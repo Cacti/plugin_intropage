@@ -1,6 +1,6 @@
 # plugin_intropage
 
-##Intropage/Dashboard plugin for Cacti
+## Intropage/Dashboard plugin for Cacti
 Plugin displays usefull information and graphs on console screen or separated tab:
 * trends
 * host graph (total, down, ...)
@@ -10,19 +10,19 @@ Plugin displays usefull information and graphs on console screen or separated ta
 * worst ping and availability
 * ...
 
-##Author 
+## Author 
 Petr Macek (petr.macek@kostax.cz)
 
 
 
-##Installation
+## Installation
 Copy directory intropage to plugins directory
 Check file permission (Linux/unix - readable for www server)
 Enable plugin (Console -> Plugin management)
 Configure plugin (Console -> Settings -> Intropage tab)
 You can set Intropage as first page (Console -> User managemnt -> user -> Login Options) 
     
-##Upgrade
+## Upgrade
 Delete old files
 Copy new files
 Check file permission (Linux/unix - readable for www server)
@@ -30,13 +30,13 @@ Disable and deinstall old version (Console -> Plugin management)
 Install and enable new version (Console -> Plugin management) 
 Configure plugin (Console -> Settings -> Intropage tab)
     
-##Possible Bugs?
+## Possible Bugs?
 If you find a problem, let me know via github or https://forums.cacti.net/viewtopic.php?f=5&t=51920 
 
 ## Thanks
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
-##Changelog
+## Changelog
 	1.0 ---
 	Completely new design and function - Dashboard
 	Add automatic refresh page
