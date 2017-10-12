@@ -1,0 +1,54 @@
+
+#obal {
+display: flex;
+flex-wrap: wrap; }
+
+.flexchild {
+    flex-grow: 1;
+    padding: 0.2em;
+}
+
+.txt_big	{
+    font-size: 2em;
+
+}
+
+
+
+.cactiTableTitle .pokus {
+        color: black;
+}
+
+
+.color_red { 
+
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,0,0,1)), color-stop(100%, rgba(255,0,0,1))) !important;
+    background: -webkit-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
+    background: -o-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
+    background: -ms-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
+}
+
+.color_yellow       { 
+
+    background-color: #ffff00;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,255,0,1) 100%) !important;
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,0,1)), color-stop(100%, rgba(255,255,0,1))) !important;
+    background: -webkit-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,255,0,1) 100%) !important;
+    background: -o-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,255,0,1) 100%) !important;
+    background: -ms-linear-gradient(top, rgba(255,255,0,1) 0%, rgba(255,255,0,1) 100%) !important;
+}
+
+.color_green       { 
+    background-color: #00ff00;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,255,0,1)), color-stop(100%, rgba(0,255,0,1))) !important;
+    background: -webkit-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
+    background: -o-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
+    background: -ms-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
+}
+
+

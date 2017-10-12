@@ -1,0 +1,57 @@
+<?php
+
+function top5_ping() {
+	global $config, $allowed_hosts, $console_access;
+	
+	$result = array(
+		'name' => 'Top5 ping (avg, current)',
+		'alarm' => 'green',
+	);
+	
+	
+	$result['data'] = "<table>";
+        $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) order by avg_time desc limit 5");
+	foreach($sql_worst_host as $host) {
+            if ($console_access)  
+        	$result['data'] .= "<td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&amp;id=".$host['id']."\">".$host['description']."</a>";
+            else  
+        	$result['data'] .=  "<td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+    
+	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['avg_time'],2) . "ms</td>\n";
+            $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
+	}	
+	
+	$result['data'] .= "</table>\n";
+	return $result;
+}
+
+
+
+function top5_availability() {
+	global $config, $allowed_hosts, $console_access;
+	
+	$result = array(
+		'name' => 'Top5 availability',
+		'alarm' => 'green',
+	);
+	
+
+	$result['data'] = "<table>";
+	 $sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) order by availability  limit 5");
+
+	foreach($sql_worst_host as $host) {
+            if ($console_access)  
+        	$result['data'] .= "<td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&amp;id=".$host['id']."\">".$host['description']."</a>";
+            else  
+        	$result['data'] .=  "<td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+    
+            $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['availability'],2) . "%</td></tr>\n";
+	}	
+	
+	$result['data'] .= "</table>\n";
+	return $result;
+
+}
+
+
+?>
