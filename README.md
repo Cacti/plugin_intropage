@@ -40,6 +40,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	1.1---
 	CSS optimalization for all themes
 	Add graph colors
+	Fix tab image in classic theme
 
 	1.0 ---
 	Completely new design and function - Dashboard
