@@ -37,6 +37,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.1---
+	CSS optimalization for all themes
+	Add graph colors
+
 	1.0 ---
 	Completely new design and function - Dashboard
 	Add automatic refresh page

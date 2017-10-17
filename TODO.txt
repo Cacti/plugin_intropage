@@ -1,7 +1,7 @@
-css for another themes
 movable panels
 better panels priority
 remote poller stats
 reload via ajax 
 
+css for another themes - done
 
