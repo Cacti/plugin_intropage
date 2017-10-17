@@ -7,6 +7,22 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 
     $graph_height = 160;
 
+    $selectedTheme = get_selected_theme();
+    switch ($selectedTheme)	{
+	case "dark":
+	case "paper-plane":
+	
+	    $bgcolor = "#202020";
+	break;
+    
+	case "sunrise":
+	    $bgcolor = "";
+	break;
+    
+	default:
+	    $bgcolor = "#f5f5f5";
+    }
+
     print "<div class='flexchild' style='width: $size%;'>";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
@@ -16,7 +32,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
     print "	<table class='cactiTable' style='padding:3px;'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
-    print "<div style=\"min-height: " . $graph_height . "px;\">\n";
+    print "<div class=\"panel_data\" style=\"min-height: " . $graph_height . "px;\">\n";
 
     // graph
     
@@ -24,14 +40,6 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 
 	//---------zacatek kresleni grafu
 	// Display PIE
-//	$gd = function_exists ("imagecreatetruecolor") ? true:false;
-//	if ($gd) {
-//	    foreach($dispdata['pie'] as $id => $val) {
-//		if (!isset($val)) continue; 
-//		elseif (!array_sum($val)) continue;
-
-
-//		}
 		$labely = array();
 
 		$xid = "x". substr(md5($dispdata['pie']['title']),0,7);
@@ -41,7 +49,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 		}
 
 
-		print "<div style=\"background: #f5f5f5;\"><canvas id=\"pie_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor5;\"><canvas id=\"pie_$xid\" height=\"$graph_height\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		
 
@@ -93,7 +101,7 @@ EOF;
 */
 		$xid = "x" . substr(md5($dispdata['bar']['title1']),0,7);
 
-		print "<div style=\"background: #f5f5f5;\"><canvas id=\"bar_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"bar_$xid\" height=\"$graph_height\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		$bar_labels1 = implode('","',$dispdata['bar']['label1']);
 		$bar_values1 = implode(',',$dispdata['bar']['data1']);
@@ -113,6 +121,8 @@ new Chart($xid, {
 	datasets: [{
 	    label: '$bar_title1',
 	    data: [$bar_values1],
+	    borderColor: 'rgba(220,220,220,0.5)',
+	    backgroundColor: 'rgba(220,220,220,0.5)',
 	},{
     	    type: 'line',
     	    label: '$bar_title2',
@@ -142,16 +152,10 @@ print "</div>\n";
 
 ///////////// line graph
     elseif (isset($dispdata['line']))	{
-/*
-	    foreach($dispdata['line'] as $id => $val) {
-		if (!isset($val)) continue; 
-		elseif (!array_sum($val)) continue;
-		$xid = "x" . substr(md5($dispdata['line']['title']),0,7);
-}
-*/
+
 		$xid = "x" . substr(md5($dispdata['line']['title']),0,7);
 
-		print "<div style=\"background: #f5f5f5;\"><canvas id=\"line_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\" height=\"$graph_height\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		$line_labels = implode('","',$dispdata['line']['label1']);
 
@@ -174,6 +178,9 @@ new Chart($xid, {
 	datasets: [{
 	    label: '$title1',
 	    data: [$line_values],
+	    borderColor: 'rgba(220,220,220,0.5)',
+	    backgroundColor: 'rgba(220,220,220,0.5)',
+
 	},{
 	
 	    label: '$title2',

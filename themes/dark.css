@@ -1,0 +1,17 @@
+.txt_big        {
+    font-size: 1.5em;
+}
+
+.cactiTableTitle .pokus {
+        color: white;
+        font-weight: bold;
+}
+
+.cactiTableButton	{
+    padding: 3px 0px;
+    height: 20px;
+}
+
+.panel_data     {
+    background-color: #202020;
+}
