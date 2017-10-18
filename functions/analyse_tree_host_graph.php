@@ -21,11 +21,10 @@ function analyse_tree_host_graph() {
     
 	$total_errors += count($sql_duplicate);
     
-    if (count($sql_duplicate)) {
+    if (count($sql_duplicate) > 0) {
 	$result['alarm'] = "red";
 	foreach($sql_duplicate as $row) {
-	    $sql_hosts = db_fetch_assoc_prepared("SELECT id,description,hostname from host WHERE description IN(
-SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description HAVING count(*)>1) ORDER BY description");
+	    $sql_hosts = db_fetch_assoc_prepared("SELECT id,description,hostname from host WHERE description IN(SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description HAVING count(*)>1) ORDER BY description");
 	    foreach ($sql_hosts as $row) {
 		if ($pom == 0)	{
 		    $pom++;
@@ -36,8 +35,6 @@ SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description
 	}
     }
 
-	
-	
 
 	// device in more trees
 
@@ -46,8 +43,8 @@ SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description
 	
 	$sql_multiple = db_fetch_assoc ("SELECT host.id, host.description, count(*) AS count FROM host INNER JOIN graph_tree_items ON (host.id = graph_tree_items.host_id) GROUP BY description HAVING count(*)>1");
 	$result['data'] .= count($sql_multiple) . "<br/>";
-	if (count($sql_multiple)) {
-		$result['alarm'] = "red";
+	if (count($sql_multiple) > 0) {
+		$result['alarm'] = "yellow";
 		foreach($sql_multiple as $row) {
 			$sql_hosts = db_fetch_assoc_prepared("SELECT graph_tree.id as gtid, host.description, graph_tree_items.title, graph_tree_items.parent, graph_tree.name FROM host INNER JOIN graph_tree_items ON (host.id = graph_tree_items.host_id) INNER JOIN graph_tree ON (graph_tree_items.graph_tree_id = graph_tree.id) WHERE host.id = ?",array($row['id']));
 			foreach($sql_hosts as $host) {
@@ -80,8 +77,8 @@ SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description
 
 	$sql_no_graphs = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND id NOT IN (SELECT DISTINCT host_id FROM graph_local) AND snmp_version != 0");
 	$result['data'] .= count($sql_no_graphs) . "<br/>";
-	if ($sql_no_graphs) {
-		$result['alarm'] = "red";
+	if (count($sql_no_graphs) > 0) {
+		$result['alarm'] = "yellow";
 		foreach($sql_no_graphs as $row) {
 				if ($pom == 0)	{
 				    $pom++;
@@ -102,8 +99,8 @@ SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description
 	
 	$sql_no_graphs = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND id NOT IN (SELECT DISTINCT host_id FROM graph_tree_items)");
 	$result['data'] .= count($sql_no_graphs) . "<br/>";
-	if ($sql_no_graphs) {
-		$result['alarm'] = "red";
+	if (count($sql_no_graphs) > 0) {
+		$result['alarm'] = "yellow";
 		foreach($sql_no_graphs as $row) {
 				if ($pom == 0)	{
 				    $pom++;
@@ -126,7 +123,7 @@ SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description
 
     $result['data'] .= count($sql_dupip) . "<br/>";
 
-    if (count($sql_dupip > 0)) {
+    if (count($sql_dupip) > 0) {
 
 	$result['alarm'] = "red";
 	foreach($sql_dupip as $row) {
