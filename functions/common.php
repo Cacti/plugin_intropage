@@ -49,7 +49,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 		}
 
 
-		print "<div style=\"background: $bgcolor5;\"><canvas id=\"pie_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\" height=\"$graph_height\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		
 
