@@ -19,12 +19,14 @@ function graph_data_source() {
 	if ($sql_ds) {
 
 		foreach ($sql_ds as $item) {
-			array_push($result['pie']['label'],preg_replace('/script server/','SS',$input_types[$item['type_id']]));
-			array_push($result['pie']['data'],$item['total']);
+			if (!is_null ($item['type_id']))	{
+				array_push($result['pie']['label'],preg_replace('/script server/','SS',$input_types[$item['type_id']]));
+				array_push($result['pie']['data'],$item['total']);
 
 
-			$result['data'] .= preg_replace('/script server/','SS',$input_types[$item['type_id']]) . ": ";
-			$result['data'] .= $item['total'] . "<br/>";
+				$result['data'] .= preg_replace('/script server/','SS',$input_types[$item['type_id']]) . ": ";
+				$result['data'] .= $item['total'] . "<br/>";
+			}
 
 
 		}
