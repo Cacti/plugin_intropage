@@ -7,6 +7,7 @@ function analyse_db() {
 		'name' => 'Database check',
 		'alarm' => 'green',
 		'data' => '',
+		'detail' => NULL,
 	);
 	
 	$damaged = 0;
