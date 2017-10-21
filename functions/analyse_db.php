@@ -21,8 +21,8 @@ function analyse_db() {
 		elseif (!preg_match('/OK/i',$row["Msg_text"])) { $damaged++; $result['detail'] .= "Table " . $row["Table"] . " status " . $row["Msg_text"] . "<br/>\n"; }
 	}
 	
-	if ($damaged) { 
-	    $return['alarm'] = "red";
+	if ($damaged > 0) { 
+	    $result['alarm'] = "red";
 	    $result['data'] = "<span class=\"txt_big\">DB problem</span><br/><br/>"; 
 	}
 	else	{
@@ -35,7 +35,8 @@ function analyse_db() {
 
 	foreach($con_err as $key=>$val) {
 	    $cerrors = $cerrors + $val['Value'];
-	    $return['alarm'] = "red";
+	    if ($return['alarm'] == "green")	// only yellow
+		$return['alarm'] = "yellow";
 	
 	}
 
