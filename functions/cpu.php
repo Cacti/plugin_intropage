@@ -7,13 +7,50 @@ function cpu() {
 		'name' => 'CPU utilization',
 		'alarm' => 'green',
 		'data' => '',
+
+                'line' => array(
+                        'title' => 'CPU load: ',
+                        'label1' => array(),
+                        'data1' => array(),
+//                        'title1' => "",
+//                        'data2' => array(),
+//                        'title2' => "",
+                    ),
 		
 	);
 	
+
     if (stristr(PHP_OS, 'win')) {
 	$result['data'] = "This function is not implemented on Windows platforms";
     }
     else	{
+
+
+
+        $sql = db_fetch_assoc("SELECT date_format(time(date),'%H:%i') as xdate,name,value FROM plugin_intropage_trends where name='cpuload' order by date desc limit 10");
+        if (count($sql)) {
+            $result['line']['title1'] = "`Load";
+            foreach($sql as $row) {
+                // no gd data
+                $result['data'] .= $row['xdate'] . " " . $row['name'] ." " . $row['value']. "<br/>";
+                array_push($result['line']['label1'],$row['xdate']);
+                array_push($result['line']['data1'],$row['value']);
+
+            }
+        }
+        else    {
+            unset ($result['line']);
+            $result['data'] = "Waiting for data";
+        }
+
+
+
+
+
+    }
+
+
+/* old
 	$load = sys_getloadavg();
 
 	$load[0] = round ($load[0],2);
@@ -42,10 +79,8 @@ function cpu() {
 	    $result['data'] .= "<b>Load 15 min: $load[2]</b><br/>\n";
 	else
 	    $result['data'] .= "Load 15 min: $load[2]<br/>\n";
-    }
-
-
-
+    
+*/
 	
 	return $result;
 }

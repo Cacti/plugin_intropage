@@ -47,7 +47,7 @@ $panel['graph_data_source']['priority'] = 12;
 $panel['graph_host_template']['size'] = 25;
 $panel['graph_host_template']['priority'] = 11;
 
-$panel['cpu']['size'] = 10;
+$panel['cpu']['size'] = 30;
 $panel['cpu']['priority'] = 34;
 
 

@@ -116,13 +116,16 @@ function intropage_poller_bottom () {
     if ($rozdil < 0)
 	$rozdil = read_config_option("poller_interval");
 
-//    db_execute("insert into plugin_intropage_trends (name,date,value) select 'poller',now(), time_to_sec(max(timediff(end_time,start_time))) from poller_time where end_time != '0000-00-00 00:00:00'");
     db_execute("insert into plugin_intropage_trends (name,date,value) values ('poller', '$start', '$rozdil')");
 
+// CPU load - linux only
+    if (!stristr(PHP_OS, 'win')) {
+        $load = sys_getloadavg();
+        $load[0] = round ($load[0],2);
 
-
-
-//    db_execute("insert into plugin_intropage_trends (name,date,value) select 'poller',now(), concat(end_time,'-',start_time) from poller_time");
+	db_execute("insert into plugin_intropage_trends (name,date,value) values ('cpuload', '$start', '" . $load[0] . "')");
+    }
+// end of cpu load
 
     db_execute('delete from plugin_intropage_trends where date < date_sub(now(), INTERVAL 20 DAY)');
 

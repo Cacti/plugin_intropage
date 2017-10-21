@@ -1,7 +1,5 @@
 <?php
 
-
-
 //function intropage_display_panel ($size,$type,$header,$data,$detail="")	{
 function intropage_display_panel ($size,$type,$header,$dispdata)	{
 
@@ -161,11 +159,13 @@ print "</div>\n";
 
 		$line_values = implode(',',$dispdata['line']['data1']);
 		
-		if (isset($dispdata['line']['data2']))
+		if (isset($dispdata['line']['data2']))	{
 		    $line_values2 = implode(',',$dispdata['line']['data2']);
+		    $title2 = $dispdata['line']['title2'];
 
+		}
+	    
 		$title1 = $dispdata['line']['title1'];
-		$title2 = $dispdata['line']['title2'];
 
 		
 //		$line_title = $dispdata['line']['title1'];
@@ -181,13 +181,22 @@ new Chart($xid, {
 	    borderColor: 'rgba(220,220,220,0.5)',
 	    backgroundColor: 'rgba(220,220,220,0.5)',
 
-	},{
+	},
+EOF;
+	
+if ($title2)	{
+	print <<<EOF
+	{
 	
 	    label: '$title2',
 
     	    data: [$line_values2],
     	    borderColor: "#ff0000",
 	}
+EOF;
+}
+print <<<EOF
+	
 	]
     },
     options: {
