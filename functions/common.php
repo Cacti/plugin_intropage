@@ -184,7 +184,7 @@ new Chart($xid, {
 	},
 EOF;
 	
-if ($title2)	{
+if (isset($title2))	{
 	print <<<EOF
 	{
 	
