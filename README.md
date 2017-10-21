@@ -37,7 +37,15 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
-	1.1---
+	1.2 ---
+	Add CPU load graph instead of text information
+	Add yellow alarm for ping > 1000ms or < 75% availability
+	Add last poller time to poller info
+	Fix panel size
+	Fix alarm in analyse DB
+	CSS optimalization
+	
+	1.1 ---
 	CSS optimalization for all themes
 	Add graph colors
 	Fix tab image in classic theme
