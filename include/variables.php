@@ -19,7 +19,7 @@ $panel['analyse_db']['priority'] = 70;
 $panel['analyse_tree_host_graph']['size'] = 25;
 $panel['analyse_tree_host_graph']['priority'] = 50;
 
-$panel['trend']['size'] = 30;
+$panel['trend']['size'] = 25;
 $panel['trend']['priority'] = 30;
 
 $panel['ntp']['size'] = 15;
@@ -28,11 +28,8 @@ $panel['ntp']['priority'] = 60;
 $panel['poller_info']['size'] = 15;
 $panel['poller_info']['priority'] = 20;
 
-$panel['poller_stat']['size'] = 30;
+$panel['poller_stat']['size'] = 25;
 $panel['poller_stat']['priority'] = 25;
-
-//$panel['graph_poller']['size'] = 60;
-//$panel['graph_poller']['priority'] = 1;
 
 $panel['graph_host']['size'] = 25;
 $panel['graph_host']['priority'] = 15;
@@ -47,7 +44,7 @@ $panel['graph_data_source']['priority'] = 12;
 $panel['graph_host_template']['size'] = 25;
 $panel['graph_host_template']['priority'] = 11;
 
-$panel['cpu']['size'] = 30;
+$panel['cpu']['size'] = 25;
 $panel['cpu']['priority'] = 34;
 
 
