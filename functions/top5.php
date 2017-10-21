@@ -18,7 +18,15 @@ function top5_ping() {
         	$result['data'] .=  "<td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
     
 	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['avg_time'],2) . "ms</td>\n";
-            $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
+	
+	    if ($host['cur_time'] > 1000)	{
+		$result['alarm'] = "yellow";
+        	$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['cur_time'],2) . "ms</b></td></tr>\n";
+	    }
+	    else
+		$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
+
+		
 	}	
 	
 	$result['data'] .= "</table>\n";
@@ -31,7 +39,7 @@ function top5_availability() {
 	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
-		'name' => 'Top5 availability',
+		'name' => 'Top5 worst availability',
 		'alarm' => 'green',
 	);
 	
@@ -45,7 +53,14 @@ function top5_availability() {
             else  
         	$result['data'] .=  "<td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
     
-            $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['availability'],2) . "%</td></tr>\n";
+	    if ($host['availability'] < 90)	{
+		$result['alarm'] = "yellow";
+        	$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['availability'],2) . "%</b></td></tr>\n";
+	    }
+	    else
+        	$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['availability'],2) . "%</td></tr>\n";
+
+
 	}	
 	
 	$result['data'] .= "</table>\n";
