@@ -35,8 +35,8 @@ function analyse_db() {
 
 	foreach($con_err as $key=>$val) {
 	    $cerrors = $cerrors + $val['Value'];
-	    if ($return['alarm'] == "green")	// only yellow
-		$return['alarm'] = "yellow";
+	    if ($result['alarm'] == "green")	// only yellow
+		$result['alarm'] = "yellow";
 	
 	}
 
