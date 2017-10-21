@@ -3,5 +3,10 @@ better panels priority
 remote poller stats
 reload via ajax 
 
+sql query statistics?
+
 css for another themes - done
 
+
+https://github.com/Cacti/cacti/wiki/PluginMigration   :
+Adding '&header=false' to most header() function calls to drive Ajax rendering. (mandatory)
