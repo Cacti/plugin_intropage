@@ -33,9 +33,13 @@ function poller_info() {
 
     	$result['data'] = "<span class=\"txt_big\">$ok</span>(ok)<span class=\"txt_big\">/$count</span>(all)</span><br/><br/>";
     	if ($running)
-    	    $result['data'] .= "Poller is running now<br/>";
-    	else
-    	    $result['data'] .= "Poller isn't running now<br/>";
+    	    $result['data'] .= "Poller is running now.<br/>";
+    	else	{
+    	    $result['data'] .= "Poller isn't running now.<br/>";
+    	    $rozdil = db_fetch_cell("SELECT time_to_sec(max(timediff(end_time,start_time))) from poller_time");
+    	    $result['data'] .= "Last poller time $rozdil seconds."; 
+
+	}
 
         if ($count > $ok) {
                 $result['alarm'] = "red";
@@ -44,6 +48,10 @@ function poller_info() {
         else	{
     	    $result['alarm'] = "green";
         }
+
+
+	
+	
 
 	return $result;
 }

@@ -96,7 +96,6 @@ function intropage_setup_database() {
 		}
 	}
 
-	//cacti_log("INTROPAGE:INSERT INTO plugin_intropage_panel (panel,size,priority) VALUES $sql_insert",true,"Intropage");
 	
 	if ($sql_insert != '') {
 		db_execute("INSERT INTO plugin_intropage_panel (panel,size,priority) VALUES $sql_insert");
