@@ -1,3 +1,5 @@
+display.php - mam tam dvakrat selectedTheme
+
 movable panels
 better panels priority
 remote poller stats
