@@ -217,9 +217,8 @@ print "</div>\n";
 
 ////////////////
 
-    else	{	// display text data
-        print $dispdata['data'];    
-    
+    elseif (isset($dispdata['data'])) {	// display text data
+        print $dispdata['data'];
     } 
     
     // end of graph
