@@ -35,10 +35,11 @@ function analyse_db() {
 
 	foreach($con_err as $key=>$val) {
 	    $cerrors = $cerrors + $val['Value'];
-	    if ($result['alarm'] == "green")	// only yellow
-		$result['alarm'] = "yellow";
-	
 	}
+
+	if ($cerrors > 0 && $result['alarm'] == "green")	// only yellow
+		$result['alarm'] = "yellow";
+
 
         $result['data'] .= "Connection errors: $cerrors<br/>";
 
