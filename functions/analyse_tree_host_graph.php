@@ -85,7 +85,7 @@ function analyse_tree_host_graph() {
 				    $result['detail'] .= "<br/><br/>Host without graph:<br/>";
 				}
 
-			$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%2$d\">%s (ID: %2$d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description']);
+			$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
 		}
 	}
 
