@@ -1,8 +1,5 @@
 new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
 
-user without console access - a lot of errors and warnings
-
-
 movable panels
 better panels priority
 remote poller stats
