@@ -1,7 +1,9 @@
 <?php
 
-//function intropage_display_panel ($size,$type,$header,$data,$detail="")	{
 function intropage_display_panel ($size,$type,$header,$dispdata)	{
+    
+    if (!empty($dispdata))	{	// empty? Typical for no console access
+	
 
     $graph_height = 160;
 
@@ -46,14 +48,10 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 		    $labely[$key] = $val . " (" . $dispdata['pie']['data'][$key] . ")";
 		}
 
-
 		print "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\" height=\"$graph_height\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		
-
-//		$pie_labels = implode('","',$dispdata['pie']['label']);
 		$pie_labels = implode('","',$labely);
-
 
 		$pie_values = implode(',',$dispdata['pie']['data']);
 		$pie_title = $dispdata['pie']['title'];
@@ -85,18 +83,9 @@ new Chart($xid, {
 });
 EOF;
 		print "</script></div>\n";
-//		echo "</div>\n";
-//		} // foreach end
-	//} 
     }   // pie graph end ------------------------------------
     elseif (isset($dispdata['bar']))	{
-/*
-	    foreach($dispdata['bar'] as $id => $val) {
-		if (!isset($val)) continue; 
-		elseif (!array_sum($val)) continue;
-		$xid = "x" . substr(md5($dispdata['bar']['title']),0,7);
-	}
-*/
+
 		$xid = "x" . substr(md5($dispdata['bar']['title1']),0,7);
 
 		print "<div style=\"background: $bgcolor;\"><canvas id=\"bar_$xid\" height=\"$graph_height\"></canvas>\n";
@@ -140,8 +129,6 @@ new Chart($xid, {
 });
 EOF;
 print "</script>\n";
-//    }
-
 print "</div>\n";
 
 
@@ -167,8 +154,6 @@ print "</div>\n";
 	    
 		$title1 = $dispdata['line']['title1'];
 
-		
-//		$line_title = $dispdata['line']['title1'];
 		print <<<EOF
 var $xid = document.getElementById("line_$xid").getContext("2d");
 new Chart($xid, {
@@ -206,16 +191,11 @@ print <<<EOF
 });
 EOF;
 print "</script>\n";
-//    }
 
 print "</div>\n";
 
 
     } // line graph end
-
-
-
-////////////////
 
     elseif (isset($dispdata['data'])) {	// display text data
         print $dispdata['data'];
@@ -235,8 +215,8 @@ print "</div>\n";
     html_end_box(false);
     print "</div>";
 
-}
+    }
 
-    
+}
 
 ?>

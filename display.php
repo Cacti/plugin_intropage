@@ -108,6 +108,8 @@ function display_informations() {
 	
 	// Retrieve access
 	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8"))?true:false;
+
+
 	
 	// Start
 	$values = array();
@@ -218,6 +220,7 @@ function display_informations() {
 
 //	$display_important_first = on/off
 //	$display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
+// 	0 chyby, 1 - chyby/warn, 2- all
 
     print '<div id="obal" style="width: 100%; margin: 20px auto; xbackground-color: #efefef;">';
 
@@ -225,23 +228,16 @@ function display_informations() {
     $query = "select * from plugin_intropage_panel order by priority desc";
     
     $panels = db_fetch_assoc($query);
-//    $percent = 0;
 
     if ($display_important_first == "on")	{  // important first
-// 0 chyby, 1 - chyby/warn, 2- all
     	    foreach($values as $key=>$value) {	
 		if ($value['alarm'] == "red")	{
 
 		    $size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
 
-//		    if ($percent + $size > 100)	{
-//			print "<div style='clear: both;'></div>";
-//			$percent = 0;
-//		    }
 
 		    intropage_display_panel($size,$value['alarm'],$value['name'],$value);
 		    $value['displayed'] = true;
-//		    $percent += $size;
 		}
 	    }
 
@@ -252,14 +248,8 @@ function display_informations() {
 	
 			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
 
-//			if ($percent + $size > 100)	{
-//			    print "<div style='clear: both;'></div>";
-//			    $percent = 0;
-//			}
-
       		        intropage_display_panel($size,$value['alarm'],$value['name'],$value);
 			$value['displayed'] = true;
-//			$percent += $size;
 		    }
 		}
 	    }
@@ -269,21 +259,13 @@ function display_informations() {
 		    if ($value['alarm'] == "green" && !isset($value['displayed']))	{
 			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
 
-//			if ($percent + $size > 100)	{
-//			    print "<div style='clear: both;'></div>";
-//			    $percent = 0;
-//			}
-
 			intropage_display_panel($size,$value['alarm'],$value['name'],$value);
-//			$percent += $size;
 		    }
 		}
 	    }
     }
     else	{	// order by priority
 
-
-//echo "$display_level - $display_important_first<br/>";
 	foreach ($panels as $key=>$value)	{
 
 	    $pom = $value['panel'];
@@ -293,17 +275,11 @@ function display_informations() {
 	            ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
 	            ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
 
-//			if ($percent + $value['size'] > 100)	{
-//    			    print "<div style='clear: both;'></div>";
-//			    $percent = 0;
-//			}
 
 			intropage_display_panel($value['size'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-//			$percent += $value['size'];
 		}
 	}
 
-//	print "<div style='clear: both;'></div>";
     }
     
 // js for displaying detail
