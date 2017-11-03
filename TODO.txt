@@ -1,10 +1,7 @@
-zacistit allowed hosts, odstranit je z devices
-v grafu hostu ue to ok, co v trendech?
-24h extremy - novy panel
+new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
 
-omezeny uzivatel - analyza logu?
+user without console access - a lot of errors and warnings
 
-display.php - mam tam dvakrat selectedTheme
 
 movable panels
 better panels priority
@@ -13,7 +10,7 @@ reload via ajax
 
 sql query statistics?
 
-css for another themes - done
+
 
 
 https://github.com/Cacti/cacti/wiki/PluginMigration   :
