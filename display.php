@@ -42,6 +42,8 @@ function display_informations() {
 	$current_user = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 	$allowed_hosts = '';
+
+/*  old and bad
 	$sql = "SELECT distinct host.id as id FROM host
         LEFT JOIN graph_local ON (host.id = graph_local.host_id)
         LEFT JOIN graph_templates_graph ON (graph_templates_graph.local_graph_id = graph_local.id)
@@ -49,12 +51,64 @@ function display_informations() {
             (host.id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id=" . $_SESSION["sess_user_id"] . ") OR
             (graph_templates_graph.id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id=" . $_SESSION["sess_user_id"] . "))
         WHERE graph_templates_graph.local_graph_id=graph_local.id and  $sql_where";
-    $sql_result = db_fetch_assoc ($sql);
-    if ($sql_result) {
-        $sql_array_result = array();
-        foreach ($sql_result as $item) { array_push($sql_array_result,$item['id']); }
-        $allowed_hosts = sprintf("%s",implode(",",$sql_array_result));
-    }
+
+	//echo $sql;
+
+	$sql_result = db_fetch_assoc ($sql);
+	if ($sql_result) {
+    	    $sql_array_result = array();
+    	    foreach ($sql_result as $item) { array_push($sql_array_result,$item['id']); }
+    	    $allowed_hosts = sprintf("%s",implode(",",$sql_array_result));
+	}
+    
+*/    
+
+// allowed host new
+
+
+	/* get policies for all groups and user - from user_admin.php */
+
+	$policies   = db_fetch_assoc("SELECT uag.id, 'group' AS type, uag.name, policy_graphs, policy_hosts, policy_graph_templates
+    	    FROM user_auth_group AS uag 
+    	    INNER JOIN user_auth_group_members AS uagm  ON uag.id = uagm.group_id
+    	    WHERE uag.enabled = 'on' AND uagm.user_id = " . $_SESSION["sess_user_id"]);
+
+	$policies[] = db_fetch_row("SELECT id, 'user' AS type, 'user' AS name, policy_graphs, policy_hosts, policy_graph_templates
+    	    FROM user_auth WHERE id = " .$_SESSION["sess_user_id"]);
+
+	// user ma prednost, proto se dela reverse
+	array_reverse($policies);
+
+                
+	$policy=$policies[0]['policy_hosts'];
+
+	$sql_query = "SELECT host.*, user_auth_perms.user_id FROM host LEFT JOIN user_auth_perms ON 
+	    host.id = user_auth_perms.item_id AND user_auth_perms.type = 3 AND user_auth_perms.user_id = " . $_SESSION["sess_user_id"];
+
+	$hosts = db_fetch_assoc($sql_query);
+	if (sizeof($hosts)) {
+	    foreach ($hosts as $host) {
+    		if (empty($host['user_id']) || $host['user_id'] == NULL) {
+        	    if ($policy['policy_hosts'] == 1) {
+            		// ulozit
+            		$allowed_hosts .= $host[id] . ",";
+        	    } 
+        
+    		}
+    		else    {
+        	    if ($policy['policy_hosts'] != 1) {
+            		$allowed_hosts .= $host[id] . ",";                
+        	    }
+    		}
+	    }   
+	}
+
+	$allowed_hosts = substr($allowed_hosts,0,-1);
+
+// allowed host new - end
+
+
+    
 	
 	// Retrieve access
 	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8"))?true:false;

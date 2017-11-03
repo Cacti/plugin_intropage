@@ -1,3 +1,9 @@
+zacistit allowed hosts, odstranit je z devices
+v grafu hostu ue to ok, co v trendech?
+24h extremy - novy panel
+
+omezeny uzivatel - analyza logu?
+
 display.php - mam tam dvakrat selectedTheme
 
 movable panels

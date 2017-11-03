@@ -9,10 +9,11 @@ function graph_host() {
 	);
 	
 	$h_all  = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts)");
-	$h_up   = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status='3' AND disabled=''");
-	$h_down = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status='1' AND disabled=''");
-	$h_reco = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status='2' AND disabled=''");
+	$h_up   = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status=3 AND disabled=''");
+	$h_down = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status=1 AND disabled=''");
+	$h_reco = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status=2 AND disabled=''");
 	$h_disa = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND disabled='on'");
+
 	
 	if ($h_down > 0) { $result['alarm'] = "red"; }
 	elseif ($h_disa > 0) { $result['alarm'] = "yellow"; }
