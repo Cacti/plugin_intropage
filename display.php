@@ -6,9 +6,6 @@ function display_informations() {
 
 	global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
 
-     $selectedTheme = get_selected_theme();
-// echo "<h1>$selectedTheme</h1>";
-
 	if (!api_user_realm_auth('intropage.php'))	{
 		print "Intropage - permission denied";
 		print "<br/><br/>";
