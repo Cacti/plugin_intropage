@@ -75,7 +75,6 @@ function display_informations() {
 
 	// user ma prednost, proto se dela reverse
 	array_reverse($policies);
-
                 
 	$policy=$policies[0]['policy_hosts'];
 
@@ -86,15 +85,15 @@ function display_informations() {
 	if (sizeof($hosts)) {
 	    foreach ($hosts as $host) {
     		if (empty($host['user_id']) || $host['user_id'] == NULL) {
-        	    if ($policy['policy_hosts'] == 1) {
+        	    if ($policy == 1) {
             		// ulozit
-            		$allowed_hosts .= $host[id] . ",";
+            		$allowed_hosts .= $host['id'] . ",";
         	    } 
         
     		}
     		else    {
-        	    if ($policy['policy_hosts'] != 1) {
-            		$allowed_hosts .= $host[id] . ",";                
+        	    if ($policy != 1) {
+            		$allowed_hosts .= $host['id'] . ",";                
         	    }
     		}
 	    }   
