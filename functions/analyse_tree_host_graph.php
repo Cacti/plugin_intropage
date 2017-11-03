@@ -21,20 +21,19 @@ function analyse_tree_host_graph() {
     
 	$total_errors += count($sql_duplicate);
     
-    if (count($sql_duplicate) > 0) {
-	$result['alarm'] = "red";
-	foreach($sql_duplicate as $row) {
-	    $sql_hosts = db_fetch_assoc_prepared("SELECT id,description,hostname from host WHERE description IN(SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description HAVING count(*)>1) ORDER BY description");
-	    foreach ($sql_hosts as $row) {
-		if ($pom == 0)	{
-		    $pom++;
-		    $result['detail'] .= "Same description:<br/>";
+	if (count($sql_duplicate) > 0) {
+	    $result['alarm'] = "red";
+	    foreach($sql_duplicate as $row) {
+		$sql_hosts = db_fetch_assoc_prepared("SELECT id,description,hostname from host WHERE description IN(SELECT  description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description HAVING count(*)>1) ORDER BY description");
+		foreach ($sql_hosts as $row) {
+		    if ($pom == 0)	{
+			$pom++;
+			$result['detail'] .= "Same description:<br/>";
+		    }
+		    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
 		}
-		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
 	    }
 	}
-    }
-
 
 	// device in more trees
 
@@ -76,6 +75,7 @@ function analyse_tree_host_graph() {
 	$result['data'] .= 'Hosts without graphs: ';
 
 	$sql_no_graphs = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND id NOT IN (SELECT DISTINCT host_id FROM graph_local) AND snmp_version != 0");
+
 	$result['data'] .= count($sql_no_graphs) . "<br/>";
 	if (count($sql_no_graphs) > 0) {
 		$result['alarm'] = "yellow";
