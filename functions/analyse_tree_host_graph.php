@@ -16,7 +16,7 @@ function analyse_tree_host_graph() {
 	$result['data'] .= "Hosts with the same description: ";
 
 	$pom = 0;
-	$sql_duplicate = db_fetch_assoc("SELECT count(*) NoDups, description FROM host  WHERE id IN ($allowed_hosts) GROUP BY description HAVING count(*)>1");
+	$sql_duplicate = db_fetch_assoc("SELECT count(*) NoDups, description FROM host  WHERE id IN ($allowed_hosts) AND  disabled != 'on' GROUP BY description HAVING count(*)>1");
 	$result['data'] .= count($sql_duplicate) . "<br/>";
     
 	$total_errors += count($sql_duplicate);
@@ -74,7 +74,7 @@ function analyse_tree_host_graph() {
 	$pom = 0;
 	$result['data'] .= 'Hosts without graphs: ';
 
-	$sql_no_graphs = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND id NOT IN (SELECT DISTINCT host_id FROM graph_local) AND snmp_version != 0");
+	$sql_no_graphs = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on'  AND id NOT IN (SELECT DISTINCT host_id FROM graph_local) AND snmp_version != 0");
 
 	$result['data'] .= count($sql_no_graphs) . "<br/>";
 	if (count($sql_no_graphs) > 0) {
@@ -97,7 +97,7 @@ function analyse_tree_host_graph() {
 	$pom = 0;
 	$result['data'] .= 'Hosts without tree: ';
 	
-	$sql_no_graphs = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND id NOT IN (SELECT DISTINCT host_id FROM graph_tree_items)");
+	$sql_no_graphs = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND  id NOT IN (SELECT DISTINCT host_id FROM graph_tree_items)");
 	$result['data'] .= count($sql_no_graphs) . "<br/>";
 	if (count($sql_no_graphs) > 0) {
 		$result['alarm'] = "yellow";
@@ -119,7 +119,7 @@ function analyse_tree_host_graph() {
 	$pom = 0;
     	$result['data'] .= 'Devices with the same IP: ';
     
-    $sql_dupip = db_fetch_assoc("SELECT count(*) NoDups, id, hostname FROM host  WHERE id IN ($allowed_hosts) GROUP BY hostname,snmp_port HAVING count(*)>1");
+    $sql_dupip = db_fetch_assoc("SELECT count(*) NoDups, id, hostname FROM host  WHERE id IN ($allowed_hosts)  AND disabled != 'on'  GROUP BY hostname,snmp_port HAVING count(*)>1");
 
     $result['data'] .= count($sql_dupip) . "<br/>";
 
