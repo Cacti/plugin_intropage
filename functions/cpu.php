@@ -29,7 +29,7 @@ function cpu() {
 
         $sql = db_fetch_assoc("SELECT date_format(time(date),'%H:%i') as xdate,name,value FROM plugin_intropage_trends where name='cpuload' order by date desc limit 10");
         if (count($sql)) {
-            $result['line']['title1'] = "`Load";
+            $result['line']['title1'] = "Load";
             foreach($sql as $row) {
                 // no gd data
                 $result['data'] .= $row['xdate'] . " " . $row['name'] ." " . $row['value']. "<br/>";
