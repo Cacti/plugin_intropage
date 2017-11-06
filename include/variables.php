@@ -25,7 +25,7 @@ $panel['trend']['priority'] = 30;
 $panel['ntp']['size'] = 15;
 $panel['ntp']['priority'] = 60;
 
-$panel['poller_info']['size'] = 15;
+$panel['poller_info']['size'] = 20;
 $panel['poller_info']['priority'] = 20;
 
 $panel['poller_stat']['size'] = 25;

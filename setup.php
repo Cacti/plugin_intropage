@@ -106,16 +106,29 @@ function intropage_setup_database() {
 }
 
 function intropage_poller_bottom () {
-//    global $config;
+//    global $config;;8
 
 
-    $start = db_fetch_cell("SELECT distinct min(start_time) from poller_time");
+    $start = db_fetch_cell("SELECT min(start_time) from poller_time");
 
+/*
     $rozdil = db_fetch_cell("SELECT time_to_sec(max(timediff(end_time,start_time))) from poller_time");
     if ($rozdil < 0)
 	$rozdil = read_config_option("poller_interval");
+*/
 
-    db_execute("insert into plugin_intropage_trends (name,date,value) values ('poller', '$start', '$rozdil')");
+
+    $sum = 0; 
+    $stats = db_fetch_assoc("SELECT time_to_sec(max((timediff(end_time,start_time)))) as xtime from poller_time group by poller_id");
+    foreach($stats as $stat) {	
+	if ($stat['xtime'] < 0)  // kdyz poller nedobiha, musim pricist cely interval
+	    $sum += read_config_option("poller_interval");
+	else
+	    $sum += $stat['xtime'];
+    }
+
+
+    db_execute("insert into plugin_intropage_trends (name,date,value) values ('poller', '$start', '" . (round($sum/count($stats))) . "')");
 
 // CPU load - linux only
     if (!stristr(PHP_OS, 'win')) {
@@ -126,7 +139,7 @@ function intropage_poller_bottom () {
     }
 // end of cpu load
 
-    db_execute('delete from plugin_intropage_trends where date < date_sub(now(), INTERVAL 20 DAY)');
+    db_execute('delete from plugin_intropage_trends where date < date_sub(now(), INTERVAL 2 DAY)');
 
     // all hosts without permissions!!!
      db_execute("insert into plugin_intropage_trends (name,date,value) select 'host', now(), count(id) FROM host WHERE status='1' AND disabled=''");

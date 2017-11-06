@@ -15,31 +15,43 @@ function poller_info() {
         4 => '<div class="deviceDisabled">'   . __('Disabled')     . '</div>',
         5 => '<div class="deviceDown">'       . __('Recovering')   . '</div>'
 */
-        $sql_pollers = db_fetch_assoc("SELECT id,status,last_update FROM poller ORDER BY id");
+
+	$result['data'] = "<b>Name/max. time/total time/state</b><br/>";
+	
+
+        $sql_pollers = db_fetch_assoc("SELECT id,name,status,last_update,total_time FROM poller ORDER BY id");
 
 	$count = count($sql_pollers);
-	$ok = 0;
-	$running = false;
+	$ok = 0; $running = 0; $xpollers = array();
         if (sizeof($sql_pollers)) {
                 foreach ($sql_pollers as $poller) {
-                        if ($poller['status'] == 1 || $poller['status'] == 2 || $poller_status['5']) 
+                        if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) 	{
                                 $ok++;
-                        if ($poller['status'] == 1)
-                    	    $running = true;
-                                
+
+			}
+			
+			$age = db_fetch_cell ("select time_to_sec(max(timediff(end_time,start_time))) from poller_time where poller_id = " . $poller['id']);
+			if ($age < 0)
+			    $age = "---";
+
+			$result['data'] .= $poller['name'] . "/" .                  	    
+			 $age . "s/" . 
+			round($poller['total_time']) . "s/";
+            		if ($poller['status'] == 0) $result['data'] .= "New/Idle";
+            		elseif ($poller['status'] == 1) $result['data'] .= "Running";
+            		elseif ($poller['status'] == 2) $result['data'] .= "Idle";
+            		elseif ($poller['status'] == 3) $result['data'] .= "Unkn/down";
+            		elseif ($poller['status'] == 4) $result['data'] .= "Disabled";
+            		elseif ($poller['status'] == 5) $result['data'] .= "Recovering";
+            		
+            		$result['data'] . "<br/>\n";
 		}	
 	}
 
 
-    	$result['data'] = "<span class=\"txt_big\">$ok</span>(ok)<span class=\"txt_big\">/$count</span>(all)</span><br/><br/>";
-    	if ($running)
-    	    $result['data'] .= "Poller is running now.<br/>";
-    	else	{
-    	    $result['data'] .= "Poller isn't running now.<br/>";
-    	    $rozdil = db_fetch_cell("SELECT time_to_sec(max(timediff(end_time,start_time))) from poller_time");
-    	    $result['data'] .= "Last poller time $rozdil seconds."; 
+    	$result['data'] = "<span class=\"txt_big\">$ok</span>(ok)<span class=\"txt_big\">/$count</span>(all)</span><br/><br/>"
+    			    . $result['data'];
 
-	}
 
         if ($count > $ok) {
                 $result['alarm'] = "red";
@@ -49,9 +61,6 @@ function poller_info() {
     	    $result['alarm'] = "green";
         }
 
-
-	
-	
 
 	return $result;
 }
