@@ -49,7 +49,7 @@ function poller_info() {
 	}
 
 
-    	$result['data'] = "<span class=\"txt_big\">$ok</span>(ok)<span class=\"txt_big\">/$count</span>(all)</span><br/><br/>"
+    	$result['data'] = "<span class=\"txt_big\">$ok</span>(ok)<span class=\"txt_big\">/$count</span>(all)</span><br/>"
     			    . $result['data'];
 
 
