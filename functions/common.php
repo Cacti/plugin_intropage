@@ -1,6 +1,6 @@
 <?php
 
-function intropage_display_panel ($size,$type,$header,$dispdata)	{
+function intropage_display_panel ($size,$type,$header,$dispdata,$pom)	{
     
     if (!empty($dispdata))	{	// empty? Typical for no console access
 	
@@ -23,11 +23,26 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
+    
+    
     print "<div class='flexchild' style='width: $size%;'>";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
-    print "	    <div class='cactiTableButton color_$type'><span></span></div>\n";
+    print "	    <div class='cactiTableButton2 color_$type'><span>";
+    if ( $_SESSION['intropage_cur_panel'] == 1)
+	echo "&lt; ";
+    else
+	echo "<a href='#start'>&lt; </a>";
+    
+    if ($_SESSION['intropage_cur_panel'] == $_SESSION['intropage_max_panel'])
+	echo " &gt;";
+    else
+	echo "<a href='#end'> &gt;</a>";
+    
+ 
+    
+    print "</span></div>\n";
     print "	</div>\n";
     print "	<table class='cactiTable' style='padding:3px;'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
@@ -138,21 +153,31 @@ print "</div>\n";
 ///////////// line graph
     elseif (isset($dispdata['line']))	{
 
-		$xid = "x" . substr(md5($dispdata['line']['title']),0,7);
+		$xid = "x" . substr(md5($dispdata['line']['title1']),0,7);
 
 		print "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\" height=\"$graph_height\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
+		$title1 = $dispdata['line']['title1'];
 		$line_labels = implode('","',$dispdata['line']['label1']);
-
 		$line_values = implode(',',$dispdata['line']['data1']);
-		
-		if (isset($dispdata['line']['data2']))	{
+
+		if (count($dispdata['line']['data2']) > 0)	{
 		    $line_values2 = implode(',',$dispdata['line']['data2']);
 		    $title2 = $dispdata['line']['title2'];
-
 		}
-	    
-		$title1 = $dispdata['line']['title1'];
+		if (count($dispdata['line']['data3']) > 0)	{
+		    $line_values3 = implode(',',$dispdata['line']['data3']);
+		    $title3 = $dispdata['line']['title3'];
+		}
+
+		if (count($dispdata['line']['data4']) > 0)	{
+		    $line_values4 = implode(',',$dispdata['line']['data4']);
+		    $title4 = $dispdata['line']['title4'];
+		}
+		if (count($dispdata['line']['data5']) > 0)	{
+		    $line_values5 = implode(',',$dispdata['line']['data5']);
+		    $title5 = $dispdata['line']['title5'];
+		}
 
 		print <<<EOF
 var $xid = document.getElementById("line_$xid").getContext("2d");
@@ -169,17 +194,46 @@ new Chart($xid, {
 	},
 EOF;
 	
-if (isset($title2))	{
+if (count($dispdata['line']['data2']) > 0)	{
 	print <<<EOF
 	{
-	
 	    label: '$title2',
-
     	    data: [$line_values2],
-    	    borderColor: "#ff0000",
-	}
+    	    borderColor: "#0f0f00",
+	},
 EOF;
 }
+
+if (count($dispdata['line']['data3']) > 0)	{
+	print <<<EOF
+	{
+	    label: '$title3',
+    	    data: [$line_values3],
+    	    borderColor: "#f0000f",
+	},
+EOF;
+}
+
+if (count($dispdata['line']['data4']) > 0)	{
+	print <<<EOF
+	{
+	    label: '$title4',
+    	    data: [$line_values4],
+    	    borderColor: "#0000ff",
+	},
+EOF;
+}
+
+if (count($dispdata['line']['data5']) > 0)	{
+	print <<<EOF
+	{
+	    label: '$title5',
+    	    data: [$line_values5],
+    	    borderColor: "#00ff00",
+	},
+EOF;
+}
+
 print <<<EOF
 	
 	]
@@ -215,8 +269,10 @@ print "</div>\n";
     html_end_box(false);
     print "</div>";
 
+
     }
 
+    $_SESSION['intropage_cur_panel']++;
 }
 
 ?>

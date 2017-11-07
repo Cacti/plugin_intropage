@@ -117,7 +117,7 @@ function intropage_poller_bottom () {
 	$rozdil = read_config_option("poller_interval");
 */
 
-
+/*
     $sum = 0; 
     $stats = db_fetch_assoc("SELECT time_to_sec(max((timediff(end_time,start_time)))) as xtime from poller_time group by poller_id");
     foreach($stats as $stat) {	
@@ -126,9 +126,15 @@ function intropage_poller_bottom () {
 	else
 	    $sum += $stat['xtime'];
     }
+*/
 
 
-    db_execute("insert into plugin_intropage_trends (name,date,value) values ('poller', '$start', '" . (round($sum/count($stats))) . "')");
+    $stats = db_fetch_assoc("SELECT id,total_time from poller order by id limit 5");
+    foreach($stats as $stat) {	
+	db_execute("insert into plugin_intropage_trends (name,date,value) values ('poller','$start', '" .$stat['id'] . ":" . round($stat['total_time']) . "')");
+    }
+
+
 
 // CPU load - linux only
     if (!stristr(PHP_OS, 'win')) {

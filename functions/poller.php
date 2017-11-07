@@ -1,5 +1,6 @@
 <?php
 
+
 function poller_info() {
 	global $config, $sql_where;
 	
@@ -16,10 +17,10 @@ function poller_info() {
         5 => '<div class="deviceDown">'       . __('Recovering')   . '</div>'
 */
 
-	$result['data'] = "<b>Name/max. time/total time/state</b><br/>";
+	$result['data'] = "<b>ID/Name/max. time/total time/state</b><br/>";
 	
 
-        $sql_pollers = db_fetch_assoc("SELECT id,name,status,last_update,total_time FROM poller ORDER BY id");
+        $sql_pollers = db_fetch_assoc("SELECT id,name,status,last_update,total_time FROM poller ORDER BY id limit 5");
 
 	$count = count($sql_pollers);
 	$ok = 0; $running = 0; $xpollers = array();
@@ -34,7 +35,7 @@ function poller_info() {
 			if ($age < 0)
 			    $age = "---";
 
-			$result['data'] .= $poller['name'] . "/" .                  	    
+			$result['data'] .= $poller['id'] . "/" .  $poller['name'] . "/" .                  	    
 			 $age . "s/" . 
 			round($poller['total_time']) . "s/";
             		if ($poller['status'] == 0) $result['data'] .= "New/Idle";
@@ -48,18 +49,19 @@ function poller_info() {
 		}	
 	}
 
-
     	$result['data'] = "<span class=\"txt_big\">$ok</span>(ok)<span class=\"txt_big\">/$count</span>(all)</span><br/>"
     			    . $result['data'];
 
 
+
         if ($count > $ok) {
                 $result['alarm'] = "red";
-                $result['data'] .= "Not all pollers are ok";
+//                $result['data'] = "<b>Not all pollers are ok</b><br/>" . $result['data'];
         }
         else	{
     	    $result['alarm'] = "green";
         }
+
 
 
 	return $result;
@@ -75,18 +77,106 @@ function poller_stat() {
 		'name' => "Poller stats (interval ".$poller_interval."s)",
 		'alarm' => 'green',
 		'data' => '',
-                'bar' => array(
-                        'title1' => 'Poller time',
+                'line' => array(
+                        'title1' => '',
                         'label1' => array(),
                         'data1' => array(),
-                        'title2' => 'Average',
+                        'title2' => '',
                         'label2' => array(),
                         'data2' => array(),
+                        'title3' => '',
+                        'label3' => array(),
+                        'data3' => array(),
+                        'title4' => '',
+                        'label4' => array(),
+                        'data4' => array(),
+                        'title5' => '',
+                        'label5' => array(),
+                        'data5' => array(),
 
 		),	
 	);
 	
 
+
+	$pollers = db_fetch_assoc("SELECT id from poller order by id limit 5");
+	$new_index = 1;
+	foreach ($pollers as $xpoller)	{
+//echo "<br/>" . $xpoller['id'] ." aa";
+	    $poller_time = db_fetch_assoc("SELECT  date_format(time(date),'%H:%i') as date,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by date desc limit 10");
+	    $poller_time = array_reverse ($poller_time);
+
+	    foreach ($poller_time as $one_poller)	{
+	    list($id,$time) = explode(":",$one_poller['value']); 
+	
+	//print_r ($one_poller);
+//	echo "$id, $time<br/><br/>";
+	
+	    if ($time > $poller_interval)	{
+		$result['alarm'] = "red";
+		$result['data'] .= "<b>" . $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
+
+	    }
+	    else
+		$result['data'] .= $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
+		
+	    // graph data
+            array_push($result['line']['label' . $new_index], $one_poller['date'] );
+            array_push($result['line']['data' . $new_index],$time);
+//            $result['line']['data' . $new_index][$f] = $time;
+
+            $result['line']['title' . $new_index] = 'Poller ID: ' . $xpoller['id'];
+            
+            }
+		
+	    $new_index++;
+	}
+
+
+
+/*
+	$pollers = db_fetch_assoc("SELECT date,value from plugin_intropage_trends where name='poller' order by date desc, value limit 10");
+
+	$f = 10;
+	
+	foreach($pollers as $poller) {
+	    list($id,$time) = explode(":",$poller['value']); 
+
+	    if ($time > $poller_interval)	{
+		$result['alarm'] = "red";
+		$result['data'] .= "<b>" . $poller['date'] . ' Poller\'s ID: ' . $id . ' ' . $time . 's</b><br/>';
+
+	    }
+	    else
+		$result['data'] .= $poller['date'] . ' Poller\'s ID: ' . $id . ' ' . $time . 's<br/>';
+		
+	    // graph data
+            $result['line']['label' . $id] = 'Poller\' ID: ' . $id;
+//            array_push($result['line']['data' . $id],$time);
+            $result['line']['data' . $id][$f] = $time;
+
+            $result['line']['title' . $id] = 'Poller\' ID: ' . $id;
+            
+            $f--;
+	}
+*/
+
+/*
+	foreach ($result['line'] as $line) {
+	    $['line']['data' . $f] = array_reverse ($result['line']['data' . $f]);
+	}
+*/
+	if (count($result['line']['data1']) < 3)	{
+	    $result['data'] = "Waiting for data";
+	    unset ($result['line']);
+	}
+/*	else
+	    $result['data'] .= "<br/>Average $avg s";
+*/
+
+
+
+/*
 	$avg = db_fetch_cell("SELECT floor(avg(value)) FROM (select value from plugin_intropage_trends where name='poller'  order by date desc limit 10) prumery");
 
 	$pollers_time = db_fetch_assoc("SELECT date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends where name='poller'  order by date desc limit 10");
@@ -116,6 +206,8 @@ function poller_stat() {
 	}
 	else
 	    $result['data'] .= "<br/>Average $avg s";
+
+*/
 
 	/*
 	$pollers_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=3"))?true:false;
