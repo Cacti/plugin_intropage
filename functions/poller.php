@@ -44,7 +44,7 @@ function poller_info() {
             		elseif ($poller['status'] == 4) $result['data'] .= "Disabled";
             		elseif ($poller['status'] == 5) $result['data'] .= "Recovering";
             		
-            		$result['data'] . "<br/>\n";
+            		$result['data'] .= "<br/>\n";
 		}	
 	}
 
