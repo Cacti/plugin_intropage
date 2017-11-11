@@ -9,6 +9,13 @@
     height: 20px;
 }
 
+.cactiTableButton2 span {
+        padding: 0px 12px 0px 3px;
+        white-space: nowrap;
+        vertical-align: middle;
+}
+
+
 .panel_data     {
     background-color: #202020;
 }

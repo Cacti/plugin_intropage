@@ -1,6 +1,6 @@
 <?php
 
-function intropage_display_panel ($size,$type,$header,$dispdata,$pom)	{
+function intropage_display_panel ($size,$type,$header,$dispdata)	{
     
     if (!empty($dispdata))	{	// empty? Typical for no console access
 	
@@ -23,8 +23,8 @@ function intropage_display_panel ($size,$type,$header,$dispdata,$pom)	{
 	    $bgcolor = "#f5f5f5";
     }
 
-    
-    
+
+
     print "<div class='flexchild' style='width: $size%;'>";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
@@ -44,6 +44,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata,$pom)	{
     
     print "</span></div>\n";
     print "	</div>\n";
+    
     print "	<table class='cactiTable' style='padding:3px;'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
@@ -161,20 +162,19 @@ print "</div>\n";
 		$line_labels = implode('","',$dispdata['line']['label1']);
 		$line_values = implode(',',$dispdata['line']['data1']);
 
-		if (count($dispdata['line']['data2']) > 0)	{
+		if (!empty($dispdata['line']['data2']))	{
 		    $line_values2 = implode(',',$dispdata['line']['data2']);
 		    $title2 = $dispdata['line']['title2'];
 		}
-		if (count($dispdata['line']['data3']) > 0)	{
+		if (!empty($dispdata['line']['data3']))	{
 		    $line_values3 = implode(',',$dispdata['line']['data3']);
 		    $title3 = $dispdata['line']['title3'];
 		}
-
-		if (count($dispdata['line']['data4']) > 0)	{
+		if (!empty($dispdata['line']['data4']))	{
 		    $line_values4 = implode(',',$dispdata['line']['data4']);
 		    $title4 = $dispdata['line']['title4'];
 		}
-		if (count($dispdata['line']['data5']) > 0)	{
+		if (!empty($dispdata['line']['data5']) )	{
 		    $line_values5 = implode(',',$dispdata['line']['data5']);
 		    $title5 = $dispdata['line']['title5'];
 		}
@@ -194,7 +194,7 @@ new Chart($xid, {
 	},
 EOF;
 	
-if (count($dispdata['line']['data2']) > 0)	{
+if (!empty($dispdata['line']['data2']))	{
 	print <<<EOF
 	{
 	    label: '$title2',
@@ -204,7 +204,7 @@ if (count($dispdata['line']['data2']) > 0)	{
 EOF;
 }
 
-if (count($dispdata['line']['data3']) > 0)	{
+if (!empty($dispdata['line']['data3']))	{
 	print <<<EOF
 	{
 	    label: '$title3',
@@ -214,7 +214,7 @@ if (count($dispdata['line']['data3']) > 0)	{
 EOF;
 }
 
-if (count($dispdata['line']['data4']) > 0)	{
+if (!empty($dispdata['line']['data4']))	{
 	print <<<EOF
 	{
 	    label: '$title4',
@@ -224,7 +224,8 @@ if (count($dispdata['line']['data4']) > 0)	{
 EOF;
 }
 
-if (count($dispdata['line']['data5']) > 0)	{
+
+if (!empty($dispdata['line']['data5']))	{
 	print <<<EOF
 	{
 	    label: '$title5',
@@ -269,10 +270,11 @@ print "</div>\n";
     html_end_box(false);
     print "</div>";
 
-
-    }
-
     $_SESSION['intropage_cur_panel']++;
+
+
+    } // have console access
+
 }
 
 ?>

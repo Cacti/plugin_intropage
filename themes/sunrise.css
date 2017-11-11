@@ -5,3 +5,9 @@
 
 }
 
+.cactiTableButton2 span  {
+        padding: 0px 16px 0px 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+}

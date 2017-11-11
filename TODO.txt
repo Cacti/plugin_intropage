@@ -1,12 +1,16 @@
+settings panel per user
+
+zbavit se 160px v grafu
+spojit poller info a poller stats?
+
 new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
+sipky u hodin pomoci utf8
 
-movable panels
+
+
+
 better panels priority
-remote poller stats
 reload via ajax 
-
-sql query statistics?
-
 
 
 

@@ -222,12 +222,16 @@ function display_informations() {
 //	$display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
 // 	0 chyby, 1 - chyby/warn, 2- all
 
+    if (!isset($_SESSION['intropage_cur_panel']))
+	$_SESSION['intropage_cur_panel'] = 1;
+    
     print '<div id="obal" style="width: 100%; margin: 20px auto; xbackground-color: #efefef;">';
-
 
     $query = "select * from plugin_intropage_panel order by priority desc";
     
     $panels = db_fetch_assoc($query);
+    $_SESSION['intropage_max_panel'] = count ($panels);
+
 
     if ($display_important_first == "on")	{  // important first
     	    foreach($values as $key=>$value) {	
@@ -298,6 +302,7 @@ function hide_display (id)      {
 
 EOF;
 
+    unset ($_SESSION['intropage_cur_panel'],$_SESSION['intropage_max_panel']);
 
     print "<div style='clear: both;'></div>";
     print "<div style=\"width: 100%\"> Generated: " . date("H:i:s") . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";

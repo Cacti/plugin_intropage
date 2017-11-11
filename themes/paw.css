@@ -11,3 +11,10 @@
         color: #444444;
 }
 
+.cactiTableButton2 span {
+        color: white;
+        padding: 0px 12px 0px 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+}

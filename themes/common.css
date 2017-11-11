@@ -13,6 +13,9 @@
     font-size: 1.5em;
 }
 
+.cactiTableButton2 {
+    text-align: right;
+}
 
 .color_red {
     background: rgba(255,255,255,1);
