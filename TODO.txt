@@ -1,5 +1,7 @@
 vycistit width apod.
 
+sometimes incomplete graphs
+
 zkusit znovu drag and drop - pouzuit https://codepen.io/randohinn/pen/EyBqAK
 
 better display analyse log - join log size and only count warning and errors and details
