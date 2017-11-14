@@ -298,6 +298,12 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
+	"intropage_debug" => array(
+		"friendly_name" => "Display debug information",
+		"description" => "if checked this plugin is displays information about duration",
+		"method" => "checkbox",
+		"default" => "on",
+	),
 
 
 );

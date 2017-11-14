@@ -12,7 +12,7 @@ function display_informations() {
 		return false;
 	}
 
-
+	$debug = "";
 	$debug_start = microtime(true);
 
 
@@ -34,7 +34,7 @@ function display_informations() {
 	// Retrieve global configuration options
 	$display_important_first = read_config_option("intropage_display_important_first");
 	$display_level = read_config_option("intropage_display_level");
-	$debug = read_config_option("intropage_debug");
+	$intropage_debug = read_config_option("intropage_debug");
 	
 	$current_user = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
@@ -116,102 +116,149 @@ function display_informations() {
 
 	// analyze_log  - 2 pannels
 	if ($console_access && read_config_option('intropage_analyse_log') == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_log.php');
 		$values['analyse_log'] = analyse_log();
 		$values['analyse_log_size'] = analyse_log_size();
+		$debug .= "Analyse log: " . ( microtime(true) -$start) . "<br/>\n";
+
 	}
 
 	// analyse login
 	if ($console_access && read_config_option('intropage_analyse_login') == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_login.php');
 		$values['analyse_login'] = analyse_login();
+		
+		$debug .= "Analyse login: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 
 	// analyse_db
 	if ($console_access && read_config_option('intropage_analyse_db') == "on") {
+		$start = microtime(true);
+
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_db.php');
 		$values['analyse_db'] = analyse_db();
+		$debug .= "Analyse db: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 
 	// analyse tree/host/graph 
 	if ($console_access && read_config_option('intropage_analyse_tree_host_graph') == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_tree_host_graph.php');
 		$values['analyse_tree_host_graph'] = analyse_tree_host_graph();
-	}
+		$debug .= "Analyse tree host graph: " . (microtime(true)-$start) . "<br/>\n";
 
+	}
 
 
 	// trend
 	if (read_config_option("intropage_trend") == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/trend.php');
 		$values['trend'] = get_trend();
+		$debug .= "Trend: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 	
 
 	// Check NTP
 	if ($console_access && read_config_option('intropage_ntp') == "on") {
+		$start = microtime(true);
+	
 		include_once($config['base_path'] . '/plugins/intropage/functions/ntp.php');
 		$values['ntp'] = ntp();
+		$debug .= "NTP: " . (microtime(true)-$start) . "<br/>\n";
+		
 	}
 	
 	// poller_info - 2 pannels
 	if ($console_access && read_config_option('intropage_poller_info') == "on") {
+		$start = microtime(true);
+
 		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
 		$values['poller_info'] = poller_info();
 		$values['poller_stat'] = poller_stat();
+		$debug .= "Poller info: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 
 	// graph_poller
 	if ($console_access && read_config_option('intropage_graph_poller') == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
 		$values['graph_poller'] = graph_poller();
+		$debug .= "graph poller: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 	
 
 	// graph_host
 	if (read_config_option("intropage_graph_host") == "on") {
+		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_host.php');
 	    $values['graph_host'] = graph_host();
+		$debug .= "graph host: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 	
 	// Check Thresholds
 	if (read_config_option("intropage_graph_threshold") == "on") {
+		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_thold.php');
 	    $values['graph_thold'] = graph_thold();
+		$debug .= "graph thold: " . (microtime(true)-$start) . "<br/>\n";
+	    
 	}
 	
 	
 	// Get Datasources
 	if (read_config_option("intropage_graph_data_source") == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_data_source.php');
 		$values['graph_data_source'] = graph_data_source();
+		$debug .= "graph data source: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 
 	
 	// Get Hosts templates
 	if (read_config_option("intropage_graph_host_template") == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_host_template.php');
 		$values['graph_host_template'] = graph_host_template();
+		$debug .= "graph host template: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 
 	// top5
 	if (read_config_option("intropage_top5") == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/top5.php');
 		$values['top5_ping'] = top5_ping();
 		$values['top5_availability'] = top5_availability();
+		$debug .= "top5: " . (microtime(true)-$start) . "<br/>\n";
 
 	}
 
 	// info
 	if ($console_access && read_config_option("intropage_info") == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/info.php');
 		$values['info'] = info();
+		$debug .= "info: " . (microtime(true)-$start) . "<br/>\n";
+		
 	}
 
 	// cpu
 	if ($console_access && read_config_option("intropage_cpu") == "on") {
+		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/cpu.php');
 		$values['cpu'] = cpu();
+		$debug .= "cpu: " . (microtime(true)-$start) . "<br/>\n";
+
 	}
 
 
@@ -273,8 +320,9 @@ function display_informations() {
 	foreach ($panels as $key=>$value)	{
 
 	    $pom = $value['panel'];
-    
-	    if (  
+
+	
+		if (
 		    ($display_level == 2 ) ||
 	            ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
 	            ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
@@ -307,6 +355,13 @@ EOF;
     print "<div style='clear: both;'></div>";
     print "<div style=\"width: 100%\"> Generated: " . date("H:i:s") . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";
 
+	    if ($intropage_debug) {
+		echo $debug;
+	    
+	    }
+
+
+ 
     print "</div>\n"; // div id=obal
 
 
