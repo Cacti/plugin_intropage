@@ -1,4 +1,4 @@
-
+vycistit width apod.
 
 zkusit znovu drag and drop - pouzuit https://codepen.io/randohinn/pen/EyBqAK
 
