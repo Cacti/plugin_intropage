@@ -125,7 +125,7 @@ function poller_stat() {
             array_push($result['line']['data' . $new_index],$time);
 //            $result['line']['data' . $new_index][$f] = $time;
 
-            $result['line']['title' . $new_index] = 'Poller ID: ' . $xpoller['id'];
+            $result['line']['title' . $new_index] = 'ID: ' . $xpoller['id'];
             
             }
 		
