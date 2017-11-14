@@ -25,22 +25,21 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 
 
 
-    print "<div class='flexchild' style='width: $size%;'>";
+    print "<div class='flexchild' style='xwidth: $size%;'>";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
     print "	    <div class='cactiTableButton2 color_$type'><span>";
-    if ( $_SESSION['intropage_cur_panel'] == 1)
-	echo "&lt; ";
-    else
-	echo "<a href='#start'>&lt; </a>";
     
-    if ($_SESSION['intropage_cur_panel'] == $_SESSION['intropage_max_panel'])
-	echo " &gt;";
-    else
-	echo "<a href='#end'> &gt;</a>";
+
+
+    if (isset($dispdata['detail']))	{
+        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#11016;</a>\n",md5($header));
+    }
+
     
- 
+//    echo "<a href='#hide' title='Close this panel'>&#x2716;</a>";
+//    echo "<a href='#hide' title='View details'>&#11016;</a>";
     
     print "</span></div>\n";
     print "	</div>\n";
@@ -48,7 +47,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
     print "	<table class='cactiTable' style='padding:3px;'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
-    print "<div class=\"panel_data\" style=\"min-height: " . $graph_height . "px;\">\n";
+    print "<div class=\"panel_data\" style=\"min-height: " . $graph_height . "px; padding-right: 15px; padding-left: 5px;\">\n";
 
     // graph
     
@@ -259,7 +258,7 @@ print "</div>\n";
     // end of graph
 
     if (isset($dispdata['detail']))	{
-        printf("<span style='float: right'><a href='#' onclick=\"hide_display('block_%s');\">View/hide details</a></span><br/>\n",md5($header));
+//        printf("<span style='float: right'><a href='#' onclick=\"hide_display('block_%s');\">View/hide details</a></span><br/>\n",md5($header));
         printf("<div id=\"block_%s\" style=\"display: none\">\n",md5($header));
         print($dispdata['detail']);
         print("</div>\n");

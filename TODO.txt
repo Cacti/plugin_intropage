@@ -1,15 +1,22 @@
-settings panel per user
 
-zbavit se 160px v grafu
-spojit poller info a poller stats?
+
+zkusit znovu drag and drop - pouzuit https://codepen.io/randohinn/pen/EyBqAK
+
+better display analyse log - join log size and only count warning and errors and details
+
+better display anlayse login - only count failed and detail
+
+panel settings per user
+
+better display panel - divs with dragable width, drag and drop
+
+
+join poller info and poller stats?
 
 new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
-sipky u hodin pomoci utf8
 
 
 
-
-better panels priority
 reload via ajax 
 
 
