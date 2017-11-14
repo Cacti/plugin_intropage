@@ -72,7 +72,7 @@ function intropage_console_after() {
 		//$x['data'] = "You can choose view between separated tab and console, you can set it up in Console -> User Management -> User -> Intropage Options ";
 //		intropage_display_panel(100,"green","Hint",$x);
 //	          intropage_display_panel($size,$value['alarm'],$value['name'],$value);
-	    print "<br/>HINT: You can choose view between separated tab and console, you can set it up in Console -> User Management -> User -> Intropage Options";
+//	    print "<br/>HINT: You can choose view between separated tab and console, you can set it up in Console -> User Management -> User -> Intropage Options";
 	}
 
 	    intropage_display_hint();
@@ -97,7 +97,6 @@ function intropage_display_hint ()       {
     switch ($lopts)     { // after login: 3=graphs, 4=intropage tab, 5=intropage in console
         case "1" :
         case "2" :
-        echo "select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8";
             if (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8"))        {
                 echo "<b>Hint: </b>If you want to see Intropage plugin as default page (in console or separated tab), you can set it up in Console -> User Management -> User -> Login Options <br/>";
             }
