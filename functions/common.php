@@ -34,7 +34,8 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 
 
     if (isset($dispdata['detail']))	{
-        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#11016;</a>\n",md5($header));
+//        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#11016;</a>\n",md5($header));
+        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
     }
 
     
