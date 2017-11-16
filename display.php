@@ -120,7 +120,7 @@ function display_informations() {
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_log.php');
 		$values['analyse_log'] = analyse_log();
 		$values['analyse_log_size'] = analyse_log_size();
-		$debug .= "Analyse log: " . ( microtime(true) -$start) . "<br/>\n";
+		$debug .= "Analyse log: " . round(microtime(true) -$start,2) . "<br/>\n";
 
 	}
 
@@ -130,7 +130,7 @@ function display_informations() {
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_login.php');
 		$values['analyse_login'] = analyse_login();
 		
-		$debug .= "Analyse login: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "Analyse login: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
@@ -140,7 +140,7 @@ function display_informations() {
 
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_db.php');
 		$values['analyse_db'] = analyse_db();
-		$debug .= "Analyse db: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "Analyse db: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
@@ -149,7 +149,7 @@ function display_informations() {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_tree_host_graph.php');
 		$values['analyse_tree_host_graph'] = analyse_tree_host_graph();
-		$debug .= "Analyse tree host graph: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "Analyse tree host graph: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
@@ -159,7 +159,7 @@ function display_informations() {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/trend.php');
 		$values['trend'] = get_trend();
-		$debug .= "Trend: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "Trend: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 	
@@ -170,7 +170,7 @@ function display_informations() {
 	
 		include_once($config['base_path'] . '/plugins/intropage/functions/ntp.php');
 		$values['ntp'] = ntp();
-		$debug .= "NTP: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "NTP: " . round(microtime(true)-$start,2) . "<br/>\n";
 		
 	}
 	
@@ -181,7 +181,7 @@ function display_informations() {
 		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
 		$values['poller_info'] = poller_info();
 		$values['poller_stat'] = poller_stat();
-		$debug .= "Poller info: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "Poller info: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
@@ -190,7 +190,7 @@ function display_informations() {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
 		$values['graph_poller'] = graph_poller();
-		$debug .= "graph poller: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "graph poller: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 	
@@ -200,7 +200,7 @@ function display_informations() {
 		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_host.php');
 	    $values['graph_host'] = graph_host();
-		$debug .= "graph host: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "graph host: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 	
@@ -209,7 +209,7 @@ function display_informations() {
 		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_thold.php');
 	    $values['graph_thold'] = graph_thold();
-		$debug .= "graph thold: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "graph thold: " . round(microtime(true)-$start,2) . "<br/>\n";
 	    
 	}
 	
@@ -219,7 +219,7 @@ function display_informations() {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_data_source.php');
 		$values['graph_data_source'] = graph_data_source();
-		$debug .= "graph data source: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "graph data source: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
@@ -229,7 +229,7 @@ function display_informations() {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_host_template.php');
 		$values['graph_host_template'] = graph_host_template();
-		$debug .= "graph host template: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "graph host template: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
@@ -239,7 +239,7 @@ function display_informations() {
 		include_once($config['base_path'] . '/plugins/intropage/functions/top5.php');
 		$values['top5_ping'] = top5_ping();
 		$values['top5_availability'] = top5_availability();
-		$debug .= "top5: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "top5: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
@@ -248,7 +248,7 @@ function display_informations() {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/info.php');
 		$values['info'] = info();
-		$debug .= "info: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "info: " . round(microtime(true)-$start,2) . "<br/>\n";
 		
 	}
 
@@ -257,7 +257,7 @@ function display_informations() {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/cpu.php');
 		$values['cpu'] = cpu();
-		$debug .= "cpu: " . (microtime(true)-$start) . "<br/>\n";
+		$debug .= "cpu: " . round(microtime(true)-$start,2) . "<br/>\n";
 
 	}
 
