@@ -152,7 +152,7 @@ function analyse_tree_host_graph() {
 
 	$result['data'] .= 'Plugin monitor, not monitored: ';
 
-        $sql_result = db_fetch_assoc ("SELECT description, id FROM host WHERE id in ($allowed_hosts) and monitor != 'on'");
+        $sql_result = db_fetch_assoc ("SELECT id,description,hostname FROM host WHERE id in ($allowed_hosts) and monitor != 'on'");
         
 	$result['data'] .= count($sql_result) . "<br/>";
     
@@ -164,7 +164,7 @@ function analyse_tree_host_graph() {
     	    foreach ($sql_result as $row) {
 		if ($pom == 0)	{	
 		    $pom++;
-		    $result['detail'] .= "<br/><br/>Plugin monitor, not monitored:<br/>";
+		    $result['detail'] .= "<br/><br/>Plugin monitor, not monitored devices:<br/>";
 		}
 
 		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s %s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['hostname'],$row['id']);
