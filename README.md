@@ -38,9 +38,16 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
 	1.2 ---
+	Add poller graph for more pollers
+	Add poller statistics for all pollers
 	Add CPU load graph instead of text information
 	Add yellow alarm for ping > 1000ms or < 75% availability
 	Add last poller time to poller info
+	Add plugin monitor check
+	Add links for setting for users without console
+	Fix host, thold count (wrong permission)
+	Fix DB check level
+	Fix displaying details
 	Fix panel size
 	Fix alarm in analyse DB
 	CSS optimalization
