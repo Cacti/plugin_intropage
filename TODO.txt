@@ -2,8 +2,6 @@ modern - blbe zobrazuje hlavicku
 
 code cleaning
 
-sometimes incomplete pie graphs
-
 drag and drop panels - pouzuit https://codepen.io/randohinn/pen/EyBqAK
 
 better display analyse log - join log size and only count warning and errors and details
@@ -11,7 +9,6 @@ better display analyse log - join log size and only count warning and errors and
 better display anlayse login - only count failed and detail
 
 panel settings per user
-
 
 new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
 
