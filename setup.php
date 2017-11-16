@@ -106,28 +106,11 @@ function intropage_setup_database() {
 }
 
 function intropage_poller_bottom () {
-//    global $config;;8
 
 
     $start = db_fetch_cell("SELECT min(start_time) from poller_time");
 
-/*
-    $rozdil = db_fetch_cell("SELECT time_to_sec(max(timediff(end_time,start_time))) from poller_time");
-    if ($rozdil < 0)
-	$rozdil = read_config_option("poller_interval");
-*/
-
-/*
-    $sum = 0; 
-    $stats = db_fetch_assoc("SELECT time_to_sec(max((timediff(end_time,start_time)))) as xtime from poller_time group by poller_id");
-    foreach($stats as $stat) {	
-	if ($stat['xtime'] < 0)  // kdyz poller nedobiha, musim pricist cely interval
-	    $sum += read_config_option("poller_interval");
-	else
-	    $sum += $stat['xtime'];
-    }
-*/
-
+    // poller stats
 
     $stats = db_fetch_assoc("SELECT id,total_time from poller order by id limit 5");
     foreach($stats as $stat) {	
@@ -135,19 +118,29 @@ function intropage_poller_bottom () {
     }
 
 
+    // 24 hour extrems (host down,max poller time, ...)
+    // name a value 
+    $down = db_fetch_cell("select count(id) FROM host WHERE status='1' AND disabled=''");
+    db_execute("insert into plugin_intropage_trends (name,date,value) values ('extrem_down_host', '$start', '$down')");
+    
+    $down_max = db_fetch_cell("select count(value) FROM plugin_intropage_trends WHERE name='extrem_down_host' and date > date_sub(date,interval 1 day) order by value desc limit 3 ");
+    $down_min = db_fetch_cell("select count(value) FROM plugin_intropage_trends WHERE name='extrem_down_host' and date > date_sub(date,interval 1 day) order by value limit 3 ");
+    // add thold, ...    
+    
+    
+    
 
-// CPU load - linux only
+    // CPU load - linux only
     if (!stristr(PHP_OS, 'win')) {
         $load = sys_getloadavg();
         $load[0] = round ($load[0],2);
 
 	db_execute("insert into plugin_intropage_trends (name,date,value) values ('cpuload', '$start', '" . $load[0] . "')");
     }
-// end of cpu load
 
     db_execute('delete from plugin_intropage_trends where date < date_sub(now(), INTERVAL 2 DAY)');
 
-    // all hosts without permissions!!!
+    // trends - all hosts without permissions!!!
      db_execute("insert into plugin_intropage_trends (name,date,value) select 'host', now(), count(id) FROM host WHERE status='1' AND disabled=''");
      db_execute("insert into plugin_intropage_trends (name,date,value) select 'thold', now(), COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
 
