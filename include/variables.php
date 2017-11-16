@@ -1,67 +1,41 @@
 <?php
 
-// size 10-100%
 // priority (order) (bigger number =  highest priority)
 $panel = array();
 
-$panel['analyse_log']['size'] = 40;
 $panel['analyse_log']['priority'] = 85;
 
-$panel['analyse_log_size']['size'] = 10;
 $panel['analyse_log_size']['priority'] = 80;
 
-$panel['analyse_login']['size'] = 25;
 $panel['analyse_login']['priority'] = 75;
 
-$panel['analyse_db']['size'] = 15;
 $panel['analyse_db']['priority'] = 70;
 
-$panel['analyse_tree_host_graph']['size'] = 25;
 $panel['analyse_tree_host_graph']['priority'] = 50;
 
-$panel['trend']['size'] = 25;
 $panel['trend']['priority'] = 30;
 
-$panel['ntp']['size'] = 15;
 $panel['ntp']['priority'] = 60;
 
-$panel['poller_info']['size'] = 20;
 $panel['poller_info']['priority'] = 20;
 
-$panel['poller_stat']['size'] = 25;
 $panel['poller_stat']['priority'] = 25;
 
-$panel['graph_host']['size'] = 25;
 $panel['graph_host']['priority'] = 15;
 
-$panel['graph_thold']['size'] = 25;
 $panel['graph_thold']['priority'] = 13;
 
-
-$panel['graph_data_source']['size'] = 25;
 $panel['graph_data_source']['priority'] = 12;
 
-$panel['graph_host_template']['size'] = 25;
 $panel['graph_host_template']['priority'] = 11;
 
-$panel['cpu']['size'] = 25;
 $panel['cpu']['priority'] = 34;
 
-
-$panel['top5_ping']['size'] = 25;
 $panel['top5_ping']['priority'] = 8;
 
-$panel['top5_availability']['size'] = 25;
 $panel['top5_availability']['priority'] = 7;
 
-$panel['info']['size'] = 40;
 $panel['info']['priority'] = 1;
-
-
-
-//$panel['debug']['size'] = 30;
-//$panel['debug']['priority'] = 0;
-
 
 
 $intropage_settings = array(

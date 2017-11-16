@@ -25,7 +25,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 
 
 
-    print "<div class='flexchild' style='xwidth: $size%;'>";
+    print "<div class='flexchild'>";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
