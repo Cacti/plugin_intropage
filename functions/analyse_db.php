@@ -7,7 +7,7 @@ function analyse_db() {
 		'name' => 'Database check',
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => NULL,
+		'detail' => '',
 	);
 	
 	$damaged = 0;
@@ -30,7 +30,7 @@ function analyse_db() {
 	    $result['data'] = "<span class=\"txt_big\">DB OK</span><br/><br/>"; 
 	}	
 
-// connecton errors
+// connection errors
 	$cerrors = 0;
 	$con_err = db_fetch_assoc ("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
 
