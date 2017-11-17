@@ -23,9 +23,13 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
-
-
+//if (    $_SESSION['intropage_cur_panel']==1)
+//    print "<div class='row'>"; // dragula
+    
+    
+//    print "<div class='col-xs'>"; // dragula
     print "<div class='flexchild'>";
+
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
@@ -268,11 +272,17 @@ print "</div>\n";
     print "</div>\n";	// obalovy div kvuli min-height
     print "</td></tr>\n\n";
     html_end_box(false);
-    print "</div>";
+    print "</div>\n\n\n";
 
     $_SESSION['intropage_cur_panel']++;
 
-
+/*
+if (    $_SESSION['intropage_cur_panel']==4)	{
+$_SESSION['intropage_cur_panel'] = 1;
+print "</div>"; // dragula
+}
+*/
+    
     } // have console access
 
 }
