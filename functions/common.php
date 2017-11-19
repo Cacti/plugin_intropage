@@ -1,7 +1,17 @@
 <?php
 
 function intropage_display_panel ($size,$type,$header,$dispdata)	{
-    
+
+    print "<div id='item" . $_SESSION['intropage_cur_panel'] ."' class='flexchild'>\n";
+	echo "<br/><br/>Ja jsem obsah divu " . $_SESSION['intropage_cur_panel'] . "<br/><br/>\n";
+
+
+    print "</div>\n\n";
+
+    $_SESSION['intropage_cur_panel']++;
+
+
+/*    
     if (!empty($dispdata))	{	// empty? Typical for no console access
 	
 
@@ -23,12 +33,9 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
-//if (    $_SESSION['intropage_cur_panel']==1)
-//    print "<div class='row'>"; // dragula
     
-    
-//    print "<div class='col-xs'>"; // dragula
-    print "<div class='flexchild'>";
+    print "<div id='item" . $_SESSION['intropage_cur_panel'] ."' class='flexchild'>";
+
 
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
@@ -38,13 +45,10 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 
 
     if (isset($dispdata['detail']))	{
-//        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#11016;</a>\n",md5($header));
         printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
     }
 
     
-//    echo "<a href='#hide' title='Close this panel'>&#x2716;</a>";
-//    echo "<a href='#hide' title='View details'>&#11016;</a>";
     
     print "</span></div>\n";
     print "	</div>\n";
@@ -53,6 +57,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
     print "<div class=\"panel_data\" style=\"min-height: " . $graph_height . "px; padding-right: 15px; padding-left: 5px;\">\n";
+
 
     // graph
     
@@ -276,15 +281,9 @@ print "</div>\n";
 
     $_SESSION['intropage_cur_panel']++;
 
-/*
-if (    $_SESSION['intropage_cur_panel']==4)	{
-$_SESSION['intropage_cur_panel'] = 1;
-print "</div>"; // dragula
-}
-*/
     
     } // have console access
-
+*/
 }
 
 ?>
