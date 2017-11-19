@@ -1,8 +1,10 @@
-modern - blbe zobrazuje hlavicku
 
 code cleaning
 
 drag and drop panels - pouzuit https://codepen.io/randohinn/pen/EyBqAK
+nejde, vracim se ke kodu: https://codepen.io/abechiyo/pen/aJdQXm
+vraci spatne poradi, zkusit jeste s LI a pak to vzdat
+https://jqueryui.com/sortable/
 
 better display analyse log - join log size and only count warning and errors and details
 
