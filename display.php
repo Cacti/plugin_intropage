@@ -1,7 +1,5 @@
 <?php
 
-
-
 function display_informations() {
 
 	global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
@@ -15,21 +13,29 @@ function display_informations() {
 	$debug = "";
 	$debug_start = microtime(true);
 
-
 	// ugly but works. With jquery reload it works strange and I don't know why
 	if (read_config_option("intropage_autorefresh") > 0)
 	 	header("refresh: " . read_config_option("intropage_autorefresh") .";");
 
 	 $selectedTheme = get_selected_theme();
 
-
 	// common
 	include_once($config['base_path'] . '/plugins/intropage/functions/common.php');
 	// style for panels
-	 print "<link type='text/css' href='" . $config["url_path"] . "plugins/intropage/themes/common.css' rel='stylesheet'>\n";
-	 print "<link type='text/css' href='" . $config["url_path"] . "plugins/intropage/themes/" . $selectedTheme . ".css' rel='stylesheet'>\n";
+	print "<link type='text/css' href='" . $config["url_path"] . "plugins/intropage/themes/common.css' rel='stylesheet'>\n";
+	print "<link type='text/css' href='" . $config["url_path"] . "plugins/intropage/themes/" . $selectedTheme . ".css' rel='stylesheet'>\n";
 
+	
+	// drag and drop jquery
+print <<<EOF
 
+<script type="text/javascript">
+$( function() {
+  $( "ul" ).sortable().disableSelection();
+} );
+</script>
+
+EOF;
 
 	// Retrieve global configuration options
 	$display_important_first = read_config_option("intropage_display_important_first");
@@ -39,29 +45,6 @@ function display_informations() {
 	$current_user = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 	$allowed_hosts = '';
-
-/*  old and bad
-	$sql = "SELECT distinct host.id as id FROM host
-        LEFT JOIN graph_local ON (host.id = graph_local.host_id)
-        LEFT JOIN graph_templates_graph ON (graph_templates_graph.local_graph_id = graph_local.id)
-        LEFT JOIN user_auth_perms ON ((graph_templates_graph.local_graph_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
-            (host.id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id=" . $_SESSION["sess_user_id"] . ") OR
-            (graph_templates_graph.id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id=" . $_SESSION["sess_user_id"] . "))
-        WHERE graph_templates_graph.local_graph_id=graph_local.id and  $sql_where";
-
-	//echo $sql;
-
-	$sql_result = db_fetch_assoc ($sql);
-	if ($sql_result) {
-    	    $sql_array_result = array();
-    	    foreach ($sql_result as $item) { array_push($sql_array_result,$item['id']); }
-    	    $allowed_hosts = sprintf("%s",implode(",",$sql_array_result));
-	}
-    
-*/    
-
-// allowed host new
-
 
 	/* get policies for all groups and user - from user_admin.php */
 
@@ -101,14 +84,9 @@ function display_informations() {
 
 	$allowed_hosts = substr($allowed_hosts,0,-1);
 
-// allowed host new - end
-
-
-    
 	
 	// Retrieve access
 	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8"))?true:false;
-
 
 	
 	// Start
@@ -153,17 +131,14 @@ function display_informations() {
 
 	}
 
-
 	// trend
 	if (read_config_option("intropage_trend") == "on") {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/trend.php');
 		$values['trend'] = get_trend();
 		$debug .= "Trend: " . round(microtime(true)-$start,2) . "<br/>\n";
-
 	}
 	
-
 	// Check NTP
 	if ($console_access && read_config_option('intropage_ntp') == "on") {
 		$start = microtime(true);
@@ -194,14 +169,12 @@ function display_informations() {
 
 	}
 	
-
 	// graph_host
 	if (read_config_option("intropage_graph_host") == "on") {
 		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_host.php');
 	    $values['graph_host'] = graph_host();
 		$debug .= "graph host: " . round(microtime(true)-$start,2) . "<br/>\n";
-
 	}
 	
 	// Check Thresholds
@@ -213,14 +186,12 @@ function display_informations() {
 	    
 	}
 	
-	
 	// Get Datasources
 	if (read_config_option("intropage_graph_data_source") == "on") {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_data_source.php');
 		$values['graph_data_source'] = graph_data_source();
 		$debug .= "graph data source: " . round(microtime(true)-$start,2) . "<br/>\n";
-
 	}
 
 	
@@ -230,7 +201,6 @@ function display_informations() {
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_host_template.php');
 		$values['graph_host_template'] = graph_host_template();
 		$debug .= "graph host template: " . round(microtime(true)-$start,2) . "<br/>\n";
-
 	}
 
 	// top5
@@ -240,7 +210,6 @@ function display_informations() {
 		$values['top5_ping'] = top5_ping();
 		$values['top5_availability'] = top5_availability();
 		$debug .= "top5: " . round(microtime(true)-$start,2) . "<br/>\n";
-
 	}
 
 	// info
@@ -249,7 +218,6 @@ function display_informations() {
 		include_once($config['base_path'] . '/plugins/intropage/functions/info.php');
 		$values['info'] = info();
 		$debug .= "info: " . round(microtime(true)-$start,2) . "<br/>\n";
-		
 	}
 
 	// cpu
@@ -258,7 +226,6 @@ function display_informations() {
 		include_once($config['base_path'] . '/plugins/intropage/functions/cpu.php');
 		$values['cpu'] = cpu();
 		$debug .= "cpu: " . round(microtime(true)-$start,2) . "<br/>\n";
-
 	}
 
 
@@ -269,25 +236,18 @@ function display_informations() {
 //	$display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
 // 	0 chyby, 1 - chyby/warn, 2- all
 
-    if (!isset($_SESSION['intropage_cur_panel']))
-	$_SESSION['intropage_cur_panel'] = 1;
-    
-    print '<div id="obal" style="width: 100%; margin: 20px auto; xbackground-color: #efefef;">';
+    print '<ul id="obal" style="width: 100%; margin: 20px auto; xbackground-color: #efefef;">';
 
     $query = "select * from plugin_intropage_panel order by priority desc";
     
     $panels = db_fetch_assoc($query);
     $_SESSION['intropage_max_panel'] = count ($panels);
 
-
     if ($display_important_first == "on")	{  // important first
     	    foreach($values as $key=>$value) {	
 		if ($value['alarm'] == "red")	{
 
-		    $size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
-
-
-		    intropage_display_panel($size,$value['alarm'],$value['name'],$value);
+		    intropage_display_panel($value['alarm'],$value['name'],$value);
 		    $value['displayed'] = true;
 		}
 	    }
@@ -297,9 +257,7 @@ function display_informations() {
     		foreach($values as $key=>$value) {	
 		    if ($value['alarm'] == "yellow")	{
 	
-			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
-
-      		        intropage_display_panel($size,$value['alarm'],$value['name'],$value);
+      		        intropage_display_panel($value['alarm'],$value['name'],$value);
 			$value['displayed'] = true;
 		    }
 		}
@@ -308,9 +266,7 @@ function display_informations() {
 	    if ($display_level == 2)	{
     		foreach($values as $key=>$value) {	
 		    if ($value['alarm'] == "green" && !isset($value['displayed']))	{
-			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
-
-			intropage_display_panel($size,$value['alarm'],$value['name'],$value);
+			intropage_display_panel($value['alarm'],$value['name'],$value);
 		    }
 		}
 	    }
@@ -320,7 +276,6 @@ function display_informations() {
 	foreach ($panels as $key=>$value)	{
 
 	    $pom = $value['panel'];
-
 	
 		if (
 		    ($display_level == 2 ) ||
@@ -328,7 +283,7 @@ function display_informations() {
 	            ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
 
 			if (isset ($values[$pom]))	// only active panels, not disable
-				intropage_display_panel($value['size'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+				intropage_display_panel($values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 		}
 	}
 
@@ -350,8 +305,6 @@ function hide_display (id)      {
 
 EOF;
 
-    unset ($_SESSION['intropage_cur_panel'],$_SESSION['intropage_max_panel']);
-
     print "<div style='clear: both;'></div>";
     print "<div style=\"width: 100%\"> Generated: " . date("H:i:s") . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";
 
@@ -361,8 +314,7 @@ EOF;
 	    }
 
 
- 
-    print "</div>\n"; // div id=obal
+    print "</ul>\n";
 
 
 // reload
@@ -387,8 +339,6 @@ function reloadChat () {
 }
 */
 // end of reload
-
-
 
 	
 	return true;

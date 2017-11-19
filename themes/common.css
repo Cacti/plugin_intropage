@@ -1,12 +1,23 @@
 
 #obal {
-    display: flex;
-    flex-wrap: wrap; 
+    list-style-type: none; /* remove bullets */
+    display: flex; /* flexbox */
+    flex-wrap: wrap; /* multiple lines */
+    align-items: stretch;
+    margin: 0px;
+    padding: 0px;
 }
 
 .flexchild {
-    flex-grow: 1;
     padding: 0.2em;
+    flex-grow: 1; /* stretch box width */
+    min-height: 160px;
+    cursor: move;
+    border: 0px;
+}
+
+.panel_data	{
+    min-height: 160px;
 }
 
 .txt_big	{

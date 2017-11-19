@@ -1,22 +1,10 @@
 <?php
 
-function intropage_display_panel ($size,$type,$header,$dispdata)	{
+function intropage_display_panel ($type,$header,$dispdata)	{
 
-    print "<div id='item" . $_SESSION['intropage_cur_panel'] ."' class='flexchild'>\n";
-	echo "<br/><br/>Ja jsem obsah divu " . $_SESSION['intropage_cur_panel'] . "<br/><br/>\n";
-
-
-    print "</div>\n\n";
-
-    $_SESSION['intropage_cur_panel']++;
-
-
-/*    
+   
     if (!empty($dispdata))	{	// empty? Typical for no console access
 	
-
-    $graph_height = 160;
-
     $selectedTheme = get_selected_theme();
     switch ($selectedTheme)	{
 	case "dark":
@@ -33,33 +21,25 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
-    
-    print "<div id='item" . $_SESSION['intropage_cur_panel'] ."' class='flexchild'>";
-
-
+    print "<li class='ui-state-default flexchild'>\n";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
     print "	    <div class='cactiTableButton2 color_$type'><span>";
     
-
-
     if (isset($dispdata['detail']))	{
         printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
     }
-
-    
     
     print "</span></div>\n";
     print "	</div>\n";
-    
     print "	<table class='cactiTable' style='padding:3px;'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
-    print "<div class=\"panel_data\" style=\"min-height: " . $graph_height . "px; padding-right: 15px; padding-left: 5px;\">\n";
+    print "<div class='panel_data'>\n";
 
 
-    // graph
+    // pie graph
     
     if (isset($dispdata['pie']))	{
 
@@ -159,8 +139,7 @@ print "</div>\n";
 
     } // bar graph end
 
-
-///////////// line graph
+// line graph
     elseif (isset($dispdata['line']))	{
 
 		$xid = "x" . substr(md5($dispdata['line']['title1']),0,7);
@@ -268,7 +247,6 @@ print "</div>\n";
     // end of graph
 
     if (isset($dispdata['detail']))	{
-//        printf("<span style='float: right'><a href='#' onclick=\"hide_display('block_%s');\">View/hide details</a></span><br/>\n",md5($header));
         printf("<div id=\"block_%s\" style=\"display: none\">\n",md5($header));
         print($dispdata['detail']);
         print("</div>\n");
@@ -277,13 +255,9 @@ print "</div>\n";
     print "</div>\n";	// obalovy div kvuli min-height
     print "</td></tr>\n\n";
     html_end_box(false);
-    print "</div>\n\n\n";
 
-    $_SESSION['intropage_cur_panel']++;
+    print "</li>\n\n";
 
-    
     } // have console access
-*/
 }
-
 ?>
