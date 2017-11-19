@@ -30,7 +30,6 @@ function display_informations() {
 	 print "<link type='text/css' href='" . $config["url_path"] . "plugins/intropage/themes/" . $selectedTheme . ".css' rel='stylesheet'>\n";
 
 
-
 	// Retrieve global configuration options
 	$display_important_first = read_config_option("intropage_display_important_first");
 	$display_level = read_config_option("intropage_display_level");
@@ -271,8 +270,10 @@ function display_informations() {
 
     if (!isset($_SESSION['intropage_cur_panel']))
 	$_SESSION['intropage_cur_panel'] = 1;
+
     
-    print '<div id="obal" style="width: 100%; margin: 20px auto; xbackground-color: #efefef;">';
+//    print '<div id="obal" class="container"  style="width: 100%; margin: 20px auto;">';
+    print '<div id="obal" style="width: 100%; margin: 20px auto;">';
 
     $query = "select * from plugin_intropage_panel order by priority desc";
     
@@ -284,7 +285,7 @@ function display_informations() {
     	    foreach($values as $key=>$value) {	
 		if ($value['alarm'] == "red")	{
 
-		    $size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
+//		    $size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
 
 
 		    intropage_display_panel($size,$value['alarm'],$value['name'],$value);
@@ -297,7 +298,7 @@ function display_informations() {
     		foreach($values as $key=>$value) {	
 		    if ($value['alarm'] == "yellow")	{
 	
-			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
+//			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
 
       		        intropage_display_panel($size,$value['alarm'],$value['name'],$value);
 			$value['displayed'] = true;
@@ -308,7 +309,7 @@ function display_informations() {
 	    if ($display_level == 2)	{
     		foreach($values as $key=>$value) {	
 		    if ($value['alarm'] == "green" && !isset($value['displayed']))	{
-			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
+//			$size = db_fetch_cell ("select size from plugin_intropage_panel where panel='$key'");
 
 			intropage_display_panel($size,$value['alarm'],$value['name'],$value);
 		    }
@@ -326,9 +327,8 @@ function display_informations() {
 		    ($display_level == 2 ) ||
 	            ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
 	            ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
-
-
-			intropage_display_panel($value['size'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			if (isset ($values[$pom]))	// only active panels, not disable
+			    intropage_display_panel($value['size'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 		}
 	}
 
