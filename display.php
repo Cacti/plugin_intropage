@@ -327,8 +327,8 @@ function display_informations() {
 	            ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
 	            ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
 
-
-			intropage_display_panel($value['size'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			if (isset ($values[$pom]))	// only active panels, not disable
+				intropage_display_panel($value['size'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 		}
 	}
 
