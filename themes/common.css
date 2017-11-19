@@ -28,13 +28,14 @@
     text-align: right;
 }
 
+
 .color_red {
     background: rgba(255,255,255,1);
-    background: -moz-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,0,0,1)), color-stop(100%, rgba(255,0,0,1))) !important;
-    background: -webkit-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
-    background: -o-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
-    background: -ms-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 100%) !important;
+    background: -moz-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(221,20,20,1)), color-stop(100%, rgba(221,20,20,1))) !important;
+    background: -webkit-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
+    background: -o-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
+    background: -ms-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
 }
 
 .color_yellow       {
@@ -48,12 +49,12 @@
 }
 
 .color_green       {
-    background-color: #00ff00;
+    background-color: #457915;
     background: rgba(255,255,255,1);
-    background: -moz-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,255,0,1)), color-stop(100%, rgba(0,255,0,1))) !important;
-    background: -webkit-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
-    background: -o-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
-    background: -ms-linear-gradient(top, rgba(0,255,0,1) 0%, rgba(0,255,0,1) 100%) !important;
+    background: -moz-linear-gradient(top, rgba(69,121,0,1) 0%, rgba(69,121,21,1) 100%) !important;
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(69,121,21,1)), color-stop(100%, rgba(69,121,21,1))) !important;
+    background: -webkit-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
+    background: -o-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
+    background: -ms-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
 }
 

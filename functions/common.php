@@ -53,7 +53,7 @@ function intropage_display_panel ($type,$header,$dispdata)	{
 		    $labely[$key] = $val . " (" . $dispdata['pie']['data'][$key] . ")";
 		}
 
-		print "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		
 		$pie_labels = implode('","',$labely);
@@ -93,7 +93,7 @@ EOF;
 
 		$xid = "x" . substr(md5($dispdata['bar']['title1']),0,7);
 
-		print "<div style=\"background: $bgcolor;\"><canvas id=\"bar_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"bar_$xid\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		$bar_labels1 = implode('","',$dispdata['bar']['label1']);
 		$bar_values1 = implode(',',$dispdata['bar']['data1']);
@@ -144,7 +144,7 @@ print "</div>\n";
 
 		$xid = "x" . substr(md5($dispdata['line']['title1']),0,7);
 
-		print "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		$title1 = $dispdata['line']['title1'];
 		$line_labels = implode('","',$dispdata['line']['label1']);
@@ -252,7 +252,7 @@ print "</div>\n";
         print("</div>\n");
     }
 
-    print "</div>\n";	// obalovy div kvuli min-height
+    print "</div>\n";	// end of panel_data
     print "</td></tr>\n\n";
     html_end_box(false);
 
