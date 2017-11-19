@@ -157,14 +157,14 @@ $intropage_settings = array(
 		"array" => array("QUICK" => "Quick", "FAST" => "Fast", "CHANGED" => "Changed", "MEDIUM" => "Medium", "EXTENDED"  => "Extended"),
 		"default" => "Medium",
 	),
+
+// analyse_tree_host_graph
 	
 	"intropage_display_header" => array(
 		"friendly_name" => "Analyse trees, hosts, graphs, ...",
 		"method" => "spacer",
 	),
 	
-	
-// analyse_tree_host_graph
 	"intropage_analyse_tree_host_graph" => array(
 		"friendly_name" => "Allow check for devices with the same description, without graph and in more than one tree",
 		"description" => "if checked this plugin is allowed to search for devices with the same description,without graph and in more than one tree",
@@ -172,26 +172,25 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 
-
+// trend	
 	"intropage_display_header" => array(
 		"friendly_name" => "Trends",
 		"method" => "spacer",
 	),
 
-// trend	
 	"intropage_trend" => array(
 		"friendly_name" => "Display graph for host and thold trends",
 		"description" => "if checked this plugin displays graph with trends",
 		"method" => "checkbox",
 		"default" => "on",
 	),
-	
+
+// ntp
 	"intropage_display_header" => array(
 		"friendly_name" => "NTP",
 		"method" => "spacer",
 	),
 	
-// ntp
 	"intropage_ntp_header" => array(
 		"friendly_name" => "NTP settings",
 		"method" => "spacer",
@@ -209,18 +208,20 @@ $intropage_settings = array(
 		"max_length" => 50,
 		"default" => "pool.ntp.org",
 	),
+
+// poller
 	"intropage_display_header" => array(
 		"friendly_name" => "Poller",
 		"method" => "spacer",
 	),
 
-// poller
 	"intropage_poller_info" => array(
 		"friendly_name" => "Display poller info - how many poller and how long pollers run",
 		"description" => "if checked this plugin displays poller information",
 		"method" => "checkbox",
 		"default" => "on",
 	),
+
 // graph poller
 	"intropage_graph_poller" => array(
 		"friendly_name" => "Display poller graph",
