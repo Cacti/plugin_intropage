@@ -22,6 +22,7 @@ function cpu() {
 
     if (stristr(PHP_OS, 'win')) {
 	$result['data'] = "This function is not implemented on Windows platforms";
+	unset ($result['line']);
     }
     else	{
 
