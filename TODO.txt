@@ -1,4 +1,5 @@
 top5 - odkazy spatna barva, style 2em natvrdo zakodovane
+info - poller type is empty
 
 modern - blbe zobrazuje hlavicku
 
