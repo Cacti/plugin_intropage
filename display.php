@@ -161,14 +161,15 @@ EOF;
 	}
 
 	// graph_poller
+	/*
 	if ($console_access && read_config_option('intropage_graph_poller') == "on") {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
 		$values['graph_poller'] = graph_poller();
 		$debug .= "graph poller: " . round(microtime(true)-$start,2) . "<br/>\n";
-
 	}
-	
+
+*/	
 	// graph_host
 	if (read_config_option("intropage_graph_host") == "on") {
 		$start = microtime(true);
