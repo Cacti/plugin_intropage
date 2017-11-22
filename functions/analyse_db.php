@@ -38,9 +38,12 @@ function analyse_db() {
 	    $cerrors = $cerrors + $val['Value'];
 	}
 
-	if ($cerrors > 0 && $result['alarm'] == "green")	// only yellow
+	if ($cerrors > 0 )	{	// only yellow
+	    $result['detail'] .= "Connection errors - try to restart database. <br/>";
+	    
+	    if ($result['alarm'] == "green")
 		$result['alarm'] = "yellow";
-
+	}
 
         $result['data'] .= "Connection errors: $cerrors<br/>";
 
