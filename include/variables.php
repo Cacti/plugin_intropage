@@ -39,6 +39,7 @@ $panel['info']['priority'] = 1;
 
 
 $intropage_settings = array(
+
 	"intropage_display_header" => array(
 		"friendly_name" => "Display settings",
 		"method" => "spacer",
@@ -65,16 +66,11 @@ $intropage_settings = array(
 	),
 
 // analyse_log
-	"intropage_display_header" => array(
+	"intropage_analyse_header" => array(
 		"friendly_name" => "Logs",
 		"method" => "spacer",
 	),
 
-
-	"intropage_analyse_log_header" => array(
-		"friendly_name" => "Log analyse settings",
-		"method" => "spacer",
-	),
 	"intropage_analyse_log" => array(
 		"friendly_name" => "Allow cacti log analyse - warning and errors in log, size of log",
 		"description" => "if checked this plugin is allowed to analyse cacti log file",
@@ -89,11 +85,6 @@ $intropage_settings = array(
 		"default" => "1000",
 	),
 	
-	"intropage_display_header" => array(
-		"friendly_name" => "Logins",
-		"method" => "spacer",
-	),
-
 	
 // analyse_login	
 	"intropage_analyse_login_header" => array(
@@ -109,13 +100,9 @@ $intropage_settings = array(
 
 
 // analyse_db	
-	"intropage_display_header" => array(
-		"friendly_name" => "DB",
-		"method" => "spacer",
-	),
 
 	"intropage_analyse_db_header" => array(
-		"friendly_name" => "Analyze MySQL database",
+		"friendly_name" => "DB",
 		"method" => "spacer",
 	),
 	"intropage_analyse_db" => array(
@@ -132,7 +119,7 @@ $intropage_settings = array(
 		"default" => "Medium",
 	),
 	
-	"intropage_display_header" => array(
+	"intropage_anlayse_tree_header" => array(
 		"friendly_name" => "Analyse trees, hosts, graphs, ...",
 		"method" => "spacer",
 	),
@@ -146,11 +133,6 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 
-
-	"intropage_display_header" => array(
-		"friendly_name" => "Trends",
-		"method" => "spacer",
-	),
 
 // trend	
 	"intropage_trend" => array(
@@ -183,7 +165,7 @@ $intropage_settings = array(
 		"max_length" => 50,
 		"default" => "pool.ntp.org",
 	),
-	"intropage_display_header" => array(
+	"intropage_poller_header" => array(
 		"friendly_name" => "Poller",
 		"method" => "spacer",
 	),
@@ -196,16 +178,27 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 // graph poller
+/*
 	"intropage_graph_poller" => array(
 		"friendly_name" => "Display poller graph",
 		"description" => "if checked this plugin displays poller graph",
 		"method" => "checkbox",
 		"default" => "on",
 	),
-	"intropage_display_header" => array(
+*/
+	"intropage_graphs_header" => array(
 		"friendly_name" => "Graphs",
 		"method" => "spacer",
 	),
+
+// trend	
+	"intropage_trend" => array(
+		"friendly_name" => "Display graph for host and thold trends",
+		"description" => "if checked this plugin displays graph with trends",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+
 
 	
 // graph_host
@@ -239,8 +232,15 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
+	"intropage_cpu" => array(
+		"friendly_name" => "Display CPU utilization graph",
+		"description" => "if checked this plugin is displays information about CPU",
+		"method" => "checkbox",
+		"default" => "on",
+	),
 
-	"intropage_display_header" => array(
+
+	"intropage_top5_header" => array(
 		"friendly_name" => "Top5",
 		"method" => "spacer",
 	),
@@ -253,7 +253,7 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 // info - os, php apod
-	"intropage_display_header" => array(
+	"intropage_info_header" => array(
 		"friendly_name" => "Info",
 		"method" => "spacer",
 	),
