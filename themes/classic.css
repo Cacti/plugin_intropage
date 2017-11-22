@@ -2,7 +2,6 @@
         color: white;
 }
 
-
 .cactiTableButton2 span {
         color: white;
         padding: 5px 8px 0px 3px;
@@ -12,4 +11,8 @@
         white-space: nowrap;
         overflow: hidden;
         vertical-align: middle;
+}
+
+a:link, a:visited, a:hover, a:active 	{
+    color: blue !important;
 }

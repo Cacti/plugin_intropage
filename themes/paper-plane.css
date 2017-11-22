@@ -2,7 +2,7 @@
 .panel_data     {
     background-color: #202020;
     color: white;
-    
+    padding: 4px;
 }
 
 .cactiTableTitle .pokus {
@@ -15,7 +15,7 @@
 }
 
 .cactiTableButton2 span  {
-        padding: 0px 12px 18px 3px;
+        padding: 0px 12px 24px 3px;
         white-space: nowrap;
         overflow: hidden;
         vertical-align: middle;
