@@ -27,7 +27,7 @@ function intropage_display_panel ($type,$header,$dispdata)	{
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
     print "	    <div class='cactiTableButton2 color_$type'><span>";
     
-    if (isset($dispdata['detail']))	{
+    if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
         printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
     }
     
