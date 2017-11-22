@@ -101,7 +101,7 @@ function poller_stat() {
 	$new_index = 1;
 	foreach ($pollers as $xpoller)	{
 //echo "<br/>" . $xpoller['id'] ." aa";
-	    $poller_time = db_fetch_assoc("SELECT  date_format(time(date),'%H:%i') as date,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by date desc limit 10");
+	    $poller_time = db_fetch_assoc("SELECT  date_format(time(date),'%H:%i') as xdate,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by date desc limit 10");
 	    $poller_time = array_reverse ($poller_time);
 
 	    foreach ($poller_time as $one_poller)	{
@@ -112,14 +112,14 @@ function poller_stat() {
 	
 	    if ($time > $poller_interval)	{
 		$result['alarm'] = "red";
-		$result['data'] .= "<b>" . $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
+		$result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
 
 	    }
 	    else
-		$result['data'] .= $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
+		$result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
 		
 	    // graph data
-            array_push($result['line']['label' . $new_index], $one_poller['date'] );
+            array_push($result['line']['label' . $new_index], $one_poller['xdate'] );
             array_push($result['line']['data' . $new_index],$time);
 //            $result['line']['data' . $new_index][$f] = $time;
 
