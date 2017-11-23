@@ -279,7 +279,6 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 
-
 );
 
 ?>
