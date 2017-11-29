@@ -82,7 +82,6 @@ function intropage_setup_database() {
 
         $data = array();
 	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(30)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'size', 'type' => 'int(2)', 'default' => '1', 'NULL' => false);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
 	$data['type'] = 'MyISAM';
         $data['comment'] = 'panel setting';
@@ -90,15 +89,15 @@ function intropage_setup_database() {
 
 	$sql_insert = '';
 	foreach ($panel as $key=>$value)   {
-		if (isset($value['size']) && !db_fetch_cell("SELECT size FROM plugin_intropage_panel WHERE panel='$key'")) {
+		if (isset($value['priority']) && !db_fetch_cell("SELECT priority FROM plugin_intropage_panel WHERE panel='$key'")) {
 			if ($sql_insert != '') $sql_insert .= ",";
-			$sql_insert .= sprintf("(%s,%s,%s)",db_qstr($key),db_qstr($value['size']),db_qstr($value['priority']));
+			$sql_insert .= sprintf("(%s,%s)",db_qstr($key),db_qstr($value['priority']));
 		}
 	}
 
 	
 	if ($sql_insert != '') {
-		db_execute("INSERT INTO plugin_intropage_panel (panel,size,priority) VALUES $sql_insert");
+		db_execute("INSERT INTO plugin_intropage_panel (panel,priority) VALUES $sql_insert");
 	}
 
 

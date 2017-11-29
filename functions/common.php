@@ -1,12 +1,10 @@
 <?php
 
-function intropage_display_panel ($size,$type,$header,$dispdata)	{
-    
+function intropage_display_panel ($type,$header,$dispdata)	{
+
+   
     if (!empty($dispdata))	{	// empty? Typical for no console access
 	
-
-    $graph_height = 160;
-
     $selectedTheme = get_selected_theme();
     switch ($selectedTheme)	{
 	case "dark":
@@ -23,34 +21,25 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
-
-
-    print "<div class='flexchild' style='xwidth: $size%;'>";
+    print "<li class='ui-state-default flexchild'>\n";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
     print "	    <div class='cactiTableButton2 color_$type'><span>";
     
-
-
-    if (isset($dispdata['detail']))	{
-//        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#11016;</a>\n",md5($header));
+    if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
         printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
     }
-
-    
-//    echo "<a href='#hide' title='Close this panel'>&#x2716;</a>";
-//    echo "<a href='#hide' title='View details'>&#11016;</a>";
     
     print "</span></div>\n";
     print "	</div>\n";
-    
     print "	<table class='cactiTable' style='padding:3px;'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
-    print "<div class=\"panel_data\" style=\"min-height: " . $graph_height . "px; padding-right: 15px; padding-left: 5px;\">\n";
+    print "<div class='panel_data'>\n";
 
-    // graph
+
+    // pie graph
     
     if (isset($dispdata['pie']))	{
 
@@ -64,7 +53,7 @@ function intropage_display_panel ($size,$type,$header,$dispdata)	{
 		    $labely[$key] = $val . " (" . $dispdata['pie']['data'][$key] . ")";
 		}
 
-		print "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		
 		$pie_labels = implode('","',$labely);
@@ -104,7 +93,7 @@ EOF;
 
 		$xid = "x" . substr(md5($dispdata['bar']['title1']),0,7);
 
-		print "<div style=\"background: $bgcolor;\"><canvas id=\"bar_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"bar_$xid\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		$bar_labels1 = implode('","',$dispdata['bar']['label1']);
 		$bar_values1 = implode(',',$dispdata['bar']['data1']);
@@ -150,13 +139,12 @@ print "</div>\n";
 
     } // bar graph end
 
-
-///////////// line graph
+// line graph
     elseif (isset($dispdata['line']))	{
 
 		$xid = "x" . substr(md5($dispdata['line']['title1']),0,7);
 
-		print "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\" height=\"$graph_height\"></canvas>\n";
+		print "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\"></canvas>\n";
 		print "<script type='text/javascript'>\n";
 		$title1 = $dispdata['line']['title1'];
 		$line_labels = implode('","',$dispdata['line']['label1']);
@@ -259,22 +247,17 @@ print "</div>\n";
     // end of graph
 
     if (isset($dispdata['detail']))	{
-//        printf("<span style='float: right'><a href='#' onclick=\"hide_display('block_%s');\">View/hide details</a></span><br/>\n",md5($header));
         printf("<div id=\"block_%s\" style=\"display: none\">\n",md5($header));
         print($dispdata['detail']);
         print("</div>\n");
     }
 
-    print "</div>\n";	// obalovy div kvuli min-height
+    print "</div>\n";	// end of panel_data
     print "</td></tr>\n\n";
     html_end_box(false);
-    print "</div>";
 
-    $_SESSION['intropage_cur_panel']++;
-
+    print "</li>\n\n";
 
     } // have console access
-
 }
-
 ?>

@@ -13,9 +13,9 @@ function top5_ping() {
         $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) order by avg_time desc limit 5");
 	foreach($sql_worst_host as $host) {
             if ($console_access)  
-        	$result['data'] .= "<td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&amp;id=".$host['id']."\">".$host['description']."</a>";
+        	$result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
             else  
-        	$result['data'] .=  "<td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+        	$result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
     
 	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['avg_time'],2) . "ms</td>\n";
 	
@@ -49,9 +49,9 @@ function top5_availability() {
 
 	foreach($sql_worst_host as $host) {
             if ($console_access)  
-        	$result['data'] .= "<td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&amp;id=".$host['id']."\">".$host['description']."</a>";
+        	$result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
             else  
-        	$result['data'] .=  "<td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+        	$result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
     
 	    if ($host['availability'] < 90)	{
 		$result['alarm'] = "yellow";

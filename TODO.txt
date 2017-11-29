@@ -1,20 +1,17 @@
 
+drag and drop - save settings
+top5 - style 2em natvrdo zakodovane
+info - poller type is empty (sometimes)
+
 code cleaning
 
-drag and drop panels - pouzuit https://codepen.io/randohinn/pen/EyBqAK
-nejde, vracim se ke kodu: https://codepen.io/abechiyo/pen/aJdQXm
-vraci spatne poradi, zkusit jeste s LI a pak to vzdat
-https://jqueryui.com/sortable/
 
 better display analyse log - join log size and only count warning and errors and details
-
 better display anlayse login - only count failed and detail
 
 panel settings per user
 
 new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
-
-
 
 reload via ajax 
 

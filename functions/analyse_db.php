@@ -24,13 +24,13 @@ function analyse_db() {
 	
 	if ($damaged > 0) { 
 	    $result['alarm'] = "red";
-	    $result['data'] = "<span class=\"txt_big\">DB problem</span><br/><br/>"; 
+	    $result['data'] = "<span class='txt_big'>DB problem</span><br/><br/>"; 
 	}
 	else	{
-	    $result['data'] = "<span class=\"txt_big\">DB OK</span><br/><br/>"; 
+	    $result['data'] = "<span class='txt_big'>DB OK</span><br/><br/>"; 
 	}	
 
-// connection errors
+	// connection errors
 	$cerrors = 0;
 	$con_err = db_fetch_assoc ("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
 
@@ -38,12 +38,14 @@ function analyse_db() {
 	    $cerrors = $cerrors + $val['Value'];
 	}
 
-	if ($cerrors > 0 && $result['alarm'] == "green")	// only yellow
+	if ($cerrors > 0 )	{	// only yellow
+	    $result['detail'] .= "Connection errors - try to restart database. <br/>";
+	    
+	    if ($result['alarm'] == "green")
 		$result['alarm'] = "yellow";
-
+	}
 
         $result['data'] .= "Connection errors: $cerrors<br/>";
-
 	
 	$result['data'] .= "Damaged tables: $damaged<br/>Memory tables: $memtables<br/>All tables: " . count($tables);
 	

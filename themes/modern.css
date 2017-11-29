@@ -4,3 +4,8 @@
         overflow: hidden;
         vertical-align: middle;
 }
+
+
+.panel_data	{
+    padding: 4px;
+}

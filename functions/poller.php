@@ -1,13 +1,5 @@
 <?php
 
-
-function poller_info() {
-	global $config, $sql_where;
-	
-	$result = array(
-		'name' => 'Poller info',
-		'alarm' => 'green',
-	);
 /*
         0 => '<div class="deviceUnknown">'    . __('New/Idle')     . '</div>',
         1 => '<div class="deviceUp">'         . __('Running')      . '</div>',
@@ -17,8 +9,17 @@ function poller_info() {
         5 => '<div class="deviceDown">'       . __('Recovering')   . '</div>'
 */
 
-	$result['data'] = "<b>ID/Name/max. time/total time/state</b><br/>";
+
+
+function poller_info() {
+	global $config, $sql_where;
 	
+	$result = array(
+		'name' => 'Poller info',
+		'alarm' => 'green',
+	);
+
+	$result['data'] = "<b>ID/Name/max. time/total time/state</b><br/>";
 
         $sql_pollers = db_fetch_assoc("SELECT id,name,status,last_update,total_time FROM poller ORDER BY id limit 5");
 
@@ -28,7 +29,6 @@ function poller_info() {
                 foreach ($sql_pollers as $poller) {
                         if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) 	{
                                 $ok++;
-
 			}
 			
 			$age = db_fetch_cell ("select time_to_sec(max(timediff(end_time,start_time))) from poller_time where poller_id = " . $poller['id']);
@@ -62,15 +62,13 @@ function poller_info() {
     	    $result['alarm'] = "green";
         }
 
-
-
 	return $result;
 }
 
 
 
 function poller_stat() {
-	global $config, $log;
+	global $config;
 	
 	$poller_interval = read_config_option("poller_interval");
 	$result = array(
@@ -103,7 +101,7 @@ function poller_stat() {
 	$new_index = 1;
 	foreach ($pollers as $xpoller)	{
 //echo "<br/>" . $xpoller['id'] ." aa";
-	    $poller_time = db_fetch_assoc("SELECT  date_format(time(date),'%H:%i') as date,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by date desc limit 10");
+	    $poller_time = db_fetch_assoc("SELECT  date_format(time(date),'%H:%i') as xdate,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by date desc limit 10");
 	    $poller_time = array_reverse ($poller_time);
 
 	    foreach ($poller_time as $one_poller)	{
@@ -114,14 +112,14 @@ function poller_stat() {
 	
 	    if ($time > $poller_interval)	{
 		$result['alarm'] = "red";
-		$result['data'] .= "<b>" . $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
+		$result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
 
 	    }
 	    else
-		$result['data'] .= $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
+		$result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
 		
 	    // graph data
-            array_push($result['line']['label' . $new_index], $one_poller['date'] );
+            array_push($result['line']['label' . $new_index], $one_poller['xdate'] );
             array_push($result['line']['data' . $new_index],$time);
 //            $result['line']['data' . $new_index][$f] = $time;
 
@@ -134,45 +132,10 @@ function poller_stat() {
 
 
 
-/*
-	$pollers = db_fetch_assoc("SELECT date,value from plugin_intropage_trends where name='poller' order by date desc, value limit 10");
-
-	$f = 10;
-	
-	foreach($pollers as $poller) {
-	    list($id,$time) = explode(":",$poller['value']); 
-
-	    if ($time > $poller_interval)	{
-		$result['alarm'] = "red";
-		$result['data'] .= "<b>" . $poller['date'] . ' Poller\'s ID: ' . $id . ' ' . $time . 's</b><br/>';
-
-	    }
-	    else
-		$result['data'] .= $poller['date'] . ' Poller\'s ID: ' . $id . ' ' . $time . 's<br/>';
-		
-	    // graph data
-            $result['line']['label' . $id] = 'Poller\' ID: ' . $id;
-//            array_push($result['line']['data' . $id],$time);
-            $result['line']['data' . $id][$f] = $time;
-
-            $result['line']['title' . $id] = 'Poller\' ID: ' . $id;
-            
-            $f--;
-	}
-*/
-
-/*
-	foreach ($result['line'] as $line) {
-	    $['line']['data' . $f] = array_reverse ($result['line']['data' . $f]);
-	}
-*/
 	if (count($result['line']['data1']) < 3)	{
 	    $result['data'] = "Waiting for data";
 	    unset ($result['line']);
 	}
-/*	else
-	    $result['data'] .= "<br/>Average $avg s";
-*/
 
 
 
@@ -280,10 +243,5 @@ function poller_stat() {
 }
 
 
-
-function graph_poller() {
-	global $config, $log;
-
-}
 
 ?>
