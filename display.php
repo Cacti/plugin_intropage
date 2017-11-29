@@ -289,6 +289,15 @@ EOF;
 	}
 
     }
+
+	// display debug information in panel
+    if ($intropage_debug) {
+	$value['data'] = $debug;
+	intropage_display_panel('green','Debug',$value);
+    }
+
+
+
     
 // js for displaying detail
 	print <<<EOF
@@ -309,10 +318,6 @@ EOF;
     print "<div style='clear: both;'></div>";
     print "<div style=\"width: 100%\"> Generated: " . date("H:i:s") . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";
 
-	    if ($intropage_debug) {
-		echo $debug;
-	    
-	    }
 
 
     print "</ul>\n";
