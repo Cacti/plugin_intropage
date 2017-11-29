@@ -1,8 +1,7 @@
 drag and drop - save settings
 top5 - style 2em natvrdo zakodovane
 info - poller type is empty (sometimes)
-
-debug  - to panel
+zmensovani - zmenit sipku
 
 code cleaning
 
