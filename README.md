@@ -37,6 +37,13 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.3 ---
+	Add drag and drop panel
+	Add monitor plugin check again
+	Fix poller graph - incorect times
+	Fix install script 
+	Fix a lot of typo/small errors
+
 	1.2 ---
 	Add poller graph for more pollers
 	Add poller statistics for all pollers

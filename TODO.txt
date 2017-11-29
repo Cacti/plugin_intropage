@@ -1,9 +1,6 @@
-db check - connection errors opravi restart mysql, to tam dat do detailu
-
-top5 - odkazy spatna barva, style 2em natvrdo zakodovane
-info - poller type is empty
-
-modern - blbe zobrazuje hlavicku
+drag and drop - save settings
+top5 - style 2em natvrdo zakodovane
+info - poller type is empty (sometimes)
 
 code cleaning
 
