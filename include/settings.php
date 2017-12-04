@@ -66,7 +66,7 @@ function intropage_console_after() {
 	if ($lopts == 1) { // in tab
 	} else {  // in console
 		include_once($config['base_path'] . "/plugins/intropage/display.php");
-		display_informations();
+		display_information();
 
 
 		//$x['data'] = "You can choose view between separated tab and console, you can set it up in Console -> User Management -> User -> Intropage Options ";
@@ -77,6 +77,23 @@ function intropage_console_after() {
 
 	    intropage_display_hint();
 
+	// reload
+	$timeout = read_config_option("intropage_autorefresh");
+	if ($timeout > 0)     {
+	    $timeout *= 1000;
+
+print <<<EOF
+
+<script type="text/javascript">
+var timeout = setInterval(reloadChat, $timeout);
+function reloadChat () {
+     $('#obal').load('$config[url_path]plugins/intropage/intropage_ajax.php?header=false');
+}
+</script>
+
+EOF;
+
+	}
 }
 
 function intropage_user_admin_setup_sql_save($save) {

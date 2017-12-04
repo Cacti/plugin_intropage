@@ -1,6 +1,6 @@
 <?php
 
-function display_informations() {
+function display_information() {
 
 	global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
 
@@ -14,8 +14,8 @@ function display_informations() {
 	$debug_start = microtime(true);
 
 	// ugly but works. With jquery reload it works strange and I don't know why
-	if (read_config_option("intropage_autorefresh") > 0)
-	 	header("refresh: " . read_config_option("intropage_autorefresh") .";");
+//	if (read_config_option("intropage_autorefresh") > 0)
+//	 	header("refresh: " . read_config_option("intropage_autorefresh") .";");
 
 	 $selectedTheme = get_selected_theme();
 
@@ -322,25 +322,23 @@ EOF;
 
     print "</ul>\n";
 
-
-// reload
-
 /*
+// reload
 $timeout = read_config_option("intropage_autorefresh");
-if ($timeout >0)	{
-
+if ($timeout >0 && !isset($header))	{
+    $timeout *= 1000;
+    $timeout = 15000;
+    
+print <<<EOF
 
 <script type="text/javascript">
-var timeout = setInterval(reloadChat, <?php echo ($timeout*1000);?>);    
-
+var timeout = setInterval(reloadChat, $timeout);    
 function reloadChat () {
-
-     $('#obal').load('<?php echo $config["url_path"];?>plugins/intropage/intropage_ajax.php');
-
+     $('#obal').load('$config[url_path]plugins/intropage/intropage_ajax.php?header=false');
 }
-
 </script>
 
+EOF;
 
 }
 */
@@ -350,4 +348,4 @@ function reloadChat () {
 	return true;
 }
 
-?>
+?>
