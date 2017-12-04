@@ -1,3 +1,4 @@
+spojit logsize a analyse log, v datech bude jen size, pocet chyb a warningu, v detailu vse
 drag and drop - save settings
 top5 - style 2em natvrdo zakodovane
 info - poller type is empty (sometimes)
