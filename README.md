@@ -37,6 +37,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.4 ---
+	Ajax reload
+	Fix analyse log messages
+
 	1.3 ---
 	Add drag and drop panel
 	Add monitor plugin check again
