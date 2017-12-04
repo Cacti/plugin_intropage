@@ -124,6 +124,7 @@ function analyse_log() {
 	$result = array(
 		'name' => "Analyse log ( first 10 problems in last ".read_config_option("intropage_analyse_log_rows")." lines)",
 		'alarm' => 'green',
+		'data' => 'Without erros and warnings',
 	);
 
 	if (read_config_option('intropage_analyse_log')) {
