@@ -1,22 +1,12 @@
-spojit logsize a analyse log, v datech bude jen size, pocet chyb a warningu, v detailu vse
 drag and drop - save settings
 top5 - style 2em natvrdo zakodovane
 info - poller type is empty (sometimes)
-zmensovani - zmenit sipku
 
 code cleaning
-
-
-better display analyse log - join log size and only count warning and errors and details
-better display anlayse login - only count failed and detail
 
 panel settings per user
 
 new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
 
-reload via ajax 
+zmensovani - zmenit sipku
 
-
-
-https://github.com/Cacti/cacti/wiki/PluginMigration   :
-Adding '&header=false' to most header() function calls to drive Ajax rendering. (mandatory)
