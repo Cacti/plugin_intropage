@@ -40,6 +40,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	1.4 ---
 	Ajax reload
 	Fix analyse log messages
+	Join panels analyse log and analyse log size
 
 	1.3 ---
 	Add drag and drop panel
