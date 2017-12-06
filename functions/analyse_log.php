@@ -52,6 +52,7 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
+/*
 function analyse_log_size() {
 	global $config, $log;
 	
@@ -80,51 +81,15 @@ function analyse_log_size() {
 	return $result;
 }
 
-/*
-function get_log_msg() {
-	global $config, $log;
-	
-	$result = array(
-		'name' => "Warning and error (in last ".$log['nbr_lines']." lines)",
-		'alarm' => 'green',
-	);
-	
-	if (!$log['size'] || !isset($log['lines'])) {
-		$result['alarm'] = "red";
-		$result['data'] = "Log file not accessible";
-	} else {
-		$result['detail'] = '';
-		$error = 0;
-		foreach($log['lines'] as $line) {
-			if (preg_match('/(WARN|ERROR|FATAL)/',$line,$matches)) {
-				$result['detail'] .= "$line<br/>";
-				if (strcmp($matches[1],"WARN") && $error < 1) {
-					$result['alarm'] = "yellow";
-					$result['data'] = "There is warning in logs";
-					$error = 1;
-				} elseif ((strcmp($matches[1],"ERROR") || strcmp($matches[1],"FATAL")) && $error < 2) {
-					$error = 2;
-					$result['alarm'] = "red";
-					$result['data'] = "There is error in logs";
-				}
-			}
-		}
-	}
-	
-	return $result;
-}
-
 */
 
 function analyse_log() {
 	global $config, $log;
 	
-	$mess_len =100;
-	
 	$result = array(
-		'name' => "Analyse log ( first 10 problems in last ".read_config_option("intropage_analyse_log_rows")." lines)",
+		'name' => "Analyse cacti log",
 		'alarm' => 'green',
-		'data' => 'Without erros and warnings',
+		'data' => '',
 	);
 
 	if (read_config_option('intropage_analyse_log')) {
@@ -142,62 +107,71 @@ function analyse_log() {
 		);
 	}
 	
-
+	
 	
 	if (!$log['size'] || !isset($log['lines'])) {
 		$result['alarm'] = "red";
-		$result['data'] = "Log file not accessible";
+		$result['data'] .= "Log file not accessible";
 	} else {
 		$result['detail'] = '';
 		$error = 0;
 		$ecount = 0;
-		$count = 0;
+		$warn = 0;
 		foreach($log['lines'] as $line) {
-		    if ($ecount < 11)	{
+//		    if ($ecount < 11)	{
 		    
 			if (preg_match('/(WARN|ERROR|FATAL)/',$line,$matches)) {
 
 				if (strcmp($matches[1],"WARN"))	{
-				    if ($error < 1) {
-					$result['alarm'] = "yellow";
-			
-					$result['data'] = "<span class=\"txt_big\">Warnings in the log</span><br/><br/>";
-					$error = 1;
-				    }
+				    $warn++;
 
     				    $ecount++;
-				    if ($count < 4)
-					$result['data'] .= "<b>" . substr($line,0,$mess_len) . "</b><br/>";					
-				    else	
-					$result['detail'] .= "<b>$line</b><br/>";					
+    				    $result['detail'] .= "<b>$line</b><br/>";					
 					
 				} elseif ((strcmp($matches[1],"ERROR") || strcmp($matches[1],"FATAL")))	{
-				    if ($error < 2) {
-					$error = 2;
-					$result['alarm'] = "red";
-					$result['data'] = "<span class=\"txt_big\">Errors in the log</span><br/><br/>";
-				    }
+				    $error++;
 				    $ecount++;
-				    if ($count < 4)
-					$result['data'] .= "<b>" . substr($line,0,$mess_len) . "</b><br/>";					
-				    else	
-					$result['detail'] .= "<b>$line</b><br/>";					
+				    $result['detail'] .= "<b>$line</b><br/>";					
 
 				}
-				else	{	// normal log
-				    if ($count < 4)
-					$result['data'] .=  substr($line,0,$mess_len) . "<br/>";					
-				    else	
-					$result['detail'] .= "$line<br/>";					
-				
-				
-				
-				}
 			}
-		    }
+//		    }
 		    
-		    $count++;
 		}
+		        
+		$result['data'] .= "<span class=\"txt_big\">\n";
+		$result['data'] .= "Errors: $error<br/>";
+		$result['data'] .= "Warnings: $warn<br/>";
+		$result['data'] .= "</span>\n";
+
+
+// analyse log size
+//	if (!$log['size']) {
+//		$result['alarm'] = "red";
+//		$result['data'] .= "<span class=\"txt_big\">Log file not accessible</span><br/>";
+//	} elseif ($log['size'] < 0) {
+	
+	if ($log['size'] < 0) {
+		$result['alarm'] = "red";
+		$result['data'] .= "<span class=\"txt_big\">Log size: file is larger than 2GB</span><br/>";
+	} elseif ($log['size'] < 255999999) {
+		$result['data'] .= "<span class=\"txt_big\">Log size: " . human_filesize($log['size']) . "</span><br/>(Log size OK)<br/>";
+	} else {
+		$result['alarm'] = "yellow";
+		$result['data'] .= "<span class=\"txt_big\">Log size: " . human_filesize($log['size']) . "</span><br/>(Logfile is quite large)<br/>";
+	}
+
+
+
+
+		$result['data'] .= "<br/>( errors and warning in last ".read_config_option("intropage_analyse_log_rows")." lines)";
+
+		if ($error > 0)
+		    $result['alarm'] = "red";
+		    
+		if ($warn > 0 && $result['alarm'] == "green")
+		    $result['alarm'] = "yellow";
+
 		
 	}
 

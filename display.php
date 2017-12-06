@@ -92,12 +92,12 @@ EOF;
 	// Start
 	$values = array();
 
-	// analyze_log  - 2 pannels
+	// analyze_log  - 2 panels, now only one panel
 	if ($console_access && read_config_option('intropage_analyse_log') == "on") {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_log.php');
 		$values['analyse_log'] = analyse_log();
-		$values['analyse_log_size'] = analyse_log_size();
+//		$values['analyse_log_size'] = analyse_log_size();
 		$debug .= "Analyse log: " . round(microtime(true) -$start,2) . "<br/>\n";
 
 	}

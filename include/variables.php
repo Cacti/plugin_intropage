@@ -5,7 +5,7 @@ $panel = array();
 
 $panel['analyse_log']['priority'] = 85;
 
-$panel['analyse_log_size']['priority'] = 80;
+//$panel['analyse_log_size']['priority'] = 80;
 
 $panel['analyse_login']['priority'] = 75;
 
