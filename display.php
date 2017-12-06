@@ -98,7 +98,7 @@ EOF;
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_log.php');
 		$values['analyse_log'] = analyse_log();
 //		$values['analyse_log_size'] = analyse_log_size();
-		$debug .= "Analyse log: " . round(microtime(true) -$start,2) . "<br/>\n";
+		$debug .= "Analyse log: " . round(microtime(true) -$start,2) . " || \n";
 
 	}
 
@@ -108,7 +108,7 @@ EOF;
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_login.php');
 		$values['analyse_login'] = analyse_login();
 		
-		$debug .= "Analyse login: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "Analyse login: " . round(microtime(true)-$start,2) . " || \n";
 
 	}
 
@@ -160,22 +160,12 @@ EOF;
 
 	}
 
-	// graph_poller
-	/*
-	if ($console_access && read_config_option('intropage_graph_poller') == "on") {
-		$start = microtime(true);
-		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
-		$values['graph_poller'] = graph_poller();
-		$debug .= "graph poller: " . round(microtime(true)-$start,2) . "<br/>\n";
-	}
-
-*/	
 	// graph_host
 	if (read_config_option("intropage_graph_host") == "on") {
 		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_host.php');
 	    $values['graph_host'] = graph_host();
-		$debug .= "graph host: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "graph host: " . round(microtime(true)-$start,2) . " || \n";
 	}
 	
 	// Check Thresholds
@@ -183,7 +173,7 @@ EOF;
 		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_thold.php');
 	    $values['graph_thold'] = graph_thold();
-		$debug .= "graph thold: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "graph thold: " . round(microtime(true)-$start,2) . " || \n";
 	    
 	}
 	
@@ -192,7 +182,7 @@ EOF;
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_data_source.php');
 		$values['graph_data_source'] = graph_data_source();
-		$debug .= "graph data source: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "graph data source: " . round(microtime(true)-$start,2) . " || \n";
 	}
 
 	
