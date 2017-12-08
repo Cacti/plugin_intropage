@@ -129,7 +129,7 @@ EOF;
 	}
 
 	// trend
-	if (read_config_option("intropage_trend") == "on") {
+	if ($console_access && read_config_option("intropage_trend") == "on") {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/trend.php');
 		$values['trend'] = get_trend();
