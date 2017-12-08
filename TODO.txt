@@ -1,12 +1,18 @@
-drag and drop - save settings
-top5 - style 2em natvrdo zakodovane
-info - poller type is empty (sometimes)
-
-code cleaning
-
+Major
+-----
 panel settings per user
+drag and drop - save settings
+
+
 
 new panel - 24 hours extrems (max/min host down, max/min thold, max/min poller time, ...)
 
 zmensovani - zmenit sipku
+
+
+Minor
+-----
+top5 - style 2em hardcoded
+code cleaning
+info - poller type is empty (sometimes)
 
