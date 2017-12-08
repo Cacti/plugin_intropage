@@ -283,24 +283,37 @@ EOF;
 	intropage_display_panel('green','Debug',$value);
     }
 
+// js for detail
+?>
+<script>
+$(document).ready(function () {
+ $('.article').hide();
+  $('.maxim').click(function(){
 
 
-    
-// js for displaying detail
-	print <<<EOF
-<script type="text/javascript">
-function hide_display (id)      {
-    var temp = document.getElementById(id);
+    $(this).html( $(this).html() == '+' ? '-' :'+' );
+//    $(this).attr('title', $(this).attr('title') == 'Show details' ? 'Hide details' : 'Show details');
+    $(this).nextAll('.article').first().toggle();
 
-    if (temp.style.display=='block')
-        temp.style.display='none';
-    else
-        temp.style.display='block';
-    return false;
-}
-</script>
 
-EOF;
+    if ($('#' + this.name).css("display") == "none")	{
+	$('#' + this.name).css("display","block");
+        $(this).attr('title','Hide details');	
+    }
+    else		{
+	$('#' + this.name).css("display","none");
+        $(this).attr('title','Show details');	
+
+    }
+
+  });
+});</script>
+
+
+<?php
+
+
+// end of detail js
 
     print "<div style='clear: both;'></div>";
     print "<div style=\"width: 100%\"> Generated: " . date("H:i:s") . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";

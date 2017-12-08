@@ -28,7 +28,8 @@ function intropage_display_panel ($type,$header,$dispdata)	{
     print "	    <div class='cactiTableButton2 color_$type'><span>";
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
-        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
+//        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
+        printf("<a href='#' title='Show details' class='maxim' name='%s'>+</a>\n",md5($header));
     }
     
     print "</span></div>\n";
@@ -247,7 +248,7 @@ print "</div>\n";
     // end of graph
 
     if (isset($dispdata['detail']))	{
-        printf("<div id=\"block_%s\" style=\"display: none\">\n",md5($header));
+        printf("<div id=\"%s\" style=\"display: none\">\n",md5($header));
         print($dispdata['detail']);
         print("</div>\n");
     }
