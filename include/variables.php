@@ -15,6 +15,8 @@ $panel['analyse_tree_host_graph']['priority'] = 50;
 
 $panel['trend']['priority'] = 30;
 
+$panel['extrem']['priority'] = 30;
+
 $panel['ntp']['priority'] = 60;
 
 $panel['poller_info']['priority'] = 20;
@@ -142,6 +144,15 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 	
+// 24h extrem
+	"intropage_extrem" => array(
+		"friendly_name" => "Display last 24 hours extrems",
+		"description" => "if checked this plugin displays host,poller and thold extrems",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+
+
 	"intropage_display_header" => array(
 		"friendly_name" => "NTP",
 		"method" => "spacer",

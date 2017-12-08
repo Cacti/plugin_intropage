@@ -135,6 +135,16 @@ EOF;
 		$values['trend'] = get_trend();
 		$debug .= "Trend: " . round(microtime(true)-$start,2) . "<br/>\n";
 	}
+
+	// extrem
+	if ($console_access && read_config_option("intropage_extrem") == "on") {
+		$start = microtime(true);
+		include_once($config['base_path'] . '/plugins/intropage/functions/extrem.php');
+		$values['extrem'] = extrem();
+		$debug .= "Extrem: " . round(microtime(true)-$start,2) . "<br/>\n";
+	}
+
+
 	
 	// Check NTP
 	if ($console_access && read_config_option('intropage_ntp') == "on") {
