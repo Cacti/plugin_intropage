@@ -38,7 +38,9 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
 	1.4 ---
+	Add 24 hour extrem panel
 	Ajax reload
+	Ajax view/hide details
 	Fix analyse log messages
 	Join panels analyse log and analyse log size
 
