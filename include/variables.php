@@ -136,9 +136,6 @@ $intropage_settings = array(
 	),
 
 
-<<<<<<< HEAD
-// ntp
-=======
 // trend	
 	"intropage_trend" => array(
 		"friendly_name" => "Display graph for host and thold trends",
@@ -156,12 +153,11 @@ $intropage_settings = array(
 	),
 
 
->>>>>>> develop
 	"intropage_display_header" => array(
 		"friendly_name" => "NTP",
 		"method" => "spacer",
 	),
-	
+// ntp	
 	"intropage_ntp_header" => array(
 		"friendly_name" => "NTP settings",
 		"method" => "spacer",
