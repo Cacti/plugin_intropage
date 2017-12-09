@@ -22,7 +22,7 @@ function analyse_login() {
 			$result['alarm'] = "red";
 			$flog++;
 		}
-		$result['detail'] .= sprintf("<b>%s | %s | %s | %s</b><br/>",$row['time'],$row['ip'],$row['username'], ($row['result'] == 0)? "failed":"succes");
+		$result['detail'] .= sprintf("%s | %s | %s | %s<br/>",$row['time'],$row['ip'],$row['username'], ($row['result'] == 0)? "failed":"succes");
 		
 	}
 	$result['data'] = "<span class=\"txt_big\">Failed logins: $flog</span><br/><br/>";
