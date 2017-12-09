@@ -14,7 +14,7 @@ function extrem() {
 	
     // long run poller	
 	$result['data'] .= "<strong>Long run poller: </strong>";
-        $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,substring(value,instr(value,':')+1) as xvalue FROM plugin_intropage_trends WHERE name='poller' and date > date_sub(date,interval 1 day) order by xvalue desc  limit 5");
+        $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,substring(value,instr(value,':')+1) as xvalue FROM plugin_intropage_trends WHERE name='poller' and date > date_sub(date,interval 1 day) order by xvalue desc,date  limit 5");
 	foreach($sql_result as $row) {
             $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['xvalue'] . "s\n";     
 	}	
@@ -22,7 +22,7 @@ function extrem() {
 	
     // max host down
 	$result['data'] .= "<strong>Max host down: </strong>";
-        $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='host' and date > date_sub(date,interval 1 day) order by value desc limit 5");
+        $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='host' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
 	foreach($sql_result as $row) {
             $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "\n";     
 	}	
@@ -30,7 +30,7 @@ function extrem() {
 	
     // max thold trig
 	$result['data'] .= "<strong>Max thold triggered: </strong>";
-        $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc limit 5");
+        $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
 	foreach($sql_result as $row) {
             $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "\n";     
 
