@@ -26,7 +26,7 @@ $lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESS
 if ($lopts == 1)	// separated tab, we need header
     general_header();
 
-display_informations();
+display_information();
 intropage_console_after();
 
 if ($lopts == 1)	// separated tab, we need footer

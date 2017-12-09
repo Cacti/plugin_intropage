@@ -44,12 +44,12 @@ function ntp() {
 			$diff_time = date('U') - $ntp_time;
 			if ($diff_time < -600 || $diff_time > 600) {
 				$result['alarm'] = "red";
-				$result['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>". date("H:i:s") . "</span><br/><br/>Please check time. It is different (more than 10 minutes) from NTP server $ntp_server";
+				$result['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>". date("H:i:s") . "</span><br/><br/>Please check time.<br/>It is different (more than 10 minutes) from NTP server $ntp_server";
 			} elseif ($diff_time < -120 || $diff_time > 120) {
 				$values['time']['alarm'] = "yellow";
-				$values['time']['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>" . date("H:i:s") . "</span><br/><br/>Please check time. It is different (more than 2 minutes) from NTP server $ntp_server";
+				$values['time']['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>" . date("H:i:s") . "</span><br/><br/>Please check time.<br/>It is different (more than 2 minutes) from NTP server $ntp_server";
 			} else {
-				$result['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>" . date("H:i:s") . "</span><br/><br/>Localtime is equal to NTP server $ntp_server";
+				$result['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>" . date("H:i:s") . "</span><br/><br/>Localtime is equal to NTP server<br/>$ntp_server";
 			}
 		} else {
 			$result['alarm'] = "red";

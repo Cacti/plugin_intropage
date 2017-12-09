@@ -1,6 +1,6 @@
 <?php
 
-function display_informations() {
+function display_information() {
 
 	global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
 
@@ -13,9 +13,6 @@ function display_informations() {
 	$debug = "";
 	$debug_start = microtime(true);
 
-	// ugly but works. With jquery reload it works strange and I don't know why
-	if (read_config_option("intropage_autorefresh") > 0)
-	 	header("refresh: " . read_config_option("intropage_autorefresh") .";");
 
 	 $selectedTheme = get_selected_theme();
 
@@ -92,13 +89,13 @@ EOF;
 	// Start
 	$values = array();
 
-	// analyze_log  - 2 pannels
+	// analyze_log  - 2 panels, now only one panel
 	if ($console_access && read_config_option('intropage_analyse_log') == "on") {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_log.php');
 		$values['analyse_log'] = analyse_log();
-		$values['analyse_log_size'] = analyse_log_size();
-		$debug .= "Analyse log: " . round(microtime(true) -$start,2) . "<br/>\n";
+//		$values['analyse_log_size'] = analyse_log_size();
+		$debug .= "Analyse log: " . round(microtime(true) -$start,2) . " || \n";
 
 	}
 
@@ -108,7 +105,7 @@ EOF;
 		include_once($config['base_path'] . '/plugins/intropage/functions/analyse_login.php');
 		$values['analyse_login'] = analyse_login();
 		
-		$debug .= "Analyse login: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "Analyse login: " . round(microtime(true)-$start,2) . " || \n";
 
 	}
 
@@ -132,12 +129,22 @@ EOF;
 	}
 
 	// trend
-	if (read_config_option("intropage_trend") == "on") {
+	if ($console_access && read_config_option("intropage_trend") == "on") {
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/trend.php');
 		$values['trend'] = get_trend();
-		$debug .= "Trend: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "Trend: " . round(microtime(true)-$start,2) . " || \n";
 	}
+
+	// extrem
+	if ($console_access && read_config_option("intropage_extrem") == "on") {
+		$start = microtime(true);
+		include_once($config['base_path'] . '/plugins/intropage/functions/extrem.php');
+		$values['extrem'] = extrem();
+		$debug .= "Extrem: " . round(microtime(true)-$start,2) . "<br/>\n";
+	}
+
+
 	
 	// Check NTP
 	if ($console_access && read_config_option('intropage_ntp') == "on") {
@@ -160,22 +167,12 @@ EOF;
 
 	}
 
-	// graph_poller
-	/*
-	if ($console_access && read_config_option('intropage_graph_poller') == "on") {
-		$start = microtime(true);
-		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
-		$values['graph_poller'] = graph_poller();
-		$debug .= "graph poller: " . round(microtime(true)-$start,2) . "<br/>\n";
-	}
-
-*/	
 	// graph_host
 	if (read_config_option("intropage_graph_host") == "on") {
 		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_host.php');
 	    $values['graph_host'] = graph_host();
-		$debug .= "graph host: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "graph host: " . round(microtime(true)-$start,2) . " || \n";
 	}
 	
 	// Check Thresholds
@@ -183,7 +180,7 @@ EOF;
 		$start = microtime(true);
 	    include_once($config['base_path'] . '/plugins/intropage/functions/graph_thold.php');
 	    $values['graph_thold'] = graph_thold();
-		$debug .= "graph thold: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "graph thold: " . round(microtime(true)-$start,2) . " || \n";
 	    
 	}
 	
@@ -192,7 +189,7 @@ EOF;
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/graph_data_source.php');
 		$values['graph_data_source'] = graph_data_source();
-		$debug .= "graph data source: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "graph data source: " . round(microtime(true)-$start,2) . " || \n";
 	}
 
 	
@@ -289,57 +286,52 @@ EOF;
 	}
 
     }
-    
-// js for displaying detail
-	print <<<EOF
-<script type="text/javascript">
-function hide_display (id)      {
-    var temp = document.getElementById(id);
 
-    if (temp.style.display=='block')
-        temp.style.display='none';
-    else
-        temp.style.display='block';
-    return false;
-}
-</script>
+	// display debug information in panel
+    if ($intropage_debug) {
+	$value['data'] = $debug;
+	intropage_display_panel('green','Debug',$value);
+    }
 
-EOF;
+// js for detail
+?>
+<script>
+$(document).ready(function () {
+ $('.article').hide();
+  $('.maxim').click(function(){
+
+
+    $(this).html( $(this).html() == '+' ? '-' :'+' );
+//    $(this).attr('title', $(this).attr('title') == 'Show details' ? 'Hide details' : 'Show details');
+    $(this).nextAll('.article').first().toggle();
+
+
+    if ($('#' + this.name).css("display") == "none")	{
+	$('#' + this.name).css("display","block");
+        $(this).attr('title','Hide details');	
+    }
+    else		{
+	$('#' + this.name).css("display","none");
+        $(this).attr('title','Show details');	
+
+    }
+
+  });
+});</script>
+
+
+<?php
+
+
+// end of detail js
 
     print "<div style='clear: both;'></div>";
     print "<div style=\"width: 100%\"> Generated: " . date("H:i:s") . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";
 
-	    if ($intropage_debug) {
-		echo $debug;
-	    
-	    }
 
 
     print "</ul>\n";
 
-
-// reload
-
-/*
-$timeout = read_config_option("intropage_autorefresh");
-if ($timeout >0)	{
-
-
-<script type="text/javascript">
-var timeout = setInterval(reloadChat, <?php echo ($timeout*1000);?>);    
-
-function reloadChat () {
-
-     $('#obal').load('<?php echo $config["url_path"];?>plugins/intropage/intropage_ajax.php');
-
-}
-
-</script>
-
-
-}
-*/
-// end of reload
 
 	
 	return true;

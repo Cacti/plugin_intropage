@@ -5,7 +5,7 @@ $panel = array();
 
 $panel['analyse_log']['priority'] = 85;
 
-$panel['analyse_log_size']['priority'] = 80;
+//$panel['analyse_log_size']['priority'] = 80;
 
 $panel['analyse_login']['priority'] = 75;
 
@@ -14,6 +14,8 @@ $panel['analyse_db']['priority'] = 70;
 $panel['analyse_tree_host_graph']['priority'] = 50;
 
 $panel['trend']['priority'] = 30;
+
+$panel['extrem']['priority'] = 30;
 
 $panel['ntp']['priority'] = 60;
 
@@ -134,7 +136,27 @@ $intropage_settings = array(
 	),
 
 
+<<<<<<< HEAD
 // ntp
+=======
+// trend	
+	"intropage_trend" => array(
+		"friendly_name" => "Display graph for host and thold trends",
+		"description" => "if checked this plugin displays graph with trends",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+	
+// 24h extrem
+	"intropage_extrem" => array(
+		"friendly_name" => "Display last 24 hours extrems",
+		"description" => "if checked this plugin displays host,poller and thold extrems",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+
+
+>>>>>>> develop
 	"intropage_display_header" => array(
 		"friendly_name" => "NTP",
 		"method" => "spacer",
