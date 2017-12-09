@@ -13,6 +13,8 @@ Plugin displays usefull information and graphs on console screen or separated ta
 ## Author 
 Petr Macek (petr.macek@kostax.cz)
 
+## Screenshot
+![Screenshot](https://user-images.githubusercontent.com/26485719/33798454-9b074d7c-dd18-11e7-85f8-ed2586736888.png)
 
 
 ## Installation
