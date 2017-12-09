@@ -133,7 +133,7 @@ EOF;
 		$start = microtime(true);
 		include_once($config['base_path'] . '/plugins/intropage/functions/trend.php');
 		$values['trend'] = get_trend();
-		$debug .= "Trend: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "Trend: " . round(microtime(true)-$start,2) . " || \n";
 	}
 
 	// extrem
