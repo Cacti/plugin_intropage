@@ -174,6 +174,27 @@ function analyse_tree_host_graph() {
 	
     }
     
+    
+    // orphaned DS
+    // orphaned
+    $sql_result = db_fetch_assoc ("SELECT dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step, dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id, COUNT(DISTINCT gti.local_graph_id) AS deletable FROM data_local AS dl INNER JOIN data_template_data AS dtd ON dl.id=dtd.local_data_id LEFT JOIN data_template AS dt ON dl.data_template_id=dt.id LEFT JOIN data_template_rrd AS dtr ON dtr.local_data_id=dtd.local_data_id LEFT JOIN graph_templates_item AS gti ON (gti.task_item_id=dtr.id) GROUP BY dl.id HAVING deletable=0 ORDER BY `name_cache` ASC");
+    $result['data'] .= "Orphaned DS: " . count($sql_result) . "<br/>";
+    if (count($sql_result) > 0) {
+        if ($result['alarm'] == "green")
+            $result['alarm'] = "yellow";
+
+        $result['detail'] .= "Orphaned DS detail:<br/>";
+        foreach($sql_result as $row) {
+
+            $result['detail'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "data_sources.php?action=ds_edit&id=" . $row['local_data_id'] . "\">" .
+            $row['name_cache'] . "</a><br/>\n";
+
+        }
+    }
+
+
+    
+    
     $total_errors += count($sql_result);
 
 
