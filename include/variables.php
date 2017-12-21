@@ -39,6 +39,9 @@ $panel['top5_availability']['priority'] = 7;
 
 $panel['info']['priority'] = 1;
 
+$panel['boost']['priority'] = 55;
+
+
 
 $intropage_settings = array(
 
@@ -188,15 +191,15 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
-// graph poller
-/*
-	"intropage_graph_poller" => array(
-		"friendly_name" => "Display poller graph",
-		"description" => "if checked this plugin displays poller graph",
+
+// boost 
+	"intropage_boost" => array(
+		"friendly_name" => "Display boost stats",
+		"description" => "if checked this plugin displays boost stats",
 		"method" => "checkbox",
 		"default" => "on",
 	),
-*/
+
 	"intropage_graphs_header" => array(
 		"friendly_name" => "Graphs",
 		"method" => "spacer",

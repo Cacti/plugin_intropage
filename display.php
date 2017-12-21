@@ -163,9 +163,22 @@ EOF;
 		include_once($config['base_path'] . '/plugins/intropage/functions/poller.php');
 		$values['poller_info'] = poller_info();
 		$values['poller_stat'] = poller_stat();
-		$debug .= "Poller info: " . round(microtime(true)-$start,2) . "<br/>\n";
+		$debug .= "Poller info: " . round(microtime(true)-$start,2) . " | \n";
 
 	}
+
+	// boost and orphaned ds
+	if ($console_access && read_config_option('intropage_boost') == "on") {
+		$start = microtime(true);
+
+		include_once($config['base_path'] . '/plugins/intropage/functions/boost.php');
+		$values['boost'] = boost();
+		$debug .= "Boost: " . round(microtime(true)-$start,2) . "<br/>\n";
+
+	}
+
+
+
 
 	// graph_host
 	if (read_config_option("intropage_graph_host") == "on") {

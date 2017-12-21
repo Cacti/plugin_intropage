@@ -11,3 +11,4 @@ top5,extrem - style 2em hardcoded
 code cleaning
 info - poller type is empty (sometimes)
 
+analyse_log - detail promenna, pracuju s ni jinak, az pozdeji v kodu
