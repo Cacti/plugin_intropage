@@ -14,30 +14,6 @@ function boost() {
 // zkusit u te translace rovnou mezeru
 
 // from lib/boost.php
-function boost_file_size_display($file_size, $digits = 2) {
-        if ($file_size > 1024) {
-                $file_size = $file_size / 1024;
-
-                if ($file_size > 1024) {
-                        $file_size = $file_size / 1024;
-
-                        if ($file_size > 1024) {
-                                $file_size = $file_size / 1024;
-                                $file_suffix = ' GBytes';
-                        } else {
-                                $file_suffix = ' MBytes';
-                        }
-                } else {
-                        $file_suffix = ' KBytes';
-                }
-        } else {
-                $file_suffix = ' Bytes';
-        }
-
-        $file_size = number_format_i18n($file_size, $digits) . $file_suffix;
-
-        return $file_size;
-}
 
       $rrd_updates     = read_config_option('boost_rrd_update_enable', TRUE);
         $last_run_time   = read_config_option('boost_last_run_time', TRUE);
@@ -49,7 +25,32 @@ function boost_file_size_display($file_size, $digits = 2) {
         $peak_memory     = read_config_option('boost_peak_memory', TRUE);
         $detail_stats    = read_config_option('stats_detail_boost', TRUE);
 
+       /* get the boost table status */
+        $boost_table_status = db_fetch_assoc("SELECT *
+                FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
+                AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
 
+        $pending_records = 0;
+        $arch_records    = 0;
+        $data_length     = 0;
+        $engine          = '';
+        $max_data_length = 0;
+
+        foreach($boost_table_status as $table) {
+                if ($table['TABLE_NAME'] == 'poller_output_boost') {
+                        $pending_records += $table['TABLE_ROWS'];
+                } else {
+                        $arch_records += $table['TABLE_ROWS'];
+                }
+
+                $data_length    += $table['DATA_LENGTH'];
+                $data_length    += $table['INDEX_LENGTH'];
+                $engine          = $table['ENGINE'];
+                $max_data_length = $table['MAX_DATA_LENGTH'];
+        }
+
+        $total_records  = $pending_records + $arch_records;
+        $avg_row_length = ($total_records ? intval($data_length / $total_records) : 0);
 
         $boost_status = read_config_option('boost_poller_status', TRUE);
         if ($boost_status != '') {
@@ -66,6 +67,28 @@ function boost_file_size_display($file_size, $digits = 2) {
                 $boost_status_text = __('Never Run');
                 $boost_status_date = '';
         }
+
+
+       if ($total_records) {
+    		$result['data'] .= __('Pending Boost Records: ') . number_format_i18n($pending_records, -1) . '<br/>';
+
+                $result['data'] .=  __('Archived Boost Records: ') . number_format_i18n($arch_records, -1) . '<br/>';
+
+		if ($total_records > ($max_records - ($max_records/10)) && $result['alarm'] == "green")	{
+		    $result['alarm'] = "yellow";
+            	    $result['data'] .= '<b>' . __('Total Boost Records: ') . number_format_i18n($total_records, -1) . '</b><br/>';
+		    
+		}
+		elseif ($total_records > ($max_records - ($max_records/20)) && $result['alarm'] == "green")	{
+		    $result['alarm'] = "red";
+            	    $result['data'] .= '<b>' . __('Total Boost Records: ') . number_format_i18n($total_records, -1) . '</b><br/>';
+
+		}
+		else
+            	    $result['data'] .= __('Total Boost Records: ') . number_format_i18n($total_records, -1) . '<br/>';
+
+        }
+
 
 
        $stats_boost = read_config_option('stats_boost', TRUE);
@@ -90,10 +113,10 @@ function boost_file_size_display($file_size, $digits = 2) {
                 AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
 
         /* tell the user how big the table is */
-        $result['data'] .= __('Current Boost Table(s) Size:') . ' ' . boost_file_size_display($data_length, 2) . '<br/>';
+        $result['data'] .= __('Current Boost Table(s) Size:') . ' ' . human_filesize($data_length) . '<br/>';
 
         /* tell the user about the average size/record */
-        // $result['data'] .= __('Avg Bytes/Record:') . ' ' . boost_file_size_display($avg_row_length, 0) . '<br/>';
+        $result['data'] .= __('Avg Bytes/Record:') . ' ' . human_filesize($avg_row_length) . '<br/>';
 
 
 	$result['data'] .= "Last run duration: ";
@@ -106,30 +129,11 @@ function boost_file_size_display($file_size, $digits = 2) {
 
 
         $result['data'] .= __('RRD Updates:') . ' ' . ($boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1):'-') . '<br/>';
-        $result['data'] .= __('Maximum Records:') . ' ' . number_format_i18n($max_records, -1) . ' ' . __('Records') . '<br/>';
+        $result['data'] .= __('Maximum Records:') . ' ' . number_format_i18n($max_records, -1) .  '<br/>';
 
         $result['data'] .= __('Update Frequency:') . ' ' . ($rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_interval]) . '<br/>';
 
         $result['data'] .= __('Next Start Time:') . ' ' . $next_run_time . '<br/>';
-
-
-/* moved to analyse graph/host/tree
-// orphaned
-    $sql_result = db_fetch_assoc ("SELECT dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step, dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id, COUNT(DISTINCT gti.local_graph_id) AS deletable FROM data_local AS dl INNER JOIN data_template_data AS dtd ON dl.id=dtd.local_data_id LEFT JOIN data_template AS dt ON dl.data_template_id=dt.id LEFT JOIN data_template_rrd AS dtr ON dtr.local_data_id=dtd.local_data_id LEFT JOIN graph_templates_item AS gti ON (gti.task_item_id=dtr.id) GROUP BY dl.id HAVING deletable=0 ORDER BY `name_cache` ASC");
-    $result['data'] .= "Orphaned DS: " . count($sql_result) . "<br/>";
-    if (count($sql_result) > 0) {
-        if ($result['alarm'] == "green")
-            $result['alarm'] = "yellow";
-
-	$result['detail'] .= "Orphaned DS detail:<br/>";
-    	foreach($sql_result as $row) {
-
-	    $result['detail'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "data_sources.php?action=ds_edit&id=" . $row['local_data_id'] . "\">" .
-	    $row['name_cache'] . "</a><br/>\n"; 
-
-	}
-    }
-*/
 
 
 

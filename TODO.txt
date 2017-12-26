@@ -2,7 +2,8 @@ Major
 -----
 panel settings per user
 drag and drop - save settings
-
+boost panel - add pending and archived
+boost panel -  add max memory/peak
 
 
 Minor
