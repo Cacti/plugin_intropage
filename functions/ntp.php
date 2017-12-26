@@ -53,7 +53,7 @@ function ntp() {
 			}
 		} else {
 			$result['alarm'] = "red";
-			$result['data'] = "Unable to contact the NTP server indicated. Please check your configuration";
+			$result['data'] = "Unable to contact the NTP server indicated.<br/>Please check your configuration";
 		}
 	} else {
 		$result['alarm'] = "red";
