@@ -104,6 +104,19 @@ $intropage_settings = array(
 	),
 
 
+// plugin thold - log	
+	"intropage_thold_header" => array(
+		"friendly_name" => "Analyse thold log",
+		"method" => "spacer",
+	),
+	"intropage_thold_log" => array(
+		"friendly_name" => "Display last 10 thold events",
+		"description" => "if checked this plugin display panel with last 10 thold events",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+
+
 // analyse_db	
 
 	"intropage_analyse_db_header" => array(
@@ -124,16 +137,16 @@ $intropage_settings = array(
 		"default" => "Medium",
 	),
 	
-	"intropage_anlayse_tree_header" => array(
-		"friendly_name" => "Analyse trees, hosts, graphs, ...",
+	"intropage_analyse_tree_header" => array(
+		"friendly_name" => "Analyse trees, hosts, graphs, orphaned DS, ...",
 		"method" => "spacer",
 	),
 	
 	
 // analyse_tree_host_graph
 	"intropage_analyse_tree_host_graph" => array(
-		"friendly_name" => "Allow check for devices with the same description, without graph and in more than one tree",
-		"description" => "if checked this plugin is allowed to search for devices with the same description,without graph and in more than one tree",
+		"friendly_name" => "Allow check for devices with the same description, without graph,in more than one tree, orphaned DS",
+		"description" => "if checked this plugin is allowed to search for devices with the same description,without graph, in more than one tree, orphaned DS",
 		"method" => "checkbox",
 		"default" => "on",
 	),
@@ -156,10 +169,6 @@ $intropage_settings = array(
 	),
 
 
-	"intropage_display_header" => array(
-		"friendly_name" => "NTP",
-		"method" => "spacer",
-	),
 	
 // ntp
 	"intropage_ntp_header" => array(
