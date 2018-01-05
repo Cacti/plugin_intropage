@@ -5,7 +5,7 @@ function graph_host_template() {
 	
 	$result = array(
 		'name' => 'Host templates',
-		'alarm' => 'green',
+		'alarm' => 'grey',
 		'data' => '',
 		'pie' => array(
 			'title' => 'Host Templates: ',

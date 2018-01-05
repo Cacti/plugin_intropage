@@ -3,12 +3,11 @@ Major
 panel settings per user
 drag and drop - save settings
 panel for 2-3 the most important graphs
-panel thold last events - spatne vypisuju datum a cas
+plugins.php - awaiting configuration
 
 Minor
 -----
 top5,extrem - style 2em hardcoded
 code cleaning
-info - poller type is empty (sometimes)
 
-analyse_log - detail promenna, pracuju s ni jinak, az pozdeji v kodu
+

@@ -5,7 +5,8 @@ function graph_host() {
 	
 	$result = array(
 		'name' => 'Hosts',
-		'alarm' => "green",
+		'data' => '',
+		'alarm' => "grey",
 	);
 	
 	$h_all  = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts)");

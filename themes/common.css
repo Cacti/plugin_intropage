@@ -58,3 +58,15 @@
     background: -ms-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
 }
 
+.color_grey       {
+    background-color: #9c9c9c;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(156,156,156,1)), color-stop(100%, rgba(156,156,156,1))) !important;
+    background: -webkit-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
+    background: -o-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
+    background: -ms-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
+}
+
+
+

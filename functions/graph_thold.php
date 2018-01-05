@@ -5,6 +5,7 @@ function graph_thold() {
 	
 	$result = array(
 		'name' => 'Thresholds',
+		'data' => '',
 		'alarm' => 'green',
 	);
 	

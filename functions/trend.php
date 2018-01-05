@@ -5,7 +5,7 @@ function get_trend() {
 	
 	$result = array(
 		'name' => 'Trends',
-		'alarm' => 'green',
+		'alarm' => 'grey',
 		'data' => '',
 		
                 'line' => array(

@@ -5,9 +5,9 @@ function info() {
 	
 	$result = array(
 		'name' => 'Info',
-		'alarm' => 'green',
+		'alarm' => 'grey',
 		'data' => '',
-//		'detail' => '',
+
 	);
 	
 	$xdata = '';

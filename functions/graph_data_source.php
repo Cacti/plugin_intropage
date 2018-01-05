@@ -6,7 +6,7 @@ function graph_data_source() {
 
 	$result = array(
 		'name' => 'Data sources',
-		'alarm' => 'green',
+		'alarm' => 'grey',
 		'data' => '',
 		'pie' => array(
 			'title' => 'Datasources: ',

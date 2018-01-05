@@ -5,7 +5,7 @@ function cpu() {
 	
     $result = array(
 	'name' => 'CPU utilization',
-	'alarm' => 'green',
+	'alarm' => 'grey',
 	'data' => '',
         'line' => array(
             'title' => 'CPU load: ',

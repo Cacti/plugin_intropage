@@ -293,6 +293,14 @@ EOF;
 			intropage_display_panel($value['alarm'],$value['name'],$value);
 		    }
 		}
+
+    		foreach($values as $key=>$value) {	
+		    if ($value['alarm'] == "grey" && !isset($value['displayed']))	{
+			intropage_display_panel($value['alarm'],$value['name'],$value);
+		    }
+		}
+
+
 	    }
     }
     else	{	// order by priority
@@ -316,7 +324,7 @@ EOF;
 	// display debug information in panel
     if ($intropage_debug) {
 	$value['data'] = $debug;
-	intropage_display_panel('green','Debug',$value);
+	intropage_display_panel('grey','Debug',$value);
     }
 
 // js for detail

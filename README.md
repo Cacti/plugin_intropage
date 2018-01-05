@@ -42,6 +42,8 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	1.5 ---
 	Add Boost statistics panel
 	Add Orphaned DS to analyze tree/host/graph
+	Add Last thold events panel
+	Add Grey panel for panels without tests and alarms
 
 	1.4 ---
 	Add 24 hour extrem panel

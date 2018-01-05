@@ -5,7 +5,7 @@ function extrem() {
 	
 	$result = array(
 		'name' => '24 hour extrem',
-		'alarm' => 'green',
+		'alarm' => 'grey',
 		'data' => '',
 	);
 	
