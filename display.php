@@ -106,8 +106,21 @@ EOF;
 		$values['analyse_login'] = analyse_login();
 		
 		$debug .= "Analyse login: " . round(microtime(true)-$start,2) . " || \n";
+	}
+
+	// thold events
+	if ($console_access && read_config_option('intropage_thold_events') == "on") {
+		$start = microtime(true);
+		include_once($config['base_path'] . '/plugins/intropage/functions/thold_events.php');
+		$values['thold_events'] = thold_events();
+		
+		$debug .= "Thold events: " . round(microtime(true)-$start,2) . " || \n";
 
 	}
+
+
+
+
 
 	// analyse_db
 	if ($console_access && read_config_option('intropage_analyse_db') == "on") {

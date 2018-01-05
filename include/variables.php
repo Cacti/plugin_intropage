@@ -5,9 +5,9 @@ $panel = array();
 
 $panel['analyse_log']['priority'] = 85;
 
-//$panel['analyse_log_size']['priority'] = 80;
-
 $panel['analyse_login']['priority'] = 75;
+
+$panel['thold_events']['priority'] = 77;
 
 $panel['analyse_db']['priority'] = 70;
 
@@ -109,7 +109,7 @@ $intropage_settings = array(
 		"friendly_name" => "Analyse thold log",
 		"method" => "spacer",
 	),
-	"intropage_thold_log" => array(
+	"intropage_thold_events" => array(
 		"friendly_name" => "Display last 10 thold events",
 		"description" => "if checked this plugin display panel with last 10 thold events",
 		"method" => "checkbox",

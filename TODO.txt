@@ -3,6 +3,7 @@ Major
 panel settings per user
 drag and drop - save settings
 panel for 2-3 the most important graphs
+panel thold last events - spatne vypisuju datum a cas
 
 Minor
 -----
