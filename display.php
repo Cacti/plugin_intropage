@@ -322,7 +322,9 @@ EOF;
     }
 
 	// display debug information in panel
+
     if ($intropage_debug) {
+	unset($value);
 	$value['data'] = $debug;
 	intropage_display_panel('grey','Debug',$value);
     }
