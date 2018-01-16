@@ -81,9 +81,11 @@ function intropage_setup_database() {
         api_plugin_db_table_create ('intropage', 'plugin_intropage_trends', $data);
 
         $data = array();
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
 	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(30)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
 	$data['type'] = 'MyISAM';
+	$data['primary'] = 'id';
         $data['comment'] = 'panel setting';
         api_plugin_db_table_create ('intropage', 'plugin_intropage_panel', $data);
 

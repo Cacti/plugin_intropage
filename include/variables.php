@@ -3,7 +3,7 @@
 // priority (order) (bigger number =  highest priority)
 $panel = array();
 
-$panel['analyse_log']['priority'] = 85;
+$panel['analyse_log']['priority'] = 60;
 
 $panel['analyse_login']['priority'] = 75;
 
@@ -19,11 +19,11 @@ $panel['extrem']['priority'] = 30;
 
 $panel['ntp']['priority'] = 60;
 
-$panel['poller_info']['priority'] = 20;
+$panel['poller_info']['priority'] = 50;
 
-$panel['poller_stat']['priority'] = 25;
+$panel['poller_stat']['priority'] = 50;
 
-$panel['graph_host']['priority'] = 15;
+$panel['graph_host']['priority'] = 14;
 
 $panel['graph_thold']['priority'] = 13;
 
@@ -31,11 +31,11 @@ $panel['graph_data_source']['priority'] = 12;
 
 $panel['graph_host_template']['priority'] = 11;
 
-$panel['cpu']['priority'] = 34;
+$panel['cpu']['priority'] = 45;
 
-$panel['top5_ping']['priority'] = 8;
+$panel['top5_ping']['priority'] = 30;
 
-$panel['top5_availability']['priority'] = 7;
+$panel['top5_availability']['priority'] = 31;
 
 $panel['info']['priority'] = 1;
 
@@ -118,7 +118,6 @@ $intropage_settings = array(
 
 
 // analyse_db	
-
 	"intropage_analyse_db_header" => array(
 		"friendly_name" => "DB",
 		"method" => "spacer",
@@ -168,8 +167,6 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 
-
-	
 // ntp
 	"intropage_ntp_header" => array(
 		"friendly_name" => "NTP settings",
@@ -214,15 +211,6 @@ $intropage_settings = array(
 		"method" => "spacer",
 	),
 
-// trend	
-	"intropage_trend" => array(
-		"friendly_name" => "Display graph for host and thold trends",
-		"description" => "if checked this plugin displays graph with trends",
-		"method" => "checkbox",
-		"default" => "on",
-	),
-
-
 	
 // graph_host
 	"intropage_graph_host" => array(
@@ -233,7 +221,7 @@ $intropage_settings = array(
 	),
 	
 // graph threshold	
-	"intropage_graph_threshold" => array(
+	"intropage_graph_thold" => array(
 		"friendly_name" => "Display pie graph for thresholds (ok/trigerred/..)",
 		"description" => "if checked this plugin  displays pie graph for thresholds. It needs GD library",
 		"method" => "checkbox",
@@ -255,13 +243,6 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
-	"intropage_cpu" => array(
-		"friendly_name" => "Display CPU utilization graph",
-		"description" => "if checked this plugin is displays information about CPU",
-		"method" => "checkbox",
-		"default" => "on",
-	),
-
 
 	"intropage_top5_header" => array(
 		"friendly_name" => "Top5",

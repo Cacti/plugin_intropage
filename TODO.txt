@@ -1,7 +1,38 @@
+abych mohl spravne zobrazovat pri red alarm prvi, tak musim 
+sparovat panel z mysql a includovani z display.php.
+Rozsirim tedy tabulku plugin_intropage_panel seznam funkci, ktere 
+pakk budu volat ve smycce. SOubory se taky musi pojmenovat dle panel name
+
+|  1 | analyse_log             |       85 |
+|  2 | analyse_login           |       75 |
+|  3 | thold_events            |       77 |
+|  4 | analyse_db              |       70 |
+|  5 | analyse_tree_host_graph |       50 |
+|  6 | trend                   |       30 |
+|  7 | extrem                  |       30 |
+|  8 | ntp                     |       60 |
+|  9 | poller_info             |       20 |
+| 10 | poller_stat             |       25 |
+| 11 | graph_host              |       15 |
+| 12 | graph_thold             |       13 |
+| 13 | graph_data_source       |       12 |
+| 14 | graph_host_template     |       11 |
+| 15 | cpu                     |       34 |
+| 16 | top5_ping               |        8 |
+| 17 | top5_availability       |        7 |
+| 18 | info                    |        1 |
+| 19 | boost                   |       55 |
++----+-------------------------+----------+
+
+Vznikaji mi tu vyjimky! Jednu muzu resit pomoci include_once (top5,poller).
+includnout vse najednou? Asi ano
+action funkce mit ve zvlastnim souboru, podpurne v druhem
+
+
 Major
 -----
-panel settings per user
-drag and drop - save settings
+panel order per user - bude jen v session,uz to umim ukladat getem, jeste musim mit spravna IDcka
+ 
 panel for 2-3 the most important graphs
 plugins.php - awaiting configuration
 
