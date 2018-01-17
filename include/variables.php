@@ -50,7 +50,7 @@ $intropage_settings = array(
 		"method" => "spacer",
 	),
 	"intropage_display_important_first" => array(
-		"friendly_name" => "Important things will be at the top",
+		"friendly_name" => "Important things will be at the top. If you change this, please logout and logon again!",
 		"description" => "if checked this plugin is displays imporatnt (errors, warnings) information first",
 		"method" => "checkbox",
 		"default" => "off",

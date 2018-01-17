@@ -14,15 +14,17 @@ function display_information() {
 	$debug_start = microtime(true);
 
 
-	 $selectedTheme = get_selected_theme();
+	$selectedTheme = get_selected_theme();
+
+	$url_path = $config["url_path"] . "plugins/intropage";
 
 	// functions
 	include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');	
 
 	// style for panels
-	print "<link type='text/css' href='" . $config["url_path"] . "plugins/intropage/themes/common.css' rel='stylesheet'>\n";
-	print "<link type='text/css' href='" . $config["url_path"] . "plugins/intropage/themes/" . $selectedTheme . ".css' rel='stylesheet'>\n";
+	print "<link type='text/css' href='$url_path/themes/common.css' rel='stylesheet'>\n";
+	print "<link type='text/css' href='$url_path/themes/" . $selectedTheme . ".css' rel='stylesheet'>\n";
 
 	
 	// drag and drop jquery
@@ -44,9 +46,7 @@ print <<<EOF
 	    xdata.push($(this).attr("id"));
 	});
 
-//window.alert($("#ul").sortable('toString'));
-
-	$.get('https://kaktus.kostax.cz/plugins/intropage/intropage_ajax.php',{xdata:xdata});
+	$.get('$url_path/intropage_ajax.php',{xdata:xdata});
 
 
 
@@ -55,78 +55,6 @@ print <<<EOF
     $( "#sortable" ).disableSelection();
 
   });
-
-
-
-/* puvodni funkcni drag and drop
-$( function() {
-  $( "ul" ).sortable().disableSelection();
-
-});
-*/
-
-//* lepsi metoda
-/*
-$( function() {
-    $('#obal').sortable(); // zapne sortable
-
-// toto funguje, vraci mi idcka 
-var result = $('#obal').sortable("toArray");
-alert(result);
-
-});
-*/
-
-
-/*
-$( function() {
-
-//    $('#obal').sortable();
-    
-    $('#obal').sortable({
-    
-    update: function (event,ui)	{
-// tohle neco dela      var data = $("#obal").sortable('toArray', {attribute: "data-item"});  
- var data = $("#obal").sortable('serialize');  
-
-
-
-//	window.alert( $(this).sortable('serialize'));
-   console.log(data);
-    
-    }
-    
-    });
-
-});
-*/
-
-/*
-// tohle jde
-$( "ul" ).bind( "sortupdate", function(event, ui) {
-    	    window.alert ('postuju' + $("#ul").sortable());
- 
-});
-*/
-
-
-/*
-
-//        var data = $(this).sortable('serialize');
-    
-        var data = $("ul").sortable();
-
-        // POST to server using $.post or $.ajax
-        $.ajax({
-            data: data,
-            type: 'POST',
-            url: '/plugins/intropage/intropage_ajax.php'
-        });
-    
-    }
-    
-    });
-*/
 
 
 </script>
@@ -188,16 +116,17 @@ EOF;
 	// Start
 	$values = array();
 
-
 	$query = "select * from plugin_intropage_panel order by priority desc";
 	$panels = db_fetch_assoc($query);
-	
+
+
 	foreach ($panels as $panel)	{
 	    $start = microtime(true);	
 	    $pokus = $panel['panel'];
 	    $values[$pokus] = $pokus();
 	    $debug .= "$pokus: " . round(microtime(true) -$start,2) . " || \n";
 	}
+
 
 
 	// Display ----------------------------------
@@ -208,14 +137,27 @@ EOF;
 
     print '<ul id="obal" style="width: 100%; margin: 20px auto;">';
 
+    // user changed order
+    if (isset ($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order']))	{
+	    $order = "";
+	    foreach ($_SESSION['intropage_order'] as $ord)	{
+		$order .= $ord . ",";
+	    }
+	    $order = substr ($order,0,-1);    
+    
+        $query = "select * from plugin_intropage_panel order by field (id,$order)";
+	$panels = db_fetch_assoc($query);
 
-    if (isset ($_SESSION['intropage_order']))	{
-    
-    
+        foreach($panels as $panel) {
+	    $pom = $panel['panel'];
+            intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+	}
+	
     }
-
-
-    if ($display_important_first == "on")	{  // important first
+    elseif ($display_important_first == "on")	{  // important first
+    
+    
+    
 
     	    foreach($panels as $panel) {	
     		$pom = $panel['panel'];

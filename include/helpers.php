@@ -78,15 +78,13 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
-    print "<li id='panel_id_$panel_id' class='ui-state-default flexchild'>\n";
-//    print "<li class='ui-state-default flexchild'>\n";
+    print "<li id='panel_$panel_id' class='ui-state-default flexchild'>\n";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
     print "	    <div class='cactiTableButton2 color_$type'><span>";
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
-//        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
         printf("<a href='#' title='Show details' class='maxim' name='%s'>+</a>\n",md5($header));
     }
     
