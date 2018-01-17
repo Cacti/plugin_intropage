@@ -22,12 +22,6 @@ if (isset($_GET['xdata']) && is_array($_GET['xdata']))	{
 	}
     
     }
-    
-/*
-    fwrite($fp,"post zacatek\n");
-    fwrite($fp, print_r($_GET, TRUE));
-    fwrite($fp,"post konec\n");
-*/
 
 }
 
