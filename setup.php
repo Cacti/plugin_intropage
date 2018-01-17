@@ -81,9 +81,11 @@ function intropage_setup_database() {
         api_plugin_db_table_create ('intropage', 'plugin_intropage_trends', $data);
 
         $data = array();
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
 	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(30)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
 	$data['type'] = 'MyISAM';
+	$data['primary'] = 'id';
         $data['comment'] = 'panel setting';
         api_plugin_db_table_create ('intropage', 'plugin_intropage_panel', $data);
 
@@ -117,16 +119,6 @@ function intropage_poller_bottom () {
     }
 
 
-    // 24 hour extrems (host down,max poller time, ...)
-    // name a value 
-//    $value = db_fetch_cell("select count(id) FROM host WHERE status='1' AND disabled=''");
-//    db_execute("insert into plugin_intropage_trends (name,date,value) values ('extrem_down_host', '$start', '$value')");
-    
-//    $down_max = db_fetch_cell("select count(value) FROM plugin_intropage_trends WHERE name='extrem_down_host' and date > date_sub(date,interval 1 day) order by value desc limit 3 ");
-//    $down_min = db_fetch_cell("select count(value) FROM plugin_intropage_trends WHERE name='extrem_up_host' and date > date_sub(date,interval 1 day) order by value limit 3 ");
-    // add thold, ...    
-//SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger))    
-    
     
 
     // CPU load - linux only

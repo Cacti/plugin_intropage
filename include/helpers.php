@@ -1,6 +1,63 @@
 <?php
 
-function intropage_display_panel ($type,$header,$dispdata)	{
+
+function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
+	
+	if (!(file_exists($log_file) && is_readable($log_file))) { return false; }
+	
+	$f_handle = @fopen($log_file,"rb");
+	if ($f_handle === false) { return false; }
+	
+	if (!$adaptive) { $buffer = 4096; }
+	else { $buffer = ($nbr_lines < 2 ? 64 : ($nbr_lines < 10 ? 512 : 4096)); }
+	
+	fseek($f_handle, -1, SEEK_END);
+	
+	if (fread($f_handle, 1) != "\n") $nbr_lines -= 1;
+	
+	// Start reading
+	$output = '';
+	$chunk = '';
+	// While we would like more
+	while (ftell($f_handle) > 0 && $nbr_lines >= 0) {
+		// Figure out how far back we should jump
+		$seek = min(ftell($f_handle), $buffer);
+		// Do the jump (backwards, relative to where we are)
+		fseek($f_handle, -$seek, SEEK_CUR);
+		// Read a chunk and prepend it to our output
+		$output = ($chunk = fread($f_handle, $seek)) . $output;
+		// Jump back to where we started reading
+		fseek($f_handle, -mb_strlen($chunk, '8bit'), SEEK_CUR);
+		// Decrease our line counter
+		$nbr_lines -= substr_count($chunk, "\n");
+	}
+	
+	// While we have too many lines (Because of buffer size we might have read too many)
+	while ($nbr_lines++ < 0) {
+		// Find first newline and remove all text before that
+		$output = substr($output, strpos($output, "\n") + 1);
+	}
+	
+	// Close file
+	fclose($f_handle);
+	
+	return explode("\n",$output);
+}
+
+
+
+
+
+
+function human_filesize($bytes, $decimals = 2) {
+        $size = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $factor = floor((strlen($bytes) - 1) / 3);
+        return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
+}
+
+
+
+function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 
    
     if (!empty($dispdata))	{	// empty? Typical for no console access
@@ -21,14 +78,13 @@ function intropage_display_panel ($type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
-    print "<li class='ui-state-default flexchild'>\n";
+    print "<li id='panel_$panel_id' class='ui-state-default flexchild'>\n";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
     print "<div>\n";
     print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
     print "	    <div class='cactiTableButton2 color_$type'><span>";
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
-//        printf("<a href='#' onclick=\"hide_display('block_%s');\" title='View details'>&#8599;</a>\n",md5($header));
         printf("<a href='#' title='Show details' class='maxim' name='%s'>+</a>\n",md5($header));
     }
     
@@ -261,4 +317,37 @@ print "</div>\n";
 
     } // have console access
 }
+
+
+function ntp_time($host) {
+    $timestamp = -1;
+    $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+
+    $timeout = array('sec'=>1,'usec'=>500000);
+    socket_set_option($sock,SOL_SOCKET,SO_RCVTIMEO,$timeout);
+    socket_clear_error();         
+    
+    socket_connect($sock, $host, 123);
+    if (socket_last_error() == 0)	{  
+		// Send request
+		$msg = "\010" . str_repeat("\0", 47);
+		socket_send($sock, $msg, strlen($msg), 0);
+    	// Receive response and close socket
+    	
+    	if (@socket_recv($sock, $recv, 48, MSG_WAITALL))	{
+	    	socket_close($sock);
+	    	// Interpret response
+	    	$data = unpack('N12', $recv);
+	    	$timestamp = sprintf('%u', $data[9]);
+	    	// NTP is number of seconds since 0000 UT on 1 January 1900
+	    	// Unix time is seconds since 0000 UT on 1 January 1970
+	    	$timestamp -= 2208988800;
+		}
+    }
+    return $timestamp;
+}
+
+
+
+
 ?>

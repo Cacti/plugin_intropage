@@ -3,11 +3,11 @@
 // priority (order) (bigger number =  highest priority)
 $panel = array();
 
-$panel['analyse_log']['priority'] = 85;
-
-//$panel['analyse_log_size']['priority'] = 80;
+$panel['analyse_log']['priority'] = 60;
 
 $panel['analyse_login']['priority'] = 75;
+
+$panel['thold_events']['priority'] = 77;
 
 $panel['analyse_db']['priority'] = 70;
 
@@ -19,11 +19,11 @@ $panel['extrem']['priority'] = 30;
 
 $panel['ntp']['priority'] = 60;
 
-$panel['poller_info']['priority'] = 20;
+$panel['poller_info']['priority'] = 50;
 
-$panel['poller_stat']['priority'] = 25;
+$panel['poller_stat']['priority'] = 50;
 
-$panel['graph_host']['priority'] = 15;
+$panel['graph_host']['priority'] = 14;
 
 $panel['graph_thold']['priority'] = 13;
 
@@ -31,13 +31,16 @@ $panel['graph_data_source']['priority'] = 12;
 
 $panel['graph_host_template']['priority'] = 11;
 
-$panel['cpu']['priority'] = 34;
+$panel['cpu']['priority'] = 45;
 
-$panel['top5_ping']['priority'] = 8;
+$panel['top5_ping']['priority'] = 30;
 
-$panel['top5_availability']['priority'] = 7;
+$panel['top5_availability']['priority'] = 31;
 
 $panel['info']['priority'] = 1;
+
+$panel['boost']['priority'] = 55;
+
 
 
 $intropage_settings = array(
@@ -47,7 +50,7 @@ $intropage_settings = array(
 		"method" => "spacer",
 	),
 	"intropage_display_important_first" => array(
-		"friendly_name" => "Important things will be at the top",
+		"friendly_name" => "Important things will be at the top. If you change this, please logout and logon again!",
 		"description" => "if checked this plugin is displays imporatnt (errors, warnings) information first",
 		"method" => "checkbox",
 		"default" => "off",
@@ -101,8 +104,20 @@ $intropage_settings = array(
 	),
 
 
-// analyse_db	
+// plugin thold - log	
+	"intropage_thold_header" => array(
+		"friendly_name" => "Analyse thold log",
+		"method" => "spacer",
+	),
+	"intropage_thold_events" => array(
+		"friendly_name" => "Display last 10 thold events",
+		"description" => "if checked this plugin display panel with last 10 thold events",
+		"method" => "checkbox",
+		"default" => "on",
+	),
 
+
+// analyse_db	
 	"intropage_analyse_db_header" => array(
 		"friendly_name" => "DB",
 		"method" => "spacer",
@@ -120,17 +135,17 @@ $intropage_settings = array(
 		"array" => array("QUICK" => "Quick", "FAST" => "Fast", "CHANGED" => "Changed", "MEDIUM" => "Medium", "EXTENDED"  => "Extended"),
 		"default" => "Medium",
 	),
-
-// analyse_tree_host_graph
 	
-	"intropage_anlayse_tree_header" => array(
-		"friendly_name" => "Analyse trees, hosts, graphs, ...",
+	"intropage_analyse_tree_header" => array(
+		"friendly_name" => "Analyse trees, hosts, graphs, orphaned DS, ...",
 		"method" => "spacer",
 	),
 	
+	
+// analyse_tree_host_graph
 	"intropage_analyse_tree_host_graph" => array(
-		"friendly_name" => "Allow check for devices with the same description, without graph and in more than one tree",
-		"description" => "if checked this plugin is allowed to search for devices with the same description,without graph and in more than one tree",
+		"friendly_name" => "Allow check for devices with the same description, without graph,in more than one tree, orphaned DS",
+		"description" => "if checked this plugin is allowed to search for devices with the same description,without graph, in more than one tree, orphaned DS",
 		"method" => "checkbox",
 		"default" => "on",
 	),
@@ -152,12 +167,7 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 
-
-	"intropage_display_header" => array(
-		"friendly_name" => "NTP",
-		"method" => "spacer",
-	),
-// ntp	
+// ntp
 	"intropage_ntp_header" => array(
 		"friendly_name" => "NTP settings",
 		"method" => "spacer",
@@ -175,13 +185,12 @@ $intropage_settings = array(
 		"max_length" => 50,
 		"default" => "pool.ntp.org",
 	),
-
-// poller
 	"intropage_poller_header" => array(
 		"friendly_name" => "Poller",
 		"method" => "spacer",
 	),
 
+// poller
 	"intropage_poller_info" => array(
 		"friendly_name" => "Display poller info - how many poller and how long pollers run",
 		"description" => "if checked this plugin displays poller information",
@@ -189,28 +198,18 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 
-// graph poller
-/*
-	"intropage_graph_poller" => array(
-		"friendly_name" => "Display poller graph",
-		"description" => "if checked this plugin displays poller graph",
+// boost 
+	"intropage_boost" => array(
+		"friendly_name" => "Display boost stats",
+		"description" => "if checked this plugin displays boost stats",
 		"method" => "checkbox",
 		"default" => "on",
 	),
-*/
+
 	"intropage_graphs_header" => array(
 		"friendly_name" => "Graphs",
 		"method" => "spacer",
 	),
-
-// trend	
-	"intropage_trend" => array(
-		"friendly_name" => "Display graph for host and thold trends",
-		"description" => "if checked this plugin displays graph with trends",
-		"method" => "checkbox",
-		"default" => "on",
-	),
-
 
 	
 // graph_host
@@ -222,7 +221,7 @@ $intropage_settings = array(
 	),
 	
 // graph threshold	
-	"intropage_graph_threshold" => array(
+	"intropage_graph_thold" => array(
 		"friendly_name" => "Display pie graph for thresholds (ok/trigerred/..)",
 		"description" => "if checked this plugin  displays pie graph for thresholds. It needs GD library",
 		"method" => "checkbox",
@@ -244,13 +243,6 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
-	"intropage_cpu" => array(
-		"friendly_name" => "Display CPU utilization graph",
-		"description" => "if checked this plugin is displays information about CPU",
-		"method" => "checkbox",
-		"default" => "on",
-	),
-
 
 	"intropage_top5_header" => array(
 		"friendly_name" => "Top5",

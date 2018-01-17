@@ -39,6 +39,13 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.5 ---
+	Add Boost statistics panel
+	Add Orphaned DS to analyze tree/host/graph
+	Add Last thold events panel
+	Add Grey panel for panels without tests and alarms
+	Add save panel order (drag and drop)
+
 	1.4 ---
 	Add 24 hour extrem panel
 	Ajax reload
