@@ -1,11 +1,12 @@
 Major
 -----
+dashboard configuration per user (add/remove panel buttons, ...)
 panel for 2-3 the most important graphs
-plugins.php - awaiting configuration
 
 Minor
 -----
 top5,extrem - style 2em hardcoded
 code cleaning
+plugins.php - awaiting configuration
 
 
