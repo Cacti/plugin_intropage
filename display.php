@@ -20,7 +20,7 @@ function display_information() {
 
 	// functions
 	include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-	include_once($config['base_path'] . '/plugins/intropage/include/data.php');	
+	include_once($config['base_path'] . '/plugins/intropage/include/data.php');	
 
 	// style for panels
 	print "<link type='text/css' href='$url_path/themes/common.css' rel='stylesheet'>\n";
