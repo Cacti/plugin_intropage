@@ -1136,7 +1136,7 @@ function top5_ping() {
 	
 	
 	$result['data'] = "<table>";
-        $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) order by avg_time desc limit 5");
+        $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) and disabled != 'on' order by avg_time desc limit 5");
 	foreach($sql_worst_host as $host) {
             if ($console_access)  
         	$result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
@@ -1172,7 +1172,7 @@ function top5_availability() {
 	
 
 	$result['data'] = "<table>";
-	 $sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) order by availability  limit 5");
+	 $sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) and disabled != 'on' order by availability  limit 5");
 
 	foreach($sql_worst_host as $host) {
             if ($console_access)  
