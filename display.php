@@ -106,7 +106,11 @@ EOF;
 	    }   
 	}
 
-	$allowed_hosts = substr($allowed_hosts,0,-1);
+        if (!empty($allowed_hosts))
+            $allowed_hosts = substr($allowed_hosts,0,-1);
+        else
+            $allowed_hosts = "NULL";
+
 
 	
 	// Retrieve access
