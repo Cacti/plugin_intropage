@@ -312,7 +312,6 @@ print "</div>\n";
     print "</div>\n";	// end of panel_data
     print "</td></tr>\n\n";
     html_end_box(false);
-
     print "</li>\n\n";
 
     } // have console access
