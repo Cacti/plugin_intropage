@@ -32,6 +32,20 @@ print <<<EOF
 
 <script type="text/javascript">
 
+// IE 10 & 11 hack for flex. Without this are all panels in one line
+$(window).load(function() {
+    if (  
+	navigator.userAgent.search('MSIE 10') > 0 || // ie10
+        (navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 ) // ie11
+	)	
+	{
+    	    $('#obal').css('max-width',($(window).width()-190));
+        }
+        
+});
+
+
+
 /* tohle funguje, asi pouzit, ale musim mit idcka
 */
   $(function() {
@@ -139,7 +153,7 @@ EOF;
 //	$display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
 // 	0 chyby, 1 - chyby/warn, 2- all
 
-    print '<ul id="obal" style="width: 100%; margin: 20px auto;">';
+    print '<ul id="obal" xstyle="width: 100%; margin: 20px auto;">';
 
     // user changed order
     if (isset ($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order']))	{
