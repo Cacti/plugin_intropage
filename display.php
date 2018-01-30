@@ -139,10 +139,13 @@ EOF;
 
 
 	foreach ($panels as $panel)	{
-	    $start = microtime(true);	
 	    $pokus = $panel['panel'];
-	    $values[$pokus] = $pokus();
-	    $debug .= "$pokus: " . round(microtime(true) -$start,2) . " || \n";
+//    echo "<br/>$pokus";
+	    if (read_config_option("intropage_" . $pokus) == "on")	{
+		$start = microtime(true);	
+		$values[$pokus] = $pokus();
+		$debug .= "$pokus: " . round(microtime(true) -$start,2) . " || \n";
+	    }
 	}
 
 
