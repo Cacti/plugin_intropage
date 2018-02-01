@@ -1,23 +1,8 @@
 
-.cactiTableTitle	{
-       border-bottom: 0px;
+.panel_header {
+    color: white;
 }
 
-.cactiTableButton	{
-       border-bottom: 0px;
-}
-
-.cactiTableTitle .pokus {
-        color: #444444;
-}
-
-.cactiTableButton2 span {
-        color: white;
-        padding: 0px 12px 14px 3px;
-        white-space: nowrap;
-        overflow: hidden;
-        vertical-align: middle;
-}
 
 .panel_data	{
     padding: 4px;

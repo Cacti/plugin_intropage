@@ -1,4 +1,3 @@
-
 #obal {
     list-style-type: none; /* remove bullets */
     display: flex; /* flexbox */
@@ -21,17 +20,23 @@
     min-height: 160px;
 }
 
+.panel_header	{
+    padding: 4px;
+    font-weight: bold;
+}
+
+.header_link	{
+    float: right;
+}
+
 .txt_big	{
     font-size: 1.5em;
 }
 
-.cactiTableButton2 {
-    text-align: right;
-}
 
 
 .color_red {
-    background: rgba(255,255,255,1);
+    background: rgba(255,255,255,1) !important;
     background: -moz-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(221,20,20,1)), color-stop(100%, rgba(221,20,20,1))) !important;
     background: -webkit-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;

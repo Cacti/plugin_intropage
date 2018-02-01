@@ -5,18 +5,12 @@
     padding: 4px;
 }
 
-.cactiTableTitle .pokus {
-        color: #f7f7f7;
-        font-weight: bold;
-}
 
 .textArea {
         background-color: #202020;
 }
 
-.cactiTableButton2 span  {
-        padding: 0px 12px 24px 3px;
-        white-space: nowrap;
-        overflow: hidden;
-        vertical-align: middle;
+.panel_header 	{
+    color: #bbf;
+
 }

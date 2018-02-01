@@ -39,6 +39,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.6 ---
+	Fix top5 - add device disabled test
+	Fix display in IE10 and IE11
+
 	1.5 ---
 	Add Boost statistics panel
 	Add Orphaned DS to analyze tree/host/graph
