@@ -250,12 +250,22 @@ $intropage_settings = array(
 	),
 	
 	
-	"intropage_top5" => array(
-		"friendly_name" => "Display top 5 devices with the worst ping and availability",
-		"description" => "if checked this plugin displays table of hosts with the worse ping and availability",
+	"intropage_top5_ping" => array(
+		"friendly_name" => "Display top 5 devices with the worst ping",
+		"description" => "if checked this plugin displays table of hosts with the worse ping",
 		"method" => "checkbox",
 		"default" => "on",
 	),
+
+	"intropage_top5_availability" => array(
+		"friendly_name" => "Display top 5 devices with the worst availability",
+		"description" => "if checked this plugin displays table of hosts with the worse availability",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+
+
+
 // info - os, php apod
 	"intropage_info_header" => array(
 		"friendly_name" => "Info",
