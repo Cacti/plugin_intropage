@@ -198,6 +198,15 @@ $intropage_settings = array(
 		"default" => "on",
 	),
 
+
+	"intropage_poller_stat" => array(
+		"friendly_name" => "Display poller history graph",
+		"description" => "if checked this plugin displays poller history graph",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+
+
 // boost 
 	"intropage_boost" => array(
 		"friendly_name" => "Display boost stats",
