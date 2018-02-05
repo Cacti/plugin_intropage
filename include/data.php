@@ -788,11 +788,12 @@ function graph_thold() {
 			$result['data'] .= "Trigged: $t_trig<br/>\n";
 			$result['data'] .= "Disabled: $t_disa<br/>\n";
 		}
-		if (read_config_option('intropage_graph_threshold') == "on")	{
+		if (read_config_option('intropage_graph_thold') == "on")	{
 			$result['pie'] = array('title' => 'Thresholds: ', 'label' => array("OK","Breached","Trigerred","Disabled"), 'data' => array($t_all-$t_brea-$t_trig-$t_disa,$t_brea,$t_trig,$t_disa));
 		}
 	}
 	
+//	print_r($result);
 	return $result;
 }
 
