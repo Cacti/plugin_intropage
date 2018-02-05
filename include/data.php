@@ -1017,7 +1017,8 @@ function poller_info() {
 
 function poller_stat() {
 	global $config;
-	
+
+
 	$poller_interval = read_config_option("poller_interval");
 	$result = array(
 		'name' => "Poller stats (interval ".$poller_interval."s)",
@@ -1039,11 +1040,9 @@ function poller_stat() {
                         'title5' => '',
                         'label5' => array(),
                         'data5' => array(),
-
 		),	
 	);
 	
-
 
 	$pollers = db_fetch_assoc("SELECT id from poller order by id limit 5");
 	$new_index = 1;
@@ -1054,11 +1053,9 @@ function poller_stat() {
 	    foreach ($poller_time as $one_poller)	{
 	    list($id,$time) = explode(":",$one_poller['value']); 
 	
-	
 	    if ($time > $poller_interval)	{
 		$result['alarm'] = "red";
 		$result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
-
 	    }
 	    else
 		$result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
@@ -1074,15 +1071,10 @@ function poller_stat() {
 	    $new_index++;
 	}
 
-
-
 	if (count($result['line']['data1']) < 3)	{
 	    $result['data'] = "Waiting for data";
 	    unset ($result['line']);
 	}
-
-
-
 
 	return $result;
 }
