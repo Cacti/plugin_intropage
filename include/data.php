@@ -686,7 +686,7 @@ function graph_host() {
 	$result = array(
 		'name' => 'Hosts',
 		'data' => '',
-		'alarm' => "grey",
+		'alarm' => "green",
 	);
 	
 	$h_all  = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts)");
@@ -1079,20 +1079,20 @@ function poller_stat() {
 	    $poller_time = array_reverse ($poller_time);
 
 	    foreach ($poller_time as $one_poller)	{
-	    list($id,$time) = explode(":",$one_poller['value']); 
+		list($id,$time) = explode(":",$one_poller['value']); 
 	
-	    if ($time > $poller_interval)	{
-		$result['alarm'] = "red";
-		$result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
-	    }
-	    else
-		$result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
+		if ($time > ($poller_interval-10))	{
+		    $result['alarm'] = "red";
+		    $result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
+		}
+		else
+		    $result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
 		
-	    // graph data
-            array_push($result['line']['label' . $new_index], $one_poller['xdate'] );
-            array_push($result['line']['data' . $new_index],$time);
+		// graph data
+        	array_push($result['line']['label' . $new_index], $one_poller['xdate'] );
+        	array_push($result['line']['data' . $new_index],$time);
 
-            $result['line']['title' . $new_index] = 'ID: ' . $xpoller['id'];
+        	$result['line']['title' . $new_index] = 'ID: ' . $xpoller['id'];
             
             }
 		
