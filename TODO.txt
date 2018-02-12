@@ -1,14 +1,13 @@
 Major
 -----
+
 gastro - host ma byt zeleny a je sedy
-poller_stat je green i kdyz nestiha dobihat poller
+poller_stat je green i kdyz nestiha dobihat poller - kde je alertovani stat nebo info???
+u polleru alertoat i kdyz se blizim k te hranici, ne az prekroceni, protoze mi to killne treba pri 299
 pridat znovu mactrack
-issue22 - je videt, ze thold - nema prava, ale last thold event mu zobrazi - mozna vyreseno
-po instalaci je aktivni debug, divne - mozna vyreseno
 pridat waiting for data do top5, graf ds, host, host template, thold events 
 dashboard configuration per user (add/remove panel buttons, ...)
 panel for 2-3 the most important graphs
-optimalization flex in ie11  - dle detekce prohlizece musim zmenit max-width u obalu
 ajax - mam dvakrat obal
 
 
