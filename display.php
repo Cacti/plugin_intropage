@@ -140,7 +140,7 @@ EOF;
 
 	foreach ($panels as $panel)	{
 	    $pokus = $panel['panel'];
-//    echo "<br/>$pokus";
+
 	    if (read_config_option("intropage_" . $pokus) == "on")	{
 		$start = microtime(true);	
 		$values[$pokus] = $pokus();
