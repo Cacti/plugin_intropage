@@ -1,10 +1,18 @@
 Major
 -----
+gastro - host ma byt zeleny a je sedy
+poller_stat je green i kdyz nestiha dobihat poller - kde je alertovani stat nebo info???
+u polleru alertoat i kdyz se blizim k te hranici, ne az prekroceni, protoze mi to killne treba pri 299
+pridat znovu mactrack
+pridat waiting for data do top5, graf ds, host, host template, thold events 
 dashboard configuration per user (add/remove panel buttons, ...)
 panel for 2-3 the most important graphs
+ajax - mam dvakrat obal
+
 
 Minor
 -----
+plugins.php - awaiting configuration
 top5,extrem - style 2em hardcoded
 code cleaning
 plugins.php - awaiting configuration

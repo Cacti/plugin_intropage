@@ -20,7 +20,7 @@ function display_information() {
 
 	// functions
 	include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-	include_once($config['base_path'] . '/plugins/intropage/include/data.php');	
+	include_once($config['base_path'] . '/plugins/intropage/include/data.php');	
 
 	// style for panels
 	print "<link type='text/css' href='$url_path/themes/common.css' rel='stylesheet'>\n";
@@ -31,6 +31,20 @@ function display_information() {
 print <<<EOF
 
 <script type="text/javascript">
+
+// IE 10 & 11 hack for flex. Without this are all panels in one line
+$(window).load(function() {
+    if (  
+	navigator.userAgent.search('MSIE 10') > 0 || // ie10
+        (navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 ) // ie11
+	)	
+	{
+    	    $('#obal').css('max-width',($(window).width()-190));
+        }
+        
+});
+
+
 
 /* tohle funguje, asi pouzit, ale musim mit idcka
 */
@@ -106,7 +120,11 @@ EOF;
 	    }   
 	}
 
-	$allowed_hosts = substr($allowed_hosts,0,-1);
+        if (!empty($allowed_hosts))
+            $allowed_hosts = substr($allowed_hosts,0,-1);
+        else
+            $allowed_hosts = "NULL";
+
 
 	
 	// Retrieve access
@@ -121,10 +139,13 @@ EOF;
 
 
 	foreach ($panels as $panel)	{
-	    $start = microtime(true);	
 	    $pokus = $panel['panel'];
-	    $values[$pokus] = $pokus();
-	    $debug .= "$pokus: " . round(microtime(true) -$start,2) . " || \n";
+
+	    if (read_config_option("intropage_" . $pokus) == "on")	{
+		$start = microtime(true);	
+		$values[$pokus] = $pokus();
+		$debug .= "$pokus: " . round(microtime(true) -$start,2) . " || \n";
+	    }
 	}
 
 
@@ -135,7 +156,7 @@ EOF;
 //	$display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
 // 	0 chyby, 1 - chyby/warn, 2- all
 
-    print '<ul id="obal" style="width: 100%; margin: 20px auto;">';
+    print '<ul id="obal" xstyle="width: 100%; margin: 20px auto;">';
 
     // user changed order
     if (isset ($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order']))	{
@@ -150,7 +171,8 @@ EOF;
 
         foreach($panels as $panel) {
 	    $pom = $panel['panel'];
-            intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+	    if (read_config_option("intropage_" . $pom) == "on")	
+        	intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 	}
 	
     }
@@ -161,9 +183,12 @@ EOF;
 
     	    foreach($panels as $panel) {	
     		$pom = $panel['panel'];
-		if ($values[$pom]['alarm'] == "red")	{
-		    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-		    $values[$pom]['displayed'] = true;
+		if (read_config_option("intropage_" . $pom) == "on")	{
+
+		    if ($values[$pom]['alarm'] == "red")	{
+			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			$values[$pom]['displayed'] = true;
+		    }
 		}
 	    }
 
@@ -171,9 +196,12 @@ EOF;
 	    if ($display_level == 1 || ($display_level == 2 && !isset($values[$pom]['displayed'])))	{
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-		    if ($values[$pom]['alarm'] == "yellow")	{
-			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			$values[$pom]['displayed'] = true;
+		    if (read_config_option("intropage_" . $pom) == "on")	{
+
+		        if ($values[$pom]['alarm'] == "yellow")	{
+			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			    $values[$pom]['displayed'] = true;
+			}
 		    }
 		}
 	    }
@@ -182,19 +210,25 @@ EOF;
 	    if ($display_level == 2)	{
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-		    if ($values[$pom]['alarm'] == "green")	{
+		    if (read_config_option("intropage_" . $pom) == "on")	{
 
-			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			$values[$pom]['displayed'] = true;
+			if ($values[$pom]['alarm'] == "green")	{
+
+			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			    $values[$pom]['displayed'] = true;
+			}
 		    }
 		}
 
 		// grey and without color
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-		    if (!isset($values[$pom]['displayed']))	{
-			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			$values[$pom]['displayed'] = true;
+		    if (read_config_option("intropage_" . $pom) == "on")		{
+
+	    		if (!isset($values[$pom]['displayed']))	{
+			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			    $values[$pom]['displayed'] = true;
+			}
 		    }
 		}
 	    }
@@ -206,6 +240,8 @@ EOF;
 
 	    $pom = $panel['panel'];
 	
+	    if (read_config_option("intropage_" . $pom) == "on")	{
+
 		if (
 		    ($display_level == 2 ) ||
 	            ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
@@ -214,6 +250,7 @@ EOF;
 			if (isset ($values[$pom]))	// only active panels, not disable
 				intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 		}
+	    }
 	}
 
     }

@@ -80,17 +80,16 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 
     print "<li id='panel_$panel_id' class='ui-state-default flexchild'>\n";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
-    print "<div>\n";
-    print "	    <div class='cactiTableTitle color_$type'><span class=\"pokus\">$header</span></div>\n";
-    print "	    <div class='cactiTableButton2 color_$type'><span>";
+
+    print "<div class='panel_header color_$type'>\n";
+    print "$header\n";
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
-        printf("<a href='#' title='Show details' class='maxim' name='%s'>+</a>\n",md5($header));
+        printf("<a href='#' title='Show details' class='header_link maxim' name='%s'>+</a>\n",md5($header));
     }
-    
-    print "</span></div>\n";
-    print "	</div>\n";
-    print "	<table class='cactiTable' style='padding:3px;'>\n";
+
+    print "</div>\n";
+    print "	<table class='cactiTable'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
     print "<div class='panel_data'>\n";
@@ -312,7 +311,6 @@ print "</div>\n";
     print "</div>\n";	// end of panel_data
     print "</td></tr>\n\n";
     html_end_box(false);
-
     print "</li>\n\n";
 
     } // have console access

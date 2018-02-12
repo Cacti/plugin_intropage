@@ -788,11 +788,12 @@ function graph_thold() {
 			$result['data'] .= "Trigged: $t_trig<br/>\n";
 			$result['data'] .= "Disabled: $t_disa<br/>\n";
 		}
-		if (read_config_option('intropage_graph_threshold') == "on")	{
+		if (read_config_option('intropage_graph_thold') == "on")	{
 			$result['pie'] = array('title' => 'Thresholds: ', 'label' => array("OK","Breached","Trigerred","Disabled"), 'data' => array($t_all-$t_brea-$t_trig-$t_disa,$t_brea,$t_trig,$t_disa));
 		}
 	}
 	
+//	print_r($result);
 	return $result;
 }
 
@@ -1017,7 +1018,8 @@ function poller_info() {
 
 function poller_stat() {
 	global $config;
-	
+
+
 	$poller_interval = read_config_option("poller_interval");
 	$result = array(
 		'name' => "Poller stats (interval ".$poller_interval."s)",
@@ -1039,11 +1041,9 @@ function poller_stat() {
                         'title5' => '',
                         'label5' => array(),
                         'data5' => array(),
-
 		),	
 	);
 	
-
 
 	$pollers = db_fetch_assoc("SELECT id from poller order by id limit 5");
 	$new_index = 1;
@@ -1054,11 +1054,9 @@ function poller_stat() {
 	    foreach ($poller_time as $one_poller)	{
 	    list($id,$time) = explode(":",$one_poller['value']); 
 	
-	
 	    if ($time > $poller_interval)	{
 		$result['alarm'] = "red";
 		$result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
-
 	    }
 	    else
 		$result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
@@ -1074,15 +1072,10 @@ function poller_stat() {
 	    $new_index++;
 	}
 
-
-
 	if (count($result['line']['data1']) < 3)	{
 	    $result['data'] = "Waiting for data";
 	    unset ($result['line']);
 	}
-
-
-
 
 	return $result;
 }
@@ -1136,7 +1129,7 @@ function top5_ping() {
 	
 	
 	$result['data'] = "<table>";
-        $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) order by avg_time desc limit 5");
+        $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) and disabled != 'on' order by avg_time desc limit 5");
 	foreach($sql_worst_host as $host) {
             if ($console_access)  
         	$result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
@@ -1172,7 +1165,7 @@ function top5_availability() {
 	
 
 	$result['data'] = "<table>";
-	 $sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) order by availability  limit 5");
+	 $sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) and disabled != 'on' order by availability  limit 5");
 
 	foreach($sql_worst_host as $host) {
             if ($console_access)  
