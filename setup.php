@@ -20,6 +20,10 @@ function plugin_intropage_install() {
 
 function plugin_intropage_uninstall () {
 	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
+	db_execute("DROP TABLE plugin_intropage_user_setting");
+	db_execute("DROP TABLE plugin_intropage_trends");
+	db_execute("DROP TABLE plugin_intropage_panel");
+
 }
 
 function plugin_intropage_version()	{
@@ -82,7 +86,20 @@ function intropage_setup_database() {
 
         $data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
-	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(30)', 'NULL' => false);
+        $data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+//        $data['columns'][] = array('name' => 'disabled', 'type' => 'int(1)', 'NULL' => false, 'default' => '0');
+        $data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
+        $data['columns'][] = array('name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => '50');
+	$data['type'] = 'MyISAM';
+	$data['primary'] = 'id';
+        $data['comment'] = 'intropage user settings';
+        api_plugin_db_table_create ('intropage', 'plugin_intropage_user_setting', $data);
+
+
+
+        $data = array();
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
+	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
 	$data['type'] = 'MyISAM';
 	$data['primary'] = 'id';

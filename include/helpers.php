@@ -58,7 +58,7 @@ function human_filesize($bytes, $decimals = 2) {
 
 
 function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
-
+    global $config;
    
     if (!empty($dispdata))	{	// empty? Typical for no console access
 	
@@ -83,12 +83,17 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 
     print "<div class='panel_header color_$type'>\n";
     print "$header\n";
+
+//    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; X &nbsp;</a>\n",$config["url_path"] . "plugins/intropage/intropage.php?action=disable&panel_id=$panel_id");
+    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; X &nbsp;</a>\n","?action=disable&panel_id=$panel_id");
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
-        printf("<a href='#' title='Show details' class='header_link maxim' name='%s'>+</a>\n",md5($header));
+	printf("<a href='#' title='Show details' class='header_link maxim' name='%s'> + </a>\n",md5($header));
     }
 
-    print "</div>\n";
+
+
+    print " </div>\n";
     print "	<table class='cactiTable'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 

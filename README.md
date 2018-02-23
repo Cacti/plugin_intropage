@@ -39,6 +39,11 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.6 ---
+	Add user setting directly on intropage (close/add panel, autorefresh, ...)
+	Add permissions (admin can enable/disable panel for all users)
+	Fix ajax double displaying
+
 	1.5.1 ---
 	Fix top5 - add device disabled test
 	Fix display in IE10 and IE11

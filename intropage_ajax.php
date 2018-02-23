@@ -5,6 +5,8 @@ include_once("./include/auth.php");
 include_once("./plugins/intropage/display.php");
 
 
+/*
+// change priority
 if (isset($_GET['xdata']) && is_array($_GET['xdata']))	{
     $error = false;
     $order = array();
@@ -20,10 +22,10 @@ if (isset($_GET['xdata']) && is_array($_GET['xdata']))	{
 	if (!$error)	{
 	    $_SESSION['intropage_order'] = $order;
 	}
-    
     }
-
 }
+
+*/
 
 
 display_information();
