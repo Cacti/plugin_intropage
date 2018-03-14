@@ -95,13 +95,12 @@ function analyse_log() {
 		    
 			if (preg_match('/(WARN|ERROR|FATAL)/',$line,$matches)) {
 
-				if (strcmp($matches[1],"WARN"))	{
+				if (strcmp($matches[1],"WARN") === 0)	{
 				    $warn++;
-
     				    $ecount++;
     				    $result['detail'] .= "<b>$line</b><br/>";					
 					
-				} elseif ((strcmp($matches[1],"ERROR") || strcmp($matches[1],"FATAL")))	{
+				} elseif (strcmp($matches[1],"ERROR") === 0 || strcmp($matches[1],"FATAL")=== 0 )	{
 				    $error++;
 				    $ecount++;
 				    $result['detail'] .= "<b>$line</b><br/>";					
@@ -1294,6 +1293,13 @@ function trend() {
 	}
 	
 	return $result;
+}
+
+//-----------------top graph----------
+
+function top_graph()	{
+
+
 }
 
 ?>
