@@ -1295,10 +1295,55 @@ function trend() {
 	return $result;
 }
 
-//-----------------top graph----------
+//-----------------favourite graph----------
 
-function top_graph()	{
+function favourite_graph()	{
 
+        global $config;
+
+        $result = array(
+                'name' => 'Favourite graph',
+                'alarm' => 'grey',
+                'data' => '',
+                'detail' => '',
+        );
+    
+    if (!read_user_setting("intropage_favouritegraph_1",false) && ! read_user_setting("intropage_favouritegraph_2",false))
+	$result['data'] .= "No selected favourite graphs";
+    
+    // div a bud da dva vedle sebe nebo jen jeden
+    //$result['data'] .= "<div>\n";
+    
+    if (read_user_setting("intropage_favouritegraph_1"))
+	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
+	'local_graph_id=' . read_user_setting("intropage_favouritegraph_1") . '&' .
+	'graph_height=115&' . 
+	'graph_width=380&' . 
+	'graph_nolegend=true" alt="Favourite graph 1"/>&nbsp;';
+
+
+    if (read_user_setting("intropage_favouritegraph_2"))
+	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
+	'local_graph_id=' . read_user_setting("intropage_favouritegraph_2") . '&' .
+	'graph_height=115&' . 
+	'graph_width=380&' . 
+	'graph_nolegend=true" alt="Favourite graph 2"/>';
+
+
+
+/*
+get_filter_request_var('graph_height');
+get_filter_request_var('graph_width');
+get_filter_request_var('local_graph_id');
+
+if (isset_request_var('graph_nolegend')) {
+
+*/
+
+    //$result['data'] .= "<div>\n";
+
+
+    return $result;
 
 }
 

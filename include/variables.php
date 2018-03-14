@@ -41,6 +41,8 @@ $panel['info']['priority'] = 1;
 
 $panel['boost']['priority'] = 55;
 
+$panel['favourite_graph']['priority'] = 71;
+
 
 
 $intropage_settings = array(
@@ -137,7 +139,7 @@ $intropage_settings = array(
 	),
 	
 	"intropage_analyse_tree_header" => array(
-		"friendly_name" => "Analyse trees, hosts, graphs, orphaned DS, ...",
+		"friendly_name" => "Analyses, trends, extrems, ...",
 		"method" => "spacer",
 	),
 	
@@ -149,6 +151,7 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
+
 
 
 // trend	
@@ -219,6 +222,16 @@ $intropage_settings = array(
 		"friendly_name" => "Graphs",
 		"method" => "spacer",
 	),
+
+
+// favourite_graph	
+	"intropage_favourite_graph" => array(
+		"friendly_name" => "Allow add up to 2 arbitrary graphs to dashboard for users",
+		"description" => "if checked panel is allowed for users",
+		"method" => "checkbox",
+		"default" => "on",
+	),
+
 
 	
 // graph_host

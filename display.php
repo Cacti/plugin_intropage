@@ -13,7 +13,6 @@ function display_information() {
 	$debug = "";
 	$debug_start = microtime(true);
 
-
 	$selectedTheme = get_selected_theme();
 
 	$url_path = $config["url_path"] . "plugins/intropage";
@@ -310,7 +309,6 @@ $(document).ready(function () {
 
 
     // settings
-
     echo "<form method=\"post\">\n";
     echo "<select name=\"intropage_action\" size=\"1\">";
     echo "<option value=\"0\">Select action ...</option>";
@@ -368,7 +366,7 @@ $(document).ready(function () {
 
 	
     if (read_user_setting("intropage_display_level") == 2)
-	echo "<option value=\"displaylevel_2\" disbaled=\"disabled\">Display all</option>";
+	echo "<option value=\"displaylevel_2\" disabled=\"disabled\">Display all</option>";
     else
 	echo "<option value=\"displaylevel_2\">Display all</option>";
 
@@ -388,6 +386,11 @@ $(document).ready(function () {
 	echo "<option value=\"reset_order\">Reset panel order to default</option>";
 
     echo "<option value=\"reset_all\">Reset all to default</option>";
+
+    if ($intropage_debug == 0) 
+            echo "<option value=\"debug_ena\">Enable debug</option>";
+    else 
+            echo "<option value=\"debug_disa\">Disable debug</option>";
 
 
 
@@ -436,6 +439,8 @@ $(document).ready(function () {
         break;
 
 	// !!!!! tady by jeste mela byt moznost, kdyz nema konzoli a jako vychozi si dal intropage prepnout zpet na graf
+
+
     }
 
     

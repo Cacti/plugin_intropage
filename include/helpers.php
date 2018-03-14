@@ -350,7 +350,23 @@ function ntp_time($host) {
     return $timestamp;
 }
 
+function intropage_graph_button($data)	{
 
+       global $config;
+
+        $local_graph_id = $data[1]['local_graph_id'];
+	print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph=1&graph_id=' . $local_graph_id . '">[1]</a><br/>';
+	print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph=2&graph_id=' . $local_graph_id . '">[2]</a><br/>';
+
+//  (isset($_GET['action']) && $_GET['action'] == "favgraph" && is_numeric($_GET['graph']) && is_numeric($_GET['graph_id']))
+
+    // !!! tady jeste udelat vypinani
+
+//                print '<a class="iconLink" href="' . htmlspecialchars($config['url_path'] . 'plugins/thold/thold.php?action=add' . '&usetemplate=1&local_graph_id=' . $local_graph_id) . '"><img src="' . $config['url_path'] . 'plugins/thold/images/edit_object.png" alt="" title="' . __esc('Create Threshold', 'thold') . '"></a><br>';
+
+
+
+}
 
 
 ?>

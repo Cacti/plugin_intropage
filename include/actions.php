@@ -1,7 +1,14 @@
 <?php
 
-// !!!! potrebuju variables?
-//include_once($config['base_path'] . '/plugins/intropage/include/variables.php'); 
+
+// favourite graphs
+if (isset($_GET['action']) && $_GET['action'] == "favgraph" && is_numeric($_GET['graph']) && is_numeric($_GET['graph_id']))	{
+	if (read_user_setting('intropage_favouritegraph_' . $_GET['graph']) != $_GET['graph_id'])
+	    set_user_setting('intropage_favouritegraph_' . $_GET['graph'], $_GET['graph_id']);
+	else	// unset
+	    set_user_setting('intropage_favouritegraph_' . $_GET['graph'], '');
+
+}
 
  
  
@@ -32,14 +39,20 @@ if (isset($_GET['xdata']) && is_array($_GET['xdata']))  {
 
 
 
-if (isset($_POST['intropage_action']) && is_string ($_POST['intropage_action']))	{
+if (isset($_POST['intropage_action']) && is_string ($_POST['intropage_action'])) {
+
     $values = explode ("_", $_POST['intropage_action']);
+	
     $action = array_shift($values);
     
     $value = implode ("_",$values);
     
+    echo "<h1>im here</h1> . print_r($values)";
     
     switch ($action)	{
+    
+
+
 	case "reset":
 	    if ($value == "all")	{
     		unset ($_SESSION['intropage_changed_order'], $_SESSION['intropage_order']);
@@ -63,6 +76,14 @@ if (isset($_POST['intropage_action']) && is_string ($_POST['intropage_action']))
 	case "refresh":
 	    if ($value == 0 || $value == 60 || $value == 180 || $value == 600)
 		    set_user_setting('intropage_autorefresh', $value);
+	break;
+
+	case "debug":
+	    if ($value == "ena")
+		    set_user_setting('intropage_debug', 1);
+	    if ($value == "disa")
+		    set_user_setting('intropage_debug', 0);
+
 	break;
 
 
