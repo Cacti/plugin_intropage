@@ -1,16 +1,14 @@
 Major
 -----
-panel for 2-3 the most important graphs - umim ke grafu napsat [1] a [2], zacinam ukladat vybrane grafy
-mozna to budu muset mit ve dvou panelech, aby bylo mozny kazdy zavirat zvlast
 
-admin opption for disable panels with sensitive data for users without console
+admin option for disable panels with sensitive data for users without console
 
 
 
 errors
 ------
 user without console - set intropage as default is not working
-chyby v logu nejak divne pocitam
+
 
 Minor
 -----

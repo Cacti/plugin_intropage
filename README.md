@@ -42,6 +42,8 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	1.6 ---
 	Add user setting directly on intropage (close/add panel, autorefresh, ...)
 	Add permissions (admin can enable/disable panel for all users)
+	Add Favourite graphs panel
+	Fix error and warnings count in Analyse log panel
 	Fix ajax double displaying
 
 	1.5.1 ---
