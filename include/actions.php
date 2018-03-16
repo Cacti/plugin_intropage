@@ -47,7 +47,7 @@ if (isset($_POST['intropage_action']) && is_string ($_POST['intropage_action']))
     
     $value = implode ("_",$values);
     
-    echo "<h1>im here</h1> . print_r($values)";
+
     
     switch ($action)	{
     
