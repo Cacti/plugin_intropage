@@ -1317,16 +1317,16 @@ function favourite_graph()	{
     if (read_user_setting("intropage_favouritegraph_1"))
 	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
 	'local_graph_id=' . read_user_setting("intropage_favouritegraph_1") . '&' .
-	'graph_height=115&' . 
-	'graph_width=380&' . 
+	'graph_height=105&' . 
+	'graph_width=300&' . 
 	'graph_nolegend=true" alt="Favourite graph 1"/>&nbsp;';
 
 
     if (read_user_setting("intropage_favouritegraph_2"))
 	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
 	'local_graph_id=' . read_user_setting("intropage_favouritegraph_2") . '&' .
-	'graph_height=115&' . 
-	'graph_width=380&' . 
+	'graph_height=105&' . 
+	'graph_width=300&' . 
 	'graph_nolegend=true" alt="Favourite graph 2"/>';
 
 
