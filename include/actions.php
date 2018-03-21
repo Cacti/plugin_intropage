@@ -47,11 +47,7 @@ if (isset($_POST['intropage_action']) && is_string ($_POST['intropage_action']))
     
     $value = implode ("_",$values);
     
-
-    
     switch ($action)	{
-    
-
 
 	case "reset":
 	    if ($value == "all")	{
@@ -69,8 +65,9 @@ if (isset($_POST['intropage_action']) && is_string ($_POST['intropage_action']))
 	break;
     
 	case "addpanel":
-	    if (preg_match('/^[a-z0-9\-\_]+$/i', $value))
-		db_execute ("insert into plugin_intropage_user_setting (user_id,disabled,panel,priority) select " . $_SESSION['sess_user_id'] . ",0,panel,priority from plugin_intropage_panel where panel='$value' limit 1");
+	    if (preg_match('/^[a-z0-9\-\_]+$/i', $value))	{
+		db_execute ("insert into plugin_intropage_user_setting (user_id,panel,priority) select " . $_SESSION['sess_user_id'] . ",panel,priority from plugin_intropage_panel where panel='$value' limit 1");
+	    }
 	break;
 
 	case "refresh":
