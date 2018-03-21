@@ -2,12 +2,14 @@ Major
 -----
 
 admin option for disable panels with sensitive data for users without console
-
+last thold events - try display only 5 rows (each split to 2 rows), now this panel si huge
+next 10 events will be in detail 
 
 
 errors
 ------
 user without console - set intropage as default is not working
+maximalize and minimalize symbols (+ and -) works strange :-)
 
 
 Minor
