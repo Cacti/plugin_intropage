@@ -91,7 +91,6 @@ function intropage_setup_database() {
         $data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
         $data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-//        $data['columns'][] = array('name' => 'disabled', 'type' => 'int(1)', 'NULL' => false, 'default' => '0');
         $data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
         $data['columns'][] = array('name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => '50');
 	$data['type'] = 'MyISAM';
