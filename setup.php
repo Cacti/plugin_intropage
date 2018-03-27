@@ -12,6 +12,10 @@ function plugin_intropage_install() {
 
 	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
 
+ 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/helpers.php');
+ 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/helpers.php');
+
+
 	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');	
@@ -20,6 +24,10 @@ function plugin_intropage_install() {
 
 function plugin_intropage_uninstall () {
 	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
+	db_execute("DROP TABLE plugin_intropage_user_setting");
+	db_execute("DROP TABLE plugin_intropage_trends");
+	db_execute("DROP TABLE plugin_intropage_panel");
+
 }
 
 function plugin_intropage_version()	{
@@ -82,7 +90,19 @@ function intropage_setup_database() {
 
         $data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
-	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(30)', 'NULL' => false);
+        $data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+        $data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
+        $data['columns'][] = array('name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => '50');
+	$data['type'] = 'MyISAM';
+	$data['primary'] = 'id';
+        $data['comment'] = 'intropage user settings';
+        api_plugin_db_table_create ('intropage', 'plugin_intropage_user_setting', $data);
+
+
+
+        $data = array();
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
+	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
 	$data['type'] = 'MyISAM';
 	$data['primary'] = 'id';

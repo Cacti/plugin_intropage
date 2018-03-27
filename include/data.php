@@ -95,13 +95,12 @@ function analyse_log() {
 		    
 			if (preg_match('/(WARN|ERROR|FATAL)/',$line,$matches)) {
 
-				if (strcmp($matches[1],"WARN"))	{
+				if (strcmp($matches[1],"WARN") === 0)	{
 				    $warn++;
-
     				    $ecount++;
     				    $result['detail'] .= "<b>$line</b><br/>";					
 					
-				} elseif ((strcmp($matches[1],"ERROR") || strcmp($matches[1],"FATAL")))	{
+				} elseif (strcmp($matches[1],"ERROR") === 0 || strcmp($matches[1],"FATAL")=== 0 )	{
 				    $error++;
 				    $ecount++;
 				    $result['detail'] .= "<b>$line</b><br/>";					
@@ -650,7 +649,8 @@ function graph_data_source() {
 	);
 	
 	$sql_ds = db_fetch_assoc("SELECT data_input.type_id, COUNT(data_input.type_id) AS total FROM data_local INNER JOIN data_template_data ON (data_local.id = data_template_data.local_data_id) LEFT JOIN data_input ON (data_input.id=data_template_data.data_input_id) LEFT JOIN data_template ON (data_local.data_template_id=data_template.id) WHERE local_data_id<>0 group by type_id LIMIT 6");
-	if ($sql_ds) {
+	if (sizeof($sql_ds) > 0) {
+
 
 		foreach ($sql_ds as $item) {
 			if (!is_null ($item['type_id']))	{
@@ -664,6 +664,11 @@ function graph_data_source() {
 
 
 		}
+	}
+	else	{
+	    $result['data'] = "Waiting for data";
+	    unset ($result['pie']);
+	
 	}
 	
 	
@@ -680,7 +685,8 @@ function graph_host() {
 	$result = array(
 		'name' => 'Hosts',
 		'data' => '',
-		'alarm' => "grey",
+		'alarm' => 'green',
+		'detail' => '',
 	);
 	
 	$h_all  = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts)");
@@ -689,27 +695,56 @@ function graph_host() {
 	$h_reco = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status=2 AND disabled=''");
 	$h_disa = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND disabled='on'");
 
+	$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
 	
-	if ($h_down > 0) { $result['alarm'] = "red"; }
-	elseif ($h_disa > 0) { $result['alarm'] = "yellow"; }
+//	if ($h_down > 0) { $result['alarm'] = "red"; }
+//	elseif ($h_disa > 0) { $result['alarm'] = "yellow"; }
 	
 	if ($console_access) {
-	    $result['data'] = "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-1\">All: $h_all</a><br/>\n";
+	    $result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-1\">All: $h_all</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=3\">Up: $h_up</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=1\">Down: $h_down</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-2\">Disabled: $h_disa</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=2\">Recovering: $h_reco</a>\n";
 	} else {
-    	    $result['data'] = "All: $h_all<br/>\n";
+    	    $result['data']  = "All: $h_all<br/>\n";
 	    $result['data'] .= "Up: $h_up<br/>\n";
 	    $result['data'] .= "Down: $h_down<br/>\n";
 	    $result['data'] .= "Disabled: $h_disa<br/>\n";
 	    $result['data'] .= "Recovering: $h_reco\n";
 	}
-	if (read_config_option('intropage_graph_host') == "on") {
+	if (read_config_option('intropage_graph_host') == "on" && $count > 0) {
 		$result['pie'] = array('title' => 'Hosts: ', 'label' => array("Up","Down","Recovering","Disabled"), 'data' => array($h_up,$h_down,$h_reco,$h_disa));
 	}
+	else	{
+	    unset ($result['pie']);
+	}
 	
+	
+	
+	// alarms and details
+	if ($h_reco > 0)	{
+	    $result['alarm'] = "yellow";
+	    $hosts = db_fetch_assoc ("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=2 AND disabled=''");
+	    $result['detail'] .= "<b>RECOVERING:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	
+	}
+
+	if ($h_down > 0)	{
+	    $result['alarm'] = "red";
+	    $hosts = db_fetch_assoc ("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=1 AND disabled=''");
+	    $result['detail'] .= "<b>DOWN:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	    
+	    
+	}    
+
+
 	return $result;
 }
 
@@ -732,7 +767,7 @@ function graph_host_template() {
 	);
 	
 	$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, count(host.host_template_id) AS total FROM host_template LEFT JOIN host ON (host_template.id = host.host_template_id) AND host.id IN ($allowed_hosts) GROUP by host_template_id ORDER BY total desc LIMIT 6");
-	if ($sql_ht) {
+	if (sizeof($sql_ht) > 0) {
 		foreach ($sql_ht as $item) {
 			array_push($result['pie']['label'],$item['name']);
 			array_push($result['pie']['data'],$item['total']);
@@ -741,6 +776,10 @@ function graph_host_template() {
 			$result['data'] .= $item['total'] . "<br/>";
 
 		}
+	}
+	else	{
+	    unset ($result['pie']);
+	    $result['data'] = "Waiting for data";
 	}
 	
 	return $result;
@@ -755,6 +794,13 @@ function graph_thold() {
 		'name' => 'Thresholds',
 		'data' => '',
 		'alarm' => 'green',
+		'detail' => '',
+		'pie' => array(
+			'title' => 'Thresholds: ',
+			'label' => array(),
+			'data' => array(),			
+		),
+		
 	);
 	
 	if (!db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
@@ -763,19 +809,26 @@ function graph_thold() {
 	} elseif (!db_fetch_cell("SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
 		$result['data'] = "You don't have permission\n";
 	} else {
+		$sql_join = " LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
+			(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
+    		(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . "))";
+/*
 		$sql_join = "LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
 			(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
     		(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . "))";
+*/
 		
 		$t_all = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
 		$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-#		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
 		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
 									 
 		$t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
 		
-		if ($t_brea > 0 || $t_trig > 0) { $result['alarm'] = "red"; }
-		elseif ($t_disa > 0) { $result['alarm'] = "yellow"; }
+		$count = $t_all + $t_brea + $t_trig + $t_disa; 
+		
+	//	if ($t_brea > 0 || $t_trig > 0) { $result['alarm'] = "red"; }
+	//	elseif ($t_disa > 0) { $result['alarm'] = "yellow"; }
 		
 		if (db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')")) {
 			$result['data'] = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=-1\">All: $t_all</a><br/>\n";
@@ -788,12 +841,41 @@ function graph_thold() {
 			$result['data'] .= "Trigged: $t_trig<br/>\n";
 			$result['data'] .= "Disabled: $t_disa<br/>\n";
 		}
-		if (read_config_option('intropage_graph_thold') == "on")	{
+		if (read_config_option('intropage_graph_thold') == "on" && $count > 0)	{
 			$result['pie'] = array('title' => 'Thresholds: ', 'label' => array("OK","Breached","Trigerred","Disabled"), 'data' => array($t_all-$t_brea-$t_trig-$t_disa,$t_brea,$t_trig,$t_disa));
+		}
+		else	{
+		    unset ($result['pie']);
+		
 		}
 	}
 	
-//	print_r($result);
+
+	
+	// alarms and details
+	if ($t_brea > 0)	{
+	    $result['alarm'] = "yellow";
+	    $hosts = db_fetch_assoc ("select description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+	    $result['detail'] .= "<b>BREACHED:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	
+	}
+
+	if ($t_trig > 0)	{
+	    $result['alarm'] = "red";
+	    $hosts = db_fetch_assoc ("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+	    $result['detail'] .= "<b>TRIGGERED:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	}    
+
+
+
+
+
 	return $result;
 }
 
@@ -1052,20 +1134,20 @@ function poller_stat() {
 	    $poller_time = array_reverse ($poller_time);
 
 	    foreach ($poller_time as $one_poller)	{
-	    list($id,$time) = explode(":",$one_poller['value']); 
+		list($id,$time) = explode(":",$one_poller['value']); 
 	
-	    if ($time > $poller_interval)	{
-		$result['alarm'] = "red";
-		$result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
-	    }
-	    else
-		$result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
+		if ($time > ($poller_interval-10))	{
+		    $result['alarm'] = "red";
+		    $result['data'] .= "<b>" . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
+		}
+		else
+		    $result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
 		
-	    // graph data
-            array_push($result['line']['label' . $new_index], $one_poller['xdate'] );
-            array_push($result['line']['data' . $new_index],$time);
+		// graph data
+        	array_push($result['line']['label' . $new_index], $one_poller['xdate'] );
+        	array_push($result['line']['data' . $new_index],$time);
 
-            $result['line']['title' . $new_index] = 'ID: ' . $xpoller['id'];
+        	$result['line']['title' . $new_index] = 'ID: ' . $xpoller['id'];
             
             }
 		
@@ -1102,14 +1184,18 @@ function thold_events() {
 	else	{
 
 	    $sql_result = db_fetch_assoc("SELECT tl.description as description,tl.time as time, tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2 FROM plugin_thold_log AS tl INNER JOIN thold_data AS td ON tl.threshold_id=td.id INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id LEFT JOIN graph_templates_graph AS gtg ON gtg.local_graph_id=gl.id LEFT JOIN host AS h ON h.id=gl.host_id LEFT JOIN user_auth_perms AS uap0 ON (gl.id=uap0.item_id AND uap0.type=1) LEFT JOIN user_auth_perms AS uap1 ON (gl.host_id=uap1.item_id AND uap1.type=3) LEFT JOIN user_auth_perms AS uap2 ON (gl.graph_template_id=uap2.item_id AND uap2.type=4) HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL)) ORDER BY `time` DESC LIMIT 10");
-
-	    foreach($sql_result as $row) {
-		$result['data'] .=  date('Y-m-d H:i:s', $row['time']) . " - " . $row['description'] . "<br/>\n";
-		if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7 )
-		    $result['alarm'] = "red";
-		elseif ($result['alarm'] == "green" && ($row['status'] == 2 || $row['status'] == 3))
-		    $result['alarm'] == "yellow";
-
+	    if (sizeof ($sql_result) > 0)	{
+		foreach($sql_result as $row) {
+		    $result['data'] .=  date('Y-m-d H:i:s', $row['time']) . " - " . $row['description'] . "<br/>\n";
+		    if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7 )
+			$result['alarm'] = "red";
+		    elseif ($result['alarm'] == "green" && ($row['status'] == 2 || $row['status'] == 3))
+			$result['alarm'] == "yellow";
+		}
+		
+	    }
+	    else	{
+		$result['data'] = "Without events yet";
 	    }
 	}
 	
@@ -1130,21 +1216,26 @@ function top5_ping() {
 	
 	$result['data'] = "<table>";
         $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) and disabled != 'on' order by avg_time desc limit 5");
-	foreach($sql_worst_host as $host) {
-            if ($console_access)  
-        	$result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
-            else  
-        	$result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
-    
-	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['avg_time'],2) . "ms</td>\n";
-	
-	    if ($host['cur_time'] > 1000)	{
-		$result['alarm'] = "yellow";
-        	$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['cur_time'],2) . "ms</b></td></tr>\n";
-	    }
-	    else
-		$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
+        if (sizeof($sql_worst_host) > 0) {
 
+	    foreach($sql_worst_host as $host) {
+        	if ($console_access)  
+        	    $result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
+        	else  
+        	    $result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+    
+		$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['avg_time'],2) . "ms</td>\n";
+	
+		if ($host['cur_time'] > 1000)	{
+		    $result['alarm'] = "yellow";
+        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['cur_time'],2) . "ms</b></td></tr>\n";
+		}
+		else
+		    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
+	    }
+	}
+	else	{	// no data
+	    $result['data'] = "Waiting for data";
 		
 	}	
 	
@@ -1165,22 +1256,27 @@ function top5_availability() {
 	
 
 	$result['data'] = "<table>";
-	 $sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) and disabled != 'on' order by availability  limit 5");
+	$sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) and disabled != 'on' order by availability  limit 5");
 
-	foreach($sql_worst_host as $host) {
-            if ($console_access)  
-        	$result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
-            else  
-        	$result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+        if (sizeof($sql_worst_host) > 0) {
+
+	    foreach($sql_worst_host as $host) {
+        	if ($console_access)  
+        	    $result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
+        	else  
+        	    $result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
     
-	    if ($host['availability'] < 90)	{
-		$result['alarm'] = "yellow";
-        	$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['availability'],2) . "%</b></td></tr>\n";
+		if ($host['availability'] < 90)	{
+		    $result['alarm'] = "yellow";
+        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['availability'],2) . "%</b></td></tr>\n";
+		}
+		else
+        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['availability'],2) . "%</td></tr>\n";
 	    }
-	    else
-        	$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['availability'],2) . "%</td></tr>\n";
 
-
+	}
+	else	{	// no data
+	    $result['data'] = "Waiting for data";
 	}	
 	
 	$result['data'] .= "</table>\n";
@@ -1253,6 +1349,58 @@ function trend() {
 	}
 	
 	return $result;
+}
+
+//-----------------favourite graph----------
+
+function favourite_graph()	{
+
+        global $config;
+
+        $result = array(
+                'name' => 'Favourite graph',
+                'alarm' => 'grey',
+                'data' => '',
+                'detail' => '',
+        );
+    
+    if (!read_user_setting("intropage_favouritegraph_1",false) && ! read_user_setting("intropage_favouritegraph_2",false))
+	$result['data'] .= "No selected favourite graphs";
+    
+    // div a bud da dva vedle sebe nebo jen jeden
+    //$result['data'] .= "<div>\n";
+    
+    if (read_user_setting("intropage_favouritegraph_1"))
+	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
+	'local_graph_id=' . read_user_setting("intropage_favouritegraph_1") . '&' .
+	'graph_height=105&' . 
+	'graph_width=300&' . 
+	'graph_nolegend=true" alt="Favourite graph 1"/>&nbsp;';
+
+
+    if (read_user_setting("intropage_favouritegraph_2"))
+	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
+	'local_graph_id=' . read_user_setting("intropage_favouritegraph_2") . '&' .
+	'graph_height=105&' . 
+	'graph_width=300&' . 
+	'graph_nolegend=true" alt="Favourite graph 2"/>';
+
+
+
+/*
+get_filter_request_var('graph_height');
+get_filter_request_var('graph_width');
+get_filter_request_var('local_graph_id');
+
+if (isset_request_var('graph_nolegend')) {
+
+*/
+
+    //$result['data'] .= "<div>\n";
+
+
+    return $result;
+
 }
 
 ?>
