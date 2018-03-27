@@ -43,6 +43,8 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Add user setting directly on intropage (close/add panel, autorefresh, ...)
 	Add permissions (admin can enable/disable panel for all users)
 	Add Favourite graphs panel
+	Add option for cahnge default page for users without console
+	Add detail panel of up/down/recovering hosts
 	Fix error and warnings count in Analyse log panel
 	Fix ajax double displaying
 
