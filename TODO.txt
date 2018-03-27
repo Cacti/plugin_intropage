@@ -16,5 +16,4 @@ top5,extrem - style 2em hardcoded
 code cleaning
 add mactrack again
 add panel - asi tam udelat case sensitive nazvy a bez podtrzitek - v roletce nejsou ted pekne nazvy
-bezneho uzivatele bez console asi nedavam moznost si zpet default prepnout grafy
 
