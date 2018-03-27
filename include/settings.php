@@ -13,7 +13,7 @@ function intropage_config_form ()	{
 			"items" => array(
 				0 => array(
 					"radio_value" => "0",
-					"radio_caption" => "Show the Intropage plugin screen in console screen"),
+					"radio_caption" => "Show the Intropage plugin screen in console screen (you need console access permission!)"),
 				1 => array(
 					"radio_value" => "1",
 					"radio_caption" => "Show the Intropage plugin screen in separated tab"),
