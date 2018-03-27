@@ -103,11 +103,11 @@ if (isset($_POST['intropage_action']) && is_string ($_POST['intropage_action']))
     
 
 	case "loginopt":
-	 /// !!!! tady ma byt spis asi set_user_settings !!!
-	    if ($value == "console")
-		db_fetch_cell_prepared('update user_auth set intropage_opts=0 WHERE id=?',array($_SESSION['sess_user_id']));
-	    elseif ($value == "tab")
-		db_fetch_cell_prepared('update user_auth set intropage_opts=1 WHERE id=?',array($_SESSION['sess_user_id']));
+	    if ($value == "intropage") // SELECT login_opts FROM user_auth WHERE id
+		db_fetch_cell_prepared('update user_auth set login_opts=4 WHERE id=?',array($_SESSION['sess_user_id']));
+	    elseif ($value == "graph")
+		db_fetch_cell_prepared('update user_auth set login_opts=3 WHERE id=?',array($_SESSION['sess_user_id']));
+    
     }
 
 }

@@ -402,45 +402,14 @@ $(document).ready(function () {
     // 0 = console, 1= tab
     
     // login options can change user group!
-    
 
-
-    switch ($lopts)     { // after login: 1=podle url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!! 4 a 5 uz asi neplati
-        case "2" :  // ma konzoli, dam mu dve moznosti - v tabu, v konzoli -- nebo mu nedam nic? Muze si to prenastavit
-            if ($console_access)        {
-        	if ($lopts_intropage == 0)	{
-            	    echo "<option value=\"loginopt_console\" disabled=\"disabled\">View intropage as default page in console</option>";
-            	    echo "<option value=\"loginopt_tab\">View intropage as default page in tab</option>";
-		}
-		else	{
-            	    echo "<option value=\"loginopt_console\">View intropage as default page in console</option>";
-            	    echo "<option value=\"loginopt_tab\" disabled=\"disabled\">View intropage as default page in tab</option>";
-
-            	}
-            }
-        break;
-
-        case "3": // vychozi ma graf - nabidnout mu to do roletky
-            if ($console_access)	{
-        	if ($lopts_intropage == 0)	{
-            	    echo "<option value=\"loginopt_console\" disabled=\"disabled\">View intropage as default page in console</option>";
-            	    echo "<option value=\"loginopt_tab\">View intropage as default page in tab</option>";
-		}
-		else	{
-            	    echo "<option value=\"loginopt_console\">View intropage as default page in console</option>";
-            	    echo "<option value=\"loginopt_tab\" disabled=\"disabled\">View intropage as default page in tab</option>";
-
-            	}
-            	
-            }
-            else
-    		echo "<option value=\"loginopt_tab\">View intropage as default page in tab</option>";
-
-        break;
-
-	// !!!!! tady by jeste mela byt moznost, kdyz nema konzoli a jako vychozi si dal intropage prepnout zpet na graf
-
-
+    // after login: 1=podle url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
+    if (!$console_access)        {
+	if ($lopts < 4)
+            echo "<option value=\"loginopt_intropage\">Set intropage as default page</option>";
+	else
+            echo "<option value=\"loginopt_graph\">Set graph as default page</option>";
+	    
     }
 
     
