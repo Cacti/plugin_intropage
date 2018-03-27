@@ -3,9 +3,9 @@
 chdir('../../');
 include_once("./include/auth.php");
 
-include_once("./plugins/include/settings.php");
+include_once($config['base_path'] . "/plugins/intropage/include/settings.php");
 
-include_once("./plugins/intropage/display.php");
+include_once($config['base_path'] . "/plugins/intropage/display.php");
 
 
 set_default_action();
