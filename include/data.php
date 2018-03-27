@@ -685,7 +685,8 @@ function graph_host() {
 	$result = array(
 		'name' => 'Hosts',
 		'data' => '',
-		'alarm' => "green",
+		'alarm' => 'green',
+		'detail' => '',
 	);
 	
 	$h_all  = db_fetch_cell ("SELECT count(id) FROM host WHERE id IN ($allowed_hosts)");
@@ -696,17 +697,17 @@ function graph_host() {
 
 	$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
 	
-	if ($h_down > 0) { $result['alarm'] = "red"; }
-	elseif ($h_disa > 0) { $result['alarm'] = "yellow"; }
+//	if ($h_down > 0) { $result['alarm'] = "red"; }
+//	elseif ($h_disa > 0) { $result['alarm'] = "yellow"; }
 	
 	if ($console_access) {
-	    $result['data'] = "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-1\">All: $h_all</a><br/>\n";
+	    $result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-1\">All: $h_all</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=3\">Up: $h_up</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=1\">Down: $h_down</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-2\">Disabled: $h_disa</a><br/>\n";
 	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=2\">Recovering: $h_reco</a>\n";
 	} else {
-    	    $result['data'] = "All: $h_all<br/>\n";
+    	    $result['data']  = "All: $h_all<br/>\n";
 	    $result['data'] .= "Up: $h_up<br/>\n";
 	    $result['data'] .= "Down: $h_down<br/>\n";
 	    $result['data'] .= "Disabled: $h_disa<br/>\n";
@@ -717,9 +718,33 @@ function graph_host() {
 	}
 	else	{
 	    unset ($result['pie']);
-	
 	}
 	
+	
+	
+	// alarms and details
+	if ($h_reco > 0)	{
+	    $result['alarm'] = "yellow";
+	    $hosts = db_fetch_assoc ("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=2 AND disabled=''");
+	    $result['detail'] .= "<b>RECOVERING:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	
+	}
+
+	if ($h_down > 0)	{
+	    $result['alarm'] = "red";
+	    $hosts = db_fetch_assoc ("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=1 AND disabled=''");
+	    $result['detail'] .= "<b>DOWN:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	    
+	    
+	}    
+
+
 	return $result;
 }
 
@@ -769,6 +794,7 @@ function graph_thold() {
 		'name' => 'Thresholds',
 		'data' => '',
 		'alarm' => 'green',
+		'detail' => '',
 		'pie' => array(
 			'title' => 'Thresholds: ',
 			'label' => array(),
@@ -783,21 +809,26 @@ function graph_thold() {
 	} elseif (!db_fetch_cell("SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
 		$result['data'] = "You don't have permission\n";
 	} else {
+		$sql_join = " LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
+			(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
+    		(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . "))";
+/*
 		$sql_join = "LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
 			(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
     		(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . "))";
+*/
 		
 		$t_all = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
 		$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-#		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
 		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
 									 
 		$t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
 		
 		$count = $t_all + $t_brea + $t_trig + $t_disa; 
 		
-		if ($t_brea > 0 || $t_trig > 0) { $result['alarm'] = "red"; }
-		elseif ($t_disa > 0) { $result['alarm'] = "yellow"; }
+	//	if ($t_brea > 0 || $t_trig > 0) { $result['alarm'] = "red"; }
+	//	elseif ($t_disa > 0) { $result['alarm'] = "yellow"; }
 		
 		if (db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')")) {
 			$result['data'] = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=-1\">All: $t_all</a><br/>\n";
@@ -819,7 +850,32 @@ function graph_thold() {
 		}
 	}
 	
-//	print_r($result);
+
+	
+	// alarms and details
+	if ($t_brea > 0)	{
+	    $result['alarm'] = "yellow";
+	    $hosts = db_fetch_assoc ("select description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+	    $result['detail'] .= "<b>BREACHED:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	
+	}
+
+	if ($t_trig > 0)	{
+	    $result['alarm'] = "red";
+	    $hosts = db_fetch_assoc ("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+	    $result['detail'] .= "<b>TRIGGERED:</b><br/>\n";
+	    foreach ($hosts as $host)
+		$result['detail'] .= $host['description'] . "<br/>\n";
+	    $result['detail'] .= "<br/><br/>\n";
+	}    
+
+
+
+
+
 	return $result;
 }
 
