@@ -39,6 +39,11 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.6.1 ---
+	Add Awesome icons (close, reload, show detail,...)
+	Fix blank login page if intropage in console is default page
+	Fix show/hide detail
+
 	1.6 ---
 	Add user setting directly on intropage (close/add panel, autorefresh, ...)
 	Add permissions (admin can enable/disable panel for all users)

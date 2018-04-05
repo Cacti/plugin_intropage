@@ -6,11 +6,14 @@ add reload for each panel
 
 errors
 ------
-maximalize and minimalize symbols (+ and -) works strange :-)
 
 
 Minor
 -----
+awesome icons
+copy text in panels
+
+add icons for selecting favourite graphs
 plugins.php - awaiting configuration
 top5,extrem - style 2em hardcoded
 code cleaning

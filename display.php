@@ -51,6 +51,7 @@ $(window).load(function() {
 // drag and drop order 
   $(function() {
 
+
     $( "#obal" ).sortable({
 	
     
@@ -275,19 +276,20 @@ EOF;
 // js for detail
 ?>
 <script>
+
 $(document).ready(function () {
  $('.article').hide();
   $('.maxim').click(function(){
 
-
-    $(this).html( $(this).html() == '+' ? '-' :'+' );
+//   window.alert($(this).html());
+    $(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
 //    $(this).attr('title', $(this).attr('title') == 'Show details' ? 'Hide details' : 'Show details');
     $(this).nextAll('.article').first().toggle();
 
 
     if ($('#' + this.name).css("display") == "none")	{
 	$('#' + this.name).css("display","block");
-        $(this).attr('title','Hide details');	
+        $(this).attr('title','Hide details');
     }
     else		{
 	$('#' + this.name).css("display","none");
@@ -296,7 +298,8 @@ $(document).ready(function () {
     }
 
   });
-});</script>
+});
+</script>
 
 
 <?php

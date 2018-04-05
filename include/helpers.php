@@ -84,11 +84,13 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
     print "<div class='panel_header color_$type'>\n";
     print "$header\n";
 
-//    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; X &nbsp;</a>\n",$config["url_path"] . "plugins/intropage/intropage.php?action=disable&panel_id=$panel_id");
-    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; X &nbsp;</a>\n","?action=disable&panel_id=$panel_id");
+
+// awesome 5.0+    printf("<a href='#' title='Reload panel - not implemented' class='header_link'><i class='fa fa-sync-alt'></i></a>\n");
+
+    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n","?action=disable&panel_id=$panel_id");
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
-	printf("<a href='#' title='Show details' class='header_link maxim' name='%s'> + </a>\n",md5($header));
+	printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n",md5($header));
     }
 
 
