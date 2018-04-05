@@ -2,7 +2,7 @@ Major
 -----
 admin option for disable panels with sensitive data for users without console
 add reload for each panel
-
+add more favourite graphs
 
 errors
 ------

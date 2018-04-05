@@ -23,6 +23,7 @@
 .panel_header	{
     padding: 4px;
     font-weight: bold;
+
 }
 
 .header_link	{
@@ -33,10 +34,13 @@
     font-size: 1.5em;
 }
 
+.rpad	{
+    padding-right: 1em !important;
+}
 
-._asi_nepouzivam_doprava	{
-    float: right;
-    padding-right: 10%;
+
+.texalirig	{
+    text-align: right;
 }
 
 .color_red {
@@ -79,4 +83,6 @@
 }
 
 
-
+.rpad	{
+    padding-right: 20px;
+}

@@ -599,26 +599,26 @@ function extrem() {
 	);
 	
 	
-	$result['data'] .= "<table><tr><td style=\"padding-right: 2em;\">\n";
+	$result['data'] .= "<table><tr><td class=\"rpad\">\n";
 	
     // long run poller	
-	$result['data'] .= "<strong>Long run poller: </strong>";
+	$result['data'] .= "<strong>Long run<br/>poller: </strong>";
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,substring(value,instr(value,':')+1) as xvalue FROM plugin_intropage_trends WHERE name='poller' and date > date_sub(date,interval 1 day) order by xvalue desc, date  limit 5");
 	foreach($sql_result as $row) {
             $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['xvalue'] . "s\n";     
 	}	
-	$result['data'] .="</td><td style=\"padding-right: 2em;\">\n";
+	$result['data'] .="</td><td class=\"rpad texalirig\">\n";
 	
     // max host down
-	$result['data'] .= "<strong>Max host down: </strong>";
+	$result['data'] .= "<strong>Max host<br/>down: </strong>";
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='host' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
 	foreach($sql_result as $row) {
             $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "\n";     
 	}	
-	$result['data'] .="</td><td style=\"padding-right: 2em;\">\n";
+	$result['data'] .="</td><td class=\"rpad texalirig\">\n";
 	
     // max thold trig
-	$result['data'] .= "<strong>Max thold triggered: </strong>";
+	$result['data'] .= "<strong>Max thold<br/>triggered: </strong>";
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
 	foreach($sql_result as $row) {
             $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "\n";     
@@ -1220,18 +1220,18 @@ function top5_ping() {
 
 	    foreach($sql_worst_host as $host) {
         	if ($console_access)  
-        	    $result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
+        	    $result['data'] .= "<tr><td class=\"rpad\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
         	else  
-        	    $result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+        	    $result['data'] .=  "<tr><td class=\"rpad\">".$host['description']."</td>\n"; 
     
-		$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['avg_time'],2) . "ms</td>\n";
+		$result['data'] .= "<td class=\"rpad texalirig\">" . round($host['avg_time'],2) . "ms</td>\n";
 	
 		if ($host['cur_time'] > 1000)	{
 		    $result['alarm'] = "yellow";
-        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['cur_time'],2) . "ms</b></td></tr>\n";
+        	    $result['data'] .= "<td class=\"rpad texalirig\"<b>" . round($host['cur_time'],2) . "ms</b></td></tr>\n";
 		}
 		else
-		    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
+		    $result['data'] .= "<td class=\"rpad texalirig\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
 	    }
 	}
 	else	{	// no data
@@ -1262,16 +1262,16 @@ function top5_availability() {
 
 	    foreach($sql_worst_host as $host) {
         	if ($console_access)  
-        	    $result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
+        	    $result['data'] .= "<tr><td class=\"rpad\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
         	else  
-        	    $result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+        	    $result['data'] .=  "<tr><td class=\"rpad\">".$host['description']."</td>\n"; 
     
 		if ($host['availability'] < 90)	{
 		    $result['alarm'] = "yellow";
-        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['availability'],2) . "%</b></td></tr>\n";
+        	    $result['data'] .= "<td class=\"rpad texalirig\"><b>" . round($host['availability'],2) . "%</b></td></tr>\n";
 		}
 		else
-        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['availability'],2) . "%</td></tr>\n";
+        	    $result['data'] .= "<td class=\"rpad texalirig\">" . round($host['availability'],2) . "%</td></tr>\n";
 	    }
 
 	}
