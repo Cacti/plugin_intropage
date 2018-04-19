@@ -1,15 +1,34 @@
 Major
 -----
+
+
+v action nerecim prioritu favgraph, takze to dostane default
+
 admin option for disable panels with sensitive data for users without console
+ - tohle asi nebude, protoze to pujde resit pravy
+
 add reload for each panel
-add more favourite graphs
+
+add more favourite graphs -
+	    cele to bude vyjimka z panelu
+	    kdyz da nekdo zavrit panel s grafem, tak se to bude chovat stejne jako kdyz zmacknul skrtle oko u grafu
+
+
+debug panel - asi konfigurovat jako normalni panel a ulozit do db
+nemam vybrany fav_graf a snazi se mi neco zobrazit
+
+
+
+rrd_graph_graph_options - mozna  mi dovoli vyhodit nadpis
 
 errors
 ------
-
+nejde mi addpanel v roletce, mam v display.php pri generovani roletky nejakou nesmyslnou podminku user_id=null
+ta podminka neni nesmyslna, to je left outer join
 
 Minor
 -----
+pridat ntp rozdil
 awesome icons
 copy text in panels
 

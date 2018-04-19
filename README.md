@@ -39,8 +39,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
-	1.6.1 ---
+	1.7 ---
 	Add Awesome icons (close, reload, show detail,...)
+	Add user permissions 
+	Improve favourite graphs - you can set more than 2 graphs
 	Fix blank login page if intropage in console is default page
 	Fix show/hide detail
 

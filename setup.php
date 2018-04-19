@@ -11,12 +11,18 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
 
 	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
 
  	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/helpers.php');
  	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/helpers.php');
 
 
 	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
+
+    // !!!!! test - nepouzivam, ale taky je to cesta
+//	api_plugin_register_hook('intropage', 'user_admin_tab','intropage_user_admin_tab', 'include/settings.php');
+
+
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');	
 	intropage_setup_database();
@@ -27,6 +33,8 @@ function plugin_intropage_uninstall () {
 	db_execute("DROP TABLE plugin_intropage_user_setting");
 	db_execute("DROP TABLE plugin_intropage_trends");
 	db_execute("DROP TABLE plugin_intropage_panel");
+    	db_execute("UPDATE user_auth set login_opts=1 where login_opts > 3");
+
 
 }
 
@@ -54,6 +62,29 @@ function intropage_check_upgrade() {
 	$oldv = db_fetch_cell('SELECT version FROM plugin_config WHERE directory="intropage"');
 	if ($oldv < 0.9) {
 		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_cpu', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+
+
+
 		db_execute('UPDATE plugin_hooks SET function="intropage_config_form", file="include/settings.php" WHERE name="intropage" AND hook="config_form"');
 		db_execute('UPDATE plugin_hooks SET function="intropage_config_settings", file="include/settings.php" WHERE name="intropage" AND hook="config_settings"');
 		db_execute('UPDATE plugin_hooks SET function="intropage_show_tab", file="include/tab.php" WHERE name="intropage" AND hook="top_header_tabs"');
@@ -67,6 +98,27 @@ function intropage_check_upgrade() {
 function intropage_setup_database() {
 	global $config, $intropage_settings;
 	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_cpu', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+
 	
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 	$sql_insert = '';
@@ -93,6 +145,7 @@ function intropage_setup_database() {
         $data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
         $data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
         $data['columns'][] = array('name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => '50');
+        $data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true, 'default' => NULL);
 	$data['type'] = 'MyISAM';
 	$data['primary'] = 'id';
         $data['comment'] = 'intropage user settings';

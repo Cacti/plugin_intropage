@@ -3,7 +3,7 @@
 
 //------------------------------------ analyse_db -----------------------------------------------------
 
-function analyse_db() {
+function intropage_analyse_db() {
 	global $config;
 	
 	$result = array(
@@ -59,7 +59,7 @@ function analyse_db() {
 //------------------------------------ analyse_log -----------------------------------------------------
 
 
-function analyse_log() {
+function intropage_analyse_log() {
 	global $config, $log;
 	
 	$result = array(
@@ -69,21 +69,21 @@ function analyse_log() {
 		'detail' => '',
 	);
 
-	if (read_config_option('intropage_analyse_log')) {
+//	if (read_config_option('intropage_analyse_log')) {
 		$log = array(
 			'file' => read_config_option("path_cactilog"),
 			'nbr_lines' => read_config_option("intropage_analyse_log_rows"),
 		);
 		$log['size'] = filesize($log['file']);
 		$log['lines'] = tail_log($log['file'],$log['nbr_lines']);
-	} else {
+/*	} else {
 		$log = array(
 			'size' => false,
 			'file' => read_config_option("path_cactilog"),
 			'nbr_lines' => 0,
 		);
 	}
-	
+*/	
 	if (!$log['size'] || !isset($log['lines'])) {
 		$result['alarm'] = "red";
 		$result['data'] .= "Log file not accessible";
@@ -147,7 +147,7 @@ function analyse_log() {
 //------------------------------------ analyse_login -----------------------------------------------------
 
 
-function analyse_login() {
+function intropage_analyse_login() {
 	global $config;
 	
 	$result = array(
@@ -195,7 +195,7 @@ function analyse_login() {
 
 
 
-function analyse_tree_host_graph() {
+function intropage_analyse_tree_host_graph() {
     global $config, $allowed_hosts;
 	
     $result = array(
@@ -401,7 +401,7 @@ function analyse_tree_host_graph() {
 //------------------------------------ boost -----------------------------------------------------
 
 
-function boost() {
+function intropage_boost() {
     global $config, $boost_refresh_interval, $boost_max_runtime;
 	
     $result = array(
@@ -544,7 +544,7 @@ function boost() {
 //------------------------------------ cpu -----------------------------------------------------
 
 
-function cpu() {
+function intropage_cpu() {
     global $config;
 	
     $result = array(
@@ -589,7 +589,7 @@ function cpu() {
 
 //------------------------------------ extrem -----------------------------------------------------
 
-function extrem() {
+function intropage_extrem() {
 	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
@@ -634,7 +634,7 @@ function extrem() {
 //------------------------------------ graph_datasource -----------------------------------------------------
 
 
-function graph_data_source() {
+function intropage_graph_data_source() {
 	global $config, $input_types;
 
 	$result = array(
@@ -679,7 +679,7 @@ function graph_data_source() {
 //------------------------------------ graph_host -----------------------------------------------------
 
 
-function graph_host() {
+function intropage_graph_host() {
 	global $config, $allowed_hosts, $console_access, $sql_where;
 	
 	$result = array(
@@ -713,7 +713,8 @@ function graph_host() {
 	    $result['data'] .= "Disabled: $h_disa<br/>\n";
 	    $result['data'] .= "Recovering: $h_reco\n";
 	}
-	if (read_config_option('intropage_graph_host') == "on" && $count > 0) {
+//	if (read_config_option('intropage_graph_host') == "on" && $count > 0) {
+	if ($count > 0) {
 		$result['pie'] = array('title' => 'Hosts: ', 'label' => array("Up","Down","Recovering","Disabled"), 'data' => array($h_up,$h_down,$h_reco,$h_disa));
 	}
 	else	{
@@ -752,7 +753,7 @@ function graph_host() {
 
 //------------------------------------ graph host_template -----------------------------------------------------
 
-function graph_host_template() {
+function intropage_graph_host_template() {
 	global $config, $allowed_hosts;
 	
 	$result = array(
@@ -787,7 +788,7 @@ function graph_host_template() {
 
 //------------------------------------ graph_thold -----------------------------------------------------
 
-function graph_thold() {
+function intropage_graph_thold() {
 	global $config, $sql_where;
 	
 	$result = array(
@@ -841,7 +842,7 @@ function graph_thold() {
 			$result['data'] .= "Trigged: $t_trig<br/>\n";
 			$result['data'] .= "Disabled: $t_disa<br/>\n";
 		}
-		if (read_config_option('intropage_graph_thold') == "on" && $count > 0)	{
+		if ($count > 0)	{
 			$result['pie'] = array('title' => 'Thresholds: ', 'label' => array("OK","Breached","Trigerred","Disabled"), 'data' => array($t_all-$t_brea-$t_trig-$t_disa,$t_brea,$t_trig,$t_disa));
 		}
 		else	{
@@ -882,7 +883,7 @@ function graph_thold() {
 
 //------------------------------------ info -----------------------------------------------------
 
-function info() {
+function intropage_info() {
 	global $config, $allowed_hosts, $poller_options;
 	
 	$result = array(
@@ -929,7 +930,7 @@ function info() {
 //------------------------------------ mactrack -----------------------------------------------------
 
 
-function get_mactrack() {
+function intropage_get_mactrack() {
 	global $config;
 	
 	$result = array(
@@ -980,9 +981,9 @@ function get_mactrack() {
 			$result['data'] .= "Disabled: $m_disa | \n";
 		}
 		
-		if (read_config_option('intropage_display_pie_mactrack') == "on")	{
+		//if (read_config_option('intropage_display_pie_mactrack') == "on")	{
 			$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array("Down","Up","Error","Unknown","Disabled"), 'data' => array($m_down,$m_up,$m_err,$m_unkn,$m_disa));
-		}
+		//}
 	}
 	
 	return $result;
@@ -991,7 +992,7 @@ function get_mactrack() {
 
 //------------------------------------ ntp -----------------------------------------------------
 
-function ntp() {
+function intropage_ntp() {
 	global $config;
 
 	$result = array(
@@ -1041,7 +1042,7 @@ function ntp() {
 
 
 
-function poller_info() {
+function intropage_poller_info() {
 	global $config, $sql_where;
 	
 	$result = array(
@@ -1098,7 +1099,7 @@ function poller_info() {
 
 //------------------------------------ poller_stat -----------------------------------------------------
 
-function poller_stat() {
+function intropage_poller_stat() {
 	global $config;
 
 
@@ -1166,7 +1167,7 @@ function poller_stat() {
 //------------------------------------ thold_events -----------------------------------------------------
 
 
-function thold_events() {
+function intropage_thold_event() {
 	global $config;
 	
 	$result = array(
@@ -1205,7 +1206,7 @@ function thold_events() {
 //------------------------------------ top5_ping -----------------------------------------------------
 
 
-function top5_ping() {
+function intropage_top5_ping() {
 	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
@@ -1222,7 +1223,7 @@ function top5_ping() {
         	if ($console_access)  
         	    $result['data'] .= "<tr><td class=\"rpad\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
         	else  
-        	    $result['data'] .=  "<tr><td class=\"rpad\">".$host['description']."</td>\n"; 
+        	    $result['data'] .=  "<tr><td class=\"rpad\">" . $host['description'] . "</td>\n"; 
     
 		$result['data'] .= "<td class=\"rpad texalirig\">" . round($host['avg_time'],2) . "ms</td>\n";
 	
@@ -1246,7 +1247,7 @@ function top5_ping() {
 
 //------------------------------------ top5_availability -----------------------------------------------------
 
-function top5_availability() {
+function intropage_top5_availability() {
 	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
@@ -1288,7 +1289,7 @@ function top5_availability() {
 //------------------------------------ trend -----------------------------------------------------
 
 
-function trend() {
+function intropage_trend() {
 	global $config, $allowed_hosts;
 	
 	$result = array(
@@ -1353,53 +1354,36 @@ function trend() {
 
 //-----------------favourite graph----------
 
-function favourite_graph()	{
+function intropage_favourite_graph($fav_graph_id)	{
 
-        global $config;
+    global $config;
 
+    if (isset($fav_graph_id))	{
+    
         $result = array(
-                'name' => 'Favourite graph',
+                'name' => 'Favourite graph ' .$fav_graph_id,
                 'alarm' => 'grey',
                 'data' => '',
                 'detail' => '',
         );
-    
-    if (!read_user_setting("intropage_favouritegraph_1",false) && ! read_user_setting("intropage_favouritegraph_2",false))
-	$result['data'] .= "No selected favourite graphs";
-    
-    // div a bud da dva vedle sebe nebo jen jeden
-    //$result['data'] .= "<div>\n";
-    
-    if (read_user_setting("intropage_favouritegraph_1"))
-	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
-	'local_graph_id=' . read_user_setting("intropage_favouritegraph_1") . '&' .
-	'graph_height=105&' . 
-	'graph_width=300&' . 
-	'graph_nolegend=true" alt="Favourite graph 1"/>&nbsp;';
 
 
-    if (read_user_setting("intropage_favouritegraph_2"))
-	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
-	'local_graph_id=' . read_user_setting("intropage_favouritegraph_2") . '&' .
-	'graph_height=105&' . 
-	'graph_width=300&' . 
-	'graph_nolegend=true" alt="Favourite graph 2"/>';
+    	    $result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
+    	    'local_graph_id=' . $fav_graph_id . '&' .
+    	    'graph_height=105&' .
+    	    'graph_width=300&' .
+    	    'graph_nolegend=true" alt="Favourite graph ID ' . $fav_graph_id . '"/>&nbsp;';
 
 
+//	$result['data'] = "ja budu graf";
 
-/*
-get_filter_request_var('graph_height');
-get_filter_request_var('graph_width');
-get_filter_request_var('local_graph_id');
+//echo $result['data'];
 
-if (isset_request_var('graph_nolegend')) {
+        return $result;
 
-*/
-
-    //$result['data'] .= "<div>\n";
+    }
 
 
-    return $result;
 
 }
 

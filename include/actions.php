@@ -2,12 +2,44 @@
 
 
 // favourite graphs
-if (isset($_GET['action']) && $_GET['action'] == "favgraph" && is_numeric($_GET['graph']) && is_numeric($_GET['graph_id']))	{
-	if (read_user_setting('intropage_favouritegraph_' . $_GET['graph']) != $_GET['graph_id'])
-	    set_user_setting('intropage_favouritegraph_' . $_GET['graph'], $_GET['graph_id']);
-	else	// unset
-	    set_user_setting('intropage_favouritegraph_' . $_GET['graph'], '');
+if (isset($_GET['action']) && $_GET['action'] == "favgraph" && is_numeric($_GET['graph_id']))	{
 
+        
+    if (db_fetch_cell ("select count(*) from plugin_intropage_user_setting where user_id=" . $_SESSION['sess_user_id'] . 
+	" and fav_graph_id=" . $_GET['graph_id']) > 0)	{	// already fav
+	
+	db_execute ("delete from plugin_intropage_user_setting where user_id=" . $_SESSION['sess_user_id'] . " and fav_graph_id=" .  $_GET['graph_id']); 
+	
+    }
+    else	{	// add to fav
+	db_execute ("insert into plugin_intropage_user_setting (user_id,panel,fav_graph_id) values (" . $_SESSION['sess_user_id'] . 
+	",'intropage_favourite_graph'," . $_GET['graph_id'] . ")"); 
+    
+    
+    }
+
+    
+    
+
+
+/*
+     if (user_setting_exists('intropage_favourite_graphs', $_SESSION['sess_user_id']))	{
+	$fg = array_filter(explode(',',read_user_setting('intropage_favourite_graphs')));
+	
+	if (($key = array_search($_GET['graph_id'], $fg)) !== false) {
+	    unset($fg[$key]);
+	}
+        else
+    	{
+	    $fg[] = $_GET['graph_id'];    
+	}
+    }
+    else	{
+	$fg[] = $_GET['graph_id'];    
+    }	
+
+    set_user_setting('intropage_favourite_graphs', implode (",",$fg));
+*/
 }
 
  

@@ -60,7 +60,7 @@ function human_filesize($bytes, $decimals = 2) {
 function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
     global $config;
    
-    if (!empty($dispdata))	{	// empty? Typical for no console access
+//    if (!empty($dispdata))	{	// empty? Typical for no console access
 	
     $selectedTheme = get_selected_theme();
     switch ($selectedTheme)	{
@@ -77,6 +77,7 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 	default:
 	    $bgcolor = "#f5f5f5";
     }
+
 
     print "<li id='panel_$panel_id' class='ui-state-default flexchild'>\n";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
@@ -320,7 +321,7 @@ print "</div>\n";
     html_end_box(false);
     print "</li>\n\n";
 
-    } // have console access
+//    } // have console access
 }
 
 
@@ -356,24 +357,54 @@ function intropage_graph_button($data)	{
 
        global $config;
 
+    // if (read_config_option("intropage_favourite_graph") == "on")      {
+    if (db_fetch_cell("select intropage_favourite_graph from user_auth where id=" . $_SESSION['sess_user_id']) == "on") {
+
         $local_graph_id = $data[1]['local_graph_id'];
+
+
+    if (db_fetch_cell ("select count(*) from plugin_intropage_user_setting where user_id=" . $_SESSION['sess_user_id'] .
+        " and fav_graph_id=" . $local_graph_id) > 0)   {       // already fav
+
+	    $fav = "<i class='fa fa-eye-slash'  title='remove from dashboard'></i>";
+
+    }
+    else        {       // add to fav
+	$fav = "<i class='fa fa-eye' title='add to dashboard'></i>";
+    }
+
 
         $lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
         if ($lopts == 1) { // in tab
-// tohle funguje u tabu
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph=1&graph_id=' . $local_graph_id . '">[1]</a><br/>';
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph=2&graph_id=' . $local_graph_id . '">[2]</a><br/>';
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 	}
 	else	{	// in console
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph=1&graph_id=' . $local_graph_id . '">[1]</a><br/>';
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph=2&graph_id=' . $local_graph_id . '">[2]</a><br/>';
-	
-	
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 	}
 
+    }
 
 
+/*
+	$fav = "<i class='fa fa-eye' title='add to dashboard'></i>";
+
+        $local_graph_id = $data[1]['local_graph_id'];
+
+	$fg = explode (',', read_user_setting('intropage_favourite_graphs'));
+	if (array_search ($local_graph_id, $fg) !==false)
+    	    $fav = "<i class='fa fa-eye-slash'  title='remove from dashboard'></i>";
+
+        $lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
+        if ($lopts == 1) { // in tab
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
+	}
+	else	{	// in console
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
+	}
+*/	
+	
 }
+
 
 
 ?>

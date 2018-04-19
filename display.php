@@ -129,7 +129,6 @@ EOF;
         else
             $allowed_hosts = "NULL";
 
-
 	
 	// Retrieve access
 	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8"))?true:false;
@@ -139,25 +138,44 @@ EOF;
 	$values = array();
 
 	// retrieve user setting (and creating if not)
+
 	
-	if (db_fetch_cell ("select count(*) from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] ) == 0)	{
+	if (db_fetch_cell ("select count(*) from plugin_intropage_user_setting where fav_graph_id is null and user_id = " . $_SESSION['sess_user_id'] ) == 0)	{
+	    $all_panel = db_fetch_assoc("SELECT panel,priority from plugin_intropage_panel");
+	    
 	    // generating user setting
-	    db_execute ("insert into plugin_intropage_user_setting (user_id,panel,priority) select " . $_SESSION['sess_user_id'] . ",panel,priority from plugin_intropage_panel");
-	}
+	    foreach ($all_panel as $one)	{
+		if (db_fetch_cell("select " . $one['panel'] . " from user_auth where id=" . $_SESSION['sess_user_id']) == "on")	{
+		    db_execute ("insert into plugin_intropage_user_setting (user_id,panel,priority) values (" . $_SESSION['sess_user_id'] . ",'" . $one['panel'] . "'," . $one['priority'] . ")");
+		}
+	    }
+    	}
 
-	$panels = db_fetch_assoc ("select * from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . " order by priority desc" );
+	// panels + favourite graphs (fav_graph_id is not null)
+	$xpanels = db_fetch_assoc ("select id,panel,priority from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and panel !='intropage_favourite_graph'  order by priority desc" );
 
+	$panels = array_merge($xpanels,db_fetch_assoc ("select id,concat(panel,'_',fav_graph_id) as panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and (panel='intropage_favourite_graph' and fav_graph_id is not null)  order by priority desc" ));
 
 	// retrieve data for all panels
+	
 	foreach ($panels as $panel)	{
-	    $pokus = $panel['panel'];
 
-	    // read global setting is correct. Admin can disable panel for all users
-	    if (read_config_option("intropage_" . $pokus) == "on")	{
+	    $pokus = $panel['panel'];
 		$start = microtime(true);	
-		$values[$pokus] = $pokus();
+
+		
+		if (isset($panel['fav_graph_id']))	{ // fav_graph exception
+		    $values[$pokus] = intropage_favourite_graph($panel['fav_graph_id']);
+		}
+		else	{	// normal panel
+		
+		    $values[$pokus] = $pokus();
+
+
+		}
+		
 		$debug .= "$pokus: " . round(microtime(true) -$start,2) . " || \n";
-	    }
+
 	}
 
 
@@ -166,6 +184,7 @@ EOF;
 //	$display_important_first = on/off
 //	$display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
 // 	0 chyby, 1 - chyby/warn, 2- all
+
 
     print '<div id="megaobal">';
     print '<ul id="obal">';
@@ -180,13 +199,13 @@ EOF;
 	}
 	$order = substr ($order,0,-1);    
     
-        $query = "select * from plugin_intropage_user_setting order by field (id,$order)";
+        $query = "select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where panel !='intropage_favourite_graph' or (panel='intropage_favourite_graph' and fav_graph_id is not null)  order by field (id,$order)";
 	$panels = db_fetch_assoc($query);
 
         foreach($panels as $panel) {
 	    $pom = $panel['panel'];
-	    if (read_config_option("intropage_" . $pom) == "on")	
         	intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+
 	}
 	
     }
@@ -194,26 +213,22 @@ EOF;
 
     	    foreach($panels as $panel) {	
     		$pom = $panel['panel'];
-		if (read_config_option("intropage_" . $pom) == "on")	{
 
 		    if ($values[$pom]['alarm'] == "red")	{
 			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 			$values[$pom]['displayed'] = true;
 		    }
-		}
 	    }
 
 	    // yellow (errors and warnings)
 	    if ($display_level == 1 || ($display_level == 2 && !isset($values[$pom]['displayed'])))	{
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-		    if (read_config_option("intropage_" . $pom) == "on")	{
 
 		        if ($values[$pom]['alarm'] == "yellow")	{
 			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 			    $values[$pom]['displayed'] = true;
 			}
-		    }
 		}
 	    }
 
@@ -221,46 +236,42 @@ EOF;
 	    if ($display_level == 2)	{
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-		    if (read_config_option("intropage_" . $pom) == "on")	{
 
 			if ($values[$pom]['alarm'] == "green")	{
 
 			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 			    $values[$pom]['displayed'] = true;
 			}
-		    }
 		}
 
 		// grey and without color
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-		    if (read_config_option("intropage_" . $pom) == "on")		{
 
 	    		if (!isset($values[$pom]['displayed']))	{
 			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 			    $values[$pom]['displayed'] = true;
 			}
-		    }
 		}
 	    }
 
     }
     else	{	// display only errors/errors and warnings/all - order by priority
+
+
 	foreach ($panels as $panel)	{
 
 	    $pom = $panel['panel'];
-	
-	    if (read_config_option("intropage_" . $pom) == "on")	{
 
 		if (
 		    ($display_level == 2 ) ||
 	            ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
 	            ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
 
-			if (isset ($values[$pom]))	// only active panels, not disable
 				intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+
+
 		}
-	    }
 	}
 
     }
@@ -319,12 +330,15 @@ $(document).ready(function () {
     $panels = db_fetch_assoc ("select t1.panel as panel_name from plugin_intropage_panel as t1 left outer join plugin_intropage_user_setting as t2 on t1.panel = t2.panel where t2.user_id is null order by t1.priority");
     if (sizeof($panels) > 0)	{
 	// allowed panel?
-        if (read_config_option("intropage_" . $pom) == "on")	{
+        //if (read_config_option("intropage_" . $pom) == "on")	{
 
-	    foreach ($panels as $panel)	{
+	foreach ($panels as $panel)	{
+	    if (db_fetch_cell("select " . $panel['panel_name'] . " from user_auth where id=" . $_SESSION['sess_user_id']) == "on") 
 		echo "<option value=\"addpanel_" . $panel['panel_name'] . "\">Add panel " . $panel['panel_name'] . "</option>\n";
+	    else
+		echo "<option value=\"addpanel_" . $panel['panel_name'] . "\" disabled=\"disabled\">Add panel " . $panel['panel_name'] . " (admin prohibited)</option>\n";
     
-	    }
+	    
 	}
     }
 
