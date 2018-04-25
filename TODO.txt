@@ -1,38 +1,29 @@
 Major
 -----
+kdyz adminovi seberu prava, tak jen v tabulce user_auth, ale uz ne 
+v plugin_intropage_settings!!!
 
-
-v action nerecim prioritu favgraph, takze to dostane default
-
-admin option for disable panels with sensitive data for users without console
- - tohle asi nebude, protoze to pujde resit pravy
+graf prejmenovat dle nazvu, proste sahnu do db a najdu si ho
 
 add reload for each panel
 
-add more favourite graphs -
-	    cele to bude vyjimka z panelu
-	    kdyz da nekdo zavrit panel s grafem, tak se to bude chovat stejne jako kdyz zmacknul skrtle oko u grafu
-
-
-debug panel - asi konfigurovat jako normalni panel a ulozit do db
-nemam vybrany fav_graf a snazi se mi neco zobrazit
+v action nerecim prioritu favgraph, takze to dostane default
 
 
 
-rrd_graph_graph_options - mozna  mi dovoli vyhodit nadpis
+
 
 errors
 ------
-nejde mi addpanel v roletce, mam v display.php pri generovani roletky nejakou nesmyslnou podminku user_id=null
-ta podminka neni nesmyslna, to je left outer join
+debug panel - asi konfigurovat jako normalni panel a ulozit do db
+
 
 Minor
 -----
 pridat ntp rozdil
-awesome icons
 copy text in panels
 
-add icons for selecting favourite graphs
+
 plugins.php - awaiting configuration
 top5,extrem - style 2em hardcoded
 code cleaning

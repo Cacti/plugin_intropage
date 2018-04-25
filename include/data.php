@@ -387,6 +387,33 @@ function intropage_analyse_tree_host_graph() {
     }
 
 
+    // public/private community
+    //select id,hostname from host where snmp_community ='public' or snmp_community='private'
+    $pom = 0;
+    $result['data'] .= 'Hosts with default public/private community: ';
+
+    $sql_result = db_fetch_assoc("SELECT id,description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND (snmp_community ='public' or snmp_community='private')");
+
+    $result['data'] .= count($sql_result) . "<br/>";
+    if (count($sql_result) > 0) {
+	if ($result['alarm'] == "green")
+	    $result['alarm'] = "yellow";
+	
+	foreach($sql_result as $row) {
+    	    if ($pom == 0)	{
+		$pom++;
+		$result['detail'] .= "<br/><br/>Default community name (public/private):<br/>";
+	    }
+
+	    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
+	}
+    }
+    $total_errors += count($sql_result);
+
+
+
+
+
     $total_errors += count($sql_result);
 
     if ($total_errors > 0)

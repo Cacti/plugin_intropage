@@ -42,6 +42,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	1.7 ---
 	Add Awesome icons (close, reload, show detail,...)
 	Add user permissions 
+	Add default snmp community (public/private) check
 	Improve favourite graphs - you can set more than 2 graphs
 	Fix blank login page if intropage in console is default page
 	Fix show/hide detail
