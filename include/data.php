@@ -1388,23 +1388,26 @@ function intropage_favourite_graph($fav_graph_id)	{
     if (isset($fav_graph_id))	{
     
         $result = array(
-                'name' => 'Favourite graph ' .$fav_graph_id,
+                'name' => 'Favourite graph ',
                 'alarm' => 'grey',
                 'data' => '',
                 'detail' => '',
         );
 
 
+
+
+	$result['name'] .= db_fetch_cell_prepared('select title_cache from graph_templates_graph where local_graph_id = ?',
+                 array($fav_graph_id));
+
+
+
+
     	    $result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
     	    'local_graph_id=' . $fav_graph_id . '&' .
     	    'graph_height=105&' .
     	    'graph_width=300&' .
-    	    'graph_nolegend=true" alt="Favourite graph ID ' . $fav_graph_id . '"/>&nbsp;';
-
-
-//	$result['data'] = "ja budu graf";
-
-//echo $result['data'];
+    	    'graph_nolegend=true" alt="Favourite graph ' . $title . '"/>&nbsp;';
 
         return $result;
 
