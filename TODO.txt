@@ -16,7 +16,7 @@ v action nerecim prioritu favgraph, takze to dostane default
 errors
 ------
 debug panel - asi konfigurovat jako normalni panel a ulozit do db
-
+dbcheck falesna chyba
 
 Minor
 -----

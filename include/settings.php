@@ -317,6 +317,7 @@ function intropage_user_admin_setup_sql_save($save) {
 	$save['intropage_boost'] = form_input_validate(get_nfilter_request_var('intropage_boost'), 'intropage_boost', '^on$', true, 3);
 	$save['intropage_favourite_graph'] = form_input_validate(get_nfilter_request_var('intropage_favourite_graph'), 'intropage_favourite_graph', '^on$', true, 3);
 
+
 	return $save;
 }
 

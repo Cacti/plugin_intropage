@@ -150,6 +150,16 @@ EOF;
 		}
 	    }
     	}
+    	else	{	// revoke permissions
+	    $all_panel = db_fetch_assoc("SELECT panel from plugin_intropage_user_setting");
+	    
+	    foreach ($all_panel as $one)	{
+	    
+		if (db_fetch_cell("select " . $one['panel'] . " from user_auth where id=" . $_SESSION['sess_user_id']) != "on")	{
+			db_execute ("delete from plugin_intropage_user_setting where user_id= " . $_SESSION['sess_user_id'] . " and panel ='" . $one['panel'] . "'");
+		}    	
+    	    }
+	}
 
 	// panels + favourite graphs (fav_graph_id is not null)
 	$xpanels = db_fetch_assoc ("select id,panel,priority from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and panel !='intropage_favourite_graph'  order by priority desc" );
