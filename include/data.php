@@ -21,8 +21,9 @@ function intropage_analyse_db() {
 	foreach($tables as $key=>$val) {
 
 		$row = db_fetch_row("check table ".current($val)." $db_check_level");
+
 		if (preg_match('/^note$/i',$row["Msg_type"]) && preg_match('/doesn\'t support/i',$row["Msg_text"])) { $memtables++; }
-		elseif (!preg_match('/OK/i',$row["Msg_text"])) { $damaged++; $result['detail'] .= "Table " . $row["Table"] . " status " . $row["Msg_text"] . "<br/>\n"; }
+		elseif (!preg_match('/OK/i',$row["Msg_text"]) && !preg_match('/Table is already up to date/i',$row["Msg_text"]) ) { $damaged++; $result['detail'] .= "Table " . $row["Table"] . " status " . $row["Msg_text"] . "<br/>\n"; }
 	}
 	
 	if ($damaged > 0) { 
