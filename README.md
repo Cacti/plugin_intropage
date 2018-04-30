@@ -46,6 +46,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Improve favourite graphs - you can set more than 2 graphs
 	Fix blank login page if intropage in console is default page
 	Fix show/hide detail
+	Fix db check - Ok tables are reported as damaged if check level is "Changed"
 
 	1.6 ---
 	Add user setting directly on intropage (close/add panel, autorefresh, ...)
