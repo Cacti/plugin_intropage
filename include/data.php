@@ -1407,7 +1407,7 @@ function intropage_favourite_graph($fav_graph_id)	{
     	    'local_graph_id=' . $fav_graph_id . '&' .
     	    'graph_height=105&' .
     	    'graph_width=300&' .
-    	    'graph_nolegend=true" alt="Favourite graph ' . $title . '"/>&nbsp;';
+    	    'graph_nolegend=true"/>&nbsp;';
 
         return $result;
 
