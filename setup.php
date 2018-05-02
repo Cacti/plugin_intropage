@@ -16,12 +16,7 @@ function plugin_intropage_install() {
  	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/helpers.php');
  	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/helpers.php');
 
-
 	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
-
-    // !!!!! test - nepouzivam, ale taky je to cesta
-//	api_plugin_register_hook('intropage', 'user_admin_tab','intropage_user_admin_tab', 'include/settings.php');
-
 
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');	
@@ -30,12 +25,10 @@ function plugin_intropage_install() {
 
 function plugin_intropage_uninstall () {
 	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
-	db_execute("DROP TABLE plugin_intropage_user_setting");
-	db_execute("DROP TABLE plugin_intropage_trends");
-	db_execute("DROP TABLE plugin_intropage_panel");
-    	db_execute("UPDATE user_auth set login_opts=1 where login_opts > 3");
-
-
+	db_execute('DROP TABLE plugin_intropage_user_setting');
+	db_execute('DROP TABLE plugin_intropage_trends');
+	db_execute('DROP TABLE plugin_intropage_panel');
+    	db_execute('UPDATE user_auth set login_opts=1 where login_opts > 3');
 }
 
 function plugin_intropage_version()	{
@@ -83,8 +76,6 @@ function intropage_check_upgrade() {
 		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 		api_plugin_db_add_column ('user_auth',array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 
-
-
 		db_execute('UPDATE plugin_hooks SET function="intropage_config_form", file="include/settings.php" WHERE name="intropage" AND hook="config_form"');
 		db_execute('UPDATE plugin_hooks SET function="intropage_config_settings", file="include/settings.php" WHERE name="intropage" AND hook="config_settings"');
 		db_execute('UPDATE plugin_hooks SET function="intropage_show_tab", file="include/tab.php" WHERE name="intropage" AND hook="top_header_tabs"');
@@ -119,7 +110,6 @@ function intropage_setup_database() {
 	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column ('intropage', 'user_auth',array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 
-	
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 	$sql_insert = '';
 	foreach ($intropage_settings as $key=>$value)   {
@@ -152,7 +142,6 @@ function intropage_setup_database() {
         api_plugin_db_table_create ('intropage', 'plugin_intropage_user_setting', $data);
 
 
-
         $data = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false,'auto_increment' => true);
 	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false);
@@ -174,25 +163,18 @@ function intropage_setup_database() {
 	if ($sql_insert != '') {
 		db_execute("INSERT INTO plugin_intropage_panel (panel,priority) VALUES $sql_insert");
 	}
-
-
-
 }
 
 function intropage_poller_bottom () {
 
-
     $start = db_fetch_cell("SELECT min(start_time) from poller_time");
 
     // poller stats
-
-    $stats = db_fetch_assoc("SELECT id,total_time from poller order by id limit 5");
+    $stats = db_fetch_assoc('SELECT id,total_time from poller order by id limit 5');
     foreach($stats as $stat) {	
 	db_execute("insert into plugin_intropage_trends (name,date,value) values ('poller','$start', '" .$stat['id'] . ":" . round($stat['total_time']) . "')");
     }
 
-
-    
 
     // CPU load - linux only
     if (!stristr(PHP_OS, 'win')) {
@@ -205,8 +187,8 @@ function intropage_poller_bottom () {
     db_execute('delete from plugin_intropage_trends where date < date_sub(now(), INTERVAL 2 DAY)');
 
     // trends - all hosts without permissions!!!
-     db_execute("insert into plugin_intropage_trends (name,date,value) select 'host', now(), count(id) FROM host WHERE status='1' AND disabled=''");
-     db_execute("insert into plugin_intropage_trends (name,date,value) select 'thold', now(), COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
+    db_execute("insert into plugin_intropage_trends (name,date,value) select 'host', now(), count(id) FROM host WHERE status='1' AND disabled=''");
+    db_execute("insert into plugin_intropage_trends (name,date,value) select 'thold', now(), COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
 
 }
 
