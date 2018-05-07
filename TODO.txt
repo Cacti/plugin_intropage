@@ -24,6 +24,7 @@ Code cleaning
 taby na zacatku
 v podminkach nedelat mezery
 snazit se pouzivat apostrofy
+mam setup.php
 
 
 

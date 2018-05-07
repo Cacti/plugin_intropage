@@ -5,21 +5,19 @@ function display_information() {
 	global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
 
 	if (!api_user_realm_auth('intropage.php'))	{
-		print "Intropage - permission denied";
-		print "<br/><br/>";
+		echo 'Intropage - permission denied<br/><br/>';
 		return false;
 	}
 
-	$debug = "";
+	$debug = '';
 	$debug_start = microtime(true);
 
 	$selectedTheme = get_selected_theme();
 
-	$url_path = $config["url_path"] . "plugins/intropage";
+	$url_path = $config['url_path'] . 'plugins/intropage';
 
 	// actions
 	include_once($config['base_path'] . '/plugins/intropage/include/actions.php');
-
 
 	// functions
 	include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
@@ -34,26 +32,21 @@ print <<<EOF
 
 <script type="text/javascript">
 
-// IE 10 & 11 hack for flex. Without this are all panels in one line
+// IE 10 (MSIE 10) & 11 (Trident) hack for flex. Without this are all panels in one line
 $(window).load(function() {
-    if (  
-	navigator.userAgent.search('MSIE 10') > 0 || // ie10
-        (navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 ) // ie11
-	)	
-	{
+
+
+    if (navigator.userAgent.search('MSIE 10') > 0 || 
+        (navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 ))	{
     	    $('#obal').css('max-width',($(window).width()-190));
         }
-        
 });
 
 
 
 // drag and drop order 
   $(function() {
-
-
     $( "#obal" ).sortable({
-	
     
       update: function( event, ui ) {
         //console.log($("#obal"));
@@ -75,11 +68,11 @@ EOF;
 
 	// Retrieve user settings and defaults
 	
-	$display_important_first = read_user_setting("intropage_display_important_first", read_config_option("intropage_display_important_first"));
-	$display_level = read_user_setting("intropage_display_level",read_config_option("intropage_display_level"));
-	$autorefresh = read_user_setting("intropage_autorefresh",read_config_option("intropage_autorefresh"));
+	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
+	$display_level = read_user_setting('intropage_display_level',read_config_option('intropage_display_level'));
+	$autorefresh = read_user_setting('intropage_autorefresh',read_config_option('intropage_autorefresh'));
 
-	$intropage_debug = read_user_setting("intropage_debug",0);
+	$intropage_debug = read_user_setting('intropage_debug',0);
 	
 
 	// Retrieve global configuration options
@@ -114,7 +107,6 @@ EOF;
             		// ulozit
             		$allowed_hosts .= $host['id'] . ",";
         	    } 
-        
     		}
     		else    {
         	    if ($policy != 1) {
@@ -132,7 +124,6 @@ EOF;
 	
 	// Retrieve access
 	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8"))?true:false;
-
 	
 	// Start
 	$values = array();
@@ -140,22 +131,22 @@ EOF;
 	// retrieve user setting (and creating if not)
 
 	
-	if (db_fetch_cell ("select count(*) from plugin_intropage_user_setting where fav_graph_id is null and user_id = " . $_SESSION['sess_user_id'] ) == 0)	{
-	    $all_panel = db_fetch_assoc("SELECT panel,priority from plugin_intropage_panel");
+	if (db_fetch_cell ('select count(*) from plugin_intropage_user_setting where fav_graph_id is null and user_id = ' . $_SESSION['sess_user_id'] ) == 0)	{
+	    $all_panel = db_fetch_assoc('SELECT panel,priority from plugin_intropage_panel');
 	    
 	    // generating user setting
 	    foreach ($all_panel as $one)	{
-		if (db_fetch_cell("select " . $one['panel'] . " from user_auth where id=" . $_SESSION['sess_user_id']) == "on")	{
+		if (db_fetch_cell('select ' . $one['panel'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) == 'on')	{
 		    db_execute ("insert into plugin_intropage_user_setting (user_id,panel,priority) values (" . $_SESSION['sess_user_id'] . ",'" . $one['panel'] . "'," . $one['priority'] . ")");
 		}
 	    }
     	}
     	else	{	// revoke permissions
-	    $all_panel = db_fetch_assoc("SELECT panel from plugin_intropage_user_setting");
+	    $all_panel = db_fetch_assoc('SELECT panel from plugin_intropage_user_setting');
 	    
 	    foreach ($all_panel as $one)	{
 	    
-		if (db_fetch_cell("select " . $one['panel'] . " from user_auth where id=" . $_SESSION['sess_user_id']) != "on")	{
+		if (db_fetch_cell('select ' . $one['panel'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) != 'on')	{
 			db_execute ("delete from plugin_intropage_user_setting where user_id= " . $_SESSION['sess_user_id'] . " and panel ='" . $one['panel'] . "'");
 		}    	
     	    }
@@ -167,24 +158,19 @@ EOF;
 	$panels = array_merge($xpanels,db_fetch_assoc ("select id,concat(panel,'_',fav_graph_id) as panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and (panel='intropage_favourite_graph' and fav_graph_id is not null)  order by priority desc" ));
 
 	// retrieve data for all panels
-	
 	foreach ($panels as $panel)	{
 
 	    $pokus = $panel['panel'];
 		$start = microtime(true);	
 
-		
 		if (isset($panel['fav_graph_id']))	{ // fav_graph exception
 		    $values[$pokus] = intropage_favourite_graph($panel['fav_graph_id']);
 		}
 		else	{	// normal panel
-		
 		    $values[$pokus] = $pokus();
-
-
 		}
 		
-		$debug .= "$pokus: " . round(microtime(true) -$start,2) . " || \n";
+		$debug .= '$pokus: ' . round(microtime(true) -$start,2) . ' || \n';
 
 	}
 
@@ -203,9 +189,9 @@ EOF;
     // user changed order - new order is valid until logout
     
     if (isset ($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order']))	{
-	$order = "";
+	$order = '';
 	foreach ($_SESSION['intropage_order'] as $ord)	{
-	    $order .= $ord . ",";
+	    $order .= $ord . ',';
 	}
 	$order = substr ($order,0,-1);    
     
@@ -214,31 +200,28 @@ EOF;
 
         foreach($panels as $panel) {
 	    $pom = $panel['panel'];
-        	intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-
+    	    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 	}
-	
     }
-    elseif ($display_important_first == "on")	{  // important first
+    elseif ($display_important_first == 'on')	{  // important first
 
     	    foreach($panels as $panel) {	
     		$pom = $panel['panel'];
 
-		    if ($values[$pom]['alarm'] == "red")	{
-			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			$values[$pom]['displayed'] = true;
-		    }
+		if ($values[$pom]['alarm'] == "red")	{
+		    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+		    $values[$pom]['displayed'] = true;
+		}
 	    }
 
 	    // yellow (errors and warnings)
 	    if ($display_level == 1 || ($display_level == 2 && !isset($values[$pom]['displayed'])))	{
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-
-		        if ($values[$pom]['alarm'] == "yellow")	{
-			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			    $values[$pom]['displayed'] = true;
-			}
+    	    	    if ($values[$pom]['alarm'] == "yellow")	{
+			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			$values[$pom]['displayed'] = true;
+		    }
 		}
 	    }
 
@@ -247,46 +230,37 @@ EOF;
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
 
-			if ($values[$pom]['alarm'] == "green")	{
-
-			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			    $values[$pom]['displayed'] = true;
-			}
+		    if ($values[$pom]['alarm'] == "green")	{
+    			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			$values[$pom]['displayed'] = true;
+		    }
 		}
 
 		// grey and without color
     		foreach($panels as $panel) {	
     		    $pom = $panel['panel'];
-
-	    		if (!isset($values[$pom]['displayed']))	{
-			    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			    $values[$pom]['displayed'] = true;
-			}
+        	    if (!isset($values[$pom]['displayed']))	{
+			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+			$values[$pom]['displayed'] = true;
+		    }
 		}
 	    }
-
     }
     else	{	// display only errors/errors and warnings/all - order by priority
-
-
 	foreach ($panels as $panel)	{
 
 	    $pom = $panel['panel'];
 
-		if (
-		    ($display_level == 2 ) ||
-	            ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
-	            ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
-
-				intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-
-
+	    if (
+		($display_level == 2 ) ||
+	        ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
+	        ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
+		    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
 		}
 	}
-
     }
 
-	// display debug information in panel
+    // display debug information in panel
 
     if ($intropage_debug) {
 	unset($value);
@@ -302,11 +276,8 @@ $(document).ready(function () {
  $('.article').hide();
   $('.maxim').click(function(){
 
-//   window.alert($(this).html());
     $(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
-//    $(this).attr('title', $(this).attr('title') == 'Show details' ? 'Hide details' : 'Show details');
     $(this).nextAll('.article').first().toggle();
-
 
     if ($('#' + this.name).css("display") == "none")	{
 	$('#' + this.name).css("display","block");
@@ -315,9 +286,7 @@ $(document).ready(function () {
     else		{
 	$('#' + this.name).css("display","none");
         $(this).attr('title','Show details');	
-
     }
-
   });
 });
 </script>
@@ -325,103 +294,96 @@ $(document).ready(function () {
 
 <?php
 
-
 // end of detail js
 
     print "<div style='clear: both;'></div>";
-    print "</ul>\n";
+    print '</ul>\n';
 
 
     // settings
-    echo "<form method=\"post\">\n";
-    echo "<select name=\"intropage_action\" size=\"1\">";
-    echo "<option value=\"0\">Select action ...</option>";
+    echo "<form method='post'>\n";
+    echo "<select name='intropage_action' size='1'>";
+    echo "<option value='0'>Select action ...</option>";
 
-    $panels = db_fetch_assoc ("select t1.panel as panel_name from plugin_intropage_panel as t1 left outer join plugin_intropage_user_setting as t2 on t1.panel = t2.panel where t2.user_id is null order by t1.priority");
+    $panels = db_fetch_assoc ('select t1.panel as panel_name from plugin_intropage_panel as t1 left outer join plugin_intropage_user_setting as t2 on t1.panel = t2.panel where t2.user_id is null order by t1.priority');
     if (sizeof($panels) > 0)	{
 	// allowed panel?
-        //if (read_config_option("intropage_" . $pom) == "on")	{
+        //if (read_config_option('intropage_' . $pom) == 'on')	{
 
 	foreach ($panels as $panel)	{
-	    if (db_fetch_cell("select " . $panel['panel_name'] . " from user_auth where id=" . $_SESSION['sess_user_id']) == "on") 
-		echo "<option value=\"addpanel_" . $panel['panel_name'] . "\">Add panel " . $panel['panel_name'] . "</option>\n";
+	    if (db_fetch_cell('select ' . $panel['panel_name'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') 
+		echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . $panel['panel_name'] . '</option>\n';
 	    else
-		echo "<option value=\"addpanel_" . $panel['panel_name'] . "\" disabled=\"disabled\">Add panel " . $panel['panel_name'] . " (admin prohibited)</option>\n";
-    
-	    
+		echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . $panel['panel_name'] . ' (admin prohibited)</option>\n';
 	}
     }
 
     // only submit :-)
-    echo "<option value=\"\">Refresh now</option>";
+    echo "<option value=''>Refresh now</option>";
 
     if ($autorefresh > 0)
-	echo "<option value=\"refresh_0\">Autorefresh disable</option>";
+	echo "<option value='refresh_0'>Autorefresh disable</option>";
     else
-	echo "<option value=\"refresh_0\" disabled=\"disabled\">Autorefresh disable</option>";
+	echo "<option value='refresh_0' disabled='disabled'>Autorefresh disable</option>";
 
         
     if ($autorefresh == 60)
-	echo "<option value=\"refresh_60\" disabled=\"disabled\">Autorefresh 1 minute</option>";
+	echo "<option value='refresh_60' disabled='disabled'>Autorefresh 1 minute</option>";
     else
-	echo "<option value=\"refresh_60\">Autorefresh 1 minute</option>";
+	echo "<option value='refresh_60'>Autorefresh 1 minute</option>";
 
 
     if ($autorefresh == 180)
-	echo "<option value=\"refresh_180\" disabled=\"disabled\">Autorefresh 3 minutes</option>";
+	echo "<option value='refresh_180' disabled='disabled'>Autorefresh 3 minutes</option>";
     else
-	echo "<option value=\"refresh_180\">Autorefresh 3 minutes</option>";
+	echo "<option value='refresh_180'>Autorefresh 3 minutes</option>";
 
 
     if ($autorefresh == 600)
-	echo "<option value=\"refresh_600\" disabled=\"disabled\">Autorefresh 10 minutes</option>";
+	echo "<option value='refresh_600' disabled='disabled'>Autorefresh 10 minutes</option>";
     else
-	echo "<option value=\"refresh_600\">Autorefresh 10 minutes</option>";
+	echo "<option value='refresh_600'>Autorefresh 10 minutes</option>";
 
 
 
-    if (read_user_setting("intropage_display_level") == 0)
-	echo "<option value=\"displaylevel_0\" disabled=\"disabled\">Display only errors</option>";
+    if (read_user_setting('intropage_display_level') == 0)
+	echo "<option value='displaylevel_0' disabled='disabled'>Display only errors</option>";
     else
-	echo "<option value=\"displaylevel_0\">Display only errors</option>";
+	echo "<option value='displaylevel_0'>Display only errors</option>";
     
 
-    if (read_user_setting("intropage_display_level") == 1)
-	echo "<option value=\"displaylevel_1\" disabled=\"disabled\">Display errors and warnings</option>";
+    if (read_user_setting('intropage_display_level') == 1)
+	echo "<option value='displaylevel_1' disabled='disabled'>Display errors and warnings</option>";
     else
-	echo "<option value=\"displaylevel_1\">Display errors and warnings</option>";
+	echo "<option value='displaylevel_1'>Display errors and warnings</option>";
 
 	
-    if (read_user_setting("intropage_display_level") == 2)
-	echo "<option value=\"displaylevel_2\" disabled=\"disabled\">Display all</option>";
+    if (read_user_setting('intropage_display_level') == 2)
+	echo "<option value='displaylevel_2' disabled='disabled'>Display all</option>";
     else
-	echo "<option value=\"displaylevel_2\">Display all</option>";
+	echo "<option value='displaylevel_2'>Display all</option>";
 
 
-    if ($display_important_first == "on")	{
-	echo "<option value=\"important_first\" disabled=\"disabled\">Sort by - red-yellow-green-gray</option>";
-	echo "<option value=\"important_no\">Sort by panel priority</option>";
+    if ($display_important_first == 'on')	{
+	echo "<option value='important_first' disabled='disabled'>Sort by - red-yellow-green-gray</option>";
+	echo "<option value='important_no'>Sort by panel priority</option>";
     
     }
     else	{
-	echo "<option value=\"important_first\">Sort by - red-yellow-green-gray</option>";
-	echo "<option value=\"important_no\" disabled=\"disabled\">Sort by panel priority</option>";
+	echo "<option value='important_first'>Sort by - red-yellow-green-gray</option>";
+	echo "<option value='important_no' disabled='disabled'>Sort by panel priority</option>";
     }
     
 
     if (isset($_SESSION['intropage_changed_order']))
-	echo "<option value=\"reset_order\">Reset panel order to default</option>";
+	echo "<option value='reset_order'>Reset panel order to default</option>";
 
-    echo "<option value=\"reset_all\">Reset all to default</option>";
+    echo "<option value='reset_all'>Reset all to default</option>";
 
     if ($intropage_debug == 0) 
-            echo "<option value=\"debug_ena\">Enable debug</option>";
+            echo "<option value='debug_ena'>Enable debug</option>";
     else 
-            echo "<option value=\"debug_disa\">Disable debug</option>";
-
-
-
-
+            echo "<option value='debug_disa'>Disable debug</option>";
 
 
     $lopts = db_fetch_cell('SELECT login_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
@@ -433,21 +395,20 @@ $(document).ready(function () {
     // after login: 1=podle url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
     if (!$console_access)        {
 	if ($lopts < 4)
-            echo "<option value=\"loginopt_intropage\">Set intropage as default page</option>";
+            echo "<option value='loginopt_intropage'>Set intropage as default page</option>";
 	else
-            echo "<option value=\"loginopt_graph\">Set graph as default page</option>";
+            echo "<option value='loginopt_graph'>Set graph as default page</option>";
 	    
     }
-
     
-    echo "</select>\n";
-    echo "<input type=\"submit\" name=\"intropage_go\" value=\"Go\">\n";
-    echo "</form>\n";
+    echo '</select>\n';
+    echo "<input type='submit' name='intropage_go' value='Go'>\n";
+    echo '</form>\n';
     // end of settings
 
-    print "<div style=\"width: 100%\"> Generated: " . date("H:i:s") . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";
+    print "<div style='width: 100%'> Generated: " . date('H:i:s') . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";
 
-    echo "</div>\n"; // konec megaobal
+    echo '</div>\n'; // konec megaobal
 
     return true;
 }
