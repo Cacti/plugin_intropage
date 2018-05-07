@@ -24,8 +24,8 @@ function display_information() {
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');	
 
 	// style for panels
-	print "<link type='text/css' href='$url_path/themes/common.css' rel='stylesheet'>\n";
-	print "<link type='text/css' href='$url_path/themes/" . $selectedTheme . ".css' rel='stylesheet'>\n";
+	print "<link type='text/css' href='$url_path/themes/common.css' rel='stylesheet'>";
+	print "<link type='text/css' href='$url_path/themes/" . $selectedTheme . ".css' rel='stylesheet'>";
 
 	
 print <<<EOF
@@ -55,7 +55,8 @@ $(window).load(function() {
 	    xdata.push($(this).attr("id"));
 	});
 
-	$.get('$url_path',{xdata:xdata, intropage_action: "order"});
+//	$.get('$url_path',{xdata:xdata, intropage_action: "order"});
+	$.get('$url_path',{xdata:xdata});
       }
     });
     $( "#sortable" ).disableSelection();
@@ -170,7 +171,7 @@ EOF;
 		    $values[$pokus] = $pokus();
 		}
 		
-		$debug .= '$pokus: ' . round(microtime(true) -$start,2) . ' || \n';
+		$debug .= $pokus . ': ' . round(microtime(true) -$start,2) . ' || ';
 
 	}
 
@@ -297,11 +298,11 @@ $(document).ready(function () {
 // end of detail js
 
     print "<div style='clear: both;'></div>";
-    print '</ul>\n';
+    print '</ul>';
 
 
     // settings
-    echo "<form method='post'>\n";
+    echo "<form method='post'>";
     echo "<select name='intropage_action' size='1'>";
     echo "<option value='0'>Select action ...</option>";
 
@@ -312,9 +313,9 @@ $(document).ready(function () {
 
 	foreach ($panels as $panel)	{
 	    if (db_fetch_cell('select ' . $panel['panel_name'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') 
-		echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . $panel['panel_name'] . '</option>\n';
+		echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . $panel['panel_name'] . '</option>';
 	    else
-		echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . $panel['panel_name'] . ' (admin prohibited)</option>\n';
+		echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . $panel['panel_name'] . ' (admin prohibited)</option>';
 	}
     }
 
@@ -401,14 +402,14 @@ $(document).ready(function () {
 	    
     }
     
-    echo '</select>\n';
-    echo "<input type='submit' name='intropage_go' value='Go'>\n";
-    echo '</form>\n';
+    echo '</select>';
+    echo "<input type='submit' name='intropage_go' value='Go'>";
+    echo '</form>';
     // end of settings
 
-    print "<div style='width: 100%'> Generated: " . date('H:i:s') . " (" . round(microtime(true) - $debug_start)  . "s)</div>\n";
+    print "<div style='width: 100%'> Generated: " . date('H:i:s') . " (" . round(microtime(true) - $debug_start)  . "s)</div>";
 
-    echo '</div>\n'; // konec megaobal
+    echo '</div>'; // konec megaobal
 
     return true;
 }

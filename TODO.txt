@@ -10,8 +10,8 @@ v action nerecim prioritu favgraph, takze to dostane default
 
 errors
 ------
-debug panel - asi konfigurovat jako normalni panel a ulozit do db
-
+debug panel - asi konfigurovat jako normalni panel a ulozit do db - proc?
+zmenim si poradi panelu, kliknu znovu na konzoli a mam je v puvodnim poradi
 
 
 Minor
@@ -24,7 +24,7 @@ Code cleaning
 taby na zacatku
 v podminkach nedelat mezery
 snazit se pouzivat apostrofy
-mam setup.php
+zbyva adresar include
 
 
 
