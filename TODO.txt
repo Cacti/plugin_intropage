@@ -21,25 +21,8 @@ copy text in panels
 
 Code cleaning
 -------------
-Remove all instances of $_GET, $_REQUEST, and $_POST and replacing the wrappers get_request_var(), get_filter_request_var(), set_request_var(), isset_request_var(), isempty_request_var() (mandatory)
-- tady vsude tedy get_filter_request_var
-get_filter_request_var($name, $filter = FILTER_VALIDATE_INT, $options = array()) {
-- kdyz je to int, nemusim ani druhy parametr
-regexp se dela takhle
-get_filter_request_var('tab', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-zA-Z]+)$/')));
-nebo 'regexp' => '/^(in|out)$/')))
-default v options['default'] = "vychozi";
-
-
-Utilize the 'validate_store_request_vars()' function to greatly simplify request validation on your pages. (mandatory)
--- toto je videt v tholdu, ale uklada to do session
-
-pro selecty asi pouzit db_fetch_assoc_prepared, nemusim prepared, on ho vola i tak, jen mu nepredava parametry
-
 taby na zacatku
-
 v podminkach nedelat mezery
-
 snazit se pouzivat apostrofy
 
 

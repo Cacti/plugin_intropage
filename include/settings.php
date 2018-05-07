@@ -330,17 +330,5 @@ function intropage_user_group_admin_setup_sql_save($save) {
 }
 */
 
-/*
-function intropage_user_admin_tab ()	{
- // nepouzivam, nakonec jdu pres config_form
- /// !!!! pokracovat zde 
- // https://github.com/Canatrix/cacti-plugin-api/blob/master/includes/tab.php
-    echo '
-	<td width="1"></td>
-	<td '. ((get_request_var_request("tab") == "api_settings_edit") ? "bgcolor='silver'" : "bgcolor='#DFDFDF'").' nowrap="nowrap" width="130" align="center" class="tab">
-		    <span class="textHeader"><a href="'.htmlspecialchars("user_admin.php?action=user_edit&tab=api_settings_edit&id=" . $_GET["id"]).'">RestAPI accesses</a></span>
-		</td>
-    ';
-}
-*/ 
+
 ?>
