@@ -62,7 +62,7 @@ $(window).load(function() {
 	    xdata.push($(this).attr("id"));
 	});
 
-	$.get('$url_path',{xdata:xdata});
+	$.get('$url_path',{xdata:xdata, intropage_action: "order"});
       }
     });
     $( "#sortable" ).disableSelection();

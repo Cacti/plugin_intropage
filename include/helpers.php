@@ -88,7 +88,7 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 
 // awesome 5.0+    printf("<a href='#' title='Reload panel - not implemented' class='header_link'><i class='fa fa-sync-alt'></i></a>\n");
 
-    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n","?action=disable&panel_id=$panel_id");
+    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n","?intropage_action=droppanel&panel_id=$panel_id");
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
 	printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n",md5($header));
@@ -376,10 +376,10 @@ function intropage_graph_button($data)	{
 
         $lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
         if ($lopts == 1) { // in tab
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 	}
 	else	{	// in console
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 	}
 
     }

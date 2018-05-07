@@ -44,6 +44,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Add user permissions 
 	Add default snmp community (public/private) check
 	Improve favourite graphs - you can set more than 2 graphs
+	Improve ntp - add time difference
 	Fix blank login page if intropage in console is default page
 	Fix show/hide detail
 	Fix db check - Ok tables are reported as damaged if check level is "Changed"
