@@ -14,7 +14,21 @@ function display_information() {
 
 	$selectedTheme = get_selected_theme();
 
-	$url_path = $config['url_path'] . 'plugins/intropage';
+
+
+
+//	$url_path = $config['url_path'] . 'plugins/intropage/';
+
+
+        
+        if (db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id'])== 1)  // in tab
+            $url_path = $config['url_path'] . 'plugins/intropage/intropage.php'; 
+        else           // in console
+            $url_path = $config['url_path'];
+
+
+
+
 
 	// actions
 	include_once($config['base_path'] . '/plugins/intropage/include/actions.php');
@@ -24,8 +38,8 @@ function display_information() {
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');	
 
 	// style for panels
-	print "<link type='text/css' href='$url_path/themes/common.css' rel='stylesheet'>";
-	print "<link type='text/css' href='$url_path/themes/" . $selectedTheme . ".css' rel='stylesheet'>";
+	echo "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
+	echo "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/" . $selectedTheme . ".css' rel='stylesheet'>";
 
 	
 print <<<EOF
@@ -55,8 +69,7 @@ $(window).load(function() {
 	    xdata.push($(this).attr("id"));
 	});
 
-//	$.get('$url_path',{xdata:xdata, intropage_action: "order"});
-	$.get('$url_path',{xdata:xdata});
+	$.get('$url_path',{xdata:xdata, intropage_action:'order'});
       }
     });
     $( "#sortable" ).disableSelection();

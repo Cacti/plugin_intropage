@@ -1,6 +1,7 @@
 <?php
 
 
+
 if (isset_request_var('intropage_action') && 
     get_filter_request_var('intropage_action', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')))) {
 
