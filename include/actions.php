@@ -16,6 +16,9 @@ if (isset_request_var('intropage_action') &&
 	case "droppanel":
 	    if (get_filter_request_var('panel_id')) 
 		db_execute ("delete from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . " and id = " . get_request_var('panel_id'));
+	    // user can close debug panels like others
+	    if (get_request_var('panel_id') == 999)
+    		set_user_setting('intropage_debug', 0);
 	break;
 
 
