@@ -48,6 +48,8 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Fix blank login page if intropage in console is default page
 	Fix show/hide detail
 	Fix db check - Ok tables are reported as damaged if check level is "Changed"
+	Fix drag and drop
+	Fix sorting panels
 
 	1.6 ---
 	Add user setting directly on intropage (close/add panel, autorefresh, ...)
