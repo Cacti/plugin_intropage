@@ -30,8 +30,11 @@ if (isset_request_var('intropage_action') &&
 	
 		}
 		else	{	// add to fav
-		    db_execute ("insert into plugin_intropage_user_setting (user_id,panel,fav_graph_id) values (" . $_SESSION['sess_user_id'] . 
-				",'intropage_favourite_graph'," . get_request_var('graph_id') . ")"); 
+		    // priority for new panel:
+		    $prio = db_fetch_cell ("select priority from plugin_intropage_panel where panel='intropage_favourite_graph'");
+		    
+		    db_execute ("insert into plugin_intropage_user_setting (user_id,priority,panel,fav_graph_id) values (" . $_SESSION['sess_user_id'] . 
+				",$prio,'intropage_favourite_graph'," . get_request_var('graph_id') . ")"); 
 		}
 	    }
 	break;

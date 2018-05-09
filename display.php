@@ -139,11 +139,7 @@ EOF;
 	// Retrieve access
 	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8"))?true:false;
 	
-	// Start
-	$values = array();
-
 	// retrieve user setting (and creating if not)
-
 	
 	if (db_fetch_cell ('select count(*) from plugin_intropage_user_setting where fav_graph_id is null and user_id = ' . $_SESSION['sess_user_id'] ) == 0)	{
 	    $all_panel = db_fetch_assoc('SELECT panel,priority from plugin_intropage_panel');
@@ -167,25 +163,41 @@ EOF;
 	}
 
 	// panels + favourite graphs (fav_graph_id is not null)
-	$xpanels = db_fetch_assoc ("select id,panel,priority from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and panel !='intropage_favourite_graph'  order by priority desc" );
+//	$xpanels = db_fetch_assoc ("select id,panel,priority from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and panel !='intropage_favourite_graph'  order by priority desc" );
+//	$panels = array_merge($xpanels,db_fetch_assoc ("select id,concat(panel,'_',fav_graph_id) as panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and (panel='intropage_favourite_graph' and fav_graph_id is not null)  order by priority desc" ));
 
-	$panels = array_merge($xpanels,db_fetch_assoc ("select id,concat(panel,'_',fav_graph_id) as panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and (panel='intropage_favourite_graph' and fav_graph_id is not null)  order by priority desc" ));
+	$order = ' priority desc';
+	if (isset ($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order']))	{
+	    $order = 'field (id,';
+	    foreach ($_SESSION['intropage_order'] as $ord)	{
+		$order .= $ord . ',';
+	    }
+	    $order = substr ($order,0,-1);    
+	    $order .= ')'; 	
+	}
+	
+//	$panels = db_fetch_assoc ("select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . " and (panel !='intropage_favourite_graph' or panel='intropage_favourite_graph' and fav_graph_id is not null) order by $order");
+
+	// zde pozor, mohl bych to selectovat v jednom dotazu, ale potrebuju, aby se fav grafy jmenovali jinak.
+	// bez toho si je nize ve foreach presisuju,, protoze se oba jmenuji jen fav_graph
+
+	$panels = db_fetch_assoc ("select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . 
+	$_SESSION['sess_user_id'] . "  and panel !='intropage_favourite_graph' union select id,concat(panel,'_',fav_graph_id) as panel, priority,fav_graph_id from plugin_intropage_user_setting where ( panel='intropage_favourite_graph' and fav_graph_id is not null) order by  $order");
 
 	// retrieve data for all panels
-	foreach ($panels as $panel)	{
+	foreach ($panels as $xkey => $xvalue)	{
 
-	    $pokus = $panel['panel'];
-		$start = microtime(true);	
+	    $pokus = $xvalue['panel'];
+	    $start = microtime(true);	
 
-		if (isset($panel['fav_graph_id']))	{ // fav_graph exception
-		    $values[$pokus] = intropage_favourite_graph($panel['fav_graph_id']);
-		}
-		else	{	// normal panel
-		    $values[$pokus] = $pokus();
-		}
+	    if (isset($xvalue['fav_graph_id']))	{ // fav_graph exception
+		$panels[$xkey]['alldata'] = intropage_favourite_graph($xvalue['fav_graph_id']);
+	    }
+	    else	{	// normal panel
+		$panels[$xkey]['alldata'] = $pokus();
+	    }
 		
-		$debug .= $pokus . ': ' . round(microtime(true) -$start,2) . ' || ';
-
+	    $debug .= $pokus . ': ' . round(microtime(true) -$start,2) . ' || ';
 	}
 
 
@@ -201,75 +213,66 @@ EOF;
     
 
     // user changed order - new order is valid until logout
-    
+    /*	ted resim az dole, vyse vyresim order a zobrazovani je pak stejne
     if (isset ($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order']))	{
 	$order = '';
 	foreach ($_SESSION['intropage_order'] as $ord)	{
 	    $order .= $ord . ',';
 	}
 	$order = substr ($order,0,-1);    
+
+	$panels = db_fetch_assoc  ("select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . " and (panel !='intropage_favourite_graph' or panel='intropage_favourite_graph' and fav_graph_id is not null) order by field (id,$order)");
     
-        $query = "select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where panel !='intropage_favourite_graph' or (panel='intropage_favourite_graph' and fav_graph_id is not null)  order by field (id,$order)";
-	$panels = db_fetch_assoc($query);
-
-        foreach($panels as $panel) {
-	    $pom = $panel['panel'];
-    	    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+        foreach($panels as $xkey => $xvalue) {
+    	    intropage_display_panel($xvalue['id'],$xvalue['alldata']['alarm'],$xvalue['alldata']['name'],$xvalue['alldata']);
 	}
-    }
-    elseif ($display_important_first == 'on')	{  // important first
+    }*/
+    
+    if ($display_important_first == 'on')	{  // important first
+    	    foreach($panels as $xkey => $xvalue) {	
 
-    	    foreach($panels as $panel) {	
-    		$pom = $panel['panel'];
-
-		if ($values[$pom]['alarm'] == "red")	{
-		    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-		    $values[$pom]['displayed'] = true;
+		if ($xvalue['alldata']['alarm'] == "red")	{
+		    intropage_display_panel($xvalue['id'],$xvalue['alldata']['alarm'],$xvalue['alldata']['name'],$xvalue['alldata']);
+		    $panels[$xkey]['displayed'] = true;
 		}
 	    }
 
 	    // yellow (errors and warnings)
-	    if ($display_level == 1 || ($display_level == 2 && !isset($values[$pom]['displayed'])))	{
-    		foreach($panels as $panel) {	
-    		    $pom = $panel['panel'];
-    	    	    if ($values[$pom]['alarm'] == "yellow")	{
-			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			$values[$pom]['displayed'] = true;
+	    if ($display_level == 1 || ($display_level == 2 && !isset($xvalue['displayed'])))	{
+    		foreach($panels as $xkey => $xvalue) {	
+    	    	    if ($xvalue['alldata']['alarm'] == "yellow")	{
+			intropage_display_panel($xvalue['id'],$xvalue['alldata']['alarm'],$xvalue['alldata']['name'],$xvalue['alldata']);
+			$panels[$xkey]['displayed'] = true;
 		    }
 		}
 	    }
 
 	    // green (all)
 	    if ($display_level == 2)	{
-    		foreach($panels as $panel) {	
-    		    $pom = $panel['panel'];
-
-		    if ($values[$pom]['alarm'] == "green")	{
-    			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			$values[$pom]['displayed'] = true;
+    		foreach($panels as $xkey => $xvalue) {	
+		    if ($xvalue['alldata']['alarm'] == "green")	{
+			intropage_display_panel($xvalue['id'],$xvalue['alldata']['alarm'],$xvalue['alldata']['name'],$xvalue['alldata']);
+			$panels[$xkey]['displayed'] = true;
 		    }
 		}
 
 		// grey and without color
-    		foreach($panels as $panel) {	
-    		    $pom = $panel['panel'];
-        	    if (!isset($values[$pom]['displayed']))	{
-			intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
-			$values[$pom]['displayed'] = true;
+    		foreach($panels as $xkey => $xvalue) {	
+        	    if (!isset($xvalue['displayed']))	{
+			intropage_display_panel($xvalue['id'],$xvalue['alldata']['alarm'],$xvalue['alldata']['name'],$xvalue['alldata']);
+			$panels[$xkey]['displayed'] = true;
 		    }
 		}
 	    }
     }
     else	{	// display only errors/errors and warnings/all - order by priority
-	foreach ($panels as $panel)	{
-
-	    $pom = $panel['panel'];
+	foreach ($panels as $xkey => $xvalue)	{
 
 	    if (
 		($display_level == 2 ) ||
-	        ($display_level == 1 && ($values[$pom]['alarm'] == "red" || $values[$pom]['alarm'] =="yellow") ) ||
-	        ($display_level == 0 &&  $values[$pom]['alarm'] == "red") )	{
-		    intropage_display_panel($panel['id'],$values[$pom]['alarm'],$values[$pom]['name'],$values[$pom]);
+	        ($display_level == 1 && ($xvalue['alldata']['alarm'] == "red" || $xvalue['alldata']['alarm'] =="yellow") ) ||
+	        ($display_level == 0 &&  $xvalue['alldata']['alarm'] == "red") )	{
+		    intropage_display_panel($xvalue['id'],$xvalue['alldata']['alarm'],$xvalue['alldata']['name'],$xvalue['alldata']);
 		}
 	}
     }

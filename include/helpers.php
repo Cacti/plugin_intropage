@@ -385,23 +385,6 @@ function intropage_graph_button($data)	{
     }
 
 
-/*
-	$fav = "<i class='fa fa-eye' title='add to dashboard'></i>";
-
-        $local_graph_id = $data[1]['local_graph_id'];
-
-	$fg = explode (',', read_user_setting('intropage_favourite_graphs'));
-	if (array_search ($local_graph_id, $fg) !==false)
-    	    $fav = "<i class='fa fa-eye-slash'  title='remove from dashboard'></i>";
-
-        $lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
-        if ($lopts == 1) { // in tab
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
-	}
-	else	{	// in console
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
-	}
-*/	
 	
 }
 

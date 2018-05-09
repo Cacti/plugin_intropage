@@ -1396,8 +1396,6 @@ function intropage_favourite_graph($fav_graph_id)	{
         );
 
 
-
-
 	$result['name'] .= db_fetch_cell_prepared('select title_cache from graph_templates_graph where local_graph_id = ?',
                  array($fav_graph_id));
 
