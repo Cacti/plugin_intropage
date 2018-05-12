@@ -1,17 +1,13 @@
+Asi to vydat, pak resit ty dalsi veci
+
+
 Major
 -----
 add reload for each panel
 
-v action nerecim prioritu favgraph, takze to dostane default
-
-
-
-
 
 errors
 ------
-debug panel - asi konfigurovat jako normalni panel a ulozit do db - proc?
-zmenim si poradi panelu, kliknu znovu na konzoli a mam je v puvodnim poradi
 
 
 Minor
