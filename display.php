@@ -14,20 +14,12 @@ function display_information() {
 
 	$selectedTheme = get_selected_theme();
 
-
-
-
 //	$url_path = $config['url_path'] . 'plugins/intropage/';
-
-
-        
+    
         if (db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id'])== 1)  // in tab
             $url_path = $config['url_path'] . 'plugins/intropage/intropage.php'; 
         else           // in console
             $url_path = $config['url_path'];
-
-
-
 
 
 	// actions
