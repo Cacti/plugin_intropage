@@ -1,16 +1,29 @@
+Asi to vydat, pak resit ty dalsi veci
+
+
 Major
 -----
-admin option for disable panels with sensitive data for users without console
 add reload for each panel
 
 
 errors
 ------
-maximalize and minimalize symbols (+ and -) works strange :-)
 
 
 Minor
 -----
+copy text in panels
+
+
+Code cleaning
+-------------
+taby na zacatku
+v podminkach nedelat mezery
+snazit se pouzivat apostrofy
+zbyva adresar include
+
+
+
 plugins.php - awaiting configuration
 top5,extrem - style 2em hardcoded
 code cleaning

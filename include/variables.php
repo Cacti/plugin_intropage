@@ -2,50 +2,28 @@
 
 // priority (order) (bigger number =  highest priority)
 $panel = array();
+$panel['intropage_analyse_log']['priority'] = 60;
+$panel['intropage_analyse_login']['priority'] = 75;
+$panel['intropage_thold_event']['priority'] = 77;
+$panel['intropage_analyse_db']['priority'] = 70;
+$panel['intropage_analyse_tree_host_graph']['priority'] = 50;
+$panel['intropage_trend']['priority'] = 30;
+$panel['intropage_extrem']['priority'] = 30;
+$panel['intropage_ntp']['priority'] = 60;
+$panel['intropage_poller_info']['priority'] = 50;
+$panel['intropage_poller_stat']['priority'] = 50;
+$panel['intropage_graph_host']['priority'] = 14;
+$panel['intropage_graph_thold']['priority'] = 13;
+$panel['intropage_graph_data_source']['priority'] = 12;
+$panel['intropage_graph_host_template']['priority'] = 11;
+$panel['intropage_cpu']['priority'] = 45;
+$panel['intropage_top5_ping']['priority'] = 30;
+$panel['intropage_top5_availability']['priority'] = 31;
+$panel['intropage_info']['priority'] = 1;
+$panel['intropage_boost']['priority'] = 55;
+$panel['intropage_favourite_graph']['priority'] = 99;
 
-$panel['analyse_log']['priority'] = 60;
-
-$panel['analyse_login']['priority'] = 75;
-
-$panel['thold_events']['priority'] = 77;
-
-$panel['analyse_db']['priority'] = 70;
-
-$panel['analyse_tree_host_graph']['priority'] = 50;
-
-$panel['trend']['priority'] = 30;
-
-$panel['extrem']['priority'] = 30;
-
-$panel['ntp']['priority'] = 60;
-
-$panel['poller_info']['priority'] = 50;
-
-$panel['poller_stat']['priority'] = 50;
-
-$panel['graph_host']['priority'] = 14;
-
-$panel['graph_thold']['priority'] = 13;
-
-$panel['graph_data_source']['priority'] = 12;
-
-$panel['graph_host_template']['priority'] = 11;
-
-$panel['cpu']['priority'] = 45;
-
-$panel['top5_ping']['priority'] = 30;
-
-$panel['top5_availability']['priority'] = 31;
-
-$panel['info']['priority'] = 1;
-
-$panel['boost']['priority'] = 55;
-
-$panel['favourite_graph']['priority'] = 71;
-
-
-
-$intropage_settings = array(
+$intropage_settings = array(	// default values
 
 	"intropage_display_header" => array(
 		"friendly_name" => "Display settings",
@@ -71,7 +49,7 @@ $intropage_settings = array(
 		"array" => array("0" => "Only errors", "1" => "Errors and warnings", "2" => "All",),
 		"default" => "2",
 	),
-
+/*
 // analyse_log
 	"intropage_analyse_header" => array(
 		"friendly_name" => "Logs",
@@ -84,15 +62,16 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
+*/
 	"intropage_analyse_log_rows" => array(
-		"friendly_name" => "Number of lines",
+		"friendly_name" => "Analyse log -  number of lines",
 		"description" => "How many lines of log will be analysed. Big number may causes slow page load",
 		"method" => "textbox",
 		"max_length" => 5,
 		"default" => "1000",
 	),
 	
-	
+/*	
 // analyse_login	
 	"intropage_analyse_login_header" => array(
 		"friendly_name" => "Login analyse settings",
@@ -130,14 +109,16 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
+*/
 	"intropage_analyse_db_level" => array(
-		"friendly_name" => "Level of db check",
+		"friendly_name" => "Analyse DB - Level of db check",
 		"description" => "Quick - no check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>",
 		"method" => "drop_array",
 		"array" => array("QUICK" => "Quick", "FAST" => "Fast", "CHANGED" => "Changed", "MEDIUM" => "Medium", "EXTENDED"  => "Extended"),
-		"default" => "Medium",
+		"default" => "Changed",
 	),
-	
+
+/*	
 	"intropage_analyse_tree_header" => array(
 		"friendly_name" => "Analyses, trends, extrems, ...",
 		"method" => "spacer",
@@ -181,13 +162,15 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
+*/
 	"intropage_ntp_server" => array(
-		"friendly_name" => "IP or DNS name of NTP server",
+		"friendly_name" => "NTP (time) check - IP or DNS name of NTP server",
 		"description" => "Insert IP or DNS name of NTP server",
 		"method" => "textbox",
 		"max_length" => 50,
 		"default" => "pool.ntp.org",
 	),
+/*
 	"intropage_poller_header" => array(
 		"friendly_name" => "Poller",
 		"method" => "spacer",
@@ -226,7 +209,7 @@ $intropage_settings = array(
 
 // favourite_graph	
 	"intropage_favourite_graph" => array(
-		"friendly_name" => "Allow add up to 2 arbitrary graphs to dashboard for users",
+		"friendly_name" => "Allow add any graphs to dashboard for users",
 		"description" => "if checked panel is allowed for users",
 		"method" => "checkbox",
 		"default" => "on",
@@ -314,7 +297,7 @@ $intropage_settings = array(
 		"method" => "checkbox",
 		"default" => "on",
 	),
-
+*/
 );
 
 ?>

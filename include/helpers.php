@@ -60,7 +60,7 @@ function human_filesize($bytes, $decimals = 2) {
 function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
     global $config;
    
-    if (!empty($dispdata))	{	// empty? Typical for no console access
+//    if (!empty($dispdata))	{	// empty? Typical for no console access
 	
     $selectedTheme = get_selected_theme();
     switch ($selectedTheme)	{
@@ -78,17 +78,20 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 	    $bgcolor = "#f5f5f5";
     }
 
+
     print "<li id='panel_$panel_id' class='ui-state-default flexchild'>\n";
     print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
 
     print "<div class='panel_header color_$type'>\n";
     print "$header\n";
 
-//    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; X &nbsp;</a>\n",$config["url_path"] . "plugins/intropage/intropage.php?action=disable&panel_id=$panel_id");
-    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; X &nbsp;</a>\n","?action=disable&panel_id=$panel_id");
+
+// awesome 5.0+    printf("<a href='#' title='Reload panel - not implemented' class='header_link'><i class='fa fa-sync-alt'></i></a>\n");
+
+    printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n","?intropage_action=droppanel&panel_id=$panel_id");
     
     if (isset($dispdata['detail']) && !empty($dispdata['detail']))	{
-	printf("<a href='#' title='Show details' class='header_link maxim' name='%s'> + </a>\n",md5($header));
+	printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n",md5($header));
     }
 
 
@@ -318,7 +321,7 @@ print "</div>\n";
     html_end_box(false);
     print "</li>\n\n";
 
-    } // have console access
+//    } // have console access
 }
 
 
@@ -354,24 +357,37 @@ function intropage_graph_button($data)	{
 
        global $config;
 
+    // if (read_config_option("intropage_favourite_graph") == "on")      {
+    if (db_fetch_cell("select intropage_favourite_graph from user_auth where id=" . $_SESSION['sess_user_id']) == "on") {
+
         $local_graph_id = $data[1]['local_graph_id'];
+
+
+    if (db_fetch_cell ("select count(*) from plugin_intropage_user_setting where user_id=" . $_SESSION['sess_user_id'] .
+        " and fav_graph_id=" . $local_graph_id) > 0)   {       // already fav
+
+	    $fav = "<i class='fa fa-eye-slash'  title='remove from dashboard'></i>";
+
+    }
+    else        {       // add to fav
+	$fav = "<i class='fa fa-eye' title='add to dashboard'></i>";
+    }
+
 
         $lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
         if ($lopts == 1) { // in tab
-// tohle funguje u tabu
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph=1&graph_id=' . $local_graph_id . '">[1]</a><br/>';
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?action=favgraph&graph=2&graph_id=' . $local_graph_id . '">[2]</a><br/>';
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 	}
 	else	{	// in console
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph=1&graph_id=' . $local_graph_id . '">[1]</a><br/>';
-	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?action=favgraph&graph=2&graph_id=' . $local_graph_id . '">[2]</a><br/>';
-	
-	
+	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 	}
 
+    }
 
 
+	
 }
+
 
 
 ?>

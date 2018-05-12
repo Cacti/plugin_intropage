@@ -3,7 +3,7 @@
 
 //------------------------------------ analyse_db -----------------------------------------------------
 
-function analyse_db() {
+function intropage_analyse_db() {
 	global $config;
 	
 	$result = array(
@@ -21,8 +21,9 @@ function analyse_db() {
 	foreach($tables as $key=>$val) {
 
 		$row = db_fetch_row("check table ".current($val)." $db_check_level");
+
 		if (preg_match('/^note$/i',$row["Msg_type"]) && preg_match('/doesn\'t support/i',$row["Msg_text"])) { $memtables++; }
-		elseif (!preg_match('/OK/i',$row["Msg_text"])) { $damaged++; $result['detail'] .= "Table " . $row["Table"] . " status " . $row["Msg_text"] . "<br/>\n"; }
+		elseif (!preg_match('/OK/i',$row["Msg_text"]) && !preg_match('/Table is already up to date/i',$row["Msg_text"]) ) { $damaged++; $result['detail'] .= "Table " . $row["Table"] . " status " . $row["Msg_text"] . "<br/>"; }
 	}
 	
 	if ($damaged > 0) { 
@@ -59,7 +60,7 @@ function analyse_db() {
 //------------------------------------ analyse_log -----------------------------------------------------
 
 
-function analyse_log() {
+function intropage_analyse_log() {
 	global $config, $log;
 	
 	$result = array(
@@ -69,21 +70,21 @@ function analyse_log() {
 		'detail' => '',
 	);
 
-	if (read_config_option('intropage_analyse_log')) {
+//	if (read_config_option('intropage_analyse_log')) {
 		$log = array(
 			'file' => read_config_option("path_cactilog"),
 			'nbr_lines' => read_config_option("intropage_analyse_log_rows"),
 		);
 		$log['size'] = filesize($log['file']);
 		$log['lines'] = tail_log($log['file'],$log['nbr_lines']);
-	} else {
+/*	} else {
 		$log = array(
 			'size' => false,
 			'file' => read_config_option("path_cactilog"),
 			'nbr_lines' => 0,
 		);
 	}
-	
+*/	
 	if (!$log['size'] || !isset($log['lines'])) {
 		$result['alarm'] = "red";
 		$result['data'] .= "Log file not accessible";
@@ -110,10 +111,10 @@ function analyse_log() {
 		    
 		}
 		        
-		$result['data'] .= "<span class=\"txt_big\">\n";
+		$result['data'] .= "<span class=\"txt_big\">";
 		$result['data'] .= "Errors: $error<br/>";
 		$result['data'] .= "Warnings: $warn<br/>";
-		$result['data'] .= "</span>\n";
+		$result['data'] .= "</span>";
 
 
 	
@@ -147,7 +148,7 @@ function analyse_log() {
 //------------------------------------ analyse_login -----------------------------------------------------
 
 
-function analyse_login() {
+function intropage_analyse_login() {
 	global $config;
 	
 	$result = array(
@@ -184,7 +185,7 @@ function analyse_login() {
 	
 	$loggin_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=19"))?true:false;
 	if ($result['detail'] && $loggin_access)	    
-		$result['detail'] .= "<br/><br/><a href=\"" . htmlspecialchars($config['url_path']) . "utilities.php?action=view_user_log\">Full log</a><br/>\n";
+		$result['detail'] .= "<br/><br/><a href=\"" . htmlspecialchars($config['url_path']) . "utilities.php?action=view_user_log\">Full log</a><br/>";
 	
 	return $result;
 }
@@ -195,7 +196,7 @@ function analyse_login() {
 
 
 
-function analyse_tree_host_graph() {
+function intropage_analyse_tree_host_graph() {
     global $config, $allowed_hosts;
 	
     $result = array(
@@ -224,7 +225,7 @@ function analyse_tree_host_graph() {
 		    $pom++;
 		    $result['detail'] .= "Same description:<br/>";
 		}
-		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
+		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
 	    }
 	}
     }
@@ -256,7 +257,7 @@ function analyse_tree_host_graph() {
 		    $result['detail'] .= "<br/><br/>Device on more then one tree:<br/>";
 		}
 
-		$result['detail'] .= sprintf("<a href=\"%stree.php?action=edit&id=%d\">Node: %s | Tree: %s</a><br/>\n",htmlspecialchars($config['url_path']),$host['gtid'],$host['description'],$tree);
+		$result['detail'] .= sprintf("<a href=\"%stree.php?action=edit&id=%d\">Node: %s | Tree: %s</a><br/>",htmlspecialchars($config['url_path']),$host['gtid'],$host['description'],$tree);
     	    }
 	}
     }
@@ -281,7 +282,7 @@ function analyse_tree_host_graph() {
 		$result['detail'] .= "<br/><br/>Host without graph:<br/>";
 	    }
 
-	    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
+	    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
 	}
     }
 
@@ -305,7 +306,7 @@ function analyse_tree_host_graph() {
 		$result['detail'] .= "<br/><br/>Hosts without tree:<br/>";
 	    }
 
-	    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
+	    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
 	}
     }
 
@@ -333,7 +334,7 @@ function analyse_tree_host_graph() {
 		    $result['detail'] .= "<br/><br/>Device with same ip and port:<br/>";
 		}
 
-		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s %s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['hostname'],$row['id']);
+		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s %s (ID: %d)</a><br/>",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['hostname'],$row['id']);
 	    }
 	}
     }
@@ -361,7 +362,7 @@ function analyse_tree_host_graph() {
 		    $result['detail'] .= "<br/><br/>Plugin monitor, not monitored devices:<br/>";
 		}
 
-		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s %s (ID: %d)</a><br/>\n",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['hostname'],$row['id']);
+		$result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s %s (ID: %d)</a><br/>",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['hostname'],$row['id']);
     
 	    }
 	}
@@ -381,10 +382,37 @@ function analyse_tree_host_graph() {
         foreach($sql_result as $row) {
 
             $result['detail'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "data_sources.php?action=ds_edit&id=" . $row['local_data_id'] . "\">" .
-            $row['name_cache'] . "</a><br/>\n";
+            $row['name_cache'] . "</a><br/>";
 
         }
     }
+
+
+    // public/private community
+    //select id,hostname from host where snmp_community ='public' or snmp_community='private'
+    $pom = 0;
+    $result['data'] .= 'Hosts with default public/private community: ';
+
+    $sql_result = db_fetch_assoc("SELECT id,description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND (snmp_community ='public' or snmp_community='private')");
+
+    $result['data'] .= count($sql_result) . "<br/>";
+    if (count($sql_result) > 0) {
+	if ($result['alarm'] == "green")
+	    $result['alarm'] = "yellow";
+	
+	foreach($sql_result as $row) {
+    	    if ($pom == 0)	{
+		$pom++;
+		$result['detail'] .= "<br/><br/>Default community name (public/private):<br/>";
+	    }
+
+	    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
+	}
+    }
+    $total_errors += count($sql_result);
+
+
+
 
 
     $total_errors += count($sql_result);
@@ -401,7 +429,7 @@ function analyse_tree_host_graph() {
 //------------------------------------ boost -----------------------------------------------------
 
 
-function boost() {
+function intropage_boost() {
     global $config, $boost_refresh_interval, $boost_max_runtime;
 	
     $result = array(
@@ -544,7 +572,7 @@ function boost() {
 //------------------------------------ cpu -----------------------------------------------------
 
 
-function cpu() {
+function intropage_cpu() {
     global $config;
 	
     $result = array(
@@ -589,7 +617,7 @@ function cpu() {
 
 //------------------------------------ extrem -----------------------------------------------------
 
-function extrem() {
+function intropage_extrem() {
 	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
@@ -599,34 +627,34 @@ function extrem() {
 	);
 	
 	
-	$result['data'] .= "<table><tr><td style=\"padding-right: 2em;\">\n";
+	$result['data'] .= "<table><tr><td class=\"rpad\">";
 	
     // long run poller	
-	$result['data'] .= "<strong>Long run poller: </strong>";
+	$result['data'] .= "<strong>Long run<br/>poller: </strong>";
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,substring(value,instr(value,':')+1) as xvalue FROM plugin_intropage_trends WHERE name='poller' and date > date_sub(date,interval 1 day) order by xvalue desc, date  limit 5");
 	foreach($sql_result as $row) {
-            $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['xvalue'] . "s\n";     
+            $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['xvalue'] . "s";     
 	}	
-	$result['data'] .="</td><td style=\"padding-right: 2em;\">\n";
+	$result['data'] .="</td><td class=\"rpad texalirig\">";
 	
     // max host down
-	$result['data'] .= "<strong>Max host down: </strong>";
+	$result['data'] .= "<strong>Max host<br/>down: </strong>";
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='host' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
 	foreach($sql_result as $row) {
-            $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "\n";     
+            $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "";     
 	}	
-	$result['data'] .="</td><td style=\"padding-right: 2em;\">\n";
+	$result['data'] .="</td><td class=\"rpad texalirig\">";
 	
     // max thold trig
-	$result['data'] .= "<strong>Max thold triggered: </strong>";
+	$result['data'] .= "<strong>Max thold<br/>triggered: </strong>";
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
 	foreach($sql_result as $row) {
-            $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "\n";     
+            $result['data'] .=  "<br/>" . $row['xdate'] . " " . $row['value'] . "";     
 
 	}	
-	$result['data'] .="</td></tr>\n";
+	$result['data'] .="</td></tr>";
 
-	$result['data'] .= "</table>\n";
+	$result['data'] .= "</table>";
 
 	return $result;
 }
@@ -634,7 +662,7 @@ function extrem() {
 //------------------------------------ graph_datasource -----------------------------------------------------
 
 
-function graph_data_source() {
+function intropage_graph_data_source() {
 	global $config, $input_types;
 
 	$result = array(
@@ -679,7 +707,7 @@ function graph_data_source() {
 //------------------------------------ graph_host -----------------------------------------------------
 
 
-function graph_host() {
+function intropage_graph_host() {
 	global $config, $allowed_hosts, $console_access, $sql_where;
 	
 	$result = array(
@@ -701,19 +729,20 @@ function graph_host() {
 //	elseif ($h_disa > 0) { $result['alarm'] = "yellow"; }
 	
 	if ($console_access) {
-	    $result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-1\">All: $h_all</a><br/>\n";
-	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=3\">Up: $h_up</a><br/>\n";
-	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=1\">Down: $h_down</a><br/>\n";
-	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-2\">Disabled: $h_disa</a><br/>\n";
-	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=2\">Recovering: $h_reco</a>\n";
+	    $result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-1\">All: $h_all</a><br/>";
+	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=3\">Up: $h_up</a><br/>";
+	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=1\">Down: $h_down</a><br/>";
+	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=-2\">Disabled: $h_disa</a><br/>";
+	    $result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "host.php?host_status=2\">Recovering: $h_reco</a>";
 	} else {
-    	    $result['data']  = "All: $h_all<br/>\n";
-	    $result['data'] .= "Up: $h_up<br/>\n";
-	    $result['data'] .= "Down: $h_down<br/>\n";
-	    $result['data'] .= "Disabled: $h_disa<br/>\n";
-	    $result['data'] .= "Recovering: $h_reco\n";
+    	    $result['data']  = "All: $h_all<br/>";
+	    $result['data'] .= "Up: $h_up<br/>";
+	    $result['data'] .= "Down: $h_down<br/>";
+	    $result['data'] .= "Disabled: $h_disa<br/>";
+	    $result['data'] .= "Recovering: $h_reco";
 	}
-	if (read_config_option('intropage_graph_host') == "on" && $count > 0) {
+//	if (read_config_option('intropage_graph_host') == "on" && $count > 0) {
+	if ($count > 0) {
 		$result['pie'] = array('title' => 'Hosts: ', 'label' => array("Up","Down","Recovering","Disabled"), 'data' => array($h_up,$h_down,$h_reco,$h_disa));
 	}
 	else	{
@@ -726,20 +755,20 @@ function graph_host() {
 	if ($h_reco > 0)	{
 	    $result['alarm'] = "yellow";
 	    $hosts = db_fetch_assoc ("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=2 AND disabled=''");
-	    $result['detail'] .= "<b>RECOVERING:</b><br/>\n";
+	    $result['detail'] .= "<b>RECOVERING:</b><br/>";
 	    foreach ($hosts as $host)
-		$result['detail'] .= $host['description'] . "<br/>\n";
-	    $result['detail'] .= "<br/><br/>\n";
+		$result['detail'] .= $host['description'] . "<br/>";
+	    $result['detail'] .= "<br/><br/>";
 	
 	}
 
 	if ($h_down > 0)	{
 	    $result['alarm'] = "red";
 	    $hosts = db_fetch_assoc ("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=1 AND disabled=''");
-	    $result['detail'] .= "<b>DOWN:</b><br/>\n";
+	    $result['detail'] .= "<b>DOWN:</b><br/>";
 	    foreach ($hosts as $host)
-		$result['detail'] .= $host['description'] . "<br/>\n";
-	    $result['detail'] .= "<br/><br/>\n";
+		$result['detail'] .= $host['description'] . "<br/>";
+	    $result['detail'] .= "<br/><br/>";
 	    
 	    
 	}    
@@ -752,7 +781,7 @@ function graph_host() {
 
 //------------------------------------ graph host_template -----------------------------------------------------
 
-function graph_host_template() {
+function intropage_graph_host_template() {
 	global $config, $allowed_hosts;
 	
 	$result = array(
@@ -787,7 +816,7 @@ function graph_host_template() {
 
 //------------------------------------ graph_thold -----------------------------------------------------
 
-function graph_thold() {
+function intropage_graph_thold() {
 	global $config, $sql_where;
 	
 	$result = array(
@@ -805,9 +834,9 @@ function graph_thold() {
 	
 	if (!db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
 		$result['alarm'] = "grey";
-		$result['data'] = "Thold plugin not installed/running\n";
+		$result['data'] = "Thold plugin not installed/running";
 	} elseif (!db_fetch_cell("SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
-		$result['data'] = "You don't have permission\n";
+		$result['data'] = "You don't have permission";
 	} else {
 		$sql_join = " LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
 			(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= " . $_SESSION["sess_user_id"] . ") OR
@@ -831,17 +860,17 @@ function graph_thold() {
 	//	elseif ($t_disa > 0) { $result['alarm'] = "yellow"; }
 		
 		if (db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')")) {
-			$result['data'] = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=-1\">All: $t_all</a><br/>\n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=1\">Breached: $t_brea</a><br/>\n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=3\">Trigged: $t_trig</a><br/>\n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=0\">Disabled: $t_disa</a><br/>\n";
+			$result['data'] = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=-1\">All: $t_all</a><br/>";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=1\">Breached: $t_brea</a><br/>";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=3\">Trigged: $t_trig</a><br/>";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/thold/thold_graph.php?tab=thold&amp;triggered=0\">Disabled: $t_disa</a><br/>";
 		} else {
-			$result['data'] = "All: $t_all<br/>\n";
-			$result['data'] .= "Breached: $t_brea<br/>\n";
-			$result['data'] .= "Trigged: $t_trig<br/>\n";
-			$result['data'] .= "Disabled: $t_disa<br/>\n";
+			$result['data'] = "All: $t_all<br/>";
+			$result['data'] .= "Breached: $t_brea<br/>";
+			$result['data'] .= "Trigged: $t_trig<br/>";
+			$result['data'] .= "Disabled: $t_disa<br/>";
 		}
-		if (read_config_option('intropage_graph_thold') == "on" && $count > 0)	{
+		if ($count > 0)	{
 			$result['pie'] = array('title' => 'Thresholds: ', 'label' => array("OK","Breached","Trigerred","Disabled"), 'data' => array($t_all-$t_brea-$t_trig-$t_disa,$t_brea,$t_trig,$t_disa));
 		}
 		else	{
@@ -856,20 +885,20 @@ function graph_thold() {
 	if ($t_brea > 0)	{
 	    $result['alarm'] = "yellow";
 	    $hosts = db_fetch_assoc ("select description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-	    $result['detail'] .= "<b>BREACHED:</b><br/>\n";
+	    $result['detail'] .= "<b>BREACHED:</b><br/>";
 	    foreach ($hosts as $host)
-		$result['detail'] .= $host['description'] . "<br/>\n";
-	    $result['detail'] .= "<br/><br/>\n";
+		$result['detail'] .= $host['description'] . "<br/>";
+	    $result['detail'] .= "<br/><br/>";
 	
 	}
 
 	if ($t_trig > 0)	{
 	    $result['alarm'] = "red";
 	    $hosts = db_fetch_assoc ("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-	    $result['detail'] .= "<b>TRIGGERED:</b><br/>\n";
+	    $result['detail'] .= "<b>TRIGGERED:</b><br/>";
 	    foreach ($hosts as $host)
-		$result['detail'] .= $host['description'] . "<br/>\n";
-	    $result['detail'] .= "<br/><br/>\n";
+		$result['detail'] .= $host['description'] . "<br/>";
+	    $result['detail'] .= "<br/><br/>";
 	}    
 
 
@@ -882,7 +911,7 @@ function graph_thold() {
 
 //------------------------------------ info -----------------------------------------------------
 
-function info() {
+function intropage_info() {
 	global $config, $allowed_hosts, $poller_options;
 	
 	$result = array(
@@ -929,7 +958,7 @@ function info() {
 //------------------------------------ mactrack -----------------------------------------------------
 
 
-function get_mactrack() {
+function intropage_get_mactrack() {
 	global $config;
 	
 	$result = array(
@@ -941,17 +970,17 @@ function get_mactrack() {
 	
 	if (!db_fetch_cell("SELECT directory FROM plugin_config where directory='mactrack' and status=1")) {
 		$result['alarm'] = "grey";
-		$result['data'] = "Mactrack plugin not installed/running\n";
+		$result['data'] = "Mactrack plugin not installed/running";
 	} elseif (!db_fetch_cell("SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id =2120")) {
-		$result['data'] =  "You don't have permission\n";
+		$result['data'] =  "You don't have permission";
 	} else {
 		$sql_no_mt = db_fetch_assoc("SELECT id, description, hostname FROM host WHERE id NOT IN (SELECT DISTINCT host_id FROM mac_track_devices) AND snmp_version != 0");
 		if ($sql_no_mt) {
 			$result['detail'] .= "Host without mac-track: <br/>";
 			foreach ($sql_no_mt as $item) {
 				$result['detail'] .= ($console_access)?
-					sprintf("<a href=\"%shost.php?action=edit&amp;id=%s\">%s-%s</a><br/>\n",$config['url_path'],$item['id'],$item['description'],$item['hostname']):
-					sprintf("%s-%s<br/>\n",$item['description'],$item['hostname']);
+					sprintf("<a href=\"%shost.php?action=edit&amp;id=%s\">%s-%s</a><br/>",$config['url_path'],$item['id'],$item['description'],$item['hostname']):
+					sprintf("%s-%s<br/>",$item['description'],$item['hostname']);
 			}
 		}
 		$m_all  = db_fetch_cell ("select count(host_id) from mac_track_devices");
@@ -965,24 +994,24 @@ function get_mactrack() {
 		elseif ($m_disa > 0) { $result['alarm'] = "yellow"; }
 		
 		if (db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')")) {
-			$result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=-1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">All: $m_all</a> | \n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . 	"plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=3&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Up: $m_up</a> | \n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Down: $m_down</a> | \n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=4&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Error: $m_err</a> | \n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=0&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Unknown: $m_unkn</a> | \n";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack_devices.php?site_id=-1&amp;status=-2&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Disabled: $m_disa</a>\n";
+			$result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=-1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">All: $m_all</a> | ";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . 	"plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=3&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Up: $m_up</a> | ";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Down: $m_down</a> | ";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=4&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Error: $m_err</a> | ";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=0&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Unknown: $m_unkn</a> | ";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack_devices.php?site_id=-1&amp;status=-2&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Disabled: $m_disa</a>";
 		} else {
-			$result['data'] = "All: $m_all</a> | \n";
-			$result['data'] .= "Up: $m_up | \n";
-			$result['data'] .= "Down: $m_down | \n";
-			$result['data'] .= "Error: $m_err | \n";
-			$result['data'] .= "Unknown: $m_unkn | \n";
-			$result['data'] .= "Disabled: $m_disa | \n";
+			$result['data'] = "All: $m_all</a> | ";
+			$result['data'] .= "Up: $m_up | ";
+			$result['data'] .= "Down: $m_down | ";
+			$result['data'] .= "Error: $m_err | ";
+			$result['data'] .= "Unknown: $m_unkn | ";
+			$result['data'] .= "Disabled: $m_disa | ";
 		}
 		
-		if (read_config_option('intropage_display_pie_mactrack') == "on")	{
+		//if (read_config_option('intropage_display_pie_mactrack') == "on")	{
 			$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array("Down","Up","Error","Unknown","Disabled"), 'data' => array($m_down,$m_up,$m_err,$m_unkn,$m_disa));
-		}
+		//}
 	}
 	
 	return $result;
@@ -991,7 +1020,7 @@ function get_mactrack() {
 
 //------------------------------------ ntp -----------------------------------------------------
 
-function ntp() {
+function intropage_ntp() {
 	global $config;
 
 	$result = array(
@@ -1007,10 +1036,10 @@ function ntp() {
 			$diff_time = date('U') - $ntp_time;
 			if ($diff_time < -600 || $diff_time > 600) {
 				$result['alarm'] = "red";
-				$result['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>". date("H:i:s") . "</span><br/><br/>Please check time.<br/>It is different (more than 10 minutes) from NTP server $ntp_server";
+				$result['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>". date("H:i:s") . "</span><br/><br/>Please check time.<br/>It is different (more than $diff_time seconds) from NTP server $ntp_server";
 			} elseif ($diff_time < -120 || $diff_time > 120) {
 				$values['time']['alarm'] = "yellow";
-				$values['time']['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>" . date("H:i:s") . "</span><br/><br/>Please check time.<br/>It is different (more than 2 minutes) from NTP server $ntp_server";
+				$values['time']['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>" . date("H:i:s") . "</span><br/><br/>Please check time.<br/>It is different (more than $diff_time seconds) from NTP server $ntp_server";
 			} else {
 				$result['data'] = "<span class=\"txt_big\">" . date("Y-m-d") . "<br/>" . date("H:i:s") . "</span><br/><br/>Localtime is equal to NTP server<br/>$ntp_server";
 			}
@@ -1041,7 +1070,7 @@ function ntp() {
 
 
 
-function poller_info() {
+function intropage_poller_info() {
 	global $config, $sql_where;
 	
 	$result = array(
@@ -1075,7 +1104,7 @@ function poller_info() {
             		elseif ($poller['status'] == 4) $result['data'] .= "Disabled";
             		elseif ($poller['status'] == 5) $result['data'] .= "Recovering";
             		
-            		$result['data'] .= "<br/>\n";
+            		$result['data'] .= "<br/>";
 		}	
 	}
 
@@ -1098,7 +1127,7 @@ function poller_info() {
 
 //------------------------------------ poller_stat -----------------------------------------------------
 
-function poller_stat() {
+function intropage_poller_stat() {
 	global $config;
 
 
@@ -1166,7 +1195,7 @@ function poller_stat() {
 //------------------------------------ thold_events -----------------------------------------------------
 
 
-function thold_events() {
+function intropage_thold_event() {
 	global $config;
 	
 	$result = array(
@@ -1186,7 +1215,7 @@ function thold_events() {
 	    $sql_result = db_fetch_assoc("SELECT tl.description as description,tl.time as time, tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2 FROM plugin_thold_log AS tl INNER JOIN thold_data AS td ON tl.threshold_id=td.id INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id LEFT JOIN graph_templates_graph AS gtg ON gtg.local_graph_id=gl.id LEFT JOIN host AS h ON h.id=gl.host_id LEFT JOIN user_auth_perms AS uap0 ON (gl.id=uap0.item_id AND uap0.type=1) LEFT JOIN user_auth_perms AS uap1 ON (gl.host_id=uap1.item_id AND uap1.type=3) LEFT JOIN user_auth_perms AS uap2 ON (gl.graph_template_id=uap2.item_id AND uap2.type=4) HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL)) ORDER BY `time` DESC LIMIT 10");
 	    if (sizeof ($sql_result) > 0)	{
 		foreach($sql_result as $row) {
-		    $result['data'] .=  date('Y-m-d H:i:s', $row['time']) . " - " . $row['description'] . "<br/>\n";
+		    $result['data'] .=  date('Y-m-d H:i:s', $row['time']) . " - " . $row['description'] . "<br/>";
 		    if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7 )
 			$result['alarm'] = "red";
 		    elseif ($result['alarm'] == "green" && ($row['status'] == 2 || $row['status'] == 3))
@@ -1205,7 +1234,7 @@ function thold_events() {
 //------------------------------------ top5_ping -----------------------------------------------------
 
 
-function top5_ping() {
+function intropage_top5_ping() {
 	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
@@ -1220,18 +1249,18 @@ function top5_ping() {
 
 	    foreach($sql_worst_host as $host) {
         	if ($console_access)  
-        	    $result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
+        	    $result['data'] .= "<tr><td class=\"rpad\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
         	else  
-        	    $result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+        	    $result['data'] .=  "<tr><td class=\"rpad\">" . $host['description'] . "</td>"; 
     
-		$result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['avg_time'],2) . "ms</td>\n";
+		$result['data'] .= "<td class=\"rpad texalirig\">" . round($host['avg_time'],2) . "ms</td>";
 	
 		if ($host['cur_time'] > 1000)	{
 		    $result['alarm'] = "yellow";
-        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['cur_time'],2) . "ms</b></td></tr>\n";
+        	    $result['data'] .= "<td class=\"rpad texalirig\"<b>" . round($host['cur_time'],2) . "ms</b></td></tr>";
 		}
 		else
-		    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['cur_time'],2) . "ms</td></tr>\n";
+		    $result['data'] .= "<td class=\"rpad texalirig\">" . round($host['cur_time'],2) . "ms</td></tr>";
 	    }
 	}
 	else	{	// no data
@@ -1239,14 +1268,14 @@ function top5_ping() {
 		
 	}	
 	
-	$result['data'] .= "</table>\n";
+	$result['data'] .= "</table>";
 	return $result;
 }
 
 
 //------------------------------------ top5_availability -----------------------------------------------------
 
-function top5_availability() {
+function intropage_top5_availability() {
 	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
@@ -1262,16 +1291,16 @@ function top5_availability() {
 
 	    foreach($sql_worst_host as $host) {
         	if ($console_access)  
-        	    $result['data'] .= "<tr><td style=\"padding-right: 2em;\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
+        	    $result['data'] .= "<tr><td class=\"rpad\"><a href=\"".htmlspecialchars($config['url_path'])."host.php?action=edit&id=".$host['id']."\">".$host['description']."</a>";
         	else  
-        	    $result['data'] .=  "<tr><td style=\"padding-right: 2em;\">".$host['description']."</td>\n"; 
+        	    $result['data'] .=  "<tr><td class=\"rpad\">".$host['description']."</td>"; 
     
 		if ($host['availability'] < 90)	{
 		    $result['alarm'] = "yellow";
-        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\"><b>" . round($host['availability'],2) . "%</b></td></tr>\n";
+        	    $result['data'] .= "<td class=\"rpad texalirig\"><b>" . round($host['availability'],2) . "%</b></td></tr>";
 		}
 		else
-        	    $result['data'] .= "<td style=\"padding-right: 2em; text-align: right;\">" . round($host['availability'],2) . "%</td></tr>\n";
+        	    $result['data'] .= "<td class=\"rpad texalirig\">" . round($host['availability'],2) . "%</td></tr>";
 	    }
 
 	}
@@ -1279,7 +1308,7 @@ function top5_availability() {
 	    $result['data'] = "Waiting for data";
 	}	
 	
-	$result['data'] .= "</table>\n";
+	$result['data'] .= "</table>";
 	return $result;
 
 }
@@ -1288,7 +1317,7 @@ function top5_availability() {
 //------------------------------------ trend -----------------------------------------------------
 
 
-function trend() {
+function intropage_trend() {
 	global $config, $allowed_hosts;
 	
 	$result = array(
@@ -1353,53 +1382,37 @@ function trend() {
 
 //-----------------favourite graph----------
 
-function favourite_graph()	{
+function intropage_favourite_graph($fav_graph_id)	{
 
-        global $config;
+    global $config;
 
+    if (isset($fav_graph_id))	{
+    
         $result = array(
-                'name' => 'Favourite graph',
+                'name' => 'Favourite graph ',
                 'alarm' => 'grey',
                 'data' => '',
                 'detail' => '',
         );
-    
-    if (!read_user_setting("intropage_favouritegraph_1",false) && ! read_user_setting("intropage_favouritegraph_2",false))
-	$result['data'] .= "No selected favourite graphs";
-    
-    // div a bud da dva vedle sebe nebo jen jeden
-    //$result['data'] .= "<div>\n";
-    
-    if (read_user_setting("intropage_favouritegraph_1"))
-	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
-	'local_graph_id=' . read_user_setting("intropage_favouritegraph_1") . '&' .
-	'graph_height=105&' . 
-	'graph_width=300&' . 
-	'graph_nolegend=true" alt="Favourite graph 1"/>&nbsp;';
 
 
-    if (read_user_setting("intropage_favouritegraph_2"))
-	$result['data'] .= '<img src="' . $config['url_path'] . 'graph_image.php?' . 
-	'local_graph_id=' . read_user_setting("intropage_favouritegraph_2") . '&' .
-	'graph_height=105&' . 
-	'graph_width=300&' . 
-	'graph_nolegend=true" alt="Favourite graph 2"/>';
+	$result['name'] .= db_fetch_cell_prepared('select title_cache from graph_templates_graph where local_graph_id = ?',
+                 array($fav_graph_id));
 
 
 
-/*
-get_filter_request_var('graph_height');
-get_filter_request_var('graph_width');
-get_filter_request_var('local_graph_id');
 
-if (isset_request_var('graph_nolegend')) {
+    	    $result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
+    	    'local_graph_id=' . $fav_graph_id . '&' .
+    	    'graph_height=105&' .
+    	    'graph_width=300&' .
+    	    'graph_nolegend=true"/>&nbsp;';
 
-*/
+        return $result;
 
-    //$result['data'] .= "<div>\n";
+    }
 
 
-    return $result;
 
 }
 
