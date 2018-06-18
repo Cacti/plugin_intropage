@@ -919,6 +919,9 @@ function intropage_info() {
 	
 	$xdata = '';
 
+	$result['data'] .= "Cacti version: " . CACTI_VERSION . "<br/>";
+
+
 	if ($poller_options[read_config_option("poller_type")] == 'spine' && file_exists(read_config_option("path_spine")) && (function_exists('is_executable')) && (is_executable(read_config_option("path_spine")))) {
 	    $spine_version = "SPINE";
 	    exec(read_config_option("path_spine") . " --version", $out_array);
@@ -926,11 +929,17 @@ function intropage_info() {
 		$spine_version = $out_array[0];
 	    }
 	    
-	    $result['data'] .= "Poller type: <a href=\"" . htmlspecialchars($config['url_path']) .  "settings.php?tab=poller\">$spine_version</a><br/>";
+	    $result['data'] .= "Poller type: <a href=\"" . htmlspecialchars($config['url_path']) .  "settings.php?tab=poller\">Spine</a><br/>";
+	    $result['data'] .= "Spine version: $spine_version<br/>";
+	    if (!strpos($spine_version,CACTI_VERSION,0))
+
+		$result['data'] .= "<span class='red'>You are using incorrect spine version!</span><br/>";
+		$result['alarm'] = 'red';
+		
 	} else {
 	    $result['data'] .= "Poller type: <a href=\"" . htmlspecialchars($config['url_path']) .  "settings.php?tab=poller\">".$poller_options[read_config_option("poller_type")]."</a><br/>";
 	}
-
+    
 	
 
 	$result['data'] .= "Running on: ";
