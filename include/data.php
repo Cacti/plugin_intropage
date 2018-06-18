@@ -393,7 +393,7 @@ function intropage_analyse_tree_host_graph() {
     $pom = 0;
     $result['data'] .= 'Hosts with default public/private community: ';
 
-    $sql_result = db_fetch_assoc("SELECT id,description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND (snmp_community ='public' or snmp_community='private')");
+    $sql_result = db_fetch_assoc("SELECT id,description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND (snmp_community ='public' or snmp_community='private') order by description");
 
     $result['data'] .= count($sql_result) . "<br/>";
     if (count($sql_result) > 0) {
@@ -409,10 +409,6 @@ function intropage_analyse_tree_host_graph() {
 	    $result['detail'] .= sprintf("<a href=\"%shost.php?action=edit&amp;id=%d\">%s (ID: %d)</a><br/>",htmlspecialchars($config['url_path']),$row['id'],$row['description'],$row['id']);
 	}
     }
-    $total_errors += count($sql_result);
-
-
-
 
 
     $total_errors += count($sql_result);
