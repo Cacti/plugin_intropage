@@ -18,24 +18,24 @@ Petr Macek (petr.macek@kostax.cz)
 
 
 ## Installation
-Copy directory intropage to plugins directory
-Check file permission (Linux/unix - readable for www server)
-Enable plugin (Console -> Plugin management)
-Configure plugin (Console -> Settings -> Intropage tab)
-You can set Intropage as first page (Console -> User managemnt -> user -> Login Options) 
+Copy directory intropage to plugins directory <br/>
+Check file permission (Linux/unix - readable for www server) <br/>
+Enable plugin (Console -> Plugin management) <br/>
+Configure plugin (Console -> Settings -> Intropage tab) <br/>
+You can set Intropage as first page (Console -> User managemnt -> user -> Login Options)  <br/>
     
 ## Upgrade
-Delete old files
-Copy new files
-Check file permission (Linux/unix - readable for www server)
-Disable and deinstall old version (Console -> Plugin management) 
-Install and enable new version (Console -> Plugin management) 
-Configure plugin (Console -> Settings -> Intropage tab)
+Delete old files <br/>
+Copy new files <br/>
+Check file permission (Linux/unix - readable for www server) <br/>
+Disable and deinstall old version (Console -> Plugin management)  <br/>
+Install and enable new version (Console -> Plugin management)  <br/>
+Configure plugin (Console -> Settings -> Intropage tab) <br/>
 
 ## Configuration
-Console -> users -> choose users -> Intropage options and panels (admin)
-Settings -> Intropage (admin)
-On intropage page -> below form (user)
+Console -> users -> choose users -> Intropage options and panels (admin) <br/>
+Settings -> Intropage (admin) <br/>
+On intropage page -> below form (user) <br/>
     
 ## Possible Bugs?
 If you find a problem, let me know via github or https://forums.cacti.net/viewtopic.php?f=5&t=51920 
