@@ -1,9 +1,10 @@
-Asi to vydat, pak resit ty dalsi veci
+screenshot s fav grafama
 
 
 Major
 -----
 add reload for each panel
+add howto panel for favourite graphs
 
 
 errors

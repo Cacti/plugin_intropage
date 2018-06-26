@@ -1,7 +1,7 @@
 # plugin_intropage
 
 ## Intropage/Dashboard plugin for Cacti
-Plugin displays usefull information and graphs on console screen or separated tab:
+Plugin displays usefull information and favourite graphs on console screen or separated tab:
 * trends
 * host graph (total, down, ...)
 * poller statistics
@@ -14,7 +14,7 @@ Plugin displays usefull information and graphs on console screen or separated ta
 Petr Macek (petr.macek@kostax.cz)
 
 ## Screenshot
-![Screenshot](https://user-images.githubusercontent.com/26485719/33798454-9b074d7c-dd18-11e7-85f8-ed2586736888.png)
+![Screenshot](https://user-images.githubusercontent.com/26485719/41935583-78f73d32-798a-11e8-83f4-768d2e454a79.png)
 
 
 ## Installation
@@ -31,6 +31,11 @@ Check file permission (Linux/unix - readable for www server)
 Disable and deinstall old version (Console -> Plugin management) 
 Install and enable new version (Console -> Plugin management) 
 Configure plugin (Console -> Settings -> Intropage tab)
+
+## Configuration
+Console -> users -> choose users -> Intropage options and panels (admin)
+Settings -> Intropage (admin)
+On intropage page -> below form (user)
     
 ## Possible Bugs?
 If you find a problem, let me know via github or https://forums.cacti.net/viewtopic.php?f=5&t=51920 
@@ -39,6 +44,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
 
 ## Changelog
+	1.8 ---
+	Add check for cacti and spine version
+	Fix number of errors in snmp defaul community test
+
 	1.7 ---
 	Add Awesome icons (close, reload, show detail,...)
 	Add user permissions 
