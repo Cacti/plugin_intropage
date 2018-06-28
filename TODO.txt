@@ -1,9 +1,11 @@
-Asi to vydat, pak resit ty dalsi veci
+!!!! udelal jsem chybu. v masteru mam novejsi verzi nez tady, to napred resit
+mam v ostre novejsi readme
 
 
 Major
 -----
 add reload for each panel
+autorefresh disable skonci v prazdne strance
 
 
 errors

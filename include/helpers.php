@@ -1,11 +1,10 @@
 <?php
 
-
 function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 	
 	if (!(file_exists($log_file) && is_readable($log_file))) { return false; }
 	
-	$f_handle = @fopen($log_file,"rb");
+	$f_handle = @fopen($log_file, 'rb');
 	if ($f_handle === false) { return false; }
 	
 	if (!$adaptive) { $buffer = 4096; }
@@ -45,10 +44,6 @@ function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 }
 
 
-
-
-
-
 function human_filesize($bytes, $decimals = 2) {
         $size = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $factor = floor((strlen($bytes) - 1) / 3);
@@ -60,30 +55,28 @@ function human_filesize($bytes, $decimals = 2) {
 function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
     global $config;
    
-//    if (!empty($dispdata))	{	// empty? Typical for no console access
-	
     $selectedTheme = get_selected_theme();
     switch ($selectedTheme)	{
-	case "dark":
-	case "paper-plane":
+	case 'dark':
+	case 'paper-plane':
 	
-	    $bgcolor = "#202020";
+	    $bgcolor = '#202020';
 	break;
     
-	case "sunrise":
-	    $bgcolor = "";
+	case 'sunrise':
+	    $bgcolor = '';
 	break;
     
 	default:
-	    $bgcolor = "#f5f5f5";
+	    $bgcolor = '#f5f5f5';
     }
 
 
-    print "<li id='panel_$panel_id' class='ui-state-default flexchild'>\n";
-    print "<div class='cactiTable' style='text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;'>\n";
+    print '<li id="panel_' . $panel_id . '" class="ui-state-default flexchild">';
+    print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box; padding-bottom: 5px;padding-right: 5px;">';
 
-    print "<div class='panel_header color_$type'>\n";
-    print "$header\n";
+    print '<div class="panel_header color_' . $type . '">';
+    print $header;
 
 
 // awesome 5.0+    printf("<a href='#' title='Reload panel - not implemented' class='header_link'><i class='fa fa-sync-alt'></i></a>\n");
@@ -94,14 +87,11 @@ function intropage_display_panel ($panel_id,$type,$header,$dispdata)	{
 	printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n",md5($header));
     }
 
-
-
     print " </div>\n";
     print "	<table class='cactiTable'>\n";
     print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
     print "<div class='panel_data'>\n";
-
 
     // pie graph
     
@@ -136,7 +126,6 @@ new Chart($xid, {
 	}]
     },
     options: {
-	xxxbackgroundColor:'rgb(10,10,10)',
 	responsive: false,
 	title: { display: false, text: "$pie_title" },
 	legend: { 
@@ -144,7 +133,6 @@ new Chart($xid, {
 	    position: 'right', 
 	    labels: { 
 		usePointStyle: true,
-		
 	    }
 	},
 	tooltipTemplate: "<%= value %>%"
@@ -166,7 +154,6 @@ EOF;
 		$bar_labels2 = implode('","',$dispdata['bar']['label1']);
 		$bar_values2 = implode(',',$dispdata['bar']['data2']);
 		$bar_title2 = $dispdata['bar']['title2'];
-
 
 		print <<<EOF
 var $xid = document.getElementById("bar_$xid").getContext("2d");
@@ -320,8 +307,6 @@ print "</div>\n";
     print "</td></tr>\n\n";
     html_end_box(false);
     print "</li>\n\n";
-
-//    } // have console access
 }
 
 
@@ -355,24 +340,19 @@ function ntp_time($host) {
 
 function intropage_graph_button($data)	{
 
-       global $config;
+    global $config;
 
-    // if (read_config_option("intropage_favourite_graph") == "on")      {
-    if (db_fetch_cell("select intropage_favourite_graph from user_auth where id=" . $_SESSION['sess_user_id']) == "on") {
+    if (db_fetch_cell('select intropage_favourite_graph from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') {
 
         $local_graph_id = $data[1]['local_graph_id'];
 
-
-    if (db_fetch_cell ("select count(*) from plugin_intropage_user_setting where user_id=" . $_SESSION['sess_user_id'] .
-        " and fav_graph_id=" . $local_graph_id) > 0)   {       // already fav
-
-	    $fav = "<i class='fa fa-eye-slash'  title='remove from dashboard'></i>";
-
-    }
-    else        {       // add to fav
-	$fav = "<i class='fa fa-eye' title='add to dashboard'></i>";
-    }
-
+	if (db_fetch_cell ('select count(*) from plugin_intropage_user_setting where user_id=' . $_SESSION['sess_user_id'] .
+    	    ' and fav_graph_id=' . $local_graph_id) > 0)   {       // already fav
+		$fav = '<i class="fa fa-eye-slash" title="remove from dashboard"></i>';
+	}
+	else        {       // add to fav
+	    $fav = '<i class="fa fa-eye" title="add to dashboard"></i>';
+	}
 
         $lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
         if ($lopts == 1) { // in tab
@@ -381,13 +361,7 @@ function intropage_graph_button($data)	{
 	else	{	// in console
 	    print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 	}
-
     }
-
-
-	
 }
-
-
 
 ?>
