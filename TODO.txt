@@ -2,7 +2,7 @@ Major
 -----
 add reload for each panel
 add mactrack again
-
+napoveda, jak pridavat fav grafy
 
 errors
 ------

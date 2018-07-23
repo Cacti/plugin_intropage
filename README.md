@@ -37,6 +37,9 @@ Console -> users -> choose users -> Intropage options and panels (admin) <br/>
 Settings -> Intropage (admin) <br/>
 On intropage page -> below form (user) <br/>
 
+## How to add graphs to Intropage/Dashboard?
+Go to graphs, select graph, click to icon Eye
+
 ## Possible Bugs?
 If you find a problem, let me know via github or https://forums.cacti.net/viewtopic.php?f=5&t=51920
 
