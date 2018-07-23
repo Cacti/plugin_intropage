@@ -321,9 +321,9 @@ $(document).ready(function () {
 
 	foreach ($panels as $panel)	{
 	    if (db_fetch_cell('select ' . $panel['panel_name'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') 
-		echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . $panel['panel_name'] . '</option>';
+		echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . ucfirst(str_replace('_',' ',$panel['panel_name'])) . '</option>';
 	    else
-		echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . $panel['panel_name'] . ' (admin prohibited)</option>';
+		echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . ucfirst(str_replace('_',' ',$panel['panel_name'])) . ' (admin prohibited)</option>';
 	}
     }
 
