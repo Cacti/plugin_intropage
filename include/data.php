@@ -892,11 +892,10 @@ function intropage_info() {
 	    
 	    $result['data'] .= 'Poller type: <a href="' . htmlspecialchars($config['url_path']) .  'settings.php?tab=poller">Spine</a><br/>';
 	    $result['data'] .= 'Spine version: ' . $spine_version . '<br/>';
-	    if (!strpos($spine_version,CACTI_VERSION,0))
-
+	    if (!strpos($spine_version,CACTI_VERSION,0))	{
 		$result['data'] .= '<span class="red">You are using incorrect spine version!</span><br/>';
-		$result['alarm'] = 'red';
-		
+	    $result['alarm'] = 'red';
+	    }	
 	} else {
 	    $result['data'] .= 'Poller type: <a href="' . htmlspecialchars($config['url_path']) .  'settings.php?tab=poller">' . $poller_options[read_config_option('poller_type')] . '</a><br/>';
 	}
