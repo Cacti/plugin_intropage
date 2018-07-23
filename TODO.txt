@@ -1,24 +1,16 @@
-!!!! udelal jsem chybu. v masteru mam novejsi verzi nez tady, to napred resit
--- to uz je asi vyreseno, jen readme zase neentruju
-
 Major
 -----
 add reload for each panel
-autorefresh disable skonci v prazdne strance
+add mactrack again
 
 
 errors
 ------
+empty page appears if disable autorefresh (at least one refresh period)
 
 
 Minor
 -----
 copy text in panels
 
-
-
-plugins.php - awaiting configuration
-top5,extrem - style 2em hardcoded
-add mactrack again
-add panel - asi tam udelat case sensitive nazvy a bez podtrzitek - v roletce nejsou ted pekne nazvy
 
