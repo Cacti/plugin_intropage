@@ -633,17 +633,26 @@ function intropage_extrem() {
 	}	
 	$result['data'] .= '</td><td class="rpad texalirig">';
 	
-    // max thold trig
+    // max thold trig 
+    // extrems don't use user permission!
 	$result['data'] .= '<strong>Max thold<br/>triggered: </strong>';
-        $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
-	foreach($sql_result as $row) {
-            $result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['value'];     
 
-	}	
+	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {	    
+    	    $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
+	    foreach($sql_result as $row) {
+        	$result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['value'];     
+	    }
+	}
+	else	{
+    	    $result['data'] .=  '<br/>no<br/>plugin<br/>installed<br/>or<br/> running';     
+	    
+	}        
+	    	
 	$result['data'] .='</td></tr>';
 
 	$result['data'] .= '</table>';
-
+	
+	
 	return $result;
 }
 
@@ -1299,19 +1308,24 @@ function intropage_trend() {
                     ),
 	);
 	
-	$sql = db_fetch_assoc("SELECT date_format(time(date),'%H:%i') as xdate,name,value FROM plugin_intropage_trends where name='thold' order by date desc limit 10");
-        if (count($sql)) {
-    	    $result['line']['title1'] = 'Tholds triggered';
-            foreach($sql as $row) {
-		// no gd data
-                $result['data'] .= $row['xdate'] . ' ' . $row['name'] . ' ' . $row['value'] . '<br/>'; 
-                array_push($result['line']['label1'],$row['xdate']);
-                array_push($result['line']['data1'],$row['value']);
+	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {	    
 
+	    $sql = db_fetch_assoc("SELECT date_format(time(date),'%H:%i') as xdate,name,value FROM plugin_intropage_trends where name='thold' order by date desc limit 10");
+    	    if (count($sql)) {
+    		$result['line']['title1'] = 'Tholds triggered';
+        	foreach($sql as $row) {
+		    // no gd data
+            	    $result['data'] .= $row['xdate'] . ' ' . $row['name'] . ' ' . $row['value'] . '<br/>'; 
+            	    array_push($result['line']['label1'],$row['xdate']);
+        	    array_push($result['line']['data1'],$row['value']);
+		}
+	    }
+	    else	{
+		unset ($result['line']);
 	    }
 	}
-	else	{
-	    unset ($result['line']);
+	else	{	// no plugin installed or running
+	
 	}
 	
 	$sql = db_fetch_assoc("SELECT date_format(time(date),'%h:%i') as xdate,name,value FROM plugin_intropage_trends where name='host' order by date desc limit 10");
