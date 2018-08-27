@@ -877,33 +877,30 @@ function intropage_graph_thold() {
 		    unset ($result['pie']);
 		
 		}
+
+		// alarms and details
+		if ($t_brea > 0)	{
+			$result['alarm'] = "yellow";
+			$hosts = db_fetch_assoc ("select description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+
+			$result['detail'] .= "<b>BREACHED:</b><br/>";
+			foreach ($hosts as $host) {
+				$result['detail'] .= $host['description'] . "<br/>";
+			}
+			$result['detail'] .= "<br/><br/>";
+		}
+
+		if ($t_trig > 0)	{
+			$result['alarm'] = "red";
+			$hosts = db_fetch_assoc ("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+
+			$result['detail'] .= "<b>TRIGGERED:</b><br/>";
+			foreach ($hosts as $host) {
+				$result['detail'] .= $host['description'] . "<br/>";
+			}
+			$result['detail'] .= "<br/><br/>";
+		}
 	}
-	
-
-	
-	// alarms and details
-	if ($t_brea > 0)	{
-	    $result['alarm'] = "yellow";
-	    $hosts = db_fetch_assoc ("select description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-	    $result['detail'] .= "<b>BREACHED:</b><br/>";
-	    foreach ($hosts as $host)
-		$result['detail'] .= $host['description'] . "<br/>";
-	    $result['detail'] .= "<br/><br/>";
-	
-	}
-
-	if ($t_trig > 0)	{
-	    $result['alarm'] = "red";
-	    $hosts = db_fetch_assoc ("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-	    $result['detail'] .= "<b>TRIGGERED:</b><br/>";
-	    foreach ($hosts as $host)
-		$result['detail'] .= $host['description'] . "<br/>";
-	    $result['detail'] .= "<br/><br/>";
-	}    
-
-
-
-
 
 	return $result;
 }
