@@ -188,7 +188,9 @@ function intropage_poller_bottom () {
 
     // trends - all hosts without permissions!!!
     db_execute("insert into plugin_intropage_trends (name,date,value) select 'host', now(), count(id) FROM host WHERE status='1' AND disabled=''");
-    db_execute("insert into plugin_intropage_trends (name,date,value) select 'thold', now(), COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
+    if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
+	db_execute("insert into plugin_intropage_trends (name,date,value) select 'thold', now(), COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
+    }
 
 }
 
