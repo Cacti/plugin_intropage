@@ -49,7 +49,12 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 ## Changelog
         1.8 ---
         Add check for cacti and spine version
-        Fix number of errors in snmp defaul community test
+        Add panel for Mactrack plugin (again)
+        Fix number of errors in snmp default community test
+        Add test for extrems, trends - is thold plugin installed and running?
+        Fix PHP noticed if thold isn't installed
+        Change error/warning in analyse tree/host/graph
+        
 
 	1.7 ---
 	Add Awesome icons (close, reload, show detail,...)

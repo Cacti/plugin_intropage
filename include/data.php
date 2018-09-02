@@ -937,15 +937,14 @@ function intropage_info() {
 //------------------------------------ mactrack -----------------------------------------------------
 
 
-function intropage_get_mactrack() {
-	global $config;
+function intropage_mactrack() {
+	global $config, $console_access;
 	
 	$result = array(
 		'name' => 'Mactrack',
 		'alarm' => 'green',
 	);
 	
-	$console_access = db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION["sess_user_id"] . "' and user_auth_realm.realm_id=8") ? true : false;
 	
 	if (!db_fetch_cell("SELECT directory FROM plugin_config where directory='mactrack' and status=1")) {
 		$result['alarm'] = 'grey';
@@ -969,12 +968,16 @@ function intropage_get_mactrack() {
 		$m_err  = db_fetch_cell ("select count(host_id) from mac_track_devices where snmp_status='4'");
 		$m_unkn = db_fetch_cell ("select count(host_id) from mac_track_devices where snmp_status='0'");
 		
-		if ($m_down > 0 || $m_err > 0 || $m_unkn > 0) { $result['alarm'] = 'red'; }
-		elseif ($m_disa > 0) { $result['alarm'] = 'yellow'; }
+		if ($m_down > 0 || $m_err > 0 || $m_unkn > 0)	{ 
+		    $result['alarm'] = 'red'; 
+		}
+		elseif ($m_disa > 0)	{ 
+		    $result['alarm'] = 'yellow'; 
+		}
 		
 		if (db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')")) {
 			$result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=-1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">All: $m_all</a> | ";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . 	"plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=3&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Up: $m_up</a> | ";
+			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=3&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Up: $m_up</a> | ";
 			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Down: $m_down</a> | ";
 			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=4&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Error: $m_err</a> | ";
 			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=0&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Unknown: $m_unkn</a> | ";
@@ -988,7 +991,7 @@ function intropage_get_mactrack() {
 			$result['data'] .= 'Disabled: ' . $m_disa . ' | ';
 		}
 		
-			$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array('Down','Up','Error','Unknown','Disabled'), 'data' => array($m_down,$m_up,$m_err,$m_unkn,$m_disa));
+		$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array('Down','Up','Error','Unknown','Disabled'), 'data' => array($m_down,$m_up,$m_err,$m_unkn,$m_disa));
 	}
 	
 	return $result;

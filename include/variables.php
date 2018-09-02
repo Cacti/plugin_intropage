@@ -17,6 +17,7 @@ $panel['intropage_graph_thold']['priority'] = 13;
 $panel['intropage_graph_data_source']['priority'] = 12;
 $panel['intropage_graph_host_template']['priority'] = 11;
 $panel['intropage_cpu']['priority'] = 45;
+$panel['intropage_mactrack']['priority'] = 42;
 $panel['intropage_top5_ping']['priority'] = 30;
 $panel['intropage_top5_availability']['priority'] = 31;
 $panel['intropage_info']['priority'] = 1;
