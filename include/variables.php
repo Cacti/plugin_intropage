@@ -73,6 +73,15 @@ $intropage_settings = array(	// default values
 		'max_length' => 50,
 		'default' => 'pool.ntp.org',
 	),
+
+	'intropage_maintenance_alert' => array(
+		'friendly_name' => 'Information panel about maintenance tasks, down devices, ..',
+		'description' => 'If isn\'t empty, panel will be displayed on the top',
+		'method' => 'textbox',
+		'max_length' => 500,
+		'default' => '',
+	),
+
 );
 
 ?>
