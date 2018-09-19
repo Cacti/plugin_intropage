@@ -193,6 +193,8 @@ EOF;
 	}
 
 
+
+
 	// Display ----------------------------------
 
 //	$display_important_first = on/off
@@ -202,6 +204,16 @@ EOF;
 
     print '<div id="megaobal">';
     print '<ul id="obal">';
+
+
+	// extra maintenance panel 
+        if (strlen(read_config_option('intropage_maintenance_alert')) > 3)	{
+	    $tmp['data'] = nl2br(read_config_option('intropage_maintenance_alert'));
+
+	    intropage_display_panel(998,'red','Maintenance alert',$tmp);
+	}
+	// end of maintenace panel
+
     
 
     // user changed order - new order is valid until logout
