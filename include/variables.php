@@ -77,8 +77,10 @@ $intropage_settings = array(	// default values
 	'intropage_maintenance_alert' => array(
 		'friendly_name' => 'Information panel about maintenance tasks, down devices, ..',
 		'description' => 'If isn\'t empty, panel will be displayed on the top',
-		'method' => 'textbox',
-		'max_length' => 500,
+		'method' => 'textarea',
+		'max_length' => 1000,
+                'textarea_rows' => '4',
+                'textarea_cols' => '60',
 		'default' => '',
 	),
 
