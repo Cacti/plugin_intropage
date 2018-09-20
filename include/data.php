@@ -945,13 +945,19 @@ function intropage_mactrack() {
 		'alarm' => 'green',
 	);
 	
+	// select id from plugin_realms where plugin='mactrack' and display like '%view%';
+     // = 329 +100
+	
 	
 	if (!db_fetch_cell("SELECT directory FROM plugin_config where directory='mactrack' and status=1")) {
 		$result['alarm'] = 'grey';
 		$result['data'] = 'Mactrack plugin not installed/running';
-	} elseif (!db_fetch_cell("SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id =2120")) {
-		$result['data'] =  "You don't have permission";
 	} else {
+	    $mactrack_id = db_fetch_cell ("select id from plugin_realms where plugin='mactrack' and display like '%view%'");
+	    if (!db_fetch_cell("SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id =" . ($mactrack_id+100))) {
+		$result['data'] =  "You don't have permission";
+	    }
+	    else {
 		$sql_no_mt = db_fetch_assoc("SELECT id, description, hostname FROM host WHERE id NOT IN (SELECT DISTINCT host_id FROM mac_track_devices) AND snmp_version != 0");
 		if ($sql_no_mt) {
 			$result['detail'] .= 'Host without mac-track: <br/>';
@@ -992,6 +998,7 @@ function intropage_mactrack() {
 		}
 		
 		$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array('Down','Up','Error','Unknown','Disabled'), 'data' => array($m_down,$m_up,$m_err,$m_unkn,$m_disa));
+	    }
 	}
 	
 	return $result;
