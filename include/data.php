@@ -957,7 +957,8 @@ function intropage_mactrack() {
 	    if (!db_fetch_cell("SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id =" . ($mactrack_id+100))) {
 		$result['data'] =  "You don't have permission";
 	    }
-	    else {
+	    else {	// mactrack is running and you have permission
+	    /*
 		$sql_no_mt = db_fetch_assoc("SELECT id, description, hostname FROM host WHERE id NOT IN (SELECT DISTINCT host_id FROM mac_track_devices) AND snmp_version != 0");
 		if ($sql_no_mt) {
 			$result['detail'] .= 'Host without mac-track: <br/>';
@@ -967,6 +968,8 @@ function intropage_mactrack() {
 					sprintf("%s-%s<br/>",$item['description'],$item['hostname']);
 			}
 		}
+		*/
+		
 		$m_all  = db_fetch_cell ("select count(host_id) from mac_track_devices");
 		$m_up   = db_fetch_cell ("select count(host_id) from mac_track_devices where snmp_status='3'");
 		$m_down = db_fetch_cell ("select count(host_id) from mac_track_devices where snmp_status='1'");
@@ -981,21 +984,13 @@ function intropage_mactrack() {
 		    $result['alarm'] = 'yellow'; 
 		}
 		
-		if (db_fetch_cell("SELECT COUNT(*) FROM user_auth_realm WHERE user_id = ".$_SESSION["sess_user_id"]." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')")) {
-			$result['data']  = "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=-1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">All: $m_all</a> | ";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=3&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Up: $m_up</a> | ";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=1&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Down: $m_down</a> | ";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=4&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Error: $m_err</a> | ";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack/mactrack_devices.php?site_id=-1&amp;status=0&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Unknown: $m_unkn</a> | ";
-			$result['data'] .= "<a href=\"" . htmlspecialchars($config['url_path']) . "plugins/mactrack_devices.php?site_id=-1&amp;status=-2&amp;type_id=-1&amp;device_type_id=-1&amp;filter=&amp;rows=-1\">Disabled: $m_disa</a>";
-		} else {
-			$result['data']  = 'All: ' . $m_all . '</a> | ';
-			$result['data'] .= 'Up: ' . $m_up . ' | ';
-			$result['data'] .= 'Down: ' . $m_down . ' | ';
-			$result['data'] .= 'Error: ' . $m_err . ' | ';
-			$result['data'] .= 'Unknown: ' . $m_unkn . ' | ';
-			$result['data'] .= 'Disabled: ' . $m_disa . ' | ';
-		}
+		$result['data']  = 'All: ' . $m_all . '</a> | ';
+		$result['data'] .= 'Up: ' . $m_up . ' | ';
+		$result['data'] .= 'Down: ' . $m_down . ' | ';
+		$result['data'] .= 'Error: ' . $m_err . ' | ';
+		$result['data'] .= 'Unknown: ' . $m_unkn . ' | ';
+		$result['data'] .= 'Disabled: ' . $m_disa . ' | ';
+		
 		
 		$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array('Down','Up','Error','Unknown','Disabled'), 'data' => array($m_down,$m_up,$m_err,$m_unkn,$m_disa));
 	    }
@@ -1004,6 +999,47 @@ function intropage_mactrack() {
 	return $result;
 }
 
+//------------------------------------ mactrack sites -----------------------------------------------------
+
+
+function intropage_mactrack_sites() {
+	global $config, $console_access;
+	
+	$result = array(
+		'name' => 'Mactrack sites',
+		'alarm' => 'grey',
+		'data' => '',
+
+	);
+
+
+// SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5;
+
+	$result['data'] .= '<table><tr><td class="rpad">Site</td><td class="rpad">Devices</td>';
+	$result['data'] .= '<td class="rpad">IPs</td><td class="rpad">Ports</td>';
+	$result['data'] .= '<td class="rpad">Ports up</td><td class="rpad">MACs</td>';
+	$result['data'] .= '<td class="rpad">Device errors</td></tr>';
+	
+	
+	
+        $sql_result = db_fetch_assoc("SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5");
+	if (sizeof($sql_result) > 0) {
+
+	    foreach($sql_result as $row) {
+        	$result['data'] .=  '<tr><td>' . $row['site_name'] . '</td><td>' . $row['total_devices'] . '</td>';      
+        	$result['data'] .=  '<td>' . $row['total_ips'] . '</td><td>' . $row['total_user_ports'] . '</td>';      
+        	$result['data'] .=  '<td>' . $row['total_oper_ports'] . '</td><td>' . $row['total_macs'] . '</td>';      
+        	$result['data'] .=  '<td>' . $row['total_device_errors'] . '</td></tr>';      
+	    }	
+	    $result['data'] .='</table>';
+	}
+	else	{
+	    $result['data'] = 'No mactrack sites found';
+	}
+
+
+    return $result;
+}
 
 //------------------------------------ ntp -----------------------------------------------------
 

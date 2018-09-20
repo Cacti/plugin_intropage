@@ -122,6 +122,12 @@ function intropage_config_form ()	{
                                 'form_id' => '|arg1:id|',
                                 'default' => 'on'
                                 ),
+                        'intropage_mactrack_sites' => array(
+                                'value' => '|arg1:intropage_mactrack_sites|',
+                                'friendly_name' => 'Allow panel Mactrack sites',
+                                'form_id' => '|arg1:id|',
+                                'default' => 'on'
+                                ),
 
                         'intropage_top5_ping' => array(
                                 'value' => '|arg1:intropage_top5_ping|',
@@ -318,6 +324,7 @@ function intropage_user_admin_setup_sql_save($save) {
 	$save['intropage_graph_host_template'] = form_input_validate(get_nfilter_request_var('intropage_graph_host_template'), 'intropage_graph_host_template', '^on$', true, 3);
 	$save['intropage_cpu'] = form_input_validate(get_nfilter_request_var('intropage_cpu'), 'intropage_cpu', '^on$', true, 3);
 	$save['intropage_mactrack'] = form_input_validate(get_nfilter_request_var('intropage_mactrack'), 'intropage_mactrack', '^on$', true, 3);
+	$save['intropage_mactrack_sites'] = form_input_validate(get_nfilter_request_var('intropage_mactrack_sites'), 'intropage_mactrack_sites', '^on$', true, 3);
 	$save['intropage_top5_ping'] = form_input_validate(get_nfilter_request_var('intropage_top5_ping'), 'intropage_top5_ping', '^on$', true, 3);
 	$save['intropage_top5_availability'] = form_input_validate(get_nfilter_request_var('intropage_top5_availability'), 'intropage_top5_availability', '^on$', true, 3);
 	$save['intropage_info'] = form_input_validate(get_nfilter_request_var('intropage_info'), 'intropage_info', '^on$', true, 3);
