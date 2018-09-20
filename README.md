@@ -50,6 +50,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
         1.8 ---
         Add check for cacti and spine version
         Add panel for Mactrack plugin (again)
+        Add panel for Top5 Mactrack sites
         Add panel Maintenace alert
         Fix number of errors in snmp default community test
         Add test for extrems, trends - is thold plugin installed and running?
