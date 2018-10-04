@@ -992,7 +992,7 @@ function intropage_mactrack() {
 		$result['data'] .= 'Disabled: ' . $m_disa . ' | ';
 		
 		
-		$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array('Down','Up','Error','Unknown','Disabled'), 'data' => array($m_down,$m_up,$m_err,$m_unkn,$m_disa));
+		$result['pie'] = array('title' => 'MAC Tracks:', 'label' => array('Up','Down','Error','Unknown','Disabled'), 'data' => array($m_up,$m_down,$m_err,$m_unkn,$m_disa));
 	    }
 	}
 	
