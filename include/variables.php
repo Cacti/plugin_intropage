@@ -1,6 +1,9 @@
 <?php
 
 // priority (order) (bigger number =  highest priority)
+
+// maint plugin and admin alert panel are always visible 
+
 $panel = array();
 $panel['intropage_analyse_log']['priority'] = 60;
 $panel['intropage_analyse_login']['priority'] = 75;
@@ -23,7 +26,7 @@ $panel['intropage_top5_ping']['priority'] = 30;
 $panel['intropage_top5_availability']['priority'] = 31;
 $panel['intropage_info']['priority'] = 1;
 $panel['intropage_boost']['priority'] = 55;
-$panel['intropage_favourite_graph']['priority'] = 99;
+$panel['intropage_favourite_graph']['priority'] = 95;
 
 $intropage_settings = array(	// default values
 

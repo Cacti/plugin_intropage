@@ -205,6 +205,15 @@ EOF;
     print '<div id="megaobal">';
     print '<ul id="obal">';
 
+	// extra maint plugin panel
+	    // resit allowed hosts
+	    // zobrazovat jen v pripade, ze je datum pred 1 den nebo alert probiha
+	
+	
+	
+	// end of extra maint plugin panel
+
+
 
 	// extra admin panel 
         if (strlen(read_config_option('intropage_admin_alert')) > 3)	{
