@@ -75,8 +75,8 @@ $intropage_settings = array(	// default values
 		'default' => 'pool.ntp.org',
 	),
 
-	'intropage_maintenance_alert' => array(
-		'friendly_name' => 'Information panel about maintenance tasks, down devices, ..',
+	'intropage_admin_alert' => array(
+		'friendly_name' => 'Admin information panel about maintenance tasks, down devices, ..',
 		'description' => 'If isn\'t empty, panel will be displayed on the top. You can use html tags (b, i, ...).',
 		'method' => 'textarea',
 		'max_length' => 1000,

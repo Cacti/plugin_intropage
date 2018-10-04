@@ -206,13 +206,13 @@ EOF;
     print '<ul id="obal">';
 
 
-	// extra maintenance panel 
-        if (strlen(read_config_option('intropage_maintenance_alert')) > 3)	{
-	    $tmp['data'] = nl2br(read_config_option('intropage_maintenance_alert'));
+	// extra admin panel 
+        if (strlen(read_config_option('intropage_admin_alert')) > 3)	{
+	    $tmp['data'] = nl2br(read_config_option('intropage_admin_alert'));
 
-	    intropage_display_panel(998,'red','Maintenance alert',$tmp);
+	    intropage_display_panel(998,'red','Admin alert',$tmp);
 	}
-	// end of maintenace panel
+	// end of admin panel
 
     
 
