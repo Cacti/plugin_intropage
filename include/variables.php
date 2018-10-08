@@ -88,6 +88,15 @@ $intropage_settings = array(	// default values
 		'default' => '',
 	),
 
+	'intropage_maint_plugin_days' => array(
+		'friendly_name' => 'Maint plugin - how many days before display alert',
+		'description' => '0 = display if maintenance start date is reached</strong>',
+		'method' => 'drop_array',
+		'array' => array('0' => 'When maintenance starts', '1' => '1 day before', '3' => '3 days before', '7' => '7 days before'),
+		'default' => '1',
+	),
+
+
 );
 
 ?>
