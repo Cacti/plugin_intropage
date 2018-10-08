@@ -1014,29 +1014,31 @@ function intropage_mactrack_sites() {
 
 
 // SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5;
-
-	$result['data'] .= '<table><tr><td class="rpad">Site</td><td class="rpad">Devices</td>';
-	$result['data'] .= '<td class="rpad">IPs</td><td class="rpad">Ports</td>';
-	$result['data'] .= '<td class="rpad">Ports up</td><td class="rpad">MACs</td>';
-	$result['data'] .= '<td class="rpad">Device errors</td></tr>';
-	
-	
-	
-        $sql_result = db_fetch_assoc("SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5");
-	if (sizeof($sql_result) > 0) {
-
-	    foreach($sql_result as $row) {
-        	$result['data'] .=  '<tr><td>' . $row['site_name'] . '</td><td>' . $row['total_devices'] . '</td>';      
-        	$result['data'] .=  '<td>' . $row['total_ips'] . '</td><td>' . $row['total_user_ports'] . '</td>';      
-        	$result['data'] .=  '<td>' . $row['total_oper_ports'] . '</td><td>' . $row['total_macs'] . '</td>';      
-        	$result['data'] .=  '<td>' . $row['total_device_errors'] . '</td></tr>';      
-	    }	
-	    $result['data'] .='</table>';
+	if (!db_fetch_cell("SELECT directory FROM plugin_config where directory='mactrack' and status=1")) {
+		$result['alarm'] = 'grey';
+		$result['data'] = 'Mactrack plugin not installed/running';
 	}
 	else	{
-	    $result['data'] = 'No mactrack sites found';
-	}
+	    $result['data'] .= '<table><tr><td class="rpad">Site</td><td class="rpad">Devices</td>';
+	    $result['data'] .= '<td class="rpad">IPs</td><td class="rpad">Ports</td>';
+	    $result['data'] .= '<td class="rpad">Ports up</td><td class="rpad">MACs</td>';
+	    $result['data'] .= '<td class="rpad">Device errors</td></tr>';
+	
+    	    $sql_result = db_fetch_assoc("SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5");
+	    if (sizeof($sql_result) > 0) {
 
+		foreach($sql_result as $row) {
+        	    $result['data'] .=  '<tr><td>' . $row['site_name'] . '</td><td>' . $row['total_devices'] . '</td>';      
+        	    $result['data'] .=  '<td>' . $row['total_ips'] . '</td><td>' . $row['total_user_ports'] . '</td>';      
+        	    $result['data'] .=  '<td>' . $row['total_oper_ports'] . '</td><td>' . $row['total_macs'] . '</td>';      
+        	    $result['data'] .=  '<td>' . $row['total_device_errors'] . '</td></tr>';      
+		}	
+		$result['data'] .='</table>';
+    	    }
+	    else	{
+		$result['data'] = 'No mactrack sites found';
+	    }
+	}
 
     return $result;
 }
