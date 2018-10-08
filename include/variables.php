@@ -2,7 +2,7 @@
 
 // priority (order) (bigger number =  highest priority)
 
-// maint plugin and admin alert panel are always visible 
+// maint plugin and admin alert panels are always visible 
 
 $panel = array();
 $panel['intropage_analyse_log']['priority'] = 60;
