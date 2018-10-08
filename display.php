@@ -2,7 +2,8 @@
 
 function display_information() {
 
-	global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
+	//global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
+	global $config, $colors, $poller_options;
 
 	if (!api_user_realm_auth('intropage.php'))	{
 		echo 'Intropage - permission denied<br/><br/>';
@@ -209,6 +210,7 @@ EOF;
 	    // resit allowed hosts
 	    // zobrazovat jen v pripade, ze je datum pred 1 den nebo alert probiha
 	
+	    // intropage_maint_plugin_days
 	
 	
 	// end of extra maint plugin panel
