@@ -211,6 +211,7 @@ EOF;
 	// extra maint plugin panel
 
      if (db_fetch_cell("SELECT directory FROM plugin_config where directory='maint'")) {
+        $start = microtime(true);	
 
 	$tmp['data'] = "";
     
@@ -262,6 +263,8 @@ EOF;
 	    intropage_display_panel(997,'red','Plugin Maint alert',$tmp);
 	    $tmp['data'] = "";    
 	}
+	    $debug .= 'Maint plugin: ' . round(microtime(true) -$start,2) . ' || ';
+
     }
 	
 	// end of extra maint plugin panel
