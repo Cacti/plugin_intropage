@@ -699,7 +699,7 @@ function intropage_graph_data_source() {
 
 
 function intropage_graph_host() {
-	global $config, $allowed_hosts, $console_access, $sql_where;
+	global $config, $allowed_hosts, $console_access;
 	
 	$result = array(
 		'name' => 'Hosts',

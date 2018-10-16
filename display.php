@@ -3,7 +3,8 @@
 function display_information() {
 
 	//global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
-	global $config, $colors, $poller_options;
+	// tyhle opravdu potrebuju jako globalni, pouzivaji se v data.php. Toto je totiz fce
+	global $config, $allowed_hosts, $sql_where;
 
 	if (!api_user_realm_auth('intropage.php'))	{
 		echo 'Intropage - permission denied<br/><br/>';
@@ -78,6 +79,8 @@ EOF;
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$display_level = read_user_setting('intropage_display_level',read_config_option('intropage_display_level'));
 	$autorefresh = read_user_setting('intropage_autorefresh',read_config_option('intropage_autorefresh'));
+	$maint_days_before = read_user_setting('intropage_maint_plugin_days_before',3);
+
 
 	$intropage_debug = read_user_setting('intropage_debug',0);
 	
@@ -195,7 +198,6 @@ EOF;
 
 
 
-
 	// Display ----------------------------------
 
 //	$display_important_first = on/off
@@ -207,11 +209,60 @@ EOF;
     print '<ul id="obal">';
 
 	// extra maint plugin panel
-	    // resit allowed hosts
-	    // zobrazovat jen v pripade, ze je datum pred 1 den nebo alert probiha
-	
-	    // intropage_maint_plugin_days
-	
+
+     if (db_fetch_cell("SELECT directory FROM plugin_config where directory='maint'")) {
+
+	$tmp['data'] = "";
+    
+//   $schedules = db_fetch_assoc ("select * from plugin_maint_hosts as mh join plugin_maint_schedules as ms 
+//   on mh.schedule=ms.id where mh.host in ($allowed_hosts) and ms.enabled='on'");	    
+
+	$schedules = db_fetch_assoc ("select * from plugin_maint_schedules where enabled='on'");
+	if (sizeof($schedules))	{
+	    foreach ($schedules as $sc)	{
+    		$t = time();
+    		switch ($sc['mtype']) {
+            	    case 1:
+                	if ($t > ($sc['stime']+$maint_days_before) && $t < $sc['etime'])	{
+            		    $tmp['data'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
+            				    ' - ' . $sc[name] . ' (One time)</b><br/>Affected hosts:<br/>';
+				
+			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
+                    	    foreach ($hosts as $host)	{
+                    		$tmp['data'] .= $host['description'] . ', ';
+                    	    }
+                    	    $tmp['data'] = substr ($tmp['data'],0,-2);
+                        		    		    
+                    	    $tmp['data'] .= '<br/><br/>';
+                	}
+            	    break;
+            	    case 2:
+                	while ($sc['etime'] < $t) {
+                    	    $sc['etime'] += $sc['minterval'];
+                    	    $sc['stime'] += $sc['minterval'];
+                	}
+                	if ($t > ($sc['stime']+$maint_days_before) && $t < $sc['etime'])	{
+            		    $tmp['data'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
+            				    ' - ' . $sc[name] . ' (Reoccurring)</b><br/>Affected hosts:<br/>';
+				
+			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
+                    	    foreach ($hosts as $host)	{
+                    		$tmp['data'] .= $host['description'] . ', ';
+                    	    }
+                    	    $tmp['data'] = substr ($tmp['data'],0,-2);
+                        	    		    
+                    	    $tmp['data'] .= '<br/><br/>';
+            		}
+            	    break;
+        	}
+	    }
+	}
+	    
+	if ($tmp['data'])	{
+	    intropage_display_panel(997,'red','Plugin Maint alert',$tmp);
+	    $tmp['data'] = "";    
+	}
+    }
 	
 	// end of extra maint plugin panel
 
