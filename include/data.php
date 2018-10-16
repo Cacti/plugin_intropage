@@ -1265,10 +1265,9 @@ function intropage_top5_ping() {
 	);
 	
 	
-	$result['data'] = '<table>';
         $sql_worst_host = db_fetch_assoc("SELECT description, id , avg_time, cur_time FROM host where host.id in ($allowed_hosts) and disabled != 'on' order by avg_time desc limit 5");
         if (sizeof($sql_worst_host) > 0) {
-
+	    $result['data'] = '<table>';
 	    foreach($sql_worst_host as $host) {
         	if ($console_access)  
         	    $result['data'] .= '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
@@ -1284,13 +1283,13 @@ function intropage_top5_ping() {
 		else
 		    $result['data'] .= '<td class="rpad texalirig">' . round($host['cur_time'],2) . 'ms</td></tr>';
 	    }
+	    $result['data'] .= '</table>';
 	}
 	else	{	// no data
 	    $result['data'] = 'Waiting for data';
 		
 	}	
 	
-	$result['data'] .= '</table>';
 	return $result;
 }
 
@@ -1306,10 +1305,10 @@ function intropage_top5_availability() {
 	);
 	
 
-	$result['data'] = '<table>';
 	$sql_worst_host = db_fetch_assoc("SELECT description, id, availability FROM host where  host.id in ($allowed_hosts) and disabled != 'on' order by availability  limit 5");
 
         if (sizeof($sql_worst_host) > 0) {
+	    $result['data'] = '<table>';
 
 	    foreach($sql_worst_host as $host) {
         	if ($console_access)  
@@ -1324,12 +1323,12 @@ function intropage_top5_availability() {
 		else
         	    $result['data'] .= '<td class="rpad texalirig">' . round($host['availability'],2) . '%</td></tr>';
 	    }
+	$result['data'] .= '</table>';
 	}
 	else	{	// no data
 	    $result['data'] = 'Waiting for data';
 	}	
 	
-	$result['data'] .= '</table>';
 	return $result;
 
 }
