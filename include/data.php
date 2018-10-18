@@ -620,17 +620,28 @@ function intropage_extrem() {
     // long run poller	
 	$result['data'] .= '<strong>Long run<br/>poller: </strong>';
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,substring(value,instr(value,':')+1) as xvalue FROM plugin_intropage_trends WHERE name='poller' and date > date_sub(date,interval 1 day) order by xvalue desc, date  limit 5");
-	foreach($sql_result as $row) {
-            $result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['xvalue'] . 's';     
-	}	
+	if (count($sql_result) > 0)	{
+	    foreach($sql_result as $row) {
+        	$result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['xvalue'] . 's';     
+	    }	
+	}
+	else	{
+	    $result['data'] .= '<br/>Waiting<br/>for data';
+	}
 	$result['data'] .='</td><td class="rpad texalirig">';
 	
     // max host down
 	$result['data'] .= '<strong>Max host<br/>down: </strong>';
         $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='host' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
-	foreach($sql_result as $row) {
-            $result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['value'];     
-	}	
+	if (count($sql_result) > 0)	{
+	    foreach($sql_result as $row) {
+        	$result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['value'];     
+	    }	
+	}
+	else	{
+	    $result['data'] .=  '<br/>Waiting<br/>for data';
+	}
+	
 	$result['data'] .= '</td><td class="rpad texalirig">';
 	
     // max thold trig 
@@ -639,8 +650,13 @@ function intropage_extrem() {
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {	    
     	    $sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
-	    foreach($sql_result as $row) {
-        	$result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['value'];     
+	    if (count($sql_result) > 0)	{
+		foreach($sql_result as $row) {
+        	    $result['data'] .=  '<br/>' . $row['xdate'] . ' ' . $row['value'];     
+		}
+	    }
+	    else	{
+		$result['data'] .=  '<br/>Waiting<br/>for data';
 	    }
 	}
 	else	{
