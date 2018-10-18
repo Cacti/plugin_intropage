@@ -1,4 +1,15 @@
-
 .panel_header {
-    color: #ccf;
+    color: white;
+    font-size: 1.1em;
+}
+
+
+a:link, a:visited, a:hover, a:active    {
+    color: white !important;
+}
+
+
+.panel_data     {
+    background: rgba(0,0,0,0.1);
+    padding: 2px;
 }
