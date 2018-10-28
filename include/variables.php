@@ -36,7 +36,7 @@ $intropage_settings = array(	// default values
 	),
 	'intropage_display_important_first' => array(
 		'friendly_name' => 'Important things will be at the top',
-		'description' => 'If checked Intropage displays imporatnt (errors, warnings) information first',
+		'description' => 'If checked Intropage displays important (errors, warnings) information first',
 		'method' => 'checkbox',
 		'default' => 'off',
 	),
