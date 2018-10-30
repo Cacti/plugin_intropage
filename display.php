@@ -79,10 +79,9 @@ EOF;
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$display_level = read_user_setting('intropage_display_level',read_config_option('intropage_display_level'));
 	$autorefresh = read_user_setting('intropage_autorefresh',read_config_option('intropage_autorefresh'));
-	$maint_days_before = read_user_setting('intropage_maint_plugin_days_before',3);
-
-
 	$intropage_debug = read_user_setting('intropage_debug',0);
+
+	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 	
 
 	// Retrieve global configuration options
@@ -214,7 +213,7 @@ EOF;
         $start = microtime(true);	
 
 	$tmp['data'] = "";
-    
+	$tmp['xdata'] = "";
 
 	$schedules = db_fetch_assoc ("select * from plugin_maint_schedules where enabled='on'");
 	if (sizeof($schedules))	{
@@ -222,17 +221,18 @@ EOF;
     		$t = time();
     		switch ($sc['mtype']) {
             	    case 1:
-                	if ($t > ($sc['stime']+$maint_days_before) && $t < $sc['etime'])	{
-            		    $tmp['data'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
+
+//                	if ($t > ($sc['stime']+$maint_days_before) && $t < $sc['etime'])	{
+                	if ($t > ($sc['stime']-$maint_days_before))	{
+
+            		    $tmp['xdata'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
             				    ' - ' . $sc[name] . ' (One time)</b><br/>Affected hosts:<br/>';
 				
 			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
                     	    foreach ($hosts as $host)	{
-                    		$tmp['data'] .= $host['description'] . ', ';
+                    		$tmp['xdata'] .= $host['description'] . ', ';
                     	    }
-                    	    $tmp['data'] = substr ($tmp['data'],0,-2);
-                        		    		    
-                    	    $tmp['data'] .= '<br/><br/>';
+                    	    $tmp['data'] = substr ($tmp['xdata'],0,-2) . '<br/><br/>';
                 	}
             	    break;
             	    case 2:
@@ -240,18 +240,18 @@ EOF;
                     	    $sc['etime'] += $sc['minterval'];
                     	    $sc['stime'] += $sc['minterval'];
                 	}
-                	if ($t > ($sc['stime']+$maint_days_before) && $t < $sc['etime'])	{
-            		    $tmp['data'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
+//                	if ($t > ($sc['stime']+$maint_days_before) && $t < $sc['etime'])	{
+                	if ($t > ($sc['stime']-$maint_days_before))	{
+            		    $tmp['xdata'] = '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
             				    ' - ' . $sc[name] . ' (Reoccurring)</b><br/>Affected hosts:<br/>';
 				
 			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
                     	    foreach ($hosts as $host)	{
-                    		$tmp['data'] .= $host['description'] . ', ';
+                    		$tmp['xdata'] .= $host['description'] . ', ';
                     	    }
-                    	    $tmp['data'] = substr ($tmp['data'],0,-2);
-                        	    		    
-                    	    $tmp['data'] .= '<br/><br/>';
+                    	    $tmp['data'] .= substr ($tmp['xdata'],0,-2) . '<br/><br/>';
             		}
+
             	    break;
         	}
 	    }
