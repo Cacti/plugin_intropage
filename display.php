@@ -226,7 +226,7 @@ EOF;
                 	if ($t > ($sc['stime']-$maint_days_before))	{
 
             		    $tmp['xdata'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
-            				    ' - ' . $sc[name] . ' (One time)</b><br/>Affected hosts:<br/>';
+            				    ' - ' . $sc['name'] . ' (One time)</b><br/>Affected hosts:<br/>';
 				
 			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
                     	    foreach ($hosts as $host)	{
@@ -243,7 +243,7 @@ EOF;
 //                	if ($t > ($sc['stime']+$maint_days_before) && $t < $sc['etime'])	{
                 	if ($t > ($sc['stime']-$maint_days_before))	{
             		    $tmp['xdata'] = '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
-            				    ' - ' . $sc[name] . ' (Reoccurring)</b><br/>Affected hosts:<br/>';
+            				    ' - ' . $sc['name'] . ' (Reoccurring)</b><br/>Affected hosts:<br/>';
 				
 			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
                     	    foreach ($hosts as $host)	{
