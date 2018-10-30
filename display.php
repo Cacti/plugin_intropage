@@ -215,8 +215,6 @@ EOF;
 
 	$tmp['data'] = "";
     
-//   $schedules = db_fetch_assoc ("select * from plugin_maint_hosts as mh join plugin_maint_schedules as ms 
-//   on mh.schedule=ms.id where mh.host in ($allowed_hosts) and ms.enabled='on'");	    
 
 	$schedules = db_fetch_assoc ("select * from plugin_maint_schedules where enabled='on'");
 	if (sizeof($schedules))	{
@@ -492,7 +490,7 @@ $(document).ready(function () {
     echo '</form>';
     // end of settings
 
-    print "<div style='width: 100%'> Generated: " . date('H:i:s') . " (" . round(microtime(true) - $debug_start)  . "s)</div>";
+    print "<div id='generated'> Generated: " . date('H:i:s') . " (" . round(microtime(true) - $debug_start)  . "s)</div>";
 
     echo '</div>'; // konec megaobal
 

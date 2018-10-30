@@ -9,7 +9,9 @@
 }
 
 .flexchild {
-    padding: 0.2em;
+    padding: 0;
+    margin-right: 5px;
+    margin-bottom: 5px;
     flex-grow: 1; /* stretch box width */
     min-height: 160px;
     cursor: move;
@@ -90,4 +92,8 @@
 
 .red	{
     color: red;
+}
+
+#generated	(
+    widht: 100%;
 }
