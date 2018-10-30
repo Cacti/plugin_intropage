@@ -57,7 +57,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
         Fix PHP noticed if thold isn't installed
 	Fix Top5 display if no data
         Change error/warning in analyse tree/host/graph
-        
+        Better themes support
 
 	1.7 ---
 	Add Awesome icons (close, reload, show detail,...)
