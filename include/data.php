@@ -543,8 +543,8 @@ function intropage_boost() {
         $result['data'] .= '<br/>';
 
 
-        $result['data'] .= __('RRD Updates:') . ' ' . ($boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1):'-') . '<br/>';
-        $result['data'] .= __('Maximum Records:') . ' ' . number_format_i18n($max_records, -1) .  '<br/>';
+        $result['data'] .= __('RRD Updates') . ' / Max: ' . ($boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1):'-') . ' / ' . number_format_i18n($max_records, -1)  . '<br/>';
+    //    $result['data'] .= __('Maximum Records:') . ' ' . number_format_i18n($max_records, -1) .  '<br/>';
 
         $result['data'] .= __('Update Frequency:') . ' ' . ($rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_interval]) . '<br/>';
 
