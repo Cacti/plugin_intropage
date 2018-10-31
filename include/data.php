@@ -1389,7 +1389,8 @@ function intropage_trend() {
 		}
 	    }
 	    else	{
-		unset ($result['line']);
+		unset ($result['line']['label1']);
+		unset ($result['line']['data1']);
 	    }
 	}
 	else	{	// no plugin installed or running
@@ -1407,7 +1408,7 @@ function intropage_trend() {
 	    }
 	}
 	else	{
-	    unset ($result['line']);
+	    unset ($result['line']['data2']);
 	}
 	
 	if (count($sql) < 3)	{
