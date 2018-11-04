@@ -10,7 +10,7 @@ Plugin displays usefull information and favourite graphs on console screen or se
 * worst ping and availability
 * ...
 
-## Author 
+## Author
 Petr Macek (petr.macek@kostax.cz)
 
 ## Screenshot
@@ -23,7 +23,7 @@ Check file permission (Linux/unix - readable for www server) <br/>
 Enable plugin (Console -> Plugin management) <br/>
 Configure plugin (Console -> Settings -> Intropage tab) <br/>
 You can set Intropage as first page (Console -> User managemnt -> user -> Login Options)  <br/>
-    
+
 ## Upgrade
 Delete old files <br/>
 Copy new files <br/>
@@ -36,17 +36,29 @@ Configure plugin (Console -> Settings -> Intropage tab) <br/>
 Console -> users -> choose users -> Intropage options and panels (admin) <br/>
 Settings -> Intropage (admin) <br/>
 On intropage page -> below form (user) <br/>
-    
+
+## How to add graphs to Intropage/Dashboard?
+Go to graphs, select graph, click to icon Eye
+
 ## Possible Bugs?
-If you find a problem, let me know via github or https://forums.cacti.net/viewtopic.php?f=5&t=51920 
+If you find a problem, let me know via github or https://forums.cacti.net/viewtopic.php?f=5&t=51920
 
 ## Thanks
-Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil 
+Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+        
 	1.8 ---
-	Add check for cacti and spine version
-	Fix number of errors in snmp defaul community test
+        Add check for cacti and spine version
+        Add panel for Mactrack plugin (again)
+        Add panel for Top5 Mactrack sites
+        Add panel Maintenace alert
+        Fix number of errors in snmp default community test
+        Add test for extrems, trends - is thold plugin installed and running?
+        Fix PHP noticed if thold isn't installed
+	Fix Top5 display if no data
+        Change error/warning in analyse tree/host/graph
+        Better themes support
 
 	1.7 ---
 	Add Awesome icons (close, reload, show detail,...)

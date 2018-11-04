@@ -2,7 +2,9 @@
 
 function display_information() {
 
-	global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
+	//global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
+	// tyhle opravdu potrebuju jako globalni, pouzivaji se v data.php. Toto je totiz fce
+	global $config, $allowed_hosts, $sql_where;
 
 	if (!api_user_realm_auth('intropage.php'))	{
 		echo 'Intropage - permission denied<br/><br/>';
@@ -77,8 +79,9 @@ EOF;
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$display_level = read_user_setting('intropage_display_level',read_config_option('intropage_display_level'));
 	$autorefresh = read_user_setting('intropage_autorefresh',read_config_option('intropage_autorefresh'));
-
 	$intropage_debug = read_user_setting('intropage_debug',0);
+
+	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 	
 
 	// Retrieve global configuration options
@@ -193,6 +196,7 @@ EOF;
 	}
 
 
+
 	// Display ----------------------------------
 
 //	$display_important_first = on/off
@@ -202,6 +206,77 @@ EOF;
 
     print '<div id="megaobal">';
     print '<ul id="obal">';
+
+	// extra maint plugin panel
+
+     if (db_fetch_cell("SELECT directory FROM plugin_config where directory='maint'")) {
+        $start = microtime(true);	
+
+	$tmp['data'] = '';
+
+	$schedules = db_fetch_assoc ("select * from plugin_maint_schedules where enabled='on'");
+	if (sizeof($schedules))	{
+	    foreach ($schedules as $sc)	{
+    		$t = time();
+    		switch ($sc['mtype']) {
+    		
+            	    case 1:
+
+                	if ($t > ($sc['stime']-$maint_days_before) && $t < $sc['etime'])	{
+
+            		    $tmp['data'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
+            				    ' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
+				
+			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
+                    	    foreach ($hosts as $host)	{
+                    		$tmp['data'] .= $host['description'] . ', ';
+                    	    }
+                    	    $tmp['data'] = substr ($tmp['data'],0,-2) .'<br/><br/>';
+                	}
+            	    break;
+            	    
+            	    case 2:
+                	while ($sc['etime'] < $t) {
+                    	    $sc['etime'] += $sc['minterval'];
+                    	    $sc['stime'] += $sc['minterval'];
+                	}
+
+                	if ($t > ($sc['stime']-$maint_days_before) && $t < $sc['etime'])	{
+            		    $tmp['data'] .= '<b>' . date('d. m . Y  H:i',$sc['stime']) . ' - ' . date('d. m . Y  H:i',$sc['etime']) . 
+            				    ' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
+				
+			    $hosts = db_fetch_assoc ('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
+                    	    foreach ($hosts as $host)	{
+                    		$tmp['data'] .= $host['description'] . ', ';
+                    	    }
+                    	    $tmp['data'] = substr ($tmp['data'],0,-2) . '<br/><br/>';
+            		}
+
+            	    break;
+        	}
+	    }
+	}
+	    
+	if ($tmp['data'])	{
+	    intropage_display_panel(997,'red','Plugin Maint alert',$tmp);
+	    $tmp['data'] = "";    
+	}
+	$debug .= 'Maint plugin: ' . round(microtime(true) -$start,2) . ' || ';
+
+    }
+	
+	// end of extra maint plugin panel
+
+
+
+	// extra admin panel 
+        if (strlen(read_config_option('intropage_admin_alert')) > 3)	{
+	    $tmp['data'] = nl2br(read_config_option('intropage_admin_alert'));
+
+	    intropage_display_panel(998,'red','Admin alert',$tmp);
+	}
+	// end of admin panel
+
     
 
     // user changed order - new order is valid until logout
@@ -321,9 +396,9 @@ $(document).ready(function () {
 
 	foreach ($panels as $panel)	{
 	    if (db_fetch_cell('select ' . $panel['panel_name'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') 
-		echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . $panel['panel_name'] . '</option>';
+		echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . ucfirst(str_replace('_',' ',$panel['panel_name'])) . '</option>';
 	    else
-		echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . $panel['panel_name'] . ' (admin prohibited)</option>';
+		echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . ucfirst(str_replace('_',' ',$panel['panel_name'])) . ' (admin prohibited)</option>';
 	}
     }
 
@@ -415,7 +490,7 @@ $(document).ready(function () {
     echo '</form>';
     // end of settings
 
-    print "<div style='width: 100%'> Generated: " . date('H:i:s') . " (" . round(microtime(true) - $debug_start)  . "s)</div>";
+    print "<div id='generated'> Generated: " . date('H:i:s') . " (" . round(microtime(true) - $debug_start)  . "s)</div>";
 
     echo '</div>'; // konec megaobal
 

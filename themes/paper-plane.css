@@ -1,4 +1,9 @@
 
+.flexchild	{
+    background-color: #202020 !important;
+
+}
+
 .panel_data     {
     background-color: #202020;
     color: white;
@@ -13,4 +18,9 @@
 .panel_header 	{
     color: #bbf;
 
+}
+
+
+#generated      {
+    color: white;
 }
