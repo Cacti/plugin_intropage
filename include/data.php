@@ -1388,10 +1388,10 @@ function intropage_trend() {
         	    array_push($result['line']['data1'],$row['value']);
 		}
 	    }
-	    else	{
-		unset ($result['line']['label1']);
-		unset ($result['line']['data1']);
-	    }
+	    //else	{
+		//unset ($result['line']['label1']);
+		//unset ($result['line']['data1']);
+	    //}
 	}
 	else	{	// no plugin installed or running
 	
@@ -1407,9 +1407,9 @@ function intropage_trend() {
                     array_push($result['line']['data2'],$row['value']);
 	    }
 	}
-	else	{
-	    unset ($result['line']['data2']);
-	}
+	//else	{
+	    //unset ($result['line']['data2']);
+	//}
 	
 	if (count($sql) < 3)	{
 	    unset($result['line']);
