@@ -17,7 +17,7 @@ function display_information() {
 	$selectedTheme = get_selected_theme();
 
 //	$url_path = $config['url_path'] . 'plugins/intropage/';
-    
+
         if (db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id'])== 1)  // in tab
             $url_path = $config['url_path'] . 'plugins/intropage/intropage.php'; 
         else           // in console
@@ -40,22 +40,23 @@ print <<<EOF
 
 <script type="text/javascript">
 
-// IE 10 (MSIE 10) & 11 (Trident) hack for flex. Without this are all panels in one line
-$(window).load(function() {
+  function resizeObal() {
+    if (navigator.userAgent.search('MSIE 10') > 0 ||
+       (navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 )) {
+      $('#obal').css('max-width',($(window).width()-190));
+    }
+  }
 
-
-    if (navigator.userAgent.search('MSIE 10') > 0 || 
-        (navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 ))	{
-    	    $('#obal').css('max-width',($(window).width()-190));
-        }
-});
-
-
-
-// drag and drop order 
+  // drag and drop order
   $(function() {
+
+    $(window).resize(function() {
+      resizeObal();
+    });
+
+    resizeObal();
     $( "#obal" ).sortable({
-    
+
       update: function( event, ui ) {
         //console.log($("#obal"));
         var xdata = new Array();
