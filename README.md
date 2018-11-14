@@ -47,7 +47,8 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
-        1.8 ---
+        
+	1.8 ---
         Add check for cacti and spine version
         Add panel for Mactrack plugin (again)
         Add panel for Top5 Mactrack sites
