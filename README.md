@@ -47,6 +47,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+
+	1.8.1 ---
+	Fix javascript/jquery error (MSIE11 fix)
+	Move Analyse DB and NTP to poller and run periodically
         
 	1.8 ---
         Add check for cacti and spine version

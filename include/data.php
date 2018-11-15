@@ -13,47 +13,23 @@ function intropage_analyse_db() {
 		'detail' => '',
 	);
 
-	$damaged        = 0;
-	$memtables      = 0;
-	$db_check_level = read_config_option('intropage_analyse_db_level');
-
-	$tables = db_fetch_assoc('SHOW TABLES');
-	foreach ($tables as $key => $val) {
-		$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
-
-		if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
-			$memtables++;
-		} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
-			$damaged++;
-			$result['detail'] .= 'Table ' . $row['Table'] . ' status ' . $row['Msg_text'] . '<br/>';
-		}
+	$result['alarm'] 	= db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_alarm'");
+	$result['data'] 	= db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_result'");
+	$result['detail']  	= db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_detail'");
+	
+	$result['data'] .= '<br/><br/>Last check: ' . db_fetch_cell("SELECT date from plugin_intropage_trends where name='db_check_result'") . '<br/>';
+	$often = read_config_option('intropage_analyse_db_interval');
+	if ($often == 900)	{
+	    $result['data'] .= 'Checked every 15 minutes';
 	}
-
-	if ($damaged > 0) {
-		$result['alarm'] = 'red';
-		$result['data']  = '<span class="txt_big">DB problem</span><br/><br/>';
-	} else {
-		$result['data'] = '<span class="txt_big">DB OK</span><br/><br/>';
+	elseif ($often == 3600)	{
+	    $result['data'] .= 'Checked hourly';
+	}	
+	else	{
+	    $result['data'] .= 'Checked daily';
 	}
-
-	// connection errors
-	$cerrors = 0;
-	$con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
-
-	foreach ($con_err as $key => $val) {
-		$cerrors = $cerrors + $val['Value'];
-	}
-
-	if ($cerrors > 0) {	// only yellow
-		$result['detail'] .= 'Connection errors - try to restart database. <br/>';
-
-		if ($result['alarm'] == 'green') {
-			$result['alarm'] = 'yellow';
-		}
-	}
-
-	$result['data'] .= 'Connection errors: ' . $cerrors . '<br/>';
-	$result['data'] .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
+	
+	$result['data'] .= '<br/><br/>';
 
 	return $result;
 }
@@ -1059,27 +1035,39 @@ function intropage_ntp() {
 	);
 
 	$ntp_server = read_config_option('intropage_ntp_server');
-
-	if (filter_var($ntp_server, FILTER_VALIDATE_IP) || preg_match('/^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z])$/i', $ntp_server)) {
-		$ntp_time = ntp_time($ntp_server);
-		if ($ntp_time > 0) {
-			$diff_time = date('U') - $ntp_time;
-			if ($diff_time < -600 || $diff_time > 600) {
-				$result['alarm'] = 'red';
-				$result['data']  = '<span class="txt_big">' . date('Y-m-d') . '<br/>'. date('H:i:s') . "</span><br/><br/>Please check time.<br/>It is different (more than $diff_time seconds) from NTP server $ntp_server";
-			} elseif ($diff_time < -120 || $diff_time > 120) {
-				$values['time']['alarm'] = 'yellow';
-				$values['time']['data']  = '<span class="txt_big">' . date('Y-m-d') . '<br/>' . date('H:i:s') . "</span><br/><br/>Please check time.<br/>It is different (more than $diff_time seconds) from NTP server $ntp_server";
-			} else {
-				$result['data'] = '<span class="txt_big">' . date('Y-m-d') . '<br/>' . date('H:i:s') . "</span><br/><br/>Localtime is equal to NTP server<br/>$ntp_server";
-			}
-		} else {
-			$result['alarm'] = 'red';
-			$result['data']  = 'Unable to contact the NTP server indicated.<br/>Please check your configuration';
-		}
-	} else {
+	
+	$diff_time = db_fetch_cell("SELECT value from plugin_intropage_trends where name='ntp_diff_time'");
+	
+	if ($diff_time === false)	{
+	    $result['alarm'] = 'yellow';
+	    $result['data']  = 'Waiting for data<br/>';
+	}
+	elseif ($diff_time != "error") {
+	    if ($diff_time < -600 || $diff_time > 600) {
 		$result['alarm'] = 'red';
-		$result['data']  = 'Incorrect ntp server address, please insert IP or DNS name';
+		$result['data']  = '<span class="txt_big">' . date('Y-m-d') . '<br/>'. date('H:i:s') . "</span><br/><br/>Please check time.<br/>It is different (more than $diff_time seconds) from NTP server $ntp_server<br/>";
+	    } elseif ($diff_time < -120 || $diff_time > 120) {
+		$result['alarm'] = 'yellow';
+		$result['data']  = '<span class="txt_big">' . date('Y-m-d') . '<br/>' . date('H:i:s') . "</span><br/><br/>Please check time.<br/>It is different (more than $diff_time seconds) from NTP server $ntp_server<br/>";
+	    } else {
+		$result['data'] = '<span class="txt_big">' . date('Y-m-d') . '<br/>' . date('H:i:s') . "</span><br/><br/>Localtime is equal to NTP server<br/>$ntp_server<br/>";
+	    }
+	} 
+	else {
+	    $result['alarm'] = 'red';
+	    $result['data']  = 'Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>';
+	}
+	
+	$result['data'] .= '<br/>Last check: ' . db_fetch_cell("SELECT date from plugin_intropage_trends where name='ntp_diff_time'") . '<br/>';
+	$often = read_config_option('intropage_ntp_interval');
+	if ($often == 900)	{
+	    $result['data'] .= 'Checked every 15 minutes';
+	}
+	elseif ($often == 3600)	{
+	    $result['data'] .= 'Checked hourly';
+	}	
+	else	{
+	    $result['data'] .= 'Checked daily';
 	}
 
 	return $result;

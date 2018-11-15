@@ -62,6 +62,14 @@ $intropage_settings = array(	// default values
 		'default' => '1000',
 	),
 
+	'intropage_analyse_db_interval' => array(
+		'friendly_name' => 'How often analyze DB',
+		'description' => '<strong>Poller runs this task. It could cause long poller run.</strong>',
+		'method' => 'drop_array',
+		'array' => array('900' => 'Every 15 minutes', '3600' => 'Every hour', '86400' => 'Every day'),
+		'default' => '86400',
+	),
+
 	'intropage_analyse_db_level' => array(
 		'friendly_name' => 'Analyse DB - Level of db check',
 		'description' => 'Quick - no check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>',
@@ -76,6 +84,14 @@ $intropage_settings = array(	// default values
 		'method' => 'textbox',
 		'max_length' => 50,
 		'default' => 'pool.ntp.org',
+	),
+
+	'intropage_ntp_interval' => array(
+		'friendly_name' => 'How often check NTP',
+		'description' => '<strong>Poller runs this task. It could cause long poller run.</strong>',
+		'method' => 'drop_array',
+		'array' => array('900' => 'Every 15 minutes', '3600' => 'Every hour', '86400' => 'Every day'),
+		'default' => '3600',
 	),
 
 	'intropage_admin_alert' => array(

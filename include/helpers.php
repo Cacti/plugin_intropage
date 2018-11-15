@@ -321,7 +321,7 @@ function ntp_time($host) {
 	$timestamp = -1;
 	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
-	$timeout = array('sec' => 1, 'usec' => 500000);
+	$timeout = array('sec' => 1, 'usec' => 400000);
 	socket_set_option($sock, SOL_SOCKET, SO_RCVTIMEO, $timeout);
 	socket_clear_error();
 
@@ -341,7 +341,14 @@ function ntp_time($host) {
 			// Unix time is seconds since 0000 UT on 1 January 1970
 			$timestamp -= 2208988800;
 		}
+		else {
+		    $timestamp = "error";
+		}
 	}
+	else {
+	    $timestamp = "error";
+	}
+	
 	return $timestamp;
 }
 
@@ -366,3 +373,4 @@ function intropage_graph_button($data) {
 		}
 	}
 }
+

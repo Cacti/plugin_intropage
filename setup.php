@@ -129,9 +129,9 @@ function intropage_setup_database() {
 	}
 
 	$data              = array();
-	$data['columns'][] = array('name' => 'date', 'type' => 'timestamp', 'default' => '0000-00-00 00:00:00', 'NULL' => false);
+	$data['columns'][] = array('name' => 'date', 'type' => 'datetime');
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'value', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'value', 'type' => 'varchar(250)', 'NULL' => false, 'default' => '0');
 	$data['type']      = 'MyISAM';
 	$data['comment']   = 'trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
@@ -174,6 +174,8 @@ function intropage_setup_database() {
 }
 
 function intropage_poller_bottom() {
+	global $config;
+	
 	$start = db_fetch_cell('SELECT min(start_time) from poller_time');
 
 	// poller stats
@@ -198,4 +200,84 @@ function intropage_poller_bottom() {
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
 		db_execute("insert into plugin_intropage_trends (name,date,value) select 'thold', now(), COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
 	}
+	
+	// check NTP
+	$last = db_fetch_cell("SELECT unix_timestamp(date) as `date` from plugin_intropage_trends where name='ntp_diff_time'");
+
+	if (!$last)	{
+    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('ntp_diff_time', now(), '0')");
+    	    $last = 0;
+	}
+	
+	if (time() > $last + read_config_option('intropage_ntp_interval'))	{
+	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
+	    $ntp_server = read_config_option('intropage_ntp_server');
+	    $ntp_time = ntp_time($ntp_server);
+	    $diff_time = date('U') - $ntp_time;
+    	    db_execute("update plugin_intropage_trends set date=now(), value=$diff_time where name='ntp_diff_time'");
+	}
+
+	// check db
+	$last = db_fetch_cell("SELECT unix_timestamp(date) as `date` from plugin_intropage_trends where name='db_check_alarm'");
+
+	if (!$last)	{
+    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('db_check_result', now(), 'Waiting for data')");
+    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('db_check_alarm', now(), 'yellow')");
+    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('db_check_detail', now(), NULL)");
+    	    $last = 0;
+	}
+
+	if (time() > $last + read_config_option('intropage_analyse_db_interval'))	{
+	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
+
+    	    $damaged        = 0;
+    	    $memtables      = 0;
+    	    $db_check_level = read_config_option('intropage_analyse_db_level');
+    	    $text_result = '';
+    	    $text_detail = '';
+    	    $alarm = 'green';
+
+    	    $tables = db_fetch_assoc('SHOW TABLES');
+    	    foreach ($tables as $key => $val) {
+                $row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
+
+                if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
+                        $memtables++;
+                } elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
+                        $damaged++;
+                        $text_detail .= 'Table ' . $row['Table'] . ' status ' . $row['Msg_text'] . '<br/>';
+                }
+    	    }
+    	    
+    	    if ($damaged > 0) {
+    		$alarm = 'red';
+                $text_result = '<span class="txt_big">DB problem</span><br/><br/>';
+    	    } else {
+                $text_result = '<span class="txt_big">DB OK</span><br/><br/>';
+    	    }
+
+    	    // connection errors
+    	    $cerrors = 0;
+    	    $con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
+
+    	    foreach ($con_err as $key => $val) {
+                $cerrors = $cerrors + $val['Value'];
+	    }
+
+    	    if ($cerrors > 0) {     // only yellow
+                $text_detail .= 'Connection errors - try to restart database. <br/>';
+
+                if ($alarm == 'green') {
+                        $alarm = 'yellow';
+                }
+    	    }
+    	    $text .= 'Connection errors: ' . $cerrors . '<br/>';
+    	    $text .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
+
+    	    db_execute("update plugin_intropage_trends set date=now(), value='$text' where name='db_check_result'");
+    	    db_execute("update plugin_intropage_trends set date=now(), value='$alarm' where name='db_check_alarm'");
+    	    db_execute("update plugin_intropage_trends set date=now(), value='$text2' where name='db_check_detail'");
+
+	}
+
 }
