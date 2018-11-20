@@ -85,10 +85,13 @@ EOF;
 
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
+	// need for thold
+	$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
+	$sql_where     = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
+
 
 	// Retrieve global configuration options
 /*  my old code
-	$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$sql_where     = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 	$allowed_hosts = '';
 
