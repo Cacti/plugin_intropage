@@ -181,12 +181,14 @@ function intropage_setup_database() {
 function intropage_poller_bottom() {
 	global $config;
 	
+	// drive jsem si start daval do 
 //	$start = db_fetch_cell('SELECT min(start_time) from poller_time');
 
 	// poller stats
 	$stats = db_fetch_assoc('SELECT id,total_time from poller order by id limit 5');
 	foreach ($stats as $stat) {
-		db_execute("insert into plugin_intropage_trends (name,cur_timestamp,value) values ('poller','$start', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
+//		db_execute("insert into plugin_intropage_trends (name,cur_timestamp,value) values ('poller','$start', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
+		db_execute("insert into plugin_intropage_trends (name,value) values ('poller','" .$stat['id'] . ':' . round($stat['total_time']) . "')");
 	}
 
 
