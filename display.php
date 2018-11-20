@@ -87,12 +87,12 @@ EOF;
 
 
 	// Retrieve global configuration options
-
+/*  my old code
 	$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$sql_where     = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 	$allowed_hosts = '';
 
-	/* get policies for all groups and user - from user_admin.php */
+	// get policies for all groups and user - from user_admin.php
 
 	$policies   = db_fetch_assoc("SELECT uag.id, 'group' AS type, uag.name, policy_graphs, policy_hosts, policy_graph_templates
 		FROM user_auth_group AS uag
@@ -108,7 +108,7 @@ EOF;
 	$policy=$policies[0]['policy_hosts'];
 
 	$sql_query = 'SELECT host.*, user_auth_perms.user_id FROM host LEFT JOIN user_auth_perms ON
-		host.id = user_auth_perms.item_id AND user_auth_perms.type = 3 AND user_auth_perms.user_id = ' . $_SESSION['sess_user_id'];
+		host.id = user_auth_perms.item_id AND user_auth_perms.type = 3 AND user_auth_perms.user_id = ' . $_SESSION['sess_user_id'] . ' order by host.id';
 
 	$hosts = db_fetch_assoc($sql_query);
 	if (sizeof($hosts)) {
@@ -130,6 +130,20 @@ EOF;
 		$allowed_hosts = substr($allowed_hosts, 0, -1);
 	} else {
 		$allowed_hosts = 'NULL';
+	}
+*/
+
+	$hosts = get_allowed_devices('', 'id');
+	if (sizeof($hosts)) {
+		foreach ($hosts as $host) {
+			$allowed_hosts .= $host['id'] . ',';
+		}
+	}
+		
+	if (!empty($allowed_hosts)) {
+		$allowed_hosts = substr($allowed_hosts, 0, -1);
+	} else {
+		$allowed_hosts = '';
 	}
 
 
