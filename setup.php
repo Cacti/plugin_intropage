@@ -129,12 +129,17 @@ function intropage_setup_database() {
 	}
 
 	$data              = array();
-	$data['columns'][] = array('name' => 'date', 'type' => 'datetime');
+	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'value', 'type' => 'varchar(250)', 'NULL' => false, 'default' => '0');
 	$data['type']      = 'MyISAM';
 	$data['comment']   = 'trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
+
+	// I cannot set this in definition above
+	db_execute("ALTER TABLE plugin_intropage_trends MODIFY cur_timestamp timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP");
+
+
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
@@ -176,12 +181,12 @@ function intropage_setup_database() {
 function intropage_poller_bottom() {
 	global $config;
 	
-	$start = db_fetch_cell('SELECT min(start_time) from poller_time');
+//	$start = db_fetch_cell('SELECT min(start_time) from poller_time');
 
 	// poller stats
 	$stats = db_fetch_assoc('SELECT id,total_time from poller order by id limit 5');
 	foreach ($stats as $stat) {
-		db_execute("insert into plugin_intropage_trends (name,date,value) values ('poller','$start', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
+		db_execute("insert into plugin_intropage_trends (name,cur_timestamp,value) values ('poller','$start', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
 	}
 
 
@@ -190,22 +195,22 @@ function intropage_poller_bottom() {
 		$load    = sys_getloadavg();
 		$load[0] = round($load[0], 2);
 
-		db_execute("insert into plugin_intropage_trends (name,date,value) values ('cpuload', '$start', '" . $load[0] . "')");
+		db_execute("insert into plugin_intropage_trends (name,value) values ('cpuload','" . $load[0] . "')");
 	}
 
-	db_execute('delete from plugin_intropage_trends where date < date_sub(now(), INTERVAL 2 DAY)');
+	db_execute('delete from plugin_intropage_trends where cur_timestamp < date_sub(now(), INTERVAL 2 DAY)');
 
 	// trends - all hosts without permissions!!!
-	db_execute("insert into plugin_intropage_trends (name,date,value) select 'host', now(), count(id) FROM host WHERE status='1' AND disabled=''");
+	db_execute("insert into plugin_intropage_trends (name,value) select 'host', count(id) FROM host WHERE status='1' AND disabled=''");
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
-		db_execute("insert into plugin_intropage_trends (name,date,value) select 'thold', now(), COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
+		db_execute("insert into plugin_intropage_trends (name,value) select 'thold', COUNT(*) FROM thold_data  WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger)");
 	}
 	
 	// check NTP
-	$last = db_fetch_cell("SELECT unix_timestamp(date) as `date` from plugin_intropage_trends where name='ntp_diff_time'");
+	$last = db_fetch_cell("SELECT unix_timestamp(cur_timestamp) from plugin_intropage_trends where name='ntp_diff_time'");
 
 	if (!$last)	{
-    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('ntp_diff_time', now(), '0')");
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_diff_time', '0')");
     	    $last = 0;
 	}
 	
@@ -214,16 +219,16 @@ function intropage_poller_bottom() {
 	    $ntp_server = read_config_option('intropage_ntp_server');
 	    $ntp_time = ntp_time($ntp_server);
 	    $diff_time = date('U') - $ntp_time;
-    	    db_execute("update plugin_intropage_trends set date=now(), value=$diff_time where name='ntp_diff_time'");
+    	    db_execute("update plugin_intropage_trends set value=$diff_time where name='ntp_diff_time'");
 	}
 
 	// check db
-	$last = db_fetch_cell("SELECT unix_timestamp(date) as `date` from plugin_intropage_trends where name='db_check_alarm'");
+	$last = db_fetch_cell("SELECT unix_timestamp(cur_timestamp) from plugin_intropage_trends where name='db_check_alarm'");
 
 	if (!$last)	{
-    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('db_check_result', now(), 'Waiting for data')");
-    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('db_check_alarm', now(), 'yellow')");
-    	    db_execute("insert into plugin_intropage_trends (name,date,value) values ('db_check_detail', now(), NULL)");
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_result', 'Waiting for data')");
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_alarm', 'yellow')");
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_detail', NULL)");
     	    $last = 0;
 	}
 
@@ -274,10 +279,9 @@ function intropage_poller_bottom() {
     	    $text .= 'Connection errors: ' . $cerrors . '<br/>';
     	    $text .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
 
-    	    db_execute("update plugin_intropage_trends set date=now(), value='$text' where name='db_check_result'");
-    	    db_execute("update plugin_intropage_trends set date=now(), value='$alarm' where name='db_check_alarm'");
-    	    db_execute("update plugin_intropage_trends set date=now(), value='$text2' where name='db_check_detail'");
+    	    db_execute("update plugin_intropage_trends set value='$text' where name='db_check_result'");
+    	    db_execute("update plugin_intropage_trends set value='$alarm' where name='db_check_alarm'");
+    	    db_execute("update plugin_intropage_trends set value='$text2' where name='db_check_detail'");
 
 	}
-
 }

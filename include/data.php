@@ -17,7 +17,7 @@ function intropage_analyse_db() {
 	$result['data'] 	= db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_result'");
 	$result['detail']  	= db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_detail'");
 	
-	$result['data'] .= '<br/><br/>Last check: ' . db_fetch_cell("SELECT date from plugin_intropage_trends where name='db_check_result'") . '<br/>';
+	$result['data'] .= '<br/><br/>Last check: ' . db_fetch_cell("SELECT cur_timestamp from plugin_intropage_trends where name='db_check_result'") . '<br/>';
 	$often = read_config_option('intropage_analyse_db_interval');
 	if ($often == 900)	{
 	    $result['data'] .= 'Checked every 15 minutes';
@@ -565,11 +565,11 @@ function intropage_cpu() {
 		$result['data'] = 'This function is not implemented on Windows platforms';
 		unset($result['line']);
 	} else {
-		$sql = db_fetch_assoc("SELECT date_format(time(date),'%H:%i') as xdate,name,value FROM plugin_intropage_trends where name='cpuload' order by date desc limit 10");
+		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') as `date`,name,value FROM plugin_intropage_trends where name='cpuload' order by cur_timestamp desc limit 10");
 		if (count($sql)) {
 			$result['line']['title1'] = 'Load';
 			foreach ($sql as $row) {
-				array_push($result['line']['label1'], $row['xdate']);
+				array_push($result['line']['label1'], $row['date']);
 				array_push($result['line']['data1'], $row['value']);
 			}
 			$result['line']['data1']  = array_reverse($result['line']['data1']);
@@ -600,10 +600,10 @@ function intropage_extrem() {
 
 	// long run poller
 	$result['data'] .= '<strong>Long run<br/>poller: </strong>';
-	$sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,substring(value,instr(value,':')+1) as xvalue FROM plugin_intropage_trends WHERE name='poller' and date > date_sub(date,interval 1 day) order by xvalue desc, date  limit 5");
+	$sql_result = db_fetch_assoc("select date_format(time(cur_timestamp),'%H:%i') as `date`,substring(value,instr(value,':')+1) as xvalue FROM plugin_intropage_trends WHERE name='poller' and cur_timestamp > date_sub(cur_timestamp,interval 1 day) order by xvalue desc, cur_timestamp  limit 5");
 	if (count($sql_result) > 0) {
 		foreach ($sql_result as $row) {
-			$result['data'] .= '<br/>' . $row['xdate'] . ' ' . $row['xvalue'] . 's';
+			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
 		}
 	} else {
 		$result['data'] .= '<br/>Waiting<br/>for data';
@@ -612,10 +612,10 @@ function intropage_extrem() {
 
 	// max host down
 	$result['data'] .= '<strong>Max host<br/>down: </strong>';
-	$sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='host' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
+	$sql_result = db_fetch_assoc("select date_format(time(cur_timestamp),'%H:%i') as `date`,value FROM plugin_intropage_trends WHERE name='host' and cur_timestamp > date_sub(cur_timestamp,interval 1 day) order by value desc,cur_timestamp limit 5");
 	if (count($sql_result) > 0) {
 		foreach ($sql_result as $row) {
-			$result['data'] .= '<br/>' . $row['xdate'] . ' ' . $row['value'];
+			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 		}
 	} else {
 		$result['data'] .= '<br/>Waiting<br/>for data';
@@ -628,10 +628,10 @@ function intropage_extrem() {
 	$result['data'] .= '<strong>Max thold<br/>triggered: </strong>';
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
-		$sql_result = db_fetch_assoc("select date_format(time(date),'%H:%i') as xdate,value FROM plugin_intropage_trends WHERE name='thold' and date > date_sub(date,interval 1 day) order by value desc,date limit 5");
+		$sql_result = db_fetch_assoc("select date_format(time(cur_timestamp),'%H:%i') as `date`,value FROM plugin_intropage_trends WHERE name='thold' and cur_timestamp > date_sub(cur_timestamp,interval 1 day) order by value desc,cur_timestamp limit 5");
 		if (count($sql_result) > 0) {
 			foreach ($sql_result as $row) {
-				$result['data'] .= '<br/>' . $row['xdate'] . ' ' . $row['value'];
+				$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 			}
 		} else {
 			$result['data'] .= '<br/>Waiting<br/>for data';
@@ -1043,7 +1043,11 @@ function intropage_ntp() {
 	    $result['data']  = 'Waiting for data<br/>';
 	}
 	elseif ($diff_time != "error") {
-	    if ($diff_time < -600 || $diff_time > 600) {
+	    if ($diff_time > 1400000000)	{
+		$result['alarm'] = 'red';
+		$result['data']  = '<span class="txt_big">' . date('Y-m-d') . '<br/>'. date('H:i:s') . "</span><br/><br/>Failed to get NTP time from $ntp_server<br/>";
+	    }
+	    elseif ($diff_time < -600 || $diff_time > 600) {
 		$result['alarm'] = 'red';
 		$result['data']  = '<span class="txt_big">' . date('Y-m-d') . '<br/>'. date('H:i:s') . "</span><br/><br/>Please check time.<br/>It is different (more than $diff_time seconds) from NTP server $ntp_server<br/>";
 	    } elseif ($diff_time < -120 || $diff_time > 120) {
@@ -1058,7 +1062,7 @@ function intropage_ntp() {
 	    $result['data']  = 'Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>';
 	}
 	
-	$result['data'] .= '<br/>Last check: ' . db_fetch_cell("SELECT date from plugin_intropage_trends where name='ntp_diff_time'") . '<br/>';
+	$result['data'] .= '<br/>Last check: ' . db_fetch_cell("SELECT cur_timestamp from plugin_intropage_trends where name='ntp_diff_time'") . '<br/>';
 	$often = read_config_option('intropage_ntp_interval');
 	if ($often == 900)	{
 	    $result['data'] .= 'Checked every 15 minutes';
@@ -1184,7 +1188,7 @@ function intropage_poller_stat() {
 	$pollers   = db_fetch_assoc('SELECT id from poller order by id limit 5');
 	$new_index = 1;
 	foreach ($pollers as $xpoller) {
-		$poller_time = db_fetch_assoc("SELECT  date_format(time(date),'%H:%i') as xdate,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by date desc limit 10");
+		$poller_time = db_fetch_assoc("SELECT  date_format(time(cur_timestamp),'%H:%i') as `date`,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by cur_timestamp desc limit 10");
 		$poller_time = array_reverse($poller_time);
 
 		foreach ($poller_time as $one_poller) {
@@ -1192,13 +1196,13 @@ function intropage_poller_stat() {
 
 			if ($time > ($poller_interval - 10)) {
 				$result['alarm'] = 'red';
-				$result['data'] .= '<b>' . $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
+				$result['data'] .= '<b>' . $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's</b><br/>';
 			} else {
-				$result['data'] .= $one_poller['xdate'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
+				$result['data'] .= $one_poller['date'] . ' Poller ID: ' . $xpoller['id'] . ' ' . $time . 's<br/>';
 			}
 
 			// graph data
-			array_push($result['line']['label' . $new_index], $one_poller['xdate']);
+			array_push($result['line']['label' . $new_index], $one_poller['date']);
 			array_push($result['line']['data' . $new_index], $time);
 
 			$result['line']['title' . $new_index] = 'ID: ' . $xpoller['id'];
@@ -1352,13 +1356,13 @@ function intropage_trend() {
 	);
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
-		$sql = db_fetch_assoc("SELECT date_format(time(date),'%H:%i') as xdate,name,value FROM plugin_intropage_trends where name='thold' order by date desc limit 10");
+		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') as `date`,name,value FROM plugin_intropage_trends where name='thold' order by cur_timestamp desc limit 10");
 		if (count($sql)) {
 			$result['line']['title1'] = 'Tholds triggered';
 			foreach ($sql as $row) {
 				// no gd data
-				$result['data'] .= $row['xdate'] . ' ' . $row['name'] . ' ' . $row['value'] . '<br/>';
-				array_push($result['line']['label1'], $row['xdate']);
+				$result['data'] .= $row['date'] . ' ' . $row['name'] . ' ' . $row['value'] . '<br/>';
+				array_push($result['line']['label1'], $row['date']);
 				array_push($result['line']['data1'], $row['value']);
 			}
 		}
@@ -1371,13 +1375,13 @@ function intropage_trend() {
 
 
 
-	$sql = db_fetch_assoc("SELECT date_format(time(date),'%h:%i') as xdate,name,value FROM plugin_intropage_trends where name='host' order by date desc limit 10");
+	$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`,name,value FROM plugin_intropage_trends where name='host' order by cur_timestamp desc limit 10");
 	if (count($sql)) {
 		$result['line']['title2'] = 'Hosts down';
 
 		foreach ($sql as $row) {
 			// no gd data
-			$result['data'] .= $row['xdate'] . ' ' . $row['name'] . ' ' . $row['value'] . '<br/>';
+			$result['data'] .= $row['date'] . ' ' . $row['name'] . ' ' . $row['value'] . '<br/>';
 			array_push($result['line']['data2'], $row['value']);
 		}
 	}
