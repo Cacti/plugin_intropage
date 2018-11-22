@@ -17,6 +17,11 @@ function intropage_analyse_db() {
 	$result['data'] 	= db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_result'");
 	$result['detail']  	= db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_detail'");
 	
+	if (!$result['data'])	{
+	    $result['alarm'] = 'yellow';
+	    $result['data'] = 'Waiting for data';
+	}
+	
 	$result['data'] .= '<br/><br/>Last check: ' . db_fetch_cell("SELECT cur_timestamp from plugin_intropage_trends where name='db_check_result'") . '<br/>';
 	$often = read_config_option('intropage_analyse_db_interval');
 	if ($often == 900)	{
@@ -1101,7 +1106,8 @@ function intropage_poller_info() {
 
 	$result['data'] = '<b>ID/Name/max. time/total time/state</b><br/>';
 
-	$sql_pollers = db_fetch_assoc('SELECT id,name,status,last_update,total_time FROM poller ORDER BY id limit 5');
+//	$sql_pollers = db_fetch_assoc('SELECT id,name,status,last_update,total_time FROM poller ORDER BY id limit 5');
+	$sql_pollers = db_fetch_assoc('SELECT p.id,name,status,last_update,total_time FROM poller p INNER JOIN poller_time pt ON pt.poller_id = p.id WHERE p.disabled = \'\' group by p.id ORDER BY p.id limit 5');
 
 	$count    = count($sql_pollers);
 	$ok       = 0;
@@ -1113,7 +1119,7 @@ function intropage_poller_info() {
 				$ok++;
 			}
 
-			$age = db_fetch_cell('select time_to_sec(max(timediff(end_time,start_time))) from poller_time where poller_id = ' . $poller['id']);
+    			$age = db_fetch_cell('select time_to_sec(max(timediff(end_time,start_time))) from poller_time where poller_id = ' . $poller['id']);
 			if ($age < 0) {
 				$age = '---';
 			}
@@ -1185,7 +1191,8 @@ function intropage_poller_stat() {
 	);
 
 
-	$pollers   = db_fetch_assoc('SELECT id from poller order by id limit 5');
+//	$pollers   = db_fetch_assoc('SELECT id from poller order by id limit 5');
+	$pollers   = db_fetch_assoc('SELECT p.id FROM poller p INNER JOIN poller_time pt ON pt.poller_id = p.id WHERE p.disabled = \'\' group by p.id order by id limit 5');
 	$new_index = 1;
 	foreach ($pollers as $xpoller) {
 		$poller_time = db_fetch_assoc("SELECT  date_format(time(cur_timestamp),'%H:%i') as `date`,value from plugin_intropage_trends where name='poller' and value like '" . $xpoller['id'] . ":%' order by cur_timestamp desc limit 10");

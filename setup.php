@@ -181,14 +181,13 @@ function intropage_setup_database() {
 function intropage_poller_bottom() {
 	global $config;
 	
-	// drive jsem si start daval do 
-	$start = db_fetch_cell('SELECT min(start_time) from poller_time');
+	// drive jsem si start daval do  - nesmysl, muzu mit vice polleru a pak tam davam start prvniho
+//	$start = db_fetch_cell('SELECT min(start_time) from poller_time');
 
 	// poller stats
-	$stats = db_fetch_assoc('SELECT id,total_time from poller order by id limit 5');
+	$stats = db_fetch_assoc('SELECT id,total_time,date_sub(last_update,interval round(total_time) second) as start from poller order by id limit 5');
 	foreach ($stats as $stat) {
 		db_execute("insert into plugin_intropage_trends (name,cur_timestamp,value) values ('poller','$start', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
-//		db_execute("insert into plugin_intropage_trends (name,value) values ('poller','" .$stat['id'] . ':' . round($stat['total_time']) . "')");
 	}
 
 
@@ -200,6 +199,7 @@ function intropage_poller_bottom() {
 		db_execute("insert into plugin_intropage_trends (name,value) values ('cpuload','" . $load[0] . "')");
 	}
 
+	// cleaning old data
 	db_execute('delete from plugin_intropage_trends where cur_timestamp < date_sub(now(), INTERVAL 2 DAY)');
 
 	// trends - all hosts without permissions!!!
