@@ -89,67 +89,8 @@ EOF;
 	$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$sql_where     = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 
-
-	// Retrieve global configuration options
-/*  my old code
-	$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
-	$sql_where     = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
-	$allowed_hosts = '';
-
-	// get policies for all groups and user - from user_admin.php
-
-	$policies   = db_fetch_assoc("SELECT uag.id, 'group' AS type, uag.name, policy_graphs, policy_hosts, policy_graph_templates
-		FROM user_auth_group AS uag
-		INNER JOIN user_auth_group_members AS uagm  ON uag.id = uagm.group_id
-		WHERE uag.enabled = 'on' AND uagm.user_id = " . $_SESSION['sess_user_id']);
-
-	$policies[] = db_fetch_row("SELECT id, 'user' AS type, 'user' AS name, policy_graphs, policy_hosts, policy_graph_templates
-		FROM user_auth WHERE id = " .$_SESSION['sess_user_id']);
-
-	// user ma prednost, proto se dela reverse
-	array_reverse($policies);
-
-	$policy=$policies[0]['policy_hosts'];
-
-	$sql_query = 'SELECT host.*, user_auth_perms.user_id FROM host LEFT JOIN user_auth_perms ON
-		host.id = user_auth_perms.item_id AND user_auth_perms.type = 3 AND user_auth_perms.user_id = ' . $_SESSION['sess_user_id'] . ' order by host.id';
-
-	$hosts = db_fetch_assoc($sql_query);
-	if (sizeof($hosts)) {
-		foreach ($hosts as $host) {
-			if (empty($host['user_id']) || $host['user_id'] == null) {
-				if ($policy == 1) {
-					// ulozit
-					$allowed_hosts .= $host['id'] . ',';
-				}
-			} else {
-				if ($policy != 1) {
-					$allowed_hosts .= $host['id'] . ',';
-				}
-			}
-		}
-	}
-
-	if (!empty($allowed_hosts)) {
-		$allowed_hosts = substr($allowed_hosts, 0, -1);
-	} else {
-		$allowed_hosts = 'NULL';
-	}
-*/
-
-	$hosts = get_allowed_devices('', 'id');
-	if (sizeof($hosts)) {
-		foreach ($hosts as $host) {
-			$allowed_hosts .= $host['id'] . ',';
-		}
-	}
-		
-	if (!empty($allowed_hosts)) {
-		$allowed_hosts = substr($allowed_hosts, 0, -1);
-	} else {
-		$allowed_hosts = '';
-	}
-
+	$hosts = get_allowed_devices();
+	$allowed_hosts = implode(',', array_column($hosts, 'id'));
 
 	// Retrieve access
 	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION['sess_user_id'] . "' and user_auth_realm.realm_id=8")) ? true : false;
