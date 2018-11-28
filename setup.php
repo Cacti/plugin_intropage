@@ -187,7 +187,7 @@ function intropage_poller_bottom() {
 	// poller stats
 	$stats = db_fetch_assoc('SELECT id,total_time,date_sub(last_update,interval round(total_time) second) as start from poller order by id limit 5');
 	foreach ($stats as $stat) {
-		db_execute("insert into plugin_intropage_trends (name,cur_timestamp,value) values ('poller','$start', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
+		db_execute("insert into plugin_intropage_trends (name,cur_timestamp,value) values ('poller','" . $stat['start'] . "', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
 	}
 
 
@@ -278,8 +278,8 @@ function intropage_poller_bottom() {
                         $alarm = 'yellow';
                 }
     	    }
-    	    $text .= 'Connection errors: ' . $cerrors . '<br/>';
-    	    $text .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
+    	    $text_result .= 'Connection errors: ' . $cerrors . '<br/>';
+    	    $text_result .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
 
     	    db_execute("update plugin_intropage_trends set value='$text' where name='db_check_result'");
     	    db_execute("update plugin_intropage_trends set value='$alarm' where name='db_check_alarm'");
