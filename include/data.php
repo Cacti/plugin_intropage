@@ -1104,7 +1104,7 @@ function intropage_poller_info() {
 		'alarm' => 'green',
 	);
 
-	$result['data'] = '<b>ID/Name/max. time/total time/state</b><br/>';
+	$result['data'] = '<b>ID/Name/total time/state</b><br/>';
 
 //	$sql_pollers = db_fetch_assoc('SELECT id,name,status,last_update,total_time FROM poller ORDER BY id limit 5');
 	$sql_pollers = db_fetch_assoc('SELECT p.id,name,status,last_update,total_time FROM poller p INNER JOIN poller_time pt ON pt.poller_id = p.id WHERE p.disabled = \'\' group by p.id ORDER BY p.id limit 5');
@@ -1112,20 +1112,22 @@ function intropage_poller_info() {
 	$count    = count($sql_pollers);
 	$ok       = 0;
 	$running  = 0;
-	$xpollers = array();
+
 	if (sizeof($sql_pollers)) {
 		foreach ($sql_pollers as $poller) {
 			if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) {
 				$ok++;
 			}
 
-    			$age = db_fetch_cell('select time_to_sec(max(timediff(end_time,start_time))) from poller_time where poller_id = ' . $poller['id']);
-			if ($age < 0) {
-				$age = '---';
-			}
+//    			$age = db_fetch_cell('select time_to_sec(max(timediff(end_time,start_time))) from poller_time where poller_id = ' . $poller['id']);
+// !!! tady to asi predelat dle #36, zbytecne si tu komplikuju praci
+//    			$age = db_fetch_cell('select time_to_sec(max(timediff(end_time,start_time))) from poller_time where poller_id = ' . $poller['id']);
+//			if ($age < 0) {
+//				$age = '---';
+//			}
 
 			$result['data'] .= $poller['id'] . '/' .  $poller['name'] . '/' .
-			 $age . 's/' .
+//			 $age . 's/' .
 			round($poller['total_time']) . 's/';
 			if ($poller['status'] == 0) {
 				$result['data'] .= 'New/Idle';
