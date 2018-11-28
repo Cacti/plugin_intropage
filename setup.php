@@ -281,9 +281,9 @@ function intropage_poller_bottom() {
     	    $text_result .= 'Connection errors: ' . $cerrors . '<br/>';
     	    $text_result .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
 
-    	    db_execute("update plugin_intropage_trends set value='$text' where name='db_check_result'");
+    	    db_execute("update plugin_intropage_trends set value='$text_result' where name='db_check_result'");
     	    db_execute("update plugin_intropage_trends set value='$alarm' where name='db_check_alarm'");
-    	    db_execute("update plugin_intropage_trends set value='$text2' where name='db_check_detail'");
+    	    db_execute("update plugin_intropage_trends set value='$text_detail' where name='db_check_detail'");
 
 	}
 }
