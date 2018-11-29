@@ -220,7 +220,14 @@ function intropage_poller_bottom() {
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 	    $ntp_server = read_config_option('intropage_ntp_server');
 	    $ntp_time = ntp_time($ntp_server);
-	    $diff_time = date('U') - $ntp_time;
+
+	    if ($ntp_time == 'error')	{
+		$diff_time = $ntp_time;
+	    }
+	    else	{
+	    	$diff_time = date('U') - $ntp_time;
+	    }
+
     	    db_execute("update plugin_intropage_trends set value=$diff_time where name='ntp_diff_time'");
 	}
 
