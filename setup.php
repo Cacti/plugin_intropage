@@ -131,7 +131,7 @@ function intropage_setup_database() {
 	$data              = array();
 	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'value', 'type' => 'varchar(250)', 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'value', 'type' => 'varchar(250)', 'NULL' => true, 'default' => null);
 	$data['type']      = 'MyISAM';
 	$data['comment']   = 'trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
