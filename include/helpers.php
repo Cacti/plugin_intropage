@@ -81,7 +81,7 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 
 
 	print '<li id="panel_' . $panel_id . '" class="ui-state-default flexchild">';
-	print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box; xpadding-bottom: 5px;xpadding-right: 5px;">';
+	print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box; ">';
 
 	print '<div class="panel_header color_' . $type . '">';
 	print $header;
