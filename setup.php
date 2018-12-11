@@ -228,7 +228,7 @@ function intropage_poller_bottom() {
 	    	$diff_time = date('U') - $ntp_time;
 	    }
 
-    	    db_execute("update plugin_intropage_trends set value=$diff_time where name='ntp_diff_time'");
+    	    db_execute("update plugin_intropage_trends set value='$diff_time' where name='ntp_diff_time'");
 	}
 
 	// check db
