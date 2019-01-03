@@ -343,14 +343,16 @@ $(document).ready(function () {
 
 
 <script type="text/javascript">
-$( "#switch_copytext" ).click(function() {
-    if ( $("#obal").sortable( "option", "disabled" ))	{
-	$("#obal").sortable( "enable" );
-	$("#switch_copytext").attr('title','Disable panel move/Enable copy text from panel');
+$( '#switch_copytext' ).click(function() {
+    if ($('#obal').sortable('option','disabled'))	{
+	$('#obal').sortable('enable');
+	$('#switch_copytext').attr('title','Disable panel move/Enable copy text from panel');
+	$('.flexchild').css('cursor','move');
     }
     else	{
-	$("#obal").sortable( "disable" );
-	$("#switch_copytext").attr('title','Enable panel move/Disable copy text from panel');
+	$('#obal').sortable('disable');
+	$('#switch_copytext').attr('title','Enable panel move/Disable copy text from panel');
+	$('.flexchild').css('cursor','default');
     }
 });
 </script>
