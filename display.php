@@ -69,7 +69,6 @@ function display_information() {
       }
     });
     $( "#sortable" ).disableSelection();
-
   });
 
 </script>
@@ -337,6 +336,29 @@ $(document).ready(function () {
 
 	// settings
 	echo "<form method='post'>";
+
+	printf("<a href='#' id='switch_copytext' title='Disable panel move/enable copy text from panel'><i class='fa fa-clone'></i></a>\n");
+	echo "&nbsp; &nbsp; ";
+?>
+
+
+<script type="text/javascript">
+$( "#switch_copytext" ).click(function() {
+    if ( $("#obal").sortable( "option", "disabled" ))	{
+	$("#obal").sortable( "enable" );
+	$("#switch_copytext").attr('title','Disable panel move/Enable copy text from panel');
+    }
+    else	{
+	$("#obal").sortable( "disable" );
+	$("#switch_copytext").attr('title','Enable panel move/Disable copy text from panel');
+    }
+});
+</script>
+
+<?php
+
+
+
 	echo "<select name='intropage_action' size='1'>";
 	echo "<option value='0'>Select action ...</option>";
 
@@ -446,6 +468,7 @@ $(document).ready(function () {
 
 	echo '</select>';
 	echo "<input type='submit' name='intropage_go' value='Go'>";
+	
 	echo '</form>';
 	// end of settings
 
