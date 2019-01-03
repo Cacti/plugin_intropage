@@ -101,9 +101,6 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 		printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($header));
 	}
 
-	printf("<a href='#' title='Move panel/disable copy text - comming soon' class='header_link'><i class='fa fa-clone'></i></a>\n");
-
-
 	print " </div>\n";
 	print "	<table class='cactiTable'>\n";
 	print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
