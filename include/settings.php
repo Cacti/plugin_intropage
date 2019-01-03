@@ -251,10 +251,7 @@ function intropage_login_options_navigate() {
 		if ($system_lopts == 4 && $intropage_lopts == 0) {
 			header('Location: ' . $config['url_path']);
 		}
-
-
-
-		// ostatni resi asi resi auth login
+		// ostatni resi asi auth login
 	} else {	// no console access
 		if ($system_lopts == 4 || $system_lopts == 2) {	// intropage as default
 					header('Location: ' . $config['url_path'] . 'plugins/intropage/intropage.php');
