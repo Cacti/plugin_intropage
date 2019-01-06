@@ -86,15 +86,13 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	print '<div class="panel_header color_' . $type . '">';
 	print $header;
 
-
-	// awesome 5.0+    printf("<a href='#' title='Reload panel - not implemented' class='header_link'><i class='fa fa-sync-alt'></i></a>\n");
-
-
 	if ($panel_id > 990) {
 		printf("<a href='#' title='You cannot disable this panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n");
 	} else {
 		printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
 	}
+
+	printf("<a href='#' id='reloadid_" . $panel_id . "' title='Reload panel - not implemented' class='header_link reload_panel_now'>&nbsp; <i class='fa fa-retweet'></i></a>\n");
 
 
 	if (isset($dispdata['detail']) && !empty($dispdata['detail'])) {
