@@ -63,7 +63,7 @@ function intropage_analyse_log() {
 
 	if (!$log['size'] || !isset($log['lines'])) {
 		$result['alarm'] = 'red';
-		$result['data'] .= 'Log file not accessible';
+		$result['data'] .= 'Log file not accessible or empty';
 	} else {
 		$error  = 0;
 		$ecount = 0;
