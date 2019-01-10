@@ -343,8 +343,8 @@ $(document).ready(function () {
 
 
 <script type="text/javascript">
+// enable/disable move panel/copy text
 $( '#switch_copytext' ).click(function() {
-
     if ($('#obal').sortable('option','disabled'))	{
 	$('#obal').sortable('enable');
 	$('#switch_copytext').attr('title','Disable panel move/Enable copy text from panel');
@@ -357,42 +357,39 @@ $( '#switch_copytext' ).click(function() {
     }
 });
 
-// reload panel
+// reload single panel
+/*
 $(document).ready(function() {
     $('.reload_panel_now').click(function() {
     var panel_id = $(this).attr('id').split("_").pop();
 
-    //    window.alert('#panel_'+panel_id);
-//	window.alert($('#panel_'+panel_id).find(".panel_data").text()) ;
-//	$('#panel_'+panel_id).find(".panel_data").html('<h2>zmena</h2>') ;
-
-/* tohle funguje a vraci obsah panelu, ted ho jeste dostat do panelu
-$.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
-                        .done(function(data) {
-	    window.alert(data);
-	});
-*/
-
-
-$.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
-                        .done(function(data) {
-			    $('#panel_'+panel_id).find(".panel_data").html(data) ;
-                        })
-                        .fail(function(data) {
-                                //getPresentHTTPError(data);
-                                // tady bych vypsal, ze se nepodarilo
-        			    $('#panel_'+panel_id).find(".panel_data").html('neporadilo se nacist') ;
-
-                        });
-
+    $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
+        .done(function(data) {
+	    $('#panel_'+panel_id).find(".panel_data").html(data);
+        })
+        .fail(function(data) {
+	    $('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
+        });
     });
 });
+*/
 
+$(document).ready(function() {
+    $('.reload_panel_now').click(function() {
+    var panel_id = $(this).attr('id').split("_").pop();
+
+    $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
+        .done(function(data) {
+	    $('#obal').find('#panel_'+panel_id).replaceWith(data);	
+        })
+        .fail(function(data) {
+	    $('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
+        });
+    });
+});
 </script>
 
 <?php
-
-
 
 	echo "<select name='intropage_action' size='1'>";
 	echo "<option value='0'>Select action ...</option>";
