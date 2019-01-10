@@ -92,7 +92,7 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 		printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
 	}
 
-	printf("<a href='#' id='reloadid_" . $panel_id . "' title='Reload panel - not implemented' class='header_link reload_panel_now'>&nbsp; <i class='fa fa-retweet'></i></a>\n");
+	printf("<a href='#' id='reloadid_" . $panel_id . "' title='Reload panel - not fully implemented' class='header_link reload_panel_now'>&nbsp; <i class='fa fa-retweet'></i></a>\n");
 
 
 	if (isset($dispdata['detail']) && !empty($dispdata['detail'])) {
