@@ -3,10 +3,9 @@
 chdir('../../');
 include_once('./include/auth.php');
 
-
-// reload jednoho panelu
+    // reload single panel
 if (isset_request_var('reload_panel') &&
-        get_filter_request_var('reload_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/')))) {
+    get_filter_request_var('reload_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/')))) {
     
     include_once($config['base_path'] . '/plugins/intropage/include/data.php');
     include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
