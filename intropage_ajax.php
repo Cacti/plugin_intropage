@@ -20,7 +20,6 @@ if (isset_request_var('reload_panel') &&
         $data = $pokus();
     }
     intropage_display_panel(get_request_var('reload_panel'),$data['alarm'],$data['name'],$data);
-
 }
 else	{	// reload all
     include_once('./plugins/intropage/display.php');

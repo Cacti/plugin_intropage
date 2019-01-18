@@ -59,7 +59,7 @@ function human_filesize($bytes, $decimals = 2) {
 }
 
 
-
+// last parameter full = false - send only content of div 'panel_data', it is for single panel reload
 function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	global $config;
 
@@ -78,7 +78,6 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	default:
 		$bgcolor = '#f5f5f5';
 	}
-
 
 	print '<li id="panel_' . $panel_id . '" class="ui-state-default flexchild">';
 	print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box; ">';
@@ -310,6 +309,7 @@ EOF;
 	}
 
 	print "</div>\n";	// end of panel_data
+
 	print "</td></tr>\n\n";
 	html_end_box(false);
 	print "</li>\n\n";

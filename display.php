@@ -325,23 +325,6 @@ $(document).ready(function () {
 });
 </script>
 
-
-<?php
-
-// end of detail js
-
-	print "<div style='clear: both;'></div>";
-	print '</ul>';
-
-
-	// settings
-	echo "<form method='post'>";
-
-	printf("<a href='#' id='switch_copytext' title='Disable panel move/enable copy text from panel'><i class='fa fa-clone'></i></a>\n");
-	echo "&nbsp; &nbsp; ";
-?>
-
-
 <script type="text/javascript">
 // enable/disable move panel/copy text
 $( '#switch_copytext' ).click(function() {
@@ -358,31 +341,19 @@ $( '#switch_copytext' ).click(function() {
 });
 
 // reload single panel
-/*
+
 $(document).ready(function() {
-    $('.reload_panel_now').click(function() {
+
+    $(document).on('click','.reload_panel_now',function() {
     var panel_id = $(this).attr('id').split("_").pop();
 
     $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
-        .done(function(data) {
-	    $('#panel_'+panel_id).find(".panel_data").html(data);
-        })
-        .fail(function(data) {
-	    $('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
-        });
-    });
-});
-*/
+    .done(function(data) {
 
-$(document).ready(function() {
-    $('.reload_panel_now').click(function() {
-    var panel_id = $(this).attr('id').split("_").pop();
+	$('#obal').find('#panel_'+panel_id).replaceWith(data);	
 
-    $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
-        .done(function(data) {
-	    $('#obal').find('#panel_'+panel_id).replaceWith(data);	
         })
-        .fail(function(data) {
+    .fail(function(data) {
 	    $('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
         });
     });
@@ -390,6 +361,16 @@ $(document).ready(function() {
 </script>
 
 <?php
+
+	print "<div style='clear: both;'></div>";
+	print '</ul>';
+
+
+	// settings
+	echo "<form method='post'>";
+
+	printf("<a href='#' id='switch_copytext' title='Disable panel move/enable copy text from panel'><i class='fa fa-clone'></i></a>\n");
+	echo "&nbsp; &nbsp; ";
 
 	echo "<select name='intropage_action' size='1'>";
 	echo "<option value='0'>Select action ...</option>";
