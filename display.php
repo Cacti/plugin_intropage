@@ -303,9 +303,9 @@ EOF;
 		intropage_display_panel(999, 'grey', 'Debug', $value);
 	}
 
-	// js for detail ?>
+?>
 <script>
-
+// display/hide detail
 $(document).ready(function () {
  $('.article').hide();
   $('.maxim').click(function(){
@@ -323,11 +323,12 @@ $(document).ready(function () {
     }
   });
 });
-</script>
 
-<script type="text/javascript">
+
 // enable/disable move panel/copy text
-$( '#switch_copytext' ).click(function() {
+//$('#switch_copytext').click(function() {
+ $(document).on('click','#switch_copytext',function() {
+
     if ($('#obal').sortable('option','disabled'))	{
 	$('#obal').sortable('enable');
 	$('#switch_copytext').attr('title','Disable panel move/Enable copy text from panel');
@@ -338,24 +339,28 @@ $( '#switch_copytext' ).click(function() {
 	$('#switch_copytext').attr('title','Enable panel move/Disable copy text from panel');
 	$('.flexchild').css('cursor','default');
     }
+
 });
 
-// reload single panel
 
+// reload single panel
 $(document).ready(function() {
 
     $(document).on('click','.reload_panel_now',function() {
     var panel_id = $(this).attr('id').split("_").pop();
 
+//    $('#panel_'+panel_id).find(".panel_data").css('background-color','black');
+//    $('#panel_'+panel_id).find(".panel_data").fadeIn("slow");
+    
     $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
     .done(function(data) {
-
 	$('#obal').find('#panel_'+panel_id).replaceWith(data);	
-
         })
     .fail(function(data) {
 	    $('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
         });
+    
+    
     });
 });
 </script>
