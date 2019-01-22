@@ -779,7 +779,7 @@ function intropage_graph_host_template() {
 	$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, count(host.host_template_id) AS total FROM host_template LEFT JOIN host ON (host_template.id = host.host_template_id) AND host.id IN ($allowed_hosts) GROUP by host_template_id ORDER BY total desc LIMIT 6");
 	if (sizeof($sql_ht) > 0) {
 		foreach ($sql_ht as $item) {
-			array_push($result['pie']['label'], $item['name']);
+			array_push($result['pie']['label'], substr($item['name'],0,15));
 			array_push($result['pie']['data'], $item['total']);
 
 			$result['data'] .= $item['name'] . ': ';
