@@ -349,12 +349,14 @@ $(document).ready(function() {
     $(document).on('click','.reload_panel_now',function() {
     var panel_id = $(this).attr('id').split("_").pop();
 
-//    $('#panel_'+panel_id).find(".panel_data").css('background-color','black');
-//    $('#panel_'+panel_id).find(".panel_data").fadeIn("slow");
+    $('#panel_'+panel_id).find(".panel_data").css('opacity',0.2);
+    $('#panel_'+panel_id).find('.panel_data').fadeIn('slow').delay(1000);
     
     $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
     .done(function(data) {
 	$('#obal').find('#panel_'+panel_id).replaceWith(data);	
+
+
         })
     .fail(function(data) {
 	    $('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
