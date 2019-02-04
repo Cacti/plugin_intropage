@@ -393,6 +393,26 @@ function intropage_analyse_tree_host_graph() {
 
 	//    $total_errors += count($sql_result);
 
+
+	// thold notify only global list - for me it is error
+	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
+	    $pom = 0;
+	    $result['data'] .= 'Thold notify global list only: ';
+
+	    $sql_result = db_fetch_assoc("SELECT id,description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND thold_send_email = 1 order by description");
+
+	    $result['data'] .= count($sql_result) . '<br/>';
+	    if (count($sql_result) > 0) {
+		foreach ($sql_result as $row) {
+			if ($pom == 0) {
+				$pom++;
+				$result['detail'] .= '<br/><br/>Thold notify global list only:<br/>';
+			}
+			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+		}
+	    }
+	}
+
 	if ($total_errors > 0) {
 		$result['data'] = '<span class="txt_big">Found ' . $total_errors . ' problems</span><br/>' . $result['data'];
 	} else {
@@ -629,7 +649,7 @@ function intropage_extrem() {
 	$result['data'] .= '</td><td class="rpad texalirig">';
 
 	// max thold trig
-	// extrems don't use user permission!
+	// extrems doesn't use user permission!
 	$result['data'] .= '<strong>Max thold<br/>triggered: </strong>';
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
