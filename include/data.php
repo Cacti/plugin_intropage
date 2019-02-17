@@ -178,23 +178,15 @@ function intropage_analyse_tree_host_graph() {
 
 	// hosts with same IP
 
-	$pom = 0;
-	$result['data'] .= 'Devices with the same IP: ';
-
 	$sql_result = db_fetch_assoc("SELECT count(*) NoDups, id, hostname FROM host  WHERE id IN ($allowed_hosts)  AND disabled != 'on'  GROUP BY hostname,snmp_port HAVING count(*)>1");
-
-	$result['data'] .= count($sql_result) . '<br/>';
+	$result['detail'] .= '<br/><b>Devices with the same IP and port - ' . count($sql_result) . ':</b><br/>';
 
 	if (count($sql_result) > 0) {
+		$result['data'] .= 'Devices with the same IP: ' . count($sql_result) . '<br/>';
 		$result['alarm'] = 'red';
 		foreach ($sql_result as $row) {
 			$sql_hosts = db_fetch_assoc_prepared("SELECT id,description,hostname from host WHERE hostname IN(SELECT  hostname FROM host  WHERE id IN ($allowed_hosts) GROUP BY hostname,snmp_port HAVING count(*)>1) order by hostname");
 			foreach ($sql_hosts as $row) {
-				if ($pom == 0) {
-					$pom++;
-					$result['detail'] .= '<br/><br/>Device with same ip and port:<br/>';
-				}
-
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
 			}
 		}
@@ -205,65 +197,77 @@ function intropage_analyse_tree_host_graph() {
 
 	// same description
 
-	$result['data'] .= 'Hosts with the same description: ';
-
-	$pom        = 0;
 	$sql_result = db_fetch_assoc("SELECT count(*) NoDups, description FROM host  WHERE id IN ($allowed_hosts) AND  disabled != 'on' GROUP BY description HAVING count(*)>1");
-	$result['data'] .= count($sql_result) . '<br/>';
+	$result['detail'] .= '<br/><b>Same description - ' . count($sql_result) . ':</b><br/>';
 
 	$total_errors += count($sql_result);
 
 	if (count($sql_result) > 0) {
+		$result['data'] .= 'Hosts with the same description: ' . count($sql_result) . '<br/>';
 		$result['alarm'] = 'red';
 		foreach ($sql_result as $row) {
 			$sql_hosts = db_fetch_assoc_prepared('SELECT id,description,hostname from host WHERE description IN(SELECT  description FROM host  WHERE id IN (' . $allowed_hosts . ') GROUP BY description HAVING count(*)>1) ORDER BY description');
 			foreach ($sql_hosts as $row) {
-				if ($pom == 0) {
-					$pom++;
-					$result['detail'] .= 'Same description:<br/>';
-				}
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
 			}
 		}
 	}
+
 	$total_errors += count($sql_result);
 
 
 
 	// orphaned DS
-	// orphaned
 	$sql_result = db_fetch_assoc('SELECT dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step, dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id, COUNT(DISTINCT gti.local_graph_id) AS deletable FROM data_local AS dl INNER JOIN data_template_data AS dtd ON dl.id=dtd.local_data_id LEFT JOIN data_template AS dt ON dl.data_template_id=dt.id LEFT JOIN data_template_rrd AS dtr ON dtr.local_data_id=dtd.local_data_id LEFT JOIN graph_templates_item AS gti ON (gti.task_item_id=dtr.id) GROUP BY dl.id HAVING deletable=0 ORDER BY `name_cache` ASC');
-	$result['data'] .= 'Orphaned DS: ' . count($sql_result);
+	$result['detail'] .= '<br/><b>Orphaned DS - ' . count($sql_result) . ':</b><br/>';
+
 	if (count($sql_result) > 0) {
+		$result['data'] .= 'Orphaned DS: ' . count($sql_result);
+
 		if ($result['alarm'] == 'green') {
 			$result['alarm'] = 'yellow';
 		}
 
-		$result['detail'] .= '<br/><br/>Orphaned DS detail:<br/>';
 		foreach ($sql_result as $row) {
 			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
 			$row['name_cache'] . '</a><br/>';
 		}
 	}
+
+	$total_errors += count($sql_result);
+
+
+	// empty poller_output
+	$sql_result = db_fetch_assoc('SELECT local_data_id from poller_output');
+	$result['detail'] .= '<br/><b>Poller output items - ' . count($sql_result) . ':</b><br/>';
+
+	if (count($sql_result) > 0) {
+		$result['data'] .= 'Table poller_output: ' . count($sql_result);
+
+		$result['alarm'] = 'yellow';
+		
+		foreach ($sql_result as $row) {
+			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
+			$row['name_cache'] . '</a><br/>';
+		}
+	}
+	
 	$total_errors += count($sql_result);
 
 
 
 	// below - only information without red/yellow/green
-	$result['data'] .= '<br/><b>Information only (no warn/error):</b><br/>';
+	$result['data'] .= '<br/><br/><b>Information only (no warn/error):</b><br/>';
 
 
 	// device in more trees
 
-	$pom = 0;
-	$result['data'] .= 'Devices in more then one tree: ';
-
 	$sql_result = db_fetch_assoc('SELECT host.id, host.description, count(*) AS count FROM host INNER JOIN graph_tree_items ON (host.id = graph_tree_items.host_id) GROUP BY description HAVING count(*)>1');
-	$result['data'] .= count($sql_result) . '<br/>';
+	$result['detail'] .= '<br/><b>Devices in more than one tree - ' . count($sql_result) . ':</b><br/>';
 
 	if (count($sql_result) > 0) {
-//	if ($result['alarm'] == 'green')
-//	    $result['alarm'] = 'yellow';
+
+		$result['data'] .= 'Devices in more than one tree: ' . count($sql_result) . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description, graph_tree_items.title, graph_tree_items.parent, graph_tree.name FROM host INNER JOIN graph_tree_items ON (host.id = graph_tree_items.host_id) INNER JOIN graph_tree ON (graph_tree_items.graph_tree_id = graph_tree.id) WHERE host.id = ?', array($row['id']));
@@ -276,35 +280,25 @@ function intropage_analyse_tree_host_graph() {
 					$tree .= $sql_parent['title'] . ' / ';
 				}
 
-				if ($pom == 0) {
-					$pom++;
-					$result['detail'] .= '<br/>Device on more then one tree:<br/>';
-				}
-
 				$result['detail'] .= sprintf('<a href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', htmlspecialchars($config['url_path']), $host['gtid'], $host['description'], $tree);
 			}
 		}
 	}
+	
+	
 
 	//    $total_errors += count($sql_result);
 
 	// host without graph
 
-	$pom = 0;
-	$result['data'] .= 'Hosts without graphs: ';
-
 	$sql_result = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on'  AND id NOT IN (SELECT DISTINCT host_id FROM graph_local) AND snmp_version != 0");
+	$result['detail'] .= '<br/><b>Hosts without graphs - ' . count($sql_result) . ':</b><br/>';
 
-	$result['data'] .= count($sql_result) . '<br/>';
 	if (count($sql_result) > 0) {
-//	if ($result['alarm'] == 'green')
-//	    $result['alarm'] = 'yellow';
+
+		$result['data'] .= 'Hosts without graphs: ' . count($sql_result) . '<br/>';
 
 		foreach ($sql_result as $row) {
-			if ($pom == 0) {
-				$pom++;
-				$result['detail'] .= '<br/><br/>Host without graph:<br/>';
-			}
 
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
 		}
@@ -315,20 +309,13 @@ function intropage_analyse_tree_host_graph() {
 
 	// host without tree
 
-	$pom = 0;
-	$result['data'] .= 'Hosts without tree: ';
-
 	$sql_result = db_fetch_assoc("SELECT id , description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND  id NOT IN (SELECT DISTINCT host_id FROM graph_tree_items)");
-	$result['data'] .= count($sql_result) . '<br/>';
+	$result['detail'] .= '<br/><b>Hosts without tree - ' . count($sql_result) . ':</b><br/>';
+
 	if (count($sql_result) > 0) {
-//	if ($result['alarm'] == 'green')
-//	    $result['alarm'] = 'yellow';
+		$result['data'] .= 'Hosts without tree: ' . count($sql_result) . '<br/>';
 
 		foreach ($sql_result as $row) {
-			if ($pom == 0) {
-				$pom++;
-				$result['detail'] .= '<br/><br/>Hosts without tree:<br/>';
-			}
 
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
 		}
@@ -337,29 +324,16 @@ function intropage_analyse_tree_host_graph() {
 	//    $total_errors += count($sql_result);
 
 
-
-
 	// plugin monitor - host without monitoring
-	$pom = 0;
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='monitor'")) {	// installed plugin monitor?
 
-		$result['data'] .= 'Plugin monitor, not monitored: ';
-
 		$sql_result = db_fetch_assoc("SELECT id,description,hostname FROM host WHERE id in ($allowed_hosts) and monitor != 'on'");
-
-		$result['data'] .= count($sql_result) . '<br/>';
+		$result['detail'] .= '<br/><b>Plugin monitor/not monitored hosts - ' . count($sql_result) . ':</b><br/>';
 
 		if (count($sql_result) > 0) {
-
-//	    if ($result['alarm'] == 'green')
-			//    		$result['alarm'] = 'yellow';
+			$result['data'] .= 'Plugin monitor, not monitored: ' . count($sql_result) . '<br/>';
 
 			foreach ($sql_result as $row) {
-				if ($pom == 0) {
-					$pom++;
-					$result['detail'] .= '<br/><br/>Plugin monitor, not monitored devices:<br/>';
-				}
-
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
 			}
 		}
@@ -370,23 +344,15 @@ function intropage_analyse_tree_host_graph() {
 
 
 	// public/private community
-	//select id,hostname from host where snmp_community ='public' or snmp_community='private'
-	$pom = 0;
-	$result['data'] .= 'Hosts with default public/private community: ';
 
 	$sql_result = db_fetch_assoc("SELECT id,description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND (snmp_community ='public' or snmp_community='private') order by description");
+	$result['detail'] .= '<br/><b>Hosts with default public/private community - ' . count($sql_result) . ':</b><br/>';
 
-	$result['data'] .= count($sql_result) . '<br/>';
 	if (count($sql_result) > 0) {
-//	if ($result['alarm'] == 'green')
-//	    $result['alarm'] = 'yellow';
+
+		$result['data'] .= 'Hosts with default public/private community: ' . count($sql_result) . '<br/>';
 
 		foreach ($sql_result as $row) {
-			if ($pom == 0) {
-				$pom++;
-				$result['detail'] .= '<br/><br/>Default community name (public/private):<br/>';
-			}
-
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
 		}
 	}
@@ -396,18 +362,16 @@ function intropage_analyse_tree_host_graph() {
 
 	// thold notify only global list - for me it is error
 	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
-	    $pom = 0;
-	    $result['data'] .= 'Thold notify global list only: ';
 
 	    $sql_result = db_fetch_assoc("SELECT id,description FROM host WHERE id IN ($allowed_hosts) AND  disabled != 'on' AND thold_send_email = 1 order by description");
+	    $result['detail'] .= '<br/><b>Thold notify global list only - ' . count($sql_result) . ':</b><br/>';
 
-	    $result['data'] .= count($sql_result) . '<br/>';
+
 	    if (count($sql_result) > 0) {
+
+		$result['data'] .= 'Thold notify global list only: ' . count($sql_result) . '<br/>';
+
 		foreach ($sql_result as $row) {
-			if ($pom == 0) {
-				$pom++;
-				$result['detail'] .= '<br/><br/>Thold notify global list only:<br/>';
-			}
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
 		}
 	    }
@@ -664,6 +628,21 @@ function intropage_extrem() {
 	} else {
 		$result['data'] .= '<br/>no<br/>plugin<br/>installed<br/>or<br/> running';
 	}
+
+
+	$result['data'] .= '</td><td class="rpad texalirig">';
+
+	// poller output items
+	$result['data'] .= '<strong>Poller<br/>output item: </strong>';
+	$sql_result = db_fetch_assoc("select date_format(time(cur_timestamp),'%H:%i') as `date`,value FROM plugin_intropage_trends WHERE name='poller_output' and cur_timestamp > date_sub(cur_timestamp,interval 1 day) order by value desc,cur_timestamp limit 5");
+	if (count($sql_result) > 0) {
+		foreach ($sql_result as $row) {
+			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+		}
+	} else {
+		$result['data'] .= '<br/>Waiting<br/>for data';
+	}
+
 
 	$result['data'] .= '</td></tr>';
 
@@ -1369,7 +1348,7 @@ function intropage_top5_availability() {
 }
 
 
-//------------------------------------ trend -----------------------------------------------------
+//------------------------------------ trends -----------------------------------------------------
 
 
 function intropage_trend() {
@@ -1401,14 +1380,8 @@ function intropage_trend() {
 				array_push($result['line']['data1'], $row['value']);
 			}
 		}
-		//else	{
-		//unset ($result['line']['label1']);
-		//unset ($result['line']['data1']);
-		//}
 	}
 	// no plugin installed or running
-
-
 
 	$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`,name,value FROM plugin_intropage_trends where name='host' order by cur_timestamp desc limit 10");
 	if (count($sql)) {
@@ -1420,9 +1393,6 @@ function intropage_trend() {
 			array_push($result['line']['data2'], $row['value']);
 		}
 	}
-	//else	{
-	//unset ($result['line']['data2']);
-	//}
 
 	if (count($sql) < 3) {
 		unset($result['line']);
