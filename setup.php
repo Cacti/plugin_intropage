@@ -293,4 +293,10 @@ function intropage_poller_bottom() {
     	    db_execute("update plugin_intropage_trends set value='$text_detail' where name='db_check_detail'");
 
 	}
+	
+	// check poller_table is empty?
+	$count = db_fetch_cell("SELECT count(*) from poller_output");
+	db_execute("insert into plugin_intropage_trends (name,value) select 'poller_output', COUNT(*) FROM poller_output");
+
+	
 }
