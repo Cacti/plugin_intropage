@@ -24,16 +24,21 @@ if (isset_request_var('reload_panel') &&
     $console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION['sess_user_id'] . "' and user_auth_realm.realm_id=8")) ? true : false;
 
     $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . get_request_var('reload_panel'));
-    $pokus = $panel['panel'];
+    if ($panel)	{
+	$pokus = $panel['panel'];
 
-    if (isset($panel['fav_graph_id'])) { // fav_graph exception 
-	 $data = intropage_favourite_graph($panel['fav_graph_id']);
-    } else {        // normal panel
-        $data = $pokus();
+	if (isset($panel['fav_graph_id'])) { // fav_graph exception 
+	    $data = intropage_favourite_graph($panel['fav_graph_id']);
+	} else {        // normal panel
+    	    $data = $pokus();
+	}
+	intropage_display_data(get_request_var('reload_panel'),$data);
     }
-    intropage_display_panel(get_request_var('reload_panel'),$data['alarm'],$data['name'],$data);
+    else	{
+	echo 'Panel not found';
+    }
 }
 else	{	// reload all
-    include_once('./plugins/intropage/display.php');
-    display_information();
+//    include_once('./plugins/intropage/display.php');
+//    display_information();
 }

@@ -11,8 +11,9 @@ function display_information() {
 		return false;
 	}
 
-	$debug       = '';
 	$debug_start = microtime(true);
+
+	$logging = read_config_option('log_verbosity', true);
 
 	$selectedTheme = get_selected_theme();
 
@@ -80,7 +81,7 @@ EOF;
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$display_level           = read_user_setting('intropage_display_level', read_config_option('intropage_display_level'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
-	$intropage_debug         = read_user_setting('intropage_debug', 0);
+//	$intropage_debug         = read_user_setting('intropage_debug', 0);
 
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
@@ -147,8 +148,8 @@ EOF;
 		} else {	// normal panel
 			$panels[$xkey]['alldata'] = $pokus();
 		}
-
-		$debug .= $pokus . ': ' . round(microtime(true) - $start, 2) . ' || ';
+		if($logging >= 5)
+		    cacti_log('debug: ' . $pokus . ', duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 	}
 
 
@@ -160,6 +161,13 @@ EOF;
 	// 	0 chyby, 1 - chyby/warn, 2- all
 
 
+	echo '<script type="text/javascript">';
+	echo 'var intropage_autorefresh=' . read_user_setting('intropage_autorefresh') . ';';
+	echo 'var intropage_drag=true;';
+
+	echo '</script>';
+	
+	
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
@@ -216,11 +224,12 @@ EOF;
 			intropage_display_panel(997, 'red', 'Plugin Maint alert', $tmp);
 			$tmp['data'] = '';
 		}
-		$debug .= 'Maint plugin: ' . round(microtime(true) - $start, 2) . ' || ';
+	
+	        if($logging >= 5)
+		    cacti_log('debug: maint, duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 	}
 
 	// end of extra maint plugin panel
-
 
 
 	// extra admin panel
@@ -296,13 +305,13 @@ EOF;
 	}
 
 	// display debug information in panel
-
+/*
 	if ($intropage_debug) {
 		unset($value);
 		$value['data'] = $debug;
 		intropage_display_panel(999, 'grey', 'Debug', $value);
 	}
-
+*/
 ?>
 <script>
 // display/hide detail
@@ -326,43 +335,57 @@ $(document).ready(function () {
 
 
 // enable/disable move panel/copy text
-//$('#switch_copytext').click(function() {
- $(document).on('click','#switch_copytext',function() {
+$(document).on('click','#switch_copytext',function() {
 
-    if ($('#obal').sortable('option','disabled'))	{
+    if (!intropage_drag)	{
 	$('#obal').sortable('enable');
 	$('#switch_copytext').attr('title','Disable panel move/Enable copy text from panel');
 	$('.flexchild').css('cursor','move');
+	intropage_drag = true;
     }
     else	{
 	$('#obal').sortable('disable');
 	$('#switch_copytext').attr('title','Enable panel move/Disable copy text from panel');
 	$('.flexchild').css('cursor','default');
-    }
+	intropage_drag = false;
 
+    }
 });
 
+function reload_panel (panel_id)	{
+
+    $('#panel_'+panel_id).find(".panel_data").css('opacity',0);
+    $('#panel_'+panel_id).find('.panel_data').fadeIn('slow').delay(800);
+
+    $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
+    .done(function(data) {
+	$('#panel_'+panel_id).find(".panel_data").html(data) ;
+	$('#panel_'+panel_id).find(".panel_data").css('opacity',1);
+    })
+    .fail(function(data) {
+	$('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
+    });
+}
+
+function reload_all ()	{
+    $('#obal li').each(function() {
+        var panel_id = $(this).attr('id').split("_").pop();
+        reload_panel (panel_id);
+    });
+}
+
+// autorefresh
+if (intropage_autorefresh > 0)	{
+    setInterval(reload_all, intropage_autorefresh*1000);
+}
 
 // reload single panel
 $(document).ready(function() {
+    reload_all();
 
     $(document).on('click','.reload_panel_now',function() {
-    var panel_id = $(this).attr('id').split("_").pop();
-
-    $('#panel_'+panel_id).find(".panel_data").css('opacity',0.2);
-    $('#panel_'+panel_id).find('.panel_data').fadeIn('slow').delay(1000);
-    
-    $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
-    .done(function(data) {
-	$('#obal').find('#panel_'+panel_id).replaceWith(data);	
-
-
-        })
-    .fail(function(data) {
-	    $('#panel_'+panel_id).find(".panel_data").html('Error reading new data') ;
-        });
-    
-    
+	var panel_id = $(this).attr('id').split("_").pop();
+        reload_panel (panel_id);
     });
 });
 </script>
@@ -463,13 +486,13 @@ $(document).ready(function() {
 	}
 
 	echo "<option value='reset_all'>Reset all to default</option>";
-
+/*
 	if ($intropage_debug == 0) {
 		echo "<option value='debug_ena'>Enable debug</option>";
 	} else {
 		echo "<option value='debug_disa'>Disable debug</option>";
 	}
-
+*/
 
 	$lopts           = db_fetch_cell('SELECT login_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id=?', array($_SESSION['sess_user_id']));
@@ -492,7 +515,7 @@ $(document).ready(function() {
 	echo '</form>';
 	// end of settings
 
-	print "<div id='generated'> Generated: " . date('H:i:s') . ' (' . round(microtime(true) - $debug_start)  . 's)</div>';
+//	print "<div id='generated'> Generated: " . date('H:i:s') . ' (' . round(microtime(true) - $debug_start)  . 's)</div>';
 
 	echo '</div>'; // konec megaobal
 

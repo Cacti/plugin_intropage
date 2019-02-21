@@ -59,7 +59,6 @@ function human_filesize($bytes, $decimals = 2) {
 }
 
 
-// last parameter full = false - send only content of div 'panel_data', it is for single panel reload
 function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	global $config;
 
@@ -91,11 +90,11 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 		printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
 	}
 
-	printf("<a href='#' id='reloadid_" . $panel_id . "' title='Reload panel - not fully implemented' class='header_link reload_panel_now'>&nbsp; <i class='fa fa-retweet'></i></a>\n");
+	printf("<a href='#' id='reloadid_" . $panel_id . "' title='Reload panel' class='header_link reload_panel_now'>&nbsp; <i class='fa fa-retweet'></i></a>\n");
 
 
 	if (isset($dispdata['detail']) && !empty($dispdata['detail'])) {
-		printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($header));
+		printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($panel_id));
 	}
 
 	print " </div>\n";
@@ -103,6 +102,39 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
 	print "<div class='panel_data'>\n";
+
+	print "</div>\n";	// end of panel_data
+	print "</td></tr>\n\n";
+	html_end_box(false);
+	print "</li>\n\n";
+}
+
+
+
+
+function intropage_display_data($panel_id,$dispdata) {
+	global $config;
+
+	$selectedTheme = get_selected_theme();
+	switch ($selectedTheme) {
+	case 'dark':
+	case 'paper-plane':
+
+		$bgcolor = '#202020';
+	break;
+
+	case 'sunrise':
+		$bgcolor = '';
+	break;
+
+	default:
+		$bgcolor = '#f5f5f5';
+	}
+
+//	print "	<table class='cactiTable'>\n";
+//	print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
+
+//	print "<div class='panel_data'>\n";
 
 	// pie graph
 
@@ -303,17 +335,15 @@ EOF;
 	// end of graph
 
 	if (isset($dispdata['detail'])) {
-		printf("<div id=\"%s\" style=\"display: none\">\n", md5($header));
+		printf("<div id=\"%s\" style=\"display: none\">\n", md5($panel_id));
 		print($dispdata['detail']);
 		print("</div>\n");
 	}
 
-	print "</div>\n";	// end of panel_data
+//	print "</div>\n";	// end of panel_data
 
-	print "</td></tr>\n\n";
-	html_end_box(false);
-	print "</li>\n\n";
 }
+
 
 
 function ntp_time($host) {

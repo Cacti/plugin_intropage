@@ -276,6 +276,7 @@ function intropage_console_after() {
 	}
 
 	// reload
+/*
 	$timeout = read_user_setting('intropage_autorefresh');
 	if ($timeout > 0) {
 		$timeout *= 1000;
@@ -290,7 +291,9 @@ function reloadChat () {
 </script>
 
 EOF;
+	
 	}
+	*/
 }
 
 function intropage_user_admin_setup_sql_save($save) {

@@ -51,6 +51,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	1.8.1 ---
 	Fix javascript/jquery error (MSIE11 fix)
 	Move Analyse DB and NTP to poller and run periodically
+	Add check for thold notigy global list only
         
 	1.8 ---
         Add check for cacti and spine version
