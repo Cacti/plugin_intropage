@@ -247,8 +247,7 @@ function intropage_analyse_tree_host_graph() {
 		$result['alarm'] = 'yellow';
 		
 		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['name_cache'] . '</a><br/>';
+			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">';
 		}
 	}
 	
