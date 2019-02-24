@@ -82,12 +82,10 @@ function intropage_analyse_log() {
 		}
 
 		$result['data'] .= '<span class="txt_big">';
-		$result['data'] .= 'Errors: ' . $error . '</span> &nbsp; <a href="clog.php?message_type=3&tail_lines=' . read_config_option('intropage_analyse_log_rows') . '"><i class="fa fa-external-link"></i></a><br/>';
+		$result['data'] .= 'Errors: ' . $error . '</span> &nbsp; <a href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '"><i class="fa fa-external-link"></i></a><br/>';
 		$result['data'] .= '<span class="txt_big">';
-		$result['data'] .= 'Warnings: ' . $warn . '</span> &nbsp; <a href="clog.php?message_type=2&tail_lines=' . read_config_option('intropage_analyse_log_rows') . '"><i class="fa fa-external-link"></i></a><br/>';
+		$result['data'] .= 'Warnings: ' . $warn . '</span> &nbsp; <a href="clog.php?message_type=2&tail_lines=' . $log['nbr_lines'] . '"><i class="fa fa-external-link"></i></a><br/>';
 		$result['data'] .= '</span>';
-
-
 
 		if ($log['size'] < 0) {
 			$result['alarm'] = 'red';
@@ -98,7 +96,6 @@ function intropage_analyse_log() {
 			$result['alarm'] = 'yellow';
 			$result['data'] .= '<span class="txt_big">Log size: ' . human_filesize($log['size']) . '</span><br/>(Logfile is quite large)<br/>';
 		}
-
 
 		$result['data'] .= '<br/>(Errors and warning in last ' . read_config_option('intropage_analyse_log_rows') . ' lines)';
 
