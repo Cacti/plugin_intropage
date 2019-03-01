@@ -22,7 +22,7 @@ function intropage_analyse_db() {
 	    $result['data'] = 'Waiting for data';
 	}
 	
-	$result['data'] .= '<br/><br/>Last check: ' . db_fetch_cell("SELECT cur_timestamp from plugin_intropage_trends where name='db_check_result'") . '<br/>';
+	$result['data'] .= '<br/><br/>Last check: ' . db_fetch_cell("SELECT value from plugin_intropage_trends where name='db_check_testdate'") . '<br/>';
 	$often = read_config_option('intropage_analyse_db_interval');
 	if ($often == 900)	{
 	    $result['data'] .= 'Checked every 15 minutes';
@@ -1068,7 +1068,7 @@ function intropage_ntp() {
 	    $result['data']  = 'Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>';
 	}
 	
-	$result['data'] .= '<br/>Last check: ' . db_fetch_cell("SELECT cur_timestamp from plugin_intropage_trends where name='ntp_diff_time'") . '<br/>';
+	$result['data'] .= '<br/>Last check: ' . db_fetch_cell("SELECT value from plugin_intropage_trends where name='ntp_testdate'") . '<br/>';
 	$often = read_config_option('intropage_ntp_interval');
 	if ($often == 900)	{
 	    $result['data'] .= 'Checked every 15 minutes';
@@ -1079,6 +1079,7 @@ function intropage_ntp() {
 	else	{
 	    $result['data'] .= 'Checked daily';
 	}
+
 
 	return $result;
 }

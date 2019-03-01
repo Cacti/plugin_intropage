@@ -347,6 +347,7 @@ EOF;
 
 
 function ntp_time($host) {
+
 	$timestamp = -1;
 	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
@@ -377,8 +378,80 @@ function ntp_time($host) {
 	else {
 	    $timestamp = "error";
 	}
-	
+
 	return $timestamp;
+}
+
+
+function ntp_time2()	{
+
+	$ntp_time = ntp_time (read_config_option('intropage_ntp_server'));
+
+        if ($ntp_time == 'error')   {
+                $diff_time = $ntp_time;
+        }
+        else        {
+                $diff_time = date('U') - $ntp_time;
+        }
+
+        db_execute("update plugin_intropage_trends set value='$diff_time' where name='ntp_diff_time'");
+        db_execute("update plugin_intropage_trends set value=now() where name='ntp_testdate'");
+
+}
+
+
+function db_check ()	{
+
+            $damaged        = 0;
+            $memtables      = 0;
+            $db_check_level = read_config_option('intropage_analyse_db_level');
+            $text_result = '';
+            $text_detail = '';
+            $alarm = 'green';
+
+            $tables = db_fetch_assoc('SHOW TABLES');
+            foreach ($tables as $key => $val) {
+                $row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
+
+                if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
+                        $memtables++;
+                } elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
+                        $damaged++;
+                        $text_detail .= 'Table ' . $row['Table'] . ' status ' . $row['Msg_text'] . '<br/>';
+                }
+            }
+
+            if ($damaged > 0) {
+                $alarm = 'red';
+                $text_result = '<span class="txt_big">DB problem</span><br/><br/>';
+            } else {
+                $text_result = '<span class="txt_big">DB OK</span><br/><br/>';
+            }
+
+            // connection errors
+            $cerrors = 0;
+            $con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
+
+            foreach ($con_err as $key => $val) {
+                $cerrors = $cerrors + $val['Value'];
+            }
+
+            if ($cerrors > 0) {     // only yellow
+                $text_detail .= 'Connection errors - try to restart SQL service. <br/>';
+
+                if ($alarm == 'green') {
+                        $alarm = 'yellow';
+                }
+            }
+            $text_result .= 'Connection errors: ' . $cerrors . '<br/>';
+            $text_result .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
+
+
+            db_execute("update plugin_intropage_trends set value='$text_result' where name='db_check_result'");
+            db_execute("update plugin_intropage_trends set value='$alarm' where name='db_check_alarm'");
+            db_execute("update plugin_intropage_trends set value='$text_detail' where name='db_check_detail'");
+            db_execute("update plugin_intropage_trends set value=now() where name='db_check_testdate'");
+
 }
 
 function intropage_graph_button($data) {

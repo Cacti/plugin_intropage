@@ -86,6 +86,9 @@ function intropage_check_upgrade() {
 		db_execute('UPDATE plugin_hooks SET function="intropage_console_after", file="include/settings.php" WHERE name="intropage" AND hook="console_after"');
 		db_execute('UPDATE user_auth set login_opts=1 WHERE login_opts in (4,5)');
 	}
+	if ($oldv <= 1.8) {
+		db_execute('ALTER TABLE plugin_intropage_trends CHANGE COLUMN date cur_timestamp timestamp DEFAULT current_timestamp()');
+	}
 }
 
 function intropage_setup_database() {
@@ -137,7 +140,16 @@ function intropage_setup_database() {
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
 
 	// I cannot set this in definition above
-	db_execute("ALTER TABLE plugin_intropage_trends MODIFY cur_timestamp timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP");
+	// db_execute("ALTER TABLE plugin_intropage_trends MODIFY cur_timestamp timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP");
+
+	// few 
+	db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_result', 'Waiting for data')");
+	db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_alarm', 'yellow')");
+	db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_detail', NULL)");
+	db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_testdate', NULL)");
+	db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_diff_time', 'Waiting for date')");
+	db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_testdate', NULL)");
+
 
 
 
@@ -190,7 +202,6 @@ function intropage_poller_bottom() {
 		db_execute("insert into plugin_intropage_trends (name,cur_timestamp,value) values ('poller','" . $stat['start'] . "', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
 	}
 
-
 	// CPU load - linux only
 	if (!stristr(PHP_OS, 'win')) {
 		$load    = sys_getloadavg();
@@ -209,90 +220,37 @@ function intropage_poller_bottom() {
 	}
 	
 	// check NTP
-	$last = db_fetch_cell("SELECT unix_timestamp(cur_timestamp) from plugin_intropage_trends where name='ntp_diff_time'");
+	$last = db_fetch_cell("SELECT unix_timestamp(value) from plugin_intropage_trends where name='ntp_testdate'");
 
+
+/*
 	if (!$last)	{
-    	    db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_diff_time', '0')");
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_diff_time', '')");
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_testdate', '')");
     	    $last = 0;
 	}
-	
-	if (time() > $last + read_config_option('intropage_ntp_interval'))	{
+*/	
+	if (time() > ($last + read_config_option('intropage_ntp_interval')))	{
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-	    $ntp_server = read_config_option('intropage_ntp_server');
-	    $ntp_time = ntp_time($ntp_server);
-
-	    if ($ntp_time == 'error')	{
-		$diff_time = $ntp_time;
-	    }
-	    else	{
-	    	$diff_time = date('U') - $ntp_time;
-	    }
-
-    	    db_execute("update plugin_intropage_trends set value='$diff_time' where name='ntp_diff_time'");
+	    ntp_time2();
 	}
 
 	// check db
-	$last = db_fetch_cell("SELECT unix_timestamp(cur_timestamp) from plugin_intropage_trends where name='db_check_alarm'");
-
+	$last = db_fetch_cell("SELECT unix_timestamp(value) from plugin_intropage_trends where name='db_check_testdate'");
+/*
 	if (!$last)	{
     	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_result', 'Waiting for data')");
     	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_alarm', 'yellow')");
     	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_detail', NULL)");
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_testdate', NULL)");
     	    $last = 0;
 	}
-
-	if (time() > $last + read_config_option('intropage_analyse_db_interval'))	{
+*/
+	if (time() > ($last + read_config_option('intropage_analyse_db_interval')))	{
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-
-    	    $damaged        = 0;
-    	    $memtables      = 0;
-    	    $db_check_level = read_config_option('intropage_analyse_db_level');
-    	    $text_result = '';
-    	    $text_detail = '';
-    	    $alarm = 'green';
-
-    	    $tables = db_fetch_assoc('SHOW TABLES');
-    	    foreach ($tables as $key => $val) {
-                $row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
-
-                if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
-                        $memtables++;
-                } elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
-                        $damaged++;
-                        $text_detail .= 'Table ' . $row['Table'] . ' status ' . $row['Msg_text'] . '<br/>';
-                }
-    	    }
-    	    
-    	    if ($damaged > 0) {
-    		$alarm = 'red';
-                $text_result = '<span class="txt_big">DB problem</span><br/><br/>';
-    	    } else {
-                $text_result = '<span class="txt_big">DB OK</span><br/><br/>';
-    	    }
-
-    	    // connection errors
-    	    $cerrors = 0;
-    	    $con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
-
-    	    foreach ($con_err as $key => $val) {
-                $cerrors = $cerrors + $val['Value'];
-	    }
-
-    	    if ($cerrors > 0) {     // only yellow
-                $text_detail .= 'Connection errors - try to restart database. <br/>';
-
-                if ($alarm == 'green') {
-                        $alarm = 'yellow';
-                }
-    	    }
-    	    $text_result .= 'Connection errors: ' . $cerrors . '<br/>';
-    	    $text_result .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
-
-    	    db_execute("update plugin_intropage_trends set value='$text_result' where name='db_check_result'");
-    	    db_execute("update plugin_intropage_trends set value='$alarm' where name='db_check_alarm'");
-    	    db_execute("update plugin_intropage_trends set value='$text_detail' where name='db_check_detail'");
-
+	    db_check();
 	}
+
 	
 	// check poller_table is empty?
 	$count = db_fetch_cell("SELECT count(*) from poller_output");
