@@ -352,12 +352,12 @@ $(document).on('click','#switch_copytext',function() {
     }
 });
 
-function reload_panel (panel_id)	{
+function reload_panel (panel_id,by_hand)	{
 
     $('#panel_'+panel_id).find(".panel_data").css('opacity',0);
     $('#panel_'+panel_id).find('.panel_data').fadeIn('slow').delay(800);
 
-    $.get(urlPath+'plugins/intropage/intropage_ajax.php?reload_panel='+panel_id)
+    $.get(urlPath+'plugins/intropage/intropage_ajax.php?autom='+by_hand+'&reload_panel='+panel_id)
     .done(function(data) {
 	$('#panel_'+panel_id).find(".panel_data").html(data) ;
 	$('#panel_'+panel_id).find(".panel_data").css('opacity',1);
@@ -370,7 +370,7 @@ function reload_panel (panel_id)	{
 function reload_all ()	{
     $('#obal li').each(function() {
         var panel_id = $(this).attr('id').split("_").pop();
-        reload_panel (panel_id);
+        reload_panel (panel_id,false);
     });
 }
 
@@ -385,7 +385,7 @@ $(document).ready(function() {
 
     $(document).on('click','.reload_panel_now',function() {
 	var panel_id = $(this).attr('id').split("_").pop();
-        reload_panel (panel_id);
+        reload_panel (panel_id,true);
     });
 });
 </script>
