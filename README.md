@@ -49,9 +49,14 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 ## Changelog
 
 	1.8.1 ---
-	Fix javascript/jquery error (MSIE11 fix)
-	Move Analyse DB and NTP to poller and run periodically
+	Add test for poller_output_table
 	Add check for thold notigy global list only
+	Add test Cacti and poller version
+	Load/reload of panels now via ajax callbacks
+	Fix javascript/jquery error (MSIE11 fix)
+	Fix problem with host permission
+	Move Analyse DB and NTP to poller and run periodically
+        Better themes support
         
 	1.8 ---
         Add check for cacti and spine version
