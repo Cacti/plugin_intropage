@@ -429,24 +429,24 @@ $(document).ready(function() {
 	}
 
 
-	if ($autorefresh == 60) {
-		echo "<option value='refresh_60' disabled='disabled'>Autorefresh 1 minute</option>";
+	if ($autorefresh == 90) {
+		echo "<option value='refresh_90' disabled='disabled'>Autorefresh 1 minute</option>";
 	} else {
-		echo "<option value='refresh_60'>Autorefresh 1 minute</option>";
+		echo "<option value='refresh_90'>Autorefresh 1 minute</option>";
 	}
 
 
-	if ($autorefresh == 180) {
-		echo "<option value='refresh_180' disabled='disabled'>Autorefresh 3 minutes</option>";
+	if ($autorefresh == 560) {
+		echo "<option value='refresh_560' disabled='disabled'>Autorefresh 5 minutes</option>";
 	} else {
-		echo "<option value='refresh_180'>Autorefresh 3 minutes</option>";
+		echo "<option value='refresh_560'>Autorefresh 5 minutes</option>";
 	}
 
 
-	if ($autorefresh == 600) {
-		echo "<option value='refresh_600' disabled='disabled'>Autorefresh 10 minutes</option>";
+	if ($autorefresh == 3600) {
+		echo "<option value='refresh_3600' disabled='disabled'>Autorefresh 1 hour</option>";
 	} else {
-		echo "<option value='refresh_600'>Autorefresh 10 minutes</option>";
+		echo "<option value='refresh_3600'>Autorefresh 1 hour</option>";
 	}
 
 

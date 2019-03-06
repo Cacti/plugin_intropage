@@ -44,7 +44,7 @@ $intropage_settings = array(	// default values
 		'friendly_name' => 'Automatic refresh page',
 		'description' => 'How often',
 		'method' => 'drop_array',
-		'array' => array('0' => 'Never', '60' => 'Every minute', '180' => 'Every 3 minutes', '600' => 'Every 10 minutes', ),
+		'array' => array('0' => 'Never', '90' => 'Every minute', '360' => 'Every 5 minutes', '3600' => 'Every hour', ),
 		'default' => '0',
 	),
 	'intropage_display_level' => array(
