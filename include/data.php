@@ -99,7 +99,7 @@ function intropage_analyse_log() {
 			$log_size_note   = __('Log size is quite large');
 		}
 
-		$result['data'] .= '<span class="txt_big">' . __('Log size', 'intropage') . ': ' . $log_Size_text .'</span><br/>';
+		$result['data'] .= '<span class="txt_big">' . __('Log size', 'intropage') . ': ' . $log_size_text .'</span><br/>';
 		if (!empty($log_size_note)) {
 			$result['data'] .= '(' . $log_size_note . ')<br/>';
 		}
