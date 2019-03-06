@@ -100,6 +100,23 @@ function intropage_check_upgrade() {
 		// Set the new version
 		db_execute("UPDATE plugin_config SET version='$current' WHERE directory='intropage'");
 	}
+	
+	
+	// I need it, there is also in setup database, here is for update: 
+	if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_result'") == 0)
+	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_result', 'Waiting for data')");
+	if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_alarm'")== 0 )
+	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_alarm', 'yellow')");
+	if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_detail'") == 0)
+    	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_detail', NULL)");
+	if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_testdate'") == 0)
+	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_testdate', NULL)");
+	if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='ntp_diff_time'") == 0)
+	    db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_diff_time', 'Waiting for date')");
+	if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='ntp_testdate'") == 0)
+	    db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_testdate', NULL)");
+
+	
 }
 
 function intropage_setup_database() {
@@ -153,7 +170,7 @@ function intropage_setup_database() {
 	// I cannot set this in definition above
 	// db_execute("ALTER TABLE plugin_intropage_trends MODIFY cur_timestamp timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP");
 
-	// few 
+	// few values
 	db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_result', 'Waiting for data')");
 	db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_alarm', 'yellow')");
 	db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_detail', NULL)");
