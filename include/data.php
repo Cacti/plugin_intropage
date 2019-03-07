@@ -192,7 +192,7 @@ function intropage_analyse_tree_host_graph() {
 	if ($sql_result !== false) {
 		$total_errors += $sql_count;
 		if (count($sql_result) > 0) {
-			$result['data'] .= __('Devices with the same IP and port (%s)', $sql_count, 'intropage') . ':<br/>';
+			$result['data'] .= __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
 			$result['alarm'] = 'red';
 			foreach ($sql_result as $row) {
 				$sql_hosts = db_fetch_assoc_prepared("SELECT id,description,hostname from host WHERE hostname IN(SELECT  hostname FROM host  WHERE id IN ($allowed_hosts) GROUP BY hostname,snmp_port HAVING count(*)>1) order by hostname");
@@ -211,7 +211,7 @@ function intropage_analyse_tree_host_graph() {
 	if ($sql_result !== false) {
 		$total_errors += $sql_count;
 		if (count($sql_result) > 0) {
-			$result['data'] .= __('Devices with the same description (%s)', $sql_count, 'intropage') . '<br/>';
+			$result['data'] .= __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
 			$result['alarm'] = 'red';
 			foreach ($sql_result as $row) {
 				$sql_hosts = db_fetch_assoc_prepared('SELECT id,description,hostname from host WHERE description IN(SELECT  description FROM host  WHERE id IN (' . $allowed_hosts . ') GROUP BY description HAVING count(*)>1) ORDER BY description');
@@ -230,7 +230,7 @@ function intropage_analyse_tree_host_graph() {
 
 	if ($sql_result !== false && $sql_count > 0) {
 		$total_errors += $sql_count;
-		$result['data'] .= __('Orphaned Data Sources (%s)', $sql_count, 'intropage') . '<br/>';
+		$result['data'] .= __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<br/>';
 
 		if ($result['alarm'] == 'green') {
 			$result['alarm'] = 'yellow';
@@ -248,7 +248,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Poller output items (%s)', $sql_count, 'intropage') . ':</b><br/>';
 
 	if ($sql_result !== false && $sql_count > 0) {
-		$result['data'] .= __('Poller Output Items (%s)', $sql_count, 'intropage') . ':<br/>';
+		$result['data'] .= __('Poller Output Items: %s', $sql_count, 'intropage') . '<br/>';
 
 		if ($result['alarm'] == 'green') {
 			$result['alarm'] = 'yellow';
@@ -271,7 +271,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Devices in more than one tree (%s)', $sql_count, 'intropage') . ':</b><br/>';
 
 	if ($sql_result !== false && $sql_count > 0) {
-		$result['data'] .= __('Devices in more than one tree (%s)', $sql_count, 'intropage') . ':<br/>';
+		$result['data'] .= __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description, graph_tree_items.title, graph_tree_items.parent, graph_tree.name FROM host INNER JOIN graph_tree_items ON (host.id = graph_tree_items.host_id) INNER JOIN graph_tree ON (graph_tree_items.graph_tree_id = graph_tree.id) WHERE host.id = ?', array($row['id']));
@@ -298,7 +298,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Hosts without graphs (%s)', $sql_count, 'intropage') . ':</b><br/>';
 
 	if ($sql_result !== false && $sql_count > 0) {
-		$result['data'] .= __('Hosts without graphs (%s)', $sql_count, 'intropage') . '<br/>';
+		$result['data'] .= __('Hosts without graphs: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
@@ -314,7 +314,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Hosts without tree (%s)', $sql_count, 'intropage') . ':</b><br/>';
 
 	if ($sql_result !== false && $sql_count > 0) {
-		$result['data'] .= __('Hosts without tree (%s)', $sql_count, 'intropage') . ':<br/>';
+		$result['data'] .= __('Hosts without tree: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
@@ -329,7 +329,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Hosts with default public/private community (%s)', $sql_count, 'intropage') . ':</b><br/>';
 
 	if ($sql_result !== false && $sql_count > 0) {
-		$result['data'] .= __('Hosts with default public/private community (%s)', $sql_count, 'intropage') . '<br/>';
+		$result['data'] .= __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
@@ -346,7 +346,7 @@ function intropage_analyse_tree_host_graph() {
 		$result['detail'] .= '<br/><b>' . __('Plugin Monitor - Unmonitored hosts (%s)', $sql_count, 'intropage') . ':</b><br/>';
 
 		if ($sql_result !== false && $sql_count > 0) {
-			$result['data'] .= __('Plugin Monitor - Unmonitored hosts (%s)', $sql_count, 'intropage') . ':</b><br/>';
+			$result['data'] .= __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '</b><br/>';
 
 			foreach ($sql_result as $row) {
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
@@ -362,7 +362,7 @@ function intropage_analyse_tree_host_graph() {
 		$result['detail'] .= '<br/><b>' . __('Plugin Thold - Global notify only (%s)', $sql_count, 'intropage') . ':</b><br/>';
 
 		if ($sql_result !== false && $sql_count > 0) {
-			$result['data'] .= __('Plugin Thold - Global notify only (%s)', $sql_count, 'intropage') . ':<br/>';
+			$result['data'] .= __('Plugin Thold - Global notify only: %s', $sql_count, 'intropage') . '<br/>';
 
 			foreach ($sql_result as $row) {
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
