@@ -434,10 +434,10 @@ $(document).ready(function() {
 		//if (read_config_option('intropage_' . $pom) == 'on')	{
 
 		foreach ($panels as $panel) {
-			if (db_fetch_cell('select ' . $panel['panel_name'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') {
-				echo "<option value='addpanel_" . $panel['panel_name'] . "'>Add panel " . ucfirst(str_replace('_', ' ', $panel['panel_name'])) . '</option>';
+			if (db_fetch_cell('SELECT ' . $panel['panel_name'] . ' FROM user_auth WHERE id=' . $_SESSION['sess_user_id']) == 'on') {
+				echo "<option value='addpanel_" . $panel['panel_name'] . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_name'])), 'intropage') . '</option>';
 			} else {
-				echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">Add panel " . ucfirst(str_replace('_', ' ', $panel['panel_name'])) . ' (admin prohibited)</option>';
+				echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_name'])), '(admin prohibited)', 'intropage') . '</option>';
 			}
 		}
 	}
@@ -495,14 +495,14 @@ $(document).ready(function() {
 		echo "<option value='important_no'>" . __('Sort by panel priority', 'intropage') . '</option>';
 	} else {
 		echo "<option value='important_first'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
-		echo "<option value='important_no' disabled='disabled'>" . __('Sort by panel priority', 'intropage') . '</option>';
+		echo "<option value='important_no' disabled='disabled'>" . __('Sort by panel Priority', 'intropage') . '</option>';
 	}
 
 	if (isset($_SESSION['intropage_changed_order'])) {
-		echo "<option value='reset_order'>" . __('Reset panel order to default', 'intropage') . '</option>';
+		echo "<option value='reset_order'>" . __('Reset panel Order to Default', 'intropage') . '</option>';
 	}
 
-	echo "<option value='reset_all'>" . __('Reset all to default', 'intropage') . '</option>';
+	echo "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
 /*
 	if ($intropage_debug == 0) {
 		echo "<option value='debug_ena'>Enable debug</option>";
