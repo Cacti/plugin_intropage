@@ -230,7 +230,7 @@ function intropage_analyse_tree_host_graph() {
 
 	if ($sql_result !== false && $sql_count > 0) {
 		$total_errors += $sql_count;
-		$result['data'] .= __('Orphaned Data Sources (%s)', $sql_count, 'intropage');
+		$result['data'] .= __('Orphaned Data Sources (%s)', $sql_count, 'intropage') . '<br/>';
 
 		if ($result['alarm'] == 'green') {
 			$result['alarm'] = 'yellow';
@@ -261,7 +261,7 @@ function intropage_analyse_tree_host_graph() {
 	}
 
 	// below - only information without red/yellow/green
-	$result['data'] .= '<br/><br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
+	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
 
 	// device in more trees
