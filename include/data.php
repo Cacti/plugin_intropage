@@ -811,8 +811,10 @@ function intropage_graph_thold() {
 	if (!db_fetch_cell("SELECT directory FROM plugin_config where directory='thold' and status=1")) {
 		$result['alarm'] = 'grey';
 		$result['data']  = __('Thold plugin not installed/running', 'intropage');
+		unset($result['pie']);
 	} elseif (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $_SESSION['sess_user_id'] . " AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
 		$result['data'] = __('You don\'t have permission', 'intropage');
+		unset($result['pie']);
 	} else {
 		// need for thold - isn't any better solution?
 		$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
