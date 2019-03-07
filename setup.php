@@ -153,28 +153,28 @@ function intropage_check_upgrade() {
 			WHERE directory='intropage'");
 
 		// I need it, there is also in setup database, here is for update:
-		if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_result'") == 0) {
-			db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_result', 'Waiting for data')");
+		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_result'") == 0) {
+			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_result', 'Waiting for data')");
 		}
 
-		if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_alarm'")== 0 ) {
-			db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_alarm', 'yellow')");
+		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_alarm'")== 0 ) {
+			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_alarm', 'yellow')");
 		}
 
-		if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_detail'") == 0) {
-    	    db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_detail', NULL)");
+		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_detail'") == 0) {
+    	    db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
 		}
 
-		if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='db_check_testdate'") == 0) {
-			db_execute("insert into plugin_intropage_trends (name,value) values ('db_check_testdate', NULL)");
+		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_testdate'") == 0) {
+			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
 		}
 
-		if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='ntp_diff_time'") == 0) {
-			db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_diff_time', 'Waiting for date')");
+		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='ntp_diff_time'") == 0) {
+			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', 'Waiting for date')");
 		}
 
-		if (db_fetch_cell("SELECT count(*) from plugin_intropage_trends where name='ntp_testdate'") == 0) {
-			db_execute("insert into plugin_intropage_trends (name,value) values ('ntp_testdate', NULL)");
+		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='ntp_testdate'") == 0) {
+			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
 		}
 	}
 }
@@ -289,9 +289,10 @@ function intropage_poller_bottom() {
 		LIMIT 5');
 
 	foreach ($stats as $stat) {
-		db_execute("REPLACE INTO plugin_intropage_trends
+		db_execute_prepared("REPLACE INTO plugin_intropage_trends
 			(name, cur_timestamp, value) VALUES
-			('poller','" . $stat['start'] . "', '" .$stat['id'] . ':' . round($stat['total_time']) . "')");
+			('poller', ?, ?)",
+			array($stat['start'], $stat['id'] . ':' . round($stat['total_time'])));
 	}
 
 	// CPU load - linux only
@@ -299,8 +300,10 @@ function intropage_poller_bottom() {
 		$load    = sys_getloadavg();
 		$load[0] = round($load[0], 2);
 
-		db_execute("REPLACE INFO plugin_intropage_trends
-			(name, value) VALUES ('cpuload','" . $load[0] . "')");
+		db_execute_prepared('REPLACE INTO plugin_intropage_trends
+			(name, cur_timestamp, value) VALUES
+			("cpuload", ?, ?)',
+			array($stat['start'], $load[0]));
 	}
 
 	// cleaning old data
