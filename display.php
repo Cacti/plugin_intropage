@@ -1,4 +1,27 @@
 <?php
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2015-2019 Petr Macek                                      |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
 
 function display_information() {
 
@@ -166,8 +189,8 @@ EOF;
 	echo 'var intropage_drag=true;';
 
 	echo '</script>';
-	
-	
+
+
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
@@ -224,7 +247,7 @@ EOF;
 			intropage_display_panel(997, 'red', 'Plugin Maint alert', $tmp);
 			$tmp['data'] = '';
 		}
-	
+
 	        if($logging >= 5)
 		    cacti_log('debug: maint, duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 	}
@@ -328,7 +351,7 @@ $(document).ready(function () {
     }
     else		{
 	$('#' + this.name).css("display","none");
-        $(this).attr('title','Show details');	
+        $(this).attr('title','Show details');
     }
   });
 });
@@ -420,72 +443,66 @@ $(document).ready(function() {
 	}
 
 	// only submit :-)
-	echo "<option value=''>Refresh now</option>";
+	echo "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
 
 	if ($autorefresh > 0) {
-		echo "<option value='refresh_0'>Autorefresh disable</option>";
+		echo "<option value='refresh_0'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
 	} else {
-		echo "<option value='refresh_0' disabled='disabled'>Autorefresh disable</option>";
+		echo "<option value='refresh_0' disabled='disabled'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
 	}
-
 
 	if ($autorefresh == 90) {
-		echo "<option value='refresh_90' disabled='disabled'>Autorefresh 1 minute</option>";
+		echo "<option value='refresh_90' disabled='disabled'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
 	} else {
-		echo "<option value='refresh_90'>Autorefresh 1 minute</option>";
+		echo "<option value='refresh_90'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
 	}
 
-
 	if ($autorefresh == 560) {
-		echo "<option value='refresh_560' disabled='disabled'>Autorefresh 5 minutes</option>";
+		echo "<option value='refresh_560' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	} else {
-		echo "<option value='refresh_560'>Autorefresh 5 minutes</option>";
+		echo "<option value='refresh_560'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	}
 
 
 	if ($autorefresh == 3600) {
-		echo "<option value='refresh_3600' disabled='disabled'>Autorefresh 1 hour</option>";
+		echo "<option value='refresh_3600' disabled='disabled'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
 	} else {
-		echo "<option value='refresh_3600'>Autorefresh 1 hour</option>";
+		echo "<option value='refresh_3600'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
 	}
-
-
 
 	if (read_user_setting('intropage_display_level') == 0) {
-		echo "<option value='displaylevel_0' disabled='disabled'>Display only errors</option>";
+		echo "<option value='displaylevel_0' disabled='disabled'>" . __('Display only Errors', 'intropage') . '</option>';
 	} else {
-		echo "<option value='displaylevel_0'>Display only errors</option>";
+		echo "<option value='displaylevel_0'>" . __('Display only Errors', 'intropage') . '</option>';
 	}
 
-
 	if (read_user_setting('intropage_display_level') == 1) {
-		echo "<option value='displaylevel_1' disabled='disabled'>Display errors and warnings</option>";
+		echo "<option value='displaylevel_1' disabled='disabled'>" . __('Display Errors and Warnings', 'intropage') . '</option>';
 	} else {
-		echo "<option value='displaylevel_1'>Display errors and warnings</option>";
+		echo "<option value='displaylevel_1'>" . __('Display Errors and Warnings', 'intropage') . '</option>';
 	}
 
 
 	if (read_user_setting('intropage_display_level') == 2) {
-		echo "<option value='displaylevel_2' disabled='disabled'>Display all</option>";
+		echo "<option value='displaylevel_2' disabled='disabled'>" . __('Display All', 'intropage') . '</option>';
 	} else {
-		echo "<option value='displaylevel_2'>Display all</option>";
+		echo "<option value='displaylevel_2'>" . __('Display All', 'intropage') . '</option>';
 	}
 
 
 	if ($display_important_first == 'on') {
-		echo "<option value='important_first' disabled='disabled'>Sort by - red-yellow-green-gray</option>";
-		echo "<option value='important_no'>Sort by panel priority</option>";
+		echo "<option value='important_first' disabled='disabled'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
+		echo "<option value='important_no'>" . __('Sort by panel priority', 'intropage') . '</option>';
 	} else {
-		echo "<option value='important_first'>Sort by - red-yellow-green-gray</option>";
-		echo "<option value='important_no' disabled='disabled'>Sort by panel priority</option>";
+		echo "<option value='important_first'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
+		echo "<option value='important_no' disabled='disabled'>" . __('Sort by panel priority', 'intropage') . '</option>';
 	}
-
 
 	if (isset($_SESSION['intropage_changed_order'])) {
-		echo "<option value='reset_order'>Reset panel order to default</option>";
+		echo "<option value='reset_order'>" . __('Reset panel order to default', 'intropage') . '</option>';
 	}
 
-	echo "<option value='reset_all'>Reset all to default</option>";
+	echo "<option value='reset_all'>" . __('Reset all to default', 'intropage') . '</option>';
 /*
 	if ($intropage_debug == 0) {
 		echo "<option value='debug_ena'>Enable debug</option>";
@@ -503,15 +520,15 @@ $(document).ready(function() {
 	// after login: 1=podle url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
 	if (!$console_access) {
 		if ($lopts < 4) {
-			echo "<option value='loginopt_intropage'>Set intropage as default page</option>";
+			echo "<option value='loginopt_intropage'>" . __('Set intropage as default page', 'intropage') . "</option>";
 		} else {
-			echo "<option value='loginopt_graph'>Set graph as default page</option>";
+			echo "<option value='loginopt_graph'>" . __('Set graph as default page', 'intropage') . "</option>";
 		}
 	}
 
 	echo '</select>';
-	echo "<input type='submit' name='intropage_go' value='Go'>";
-	
+	echo "<input type='submit' name='intropage_go' value='" . __esc('Go', 'intropage') . "'>";
+
 	echo '</form>';
 	// end of settings
 
@@ -521,3 +538,4 @@ $(document).ready(function() {
 
 	return true;
 }
+

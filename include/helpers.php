@@ -1,4 +1,27 @@
 <?php
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2015-2019 Petr Macek                                      |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
 
 function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 	if (!(file_exists($log_file) && is_readable($log_file))) {
@@ -51,31 +74,26 @@ function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 	return explode("\n", $output);
 }
 
-
 function human_filesize($bytes, $decimals = 2) {
 	$size   = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
 	$factor = floor((strlen($bytes) - 1) / 3);
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
-
 function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	global $config;
 
 	$selectedTheme = get_selected_theme();
 	switch ($selectedTheme) {
-	case 'dark':
-	case 'paper-plane':
-
-		$bgcolor = '#202020';
-	break;
-
-	case 'sunrise':
-		$bgcolor = '';
-	break;
-
-	default:
-		$bgcolor = '#f5f5f5';
+		case 'dark':
+		case 'paper-plane':
+			$bgcolor = '#202020';
+			break;
+		case 'sunrise':
+			$bgcolor = '';
+			break;
+		default:
+			$bgcolor = '#f5f5f5';
 	}
 
 	print '<li id="panel_' . $panel_id . '" class="ui-state-default flexchild">';
@@ -85,16 +103,15 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	print $header;
 
 	if ($panel_id > 990) {
-		printf("<a href='#' title='You cannot disable this panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n");
+		printf("<a href='#' title='" . __esc('You cannot disable this panel', 'intropage') . "' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n");
 	} else {
-		printf("<a href='%s' title='Disable panel' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
+		printf("<a href='%s' title='" . __esc('Disable panel', 'intropage') . "' class='header_link'>&nbsp; <i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
 	}
 
-	printf("<a href='#' id='reloadid_" . $panel_id . "' title='Reload panel' class='header_link reload_panel_now'>&nbsp; <i class='fa fa-retweet'></i></a>\n");
-
+	printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'>&nbsp; <i class='fa fa-retweet'></i></a>\n");
 
 	if (isset($dispdata['detail']) && !empty($dispdata['detail'])) {
-		printf("<a href='#' title='Show details' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($panel_id));
+		printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($panel_id));
 	}
 
 	print " </div>\n";
@@ -109,26 +126,20 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	print "</li>\n\n";
 }
 
-
-
-
 function intropage_display_data($panel_id,$dispdata) {
 	global $config;
 
 	$selectedTheme = get_selected_theme();
 	switch ($selectedTheme) {
-	case 'dark':
-	case 'paper-plane':
-
-		$bgcolor = '#202020';
-	break;
-
-	case 'sunrise':
-		$bgcolor = '';
-	break;
-
-	default:
-		$bgcolor = '#f5f5f5';
+		case 'dark':
+		case 'paper-plane':
+			$bgcolor = '#202020';
+			break;
+		case 'sunrise':
+			$bgcolor = '';
+			break;
+		default:
+			$bgcolor = '#f5f5f5';
 	}
 
 //	print "	<table class='cactiTable'>\n";
@@ -171,15 +182,15 @@ new Chart($xid, {
     options: {
 	responsive: false,
 	title: { display: false, text: "$pie_title" },
-	legend: { 
-	    display: true, 
-	    position: 'right', 
-	    labels: { 
+	legend: {
+	    display: true,
+	    position: 'right',
+	    labels: {
 		usePointStyle: true,
 	    }
 	},
 	tooltipTemplate: "<%= value %>%"
-    }	
+    }
 });
 EOF;
 		print "</script></div>\n";
@@ -223,7 +234,7 @@ new Chart($xid, {
 	responsive: false,
 	tooltipTemplate: "<%= value %>%"
 
-    }	
+    }
 });
 EOF;
 		print "</script>\n";
@@ -314,13 +325,13 @@ EOF;
 		}
 
 		print <<<EOF
-	
+
 	]
     },
     options: {
 	responsive: false,
 	tooltipTemplate: "<%= value %>%"
-    }	
+    }
 });
 EOF;
 		print "</script>\n";
@@ -370,104 +381,104 @@ function ntp_time($host) {
 			// NTP is number of seconds since 0000 UT on 1 January 1900
 			// Unix time is seconds since 0000 UT on 1 January 1970
 			$timestamp -= 2208988800;
-		}
-		else {
+		} else {
 		    $timestamp = "error";
 		}
-	}
-	else {
+	} else {
 	    $timestamp = "error";
 	}
 
 	return $timestamp;
 }
 
-
-function ntp_time2()	{
-
+function ntp_time2() {
 	$ntp_time = ntp_time (read_config_option('intropage_ntp_server'));
 
-        if ($ntp_time == 'error')   {
-                $diff_time = $ntp_time;
-        }
-        else        {
-                $diff_time = date('U') - $ntp_time;
-        }
+	if ($ntp_time == 'error') {
+		$diff_time = $ntp_time;
+	} else {
+		$diff_time = date('U') - $ntp_time;
+	}
 
-        db_execute("update plugin_intropage_trends set value='$diff_time' where name='ntp_diff_time'");
-        db_execute("update plugin_intropage_trends set value=now() where name='ntp_testdate'");
-
+	db_execute("UPDATE plugin_intropage_trends SET value = '$diff_time' WHERE name = 'ntp_diff_time'");
+	db_execute("UPDATE plugin_intropage_trends SET value = NOW() WHERE name = 'ntp_testdate'");
 }
 
+function db_check() {
+	$damaged   = 0;
+	$memtables = 0;
 
-function db_check ()	{
+	$db_check_level = read_config_option('intropage_analyse_db_level');
 
-            $damaged        = 0;
-            $memtables      = 0;
-            $db_check_level = read_config_option('intropage_analyse_db_level');
-            $text_result = '';
-            $text_detail = '';
-            $alarm = 'green';
+	$text_result = '';
+	$text_detail = '';
 
-            $tables = db_fetch_assoc('SHOW TABLES');
-            foreach ($tables as $key => $val) {
-                $row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
+	$alarm = 'green';
 
-                if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
-                        $memtables++;
-                } elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
-                        $damaged++;
-                        $text_detail .= 'Table ' . $row['Table'] . ' status ' . $row['Msg_text'] . '<br/>';
-                }
-            }
+	$tables = db_fetch_assoc('SHOW TABLES');
+	foreach ($tables as $key => $val) {
+		$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
 
-            if ($damaged > 0) {
-                $alarm = 'red';
-                $text_result = '<span class="txt_big">DB problem</span><br/><br/>';
-            } else {
-                $text_result = '<span class="txt_big">DB OK</span><br/><br/>';
-            }
+		if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
+			$memtables++;
+		} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
+			$damaged++;
+			$text_detail .= 'Table ' . $row['Table'] . ' status ' . $row['Msg_text'] . '<br/>';
+		}
+	}
 
-            // connection errors
-            $cerrors = 0;
-            $con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
+	if ($damaged > 0) {
+		$alarm = 'red';
+		$text_result = '<span class="txt_big">' . __('DB problem', 'intropage') . '</span><br/><br/>';
+	} else {
+		$text_result = '<span class="txt_big">' . __('DB OK', 'intropage') . '</span><br/><br/>';
+	}
 
-            foreach ($con_err as $key => $val) {
-                $cerrors = $cerrors + $val['Value'];
-            }
+	// connection errors
+	$cerrors = 0;
+	$con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
 
-            if ($cerrors > 0) {     // only yellow
-                $text_detail .= 'Connection errors - try to restart SQL service. <br/>';
+	foreach ($con_err as $key => $val) {
+		$cerrors = $cerrors + $val['Value'];
+	}
 
-                if ($alarm == 'green') {
-                        $alarm = 'yellow';
-                }
-            }
-            $text_result .= 'Connection errors: ' . $cerrors . '<br/>';
-            $text_result .= 'Damaged tables: ' . $damaged . '<br/>Memory tables: ' . $memtables . '<br/>All tables: ' . count($tables);
+	if ($cerrors > 0) {     // only yellow
+		$text_detail .= __('Connection errors - try to restart SQL service.', 'intropage') . '<br/>';
 
+		if ($alarm == 'green') {
+			$alarm = 'yellow';
+		}
+	}
 
-            db_execute("update plugin_intropage_trends set value='$text_result' where name='db_check_result'");
-            db_execute("update plugin_intropage_trends set value='$alarm' where name='db_check_alarm'");
-            db_execute("update plugin_intropage_trends set value='$text_detail' where name='db_check_detail'");
-            db_execute("update plugin_intropage_trends set value=now() where name='db_check_testdate'");
+	$text_result .= __('Connection errors: %s', $cerrors, 'intropage') . '<br/>';
+	$text_result .= __('Damaged tables: %s', $damaged, 'intropage') . '<br/>' .
+		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
+		__('All tables: %s', count($tables), 'intropage');
 
+	db_execute("UPDATE plugin_intropage_trends SET value = '$text_result' WHERE name = 'db_check_result'");
+	db_execute("UPDATE plugin_intropage_trends SET value = '$alarm' WHERE name = 'db_check_alarm'");
+	db_execute("UPDATE plugin_intropage_trends SET value = '$text_detail' WHERE name = 'db_check_detail'");
+	db_execute("UPDATE plugin_intropage_trends SET value = NOW() WHERE name = 'db_check_testdate'");
 }
 
 function intropage_graph_button($data) {
 	global $config;
 
-	if (db_fetch_cell('select intropage_favourite_graph from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') {
+	if (db_fetch_cell('SELECT intropage_favourite_graph FROM user_auth WHERE id=' . $_SESSION['sess_user_id']) == 'on') {
 		$local_graph_id = $data[1]['local_graph_id'];
 
-		if (db_fetch_cell('select count(*) from plugin_intropage_user_setting where user_id=' . $_SESSION['sess_user_id'] .
+		if (db_fetch_cell('SELECT COUNT(*) FROM plugin_intropage_user_setting WHERE user_id=' . $_SESSION['sess_user_id'] .
 			' and fav_graph_id=' . $local_graph_id) > 0) {       // already fav
-			$fav = '<i class="fa fa-eye-slash" title="remove from dashboard"></i>';
+			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
 		} else {       // add to fav
-			$fav = '<i class="fa fa-eye" title="add to dashboard"></i>';
+			$fav = '<i class="fa fa-eye" title="' . __esc('Add to Dashboard', 'intropage') . '"></i>';
 		}
 
-		$lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
+		$lopts = db_fetch_cell_prepared('SELECT intropage_opts
+			FROM user_auth
+			WHERE id = ?',
+			array($_SESSION['sess_user_id']));
+
 		if ($lopts == 1) { // in tab
 			print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 		} else {	// in console
