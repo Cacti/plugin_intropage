@@ -1,4 +1,27 @@
 <?php
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2015-2019 Petr Macek                                      |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
 
 // priority (order) (bigger number =  highest priority)
 
@@ -29,88 +52,112 @@ $panel['intropage_boost']['priority']                   = 55;
 $panel['intropage_favourite_graph']['priority']         = 95;
 
 $intropage_settings = array(	// default values
-
 	'intropage_display_header' => array(
-		'friendly_name' => 'Display settings',
+		'friendly_name' => __('Display settings', 'intropage'),
 		'method' => 'spacer',
 	),
 	'intropage_display_important_first' => array(
-		'friendly_name' => 'Important things will be at the top',
-		'description' => 'If checked Intropage displays important (errors, warnings) information first',
+		'friendly_name' => __('Important things will be at the top', 'intropage'),
+		'description' => __('If checked Intropage displays important (errors, warnings) information first', 'intropage'),
 		'method' => 'checkbox',
 		'default' => 'off',
 	),
 	'intropage_autorefresh' => array(
-		'friendly_name' => 'Automatic refresh page',
-		'description' => 'How often',
+		'friendly_name' => __('Automatic refresh page', 'intropage'),
+		'description' => __('How often', 'intropage'),
 		'method' => 'drop_array',
-		'array' => array('0' => 'Never', '90' => 'Every minute', '360' => 'Every 5 minutes', '3600' => 'Every hour', ),
+		'array' => array(
+			'0'    => __('Never', 'intropage'),
+			'90'   => __('Every Minute', 'intropage'),
+			'360'  => __('Every %d Minutes', 5, 'intropage'),
+			'3600' => __('Every Hour', 'intropage'),
+		),
 		'default' => '0',
 	),
 	'intropage_display_level' => array(
-		'friendly_name' => 'Display',
-		'description' => 'What will you see',
+		'friendly_name' => __('Display', 'intropage'),
+		'description' => __('What will you see', 'intropage'),
 		'method' => 'drop_array',
-		'array' => array('0' => 'Only errors', '1' => 'Errors and warnings', '2' => 'All', ),
+		'array' => array(
+			'0' => __('Only Errors', 'intropage'),
+			'1' => __('Errors and Warnings', 'intropage'),
+			'2' => __('All', 'intropage')
+		),
 		'default' => '2',
 	),
 	'intropage_analyse_log_rows' => array(
-		'friendly_name' => 'Analyse log -  number of lines',
-		'description' => 'How many lines of log will be analysed. Big number may causes slow page load',
+		'friendly_name' => __('Analyse log -  number of lines', 'intropage'),
+		'description' => __('How many lines of log will be analysed. Big number may causes slow page load', 'intropage'),
 		'method' => 'textbox',
 		'max_length' => 5,
 		'default' => '1000',
 	),
 
 	'intropage_analyse_db_interval' => array(
-		'friendly_name' => 'How often analyze DB',
-		'description' => '<strong>Poller runs this task. It could cause long poller run.</strong>',
+		'friendly_name' => __('How often analyze DB', 'intropage'),
+		'description' => __('Poller runs this task. It could cause long poller run.', 'intropage'),
 		'method' => 'drop_array',
-		'array' => array('900' => 'Every 15 minutes', '3600' => 'Every hour', '86400' => 'Every day'),
+		'array' => array(
+			'900'   => __('Every %d Minutes', 15, 'intropage'),
+			'3600'  => __('Every Hour', 'intropage'),
+			'86400' => __('Every Day', 'intropage')
+		),
 		'default' => '86400',
 	),
-
 	'intropage_analyse_db_level' => array(
-		'friendly_name' => 'Analyse DB - Level of db check',
-		'description' => 'Quick - no check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>',
+		'friendly_name' => __('Analyse DB - Level of db check', 'intropage'),
+		'description' => __('Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>', 'intropage'),
 		'method' => 'drop_array',
-		'array' => array('QUICK' => 'Quick', 'FAST' => 'Fast', 'CHANGED' => 'Changed', 'MEDIUM' => 'Medium', 'EXTENDED' => 'Extended'),
-		'default' => 'Changed',
+		'array' => array(
+			'QUICK'    => __('Quick', 'intropage'),
+			'FAST'     => __('Fast', 'intropage'),
+			'CHANGED'  => __('Changed', 'intropage'),
+			'MEDIUM'   => __('Medium', 'intropage'),
+			'EXTENDED' => __('Extended', 'intropage')
+		),
+		'default' => 'CHANGED',
 	),
-
 	'intropage_ntp_server' => array(
-		'friendly_name' => 'NTP (time) check - IP or DNS name of NTP server',
-		'description' => 'Insert IP or DNS name of NTP server',
+		'friendly_name' => __('NTP (time) check - IP or DNS name of NTP server', 'intropage'),
+		'description' => __('Insert IP or DNS name of NTP server', 'intropage'),
 		'method' => 'textbox',
 		'max_length' => 50,
 		'default' => 'pool.ntp.org',
 	),
 
 	'intropage_ntp_interval' => array(
-		'friendly_name' => 'How often check NTP',
-		'description' => '<strong>Poller runs this task. It could cause long poller run.</strong>',
+		'friendly_name' => __('How often check NTP', 'intropage'),
+		'description' => __('<strong>Poller runs this task. It could cause long poller run.</strong>', 'intropage'),
 		'method' => 'drop_array',
-		'array' => array('900' => 'Every 15 minutes', '3600' => 'Every hour', '86400' => 'Every day'),
+		'array' => array(
+			'900'   => __('Every %d Minutes', 15, 'intropage'),
+			'3600'  => __('Every Hour', 'intropage'),
+			'86400' => __('Every Day', 'intropage')
+		),
 		'default' => '3600',
 	),
 
 	'intropage_admin_alert' => array(
-		'friendly_name' => 'Admin information panel about maintenance tasks, down devices, ..',
-		'description' => 'If isn\'t empty, panel will be displayed on the top. You can use html tags (b, i, ...).',
+		'friendly_name' => __('Admin information panel about maintenance tasks, down devices, ..', 'intropage'),
+		'description' => __('If isn\'t empty, panel will be displayed on the top. You can use html tags (b, i, ...).', 'intropage'),
 		'method' => 'textarea',
 		'max_length' => 1000,
-				'textarea_rows' => '4',
-				'textarea_cols' => '60',
+		'textarea_rows' => '4',
+		'textarea_cols' => '60',
 		'default' => '',
 	),
 
 	'intropage_maint_plugin_days_before' => array(
-		'friendly_name' => 'Maint plugin - how many days before display alert',
-		'description' => 'How many days?</strong>',
+		'friendly_name' => __('Maint plugin - how many days before display alert', 'intropage'),
+		'description' => __('How many days?</strong>', 'intropage'),
 		'method' => 'drop_array',
-		'array' => array('0' => 'When maintenance starts', '86400' => '1 day before', '259200' => '3 days before', '604800' => '7 days before'),
+		'array' => array(
+			'0'      => __('When maintenance starts', 'intropage'),
+			'86400'  => __('%d Day Before', 1, 'intropage'),
+			'259200' => __('%d Days Before', 3, 'intropage'),
+			'604800' => __('%d Days Before', 7, 'intropage')
+		),
 		'default' => '86400',
-	),
-
-
+	)
 );
+

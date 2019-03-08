@@ -1,0 +1,979 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-07 18:54-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../include/helpers.php:432
+msgid "DB problem"
+msgstr ""
+
+#: ../include/helpers.php:434
+msgid "DB OK"
+msgstr ""
+
+#: ../include/helpers.php:446
+msgid "Connection errors - try to restart SQL service."
+msgstr ""
+
+#: ../include/helpers.php:453
+#, php-format
+msgid "Connection errors: %s"
+msgstr ""
+
+#: ../include/helpers.php:454
+#, php-format
+msgid "Damaged tables: %s"
+msgstr ""
+
+#: ../include/helpers.php:455
+#, php-format
+msgid "Memory tables: %s"
+msgstr ""
+
+#: ../include/helpers.php:456
+#, php-format
+msgid "All tables: %s"
+msgstr ""
+
+#: ../include/settings.php:31
+msgid "Intro Page Options"
+msgstr ""
+
+#: ../include/settings.php:34
+msgid ""
+"How we should display the intropage. <strong>For users without console "
+"access you must choose separated tab"
+msgstr ""
+
+#: ../include/settings.php:39
+msgid ""
+"Show the Intropage plugin screen in console screen (you need console access "
+"permission!)"
+msgstr ""
+
+#: ../include/settings.php:43
+msgid "Show the Intropage plugin screen in separated tab"
+msgstr ""
+
+#: ../include/settings.php:47
+msgid "Intropage panels"
+msgstr ""
+
+#: ../include/settings.php:49
+msgid "Enable/disable panels"
+msgstr ""
+
+#: ../include/settings.php:53
+msgid "Allow panel Analayse Log"
+msgstr ""
+
+#: ../include/settings.php:59
+msgid "Allow panel Analayse Logins"
+msgstr ""
+
+#: ../include/settings.php:65
+msgid "Allow panel Threshold Events"
+msgstr ""
+
+#: ../include/settings.php:71
+msgid "Allow panel Analayse Database"
+msgstr ""
+
+#: ../include/settings.php:77
+msgid "Allow panel Analayse Tree, Devices, Graphs"
+msgstr ""
+
+#: ../include/settings.php:83
+msgid "Allow panel Trends"
+msgstr ""
+
+#: ../include/settings.php:89
+msgid "Allow panel 24h Extrems"
+msgstr ""
+
+#: ../include/settings.php:95
+msgid "Allow panel NTP"
+msgstr ""
+
+#: ../include/settings.php:101
+msgid "Allow panel Poller Info"
+msgstr ""
+
+#: ../include/settings.php:107
+msgid "Allow panel Poller Stats"
+msgstr ""
+
+#: ../include/settings.php:113
+msgid "Allow panel Graph Device"
+msgstr ""
+
+#: ../include/settings.php:119
+msgid "Allow panel Graph Thresholds"
+msgstr ""
+
+#: ../include/settings.php:125
+msgid "Allow panel Graph Data Dource"
+msgstr ""
+
+#: ../include/settings.php:131
+msgid "Allow panel Graph Device Template"
+msgstr ""
+
+#: ../include/settings.php:137
+msgid "Allow panel CPU Utilization"
+msgstr ""
+
+#: ../include/settings.php:143
+msgid "Allow panel MacTrack Plugin"
+msgstr ""
+
+#: ../include/settings.php:149
+msgid "Allow panel MacTrack Sites"
+msgstr ""
+
+#: ../include/settings.php:155
+msgid "Allow panel Top 5 Ping"
+msgstr ""
+
+#: ../include/settings.php:161
+msgid "Allow panel Top 5 Availability"
+msgstr ""
+
+#: ../include/settings.php:167
+msgid "Allow panel System Information"
+msgstr ""
+
+#: ../include/settings.php:173
+msgid "Allow panel Boost"
+msgstr ""
+
+#: ../include/settings.php:179
+msgid "Allow panel Favourite Graphs"
+msgstr ""
+
+#: ../include/settings.php:201
+msgid "Show Intropage (no matter in Console or Tab)"
+msgstr ""
+
+#: ../include/data.php:37
+msgid "Database check"
+msgstr ""
+
+#: ../include/data.php:49 ../include/data.php:689 ../include/data.php:1228
+#: ../include/data.php:1424 ../include/data.php:1526 ../include/data.php:1569
+msgid "Waiting for data"
+msgstr ""
+
+#: ../include/data.php:52
+msgid "Last check"
+msgstr ""
+
+#: ../include/data.php:55
+msgid "Checked Every 15 minutes"
+msgstr ""
+
+#: ../include/data.php:57
+msgid "Checked Hourly"
+msgstr ""
+
+#: ../include/data.php:59
+msgid "Checked Daily"
+msgstr ""
+
+#: ../include/data.php:73
+msgid "Analyse cacti log"
+msgstr ""
+
+#: ../include/data.php:89
+msgid "Log file not accessible or empty"
+msgstr ""
+
+#: ../include/data.php:109
+msgid "Errors"
+msgstr ""
+
+#: ../include/data.php:111
+msgid "Warnings"
+msgstr ""
+
+#: ../include/data.php:116
+msgid "file is larger than 2GB"
+msgstr ""
+
+#: ../include/data.php:120
+msgid "Log size OK"
+msgstr ""
+
+#: ../include/data.php:124
+msgid "Log size is quite large"
+msgstr ""
+
+#: ../include/data.php:127
+msgid "Log size"
+msgstr ""
+
+#: ../include/data.php:131
+#, php-format
+msgid "(Errors and warning in last %s lines)"
+msgstr ""
+
+#: ../include/data.php:151
+msgid "Last 10 logins"
+msgstr ""
+
+#: ../include/data.php:158 ../include/data.php:226 ../include/data.php:263
+#: ../include/data.php:311 ../include/data.php:332 ../include/data.php:360
+#: ../include/data.php:408 ../include/data.php:431 ../include/data.php:452
+#: ../include/data.php:473 ../include/data.php:496 ../include/data.php:639
+#: ../include/data.php:644 ../include/data.php:1297
+msgid "N/A"
+msgstr ""
+
+#: ../include/data.php:175
+msgid "failed"
+msgstr ""
+
+#: ../include/data.php:175
+msgid "success"
+msgstr ""
+
+#: ../include/data.php:178
+msgid "Failed logins"
+msgstr ""
+
+#: ../include/data.php:209
+msgid "Analyse tree/host/graph"
+msgstr ""
+
+#: ../include/data.php:227 ../include/data.php:232
+#, php-format
+msgid "Devices with the same IP and port %s"
+msgstr ""
+
+#: ../include/data.php:265 ../include/data.php:270
+#, php-format
+msgid "Devices with the same description %s"
+msgstr ""
+
+#: ../include/data.php:313 ../include/data.php:317
+#, php-format
+msgid "Orphaned Data Sources %s"
+msgstr ""
+
+#: ../include/data.php:334
+#, php-format
+msgid "Poller output items %s"
+msgstr ""
+
+#: ../include/data.php:337
+#, php-format
+msgid "Poller Output Items %s"
+msgstr ""
+
+#: ../include/data.php:350
+msgid "Information only (no warn/error)"
+msgstr ""
+
+#: ../include/data.php:362 ../include/data.php:365
+#, php-format
+msgid "Devices in more than one tree %s"
+msgstr ""
+
+#: ../include/data.php:410 ../include/data.php:413
+#, php-format
+msgid "Hosts without graphs %s"
+msgstr ""
+
+#: ../include/data.php:433 ../include/data.php:436
+#, php-format
+msgid "Hosts without tree %s"
+msgstr ""
+
+#: ../include/data.php:454 ../include/data.php:457
+#, php-format
+msgid "Hosts with default public/private community %s"
+msgstr ""
+
+#: ../include/data.php:475 ../include/data.php:478
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts %s"
+msgstr ""
+
+#: ../include/data.php:498 ../include/data.php:501
+#, php-format
+msgid "Plugin Thold - Global notify only %s"
+msgstr ""
+
+#: ../include/data.php:510
+#, php-format
+msgid "Found %s problems"
+msgstr ""
+
+#: ../include/data.php:512
+msgid "Everything OK"
+msgstr ""
+
+#: ../include/data.php:524
+msgid "Boost statistics"
+msgstr ""
+
+#: ../include/data.php:577 ../include/data.php:1324
+msgid "Idle"
+msgstr ""
+
+#: ../include/data.php:579 ../include/data.php:1322
+msgid "Running"
+msgstr ""
+
+#: ../include/data.php:581
+msgid "Overrun Warning"
+msgstr ""
+
+#: ../include/data.php:584
+msgid "Timed Out"
+msgstr ""
+
+#: ../include/data.php:587
+msgid "Other"
+msgstr ""
+
+#: ../include/data.php:590
+msgid "Never Run"
+msgstr ""
+
+#: ../include/data.php:595
+#, php-format
+msgid "Pending Boost Records: %s"
+msgstr ""
+
+#: ../include/data.php:596
+#, php-format
+msgid "Archived Boost Records: %s"
+msgstr ""
+
+#: ../include/data.php:600 ../include/data.php:603 ../include/data.php:605
+#, php-format
+msgid "Total Boost Records: %s"
+msgstr ""
+
+#: ../include/data.php:624 ../include/data.php:871 ../include/data.php:881
+#: ../include/data.php:1014 ../include/data.php:1023 ../include/data.php:1160
+#: ../include/data.php:1328
+msgid "Disabled"
+msgstr ""
+
+#: ../include/data.php:624
+#, php-format
+msgid "Boost On-demand Updating: %s"
+msgstr ""
+
+#: ../include/data.php:631
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr ""
+
+#: ../include/data.php:634
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr ""
+
+#: ../include/data.php:641
+#, php-format
+msgid "Last run duration: %s"
+msgstr ""
+
+#: ../include/data.php:643
+#, php-format
+msgid "RRD Updates / Max: %s / %s"
+msgstr ""
+
+#: ../include/data.php:644
+#, php-format
+msgid "Update Frequency: %s"
+msgstr ""
+
+#: ../include/data.php:645
+#, php-format
+msgid "Next Start Time: %s"
+msgstr ""
+
+#: ../include/data.php:656
+msgid "CPU utilization"
+msgstr ""
+
+#: ../include/data.php:660
+msgid "CPU load: "
+msgstr ""
+
+#: ../include/data.php:667
+msgid "This function is not implemented on Windows platforms"
+msgstr ""
+
+#: ../include/data.php:677
+msgid "Load"
+msgstr ""
+
+#: ../include/data.php:702
+msgid "24 hour extrem"
+msgstr ""
+
+#: ../include/data.php:710
+msgid "Long run<br/>poller"
+msgstr ""
+
+#: ../include/data.php:725 ../include/data.php:745
+msgid "Waiting<br/>for data"
+msgstr ""
+
+#: ../include/data.php:752
+msgid "Max thold<br/>triggered:"
+msgstr ""
+
+#: ../include/data.php:776
+msgid "Poller<br/>output item:"
+msgstr ""
+
+#: ../include/data.php:810
+msgid "Datasources: "
+msgstr ""
+
+#: ../include/data.php:839
+msgid "No untemplated datasources found"
+msgstr ""
+
+#: ../include/data.php:852 ../include/data.php:876
+msgid "Hosts"
+msgstr ""
+
+#: ../include/data.php:868 ../include/data.php:1011 ../include/variables.php:84
+msgid "All"
+msgstr ""
+
+#: ../include/data.php:869 ../include/data.php:878 ../include/data.php:1156
+msgid "Up"
+msgstr ""
+
+#: ../include/data.php:870 ../include/data.php:879 ../include/data.php:1157
+msgid "Down"
+msgstr ""
+
+#: ../include/data.php:872 ../include/data.php:880 ../include/data.php:1330
+msgid "Recovering"
+msgstr ""
+
+#: ../include/data.php:895
+msgid "RECOVERING"
+msgstr ""
+
+#: ../include/data.php:911
+msgid "DOWN"
+msgstr ""
+
+#: ../include/data.php:931 ../include/data.php:935
+msgid "Device Templates"
+msgstr ""
+
+#: ../include/data.php:959
+msgid "No device templates found"
+msgstr ""
+
+#: ../include/data.php:971 ../include/data.php:976 ../include/data.php:1018
+msgid "Thresholds"
+msgstr ""
+
+#: ../include/data.php:984
+msgid "Thold plugin not installed/running"
+msgstr ""
+
+#: ../include/data.php:987 ../include/data.php:1130
+msgid "You don't have permission"
+msgstr ""
+
+#: ../include/data.php:1012 ../include/data.php:1021
+msgid "Breached"
+msgstr ""
+
+#: ../include/data.php:1013
+msgid "Trigged"
+msgstr ""
+
+#: ../include/data.php:1020
+msgid "OK"
+msgstr ""
+
+#: ../include/data.php:1022
+msgid "Trigerred"
+msgstr ""
+
+#: ../include/data.php:1034
+msgid "BREACHED"
+msgstr ""
+
+#: ../include/data.php:1044
+msgid "TRIGGERED"
+msgstr ""
+
+#: ../include/data.php:1069
+msgid "Cacti version: "
+msgstr ""
+
+#: ../include/data.php:1080
+msgid "Poller type:"
+msgstr ""
+
+#: ../include/data.php:1082
+msgid "Spine version: "
+msgstr ""
+
+#: ../include/data.php:1085
+msgid "You are using incorrect spine version!"
+msgstr ""
+
+#: ../include/data.php:1089
+msgid "Poller type: "
+msgstr ""
+
+#: ../include/data.php:1092
+msgid "Running on: "
+msgstr ""
+
+#: ../include/data.php:1112 ../include/data.php:1154
+msgid "Mactrack"
+msgstr ""
+
+#: ../include/data.php:1122 ../include/data.php:1184
+msgid "Mactrack plugin not installed/running"
+msgstr ""
+
+#: ../include/data.php:1146
+#, php-format
+msgid "All: %s"
+msgstr ""
+
+#: ../include/data.php:1147
+#, php-format
+msgid "Up: %s"
+msgstr ""
+
+#: ../include/data.php:1148
+#, php-format
+msgid "Down: %s"
+msgstr ""
+
+#: ../include/data.php:1149
+#, php-format
+msgid "Error: %s"
+msgstr ""
+
+#: ../include/data.php:1150
+#, php-format
+msgid "Unknown: %s"
+msgstr ""
+
+#: ../include/data.php:1151
+#, php-format
+msgid "Disabled: %s"
+msgstr ""
+
+#: ../include/data.php:1158
+msgid "Error"
+msgstr ""
+
+#: ../include/data.php:1159
+msgid "Unknown"
+msgstr ""
+
+#: ../include/data.php:1175
+msgid "Mactrack sites"
+msgstr ""
+
+#: ../include/data.php:1186
+msgid "Site"
+msgstr ""
+
+#: ../include/data.php:1186
+msgid "Devices"
+msgstr ""
+
+#: ../include/data.php:1187
+msgid "IPs"
+msgstr ""
+
+#: ../include/data.php:1187
+msgid "Ports"
+msgstr ""
+
+#: ../include/data.php:1188
+msgid "Ports up"
+msgstr ""
+
+#: ../include/data.php:1188
+msgid "MACs"
+msgstr ""
+
+#: ../include/data.php:1189
+msgid "Device errors"
+msgstr ""
+
+#: ../include/data.php:1201
+msgid "No mactrack sites found"
+msgstr ""
+
+#: ../include/data.php:1214
+msgid "Time synchronization"
+msgstr ""
+
+#: ../include/data.php:1222
+msgid "No NTP server configured"
+msgstr ""
+
+#: ../include/data.php:1233
+msgid "Failed to get NTP time FROM $ntp_server"
+msgstr ""
+
+#: ../include/data.php:1241
+#, php-format
+msgid ""
+"Please check time.<br/>It is different (more than %s seconds) FROM NTP "
+"server %s"
+msgstr ""
+
+#: ../include/data.php:1243
+msgid "Localtime is equal to NTP server"
+msgstr ""
+
+#: ../include/data.php:1248
+msgid ""
+"Unable to contact the NTP server indicated.<br/>Please check your "
+"configuration.<br/>"
+msgstr ""
+
+#: ../include/data.php:1251
+msgid "Last check: "
+msgstr ""
+
+#: ../include/data.php:1254
+msgid "Checked every 15 minutes"
+msgstr ""
+
+#: ../include/data.php:1256
+msgid "Checked hourly"
+msgstr ""
+
+#: ../include/data.php:1258
+msgid "Checked daily"
+msgstr ""
+
+#: ../include/data.php:1282
+msgid "Poller info"
+msgstr ""
+
+#: ../include/data.php:1286
+msgid "ID/Name/total time/state"
+msgstr ""
+
+#: ../include/data.php:1320
+msgid "New/Idle"
+msgstr ""
+
+#: ../include/data.php:1326
+msgid "Unkn/down"
+msgstr ""
+
+#: ../include/data.php:1337
+msgid "(ok)"
+msgstr ""
+
+#: ../include/data.php:1337
+msgid "(all)"
+msgstr ""
+
+#: ../include/data.php:1358
+#, php-format
+msgid "Poller stats (interval %ss)"
+msgstr ""
+
+#: ../include/data.php:1407 ../include/data.php:1409
+msgid " Poller ID: "
+msgstr ""
+
+#: ../include/data.php:1416
+msgid "ID: "
+msgstr ""
+
+#: ../include/data.php:1437
+msgid "Last thold events"
+msgstr ""
+
+#: ../include/data.php:1445
+msgid "Plugin Thold isn't installed or started"
+msgstr ""
+
+#: ../include/data.php:1480
+msgid "Without events yet"
+msgstr ""
+
+#: ../include/data.php:1494
+msgid "Top5 ping (avg, current)"
+msgstr ""
+
+#: ../include/data.php:1538
+msgid "Top5 worst availability"
+msgstr ""
+
+#: ../include/data.php:1581 ../include/data.php:1585
+msgid "Trends"
+msgstr ""
+
+#: ../include/data.php:1602
+msgid "Tholds triggered"
+msgstr ""
+
+#: ../include/data.php:1620
+msgid "Hosts down"
+msgstr ""
+
+#: ../include/data.php:1649
+msgid "Favourite graph"
+msgstr ""
+
+#: ../include/variables.php:56
+msgid "Display settings"
+msgstr ""
+
+#: ../include/variables.php:60
+msgid "Important things will be at the top"
+msgstr ""
+
+#: ../include/variables.php:61
+msgid ""
+"If checked Intropage displays important (errors, warnings) information first"
+msgstr ""
+
+#: ../include/variables.php:66
+msgid "Automatic refresh page"
+msgstr ""
+
+#: ../include/variables.php:67
+msgid "How often"
+msgstr ""
+
+#: ../include/variables.php:70
+msgid "Never"
+msgstr ""
+
+#: ../include/variables.php:71
+msgid "Every Minute"
+msgstr ""
+
+#: ../include/variables.php:72 ../include/variables.php:101
+#: ../include/variables.php:133
+#, php-format
+msgid "Every %d Minutes"
+msgstr ""
+
+#: ../include/variables.php:73 ../include/variables.php:102
+#: ../include/variables.php:134
+msgid "Every Hour"
+msgstr ""
+
+#: ../include/variables.php:78
+msgid "Display"
+msgstr ""
+
+#: ../include/variables.php:79
+msgid "What will you see"
+msgstr ""
+
+#: ../include/variables.php:82
+msgid "Only Errors"
+msgstr ""
+
+#: ../include/variables.php:83
+msgid "Errors and Warnings"
+msgstr ""
+
+#: ../include/variables.php:89
+msgid "Analyse log -  number of lines"
+msgstr ""
+
+#: ../include/variables.php:90
+msgid ""
+"How many lines of log will be analysed. Big number may causes slow page load"
+msgstr ""
+
+#: ../include/variables.php:97
+msgid "How often analyze DB"
+msgstr ""
+
+#: ../include/variables.php:98
+msgid "Poller runs this task. It could cause long poller run."
+msgstr ""
+
+#: ../include/variables.php:103 ../include/variables.php:135
+msgid "Every Day"
+msgstr ""
+
+#: ../include/variables.php:108
+msgid "Analyse DB - Level of db check"
+msgstr ""
+
+#: ../include/variables.php:109
+msgid ""
+"Quick - No Check rows for inforccert links<br/>Fast - check only not "
+"properly closed tables<br/>Changed - check tables changed from last check<br/"
+">Medium - with rows scan<br/>Extended - full rows and keys<br/"
+"><strong>Medium and extended may causes slow page load!</strong>"
+msgstr ""
+
+#: ../include/variables.php:112
+msgid "Quick"
+msgstr ""
+
+#: ../include/variables.php:113
+msgid "Fast"
+msgstr ""
+
+#: ../include/variables.php:114
+msgid "Changed"
+msgstr ""
+
+#: ../include/variables.php:115
+msgid "Medium"
+msgstr ""
+
+#: ../include/variables.php:116
+msgid "Extended"
+msgstr ""
+
+#: ../include/variables.php:121
+msgid "NTP (time) check - IP or DNS name of NTP server"
+msgstr ""
+
+#: ../include/variables.php:122
+msgid "Insert IP or DNS name of NTP server"
+msgstr ""
+
+#: ../include/variables.php:129
+msgid "How often check NTP"
+msgstr ""
+
+#: ../include/variables.php:130
+msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
+msgstr ""
+
+#: ../include/variables.php:141
+msgid "Admin information panel about maintenance tasks, down devices, .."
+msgstr ""
+
+#: ../include/variables.php:142
+msgid ""
+"If isn't empty, panel will be displayed on the top. You can use html tags "
+"(b, i, ...)."
+msgstr ""
+
+#: ../include/variables.php:151
+msgid "Maint plugin - how many days before display alert"
+msgstr ""
+
+#: ../include/variables.php:152
+msgid "How many days?</strong>"
+msgstr ""
+
+#: ../include/variables.php:155
+msgid "When maintenance starts"
+msgstr ""
+
+#: ../include/variables.php:156
+#, php-format
+msgid "%d Day Before"
+msgstr ""
+
+#: ../include/variables.php:157 ../include/variables.php:158
+#, php-format
+msgid "%d Days Before"
+msgstr ""
+
+#: ../display.php:438
+#, php-format
+msgid "Add panel %s"
+msgstr ""
+
+#: ../display.php:440
+#, php-format
+msgid "Add panel %s %s"
+msgstr ""
+
+#: ../display.php:446
+msgid "Refresh Now"
+msgstr ""
+
+#: ../display.php:449 ../display.php:451
+msgid "Autorefresh Disabled"
+msgstr ""
+
+#: ../display.php:455 ../display.php:457
+msgid "Autorefresh 1 Minute"
+msgstr ""
+
+#: ../display.php:461 ../display.php:463
+msgid "Autorefresh 5 Minutes"
+msgstr ""
+
+#: ../display.php:468 ../display.php:470
+msgid "Autorefresh 1 Hour"
+msgstr ""
+
+#: ../display.php:474 ../display.php:476
+msgid "Display only Errors"
+msgstr ""
+
+#: ../display.php:480 ../display.php:482
+msgid "Display Errors and Warnings"
+msgstr ""
+
+#: ../display.php:487 ../display.php:489
+msgid "Display All"
+msgstr ""
+
+#: ../display.php:494 ../display.php:497
+msgid "Sort by - red-yellow-green-gray"
+msgstr ""
+
+#: ../display.php:495
+msgid "Sort by panel priority"
+msgstr ""
+
+#: ../display.php:498
+msgid "Sort by panel Priority"
+msgstr ""
+
+#: ../display.php:502
+msgid "Reset panel Order to Default"
+msgstr ""
+
+#: ../display.php:505
+msgid "Reset All to Default"
+msgstr ""
+
+#: ../display.php:523
+msgid "Set intropage as default page"
+msgstr ""
+
+#: ../display.php:525
+msgid "Set graph as default page"
+msgstr ""
