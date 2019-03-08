@@ -1143,7 +1143,7 @@ function intropage_mactrack() {
 				$result['alarm'] = 'yellow';
 			}
 
-			$result['data']  = __('All: %s', $m_all, 'intropage')       . '</a> | ';
+			$result['data']  = __('All: %s', $m_all, 'intropage')       . ' | ';
 			$result['data'] .= __('Up: %s', $m_up, 'intropage')         . ' | ';
 			$result['data'] .= __('Down: %s', $m_down, 'intropage')     . ' | ';
 			$result['data'] .= __('Error: %s', $m_err, 'intropage')     . ' | ';
