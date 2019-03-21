@@ -1493,35 +1493,51 @@ function intropage_top5_ping() {
 	$result = array(
 		'name' => __('Top5 ping (avg, current)', 'intropage'),
 		'alarm' => 'green',
+		'data' => '',
+		'detail' => '',
 	);
-
 
 	$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
 		FROM host
 		WHERE host.id in ($allowed_hosts)
 		AND disabled != 'on'
 		ORDER BY avg_time desc
-		LIMIT 5");
+		LIMIT 15");
+
+	$count = 0;
 
 	if (cacti_sizeof($sql_worst_host)) {
-		$result['data'] = '<table>';
 		foreach ($sql_worst_host as $host) {
 			if ($console_access) {
-				$result['data'] .= '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
 			} else {
-				$result['data'] .= '<tr><td class="rpad">' . $host['description'] . '</td>';
+				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
 			}
 
-			$result['data'] .= '<td class="rpad texalirig">' . round($host['avg_time'], 2) . 'ms</td>';
+			$row .= '<td class="rpad texalirig">' . round($host['avg_time'], 2) . 'ms</td>';
 
 			if ($host['cur_time'] > 1000) {
 				$result['alarm'] = 'yellow';
-				$result['data'] .= '<td class="rpad texalirig"><b>' . round($host['cur_time'], 2) . 'ms</b></td></tr>';
+				$row .= '<td class="rpad texalirig"><b>' . round($host['cur_time'], 2) . 'ms</b></td></tr>';
 			} else {
-				$result['data'] .= '<td class="rpad texalirig">' . round($host['cur_time'], 2) . 'ms</td></tr>';
+				$row .= '<td class="rpad texalirig">' . round($host['cur_time'], 2) . 'ms</td></tr>';
 			}
+			
+			if ($count < 5)
+			    $result['data'] .= $row;
+			else
+			    $result['detail'] .= $row;
+	
+			$count++;
 		}
-		$result['data'] .= '</table>';
+		$result['data'] = '<table>' . $result['data'] . '</table>';
+		
+		if (cacti_sizeof($sql_worst_host) > 5)	{
+		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
+		}
+		else	{
+		    unset ($result['detail']);
+		}
 	} else {	// no data
 		$result['data'] = __('Waiting for data', 'intropage');
 	}
@@ -1537,34 +1553,51 @@ function intropage_top5_availability() {
 	$result = array(
 		'name' => __('Top5 worst availability', 'intropage'),
 		'alarm' => 'green',
+		'data' => '',
+		'detail' => '',
 	);
-
 
 	$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
 		FROM host
 		WHERE host.id IN ($allowed_hosts)
 		AND disabled != 'on'
 		ORDER BY availability
-		LIMIT 5");
+		LIMIT 15");
+
+	$count = 0;
 
 	if (cacti_sizeof($sql_worst_host)) {
 		$result['data'] = '<table>';
 
 		foreach ($sql_worst_host as $host) {
 			if ($console_access) {
-				$result['data'] .= '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
 			} else {
-				$result['data'] .= '<tr><td class="rpad">' . $host['description'] . '</td>';
+				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
 			}
 
 			if ($host['availability'] < 90) {
 				$result['alarm'] = 'yellow';
-				$result['data'] .= '<td class="rpad texalirig"><b>' . round($host['availability'], 2) . '%</b></td></tr>';
+				$row .= '<td class="rpad texalirig"><b>' . round($host['availability'], 2) . '%</b></td></tr>';
 			} else {
-				$result['data'] .= '<td class="rpad texalirig">' . round($host['availability'], 2) . '%</td></tr>';
+				$row .= '<td class="rpad texalirig">' . round($host['availability'], 2) . '%</td></tr>';
 			}
+
+			if ($count < 5)
+			    $result['data'] .= $row;
+			else
+			    $result['detail'] .= $row;
+	
+			$count++;
 		}
-		$result['data'] .= '</table>';
+		$result['data'] = '<table>' . $result['data'] . '</table>';
+		
+		if (cacti_sizeof($sql_worst_host) > 5)	{
+		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
+		}
+		else	{
+		    unset ($result['detail']);
+		}
 	} else {	// no data
 		$result['data'] = __('Waiting for data', 'intropage');
 	}
@@ -1591,7 +1624,7 @@ function intropage_top5_polltime() {
 		ORDER BY polling_time desc
 		LIMIT 15");
 
-	$count = 1;
+	$count = 0;
 	
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
@@ -1609,7 +1642,7 @@ function intropage_top5_polltime() {
 				$row .= '<td class="rpad texalirig">' . round($host['polling_time'], 2) . 's</td></tr>';
 			}
 			
-			if ($count <= 5)
+			if ($count < 5)
 			    $result['data'] .= $row;
 			else
 			    $result['detail'] .= $row;
@@ -1664,7 +1697,7 @@ function intropage_top5_pollratio() {
 			$row .= '<td class="rpad texalirig">' . $host['total_polls'] . '</td>';
 			$row .= '<td class="rpad texalirig">' . round($host['ratio'], 2) . '</td></tr>';
 
-			if ($count <= 5)
+			if ($count < 5)
 			    $result['data'] .= $row;
 			else
 			    $result['detail'] .= $row;
