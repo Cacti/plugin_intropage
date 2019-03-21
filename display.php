@@ -164,7 +164,6 @@ EOF;
 	echo '<script type="text/javascript">';
 	echo 'var intropage_autorefresh=' . read_user_setting('intropage_autorefresh') . ';';
 	echo 'var intropage_drag=true;';
-
 	echo '</script>';
 	
 	
@@ -430,16 +429,16 @@ $(document).ready(function() {
 
 
 	if ($autorefresh == 90) {
-		echo "<option value='refresh_90' disabled='disabled'>Autorefresh 1 minute</option>";
+		echo "<option value='refresh_60' disabled='disabled'>Autorefresh 1 minute</option>";
 	} else {
-		echo "<option value='refresh_90'>Autorefresh 1 minute</option>";
+		echo "<option value='refresh_60'>Autorefresh 1 minute</option>";
 	}
 
 
 	if ($autorefresh == 560) {
-		echo "<option value='refresh_560' disabled='disabled'>Autorefresh 5 minutes</option>";
+		echo "<option value='refresh_500' disabled='disabled'>Autorefresh 5 minutes</option>";
 	} else {
-		echo "<option value='refresh_560'>Autorefresh 5 minutes</option>";
+		echo "<option value='refresh_500'>Autorefresh 5 minutes</option>";
 	}
 
 
