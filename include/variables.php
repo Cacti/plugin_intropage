@@ -50,6 +50,10 @@ $panel['intropage_top5_availability']['priority']       = 31;
 $panel['intropage_info']['priority']                    = 1;
 $panel['intropage_boost']['priority']                   = 55;
 $panel['intropage_favourite_graph']['priority']         = 95;
+$panel['intropage_top5_polltime']['priority']           = 32;
+$panel['intropage_top5_pollratio']['priority']          = 33;
+
+
 
 $intropage_settings = array(	// default values
 	'intropage_display_header' => array(

@@ -1572,6 +1572,120 @@ function intropage_top5_availability() {
 	return $result;
 }
 
+//------------------------------------ top5_polltime -----------------------------------------------------
+
+function intropage_top5_polltime() {
+	global $config, $allowed_hosts, $console_access;
+
+	$result = array(
+		'name' => __('Top5 worst polling time', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'detail' => '',
+	);
+
+	$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time 
+		FROM host
+		WHERE host.id in ($allowed_hosts)
+		AND disabled != 'on'
+		ORDER BY polling_time desc
+		LIMIT 15");
+
+	$count = 1;
+	
+	if (cacti_sizeof($sql_worst_host)) {
+		foreach ($sql_worst_host as $host) {
+		
+			if ($console_access) {
+				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+			} else {
+				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+			}
+
+			if ($host['polling_time'] > 30) {
+				$result['alarm'] = 'yellow';
+				$row .= '<td class="rpad texalirig"><b>' . round($host['polling_time'], 2) . 's</b></td></tr>';
+			} else {
+				$row .= '<td class="rpad texalirig">' . round($host['polling_time'], 2) . 's</td></tr>';
+			}
+			
+			if ($count <= 5)
+			    $result['data'] .= $row;
+			else
+			    $result['detail'] .= $row;
+	
+			$count++;
+		}
+		$result['data'] = '<table>' . $result['data'] . '</table>';
+		
+		if (cacti_sizeof($sql_worst_host) > 5)	{
+		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
+		}
+		else	{
+		    unset ($result['detail']);
+		}
+	} else {	// no data
+		$result['data'] = __('Waiting for data', 'intropage');
+	}
+
+	return $result;
+}
+
+//------------------------------------ top5_pollratio -----------------------------------------------------
+
+function intropage_top5_pollratio() {
+	global $config, $allowed_hosts, $console_access;
+
+	$result = array(
+		'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
+		'alarm' => 'grey',
+		'data' => '',
+		'detail' => '',
+	);
+
+	$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
+		FROM host
+		WHERE host.id in ($allowed_hosts)
+		AND disabled != 'on'
+		ORDER BY ratio desc
+		LIMIT 15");
+
+	$count = 1;
+
+	if (cacti_sizeof($sql_worst_host)) {
+		foreach ($sql_worst_host as $host) {
+			if ($console_access) {
+				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+			} else {
+				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+			}
+
+			$row .= '<td class="rpad texalirig">' . $host['failed_polls'] . '</td>';
+			$row .= '<td class="rpad texalirig">' . $host['total_polls'] . '</td>';
+			$row .= '<td class="rpad texalirig">' . round($host['ratio'], 2) . '</td></tr>';
+
+			if ($count <= 5)
+			    $result['data'] .= $row;
+			else
+			    $result['detail'] .= $row;
+	
+			$count++;
+		}
+		$result['data'] = '<table>' . $result['data'] . '</table>';
+		
+		if (cacti_sizeof($sql_worst_host) > 5)	{
+		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
+		}
+		else	{
+		    unset ($result['detail']);
+		}
+	} else {	// no data
+		$result['data'] = __('Waiting for data', 'intropage');
+	}
+
+	return $result;
+}
+
 //------------------------------------ trends -----------------------------------------------------
 
 function intropage_trend() {

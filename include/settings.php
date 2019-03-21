@@ -162,6 +162,18 @@ function intropage_config_form() {
 						'form_id' => '|arg1:id|',
 						'default' => 'on'
 					),
+					'intropage_top5_polltime' => array(
+						'value' => '|arg1:intropage_top5_polltime|',
+						'friendly_name' => __('Allow panel Top 5 worst polling time', 'intropage'),
+						'form_id' => '|arg1:id|',
+						'default' => 'on'
+					),
+					'intropage_top5_pollratio' => array(
+						'value' => '|arg1:intropage_top5_pollratio|',
+						'friendly_name' => __('Allow panel Top 5 worst polling failed/total ratio', 'intropage'),
+						'form_id' => '|arg1:id|',
+						'default' => 'on'
+					),
 					'intropage_info' => array(
 						'value' => '|arg1:intropage_info|',
 						'friendly_name' => __('Allow panel System Information', 'intropage'),
