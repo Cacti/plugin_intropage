@@ -310,6 +310,13 @@ function intropage_poller_bottom() {
 			array($stat['start'], $load[0]));
 	}
 
+	// failed polls
+	$count = db_fetch_cell('SELECT sum(failed_polls) FROM host;');
+	db_execute_prepared('REPLACE INTO plugin_intropage_trends
+		(name, value) VALUES (?, ?)',
+		array('failed_polls', $count));
+
+
 	// cleaning old data
 	db_execute('DELETE FROM plugin_intropage_trends
 		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY)');
@@ -336,13 +343,6 @@ function intropage_poller_bottom() {
 		FROM plugin_intropage_trends
 		WHERE name='ntp_testdate'");
 
-/*
-	if (!$last)	{
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', '')");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', '')");
-    	    $last = 0;
-	}
-*/
 	if (time() > ($last + read_config_option('intropage_ntp_interval')))	{
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 	    ntp_time2();
@@ -353,15 +353,6 @@ function intropage_poller_bottom() {
 		FROM plugin_intropage_trends
 		WHERE name='db_check_testdate'");
 
-/*
-	if (!$last)	{
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_result', 'Waiting for data')");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_alarm', 'yellow')");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
-    	    $last = 0;
-	}
-*/
 	if (time() > ($last + read_config_option('intropage_analyse_db_interval')))	{
 		db_execute_prepared('REPLACE INTO plugin_intropage_trends
 			(name, value) VALUES (?, ?)',

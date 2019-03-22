@@ -725,9 +725,10 @@ function intropage_extrem() {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
 
-	$result['data'] .= '</td><td class="rpad texalirig">';
+	$result['data'] .= '</td>';
 
 	// max host down
+	$result['data'] .= '<td class="rpad texalirig">';
 	$result['data'] .= '<strong>Max host<br/>down: </strong>';
 
 	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
@@ -745,10 +746,11 @@ function intropage_extrem() {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
 
-	$result['data'] .= '</td><td class="rpad texalirig">';
+	$result['data'] .= '</td>';
 
 	// max thold trig
 	// extrems doesn't use user permission!
+	$result['data'] .= '<td class="rpad texalirig">';
 	$result['data'] .= '<strong>' . __('Max thold<br/>triggered:', 'intropage') .'</strong>';
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
@@ -770,9 +772,10 @@ function intropage_extrem() {
 		$result['data'] .= '<br/>no<br/>plugin<br/>installed<br/>or<br/> running';
 	}
 
-	$result['data'] .= '</td><td class="rpad texalirig">';
+	$result['data'] .= '</td>';
 
 	// poller output items
+	$result['data'] .= '<td class="rpad texalirig">';
 	$result['data'] .= '<strong>' . __('Poller<br/>output item:', 'intropage') . '</strong>';
 
 	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
@@ -790,9 +793,30 @@ function intropage_extrem() {
 		$result['data'] .= '<br/>Waiting<br/>for data';
 	}
 
-	$result['data'] .= '</td></tr>';
+	// failed polls	
+	$result['data'] .= '</td>';
 
-	$result['data'] .= '</table>';
+	// poller output items
+	$result['data'] .= '<td class="rpad texalirig">';
+	$result['data'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
+
+	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+		FROM plugin_intropage_trends
+		WHERE name='failed_polls'
+		AND cur_timestamp > date_sub(cur_timestamp,interval 1 day)
+		ORDER BY value desc,cur_timestamp
+		LIMIT 5");
+
+	if (cacti_sizeof($sql_result)) {
+		foreach ($sql_result as $row) {
+			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+		}
+	} else {
+		$result['data'] .= '<br/>Waiting<br/>for data';
+	}
+	$result['data'] .= '</td>';
+
+	$result['data'] .= '</tr></table>';
 
 	return $result;
 }
