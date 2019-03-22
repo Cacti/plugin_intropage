@@ -1175,9 +1175,12 @@ function intropage_mactrack_sites() {
 		'name' => __('Mactrack sites', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
+		'detail' => '',
 
 	);
 
+	$count = 0;
+	
 	// SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5;
 	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
 		$result['alarm'] = 'grey';
@@ -1188,15 +1191,31 @@ function intropage_mactrack_sites() {
 		$result['data'] .= '<td class="rpad">' . __('Ports up', 'intropage') . '</td><td class="rpad">' . __('MACs', 'intropage') . '</td>';
 		$result['data'] .= '<td class="rpad">' . __('Device errors', 'intropage') . '</td></tr>';
 
-		$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5');
+		$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 15');
 		if (sizeof($sql_result) > 0) {
-			foreach ($sql_result as $row) {
-				$result['data'] .= '<tr><td>' . $row['site_name'] . '</td><td>' . $row['total_devices'] . '</td>';
-				$result['data'] .= '<td>' . $row['total_ips'] . '</td><td>' . $row['total_user_ports'] . '</td>';
-				$result['data'] .= '<td>' . $row['total_oper_ports'] . '</td><td>' . $row['total_macs'] . '</td>';
-				$result['data'] .= '<td>' . $row['total_device_errors'] . '</td></tr>';
-			}
-			$result['data'] .= '</table>';
+			foreach ($sql_result as $site) {
+				$row = '<tr><td>' . $site['site_name'] . '</td><td>' . $site['total_devices'] . '</td>';
+				$row .= '<td>' . $site['total_ips'] . '</td><td>' . $site['total_user_ports'] . '</td>';
+				$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
+				$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
+			
+                    		if ($count < 5)
+                        	    $result['data'] .= $row;
+                    		else
+                        	    $result['detail'] .= $row;
+
+                    		$count++;
+            		}
+            	    
+            		$result['data'] .= '</table>';
+
+            		if (cacti_sizeof($sql_result) > 5)  {
+                	    $result['detail'] = '<table>' . $result['detail'] . '</table>';
+            		}
+            		else    {
+                	    unset ($result['detail']);
+            		}
+
 		} else {
 			$result['data'] = __('No mactrack sites found', 'intropage');
 		}
