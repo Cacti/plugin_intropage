@@ -164,7 +164,7 @@ function intropage_check_upgrade() {
 		}
 
 		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_detail'") == 0) {
-    	    db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
+    			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
 		}
 
 		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_testdate'") == 0) {
@@ -178,6 +178,7 @@ function intropage_check_upgrade() {
 		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='ntp_testdate'") == 0) {
 			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
 		}
+		
 	}
 }
 
@@ -236,6 +237,7 @@ function intropage_setup_database() {
 	// I cannot set this in definition above
 	// db_execute("ALTER TABLE plugin_intropage_trends MODIFY cur_timestamp timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP");
 
+
 	// few values
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_result', 'Waiting for data')");
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_alarm', 'yellow')");
@@ -243,6 +245,7 @@ function intropage_setup_database() {
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', 'Waiting for date')");
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
+
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
@@ -354,12 +357,12 @@ function intropage_poller_bottom() {
 		WHERE name='db_check_testdate'");
 
 	if (time() > ($last + read_config_option('intropage_analyse_db_interval')))	{
+/*
 		db_execute_prepared('REPLACE INTO plugin_intropage_trends
 			(name, value) VALUES (?, ?)',
 			array('db_check_testdate', date('Y-m-d H:i:s', time())));
-
+*/
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-
 	    db_check();
 	}
 

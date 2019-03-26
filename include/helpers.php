@@ -400,8 +400,8 @@ function ntp_time2() {
 		$diff_time = date('U') - $ntp_time;
 	}
 
-	db_execute("UPDATE plugin_intropage_trends SET value = '$diff_time' WHERE name = 'ntp_diff_time'");
-	db_execute("UPDATE plugin_intropage_trends SET value = NOW() WHERE name = 'ntp_testdate'");
+	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array($diff_time, 'ntp_diff_time'));
+	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array(date('Y-m-d H:i:s', time()),'ntp__testdate'));
 }
 
 function db_check() {
@@ -455,10 +455,11 @@ function db_check() {
 		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
 		__('All tables: %s', count($tables), 'intropage');
 
-	db_execute("UPDATE plugin_intropage_trends SET value = '$text_result' WHERE name = 'db_check_result'");
-	db_execute("UPDATE plugin_intropage_trends SET value = '$alarm' WHERE name = 'db_check_alarm'");
-	db_execute("UPDATE plugin_intropage_trends SET value = '$text_detail' WHERE name = 'db_check_detail'");
-	db_execute("UPDATE plugin_intropage_trends SET value = NOW() WHERE name = 'db_check_testdate'");
+	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array($text_result, 'db_check_result'));
+	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array($alarm, 'db_check_alarm'));
+	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array($text_detail, 'db_check_detail'));
+	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array(date('Y-m-d H:i:s', time()), 'db_check_testdate'));
+
 }
 
 function intropage_graph_button($data) {
