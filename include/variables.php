@@ -102,11 +102,13 @@ $intropage_settings = array(	// default values
 		'description' => __('Poller runs this task. It could cause long poller run.', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
-			'900'   => __('Every %d Minutes', 15, 'intropage'),
-			'3600'  => __('Every Hour', 'intropage'),
-			'86400' => __('Every Day', 'intropage')
+			'900'   	=> __('Every %d Minutes', 15, 'intropage'),
+			'3600'  	=> __('Every Hour', 'intropage'),
+			'86400' 	=> __('Every Day', 'intropage'),
+			'604800' 	=> __('Every Week', 'intropage'),
+			'2592000' 	=> __('Every Month', 'intropage')
 		),
-		'default' => '86400',
+		'default' => '604800',
 	),
 	'intropage_analyse_db_level' => array(
 		'friendly_name' => __('Analyse DB - Level of db check', 'intropage'),
