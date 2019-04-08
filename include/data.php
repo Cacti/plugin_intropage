@@ -229,7 +229,7 @@ function intropage_analyse_tree_host_graph() {
 	if (cacti_sizeof($sql_result)) {
 		$total_errors += $sql_count;
 		if (count($sql_result) > 0) {
-			$result['data'] .= __('Devices with the same IP and port %s', $sql_count, 'intropage') . ':<br/>';
+			$result['data'] .= __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
 			$result['alarm'] = 'red';
 			foreach ($sql_result as $row) {
 				$sql_hosts = db_fetch_assoc_prepared("SELECT id, description, hostname
@@ -267,7 +267,7 @@ function intropage_analyse_tree_host_graph() {
 	if (cacti_sizeof($sql_result)) {
 		$total_errors += $sql_count;
 		if (count($sql_result) > 0) {
-			$result['data'] .= __('Devices with the same description %s', $sql_count, 'intropage') . '<br/>';
+			$result['data'] .= __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
 			$result['alarm'] = 'red';
 			foreach ($sql_result as $row) {
 				$sql_hosts = db_fetch_assoc_prepared('SELECT id, description, hostname
@@ -314,7 +314,7 @@ function intropage_analyse_tree_host_graph() {
 
 	if (cacti_sizeof($sql_result)) {
 		$total_errors += $sql_count;
-		$result['data'] .= __('Orphaned Data Sources %s', $sql_count, 'intropage') . '<br/>';
+		$result['data'] .= __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<br/>';
 
 		if ($result['alarm'] == 'green') {
 			$result['alarm'] = 'yellow';
@@ -331,20 +331,51 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Poller output items %s', $sql_count, 'intropage') . ':</b><br/>';
+	$result['detail'] .= '<br/><b>' . __('Poller output items %s:', $sql_count, 'intropage') . '</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
-		$result['data'] .= __('Poller Output Items %s', $sql_count, 'intropage') . ':<br/>';
+		$result['data'] .= __('Poller Output Items: %s', $sql_count, 'intropage') . '<br/>';
 
 		if ($result['alarm'] == 'green') {
 			$result['alarm'] = 'yellow';
 		}
 
 		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">';
+			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
+			$row['name_cache'] . '</a><br/>';
+
 		}
 		$total_errors += $sql_count;
 	}
+	
+	// DS - bad indexes
+	$sql_result = db_fetch_assoc('SELECT dtd.local_data_id,dtd.name_cache 
+		FROM data_local AS dl 
+		INNER JOIN data_template_data AS dtd 
+		ON dl.id=dtd.local_data_id 
+		INNER JOIN data_template AS dt ON dt.id=dl.data_template_id 
+		INNER JOIN host AS h ON h.id = dl.host_id 
+		WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)');
+
+	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+
+	$result['detail'] .= '<br/><b>' . __('Datasource - bad indexes %s:', $sql_count, 'intropage') . '</b><br/>';
+
+	if (cacti_sizeof($sql_result)) {
+		$result['data'] .= __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<br/>';
+
+		if ($result['alarm'] == 'green') {
+			$result['alarm'] = 'yellow';
+		}
+
+		foreach ($sql_result as $row) {  
+			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
+			$row['name_cache'] . '</a><br/>';
+
+		}
+		$total_errors += $sql_count;
+	}
+	
 
 	// below - only information without red/yellow/green
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
@@ -362,7 +393,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Devices in more than one tree %s', $sql_count, 'intropage') . ':</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
-		$result['data'] .= __('Devices in more than one tree %s', $sql_count, 'intropage') . ':<br/>';
+		$result['data'] .= __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description,
@@ -410,7 +441,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Hosts without graphs %s', $sql_count, 'intropage') . ':</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
-		$result['data'] .= __('Hosts without graphs %s', $sql_count, 'intropage') . '<br/>';
+		$result['data'] .= __('Hosts without graphs: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
@@ -433,7 +464,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Hosts without tree %s', $sql_count, 'intropage') . ':</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
-		$result['data'] .= __('Hosts without tree %s', $sql_count, 'intropage') . ':<br/>';
+		$result['data'] .= __('Hosts without tree: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
@@ -454,7 +485,7 @@ function intropage_analyse_tree_host_graph() {
 	$result['detail'] .= '<br/><b>' . __('Hosts with default public/private community %s', $sql_count, 'intropage') . ':</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
-		$result['data'] .= __('Hosts with default public/private community %s', $sql_count, 'intropage') . '<br/>';
+		$result['data'] .= __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
@@ -475,7 +506,7 @@ function intropage_analyse_tree_host_graph() {
 		$result['detail'] .= '<br/><b>' . __('Plugin Monitor - Unmonitored hosts %s', $sql_count, 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
-			$result['data'] .= __('Plugin Monitor - Unmonitored hosts %s', $sql_count, 'intropage') . ':</b><br/>';
+			$result['data'] .= __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '</b><br/>';
 
 			foreach ($sql_result as $row) {
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
@@ -498,7 +529,7 @@ function intropage_analyse_tree_host_graph() {
 		$result['detail'] .= '<br/><b>' . __('Plugin Thold - Global notify only %s', $sql_count, 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
-			$result['data'] .= __('Plugin Thold - Global notify only %s', $sql_count, 'intropage') . ':<br/>';
+			$result['data'] .= __('Plugin Thold - Global notify only: %s', $sql_count, 'intropage') . '<br/>';
 
 			foreach ($sql_result as $row) {
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
