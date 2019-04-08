@@ -401,7 +401,7 @@ function ntp_time2() {
 	}
 
 	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array($diff_time, 'ntp_diff_time'));
-	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array(date('Y-m-d H:i:s', time()),'ntp__testdate'));
+	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array(date('Y-m-d H:i:s', time()),'ntp_testdate'));
 }
 
 function db_check() {
