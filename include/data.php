@@ -327,7 +327,7 @@ function intropage_analyse_tree_host_graph() {
 	}
 
 	// empty poller_output
-	$sql_result = db_fetch_assoc('SELECT local_data_id FROM poller_output');
+	$sql_result = db_fetch_assoc('SELECT local_data_idi,rrd_name FROM poller_output');
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
@@ -342,7 +342,7 @@ function intropage_analyse_tree_host_graph() {
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['name_cache'] . '</a><br/>';
+			$row['rrd_name'] . '</a><br/>';
 
 		}
 		$total_errors += $sql_count;
