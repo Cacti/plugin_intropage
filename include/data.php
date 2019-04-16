@@ -327,7 +327,7 @@ function intropage_analyse_tree_host_graph() {
 	}
 
 	// empty poller_output
-	$sql_result = db_fetch_assoc('SELECT local_data_idi,rrd_name FROM poller_output');
+	$sql_result = db_fetch_assoc('SELECT local_data_id,rrd_name FROM poller_output');
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
