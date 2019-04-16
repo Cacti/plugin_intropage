@@ -321,8 +321,8 @@ function intropage_poller_bottom() {
 
 
 	// cleaning old data
-	db_execute('DELETE FROM plugin_intropage_trends
-		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND name IN ('poller','cpuload','failed_polls','host','thold','poller_output')');
+	db_execute("DELETE FROM plugin_intropage_trends
+		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND name IN ('poller','cpuload','failed_polls','host','thold','poller_output')");
 
 	// trends - all hosts without permissions!!!
 	db_execute("REPLACE INTO plugin_intropage_trends
