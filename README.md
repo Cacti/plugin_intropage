@@ -52,6 +52,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Add panel with worst polling time
 	Add panel with worst failed/total polling cycles
 	Add db check week and month interval
+	Add DS - bad indexes
 
 
 	1.8.1 ---
