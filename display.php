@@ -409,8 +409,18 @@ $(document).ready(function() {
 
 // reload single panel function
 $(document).on('click','.reload_panel_now',function() {
+
+    if($(this).data('lastClick') + 1000 > new Date().getTime()){
+        e.stopPropagation();
+        return false;
+    }
+    $(this).data('lastClick', new Date().getTime());
+    
     var panel_id = $(this).attr('id').split("_").pop();
+    
     reload_panel (panel_id,true);
+
+
 });
 </script>
 
