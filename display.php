@@ -401,14 +401,16 @@ if (intropage_autorefresh > 0)	{
     setInterval(reload_all, intropage_autorefresh*1000);
 }
 
-// reload single panel
+// load page = load all panels
 $(document).ready(function() {
     reload_all();
+});
 
-    $(document).on('click','.reload_panel_now',function() {
-	var panel_id = $(this).attr('id').split("_").pop();
-        reload_panel (panel_id,true);
-    });
+
+// reload single panel function
+$(document).on('click','.reload_panel_now',function() {
+    var panel_id = $(this).attr('id').split("_").pop();
+    reload_panel (panel_id,true);
 });
 </script>
 
