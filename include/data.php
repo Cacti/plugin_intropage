@@ -823,8 +823,7 @@ function intropage_extrem() {
 	} else {
 		$result['data'] .= '<br/>Waiting<br/>for data';
 	}
-
-	// failed polls	
+	
 	$result['data'] .= '</td>';
 
 	// poller output items
@@ -1757,7 +1756,7 @@ function intropage_top5_pollratio() {
 		ORDER BY ratio desc
 		LIMIT 15");
 
-	$count = 1;
+	$count = 0;
 
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
