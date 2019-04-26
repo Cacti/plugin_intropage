@@ -149,6 +149,12 @@ function intropage_check_upgrade() {
 				CHANGE COLUMN date cur_timestamp timestamp DEFAULT current_timestamp()');
 		}
 
+		if (cacti_version_compare($oldv,'1.8.2', '<')) {
+			db_execute('ALTER TABLE plugin_intropage_trends 
+				MODIFY COLUMN value varchar(250) NULL DEFAULT NULL');
+		}
+
+
 		// Set the new version
 		db_execute("UPDATE plugin_config
 			SET version='$current'
@@ -233,9 +239,6 @@ function intropage_setup_database() {
 	$data['type']      = 'MyISAM';
 	$data['comment']   = 'trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
-
-	// I cannot set this in definition above
-	// db_execute("ALTER TABLE plugin_intropage_trends MODIFY cur_timestamp timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP");
 
 
 	// few values
