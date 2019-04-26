@@ -155,11 +155,20 @@ EOF;
 
 //	$panels = db_fetch_assoc ("select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . " and (panel !='intropage_favourite_graph' or panel='intropage_favourite_graph' and fav_graph_id is not null) order by $order");
 
-	// zde pozor, mohl bych to selectovat v jednom dotazu, ale potrebuju, aby se fav grafy jmenovali jinak.
+	// zde pozor, mohl bych to selectovat v jednom dotazu, ale potrebuju, aby se fav grafy jmenovaly jinak.
 	// bez toho si je nize ve foreach presisuju,, protoze se oba jmenuji jen fav_graph
 
-	$panels = db_fetch_assoc('select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = ' .
-	$_SESSION['sess_user_id'] . "  and panel !='intropage_favourite_graph' union select id,concat(panel,'_',fav_graph_id) as panel, priority,fav_graph_id from plugin_intropage_user_setting where ( panel='intropage_favourite_graph' and fav_graph_id is not null) order by  $order");
+	$panels = db_fetch_assoc("SELECT id, panel, priority, fav_graph_id 
+			FROM plugin_intropage_user_setting 
+			WHERE 
+			    user_id = " . $_SESSION['sess_user_id'] . "  AND panel !='intropage_favourite_graph' 
+			UNION 
+			    SELECT id,concat(panel,'_',fav_graph_id) AS panel, priority, fav_graph_id 
+			    FROM plugin_intropage_user_setting 
+			    WHERE 
+				user_id = " . $_SESSION['sess_user_id'] .
+				" AND ( panel='intropage_favourite_graph' AND fav_graph_id IS NOT NULL) 
+			    ORDER BY  $order");
 
 	// retrieve data for all panels
 	foreach ($panels as $xkey => $xvalue) {
