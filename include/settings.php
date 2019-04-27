@@ -36,7 +36,7 @@ function intropage_config_form() {
 			'items' => array(
 				0 => array(
 					'radio_value' => '0',
-					'radio_caption' => __('Show the Intropage plugin screen in console screen (<strong>you need console access permission!</strong>)', 'intropage')
+					'radio_caption' => __('Show the Intropage plugin screen in console screen (you need console access permission!)', 'intropage')
 				),
 				1 => array(
 					'radio_value' => '1',
