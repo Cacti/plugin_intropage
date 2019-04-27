@@ -31,12 +31,12 @@ function intropage_config_form() {
 			'friendly_name' => __('Intro Page Options', 'intropage'),
 			'method' => 'radio',
 			'default' => '0',
-			'description' => __('How we should display the intropage. <strong>For users without console access you must choose separated tab', 'intropage'),
+			'description' => __('How we should display the intropage. <strong>For users without console access you must choose separated tab!</strong>', 'intropage'),
 			'value' => '|arg1:intropage_opts|',
 			'items' => array(
 				0 => array(
 					'radio_value' => '0',
-					'radio_caption' => __('Show the Intropage plugin screen in console screen (you need console access permission!)', 'intropage')
+					'radio_caption' => __('Show the Intropage plugin screen in console screen (<strong>you need console access permission!</strong>)', 'intropage')
 				),
 				1 => array(
 					'radio_value' => '1',
