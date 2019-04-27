@@ -111,7 +111,8 @@ EOF;
 	$allowed_hosts = implode(',', array_column($hosts, 'id'));
 
 	// Retrieve access
-	$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION['sess_user_id'] . "' and user_auth_realm.realm_id=8")) ? true : false;
+	$console_access = (db_fetch_assoc("SELECT realm_id FROM user_auth_realm 
+		    WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;
 
 	// retrieve user setting (and creating if not)
 
