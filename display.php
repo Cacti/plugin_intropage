@@ -104,13 +104,8 @@ EOF;
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$display_level           = read_user_setting('intropage_display_level', read_config_option('intropage_display_level'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
-//	$intropage_debug         = read_user_setting('intropage_debug', 0);
 
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
-
-	// need for thold - isn't any better solution? - moved to include/data/thold function
-	//	$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
-	//	$sql_where     = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 
 	$hosts = get_allowed_devices();
 	$allowed_hosts = implode(',', array_column($hosts, 'id'));
@@ -120,28 +115,26 @@ EOF;
 
 	// retrieve user setting (and creating if not)
 
-	if (db_fetch_cell('select count(*) from plugin_intropage_user_setting where fav_graph_id is null and user_id = ' . $_SESSION['sess_user_id']) == 0) {
-		$all_panel = db_fetch_assoc('SELECT panel,priority from plugin_intropage_panel');
+	if (db_fetch_cell('SELECT count(*) FROM plugin_intropage_user_setting WHERE fav_graph_id IS NULL user_id = ' . $_SESSION['sess_user_id']) == 0) {
+		$all_panel = db_fetch_assoc('SELECT panel,priority FROM plugin_intropage_panel');
 
 		// generating user setting
 		foreach ($all_panel as $one) {
-			if (db_fetch_cell('select ' . $one['panel'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) == 'on') {
-				db_execute('insert into plugin_intropage_user_setting (user_id,panel,priority) values (' . $_SESSION['sess_user_id'] . ",'" . $one['panel'] . "'," . $one['priority'] . ')');
+			if (db_fetch_cell('SELECT ' . $one['panel'] . ' FROM user_auth WHERE id=' . $_SESSION['sess_user_id']) == 'on') {
+				db_execute('INSERT INTO plugin_intropage_user_setting (user_id,panel,priority) 
+					    VALUES (' . $_SESSION['sess_user_id'] . ",'" . $one['panel'] . "'," . $one['priority'] . ')');
 			}
 		}
 	} else {	// revoke permissions
-		$all_panel = db_fetch_assoc('SELECT panel from plugin_intropage_user_setting');
+		$all_panel = db_fetch_assoc('SELECT panel FROM plugin_intropage_user_setting');
 
 		foreach ($all_panel as $one) {
-			if (db_fetch_cell('select ' . $one['panel'] . ' from user_auth where id=' . $_SESSION['sess_user_id']) != 'on') {
-				db_execute('delete from plugin_intropage_user_setting where user_id= ' . $_SESSION['sess_user_id'] . " and panel ='" . $one['panel'] . "'");
+			if (db_fetch_cell('SELECT ' . $one['panel'] . ' FROM user_auth WHERE id=' . $_SESSION['sess_user_id']) != 'on') {
+				db_execute('DELETE FROM plugin_intropage_user_setting 
+					    WHERE user_id= ' . $_SESSION['sess_user_id'] . " AND panel ='" . $one['panel'] . "'");
 			}
 		}
 	}
-
-	// panels + favourite graphs (fav_graph_id is not null)
-//	$xpanels = db_fetch_assoc ("select id,panel,priority from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and panel !='intropage_favourite_graph'  order by priority desc" );
-//	$panels = array_merge($xpanels,db_fetch_assoc ("select id,concat(panel,'_',fav_graph_id) as panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . "  and (panel='intropage_favourite_graph' and fav_graph_id is not null)  order by priority desc" ));
 
 	$order = ' priority desc';
 	if (isset($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order'])) {
@@ -152,8 +145,6 @@ EOF;
 		$order = substr($order, 0, -1);
 		$order .= ')';
 	}
-
-//	$panels = db_fetch_assoc ("select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . " and (panel !='intropage_favourite_graph' or panel='intropage_favourite_graph' and fav_graph_id is not null) order by $order");
 
 	// zde pozor, mohl bych to selectovat v jednom dotazu, ale potrebuju, aby se fav grafy jmenovaly jinak.
 	// bez toho si je nize ve foreach presisuju,, protoze se oba jmenuji jen fav_graph
@@ -185,12 +176,11 @@ EOF;
 	}
 
 
-
 	// Display ----------------------------------
 
-//	$display_important_first = on/off
-//	$display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
-	// 	0 chyby, 1 - chyby/warn, 2- all
+	// $display_important_first = on/off
+	// $display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
+	// 0 chyby, 1 - chyby/warn, 2- all
 
 
 	echo '<script type="text/javascript">';
@@ -202,14 +192,14 @@ EOF;
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
-	// extra maint plugin panel
+	// extra maint plugin panel - always first
 
-	if (db_fetch_cell("SELECT directory FROM plugin_config where directory='maint'")) {
+	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
 		$start = microtime(true);
 
 		$tmp['data'] = '';
 
-		$schedules = db_fetch_assoc("select * from plugin_maint_schedules where enabled='on'");
+		$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
 		if (sizeof($schedules)) {
 			foreach ($schedules as $sc) {
 				$t = time();
@@ -221,7 +211,9 @@ EOF;
 						$tmp['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
 								' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
 
-						$hosts = db_fetch_assoc('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
+						$hosts = db_fetch_assoc('SELECT description FROM host 
+							    JOIN plugin_maint_hosts ON host.id=plugin_maint_hosts.host 
+							    WHEREe schedule = ' . $sc['id']);
 						foreach ($hosts as $host) {
 							$tmp['data'] .= $host['description'] . ', ';
 						}
@@ -239,7 +231,10 @@ EOF;
 						$tmp['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
 								' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
 
-						$hosts = db_fetch_assoc('select description from host join plugin_maint_hosts on host.id=plugin_maint_hosts.host where schedule = ' . $sc['id']);
+						$hosts = db_fetch_assoc('SELECT description FROM host 
+							    JOIN plugin_maint_hosts ON host.id=plugin_maint_hosts.host 
+							    WHERE schedule = ' . $sc['id']);
+							    
 						foreach ($hosts as $host) {
 							$tmp['data'] .= $host['description'] . ', ';
 						}
@@ -247,7 +242,7 @@ EOF;
 					}
 
 					break;
-			}
+				}
 			}
 		}
 
@@ -270,24 +265,6 @@ EOF;
 		intropage_display_panel(998, 'red', 'Admin alert', $tmp);
 	}
 	// end of admin panel
-
-
-
-	// user changed order - new order is valid until logout
-	/*	ted resim az dole, vyse vyresim order a zobrazovani je pak stejne
-	if (isset ($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order']))	{
-	$order = '';
-	foreach ($_SESSION['intropage_order'] as $ord)	{
-		$order .= $ord . ',';
-	}
-	$order = substr ($order,0,-1);
-
-	$panels = db_fetch_assoc  ("select id,panel,priority,fav_graph_id from plugin_intropage_user_setting where user_id = " . $_SESSION['sess_user_id'] . " and (panel !='intropage_favourite_graph' or panel='intropage_favourite_graph' and fav_graph_id is not null) order by field (id,$order)");
-
-		foreach($panels as $xkey => $xvalue) {
-			intropage_display_panel($xvalue['id'],$xvalue['alldata']['alarm'],$xvalue['alldata']['name'],$xvalue['alldata']);
-	}
-	}*/
 
 	if ($display_important_first == 'on') {  // important first
 		foreach ($panels as $xkey => $xvalue) {
@@ -428,8 +405,6 @@ $(document).on('click','.reload_panel_now',function() {
     var panel_id = $(this).attr('id').split("_").pop();
     
     reload_panel (panel_id,true);
-
-
 });
 </script>
 
@@ -448,7 +423,10 @@ $(document).on('click','.reload_panel_now',function() {
 	echo "<select name='intropage_action' size='1'>";
 	echo "<option value='0'>Select action ...</option>";
 
-	$panels = db_fetch_assoc('select t1.panel as panel_name from plugin_intropage_panel as t1 left outer join plugin_intropage_user_setting as t2 on t1.panel = t2.panel where t2.user_id is null order by t1.priority');
+	$panels = db_fetch_assoc('SELECT t1.panel AS panel_name FROM plugin_intropage_panel AS t1 
+		    LEFT OUTER JOIN plugin_intropage_user_setting AS t2 ON t1.panel = t2.panel 
+		    WHERE t2.user_id IS NULL ORDER BY t1.priority');
+		    
 	if (sizeof($panels) > 0) {
 		// allowed panel?
 		//if (read_config_option('intropage_' . $pom) == 'on')	{
@@ -483,12 +461,12 @@ $(document).on('click','.reload_panel_now',function() {
 		echo "<option value='refresh_560'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	}
 
-
 	if ($autorefresh == 3600) {
 		echo "<option value='refresh_3600' disabled='disabled'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
 	} else {
 		echo "<option value='refresh_3600'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
 	}
+
 
 	if (read_user_setting('intropage_display_level') == 0) {
 		echo "<option value='displaylevel_0' disabled='disabled'>" . __('Display only Errors', 'intropage') . '</option>';
@@ -558,4 +536,3 @@ $(document).on('click','.reload_panel_now',function() {
 
 	return true;
 }
-
