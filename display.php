@@ -115,8 +115,7 @@ EOF;
 		    WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;
 
 	// retrieve user setting (and creating if not)
-
-	if (db_fetch_cell('SELECT count(*) FROM plugin_intropage_user_setting WHERE fav_graph_id IS NULL user_id = ' . $_SESSION['sess_user_id']) == 0) {
+	if (db_fetch_cell('SELECT count(*) FROM plugin_intropage_user_setting WHERE fav_graph_id IS NULL AND user_id = ' . $_SESSION['sess_user_id']) == 0) {
 		$all_panel = db_fetch_assoc('SELECT panel,priority FROM plugin_intropage_panel');
 
 		// generating user setting
@@ -138,6 +137,7 @@ EOF;
 	}
 
 	$order = ' priority desc';
+	// !!!! TADY taky implode
 	if (isset($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order'])) {
 		$order = 'field (id,';
 		foreach ($_SESSION['intropage_order'] as $ord) {
@@ -424,19 +424,17 @@ $(document).on('click','.reload_panel_now',function() {
 	echo "<select name='intropage_action' size='1'>";
 	echo "<option value='0'>Select action ...</option>";
 
-	$panels = db_fetch_assoc('SELECT t1.panel AS panel_name FROM plugin_intropage_panel AS t1 
-		    LEFT OUTER JOIN plugin_intropage_user_setting AS t2 ON t1.panel = t2.panel 
-		    WHERE t2.user_id IS NULL ORDER BY t1.priority');
+	$panels = db_fetch_assoc('SELECT panel FROM plugin_intropage_panel 
+		    WHERE panel NOT IN 
+		    (SELECT panel FROM plugin_intropage_user_setting WHERE user_id=' . $_SESSION['sess_user_id'] . ') 
+		    ORDER BY priority');
 		    
-	if (sizeof($panels) > 0) {
-		// allowed panel?
-		//if (read_config_option('intropage_' . $pom) == 'on')	{
-
+	if (sizeof($panels) > 0) {	// allowed panel?
 		foreach ($panels as $panel) {
-			if (db_fetch_cell('SELECT ' . $panel['panel_name'] . ' FROM user_auth WHERE id=' . $_SESSION['sess_user_id']) == 'on') {
-				echo "<option value='addpanel_" . $panel['panel_name'] . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_name'])), 'intropage') . '</option>';
+			if (db_fetch_cell('SELECT ' . $panel['panel'] . ' FROM user_auth WHERE id=' . $_SESSION['sess_user_id']) == 'on') {
+				echo "<option value='addpanel_" . $panel['panel'] . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel'])), 'intropage') . '</option>';
 			} else {
-				echo "<option value='addpanel_" . $panel['panel_name'] . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_name'])), '(admin prohibited)', 'intropage') . '</option>';
+				echo "<option value='addpanel_" . $panel['panel'] . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel'])), '(admin prohibited)', 'intropage') . '</option>';
 			}
 		}
 	}
