@@ -176,8 +176,13 @@ EOF;
 		    cacti_log('debug: ' . $pokus . ', duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 	}
 
+	// Notice about disable cacti dashboard
+	if (read_config_option('hide_console') != 'on')	{
+	    echo __('You can disable rows above in <b>Settings -> Hide Cacti Dashboard </b> and use the whole page for Intropage<br/><br/>');
+	}
 
-	// Display ----------------------------------
+
+	// Intropage Display ----------------------------------
 
 	// $display_important_first = on/off
 	// $display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
