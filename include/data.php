@@ -1872,7 +1872,7 @@ function intropage_favourite_graph($fav_graph_id) {
 			'detail' => '',
 		);
 
-		$result['name'] .= db_fetch_cell_prepared('SELECT title_cache
+		$result['name'] .= ' ' . db_fetch_cell_prepared('SELECT title_cache
 			FROM graph_templates_graph
 			WHERE local_graph_id = ?',
 			array($fav_graph_id));
