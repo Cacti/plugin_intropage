@@ -178,7 +178,7 @@ EOF;
 
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on')	{
-	    echo __('You can disable rows above in <b>Settings -> Hide Cacti Dashboard </b> and use the whole page for Intropage<br/><br/>');
+	    echo __('You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard </b> and use the whole page for Intropage<br/><br/>');
 	}
 
 
