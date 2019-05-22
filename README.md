@@ -53,6 +53,8 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Add panel with worst failed/total polling cycles
 	Add db check week and month interval
 	Add DS - bad indexes
+	Add remark for disable original console dashboard
+	Fix few bugs with permissions, more users, ...
 
 
 	1.8.1 ---
