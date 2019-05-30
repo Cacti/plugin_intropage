@@ -309,26 +309,6 @@ function intropage_console_after() {
 		include_once($config['base_path'] . '/plugins/intropage/display.php');
 		display_information();
 	}
-
-	// reload
-/*
-	$timeout = read_user_setting('intropage_autorefresh');
-	if ($timeout > 0) {
-		$timeout *= 1000;
-
-		print <<<EOF
-
-<script type="text/javascript">
-var timeout = setInterval(reloadChat, $timeout);
-function reloadChat () {
-     $('#megaobal').load('$config[url_path]plugins/intropage/intropage_ajax.php');
-}
-</script>
-
-EOF;
-
-	}
-	*/
 }
 
 function intropage_user_admin_setup_sql_save($save) {
