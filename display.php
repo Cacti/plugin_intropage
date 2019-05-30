@@ -190,7 +190,7 @@ EOF;
 
 
 	echo '<script type="text/javascript">';
-	echo 'var intropage_autorefresh=' . read_user_setting('intropage_autorefresh') . ';';
+	echo 'var intropage_autorefresh=' . $autorefresh . ';';
 	echo 'var intropage_drag=true;';
 	echo '</script>';
 
@@ -455,16 +455,16 @@ $(document).on('click','.reload_panel_now',function() {
 		echo "<option value='refresh_0' disabled='disabled'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
 	}
 
-	if ($autorefresh == 90) {
-		echo "<option value='refresh_90' disabled='disabled'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
+	if ($autorefresh == 60) {
+		echo "<option value='refresh_60' disabled='disabled'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
 	} else {
-		echo "<option value='refresh_90'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
+		echo "<option value='refresh_60'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
 	}
 
-	if ($autorefresh == 560) {
-		echo "<option value='refresh_560' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
+	if ($autorefresh == 300) {
+		echo "<option value='refresh_300' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	} else {
-		echo "<option value='refresh_560'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
+		echo "<option value='refresh_300'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	}
 
 	if ($autorefresh == 3600) {

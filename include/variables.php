@@ -72,11 +72,11 @@ $intropage_settings = array(	// default values
 		'method' => 'drop_array',
 		'array' => array(
 			'0'    => __('Never', 'intropage'),
-			'90'   => __('Every Minute', 'intropage'),
-			'360'  => __('Every %d Minutes', 5, 'intropage'),
+			'60'   => __('Every Minute', 'intropage'),
+			'300'  => __('Every %d Minutes', 5, 'intropage'),
 			'3600' => __('Every Hour', 'intropage'),
 		),
-		'default' => '0',
+		'default' => '60',
 	),
 	'intropage_display_level' => array(
 		'friendly_name' => __('Display', 'intropage'),
