@@ -347,6 +347,12 @@ $(document).ready(function () {
   });
 });
 
+// autorefresh - zkousim presunout
+if (intropage_autorefresh > 0)	{
+    setInterval(reload_all, intropage_autorefresh*1000);
+}
+
+
 
 // enable/disable move panel/copy text
 $(document).on('click','#switch_copytext',function() {
@@ -388,10 +394,6 @@ function reload_all ()	{
     });
 }
 
-// autorefresh
-if (intropage_autorefresh > 0)	{
-    setInterval(reload_all, intropage_autorefresh*1000);
-}
 
 // load page = load all panels
 $(document).ready(function() {
