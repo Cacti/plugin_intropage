@@ -221,9 +221,9 @@ function display_information() {
 								' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
 
 						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-						    INNER JOIN plugin_maint_hosts
+							INNER JOIN plugin_maint_hosts
 							ON host.id=plugin_maint_hosts.host
-						    WHEREe schedule = ?',
+							WHERE schedule = ?',
 							array($sc['id']));
 
 						if (cacti_sizeof($hosts)) {
@@ -248,9 +248,9 @@ function display_information() {
 								' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
 
 						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-						    INNER JOIN plugin_maint_hosts
+							INNER JOIN plugin_maint_hosts
 							ON host.id=plugin_maint_hosts.host
-						    WHERE schedule = ?',
+							WHERE schedule = ?',
 							array($sc['id']));
 
 						if (cacti_sizeof($hosts)) {
