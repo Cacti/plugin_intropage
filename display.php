@@ -271,8 +271,8 @@ function display_information() {
 			$tmp['data'] = '';
 		}
 
-        if ($logging >= 5) {
-		    cacti_log('debug: maint, duration ' . round(microtime(true) - $start, 2),true,'Intropage');
+		if ($logging >= 5) {
+			cacti_log('debug: maint, duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 		}
 	}
 
@@ -332,14 +332,6 @@ function display_information() {
 		}
 	}
 
-	// display debug information in panel
-/*
-	if ($intropage_debug) {
-		unset($value);
-		$value['data'] = $debug;
-		intropage_display_panel(999, 'grey', 'Debug', $value);
-	}
-*/
 	?>
 	<script type='text/javascript'>
 
@@ -495,7 +487,6 @@ function display_information() {
 		print "<option value='displaylevel_1'>" . __('Display Errors and Warnings', 'intropage') . '</option>';
 	}
 
-
 	if (read_user_setting('intropage_display_level') == 2) {
 		print "<option value='displaylevel_2' disabled='disabled'>" . __('Display All', 'intropage') . '</option>';
 	} else {
@@ -515,15 +506,8 @@ function display_information() {
 	}
 
 	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
-/*
-	if ($intropage_debug == 0) {
-		print "<option value='debug_ena'>Enable debug</option>";
-	} else {
-		print "<option value='debug_disa'>Disable debug</option>";
-	}
-*/
 
-	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+  $lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 
 	// 0 = console, 1= tab
@@ -545,10 +529,7 @@ function display_information() {
 	print '</form>';
 	// end of settings
 
-//	print "<div id='generated'> Generated: " . date('H:i:s') . ' (' . round(microtime(true) - $debug_start)  . 's)</div>';
-
 	print '</div>'; // konec megaobal
 
 	return true;
 }
-

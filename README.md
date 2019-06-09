@@ -48,6 +48,15 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
 
+	1.8.2 ---
+	Add panel with worst polling time
+	Add panel with worst failed/total polling cycles
+	Add db check week and month interval
+	Add DS - bad indexes
+	Add remark for disable original console dashboard
+	Fix few bugs with permissions, more users, ...
+
+
 	1.8.1 ---
 	Add test for poller_output_table
 	Add check for thold notigy global list only

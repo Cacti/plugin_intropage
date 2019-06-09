@@ -103,6 +103,8 @@ function intropage_check_upgrade() {
 			api_plugin_db_add_column('user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('user_auth', array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+			api_plugin_db_add_column('user_auth', array('name' => 'intropage_top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+			api_plugin_db_add_column('user_auth', array('name' => 'intropage_top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
@@ -147,6 +149,12 @@ function intropage_check_upgrade() {
 				CHANGE COLUMN date cur_timestamp timestamp DEFAULT current_timestamp()');
 		}
 
+		if (cacti_version_compare($oldv,'1.8.2', '<')) {
+			db_execute('ALTER TABLE plugin_intropage_trends 
+				MODIFY COLUMN value varchar(250) NULL DEFAULT NULL');
+		}
+
+
 		// Set the new version
 		db_execute("UPDATE plugin_config
 			SET version='$current'
@@ -162,7 +170,7 @@ function intropage_check_upgrade() {
 		}
 
 		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_detail'") == 0) {
-    	    db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
+    			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
 		}
 
 		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_testdate'") == 0) {
@@ -176,6 +184,7 @@ function intropage_check_upgrade() {
 		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='ntp_testdate'") == 0) {
 			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
 		}
+		
 	}
 }
 
@@ -201,6 +210,8 @@ function intropage_setup_database() {
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
@@ -229,8 +240,6 @@ function intropage_setup_database() {
 	$data['comment']   = 'trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
 
-	// I cannot set this in definition above
-	// db_execute("ALTER TABLE plugin_intropage_trends MODIFY cur_timestamp timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP");
 
 	// few values
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_result', 'Waiting for data')");
@@ -239,6 +248,7 @@ function intropage_setup_database() {
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', 'Waiting for date')");
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
+
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
@@ -306,9 +316,16 @@ function intropage_poller_bottom() {
 			array($stat['start'], $load[0]));
 	}
 
+	// failed polls
+	$count = db_fetch_cell('SELECT sum(failed_polls) FROM host;');
+	db_execute_prepared('REPLACE INTO plugin_intropage_trends
+		(name, value) VALUES (?, ?)',
+		array('failed_polls', $count));
+
+
 	// cleaning old data
-	db_execute('DELETE FROM plugin_intropage_trends
-		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY)');
+	db_execute("DELETE FROM plugin_intropage_trends
+		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND name IN ('poller','cpuload','failed_polls','host','thold','poller_output')");
 
 	// trends - all hosts without permissions!!!
 	db_execute("REPLACE INTO plugin_intropage_trends
@@ -332,13 +349,6 @@ function intropage_poller_bottom() {
 		FROM plugin_intropage_trends
 		WHERE name='ntp_testdate'");
 
-/*
-	if (!$last)	{
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', '')");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', '')");
-    	    $last = 0;
-	}
-*/
 	if (time() > ($last + read_config_option('intropage_ntp_interval')))	{
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 	    ntp_time2();
@@ -349,22 +359,13 @@ function intropage_poller_bottom() {
 		FROM plugin_intropage_trends
 		WHERE name='db_check_testdate'");
 
-/*
-	if (!$last)	{
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_result', 'Waiting for data')");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_alarm', 'yellow')");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
-    	    db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
-    	    $last = 0;
-	}
-*/
 	if (time() > ($last + read_config_option('intropage_analyse_db_interval')))	{
+/*
 		db_execute_prepared('REPLACE INTO plugin_intropage_trends
 			(name, value) VALUES (?, ?)',
 			array('db_check_testdate', date('Y-m-d H:i:s', time())));
-
+*/
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-
 	    db_check();
 	}
 

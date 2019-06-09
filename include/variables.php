@@ -29,27 +29,31 @@
 
 $panel                                                  = array();
 $panel['intropage_analyse_log']['priority']             = 60;
-$panel['intropage_analyse_login']['priority']           = 75;
-$panel['intropage_thold_event']['priority']             = 77;
-$panel['intropage_analyse_db']['priority']              = 70;
-$panel['intropage_analyse_tree_host_graph']['priority'] = 50;
-$panel['intropage_trend']['priority']                   = 30;
-$panel['intropage_extrem']['priority']                  = 30;
-$panel['intropage_ntp']['priority']                     = 60;
-$panel['intropage_poller_info']['priority']             = 50;
-$panel['intropage_poller_stat']['priority']             = 50;
-$panel['intropage_graph_host']['priority']              = 14;
-$panel['intropage_graph_thold']['priority']             = 13;
-$panel['intropage_graph_data_source']['priority']       = 12;
-$panel['intropage_graph_host_template']['priority']     = 11;
-$panel['intropage_cpu']['priority']                     = 45;
-$panel['intropage_mactrack']['priority']                = 42;
-$panel['intropage_mactrack_sites']['priority']          = 43;
-$panel['intropage_top5_ping']['priority']               = 30;
-$panel['intropage_top5_availability']['priority']       = 31;
-$panel['intropage_info']['priority']                    = 1;
+$panel['intropage_analyse_login']['priority']           = 61;
+$panel['intropage_thold_event']['priority']             = 90;
+$panel['intropage_analyse_db']['priority']              = 62;
+$panel['intropage_analyse_tree_host_graph']['priority'] = 63;
+$panel['intropage_trend']['priority']                   = 40;
+$panel['intropage_extrem']['priority']                  = 41;
+$panel['intropage_ntp']['priority']                     = 50;
+$panel['intropage_poller_info']['priority']             = 51;
+$panel['intropage_poller_stat']['priority']             = 52;
+$panel['intropage_graph_host']['priority']              = 20;
+$panel['intropage_graph_thold']['priority']             = 21;
+$panel['intropage_graph_data_source']['priority']       = 22;
+$panel['intropage_graph_host_template']['priority']     = 23;
+$panel['intropage_cpu']['priority']                     = 53;
+$panel['intropage_mactrack']['priority']                = 20;
+$panel['intropage_mactrack_sites']['priority']          = 21;
+$panel['intropage_top5_ping']['priority']               = 22;
+$panel['intropage_top5_availability']['priority']       = 23;
+$panel['intropage_info']['priority']                    = 10;
 $panel['intropage_boost']['priority']                   = 55;
 $panel['intropage_favourite_graph']['priority']         = 95;
+$panel['intropage_top5_polltime']['priority']           = 24;
+$panel['intropage_top5_pollratio']['priority']          = 25;
+
+
 
 $intropage_settings = array(	// default values
 	'intropage_display_header' => array(
@@ -68,11 +72,11 @@ $intropage_settings = array(	// default values
 		'method' => 'drop_array',
 		'array' => array(
 			'0'    => __('Never', 'intropage'),
-			'90'   => __('Every Minute', 'intropage'),
-			'360'  => __('Every %d Minutes', 5, 'intropage'),
+			'60'   => __('Every Minute', 'intropage'),
+			'300'  => __('Every %d Minutes', 5, 'intropage'),
 			'3600' => __('Every Hour', 'intropage'),
 		),
-		'default' => '0',
+		'default' => '60',
 	),
 	'intropage_display_level' => array(
 		'friendly_name' => __('Display', 'intropage'),
@@ -98,11 +102,13 @@ $intropage_settings = array(	// default values
 		'description' => __('Poller runs this task. It could cause long poller run.', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
-			'900'   => __('Every %d Minutes', 15, 'intropage'),
-			'3600'  => __('Every Hour', 'intropage'),
-			'86400' => __('Every Day', 'intropage')
+			'900'   	=> __('Every %d Minutes', 15, 'intropage'),
+			'3600'  	=> __('Every Hour', 'intropage'),
+			'86400' 	=> __('Every Day', 'intropage'),
+			'604800' 	=> __('Every Week', 'intropage'),
+			'2592000' 	=> __('Every Month', 'intropage')
 		),
-		'default' => '86400',
+		'default' => '604800',
 	),
 	'intropage_analyse_db_level' => array(
 		'friendly_name' => __('Analyse DB - Level of db check', 'intropage'),

@@ -31,7 +31,7 @@ function intropage_config_form() {
 			'friendly_name' => __('Intro Page Options', 'intropage'),
 			'method' => 'radio',
 			'default' => '0',
-			'description' => __('How we should display the intropage. <strong>For users without console access you must choose separated tab', 'intropage'),
+			'description' => __('How we should display the intropage. <strong>For users without console access you must choose separated tab!</strong>', 'intropage'),
 			'value' => '|arg1:intropage_opts|',
 			'items' => array(
 				0 => array(
@@ -43,143 +43,155 @@ function intropage_config_form() {
 					'radio_caption' => __('Show the Intropage plugin screen in separated tab', 'intropage'),
 				),
 			),
-		   'intropage_panels_grp' => array(
-				'friendly_name' => __('Intropage panels', 'intropage'),
-				'method' => 'checkbox_group',
-				'description' => __('Enable/disable panels', 'intropage'),
-				'items' => array(
-					'intropage_analyse_log' => array(
-						'value' => '|arg1:intropage_analyse_log|',
-						'friendly_name' => __('Allow panel Analayse Log', 'intropage'),
-						//    'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_analyse_login' => array(
-						'value' => '|arg1:intropage_analyse_login|',
-						'friendly_name' => __('Allow panel Analayse Logins', 'intropage'),
-						//    'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_thold_event' => array(
-						'value' => '|arg1:intropage_thold_event|',
-						'friendly_name' => __('Allow panel Threshold Events', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_analyse_db' => array(
-						'value' => '|arg1:intropage_analyse_db|',
-						'friendly_name' => __('Allow panel Analayse Database', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_analyse_tree_host_graph' => array(
-						'value' => '|arg1:intropage_analyse_tree_host_graph|',
-						'friendly_name' => __('Allow panel Analayse Tree, Devices, Graphs', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_trend' => array(
-						'value' => '|arg1:intropage_trend|',
-						'friendly_name' => __('Allow panel Trends', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_extrem' => array(
-						'value' => '|arg1:intropage_extrem|',
-						'friendly_name' => __('Allow panel 24h Extrems', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_ntp' => array(
-						'value' => '|arg1:intropage_ntp|',
-						'friendly_name' => __('Allow panel NTP', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_poller_info' => array(
-						'value' => '|arg1:intropage_poller_info|',
-						'friendly_name' => __('Allow panel Poller Info', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_poller_stat' => array(
-						'value' => '|arg1:intropage_poller_stat|',
-						'friendly_name' => __('Allow panel Poller Stats', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => '1'
-					),
-					'intropage_graph_host' => array(
-						'value' => '|arg1:intropage_graph_host|',
-						'friendly_name' => __('Allow panel Graph Device', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_graph_thold' => array(
-						'value' => '|arg1:intropage_graph_thold|',
-						'friendly_name' => __('Allow panel Graph Thresholds', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_graph_data_source' => array(
-						'value' => '|arg1:intropage_graph_data_source|',
-						'friendly_name' => __('Allow panel Graph Data Dource', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_graph_host_template' => array(
-						'value' => '|arg1:intropage_graph_host_template|',
-						'friendly_name' => __('Allow panel Graph Device Template', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_cpu' => array(
-						'value' => '|arg1:intropage_cpu|',
-						'friendly_name' => __('Allow panel CPU Utilization', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_mactrack' => array(
-						'value' => '|arg1:intropage_mactrack|',
-						'friendly_name' => __('Allow panel MacTrack Plugin', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_mactrack_sites' => array(
-						'value' => '|arg1:intropage_mactrack_sites|',
-						'friendly_name' => __('Allow panel MacTrack Sites', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_top5_ping' => array(
-						'value' => '|arg1:intropage_top5_ping|',
-						'friendly_name' => __('Allow panel Top 5 Ping', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_top5_availability' => array(
-						'value' => '|arg1:intropage_top5_availability|',
-						'friendly_name' => __('Allow panel Top 5 Availability', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_info' => array(
-						'value' => '|arg1:intropage_info|',
-						'friendly_name' => __('Allow panel System Information', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_boost' => array(
-						'value' => '|arg1:intropage_boost|',
-						'friendly_name' => __('Allow panel Boost', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					),
-					'intropage_favourite_graph' => array(
-						'value' => '|arg1:intropage_favourite_graph|',
-						'friendly_name' => __('Allow panel Favourite Graphs', 'intropage'),
-						'form_id' => '|arg1:id|',
-						'default' => 'on'
-					)
+		),
+		'intropage_panels_grp' => array(
+			'friendly_name' => __('Intropage panels', 'intropage'),
+			'method' => 'checkbox_group',
+			'description' => __('Enable/disable panels', 'intropage'),
+			'items' => array(
+				'intropage_analyse_log' => array(
+					'value' => '|arg1:intropage_analyse_log|',
+					'friendly_name' => __('Allow panel Analayse Log', 'intropage'),
+					//    'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_analyse_login' => array(
+					'value' => '|arg1:intropage_analyse_login|',
+					'friendly_name' => __('Allow panel Analayse Logins', 'intropage'),
+					//    'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_thold_event' => array(
+					'value' => '|arg1:intropage_thold_event|',
+					'friendly_name' => __('Allow panel Threshold Events', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_analyse_db' => array(
+					'value' => '|arg1:intropage_analyse_db|',
+					'friendly_name' => __('Allow panel Analayse Database', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_analyse_tree_host_graph' => array(
+					'value' => '|arg1:intropage_analyse_tree_host_graph|',
+					'friendly_name' => __('Allow panel Analayse Tree, Devices, Graphs', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+		    		'intropage_trend' => array(
+					'value' => '|arg1:intropage_trend|',
+					'friendly_name' => __('Allow panel Trends', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_extrem' => array(
+					'value' => '|arg1:intropage_extrem|',
+					'friendly_name' => __('Allow panel 24h Extrems', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_ntp' => array(
+					'value' => '|arg1:intropage_ntp|',
+					'friendly_name' => __('Allow panel NTP', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_poller_info' => array(
+					'value' => '|arg1:intropage_poller_info|',
+					'friendly_name' => __('Allow panel Poller Info', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_poller_stat' => array(
+					'value' => '|arg1:intropage_poller_stat|',
+					'friendly_name' => __('Allow panel Poller Stats', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => '1'
+				),
+				'intropage_graph_host' => array(
+					'value' => '|arg1:intropage_graph_host|',
+					'friendly_name' => __('Allow panel Graph Device', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_graph_thold' => array(
+					'value' => '|arg1:intropage_graph_thold|',
+					'friendly_name' => __('Allow panel Graph Thresholds', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_graph_data_source' => array(
+					'value' => '|arg1:intropage_graph_data_source|',
+					'friendly_name' => __('Allow panel Graph Data Dource', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_graph_host_template' => array(
+					'value' => '|arg1:intropage_graph_host_template|',
+					'friendly_name' => __('Allow panel Graph Device Template', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_cpu' => array(
+					'value' => '|arg1:intropage_cpu|',
+					'friendly_name' => __('Allow panel CPU Utilization', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_mactrack' => array(
+					'value' => '|arg1:intropage_mactrack|',
+					'friendly_name' => __('Allow panel MacTrack Plugin', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_mactrack_sites' => array(
+					'value' => '|arg1:intropage_mactrack_sites|',
+					'friendly_name' => __('Allow panel MacTrack Sites', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_top5_ping' => array(
+					'value' => '|arg1:intropage_top5_ping|',
+					'friendly_name' => __('Allow panel Top 5 Ping', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_top5_availability' => array(
+					'value' => '|arg1:intropage_top5_availability|',
+					'friendly_name' => __('Allow panel Top 5 Availability', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_top5_polltime' => array(
+					'value' => '|arg1:intropage_top5_polltime|',
+					'friendly_name' => __('Allow panel Top 5 worst polling time', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_top5_pollratio' => array(
+					'value' => '|arg1:intropage_top5_pollratio|',
+					'friendly_name' => __('Allow panel Top 5 worst polling failed/total ratio', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_info' => array(
+					'value' => '|arg1:intropage_info|',
+					'friendly_name' => __('Allow panel System Information', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_boost' => array(
+					'value' => '|arg1:intropage_boost|',
+					'friendly_name' => __('Allow panel Boost', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
+				),
+				'intropage_favourite_graph' => array(
+					'value' => '|arg1:intropage_favourite_graph|',
+					'friendly_name' => __('Allow panel Favourite Graphs', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
 				)
 			)
 		)
@@ -297,26 +309,6 @@ function intropage_console_after() {
 		include_once($config['base_path'] . '/plugins/intropage/display.php');
 		display_information();
 	}
-
-	// reload
-/*
-	$timeout = read_user_setting('intropage_autorefresh');
-	if ($timeout > 0) {
-		$timeout *= 1000;
-
-		print <<<EOF
-
-<script type="text/javascript">
-var timeout = setInterval(reloadChat, $timeout);
-function reloadChat () {
-     $('#megaobal').load('$config[url_path]plugins/intropage/intropage_ajax.php');
-}
-</script>
-
-EOF;
-
-	}
-	*/
 }
 
 function intropage_user_admin_setup_sql_save($save) {
@@ -342,6 +334,8 @@ function intropage_user_admin_setup_sql_save($save) {
 	$save['intropage_mactrack_sites']          = form_input_validate(get_nfilter_request_var('intropage_mactrack_sites'), 'intropage_mactrack_sites', '^on$', true, 3);
 	$save['intropage_top5_ping']               = form_input_validate(get_nfilter_request_var('intropage_top5_ping'), 'intropage_top5_ping', '^on$', true, 3);
 	$save['intropage_top5_availability']       = form_input_validate(get_nfilter_request_var('intropage_top5_availability'), 'intropage_top5_availability', '^on$', true, 3);
+	$save['intropage_top5_polltime']           = form_input_validate(get_nfilter_request_var('intropage_top5_polltime'), 'intropage_top5_polltime', '^on$', true, 3);
+	$save['intropage_top5_pollratio']	   = form_input_validate(get_nfilter_request_var('intropage_top5_pollratio'), 'intropage_top5_pollratio', '^on$', true, 3);
 	$save['intropage_info']                    = form_input_validate(get_nfilter_request_var('intropage_info'), 'intropage_info', '^on$', true, 3);
 	$save['intropage_boost']                   = form_input_validate(get_nfilter_request_var('intropage_boost'), 'intropage_boost', '^on$', true, 3);
 	$save['intropage_favourite_graph']         = form_input_validate(get_nfilter_request_var('intropage_favourite_graph'), 'intropage_favourite_graph', '^on$', true, 3);
@@ -349,4 +343,3 @@ function intropage_user_admin_setup_sql_save($save) {
 
 	return $save;
 }
-
