@@ -300,11 +300,28 @@ function display_information() {
 
 	// display/hide detail
 	$(function () {
+		resizeObal();
+
+		initPage();
+
+		reload_all();
+	});
+
+	function initPage() {
+		// autorefresh - zkousim presunout
+		if (intropage_autorefresh > 0)	{
+			if (refresh !== null) {
+				clearTimeout(refresh);
+			}
+
+			refresh = setInterval(reload_all, intropage_autorefresh*1000);
+		}
+
+		$('.article').hide();
+
 		$(window).resize(function() {
 			resizeObal();
 		});
-
-		resizeObal();
 
 		$('#obal').sortable({
 			update: function( event, ui ) {
@@ -320,7 +337,6 @@ function display_information() {
 
 		$('#sortable').disableSelection();
 
-		$('.article').hide();
 		$('.maxim').off('click').on('click', function() {
 			$(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
 			$(this).nextAll('.article').first().toggle();
@@ -362,17 +378,6 @@ function display_information() {
 
 			reload_panel(panel_id,true);
 		});
-
-		reload_all();
-	});
-
-	// autorefresh - zkousim presunout
-	if (intropage_autorefresh > 0)	{
-		if (refresh !== null) {
-			clearTimeout(refresh);
-		}
-
-		refresh = setInterval(reload_all, intropage_autorefresh*1000);
 	}
 
 	function resizeObal() {
