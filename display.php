@@ -59,42 +59,6 @@ function display_information() {
 		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/intropage/themes/' . $selectedTheme . ".css' rel='stylesheet'>";
 	}
 
-	?>
-	<script type="text/javascript">
-
-	function resizeObal() {
-		if (navigator.userAgent.search('MSIE 10') > 0 ||
-			(navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 )) {
-			$('#obal').css('max-width',($(window).width()-190));
-		}
-	}
-
-	// drag and drop order
-	$(function() {
-		$(window).resize(function() {
-			resizeObal();
-		});
-
-		resizeObal();
-
-		$('#obal').sortable({
-			update: function( event, ui ) {
-				//console.log($('#obal'));
-				var xdata = new Array();
-				$('#obal li').each(function() {
-					xdata.push($(this).attr('id'));
-				});
-
-				$.get('<?php print $url_path;?>', { xdata:xdata, intropage_action:'order' });
-			}
-		});
-
-		$('#sortable').disableSelection();
-	});
-
-	</script>
-	<?php
-
 	// Retrieve user settings and defaults
 
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
@@ -178,7 +142,7 @@ function display_information() {
 			}
 
 			if ($logging >= 5) {
-			    cacti_log('debug: ' . $pokus . ', duration ' . round(microtime(true) - $start, 2),true,'Intropage');
+				cacti_log('debug: ' . $pokus . ', duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 			}
 		}
 	}
@@ -193,11 +157,6 @@ function display_information() {
 	// $display_important_first = on/off
 	// $display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
 	// 0 chyby, 1 - chyby/warn, 2- all
-
-	print '<script type="text/javascript">';
-	print 'var intropage_autorefresh=' . $autorefresh . ';';
-	print 'var intropage_drag=true;';
-	print '</script>';
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -336,11 +295,33 @@ function display_information() {
 	<script type='text/javascript'>
 
 	var refresh;
+	var intropage_autorefresh = <?php print $autorefresh;?>;
+	var intropage_drag = true;
 
 	// display/hide detail
 	$(function () {
+		$(window).resize(function() {
+			resizeObal();
+		});
+
+		resizeObal();
+
+		$('#obal').sortable({
+			update: function( event, ui ) {
+				//console.log($('#obal'));
+				var xdata = new Array();
+				$('#obal li').each(function() {
+					xdata.push($(this).attr('id'));
+				});
+
+				$.get('<?php print $url_path;?>', { xdata:xdata, intropage_action:'order' });
+			}
+		});
+
+		$('#sortable').disableSelection();
+
 		$('.article').hide();
-		$('.maxim').on('click', function() {
+		$('.maxim').off('click').on('click', function() {
 			$(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
 			$(this).nextAll('.article').first().toggle();
 
@@ -354,7 +335,7 @@ function display_information() {
 		});
 
 		// enable/disable move panel/copy text
-		$('#switch_copytext').on('click', function() {
+		$('#switch_copytext').off('click').on('click', function() {
 			if (!intropage_drag) {
 				$('#obal').sortable('enable');
 				$('#switch_copytext').attr('title', '<?php print __esc('Disable panel move/Enable copy text from panel', 'intropage');?>');
@@ -369,7 +350,7 @@ function display_information() {
 		});
 
 		// reload single panel function
-		$('.reload_panel_now').on('click', function() {
+		$('.reload_panel_now').off('click').on('click', function() {
 			if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
 				e.stopPropagation();
 				return false;
@@ -394,7 +375,14 @@ function display_information() {
 		refresh = setInterval(reload_all, intropage_autorefresh*1000);
 	}
 
-	function reload_panel (panel_id,by_hand) {
+	function resizeObal() {
+		if (navigator.userAgent.search('MSIE 10') > 0 ||
+			(navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 )) {
+			$('#obal').css('max-width',($(window).width()-190));
+		}
+	}
+
+	function reload_panel(panel_id,by_hand) {
 		$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
 		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow').delay(800);
 
@@ -408,7 +396,7 @@ function display_information() {
 		});
 	}
 
-	function reload_all ()	{
+	function reload_all()	{
 		$('#obal li').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
 			reload_panel (panel_id,false);
@@ -474,7 +462,6 @@ function display_information() {
 		print "<option value='refresh_3600'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
 	}
 
-
 	if (read_user_setting('intropage_display_level') == 0) {
 		print "<option value='displaylevel_0' disabled='disabled'>" . __('Display only Errors', 'intropage') . '</option>';
 	} else {
@@ -507,7 +494,7 @@ function display_information() {
 
 	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
 
-  $lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 
 	// 0 = console, 1= tab
@@ -533,3 +520,4 @@ function display_information() {
 
 	return true;
 }
+
