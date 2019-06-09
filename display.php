@@ -157,12 +157,12 @@ function display_information() {
 		WHERE user_id = ?
 		AND panel != 'intropage_favourite_graph'
 		UNION
-	    SELECT id,concat(panel,'_',fav_graph_id) AS panel, priority, fav_graph_id
-	    FROM plugin_intropage_user_setting
-	    WHERE user_id = ?
+		SELECT id,concat(panel,'_',fav_graph_id) AS panel, priority, fav_graph_id
+		FROM plugin_intropage_user_setting
+		WHERE user_id = ?
 		AND panel = 'intropage_favourite_graph'
 		AND fav_graph_id IS NOT NULL
-	    ORDER BY $order",
+		ORDER BY $order",
 		array($_SESSION['sess_user_id'], $_SESSION['sess_user_id']));
 
 	// retrieve data for all panels
