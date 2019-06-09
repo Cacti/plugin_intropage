@@ -335,7 +335,7 @@ function display_information() {
 	?>
 	<script type='text/javascript'>
 
-	var refresh = null;
+	var refresh;
 
 	// display/hide detail
 	$(function () {
