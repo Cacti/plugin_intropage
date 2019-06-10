@@ -101,13 +101,9 @@ function display_information() {
 	}
 
 	$order = ' priority desc';
-	// !!!! TADY taky implode
 	if (isset($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order'])) {
-		$order = 'field (id,';
-		foreach ($_SESSION['intropage_order'] as $ord) {
-			$order .= $ord . ',';
-		}
-		$order = substr($order, 0, -1);
+		$order = ' field (id,';
+		$order .= implode(',', $_SESSION['intropage_order']);
 		$order .= ')';
 	}
 
