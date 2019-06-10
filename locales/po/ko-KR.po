@@ -3,190 +3,224 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:35-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2019-06-09 13:41-0400\n"
+"PO-Revision-Date: 2019-06-09 14:08-0400\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ko\n"
 
 #: display.php:32
+#, fuzzy
 msgid "Intropage - permission denied"
-msgstr ""
+msgstr "인트로 페이지 - 사용 권한이 거부되었습니다."
 
 #: display.php:152
+#, fuzzy
 msgid ""
 "You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard "
 "</b> and use the whole page for Intropage<br/><br/>"
 msgstr ""
+"위의 행을 <b>설정 -> 일반 -> 선인장 대시 보드 숨기기</b> 에서 비활성화하고 전"
+"체 페이지를 인트로 페이지에 사용할 수 있습니다. <br/><br/>"
 
 #: display.php:357
+#, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
-msgstr ""
+msgstr "패널 이동 비활성화 / 패널에서 텍스트 복사 활성화"
 
 #: display.php:362
+#, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr ""
+msgstr "패널 이동 활성화 / 패널에서 텍스트 복사 비활성화"
 
 #: display.php:400
+#, fuzzy
 msgid "Error reading new data"
-msgstr ""
+msgstr "새 데이터 읽기 오류"
 
 #: display.php:421
+#, fuzzy
 msgid "Disable panel move/enable copy text from panel"
-msgstr ""
+msgstr "패널 이동 비활성화 / 패널에서 텍스트 복사 활성화"
 
 #: display.php:425
+#, fuzzy
 msgid "Select action ..."
-msgstr ""
+msgstr "작업 선택 ..."
 
 #: display.php:436
-#, php-format
+#, fuzzy, php-format
 msgid "Add panel %s"
-msgstr ""
+msgstr "패널  %s 추가"
 
 #: display.php:438
-#, php-format
+#, fuzzy, php-format
 msgid "Add panel %s %s"
-msgstr ""
+msgstr "%s  %s 패널 추가"
 
 #: display.php:444
+#, fuzzy
 msgid "Refresh Now"
-msgstr ""
+msgstr "지금 새로 고침"
 
 #: display.php:447 display.php:449
+#, fuzzy
 msgid "Autorefresh Disabled"
-msgstr ""
+msgstr "자동 새로 고침 사용 안 함"
 
 #: display.php:453 display.php:455
+#, fuzzy
 msgid "Autorefresh 1 Minute"
-msgstr ""
+msgstr "자동 새로 고침 1 분"
 
 #: display.php:459 display.php:461
+#, fuzzy
 msgid "Autorefresh 5 Minutes"
-msgstr ""
+msgstr "자동 새로 고침 5 분"
 
 #: display.php:465 display.php:467
+#, fuzzy
 msgid "Autorefresh 1 Hour"
-msgstr ""
+msgstr "자동 새로 고침 1 시간"
 
 #: display.php:471 display.php:473
+#, fuzzy
 msgid "Display only Errors"
-msgstr ""
+msgstr "오류 만 표시"
 
 #: display.php:477 display.php:479
+#, fuzzy
 msgid "Display Errors and Warnings"
-msgstr ""
+msgstr "오류 및 경고 표시"
 
 #: display.php:483 display.php:485
+#, fuzzy
 msgid "Display All"
-msgstr ""
+msgstr "모두 표시"
 
 #: display.php:489 display.php:492
-msgid "Sort by - red-yellow-green-gray"
-msgstr ""
+#, fuzzy
+msgid "Sort by - Red-Yellow-Green-Gray"
+msgstr "정렬 기준 - 빨강 - 노랑 - 녹색 - 회색"
 
-#: display.php:490
-msgid "Sort by panel priority"
-msgstr ""
-
-#: display.php:493
-msgid "Sort by panel Priority"
-msgstr ""
+#: display.php:490 display.php:493
+#, fuzzy
+msgid "Sort by Panel Priority"
+msgstr "패널 우선 순위별로 정렬"
 
 #: display.php:497
+#, fuzzy
 msgid "Reset panel Order to Default"
-msgstr ""
+msgstr "패널 순서를 기본값으로 재설정"
 
 #: display.php:500
+#, fuzzy
 msgid "Reset All to Default"
-msgstr ""
+msgstr "모두 기본값으로 재설정"
 
 #: display.php:512
+#, fuzzy
 msgid "Set intropage as default page"
-msgstr ""
+msgstr "기본 페이지로 소개 페이지 설정"
 
 #: display.php:514
+#, fuzzy
 msgid "Set graph as default page"
-msgstr ""
+msgstr "기본 페이지로 그래프 설정"
 
 #: display.php:519
 msgid "Go"
-msgstr ""
+msgstr "가기"
 
 #: include/data.php:37
+#, fuzzy
 msgid "Database check"
-msgstr ""
+msgstr "데이터베이스 검사"
 
 #: include/data.php:49 include/data.php:720 include/data.php:1301
 #: include/data.php:1497 include/data.php:1615 include/data.php:1675
 #: include/data.php:1734 include/data.php:1789
+#, fuzzy
 msgid "Waiting for data"
-msgstr ""
+msgstr "데이터 대기 중"
 
 #: include/data.php:52
+#, fuzzy
 msgid "Last check"
-msgstr ""
+msgstr "마지막 확인"
 
 #: include/data.php:55
+#, fuzzy
 msgid "Checked Every 15 minutes"
-msgstr ""
+msgstr "매 15 분마다 점검 됨"
 
 #: include/data.php:57
+#, fuzzy
 msgid "Checked Hourly"
-msgstr ""
+msgstr "매시간 점검"
 
 #: include/data.php:59
+#, fuzzy
 msgid "Checked Daily"
-msgstr ""
+msgstr "매일 확인 됨"
 
 #: include/data.php:73
+#, fuzzy
 msgid "Analyse cacti log"
-msgstr ""
+msgstr "선인장 로그 분석"
 
 #: include/data.php:89
+#, fuzzy
 msgid "Log file not accessible or empty"
-msgstr ""
+msgstr "로그 파일에 액세스 할 수 없거나 비어 있습니다."
 
 #: include/data.php:109
 msgid "Errors"
-msgstr ""
+msgstr "오류"
 
 #: include/data.php:111
+#, fuzzy
 msgid "Warnings"
-msgstr ""
+msgstr "경고"
 
 #: include/data.php:116
+#, fuzzy
 msgid "file is larger than 2GB"
-msgstr ""
+msgstr "파일이 2GB보다 큽니다."
 
 #: include/data.php:120
+#, fuzzy
 msgid "Log size OK"
-msgstr ""
+msgstr "로그 크기 OK"
 
 #: include/data.php:124
+#, fuzzy
 msgid "Log size is quite large"
-msgstr ""
+msgstr "로그 크기가 매우 큽니다."
 
 #: include/data.php:127
+#, fuzzy
 msgid "Log size"
-msgstr ""
+msgstr "로그 크기"
 
 #: include/data.php:131
-#, php-format
+#, fuzzy, php-format
 msgid "(Errors and warning in last %s lines)"
-msgstr ""
+msgstr "(마지막  %s 줄의 오류 및 경고)"
 
 #: include/data.php:151
+#, fuzzy
 msgid "Last 10 logins"
-msgstr ""
+msgstr "최근 10 번의 로그인"
 
 #: include/data.php:158 include/data.php:226 include/data.php:263
 #: include/data.php:311 include/data.php:332 include/data.php:360
@@ -194,926 +228,1076 @@ msgstr ""
 #: include/data.php:483 include/data.php:504 include/data.php:527
 #: include/data.php:670 include/data.php:675 include/data.php:1370
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: include/data.php:175
+#, fuzzy
 msgid "failed"
-msgstr ""
+msgstr "실패"
 
 #: include/data.php:175
+#, fuzzy
 msgid "success"
-msgstr ""
+msgstr "성공"
 
 #: include/data.php:178
+#, fuzzy
 msgid "Failed logins"
-msgstr ""
+msgstr "로그인 실패"
 
 #: include/data.php:209
+#, fuzzy
 msgid "Analyse tree/host/graph"
-msgstr ""
+msgstr "트리 / 호스트 / 그래프 분석"
 
 #: include/data.php:227
-#, php-format
+#, fuzzy, php-format
 msgid "Devices with the same IP and port %s"
-msgstr ""
+msgstr "같은 IP 및 포트  %s를 사용하는 장치"
 
 #: include/data.php:232
-#, php-format
+#, fuzzy, php-format
 msgid "Devices with the same IP and port: %s"
-msgstr ""
+msgstr "같은 IP 및 포트를 가진 장치 :  %s"
 
 #: include/data.php:265
-#, php-format
+#, fuzzy, php-format
 msgid "Devices with the same description %s"
-msgstr ""
+msgstr "동일한 설명이있는 장치  %s"
 
 #: include/data.php:270
-#, php-format
+#, fuzzy, php-format
 msgid "Devices with the same description: %s"
-msgstr ""
+msgstr "같은 설명이있는 기기 :  %s"
 
 #: include/data.php:313
-#, php-format
+#, fuzzy, php-format
 msgid "Orphaned Data Sources %s"
-msgstr ""
+msgstr "고아 데이터 원본  %s"
 
 #: include/data.php:317
-#, php-format
+#, fuzzy, php-format
 msgid "Orphaned Data Sources: %s"
-msgstr ""
+msgstr "고아 데이터 원본 :  %s"
 
 #: include/data.php:334
-#, php-format
+#, fuzzy, php-format
 msgid "Poller output items %s:"
-msgstr ""
+msgstr "폴러 출력 항목  %s :"
 
 #: include/data.php:337
-#, php-format
+#, fuzzy, php-format
 msgid "Poller Output Items: %s"
-msgstr ""
+msgstr "폴러 출력 항목 :  %s"
 
 #: include/data.php:362
-#, php-format
+#, fuzzy, php-format
 msgid "Datasource - bad indexes %s:"
-msgstr ""
+msgstr "데이터 소스 - 잘못된 인덱스  %s :"
 
 #: include/data.php:365
-#, php-format
+#, fuzzy, php-format
 msgid "Datasource - bad indexes: %s"
-msgstr ""
+msgstr "데이터 소스 - 잘못된 색인 :  %s"
 
 #: include/data.php:381
+#, fuzzy
 msgid "Information only (no warn/error)"
-msgstr ""
+msgstr "정보 전용 (경고 / 오류 없음)"
 
 #: include/data.php:393
-#, php-format
+#, fuzzy, php-format
 msgid "Devices in more than one tree %s"
-msgstr ""
+msgstr "두 개 이상의 트리  %s 장치"
 
 #: include/data.php:396
-#, php-format
+#, fuzzy, php-format
 msgid "Devices in more than one tree: %s"
-msgstr ""
+msgstr "두 개 이상의 트리에있는 장치 :  %s"
 
 #: include/data.php:441
-#, php-format
+#, fuzzy, php-format
 msgid "Hosts without graphs %s"
-msgstr ""
+msgstr "그래프가없는 호스트  %s"
 
 #: include/data.php:444
-#, php-format
+#, fuzzy, php-format
 msgid "Hosts without graphs: %s"
-msgstr ""
+msgstr "그래프가없는 호스트 :  %s"
 
 #: include/data.php:464
-#, php-format
+#, fuzzy, php-format
 msgid "Hosts without tree %s"
-msgstr ""
+msgstr "트리가없는 호스트  %s"
 
 #: include/data.php:467
-#, php-format
+#, fuzzy, php-format
 msgid "Hosts without tree: %s"
-msgstr ""
+msgstr "트리가없는 호스트 :  %s"
 
 #: include/data.php:485
-#, php-format
+#, fuzzy, php-format
 msgid "Hosts with default public/private community %s"
-msgstr ""
+msgstr "기본 공개 / 비공개 커뮤니티  %s이 (가)있는 호스트"
 
 #: include/data.php:488
-#, php-format
+#, fuzzy, php-format
 msgid "Hosts with default public/private community: %s"
-msgstr ""
+msgstr "기본 공개 / 비공개 커뮤니티가있는 호스트 :  %s"
 
 #: include/data.php:506
-#, php-format
+#, fuzzy, php-format
 msgid "Plugin Monitor - Unmonitored hosts %s"
-msgstr ""
+msgstr "플러그인 모니터 - 모니터링되지 않은 호스트  %s"
 
 #: include/data.php:509
-#, php-format
+#, fuzzy, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr ""
+msgstr "플러그인 모니터 - 모니터링되지 않는 호스트 :  %s"
 
 #: include/data.php:529
-#, php-format
+#, fuzzy, php-format
 msgid "Plugin Thold - Global notify only %s"
-msgstr ""
+msgstr "플러그인 덤프 - 전체 알림 만  %s"
 
 #: include/data.php:532
-#, php-format
+#, fuzzy, php-format
 msgid "Plugin Thold - Global notify only: %s"
-msgstr ""
+msgstr "Plugin Thold - 전체 알림 만 :  %s"
 
 #: include/data.php:541
-#, php-format
+#, fuzzy, php-format
 msgid "Found %s problems"
-msgstr ""
+msgstr "%s 문제 발견"
 
 #: include/data.php:543
+#, fuzzy
 msgid "Everything OK"
-msgstr ""
+msgstr "전부 괜찮아"
 
 #: include/data.php:555
+#, fuzzy
 msgid "Boost statistics"
-msgstr ""
+msgstr "부스트 통계"
 
 #: include/data.php:608 include/data.php:1397
 msgid "Idle"
-msgstr ""
+msgstr "게으른"
 
 #: include/data.php:610 include/data.php:1395
 msgid "Running"
-msgstr ""
+msgstr "실행 중"
 
 #: include/data.php:612
+#, fuzzy
 msgid "Overrun Warning"
-msgstr ""
+msgstr "오버런 경고"
 
 #: include/data.php:615
+#, fuzzy
 msgid "Timed Out"
-msgstr ""
+msgstr "시간 초과"
 
 #: include/data.php:618
 msgid "Other"
-msgstr ""
+msgstr "기타"
 
 #: include/data.php:621
+#, fuzzy
 msgid "Never Run"
-msgstr ""
+msgstr "실행 안 함"
 
 #: include/data.php:626
-#, php-format
+#, fuzzy, php-format
 msgid "Pending Boost Records: %s"
-msgstr ""
+msgstr "보류중인 보완 레코드 :  %s"
 
 #: include/data.php:627
-#, php-format
+#, fuzzy, php-format
 msgid "Archived Boost Records: %s"
-msgstr ""
+msgstr "보관 처리 된 부스트 기록 :  %s"
 
 #: include/data.php:631 include/data.php:634 include/data.php:636
-#, php-format
+#, fuzzy, php-format
 msgid "Total Boost Records: %s"
-msgstr ""
+msgstr "총 부스트 기록 :  %s"
 
 #: include/data.php:655
-#, php-format
+#, fuzzy, php-format
 msgid "Boost On-demand Updating: %s"
-msgstr ""
+msgstr "부스트 주문형 업데이트 :  %s"
 
 #: include/data.php:655 include/data.php:925 include/data.php:935
 #: include/data.php:1068 include/data.php:1077 include/data.php:1214
 #: include/data.php:1401
 msgid "Disabled"
-msgstr ""
+msgstr "비활성화"
 
 #: include/data.php:662
-#, php-format
+#, fuzzy, php-format
 msgid "Current Boost Table(s) Size: %s"
-msgstr ""
+msgstr "현재 부스트 표 크기 :  %s"
 
 #: include/data.php:665
-#, php-format
+#, fuzzy, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr ""
+msgstr "평균 바이트 / 레코드 :  %s"
 
 #: include/data.php:672
-#, php-format
+#, fuzzy, php-format
 msgid "Last run duration: %s"
-msgstr ""
+msgstr "마지막 실행 시간 :  %s"
 
 #: include/data.php:674
-#, php-format
+#, fuzzy, php-format
 msgid "RRD Updates / Max: %s / %s"
-msgstr ""
+msgstr "RRD 업데이트 / 최대 :  %s /  %s"
 
 #: include/data.php:675
-#, php-format
+#, fuzzy, php-format
 msgid "Update Frequency: %s"
-msgstr ""
+msgstr "업데이트 빈도 :  %s"
 
 #: include/data.php:676
-#, php-format
+#, fuzzy, php-format
 msgid "Next Start Time: %s"
-msgstr ""
+msgstr "다음 시작 시간 :  %s"
 
 #: include/data.php:687
+#, fuzzy
 msgid "CPU utilization"
-msgstr ""
+msgstr "CPU 사용률"
 
 #: include/data.php:691
+#, fuzzy
 msgid "CPU load: "
-msgstr ""
+msgstr "CPU로드 :"
 
 #: include/data.php:698
+#, fuzzy
 msgid "This function is not implemented on Windows platforms"
-msgstr ""
+msgstr "이 기능은 Windows 플랫폼에 구현되어 있지 않습니다."
 
 #: include/data.php:708
 msgid "Load"
-msgstr ""
+msgstr "불러오기"
 
 #: include/data.php:733
+#, fuzzy
 msgid "24 hour extrem"
-msgstr ""
+msgstr "24 시간 극단적 인"
 
 #: include/data.php:741
+#, fuzzy
 msgid "Long run<br/>poller"
-msgstr ""
+msgstr "장기적으로 <br/> 폴러"
 
 #: include/data.php:756 include/data.php:777
+#, fuzzy
 msgid "Waiting<br/>for data"
-msgstr ""
+msgstr "기다리는 <br/> 데이터"
 
 #: include/data.php:785
+#, fuzzy
 msgid "Max thold<br/>triggered:"
-msgstr ""
+msgstr "최대 thold <br/> 트리거 됨 :"
 
 #: include/data.php:810
+#, fuzzy
 msgid "Poller<br/>output item:"
-msgstr ""
+msgstr "폴러 <br/> 출력 항목 :"
 
 #: include/data.php:831
+#, fuzzy
 msgid "Failed<br/>polls:"
-msgstr ""
+msgstr "실패한 <br/> 투표소:"
 
 #: include/data.php:864
+#, fuzzy
 msgid "Datasources: "
-msgstr ""
+msgstr "데이터 소스:"
 
 #: include/data.php:893
+#, fuzzy
 msgid "No untemplated datasources found"
-msgstr ""
+msgstr "샘플링되지 않은 데이터 소스가 없습니다."
 
 #: include/data.php:906 include/data.php:930
+#, fuzzy
 msgid "Hosts"
-msgstr ""
+msgstr "호스트"
 
 #: include/data.php:922 include/data.php:1065 include/variables.php:88
 msgid "All"
-msgstr ""
+msgstr "모두"
 
 #: include/data.php:923 include/data.php:932 include/data.php:1210
 msgid "Up"
-msgstr ""
+msgstr "위로"
 
 #: include/data.php:924 include/data.php:933 include/data.php:1211
 msgid "Down"
-msgstr ""
+msgstr "아래로"
 
 #: include/data.php:926 include/data.php:934 include/data.php:1403
+#, fuzzy
 msgid "Recovering"
-msgstr ""
+msgstr "복구 중"
 
 #: include/data.php:949
+#, fuzzy
 msgid "RECOVERING"
-msgstr ""
+msgstr "복구"
 
 #: include/data.php:965
+#, fuzzy
 msgid "DOWN"
-msgstr ""
+msgstr "아래로"
 
 #: include/data.php:985 include/data.php:989
+#, fuzzy
 msgid "Device Templates"
-msgstr ""
+msgstr "장치 템플릿"
 
 #: include/data.php:1013
+#, fuzzy
 msgid "No device templates found"
-msgstr ""
+msgstr "기기 템플릿이 없습니다."
 
 #: include/data.php:1025 include/data.php:1030 include/data.php:1072
+#, fuzzy
 msgid "Thresholds"
-msgstr ""
+msgstr "임계 값"
 
 #: include/data.php:1038
+#, fuzzy
 msgid "Thold plugin not installed/running"
-msgstr ""
+msgstr "Thold 플러그인이 설치되지 않았거나 실행 중이 아닙니다."
 
 #: include/data.php:1041 include/data.php:1184
+#, fuzzy
 msgid "You don't have permission"
-msgstr ""
+msgstr "권한이 없습니다."
 
 #: include/data.php:1066 include/data.php:1075
+#, fuzzy
 msgid "Breached"
-msgstr ""
+msgstr "위반 한"
 
 #: include/data.php:1067
+#, fuzzy
 msgid "Trigged"
-msgstr ""
+msgstr "지체 된"
 
 #: include/data.php:1074
+#, fuzzy
 msgid "OK"
-msgstr ""
+msgstr "확인"
 
 #: include/data.php:1076
+#, fuzzy
 msgid "Trigerred"
-msgstr ""
+msgstr "호랑이"
 
 #: include/data.php:1088
+#, fuzzy
 msgid "BREACHED"
-msgstr ""
+msgstr "불만"
 
 #: include/data.php:1098
+#, fuzzy
 msgid "TRIGGERED"
-msgstr ""
+msgstr "트리거 됨"
 
 #: include/data.php:1123
+#, fuzzy
 msgid "Cacti version: "
-msgstr ""
+msgstr "선인장 버전 :"
 
 #: include/data.php:1134
+#, fuzzy
 msgid "Poller type:"
-msgstr ""
+msgstr "폴러 유형 :"
 
 #: include/data.php:1136
+#, fuzzy
 msgid "Spine version: "
-msgstr ""
+msgstr "척추 버전 :"
 
 #: include/data.php:1139
+#, fuzzy
 msgid "You are using incorrect spine version!"
-msgstr ""
+msgstr "잘못된 척추 버전을 사용 중입니다!"
 
 #: include/data.php:1143
+#, fuzzy
 msgid "Poller type: "
-msgstr ""
+msgstr "폴러 유형 :"
 
 #: include/data.php:1146
+#, fuzzy
 msgid "Running on: "
-msgstr ""
+msgstr "실행 :"
 
 #: include/data.php:1166 include/data.php:1208
+#, fuzzy
 msgid "Mactrack"
-msgstr ""
+msgstr "막달레락"
 
 #: include/data.php:1176 include/data.php:1241
+#, fuzzy
 msgid "Mactrack plugin not installed/running"
-msgstr ""
+msgstr "Mactrack 플러그인이 설치되지 않았거나 실행 중입니다."
 
 #: include/data.php:1200
-#, php-format
+#, fuzzy, php-format
 msgid "All: %s"
-msgstr ""
+msgstr "전체 :  %s"
 
 #: include/data.php:1201
-#, php-format
+#, fuzzy, php-format
 msgid "Up: %s"
-msgstr ""
+msgstr "최대 :  %s"
 
 #: include/data.php:1202
-#, php-format
+#, fuzzy, php-format
 msgid "Down: %s"
-msgstr ""
+msgstr "아래로 :  %s"
 
 #: include/data.php:1203
 #, php-format
 msgid "Error: %s"
-msgstr ""
+msgstr "오류: %s"
 
 #: include/data.php:1204
-#, php-format
+#, fuzzy, php-format
 msgid "Unknown: %s"
-msgstr ""
+msgstr "알 수 없음 :  %s"
 
 #: include/data.php:1205
-#, php-format
+#, fuzzy, php-format
 msgid "Disabled: %s"
-msgstr ""
+msgstr "사용 중지됨 :  %s"
 
 #: include/data.php:1212
 msgid "Error"
-msgstr ""
+msgstr "오류"
 
 #: include/data.php:1213
 msgid "Unknown"
-msgstr ""
+msgstr "알 수 없음"
 
 #: include/data.php:1229
+#, fuzzy
 msgid "Mactrack sites"
-msgstr ""
+msgstr "마이트 락 사이트"
 
 #: include/data.php:1243
 msgid "Devices"
-msgstr ""
+msgstr "장치"
 
 #: include/data.php:1243
 msgid "Site"
-msgstr ""
+msgstr "사이트"
 
 #: include/data.php:1244
 msgid "IPs"
-msgstr ""
+msgstr "IP"
 
 #: include/data.php:1244
+#, fuzzy
 msgid "Ports"
-msgstr ""
+msgstr "항구"
 
 #: include/data.php:1245
+#, fuzzy
 msgid "MACs"
-msgstr ""
+msgstr "맥"
 
 #: include/data.php:1245
+#, fuzzy
 msgid "Ports up"
-msgstr ""
+msgstr "포트 업"
 
 #: include/data.php:1246
+#, fuzzy
 msgid "Device errors"
-msgstr ""
+msgstr "기기 오류"
 
 #: include/data.php:1274
+#, fuzzy
 msgid "No mactrack sites found"
-msgstr ""
+msgstr "mactrack 사이트가 없습니다."
 
 #: include/data.php:1287
+#, fuzzy
 msgid "Time synchronization"
-msgstr ""
+msgstr "시간 동기화"
 
 #: include/data.php:1295
+#, fuzzy
 msgid "No NTP server configured"
-msgstr ""
+msgstr "NTP 서버가 구성되지 않았습니다."
 
 #: include/data.php:1306
+#, fuzzy
 msgid "Failed to get NTP time FROM $ntp_server"
-msgstr ""
+msgstr "$ ntp_server에서 NTP 시간을 가져 오는 데 실패했습니다."
 
 #: include/data.php:1314
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "Please check time.<br/>It is different (more than %s seconds) FROM NTP "
 "server %s"
-msgstr ""
+msgstr "시간을 확인하십시오. <br/> NTP 서버  %s ( %s 초 초과)와 다릅니다."
 
 #: include/data.php:1316
+#, fuzzy
 msgid "Localtime is equal to NTP server"
-msgstr ""
+msgstr "현지 시간은 NTP 서버와 같습니다."
 
 #: include/data.php:1321
+#, fuzzy
 msgid ""
 "Unable to contact the NTP server indicated.<br/>Please check your "
 "configuration.<br/>"
-msgstr ""
+msgstr "표시된 NTP 서버에 접속할 수 없습니다. <br/> 구성을 확인하십시오. <br/>"
 
 #: include/data.php:1324
+#, fuzzy
 msgid "Last check: "
-msgstr ""
+msgstr "마지막 확인 :"
 
 #: include/data.php:1327
+#, fuzzy
 msgid "Checked every 15 minutes"
-msgstr ""
+msgstr "매 15 분마다 점검"
 
 #: include/data.php:1329
+#, fuzzy
 msgid "Checked hourly"
-msgstr ""
+msgstr "시간당 수표"
 
 #: include/data.php:1331
+#, fuzzy
 msgid "Checked daily"
-msgstr ""
+msgstr "매일 확인"
 
 #: include/data.php:1355
+#, fuzzy
 msgid "Poller info"
-msgstr ""
+msgstr "폴러 정보"
 
 #: include/data.php:1359
+#, fuzzy
 msgid "ID/Name/total time/state"
-msgstr ""
+msgstr "ID / 이름 / 총 시간 / 상태"
 
 #: include/data.php:1393
+#, fuzzy
 msgid "New/Idle"
-msgstr ""
+msgstr "신규 / 유휴"
 
 #: include/data.php:1399
+#, fuzzy
 msgid "Unkn/down"
-msgstr ""
+msgstr "Unkn / down"
 
 #: include/data.php:1410
+#, fuzzy
 msgid "(all)"
-msgstr ""
+msgstr "(모든)"
 
 #: include/data.php:1410
+#, fuzzy
 msgid "(ok)"
-msgstr ""
+msgstr "(승인)"
 
 #: include/data.php:1431
-#, php-format
+#, fuzzy, php-format
 msgid "Poller stats (interval %ss)"
-msgstr ""
+msgstr "폴러 통계 (간격  %ss)"
 
 #: include/data.php:1480 include/data.php:1482
+#, fuzzy
 msgid " Poller ID: "
-msgstr ""
+msgstr "폴러 ID :"
 
 #: include/data.php:1489
 msgid "ID: "
-msgstr ""
+msgstr "ID: "
 
 #: include/data.php:1510
+#, fuzzy
 msgid "Last thold events"
-msgstr ""
+msgstr "마지막 thold 이벤트"
 
 #: include/data.php:1518
+#, fuzzy
 msgid "Plugin Thold isn't installed or started"
-msgstr ""
+msgstr "플러그인 Thold가 설치 또는 시작되지 않았습니다."
 
 #: include/data.php:1553
+#, fuzzy
 msgid "Without events yet"
-msgstr ""
+msgstr "아직 이벤트가없는 경우"
 
 #: include/data.php:1567
+#, fuzzy
 msgid "Top5 ping (avg, current)"
-msgstr ""
+msgstr "상위 5 개의 핑 (평균, 현재)"
 
 #: include/data.php:1627
+#, fuzzy
 msgid "Top5 worst availability"
-msgstr ""
+msgstr "Top5 최악의 가용성"
 
 #: include/data.php:1687
+#, fuzzy
 msgid "Top5 worst polling time"
-msgstr ""
+msgstr "최악의 폴링 시간 Top5"
 
 #: include/data.php:1746
+#, fuzzy
 msgid "Top5 worst polling ratio (failed, total, ratio)"
-msgstr ""
+msgstr "Top5 최악의 폴링 비율 (실패, 총, 비율)"
 
 #: include/data.php:1801 include/data.php:1805
 msgid "Trends"
-msgstr ""
+msgstr "동향 "
 
 #: include/data.php:1822
+#, fuzzy
 msgid "Tholds triggered"
-msgstr ""
+msgstr "트리거 된 Tholds"
 
 #: include/data.php:1840
+#, fuzzy
 msgid "Hosts down"
-msgstr ""
+msgstr "호스트"
 
 #: include/data.php:1869
+#, fuzzy
 msgid "Favourite graph"
-msgstr ""
+msgstr "좋아하는 그래프"
 
 #: include/helpers.php:106
+#, fuzzy
 msgid "You cannot disable this panel"
-msgstr ""
+msgstr "이 패널을 비활성화 할 수 없습니다."
 
 #: include/helpers.php:108
+#, fuzzy
 msgid "Disable panel"
-msgstr ""
+msgstr "패널 사용 중지"
 
 #: include/helpers.php:111
+#, fuzzy
 msgid "Reload Panel"
-msgstr ""
+msgstr "패널 다시로드"
 
 #: include/helpers.php:114
 msgid "Show Details"
-msgstr ""
+msgstr "세부 정보 보이기"
 
 #: include/helpers.php:432
+#, fuzzy
 msgid "DB problem"
-msgstr ""
+msgstr "DB 문제"
 
 #: include/helpers.php:434
+#, fuzzy
 msgid "DB OK"
-msgstr ""
+msgstr "DB OK"
 
 #: include/helpers.php:446
+#, fuzzy
 msgid "Connection errors - try to restart SQL service."
-msgstr ""
+msgstr "연결 오류 - SQL 서비스를 다시 시작하십시오."
 
 #: include/helpers.php:453
-#, php-format
+#, fuzzy, php-format
 msgid "Connection errors: %s"
-msgstr ""
+msgstr "연결 오류 :  %s"
 
 #: include/helpers.php:454
-#, php-format
+#, fuzzy, php-format
 msgid "Damaged tables: %s"
-msgstr ""
+msgstr "손상된 테이블 :  %s"
 
 #: include/helpers.php:455
-#, php-format
+#, fuzzy, php-format
 msgid "Memory tables: %s"
-msgstr ""
+msgstr "메모리 테이블 :  %s"
 
 #: include/helpers.php:456
-#, php-format
+#, fuzzy, php-format
 msgid "All tables: %s"
-msgstr ""
+msgstr "모든 테이블 :  %s"
 
 #: include/helpers.php:473
+#, fuzzy
 msgid "Remove from Dashboard"
-msgstr ""
+msgstr "대시 보드에서 제거"
 
 #: include/helpers.php:475
+#, fuzzy
 msgid "Add to Dashboard"
-msgstr ""
+msgstr "대시 보드에 추가"
 
 #: include/settings.php:31
+#, fuzzy
 msgid "Intro Page Options"
-msgstr ""
+msgstr "소개 페이지 옵션"
 
 #: include/settings.php:34
+#, fuzzy
 msgid ""
 "How we should display the intropage. <strong>For users without console "
 "access you must choose separated tab!</strong>"
 msgstr ""
+"우리는 어떻게 인트로 피를 표시해야합니다. <strong>콘솔 액세스 권한이없는 사용"
+"자의 경우 분리 된 탭을 선택해야합니다!</strong>"
 
 #: include/settings.php:39
+#, fuzzy
 msgid ""
 "Show the Intropage plugin screen in console screen (you need console access "
 "permission!)"
 msgstr ""
+"콘솔 화면에 인트로 페이징 플러그인 화면 표시 (콘솔 액세스 권한이 필요함)"
 
 #: include/settings.php:43
+#, fuzzy
 msgid "Show the Intropage plugin screen in separated tab"
-msgstr ""
+msgstr "분리 된 탭에 인트로 페이징 플러그인 화면 표시"
 
 #: include/settings.php:48
+#, fuzzy
 msgid "Intropage panels"
-msgstr ""
+msgstr "인트로 패널"
 
 #: include/settings.php:50
+#, fuzzy
 msgid "Enable/disable panels"
-msgstr ""
+msgstr "패널 활성화 / 비활성화"
 
 #: include/settings.php:54
+#, fuzzy
 msgid "Allow panel Analayse Log"
-msgstr ""
+msgstr "패널 분석 로그 허용"
 
 #: include/settings.php:60
+#, fuzzy
 msgid "Allow panel Analayse Logins"
-msgstr ""
+msgstr "패널 분석 로그인 허용"
 
 #: include/settings.php:66
+#, fuzzy
 msgid "Allow panel Threshold Events"
-msgstr ""
+msgstr "패널 임계 값 이벤트 허용"
 
 #: include/settings.php:72
+#, fuzzy
 msgid "Allow panel Analayse Database"
-msgstr ""
+msgstr "패널 분석 데이터베이스 허용"
 
 #: include/settings.php:78
+#, fuzzy
 msgid "Allow panel Analayse Tree, Devices, Graphs"
-msgstr ""
+msgstr "패널 분석 트리, 장치, 그래프 허용"
 
 #: include/settings.php:84
+#, fuzzy
 msgid "Allow panel Trends"
-msgstr ""
+msgstr "패널 트렌드 허용"
 
 #: include/settings.php:90
+#, fuzzy
 msgid "Allow panel 24h Extrems"
-msgstr ""
+msgstr "패널 24 시간 익스트림 허용"
 
 #: include/settings.php:96
+#, fuzzy
 msgid "Allow panel NTP"
-msgstr ""
+msgstr "패널 NTP 허용"
 
 #: include/settings.php:102
+#, fuzzy
 msgid "Allow panel Poller Info"
-msgstr ""
+msgstr "패널 폴러 정보 허용"
 
 #: include/settings.php:108
+#, fuzzy
 msgid "Allow panel Poller Stats"
-msgstr ""
+msgstr "패널 폴러 통계 허용"
 
 #: include/settings.php:114
+#, fuzzy
 msgid "Allow panel Graph Device"
-msgstr ""
+msgstr "패널 그래프 장치 허용"
 
 #: include/settings.php:120
+#, fuzzy
 msgid "Allow panel Graph Thresholds"
-msgstr ""
+msgstr "패널 그래프 임계 값 허용"
 
 #: include/settings.php:126
+#, fuzzy
 msgid "Allow panel Graph Data Dource"
-msgstr ""
+msgstr "패널 그래프 데이터 소스 허용"
 
 #: include/settings.php:132
+#, fuzzy
 msgid "Allow panel Graph Device Template"
-msgstr ""
+msgstr "패널 그래프 장치 템플릿 허용"
 
 #: include/settings.php:138
+#, fuzzy
 msgid "Allow panel CPU Utilization"
-msgstr ""
+msgstr "패널 CPU 사용률 허용"
 
 #: include/settings.php:144
+#, fuzzy
 msgid "Allow panel MacTrack Plugin"
-msgstr ""
+msgstr "패널 MacTrack 플러그인 허용"
 
 #: include/settings.php:150
+#, fuzzy
 msgid "Allow panel MacTrack Sites"
-msgstr ""
+msgstr "패널 MacTrack 사이트 허용"
 
 #: include/settings.php:156
+#, fuzzy
 msgid "Allow panel Top 5 Ping"
-msgstr ""
+msgstr "패널 탑 5 핑 허용"
 
 #: include/settings.php:162
+#, fuzzy
 msgid "Allow panel Top 5 Availability"
-msgstr ""
+msgstr "패널 탑 5 가용성 허용"
 
 #: include/settings.php:168
+#, fuzzy
 msgid "Allow panel Top 5 worst polling time"
-msgstr ""
+msgstr "패널 탑 5 최악의 폴링 시간 허용"
 
 #: include/settings.php:174
+#, fuzzy
 msgid "Allow panel Top 5 worst polling failed/total ratio"
-msgstr ""
+msgstr "패널 탑 5 최악의 폴링 실패 / 전체 비율 허용"
 
 #: include/settings.php:180
+#, fuzzy
 msgid "Allow panel System Information"
-msgstr ""
+msgstr "패널 시스템 정보 허용"
 
 #: include/settings.php:186
+#, fuzzy
 msgid "Allow panel Boost"
-msgstr ""
+msgstr "패널 부스트 허용"
 
 #: include/settings.php:192
+#, fuzzy
 msgid "Allow panel Favourite Graphs"
-msgstr ""
+msgstr "패널 즐겨 찾기 그래프 허용"
 
 #: include/settings.php:213
+#, fuzzy
 msgid "Show Intropage (no matter in Console or Tab)"
-msgstr ""
+msgstr "인트로 페이 지 표시 (콘솔 또는 탭에 상관 없음)"
 
 #: include/variables.php:60
 msgid "Display settings"
-msgstr ""
+msgstr "화면 설정"
 
 #: include/variables.php:64
+#, fuzzy
 msgid "Important things will be at the top"
-msgstr ""
+msgstr "중요한 것들이 맨 위에 있습니다."
 
 #: include/variables.php:65
+#, fuzzy
 msgid ""
 "If checked Intropage displays important (errors, warnings) information first"
-msgstr ""
+msgstr "이 옵션을 선택하면 중요한 (오류, 경고) 정보가 먼저 표시됩니다"
 
 #: include/variables.php:70
+#, fuzzy
 msgid "Automatic refresh page"
-msgstr ""
+msgstr "자동 새로 고침 페이지"
 
 #: include/variables.php:71
+#, fuzzy
 msgid "How often"
-msgstr ""
+msgstr "얼마나 자주"
 
 #: include/variables.php:74
 msgid "Never"
-msgstr ""
+msgstr "안함"
 
 #: include/variables.php:75
 msgid "Every Minute"
-msgstr ""
+msgstr "1분마다"
 
 #: include/variables.php:76 include/variables.php:105 include/variables.php:139
 #, php-format
 msgid "Every %d Minutes"
-msgstr ""
+msgstr "매 %d 분"
 
 #: include/variables.php:77 include/variables.php:106 include/variables.php:140
 msgid "Every Hour"
-msgstr ""
+msgstr "매시간"
 
 #: include/variables.php:82
 msgid "Display"
-msgstr ""
+msgstr "표시"
 
 #: include/variables.php:83
+#, fuzzy
 msgid "What will you see"
-msgstr ""
+msgstr "너는 무엇을 볼 것인가?"
 
 #: include/variables.php:86
+#, fuzzy
 msgid "Only Errors"
-msgstr ""
+msgstr "오류 만"
 
 #: include/variables.php:87
+#, fuzzy
 msgid "Errors and Warnings"
-msgstr ""
+msgstr "오류 및 경고"
 
 #: include/variables.php:93
+#, fuzzy
 msgid "Analyse log -  number of lines"
-msgstr ""
+msgstr "분석 로그 - 라인 수"
 
 #: include/variables.php:94
+#, fuzzy
 msgid ""
 "How many lines of log will be analysed. Big number may causes slow page load"
-msgstr ""
+msgstr "분석 할 로그의 줄 수. 큰 숫자로 인해 페이지로드가 느려질 수 있습니다."
 
 #: include/variables.php:101
+#, fuzzy
 msgid "How often analyze DB"
-msgstr ""
+msgstr "DB 분석 빈도"
 
 #: include/variables.php:102
+#, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
-msgstr ""
+msgstr "Poller는이 작업을 실행합니다. 긴 폴러가 발생할 수 있습니다."
 
 #: include/variables.php:107 include/variables.php:141
+#, fuzzy
 msgid "Every Day"
-msgstr ""
+msgstr "매일"
 
 #: include/variables.php:108
+#, fuzzy
 msgid "Every Week"
-msgstr ""
+msgstr "매주"
 
 #: include/variables.php:109
+#, fuzzy
 msgid "Every Month"
-msgstr ""
+msgstr "매 달"
 
 #: include/variables.php:114
+#, fuzzy
 msgid "Analyse DB - Level of db check"
-msgstr ""
+msgstr "DB 분석 - db 체크의 레벨"
 
 #: include/variables.php:115
+#, fuzzy
 msgid ""
 "Quick - No Check rows for inforccert links<br/>Fast - check only not "
 "properly closed tables<br/>Changed - check tables changed from last check<br/"
 ">Medium - with rows scan<br/>Extended - full rows and keys<br/"
 "><strong>Medium and extended may causes slow page load!</strong>"
 msgstr ""
+"Quick - No 인보험 링크 행 확인 <br/> 빠른 닫힘 - 테이블이 제대로 닫히지 않음 "
+"<br/> 변경됨 - 마지막 검사에서 변경된 검사 테이블 <br/> 중간 - 행 스캔 있음 "
+"<br/> 확장 - 전체 행과 키 <br/> <strong>보통 및 확장으로 인해 페이지로드가 느"
+"려질 수 있습니다!</strong>"
 
 #: include/variables.php:118
 msgid "Quick"
-msgstr ""
+msgstr "빨리"
 
 #: include/variables.php:119
 msgid "Fast"
-msgstr ""
+msgstr "빠른"
 
 #: include/variables.php:120
 msgid "Changed"
-msgstr ""
+msgstr "변경 됨"
 
 #: include/variables.php:121
 msgid "Medium"
-msgstr ""
+msgstr "중간"
 
 #: include/variables.php:122
 msgid "Extended"
-msgstr ""
+msgstr "확장"
 
 #: include/variables.php:127
+#, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
-msgstr ""
+msgstr "NTP (시간) 확인 - NTP 서버의 IP 또는 DNS 이름"
 
 #: include/variables.php:128
+#, fuzzy
 msgid "Insert IP or DNS name of NTP server"
-msgstr ""
+msgstr "NTP 서버의 IP 또는 DNS 이름 삽입"
 
 #: include/variables.php:135
+#, fuzzy
 msgid "How often check NTP"
-msgstr ""
+msgstr "얼마나 자주 NTP 확인"
 
 #: include/variables.php:136
+#, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr ""
+"<strong>Poller는이 작업을 실행합니다. 긴 폴러가 발생할 수 있습니다.</strong>"
 
 #: include/variables.php:147
+#, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
-msgstr ""
+msgstr "유지 보수 작업, 장치 다운, 관리 정보에 관한 관리자 정보 패널"
 
 #: include/variables.php:148
+#, fuzzy
 msgid ""
 "If isn't empty, panel will be displayed on the top. You can use html tags "
 "(b, i, ...)."
 msgstr ""
+"비어 있지 않으면 패널이 맨 위에 표시됩니다. html 태그 (b, i, ...)를 사용할 "
+"수 있습니다."
 
 #: include/variables.php:157
+#, fuzzy
 msgid "Maint plugin - how many days before display alert"
-msgstr ""
+msgstr "Maint 플러그인 - 표시되기 몇 일 전 경고"
 
 #: include/variables.php:158
+#, fuzzy
 msgid "How many days?</strong>"
-msgstr ""
+msgstr "몇 일?"
 
 #: include/variables.php:161
+#, fuzzy
 msgid "When maintenance starts"
-msgstr ""
+msgstr "정비가 시작되면"
 
 #: include/variables.php:162
-#, php-format
+#, fuzzy, php-format
 msgid "%d Day Before"
-msgstr ""
+msgstr "% d 일 전"
 
 #: include/variables.php:163 include/variables.php:164
-#, php-format
+#, fuzzy, php-format
 msgid "%d Days Before"
-msgstr ""
+msgstr "% d 일 전"
