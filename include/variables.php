@@ -71,6 +71,7 @@ $intropage_settings = array(	// default values
 		'description' => __('How often', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
+			'-1'   => __('Automatically by poller', 'intropage'),
 			'0'    => __('Never', 'intropage'),
 			'60'   => __('Every Minute', 'intropage'),
 			'300'  => __('Every %d Minutes', 5, 'intropage'),

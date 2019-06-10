@@ -53,7 +53,7 @@ function display_information() {
 	// style for panels
 	print "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
 
-	if (file_exists($config['base_path'] . 'plugins/intropage/themes/' . $selectedTheme . '.css')) {
+	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
 		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/intropage/themes/' . $selectedTheme . ".css' rel='stylesheet'>";
 	}
 
