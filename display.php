@@ -24,8 +24,6 @@
 */
 
 function display_information() {
-	//global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
-	// tyhle opravdu potrebuju jako globalni, pouzivaji se v data.php. Toto je totiz fce
 	global $config, $allowed_hosts, $sql_where;
 
 	if (!api_user_realm_auth('intropage.php')) {
@@ -113,8 +111,8 @@ function display_information() {
 		$order .= ')';
 	}
 
-	// zde pozor, mohl bych to selectovat v jednom dotazu, ale potrebuju, aby se fav grafy jmenovaly jinak.
-	// bez toho si je nize ve foreach presisuju,, protoze se oba jmenuji jen fav_graph
+	// each favourite graph must have unique name
+	// without this fav_graph is overwritten
 
 	$panels = db_fetch_assoc_prepared("SELECT id, panel, priority, fav_graph_id
 		FROM plugin_intropage_user_setting
@@ -156,7 +154,6 @@ function display_information() {
 
 	// $display_important_first = on/off
 	// $display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
-	// 0 chyby, 1 - chyby/warn, 2- all
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -308,7 +305,7 @@ function display_information() {
 	});
 
 	function initPage() {
-		// autorefresh - zkousim presunout
+		// autorefresh
 		if (intropage_autorefresh > 0)	{
 			if (refresh !== null) {
 				clearTimeout(refresh);
@@ -521,7 +518,7 @@ function display_information() {
 	print '</form>';
 	// end of settings
 
-	print '</div>'; // konec megaobal
+	print '</div>'; // end of megaobal
 
 	return true;
 }
