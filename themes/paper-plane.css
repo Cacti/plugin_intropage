@@ -1,26 +1,22 @@
-
-.flexchild	{
-    background-color: #202020 !important;
-
+.flexchild {
+	background-color: #202020 !important;
 }
 
-.panel_data     {
-    background-color: #202020;
-    color: white;
-    padding: 4px;
+.panel_data {
+	background-color: #202020;
+	color: white;
+	padding: 4px;
 }
-
 
 .textArea {
-        background-color: #202020;
+	background-color: #202020;
 }
 
-.panel_header 	{
-    color: #bbf;
-
+.panel_header {
+	color: #bbf;
 }
 
-
-#generated      {
-    color: white;
+#generated {
+	color: white;
 }
+

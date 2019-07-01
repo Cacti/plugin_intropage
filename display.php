@@ -24,8 +24,6 @@
 */
 
 function display_information() {
-	//global $config, $colors, $poller_options,$console_access,$allowed_hosts,$sql_where;
-	// tyhle opravdu potrebuju jako globalni, pouzivaji se v data.php. Toto je totiz fce
 	global $config, $allowed_hosts, $sql_where;
 
 	if (!api_user_realm_auth('intropage.php')) {
@@ -55,7 +53,7 @@ function display_information() {
 	// style for panels
 	print "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
 
-	if (file_exists($config['base_path'] . 'plugins/intropage/themes/' . $selectedTheme . '.css')) {
+	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
 		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/intropage/themes/' . $selectedTheme . ".css' rel='stylesheet'>";
 	}
 
@@ -103,18 +101,14 @@ function display_information() {
 	}
 
 	$order = ' priority desc';
-	// !!!! TADY taky implode
 	if (isset($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order'])) {
-		$order = 'field (id,';
-		foreach ($_SESSION['intropage_order'] as $ord) {
-			$order .= $ord . ',';
-		}
-		$order = substr($order, 0, -1);
+		$order = ' field (id,';
+		$order .= implode(',', $_SESSION['intropage_order']);
 		$order .= ')';
 	}
 
-	// zde pozor, mohl bych to selectovat v jednom dotazu, ale potrebuju, aby se fav grafy jmenovaly jinak.
-	// bez toho si je nize ve foreach presisuju,, protoze se oba jmenuji jen fav_graph
+	// each favourite graph must have unique name
+	// without this fav_graph is overwritten
 
 	$panels = db_fetch_assoc_prepared("SELECT id, panel, priority, fav_graph_id
 		FROM plugin_intropage_user_setting
@@ -156,7 +150,6 @@ function display_information() {
 
 	// $display_important_first = on/off
 	// $display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
-	// 0 chyby, 1 - chyby/warn, 2- all
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -308,7 +301,7 @@ function display_information() {
 	});
 
 	function initPage() {
-		// autorefresh - zkousim presunout
+		// autorefresh
 		if (intropage_autorefresh > 0)	{
 			if (refresh !== null) {
 				clearTimeout(refresh);
@@ -336,6 +329,13 @@ function display_information() {
 		});
 
 		$('#sortable').disableSelection();
+
+		$('.droppanel').click(function(event) {
+			event.preventDefault();
+			panel_div_id = $(this).attr('data-panel');
+			$('#'+panel_div_id).remove();
+			$.get($(this).attr('href'));
+		});
 
 		$('.maxim').off('click').on('click', function() {
 			$(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
@@ -388,13 +388,9 @@ function display_information() {
 	}
 
 	function reload_panel(panel_id,by_hand) {
-		$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
-		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow').delay(800);
-
 		$.get(urlPath+'plugins/intropage/intropage_ajax.php?autom='+by_hand+'&reload_panel='+panel_id)
 		.done(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html(data) ;
-			$('#panel_'+panel_id).find('.panel_data').css('opacity',1);
 		})
 		.fail(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html('<?php print __('Error reading new data', 'intropage');?>') ;
@@ -404,7 +400,7 @@ function display_information() {
 	function reload_all()	{
 		$('#obal li').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
-			reload_panel (panel_id,false);
+			reload_panel(panel_id,false);
 		});
 	}
 
@@ -521,7 +517,7 @@ function display_information() {
 	print '</form>';
 	// end of settings
 
-	print '</div>'; // konec megaobal
+	print '</div>'; // end of megaobal
 
 	return true;
 }

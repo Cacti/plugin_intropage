@@ -106,9 +106,9 @@ function intropage_analyse_log() {
 		}
 
 		$result['data'] .= '<span class="txt_big">';
-		$result['data'] .= __('Errors', 'intropage') . ': ' . $error . '</span> &nbsp; <a href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '"><i class="fa fa-external-link"></i></a><br/>';
+		$result['data'] .= __('Errors', 'intropage') . ': ' . $error . '</span><a href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '"><i class="fa fa-external-link"></i></a><br/>';
 		$result['data'] .= '<span class="txt_big">';
-		$result['data'] .= __('Warnings', 'intropage') . ': ' . $warn . '</span> &nbsp; <a href="clog.php?message_type=2&tail_lines=' . $log['nbr_lines'] . '"><i class="fa fa-external-link"></i></a><br/>';
+		$result['data'] .= __('Warnings', 'intropage') . ': ' . $warn . '</span><a href="clog.php?message_type=2&tail_lines=' . $log['nbr_lines'] . '"><i class="fa fa-external-link"></i></a><br/>';
 		$result['data'] .= '</span>';
 
 		if ($log['size'] < 0) {
@@ -347,14 +347,14 @@ function intropage_analyse_tree_host_graph() {
 		}
 		$total_errors += $sql_count;
 	}
-	
+
 	// DS - bad indexes
-	$sql_result = db_fetch_assoc('SELECT dtd.local_data_id,dtd.name_cache 
-		FROM data_local AS dl 
-		INNER JOIN data_template_data AS dtd 
-		ON dl.id=dtd.local_data_id 
-		INNER JOIN data_template AS dt ON dt.id=dl.data_template_id 
-		INNER JOIN host AS h ON h.id = dl.host_id 
+	$sql_result = db_fetch_assoc('SELECT dtd.local_data_id,dtd.name_cache
+		FROM data_local AS dl
+		INNER JOIN data_template_data AS dtd
+		ON dl.id=dtd.local_data_id
+		INNER JOIN data_template AS dt ON dt.id=dl.data_template_id
+		INNER JOIN host AS h ON h.id = dl.host_id
 		WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)');
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -368,14 +368,14 @@ function intropage_analyse_tree_host_graph() {
 			$result['alarm'] = 'yellow';
 		}
 
-		foreach ($sql_result as $row) {  
+		foreach ($sql_result as $row) {
 			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
 			$row['name_cache'] . '</a><br/>';
 
 		}
 		$total_errors += $sql_count;
 	}
-	
+
 
 	// below - only information without red/yellow/green
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
@@ -823,7 +823,7 @@ function intropage_extrem() {
 	} else {
 		$result['data'] .= '<br/>Waiting<br/>for data';
 	}
-	
+
 	$result['data'] .= '</td>';
 
 	// poller output items
@@ -1234,7 +1234,7 @@ function intropage_mactrack_sites() {
 	);
 
 	$count = 0;
-	
+
 	// SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5;
 	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
 		$result['alarm'] = 'grey';
@@ -1252,7 +1252,7 @@ function intropage_mactrack_sites() {
 				$row .= '<td>' . $site['total_ips'] . '</td><td>' . $site['total_user_ports'] . '</td>';
 				$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
 				$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
-			
+
                     		if ($count < 5)
                         	    $result['data'] .= $row;
                     		else
@@ -1260,7 +1260,7 @@ function intropage_mactrack_sites() {
 
                     		$count++;
             		}
-            	    
+
             		$result['data'] .= '</table>';
 
             		if (cacti_sizeof($sql_result) > 5)  {
@@ -1595,16 +1595,16 @@ function intropage_top5_ping() {
 			} else {
 				$row .= '<td class="rpad texalirig">' . round($host['cur_time'], 2) . 'ms</td></tr>';
 			}
-			
+
 			if ($count < 5)
 			    $result['data'] .= $row;
 			else
 			    $result['detail'] .= $row;
-	
+
 			$count++;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
-		
+
 		if (cacti_sizeof($sql_worst_host) > 5)	{
 		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
 		}
@@ -1660,11 +1660,11 @@ function intropage_top5_availability() {
 			    $result['data'] .= $row;
 			else
 			    $result['detail'] .= $row;
-	
+
 			$count++;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
-		
+
 		if (cacti_sizeof($sql_worst_host) > 5)	{
 		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
 		}
@@ -1690,7 +1690,7 @@ function intropage_top5_polltime() {
 		'detail' => '',
 	);
 
-	$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time 
+	$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
 		FROM host
 		WHERE host.id in ($allowed_hosts)
 		AND disabled != 'on'
@@ -1698,10 +1698,10 @@ function intropage_top5_polltime() {
 		LIMIT 15");
 
 	$count = 0;
-	
+
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
-		
+
 			if ($console_access) {
 				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
 			} else {
@@ -1714,16 +1714,16 @@ function intropage_top5_polltime() {
 			} else {
 				$row .= '<td class="rpad texalirig">' . round($host['polling_time'], 2) . 's</td></tr>';
 			}
-			
+
 			if ($count < 5)
 			    $result['data'] .= $row;
 			else
 			    $result['detail'] .= $row;
-	
+
 			$count++;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
-		
+
 		if (cacti_sizeof($sql_worst_host) > 5)	{
 		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
 		}
@@ -1774,11 +1774,11 @@ function intropage_top5_pollratio() {
 			    $result['data'] .= $row;
 			else
 			    $result['detail'] .= $row;
-	
+
 			$count++;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
-		
+
 		if (cacti_sizeof($sql_worst_host) > 5)	{
 		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
 		}
@@ -1881,7 +1881,7 @@ function intropage_favourite_graph($fav_graph_id) {
 			'local_graph_id=' . $fav_graph_id . '&' .
 			'graph_height=105&' .
 			'graph_width=300&' .
-			'graph_nolegend=true"/>&nbsp;';
+			'graph_nolegend=true"/>';
 
 		return $result;
 	}
