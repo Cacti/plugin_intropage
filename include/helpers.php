@@ -455,7 +455,7 @@ function db_check() {
 	$con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Aborted_c%'");
 
 	foreach ($con_err as $key => $val) {
-		$aerrors = $cerrors + $val['Value'];
+		$aerrors = $aerrors + $val['Value'];
 	}
 
 	if ($aerrors > 0) {     // only yellow
