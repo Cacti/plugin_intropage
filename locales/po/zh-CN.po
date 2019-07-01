@@ -7,135 +7,140 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:41-0400\n"
+"POT-Creation-Date: 2019-07-01 15:20+0200\n"
 "PO-Revision-Date: 2019-06-09 13:48-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
-#: display.php:32
+#: display.php:30
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage  - 许可被拒绝"
 
-#: display.php:152
+#: display.php:146
 #, fuzzy
 msgid ""
-"You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard "
-"</b> and use the whole page for Intropage<br/><br/>"
+"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
+"Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 "您可以在<b>设置 - >常规 - >隐藏仙人掌仪表板中</b>禁用上面的行，并使用整个页面"
 "进行Intropage <br/><br/>"
 
-#: display.php:357
+#: display.php:351
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "禁用面板移动/从面板启用复制文本"
 
-#: display.php:362
+#: display.php:356
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr "启用面板移动/禁用面板中的复制文本"
 
-#: display.php:400
+#: display.php:394
 #, fuzzy
 msgid "Error reading new data"
 msgstr "读取新数据时出错"
 
-#: display.php:421
+#: display.php:415
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "禁用面板从面板移动/启用复制文本"
 
-#: display.php:425
+#: display.php:419
 #, fuzzy
 msgid "Select action ..."
 msgstr "选择行动......"
 
-#: display.php:436
+#: display.php:430
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "添加面板％s"
 
-#: display.php:438
+#: display.php:432
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "添加面板％s％s"
 
-#: display.php:444
+#: display.php:438
 msgid "Refresh Now"
 msgstr "立即刷新"
 
-#: display.php:447 display.php:449
+#: display.php:441 display.php:443
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "Autorefresh已禁用"
 
-#: display.php:453 display.php:455
+#: display.php:447 display.php:449
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "自动刷新1分钟"
 
-#: display.php:459 display.php:461
+#: display.php:453 display.php:455
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "自动清新5分钟"
 
-#: display.php:465 display.php:467
+#: display.php:459 display.php:461
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "自动翻新1小时"
 
-#: display.php:471 display.php:473
+#: display.php:465 display.php:467
 #, fuzzy
 msgid "Display only Errors"
 msgstr "仅显示错误"
 
-#: display.php:477 display.php:479
+#: display.php:471 display.php:473
 #, fuzzy
 msgid "Display Errors and Warnings"
 msgstr "显示错误和警告"
 
-#: display.php:483 display.php:485
+#: display.php:477 display.php:479
 msgid "Display All"
 msgstr "显示所有"
 
-#: display.php:489 display.php:492
+#: display.php:483 display.php:486
 #, fuzzy
-msgid "Sort by - Red-Yellow-Green-Gray"
+msgid "Sort by - red-yellow-green-gray"
 msgstr "排序方式 - 红 - 黄 - 绿 - 灰"
 
-#: display.php:490 display.php:493
+#: display.php:484
 #, fuzzy
-msgid "Sort by Panel Priority"
+msgid "Sort by panel priority"
 msgstr "按面板优先级排序"
 
-#: display.php:497
+#: display.php:487
+#, fuzzy
+msgid "Sort by panel Priority"
+msgstr "按面板优先级排序"
+
+#: display.php:491
 #, fuzzy
 msgid "Reset panel Order to Default"
 msgstr "重置面板订单为默认值"
 
-#: display.php:500
+#: display.php:494
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "全部重置为默认值"
 
-#: display.php:512
+#: display.php:506
 #, fuzzy
 msgid "Set intropage as default page"
 msgstr "将intropage设置为默认页面"
 
-#: display.php:514
+#: display.php:508
 #, fuzzy
 msgid "Set graph as default page"
 msgstr "将图形设置为默认页面"
 
-#: display.php:519
+#: display.php:513
 msgid "Go"
 msgstr "启动"
 
@@ -519,7 +524,7 @@ msgstr "找不到未经模板化的数据源"
 msgid "Hosts"
 msgstr "主机"
 
-#: include/data.php:922 include/data.php:1065 include/variables.php:88
+#: include/data.php:922 include/data.php:1065 include/variables.php:89
 msgid "All"
 msgstr "所有"
 
@@ -898,35 +903,44 @@ msgstr "DB OK"
 
 #: include/helpers.php:446
 #, fuzzy
-msgid "Connection errors - try to restart SQL service."
+msgid "Connection errors - try to restart SQL service, check SQL log, ..."
 msgstr "连接错误 - 尝试重新启动SQL服务。"
 
-#: include/helpers.php:453
+#: include/helpers.php:462
+msgid "Aborted clients/connects - check logs."
+msgstr ""
+
+#: include/helpers.php:469
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "连接错误：％s"
 
-#: include/helpers.php:454
+#: include/helpers.php:470
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr ""
+
+#: include/helpers.php:471
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "损坏的表：％s"
 
-#: include/helpers.php:455
+#: include/helpers.php:472
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "内存表：％s"
 
-#: include/helpers.php:456
+#: include/helpers.php:473
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "所有表格：％s"
 
-#: include/helpers.php:473
+#: include/helpers.php:490
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "从仪表板中删除"
 
-#: include/helpers.php:475
+#: include/helpers.php:492
 msgid "Add to Dashboard"
 msgstr "添加到仪表盘"
 
@@ -1117,81 +1131,85 @@ msgid "How often"
 msgstr "多久发送一次这个NetFlow报告？"
 
 #: include/variables.php:74
+msgid "Automatically by poller"
+msgstr ""
+
+#: include/variables.php:75
 msgid "Never"
 msgstr "从不"
 
-#: include/variables.php:75
+#: include/variables.php:76
 msgid "Every Minute"
 msgstr "每一分钟"
 
-#: include/variables.php:76 include/variables.php:105 include/variables.php:139
+#: include/variables.php:77 include/variables.php:106 include/variables.php:140
 #, php-format
 msgid "Every %d Minutes"
 msgstr "每%d分钟"
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:78 include/variables.php:107 include/variables.php:141
 msgid "Every Hour"
 msgstr "每隔一小时"
 
-#: include/variables.php:82
+#: include/variables.php:83
 msgid "Display"
 msgstr "显示"
 
-#: include/variables.php:83
+#: include/variables.php:84
 #, fuzzy
 msgid "What will you see"
 msgstr "你会看到什么？"
 
-#: include/variables.php:86
+#: include/variables.php:87
 #, fuzzy
 msgid "Only Errors"
 msgstr "只有错误"
 
-#: include/variables.php:87
+#: include/variables.php:88
 #, fuzzy
 msgid "Errors and Warnings"
 msgstr "错误和警告"
 
-#: include/variables.php:93
+#: include/variables.php:94
 #, fuzzy
 msgid "Analyse log -  number of lines"
 msgstr "分析日志 - 行数"
 
-#: include/variables.php:94
+#: include/variables.php:95
 #, fuzzy
 msgid ""
 "How many lines of log will be analysed. Big number may causes slow page load"
 msgstr "将分析多少行日志。大数字可能导致页面加载缓慢"
 
-#: include/variables.php:101
+#: include/variables.php:102
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "经常分析DB"
 
-#: include/variables.php:102
+#: include/variables.php:103
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "Poller执行此任务。它可能导致长轮询运行。"
 
-#: include/variables.php:107 include/variables.php:141
+#: include/variables.php:108 include/variables.php:142
 #, fuzzy
 msgid "Every Day"
 msgstr "每天"
 
-#: include/variables.php:108
+#: include/variables.php:109
 msgid "Every Week"
 msgstr "每周"
 
-#: include/variables.php:109
+#: include/variables.php:110
 msgid "Every Month"
 msgstr "每个月"
 
-#: include/variables.php:114
+#: include/variables.php:115
 #, fuzzy
 msgid "Analyse DB - Level of db check"
 msgstr "分析数据库 - 数据库检查的级别"
 
-#: include/variables.php:115
+#: include/variables.php:116
 #, fuzzy
 msgid ""
 "Quick - No Check rows for inforccert links<br/>Fast - check only not "
@@ -1203,80 +1221,80 @@ msgstr ""
 "- 检查上次检查后更改的表格<br/>中 - 带行扫描<br/>扩展 - 完整的行和键<br/> "
 "<strong>中等和扩展可能导致页面加载缓慢！</strong>"
 
-#: include/variables.php:118
+#: include/variables.php:119
 msgid "Quick"
 msgstr "快速"
 
-#: include/variables.php:119
+#: include/variables.php:120
 msgid "Fast"
 msgstr "快"
 
-#: include/variables.php:120
+#: include/variables.php:121
 #, fuzzy
 msgid "Changed"
 msgstr "更改被"
 
-#: include/variables.php:121
+#: include/variables.php:122
 msgid "Medium"
 msgstr "中"
 
-#: include/variables.php:122
+#: include/variables.php:123
 msgid "Extended"
 msgstr "扩展"
 
-#: include/variables.php:127
+#: include/variables.php:128
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP（时间）检查 -  NTP服务器的IP或DNS名称"
 
-#: include/variables.php:128
+#: include/variables.php:129
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "插入NTP服务器的IP或DNS名称"
 
-#: include/variables.php:135
+#: include/variables.php:136
 #, fuzzy
 msgid "How often check NTP"
 msgstr "经常检查NTP"
 
-#: include/variables.php:136
+#: include/variables.php:137
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr "<strong>Poller执行此任务。它可能导致长轮询运行。</strong>"
 
-#: include/variables.php:147
+#: include/variables.php:148
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "管理信息面板，关于维护任务，关闭设备，.."
 
-#: include/variables.php:148
+#: include/variables.php:149
 #, fuzzy
 msgid ""
 "If isn't empty, panel will be displayed on the top. You can use html tags "
 "(b, i, ...)."
 msgstr "如果不为空，则面板将显示在顶部。您可以使用html标签（b，i，...）。"
 
-#: include/variables.php:157
+#: include/variables.php:158
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "维护插件 - 显示警报前多少天"
 
-#: include/variables.php:158
+#: include/variables.php:159
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "多少天？"
 
-#: include/variables.php:161
+#: include/variables.php:162
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "维护开始时"
 
-#: include/variables.php:162
+#: include/variables.php:163
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "％d前一天"
 
-#: include/variables.php:163 include/variables.php:164
+#: include/variables.php:164 include/variables.php:165
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "％d天前"

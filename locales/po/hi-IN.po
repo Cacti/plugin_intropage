@@ -7,137 +7,142 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:41-0400\n"
+"POT-Creation-Date: 2019-07-01 15:20+0200\n"
 "PO-Revision-Date: 2019-06-09 13:59-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: hi_IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"Language: hi_IN\n"
 
-#: display.php:32
+#: display.php:30
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "परिचय - अनुमति से इनकार किया"
 
-#: display.php:152
+#: display.php:146
 #, fuzzy
 msgid ""
-"You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard "
-"</b> and use the whole page for Intropage<br/><br/>"
+"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
+"Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 "आप <b>सेटिंग्स</b> में ऊपर की पंक्तियों को अक्षम कर सकते हैं <b>-> सामान्य -> कैक्टि डैशबोर्ड "
 "को छुपाएं</b> और इंट्रापेज के लिए पूरे पृष्ठ का उपयोग करें <br/><br/>"
 
-#: display.php:357
+#: display.php:351
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "पैनल मूव करें / कॉपी टेक्स्ट पैनल से सक्षम करें"
 
-#: display.php:362
+#: display.php:356
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr "पैनल से पैनल मूव / डिसेबल कॉपी टेक्स्ट को सक्षम करें"
 
-#: display.php:400
+#: display.php:394
 #, fuzzy
 msgid "Error reading new data"
 msgstr "नया डेटा पढ़ने में त्रुटि"
 
-#: display.php:421
+#: display.php:415
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "पैनल से पैनल मूव / सक्षम पाठ अक्षम करें"
 
-#: display.php:425
+#: display.php:419
 #, fuzzy
 msgid "Select action ..."
 msgstr "कार्रवाई चुनें ..."
 
-#: display.php:436
+#: display.php:430
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "पैनल %s जोड़ें"
 
-#: display.php:438
+#: display.php:432
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "पैनल %s %s जोड़ें"
 
-#: display.php:444
+#: display.php:438
 #, fuzzy
 msgid "Refresh Now"
 msgstr "अब ताज़ा करें"
 
-#: display.php:447 display.php:449
+#: display.php:441 display.php:443
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "ऑटोरफ्रेश अक्षम"
 
-#: display.php:453 display.php:455
+#: display.php:447 display.php:449
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "ऑटोरफ्रेश 1 मिनट"
 
-#: display.php:459 display.php:461
+#: display.php:453 display.php:455
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "ऑटोरफ्रेश 5 मिनट"
 
-#: display.php:465 display.php:467
+#: display.php:459 display.php:461
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "ऑटोरफ्रेश 1 घंटा"
 
-#: display.php:471 display.php:473
+#: display.php:465 display.php:467
 #, fuzzy
 msgid "Display only Errors"
 msgstr "केवल त्रुटियां प्रदर्शित करें"
 
-#: display.php:477 display.php:479
+#: display.php:471 display.php:473
 #, fuzzy
 msgid "Display Errors and Warnings"
 msgstr "त्रुटियां और चेतावनी प्रदर्शित करें"
 
-#: display.php:483 display.php:485
+#: display.php:477 display.php:479
 #, fuzzy
 msgid "Display All"
 msgstr "सभी प्रदर्शित करें"
 
-#: display.php:489 display.php:492
+#: display.php:483 display.php:486
 #, fuzzy
-msgid "Sort by - Red-Yellow-Green-Gray"
+msgid "Sort by - red-yellow-green-gray"
 msgstr "द्वारा क्रमबद्ध - लाल-पीला-हरा-ग्रे"
 
-#: display.php:490 display.php:493
+#: display.php:484
 #, fuzzy
-msgid "Sort by Panel Priority"
+msgid "Sort by panel priority"
 msgstr "पैनल प्राथमिकता द्वारा क्रमबद्ध करें"
 
-#: display.php:497
+#: display.php:487
+#, fuzzy
+msgid "Sort by panel Priority"
+msgstr "पैनल प्राथमिकता द्वारा क्रमबद्ध करें"
+
+#: display.php:491
 #, fuzzy
 msgid "Reset panel Order to Default"
 msgstr "डिफ़ॉल्ट पर पैनल ऑर्डर को रीसेट करें"
 
-#: display.php:500
+#: display.php:494
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "डिफ़ॉल्ट पर सभी रीसेट करें"
 
-#: display.php:512
+#: display.php:506
 #, fuzzy
 msgid "Set intropage as default page"
 msgstr "डिफ़ॉल्ट पृष्ठ के रूप में इंट्रोपेज सेट करें"
 
-#: display.php:514
+#: display.php:508
 #, fuzzy
 msgid "Set graph as default page"
 msgstr "डिफ़ॉल्ट पृष्ठ के रूप में ग्राफ सेट करें"
 
-#: display.php:519
+#: display.php:513
 #, fuzzy
 msgid "Go"
 msgstr "चले जाओ"
@@ -533,7 +538,7 @@ msgstr "कोई भी गैर-सूचीबद्ध डेटा स्�
 msgid "Hosts"
 msgstr "मेजबान"
 
-#: include/data.php:922 include/data.php:1065 include/variables.php:88
+#: include/data.php:922 include/data.php:1065 include/variables.php:89
 msgid "All"
 msgstr "所有"
 
@@ -927,35 +932,44 @@ msgstr "DB ठीक है"
 
 #: include/helpers.php:446
 #, fuzzy
-msgid "Connection errors - try to restart SQL service."
+msgid "Connection errors - try to restart SQL service, check SQL log, ..."
 msgstr "कनेक्शन त्रुटियां - SQL सेवा को पुनरारंभ करने का प्रयास करें।"
 
-#: include/helpers.php:453
+#: include/helpers.php:462
+msgid "Aborted clients/connects - check logs."
+msgstr ""
+
+#: include/helpers.php:469
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "कनेक्शन त्रुटियां: %s"
 
-#: include/helpers.php:454
+#: include/helpers.php:470
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr ""
+
+#: include/helpers.php:471
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "क्षतिग्रस्त टेबल: %s"
 
-#: include/helpers.php:455
+#: include/helpers.php:472
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "मेमोरी टेबल: %s"
 
-#: include/helpers.php:456
+#: include/helpers.php:473
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "सभी टेबल: %s"
 
-#: include/helpers.php:473
+#: include/helpers.php:490
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "डैशबोर्ड से निकालें"
 
-#: include/helpers.php:475
+#: include/helpers.php:492
 #, fuzzy
 msgid "Add to Dashboard"
 msgstr "डैशबोर्ड में जोड़ें"
@@ -1149,87 +1163,91 @@ msgid "How often"
 msgstr "कितनी बार"
 
 #: include/variables.php:74
+msgid "Automatically by poller"
+msgstr ""
+
+#: include/variables.php:75
 #, fuzzy
 msgid "Never"
 msgstr "कभी नहीँ"
 
-#: include/variables.php:75
+#: include/variables.php:76
 #, fuzzy
 msgid "Every Minute"
 msgstr "हर मिनट"
 
-#: include/variables.php:76 include/variables.php:105 include/variables.php:139
+#: include/variables.php:77 include/variables.php:106 include/variables.php:140
 #, fuzzy, php-format
 msgid "Every %d Minutes"
 msgstr "प्रत्येक% d मिनट"
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:78 include/variables.php:107 include/variables.php:141
 #, fuzzy
 msgid "Every Hour"
 msgstr "प्रत्येक घंटे"
 
-#: include/variables.php:82
+#: include/variables.php:83
 msgid "Display"
 msgstr "डिस्प्ले"
 
-#: include/variables.php:83
+#: include/variables.php:84
 #, fuzzy
 msgid "What will you see"
 msgstr "आप क्या देखोगे"
 
-#: include/variables.php:86
+#: include/variables.php:87
 #, fuzzy
 msgid "Only Errors"
 msgstr "केवल त्रुटियां"
 
-#: include/variables.php:87
+#: include/variables.php:88
 #, fuzzy
 msgid "Errors and Warnings"
 msgstr "त्रुटियां और चेतावनी"
 
-#: include/variables.php:93
+#: include/variables.php:94
 #, fuzzy
 msgid "Analyse log -  number of lines"
 msgstr "लॉग का विश्लेषण करें - लाइनों की संख्या"
 
-#: include/variables.php:94
+#: include/variables.php:95
 #, fuzzy
 msgid ""
 "How many lines of log will be analysed. Big number may causes slow page load"
 msgstr ""
 "लॉग की कितनी लाइनों का विश्लेषण किया जाएगा। बड़ी संख्या में धीमा पृष्ठ लोड हो सकता है"
 
-#: include/variables.php:101
+#: include/variables.php:102
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "कितनी बार DB का विश्लेषण करें"
 
-#: include/variables.php:102
+#: include/variables.php:103
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "पोलर इस कार्य को चलाता है। यह लंबे समय तक मतदाता चलाने का कारण बन सकता है।"
 
-#: include/variables.php:107 include/variables.php:141
+#: include/variables.php:108 include/variables.php:142
 #, fuzzy
 msgid "Every Day"
 msgstr "हर दिन"
 
-#: include/variables.php:108
+#: include/variables.php:109
 #, fuzzy
 msgid "Every Week"
 msgstr "प्रति सप्ताह"
 
-#: include/variables.php:109
+#: include/variables.php:110
 #, fuzzy
 msgid "Every Month"
 msgstr "हर महीने"
 
-#: include/variables.php:114
+#: include/variables.php:115
 #, fuzzy
 msgid "Analyse DB - Level of db check"
 msgstr "DB का विश्लेषण करें - db जाँच का स्तर"
 
-#: include/variables.php:115
+#: include/variables.php:116
 #, fuzzy
 msgid ""
 "Quick - No Check rows for inforccert links<br/>Fast - check only not "
@@ -1242,59 +1260,59 @@ msgstr ""
 "पंक्तियों के साथ स्कैन <br/> विस्तारित - पूर्ण पंक्तियाँ और कुंजियाँ <br/> <strong>मध्यम और "
 "विस्तारित धीमा पृष्ठ लोड का कारण हो सकता है!</strong>"
 
-#: include/variables.php:118
+#: include/variables.php:119
 #, fuzzy
 msgid "Quick"
 msgstr "शीघ्र"
 
-#: include/variables.php:119
+#: include/variables.php:120
 #, fuzzy
 msgid "Fast"
 msgstr "उपवास"
 
-#: include/variables.php:120
+#: include/variables.php:121
 #, fuzzy
 msgid "Changed"
 msgstr "बदला हुआ"
 
-#: include/variables.php:121
+#: include/variables.php:122
 #, fuzzy
 msgid "Medium"
 msgstr "मध्यम"
 
-#: include/variables.php:122
+#: include/variables.php:123
 #, fuzzy
 msgid "Extended"
 msgstr "विस्तृत"
 
-#: include/variables.php:127
+#: include/variables.php:128
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP (समय) जाँच - IP या DNS नाम NTP सर्वर"
 
-#: include/variables.php:128
+#: include/variables.php:129
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "NTP सर्वर का IP या DNS नाम डालें"
 
-#: include/variables.php:135
+#: include/variables.php:136
 #, fuzzy
 msgid "How often check NTP"
 msgstr "कितनी बार NTP देखें"
 
-#: include/variables.php:136
+#: include/variables.php:137
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr ""
 "<strong>पोलर इस कार्य को चलाता है। यह लंबे समय तक मतदाता चलाने का कारण बन सकता है।"
 "</strong>"
 
-#: include/variables.php:147
+#: include/variables.php:148
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "रखरखाव कार्यों, डाउन डिवाइसेज़ के बारे में व्यवस्थापक जानकारी पैनल, ।।"
 
-#: include/variables.php:148
+#: include/variables.php:149
 #, fuzzy
 msgid ""
 "If isn't empty, panel will be displayed on the top. You can use html tags "
@@ -1303,27 +1321,27 @@ msgstr ""
 "यदि खाली नहीं है, तो पैनल शीर्ष पर प्रदर्शित किया जाएगा। आप html टैग (b, i, ...) का "
 "उपयोग कर सकते हैं।"
 
-#: include/variables.php:157
+#: include/variables.php:158
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "मेन्ट प्लगइन - डिस्प्ले अलर्ट से कितने दिन पहले"
 
-#: include/variables.php:158
+#: include/variables.php:159
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "कितने दिन?"
 
-#: include/variables.php:161
+#: include/variables.php:162
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "जब रखरखाव शुरू होता है"
 
-#: include/variables.php:162
+#: include/variables.php:163
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "% द डे से पहले"
 
-#: include/variables.php:163 include/variables.php:164
+#: include/variables.php:164 include/variables.php:165
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "% d दिन पहले"

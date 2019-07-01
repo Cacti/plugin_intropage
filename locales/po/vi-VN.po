@@ -7,139 +7,144 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:41-0400\n"
+"POT-Creation-Date: 2019-07-01 15:20+0200\n"
 "PO-Revision-Date: 2019-06-09 14:30-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: vi_VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: vi_VN\n"
 
-#: display.php:32
+#: display.php:30
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage - sự cho phép bị từ chối"
 
-#: display.php:152
+#: display.php:146
 #, fuzzy
 msgid ""
-"You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard "
-"</b> and use the whole page for Intropage<br/><br/>"
+"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
+"Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 "Bạn có thể tắt các hàng ở trên trong <b>Cài đặt -> Chung -> Ẩn Bảng điều "
 "khiển Cacti</b> và sử dụng toàn bộ trang cho Intropage <br/><br/>"
 
-#: display.php:357
+#: display.php:351
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "Vô hiệu hóa di chuyển bảng / Bật sao chép văn bản từ bảng điều khiển"
 
-#: display.php:362
+#: display.php:356
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr ""
 "Cho phép di chuyển bảng / Vô hiệu hóa văn bản sao chép từ bảng điều khiển"
 
-#: display.php:400
+#: display.php:394
 #, fuzzy
 msgid "Error reading new data"
 msgstr "Lỗi đọc dữ liệu mới"
 
-#: display.php:421
+#: display.php:415
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr ""
 "Vô hiệu hóa di chuyển bảng / cho phép sao chép văn bản từ bảng điều khiển"
 
-#: display.php:425
+#: display.php:419
 #, fuzzy
 msgid "Select action ..."
 msgstr "Chọn hành động ..."
 
-#: display.php:436
+#: display.php:430
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "Thêm bảng %s"
 
-#: display.php:438
+#: display.php:432
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "Thêm bảng điều khiển %s %s"
 
-#: display.php:444
+#: display.php:438
 #, fuzzy
 msgid "Refresh Now"
 msgstr "Làm mới ngay"
 
-#: display.php:447 display.php:449
+#: display.php:441 display.php:443
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "Autorefresh bị vô hiệu hóa"
 
-#: display.php:453 display.php:455
+#: display.php:447 display.php:449
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "Autorefresh 1 phút"
 
-#: display.php:459 display.php:461
+#: display.php:453 display.php:455
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "Autorefresh 5 phút"
 
-#: display.php:465 display.php:467
+#: display.php:459 display.php:461
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "Autorefresh 1 giờ"
 
-#: display.php:471 display.php:473
+#: display.php:465 display.php:467
 #, fuzzy
 msgid "Display only Errors"
 msgstr "Chỉ hiển thị lỗi"
 
-#: display.php:477 display.php:479
+#: display.php:471 display.php:473
 #, fuzzy
 msgid "Display Errors and Warnings"
 msgstr "Hiển thị lỗi và cảnh báo"
 
-#: display.php:483 display.php:485
+#: display.php:477 display.php:479
 #, fuzzy
 msgid "Display All"
 msgstr "Hiển thị tất cả"
 
-#: display.php:489 display.php:492
+#: display.php:483 display.php:486
 #, fuzzy
-msgid "Sort by - Red-Yellow-Green-Gray"
+msgid "Sort by - red-yellow-green-gray"
 msgstr "Sắp xếp theo - Đỏ-Vàng-Xanh-Xám"
 
-#: display.php:490 display.php:493
+#: display.php:484
 #, fuzzy
-msgid "Sort by Panel Priority"
+msgid "Sort by panel priority"
 msgstr "Sắp xếp theo bảng ưu tiên"
 
-#: display.php:497
+#: display.php:487
+#, fuzzy
+msgid "Sort by panel Priority"
+msgstr "Sắp xếp theo bảng ưu tiên"
+
+#: display.php:491
 #, fuzzy
 msgid "Reset panel Order to Default"
 msgstr "Đặt lại bảng điều khiển để mặc định"
 
-#: display.php:500
+#: display.php:494
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "Đặt lại tất cả về mặc định"
 
-#: display.php:512
+#: display.php:506
 #, fuzzy
 msgid "Set intropage as default page"
 msgstr "Đặt intropage làm trang mặc định"
 
-#: display.php:514
+#: display.php:508
 #, fuzzy
 msgid "Set graph as default page"
 msgstr "Đặt biểu đồ làm trang mặc định"
 
-#: display.php:519
+#: display.php:513
 msgid "Go"
 msgstr "Đi"
 
@@ -526,7 +531,7 @@ msgstr "Không tìm thấy nguồn dữ liệu nào"
 msgid "Hosts"
 msgstr "Hosts"
 
-#: include/data.php:922 include/data.php:1065 include/variables.php:88
+#: include/data.php:922 include/data.php:1065 include/variables.php:89
 msgid "All"
 msgstr "Tất cả"
 
@@ -912,35 +917,44 @@ msgstr "DB OK"
 
 #: include/helpers.php:446
 #, fuzzy
-msgid "Connection errors - try to restart SQL service."
+msgid "Connection errors - try to restart SQL service, check SQL log, ..."
 msgstr "Lỗi kết nối - thử khởi động lại dịch vụ SQL."
 
-#: include/helpers.php:453
+#: include/helpers.php:462
+msgid "Aborted clients/connects - check logs."
+msgstr ""
+
+#: include/helpers.php:469
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "Lỗi kết nối: %s"
 
-#: include/helpers.php:454
+#: include/helpers.php:470
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr ""
+
+#: include/helpers.php:471
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "Bảng bị hư hỏng: %s"
 
-#: include/helpers.php:455
+#: include/helpers.php:472
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "Bảng bộ nhớ: %s"
 
-#: include/helpers.php:456
+#: include/helpers.php:473
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "Tất cả các bảng: %s"
 
-#: include/helpers.php:473
+#: include/helpers.php:490
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "Xóa khỏi Bảng điều khiển"
 
-#: include/helpers.php:475
+#: include/helpers.php:492
 #, fuzzy
 msgid "Add to Dashboard"
 msgstr "Thêm vào Bảng điều khiển"
@@ -1137,48 +1151,52 @@ msgid "How often"
 msgstr "Bao lau"
 
 #: include/variables.php:74
+msgid "Automatically by poller"
+msgstr ""
+
+#: include/variables.php:75
 msgid "Never"
 msgstr "Không bao giờ"
 
-#: include/variables.php:75
+#: include/variables.php:76
 msgid "Every Minute"
 msgstr "Mỗi phút"
 
-#: include/variables.php:76 include/variables.php:105 include/variables.php:139
+#: include/variables.php:77 include/variables.php:106 include/variables.php:140
 #, php-format
 msgid "Every %d Minutes"
 msgstr "Mỗi% d Phút"
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:78 include/variables.php:107 include/variables.php:141
 #, fuzzy
 msgid "Every Hour"
 msgstr "Mỗi tiếng"
 
-#: include/variables.php:82
+#: include/variables.php:83
 msgid "Display"
 msgstr "Hiển thị"
 
-#: include/variables.php:83
+#: include/variables.php:84
 #, fuzzy
 msgid "What will you see"
 msgstr "Bạn sẽ thấy gì"
 
-#: include/variables.php:86
+#: include/variables.php:87
 #, fuzzy
 msgid "Only Errors"
 msgstr "Chỉ có lỗi"
 
-#: include/variables.php:87
+#: include/variables.php:88
 #, fuzzy
 msgid "Errors and Warnings"
 msgstr "Lỗi và cảnh báo"
 
-#: include/variables.php:93
+#: include/variables.php:94
 #, fuzzy
 msgid "Analyse log -  number of lines"
 msgstr "Phân tích nhật ký - số dòng"
 
-#: include/variables.php:94
+#: include/variables.php:95
 #, fuzzy
 msgid ""
 "How many lines of log will be analysed. Big number may causes slow page load"
@@ -1186,37 +1204,37 @@ msgstr ""
 "Có bao nhiêu dòng nhật ký sẽ được phân tích. Số lượng lớn có thể gây ra tải "
 "trang chậm"
 
-#: include/variables.php:101
+#: include/variables.php:102
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "Tần suất phân tích DB"
 
-#: include/variables.php:102
+#: include/variables.php:103
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "Poller chạy nhiệm vụ này. Nó có thể gây ra chạy xe đẩy dài."
 
-#: include/variables.php:107 include/variables.php:141
+#: include/variables.php:108 include/variables.php:142
 #, fuzzy
 msgid "Every Day"
 msgstr "Hàng ngày"
 
-#: include/variables.php:108
+#: include/variables.php:109
 #, fuzzy
 msgid "Every Week"
 msgstr "Mỗi tuần"
 
-#: include/variables.php:109
+#: include/variables.php:110
 #, fuzzy
 msgid "Every Month"
 msgstr "Mỗi tháng"
 
-#: include/variables.php:114
+#: include/variables.php:115
 #, fuzzy
 msgid "Analyse DB - Level of db check"
 msgstr "Phân tích DB - Mức kiểm tra db"
 
-#: include/variables.php:115
+#: include/variables.php:116
 #, fuzzy
 msgid ""
 "Quick - No Check rows for inforccert links<br/>Fast - check only not "
@@ -1230,54 +1248,54 @@ msgstr ""
 "đầy đủ hàng và khóa <br/> <strong>Trung bình và mở rộng có thể gây ra tải "
 "trang chậm!</strong>"
 
-#: include/variables.php:118
+#: include/variables.php:119
 msgid "Quick"
 msgstr "Nhanh chóng"
 
-#: include/variables.php:119
+#: include/variables.php:120
 msgid "Fast"
 msgstr "Nhanh"
 
-#: include/variables.php:120
+#: include/variables.php:121
 #, fuzzy
 msgid "Changed"
 msgstr "Thay đổi"
 
-#: include/variables.php:121
+#: include/variables.php:122
 msgid "Medium"
 msgstr "Trung bình"
 
-#: include/variables.php:122
+#: include/variables.php:123
 msgid "Extended"
 msgstr "Mở rộng"
 
-#: include/variables.php:127
+#: include/variables.php:128
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "Kiểm tra NTP (thời gian) - Tên IP hoặc DNS của máy chủ NTP"
 
-#: include/variables.php:128
+#: include/variables.php:129
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "Chèn tên IP hoặc DNS của máy chủ NTP"
 
-#: include/variables.php:135
+#: include/variables.php:136
 #, fuzzy
 msgid "How often check NTP"
 msgstr "Tần suất kiểm tra NTP"
 
-#: include/variables.php:136
+#: include/variables.php:137
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr ""
 "<strong>Poller chạy nhiệm vụ này. Nó có thể gây ra chạy xe đẩy dài.</strong>"
 
-#: include/variables.php:147
+#: include/variables.php:148
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "Bảng thông tin quản trị về các nhiệm vụ bảo trì, thiết bị xuống, .."
 
-#: include/variables.php:148
+#: include/variables.php:149
 #, fuzzy
 msgid ""
 "If isn't empty, panel will be displayed on the top. You can use html tags "
@@ -1286,27 +1304,27 @@ msgstr ""
 "Nếu không trống, bảng sẽ được hiển thị trên cùng. Bạn có thể sử dụng thẻ "
 "html (b, i, ...)."
 
-#: include/variables.php:157
+#: include/variables.php:158
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "Duy trì plugin - bao nhiêu ngày trước khi hiển thị cảnh báo"
 
-#: include/variables.php:158
+#: include/variables.php:159
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "Bao nhiêu ngày?"
 
-#: include/variables.php:161
+#: include/variables.php:162
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "Khi bảo trì bắt đầu"
 
-#: include/variables.php:162
+#: include/variables.php:163
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "% d Ngày trước"
 
-#: include/variables.php:163 include/variables.php:164
+#: include/variables.php:164 include/variables.php:165
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "% d Ngày trước"

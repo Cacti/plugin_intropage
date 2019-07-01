@@ -7,137 +7,142 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:41-0400\n"
+"POT-Creation-Date: 2019-07-01 15:20+0200\n"
 "PO-Revision-Date: 2019-06-09 14:04-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: ja_JP\n"
 
-#: display.php:32
+#: display.php:30
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage  - 許可が拒否されました"
 
-#: display.php:152
+#: display.php:146
 #, fuzzy
 msgid ""
-"You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard "
-"</b> and use the whole page for Intropage<br/><br/>"
+"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
+"Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 "上の<b>設定 - >一般 - > Hide Cacti Dashboard</b>で行を無効にして、ページ全体"
 "をIntropageに使うことができます。 <br/><br/>"
 
-#: display.php:357
+#: display.php:351
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "パネル移動を無効にする/パネルからのテキストのコピーを有効にする"
 
-#: display.php:362
+#: display.php:356
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr "パネル移動を有効にする/パネルからテキストをコピーするのを無効にする"
 
-#: display.php:400
+#: display.php:394
 #, fuzzy
 msgid "Error reading new data"
 msgstr "新しいデータの読み取りエラー"
 
-#: display.php:421
+#: display.php:415
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "パネルの移動を無効にする/パネルからのテキストのコピーを有効にする"
 
-#: display.php:425
+#: display.php:419
 #, fuzzy
 msgid "Select action ..."
 msgstr "アクションを選択してください..."
 
-#: display.php:436
+#: display.php:430
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "パネル％sを追加"
 
-#: display.php:438
+#: display.php:432
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "パネルを追加％s％s"
 
-#: display.php:444
+#: display.php:438
 #, fuzzy
 msgid "Refresh Now"
 msgstr "今すぐ更新"
 
-#: display.php:447 display.php:449
+#: display.php:441 display.php:443
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "自動リフレッシュ無効"
 
-#: display.php:453 display.php:455
+#: display.php:447 display.php:449
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "自動リフレッシュ1分"
 
-#: display.php:459 display.php:461
+#: display.php:453 display.php:455
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "自動リフレッシュ5分"
 
-#: display.php:465 display.php:467
+#: display.php:459 display.php:461
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "自動リフレッシュ1時間"
 
-#: display.php:471 display.php:473
+#: display.php:465 display.php:467
 #, fuzzy
 msgid "Display only Errors"
 msgstr "エラーのみ表示"
 
-#: display.php:477 display.php:479
+#: display.php:471 display.php:473
 #, fuzzy
 msgid "Display Errors and Warnings"
 msgstr "エラーと警告を表示する"
 
-#: display.php:483 display.php:485
+#: display.php:477 display.php:479
 #, fuzzy
 msgid "Display All"
 msgstr "すべて表示"
 
-#: display.php:489 display.php:492
+#: display.php:483 display.php:486
 #, fuzzy
-msgid "Sort by - Red-Yellow-Green-Gray"
+msgid "Sort by - red-yellow-green-gray"
 msgstr "並べ替え - 赤 - 黄 - 緑 - 灰色"
 
-#: display.php:490 display.php:493
+#: display.php:484
 #, fuzzy
-msgid "Sort by Panel Priority"
+msgid "Sort by panel priority"
 msgstr "パネルの優先順位で並べ替え"
 
-#: display.php:497
+#: display.php:487
+#, fuzzy
+msgid "Sort by panel Priority"
+msgstr "パネルの優先順位で並べ替え"
+
+#: display.php:491
 #, fuzzy
 msgid "Reset panel Order to Default"
 msgstr "パネルの順序をデフォルトにリセット"
 
-#: display.php:500
+#: display.php:494
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "すべてデフォルトにリセット"
 
-#: display.php:512
+#: display.php:506
 #, fuzzy
 msgid "Set intropage as default page"
 msgstr "イントロページをデフォルトページとして設定"
 
-#: display.php:514
+#: display.php:508
 #, fuzzy
 msgid "Set graph as default page"
 msgstr "グラフをデフォルトページとして設定"
 
-#: display.php:519
+#: display.php:513
 msgid "Go"
 msgstr "Go"
 
@@ -525,7 +530,7 @@ msgstr "テンプレートされていないデータソースが見つかりま
 msgid "Hosts"
 msgstr "ホスト"
 
-#: include/data.php:922 include/data.php:1065 include/variables.php:88
+#: include/data.php:922 include/data.php:1065 include/variables.php:89
 msgid "All"
 msgstr "すべて"
 
@@ -912,35 +917,44 @@ msgstr "DB OK"
 
 #: include/helpers.php:446
 #, fuzzy
-msgid "Connection errors - try to restart SQL service."
+msgid "Connection errors - try to restart SQL service, check SQL log, ..."
 msgstr "接続エラー -  SQLサービスを再起動してください。"
 
-#: include/helpers.php:453
+#: include/helpers.php:462
+msgid "Aborted clients/connects - check logs."
+msgstr ""
+
+#: include/helpers.php:469
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "接続エラー：％s"
 
-#: include/helpers.php:454
+#: include/helpers.php:470
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr ""
+
+#: include/helpers.php:471
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "破損したテーブル：％s"
 
-#: include/helpers.php:455
+#: include/helpers.php:472
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "メモリテーブル：％s"
 
-#: include/helpers.php:456
+#: include/helpers.php:473
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "すべてのテーブル：％s"
 
-#: include/helpers.php:473
+#: include/helpers.php:490
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "ダッシュボードから削除"
 
-#: include/helpers.php:475
+#: include/helpers.php:492
 #, fuzzy
 msgid "Add to Dashboard"
 msgstr "ダッシュボードに追加"
@@ -1135,49 +1149,53 @@ msgid "How often"
 msgstr "どのくらいの頻度で"
 
 #: include/variables.php:74
+msgid "Automatically by poller"
+msgstr ""
+
+#: include/variables.php:75
 msgid "Never"
 msgstr "決して"
 
-#: include/variables.php:75
+#: include/variables.php:76
 #, fuzzy
 msgid "Every Minute"
 msgstr "毎分"
 
-#: include/variables.php:76 include/variables.php:105 include/variables.php:139
+#: include/variables.php:77 include/variables.php:106 include/variables.php:140
 #, php-format
 msgid "Every %d Minutes"
 msgstr "%d 分ごと"
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:78 include/variables.php:107 include/variables.php:141
 #, fuzzy
 msgid "Every Hour"
 msgstr "毎時"
 
-#: include/variables.php:82
+#: include/variables.php:83
 msgid "Display"
 msgstr "表示"
 
-#: include/variables.php:83
+#: include/variables.php:84
 #, fuzzy
 msgid "What will you see"
 msgstr "何が見えますか"
 
-#: include/variables.php:86
+#: include/variables.php:87
 #, fuzzy
 msgid "Only Errors"
 msgstr "エラーのみ"
 
-#: include/variables.php:87
+#: include/variables.php:88
 #, fuzzy
 msgid "Errors and Warnings"
 msgstr "エラーと警告"
 
-#: include/variables.php:93
+#: include/variables.php:94
 #, fuzzy
 msgid "Analyse log -  number of lines"
 msgstr "ログを分析 - 行数"
 
-#: include/variables.php:94
+#: include/variables.php:95
 #, fuzzy
 msgid ""
 "How many lines of log will be analysed. Big number may causes slow page load"
@@ -1185,39 +1203,39 @@ msgstr ""
 "何行のログが分析されるか。数値が大きいとページの読み込みが遅くなる可能性があ"
 "ります"
 
-#: include/variables.php:101
+#: include/variables.php:102
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "DB分析頻度"
 
-#: include/variables.php:102
+#: include/variables.php:103
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr ""
 "ポーラーがこのタスクを実行します。それは長いポーラーランを引き起こす可能性が"
 "あります。"
 
-#: include/variables.php:107 include/variables.php:141
+#: include/variables.php:108 include/variables.php:142
 #, fuzzy
 msgid "Every Day"
 msgstr "毎日"
 
-#: include/variables.php:108
+#: include/variables.php:109
 #, fuzzy
 msgid "Every Week"
 msgstr "毎週"
 
-#: include/variables.php:109
+#: include/variables.php:110
 #, fuzzy
 msgid "Every Month"
 msgstr "毎月"
 
-#: include/variables.php:114
+#: include/variables.php:115
 #, fuzzy
 msgid "Analyse DB - Level of db check"
 msgstr "DBの分析 - データベースチェックのレベル"
 
-#: include/variables.php:115
+#: include/variables.php:116
 #, fuzzy
 msgid ""
 "Quick - No Check rows for inforccert links<br/>Fast - check only not "
@@ -1230,54 +1248,54 @@ msgstr ""
 "れました<br/>中 - 行スキャンあり<br/>拡張 - フル行とキー<br/> <strong>中と拡"
 "張は遅いページロードを引き起こすかもしれません！</strong>"
 
-#: include/variables.php:118
+#: include/variables.php:119
 msgid "Quick"
 msgstr "クイック"
 
-#: include/variables.php:119
+#: include/variables.php:120
 msgid "Fast"
 msgstr "高速"
 
-#: include/variables.php:120
+#: include/variables.php:121
 msgid "Changed"
 msgstr "変更点"
 
-#: include/variables.php:121
+#: include/variables.php:122
 msgid "Medium"
 msgstr "中"
 
-#: include/variables.php:122
+#: include/variables.php:123
 msgid "Extended"
 msgstr "拡張"
 
-#: include/variables.php:127
+#: include/variables.php:128
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP（時間）チェック -  NTPサーバーのIPまたはDNS名"
 
-#: include/variables.php:128
+#: include/variables.php:129
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "NTPサーバーのIPまたはDNS名を入力"
 
-#: include/variables.php:135
+#: include/variables.php:136
 #, fuzzy
 msgid "How often check NTP"
 msgstr "NTPをチェックする頻度"
 
-#: include/variables.php:136
+#: include/variables.php:137
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr ""
 "<strong>ポーラーがこのタスクを実行します。それは長いポーラーの実行を引き起こ"
 "す可能性があります。</strong>"
 
-#: include/variables.php:147
+#: include/variables.php:148
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "メンテナンスタスクに関する管理者情報パネル、デバイスのダウンなど"
 
-#: include/variables.php:148
+#: include/variables.php:149
 #, fuzzy
 msgid ""
 "If isn't empty, panel will be displayed on the top. You can use html tags "
@@ -1286,27 +1304,27 @@ msgstr ""
 "空でなければ、パネルが一番上に表示されます。あなたは、HTMLタグ（b、i、...）を"
 "使用することができます。"
 
-#: include/variables.php:157
+#: include/variables.php:158
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "Maintプラグイン - アラートを表示するまでの日数"
 
-#: include/variables.php:158
+#: include/variables.php:159
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "何日？"
 
-#: include/variables.php:161
+#: include/variables.php:162
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "メンテナンス開始時"
 
-#: include/variables.php:162
+#: include/variables.php:163
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "前の％d日"
 
-#: include/variables.php:163 include/variables.php:164
+#: include/variables.php:164 include/variables.php:165
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "％d日前"

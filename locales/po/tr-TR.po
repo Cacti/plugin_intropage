@@ -7,139 +7,144 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-09 13:41-0400\n"
+"POT-Creation-Date: 2019-07-01 15:20+0200\n"
 "PO-Revision-Date: 2019-06-09 14:29-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.3\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr_TR\n"
 
-#: display.php:32
+#: display.php:30
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage - izin reddedildi"
 
-#: display.php:152
+#: display.php:146
 #, fuzzy
 msgid ""
-"You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard "
-"</b> and use the whole page for Intropage<br/><br/>"
+"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
+"Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 "Yukarıdaki satırları <b>Ayarlar -> Genel -></b> Kaktüsler <b>Gösterge "
 "Tablosunu Gizle</b> bölümünden devre dışı bırakabilir ve tüm sayfayı "
 "Intropage için <br/><br/>"
 
-#: display.php:357
+#: display.php:351
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "Panel taşımasını devre dışı bırak / Metni kopyala"
 
-#: display.php:362
+#: display.php:356
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr "Panel hareketini etkinleştir / Metni kopyala panelden devre dışı bırak"
 
-#: display.php:400
+#: display.php:394
 #, fuzzy
 msgid "Error reading new data"
 msgstr "Yeni veri okunurken hata oluştu"
 
-#: display.php:421
+#: display.php:415
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr ""
 "Panelde metni kopyala panelini taşıma / etkinleştirmeyi devre dışı bırakma"
 
-#: display.php:425
+#: display.php:419
 #, fuzzy
 msgid "Select action ..."
 msgstr "Eylemi seç ..."
 
-#: display.php:436
+#: display.php:430
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "%s panelini ekle"
 
-#: display.php:438
+#: display.php:432
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "%s %s panelini ekle"
 
-#: display.php:444
+#: display.php:438
 #, fuzzy
 msgid "Refresh Now"
 msgstr "Şimdi yenile"
 
-#: display.php:447 display.php:449
+#: display.php:441 display.php:443
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "Otomatik Yenileme Devre Dışı"
 
-#: display.php:453 display.php:455
+#: display.php:447 display.php:449
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "Autorefresh 1 Dakika"
 
-#: display.php:459 display.php:461
+#: display.php:453 display.php:455
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "Autorefresh 5 Dakika"
 
-#: display.php:465 display.php:467
+#: display.php:459 display.php:461
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "Autorefresh 1 Saat"
 
-#: display.php:471 display.php:473
+#: display.php:465 display.php:467
 #, fuzzy
 msgid "Display only Errors"
 msgstr "Sadece Hataları Göster"
 
-#: display.php:477 display.php:479
+#: display.php:471 display.php:473
 #, fuzzy
 msgid "Display Errors and Warnings"
 msgstr "Hataları ve Uyarıları Göster"
 
-#: display.php:483 display.php:485
+#: display.php:477 display.php:479
 #, fuzzy
 msgid "Display All"
 msgstr "Tümünü Göster"
 
-#: display.php:489 display.php:492
+#: display.php:483 display.php:486
 #, fuzzy
-msgid "Sort by - Red-Yellow-Green-Gray"
+msgid "Sort by - red-yellow-green-gray"
 msgstr "Sırala - Kırmızı-Sarı-Yeşil-Gri"
 
-#: display.php:490 display.php:493
+#: display.php:484
 #, fuzzy
-msgid "Sort by Panel Priority"
+msgid "Sort by panel priority"
 msgstr "Panel Önceliğine Göre Sırala"
 
-#: display.php:497
+#: display.php:487
+#, fuzzy
+msgid "Sort by panel Priority"
+msgstr "Panel Önceliğine Göre Sırala"
+
+#: display.php:491
 #, fuzzy
 msgid "Reset panel Order to Default"
 msgstr "Panel Siparişini Varsayılana Sıfırla"
 
-#: display.php:500
+#: display.php:494
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "Tümünü Varsayılana Sıfırla"
 
-#: display.php:512
+#: display.php:506
 #, fuzzy
 msgid "Set intropage as default page"
 msgstr "Intropage'i varsayılan sayfa olarak ayarla"
 
-#: display.php:514
+#: display.php:508
 #, fuzzy
 msgid "Set graph as default page"
 msgstr "Grafiği varsayılan sayfa olarak ayarla"
 
-#: display.php:519
+#: display.php:513
 msgid "Go"
 msgstr "Git"
 
@@ -526,7 +531,7 @@ msgstr "İşlenmemiş veri kaynağı bulunamadı"
 msgid "Hosts"
 msgstr "Sunucular"
 
-#: include/data.php:922 include/data.php:1065 include/variables.php:88
+#: include/data.php:922 include/data.php:1065 include/variables.php:89
 msgid "All"
 msgstr "Tümü"
 
@@ -915,35 +920,44 @@ msgstr "DB Tamam"
 
 #: include/helpers.php:446
 #, fuzzy
-msgid "Connection errors - try to restart SQL service."
+msgid "Connection errors - try to restart SQL service, check SQL log, ..."
 msgstr "Bağlantı hataları - SQL servisini yeniden başlatmayı deneyin."
 
-#: include/helpers.php:453
+#: include/helpers.php:462
+msgid "Aborted clients/connects - check logs."
+msgstr ""
+
+#: include/helpers.php:469
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "Bağlantı hataları: %s"
 
-#: include/helpers.php:454
+#: include/helpers.php:470
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr ""
+
+#: include/helpers.php:471
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "Hasarlı tablolar: %s"
 
-#: include/helpers.php:455
+#: include/helpers.php:472
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "Bellek tabloları: %s"
 
-#: include/helpers.php:456
+#: include/helpers.php:473
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "Tüm tablolar: %s"
 
-#: include/helpers.php:473
+#: include/helpers.php:490
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "Gösterge Tablosundan Kaldır"
 
-#: include/helpers.php:475
+#: include/helpers.php:492
 #, fuzzy
 msgid "Add to Dashboard"
 msgstr "Gösterge Tablosuna Ekle"
@@ -1139,48 +1153,52 @@ msgid "How often"
 msgstr "Ne sıklıkla"
 
 #: include/variables.php:74
+msgid "Automatically by poller"
+msgstr ""
+
+#: include/variables.php:75
 msgid "Never"
 msgstr "Asla"
 
-#: include/variables.php:75
+#: include/variables.php:76
 msgid "Every Minute"
 msgstr "Dakikada Bir"
 
-#: include/variables.php:76 include/variables.php:105 include/variables.php:139
+#: include/variables.php:77 include/variables.php:106 include/variables.php:140
 #, php-format
 msgid "Every %d Minutes"
 msgstr "Her %d Dakika"
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:78 include/variables.php:107 include/variables.php:141
 #, fuzzy
 msgid "Every Hour"
 msgstr "Her saat"
 
-#: include/variables.php:82
+#: include/variables.php:83
 msgid "Display"
 msgstr "Görüntüle"
 
-#: include/variables.php:83
+#: include/variables.php:84
 #, fuzzy
 msgid "What will you see"
 msgstr "Ne göreceksin"
 
-#: include/variables.php:86
+#: include/variables.php:87
 #, fuzzy
 msgid "Only Errors"
 msgstr "Sadece hatalar"
 
-#: include/variables.php:87
+#: include/variables.php:88
 #, fuzzy
 msgid "Errors and Warnings"
 msgstr "Hatalar ve Uyarılar"
 
-#: include/variables.php:93
+#: include/variables.php:94
 #, fuzzy
 msgid "Analyse log -  number of lines"
 msgstr "Analiz günlüğü - satır sayısı"
 
-#: include/variables.php:94
+#: include/variables.php:95
 #, fuzzy
 msgid ""
 "How many lines of log will be analysed. Big number may causes slow page load"
@@ -1188,35 +1206,35 @@ msgstr ""
 "Kaç satır kütüğü analiz edilecektir. Büyük sayı yavaş sayfa yüklenmesine "
 "neden olabilir"
 
-#: include/variables.php:101
+#: include/variables.php:102
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "DB ne sıklıkla analiz edilir"
 
-#: include/variables.php:102
+#: include/variables.php:103
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr ""
 "Poller bu görevi çalıştırır. Poller uzun süre çalışmasına neden olabilir."
 
-#: include/variables.php:107 include/variables.php:141
+#: include/variables.php:108 include/variables.php:142
 msgid "Every Day"
 msgstr "Her Gün"
 
-#: include/variables.php:108
+#: include/variables.php:109
 msgid "Every Week"
 msgstr "Her Hafta"
 
-#: include/variables.php:109
+#: include/variables.php:110
 msgid "Every Month"
 msgstr "Her Ay"
 
-#: include/variables.php:114
+#: include/variables.php:115
 #, fuzzy
 msgid "Analyse DB - Level of db check"
 msgstr "Analiz et DB - db kontrol seviyesi"
 
-#: include/variables.php:115
+#: include/variables.php:116
 #, fuzzy
 msgid ""
 "Quick - No Check rows for inforccert links<br/>Fast - check only not "
@@ -1230,55 +1248,55 @@ msgstr ""
 "Genişletilmiş - tam satırlar ve anahtarlar <br/> <strong>Orta ve uzatılmış "
 "sayfa yavaş yüklenmesine neden olabilir!</strong>"
 
-#: include/variables.php:118
+#: include/variables.php:119
 #, fuzzy
 msgid "Quick"
 msgstr "Hızlı"
 
-#: include/variables.php:119
+#: include/variables.php:120
 msgid "Fast"
 msgstr "Hızlı"
 
-#: include/variables.php:120
+#: include/variables.php:121
 msgid "Changed"
 msgstr "Değiştirildi"
 
-#: include/variables.php:121
+#: include/variables.php:122
 msgid "Medium"
 msgstr "Orta"
 
-#: include/variables.php:122
+#: include/variables.php:123
 msgid "Extended"
 msgstr "Genişletilmiş"
 
-#: include/variables.php:127
+#: include/variables.php:128
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP (zaman) kontrolü - NTP sunucusunun IP veya DNS adı"
 
-#: include/variables.php:128
+#: include/variables.php:129
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "NTP sunucusunun IP veya DNS adını girin"
 
-#: include/variables.php:135
+#: include/variables.php:136
 #, fuzzy
 msgid "How often check NTP"
 msgstr "NTP'yi ne sıklıkta kontrol edin"
 
-#: include/variables.php:136
+#: include/variables.php:137
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr ""
 "<strong>Poller bu görevi çalıştırır. Poller uzun süre çalışmasına neden "
 "olabilir.</strong>"
 
-#: include/variables.php:147
+#: include/variables.php:148
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "Bakım görevleri, cihazların aşılması hakkında yönetici bilgi paneli."
 
-#: include/variables.php:148
+#: include/variables.php:149
 #, fuzzy
 msgid ""
 "If isn't empty, panel will be displayed on the top. You can use html tags "
@@ -1287,27 +1305,27 @@ msgstr ""
 "Boş değilse, panel üstte görüntülenecektir. Html etiketlerini "
 "kullanabilirsiniz (b, i, ...)."
 
-#: include/variables.php:157
+#: include/variables.php:158
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "Maint eklentisi - ekran uyarısından kaç gün önce"
 
-#: include/variables.php:158
+#: include/variables.php:159
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "Kaç gün?"
 
-#: include/variables.php:161
+#: include/variables.php:162
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "Bakım başladığında"
 
-#: include/variables.php:162
+#: include/variables.php:163
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "% d Gün Önce"
 
-#: include/variables.php:163 include/variables.php:164
+#: include/variables.php:164 include/variables.php:165
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "% d Gün Önce"
