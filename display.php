@@ -389,9 +389,14 @@ function display_information() {
 	}
 
 	function reload_panel(panel_id,by_hand) {
+		$('#panel_'+panel_id).find(".panel_data").css('opacity',0);
+		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
+
 		$.get(urlPath+'plugins/intropage/intropage_ajax.php?autom='+by_hand+'&reload_panel='+panel_id)
 		.done(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html(data) ;
+    			$('#panel_'+panel_id).find(".panel_data").css('opacity',1);
+
 		})
 		.fail(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html('<?php print __('Error reading new data', 'intropage');?>') ;
