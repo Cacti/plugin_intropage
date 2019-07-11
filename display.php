@@ -331,6 +331,13 @@ function display_information() {
 
 		$('#sortable').disableSelection();
 
+		$('.droppanel').click(function(event) {
+			event.preventDefault();
+			panel_div_id = $(this).attr('data-panel');
+			$('#'+panel_div_id).remove();
+			$.get($(this).attr('href'));
+		});
+
 		$('.maxim').off('click').on('click', function() {
 			$(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
 			$(this).nextAll('.article').first().toggle();
@@ -382,13 +389,9 @@ function display_information() {
 	}
 
 	function reload_panel(panel_id,by_hand) {
-		$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
-		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow').delay(800);
-
 		$.get(urlPath+'plugins/intropage/intropage_ajax.php?autom='+by_hand+'&reload_panel='+panel_id)
 		.done(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html(data) ;
-			$('#panel_'+panel_id).find('.panel_data').css('opacity',1);
 		})
 		.fail(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html('<?php print __('Error reading new data', 'intropage');?>') ;
@@ -398,7 +401,7 @@ function display_information() {
 	function reload_all()	{
 		$('#obal li').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
-			reload_panel (panel_id,false);
+			reload_panel(panel_id,false);
 		});
 	}
 

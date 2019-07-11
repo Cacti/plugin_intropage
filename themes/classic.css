@@ -2,6 +2,7 @@
     color: white;
 }
 
-a:link, a:visited, a:hover, a:active 	{
-    color: blue !important;
+.panel-link {
+	padding-left: 2px;
+	padding-right: 2px;
 }
