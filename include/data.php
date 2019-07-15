@@ -375,8 +375,66 @@ function intropage_analyse_tree_host_graph() {
 		}
 		$total_errors += $sql_count;
 	}
+/*	
+	// thold plugin - logonly alert and warning thold
+	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+
+	    $sql_result = db_fetch_assoc('SELECT td.id AS td_id,local_data_id,td.name AS td_name
+		    FROM thold_data AS td
+    		    INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
+    		    LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id
+    		    LEFT JOIN host AS h ON h.id=gl.host_id
+    		    LEFT JOIN thold_template AS tt ON tt.id=td.thold_template_id
+    		    LEFT JOIN plugin_thold_threshold_contact AS tc ON tc.thold_id=tt.id
+    		    WHERE tc.contact_id IS NULL AND tt.notify_alert IS NULL AND tt.notify_extra IS NULL');
+
+	    $sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+
+	    $result['detail'] .= '<br/><b>' . __('Thold logonly alert %s:', $sql_count, 'intropage') . '</b><br/>';
+
+	    if (cacti_sizeof($sql_result)) {
+		$result['data'] .= __('Thold logonly alert: %s', $sql_count, 'intropage') . '<br/>';
+
+		if ($result['alarm'] == 'green') {
+		    $result['alarm'] = 'yellow';
+		}
+
+		foreach ($sql_result as $row) {  
+		    $result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id'] . '">' .
+		    $row['td_name'] . '</a><br/>';
+		}
+		$total_errors += $sql_count;
+	    }
 
 
+	    $sql_result = db_fetch_assoc('SELECT td.id AS td_id,local_data_id,td.name AS td_name
+		    FROM thold_data AS td
+    		    INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
+    		    LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id
+    		    LEFT JOIN host AS h ON h.id=gl.host_id
+    		    LEFT JOIN thold_template AS tt ON tt.id=td.thold_template_id
+    		    WHERE tt.notify_warning_extra IS NULL AND tt.notify_warning IS NULL');
+
+	    $sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+
+	    $result['detail'] .= '<br/><b>' . __('Thold logonly warning %s:', $sql_count, 'intropage') . '</b><br/>';
+
+	    if (cacti_sizeof($sql_result)) {
+		$result['data'] .= __('Thold logonly warning: %s', $sql_count, 'intropage') . '<br/>';
+
+		if ($result['alarm'] == 'green') {
+		    $result['alarm'] = 'yellow';
+		}
+
+		foreach ($sql_result as $row) {  
+		    $result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id'] . '">' .
+		    $row['td_name'] . '</a><br/>';
+		}
+		$total_errors += $sql_count;
+	    }
+	}
+*/
+	
 	// below - only information without red/yellow/green
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 

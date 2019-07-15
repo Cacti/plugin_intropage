@@ -443,7 +443,23 @@ function db_check() {
 	}
 
 	if ($cerrors > 0) {     // only yellow
-		$text_detail .= __('Connection errors - try to restart SQL service.', 'intropage') . '<br/>';
+		$text_detail .= __('Connection errors - try to restart SQL service, check SQL log, ...', 'intropage') . '<br/>';
+
+		if ($alarm == 'green') {
+			$alarm = 'yellow';
+		}
+	}
+
+	// aborted problems
+	$aerrors = 0;
+	$con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Aborted_c%'");
+
+	foreach ($con_err as $key => $val) {
+		$aerrors = $aerrors + $val['Value'];
+	}
+
+	if ($aerrors > 0) {     // only yellow
+		$text_detail .= __('Aborted clients/connects - check logs.', 'intropage') . '<br/>';
 
 		if ($alarm == 'green') {
 			$alarm = 'yellow';
@@ -451,6 +467,7 @@ function db_check() {
 	}
 
 	$text_result .= __('Connection errors: %s', $cerrors, 'intropage') . '<br/>';
+	$text_result .= __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<br/>';
 	$text_result .= __('Damaged tables: %s', $damaged, 'intropage') . '<br/>' .
 		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
 		__('All tables: %s', count($tables), 'intropage');

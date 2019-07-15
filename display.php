@@ -143,7 +143,8 @@ function display_information() {
 
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on')	{
-	    print __('You can disable rows above in <b>Settings -> General -> Hide Cacti Dashboard </b> and use the whole page for Intropage<br/><br/>', 'intropage');
+	    print __('You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
+	    print '<a href="' . $config['url_path'] . 'settings.php"><i class="fas fa-link"></i></a><br/><br/>';
 	}
 
 	// Intropage Display ----------------------------------

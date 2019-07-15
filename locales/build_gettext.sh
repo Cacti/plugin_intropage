@@ -61,8 +61,14 @@ for file in `ls -1 locales/po/*.po`;do
 	msgmerge --backup off --update $file locales/po/cacti.pot
 done
 
+unamestr=`uname`
+
 for file in `ls -1 locales/po/*.po`;do
-  ofile=$(basename --suffix=.po ${file})
+    if [ "$unamestr" == 'Linux' ]; then
+	    ofile=$(basename --suffix=.po ${file})
+    elif [ "$unamestr" == 'FreeBSD' ]; then
+	    ofile=$(basename -s=.po ${file})
+    fi
   echo "Converting $file to LC_MESSAGES/${ofile}.mo"
   msgfmt ${file} -o locales/LC_MESSAGES/${ofile}.mo
 done
