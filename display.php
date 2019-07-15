@@ -376,7 +376,7 @@ function display_information() {
 
 			var panel_id = $(this).attr('id').split('_').pop();
 
-			reload_panel(panel_id,true);
+			reload_panel(panel_id, true, false);
 		});
 	}
 
@@ -387,20 +387,29 @@ function display_information() {
 		}
 	}
 
-	function reload_panel(panel_id,by_hand) {
+	function reload_panel(panel_id, by_hand, refresh) {
+		if (!refresh) {
+			$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
+			$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
+		}
+
 		$.get(urlPath+'plugins/intropage/intropage_ajax.php?autom='+by_hand+'&reload_panel='+panel_id)
 		.done(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html(data) ;
+
+			if (!refresh) {
+				$('#panel_'+panel_id).find('.panel_data').css('opacity',1);
+			}
 		})
 		.fail(function(data) {
-			$('#panel_'+panel_id).find('.panel_data').html('<?php print __('Error reading new data', 'intropage');?>') ;
+			$('#panel_'+panel_id).find('.panel_data').html('<?php print __('Error reading new data', 'intropage');?>');
 		});
 	}
 
 	function reload_all()	{
 		$('#obal li').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
-			reload_panel(panel_id,false);
+			reload_panel(panel_id, false, true);
 		});
 	}
 
