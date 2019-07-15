@@ -375,7 +375,7 @@ function intropage_analyse_tree_host_graph() {
 		}
 		$total_errors += $sql_count;
 	}
-	
+/*	
 	// thold plugin - logonly alert and warning thold
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
 
@@ -433,6 +433,7 @@ function intropage_analyse_tree_host_graph() {
 		$total_errors += $sql_count;
 	    }
 	}
+*/
 	
 	// below - only information without red/yellow/green
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
