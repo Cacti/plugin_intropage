@@ -1418,7 +1418,7 @@ function intropage_poller_info() {
 
 	$sql_pollers = db_fetch_assoc('SELECT p.id, name, status, last_update, total_time
 		FROM poller p
-		INNER JOIN poller_time pt
+		LEFT JOIN poller_time pt
 		ON pt.poller_id = p.id
 		WHERE p.disabled = ""
 		GROUP BY p.id
@@ -1435,15 +1435,7 @@ function intropage_poller_info() {
 				$ok++;
 			}
 
-//    			$age = db_fetch_cell('SELECT time_to_sec(max(timediff(end_time,start_time))) FROM poller_time WHERE poller_id = ' . $poller['id']);
-// !!! tady to asi predelat dle #36, zbytecne si tu komplikuju praci
-//    			$age = db_fetch_cell('SELECT time_to_sec(max(timediff(end_time,start_time))) FROM poller_time WHERE poller_id = ' . $poller['id']);
-//			if ($age < 0) {
-//				$age = '---';
-//			}
-
 			$result['data'] .= $poller['id'] . '/' .  $poller['name'] . '/' .
-//			 $age . 's/' .
 
 			round($poller['total_time']) . 's/';
 
@@ -1510,7 +1502,7 @@ function intropage_poller_stat() {
 
 	$pollers = db_fetch_assoc('SELECT p.id
 		FROM poller p
-		INNER JOIN poller_time pt
+		LEFT JOIN poller_time pt
 		ON pt.poller_id = p.id
 		WHERE p.disabled = ""
 		GROUP BY p.id
