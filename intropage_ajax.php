@@ -69,6 +69,19 @@ if (isset_request_var('reload_panel') &&
 	}
 
 	intropage_display_data(get_request_var('reload_panel'),$data);
+	
+	// change panel color or ena/disa detail
+?>
+       <script type='text/javascript'>
+	//get_request_var('reload_panel')
+            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
+            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_yellow');
+            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_red');
+            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').addClass('color_<?php print $data['alarm'];?>');
+	</script>
+<?php
+	// change panel color or ena/disa detail
+
 
     } else	{
 		echo 'Panel not found';
