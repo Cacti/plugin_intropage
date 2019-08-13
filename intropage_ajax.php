@@ -49,26 +49,27 @@ if (isset_request_var('reload_panel') &&
 
     $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . get_request_var('reload_panel'));
     if ($panel)	{
-		// exception for ntp and db_check
-		if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
-		    if ($panel['panel'] == 'intropage_ntp')	{
-				ntp_time2();
-		    }
+	// exception for ntp and db_check
+	if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
+	    if ($panel['panel'] == 'intropage_ntp')	{
+		ntp_time2();
+	    }
 
-		    if ($panel['panel'] == 'intropage_analyse_db')	{
-				db_check();
-		    }
-		}
+	    if ($panel['panel'] == 'intropage_analyse_db')	{
+		db_check();
+	    }
+	}
 
-		$pokus = $panel['panel'];
+	$pokus = $panel['panel'];
 
-		if (isset($panel['fav_graph_id'])) { // fav_graph exception
-		    $data = intropage_favourite_graph($panel['fav_graph_id']);
-		} else { // normal panel
-   	 	    $data = $pokus();
-		}
+	if (isset($panel['fav_graph_id'])) { // fav_graph exception
+	    $data = intropage_favourite_graph($panel['fav_graph_id']);
+	} else { // normal panel
+ 	    $data = $pokus();
+	}
 
-		intropage_display_data(get_request_var('reload_panel'),$data);
+	intropage_display_data(get_request_var('reload_panel'),$data);
+
     } else	{
 		echo 'Panel not found';
     }
