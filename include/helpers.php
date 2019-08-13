@@ -142,11 +142,6 @@ function intropage_display_data($panel_id,$dispdata) {
 			$bgcolor = '#f5f5f5';
 	}
 
-//	print "	<table class='cactiTable'>\n";
-//	print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
-
-//	print "<div class='panel_data'>\n";
-
 	// pie graph
 
 	if (isset($dispdata['pie'])) {
@@ -339,20 +334,17 @@ EOF;
 		print "</div>\n";
 	} // line graph end
 
+	// end of graph
+
 	elseif (isset($dispdata['data'])) {	// display text data
 		print $dispdata['data'];
 	}
-
-	// end of graph
 
 	if (isset($dispdata['detail'])) {
 		printf("<div id=\"%s\" style=\"display: none\">\n", md5($panel_id));
 		print($dispdata['detail']);
 		print("</div>\n");
 	}
-
-//	print "</div>\n";	// end of panel_data
-
 }
 
 
