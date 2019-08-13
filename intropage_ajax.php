@@ -32,7 +32,6 @@ if (!function_exists("array_column")) {
     }
 }
 
-    // reload single panel
 if (isset_request_var('reload_panel') &&
     get_filter_request_var('reload_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/')))) {
 
@@ -41,10 +40,6 @@ if (isset_request_var('reload_panel') &&
 
     // few requered variables
     $maint_days_before = read_config_option('intropage_maint_plugin_days_before');
-
-    // need for thold - isn't any better solution?
-    //$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
-    //$sql_where     = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 
     $hosts = get_allowed_devices();
     $allowed_hosts = implode(',', array_column($hosts, 'id'));
@@ -77,8 +72,4 @@ if (isset_request_var('reload_panel') &&
     } else	{
 		echo 'Panel not found';
     }
-} else	{	// reload all
-//    include_once('./plugins/intropage/display.php');
-//    display_information();
 }
-
