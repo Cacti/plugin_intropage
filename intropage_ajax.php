@@ -69,18 +69,26 @@ if (isset_request_var('reload_panel') &&
 	}
 
 	intropage_display_data(get_request_var('reload_panel'),$data);
-	
+
 	// change panel color or ena/disa detail
 ?>
        <script type='text/javascript'>
-	//get_request_var('reload_panel')
             $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
             $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_yellow');
             $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_red');
             $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').addClass('color_<?php print $data['alarm'];?>');
+
+<?php
+	    if (isset($data['detail']) && !empty($data['detail']))	{
+        	print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').show();";
+            }
+            else	{
+        	print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').hide();";
+            }
+?> 
 	</script>
 <?php
-	// change panel color or ena/disa detail
+	// end ofchange panel color or ena/disa detail
 
 
     } else	{
