@@ -170,8 +170,8 @@ new Chart($xid, {
     data: {
 	labels: ["$pie_labels"],
 	datasets: [{
-	    backgroundColor: [ "#2ecc71", "#e74c3c", "#3498db", "#9b59b6", "#f1c40f", "#33ffe6", ],
-	    data: [$pie_values]
+	    backgroundColor: [ "#2ecc71", "#e74c3c", "#f1c40f", "#6b6966", "#3498db", "#33ffe6", ],
+	    data: [$pie_values]  
 	}]
     },
     options: {
