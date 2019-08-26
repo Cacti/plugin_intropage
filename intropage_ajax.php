@@ -89,9 +89,11 @@ if (isset_request_var('reload_panel') &&
 	</script>
 <?php
 	// end ofchange panel color or ena/disa detail
-
-
-    } else	{
+    }
+    elseif (get_request_var('reload_panel') == 998) {	// exception for admin alert panel
+	 print nl2br(read_config_option('intropage_admin_alert'));
+    } 
+    else	{
 		echo 'Panel not found';
     }
 }

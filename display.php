@@ -234,7 +234,6 @@ function display_information() {
 	// extra admin panel
 	if (strlen(read_config_option('intropage_admin_alert')) > 3) {
 		$tmp['data'] = nl2br(read_config_option('intropage_admin_alert'));
-
 		intropage_display_panel(998, 'red', 'Admin alert', $tmp);
 	}
 	// end of admin panel
