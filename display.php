@@ -63,7 +63,7 @@ function display_information() {
 	$display_level           = read_user_setting('intropage_display_level', read_config_option('intropage_display_level'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
-	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
+	//$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
 	$hosts = get_allowed_devices();
 	$allowed_hosts = implode(',', array_column($hosts, 'id'));
@@ -160,8 +160,8 @@ function display_information() {
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
 		$start = microtime(true);
 
-		$tmp['data'] = '';
-
+		$tmp['data'] = intropage_maint();
+/*
 		$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
 		if (cacti_sizeof($schedules)) {
 			foreach ($schedules as $sc) {
@@ -218,7 +218,7 @@ function display_information() {
 				}
 			}
 		}
-
+*/
 		if ($tmp['data']) {
 			intropage_display_panel(997, 'red', 'Plugin Maint alert', $tmp);
 			$tmp['data'] = '';

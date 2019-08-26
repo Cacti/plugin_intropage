@@ -47,6 +47,11 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	1.8.3 ---
+	Add thold logonly DS
+	Fix panel reload - Cigamit
+	Fix Admin alert panel - not working with ajax
+	Fix maint panel - not working with ajax
 
 	1.8.2 ---
 	Add panel with worst polling time

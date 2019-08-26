@@ -1937,3 +1937,68 @@ function intropage_favourite_graph($fav_graph_id) {
 	}
 }
 
+// ----------------maint----------------------
+
+function intropage_maint()	{
+	global $config;
+	
+	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
+
+	$data = '';
+
+        $schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
+        if (cacti_sizeof($schedules)) {
+                foreach ($schedules as $sc) {
+                        $t = time();
+
+                        switch ($sc['mtype']) {
+                                case 1:
+                                        if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                $data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                                ' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
+
+                                                $hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        INNER JOIN plugin_maint_hosts
+                                                        ON host.id=plugin_maint_hosts.host
+                                                        WHERE schedule = ?',
+                                                        array($sc['id']));
+
+                                                if (cacti_sizeof($hosts)) {
+                                                        foreach ($hosts as $host) {
+                                                                $data .= $host['description'] . ', ';
+                                                        }
+                                                }
+
+                                                $data = substr($data, 0, -2) .'<br/><br/>';
+                                        }
+                                break;
+
+                                case 2:
+                                        while ($sc['etime'] < $t) {
+                                                $sc['etime'] += $sc['minterval'];
+                                                $sc['stime'] += $sc['minterval'];
+                                        }
+
+                                        if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                $data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                                ' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
+
+                                                $hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        INNER JOIN plugin_maint_hosts
+                                                        ON host.id=plugin_maint_hosts.host
+                                                        WHERE schedule = ?',
+                                                        array($sc['id']));
+
+                                                if (cacti_sizeof($hosts)) {
+                                                        foreach ($hosts as $host) {
+                                                                $data .= $host['description'] . ', ';
+                                                        }
+                                                }
+                                                $data = substr($data, 0, -2) . '<br/><br/>';
+                                        }
+                                break;
+                        }
+                }
+        }
+        return ($data);
+}
