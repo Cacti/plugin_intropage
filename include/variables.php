@@ -79,17 +79,6 @@ $intropage_settings = array(	// default values
 		),
 		'default' => '60',
 	),
-	'intropage_display_level' => array(
-		'friendly_name' => __('Display', 'intropage'),
-		'description' => __('What will you see', 'intropage'),
-		'method' => 'drop_array',
-		'array' => array(
-			'0' => __('Only Errors', 'intropage'),
-			'1' => __('Errors and Warnings', 'intropage'),
-			'2' => __('All', 'intropage')
-		),
-		'default' => '2',
-	),
 	'intropage_analyse_log_rows' => array(
 		'friendly_name' => __('Analyse log -  number of lines', 'intropage'),
 		'description' => __('How many lines of log will be analysed. Big number may causes slow page load', 'intropage'),

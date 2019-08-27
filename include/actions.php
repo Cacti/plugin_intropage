@@ -105,7 +105,6 @@ if (isset_request_var('intropage_action') &&
 
 			// default values
 			set_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
-			set_user_setting('intropage_display_level', read_config_option('intropage_display_level'));
 			set_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 		} elseif ($value == 'order') {
 			unset($_SESSION['intropage_changed_order'], $_SESSION['intropage_order']);
@@ -144,12 +143,6 @@ if (isset_request_var('intropage_action') &&
 		} else {
 			set_user_setting('intropage_display_important_first', 'off');
 			unset($_SESSION['intropage_changed_order'], $_SESSION['intropage_order']);
-		}
-		break;
-
-	case 'displaylevel':
-		if (preg_match('/^[0-9]{1}$/', $value)) {
-			set_user_setting('intropage_display_level', $value);
 		}
 		break;
 

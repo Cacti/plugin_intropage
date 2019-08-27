@@ -60,7 +60,6 @@ function display_information() {
 	// Retrieve user settings and defaults
 
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
-	$display_level           = read_user_setting('intropage_display_level', read_config_option('intropage_display_level'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
 	//$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
@@ -150,7 +149,6 @@ function display_information() {
 	// Intropage Display ----------------------------------
 
 	// $display_important_first = on/off
-	// $display_level   =  0 "Only errors", 1 "Errors and warnings", 2 => "All"
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -247,17 +245,14 @@ function display_information() {
 		}
 
 		// yellow (errors and warnings)
-		if ($display_level == 1 || ($display_level == 2 && !isset($xvalue['displayed']))) {
-			foreach ($panels as $xkey => $xvalue) {
-				if ($xvalue['alldata']['alarm'] == 'yellow') {
-					intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
-					$panels[$xkey]['displayed'] = true;
-				}
+		foreach ($panels as $xkey => $xvalue) {
+			if ($xvalue['alldata']['alarm'] == 'yellow') {
+				intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
+				$panels[$xkey]['displayed'] = true;
 			}
 		}
 
 		// green (all)
-		if ($display_level == 2) {
 			foreach ($panels as $xkey => $xvalue) {
 				if ($xvalue['alldata']['alarm'] == 'green') {
 					intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
@@ -265,22 +260,17 @@ function display_information() {
 				}
 			}
 
-			// grey and without color
-			foreach ($panels as $xkey => $xvalue) {
-				if (!isset($xvalue['displayed'])) {
-					intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
-					$panels[$xkey]['displayed'] = true;
-				}
+		// grey and without color
+		foreach ($panels as $xkey => $xvalue) {
+			if (!isset($xvalue['displayed'])) {
+				intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
+				$panels[$xkey]['displayed'] = true;
 			}
 		}
+		
 	} else {	// display only errors/errors and warnings/all - order by priority
 		foreach ($panels as $xkey => $xvalue) {
-			if (
-			($display_level == 2) ||
-			($display_level == 1 && ($xvalue['alldata']['alarm'] == 'red' || $xvalue['alldata']['alarm'] == 'yellow')) ||
-			($display_level == 0 && $xvalue['alldata']['alarm'] == 'red')) {
-				intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
-			}
+			intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
 		}
 	}
 
@@ -470,24 +460,6 @@ function display_information() {
 		print "<option value='refresh_3600' disabled='disabled'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
 	} else {
 		print "<option value='refresh_3600'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
-	}
-
-	if (read_user_setting('intropage_display_level') == 0) {
-		print "<option value='displaylevel_0' disabled='disabled'>" . __('Display only Errors', 'intropage') . '</option>';
-	} else {
-		print "<option value='displaylevel_0'>" . __('Display only Errors', 'intropage') . '</option>';
-	}
-
-	if (read_user_setting('intropage_display_level') == 1) {
-		print "<option value='displaylevel_1' disabled='disabled'>" . __('Display Errors and Warnings', 'intropage') . '</option>';
-	} else {
-		print "<option value='displaylevel_1'>" . __('Display Errors and Warnings', 'intropage') . '</option>';
-	}
-
-	if (read_user_setting('intropage_display_level') == 2) {
-		print "<option value='displaylevel_2' disabled='disabled'>" . __('Display All', 'intropage') . '</option>';
-	} else {
-		print "<option value='displaylevel_2'>" . __('Display All', 'intropage') . '</option>';
 	}
 
 	if ($display_important_first == 'on') {
