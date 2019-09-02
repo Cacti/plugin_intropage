@@ -150,6 +150,9 @@ function display_information() {
 
 	// $display_important_first = on/off
 
+	// overlay div for detail
+	print '<div id="overlay"><div id="overlay_detail"></div><span id="close_detail">' . __('Close', 'intropage') . '</span></div>';
+
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
@@ -326,7 +329,7 @@ function display_information() {
 			$('#'+panel_div_id).remove();
 			$.get($(this).attr('href'));
 		});
-
+/*
 		$('.maxim').off('click').on('click', function() {
 			$(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
 			$(this).nextAll('.article').first().toggle();
@@ -339,7 +342,7 @@ function display_information() {
 				$(this).attr('title','Show details');
 			}
 		});
-
+*/
 		// enable/disable move panel/copy text
 		$('#switch_copytext').off('click').on('click', function() {
 			if (!intropage_drag) {
@@ -403,6 +406,23 @@ function display_information() {
 		});
 	}
 
+	// detail to the new window
+	$('.maxim').click(function(event) {
+	    panel_id =  $(this).attr('detail-panel');
+    	    event.preventDefault();
+    	    $("#overlay").fadeIn("fast");
+    	    var type = $(this).attr("type");
+    	    var record = $(this).attr("record");
+    	    $("#overlay_detail").load(urlPath+'plugins/intropage/intropage_ajax.php?detail_panel='+panel_id);
+    	    $("#overlay_detail").fadeIn("fast");
+	});
+
+	$("#close_detail").click(function(event) {
+    	    event.preventDefault();
+            $("#overlay").fadeOut("fast");
+            $("#overlay_detail" ).text("");
+            $("#overlay_detail").fadeOut("fast");
+	});
 	</script>
 
 	<?php

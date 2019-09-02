@@ -32,8 +32,15 @@ if (!function_exists("array_column")) {
     }
 }
 
-if (isset_request_var('reload_panel') &&
-    get_filter_request_var('reload_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/')))) {
+if (get_filter_request_var('reload_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/'))))	{
+    $panel_id = get_request_var('reload_panel');
+}
+
+if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/'))))	{
+    $panel_id = get_request_var('detail_panel');
+}
+
+if ((isset_request_var('reload_panel') || isset_request_var('detail_panel')) && isset($panel_id)) {
 
     include_once($config['base_path'] . '/plugins/intropage/include/data.php');
     include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
@@ -47,9 +54,9 @@ if (isset_request_var('reload_panel') &&
     // Retrieve access
     $console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION['sess_user_id'] . "' and user_auth_realm.realm_id=8")) ? true : false;
 
-    $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . get_request_var('reload_panel'));
+    $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . $panel_id);
     if ($panel)	{
-	// exception for ntp and db_check
+	// exception for ntp and db_check - get data now!
 	if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
 	    if ($panel['panel'] == 'intropage_ntp')	{
 		ntp_time2();
@@ -68,9 +75,10 @@ if (isset_request_var('reload_panel') &&
  	    $data = $pokus();
 	}
 
-	intropage_display_data(get_request_var('reload_panel'),$data);
+	if (isset_request_var('reload_panel'))	{
+	    intropage_display_data(get_request_var('reload_panel'),$data);
 
-	// change panel color or ena/disa detail
+	    // change panel color or ena/disa detail
 ?>
        <script type='text/javascript'>
             $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
@@ -89,14 +97,27 @@ if (isset_request_var('reload_panel') &&
 	</script>
 <?php
 	// end ofchange panel color or ena/disa detail
+	}
+        // detail
+        if (isset_request_var('detail_panel')) {
+    	    print $data['detail'];
+	}
     }
-    elseif (get_request_var('reload_panel') == 998) {	// exception for admin alert panel
+    elseif ($panel_id == 998) {	// exception for admin alert panel
 	 print nl2br(read_config_option('intropage_admin_alert'));
     } 
-    elseif (get_request_var('reload_panel') == 997) {	// exception for maint panel
+    elseif ($panel_id == 997) {	// exception for maint panel
 	 print intropage_maint();
     } 
     else	{
 		echo 'Panel not found';
     }
 }
+/*
+// detail
+if (isset_request_var('detail_panel') &&
+    get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/')))) {	
+    print 'ja jsem <br/><b>detail</b>';
+
+}
+*/

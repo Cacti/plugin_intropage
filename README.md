@@ -48,7 +48,8 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
 	1.8.3 ---
-	Add thold logonly DS
+	Add logonly tholds
+	Detail to the new window
 	Fix panel reload - Cigamit
 	Fix Admin alert panel - not working with ajax
 	Fix maint panel - not working with ajax

@@ -111,7 +111,8 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>\n");
 
 	if (isset($dispdata['detail']) && !empty($dispdata['detail'])) {
-		printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($panel_id));
+//		printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($panel_id));
+		printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a>\n", $panel_id);
 	}
 
 	print " </div>\n";
@@ -341,8 +342,8 @@ EOF;
 	}
 
 	if (isset($dispdata['detail'])) {
-		printf("<div id=\"%s\" style=\"display: none\">\n", md5($panel_id));
-		print($dispdata['detail']);
+		printf("<div id=\"%s\" style=\"display: none\">\n", 'detail_' . $panel_id);
+// ajax		print($dispdata['detail']);
 		print("</div>\n");
 	}
 }
