@@ -49,24 +49,24 @@
 }
 
 #overlay_detail {
-    text-align: left;
-    display: inline-block;
-    max-width: 90%;
-    margin: 100px auto 0 auto;
-    padding: 2em;
-    background-color: white;
-    min-height: 150px;
+	text-align: left;
+	display: inline-block;
+	max-width: 90%;
+	margin: 100px auto 0 auto;
+	padding: 2em;
+	background-color: white;
+	min-height: 150px;
 }
 
 #close_detail {
-    position: absolute;
-    z-index: 8000;
-    background-color: white;
-    cursor: pointer;
-    top: 0px;
-    right: 0px;
-    font-size: 1.2em;
-    padding: 5px;
+	position: absolute;
+	z-index: 8000;
+	background-color: white;
+	cursor: pointer;
+	top: 0px;
+	right: 0px;
+	font-size: 1.2em;
+	padding: 5px;
 }
 
 
