@@ -40,30 +40,30 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
     $panel_id = get_request_var('detail_panel');
 }
 
-if ((isset_request_var('reload_panel') || isset_request_var('detail_panel')) && isset($panel_id)) {
+// few requered variables
+$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
+$hosts = get_allowed_devices();
+$allowed_hosts = implode(',', array_column($hosts, 'id'));
+
+// Retrieve access
+$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION['sess_user_id'] . "' and user_auth_realm.realm_id=8")) ? true : false;
+
+include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');	
+
+if (isset_request_var('reload_panel') && isset($panel_id)) {
     include_once($config['base_path'] . '/plugins/intropage/include/data.php');
-    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-
-    // few requered variables
-    $maint_days_before = read_config_option('intropage_maint_plugin_days_before');
-
-    $hosts = get_allowed_devices();
-    $allowed_hosts = implode(',', array_column($hosts, 'id'));
-
-    // Retrieve access
-    $console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION['sess_user_id'] . "' and user_auth_realm.realm_id=8")) ? true : false;
-
+    
     $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . $panel_id);
     if ($panel)	{
-	// exception for ntp and db_check - get data now!
-	if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
-	    if ($panel['panel'] == 'intropage_ntp')	{
-		ntp_time2();
+        // exception for ntp and db_check - get data now!
+        if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
+            if ($panel['panel'] == 'intropage_ntp')	{
+	        ntp_time2();
 	    }
 
-	    if ($panel['panel'] == 'intropage_analyse_db')	{
-		db_check();
+    	    if ($panel['panel'] == 'intropage_analyse_db')	{
+	        db_check();
 	    }
 	}
 
@@ -78,7 +78,7 @@ if ((isset_request_var('reload_panel') || isset_request_var('detail_panel')) && 
 	if (isset_request_var('reload_panel'))	{
 	    intropage_display_data(get_request_var('reload_panel'),$data);
 
-	    // change panel color or ena/disa detail
+	// change panel color or ena/disa detail
 ?>
        <script type='text/javascript'>
             $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
@@ -89,19 +89,15 @@ if ((isset_request_var('reload_panel') || isset_request_var('detail_panel')) && 
 <?php
 	    if (isset($data['detail']) && !empty($data['detail']))	{
         	print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').show();";
-            }
-            else	{
+    	    }
+    	    else	{
         	print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').hide();";
-            }
+    	    }
 ?> 
 	</script>
 <?php
 	// end ofchange panel color or ena/disa detail
-	}
-        // detail
-        if (isset_request_var('detail_panel')) {
-    	    print $data['detail'];
-	}
+    	}
     }
     elseif ($panel_id == 998) {	// exception for admin alert panel
 	 print nl2br(read_config_option('intropage_admin_alert'));
@@ -110,14 +106,21 @@ if ((isset_request_var('reload_panel') || isset_request_var('detail_panel')) && 
 	 print intropage_maint();
     } 
     else	{
-		echo 'Panel not found';
+	print __('Panel not found');
     }
 }
-/*
-// detail
-if (isset_request_var('detail_panel') &&
-    get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/')))) {	
-    print 'ja jsem <br/><b>detail</b>';
 
+if (isset_request_var('detail_panel') && isset($panel_id)) {
+    include_once($config['base_path'] . '/plugins/intropage/include/data_detail.php');    
+
+    $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . $panel_id);
+	if ($panel)	{
+	    $pokus = $panel['panel'] . '_detail';
+	    $data = $pokus();
+	    print ('<h3>' . $data['name'] . '</h3>');
+	    print $data['detail'];
+	}
+	else	{
+	    print __('Panel not found');	
+	}
 }
-*/

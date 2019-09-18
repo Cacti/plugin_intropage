@@ -81,10 +81,10 @@ $intropage_settings = array(	// default values
 	),
 	'intropage_analyse_log_rows' => array(
 		'friendly_name' => __('Analyse log -  number of lines', 'intropage'),
-		'description' => __('How many lines of log will be analysed. Big number may causes slow page load', 'intropage'),
+		'description' => __('How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load', 'intropage'),
 		'method' => 'textbox',
 		'max_length' => 5,
-		'default' => '1000',
+		'default' => '500',
 	),
 
 	'intropage_analyse_db_interval' => array(

@@ -436,7 +436,7 @@ function db_check() {
 	}
 
 	if ($cerrors > 0) {     // only yellow
-		$text_detail .= __('Connection errors - try to restart SQL service, check SQL log, ...', 'intropage') . '<br/>';
+		$text_detail .= __('Connection errors: %s - try to restart SQL service, check SQL log, ...', $cerrors, 'intropage') . '<br/>';
 
 		if ($alarm == 'green') {
 			$alarm = 'yellow';
@@ -452,7 +452,7 @@ function db_check() {
 	}
 
 	if ($aerrors > 0) {     // only yellow
-		$text_detail .= __('Aborted clients/connects - check logs.', 'intropage') . '<br/>';
+		$text_detail .= __('Aborted clients/connects: %s - check logs.', $aerrors, 'intropage') . '<br/>';
 
 		if ($alarm == 'green') {
 			$alarm = 'yellow';

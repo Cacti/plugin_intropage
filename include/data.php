@@ -37,12 +37,11 @@ function intropage_analyse_db() {
 		'name' => __('Database check', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	$result['alarm']  = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name='db_check_alarm'");
 	$result['data']   = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name='db_check_result'");
-	$result['detail'] = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name='db_check_detail'");
 
 	if (!$result['data']) {
 	    $result['alarm'] = 'yellow';
@@ -73,7 +72,7 @@ function intropage_analyse_log() {
 		'name' => __('Analyse cacti log', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	$log = array(
@@ -96,11 +95,9 @@ function intropage_analyse_log() {
 				if (strcmp($matches[1], 'WARN') === 0) {
 					$warn++;
 					$ecount++;
-					$result['detail'] .= '<b>' . $line . '</b><br/>';
 				} elseif (strcmp($matches[1], 'ERROR') === 0 || strcmp($matches[1], 'FATAL') === 0) {
 					$error++;
 					$ecount++;
-					$result['detail'] .= '<b>' . $line .'</b><br/>';
 				}
 			}
 		}
@@ -148,37 +145,27 @@ function intropage_analyse_login() {
 	global $config;
 
 	$result = array(
-		'name' => __('Last 10 logins', 'intropage'),
+		'name' => __('Analyse logins', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	// active users in last hour:
-	$flog       = __('N/A', 'intropage');
-	$sql_result = db_fetch_assoc('SELECT user_log.username, user_auth.full_name, user_log.time, user_log.result, user_log.ip
-		FROM user_auth
-		INNER JOIN user_log
-		ON user_auth.username = user_log.username
-		ORDER BY user_log.time desc
-		LIMIT 10');
+	$flog = db_fetch_cell('SELECT count(t.result) 
+		FROM (SELECT result FROM user_auth
+		         INNER JOIN user_log ON user_auth.username = user_log.username
+		         ORDER BY user_log.time desc LIMIT 10) 
+		as t where t.result=0;');
 
-	if (cacti_sizeof($sql_result)) {
-		$flog = 0;
-
-		foreach ($sql_result as $row) {
-			if ($row['result'] == 0) {
-				$result['alarm'] = 'red';
-				$flog++;
-			}
-
-			$result['detail'] .= sprintf('%s | %s | %s | %s<br/>', $row['time'], $row['ip'], $row['username'], ($row['result'] == 0) ? __('failed', 'intropage') : __('success', 'intropage'));
-		}
+	if ($flog > 0) {
+		$result['alarm'] = 'red';
 	}
+
 	$result['data'] = '<span class="txt_big">' . __('Failed logins', 'intropage') . ': ' . $flog . '</span><br/><br/>';
 
 	// active users in last hour:
-	$result['data'] .= 'Active users in last hour:<br/>';
+	$result['data'] .= '<b>Active users in last hour:</b><br/>';
 
 	$sql_result = db_fetch_assoc('SELECT DISTINCT username
 		FROM user_log
@@ -186,15 +173,6 @@ function intropage_analyse_login() {
 
 	foreach ($sql_result as $row) {
 		$result['data'] .= $row['username'] . '<br/>';
-	}
-
-	$loggin_access = (db_fetch_assoc("SELECT realm_id
-		FROM user_auth_realm
-		WHERE user_id='" . $_SESSION['sess_user_id'] . "'
-		AND user_auth_realm.realm_id=19")) ? true : false;
-
-	if ($result['detail'] && $loggin_access) {
-		$result['detail'] .= '<br/><br/><a href="' . htmlspecialchars($config['url_path']) . 'utilities.php?action=view_user_log">Full log</a><br/>';
 	}
 
 	return $result;
@@ -209,7 +187,7 @@ function intropage_analyse_tree_host_graph() {
 		'name' => __('Analyse tree/host/graph', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	$total_errors = 0;
@@ -224,31 +202,12 @@ function intropage_analyse_tree_host_graph() {
 		HAVING NoDups > 1");
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
-	$result['detail'] .= '<br/><b>' . __('Devices with the same IP and port %s', $sql_count, 'intropage') . ':</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
 		$total_errors += $sql_count;
 		if (count($sql_result) > 0) {
 			$result['data'] .= __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
 			$result['alarm'] = 'red';
-			foreach ($sql_result as $row) {
-				$sql_hosts = db_fetch_assoc_prepared("SELECT id, description, hostname
-					FROM host
-					WHERE hostname IN(
-						SELECT hostname
-						FROM host
-						WHERE id IN ($allowed_hosts)
-						GROUP BY hostname, snmp_port
-						HAVING COUNT(*)>1
-					)
-					ORDER BY hostname");
-
-				if (cacti_sizeof($sql_hosts)) {
-					foreach ($sql_hosts as $row) {
-						$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
-					}
-				}
-			}
 		}
 	}
 
@@ -262,31 +221,11 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Devices with the same description %s', $sql_count, 'intropage') . ':</b><br/>';
-
 	if (cacti_sizeof($sql_result)) {
 		$total_errors += $sql_count;
 		if (count($sql_result) > 0) {
 			$result['data'] .= __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
 			$result['alarm'] = 'red';
-			foreach ($sql_result as $row) {
-				$sql_hosts = db_fetch_assoc_prepared('SELECT id, description, hostname
-					FROM host
-					WHERE description IN(
-						SELECT description
-						FROM host
-						WHERE id IN (' . $allowed_hosts . ')
-						GROUP BY description
-						HAVING count(*)>1
-					)
-					ORDER BY description');
-
-				if (cacti_sizeof($sql_hosts)) {
-					foreach ($sql_hosts as $row) {
-						$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
-					}
-				}
-			}
 		}
 	}
 
@@ -310,8 +249,6 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Orphaned Data Sources %s', $sql_count, 'intropage') . ':</b><br/>';
-
 	if (cacti_sizeof($sql_result)) {
 		$total_errors += $sql_count;
 		$result['data'] .= __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<br/>';
@@ -319,19 +256,13 @@ function intropage_analyse_tree_host_graph() {
 		if ($result['alarm'] == 'green') {
 			$result['alarm'] = 'yellow';
 		}
-
-		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['name_cache'] . '</a><br/>';
-		}
 	}
+
 
 	// empty poller_output
 	$sql_result = db_fetch_assoc('SELECT local_data_id,rrd_name FROM poller_output');
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
-
-	$result['detail'] .= '<br/><b>' . __('Poller output items %s:', $sql_count, 'intropage') . '</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
 		$result['data'] .= __('Poller Output Items: %s', $sql_count, 'intropage') . '<br/>';
@@ -340,11 +271,6 @@ function intropage_analyse_tree_host_graph() {
 			$result['alarm'] = 'yellow';
 		}
 
-		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['rrd_name'] . '</a><br/>';
-
-		}
 		$total_errors += $sql_count;
 	}
 
@@ -359,8 +285,6 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Datasource - bad indexes %s:', $sql_count, 'intropage') . '</b><br/>';
-
 	if (cacti_sizeof($sql_result)) {
 		$result['data'] .= __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<br/>';
 
@@ -368,11 +292,6 @@ function intropage_analyse_tree_host_graph() {
 			$result['alarm'] = 'yellow';
 		}
 
-		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['name_cache'] . '</a><br/>';
-
-		}
 		$total_errors += $sql_count;
 	}
 	
@@ -403,8 +322,6 @@ function intropage_analyse_tree_host_graph() {
 
 	    $sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	    $result['detail'] .= '<br/><b>' . __('Thold logonly alert/warning %s:', $sql_count, 'intropage') . '</b><br/>';
-
 	    if (cacti_sizeof($sql_result)) {
 		$result['data'] .= __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<br/>';
 
@@ -412,10 +329,6 @@ function intropage_analyse_tree_host_graph() {
 		    $result['alarm'] = 'yellow';
 		}
 
-		foreach ($sql_result as $row) {  
-		    $result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id'] . '">' .
-		    $row['td_name'] . '</a><br/>';
-		}
 		$total_errors += $sql_count;
 	    }
 	}
@@ -434,38 +347,8 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Devices in more than one tree %s', $sql_count, 'intropage') . ':</b><br/>';
-
 	if (cacti_sizeof($sql_result)) {
 		$result['data'] .= __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
-
-		foreach ($sql_result as $row) {
-			$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description,
-				graph_tree_items.title, graph_tree_items.parent, graph_tree.name
-				FROM host
-				INNER JOIN graph_tree_items
-				ON (host.id = graph_tree_items.host_id)
-				INNER JOIN graph_tree
-				ON (graph_tree_items.graph_tree_id = graph_tree.id)
-				WHERE host.id = ?',
-				array($row['id']));
-
-			if (cacti_sizeof($sql_hosts)) {
-				foreach ($sql_hosts as $host) {
-					$parent = $host['parent'];
-					$tree   = $host['name'] . ' / ';
-					while ($parent != 0) {
-						$sql_parent = db_fetch_row('SELECT parent, title FROM graph_tree_items WHERE id = ' . $parent);
-						$parent     = $sql_parent['parent'];
-						$tree .= $sql_parent['title'] . ' / ';
-					}
-
-					$result['detail'] .= sprintf('<a href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', htmlspecialchars($config['url_path']), $host['gtid'], $host['description'], $tree);
-				}
-			}
-		}
-
-		//    $total_errors += $sql_count;
 	}
 
 	// host without graph
@@ -481,15 +364,8 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Hosts without graphs %s', $sql_count, 'intropage') . ':</b><br/>';
-
 	if (cacti_sizeof($sql_result)) {
 		$result['data'] .= __('Hosts without graphs: %s', $sql_count, 'intropage') . '<br/>';
-
-		foreach ($sql_result as $row) {
-			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
-		}
-		//    $total_errors += $sql_count;
 	}
 
 	// host without tree
@@ -504,15 +380,8 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Hosts without tree %s', $sql_count, 'intropage') . ':</b><br/>';
-
 	if (cacti_sizeof($sql_result)) {
 		$result['data'] .= __('Hosts without tree: %s', $sql_count, 'intropage') . '<br/>';
-
-		foreach ($sql_result as $row) {
-			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
-		}
-		//    $total_errors += $sql_count;
 	}
 
 	// public/private community
@@ -525,16 +394,8 @@ function intropage_analyse_tree_host_graph() {
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Hosts with default public/private community %s', $sql_count, 'intropage') . ':</b><br/>';
-
 	if (cacti_sizeof($sql_result)) {
 		$result['data'] .= __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
-
-		foreach ($sql_result as $row) {
-			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
-		}
-
-		//    $total_errors += $sql_count;
 	}
 
 	// plugin monitor - host without monitoring
@@ -546,40 +407,12 @@ function intropage_analyse_tree_host_graph() {
 
 		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-		$result['detail'] .= '<br/><b>' . __('Plugin Monitor - Unmonitored hosts %s', $sql_count, 'intropage') . ':</b><br/>';
-
 		if (cacti_sizeof($sql_result)) {
 			$result['data'] .= __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '</b><br/>';
 
-			foreach ($sql_result as $row) {
-				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
-			}
-			//    $total_errors += $sql_count;
 		}
 	}
-/*
-	// thold notify only global list - for me it is error
-	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
-		$sql_result = db_fetch_assoc("SELECT id, description
-			FROM host
-			WHERE id IN ($allowed_hosts)
-			AND disabled != 'on'
-			AND thold_send_email = 1
-			ORDER BY description");
 
-		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
-
-		$result['detail'] .= '<br/><b>' . __('Plugin Thold - Global notify only %s', $sql_count, 'intropage') . ':</b><br/>';
-
-		if (cacti_sizeof($sql_result)) {
-			$result['data'] .= __('Plugin Thold - Global notify only: %s', $sql_count, 'intropage') . '<br/>';
-
-			foreach ($sql_result as $row) {
-				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
-			}
-		}
-	}
-*/
 	if ($total_errors > 0) {
 		$result['data'] = '<span class="txt_big">' . __('Found %s problems', $total_errors, 'intropage') . '</span><br/>' . $result['data'];
 	} else {
@@ -598,7 +431,7 @@ function intropage_boost() {
 		'name' => __('Boost statistics'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => FALSE,
 	);
 
 	// from lib/boost.php
@@ -730,6 +563,7 @@ function intropage_cpu() {
 		'name' => __('CPU utilization', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
+		'detail' => FALSE,
 		'line' => array(
 			'title' => __('CPU load: ', 'intropage'),
 			'label1' => array(),
@@ -776,6 +610,7 @@ function intropage_extrem() {
 		'name' => __('24 hour extrem', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
+		'detail' => TRUE,
 	);
 
 	$result['data'] .= '<table><tr><td class="rpad">';
@@ -787,9 +622,9 @@ function intropage_extrem() {
 		substring(value,instr(value,':')+1) AS xvalue
 		FROM plugin_intropage_trends
 		WHERE name='poller'
-		AND cur_timestamp > date_sub(cur_timestamp,interval 1 day)
+		AND cur_timestamp > date_sub(now(),interval 1 day)
 		ORDER BY xvalue desc, cur_timestamp
-		LIMIT 5");
+		LIMIT 8");
 
 	if (cacti_sizeof($sql_result)) {
 		foreach ($sql_result as $row) {
@@ -808,9 +643,9 @@ function intropage_extrem() {
 	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='host'
-		AND cur_timestamp > date_sub(cur_timestamp,interval 1 day)
+		AND cur_timestamp > date_sub(now(),interval 1 day)
 		ORDER BY value desc,cur_timestamp
-		LIMIT 5");
+		LIMIT 8");
 
 	if (cacti_sizeof($sql_result)) {
 		foreach ($sql_result as $row) {
@@ -831,9 +666,9 @@ function intropage_extrem() {
 		$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 			FROM plugin_intropage_trends
 			WHERE name='thold'
-			AND cur_timestamp > date_sub(cur_timestamp,interval 1 day)
+			AND cur_timestamp > date_sub(now(),interval 1 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 5");
+			LIMIT 8");
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
@@ -855,9 +690,9 @@ function intropage_extrem() {
 	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='poller_output'
-		AND cur_timestamp > date_sub(cur_timestamp,interval 1 day)
+		AND cur_timestamp > date_sub(now(),interval 1 day)
 		ORDER BY value desc,cur_timestamp
-		LIMIT 5");
+		LIMIT 8");
 
 	if (cacti_sizeof($sql_result)) {
 		foreach ($sql_result as $row) {
@@ -876,9 +711,9 @@ function intropage_extrem() {
 	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='failed_polls'
-		AND cur_timestamp > date_sub(cur_timestamp,interval 1 day)
+		AND cur_timestamp > date_sub(now(),interval 1 day)
 		ORDER BY value desc,cur_timestamp
-		LIMIT 5");
+		LIMIT 8");
 
 	if (cacti_sizeof($sql_result)) {
 		foreach ($sql_result as $row) {
@@ -903,6 +738,7 @@ function intropage_graph_data_source() {
 		'name' => 'Data sources',
 		'alarm' => 'grey',
 		'data' => '',
+		'detail' => TRUE,
 		'pie' => array(
 			'title' => __('Datasources: ', 'intropage'),
 			'label' => array(),
@@ -947,9 +783,9 @@ function intropage_graph_host() {
 
 	$result = array(
 		'name' => __('Hosts', 'intropage'),
-		'data' => '',
 		'alarm' => 'green',
-		'detail' => '',
+		'data' => '',
+		'detail' => TRUE,
 	);
 
 	$h_all  = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts)");
@@ -986,34 +822,10 @@ function intropage_graph_host() {
 	// alarms and details
 	if ($h_reco > 0) {
 		$result['alarm'] = 'yellow';
-
-		$hosts = db_fetch_assoc("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=2 AND disabled=''");
-
-		$result['detail'] .= '<b>' . __('RECOVERING', 'intropage') . ':</b><br/>';
-
-		if (cacti_sizeof($hosts)) {
-			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
-			}
-		}
-
-		$result['detail'] .= '<br/><br/>';
 	}
 
 	if ($h_down > 0) {
 		$result['alarm'] = 'red';
-
-		$hosts = db_fetch_assoc("SELECT description FROM host WHERE id IN ($allowed_hosts) AND status=1 AND disabled=''");
-
-		$result['detail'] .= '<b>' . __('DOWN', 'intropage') . ':</b><br/>';
-
-		if (cacti_sizeof($hosts)) {
-			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
-			}
-		}
-
-		$result['detail'] .= '<br/><br/>';
 	}
 
 	return $result;
@@ -1028,6 +840,7 @@ function intropage_graph_host_template() {
 		'name' => __('Device Templates', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
+		'detail' => TRUE,
 		'pie' => array(
 			'title' => __('Device Templates', 'intropage'),
 			'label' => array(),
@@ -1068,7 +881,7 @@ function intropage_graph_thold() {
 		'name' => __('Thresholds', 'intropage'),
 		'data' => '',
 		'alarm' => 'green',
-		'detail' => '',
+		'detail' => TRUE,
 		'pie' => array(
 			'title' => __('Thresholds', 'intropage'),
 			'label' => array(),
@@ -1115,8 +928,8 @@ function intropage_graph_thold() {
 				'title' => __('Thresholds', 'intropage'),
 				'label' => array(
 					__('OK', 'intropage'),
+					__('Triggered', 'intropage'),
 					__('Breached', 'intropage'),
-					__('Trigerred', 'intropage'),
 					__('Disabled', 'intropage'),
 				),
 				'data' => array($t_all - $t_brea - $t_trig - $t_disa, $t_brea, $t_trig, $t_disa));
@@ -1127,22 +940,10 @@ function intropage_graph_thold() {
 		// alarms and details
 		if ($t_brea > 0) {
 			$result['alarm'] = 'yellow';
-			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-			$result['detail'] .= '<b>' . __('BREACHED', 'intropage') . ':</b><br/>';
-			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
-			}
-			$result['detail'] .= '<br/><br/>';
 		}
 
 		if ($t_trig > 0) {
 			$result['alarm'] = 'red';
-			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-			$result['detail'] .= '<b>' . __('TRIGGERED', 'intropage') .':</b><br/>';
-			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
-			}
-			$result['detail'] .= '<br/><br/>';
 		}
 	}
 
@@ -1159,6 +960,7 @@ function intropage_info() {
 		'name' => 'Info',
 		'alarm' => 'grey',
 		'data' => '',
+		'detail' => FALSE,
 	);
 
 	$xdata = '';
@@ -1208,15 +1010,16 @@ function intropage_mactrack() {
 	$result = array(
 		'name' => __('Mactrack', 'intropage'),
 		'alarm' => 'green',
+		'data' => '',
+		'detail' => FALSE,
 	);
 
 	// SELECT id from plugin_realms WHERE plugin='mactrack' and display like '%view%';
 	// = 329 +100
 
-
-	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
-		$result['alarm'] = 'grey';
+	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {		$result['alarm'] = 'grey';
 		$result['data']  = __('Mactrack plugin not installed/running', 'intropage');
+		
 	} else {
 		$mactrack_id = db_fetch_cell("SELECT id
 			FROM plugin_realms
@@ -1272,23 +1075,21 @@ function intropage_mactrack_sites() {
 		'name' => __('Mactrack sites', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 
 	);
 
-	$count = 0;
-
-	// SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 5;
 	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
 		$result['alarm'] = 'grey';
 		$result['data']  = __('Mactrack plugin not installed/running', 'intropage');
+		$result['detail'] = FALSE;
 	} else {
 		$result['data'] .= '<table><tr><td class="rpad">' . __('Site', 'intropage') . '</td><td class="rpad">' . __('Devices', 'intropage') . '</td>';
 		$result['data'] .= '<td class="rpad">' . __('IPs', 'intropage') . '</td><td class="rpad">' . __('Ports', 'intropage') . '</td>';
 		$result['data'] .= '<td class="rpad">' . __('Ports up', 'intropage') . '</td><td class="rpad">' . __('MACs', 'intropage') . '</td>';
 		$result['data'] .= '<td class="rpad">' . __('Device errors', 'intropage') . '</td></tr>';
 
-		$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 15');
+		$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 8');
 		if (sizeof($sql_result) > 0) {
 			foreach ($sql_result as $site) {
 				$row = '<tr><td>' . $site['site_name'] . '</td><td>' . $site['total_devices'] . '</td>';
@@ -1296,23 +1097,10 @@ function intropage_mactrack_sites() {
 				$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
 				$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
 
-                    		if ($count < 5)
-                        	    $result['data'] .= $row;
-                    		else
-                        	    $result['detail'] .= $row;
-
-                    		$count++;
+                    		$result['data'] .= $row;
             		}
 
             		$result['data'] .= '</table>';
-
-            		if (cacti_sizeof($sql_result) > 5)  {
-                	    $result['detail'] = '<table>' . $result['detail'] . '</table>';
-            		}
-            		else    {
-                	    unset ($result['detail']);
-            		}
-
 		} else {
 			$result['data'] = __('No mactrack sites found', 'intropage');
 		}
@@ -1329,6 +1117,8 @@ function intropage_ntp() {
 	$result = array(
 		'name' => __('Time synchronization'),
 		'alarm' => 'green',
+		'data' => '',
+		'detail' => FALSE,
 	);
 
 	$ntp_server = read_config_option('intropage_ntp_server');
@@ -1381,22 +1171,14 @@ function intropage_ntp() {
 
 //------------------------------------ poller_info -----------------------------------------------------
 
-/*
-		0 => '<div class="deviceUnknown">'    . __('New/Idle')     . '</div>',
-		1 => '<div class="deviceUp">'         . __('Running')      . '</div>',
-		2 => '<div class="deviceRecovering">' . __('Idle')         . '</div>',
-		3 => '<div class="deviceDown">'       . __('Unknown/Down') . '</div>',
-		4 => '<div class="deviceDisabled">'   . __('Disabled')     . '</div>',
-		5 => '<div class="deviceDown">'       . __('Recovering')   . '</div>'
-*/
-
-
 function intropage_poller_info() {
 	global $config;
 
 	$result = array(
 		'name' => __('Poller info', 'intropage'),
 		'alarm' => 'green',
+		'data' => '',
+		'detail' => TRUE,
 	);
 
 	$result['data'] = '<b>' . __('ID/Name/total time/state', 'intropage') . '</b><br/>';
@@ -1466,6 +1248,7 @@ function intropage_poller_stat() {
 		'name' => __('Poller stats (interval %ss)', $poller_interval, 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
+		'detail' => FALSE,
 		'line' => array(
 			'title1' => '',
 			'label1' => array(),
@@ -1545,12 +1328,13 @@ function intropage_thold_event() {
 		'name' => __('Last thold events'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	if (db_fetch_cell("SELECT count(*) FROM plugin_config WHERE directory='thold' AND status = 1") == 0) {
 		$result['alarm'] = 'yellow';
 		$result['data']  = __('Plugin Thold isn\'t installed or started', 'intropage');
+		$result['detail'] = FALSE;
 	} else {
 		$sql_result = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
@@ -1602,7 +1386,7 @@ function intropage_top5_ping() {
 		'name' => __('Top5 ping (avg, current)', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
@@ -1610,9 +1394,7 @@ function intropage_top5_ping() {
 		WHERE host.id in ($allowed_hosts)
 		AND disabled != 'on'
 		ORDER BY avg_time desc
-		LIMIT 15");
-
-	$count = 0;
+		LIMIT 5");
 
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
@@ -1631,21 +1413,10 @@ function intropage_top5_ping() {
 				$row .= '<td class="rpad texalirig">' . round($host['cur_time'], 2) . 'ms</td></tr>';
 			}
 
-			if ($count < 5)
-			    $result['data'] .= $row;
-			else
-			    $result['detail'] .= $row;
-
-			$count++;
+    			$result['data'] .= $row;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
 
-		if (cacti_sizeof($sql_worst_host) > 5)	{
-		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
-		}
-		else	{
-		    unset ($result['detail']);
-		}
 	} else {	// no data
 		$result['data'] = __('Waiting for data', 'intropage');
 	}
@@ -1662,7 +1433,7 @@ function intropage_top5_availability() {
 		'name' => __('Top5 worst availability', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
@@ -1670,12 +1441,9 @@ function intropage_top5_availability() {
 		WHERE host.id IN ($allowed_hosts)
 		AND disabled != 'on'
 		ORDER BY availability
-		LIMIT 15");
-
-	$count = 0;
+		LIMIT 5");
 
 	if (cacti_sizeof($sql_worst_host)) {
-		$result['data'] = '<table>';
 
 		foreach ($sql_worst_host as $host) {
 			if ($console_access) {
@@ -1691,21 +1459,10 @@ function intropage_top5_availability() {
 				$row .= '<td class="rpad texalirig">' . round($host['availability'], 2) . '%</td></tr>';
 			}
 
-			if ($count < 5)
-			    $result['data'] .= $row;
-			else
-			    $result['detail'] .= $row;
-
-			$count++;
+    			$result['data'] .= $row;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
 
-		if (cacti_sizeof($sql_worst_host) > 5)	{
-		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
-		}
-		else	{
-		    unset ($result['detail']);
-		}
 	} else {	// no data
 		$result['data'] = __('Waiting for data', 'intropage');
 	}
@@ -1722,7 +1479,7 @@ function intropage_top5_polltime() {
 		'name' => __('Top5 worst polling time', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
@@ -1730,9 +1487,7 @@ function intropage_top5_polltime() {
 		WHERE host.id in ($allowed_hosts)
 		AND disabled != 'on'
 		ORDER BY polling_time desc
-		LIMIT 15");
-
-	$count = 0;
+		LIMIT 5");
 
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
@@ -1750,21 +1505,10 @@ function intropage_top5_polltime() {
 				$row .= '<td class="rpad texalirig">' . round($host['polling_time'], 2) . 's</td></tr>';
 			}
 
-			if ($count < 5)
-			    $result['data'] .= $row;
-			else
-			    $result['detail'] .= $row;
-
-			$count++;
+			$result['data'] .= $row;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
 
-		if (cacti_sizeof($sql_worst_host) > 5)	{
-		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
-		}
-		else	{
-		    unset ($result['detail']);
-		}
 	} else {	// no data
 		$result['data'] = __('Waiting for data', 'intropage');
 	}
@@ -1781,7 +1525,7 @@ function intropage_top5_pollratio() {
 		'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
-		'detail' => '',
+		'detail' => TRUE,
 	);
 
 	$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
@@ -1789,9 +1533,7 @@ function intropage_top5_pollratio() {
 		WHERE host.id in ($allowed_hosts)
 		AND disabled != 'on'
 		ORDER BY ratio desc
-		LIMIT 15");
-
-	$count = 0;
+		LIMIT 5");
 
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
@@ -1805,21 +1547,10 @@ function intropage_top5_pollratio() {
 			$row .= '<td class="rpad texalirig">' . $host['total_polls'] . '</td>';
 			$row .= '<td class="rpad texalirig">' . round($host['ratio'], 2) . '</td></tr>';
 
-			if ($count < 5)
-			    $result['data'] .= $row;
-			else
-			    $result['detail'] .= $row;
-
-			$count++;
+			$result['data'] .= $row;
 		}
 		$result['data'] = '<table>' . $result['data'] . '</table>';
 
-		if (cacti_sizeof($sql_worst_host) > 5)	{
-		    $result['detail'] = '<table>' . $result['detail'] . '</table>';
-		}
-		else	{
-		    unset ($result['detail']);
-		}
 	} else {	// no data
 		$result['data'] = __('Waiting for data', 'intropage');
 	}
@@ -1836,6 +1567,7 @@ function intropage_trend() {
 		'name' => __('Trends', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
+		'detail' => FALSE,
 		'line' => array(
 			'title' => __('Trends', 'intropage'),
 			'label1' => array(),
@@ -1904,7 +1636,7 @@ function intropage_favourite_graph($fav_graph_id) {
 			'name' => __('Favourite graph', 'intropage'),
 			'alarm' => 'grey',
 			'data' => '',
-			'detail' => '',
+			'detail' => FALSE,
 		);
 
 		$result['name'] .= ' ' . db_fetch_cell_prepared('SELECT title_cache
@@ -1986,4 +1718,4 @@ function intropage_maint()	{
                 }
         }
         return ($data);
-}
+} 
