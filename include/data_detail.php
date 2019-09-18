@@ -78,7 +78,7 @@ function intropage_analyse_log_detail() {
 		'nbr_lines' => read_config_option('intropage_analyse_log_rows'),
 	);
 
-	$log['size']  = filesize($log['file']);
+	$log['size']  = @filesize($log['file']);
 	$log['lines'] = tail_log($log['file'], $log['nbr_lines']*2);
 
 	if (!$log['size'] || empty($log['lines'])) {
