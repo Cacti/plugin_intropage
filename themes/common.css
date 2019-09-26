@@ -136,3 +136,9 @@
 .fa {
 	padding-right: 3px;
 }
+
+#block {
+    width: 14px;
+    height: 14px;
+    float: right;
+}

@@ -117,7 +117,9 @@ if (isset_request_var('detail_panel') && isset($panel_id)) {
 	if ($panel)	{
 	    $pokus = $panel['panel'] . '_detail';
 	    $data = $pokus();
-	    print ('<h3>' . $data['name'] . '</h3>');
+
+	    print '<div id="block" class="color_' . $data['alarm'] . '" ></div>';
+	    print '<h3 style="display: inline">' . $data['name'] . '</h3>';
 	    print $data['detail'];
 	}
 	else	{

@@ -151,7 +151,7 @@ function display_information() {
 	// $display_important_first = on/off
 
 	// overlay div for detail
-	print '<div id="overlay"><div id="overlay_detail"><div id="detail_in"> </div></div><span id="close_detail">' . __('Close', 'intropage') . '</span></div>';
+	print '<div id="overlay"><div id="overlay_detail"><div id="detail_in"></div></div><span id="close_detail">' . __('Close', 'intropage') . '</span></div>';
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
