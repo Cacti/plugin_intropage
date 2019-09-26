@@ -47,14 +47,14 @@ $hosts = get_allowed_devices();
 $allowed_hosts = implode(',', array_column($hosts, 'id'));
 
 // Retrieve access
-$console_access = (db_fetch_assoc("select realm_id from user_auth_realm where user_id='" . $_SESSION['sess_user_id'] . "' and user_auth_realm.realm_id=8")) ? true : false;
+$console_access = (db_fetch_assoc("SELECT realm_id FROM user_auth_realm WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;
 
 include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');	
 
 if (isset_request_var('reload_panel') && isset($panel_id)) {
     include_once($config['base_path'] . '/plugins/intropage/include/data.php');
     
-    $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . $panel_id);
+    $panel = db_fetch_row ('SELECT panel,fav_graph_id FROM plugin_intropage_user_setting WHERE id = ' . $panel_id);
     if ($panel)	{
         // exception for ntp and db_check - get data now!
         if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
@@ -113,7 +113,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 if (isset_request_var('detail_panel') && isset($panel_id)) {
     include_once($config['base_path'] . '/plugins/intropage/include/data_detail.php');    
 
-    $panel = db_fetch_row ('select panel,fav_graph_id from plugin_intropage_user_setting where id = ' . $panel_id);
+    $panel = db_fetch_row ('SELECT panel,fav_graph_id FROM plugin_intropage_user_setting WHERE id = ' . $panel_id);
 	if ($panel)	{
 	    $pokus = $panel['panel'] . '_detail';
 	    $data = $pokus();
