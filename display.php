@@ -151,7 +151,7 @@ function display_information() {
 	// $display_important_first = on/off
 
 	// overlay div for detail
-	print '<div id="overlay"><div id="overlay_detail"></div><span id="close_detail">' . __('Close', 'intropage') . '</span></div>';
+	print '<div id="overlay"><div id="overlay_detail"><div id="detail_in"> </div></div><span id="close_detail">' . __('Close', 'intropage') . '</span></div>';
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -413,14 +413,14 @@ function display_information() {
     	    $("#overlay").fadeIn("fast");
     	    var type = $(this).attr("type");
     	    var record = $(this).attr("record");
-    	    $("#overlay_detail").load(urlPath+'plugins/intropage/intropage_ajax.php?detail_panel='+panel_id);
+    	    $("#detail_in").load(urlPath+'plugins/intropage/intropage_ajax.php?detail_panel='+panel_id);
     	    $("#overlay_detail").fadeIn("fast");
 	});
 
 	$("#close_detail").click(function(event) {
     	    event.preventDefault();
             $("#overlay").fadeOut("fast");
-            $("#overlay_detail" ).text("");
+            $("#detail_in" ).text("");
             $("#overlay_detail").fadeOut("fast");
 	});
 	</script>

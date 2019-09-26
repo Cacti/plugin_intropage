@@ -55,6 +55,7 @@
 	padding: 2em;
 	background-color: white;
 	min-height: 150px;
+	height: 450px;
 }
 
 #close_detail {
@@ -68,6 +69,10 @@
 	padding: 5px;
 }
 
+#detail_in {
+    overflow: auto;
+    height: 100%;
+}
 
 .txt_big {
 	font-size: 1.5em;
