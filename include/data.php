@@ -54,7 +54,6 @@ function intropage_analyse_db() {
 	    $result['data'] .= __('Checked every 15 minutes', 'intropage');
 	} elseif ($often == 3600) {
 	    $result['data'] .= __('Checked hourly', 'intropage');
-
 	} elseif ($often == 86400) {
 	    $result['data'] .= __('Checked daily', 'intropage');
 	} elseif ($often == 604800) {
@@ -62,7 +61,7 @@ function intropage_analyse_db() {
 	} elseif ($often == 2592000) {
 	    $result['data'] .= __('Checked monthly', 'intropage');
 	} else {
-	    $result['data'] .= __('DB Check is disabled', 'intropage');
+	    $result['data'] .= __('Periodic check is disabled', 'intropage');
 	}
 
 	$result['data'] .= '<br/><br/>';

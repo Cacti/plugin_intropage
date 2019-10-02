@@ -49,13 +49,19 @@ function intropage_analyse_db_detail() {
 
 	$result['detail'] .= '<br/><br/>' . __('Last check', 'intropage') . ': ' . db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name='db_check_testdate'") . '<br/>';
 	$often = read_config_option('intropage_analyse_db_interval');
-	if ($often == 900) {
-	    $result['detail'] .= __('Checked Every 15 minutes', 'intropage');
-	} elseif ($often == 3600) {
-	    $result['detail'] .= __('Checked Hourly', 'intropage');
-	} else {
-	    $result['detail'] .= __('Checked Daily', 'intropage');
-	}
+        if ($often == 900) {
+            $result['detail'] .= __('Checked every 15 minutes', 'intropage');
+        } elseif ($often == 3600) {
+            $result['detail'] .= __('Checked hourly', 'intropage');
+        } elseif ($often == 86400) {
+            $result['detail'] .= __('Checked daily', 'intropage');
+        } elseif ($often == 604800) {
+            $result['detail'] .= __('Checked weekly', 'intropage');
+        } elseif ($often == 2592000) {
+            $result['detail'] .= __('Checked monthly', 'intropage');
+        } else {
+            $result['detail'] .= __('Periodic check is disabled', 'intropage');
+        }
 
 	$result['detail'] .= '<br/><br/>';
 
