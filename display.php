@@ -162,64 +162,6 @@ function display_information() {
 		$start = microtime(true);
 
 		$tmp['data'] = intropage_maint();
-/*
-		$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
-		if (cacti_sizeof($schedules)) {
-			foreach ($schedules as $sc) {
-				$t = time();
-
-				switch ($sc['mtype']) {
-				case 1:
-					if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-						$tmp['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-								' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
-
-						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-							INNER JOIN plugin_maint_hosts
-							ON host.id=plugin_maint_hosts.host
-							WHERE schedule = ?',
-							array($sc['id']));
-
-						if (cacti_sizeof($hosts)) {
-							foreach ($hosts as $host) {
-								$tmp['data'] .= $host['description'] . ', ';
-							}
-						}
-
-						$tmp['data'] = substr($tmp['data'], 0, -2) .'<br/><br/>';
-					}
-
-					break;
-
-				case 2:
-					while ($sc['etime'] < $t) {
-						$sc['etime'] += $sc['minterval'];
-						$sc['stime'] += $sc['minterval'];
-					}
-
-					if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-						$tmp['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-								' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
-
-						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-							INNER JOIN plugin_maint_hosts
-							ON host.id=plugin_maint_hosts.host
-							WHERE schedule = ?',
-							array($sc['id']));
-
-						if (cacti_sizeof($hosts)) {
-							foreach ($hosts as $host) {
-								$tmp['data'] .= $host['description'] . ', ';
-							}
-						}
-						$tmp['data'] = substr($tmp['data'], 0, -2) . '<br/><br/>';
-					}
-
-					break;
-				}
-			}
-		}
-*/
 		if ($tmp['data']) {
 			intropage_display_panel(997, 'red', 'Plugin Maint alert', $tmp);
 			$tmp['data'] = '';
