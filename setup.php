@@ -355,18 +355,15 @@ function intropage_poller_bottom() {
 	}
 
 	// check db
-	$last = db_fetch_cell("SELECT UNIX_TIMESTAMP(value)
+	if (read_config_option('intropage_analyse_db_interval') > 0)	{	
+	    $last = db_fetch_cell("SELECT UNIX_TIMESTAMP(value)
 		FROM plugin_intropage_trends
 		WHERE name='db_check_testdate'");
 
-	if (time() > ($last + read_config_option('intropage_analyse_db_interval')))	{
-/*
-		db_execute_prepared('REPLACE INTO plugin_intropage_trends
-			(name, value) VALUES (?, ?)',
-			array('db_check_testdate', date('Y-m-d H:i:s', time())));
-*/
-	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
-	    db_check();
+	    if (time() > ($last + read_config_option('intropage_analyse_db_interval')))	{
+		include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
+		db_check();
+	    }
 	}
 
 
