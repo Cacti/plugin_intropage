@@ -1123,7 +1123,11 @@ function intropage_ntp() {
 
 	$ntp_server = read_config_option('intropage_ntp_server');
 
-	if (empty($ntp_server)) {
+	if (!preg_match('/^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z])$/i', $ntp_server))	{
+		$result['alarm'] = 'red';
+		$result['data']  = __('Wrong NTP server configured - ' . $ntp_server . '<br/>Please fix it in settings', 'intropage');
+	}
+    	else if (empty($ntp_server)) {
 		$result['alarm'] = 'grey';
 		$result['data']  = __('No NTP server configured', 'intropage');
 	} else {
