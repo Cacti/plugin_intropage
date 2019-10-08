@@ -927,7 +927,6 @@ function intropage_mactrack_sites_detail() {
 }
 
 
-
 //------------------------------------ poller_info -----------------------------------------------------
 
 function intropage_poller_info_detail() {
@@ -997,8 +996,6 @@ function intropage_poller_info_detail() {
 }
 
 
-
-
 //------------------------------------ thold_events -----------------------------------------------------
 
 function intropage_thold_event_detail() {
@@ -1054,8 +1051,8 @@ function intropage_thold_event_detail() {
 	return $result;
 }
 
-//------------------------------------ top5_ping -----------------------------------------------------
 
+//------------------------------------ top5_ping -----------------------------------------------------
 
 function intropage_top5_ping_detail() {
 	global $config, $allowed_hosts, $console_access;
@@ -1101,6 +1098,7 @@ function intropage_top5_ping_detail() {
 
 	return $result;
 }
+
 
 //------------------------------------ top5_availability -----------------------------------------------------
 
@@ -1148,6 +1146,7 @@ function intropage_top5_availability_detail() {
 	return $result;
 }
 
+
 //------------------------------------ top5_polltime -----------------------------------------------------
 
 function intropage_top5_polltime_detail() {
@@ -1193,6 +1192,7 @@ function intropage_top5_polltime_detail() {
 	return $result;
 }
 
+
 //------------------------------------ top5_pollratio -----------------------------------------------------
 
 function intropage_top5_pollratio_detail() {
@@ -1233,5 +1233,4 @@ function intropage_top5_pollratio_detail() {
 
 	return $result;
 }
-
 

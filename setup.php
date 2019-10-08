@@ -27,22 +27,17 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'config_form', 'intropage_config_form', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'include/settings.php');
-
 	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'include/tab.php');
 	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
-
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
-
 	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
-
 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/helpers.php');
 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/helpers.php');
-
-	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
-
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
+
+	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
 	intropage_setup_database();
 }
 
@@ -289,9 +284,6 @@ function intropage_setup_database() {
 function intropage_poller_bottom() {
 	global $config;
 
-	// drive jsem si start daval do  - nesmysl, muzu mit vice polleru a pak tam davam start prvniho
-//	$start = db_fetch_cell('SELECT min(start_time) from poller_time');
-
 	// poller stats
 	$stats = db_fetch_assoc('SELECT id, total_time, date_sub(last_update, interval round(total_time) second) AS start
 		FROM poller
@@ -325,7 +317,8 @@ function intropage_poller_bottom() {
 
 	// cleaning old data
 	db_execute("DELETE FROM plugin_intropage_trends
-		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND name IN ('poller','cpuload','failed_polls','host','thold','poller_output')");
+		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND 
+		name IN ('poller','cpuload','failed_polls','host','thold','poller_output')");
 
 	// trends - all hosts without permissions!!!
 	db_execute("REPLACE INTO plugin_intropage_trends

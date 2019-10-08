@@ -1604,7 +1604,6 @@ function intropage_trend() {
 			}
 		}
 	}
-	// no plugin installed or running
 
 	$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`, name, value
 		FROM plugin_intropage_trends

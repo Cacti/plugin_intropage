@@ -271,14 +271,11 @@ function intropage_login_options_navigate() {
 	$system_lopts    = db_fetch_cell('SELECT login_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$console_access  = (db_fetch_assoc("SELECT realm_id FROM user_auth_realm WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;
 
-	//echo "console access: $console_access | system login options: $system_lopts | intropake login options: $intropage_lopts<br/>";
-
 	$newtheme = false;
 	if (user_setting_exists('selected_theme', $_SESSION['sess_user_id']) && read_config_option('selected_theme') != read_user_setting('selected_theme')) {
 		unset($_SESSION['selected_theme']);
 		$newtheme = true;
 	}
-	//echo $system_lopts;
 
 	if ($console_access) {
 		if ($system_lopts == 4 && $intropage_lopts == 1) {	// intropage as default
@@ -287,7 +284,6 @@ function intropage_login_options_navigate() {
 		if ($system_lopts == 4 && $intropage_lopts == 0) {
 			header('Location: ' . $config['url_path']);
 		}
-		// ostatni resi asi auth login
 	} else {	// no console access
 		if ($system_lopts == 4 || $system_lopts == 2) {	// intropage as default
 					header('Location: ' . $config['url_path'] . 'plugins/intropage/intropage.php');

@@ -40,12 +40,7 @@ if (isset_request_var('intropage_action') &&
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
 
-		// user can close debug panels like others
-		// if (get_request_var('panel_id') == 999) {
-		//	set_user_setting('intropage_debug', 0);
-		// }
 		break;
-
 
 	// favourite graphs
 	case 'favgraph':
@@ -154,4 +149,3 @@ if (isset_request_var('intropage_action') &&
 		}
 	}
 }
-

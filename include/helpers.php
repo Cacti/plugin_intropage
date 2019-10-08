@@ -111,7 +111,6 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>\n");
 
 	if (isset($dispdata['detail']) && !empty($dispdata['detail'])) {
-//		printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' name='%s'><i class='fa fa-window-maximize'></i></a>\n", md5($panel_id));
 		printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a>\n", $panel_id);
 	}
 
@@ -147,7 +146,7 @@ function intropage_display_data($panel_id,$dispdata) {
 
 	if (isset($dispdata['pie'])) {
 
-	//---------zacatek kresleni grafu
+	//--------- begin of graph
 		// Display PIE
 		$labely = array();
 
@@ -157,7 +156,7 @@ function intropage_display_data($panel_id,$dispdata) {
 			$labely[$key] = $val . ' (' . $dispdata['pie']['data'][$key] . ')';
 		}
 
-		print "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\"></canvas>\n";
+		print "<div style='background: $bgcolor;'><canvas id='pie_$xid'></canvas>\n";
 		print "<script type='text/javascript'>\n";
 
 		$pie_labels = implode('","', $labely);
@@ -321,7 +320,6 @@ EOF;
 		}
 
 		print <<<EOF
-
 	]
     },
     options: {
@@ -343,11 +341,9 @@ EOF;
 
 	if (isset($dispdata['detail'])) {
 		printf("<div id=\"%s\" style=\"display: none\">\n", 'detail_' . $panel_id);
-// ajax		print($dispdata['detail']);
 		print("</div>\n");
 	}
 }
-
 
 
 function ntp_time($host) {

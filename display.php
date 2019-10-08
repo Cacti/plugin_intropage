@@ -62,8 +62,6 @@ function display_information() {
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
-	//$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
-
 	$hosts = get_allowed_devices();
 	$allowed_hosts = implode(',', array_column($hosts, 'id'));
 
@@ -147,8 +145,6 @@ function display_information() {
 	}
 
 	// Intropage Display ----------------------------------
-
-	// $display_important_first = on/off
 
 	// overlay div for detail
 	print '<div id="overlay"><div id="overlay_detail"><div id="detail_in"></div></div><span id="close_detail">' . __('Close', 'intropage') . '</span></div>';
@@ -253,7 +249,6 @@ function display_information() {
 
 		$('#obal').sortable({
 			update: function( event, ui ) {
-				//console.log($('#obal'));
 				var xdata = new Array();
 				$('#obal li').each(function() {
 					xdata.push($(this).attr('id'));
@@ -271,20 +266,7 @@ function display_information() {
 			$('#'+panel_div_id).remove();
 			$.get($(this).attr('href'));
 		});
-/*
-		$('.maxim').off('click').on('click', function() {
-			$(this).html( $(this).html() == '<i class="fa fa-window-maximize"></i>' ? '<i class="fa fa-window-minimize"></i>' : '<i class="fa fa-window-maximize"></i>' );
-			$(this).nextAll('.article').first().toggle();
 
-			if ($('#' + this.name).css('display') == 'none') {
-				$('#' + this.name).css('display','block');
-				$(this).attr('title','Hide details');
-			} else {
-				$('#' + this.name).css('display','none');
-				$(this).attr('title','Show details');
-			}
-		});
-*/
 		// enable/disable move panel/copy text
 		$('#switch_copytext').off('click').on('click', function() {
 			if (!intropage_drag) {
@@ -442,10 +424,9 @@ function display_information() {
 	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 
 	// 0 = console, 1= tab
-
 	// login options can change user group!
+	// after login: 1=url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
 
-	// after login: 1=podle url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
 	if (!$console_access) {
 		if ($lopts < 4) {
 			print "<option value='loginopt_intropage'>" . __('Set intropage as default page', 'intropage') . '</option>';
