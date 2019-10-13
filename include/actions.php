@@ -39,7 +39,6 @@ if (isset_request_var('intropage_action') &&
 				WHERE user_id = ? AND id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
-
 		break;
 
 	// favourite graphs
@@ -74,6 +73,7 @@ if (isset_request_var('intropage_action') &&
 		if (isset_request_var('xdata')) {
 			$error = false;
 			$order = array();
+			$priority = 90; // >90 are fav. graphs
 			foreach (get_request_var('xdata') as $data) {
 				list($a, $b) = explode('_', $data);
 				if (filter_var($b, FILTER_VALIDATE_INT)) {
@@ -83,8 +83,11 @@ if (isset_request_var('intropage_action') &&
 				}
 
 				if (!$error) {
-					$_SESSION['intropage_order']         = $order;
-					$_SESSION['intropage_changed_order'] = true;
+    			    		db_execute_prepared('UPDATE plugin_intropage_user_setting
+            				    SET priority=? WHERE user_id=? and id=?',
+            				    array ($priority, $_SESSION['sess_user_id'], $b));
+            				    
+            				    $priority--;
 				}
 			}
 		}
@@ -93,7 +96,6 @@ if (isset_request_var('intropage_action') &&
 	// reset all panels
 	case 'reset':
 		if ($value == 'all') {
-			unset($_SESSION['intropage_changed_order'], $_SESSION['intropage_order']);
 			db_execute_prepared('DELETE FROM plugin_intropage_user_setting
 				WHERE user_id = ?',
 				array($_SESSION['sess_user_id']));
@@ -101,9 +103,6 @@ if (isset_request_var('intropage_action') &&
 			// default values
 			set_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 			set_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
-		} elseif ($value == 'order') {
-			unset($_SESSION['intropage_changed_order'], $_SESSION['intropage_order']);
-		}
 		break;
 
 	case 'addpanel':
@@ -134,10 +133,8 @@ if (isset_request_var('intropage_action') &&
 	case 'important':
 		if ($value == 'first') {
 			set_user_setting('intropage_display_important_first', 'on');
-			unset($_SESSION['intropage_changed_order'], $_SESSION['intropage_order']);
 		} else {
 			set_user_setting('intropage_display_important_first', 'off');
-			unset($_SESSION['intropage_changed_order'], $_SESSION['intropage_order']);
 		}
 		break;
 

@@ -98,12 +98,14 @@ function display_information() {
 	}
 
 	$order = ' priority desc';
+// now it is in db
+/*
 	if (isset($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order'])) {
 		$order = ' field (id,';
 		$order .= implode(',', $_SESSION['intropage_order']);
 		$order .= ')';
 	}
-
+*/
 	// each favourite graph must have unique name
 	// without this fav_graph is overwritten
 
@@ -247,8 +249,8 @@ function display_information() {
 			resizeObal();
 		});
 
-		$('#obal').sortable({
-			update: function( event, ui ) {
+		$('#obal').sortable({  
+			update: function( event, ui ) {	// change order
 				var xdata = new Array();
 				$('#obal li').each(function() {
 					xdata.push($(this).attr('id'));
@@ -412,10 +414,6 @@ function display_information() {
 	} else {
 		print "<option value='important_first'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
 		print "<option value='important_no' disabled='disabled'>" . __('Sort by panel Priority', 'intropage') . '</option>';
-	}
-
-	if (isset($_SESSION['intropage_changed_order'])) {
-		print "<option value='reset_order'>" . __('Reset panel Order to Default', 'intropage') . '</option>';
 	}
 
 	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
