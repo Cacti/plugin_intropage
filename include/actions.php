@@ -103,6 +103,7 @@ if (isset_request_var('intropage_action') &&
 			// default values
 			set_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 			set_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
+		}
 		break;
 
 	case 'addpanel':
