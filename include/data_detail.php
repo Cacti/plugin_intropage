@@ -213,37 +213,38 @@ function intropage_analyse_tree_host_graph_detail() {
 	$total_errors = 0;
 
 	// hosts with same IP
+	if ($allowed_hosts)	{
+		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
+			FROM host
+			WHERE id IN ($allowed_hosts)
+			AND disabled != 'on'
+			GROUP BY hostname,snmp_port
+			HAVING NoDups > 1");
 
-	$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
-		FROM host
-		WHERE id IN ($allowed_hosts)
-		AND disabled != 'on'
-		GROUP BY hostname,snmp_port
-		HAVING NoDups > 1");
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$result['detail'] .= '<br/><b>' . __('Devices with the same IP and port - %s', $sql_count, 'intropage') . ':</b><br/>';
 
-	$result['detail'] .= '<br/><b>' . __('Devices with the same IP and port - %s', $sql_count, 'intropage') . ':</b><br/>';
-
-	if (cacti_sizeof($sql_result)) {
-		$total_errors += $sql_count;
-		if (count($sql_result) > 0) {
-			$result['alarm'] = 'red';
-			foreach ($sql_result as $row) {
-				$sql_hosts = db_fetch_assoc_prepared("SELECT id, description, hostname
-					FROM host
-					WHERE hostname IN(
-						SELECT hostname
+		if (cacti_sizeof($sql_result)) {
+			$total_errors += $sql_count;
+			if (count($sql_result) > 0) {
+				$result['alarm'] = 'red';
+				foreach ($sql_result as $row) {
+					$sql_hosts = db_fetch_assoc_prepared("SELECT id, description, hostname
 						FROM host
-						WHERE id IN ($allowed_hosts)
-						GROUP BY hostname, snmp_port
-						HAVING COUNT(*)>1
-					)
-					ORDER BY hostname");
+						WHERE hostname IN(
+							SELECT hostname
+							FROM host
+							WHERE id IN ($allowed_hosts)
+							GROUP BY hostname, snmp_port
+							HAVING COUNT(*)>1
+						)
+						ORDER BY hostname");
 
-				if (cacti_sizeof($sql_hosts)) {
-					foreach ($sql_hosts as $row) {
-						$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
+					if (cacti_sizeof($sql_hosts)) {
+						foreach ($sql_hosts as $row) {
+							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
+						}
 					}
 				}
 			}
@@ -251,42 +252,43 @@ function intropage_analyse_tree_host_graph_detail() {
 	}
 
 	// same description
-	$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
-		FROM host
-		WHERE id IN ($allowed_hosts)
-		AND disabled != 'on'
-		GROUP BY description
-		HAVING NoDups > 1");
+	if ($allowed_hosts)	{
+		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
+			FROM host
+			WHERE id IN ($allowed_hosts)
+			AND disabled != 'on'
+			GROUP BY description
+			HAVING NoDups > 1");
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Devices with the same description - %s', $sql_count, 'intropage') . ':</b><br/>';
+		$result['detail'] .= '<br/><b>' . __('Devices with the same description - %s', $sql_count, 'intropage') . ':</b><br/>';
 
-	if (cacti_sizeof($sql_result)) {
-		$total_errors += $sql_count;
-		if (count($sql_result) > 0) {
-			$result['alarm'] = 'red';
-			foreach ($sql_result as $row) {
-				$sql_hosts = db_fetch_assoc_prepared('SELECT id, description, hostname
-					FROM host
-					WHERE description IN(
-						SELECT description
+		if (cacti_sizeof($sql_result)) {
+			$total_errors += $sql_count;
+			if (count($sql_result) > 0) {
+				$result['alarm'] = 'red';
+				foreach ($sql_result as $row) {
+					$sql_hosts = db_fetch_assoc_prepared('SELECT id, description, hostname
 						FROM host
-						WHERE id IN (' . $allowed_hosts . ')
-						GROUP BY description
-						HAVING count(*)>1
-					)
-					ORDER BY description');
+						WHERE description IN(
+							SELECT description
+							FROM host
+							WHERE id IN (' . $allowed_hosts . ')
+							GROUP BY description
+							HAVING count(*)>1
+						)
+						ORDER BY description');
 
-				if (cacti_sizeof($sql_hosts)) {
-					foreach ($sql_hosts as $row) {
-						$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+					if (cacti_sizeof($sql_hosts)) {
+						foreach ($sql_hosts as $row) {
+							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+						}
 					}
 				}
 			}
 		}
 	}
-
 
 	// orphaned DS
 	$sql_result = db_fetch_assoc('SELECT dtd.local_data_id, dtd.name_cache, dtd.active,
@@ -418,123 +420,133 @@ function intropage_analyse_tree_host_graph_detail() {
 	$result['detail'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
 	// device in more trees
-	$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
-		FROM host
-		INNER JOIN graph_tree_items
-		ON (host.id = graph_tree_items.host_id)
-		GROUP BY description
-		HAVING `count` > 1');
+	if ($allowed_hosts)	{
+		$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
+			FROM host
+			INNER JOIN graph_tree_items
+			ON (host.id = graph_tree_items.host_id)
+			WHERE id IN ($allowed_hosts)
+			GROUP BY description
+			HAVING `count` > 1');
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Devices in more than one tree - %s', $sql_count, 'intropage') . ':</b><br/>';
+		$result['detail'] .= '<br/><b>' . __('Devices in more than one tree - %s', $sql_count, 'intropage') . ':</b><br/>';
 
-	if (cacti_sizeof($sql_result)) {
+		if (cacti_sizeof($sql_result)) {
 
-		foreach ($sql_result as $row) {
-			$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description,
-				graph_tree_items.title, graph_tree_items.parent, graph_tree.name
-				FROM host
-				INNER JOIN graph_tree_items
-				ON (host.id = graph_tree_items.host_id)
-				INNER JOIN graph_tree
-				ON (graph_tree_items.graph_tree_id = graph_tree.id)
-				WHERE host.id = ?',
-				array($row['id']));
+			foreach ($sql_result as $row) {
+				$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description,
+					graph_tree_items.title, graph_tree_items.parent, graph_tree.name
+					FROM host
+					INNER JOIN graph_tree_items
+					ON (host.id = graph_tree_items.host_id)
+					INNER JOIN graph_tree
+					ON (graph_tree_items.graph_tree_id = graph_tree.id)
+					WHERE host.id = ?',
+					array($row['id']));
 
-			if (cacti_sizeof($sql_hosts)) {
-				foreach ($sql_hosts as $host) {
-					$parent = $host['parent'];
-					$tree   = $host['name'] . ' / ';
-					while ($parent != 0) {
-						$sql_parent = db_fetch_row('SELECT parent, title FROM graph_tree_items WHERE id = ' . $parent);
-						$parent     = $sql_parent['parent'];
-						$tree .= $sql_parent['title'] . ' / ';
+				if (cacti_sizeof($sql_hosts)) {
+					foreach ($sql_hosts as $host) {
+						$parent = $host['parent'];
+						$tree   = $host['name'] . ' / ';
+						while ($parent != 0) {
+							$sql_parent = db_fetch_row('SELECT parent, title FROM graph_tree_items WHERE id = ' . $parent);
+							$parent     = $sql_parent['parent'];
+							$tree .= $sql_parent['title'] . ' / ';
+						}
+
+						$result['detail'] .= sprintf('<a href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', htmlspecialchars($config['url_path']), $host['gtid'], $host['description'], $tree);
 					}
-
-					$result['detail'] .= sprintf('<a href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', htmlspecialchars($config['url_path']), $host['gtid'], $host['description'], $tree);
 				}
 			}
 		}
 	}
 
 	// host without graph
-	$sql_result = db_fetch_assoc("SELECT id, description
-		FROM host
-		WHERE id IN ($allowed_hosts)
-		AND disabled != 'on'
-		AND id NOT IN (
-			SELECT DISTINCT host_id
-			FROM graph_local
-		)
-		AND snmp_version != 0");
+	if ($allowed_hosts)	{
+		$sql_result = db_fetch_assoc("SELECT id, description
+			FROM host
+			WHERE id IN ($allowed_hosts)
+			AND disabled != 'on'
+			AND id NOT IN (
+				SELECT DISTINCT host_id
+				FROM graph_local
+			)
+			AND snmp_version != 0");
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Hosts without graphs - %s', $sql_count, 'intropage') . ':</b><br/>';
+		$result['detail'] .= '<br/><b>' . __('Hosts without graphs - %s', $sql_count, 'intropage') . ':</b><br/>';
 
-	if (cacti_sizeof($sql_result)) {
-
-		foreach ($sql_result as $row) {
-			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+		if (cacti_sizeof($sql_result)) {
+			foreach ($sql_result as $row) {
+				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+			}
 		}
 	}
 
 	// host without tree
-	$sql_result = db_fetch_assoc("SELECT id, description
-		FROM host
-		WHERE id IN ($allowed_hosts)
-		AND disabled != 'on'
-		AND id NOT IN (
-			SELECT DISTINCT host_id
-			FROM graph_tree_items)
-		");
+	if ($allowed_hosts)	{
+		$sql_result = db_fetch_assoc("SELECT id, description
+			FROM host
+			WHERE id IN ($allowed_hosts)
+			AND disabled != 'on'
+			AND id NOT IN (
+				SELECT DISTINCT host_id
+				FROM graph_tree_items)
+			");
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Hosts without tree - %s', $sql_count, 'intropage') . ':</b><br/>';
+		$result['detail'] .= '<br/><b>' . __('Hosts without tree - %s', $sql_count, 'intropage') . ':</b><br/>';
 
-	if (cacti_sizeof($sql_result)) {
-
-		foreach ($sql_result as $row) {
-			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+		if (cacti_sizeof($sql_result)) {
+    
+			foreach ($sql_result as $row) {
+				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+			}
 		}
 	}
 
 	// public/private community
-	$sql_result = db_fetch_assoc("SELECT id, description
-		FROM host
-		WHERE id IN ($allowed_hosts)
-		AND disabled != 'on'
-		AND (snmp_community ='public' OR snmp_community='private')
-		ORDER BY description");
+	if ($allowed_hosts)	{
+		$sql_result = db_fetch_assoc("SELECT id, description
+			FROM host
+			WHERE id IN ($allowed_hosts)
+			AND disabled != 'on'
+			AND (snmp_community ='public' OR snmp_community='private')
+			ORDER BY description");
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Hosts with default public/private community - %s', $sql_count, 'intropage') . ':</b><br/>';
+		$result['detail'] .= '<br/><b>' . __('Hosts with default public/private community - %s', $sql_count, 'intropage') . ':</b><br/>';
 
-	if (cacti_sizeof($sql_result)) {
+		if (cacti_sizeof($sql_result)) {
 
-		foreach ($sql_result as $row) {
-			$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+			foreach ($sql_result as $row) {
+				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+			}
 		}
 	}
 
 	// plugin monitor - host without monitoring
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='monitor'")) { // installed plugin monitor?
-		$sql_result = db_fetch_assoc("SELECT id, description, hostname
-			FROM host
-			WHERE id IN ($allowed_hosts)
-			AND monitor != 'on'");
+		if ($allowed_hosts)	{
+			$sql_result = db_fetch_assoc("SELECT id, description, hostname
+				FROM host
+				WHERE id IN ($allowed_hosts)
+				AND monitor != 'on'");
 
-		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+			$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-		$result['detail'] .= '<br/><b>' . __('Plugin Monitor - Unmonitored hosts - %s', $sql_count, 'intropage') . ':</b><br/>';
+			$result['detail'] .= '<br/><b>' . __('Plugin Monitor - Unmonitored hosts - %s', $sql_count, 'intropage') . ':</b><br/>';
 
-		if (cacti_sizeof($sql_result)) {
+			if (cacti_sizeof($sql_result)) {
 
-			foreach ($sql_result as $row) {
-				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
+				foreach ($sql_result as $row) {
+					$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
+				}
 			}
 		}
 	}
@@ -552,7 +564,7 @@ function intropage_analyse_tree_host_graph_detail() {
 //------------------------------------ extrem -----------------------------------------------------
 
 function intropage_extrem_detail() {
-	global $config, $allowed_hosts, $console_access;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('48 hour extrem', 'intropage'),

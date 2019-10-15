@@ -619,7 +619,7 @@ function intropage_cpu() {
 //------------------------------------ extrem -----------------------------------------------------
 
 function intropage_extrem() {
-	global $config, $allowed_hosts, $console_access;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('24 hour extrem', 'intropage'),
@@ -850,6 +850,7 @@ function intropage_graph_host() {
 		}
 	}
 	else	{
+	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
@@ -896,6 +897,7 @@ function intropage_graph_host_template() {
 	}
 	else	{
 	    unset($result['pie']);
+	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
@@ -1462,6 +1464,7 @@ function intropage_top5_ping() {
 		}
 	}
 	else	{
+	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
@@ -1513,6 +1516,7 @@ function intropage_top5_availability() {
 		}
 	}
 	else	{
+	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
@@ -1563,6 +1567,7 @@ function intropage_top5_polltime() {
 		}
 	}
 	else	{
+	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 	
@@ -1611,6 +1616,7 @@ function intropage_top5_pollratio() {
 		}
 	}
 	else	{
+	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 	
@@ -1621,7 +1627,7 @@ function intropage_top5_pollratio() {
 //------------------------------------ trends -----------------------------------------------------
 
 function intropage_trend() {
-	global $config, $allowed_hosts;
+	global $config;
 
 	$result = array(
 		'name' => __('Trends', 'intropage'),
