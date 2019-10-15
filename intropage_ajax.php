@@ -44,7 +44,10 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
 $maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
 $hosts = get_allowed_devices();
-$allowed_hosts = implode(',', array_column($hosts, 'id'));
+if (count($hosts) > 0)
+    $allowed_hosts = implode(',', array_column($hosts, 'id'));
+else
+    $allowed_hosts = false;
 
 // Retrieve access
 $console_access = (db_fetch_assoc("SELECT realm_id FROM user_auth_realm WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;

@@ -119,7 +119,7 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
 
 	print "<div class='panel_data'>\n";
-	print __('Waiting for data', 'intropage');
+	print __('Loading data ...', 'intropage');
 	print "</div>\n";	// end of panel_data
 	print "</td></tr>\n\n";
 	html_end_box(false);

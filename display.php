@@ -63,7 +63,10 @@ function display_information() {
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
 	$hosts = get_allowed_devices();
-	$allowed_hosts = implode(',', array_column($hosts, 'id'));
+	if (count($hosts) > 0)
+    	    $allowed_hosts = implode(',', array_column($hosts, 'id'));
+	else
+	    $allowed_hosts = false;
 
 	// Retrieve access
 	$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
