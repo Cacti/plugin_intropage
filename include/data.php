@@ -345,18 +345,20 @@ function intropage_analyse_tree_host_graph() {
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
 	// device in more trees
-	$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
-		FROM host
-		INNER JOIN graph_tree_items
-		ON (host.id = graph_tree_items.host_id)
-		WHERE id IN ($allowed_hosts)
-		GROUP BY description
-		HAVING `count` > 1');
+	if ($allowed_hosts)	{
+		$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
+			FROM host
+			INNER JOIN graph_tree_items
+			ON (host.id = graph_tree_items.host_id)
+			WHERE id IN ($allowed_hosts)
+			GROUP BY description
+			HAVING `count` > 1');
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	if (cacti_sizeof($sql_result)) {
-		$result['data'] .= __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
+		if (cacti_sizeof($sql_result)) {
+			$result['data'] .= __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
+		}
 	}
 
 	// host without graph
