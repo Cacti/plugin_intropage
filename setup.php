@@ -149,6 +149,13 @@ function intropage_check_upgrade() {
 				MODIFY COLUMN value varchar(250) NULL DEFAULT NULL');
 		}
 
+		if (cacti_version_compare($oldv,'1.8.2', '<')) {
+			db_execute("DELETE FROM plugin_intropage_panel 
+				WHERE panel='intropage_favourite_graph'");
+			db_execute("DELETE FROM plugin_intropage_user_setting 
+				WHERE panel='intropage_favourite_graph' AND fav_graph_id is NULL");
+		}
+
 
 		// Set the new version
 		db_execute("UPDATE plugin_config

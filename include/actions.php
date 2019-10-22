@@ -50,9 +50,8 @@ if (isset_request_var('intropage_action') &&
 				db_execute('DELETE FROM plugin_intropage_user_setting WHERE user_id=' . $_SESSION['sess_user_id'] . ' and fav_graph_id=' .  get_request_var('graph_id'));
 			} else { // add to fav
 				// priority for new panel:
-				$prio = db_fetch_cell("SELECT priority
-					FROM plugin_intropage_panel
-					WHERE panel='intropage_favourite_graph'");
+				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_user_setting 
+					WHERE user_id=' . $_SESSION['sess_user_id']);
 
 				db_execute_prepared('REPLACE INTO plugin_intropage_user_setting
 					(user_id, priority, panel, fav_graph_id)

@@ -49,7 +49,6 @@ $panel['intropage_top5_ping']['priority']               = 22;
 $panel['intropage_top5_availability']['priority']       = 23;
 $panel['intropage_info']['priority']                    = 10;
 $panel['intropage_boost']['priority']                   = 55;
-$panel['intropage_favourite_graph']['priority']         = 95;
 $panel['intropage_top5_polltime']['priority']           = 24;
 $panel['intropage_top5_pollratio']['priority']          = 25;
 
