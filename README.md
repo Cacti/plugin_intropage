@@ -53,9 +53,10 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Add NTP server check (domain name or IP)
 	Detail to the new window
 	Fix panel reload - Cigamit
+	Fix save panel order
 	Fix Admin alert panel - not working with ajax
 	Fix maint panel - not working with ajax
-	A lot of optimalization
+	A lot of optimalization, speed-up
 
 	1.8.2 ---
 	Add panel with worst polling time
