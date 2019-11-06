@@ -350,7 +350,7 @@ function intropage_analyse_tree_host_graph() {
 			FROM host
 			INNER JOIN graph_tree_items
 			ON (host.id = graph_tree_items.host_id)
-			WHERE id IN ($allowed_hosts)
+			WHERE host.id IN (' . $allowed_hosts . ')
 			GROUP BY description
 			HAVING `count` > 1');
 
