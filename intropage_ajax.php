@@ -123,7 +123,7 @@ if (isset_request_var('detail_panel') && isset($panel_id)) {
 
 	    print '<div id="block" class="color_' . $data['alarm'] . '" ></div>';
 	    print '<h3 style="display: inline">' . $data['name'] . '</h3>';
-	    print $data['detail'];
+	    print '<br/>' . $data['detail'];
 	}
 	else	{
 	    print __('Panel not found');	
