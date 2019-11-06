@@ -214,7 +214,7 @@ function intropage_analyse_tree_host_graph_detail() {
 
 	// hosts with same IP
 	if ($allowed_hosts)	{
-		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
+		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname, snmp_port
 			FROM host
 			WHERE id IN ($allowed_hosts)
 			AND disabled != 'on'
@@ -230,20 +230,15 @@ function intropage_analyse_tree_host_graph_detail() {
 			if (count($sql_result) > 0) {
 				$result['alarm'] = 'red';
 				foreach ($sql_result as $row) {
-					$sql_hosts = db_fetch_assoc_prepared("SELECT id, description, hostname
+
+					$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
 						FROM host
-						WHERE hostname IN(
-							SELECT hostname
-							FROM host
-							WHERE id IN ($allowed_hosts)
-							GROUP BY hostname, snmp_port
-							HAVING COUNT(*)>1
-						)
-						ORDER BY hostname");
+						WHERE hostname = '" . $row['hostname'] . "' and snmp_port=" . $row['snmp_port']);
 
 					if (cacti_sizeof($sql_hosts)) {
-						foreach ($sql_hosts as $row) {
-							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
+						foreach ($sql_hosts as $row2) {
+							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row2['description'], $row2['hostname'], $row2['id']);
+							$pom++;
 						}
 					}
 				}
@@ -253,7 +248,7 @@ function intropage_analyse_tree_host_graph_detail() {
 
 	// same description
 	if ($allowed_hosts)	{
-		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
+		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, description
 			FROM host
 			WHERE id IN ($allowed_hosts)
 			AND disabled != 'on'
@@ -269,20 +264,13 @@ function intropage_analyse_tree_host_graph_detail() {
 			if (count($sql_result) > 0) {
 				$result['alarm'] = 'red';
 				foreach ($sql_result as $row) {
-					$sql_hosts = db_fetch_assoc_prepared('SELECT id, description, hostname
+					$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
 						FROM host
-						WHERE description IN(
-							SELECT description
-							FROM host
-							WHERE id IN (' . $allowed_hosts . ')
-							GROUP BY description
-							HAVING count(*)>1
-						)
-						ORDER BY description');
+						WHERE description = '" . $row['description'] . "'");
 
 					if (cacti_sizeof($sql_hosts)) {
-						foreach ($sql_hosts as $row) {
-							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+						foreach ($sql_hosts as $row2) {
+							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row2['id'], $row2['description'], $row2['id']);
 						}
 					}
 				}
@@ -425,7 +413,7 @@ function intropage_analyse_tree_host_graph_detail() {
 			FROM host
 			INNER JOIN graph_tree_items
 			ON (host.id = graph_tree_items.host_id)
-			WHERE id IN ($allowed_hosts)
+			WHERE host.id IN (' . $allowed_hosts . ')
 			GROUP BY description
 			HAVING `count` > 1');
 
