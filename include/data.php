@@ -1118,6 +1118,11 @@ function intropage_mactrack_sites() {
 		$result['data']  = __('Mactrack plugin not installed/running', 'intropage');
 		$result['detail'] = FALSE;
 	} else {
+		$mactrack_id = db_fetch_cell("SELECT id
+                        FROM plugin_realms
+                        WHERE plugin='mactrack'
+                        AND display LIKE '%view%'");
+
 		if (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = '.$_SESSION['sess_user_id'].' AND realm_id =' . ($mactrack_id + 100))) {
 		    	$result['data'] =  __('You don\'t have plugin permission', 'intropage');
 		}
