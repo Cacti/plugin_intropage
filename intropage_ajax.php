@@ -40,6 +40,21 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
     $panel_id = get_request_var('detail_panel');
 }
 
+// automatic reload when poller ends
+if (isset_request_var('autoreload'))	{
+    $reloaded = db_fetch_cell("SELECT value FROM plugin_intropage_trends
+				WHERE name='ar_displayed'");
+
+    if ($reloaded == 'false')	{
+	db_execute("UPDATE plugin_intropage_trends
+                SET value = 'true' WHERE name = 'ar_displayed'");
+	print '1';
+    }
+    else	{
+	print '0';
+    }
+}
+
 // few requered variables
 $maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 

@@ -116,7 +116,7 @@ if (isset_request_var('intropage_action') &&
 		break;
 
 	case 'refresh':
-		if ($value == 0 || $value == 60 || $value == 180 || $value == 600) {
+		if (filter_var($value, FILTER_VALIDATE_INT))	{
 			set_user_setting('intropage_autorefresh', $value);
 		}
 		break;

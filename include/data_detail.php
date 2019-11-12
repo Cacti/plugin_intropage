@@ -896,31 +896,24 @@ function intropage_mactrack_sites_detail() {
 
 	);
 
-	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
-		$result['alarm'] = 'grey';
-		$result['detail']  = __('Mactrack plugin not installed/running', 'intropage');
+	$result['detail'] .= '<table><tr><td class="rpad">' . __('Site', 'intropage') . '</td><td class="rpad">' . __('Devices', 'intropage') . '</td>';
+	$result['detail'] .= '<td class="rpad">' . __('IPs', 'intropage') . '</td><td class="rpad">' . __('Ports', 'intropage') . '</td>';
+	$result['detail'] .= '<td class="rpad">' . __('Ports up', 'intropage') . '</td><td class="rpad">' . __('MACs', 'intropage') . '</td>';
+	$result['detail'] .= '<td class="rpad">' . __('Device errors', 'intropage') . '</td></tr>';
+
+	$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc');
+	if (sizeof($sql_result) > 0) {
+		foreach ($sql_result as $site) {
+			$row = '<tr><td>' . $site['site_name'] . '</td><td>' . $site['total_devices'] . '</td>';
+			$row .= '<td>' . $site['total_ips'] . '</td><td>' . $site['total_user_ports'] . '</td>';
+			$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
+			$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
+            		$result['detail'] .= $row;
+    		}
+
+    		$result['detail'] .= '</table>';
 	} else {
-		$result['detail'] .= '<table><tr><td class="rpad">' . __('Site', 'intropage') . '</td><td class="rpad">' . __('Devices', 'intropage') . '</td>';
-		$result['detail'] .= '<td class="rpad">' . __('IPs', 'intropage') . '</td><td class="rpad">' . __('Ports', 'intropage') . '</td>';
-		$result['detail'] .= '<td class="rpad">' . __('Ports up', 'intropage') . '</td><td class="rpad">' . __('MACs', 'intropage') . '</td>';
-		$result['detail'] .= '<td class="rpad">' . __('Device errors', 'intropage') . '</td></tr>';
-
-		$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc');
-		if (sizeof($sql_result) > 0) {
-			foreach ($sql_result as $site) {
-				$row = '<tr><td>' . $site['site_name'] . '</td><td>' . $site['total_devices'] . '</td>';
-				$row .= '<td>' . $site['total_ips'] . '</td><td>' . $site['total_user_ports'] . '</td>';
-				$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
-				$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
-
-                    		$result['detail'] .= $row;
-            		}
-
-            		$result['detail'] .= '</table>';
-
-		} else {
-			$result['detail'] = __('No mactrack sites found', 'intropage');
-		}
+	    $result['detail'] = __('No mactrack sites found', 'intropage');
 	}
 
 	return $result;

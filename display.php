@@ -245,6 +245,16 @@ function display_information() {
 
 			refresh = setInterval(reload_all, intropage_autorefresh*1000);
 		}
+		
+		// automatic autorefresh after poller
+		if (intropage_autorefresh == -1)	{
+			if (refresh !== null) {
+				clearTimeout(refresh);
+			}
+
+			refresh = setInterval(testPoller, 10000);
+		}
+	
 
 		$('.article').hide();
 
@@ -300,6 +310,15 @@ function display_information() {
 
 			reload_panel(panel_id, true, false);
 		});
+	}
+
+	function testPoller() {
+		$.get(urlPath+'plugins/intropage/intropage_ajax.php?&autoreload=true')
+		.done(function(data) {
+			if (data == 1)	
+			    reload_all(); 
+		});
+	
 	}
 
 	function resizeObal() {
@@ -387,10 +406,16 @@ function display_information() {
 	// only submit :-)
 	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
 
-	if ($autorefresh > 0) {
+	if ($autorefresh > 0 || $autorefresh == -1) {
 		print "<option value='refresh_0'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
 	} else {
 		print "<option value='refresh_0' disabled='disabled'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
+	}
+
+	if ($autorefresh == -1) {
+		print "<option value='refresh_-1' disabled='disabled'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
+	} else {
+		print "<option value='refresh_-1'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
 	}
 
 	if ($autorefresh == 60) {
