@@ -51,6 +51,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Add logonly tholds
 	Add DB check disable option
 	Add NTP server check (domain name or IP)
+	Add automatic refresh after poller finish
 	Detail to the new window
 	Fix panel reload - Cigamit
 	Fix save panel order
