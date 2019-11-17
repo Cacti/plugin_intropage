@@ -315,8 +315,13 @@ function display_information() {
 	function testPoller() {
 		$.get(urlPath+'plugins/intropage/intropage_ajax.php?&autoreload=true')
 		.done(function(data) {
-			if (data == 1)	
-			    reload_all(); 
+			if (data == 1)	{
+			    $('#obal li').each(function() {
+				var panel_id = $(this).attr('id').split('_').pop();
+				reload_panel(panel_id, false, true);
+			    });
+			}
+			//     reload_all();  - it is without reload effect
 		});
 	
 	}
