@@ -318,12 +318,11 @@ function display_information() {
 			if (data == 1)	{
 			    $('#obal li').each(function() {
 				var panel_id = $(this).attr('id').split('_').pop();
-				reload_panel(panel_id, false, true);
+				reload_panel(panel_id, false, false);
 			    });
 			}
 			//     reload_all();  - it is without reload effect
 		});
-	
 	}
 
 	function resizeObal() {
