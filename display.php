@@ -358,6 +358,11 @@ function display_information() {
 		});
 	}
 
+	$("#overlay").click(function(event) { 
+    		event.preventDefault(); 
+        	$('#overlay').fadeOut("fast"); 
+        });
+
 	// detail to the new window
 	$('.maxim').click(function(event) {
 	    panel_id =  $(this).attr('detail-panel');
