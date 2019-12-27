@@ -328,7 +328,7 @@ function intropage_poller_bottom() {
 	// cleaning old data
 	db_execute("DELETE FROM plugin_intropage_trends
 		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND 
-		name IN ('poller','cpuload','failed_polls','host','thold','poller_output')");
+		name IN ('poller','cpuload','failed_polls','host','thold','poller_output','syslog_incoming','syslog_total','syslog_alert')");
 
 	// trends - all hosts without permissions!!!
 	db_execute("REPLACE INTO plugin_intropage_trends
@@ -362,6 +362,41 @@ function intropage_poller_bottom() {
 	if (time() > ($last + read_config_option('intropage_ntp_interval')))	{
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 	    ntp_time2();
+	}
+
+	// plugin syslog
+	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
+		
+		$line = syslog_db_fetch_row("SHOW TABLE STATUS LIKE 'syslog_incoming'");
+		$i_rows = $line['Auto_increment'];
+		$line = syslog_db_fetch_row("SHOW TABLE STATUS LIKE 'syslog'");
+		$total_rows = $line['Auto_increment'];
+		$alert_rows = syslog_db_fetch_cell('SELECT sum(count) FROM syslog_logs WHERE 
+			logtime > date_sub(now(), INTERVAL ' . read_config_option('poller_interval') .' SECOND)');
+
+		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_incoming'") {
+    			$sql = "INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','$i_rows')";
+		} 
+		else {
+    			$sql = "UPDATE plugin_intropage_trends SET value='$i_rows' WHERE name='syslog_incoming'";
+		}
+		db_execute($sql);
+
+		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_total'") {
+    			$sql = "INSERT INTO settings VALUES ('syslog_total','$total_rows')";
+		} 
+		else {
+    			$sql = "UPDATE plugin_intropage_trends SET value='$total_rows' WHERE name='syslog_total'";
+		}
+		db_execute($sql);
+
+		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_alert'") {
+    			$sql = "INSERT INTO settings VALUES ('syslog_alert','$alert_rows')";
+		} 
+		else {
+    			$sql = "UPDATE plugin_intropage_trends SET value='$alert_rows' WHERE name='syslog_alert'";
+		}
+		db_execute($sql);
 	}
 
 	// check db
