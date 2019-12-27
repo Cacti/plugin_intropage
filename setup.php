@@ -374,7 +374,7 @@ function intropage_poller_bottom() {
 		$alert_rows = syslog_db_fetch_cell('SELECT sum(count) FROM syslog_logs WHERE 
 			logtime > date_sub(now(), INTERVAL ' . read_config_option('poller_interval') .' SECOND)');
 
-		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_incoming'") {
+		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_incoming'")) {
     			$sql = "INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','$i_rows')";
 		} 
 		else {
@@ -382,7 +382,7 @@ function intropage_poller_bottom() {
 		}
 		db_execute($sql);
 
-		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_total'") {
+		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_total'")) {
     			$sql = "INSERT INTO settings VALUES ('syslog_total','$total_rows')";
 		} 
 		else {
@@ -390,7 +390,7 @@ function intropage_poller_bottom() {
 		}
 		db_execute($sql);
 
-		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_alert'") {
+		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_alert'")) {
     			$sql = "INSERT INTO settings VALUES ('syslog_alert','$alert_rows')";
 		} 
 		else {
