@@ -383,7 +383,7 @@ function intropage_poller_bottom() {
 		db_execute($sql);
 
 		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_total'")) {
-    			$sql = "INSERT INTO settings VALUES ('syslog_total','$total_rows')";
+    			$sql = "INSERT INTO plugin_intropage_trends VALUES ('syslog_total','$total_rows')";
 		} 
 		else {
     			$sql = "UPDATE plugin_intropage_trends SET value='$total_rows' WHERE name='syslog_total'";
@@ -391,7 +391,7 @@ function intropage_poller_bottom() {
 		db_execute($sql);
 
 		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_alert'")) {
-    			$sql = "INSERT INTO settings VALUES ('syslog_alert','$alert_rows')";
+    			$sql = "INSERT INTO plugin_intropage_trends VALUES ('syslog_alert','$alert_rows')";
 		} 
 		else {
     			$sql = "UPDATE plugin_intropage_trends SET value='$alert_rows' WHERE name='syslog_alert'";
