@@ -152,7 +152,7 @@ function display_information() {
 	// Intropage Display ----------------------------------
 
 	// overlay div for detail
-	print '<div id="overlay"><div id="overlay_detail"><div id="detail_in"></div></div><span id="close_detail">' . __('Close', 'intropage') . '</span></div>';
+	print '<div id="overlay"><div id="overlay_detail"></div></div>';
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -213,7 +213,7 @@ function display_information() {
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
-		
+
 	} else {	// display only errors/errors and warnings/all - order by priority
 		foreach ($panels as $xkey => $xvalue) {
 			intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
@@ -245,7 +245,7 @@ function display_information() {
 
 			refresh = setInterval(reload_all, intropage_autorefresh*1000);
 		}
-		
+
 		// automatic autorefresh after poller
 		if (intropage_autorefresh == -1)	{
 			if (refresh !== null) {
@@ -254,7 +254,7 @@ function display_information() {
 
 			refresh = setInterval(testPoller, 10000);
 		}
-	
+
 
 		$('.article').hide();
 
@@ -262,7 +262,7 @@ function display_information() {
 			resizeObal();
 		});
 
-		$('#obal').sortable({  
+		$('#obal').sortable({
 			update: function( event, ui ) {	// change order
 				var xdata = new Array();
 				$('#obal li').each(function() {
@@ -358,28 +358,48 @@ function display_information() {
 		});
 	}
 
-	$("#overlay").click(function(event) { 
-    		event.preventDefault(); 
-        	$('#overlay').fadeOut("fast"); 
-        });
-
 	// detail to the new window
 	$('.maxim').click(function(event) {
-	    panel_id =  $(this).attr('detail-panel');
-    	    event.preventDefault();
-    	    $("#overlay").fadeIn("fast");
-    	    var type = $(this).attr("type");
-    	    var record = $(this).attr("record");
-    	    $("#detail_in").load(urlPath+'plugins/intropage/intropage_ajax.php?detail_panel='+panel_id);
-    	    $("#overlay_detail").fadeIn("fast");
+   	    event.preventDefault();
+	    panel_id = $(this).attr('detail-panel');
+
+		$.get(urlPath+'plugins/intropage/intropage_ajax.php?detail_panel='+panel_id, function(data) {
+			$('#overlay_detail').html(data);
+			width = $('#overlay_detail').textWidth() + 150;
+			windowWidth = $(window).width();
+			if (width > 1200) {
+				width = 1200;
+			}
+
+			if (width > windowWidth) {
+				width = windowWidth - 50;
+			}
+
+			$('#overlay').dialog({
+				modal: true,
+				autoOpen: true,
+				buttons: [
+					{
+						text: '<?php print __('Close', 'intropage');?>',
+						click: function() {
+							$(this).dialog('destroy');
+							$('#overlay_detail').empty();
+						},
+						icon: 'ui-icon-heart'
+					}
+				],
+				width: width,
+				maxHeight: 650,
+				resizable: true,
+				title: '<?php print __('Panel Details', 'intropage');?>',
+			});
+
+			$('#block').click(function() {
+				$('#overlay').dialog('close');
+			});
+		});
 	});
 
-	$("#close_detail").click(function(event) {
-    	    event.preventDefault();
-            $("#overlay").fadeOut("fast");
-            $("#detail_in" ).text("");
-            $("#overlay_detail").fadeOut("fast");
-	});
 	</script>
 
 	<?php
