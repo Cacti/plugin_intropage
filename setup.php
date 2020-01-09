@@ -159,6 +159,10 @@ function intropage_check_upgrade() {
 
 		}
 
+		if (cacti_version_compare($oldv,'1.8.3', '<')) {
+			api_plugin_db_add_column('user_auth', array('name' => 'intropage_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		}
+
 		// Set the new version
 		db_execute("UPDATE plugin_config
 			SET version='$current'
@@ -219,6 +223,7 @@ function intropage_setup_database() {
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 	$sql_insert = '';
@@ -371,32 +376,29 @@ function intropage_poller_bottom() {
 		$i_rows = $line['Auto_increment'];
 		$line = syslog_db_fetch_row("SHOW TABLE STATUS LIKE 'syslog'");
 		$total_rows = $line['Auto_increment'];
-		$alert_rows = syslog_db_fetch_cell('SELECT sum(count) FROM syslog_logs WHERE 
+		$alert_rows = syslog_db_fetch_cell('SELECT ifnull(sum(count),0) FROM syslog_logs WHERE 
 			logtime > date_sub(now(), INTERVAL ' . read_config_option('poller_interval') .' SECOND)');
 
-		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_incoming'")) {
-    			$sql = "INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','$i_rows')";
-		} 
-		else {
-    			$sql = "UPDATE plugin_intropage_trends SET value='$i_rows' WHERE name='syslog_incoming'";
-		}
-		db_execute($sql);
+/*
+		$last_inc = db_fetch_cell("SELECT ifnull(value,0) FROM plugin_intropage_trends WHERE name='syslog_incoming' ORDER BY cur_timestamp DESC LIMIT 1");
+		$last_tot = db_fetch_cell("SELECT ifnull(value,0) FROM plugin_intropage_trends WHERE name='syslog_total' ORDER BY cur_timestamp DESC LIMIT 1");
+		$last_ale = db_fetch_cell("SELECT ifnull(value,0) FROM plugin_intropage_trends WHERE name='syslog_alert' ORDER BY cur_timestamp DESC LIMIT 1");
 
-		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_total'")) {
-    			$sql = "INSERT INTO plugin_intropage_trends VALUES ('syslog_total','$total_rows')";
-		} 
-		else {
-    			$sql = "UPDATE plugin_intropage_trends SET value='$total_rows' WHERE name='syslog_total'";
+		if (db_fetch_cell("SELECT count(value) FROM plugin_intropage_trends WHERE name='syslog_total'") == 1)	{
+			db_execute("UPDATE plugin_intropage_trends SET value=0 WHERE name='syslog_incoming'");
+			db_execute("UPDATE plugin_intropage_trends SET value=0 WHERE name='syslog_total'");
+			db_execute("UPDATE plugin_intropage_trends SET value=0 WHERE name='syslog_alert'");
 		}
-		db_execute($sql);
 
-		if (!db_fetch_cell("SELECT value FROM plugin_intropage_trends where name='syslog_alert'")) {
-    			$sql = "INSERT INTO plugin_intropage_trends VALUES ('syslog_alert','$alert_rows')";
-		} 
-		else {
-    			$sql = "UPDATE plugin_intropage_trends SET value='$alert_rows' WHERE name='syslog_alert'";
-		}
-		db_execute($sql);
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','" . ($i_rows - $last_inc) . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_total','" . ($total_rows - $last_tot) . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_alert','" . ($alert_rows - $last_ale) . "')");
+*/
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','" . $i_rows . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_total','" . $total_rows . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_alert','" . $alert_rows . "')");
+
+
 	}
 
 	// check db
