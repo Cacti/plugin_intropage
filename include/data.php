@@ -1798,7 +1798,7 @@ function intropage_syslog() {
 	global $config;
 
 	$result = array(
-		'name' => __('Syslog', 'intropage'),
+		'name' => __('Syslog messages and alerts', 'intropage'),
 		'alarm' => 'grey',
 		'data' => '',
 		'detail' => FALSE,
@@ -1827,7 +1827,7 @@ function intropage_syslog() {
 
 		if (cacti_sizeof($sql)) {
 			$val = 0;
-			$result['line']['title1'] = __('Total msg.', 'intropage');
+			$result['line']['title1'] = __('Total', 'intropage');
 			foreach ($sql as $row) {
 				array_push($result['line']['label1'], $row['date']);
 				array_push($result['line']['data1'], $val - $row['value']);
@@ -1845,7 +1845,7 @@ function intropage_syslog() {
 
 		if (cacti_sizeof($sql)) {
 			$val = 0;
-			$result['line']['title2'] = __('Incoming msg.', 'intropage');
+			$result['line']['title2'] = __('Incoming', 'intropage');
 			foreach ($sql as $row) {
 				array_push($result['line']['label2'], $row['date']);
 				array_push($result['line']['data2'], $val - $row['value']);
