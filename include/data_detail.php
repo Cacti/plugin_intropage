@@ -565,7 +565,7 @@ function intropage_extrem_detail() {
 	// long run poller
 	$result['detail'] .= '<strong>' . __('Long run<br/>poller', 'intropage') . ': </strong>';
 
-	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%d.%m. %H:%i') AS `date`,
+	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`,
 		substring(value,instr(value,':')+1) AS xvalue
 		FROM plugin_intropage_trends
 		WHERE name='poller'
@@ -587,7 +587,7 @@ function intropage_extrem_detail() {
 	$result['detail'] .= '<td class="rpad texalirig">';
 	$result['detail'] .= '<strong>Max host<br/>down: </strong>';
 
-	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%d.%m. %H:%i') AS `date`, value
+	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='host'
 		AND cur_timestamp > date_sub(now(),interval 2 day)
@@ -610,7 +610,7 @@ function intropage_extrem_detail() {
 	$result['detail'] .= '<strong>' . __('Max thold<br/>triggered:', 'intropage') .'</strong>';
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
-		$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%d.%m. %H:%i') AS `date`, value
+		$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 			FROM plugin_intropage_trends
 			WHERE name='thold'
 			AND cur_timestamp > date_sub(now(),interval 2 day)
@@ -634,7 +634,7 @@ function intropage_extrem_detail() {
 	$result['detail'] .= '<td class="rpad texalirig">';
 	$result['detail'] .= '<strong>' . __('Poller<br/>output item:', 'intropage') . '</strong>';
 
-	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%d.%m. %H:%i') AS `date`, value
+	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='poller_output'
 		AND cur_timestamp > date_sub(now(),interval 2 day)
@@ -655,7 +655,7 @@ function intropage_extrem_detail() {
 	$result['detail'] .= '<td class="rpad texalirig">';
 	$result['detail'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
 
-	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%d.%m. %H:%i') AS `date`, value
+	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='failed_polls'
 		AND cur_timestamp > date_sub(now(),interval 2 day)
