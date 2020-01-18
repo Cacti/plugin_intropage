@@ -171,7 +171,7 @@ function intropage_analyse_login_detail() {
 			}
 
 			$result['detail'] .= sprintf('<tr><td class="rpad">%s </td><td class="rpad">%s </td><td class="rpad">%s </td><td>%s</td></tr>', $row['time'], $row['ip'], $row['username'], ($row['result'] == 0) ? __('failed', 'intropage') : __('success', 'intropage'));
-	
+
 		}
 		$result['detail'] .= '</table>';
 	}
@@ -193,7 +193,7 @@ function intropage_analyse_login_detail() {
 		AND user_auth_realm.realm_id=19")) ? true : false;
 
 	if ($result['detail'] && $loggin_access) {
-		$result['detail'] .= '<br/><br/><a href="' . htmlspecialchars($config['url_path']) . 'utilities.php?action=view_user_log">Full log</a><br/>';
+		$result['detail'] .= '<br/><br/><a href="' . html_escape($config['url_path'] . 'utilities.php?action=view_user_log') . '">' . __('Full log') . '</a><br/>';
 	}
 
 	return $result;
@@ -233,11 +233,11 @@ function intropage_analyse_tree_host_graph_detail() {
 
 					$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
 						FROM host
-						WHERE hostname = '" . $row['hostname'] . "' and snmp_port=" . $row['snmp_port']);
+						WHERE hostname = " . db_qstr($row['hostname']) . " AND snmp_port=" . $row['snmp_port']);
 
 					if (cacti_sizeof($sql_hosts)) {
 						foreach ($sql_hosts as $row2) {
-							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row2['description'], $row2['hostname'], $row2['id']);
+							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row2['description']), html_escape($row2['hostname']), $row2['id']);
 							$pom++;
 						}
 					}
@@ -266,11 +266,11 @@ function intropage_analyse_tree_host_graph_detail() {
 				foreach ($sql_result as $row) {
 					$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
 						FROM host
-						WHERE description = '" . $row['description'] . "'");
+						WHERE description = " . db_qstr($row['description']));
 
 					if (cacti_sizeof($sql_hosts)) {
 						foreach ($sql_hosts as $row2) {
-							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row2['id'], $row2['description'], $row2['id']);
+							$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row2['id'], html_escape($row2['description']), $row2['id']);
 						}
 					}
 				}
@@ -307,8 +307,8 @@ function intropage_analyse_tree_host_graph_detail() {
 		}
 
 		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['name_cache'] . '</a><br/>';
+			$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
+			html_escape($row['name_cache']) . '</a><br/>';
 		}
 	}
 
@@ -326,8 +326,8 @@ function intropage_analyse_tree_host_graph_detail() {
 		}
 
 		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['rrd_name'] . '</a><br/>';
+			$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
+			html_escape($row['rrd_name']) . '</a><br/>';
 
 		}
 		$total_errors += $sql_count;
@@ -353,17 +353,17 @@ function intropage_analyse_tree_host_graph_detail() {
 		}
 
 		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id'] . '">' .
-			$row['name_cache'] . '</a><br/>';
+			$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
+			html_escape($row['name_cache']) . '</a><br/>';
 
 		}
 		$total_errors += $sql_count;
 	}
-	
+
 	// thold plugin - logonly alert and warning thold
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
 
-	    $sql_result = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,  
+	    $sql_result = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
 		uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 		FROM thold_data AS td
 		INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
@@ -390,20 +390,20 @@ function intropage_analyse_tree_host_graph_detail() {
 	    $result['detail'] .= '<br/><b>' . __('Thold logonly alert/warning - %s:', $sql_count, 'intropage') . '</b><br/>';
 
 	    if (cacti_sizeof($sql_result)) {
+			if ($result['alarm'] == 'green') {
+				$result['alarm'] = 'yellow';
+			}
 
-		if ($result['alarm'] == 'green') {
-		    $result['alarm'] = 'yellow';
-		}
+			foreach ($sql_result as $row) {
+				$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id']) . '">' .
+				html_escape($row['td_name']) . '</a><br/>';
+			}
 
-		foreach ($sql_result as $row) {  
-		    $result['detail'] .= '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id'] . '">' .
-		    $row['td_name'] . '</a><br/>';
-		}
-		$total_errors += $sql_count;
+			$total_errors += $sql_count;
 	    }
 	}
 
-	
+
 	// below - only information without red/yellow/green
 	$result['detail'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
@@ -444,7 +444,7 @@ function intropage_analyse_tree_host_graph_detail() {
 							$tree .= $sql_parent['title'] . ' / ';
 						}
 
-						$result['detail'] .= sprintf('<a href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', htmlspecialchars($config['url_path']), $host['gtid'], $host['description'], $tree);
+						$result['detail'] .= sprintf('<a href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', html_escape($config['url_path']), $host['gtid'], html_escape($host['description']), $tree);
 					}
 				}
 			}
@@ -469,7 +469,7 @@ function intropage_analyse_tree_host_graph_detail() {
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
-				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
 			}
 		}
 	}
@@ -490,9 +490,9 @@ function intropage_analyse_tree_host_graph_detail() {
 		$result['detail'] .= '<br/><b>' . __('Hosts without tree - %s', $sql_count, 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
-    
+
 			foreach ($sql_result as $row) {
-				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
 			}
 		}
 	}
@@ -513,7 +513,7 @@ function intropage_analyse_tree_host_graph_detail() {
 		if (cacti_sizeof($sql_result)) {
 
 			foreach ($sql_result as $row) {
-				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['id']);
+				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
 			}
 		}
 	}
@@ -533,7 +533,7 @@ function intropage_analyse_tree_host_graph_detail() {
 			if (cacti_sizeof($sql_result)) {
 
 				foreach ($sql_result as $row) {
-					$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', htmlspecialchars($config['url_path']), $row['id'], $row['description'], $row['hostname'], $row['id']);
+					$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), html_escape($row['hostname']), $row['id']);
 				}
 			}
 		}
@@ -696,7 +696,7 @@ function intropage_graph_data_source_detail() {
 		ON (data_local.data_template_id=data_template.id)
 		WHERE local_data_id<>0
 		GROUP BY type_id');
-		
+
 	$total = 0;
 
 	if (cacti_sizeof($sql_ds)) {
@@ -733,7 +733,7 @@ function intropage_graph_host_detail() {
 	$h_disa = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND disabled='on'");
 
 	$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
-	$url_prefix = $console_access ? '<a href="' . htmlspecialchars($config['url_path']) . 'host.php?host_status=%s">' : '';
+	$url_prefix = $console_access ? '<a href="' . html_escape($config['url_path'] . 'host.php?host_status=%s') . '">' : '';
 	$url_suffix = $console_access ? '</a>' : '';
 
 	$result['detail']  = sprintf($url_prefix,'-1') . __('All', 'intropage') . ": $h_all$url_suffix<br/>";
@@ -752,7 +752,7 @@ function intropage_graph_host_detail() {
 
 		if (cacti_sizeof($hosts)) {
 			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
+				$result['detail'] .= html_escape($host['description']) . '<br/>';
 			}
 		}
 
@@ -768,7 +768,7 @@ function intropage_graph_host_detail() {
 
 		if (cacti_sizeof($hosts)) {
 			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
+				$result['detail'] .= html_escape($host['description']) . '<br/>';
 			}
 		}
 
@@ -795,7 +795,7 @@ function intropage_graph_host_template_detail() {
 		ON (host_template.id = host.host_template_id) AND host.id IN ($allowed_hosts)
 		GROUP by host_template_id
 		ORDER BY total desc");
-	
+
 	$total = 0;
 
 	if (cacti_sizeof($sql_ht)) {
@@ -804,9 +804,9 @@ function intropage_graph_host_template_detail() {
 			$result['detail'] .= $item['total'] . '<br/>';
 			$total += $item['total'];
 		}
-		
+
 		$result['detail'] .= '<br/><b> Total: ' . $total . '</b><br/>';
-	
+
 	} else {
 		$result['detail'] = __('No device templates found', 'intropage');
 	}
@@ -850,7 +850,7 @@ function intropage_graph_thold_detail() {
 		$count = $t_all + $t_brea + $t_trig + $t_disa;
 
 		$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$_SESSION['sess_user_id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
-		$url_prefix = $has_access ? '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/thold/thold_graph.php?tab=thold&amp;triggered=%s\">' : '';
+		$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
 		$url_suffix = $has_access ? '</a>' : '';
 
 		$result['detail']  = sprintf($url_prefix, '-1') . __('All', 'intropage') . ": $t_all$url_suffix<br/>";
@@ -864,7 +864,7 @@ function intropage_graph_thold_detail() {
 			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
 			$result['detail'] .= '<b>' . __('BREACHED', 'intropage') . ':</b><br/>';
 			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
+				$result['detail'] .= html_escape($host['description']) . '<br/>';
 			}
 			$result['detail'] .= '<br/><br/>';
 		}
@@ -874,7 +874,7 @@ function intropage_graph_thold_detail() {
 			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
 			$result['detail'] .= '<b>' . __('TRIGGERED', 'intropage') .':</b><br/>';
 			foreach ($hosts as $host) {
-				$result['detail'] .= $host['description'] . '<br/>';
+				$result['detail'] .= html_escape($host['description']) . '<br/>';
 			}
 			$result['detail'] .= '<br/><br/>';
 		}
@@ -904,14 +904,14 @@ function intropage_mactrack_sites_detail() {
 	$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc');
 	if (sizeof($sql_result) > 0) {
 		foreach ($sql_result as $site) {
-			$row = '<tr><td>' . $site['site_name'] . '</td><td>' . $site['total_devices'] . '</td>';
+			$row = '<tr><td>' . html_escape($site['site_name']) . '</td><td>' . $site['total_devices'] . '</td>';
 			$row .= '<td>' . $site['total_ips'] . '</td><td>' . $site['total_user_ports'] . '</td>';
 			$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
 			$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
-            		$result['detail'] .= $row;
-    		}
+				$result['detail'] .= $row;
+		}
 
-    		$result['detail'] .= '</table>';
+		$result['detail'] .= '</table>';
 	} else {
 	    $result['detail'] = __('No mactrack sites found', 'intropage');
 	}
@@ -975,7 +975,7 @@ function intropage_poller_info_detail() {
 	}
 
 	$result['detail'] = '<span class="txt_big">' . $ok . '</span>' . __('(ok)', 'intropage') . '<span class="txt_big">/' . $count . '</span>' . __('(all)', 'intropage') . '</span><br/>' . $result['detail'];
-	
+
 	$result['detail'] = '<br/><br/><table>' . $row . '</table>';
 
 
@@ -1029,7 +1029,7 @@ function intropage_thold_event_detail() {
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
-				$result['detail'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . $row['description'] . '<br/>';
+				$result['detail'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . html_escape($row['description']) . '<br/>';
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
 					$result['alarm'] = 'red';
 				} elseif ($result['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
@@ -1066,9 +1066,9 @@ function intropage_top5_ping_detail() {
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
 			if ($console_access) {
-				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 			} else {
-				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+				$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 			}
 
 			$row .= '<td class="rpad texalirig">' . round($host['avg_time'], 2) . 'ms</td>';
@@ -1115,9 +1115,9 @@ function intropage_top5_availability_detail() {
 
 		foreach ($sql_worst_host as $host) {
 			if ($console_access) {
-				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 			} else {
-				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+				$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 			}
 
 			if ($host['availability'] < 90) {
@@ -1162,9 +1162,9 @@ function intropage_top5_polltime_detail() {
 		foreach ($sql_worst_host as $host) {
 
 			if ($console_access) {
-				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 			} else {
-				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+				$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 			}
 
 			if ($host['polling_time'] > 30) {
@@ -1207,9 +1207,9 @@ function intropage_top5_pollratio_detail() {
 	if (cacti_sizeof($sql_worst_host)) {
 		foreach ($sql_worst_host as $host) {
 			if ($console_access) {
-				$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 			} else {
-				$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+				$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 			}
 
 			$row .= '<td class="rpad texalirig">' . $host['failed_polls'] . '</td>';

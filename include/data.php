@@ -36,7 +36,7 @@ function intropage_analyse_db() {
 	$result = array(
 		'name' => __('Database check', 'intropage'),
 		'alarm' => 'green',
-		'data' => '', 
+		'data' => '',
 		'detail' => TRUE,
 	);
 
@@ -158,10 +158,10 @@ function intropage_analyse_login() {
 	);
 
 	// active users in last hour:
-	$flog = db_fetch_cell('SELECT count(t.result) 
+	$flog = db_fetch_cell('SELECT count(t.result)
 		FROM (SELECT result FROM user_auth
 		         INNER JOIN user_log ON user_auth.username = user_log.username
-		         ORDER BY user_log.time desc LIMIT 10) 
+		         ORDER BY user_log.time desc LIMIT 10)
 		as t where t.result=0;');
 
 	if ($flog > 0) {
@@ -301,11 +301,11 @@ function intropage_analyse_tree_host_graph() {
 
 		$total_errors += $sql_count;
 	}
-	
+
 	// thold plugin - logonly alert and warning thold
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
 
-	    $sql_result = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,  
+	    $sql_result = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
 		uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 		FROM thold_data AS td
 		INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
@@ -340,7 +340,7 @@ function intropage_analyse_tree_host_graph() {
 	    }
 	}
 
-	
+
 	// below - only information without red/yellow/green
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
@@ -647,7 +647,7 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
 		}
-	} 
+	}
 	else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
@@ -669,7 +669,7 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 		}
-	} 
+	}
 	else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
@@ -693,7 +693,7 @@ function intropage_extrem() {
 			foreach ($sql_result as $row) {
 				$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 			}
-		} 
+		}
 		else {
 			$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 		}
@@ -718,7 +718,7 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 		}
-	} 
+	}
 	else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
@@ -740,7 +740,7 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 		}
-	} 
+	}
 	else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
@@ -818,7 +818,7 @@ function intropage_graph_host() {
 		$h_disa = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND disabled='on'");
 
 		$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
-		$url_prefix = $console_access ? '<a href="' . htmlspecialchars($config['url_path']) . 'host.php?host_status=%s">' : '';
+		$url_prefix = $console_access ? '<a href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
 		$url_suffix = $console_access ? '</a>' : '';
 
 		$result['data']  = sprintf($url_prefix,'-1') . __('All', 'intropage') . ": $h_all$url_suffix<br/>";
@@ -875,7 +875,7 @@ function intropage_graph_host_template() {
 			'data' => array(),
 		),
 	);
-	
+
 	if ($allowed_hosts)	{
 		$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, count(host.host_template_id) AS total
 			FROM host_template
@@ -949,7 +949,7 @@ function intropage_graph_thold() {
 		$count = $t_all + $t_brea + $t_trig + $t_disa;
 
 		$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$_SESSION['sess_user_id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
-		$url_prefix = $has_access ? '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/thold/thold_graph.php?tab=thold&amp;triggered=%s\">' : '';
+		$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
 		$url_suffix = $has_access ? '</a>' : '';
 
 		$result['data']  = sprintf($url_prefix, '-1') . __('All', 'intropage') . ": $t_all$url_suffix<br/>";
@@ -1010,7 +1010,7 @@ function intropage_info() {
 			$spine_version = $out_array[0];
 		}
 
-		$result['data'] .= __('Poller type:', 'intropage') .' <a href="' . htmlspecialchars($config['url_path']) .  'settings.php?tab=poller">Spine</a><br/>';
+		$result['data'] .= __('Poller type:', 'intropage') .' <a href="' . html_escape($config['url_path'] .  'settings.php?tab=poller') . '">' . __('Spine', 'intropage') . '</a><br/>';
 
 		$result['data'] .= __('Spine version: ', 'intropage') . $spine_version . '<br/>';
 
@@ -1019,7 +1019,7 @@ function intropage_info() {
 			$result['alarm'] = 'red';
 		}
 	} else {
-		$result['data'] .= __('Poller type: ', 'intropage') . ' <a href="' . htmlspecialchars($config['url_path']) .  'settings.php?tab=poller">' . $poller_options[read_config_option('poller_type')] . '</a><br/>';
+		$result['data'] .= __('Poller type: ', 'intropage') . ' <a href="' . html_escape($config['url_path'] .  'settings.php?tab=poller') . '">' . $poller_options[read_config_option('poller_type')] . '</a><br/>';
 	}
 
 	$result['data'] .= __('Running on: ', 'intropage');
@@ -1053,7 +1053,7 @@ function intropage_mactrack() {
 
 	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {		$result['alarm'] = 'grey';
 		$result['data']  = __('Mactrack plugin not installed/running', 'intropage');
-		
+
 	} else {
 		$mactrack_id = db_fetch_cell("SELECT id
 			FROM plugin_realms
@@ -1409,7 +1409,7 @@ function intropage_thold_event() {
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
-				$result['data'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . $row['description'] . '<br/>';
+				$result['data'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . html_escape($row['description']) . '<br/>';
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
 					$result['alarm'] = 'red';
 				} elseif ($result['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
@@ -1448,9 +1448,9 @@ function intropage_top5_ping() {
 		if (cacti_sizeof($sql_worst_host)) {
 			foreach ($sql_worst_host as $host) {
 				if ($console_access) {
-					$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+					$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 				} else {
-					$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+					$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 				}
 
 				$row .= '<td class="rpad texalirig">' . round($host['avg_time'], 2) . 'ms</td>';
@@ -1465,7 +1465,7 @@ function intropage_top5_ping() {
     				$result['data'] .= $row;
 			}
 			$result['data'] = '<table>' . $result['data'] . '</table>';
-		} 
+		}
 		else {	// no data
 			$result['data'] = __('Waiting for data', 'intropage');
 		}
@@ -1502,9 +1502,9 @@ function intropage_top5_availability() {
 
 			foreach ($sql_worst_host as $host) {
 				if ($console_access) {
-					$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+					$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 				} else {
-					$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+					$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 				}
 
 				if ($host['availability'] < 90) {
@@ -1554,9 +1554,9 @@ function intropage_top5_polltime() {
 			foreach ($sql_worst_host as $host) {
 
 				if ($console_access) {
-					$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+					$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 				} else {
-					$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+					$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 				}
 
 				if ($host['polling_time'] > 30) {
@@ -1577,7 +1577,7 @@ function intropage_top5_polltime() {
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
-	
+
 	return $result;
 }
 
@@ -1604,9 +1604,9 @@ function intropage_top5_pollratio() {
 		if (cacti_sizeof($sql_worst_host)) {
 			foreach ($sql_worst_host as $host) {
 				if ($console_access) {
-					$row = '<tr><td class="rpad"><a href="' . htmlspecialchars($config['url_path']) . 'host.php?action=edit&id=' . $host['id'] . '">' . $host['description'] . '</a>';
+					$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 				} else {
-					$row = '<tr><td class="rpad">' . $host['description'] . '</td>';
+					$row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
 				}
 
 				$row .= '<td class="rpad texalirig">' . $host['failed_polls'] . '</td>';
@@ -1617,7 +1617,7 @@ function intropage_top5_pollratio() {
 			}
 			$result['data'] = '<table>' . $result['data'] . '</table>';
 
-		} 
+		}
 		else {	// no data
 			$result['data'] = __('Waiting for data', 'intropage');
 		}
@@ -1626,7 +1626,7 @@ function intropage_top5_pollratio() {
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
-	
+
 
 	return $result;
 }
@@ -1730,7 +1730,7 @@ function intropage_favourite_graph($fav_graph_id) {
 
 function intropage_maint()	{
 	global $config;
-	
+
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
 	$data = '';
