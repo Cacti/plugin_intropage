@@ -1735,62 +1735,160 @@ function intropage_maint()	{
 
 	$data = '';
 
-	$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
-	if (cacti_sizeof($schedules)) {
-		foreach ($schedules as $sc) {
-			$t = time();
+        $schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
+        if (cacti_sizeof($schedules)) {
+                foreach ($schedules as $sc) {
+                        $t = time();
 
-			switch ($sc['mtype']) {
-				case 1:
-					if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-						$data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-							' - ' . html_escape($sc['name']) . ' (One time)<br/>Affected hosts:</b> ';
+                        switch ($sc['mtype']) {
+                                case 1:
+                                        if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                $data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                                ' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
 
-						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-							INNER JOIN plugin_maint_hosts
-							ON host.id=plugin_maint_hosts.host
-							WHERE schedule = ?',
-							array($sc['id']));
+                                                $hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        INNER JOIN plugin_maint_hosts
+                                                        ON host.id=plugin_maint_hosts.host
+                                                        WHERE schedule = ?',
+                                                        array($sc['id']));
 
-						if (cacti_sizeof($hosts)) {
-							foreach ($hosts as $host) {
-								$data .= html_escape($host['description']) . ', ';
-							}
-						}
+                                                if (cacti_sizeof($hosts)) {
+                                                        foreach ($hosts as $host) {
+                                                                $data .= $host['description'] . ', ';
+                                                        }
+                                                }
 
-						$data = substr($data, 0, -2) .'<br/><br/>';
-					}
+                                                $data = substr($data, 0, -2) .'<br/><br/>';
+                                        }
+                                break;
 
-					break;
-				case 2:
-					while ($sc['etime'] < $t) {
-						$sc['etime'] += $sc['minterval'];
-						$sc['stime'] += $sc['minterval'];
-					}
+                                case 2:
+                                        while ($sc['etime'] < $t) {
+                                                $sc['etime'] += $sc['minterval'];
+                                                $sc['stime'] += $sc['minterval'];
+                                        }
 
-					if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-						$data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-							' - ' . html_escape($sc['name']) . ' (Reoccurring)<br/>Affected hosts:</b> ';
+                                        if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                $data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                                ' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
 
-						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-							INNER JOIN plugin_maint_hosts
-							ON host.id=plugin_maint_hosts.host
-							WHERE schedule = ?',
-							array($sc['id']));
+                                                $hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        INNER JOIN plugin_maint_hosts
+                                                        ON host.id=plugin_maint_hosts.host
+                                                        WHERE schedule = ?',
+                                                        array($sc['id']));
 
-						if (cacti_sizeof($hosts)) {
-							foreach ($hosts as $host) {
-								$data .= html_escape($host['description']) . ', ';
-							}
-						}
-						$data = substr($data, 0, -2) . '<br/><br/>';
-					}
+                                                if (cacti_sizeof($hosts)) {
+                                                        foreach ($hosts as $host) {
+                                                                $data .= $host['description'] . ', ';
+                                                        }
+                                                }
+                                                $data = substr($data, 0, -2) . '<br/><br/>';
+                                        }
+                                break;
+                        }
+                }
+        }
+        return ($data);
+} 
 
-					break;
+// ----------------syslog----------------------
+
+function intropage_syslog() {
+	global $config;
+
+	$result = array(
+		'name' => __('Syslog messages and alerts', 'intropage'),
+		'alarm' => 'grey',
+		'data' => '',
+		'detail' => FALSE,
+		'line' => array(
+			'title' => __('Syslog', 'intropage'),
+			'title1' => '',
+			'label1' => array(),
+			'data1' => array(),
+			'title2' => '',
+			'label2' => array(),
+			'data2' => array(),
+			'title3' => '',
+			'label3' => array(),
+			'data3' => array(),
+		),
+	);
+	
+	
+	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
+	
+		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+			FROM plugin_intropage_trends
+			WHERE name='syslog_total'
+			ORDER BY cur_timestamp desc
+			LIMIT 11");
+
+		if (cacti_sizeof($sql)) {
+			$val = 0;
+			$result['line']['title1'] = __('Total', 'intropage');
+			foreach ($sql as $row) {
+				array_push($result['line']['label1'], $row['date']);
+				array_push($result['line']['data1'], $val - $row['value']);
+				$val = $row['value'];			
 			}
+			array_shift($result['line']['label1']);
+			array_shift($result['line']['data1']);
+		}
+		
+		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+			FROM plugin_intropage_trends
+			WHERE name='syslog_incoming'
+			ORDER BY cur_timestamp desc
+			LIMIT 11");
+
+		if (cacti_sizeof($sql)) {
+			$val = 0;
+			$result['line']['title2'] = __('Incoming', 'intropage');
+			foreach ($sql as $row) {
+				array_push($result['line']['label2'], $row['date']);
+				array_push($result['line']['data2'], $val - $row['value']);
+				$val = $row['value'];			
+			}
+			array_shift($result['line']['label2']);
+			array_shift($result['line']['data2']);
+		}
+		
+		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+			FROM plugin_intropage_trends
+			WHERE name='syslog_alert'
+			ORDER BY cur_timestamp desc
+			LIMIT 11");
+
+		if (cacti_sizeof($sql)) {
+			$val = 0;
+			$result['line']['title3'] = __('Alerts', 'intropage');
+			foreach ($sql as $row) {
+				array_push($result['line']['label3'], $row['date']);
+				array_push($result['line']['data3'], $val - $row['value']);
+				if ($row['value']-$val > 0)	{
+				    $result['alert'] = 'yellow';
+				}
+				$val = $row['value'];			
+			}
+			array_shift($result['line']['label3']);
+			array_shift($result['line']['data3']);
 		}
 	}
 
-	return ($data);
+	if ($sql === false || count($sql) < 3) {
+		unset($result['line']);
+		$result['data'] = 'Waiting for data';
+	} else {
+		$result['line']['data1'] = array_reverse($result['line']['data1']);
+		$result['line']['data2'] = array_reverse($result['line']['data2']);
+		$result['line']['data3'] = array_reverse($result['line']['data3']);
+		$result['line']['label1'] = array_reverse($result['line']['label1']);
+		$result['line']['label2'] = array_reverse($result['line']['label2']);
+		$result['line']['label3'] = array_reverse($result['line']['label3']);
+	}
+
+	return $result;
 }
 

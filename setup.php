@@ -159,6 +159,10 @@ function intropage_check_upgrade() {
 
 		}
 
+		if (cacti_version_compare($oldv,'1.8.3', '<')) {
+			api_plugin_db_add_column('user_auth', array('name' => 'intropage_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		}
+
 		// Set the new version
 		db_execute("UPDATE plugin_config
 			SET version='$current'
@@ -219,6 +223,7 @@ function intropage_setup_database() {
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 	$sql_insert = '';
@@ -328,7 +333,7 @@ function intropage_poller_bottom() {
 	// cleaning old data
 	db_execute("DELETE FROM plugin_intropage_trends
 		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND 
-		name IN ('poller','cpuload','failed_polls','host','thold','poller_output')");
+		name IN ('poller','cpuload','failed_polls','host','thold','poller_output','syslog_incoming','syslog_total','syslog_alert')");
 
 	// trends - all hosts without permissions!!!
 	db_execute("REPLACE INTO plugin_intropage_trends
@@ -362,6 +367,38 @@ function intropage_poller_bottom() {
 	if (time() > ($last + read_config_option('intropage_ntp_interval')))	{
 	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 	    ntp_time2();
+	}
+
+	// plugin syslog
+	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
+		
+		$line = syslog_db_fetch_row("SHOW TABLE STATUS LIKE 'syslog_incoming'");
+		$i_rows = $line['Auto_increment'];
+		$line = syslog_db_fetch_row("SHOW TABLE STATUS LIKE 'syslog'");
+		$total_rows = $line['Auto_increment'];
+		$alert_rows = syslog_db_fetch_cell('SELECT ifnull(sum(count),0) FROM syslog_logs WHERE 
+			logtime > date_sub(now(), INTERVAL ' . read_config_option('poller_interval') .' SECOND)');
+
+/*
+		$last_inc = db_fetch_cell("SELECT ifnull(value,0) FROM plugin_intropage_trends WHERE name='syslog_incoming' ORDER BY cur_timestamp DESC LIMIT 1");
+		$last_tot = db_fetch_cell("SELECT ifnull(value,0) FROM plugin_intropage_trends WHERE name='syslog_total' ORDER BY cur_timestamp DESC LIMIT 1");
+		$last_ale = db_fetch_cell("SELECT ifnull(value,0) FROM plugin_intropage_trends WHERE name='syslog_alert' ORDER BY cur_timestamp DESC LIMIT 1");
+
+		if (db_fetch_cell("SELECT count(value) FROM plugin_intropage_trends WHERE name='syslog_total'") == 1)	{
+			db_execute("UPDATE plugin_intropage_trends SET value=0 WHERE name='syslog_incoming'");
+			db_execute("UPDATE plugin_intropage_trends SET value=0 WHERE name='syslog_total'");
+			db_execute("UPDATE plugin_intropage_trends SET value=0 WHERE name='syslog_alert'");
+		}
+
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','" . ($i_rows - $last_inc) . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_total','" . ($total_rows - $last_tot) . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_alert','" . ($alert_rows - $last_ale) . "')");
+*/
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','" . $i_rows . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_total','" . $total_rows . "')");
+		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_alert','" . $alert_rows . "')");
+
+
 	}
 
 	// check db

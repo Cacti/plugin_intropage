@@ -192,6 +192,12 @@ function intropage_config_form() {
 					'friendly_name' => __('Allow panel Favourite Graphs', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
+				),
+				'intropage_syslog' => array(
+					'value' => '|arg1:intropage_syslog|',
+					'friendly_name' => __('Allow panel Syslog plugin', 'intropage'),
+					'form_id' => '|arg1:id|',
+					'default' => 'on'
 				)
 			)
 		)
@@ -335,6 +341,7 @@ function intropage_user_admin_setup_sql_save($save) {
 	$save['intropage_info']                    = form_input_validate(get_nfilter_request_var('intropage_info'), 'intropage_info', '^on$', true, 3);
 	$save['intropage_boost']                   = form_input_validate(get_nfilter_request_var('intropage_boost'), 'intropage_boost', '^on$', true, 3);
 	$save['intropage_favourite_graph']         = form_input_validate(get_nfilter_request_var('intropage_favourite_graph'), 'intropage_favourite_graph', '^on$', true, 3);
+	$save['intropage_syslog']         	   = form_input_validate(get_nfilter_request_var('intropage_syslog'), 'intropage_syslog', '^on$', true, 3);
 	// maint - always visible
 
 	return $save;

@@ -51,6 +51,7 @@ $panel['intropage_info']['priority']                    = 10;
 $panel['intropage_boost']['priority']                   = 55;
 $panel['intropage_top5_polltime']['priority']           = 24;
 $panel['intropage_top5_pollratio']['priority']          = 25;
+$panel['intropage_syslog']['priority']         		= 42;
 
 
 
