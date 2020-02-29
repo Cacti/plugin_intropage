@@ -1877,7 +1877,7 @@ function intropage_syslog() {
 		}
 	}
 
-	if ($sql === false || count($sql) < 3) {
+	if ($sql === false || cacti_sizeof($sql) < 3) {
 		unset($result['line']);
 		$result['data'] = 'Waiting for data';
 	} else {
