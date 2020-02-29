@@ -27,8 +27,8 @@ function intropage_show_tab() {
 	global $config;
 
 	if (api_user_realm_auth('intropage.php') && isset($_SESSION['sess_user_id'])) {
-		$lopts = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id=?', array($_SESSION['sess_user_id']));
-		if ($lopts == 1) {
+
+		if (db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 2)	{
 			$cp = false;
 			if (basename($_SERVER['PHP_SELF']) == 'intropage.php') {
 				$cp = true;
@@ -38,4 +38,3 @@ function intropage_show_tab() {
 		}
 	}
 }
-

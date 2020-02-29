@@ -139,10 +139,15 @@ if (isset_request_var('intropage_action') &&
 		break;
 
 	case 'loginopt':
-		if ($value == 'intropage') { // SELECT login_opts FROM user_auth WHERE id
-			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 4 WHERE id = ?', array($_SESSION['sess_user_id']));
-		} elseif ($value == 'graph') {
+		if ($value == 'graph') {
 			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 3 WHERE id = ?', array($_SESSION['sess_user_id']));
 		}
+		elseif ($value == 'console') {
+			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 2 WHERE id = ?', array($_SESSION['sess_user_id']));
+		}
+		elseif ($value == 'tab') { 
+                       db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 4 WHERE id = ?', array($_SESSION['sess_user_id']));
+                }
+
 	}
 }

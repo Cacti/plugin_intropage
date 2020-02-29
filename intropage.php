@@ -36,15 +36,13 @@ if (!function_exists("array_column")) {
     }
 }
 
-$lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
-if ($lopts == 1) {	// separated tab, we need header
+if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need header
 	general_header();
 }
 
 display_information();
-intropage_console_after();
 
-if ($lopts == 1) {	// separated tab, we need footer
+if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need footer
 	bottom_footer();
 }
 

@@ -27,23 +27,6 @@ function intropage_config_form() {
 	global $fields_user_user_edit_host, $fields_user_group_edit;
 
 	$temp = array(
-		'intropage_opts' => array(
-			'friendly_name' => __('Intro Page Options', 'intropage'),
-			'method' => 'radio',
-			'default' => '0',
-			'description' => __('How we should display the intropage. <strong>For users without console access you must choose separated tab!</strong>', 'intropage'),
-			'value' => '|arg1:intropage_opts|',
-			'items' => array(
-				0 => array(
-					'radio_value' => '0',
-					'radio_caption' => __('Show the Intropage plugin screen in console screen (you need console access permission!)', 'intropage')
-				),
-				1 => array(
-					'radio_value' => '1',
-					'radio_caption' => __('Show the Intropage plugin screen in separated tab', 'intropage'),
-				),
-			),
-		),
 		'intropage_panels_grp' => array(
 			'friendly_name' => __('Intropage panels', 'intropage'),
 			'method' => 'checkbox_group',
@@ -216,7 +199,7 @@ function intropage_config_form() {
 	array_push($fields_user_user_edit_host['login_opts']['items'],
 		array(
 			'radio_value' => '4',
-			'radio_caption' => __('Show Intropage (no matter in Console or Tab)', 'intropage')
+			'radio_caption' => __('Show Intropage in Tab (not selected = intropage in console)', 'intropage')
 		)
 	);
 
@@ -273,9 +256,12 @@ function intropage_config_settings() {
 function intropage_login_options_navigate() {
 	global $config;
 
-	$intropage_lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
-	$system_lopts    = db_fetch_cell('SELECT login_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 	$console_access  = (db_fetch_assoc("SELECT realm_id FROM user_auth_realm WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;
+
+        if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+    		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+                $_SESSION['login_opts'] = $login_opts;
+	}
 
 	$newtheme = false;
 	if (user_setting_exists('selected_theme', $_SESSION['sess_user_id']) && read_config_option('selected_theme') != read_user_setting('selected_theme')) {
@@ -283,31 +269,24 @@ function intropage_login_options_navigate() {
 		$newtheme = true;
 	}
 
-	if ($console_access) {
-		if ($system_lopts == 4 && $intropage_lopts == 1) {	// intropage as default
-			header('Location: ' . $config['url_path'] . 'plugins/intropage/intropage.php');
-		}
-		if ($system_lopts == 4 && $intropage_lopts == 0) {
-			header('Location: ' . $config['url_path']);
-		}
-	} else {	// no console access
-		if ($system_lopts == 4 || $system_lopts == 2) {	// intropage as default
-					header('Location: ' . $config['url_path'] . 'plugins/intropage/intropage.php');
-		}
+	if ($_SESSION['login_opts'] == 4) {	// intropage in tab
+		header('Location: ' . $config['url_path'] . 'plugins/intropage/intropage.php');
+	}
 
-		if ($system_lopts == 3) {
-			header('Location: ' . $config['url_path'] . 'graph_view.php' . ($newtheme ? '?newtheme=1' : ''));
-		}
+	if ($_SESSION['login_opts'] == 3) {
+		header('Location: ' . $config['url_path'] . 'graph_view.php' . ($newtheme ? '?newtheme=1' : ''));
 	}
 }
 
 function intropage_console_after() {
 	global $config;
-	$lopts = db_fetch_cell('SELECT intropage_opts FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
 
+        if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+    		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+                $_SESSION['login_opts'] = $login_opts;
+	}
 
-	if ($lopts == 1) { // in tab
-	} else {  // in console
+        if ($_SESSION['login_opts'] != 4) { // in tab, otherwise it displays intropage in tab and console too
 		include_once($config['base_path'] . '/plugins/intropage/display.php');
 		display_information();
 	}
@@ -316,7 +295,6 @@ function intropage_console_after() {
 function intropage_user_admin_setup_sql_save($save) {
 	global $settings_user;
 
-	$save['intropage_opts']                    = form_input_validate(get_nfilter_request_var('intropage_opts'), 'intropage_opts', '^[01]$', true, 3);
 	$save['intropage_analyse_log']             = form_input_validate(get_nfilter_request_var('intropage_analyse_log'), 'intropage_analyse_log', '^on$', true, 3);
 	$save['intropage_analyse_login']           = form_input_validate(get_nfilter_request_var('intropage_analyse_login'), 'intropage_analyse_login', '^on$', true, 3);
 	$save['intropage_thold_event']             = form_input_validate(get_nfilter_request_var('intropage_thold_event'), 'intropage_thold_event', '^on$', true, 3);

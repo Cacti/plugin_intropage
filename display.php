@@ -37,7 +37,12 @@ function display_information() {
 
 	$selectedTheme = get_selected_theme();
 
-	if (db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) == 1) {  // in tab
+        if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+    		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+                $_SESSION['login_opts'] = $login_opts;
+	}
+
+	if ($_SESSION['login_opts'] == 4) {  // in tab
 		$url_path = $config['url_path'] . 'plugins/intropage/intropage.php';
 	} else { // in console
 		$url_path = $config['url_path'];
@@ -476,17 +481,28 @@ function display_information() {
 	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
 
 	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+//	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 
 	// 0 = console, 1= tab
 	// login options can change user group!
 	// after login: 1=url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
 
 	if (!$console_access) {
-		if ($lopts < 4) {
-			print "<option value='loginopt_intropage'>" . __('Set intropage as default page', 'intropage') . '</option>';
-		} else {
-			print "<option value='loginopt_graph'>" . __('Set graph as default page', 'intropage') . '</option>';
+		//
+		if ($lopts < 4) {	// intropage is not default
+        		print "<option value='loginopt_tab'>" . __('Set intropage as default login page', 'intropage') . '</option>';
+                }
+		
+		if ($lopts == 4)  {
+			print "<option value='loginopt_graph'>" . __('Set graph as default login page', 'intropage') . '</option>';
+		}
+	}
+	else	{	// intropage in console or in tab
+		if ($lopts == 4) {	// in tab
+        		print "<option value='loginopt_console'>" . __('Display intropage in console', 'intropage') . '</option>';
+                }
+		else {
+			print "<option value='loginopt_tab'>" . __('Display intropage in tab as default page', 'intropage') . '</option>';
 		}
 	}
 

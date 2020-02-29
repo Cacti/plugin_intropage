@@ -481,12 +481,12 @@ function intropage_graph_button($data) {
 			$fav = '<i class="fa fa-eye" title="' . __esc('Add to Dashboard', 'intropage') . '"></i>';
 		}
 
-		$lopts = db_fetch_cell_prepared('SELECT intropage_opts
+		$lopts = db_fetch_cell_prepared('SELECT login_opts
 			FROM user_auth
 			WHERE id = ?',
 			array($_SESSION['sess_user_id']));
 
-		if ($lopts == 1) { // in tab
+		if ($lopts == 4) { // in tab
 			print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 		} else {	// in console
 			print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
