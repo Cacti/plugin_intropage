@@ -1818,7 +1818,6 @@ function intropage_syslog() {
 	
 	
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
-	
 		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
 			FROM plugin_intropage_trends
 			WHERE name='syslog_total'
@@ -1874,19 +1873,23 @@ function intropage_syslog() {
 			}
 			array_shift($result['line']['label3']);
 			array_shift($result['line']['data3']);
+
+			if (cacti_sizeof($sql) < 3) {
+				unset($result['line']);
+				$result['data'] = 'Waiting for data';
+			} else {
+				$result['line']['data1'] = array_reverse($result['line']['data1']);
+				$result['line']['data2'] = array_reverse($result['line']['data2']);
+				$result['line']['data3'] = array_reverse($result['line']['data3']);
+				$result['line']['label1'] = array_reverse($result['line']['label1']);
+				$result['line']['label2'] = array_reverse($result['line']['label2']);
+				$result['line']['label3'] = array_reverse($result['line']['label3']);
+			}
 		}
 	}
-
-	if ($sql === false || cacti_sizeof($sql) < 3) {
+	else	{
+		$result['data']  = __('Syslog plugin not installed/running', 'intropage');
 		unset($result['line']);
-		$result['data'] = 'Waiting for data';
-	} else {
-		$result['line']['data1'] = array_reverse($result['line']['data1']);
-		$result['line']['data2'] = array_reverse($result['line']['data2']);
-		$result['line']['data3'] = array_reverse($result['line']['data3']);
-		$result['line']['label1'] = array_reverse($result['line']['label1']);
-		$result['line']['label2'] = array_reverse($result['line']['label2']);
-		$result['line']['label3'] = array_reverse($result['line']['label3']);
 	}
 
 	return $result;
