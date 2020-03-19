@@ -155,7 +155,7 @@ function intropage_check_upgrade() {
 			db_execute("DELETE FROM plugin_intropage_user_setting 
 				WHERE panel='intropage_favourite_graph' AND fav_graph_id is NULL");
 			db_execute("REPLACE INTO plugin_intropage_trends (name,value) 
-				VALUES ('ar_displayed', 'false')");
+				VALUES ('ar_poller_finish', '1')");
 
 		}
 
@@ -257,7 +257,7 @@ function intropage_setup_database() {
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', 'Waiting for date')");
 	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ar_displayed', 'false')");
+	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ar_poller_finish', 'false')");
 
 
 	$data              = array();
@@ -353,11 +353,8 @@ function intropage_poller_bottom() {
 	}
 
 	// automatic autorefresh
-	//db_execute("UPDATE plugin_intropage_trends
-	//	SET value=now() where name = 'ar_poller_finished'");
-
 	db_execute("UPDATE plugin_intropage_trends
-		SET value='false' where name = 'ar_displayed'");
+		SET cur_timestamp=now() where name = 'ar_poller_finish'");
 
 	// check NTP
 	$last = db_fetch_cell("SELECT UNIX_TIMESTAMP(value)

@@ -106,14 +106,7 @@ function display_information() {
 	}
 
 	$order = ' priority desc';
-// now it is in db
-/*
-	if (isset($_SESSION['intropage_order']) && is_array($_SESSION['intropage_order'])) {
-		$order = ' field (id,';
-		$order .= implode(',', $_SESSION['intropage_order']);
-		$order .= ')';
-	}
-*/
+
 	// each favourite graph must have unique name
 	// without this fav_graph is overwritten
 
@@ -251,13 +244,14 @@ function display_information() {
 			refresh = setInterval(reload_all, intropage_autorefresh*1000);
 		}
 
-		// automatic autorefresh after poller
+		// automatic autorefresh after poller end
 		if (intropage_autorefresh == -1)	{
 			if (refresh !== null) {
 				clearTimeout(refresh);
 			}
-
-			refresh = setInterval(testPoller, 10000);
+			setTimeout(function(){		// fix first double load
+			    refresh = setInterval(testPoller, 10000);
+			},30000);
 		}
 
 

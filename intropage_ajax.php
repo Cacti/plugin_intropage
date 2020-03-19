@@ -42,12 +42,26 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
 
 // automatic reload when poller ends
 if (isset_request_var('autoreload'))	{
-    $reloaded = db_fetch_cell("SELECT value FROM plugin_intropage_trends
-				WHERE name='ar_displayed'");
 
-    if ($reloaded == 'false')	{
-	db_execute("UPDATE plugin_intropage_trends
-                SET value = 'true' WHERE name = 'ar_displayed'");
+    $last_poller = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)  
+				FROM plugin_intropage_trends
+				WHERE name='ar_poller_finish'");
+
+    $last_disp = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)  
+				FROM plugin_intropage_trends
+				WHERE name='ar_displayed_" . $_SESSION['sess_user_id'] . "'");
+
+    if (!$last_disp)	{
+	db_execute("INSERT INTO plugin_intropage_trends (name,value)
+                                VALUES ('ar_displayed_" . $_SESSION['sess_user_id'] . "', now())");
+        $last_disp = $last_poller;
+    }
+
+
+    if ($last_poller > $last_disp)	{  // fix first double reload (login and poller finish after few seconds
+	db_execute("UPDATE plugin_intropage_trends set cur_timestamp=now(),value=now() 
+                                WHERE name='ar_displayed_" . $_SESSION['sess_user_id'] . "'");
+
 	print '1';
     }
     else	{
