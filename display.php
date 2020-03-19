@@ -24,7 +24,7 @@
 */
 
 function display_information() {
-	global $config, $allowed_hosts, $sql_where;
+	global $config, $sql_where;
 
 	if (!api_user_realm_auth('intropage.php')) {
 		print __('Intropage - permission denied', 'intropage') . '<br/><br/>';
@@ -69,9 +69,9 @@ function display_information() {
 
 	$hosts = get_allowed_devices();
 	if (count($hosts) > 0)
-    	    $allowed_hosts = implode(',', array_column($hosts, 'id'));
+    	    $_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
 	else
-	    $allowed_hosts = false;
+	    $_SESSION['allowed_hosts'] = false;
 
 	// Retrieve access
 	$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm

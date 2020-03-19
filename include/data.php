@@ -187,7 +187,7 @@ function intropage_analyse_login() {
 //------------------------------------ analyse_tree_host_graph  -----------------------------------------------------
 
 function intropage_analyse_tree_host_graph() {
-	global $config, $allowed_hosts;
+	global $config;
 
 	$result = array(
 		'name' => __('Analyse tree/host/graph', 'intropage'),
@@ -199,10 +199,10 @@ function intropage_analyse_tree_host_graph() {
 	$total_errors = 0;
 
 	// hosts with same IP
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
 		        FROM host
-			WHERE id IN ($allowed_hosts)
+			WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
 	    		AND disabled != 'on'
 			GROUP BY hostname,snmp_port
 			HAVING NoDups > 1");
@@ -219,10 +219,10 @@ function intropage_analyse_tree_host_graph() {
 	}
 
 	// same description
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
 			FROM host
-			WHERE id IN ($allowed_hosts)
+			WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			GROUP BY description
 			HAVING NoDups > 1");
@@ -345,12 +345,12 @@ function intropage_analyse_tree_host_graph() {
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
 	// device in more trees
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
 			FROM host
 			INNER JOIN graph_tree_items
 			ON (host.id = graph_tree_items.host_id)
-			WHERE host.id IN (' . $allowed_hosts . ')
+			WHERE host.id IN (' . $_SESSION['allowed_hosts'] . ')
 			GROUP BY description
 			HAVING `count` > 1');
 
@@ -362,10 +362,10 @@ function intropage_analyse_tree_host_graph() {
 	}
 
 	// host without graph
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_result = db_fetch_assoc("SELECT id, description
 			FROM host
-			WHERE id IN ($allowed_hosts)
+			WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			AND id NOT IN (
 				SELECT DISTINCT host_id
@@ -381,10 +381,10 @@ function intropage_analyse_tree_host_graph() {
 	}
 
 	// host without tree
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_result = db_fetch_assoc("SELECT id, description
 			FROM host
-			WHERE id IN ($allowed_hosts)
+			WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			AND id NOT IN (
 				SELECT DISTINCT host_id
@@ -399,10 +399,10 @@ function intropage_analyse_tree_host_graph() {
 	}
 
 	// public/private community
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_result = db_fetch_assoc("SELECT id, description
 			FROM host
-			WHERE id IN ($allowed_hosts)
+			WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			AND (snmp_community ='public' OR snmp_community='private')
 			ORDER BY description");
@@ -416,10 +416,10 @@ function intropage_analyse_tree_host_graph() {
 
 	// plugin monitor - host without monitoring
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='monitor'")) { // installed plugin monitor?
-		if ($allowed_hosts)	{
+		if ($_SESSION['allowed_hosts'])	{
 			$sql_result = db_fetch_assoc("SELECT id, description, hostname
 				FROM host
-				WHERE id IN ($allowed_hosts)
+				WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
 				AND monitor != 'on'");
 
 			$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -801,7 +801,7 @@ function intropage_graph_data_source() {
 //------------------------------------ graph_host -----------------------------------------------------
 
 function intropage_graph_host() {
-	global $config, $allowed_hosts, $console_access;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('Hosts', 'intropage'),
@@ -810,12 +810,12 @@ function intropage_graph_host() {
 		'detail' => TRUE,
 	);
 
-	if ($allowed_hosts)	{
-		$h_all  = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts)");
-		$h_up   = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status=3 AND disabled=''");
-		$h_down = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status=1 AND disabled=''");
-		$h_reco = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND status=2 AND disabled=''");
-		$h_disa = db_fetch_cell("SELECT count(id) FROM host WHERE id IN ($allowed_hosts) AND disabled='on'");
+	if ($_SESSION['allowed_hosts'])	{
+		$h_all  = db_fetch_cell("SELECT count(id) FROM host WHERE id IN (" . $_SESSION['allowed_hosts'] . ")");
+		$h_up   = db_fetch_cell("SELECT count(id) FROM host WHERE id IN (" . $_SESSION['allowed_hosts'] . ") AND status=3 AND disabled=''");
+		$h_down = db_fetch_cell("SELECT count(id) FROM host WHERE id IN (" . $_SESSION['allowed_hosts'] . ") AND status=1 AND disabled=''");
+		$h_reco = db_fetch_cell("SELECT count(id) FROM host WHERE id IN (" . $_SESSION['allowed_hosts'] . ") AND status=2 AND disabled=''");
+		$h_disa = db_fetch_cell("SELECT count(id) FROM host WHERE id IN (" . $_SESSION['allowed_hosts'] . ") AND disabled='on'");
 
 		$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
 		$url_prefix = $console_access ? '<a href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
@@ -862,7 +862,7 @@ function intropage_graph_host() {
 //------------------------------------ graph host_template -----------------------------------------------------
 
 function intropage_graph_host_template() {
-	global $config, $allowed_hosts;
+	global $config;
 
 	$result = array(
 		'name' => __('Device Templates', 'intropage'),
@@ -876,11 +876,11 @@ function intropage_graph_host_template() {
 		),
 	);
 
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, count(host.host_template_id) AS total
 			FROM host_template
 			LEFT JOIN host
-			ON (host_template.id = host.host_template_id) AND host.id IN ($allowed_hosts)
+			ON (host_template.id = host.host_template_id) AND host.id IN (" . $_SESSION['allowed_hosts'] . ")
 			GROUP by host_template_id
 			ORDER BY total desc
 			LIMIT 6");
@@ -1428,7 +1428,7 @@ function intropage_thold_event() {
 
 
 function intropage_top5_ping() {
-	global $config, $allowed_hosts, $console_access;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('Top5 ping (avg, current)', 'intropage'),
@@ -1437,10 +1437,10 @@ function intropage_top5_ping() {
 		'detail' => TRUE,
 	);
 
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
 			FROM host
-			WHERE host.id in ($allowed_hosts)
+			WHERE host.id in (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			ORDER BY avg_time desc
 			LIMIT 5");
@@ -1481,7 +1481,7 @@ function intropage_top5_ping() {
 //------------------------------------ top5_availability -----------------------------------------------------
 
 function intropage_top5_availability() {
-	global $config, $allowed_hosts, $console_access;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('Top5 worst availability', 'intropage'),
@@ -1490,10 +1490,10 @@ function intropage_top5_availability() {
 		'detail' => TRUE,
 	);
 
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
 			FROM host
-			WHERE host.id IN ($allowed_hosts)
+			WHERE host.id IN (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			ORDER BY availability
 			LIMIT 5");
@@ -1533,7 +1533,7 @@ function intropage_top5_availability() {
 //------------------------------------ top5_polltime -----------------------------------------------------
 
 function intropage_top5_polltime() {
-	global $config, $allowed_hosts, $console_access;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('Top5 worst polling time', 'intropage'),
@@ -1542,10 +1542,10 @@ function intropage_top5_polltime() {
 		'detail' => TRUE,
 	);
 
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
 			FROM host
-			WHERE host.id in ($allowed_hosts)
+			WHERE host.id in (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			ORDER BY polling_time desc
 			LIMIT 5");
@@ -1584,7 +1584,7 @@ function intropage_top5_polltime() {
 //------------------------------------ top5_pollratio -----------------------------------------------------
 
 function intropage_top5_pollratio() {
-	global $config, $allowed_hosts, $console_access;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
@@ -1593,10 +1593,10 @@ function intropage_top5_pollratio() {
 		'detail' => TRUE,
 	);
 
-	if ($allowed_hosts)	{
+	if ($_SESSION['allowed_hosts'])	{
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
 			FROM host
-			WHERE host.id in ($allowed_hosts)
+			WHERE host.id in (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			ORDER BY ratio desc
 			LIMIT 5");
