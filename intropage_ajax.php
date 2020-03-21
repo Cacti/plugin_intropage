@@ -27,46 +27,50 @@ chdir('../../');
 include_once('./include/auth.php');
 
 if (!function_exists("array_column")) {
-    function array_column($array,$column_name) {
-        return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
-    }
+	function array_column($array,$column_name) {
+		return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
+	}
 }
 
 if (get_filter_request_var('reload_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/'))))	{
-    $panel_id = get_request_var('reload_panel');
+	$panel_id = get_request_var('reload_panel');
 }
 
 if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^[0-9]{1,3}$/'))))	{
-    $panel_id = get_request_var('detail_panel');
+	$panel_id = get_request_var('detail_panel');
 }
 
+get_filter_request_var('autom', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '(true|false)')));
+
 // automatic reload when poller ends
-if (isset_request_var('autoreload'))	{
+if (isset_request_var('autoreload')) {
+    $last_poller = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)
+		FROM plugin_intropage_trends
+		WHERE name='ar_poller_finish'");
 
-    $last_poller = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)  
-				FROM plugin_intropage_trends
-				WHERE name='ar_poller_finish'");
+    $last_disp = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
+		FROM plugin_intropage_trends
+		WHERE name = ?',
+		array('ar_displayed_' . $_SESSION['sess_user_id']));
 
-    $last_disp = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)  
-				FROM plugin_intropage_trends
-				WHERE name='ar_displayed_" . $_SESSION['sess_user_id'] . "'");
+    if (!$last_disp) {
+		db_execute_prepared('INSERT INTO plugin_intropage_trends (name,value)
+			VALUES (?, NOW())',
+			array('ar_displayed_' . $_SESSION['sess_user_id']));
 
-    if (!$last_disp)	{
-	db_execute("INSERT INTO plugin_intropage_trends (name,value)
-                                VALUES ('ar_displayed_" . $_SESSION['sess_user_id'] . "', now())");
-        $last_disp = $last_poller;
+		$last_disp = $last_poller;
     }
 
+	if ($last_poller > $last_disp)	{  // fix first double reload (login and poller finish after few seconds
+		db_execute_prepared("UPDATE plugin_intropage_trends
+			SET cur_timestamp = NOW(), value = NOW()
+			WHERE name = ?",
+			array('ar_displayed_' . $_SESSION['sess_user_id']));
 
-    if ($last_poller > $last_disp)	{  // fix first double reload (login and poller finish after few seconds
-	db_execute("UPDATE plugin_intropage_trends set cur_timestamp=now(),value=now() 
-                                WHERE name='ar_displayed_" . $_SESSION['sess_user_id'] . "'");
-
-	print '1';
-    }
-    else	{
-	print '0';
-    }
+		print '1';
+	} else {
+		print '0';
+	}
 }
 
 // few requered variables
@@ -81,73 +85,77 @@ else
 */
 
 // Retrieve access
-$console_access = (db_fetch_assoc("SELECT realm_id FROM user_auth_realm WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;
+$console_access = api_plugin_user_realm_auth('index.php');
 
-include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');	
+include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 
 if (isset_request_var('reload_panel') && isset($panel_id)) {
-    include_once($config['base_path'] . '/plugins/intropage/include/data.php');
-    
-    $panel = db_fetch_row ('SELECT panel,fav_graph_id FROM plugin_intropage_user_setting WHERE id = ' . $panel_id);
-    if ($panel)	{
-        // exception for ntp and db_check - get data now!
-        if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
-            if ($panel['panel'] == 'intropage_ntp')	{
-	        ntp_time2();
-	    }
+	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
 
-    	    if ($panel['panel'] == 'intropage_analyse_db')	{
-	        db_check();
-	    }
+	$panel = db_fetch_row_prepared('SELECT panel, fav_graph_id
+		FROM plugin_intropage_user_setting
+		WHERE id = ?', array($panel_id));
+
+	if ($panel)	{
+		// exception for ntp and db_check - get data now!
+		if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
+			if ($panel['panel'] == 'intropage_ntp')	{
+				ntp_time2();
+			}
+
+			if ($panel['panel'] == 'intropage_analyse_db')	{
+				db_check();
+			}
+		}
+
+		$pokus = $panel['panel'];
+
+		if (isset($panel['fav_graph_id'])) { // fav_graph exception
+			$data = intropage_favourite_graph($panel['fav_graph_id']);
+		} else { // normal panel
+			$data = $pokus();
+		}
+
+		if (isset_request_var('reload_panel')) {
+			intropage_display_data(get_request_var('reload_panel'),$data);
+
+			// change panel color or ena/disa detail
+			?>
+			<script type='text/javascript'>
+				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
+				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_yellow');
+				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_red');
+				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').addClass('color_<?php print $data['alarm'];?>');
+
+			<?php
+
+			if (isset($data['detail']) && !empty($data['detail']))	{
+				print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').show();";
+			} else {
+				print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').hide();";
+			}
+			?>
+			</script>
+			<?php
+			// end ofchange panel color or ena/disa detail
+		}
+	} elseif ($panel_id == 998) {	// exception for admin alert panel
+		print nl2br(read_config_option('intropage_admin_alert'));
+	} elseif ($panel_id == 997) {	// exception for maint panel
+		print intropage_maint();
+	} else {
+		print __('Panel not found');
 	}
-
-	$pokus = $panel['panel'];
-
-	if (isset($panel['fav_graph_id'])) { // fav_graph exception
-	    $data = intropage_favourite_graph($panel['fav_graph_id']);
-	} else { // normal panel
- 	    $data = $pokus();
-	}
-
-	if (isset_request_var('reload_panel'))	{
-	    intropage_display_data(get_request_var('reload_panel'),$data);
-
-	// change panel color or ena/disa detail
-?>
-       <script type='text/javascript'>
-            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
-            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_yellow');
-            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_red');
-            $('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').addClass('color_<?php print $data['alarm'];?>');
-
-<?php
-	    if (isset($data['detail']) && !empty($data['detail']))	{
-        	print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').show();";
-    	    }
-    	    else	{
-        	print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').hide();";
-    	    }
-?> 
-	</script>
-<?php
-	// end ofchange panel color or ena/disa detail
-    	}
-    }
-    elseif ($panel_id == 998) {	// exception for admin alert panel
-	 print nl2br(read_config_option('intropage_admin_alert'));
-    } 
-    elseif ($panel_id == 997) {	// exception for maint panel
-	 print intropage_maint();
-    } 
-    else	{
-	print __('Panel not found');
-    }
 }
 
 if (isset_request_var('detail_panel') && isset($panel_id)) {
-    include_once($config['base_path'] . '/plugins/intropage/include/data_detail.php');    
+    include_once($config['base_path'] . '/plugins/intropage/include/data_detail.php');
 
-    $panel = db_fetch_row ('SELECT panel,fav_graph_id FROM plugin_intropage_user_setting WHERE id = ' . $panel_id);
+    $panel = db_fetch_row_prepared('SELECT panel,fav_graph_id
+		FROM plugin_intropage_user_setting
+		WHERE id = ?',
+		array($panel_id));
+
 	if ($panel)	{
 	    $pokus = $panel['panel'] . '_detail';
 	    $data = $pokus();
@@ -155,8 +163,8 @@ if (isset_request_var('detail_panel') && isset($panel_id)) {
 	    print '<div id="block" class="color_' . $data['alarm'] . '" ></div>';
 	    print '<h3 style="display: inline">' . $data['name'] . '</h3>';
 	    print '<br/>' . $data['detail'];
-	}
-	else	{
-	    print __('Panel not found');	
+	} else {
+		print __('Panel not found');
 	}
 }
+

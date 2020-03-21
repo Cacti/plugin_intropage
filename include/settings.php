@@ -260,11 +260,11 @@ function intropage_config_settings() {
 function intropage_login_options_navigate() {
 	global $config;
 
-	$console_access  = (db_fetch_assoc("SELECT realm_id FROM user_auth_realm WHERE user_id='" . $_SESSION['sess_user_id'] . "' AND user_auth_realm.realm_id=8")) ? true : false;
+	$console_access = api_plugin_user_realm_auth('index.php');
 
-        if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
-    		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-                $_SESSION['login_opts'] = $login_opts;
+	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+		$_SESSION['login_opts'] = $login_opts;
 	}
 
 	$newtheme = false;
@@ -285,12 +285,12 @@ function intropage_login_options_navigate() {
 function intropage_console_after() {
 	global $config;
 
-        if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
-    		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-                $_SESSION['login_opts'] = $login_opts;
+	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+		$_SESSION['login_opts'] = $login_opts;
 	}
 
-        if ($_SESSION['login_opts'] != 4) { // in tab, otherwise it displays intropage in tab and console too
+	if ($_SESSION['login_opts'] != 4) { // in tab, otherwise it displays intropage in tab and console too
 		include_once($config['base_path'] . '/plugins/intropage/display.php');
 		display_information();
 	}
