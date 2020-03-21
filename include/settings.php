@@ -251,6 +251,10 @@ function intropage_config_settings() {
 
 	$tabs['intropage']     = 'Intropage';
 	$settings['intropage'] = $intropage_settings;
+
+	if (function_exists('auth_augment_roles')) {
+		auth_augment_roles(__('Normal User'), array('intropage.php'));
+	}
 }
 
 function intropage_login_options_navigate() {
