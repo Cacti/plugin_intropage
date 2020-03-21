@@ -47,6 +47,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	1.8.4 ---
+	Speed-up 
+	Fix automatic refresh after poller finish
+
 	1.8.3 ---
 	Add logonly tholds
 	Add DB check disable option
