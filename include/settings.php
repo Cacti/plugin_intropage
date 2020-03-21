@@ -28,9 +28,10 @@ function intropage_config_form() {
 
 	$temp = array(
 		'intropage_panels_grp' => array(
-			'friendly_name' => __('Intropage panels', 'intropage'),
+			'friendly_name' => __('Intropage Panels', 'intropage'),
 			'method' => 'checkbox_group',
 			'description' => __('Enable/disable panels', 'intropage'),
+			'type' => 'flex',
 			'items' => array(
 				'intropage_analyse_log' => array(
 					'value' => '|arg1:intropage_analyse_log|',
@@ -189,7 +190,7 @@ function intropage_config_form() {
 	$new = array();
 	foreach ($fields_user_user_edit_host as $key => $val) {
 		$new = array_merge($new, array($key => $val));
-		if ($key == 'login_opts') {
+		if ($key == 'realm') {
 			$new = array_merge($new, $temp);
 		}
 	}
