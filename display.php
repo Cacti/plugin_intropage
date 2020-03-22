@@ -74,10 +74,7 @@ function display_information() {
 	    $_SESSION['allowed_hosts'] = false;
 
 	// Retrieve access
-	$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
-		WHERE user_id = ?
-		AND user_auth_realm.realm_id=8',
-		array($_SESSION['sess_user_id']))) ? true : false;
+	$console_access = api_plugin_user_realm_auth('index.php');
 
 	// retrieve user setting (and creating if not)
 	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_user_setting WHERE fav_graph_id IS NULL AND user_id = ?', array($_SESSION['sess_user_id'])) == 0) {
@@ -486,7 +483,7 @@ function display_information() {
 		if ($lopts < 4) {	// intropage is not default
         		print "<option value='loginopt_tab'>" . __('Set intropage as default login page', 'intropage') . '</option>';
                 }
-		
+
 		if ($lopts == 4)  {
 			print "<option value='loginopt_graph'>" . __('Set graph as default login page', 'intropage') . '</option>';
 		}
