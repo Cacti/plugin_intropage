@@ -30,6 +30,7 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'include/tab.php');
 	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
 	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/helpers.php');
@@ -76,6 +77,7 @@ function intropage_check_upgrade() {
 
 	$current = $info['version'];
 	$oldv    = db_fetch_cell('SELECT version FROM plugin_config WHERE directory="intropage"');
+
 	if (!cacti_version_compare($oldv, $current, '=')) {
 		if (cacti_version_compare($oldv,'0.9','<')) {
 			api_plugin_db_add_column('user_auth', array('name' => 'intropage_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'));
@@ -145,16 +147,16 @@ function intropage_check_upgrade() {
 		}
 
 		if (cacti_version_compare($oldv,'1.8.2', '<')) {
-			db_execute('ALTER TABLE plugin_intropage_trends 
+			db_execute('ALTER TABLE plugin_intropage_trends
 				MODIFY COLUMN value varchar(250) NULL DEFAULT NULL');
 		}
 
 		if (cacti_version_compare($oldv,'1.8.2', '<')) {
-			db_execute("DELETE FROM plugin_intropage_panel 
+			db_execute("DELETE FROM plugin_intropage_panel
 				WHERE panel='intropage_favourite_graph'");
-			db_execute("DELETE FROM plugin_intropage_user_setting 
+			db_execute("DELETE FROM plugin_intropage_user_setting
 				WHERE panel='intropage_favourite_graph' AND fav_graph_id is NULL");
-			db_execute("REPLACE INTO plugin_intropage_trends (name,value) 
+			db_execute("REPLACE INTO plugin_intropage_trends (name,value)
 				VALUES ('ar_poller_finish', '1')");
 
 		}
@@ -192,7 +194,21 @@ function intropage_check_upgrade() {
 		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='ntp_testdate'") == 0) {
 			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
 		}
-		
+
+		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', 1);
+	}
+}
+
+function intropage_page_head() {
+	global $config;
+
+	$selectedTheme = get_selected_theme();
+
+	// style for panels
+	print "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
+
+	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
+		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/intropage/themes/' . $selectedTheme . ".css' rel='stylesheet'>";
 	}
 }
 
@@ -332,7 +348,7 @@ function intropage_poller_bottom() {
 
 	// cleaning old data
 	db_execute("DELETE FROM plugin_intropage_trends
-		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND 
+		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND
 		name IN ('poller','cpuload','failed_polls','host','thold','poller_output','syslog_incoming','syslog_total','syslog_alert')");
 
 	// trends - all hosts without permissions!!!
@@ -368,12 +384,12 @@ function intropage_poller_bottom() {
 
 	// plugin syslog
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
-		
+
 		$line = syslog_db_fetch_row("SHOW TABLE STATUS LIKE 'syslog_incoming'");
 		$i_rows = $line['Auto_increment'];
 		$line = syslog_db_fetch_row("SHOW TABLE STATUS LIKE 'syslog'");
 		$total_rows = $line['Auto_increment'];
-		$alert_rows = syslog_db_fetch_cell('SELECT ifnull(sum(count),0) FROM syslog_logs WHERE 
+		$alert_rows = syslog_db_fetch_cell('SELECT ifnull(sum(count),0) FROM syslog_logs WHERE
 			logtime > date_sub(now(), INTERVAL ' . read_config_option('poller_interval') .' SECOND)');
 
 /*
@@ -399,7 +415,7 @@ function intropage_poller_bottom() {
 	}
 
 	// check db
-	if (read_config_option('intropage_analyse_db_interval') > 0)	{	
+	if (read_config_option('intropage_analyse_db_interval') > 0)	{
 	    $last = db_fetch_cell("SELECT UNIX_TIMESTAMP(value)
 		FROM plugin_intropage_trends
 		WHERE name='db_check_testdate'");

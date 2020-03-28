@@ -7,144 +7,142 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-01 15:20+0200\n"
-"PO-Revision-Date: 2019-06-09 14:30-0400\n"
+"POT-Creation-Date: 2020-03-28 12:11-0400\n"
+"PO-Revision-Date: 2020-03-28 12:42-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: vi_VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: display.php:30
+#: display.php:32
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage - sự cho phép bị từ chối"
 
-#: display.php:146
+#: display.php:142
 #, fuzzy
-msgid ""
-"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
-"Cacti Dashboard</b> and use the whole page for Intropage "
-msgstr ""
-"Bạn có thể tắt các hàng ở trên trong <b>Cài đặt -> Chung -> Ẩn Bảng điều "
-"khiển Cacti</b> và sử dụng toàn bộ trang cho Intropage <br/><br/>"
+msgid "You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Bạn có thể tắt các hàng ở trên trong <b>Cài đặt -> Chung -> Ẩn Bảng điều khiển Cacti</b> và sử dụng toàn bộ trang cho Intropage <br/><br/>"
 
-#: display.php:351
+#: display.php:284
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "Vô hiệu hóa di chuyển bảng / Bật sao chép văn bản từ bảng điều khiển"
 
-#: display.php:356
+#: display.php:289
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr ""
-"Cho phép di chuyển bảng / Vô hiệu hóa văn bản sao chép từ bảng điều khiển"
+msgstr "Cho phép di chuyển bảng / Vô hiệu hóa văn bản sao chép từ bảng điều khiển"
 
-#: display.php:394
+#: display.php:345
 #, fuzzy
 msgid "Error reading new data"
 msgstr "Lỗi đọc dữ liệu mới"
 
-#: display.php:415
+#: display.php:378
+msgid "Close"
+msgstr "Đóng"
+
+#: display.php:389
+#, fuzzy
+msgid "Panel Details"
+msgstr "Hiển thị chi tiết"
+
+#: display.php:408
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
-msgstr ""
-"Vô hiệu hóa di chuyển bảng / cho phép sao chép văn bản từ bảng điều khiển"
+msgstr "Vô hiệu hóa di chuyển bảng / cho phép sao chép văn bản từ bảng điều khiển"
 
-#: display.php:419
+#: display.php:412
 #, fuzzy
 msgid "Select action ..."
 msgstr "Chọn hành động ..."
 
-#: display.php:430
+#: display.php:423
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "Thêm bảng %s"
 
-#: display.php:432
+#: display.php:425
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "Thêm bảng điều khiển %s %s"
 
-#: display.php:438
+#: display.php:431
 #, fuzzy
 msgid "Refresh Now"
 msgstr "Làm mới ngay"
 
-#: display.php:441 display.php:443
+#: display.php:434 display.php:436
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "Autorefresh bị vô hiệu hóa"
 
-#: display.php:447 display.php:449
+#: display.php:440 display.php:442
+#, fuzzy
+msgid "Autorefresh automatic by poller"
+msgstr "Autorefresh bị vô hiệu hóa"
+
+#: display.php:446 display.php:448
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "Autorefresh 1 phút"
 
-#: display.php:453 display.php:455
+#: display.php:452 display.php:454
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "Autorefresh 5 phút"
 
-#: display.php:459 display.php:461
+#: display.php:458 display.php:460
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "Autorefresh 1 giờ"
 
-#: display.php:465 display.php:467
-#, fuzzy
-msgid "Display only Errors"
-msgstr "Chỉ hiển thị lỗi"
-
-#: display.php:471 display.php:473
-#, fuzzy
-msgid "Display Errors and Warnings"
-msgstr "Hiển thị lỗi và cảnh báo"
-
-#: display.php:477 display.php:479
-#, fuzzy
-msgid "Display All"
-msgstr "Hiển thị tất cả"
-
-#: display.php:483 display.php:486
+#: display.php:464 display.php:467
 #, fuzzy
 msgid "Sort by - red-yellow-green-gray"
 msgstr "Sắp xếp theo - Đỏ-Vàng-Xanh-Xám"
 
-#: display.php:484
+#: display.php:465
 #, fuzzy
 msgid "Sort by panel priority"
 msgstr "Sắp xếp theo bảng ưu tiên"
 
-#: display.php:487
+#: display.php:468
 #, fuzzy
 msgid "Sort by panel Priority"
 msgstr "Sắp xếp theo bảng ưu tiên"
 
-#: display.php:491
-#, fuzzy
-msgid "Reset panel Order to Default"
-msgstr "Đặt lại bảng điều khiển để mặc định"
-
-#: display.php:494
+#: display.php:471
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "Đặt lại tất cả về mặc định"
 
-#: display.php:506
+#: display.php:483
 #, fuzzy
-msgid "Set intropage as default page"
+msgid "Set intropage as default login page"
 msgstr "Đặt intropage làm trang mặc định"
 
-#: display.php:508
+#: display.php:487
 #, fuzzy
-msgid "Set graph as default page"
+msgid "Set graph as default login page"
 msgstr "Đặt biểu đồ làm trang mặc định"
 
-#: display.php:513
+#: display.php:492
+#, fuzzy
+msgid "Display intropage in console"
+msgstr "Hiển thị intropage trong bảng điều khiển"
+
+#: display.php:495
+#, fuzzy
+msgid "Display intropage in tab as default page"
+msgstr "Đặt intropage làm trang mặc định"
+
+#: display.php:500
 msgid "Go"
 msgstr "Đi"
 
@@ -153,738 +151,851 @@ msgstr "Đi"
 msgid "Database check"
 msgstr "Kiểm tra cơ sở dữ liệu"
 
-#: include/data.php:49 include/data.php:720 include/data.php:1301
-#: include/data.php:1497 include/data.php:1615 include/data.php:1675
-#: include/data.php:1734 include/data.php:1789
+#: include/data.php:48 include/data.php:614 include/data.php:1182
+#: include/data.php:1363 include/data.php:1470 include/data.php:1522
+#: include/data.php:1573 include/data.php:1622 include/data_detail.php:47
+#: include/data_detail.php:1088 include/data_detail.php:1135
+#: include/data_detail.php:1181 include/data_detail.php:1223
 #, fuzzy
 msgid "Waiting for data"
 msgstr "Chờ dữ liệu"
 
-#: include/data.php:52
+#: include/data.php:51 include/data_detail.php:50
 msgid "Last check"
 msgstr "Lần cuối kiểm tra vào"
 
-#: include/data.php:55
-#, fuzzy
-msgid "Checked Every 15 minutes"
-msgstr "Kiểm tra cứ sau 15 phút"
-
-#: include/data.php:57
-#, fuzzy
-msgid "Checked Hourly"
-msgstr "Kiểm tra hàng giờ"
-
-#: include/data.php:59
-#, fuzzy
-msgid "Checked Daily"
-msgstr "Kiểm tra hàng ngày"
-
-#: include/data.php:73
-#, fuzzy
-msgid "Analyse cacti log"
-msgstr "Phân tích nhật ký xương rồng"
-
-#: include/data.php:89
-#, fuzzy
-msgid "Log file not accessible or empty"
-msgstr "Tệp nhật ký không thể truy cập hoặc trống"
-
-#: include/data.php:109
-msgid "Errors"
-msgstr "Lỗi"
-
-#: include/data.php:111
-msgid "Warnings"
-msgstr "Cảnh báo"
-
-#: include/data.php:116
-#, fuzzy
-msgid "file is larger than 2GB"
-msgstr "tệp lớn hơn 2GB"
-
-#: include/data.php:120
-#, fuzzy
-msgid "Log size OK"
-msgstr "Kích thước nhật ký OK"
-
-#: include/data.php:124
-#, fuzzy
-msgid "Log size is quite large"
-msgstr "Kích thước nhật ký khá lớn"
-
-#: include/data.php:127
-#, fuzzy
-msgid "Log size"
-msgstr "Kích thước nhật ký"
-
-#: include/data.php:131
-#, fuzzy, php-format
-msgid "(Errors and warning in last %s lines)"
-msgstr "(Lỗi và cảnh báo trong dòng %s cuối cùng)"
-
-#: include/data.php:151
-#, fuzzy
-msgid "Last 10 logins"
-msgstr "10 lần đăng nhập gần nhất"
-
-#: include/data.php:158 include/data.php:226 include/data.php:263
-#: include/data.php:311 include/data.php:332 include/data.php:360
-#: include/data.php:391 include/data.php:439 include/data.php:462
-#: include/data.php:483 include/data.php:504 include/data.php:527
-#: include/data.php:670 include/data.php:675 include/data.php:1370
-msgid "N/A"
-msgstr "N/A"
-
-#: include/data.php:175
-#, fuzzy
-msgid "failed"
-msgstr "Thất bại"
-
-#: include/data.php:175
-#, fuzzy
-msgid "success"
-msgstr "Thành công"
-
-#: include/data.php:178
-#, fuzzy
-msgid "Failed logins"
-msgstr "Đăng nhập thất bại"
-
-#: include/data.php:209
-#, fuzzy
-msgid "Analyse tree/host/graph"
-msgstr "Phân tích cây / máy chủ / đồ thị"
-
-#: include/data.php:227
-#, fuzzy, php-format
-msgid "Devices with the same IP and port %s"
-msgstr "Các thiết bị có cùng IP và cổng %s"
-
-#: include/data.php:232
-#, fuzzy, php-format
-msgid "Devices with the same IP and port: %s"
-msgstr "Các thiết bị có cùng IP và cổng: %s"
-
-#: include/data.php:265
-#, fuzzy, php-format
-msgid "Devices with the same description %s"
-msgstr "Các thiết bị có cùng mô tả %s"
-
-#: include/data.php:270
-#, fuzzy, php-format
-msgid "Devices with the same description: %s"
-msgstr "Các thiết bị có cùng mô tả: %s"
-
-#: include/data.php:313
-#, fuzzy, php-format
-msgid "Orphaned Data Sources %s"
-msgstr "Nguồn dữ liệu mồ côi %s"
-
-#: include/data.php:317
-#, fuzzy, php-format
-msgid "Orphaned Data Sources: %s"
-msgstr "Nguồn dữ liệu mồ côi: %s"
-
-#: include/data.php:334
-#, fuzzy, php-format
-msgid "Poller output items %s:"
-msgstr "Các mặt hàng đầu ra của xe đẩy %s:"
-
-#: include/data.php:337
-#, fuzzy, php-format
-msgid "Poller Output Items: %s"
-msgstr "Các mục đầu ra của Poller: %s"
-
-#: include/data.php:362
-#, fuzzy, php-format
-msgid "Datasource - bad indexes %s:"
-msgstr "Nguồn dữ liệu - chỉ mục xấu %s:"
-
-#: include/data.php:365
-#, fuzzy, php-format
-msgid "Datasource - bad indexes: %s"
-msgstr "Nguồn dữ liệu - chỉ mục xấu: %s"
-
-#: include/data.php:381
-#, fuzzy
-msgid "Information only (no warn/error)"
-msgstr "Chỉ thông tin (không cảnh báo / lỗi)"
-
-#: include/data.php:393
-#, fuzzy, php-format
-msgid "Devices in more than one tree %s"
-msgstr "Thiết bị trong nhiều hơn một cây %s"
-
-#: include/data.php:396
-#, fuzzy, php-format
-msgid "Devices in more than one tree: %s"
-msgstr "Thiết bị trong nhiều cây: %s"
-
-#: include/data.php:441
-#, fuzzy, php-format
-msgid "Hosts without graphs %s"
-msgstr "Máy chủ không có đồ thị %s"
-
-#: include/data.php:444
-#, fuzzy, php-format
-msgid "Hosts without graphs: %s"
-msgstr "Máy chủ không có đồ thị: %s"
-
-#: include/data.php:464
-#, fuzzy, php-format
-msgid "Hosts without tree %s"
-msgstr "Máy chủ không có cây %s"
-
-#: include/data.php:467
-#, fuzzy, php-format
-msgid "Hosts without tree: %s"
-msgstr "Máy chủ không có cây: %s"
-
-#: include/data.php:485
-#, fuzzy, php-format
-msgid "Hosts with default public/private community %s"
-msgstr "Các máy chủ lưu trữ với cộng đồng công cộng / riêng mặc định %s"
-
-#: include/data.php:488
-#, fuzzy, php-format
-msgid "Hosts with default public/private community: %s"
-msgstr "Các máy chủ lưu trữ với cộng đồng công cộng / riêng tư mặc định: %s"
-
-#: include/data.php:506
-#, fuzzy, php-format
-msgid "Plugin Monitor - Unmonitored hosts %s"
-msgstr "Trình giám sát plugin - Máy chủ không được giám sát %s"
-
-#: include/data.php:509
-#, fuzzy, php-format
-msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "Trình giám sát plugin - Máy chủ không được giám sát: %s"
-
-#: include/data.php:529
-#, fuzzy, php-format
-msgid "Plugin Thold - Global notify only %s"
-msgstr "Plugin Thold - Toàn cầu chỉ thông báo %s"
-
-#: include/data.php:532
-#, fuzzy, php-format
-msgid "Plugin Thold - Global notify only: %s"
-msgstr "Plugin Thold - Chỉ thông báo toàn cầu: %s"
-
-#: include/data.php:541
-#, fuzzy, php-format
-msgid "Found %s problems"
-msgstr "Đã tìm thấy %s vấn đề"
-
-#: include/data.php:543
-#, fuzzy
-msgid "Everything OK"
-msgstr "Mọi thứ ổn"
-
-#: include/data.php:555
-#, fuzzy
-msgid "Boost statistics"
-msgstr "Tăng số liệu thống kê"
-
-#: include/data.php:608 include/data.php:1397
-msgid "Idle"
-msgstr "Rảnh rỗi"
-
-#: include/data.php:610 include/data.php:1395
-msgid "Running"
-msgstr "Đang chạy"
-
-#: include/data.php:612
-#, fuzzy
-msgid "Overrun Warning"
-msgstr "Cảnh báo tràn ngập"
-
-#: include/data.php:615
-#, fuzzy
-msgid "Timed Out"
-msgstr "Hết giờ"
-
-#: include/data.php:618
-msgid "Other"
-msgstr "Khác"
-
-#: include/data.php:621
-#, fuzzy
-msgid "Never Run"
-msgstr "Không bao giờ chạy"
-
-#: include/data.php:626
-#, fuzzy, php-format
-msgid "Pending Boost Records: %s"
-msgstr "Bản ghi Boost đang chờ xử lý: %s"
-
-#: include/data.php:627
-#, fuzzy, php-format
-msgid "Archived Boost Records: %s"
-msgstr "Lưu trữ bản ghi Boost: %s"
-
-#: include/data.php:631 include/data.php:634 include/data.php:636
-#, fuzzy, php-format
-msgid "Total Boost Records: %s"
-msgstr "Tổng số bản ghi Boost: %s"
-
-#: include/data.php:655
-#, fuzzy, php-format
-msgid "Boost On-demand Updating: %s"
-msgstr "Tăng cường cập nhật theo yêu cầu: %s"
-
-#: include/data.php:655 include/data.php:925 include/data.php:935
-#: include/data.php:1068 include/data.php:1077 include/data.php:1214
-#: include/data.php:1401
-msgid "Disabled"
-msgstr "Vô hiệu hóa"
-
-#: include/data.php:662
-#, fuzzy, php-format
-msgid "Current Boost Table(s) Size: %s"
-msgstr "Kích thước bảng tăng hiện tại: %s"
-
-#: include/data.php:665
-#, fuzzy, php-format
-msgid "Avg Bytes/Record: %s"
-msgstr "Byte trung bình / Bản ghi: %s"
-
-#: include/data.php:672
-#, fuzzy, php-format
-msgid "Last run duration: %s"
-msgstr "Thời lượng chạy lần cuối: %s"
-
-#: include/data.php:674
-#, fuzzy, php-format
-msgid "RRD Updates / Max: %s / %s"
-msgstr "Cập nhật RRD / Tối đa: %s / %s"
-
-#: include/data.php:675
-#, fuzzy, php-format
-msgid "Update Frequency: %s"
-msgstr "Tần suất cập nhật: %s"
-
-#: include/data.php:676
-#, fuzzy, php-format
-msgid "Next Start Time: %s"
-msgstr "Thời gian bắt đầu tiếp theo: %s"
-
-#: include/data.php:687
-#, fuzzy
-msgid "CPU utilization"
-msgstr "Sử dụng CPU"
-
-#: include/data.php:691
-#, fuzzy
-msgid "CPU load: "
-msgstr "Tải CPU:"
-
-#: include/data.php:698
-#, fuzzy
-msgid "This function is not implemented on Windows platforms"
-msgstr "Chức năng này không được triển khai trên nền tảng Windows"
-
-#: include/data.php:708
-msgid "Load"
-msgstr "Tải"
-
-#: include/data.php:733
-#, fuzzy
-msgid "24 hour extrem"
-msgstr "Cực hạn 24 giờ"
-
-#: include/data.php:741
-#, fuzzy
-msgid "Long run<br/>poller"
-msgstr "Chạy dài <br/> xe đẩy"
-
-#: include/data.php:756 include/data.php:777
-#, fuzzy
-msgid "Waiting<br/>for data"
-msgstr "Đang chờ đợi <br/> cho dữ liệu"
-
-#: include/data.php:785
-#, fuzzy
-msgid "Max thold<br/>triggered:"
-msgstr "Tối đa <br/> kích hoạt:"
-
-#: include/data.php:810
-#, fuzzy
-msgid "Poller<br/>output item:"
-msgstr "Xe đẩy <br/> mục đầu ra:"
-
-#: include/data.php:831
-#, fuzzy
-msgid "Failed<br/>polls:"
-msgstr "Thất bại <br/> các cuộc thăm dò:"
-
-#: include/data.php:864
-#, fuzzy
-msgid "Datasources: "
-msgstr "Nguồn dữ liệu:"
-
-#: include/data.php:893
-#, fuzzy
-msgid "No untemplated datasources found"
-msgstr "Không tìm thấy nguồn dữ liệu nào"
-
-#: include/data.php:906 include/data.php:930
-msgid "Hosts"
-msgstr "Hosts"
-
-#: include/data.php:922 include/data.php:1065 include/variables.php:89
-msgid "All"
-msgstr "Tất cả"
-
-#: include/data.php:923 include/data.php:932 include/data.php:1210
-msgid "Up"
-msgstr "Lên trên"
-
-#: include/data.php:924 include/data.php:933 include/data.php:1211
-msgid "Down"
-msgstr "Xuống"
-
-#: include/data.php:926 include/data.php:934 include/data.php:1403
-#, fuzzy
-msgid "Recovering"
-msgstr "Phục hồi"
-
-#: include/data.php:949
-#, fuzzy
-msgid "RECOVERING"
-msgstr "THU HỒI"
-
-#: include/data.php:965
-#, fuzzy
-msgid "DOWN"
-msgstr "Xuống"
-
-#: include/data.php:985 include/data.php:989
-#, fuzzy
-msgid "Device Templates"
-msgstr "Mẫu thiết bị"
-
-#: include/data.php:1013
-#, fuzzy
-msgid "No device templates found"
-msgstr "Không tìm thấy mẫu thiết bị nào"
-
-#: include/data.php:1025 include/data.php:1030 include/data.php:1072
-#, fuzzy
-msgid "Thresholds"
-msgstr "Ngưỡng"
-
-#: include/data.php:1038
-#, fuzzy
-msgid "Thold plugin not installed/running"
-msgstr "Thold plugin không được cài đặt / đang chạy"
-
-#: include/data.php:1041 include/data.php:1184
-msgid "You don't have permission"
-msgstr "Bạn không có quyền"
-
-#: include/data.php:1066 include/data.php:1075
-#, fuzzy
-msgid "Breached"
-msgstr "Vi phạm"
-
-#: include/data.php:1067
-#, fuzzy
-msgid "Trigged"
-msgstr "Trigged"
-
-#: include/data.php:1074
-#, fuzzy
-msgid "OK"
-msgstr "Đồng ý"
-
-#: include/data.php:1076
-#, fuzzy
-msgid "Trigerred"
-msgstr "Trigerred"
-
-#: include/data.php:1088
-#, fuzzy
-msgid "BREACHED"
-msgstr "Bánh mì"
-
-#: include/data.php:1098
-#, fuzzy
-msgid "TRIGGERED"
-msgstr "TRIGGERED"
-
-#: include/data.php:1123
-#, fuzzy
-msgid "Cacti version: "
-msgstr "Phiên bản xương rồng:"
-
-#: include/data.php:1134
-#, fuzzy
-msgid "Poller type:"
-msgstr "Loại xe đẩy:"
-
-#: include/data.php:1136
-#, fuzzy
-msgid "Spine version: "
-msgstr "Phiên bản cột sống:"
-
-#: include/data.php:1139
-#, fuzzy
-msgid "You are using incorrect spine version!"
-msgstr "Bạn đang sử dụng phiên bản cột sống không chính xác!"
-
-#: include/data.php:1143
-#, fuzzy
-msgid "Poller type: "
-msgstr "Loại xe đẩy:"
-
-#: include/data.php:1146
-#, fuzzy
-msgid "Running on: "
-msgstr "Chạy trên:"
-
-#: include/data.php:1166 include/data.php:1208
-#, fuzzy
-msgid "Mactrack"
-msgstr "Mactrack"
-
-#: include/data.php:1176 include/data.php:1241
-#, fuzzy
-msgid "Mactrack plugin not installed/running"
-msgstr "Plugin Mactrack chưa được cài đặt / đang chạy"
-
-#: include/data.php:1200
-#, fuzzy, php-format
-msgid "All: %s"
-msgstr "Tất cả: %s"
-
-#: include/data.php:1201
-#, fuzzy, php-format
-msgid "Up: %s"
-msgstr "Lên: %s"
-
-#: include/data.php:1202
-#, fuzzy, php-format
-msgid "Down: %s"
-msgstr "Xuống: %s"
-
-#: include/data.php:1203
-#, php-format
-msgid "Error: %s"
-msgstr "Lỗi: %s"
-
-#: include/data.php:1204
-#, fuzzy, php-format
-msgid "Unknown: %s"
-msgstr "Không biết"
-
-#: include/data.php:1205
-#, fuzzy, php-format
-msgid "Disabled: %s"
-msgstr "Đã tắt: %s"
-
-#: include/data.php:1212
-msgid "Error"
-msgstr "Lỗi"
-
-#: include/data.php:1213
-msgid "Unknown"
-msgstr "Không xác định"
-
-#: include/data.php:1229
-#, fuzzy
-msgid "Mactrack sites"
-msgstr "Trang web của Mactrack"
-
-#: include/data.php:1243
-msgid "Devices"
-msgstr "Thiết bị"
-
-#: include/data.php:1243
-msgid "Site"
-msgstr "Trang"
-
-#: include/data.php:1244
-msgid "IPs"
-msgstr "IPs"
-
-#: include/data.php:1244
-msgid "Ports"
-msgstr "Cổng"
-
-#: include/data.php:1245
-#, fuzzy
-msgid "MACs"
-msgstr "MAC"
-
-#: include/data.php:1245
-#, fuzzy
-msgid "Ports up"
-msgstr "Cổng lên"
-
-#: include/data.php:1246
-#, fuzzy
-msgid "Device errors"
-msgstr "Lỗi thiết bị"
-
-#: include/data.php:1274
-#, fuzzy
-msgid "No mactrack sites found"
-msgstr "Không tìm thấy trang web mactrack"
-
-#: include/data.php:1287
-#, fuzzy
-msgid "Time synchronization"
-msgstr "Đồng bộ hóa thời gian"
-
-#: include/data.php:1295
-#, fuzzy
-msgid "No NTP server configured"
-msgstr "Không có máy chủ NTP nào được cấu hình"
-
-#: include/data.php:1306
-#, fuzzy
-msgid "Failed to get NTP time FROM $ntp_server"
-msgstr "Không thể lấy thời gian NTP TỪ $ ntp_server"
-
-#: include/data.php:1314
-#, fuzzy, php-format
-msgid ""
-"Please check time.<br/>It is different (more than %s seconds) FROM NTP "
-"server %s"
-msgstr ""
-"Vui lòng kiểm tra thời gian. <br/> Nó khác (hơn %s giây) TỪ máy chủ NTP %s"
-
-#: include/data.php:1316
-#, fuzzy
-msgid "Localtime is equal to NTP server"
-msgstr "Giờ địa phương bằng với máy chủ NTP"
-
-#: include/data.php:1321
-#, fuzzy
-msgid ""
-"Unable to contact the NTP server indicated.<br/>Please check your "
-"configuration.<br/>"
-msgstr ""
-"Không thể liên lạc với máy chủ NTP được chỉ định. <br/> Vui lòng kiểm tra "
-"cấu hình của bạn. <br/>"
-
-#: include/data.php:1324
-#, fuzzy
-msgid "Last check: "
-msgstr "Kiểm tra cuối cùng:"
-
-#: include/data.php:1327
+#: include/data.php:54 include/data.php:1208 include/data_detail.php:53
 #, fuzzy
 msgid "Checked every 15 minutes"
 msgstr "Kiểm tra cứ sau 15 phút"
 
-#: include/data.php:1329
+#: include/data.php:56 include/data.php:1210 include/data_detail.php:55
 #, fuzzy
 msgid "Checked hourly"
 msgstr "Kiểm tra hàng giờ"
 
-#: include/data.php:1331
+#: include/data.php:58 include/data.php:1212 include/data_detail.php:57
 #, fuzzy
 msgid "Checked daily"
 msgstr "Kiểm tra hàng ngày"
 
-#: include/data.php:1355
+#: include/data.php:60 include/data_detail.php:59
+#, fuzzy
+msgid "Checked weekly"
+msgstr "Kiểm tra hàng ngày"
+
+#: include/data.php:62 include/data_detail.php:61
+#, fuzzy
+msgid "Checked monthly"
+msgstr "Kiểm tra hàng giờ"
+
+#: include/data.php:64 include/data_detail.php:63
+#, fuzzy
+msgid "Periodic check is disabled"
+msgstr "Kiểm tra định kỳ bị vô hiệu hóa"
+
+#: include/data.php:78
+#, fuzzy
+msgid "Analyse cacti log"
+msgstr "Phân tích nhật ký xương rồng"
+
+#: include/data.php:94 include/data_detail.php:92
+#, fuzzy
+msgid "Log file not accessible or empty"
+msgstr "Tệp nhật ký không thể truy cập hoặc trống"
+
+#: include/data.php:112 include/data_detail.php:112
+msgid "Errors"
+msgstr "Lỗi"
+
+#: include/data.php:114 include/data_detail.php:114
+msgid "Warnings"
+msgstr "Cảnh báo"
+
+#: include/data.php:119 include/data_detail.php:119
+#, fuzzy
+msgid "file is larger than 2GB"
+msgstr "tệp lớn hơn 2GB"
+
+#: include/data.php:123 include/data_detail.php:123
+#, fuzzy
+msgid "Log size OK"
+msgstr "Kích thước nhật ký OK"
+
+#: include/data.php:127 include/data_detail.php:127
+#, fuzzy
+msgid "Log size is quite large"
+msgstr "Kích thước nhật ký khá lớn"
+
+#: include/data.php:130 include/data_detail.php:130
+#, fuzzy
+msgid "Log size"
+msgstr "Kích thước nhật ký"
+
+#: include/data.php:134 include/data_detail.php:134
+#, fuzzy, php-format
+msgid "(Errors and warning in last %s lines)"
+msgstr "(Lỗi và cảnh báo trong dòng %s cuối cùng)"
+
+#: include/data.php:154
+#, fuzzy
+msgid "Analyse logins"
+msgstr "Đăng nhập thất bại"
+
+#: include/data.php:171
+#, fuzzy
+msgid "Failed logins"
+msgstr "Đăng nhập thất bại"
+
+#: include/data.php:193 include/data_detail.php:208
+#, fuzzy
+msgid "Analyse tree/host/graph"
+msgstr "Phân tích cây / máy chủ / đồ thị"
+
+#: include/data.php:210 include/data.php:230 include/data.php:258
+#: include/data.php:293 include/data.php:330 include/data.php:357
+#: include/data.php:376 include/data.php:394 include/data.php:410
+#: include/data.php:425 include/data.php:563 include/data.php:568
+#: include/data.php:1243 include/data_detail.php:224
+#: include/data_detail.php:257 include/data_detail.php:297
+#: include/data_detail.php:317 include/data_detail.php:344
+#: include/data_detail.php:387 include/data_detail.php:419
+#: include/data_detail.php:465 include/data_detail.php:487
+#: include/data_detail.php:508 include/data_detail.php:528
+#: include/data_detail.php:944
+msgid "N/A"
+msgstr "N/A"
+
+#: include/data.php:215
+#, fuzzy, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Các thiết bị có cùng IP và cổng: %s"
+
+#: include/data.php:235
+#, fuzzy, php-format
+msgid "Devices with the same description: %s"
+msgstr "Các thiết bị có cùng mô tả: %s"
+
+#: include/data.php:262
+#, fuzzy, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Nguồn dữ liệu mồ côi: %s"
+
+#: include/data.php:274
+#, fuzzy, php-format
+msgid "Poller Output Items: %s"
+msgstr "Các mục đầu ra của Poller: %s"
+
+#: include/data.php:296
+#, fuzzy, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Nguồn dữ liệu - chỉ mục xấu: %s"
+
+#: include/data.php:333
+#, fuzzy, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Cảnh báo / cảnh báo logonly: %s"
+
+#: include/data.php:345 include/data_detail.php:407
+#, fuzzy
+msgid "Information only (no warn/error)"
+msgstr "Chỉ thông tin (không cảnh báo / lỗi)"
+
+#: include/data.php:360
+#, fuzzy, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Thiết bị trong nhiều cây: %s"
+
+#: include/data.php:379
+#, fuzzy, php-format
+msgid "Hosts without graphs: %s"
+msgstr "Máy chủ không có đồ thị: %s"
+
+#: include/data.php:397
+#, fuzzy, php-format
+msgid "Hosts without tree: %s"
+msgstr "Máy chủ không có cây: %s"
+
+#: include/data.php:413
+#, fuzzy, php-format
+msgid "Hosts with default public/private community: %s"
+msgstr "Các máy chủ lưu trữ với cộng đồng công cộng / riêng tư mặc định: %s"
+
+#: include/data.php:428
+#, fuzzy, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Trình giám sát plugin - Máy chủ không được giám sát: %s"
+
+#: include/data.php:434 include/data_detail.php:542
+#, fuzzy, php-format
+msgid "Found %s problems"
+msgstr "Đã tìm thấy %s vấn đề"
+
+#: include/data.php:436 include/data_detail.php:544
+#, fuzzy
+msgid "Everything OK"
+msgstr "Mọi thứ ổn"
+
+#: include/data.php:448
+#, fuzzy
+msgid "Boost statistics"
+msgstr "Tăng số liệu thống kê"
+
+#: include/data.php:501 include/data.php:1262 include/data_detail.php:963
+msgid "Idle"
+msgstr "Rảnh rỗi"
+
+#: include/data.php:503 include/data.php:1260 include/data_detail.php:961
+msgid "Running"
+msgstr "Đang chạy"
+
+#: include/data.php:505
+#, fuzzy
+msgid "Overrun Warning"
+msgstr "Cảnh báo tràn ngập"
+
+#: include/data.php:508
+#, fuzzy
+msgid "Timed Out"
+msgstr "Hết giờ"
+
+#: include/data.php:511
+msgid "Other"
+msgstr "Khác"
+
+#: include/data.php:514
+#, fuzzy
+msgid "Never Run"
+msgstr "Không bao giờ chạy"
+
+#: include/data.php:519
+#, fuzzy, php-format
+msgid "Pending Boost Records: %s"
+msgstr "Bản ghi Boost đang chờ xử lý: %s"
+
+#: include/data.php:520
+#, fuzzy, php-format
+msgid "Archived Boost Records: %s"
+msgstr "Lưu trữ bản ghi Boost: %s"
+
+#: include/data.php:524 include/data.php:527 include/data.php:529
+#, fuzzy, php-format
+msgid "Total Boost Records: %s"
+msgstr "Tổng số bản ghi Boost: %s"
+
+#: include/data.php:548
+#, fuzzy, php-format
+msgid "Boost On-demand Updating: %s"
+msgstr "Tăng cường cập nhật theo yêu cầu: %s"
+
+#: include/data.php:548 include/data.php:827 include/data.php:837
+#: include/data.php:958 include/data.php:967 include/data.php:1094
+#: include/data.php:1266 include/data_detail.php:741
+#: include/data_detail.php:858 include/data_detail.php:967
+msgid "Disabled"
+msgstr "Vô hiệu hóa"
+
+#: include/data.php:555
+#, fuzzy, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Kích thước bảng tăng hiện tại: %s"
+
+#: include/data.php:558
+#, fuzzy, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Byte trung bình / Bản ghi: %s"
+
+#: include/data.php:565
+#, fuzzy, php-format
+msgid "Last run duration: %s"
+msgstr "Thời lượng chạy lần cuối: %s"
+
+#: include/data.php:567
+#, fuzzy, php-format
+msgid "RRD Updates / Max: %s / %s"
+msgstr "Cập nhật RRD / Tối đa: %s / %s"
+
+#: include/data.php:568
+#, fuzzy, php-format
+msgid "Update Frequency: %s"
+msgstr "Tần suất cập nhật: %s"
+
+#: include/data.php:569
+#, fuzzy, php-format
+msgid "Next Start Time: %s"
+msgstr "Thời gian bắt đầu tiếp theo: %s"
+
+#: include/data.php:580
+#, fuzzy
+msgid "CPU utilization"
+msgstr "Sử dụng CPU"
+
+#: include/data.php:585
+#, fuzzy
+msgid "CPU load: "
+msgstr "Tải CPU:"
+
+#: include/data.php:592
+#, fuzzy
+msgid "This function is not implemented on Windows platforms"
+msgstr "Chức năng này không được triển khai trên nền tảng Windows"
+
+#: include/data.php:602
+msgid "Load"
+msgstr "Tải"
+
+#: include/data.php:627
+#, fuzzy
+msgid "24 hour extrem"
+msgstr "Cực hạn 24 giờ"
+
+#: include/data.php:636 include/data_detail.php:565
+#, fuzzy
+msgid "Long run<br/>poller"
+msgstr "Chạy dài <br/> xe đẩy"
+
+#: include/data.php:652 include/data.php:674 include/data.php:698
+#: include/data.php:723 include/data.php:745 include/data_detail.php:580
+#: include/data_detail.php:601
+#, fuzzy
+msgid "Waiting<br/>for data"
+msgstr "Đang chờ đợi <br/> cho dữ liệu"
+
+#: include/data.php:682 include/data_detail.php:609
+#, fuzzy
+msgid "Max thold<br/>triggered:"
+msgstr "Tối đa <br/> kích hoạt:"
+
+#: include/data.php:708 include/data_detail.php:634
+#, fuzzy
+msgid "Poller<br/>output item:"
+msgstr "Xe đẩy <br/> mục đầu ra:"
+
+#: include/data.php:730 include/data_detail.php:655
+#, fuzzy
+msgid "Failed<br/>polls:"
+msgstr "Thất bại <br/> các cuộc thăm dò:"
+
+#: include/data.php:765
+#, fuzzy
+msgid "Datasources: "
+msgstr "Nguồn dữ liệu:"
+
+#: include/data.php:794 include/data_detail.php:711
+#, fuzzy
+msgid "No untemplated datasources found"
+msgstr "Không tìm thấy nguồn dữ liệu nào"
+
+#: include/data.php:807 include/data.php:832 include/data_detail.php:723
+msgid "Hosts"
+msgstr "Hosts"
+
+#: include/data.php:824 include/data.php:955 include/data_detail.php:738
+#: include/data_detail.php:855
+msgid "All"
+msgstr "Tất cả"
+
+#: include/data.php:825 include/data.php:834 include/data.php:1090
+#: include/data_detail.php:739
+msgid "Up"
+msgstr "Lên trên"
+
+#: include/data.php:826 include/data.php:835 include/data.php:1091
+#: include/data_detail.php:740
+msgid "Down"
+msgstr "Xuống"
+
+#: include/data.php:828 include/data.php:836 include/data.php:1268
+#: include/data_detail.php:742 include/data_detail.php:969
+#, fuzzy
+msgid "Recovering"
+msgstr "Phục hồi"
+
+#: include/data.php:856 include/data.php:903 include/data.php:1475
+#: include/data.php:1527 include/data.php:1578 include/data.php:1627
+#, fuzzy
+msgid "You don't have permissions to any hosts"
+msgstr "Bạn không có quyền"
+
+#: include/data.php:868 include/data.php:873 include/data_detail.php:786
+#, fuzzy
+msgid "Device Templates"
+msgstr "Mẫu thiết bị"
+
+#: include/data.php:897 include/data_detail.php:810
+#, fuzzy
+msgid "No device templates found"
+msgstr "Không tìm thấy mẫu thiết bị nào"
+
+#: include/data.php:915 include/data.php:920 include/data.php:962
+#: include/data_detail.php:822
+#, fuzzy
+msgid "Thresholds"
+msgstr "Ngưỡng"
+
+#: include/data.php:928 include/data_detail.php:829
+#, fuzzy
+msgid "Thold plugin not installed/running"
+msgstr "Thold plugin không được cài đặt / đang chạy"
+
+#: include/data.php:931 include/data.php:1064 include/data.php:1127
+#, fuzzy
+msgid "You don't have plugin permission"
+msgstr "Bạn không có quyền"
+
+#: include/data.php:956 include/data.php:966 include/data_detail.php:856
+#, fuzzy
+msgid "Breached"
+msgstr "Vi phạm"
+
+#: include/data.php:957 include/data_detail.php:857
+#, fuzzy
+msgid "Trigged"
+msgstr "Trigged"
+
+#: include/data.php:964
+msgid "OK"
+msgstr "OK"
+
+#: include/data.php:965
+#, fuzzy
+msgid "Triggered"
+msgstr "Trigerred"
+
+#: include/data.php:1002
+#, fuzzy
+msgid "Cacti version: "
+msgstr "Phiên bản xương rồng:"
+
+#: include/data.php:1013
+#, fuzzy
+msgid "Poller type:"
+msgstr "Loại xe đẩy:"
+
+#: include/data.php:1013
+#, fuzzy
+msgid "Spine"
+msgstr "Xương sống"
+
+#: include/data.php:1015
+#, fuzzy
+msgid "Spine version: "
+msgstr "Phiên bản cột sống:"
+
+#: include/data.php:1018
+#, fuzzy
+msgid "You are using incorrect spine version!"
+msgstr "Bạn đang sử dụng phiên bản cột sống không chính xác!"
+
+#: include/data.php:1022
+#, fuzzy
+msgid "Poller type: "
+msgstr "Loại xe đẩy:"
+
+#: include/data.php:1025
+#, fuzzy
+msgid "Running on: "
+msgstr "Chạy trên:"
+
+#: include/data.php:1045 include/data.php:1088
+#, fuzzy
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: include/data.php:1055 include/data.php:1118
+#, fuzzy
+msgid "Mactrack plugin not installed/running"
+msgstr "Plugin Mactrack chưa được cài đặt / đang chạy"
+
+#: include/data.php:1080
+#, fuzzy, php-format
+msgid "All: %s"
+msgstr "Tất cả: %s"
+
+#: include/data.php:1081
+#, fuzzy, php-format
+msgid "Up: %s"
+msgstr "Lên: %s"
+
+#: include/data.php:1082
+#, fuzzy, php-format
+msgid "Down: %s"
+msgstr "Xuống: %s"
+
+#: include/data.php:1083
+#, php-format
+msgid "Error: %s"
+msgstr "Lỗi: %s"
+
+#: include/data.php:1084
+#, fuzzy, php-format
+msgid "Unknown: %s"
+msgstr "Không biết"
+
+#: include/data.php:1085
+#, fuzzy, php-format
+msgid "Disabled: %s"
+msgstr "Đã tắt: %s"
+
+#: include/data.php:1092
+msgid "Error"
+msgstr "Lỗi"
+
+#: include/data.php:1093
+msgid "Unknown"
+msgstr "Không xác định"
+
+#: include/data.php:1109 include/data_detail.php:892
+#, fuzzy
+msgid "Mactrack sites"
+msgstr "Trang web của Mactrack"
+
+#: include/data.php:1130 include/data_detail.php:898
+msgid "Devices"
+msgstr "Thiết bị"
+
+#: include/data.php:1130 include/data_detail.php:898
+msgid "Site"
+msgstr "Trang"
+
+#: include/data.php:1131 include/data_detail.php:899
+msgid "IPs"
+msgstr "IPs"
+
+#: include/data.php:1131 include/data_detail.php:899
+msgid "Ports"
+msgstr "Cổng"
+
+#: include/data.php:1132 include/data_detail.php:900
+#, fuzzy
+msgid "MACs"
+msgstr "MAC"
+
+#: include/data.php:1132 include/data_detail.php:900
+#, fuzzy
+msgid "Ports up"
+msgstr "Cổng lên"
+
+#: include/data.php:1133 include/data_detail.php:901
+#, fuzzy
+msgid "Device errors"
+msgstr "Lỗi thiết bị"
+
+#: include/data.php:1148 include/data_detail.php:915
+#, fuzzy
+msgid "No mactrack sites found"
+msgstr "Không tìm thấy trang web mactrack"
+
+#: include/data.php:1162
+#, fuzzy
+msgid "Time synchronization"
+msgstr "Đồng bộ hóa thời gian"
+
+#: include/data.php:1172
+#, fuzzy
+msgid "Wrong NTP server configured - "
+msgstr "Không có máy chủ NTP nào được cấu hình"
+
+#: include/data.php:1176
+#, fuzzy
+msgid "No NTP server configured"
+msgstr "Không có máy chủ NTP nào được cấu hình"
+
+#: include/data.php:1187
+#, fuzzy
+msgid "Failed to get NTP time FROM $ntp_server"
+msgstr "Không thể lấy thời gian NTP TỪ $ ntp_server"
+
+#: include/data.php:1195
+#, fuzzy, php-format
+msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
+msgstr "Vui lòng kiểm tra thời gian. <br/> Nó khác (hơn %s giây) TỪ máy chủ NTP %s"
+
+#: include/data.php:1197
+#, fuzzy
+msgid "Localtime is equal to NTP server"
+msgstr "Giờ địa phương bằng với máy chủ NTP"
+
+#: include/data.php:1202
+#, fuzzy
+msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
+msgstr "Không thể liên lạc với máy chủ NTP được chỉ định. <br/> Vui lòng kiểm tra cấu hình của bạn. <br/>"
+
+#: include/data.php:1205
+msgid "Last check: "
+msgstr "Kiểm tra cuối cùng:"
+
+#: include/data.php:1226 include/data_detail.php:928
 #, fuzzy
 msgid "Poller info"
 msgstr "Thông tin về xe đẩy"
 
-#: include/data.php:1359
+#: include/data.php:1232
 #, fuzzy
 msgid "ID/Name/total time/state"
 msgstr "ID / Tên / tổng thời gian / trạng thái"
 
-#: include/data.php:1393
+#: include/data.php:1258 include/data_detail.php:959
 #, fuzzy
 msgid "New/Idle"
 msgstr "Mới / nhàn rỗi"
 
-#: include/data.php:1399
+#: include/data.php:1264 include/data_detail.php:965
 #, fuzzy
 msgid "Unkn/down"
 msgstr "Không biết / xuống"
 
-#: include/data.php:1410
+#: include/data.php:1275 include/data_detail.php:976
 #, fuzzy
 msgid "(all)"
 msgstr "(tất cả các)"
 
-#: include/data.php:1410
+#: include/data.php:1275 include/data_detail.php:976
 #, fuzzy
 msgid "(ok)"
 msgstr "(được)"
 
-#: include/data.php:1431
+#: include/data.php:1296
 #, fuzzy, php-format
 msgid "Poller stats (interval %ss)"
 msgstr "Số liệu thống kê về xe đẩy (khoảng %ss)"
 
-#: include/data.php:1480 include/data.php:1482
+#: include/data.php:1346 include/data.php:1348
 #, fuzzy
 msgid " Poller ID: "
 msgstr "ID xe đẩy:"
 
-#: include/data.php:1489
+#: include/data.php:1355
 msgid "ID: "
 msgstr "ID: "
 
-#: include/data.php:1510
+#: include/data.php:1376 include/data_detail.php:997
 #, fuzzy
 msgid "Last thold events"
 msgstr "Sự kiện cuối cùng"
 
-#: include/data.php:1518
+#: include/data.php:1384 include/data_detail.php:1004
 #, fuzzy
 msgid "Plugin Thold isn't installed or started"
 msgstr "Plugin Thold chưa được cài đặt hoặc bắt đầu"
 
-#: include/data.php:1553
+#: include/data.php:1420 include/data_detail.php:1039
 #, fuzzy
 msgid "Without events yet"
 msgstr "Không có sự kiện nào"
 
-#: include/data.php:1567
+#: include/data.php:1434
 #, fuzzy
 msgid "Top5 ping (avg, current)"
 msgstr "Top5 ping (avg, hiện tại)"
 
-#: include/data.php:1627
+#: include/data.php:1487
 #, fuzzy
 msgid "Top5 worst availability"
 msgstr "Top5 tình trạng xấu nhất"
 
-#: include/data.php:1687
+#: include/data.php:1539
 #, fuzzy
 msgid "Top5 worst polling time"
 msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
 
-#: include/data.php:1746
+#: include/data.php:1590
 #, fuzzy
 msgid "Top5 worst polling ratio (failed, total, ratio)"
 msgstr "Top5 tỷ lệ bỏ phiếu tồi tệ nhất (thất bại, tổng số, tỷ lệ)"
 
-#: include/data.php:1801 include/data.php:1805
+#: include/data.php:1640 include/data.php:1645 include/settings.php:68
 msgid "Trends"
 msgstr "Xu hướng"
 
-#: include/data.php:1822
+#: include/data.php:1662
 #, fuzzy
 msgid "Tholds triggered"
 msgstr "Thold kích hoạt"
 
-#: include/data.php:1840
+#: include/data.php:1679
 #, fuzzy
 msgid "Hosts down"
 msgstr "Chủ nhà xuống"
 
-#: include/data.php:1869
+#: include/data.php:1708
 #, fuzzy
 msgid "Favourite graph"
 msgstr "Biểu đồ yêu thích"
+
+#: include/data.php:1801
+#, fuzzy
+msgid "Syslog messages and alerts"
+msgstr "Syslog tin nhắn và cảnh báo"
+
+#: include/data.php:1806
+msgid "Syslog"
+msgstr "Syslog"
+
+#: include/data.php:1829
+msgid "Total"
+msgstr "Tổng"
+
+#: include/data.php:1847
+#, fuzzy
+msgid "Incoming"
+msgstr "Mới đến"
+
+#: include/data.php:1865
+msgid "Alerts"
+msgstr "Cảnh báo"
+
+#: include/data.php:1891
+#, fuzzy
+msgid "Syslog plugin not installed/running"
+msgstr "Thold plugin không được cài đặt / đang chạy"
+
+#: include/data_detail.php:37
+#, fuzzy
+msgid "Database check - detail"
+msgstr "Kiểm tra cơ sở dữ liệu"
+
+#: include/data_detail.php:77
+#, fuzzy
+msgid "Analyse cacti log - detail"
+msgstr "Phân tích nhật ký xương rồng"
+
+#: include/data_detail.php:154
+#, fuzzy
+msgid "Analyse logins - detail"
+msgstr "Phân tích nhật ký - số dòng"
+
+#: include/data_detail.php:173
+msgid "failed"
+msgstr "thất bại"
+
+#: include/data_detail.php:173
+msgid "success"
+msgstr "thành công"
+
+#: include/data_detail.php:196
+#, fuzzy
+msgid "Full log"
+msgstr "Nhật ký đầy đủ"
+
+#: include/data_detail.php:226
+#, fuzzy, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Các thiết bị có cùng IP và cổng %s"
+
+#: include/data_detail.php:259
+#, fuzzy, php-format
+msgid "Devices with the same description - %s"
+msgstr "Các thiết bị có cùng mô tả %s"
+
+#: include/data_detail.php:299
+#, fuzzy, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Nguồn dữ liệu mồ côi %s"
+
+#: include/data_detail.php:319
+#, fuzzy, php-format
+msgid "Poller output items - %s:"
+msgstr "Các mặt hàng đầu ra của xe đẩy %s:"
+
+#: include/data_detail.php:346
+#, fuzzy, php-format
+msgid "Datasources with bad indexes - %s:"
+msgstr "Nguồn dữ liệu - chỉ mục xấu %s:"
+
+#: include/data_detail.php:389
+#, fuzzy, php-format
+msgid "Thold logonly alert/warning - %s:"
+msgstr "Cảnh báo / cảnh báo logonly - %s:"
+
+#: include/data_detail.php:421
+#, fuzzy, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Thiết bị trong nhiều hơn một cây %s"
+
+#: include/data_detail.php:467
+#, fuzzy, php-format
+msgid "Hosts without graphs - %s"
+msgstr "Máy chủ không có đồ thị %s"
+
+#: include/data_detail.php:489
+#, fuzzy, php-format
+msgid "Hosts without tree - %s"
+msgstr "Máy chủ không có cây %s"
+
+#: include/data_detail.php:510
+#, fuzzy, php-format
+msgid "Hosts with default public/private community - %s"
+msgstr "Các máy chủ lưu trữ với cộng đồng công cộng / riêng mặc định %s"
+
+#: include/data_detail.php:530
+#, fuzzy, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Trình giám sát plugin - Máy chủ không được giám sát %s"
+
+#: include/data_detail.php:557
+#, fuzzy
+msgid "48 hour extrem"
+msgstr "Cực hạn 24 giờ"
+
+#: include/data_detail.php:750
+#, fuzzy
+msgid "RECOVERING"
+msgstr "THU HỒI"
+
+#: include/data_detail.php:766
+msgid "DOWN"
+msgstr "Xuống"
+
+#: include/data_detail.php:832
+msgid "You don't have permission"
+msgstr "Bạn không có quyền"
+
+#: include/data_detail.php:864
+#, fuzzy
+msgid "BREACHED"
+msgstr "Bánh mì"
+
+#: include/data_detail.php:874
+#, fuzzy
+msgid "TRIGGERED"
+msgstr "TRIGGERED"
+
+#: include/data_detail.php:933
+msgid "ID"
+msgstr "ID"
+
+#: include/data_detail.php:933
+msgid "Name"
+msgstr "Tên"
+
+#: include/data_detail.php:934
+msgid "State"
+msgstr "Tỉnh"
+
+#: include/data_detail.php:934
+msgid "Total time"
+msgstr "Tổng thời gian"
+
+#: include/data_detail.php:1053
+#, fuzzy
+msgid "Top 20 hosts with the worst ping (avg, current)"
+msgstr "Top5 ping (avg, hiện tại)"
+
+#: include/data_detail.php:1101
+#, fuzzy
+msgid "Top 20 hosts with the worst availability"
+msgstr "Top5 tình trạng xấu nhất"
+
+#: include/data_detail.php:1148
+#, fuzzy
+msgid "Top 20 hosts worst polling time"
+msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+
+#: include/data_detail.php:1194
+#, fuzzy
+msgid "Top 20 hosts with the  worst polling ratio (failed, total, ratio)"
+msgstr "Top5 tỷ lệ bỏ phiếu tồi tệ nhất (thất bại, tổng số, tỷ lệ)"
 
 #: include/helpers.php:106
 #, fuzzy
@@ -905,223 +1016,206 @@ msgstr "Bảng điều khiển tải lại"
 msgid "Show Details"
 msgstr "Hiển thị chi tiết"
 
-#: include/helpers.php:432
+#: include/helpers.php:122
+msgid "Loading data ..."
+msgstr "Lỗi tải dữ liệu"
+
+#: include/helpers.php:421
 #, fuzzy
 msgid "DB problem"
 msgstr "Vấn đề DB"
 
-#: include/helpers.php:434
+#: include/helpers.php:423
 #, fuzzy
 msgid "DB OK"
 msgstr "DB OK"
 
-#: include/helpers.php:446
-#, fuzzy
-msgid "Connection errors - try to restart SQL service, check SQL log, ..."
+#: include/helpers.php:435
+#, fuzzy, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "Lỗi kết nối - thử khởi động lại dịch vụ SQL."
 
-#: include/helpers.php:462
-msgid "Aborted clients/connects - check logs."
-msgstr ""
+#: include/helpers.php:451
+#, fuzzy, php-format
+msgid "Aborted clients/connects: %s - check logs."
+msgstr "Khách hàng bị hủy / kết nối: %s - kiểm tra nhật ký."
 
-#: include/helpers.php:469
+#: include/helpers.php:458
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "Lỗi kết nối: %s"
 
-#: include/helpers.php:470
-#, php-format
+#: include/helpers.php:459
+#, fuzzy, php-format
 msgid "Aborted clients/connects: %s"
-msgstr ""
+msgstr "Khách hàng bị hủy / kết nối: %s"
 
-#: include/helpers.php:471
+#: include/helpers.php:460
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "Bảng bị hư hỏng: %s"
 
-#: include/helpers.php:472
+#: include/helpers.php:461
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "Bảng bộ nhớ: %s"
 
-#: include/helpers.php:473
+#: include/helpers.php:462
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "Tất cả các bảng: %s"
 
-#: include/helpers.php:490
+#: include/helpers.php:479
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "Xóa khỏi Bảng điều khiển"
 
-#: include/helpers.php:492
-#, fuzzy
+#: include/helpers.php:481
 msgid "Add to Dashboard"
-msgstr "Thêm vào Bảng điều khiển"
+msgstr "Thêm vào bảng điều khiển"
 
 #: include/settings.php:31
 #, fuzzy
-msgid "Intro Page Options"
-msgstr "Tùy chọn trang giới thiệu"
-
-#: include/settings.php:34
-#, fuzzy
-msgid ""
-"How we should display the intropage. <strong>For users without console "
-"access you must choose separated tab!</strong>"
-msgstr ""
-"Làm thế nào chúng ta nên hiển thị intropage. <strong>Đối với người dùng "
-"không có quyền truy cập bảng điều khiển, bạn phải chọn tab riêng biệt!</"
-"strong>"
-
-#: include/settings.php:39
-#, fuzzy
-msgid ""
-"Show the Intropage plugin screen in console screen (you need console access "
-"permission!)"
-msgstr ""
-"Hiển thị màn hình plugin Intropage trong màn hình bảng điều khiển (bạn cần "
-"có quyền truy cập bảng điều khiển!)"
-
-#: include/settings.php:43
-#, fuzzy
-msgid "Show the Intropage plugin screen in separated tab"
-msgstr "Hiển thị màn hình plugin Intropage trong tab riêng biệt"
-
-#: include/settings.php:48
-#, fuzzy
-msgid "Intropage panels"
+msgid "Intropage Panels"
 msgstr "Tấm intropage"
 
-#: include/settings.php:50
+#: include/settings.php:33
 #, fuzzy
 msgid "Enable/disable panels"
 msgstr "Bật / tắt bảng"
 
-#: include/settings.php:54
+#: include/settings.php:38
 #, fuzzy
-msgid "Allow panel Analayse Log"
-msgstr "Cho phép bảng điều khiển Nhật ký phân tích"
+msgid "Analayse Log"
+msgstr "Phân tích nhật ký xương rồng"
 
-#: include/settings.php:60
+#: include/settings.php:44
 #, fuzzy
-msgid "Allow panel Analayse Logins"
+msgid "Analayse Logins"
 msgstr "Cho phép đăng nhập Bảng phân tích"
 
-#: include/settings.php:66
+#: include/settings.php:50
 #, fuzzy
-msgid "Allow panel Threshold Events"
-msgstr "Cho phép bảng ngưỡng Sự kiện"
+msgid "Threshold Events"
+msgstr "Ngưỡng"
 
-#: include/settings.php:72
+#: include/settings.php:56
 #, fuzzy
-msgid "Allow panel Analayse Database"
+msgid "Analayse Database"
 msgstr "Cho phép bảng điều khiển Cơ sở dữ liệu phân tích"
 
-#: include/settings.php:78
+#: include/settings.php:62
 #, fuzzy
-msgid "Allow panel Analayse Tree, Devices, Graphs"
-msgstr "Cho phép bảng phân tích Cây phân tích, Thiết bị, Đồ thị"
+msgid "Analayse Objects"
+msgstr "Phân tích nhật ký xương rồng"
 
-#: include/settings.php:84
+#: include/settings.php:74
 #, fuzzy
-msgid "Allow panel Trends"
-msgstr "Cho phép xu hướng bảng điều khiển"
+msgid "24h Extremes"
+msgstr "Cực hạn 24 giờ"
 
-#: include/settings.php:90
+#: include/settings.php:80
 #, fuzzy
-msgid "Allow panel 24h Extrems"
-msgstr "Cho phép bảng điều khiển 24h"
+msgid "NTP Status"
+msgstr "Tình trạng NTP"
 
-#: include/settings.php:96
+#: include/settings.php:86
 #, fuzzy
-msgid "Allow panel NTP"
-msgstr "Cho phép bảng điều khiển NTP"
+msgid "Poller Info"
+msgstr "Thông tin về xe đẩy"
 
-#: include/settings.php:102
+#: include/settings.php:92
 #, fuzzy
-msgid "Allow panel Poller Info"
-msgstr "Cho phép bảng thông tin Poller"
-
-#: include/settings.php:108
-#, fuzzy
-msgid "Allow panel Poller Stats"
+msgid "Poller Stats"
 msgstr "Cho phép bảng thống kê Poller"
 
-#: include/settings.php:114
+#: include/settings.php:98
 #, fuzzy
-msgid "Allow panel Graph Device"
+msgid "Graph Device"
 msgstr "Cho phép bảng điều khiển Thiết bị đồ thị"
 
-#: include/settings.php:120
+#: include/settings.php:104
 #, fuzzy
-msgid "Allow panel Graph Thresholds"
-msgstr "Cho phép bảng điều khiển Ngưỡng đồ thị"
+msgid "Graph Thresholds"
+msgstr "Ngưỡng"
 
-#: include/settings.php:126
+#: include/settings.php:110
 #, fuzzy
-msgid "Allow panel Graph Data Dource"
+msgid "Graph Data Dource"
 msgstr "Cho phép bảng điều khiển Nguồn dữ liệu đồ thị"
 
-#: include/settings.php:132
+#: include/settings.php:116
 #, fuzzy
-msgid "Allow panel Graph Device Template"
-msgstr "Cho phép bảng mẫu Thiết bị đồ thị"
+msgid "Graph Device Template"
+msgstr "Mẫu thiết bị"
 
-#: include/settings.php:138
+#: include/settings.php:122
 #, fuzzy
-msgid "Allow panel CPU Utilization"
-msgstr "Cho phép sử dụng CPU bảng điều khiển"
+msgid "CPU Utilization"
+msgstr "Sử dụng CPU"
 
-#: include/settings.php:144
+#: include/settings.php:128
 #, fuzzy
-msgid "Allow panel MacTrack Plugin"
+msgid "MacTrack Plugin"
 msgstr "Cho phép bảng điều khiển MacTrack Plugin"
 
-#: include/settings.php:150
+#: include/settings.php:134
 #, fuzzy
-msgid "Allow panel MacTrack Sites"
-msgstr "Cho phép trang web MacTrack bảng điều khiển"
+msgid "MacTrack Sites"
+msgstr "Trang web của Mactrack"
 
-#: include/settings.php:156
+#: include/settings.php:140
 #, fuzzy
-msgid "Allow panel Top 5 Ping"
-msgstr "Cho phép bảng Top 5 Ping"
+msgid "Top 5 Ping Times"
+msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
 
-#: include/settings.php:162
+#: include/settings.php:146
 #, fuzzy
-msgid "Allow panel Top 5 Availability"
-msgstr "Cho phép bảng điều khiển Top 5 sẵn có"
+msgid "Top 5 Availability"
+msgstr "Top5 tình trạng xấu nhất"
 
-#: include/settings.php:168
+#: include/settings.php:152
 #, fuzzy
-msgid "Allow panel Top 5 worst polling time"
-msgstr "Cho phép bảng 5 thời gian bỏ phiếu tồi tệ nhất"
+msgid "Top 5 Worst Polling"
+msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
 
-#: include/settings.php:174
+#: include/settings.php:158
 #, fuzzy
-msgid "Allow panel Top 5 worst polling failed/total ratio"
-msgstr "Cho phép bảng 5 lần bỏ phiếu tệ nhất / tổng tỷ lệ thất bại"
+msgid "Top 5 Worst Failed Ratio"
+msgstr "Top5 tình trạng xấu nhất"
 
-#: include/settings.php:180
-#, fuzzy
-msgid "Allow panel System Information"
-msgstr "Cho phép bảng thông tin hệ thống"
+#: include/settings.php:164
+msgid "System Information"
+msgstr "Cáº¥u hÃ¬nh cÃ¡c thiáº¿t láº­p vá» phÃ­m nÃ³ngName"
 
-#: include/settings.php:186
+#: include/settings.php:170
 #, fuzzy
-msgid "Allow panel Boost"
-msgstr "Cho phép bảng điều khiển Boost"
+msgid "Boost Status"
+msgstr "Tăng số liệu thống kê"
 
-#: include/settings.php:192
+#: include/settings.php:176
 #, fuzzy
-msgid "Allow panel Favourite Graphs"
-msgstr "Cho phép bảng đồ thị yêu thích"
+msgid "Favourite Graphs"
+msgstr "Biểu đồ yêu thích"
 
-#: include/settings.php:213
+#: include/settings.php:182
 #, fuzzy
-msgid "Show Intropage (no matter in Console or Tab)"
+msgid "Syslog Plugin"
+msgstr "Plugin Syslog"
+
+#: include/settings.php:203
+#, fuzzy
+msgid "Show Intropage in Tab (not selected = intropage in console)"
 msgstr "Hiển thị Intropage (không có vấn đề trong Bảng điều khiển hoặc Tab)"
+
+#: include/settings.php:253
+#, fuzzy
+msgid "Intropage"
+msgstr "Tấm intropage"
+
+#: include/settings.php:258
+msgid "Normal User"
+msgstr "Người dùng bình thường"
 
 #: include/variables.php:60
 msgid "Display settings"
@@ -1134,11 +1228,8 @@ msgstr "Những điều quan trọng sẽ ở trên đỉnh"
 
 #: include/variables.php:65
 #, fuzzy
-msgid ""
-"If checked Intropage displays important (errors, warnings) information first"
-msgstr ""
-"Nếu được chọn Intropage sẽ hiển thị thông tin quan trọng (lỗi, cảnh báo) "
-"trước"
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Nếu được chọn Intropage sẽ hiển thị thông tin quan trọng (lỗi, cảnh báo) trước"
 
 #: include/variables.php:70
 #, fuzzy
@@ -1151,10 +1242,11 @@ msgid "How often"
 msgstr "Bao lau"
 
 #: include/variables.php:74
+#, fuzzy
 msgid "Automatically by poller"
-msgstr ""
+msgstr "Tự động bằng pug"
 
-#: include/variables.php:75
+#: include/variables.php:75 include/variables.php:95
 msgid "Never"
 msgstr "Không bao giờ"
 
@@ -1162,169 +1254,269 @@ msgstr "Không bao giờ"
 msgid "Every Minute"
 msgstr "Mỗi phút"
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:77 include/variables.php:96 include/variables.php:130
 #, php-format
 msgid "Every %d Minutes"
 msgstr "Mỗi% d Phút"
 
-#: include/variables.php:78 include/variables.php:107 include/variables.php:141
+#: include/variables.php:78 include/variables.php:97 include/variables.php:131
 #, fuzzy
 msgid "Every Hour"
 msgstr "Mỗi tiếng"
 
 #: include/variables.php:83
-msgid "Display"
-msgstr "Hiển thị"
-
-#: include/variables.php:84
-#, fuzzy
-msgid "What will you see"
-msgstr "Bạn sẽ thấy gì"
-
-#: include/variables.php:87
-#, fuzzy
-msgid "Only Errors"
-msgstr "Chỉ có lỗi"
-
-#: include/variables.php:88
-#, fuzzy
-msgid "Errors and Warnings"
-msgstr "Lỗi và cảnh báo"
-
-#: include/variables.php:94
 #, fuzzy
 msgid "Analyse log -  number of lines"
 msgstr "Phân tích nhật ký - số dòng"
 
-#: include/variables.php:95
+#: include/variables.php:84
 #, fuzzy
-msgid ""
-"How many lines of log will be analysed. Big number may causes slow page load"
-msgstr ""
-"Có bao nhiêu dòng nhật ký sẽ được phân tích. Số lượng lớn có thể gây ra tải "
-"trang chậm"
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Có bao nhiêu dòng nhật ký sẽ được phân tích. Số lượng lớn có thể gây ra tải trang chậm"
 
-#: include/variables.php:102
+#: include/variables.php:91
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "Tần suất phân tích DB"
 
-#: include/variables.php:103
+#: include/variables.php:92
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "Poller chạy nhiệm vụ này. Nó có thể gây ra chạy xe đẩy dài."
 
-#: include/variables.php:108 include/variables.php:142
+#: include/variables.php:98 include/variables.php:132
 #, fuzzy
 msgid "Every Day"
 msgstr "Hàng ngày"
 
-#: include/variables.php:109
+#: include/variables.php:99
 #, fuzzy
 msgid "Every Week"
 msgstr "Mỗi tuần"
 
-#: include/variables.php:110
+#: include/variables.php:100
 #, fuzzy
 msgid "Every Month"
 msgstr "Mỗi tháng"
 
-#: include/variables.php:115
+#: include/variables.php:105
 #, fuzzy
 msgid "Analyse DB - Level of db check"
 msgstr "Phân tích DB - Mức kiểm tra db"
 
-#: include/variables.php:116
+#: include/variables.php:106
 #, fuzzy
-msgid ""
-"Quick - No Check rows for inforccert links<br/>Fast - check only not "
-"properly closed tables<br/>Changed - check tables changed from last check<br/"
-">Medium - with rows scan<br/>Extended - full rows and keys<br/"
-"><strong>Medium and extended may causes slow page load!</strong>"
-msgstr ""
-"Nhanh chóng - Không Kiểm tra hàng cho các liên kết inforccert <br/> Nhanh - "
-"chỉ kiểm tra không đóng bảng đúng cách <br/> Thay đổi - kiểm tra bảng thay "
-"đổi từ kiểm tra cuối cùng <br/> Trung bình - với quét hàng <br/> Mở rộng - "
-"đầy đủ hàng và khóa <br/> <strong>Trung bình và mở rộng có thể gây ra tải "
-"trang chậm!</strong>"
+msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>"
+msgstr "Nhanh chóng - Không Kiểm tra hàng cho các liên kết inforccert <br/> Nhanh - chỉ kiểm tra không đóng bảng đúng cách <br/> Thay đổi - kiểm tra bảng thay đổi từ kiểm tra cuối cùng <br/> Trung bình - với quét hàng <br/> Mở rộng - đầy đủ hàng và khóa <br/> <strong>Trung bình và mở rộng có thể gây ra tải trang chậm!</strong>"
 
-#: include/variables.php:119
+#: include/variables.php:109
 msgid "Quick"
 msgstr "Nhanh chóng"
 
-#: include/variables.php:120
+#: include/variables.php:110
 msgid "Fast"
 msgstr "Nhanh"
 
-#: include/variables.php:121
+#: include/variables.php:111
 #, fuzzy
 msgid "Changed"
 msgstr "Thay đổi"
 
-#: include/variables.php:122
+#: include/variables.php:112
 msgid "Medium"
 msgstr "Trung bình"
 
-#: include/variables.php:123
+#: include/variables.php:113
 msgid "Extended"
 msgstr "Mở rộng"
 
-#: include/variables.php:128
+#: include/variables.php:118
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "Kiểm tra NTP (thời gian) - Tên IP hoặc DNS của máy chủ NTP"
 
-#: include/variables.php:129
+#: include/variables.php:119
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "Chèn tên IP hoặc DNS của máy chủ NTP"
 
-#: include/variables.php:136
+#: include/variables.php:126
 #, fuzzy
 msgid "How often check NTP"
 msgstr "Tần suất kiểm tra NTP"
 
-#: include/variables.php:137
+#: include/variables.php:127
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
-msgstr ""
-"<strong>Poller chạy nhiệm vụ này. Nó có thể gây ra chạy xe đẩy dài.</strong>"
+msgstr "<strong>Poller chạy nhiệm vụ này. Nó có thể gây ra chạy xe đẩy dài.</strong>"
 
-#: include/variables.php:148
+#: include/variables.php:138
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "Bảng thông tin quản trị về các nhiệm vụ bảo trì, thiết bị xuống, .."
 
-#: include/variables.php:149
+#: include/variables.php:139
 #, fuzzy
-msgid ""
-"If isn't empty, panel will be displayed on the top. You can use html tags "
-"(b, i, ...)."
-msgstr ""
-"Nếu không trống, bảng sẽ được hiển thị trên cùng. Bạn có thể sử dụng thẻ "
-"html (b, i, ...)."
+msgid "If isn't empty, panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Nếu không trống, bảng sẽ được hiển thị trên cùng. Bạn có thể sử dụng thẻ html (b, i, ...)."
 
-#: include/variables.php:158
+#: include/variables.php:148
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "Duy trì plugin - bao nhiêu ngày trước khi hiển thị cảnh báo"
 
-#: include/variables.php:159
+#: include/variables.php:149
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "Bao nhiêu ngày?"
 
-#: include/variables.php:162
+#: include/variables.php:152
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "Khi bảo trì bắt đầu"
 
-#: include/variables.php:163
+#: include/variables.php:153
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "% d Ngày trước"
 
-#: include/variables.php:164 include/variables.php:165
+#: include/variables.php:154 include/variables.php:155
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "% d Ngày trước"
+
+#: intropage_ajax.php:147 intropage_ajax.php:167
+#, fuzzy
+msgid "Panel not found"
+msgstr "Không tìm thấy bảng điều khiển"
+
+#, fuzzy
+#~ msgid "Display only Errors"
+#~ msgstr "Chỉ hiển thị lỗi"
+
+#, fuzzy
+#~ msgid "Display Errors and Warnings"
+#~ msgstr "Hiển thị lỗi và cảnh báo"
+
+#, fuzzy
+#~ msgid "Display All"
+#~ msgstr "Hiển thị tất cả"
+
+#, fuzzy
+#~ msgid "Reset panel Order to Default"
+#~ msgstr "Đặt lại bảng điều khiển để mặc định"
+
+#, fuzzy
+#~ msgid "Checked Every 15 minutes"
+#~ msgstr "Kiểm tra cứ sau 15 phút"
+
+#, fuzzy
+#~ msgid "Last 10 logins"
+#~ msgstr "10 lần đăng nhập gần nhất"
+
+#, fuzzy
+#~ msgid "Plugin Thold - Global notify only %s"
+#~ msgstr "Plugin Thold - Toàn cầu chỉ thông báo %s"
+
+#, fuzzy
+#~ msgid "Plugin Thold - Global notify only: %s"
+#~ msgstr "Plugin Thold - Chỉ thông báo toàn cầu: %s"
+
+#, fuzzy
+#~ msgid "Intro Page Options"
+#~ msgstr "Tùy chọn trang giới thiệu"
+
+#, fuzzy
+#~ msgid "How we should display the intropage. <strong>For users without console access you must choose separated tab!</strong>"
+#~ msgstr "Làm thế nào chúng ta nên hiển thị intropage. <strong>Đối với người dùng không có quyền truy cập bảng điều khiển, bạn phải chọn tab riêng biệt!</strong>"
+
+#, fuzzy
+#~ msgid "Show the Intropage plugin screen in console screen (you need console access permission!)"
+#~ msgstr "Hiển thị màn hình plugin Intropage trong màn hình bảng điều khiển (bạn cần có quyền truy cập bảng điều khiển!)"
+
+#, fuzzy
+#~ msgid "Show the Intropage plugin screen in separated tab"
+#~ msgstr "Hiển thị màn hình plugin Intropage trong tab riêng biệt"
+
+#, fuzzy
+#~ msgid "Allow panel Analayse Log"
+#~ msgstr "Cho phép bảng điều khiển Nhật ký phân tích"
+
+#, fuzzy
+#~ msgid "Allow panel Threshold Events"
+#~ msgstr "Cho phép bảng ngưỡng Sự kiện"
+
+#, fuzzy
+#~ msgid "Allow panel Analayse Tree, Devices, Graphs"
+#~ msgstr "Cho phép bảng phân tích Cây phân tích, Thiết bị, Đồ thị"
+
+#, fuzzy
+#~ msgid "Allow panel Trends"
+#~ msgstr "Cho phép xu hướng bảng điều khiển"
+
+#, fuzzy
+#~ msgid "Allow panel 24h Extrems"
+#~ msgstr "Cho phép bảng điều khiển 24h"
+
+#, fuzzy
+#~ msgid "Allow panel NTP"
+#~ msgstr "Cho phép bảng điều khiển NTP"
+
+#, fuzzy
+#~ msgid "Allow panel Poller Info"
+#~ msgstr "Cho phép bảng thông tin Poller"
+
+#, fuzzy
+#~ msgid "Allow panel Graph Thresholds"
+#~ msgstr "Cho phép bảng điều khiển Ngưỡng đồ thị"
+
+#, fuzzy
+#~ msgid "Allow panel Graph Device Template"
+#~ msgstr "Cho phép bảng mẫu Thiết bị đồ thị"
+
+#, fuzzy
+#~ msgid "Allow panel CPU Utilization"
+#~ msgstr "Cho phép sử dụng CPU bảng điều khiển"
+
+#, fuzzy
+#~ msgid "Allow panel MacTrack Sites"
+#~ msgstr "Cho phép trang web MacTrack bảng điều khiển"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 Ping"
+#~ msgstr "Cho phép bảng Top 5 Ping"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 Availability"
+#~ msgstr "Cho phép bảng điều khiển Top 5 sẵn có"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 worst polling time"
+#~ msgstr "Cho phép bảng 5 thời gian bỏ phiếu tồi tệ nhất"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 worst polling failed/total ratio"
+#~ msgstr "Cho phép bảng 5 lần bỏ phiếu tệ nhất / tổng tỷ lệ thất bại"
+
+#, fuzzy
+#~ msgid "Allow panel Boost"
+#~ msgstr "Cho phép bảng điều khiển Boost"
+
+#, fuzzy
+#~ msgid "Allow panel Favourite Graphs"
+#~ msgstr "Cho phép bảng đồ thị yêu thích"
+
+#~ msgid "Display"
+#~ msgstr "Hiển thị"
+
+#, fuzzy
+#~ msgid "What will you see"
+#~ msgstr "Bạn sẽ thấy gì"
+
+#, fuzzy
+#~ msgid "Only Errors"
+#~ msgstr "Chỉ có lỗi"
+
+#, fuzzy
+#~ msgid "Errors and Warnings"
+#~ msgstr "Lỗi và cảnh báo"

@@ -26,6 +26,8 @@
 function display_information() {
 	global $config, $sql_where;
 
+	intropage_check_upgrade();
+
 	if (!api_user_realm_auth('intropage.php')) {
 		print __('Intropage - permission denied', 'intropage') . '<br/><br/>';
 		return false;
@@ -37,9 +39,13 @@ function display_information() {
 
 	$selectedTheme = get_selected_theme();
 
-        if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
-    		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-                $_SESSION['login_opts'] = $login_opts;
+	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+		$login_opts = db_fetch_cell_prepared('SELECT login_opts
+			FROM user_auth
+			WHERE id = ?',
+			array($_SESSION['sess_user_id']));
+
+		$_SESSION['login_opts'] = $login_opts;
 	}
 
 	if ($_SESSION['login_opts'] == 4) {  // in tab
@@ -55,23 +61,16 @@ function display_information() {
 	include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
 
-	// style for panels
-	print "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
-
-	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
-		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/intropage/themes/' . $selectedTheme . ".css' rel='stylesheet'>";
-	}
-
 	// Retrieve user settings and defaults
-
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
 	$hosts = get_allowed_devices();
-	if (count($hosts) > 0)
-    	    $_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
-	else
-	    $_SESSION['allowed_hosts'] = false;
+	if (count($hosts) > 0) {
+		$_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
+	} else {
+		$_SESSION['allowed_hosts'] = false;
+	}
 
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
@@ -233,7 +232,7 @@ function display_information() {
 
 	function initPage() {
 		// autorefresh
-		if (intropage_autorefresh > 0)	{
+		if (intropage_autorefresh > 0) {
 			if (refresh !== null) {
 				clearTimeout(refresh);
 			}
@@ -242,11 +241,11 @@ function display_information() {
 		}
 
 		// automatic autorefresh after poller end
-		if (intropage_autorefresh == -1)	{
+		if (intropage_autorefresh == -1) {
 			if (refresh !== null) {
 				clearTimeout(refresh);
 			}
-			setTimeout(function(){		// fix first double load
+			setTimeout(function() {		// fix first double load
 			    refresh = setInterval(testPoller, 10000);
 			},30000);
 		}
