@@ -250,7 +250,8 @@ function intropage_config_settings() {
 	global $tabs, $settings, $config, $intropage_settings;
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 
-	$tabs['intropage']     = 'Intropage';
+	$tabs['intropage'] = __('Intropage', 'intropage');
+
 	$settings['intropage'] = $intropage_settings;
 
 	if (function_exists('auth_augment_roles')) {
@@ -287,7 +288,11 @@ function intropage_console_after() {
 	global $config;
 
 	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
-		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+		$login_opts = db_fetch_cell_prepared('SELECT login_opts
+			FROM user_auth
+			WHERE id = ?',
+			array($_SESSION['sess_user_id']));
+
 		$_SESSION['login_opts'] = $login_opts;
 	}
 

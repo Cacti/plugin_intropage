@@ -26,7 +26,9 @@
 function display_information() {
 	global $config, $sql_where;
 
-	intropage_check_upgrade();
+	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+
+	intropage_upgrade_database();
 
 	if (!api_user_realm_auth('intropage.php')) {
 		print __('Intropage - permission denied', 'intropage') . '<br/><br/>';
