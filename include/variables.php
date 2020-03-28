@@ -79,6 +79,19 @@ $intropage_settings = array(	// default values
 		),
 		'default' => '60',
 	),
+	'intropage_timeout' => array(
+		'friendly_name' => __('Poller Timeout'),
+		'description' => __('The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti.'),
+		'method' => 'drop_array',
+		'default' => '300',
+		'array' => array(
+			60   => __('%d Minute', 1),
+			300  => __('%d Minutes', 5),
+			600  => __('%d Minutes', 10),
+			900  => __('%d Seconds', 15),
+			1200 => __('%d Seconds', 20)
+		)
+	),
 	'intropage_analyse_log_rows' => array(
 		'friendly_name' => __('Analyse log -  number of lines', 'intropage'),
 		'description' => __('How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load', 'intropage'),
