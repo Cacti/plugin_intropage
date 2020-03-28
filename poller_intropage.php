@@ -85,9 +85,6 @@ if (cacti_sizeof($parms)) {
 			exit(1);
 		}
 	}
-} else {
-	display_help();
-	exit(1);
 }
 
 intropage_debug('Intropage Starting Checks');
