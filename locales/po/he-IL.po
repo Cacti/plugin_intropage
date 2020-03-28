@@ -7,142 +7,141 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-28 12:11-0400\n"
-"PO-Revision-Date: 2020-03-28 12:34-0400\n"
+"POT-Creation-Date: 2020-03-28 17:55-0400\n"
+"PO-Revision-Date: 2020-03-28 12:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? 2 : 3);\n"
 
-#: display.php:32
+#: display.php:34
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage - רשות נדחתה"
 
-#: display.php:142
+#: display.php:144
 #, fuzzy
 msgid "You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr "ניתן להשבית שורות למעלה <b>ב'הגדרות '-> כללי -> הסתר את מרכז השליטה של Cacti</b> והשתמש בדף שלם עבור Intropage <br/><br/>"
 
-#: display.php:284
+#: display.php:286
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "השבת את העברת החלונית / אפשר טקסט להעתיק מהחלונית"
 
-#: display.php:289
+#: display.php:291
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr "הפעל לוח / בטל טקסט להעתיק מהחלונית"
 
-#: display.php:345
+#: display.php:347
 #, fuzzy
 msgid "Error reading new data"
 msgstr "שגיאה בקריאת נתונים חדשים"
 
-#: display.php:378
+#: display.php:380
 msgid "Close"
-msgstr "סגור"
+msgstr ""
 
-#: display.php:389
+#: display.php:391
 #, fuzzy
 msgid "Panel Details"
 msgstr "הצג פרטים"
 
-#: display.php:408
+#: display.php:410
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "השבת את החלונית / אפשר להעתיק טקסט מהחלונית"
 
-#: display.php:412
+#: display.php:414
 #, fuzzy
 msgid "Select action ..."
 msgstr "בחר פעולה ..."
 
-#: display.php:423
+#: display.php:425
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "הוסף פאנל %s"
 
-#: display.php:425
+#: display.php:427
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "הוסף פאנל %s %s"
 
-#: display.php:431
+#: display.php:433
 #, fuzzy
 msgid "Refresh Now"
 msgstr "רענן עכשיו"
 
-#: display.php:434 display.php:436
+#: display.php:436 display.php:438
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "ביטול נעילה אוטומטית"
 
-#: display.php:440 display.php:442
+#: display.php:442 display.php:444
 #, fuzzy
 msgid "Autorefresh automatic by poller"
 msgstr "ביטול נעילה אוטומטית"
 
-#: display.php:446 display.php:448
+#: display.php:448 display.php:450
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "תיקון אוטומטי של דקה אחת"
 
-#: display.php:452 display.php:454
+#: display.php:454 display.php:456
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "5 דקות"
 
-#: display.php:458 display.php:460
+#: display.php:460 display.php:462
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "תיקון אוטומטי 1 שעה"
 
-#: display.php:464 display.php:467
+#: display.php:466 display.php:469
 #, fuzzy
 msgid "Sort by - red-yellow-green-gray"
 msgstr "מיון לפי - אדום - צהוב - ירוק - אפור"
 
-#: display.php:465
+#: display.php:467
 #, fuzzy
 msgid "Sort by panel priority"
 msgstr "מיין לפי עדיפות פאנל"
 
-#: display.php:468
+#: display.php:470
 #, fuzzy
 msgid "Sort by panel Priority"
 msgstr "מיין לפי עדיפות פאנל"
 
-#: display.php:471
+#: display.php:473
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "אפס הכל אל ברירת המחדל"
 
-#: display.php:483
+#: display.php:485
 #, fuzzy
 msgid "Set intropage as default login page"
 msgstr "הגדרת intropage כדף ברירת המחדל"
 
-#: display.php:487
+#: display.php:489
 #, fuzzy
 msgid "Set graph as default login page"
 msgstr "הגדר תרשים כברירת מחדל"
 
-#: display.php:492
-#, fuzzy
+#: display.php:494
 msgid "Display intropage in console"
-msgstr "הצג אינטרופג 'במסוף"
+msgstr ""
 
-#: display.php:495
+#: display.php:497
 #, fuzzy
 msgid "Display intropage in tab as default page"
 msgstr "הגדרת intropage כדף ברירת המחדל"
 
-#: display.php:500
+#: display.php:502
 msgid "Go"
 msgstr "עבור"
 
@@ -151,9 +150,9 @@ msgstr "עבור"
 msgid "Database check"
 msgstr "בדיקת מסד נתונים"
 
-#: include/data.php:48 include/data.php:614 include/data.php:1182
-#: include/data.php:1363 include/data.php:1470 include/data.php:1522
-#: include/data.php:1573 include/data.php:1622 include/data_detail.php:47
+#: include/data.php:48 include/data.php:614 include/data.php:1173
+#: include/data.php:1354 include/data.php:1461 include/data.php:1511
+#: include/data.php:1561 include/data.php:1608 include/data_detail.php:47
 #: include/data_detail.php:1088 include/data_detail.php:1135
 #: include/data_detail.php:1181 include/data_detail.php:1223
 #, fuzzy
@@ -164,17 +163,17 @@ msgstr "ממתין לנתונים"
 msgid "Last check"
 msgstr "בדיקה אחרונה"
 
-#: include/data.php:54 include/data.php:1208 include/data_detail.php:53
+#: include/data.php:54 include/data.php:1199 include/data_detail.php:53
 #, fuzzy
 msgid "Checked every 15 minutes"
 msgstr "נבדק כל 15 דקות"
 
-#: include/data.php:56 include/data.php:1210 include/data_detail.php:55
+#: include/data.php:56 include/data.php:1201 include/data_detail.php:55
 #, fuzzy
 msgid "Checked hourly"
 msgstr "נבדק מדי שעה"
 
-#: include/data.php:58 include/data.php:1212 include/data_detail.php:57
+#: include/data.php:58 include/data.php:1203 include/data_detail.php:57
 #, fuzzy
 msgid "Checked daily"
 msgstr "נבדקים מדי יום"
@@ -190,13 +189,12 @@ msgid "Checked monthly"
 msgstr "נבדק מדי שעה"
 
 #: include/data.php:64 include/data_detail.php:63
-#, fuzzy
 msgid "Periodic check is disabled"
-msgstr "הסימון התקופתי מושבת"
+msgstr ""
 
 #: include/data.php:78
 #, fuzzy
-msgid "Analyse cacti log"
+msgid "Analyze cacti log"
 msgstr "ניתוח יומן קקטוסים"
 
 #: include/data.php:94 include/data_detail.php:92
@@ -241,24 +239,24 @@ msgstr "(שגיאות ואזהרה בשורות %s האחרונות)"
 
 #: include/data.php:154
 #, fuzzy
-msgid "Analyse logins"
+msgid "Analyze logins"
 msgstr "כניסות נכשלו"
 
-#: include/data.php:171
+#: include/data.php:173
 #, fuzzy
 msgid "Failed logins"
 msgstr "כניסות נכשלו"
 
-#: include/data.php:193 include/data_detail.php:208
+#: include/data.php:197 include/data_detail.php:208
 #, fuzzy
-msgid "Analyse tree/host/graph"
+msgid "Analyze tree/host/graph"
 msgstr "ניתוח עץ / מארח / גרף"
 
-#: include/data.php:210 include/data.php:230 include/data.php:258
-#: include/data.php:293 include/data.php:330 include/data.php:357
-#: include/data.php:376 include/data.php:394 include/data.php:410
-#: include/data.php:425 include/data.php:563 include/data.php:568
-#: include/data.php:1243 include/data_detail.php:224
+#: include/data.php:214 include/data.php:234 include/data.php:262
+#: include/data.php:296 include/data.php:332 include/data.php:358
+#: include/data.php:377 include/data.php:395 include/data.php:411
+#: include/data.php:426 include/data.php:563 include/data.php:568
+#: include/data.php:1234 include/data_detail.php:224
 #: include/data_detail.php:257 include/data_detail.php:297
 #: include/data_detail.php:317 include/data_detail.php:344
 #: include/data_detail.php:387 include/data_detail.php:419
@@ -268,119 +266,119 @@ msgstr "ניתוח עץ / מארח / גרף"
 msgid "N/A"
 msgstr "לא זמין"
 
-#: include/data.php:215
+#: include/data.php:219
 #, fuzzy, php-format
 msgid "Devices with the same IP and port: %s"
 msgstr "התקנים עם כתובת IP ויציאה: %s"
 
-#: include/data.php:235
+#: include/data.php:239
 #, fuzzy, php-format
 msgid "Devices with the same description: %s"
 msgstr "התקנים עם אותו תיאור: %s"
 
-#: include/data.php:262
+#: include/data.php:266
 #, fuzzy, php-format
 msgid "Orphaned Data Sources: %s"
 msgstr "מקורות נתונים יתומים: %s"
 
-#: include/data.php:274
+#: include/data.php:277
 #, fuzzy, php-format
 msgid "Poller Output Items: %s"
 msgstr "פריטי פלט של פולרים: %s"
 
-#: include/data.php:296
+#: include/data.php:299
 #, fuzzy, php-format
 msgid "Datasource - bad indexes: %s"
 msgstr "מסדי נתונים - מדדים גרועים: %s"
 
-#: include/data.php:333
-#, fuzzy, php-format
+#: include/data.php:335
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "נתן התראה / אזהרה לוגונית: %s"
+msgstr ""
 
-#: include/data.php:345 include/data_detail.php:407
+#: include/data.php:346 include/data_detail.php:407
 #, fuzzy
 msgid "Information only (no warn/error)"
 msgstr "מידע בלבד (ללא אזהרה / שגיאה)"
 
-#: include/data.php:360
+#: include/data.php:361
 #, fuzzy, php-format
 msgid "Devices in more than one tree: %s"
 msgstr "התקנים ביותר מעץ אחד: %s"
 
-#: include/data.php:379
+#: include/data.php:380
 #, fuzzy, php-format
 msgid "Hosts without graphs: %s"
 msgstr "מארחים ללא גרפים: %s"
 
-#: include/data.php:397
+#: include/data.php:398
 #, fuzzy, php-format
 msgid "Hosts without tree: %s"
 msgstr "מארחים ללא עץ: %s"
 
-#: include/data.php:413
+#: include/data.php:414
 #, fuzzy, php-format
 msgid "Hosts with default public/private community: %s"
 msgstr "מארחים עם הקהילה הציבורית / פרטית המוגדרת כברירת מחדל: %s"
 
-#: include/data.php:428
+#: include/data.php:429
 #, fuzzy, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
 msgstr "לפקח מארח - לא מארחים: %s"
 
-#: include/data.php:434 include/data_detail.php:542
+#: include/data.php:435 include/data_detail.php:542
 #, fuzzy, php-format
 msgid "Found %s problems"
 msgstr "נמצאו %s בעיות"
 
-#: include/data.php:436 include/data_detail.php:544
+#: include/data.php:437 include/data_detail.php:544
 #, fuzzy
 msgid "Everything OK"
 msgstr "הכל בסדר"
 
-#: include/data.php:448
+#: include/data.php:449
 #, fuzzy
 msgid "Boost statistics"
 msgstr "שפר נתונים סטטיסטיים"
 
-#: include/data.php:501 include/data.php:1262 include/data_detail.php:963
+#: include/data.php:502 include/data.php:1253 include/data_detail.php:963
 msgid "Idle"
 msgstr "ממתין"
 
-#: include/data.php:503 include/data.php:1260 include/data_detail.php:961
+#: include/data.php:504 include/data.php:1251 include/data_detail.php:961
 msgid "Running"
 msgstr "פועל"
 
-#: include/data.php:505
+#: include/data.php:506
 #, fuzzy
 msgid "Overrun Warning"
 msgstr "אזהרה על הצפת"
 
-#: include/data.php:508
+#: include/data.php:509
 #, fuzzy
 msgid "Timed Out"
 msgstr "נגמר הזמן"
 
-#: include/data.php:511
+#: include/data.php:512
 msgid "Other"
 msgstr "אחר"
 
-#: include/data.php:514
+#: include/data.php:515
 #, fuzzy
 msgid "Never Run"
 msgstr "לעולם לא לרוץ"
 
-#: include/data.php:519
+#: include/data.php:520
 #, fuzzy, php-format
 msgid "Pending Boost Records: %s"
 msgstr "רשומות Boost בהמתנה: %s"
 
-#: include/data.php:520
+#: include/data.php:521
 #, fuzzy, php-format
 msgid "Archived Boost Records: %s"
 msgstr "רשומות ארכיון שהועברו לארכיון: %s"
 
-#: include/data.php:524 include/data.php:527 include/data.php:529
+#: include/data.php:525 include/data.php:528 include/data.php:530
 #, fuzzy, php-format
 msgid "Total Boost Records: %s"
 msgstr "סה\"כ רשומות Boost: %s"
@@ -390,9 +388,9 @@ msgstr "סה\"כ רשומות Boost: %s"
 msgid "Boost On-demand Updating: %s"
 msgstr "שפר עדכון לפי דרישה: %s"
 
-#: include/data.php:548 include/data.php:827 include/data.php:837
-#: include/data.php:958 include/data.php:967 include/data.php:1094
-#: include/data.php:1266 include/data_detail.php:741
+#: include/data.php:548 include/data.php:823 include/data.php:833
+#: include/data.php:952 include/data.php:961 include/data.php:1087
+#: include/data.php:1257 include/data_detail.php:741
 #: include/data_detail.php:858 include/data_detail.php:967
 msgid "Disabled"
 msgstr "לא זמין"
@@ -456,399 +454,400 @@ msgstr "24 שעות קיצוניות"
 msgid "Long run<br/>poller"
 msgstr "טווח ארוך <br/> פוסטר"
 
-#: include/data.php:652 include/data.php:674 include/data.php:698
-#: include/data.php:723 include/data.php:745 include/data_detail.php:580
+#: include/data.php:651 include/data.php:672 include/data.php:695
+#: include/data.php:719 include/data.php:740 include/data_detail.php:580
 #: include/data_detail.php:601
 #, fuzzy
 msgid "Waiting<br/>for data"
 msgstr "ממתין <br/> עבור נתונים"
 
-#: include/data.php:682 include/data_detail.php:609
+#: include/data.php:680 include/data_detail.php:609
 #, fuzzy
 msgid "Max thold<br/>triggered:"
 msgstr "מקסימום <br/> מופעלות:"
 
-#: include/data.php:708 include/data_detail.php:634
+#: include/data.php:705 include/data_detail.php:634
 #, fuzzy
 msgid "Poller<br/>output item:"
 msgstr "פולר <br/> פריט פלט:"
 
-#: include/data.php:730 include/data_detail.php:655
+#: include/data.php:726 include/data_detail.php:655
 #, fuzzy
 msgid "Failed<br/>polls:"
 msgstr "נכשל <br/> סקרים:"
 
-#: include/data.php:765
+#: include/data.php:761
 #, fuzzy
 msgid "Datasources: "
 msgstr "מקורות מידע:"
 
-#: include/data.php:794 include/data_detail.php:711
+#: include/data.php:790 include/data_detail.php:711
 #, fuzzy
 msgid "No untemplated datasources found"
 msgstr "לא נמצאו datasources untemplated"
 
-#: include/data.php:807 include/data.php:832 include/data_detail.php:723
+#: include/data.php:803 include/data.php:828 include/data_detail.php:723
 #, fuzzy
 msgid "Hosts"
 msgstr "מארחים"
 
-#: include/data.php:824 include/data.php:955 include/data_detail.php:738
+#: include/data.php:820 include/data.php:949 include/data_detail.php:738
 #: include/data_detail.php:855
 msgid "All"
 msgstr "הכל"
 
-#: include/data.php:825 include/data.php:834 include/data.php:1090
+#: include/data.php:821 include/data.php:830 include/data.php:1083
 #: include/data_detail.php:739
 msgid "Up"
 msgstr "למעלה"
 
-#: include/data.php:826 include/data.php:835 include/data.php:1091
+#: include/data.php:822 include/data.php:831 include/data.php:1084
 #: include/data_detail.php:740
 msgid "Down"
 msgstr "למטה"
 
-#: include/data.php:828 include/data.php:836 include/data.php:1268
+#: include/data.php:824 include/data.php:832 include/data.php:1259
 #: include/data_detail.php:742 include/data_detail.php:969
 #, fuzzy
 msgid "Recovering"
 msgstr "שחזור"
 
-#: include/data.php:856 include/data.php:903 include/data.php:1475
-#: include/data.php:1527 include/data.php:1578 include/data.php:1627
+#: include/data.php:851 include/data.php:897 include/data.php:1465
+#: include/data.php:1515 include/data.php:1565 include/data.php:1612
 #, fuzzy
 msgid "You don't have permissions to any hosts"
 msgstr "אין לך הרשאה"
 
-#: include/data.php:868 include/data.php:873 include/data_detail.php:786
+#: include/data.php:863 include/data.php:868 include/data_detail.php:786
 #, fuzzy
 msgid "Device Templates"
 msgstr "תבניות מכשיר"
 
-#: include/data.php:897 include/data_detail.php:810
+#: include/data.php:892 include/data_detail.php:810
 #, fuzzy
 msgid "No device templates found"
 msgstr "לא נמצאו תבניות מכשיר"
 
-#: include/data.php:915 include/data.php:920 include/data.php:962
+#: include/data.php:909 include/data.php:914 include/data.php:956
 #: include/data_detail.php:822
+#, fuzzy
 msgid "Thresholds"
-msgstr "ערכי סף"
+msgstr "סף"
 
-#: include/data.php:928 include/data_detail.php:829
+#: include/data.php:922 include/data_detail.php:829
 #, fuzzy
 msgid "Thold plugin not installed/running"
 msgstr "תוסף זה לא מותקן / פועל"
 
-#: include/data.php:931 include/data.php:1064 include/data.php:1127
+#: include/data.php:925 include/data.php:1057 include/data.php:1119
 #, fuzzy
 msgid "You don't have plugin permission"
 msgstr "אין לך הרשאה"
 
-#: include/data.php:956 include/data.php:966 include/data_detail.php:856
+#: include/data.php:950 include/data.php:960 include/data_detail.php:856
 #, fuzzy
 msgid "Breached"
 msgstr "הפרוצה"
 
-#: include/data.php:957 include/data_detail.php:857
+#: include/data.php:951 include/data_detail.php:857
 #, fuzzy
 msgid "Trigged"
 msgstr "טריג '"
 
-#: include/data.php:964
+#: include/data.php:958
+#, fuzzy
 msgid "OK"
-msgstr "אישור"
+msgstr "OK"
 
-#: include/data.php:965
+#: include/data.php:959
 #, fuzzy
 msgid "Triggered"
 msgstr "טריגרד"
 
-#: include/data.php:1002
+#: include/data.php:996
 #, fuzzy
 msgid "Cacti version: "
 msgstr "גרסת Cacti:"
 
-#: include/data.php:1013
+#: include/data.php:1007
 #, fuzzy
 msgid "Poller type:"
 msgstr "סוג הסולם:"
 
-#: include/data.php:1013
-#, fuzzy
+#: include/data.php:1007
 msgid "Spine"
-msgstr "עמוד שדרה"
+msgstr ""
 
-#: include/data.php:1015
+#: include/data.php:1009
 #, fuzzy
 msgid "Spine version: "
 msgstr "גרסת השדרה:"
 
-#: include/data.php:1018
+#: include/data.php:1012
 #, fuzzy
 msgid "You are using incorrect spine version!"
 msgstr "אתה משתמש בגרסה שגויה של עמוד השדרה!"
 
-#: include/data.php:1022
+#: include/data.php:1016
 #, fuzzy
 msgid "Poller type: "
 msgstr "סוג הסולם:"
 
-#: include/data.php:1025
+#: include/data.php:1019
+#, fuzzy
 msgid "Running on: "
 msgstr "רץ על:"
 
-#: include/data.php:1045 include/data.php:1088
+#: include/data.php:1039 include/data.php:1081
 #, fuzzy
 msgid "Mactrack"
 msgstr "Mactrack"
 
-#: include/data.php:1055 include/data.php:1118
+#: include/data.php:1049 include/data.php:1110
 #, fuzzy
 msgid "Mactrack plugin not installed/running"
 msgstr "לא מותקן / פועל"
 
-#: include/data.php:1080
+#: include/data.php:1073
 #, fuzzy, php-format
 msgid "All: %s"
 msgstr "הכל: %s"
 
-#: include/data.php:1081
+#: include/data.php:1074
 #, fuzzy, php-format
 msgid "Up: %s"
 msgstr "יו פי אס"
 
-#: include/data.php:1082
+#: include/data.php:1075
 #, fuzzy, php-format
 msgid "Down: %s"
 msgstr "למטה: %s"
 
-#: include/data.php:1083
+#: include/data.php:1076
 #, php-format
 msgid "Error: %s"
 msgstr "שגיאה %s"
 
-#: include/data.php:1084
+#: include/data.php:1077
 #, fuzzy, php-format
 msgid "Unknown: %s"
 msgstr "לא ידוע: %s"
 
-#: include/data.php:1085
+#: include/data.php:1078
 #, fuzzy, php-format
 msgid "Disabled: %s"
 msgstr "מושבת: %s"
 
-#: include/data.php:1092
+#: include/data.php:1085
 msgid "Error"
 msgstr "שגיאה"
 
-#: include/data.php:1093
+#: include/data.php:1086
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: include/data.php:1109 include/data_detail.php:892
+#: include/data.php:1102 include/data_detail.php:892
 #, fuzzy
 msgid "Mactrack sites"
 msgstr "אתרי Mactrack"
 
-#: include/data.php:1130 include/data_detail.php:898
+#: include/data.php:1121 include/data_detail.php:898
 msgid "Devices"
 msgstr "ניתן להתנתק מכל ההתקנים האחרים, כגון טלפון נייד או מחשב ציבורי, על ידי לחיצה על כפתור התנתקות מכל ההתקנים האחרים."
 
-#: include/data.php:1130 include/data_detail.php:898
+#: include/data.php:1121 include/data_detail.php:898
 msgid "Site"
 msgstr "אתר"
 
-#: include/data.php:1131 include/data_detail.php:899
+#: include/data.php:1122 include/data_detail.php:899
 msgid "IPs"
 msgstr "כתובות IP"
 
-#: include/data.php:1131 include/data_detail.php:899
+#: include/data.php:1122 include/data_detail.php:899
 #, fuzzy
 msgid "Ports"
 msgstr "נמלים"
 
-#: include/data.php:1132 include/data_detail.php:900
+#: include/data.php:1123 include/data_detail.php:900
 #, fuzzy
 msgid "MACs"
 msgstr "MACs"
 
-#: include/data.php:1132 include/data_detail.php:900
+#: include/data.php:1123 include/data_detail.php:900
 #, fuzzy
 msgid "Ports up"
 msgstr "יציאות למעלה"
 
-#: include/data.php:1133 include/data_detail.php:901
+#: include/data.php:1124 include/data_detail.php:901
 #, fuzzy
 msgid "Device errors"
 msgstr "שגיאות בהתקן"
 
-#: include/data.php:1148 include/data_detail.php:915
+#: include/data.php:1139 include/data_detail.php:915
 #, fuzzy
 msgid "No mactrack sites found"
 msgstr "לא נמצאו אתרים mactrack"
 
-#: include/data.php:1162
+#: include/data.php:1153
 #, fuzzy
 msgid "Time synchronization"
 msgstr "סנכרון זמן"
 
-#: include/data.php:1172
+#: include/data.php:1163
 #, fuzzy
 msgid "Wrong NTP server configured - "
 msgstr "לא הוגדר שרת NTP"
 
-#: include/data.php:1176
+#: include/data.php:1167
 #, fuzzy
 msgid "No NTP server configured"
 msgstr "לא הוגדר שרת NTP"
 
-#: include/data.php:1187
+#: include/data.php:1178
 #, fuzzy
 msgid "Failed to get NTP time FROM $ntp_server"
 msgstr "נכשל כדי לקבל זמן NTP מ- ntp_server $"
 
-#: include/data.php:1195
+#: include/data.php:1186
 #, fuzzy, php-format
 msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
 msgstr "בדוק את השעה. <br/> זה שונה (יותר מ %s שניות) מ NTP שרת %s"
 
-#: include/data.php:1197
+#: include/data.php:1188
 #, fuzzy
 msgid "Localtime is equal to NTP server"
 msgstr "Localtime שווה לשרת NTP"
 
-#: include/data.php:1202
+#: include/data.php:1193
 #, fuzzy
 msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
 msgstr "לא ניתן ליצור קשר עם שרת NTP. <br/> בדוק את התצורה שלך. <br/>"
 
-#: include/data.php:1205
+#: include/data.php:1196
 #, fuzzy
 msgid "Last check: "
 msgstr "בדיקה אחרונה:"
 
-#: include/data.php:1226 include/data_detail.php:928
+#: include/data.php:1217 include/data_detail.php:928
 #, fuzzy
 msgid "Poller info"
 msgstr "פרטי סוקר"
 
-#: include/data.php:1232
+#: include/data.php:1223
 #, fuzzy
 msgid "ID/Name/total time/state"
 msgstr "מזהה / שם / סה\"כ זמן / מדינה"
 
-#: include/data.php:1258 include/data_detail.php:959
+#: include/data.php:1249 include/data_detail.php:959
 #, fuzzy
 msgid "New/Idle"
 msgstr "חדש / לא פעיל"
 
-#: include/data.php:1264 include/data_detail.php:965
+#: include/data.php:1255 include/data_detail.php:965
 #, fuzzy
 msgid "Unkn/down"
 msgstr "Unkn / מטה"
 
-#: include/data.php:1275 include/data_detail.php:976
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(all)"
 msgstr "(את כל)"
 
-#: include/data.php:1275 include/data_detail.php:976
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(ok)"
 msgstr "(בסדר)"
 
-#: include/data.php:1296
+#: include/data.php:1287
 #, fuzzy, php-format
 msgid "Poller stats (interval %ss)"
 msgstr "סטטיסטיקת פולר (interval %s)"
 
-#: include/data.php:1346 include/data.php:1348
+#: include/data.php:1337 include/data.php:1339
 #, fuzzy
 msgid " Poller ID: "
 msgstr "מזהה פולר:"
 
-#: include/data.php:1355
+#: include/data.php:1346
 msgid "ID: "
 msgstr "מזהה:"
 
-#: include/data.php:1376 include/data_detail.php:997
+#: include/data.php:1367 include/data_detail.php:997
 #, fuzzy
 msgid "Last thold events"
 msgstr "האירועים האחרונים"
 
-#: include/data.php:1384 include/data_detail.php:1004
+#: include/data.php:1375 include/data_detail.php:1004
 #, fuzzy
 msgid "Plugin Thold isn't installed or started"
 msgstr "תוסף Thold אינו מותקן או מופעל"
 
-#: include/data.php:1420 include/data_detail.php:1039
+#: include/data.php:1411 include/data_detail.php:1039
 #, fuzzy
 msgid "Without events yet"
 msgstr "ללא אירועים"
 
-#: include/data.php:1434
+#: include/data.php:1425
 #, fuzzy
 msgid "Top5 ping (avg, current)"
 msgstr "Top5 ping (ממוצע, שוטף)"
 
-#: include/data.php:1487
+#: include/data.php:1477
 #, fuzzy
 msgid "Top5 worst availability"
 msgstr "Top5 זמינות הגרוע ביותר"
 
-#: include/data.php:1539
+#: include/data.php:1527
 #, fuzzy
 msgid "Top5 worst polling time"
 msgstr "זמן הגרוע ביותר"
 
-#: include/data.php:1590
+#: include/data.php:1577
 #, fuzzy
 msgid "Top5 worst polling ratio (failed, total, ratio)"
 msgstr "Top5 יחס הסקרים הגרוע ביותר (נכשל, סה\"כ, יחס)"
 
-#: include/data.php:1640 include/data.php:1645 include/settings.php:68
+#: include/data.php:1625 include/data.php:1630 include/settings.php:68
+#, fuzzy
 msgid "Trends"
 msgstr "מגמות"
 
-#: include/data.php:1662
+#: include/data.php:1647
 #, fuzzy
 msgid "Tholds triggered"
 msgstr "Tholds מופעלות"
 
-#: include/data.php:1679
+#: include/data.php:1664
 #, fuzzy
 msgid "Hosts down"
 msgstr "מארחים למטה"
 
-#: include/data.php:1708
+#: include/data.php:1693
 #, fuzzy
 msgid "Favourite graph"
 msgstr "גרף מועדף"
 
-#: include/data.php:1801
-#, fuzzy
+#: include/data.php:1789
 msgid "Syslog messages and alerts"
-msgstr "הודעות Syslog והתראות"
+msgstr ""
 
-#: include/data.php:1806
-#, fuzzy
+#: include/data.php:1794
 msgid "Syslog"
-msgstr "סיסלוג"
+msgstr ""
 
-#: include/data.php:1829
+#: include/data.php:1817
 msgid "Total"
-msgstr "סה\"כ"
+msgstr ""
 
-#: include/data.php:1847
+#: include/data.php:1835
 msgid "Incoming"
-msgstr "incoming"
+msgstr ""
 
-#: include/data.php:1865
+#: include/data.php:1853
 msgid "Alerts"
-msgstr "התראות"
+msgstr ""
 
-#: include/data.php:1891
+#: include/data.php:1878
 #, fuzzy
 msgid "Syslog plugin not installed/running"
 msgstr "תוסף זה לא מותקן / פועל"
@@ -860,26 +859,27 @@ msgstr "בדיקת מסד נתונים"
 
 #: include/data_detail.php:77
 #, fuzzy
-msgid "Analyse cacti log - detail"
+msgid "Analyze cacti log - detail"
 msgstr "ניתוח יומן קקטוסים"
 
 #: include/data_detail.php:154
 #, fuzzy
-msgid "Analyse logins - detail"
+msgid "Analyze logins - detail"
 msgstr "ניתוח יומן - מספר השורות"
 
 #: include/data_detail.php:173
+#, fuzzy
 msgid "failed"
 msgstr "נכשל"
 
 #: include/data_detail.php:173
+#, fuzzy
 msgid "success"
 msgstr "הצלחה"
 
 #: include/data_detail.php:196
-#, fuzzy
 msgid "Full log"
-msgstr "יומן מלא"
+msgstr ""
 
 #: include/data_detail.php:226
 #, fuzzy, php-format
@@ -907,9 +907,9 @@ msgid "Datasources with bad indexes - %s:"
 msgstr "Datasource - אינדקסים רעים %s:"
 
 #: include/data_detail.php:389
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s:"
-msgstr "נתן התראה / אזהרה לוגונית - %s:"
+msgstr ""
 
 #: include/data_detail.php:421
 #, fuzzy, php-format
@@ -947,8 +947,9 @@ msgid "RECOVERING"
 msgstr "שחזור"
 
 #: include/data_detail.php:766
+#, fuzzy
 msgid "DOWN"
-msgstr "הפעל דף הפתיחה שמאפשר למשתמשים לדעת שהאתר מושבת לצורך בניה או שדרוג. (ברירת מחדל: ביטול)"
+msgstr "למטה"
 
 #: include/data_detail.php:832
 #, fuzzy
@@ -966,20 +967,21 @@ msgid "TRIGGERED"
 msgstr "טריגרד"
 
 #: include/data_detail.php:933
+#, fuzzy
 msgid "ID"
-msgstr "מזהה"
+msgstr "מזהה:"
 
 #: include/data_detail.php:933
 msgid "Name"
-msgstr "שם"
+msgstr ""
 
 #: include/data_detail.php:934
 msgid "State"
-msgstr "מדינה"
+msgstr ""
 
 #: include/data_detail.php:934
 msgid "Total time"
-msgstr "סך הכל זמן עבודה"
+msgstr ""
 
 #: include/data_detail.php:1053
 #, fuzzy
@@ -1021,9 +1023,8 @@ msgid "Show Details"
 msgstr "הצג פרטים"
 
 #: include/helpers.php:122
-#, fuzzy
 msgid "Loading data ..."
-msgstr "טוען נתונים ..."
+msgstr ""
 
 #: include/helpers.php:421
 #, fuzzy
@@ -1041,9 +1042,9 @@ msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "שגיאות חיבור - נסה להפעיל מחדש את שירות SQL."
 
 #: include/helpers.php:451
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s - check logs."
-msgstr "לקוחות שהופסקו / מתחבר: %s - בדקו יומנים."
+msgstr ""
 
 #: include/helpers.php:458
 #, fuzzy, php-format
@@ -1051,9 +1052,9 @@ msgid "Connection errors: %s"
 msgstr "שגיאות התחברות: %s"
 
 #: include/helpers.php:459
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "לקוחות שהופסקו / מתחבר: %s"
+msgstr ""
 
 #: include/helpers.php:460
 #, fuzzy, php-format
@@ -1092,12 +1093,12 @@ msgstr "הפעל / השבת את החלוניות"
 
 #: include/settings.php:38
 #, fuzzy
-msgid "Analayse Log"
+msgid "Analyze Log"
 msgstr "ניתוח יומן קקטוסים"
 
 #: include/settings.php:44
 #, fuzzy
-msgid "Analayse Logins"
+msgid "Analyze Logins"
 msgstr "אפשר לוח אנאלייז"
 
 #: include/settings.php:50
@@ -1107,12 +1108,12 @@ msgstr "סף"
 
 #: include/settings.php:56
 #, fuzzy
-msgid "Analayse Database"
+msgid "Analyze Database"
 msgstr "אפשר פאנל אנאליזה"
 
 #: include/settings.php:62
 #, fuzzy
-msgid "Analayse Objects"
+msgid "Analyze Objects"
 msgstr "ניתוח יומן קקטוסים"
 
 #: include/settings.php:74
@@ -1121,9 +1122,8 @@ msgid "24h Extremes"
 msgstr "24 שעות קיצוניות"
 
 #: include/settings.php:80
-#, fuzzy
 msgid "NTP Status"
-msgstr "סטטוס NTP"
+msgstr ""
 
 #: include/settings.php:86
 #, fuzzy
@@ -1191,8 +1191,9 @@ msgid "Top 5 Worst Failed Ratio"
 msgstr "Top5 זמינות הגרוע ביותר"
 
 #: include/settings.php:164
+#, fuzzy
 msgid "System Information"
-msgstr "מידע מערכת"
+msgstr "אפשר פאנל מידע מערכת"
 
 #: include/settings.php:170
 #, fuzzy
@@ -1205,9 +1206,8 @@ msgid "Favourite Graphs"
 msgstr "גרף מועדף"
 
 #: include/settings.php:182
-#, fuzzy
 msgid "Syslog Plugin"
-msgstr "תוסף Syslog"
+msgstr ""
 
 #: include/settings.php:203
 #, fuzzy
@@ -1220,9 +1220,8 @@ msgid "Intropage"
 msgstr "לוחות אינטרופ"
 
 #: include/settings.php:258
-#, fuzzy
 msgid "Normal User"
-msgstr "משתמש רגיל"
+msgstr ""
 
 #: include/variables.php:60
 msgid "Display settings"
@@ -1249,11 +1248,10 @@ msgid "How often"
 msgstr "באיזו תדירות"
 
 #: include/variables.php:74
-#, fuzzy
 msgid "Automatically by poller"
-msgstr "אוטומטית לפי קלפי"
+msgstr ""
 
-#: include/variables.php:75 include/variables.php:95
+#: include/variables.php:75 include/variables.php:108
 msgid "Never"
 msgstr "לעולם לא"
 
@@ -1261,137 +1259,162 @@ msgstr "לעולם לא"
 msgid "Every Minute"
 msgstr "כל דקה"
 
-#: include/variables.php:77 include/variables.php:96 include/variables.php:130
+#: include/variables.php:77 include/variables.php:109 include/variables.php:143
 #, fuzzy, php-format
 msgid "Every %d Minutes"
 msgstr "כל% d דקות"
 
-#: include/variables.php:78 include/variables.php:97 include/variables.php:131
+#: include/variables.php:78 include/variables.php:110 include/variables.php:144
 #, fuzzy
 msgid "Every Hour"
 msgstr "כל שעה"
 
 #: include/variables.php:83
 #, fuzzy
-msgid "Analyse log -  number of lines"
-msgstr "ניתוח יומן - מספר השורות"
+msgid "Poller Timeout"
+msgstr "פרטי סוקר"
 
 #: include/variables.php:84
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr ""
+
+#: include/variables.php:88
+#, fuzzy, php-format
+msgid "%d Minute"
+msgstr "כל% d דקות"
+
+#: include/variables.php:89 include/variables.php:90
+#, fuzzy, php-format
+msgid "%d Minutes"
+msgstr "כל% d דקות"
+
+#: include/variables.php:91 include/variables.php:92
+#, php-format
+msgid "%d Seconds"
+msgstr ""
+
+#: include/variables.php:96
+#, fuzzy
+msgid "Analyze log -  number of lines"
+msgstr "ניתוח יומן - מספר השורות"
+
+#: include/variables.php:97
 #, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr "כמה שורות של יומן ינותחו. מספר גדול עלול לגרום לעומס דפים איטי"
 
-#: include/variables.php:91
+#: include/variables.php:104
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "כמה פעמים לנתח DB"
 
-#: include/variables.php:92
+#: include/variables.php:105
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "פולר מנהל את המשימה הזאת. זה יכול לגרום להמשך זמן רב."
 
-#: include/variables.php:98 include/variables.php:132
+#: include/variables.php:111 include/variables.php:145
 msgid "Every Day"
 msgstr "כל יום"
 
-#: include/variables.php:99
+#: include/variables.php:112
 msgid "Every Week"
 msgstr "כל שבוע"
 
-#: include/variables.php:100
+#: include/variables.php:113
 msgid "Every Month"
 msgstr "כל חודש"
 
-#: include/variables.php:105
+#: include/variables.php:118
 #, fuzzy
-msgid "Analyse DB - Level of db check"
+msgid "Analyze DB - Level of db check"
 msgstr "ניתוח DB - רמת בדיקת db"
 
-#: include/variables.php:106
+#: include/variables.php:119
 #, fuzzy
 msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>"
 msgstr "מהיר - לא בדוק שורות עבור קישורים inforccert <br/> מהר - לבדוק רק לא סגור שולחנות כראוי <br/> שולחנות בדיקה שהשתנו השתנו מהבדיקה האחרונה <br/> בינוני - עם שורות סריקה <br/> מורחבת - שורות ומפתחות מלאים <br/> <strong>בינונית ומורחבת עלולה לגרום לעומס דף איטי!</strong>"
 
-#: include/variables.php:109
+#: include/variables.php:122
+#, fuzzy
 msgid "Quick"
 msgstr "מהר"
 
-#: include/variables.php:110
+#: include/variables.php:123
 msgid "Fast"
 msgstr "מהיר"
 
-#: include/variables.php:111
+#: include/variables.php:124
+#, fuzzy
 msgid "Changed"
 msgstr "השתנה"
 
-#: include/variables.php:112
+#: include/variables.php:125
 msgid "Medium"
 msgstr "בינוני"
 
-#: include/variables.php:113
+#: include/variables.php:126
 msgid "Extended"
 msgstr "מורחב"
 
-#: include/variables.php:118
+#: include/variables.php:131
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP (זמן) לבדוק - IP או DNS שם שרת NTP"
 
-#: include/variables.php:119
+#: include/variables.php:132
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "הכנס IP או DNS שם שרת NTP"
 
-#: include/variables.php:126
+#: include/variables.php:139
 #, fuzzy
 msgid "How often check NTP"
 msgstr "כמה פעמים לבדוק NTP"
 
-#: include/variables.php:127
+#: include/variables.php:140
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr "<strong>פולר מנהל את המשימה הזאת. זה יכול לגרום להמשך זמן רב.</strong>"
 
-#: include/variables.php:138
+#: include/variables.php:151
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "לוח מידע של מנהל מערכת על משימות תחזוקה, התקנים למטה, .."
 
-#: include/variables.php:139
+#: include/variables.php:152
 #, fuzzy
 msgid "If isn't empty, panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr "אם הוא לא ריק, לוח יוצג בחלק העליון. ניתן להשתמש בתגי HTML (b, i, ...)."
 
-#: include/variables.php:148
+#: include/variables.php:161
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "שמור את התוסף - כמה ימים לפני התראה על הצג"
 
-#: include/variables.php:149
+#: include/variables.php:162
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "כמה ימים?"
 
-#: include/variables.php:152
+#: include/variables.php:165
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "כאשר התחזוקה מתחילה"
 
-#: include/variables.php:153
+#: include/variables.php:166
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "% d יום לפני"
 
-#: include/variables.php:154 include/variables.php:155
+#: include/variables.php:167 include/variables.php:168
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "% d ימים לפני"
 
 #: intropage_ajax.php:147 intropage_ajax.php:167
-#, fuzzy
 msgid "Panel not found"
-msgstr "הפאנל לא נמצא"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Display only Errors"

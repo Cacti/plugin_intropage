@@ -7,153 +7,153 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-28 12:11-0400\n"
-"PO-Revision-Date: 2020-03-28 12:34-0400\n"
+"POT-Creation-Date: 2020-03-28 17:55-0400\n"
+"PO-Revision-Date: 2020-03-28 12:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hi_IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 
-#: display.php:32
+#: display.php:34
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "परिचय - अनुमति से इनकार किया"
 
-#: display.php:142
+#: display.php:144
 #, fuzzy
 msgid "You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr "आप <b>सेटिंग्स</b> में ऊपर की पंक्तियों को अक्षम कर सकते हैं <b>-> सामान्य -> कैक्टि डैशबोर्ड को छुपाएं</b> और इंट्रापेज के लिए पूरे पृष्ठ का उपयोग करें <br/><br/>"
 
-#: display.php:284
+#: display.php:286
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "पैनल मूव करें / कॉपी टेक्स्ट पैनल से सक्षम करें"
 
-#: display.php:289
+#: display.php:291
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr "पैनल से पैनल मूव / डिसेबल कॉपी टेक्स्ट को सक्षम करें"
 
-#: display.php:345
+#: display.php:347
 #, fuzzy
 msgid "Error reading new data"
 msgstr "नया डेटा पढ़ने में त्रुटि"
 
-#: display.php:378
+#: display.php:380
 msgid "Close"
-msgstr "बंद"
+msgstr ""
 
-#: display.php:389
+#: display.php:391
 #, fuzzy
 msgid "Panel Details"
 msgstr "प्रदर्शन का विवरण"
 
-#: display.php:408
+#: display.php:410
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "पैनल से पैनल मूव / सक्षम पाठ अक्षम करें"
 
-#: display.php:412
+#: display.php:414
 #, fuzzy
 msgid "Select action ..."
 msgstr "कार्रवाई चुनें ..."
 
-#: display.php:423
+#: display.php:425
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "पैनल %s जोड़ें"
 
-#: display.php:425
+#: display.php:427
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "पैनल %s %s जोड़ें"
 
-#: display.php:431
+#: display.php:433
 #, fuzzy
 msgid "Refresh Now"
 msgstr "अब ताज़ा करें"
 
-#: display.php:434 display.php:436
+#: display.php:436 display.php:438
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "ऑटोरफ्रेश अक्षम"
 
-#: display.php:440 display.php:442
+#: display.php:442 display.php:444
 #, fuzzy
 msgid "Autorefresh automatic by poller"
 msgstr "ऑटोरफ्रेश अक्षम"
 
-#: display.php:446 display.php:448
+#: display.php:448 display.php:450
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "ऑटोरफ्रेश 1 मिनट"
 
-#: display.php:452 display.php:454
+#: display.php:454 display.php:456
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "ऑटोरफ्रेश 5 मिनट"
 
-#: display.php:458 display.php:460
+#: display.php:460 display.php:462
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "ऑटोरफ्रेश 1 घंटा"
 
-#: display.php:464 display.php:467
+#: display.php:466 display.php:469
 #, fuzzy
 msgid "Sort by - red-yellow-green-gray"
 msgstr "द्वारा क्रमबद्ध - लाल-पीला-हरा-ग्रे"
 
-#: display.php:465
+#: display.php:467
 #, fuzzy
 msgid "Sort by panel priority"
 msgstr "पैनल प्राथमिकता द्वारा क्रमबद्ध करें"
 
-#: display.php:468
+#: display.php:470
 #, fuzzy
 msgid "Sort by panel Priority"
 msgstr "पैनल प्राथमिकता द्वारा क्रमबद्ध करें"
 
-#: display.php:471
+#: display.php:473
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "डिफ़ॉल्ट पर सभी रीसेट करें"
 
-#: display.php:483
+#: display.php:485
 #, fuzzy
 msgid "Set intropage as default login page"
 msgstr "डिफ़ॉल्ट पृष्ठ के रूप में इंट्रोपेज सेट करें"
 
-#: display.php:487
+#: display.php:489
 #, fuzzy
 msgid "Set graph as default login page"
 msgstr "डिफ़ॉल्ट पृष्ठ के रूप में ग्राफ सेट करें"
 
-#: display.php:492
-#, fuzzy
+#: display.php:494
 msgid "Display intropage in console"
-msgstr "कंसोल में इंट्रोपेज प्रदर्शित करें"
+msgstr ""
 
-#: display.php:495
+#: display.php:497
 #, fuzzy
 msgid "Display intropage in tab as default page"
 msgstr "डिफ़ॉल्ट पृष्ठ के रूप में इंट्रोपेज सेट करें"
 
-#: display.php:500
+#: display.php:502
+#, fuzzy
 msgid "Go"
-msgstr "जाएं"
+msgstr "चले जाओ"
 
 #: include/data.php:37
 #, fuzzy
 msgid "Database check"
 msgstr "डेटाबेस की जाँच"
 
-#: include/data.php:48 include/data.php:614 include/data.php:1182
-#: include/data.php:1363 include/data.php:1470 include/data.php:1522
-#: include/data.php:1573 include/data.php:1622 include/data_detail.php:47
+#: include/data.php:48 include/data.php:614 include/data.php:1173
+#: include/data.php:1354 include/data.php:1461 include/data.php:1511
+#: include/data.php:1561 include/data.php:1608 include/data_detail.php:47
 #: include/data_detail.php:1088 include/data_detail.php:1135
 #: include/data_detail.php:1181 include/data_detail.php:1223
 #, fuzzy
@@ -165,17 +165,17 @@ msgstr "डाटा का इंतजार है"
 msgid "Last check"
 msgstr "अंतिम जांच"
 
-#: include/data.php:54 include/data.php:1208 include/data_detail.php:53
+#: include/data.php:54 include/data.php:1199 include/data_detail.php:53
 #, fuzzy
 msgid "Checked every 15 minutes"
 msgstr "हर 15 मिनट में जांच की"
 
-#: include/data.php:56 include/data.php:1210 include/data_detail.php:55
+#: include/data.php:56 include/data.php:1201 include/data_detail.php:55
 #, fuzzy
 msgid "Checked hourly"
 msgstr "प्रति घंटा की जाँच की गई"
 
-#: include/data.php:58 include/data.php:1212 include/data_detail.php:57
+#: include/data.php:58 include/data.php:1203 include/data_detail.php:57
 #, fuzzy
 msgid "Checked daily"
 msgstr "रोज जांच होती है"
@@ -191,13 +191,12 @@ msgid "Checked monthly"
 msgstr "हर घंटे चेक किया गया"
 
 #: include/data.php:64 include/data_detail.php:63
-#, fuzzy
 msgid "Periodic check is disabled"
-msgstr "समय-समय पर जाँच अक्षम है"
+msgstr ""
 
 #: include/data.php:78
 #, fuzzy
-msgid "Analyse cacti log"
+msgid "Analyze cacti log"
 msgstr "कैक्टि लॉग का विश्लेषण करें"
 
 #: include/data.php:94 include/data_detail.php:92
@@ -206,12 +205,14 @@ msgid "Log file not accessible or empty"
 msgstr "लॉग फ़ाइल सुलभ या खाली नहीं"
 
 #: include/data.php:112 include/data_detail.php:112
+#, fuzzy
 msgid "Errors"
-msgstr "गल्तियां"
+msgstr "त्रुटियाँ"
 
 #: include/data.php:114 include/data_detail.php:114
+#, fuzzy
 msgid "Warnings"
-msgstr "चेतावनियां"
+msgstr "चेतावनी"
 
 #: include/data.php:119 include/data_detail.php:119
 #, fuzzy
@@ -240,145 +241,149 @@ msgstr "(त्रुटियों और अंतिम %s लाइनो�
 
 #: include/data.php:154
 #, fuzzy
-msgid "Analyse logins"
+msgid "Analyze logins"
 msgstr "लॉग किए गए विफल"
 
-#: include/data.php:171
+#: include/data.php:173
 #, fuzzy
 msgid "Failed logins"
 msgstr "लॉग किए गए विफल"
 
-#: include/data.php:193 include/data_detail.php:208
+#: include/data.php:197 include/data_detail.php:208
 #, fuzzy
-msgid "Analyse tree/host/graph"
+msgid "Analyze tree/host/graph"
 msgstr "ट्री / होस्ट / ग्राफ का विश्लेषण करें"
 
-#: include/data.php:210 include/data.php:230 include/data.php:258
-#: include/data.php:293 include/data.php:330 include/data.php:357
-#: include/data.php:376 include/data.php:394 include/data.php:410
-#: include/data.php:425 include/data.php:563 include/data.php:568
-#: include/data.php:1243 include/data_detail.php:224
+#: include/data.php:214 include/data.php:234 include/data.php:262
+#: include/data.php:296 include/data.php:332 include/data.php:358
+#: include/data.php:377 include/data.php:395 include/data.php:411
+#: include/data.php:426 include/data.php:563 include/data.php:568
+#: include/data.php:1234 include/data_detail.php:224
 #: include/data_detail.php:257 include/data_detail.php:297
 #: include/data_detail.php:317 include/data_detail.php:344
 #: include/data_detail.php:387 include/data_detail.php:419
 #: include/data_detail.php:465 include/data_detail.php:487
 #: include/data_detail.php:508 include/data_detail.php:528
 #: include/data_detail.php:944
+#, fuzzy
 msgid "N/A"
-msgstr "लागू नहीं"
+msgstr "एन / ए"
 
-#: include/data.php:215
+#: include/data.php:219
 #, fuzzy, php-format
 msgid "Devices with the same IP and port: %s"
 msgstr "समान IP और पोर्ट वाले डिवाइस: %s"
 
-#: include/data.php:235
+#: include/data.php:239
 #, fuzzy, php-format
 msgid "Devices with the same description: %s"
 msgstr "समान विवरण वाले उपकरण: %s"
 
-#: include/data.php:262
+#: include/data.php:266
 #, fuzzy, php-format
 msgid "Orphaned Data Sources: %s"
 msgstr "अनाथ डेटा स्रोत: %s"
 
-#: include/data.php:274
+#: include/data.php:277
 #, fuzzy, php-format
 msgid "Poller Output Items: %s"
 msgstr "पोलर आउटपुट आइटम: %s"
 
-#: include/data.php:296
+#: include/data.php:299
 #, fuzzy, php-format
 msgid "Datasource - bad indexes: %s"
 msgstr "डेटासोर्स - खराब इंडेक्स: %s"
 
-#: include/data.php:333
-#, fuzzy, php-format
+#: include/data.php:335
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "लॉगऑनली अलर्ट / चेतावनी दी: %s"
+msgstr ""
 
-#: include/data.php:345 include/data_detail.php:407
+#: include/data.php:346 include/data_detail.php:407
 #, fuzzy
 msgid "Information only (no warn/error)"
 msgstr "केवल जानकारी (कोई चेतावनी / त्रुटि)"
 
-#: include/data.php:360
+#: include/data.php:361
 #, fuzzy, php-format
 msgid "Devices in more than one tree: %s"
 msgstr "एक से अधिक पेड़ में उपकरण: %s"
 
-#: include/data.php:379
+#: include/data.php:380
 #, fuzzy, php-format
 msgid "Hosts without graphs: %s"
 msgstr "बिना ग्राफ़ के होस्ट: %s"
 
-#: include/data.php:397
+#: include/data.php:398
 #, fuzzy, php-format
 msgid "Hosts without tree: %s"
 msgstr "वृक्ष के बिना मेजबान: %s"
 
-#: include/data.php:413
+#: include/data.php:414
 #, fuzzy, php-format
 msgid "Hosts with default public/private community: %s"
 msgstr "डिफ़ॉल्ट सार्वजनिक / निजी समुदाय के साथ होस्ट: %s"
 
-#: include/data.php:428
+#: include/data.php:429
 #, fuzzy, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
 msgstr "प्लगइन्स मॉनिटर - गैर-होस्टेड होस्ट: %s"
 
-#: include/data.php:434 include/data_detail.php:542
+#: include/data.php:435 include/data_detail.php:542
 #, fuzzy, php-format
 msgid "Found %s problems"
 msgstr "%s समस्याएँ मिलीं"
 
-#: include/data.php:436 include/data_detail.php:544
+#: include/data.php:437 include/data_detail.php:544
 #, fuzzy
 msgid "Everything OK"
 msgstr "सब ठीक है"
 
-#: include/data.php:448
+#: include/data.php:449
 #, fuzzy
 msgid "Boost statistics"
 msgstr "आंकड़ों को बूस्ट करें"
 
-#: include/data.php:501 include/data.php:1262 include/data_detail.php:963
+#: include/data.php:502 include/data.php:1253 include/data_detail.php:963
+#, fuzzy
 msgid "Idle"
-msgstr "आइडल"
+msgstr "बेकार"
 
-#: include/data.php:503 include/data.php:1260 include/data_detail.php:961
+#: include/data.php:504 include/data.php:1251 include/data_detail.php:961
+#, fuzzy
 msgid "Running"
 msgstr "चल रहा है"
 
-#: include/data.php:505
+#: include/data.php:506
 #, fuzzy
 msgid "Overrun Warning"
 msgstr "ओवररन वार्निंग"
 
-#: include/data.php:508
+#: include/data.php:509
+#, fuzzy
 msgid "Timed Out"
-msgstr "समय समााप्त हो जाना"
+msgstr "समय समााप्त"
 
-#: include/data.php:511
+#: include/data.php:512
 msgid "Other"
 msgstr "अन्य"
 
-#: include/data.php:514
+#: include/data.php:515
 #, fuzzy
 msgid "Never Run"
 msgstr "कभी मत दौडना"
 
-#: include/data.php:519
+#: include/data.php:520
 #, fuzzy, php-format
 msgid "Pending Boost Records: %s"
 msgstr "लंबित बूस्ट रिकॉर्ड: %s"
 
-#: include/data.php:520
+#: include/data.php:521
 #, fuzzy, php-format
 msgid "Archived Boost Records: %s"
 msgstr "अभिलेखीकृत बूस्ट रिकॉर्ड: %s"
 
-#: include/data.php:524 include/data.php:527 include/data.php:529
+#: include/data.php:525 include/data.php:528 include/data.php:530
 #, fuzzy, php-format
 msgid "Total Boost Records: %s"
 msgstr "कुल बूस्ट रिकॉर्ड: %s"
@@ -388,9 +393,9 @@ msgstr "कुल बूस्ट रिकॉर्ड: %s"
 msgid "Boost On-demand Updating: %s"
 msgstr "बूस्ट ऑन-डिमांड अपडेटिंग: %s"
 
-#: include/data.php:548 include/data.php:827 include/data.php:837
-#: include/data.php:958 include/data.php:967 include/data.php:1094
-#: include/data.php:1266 include/data_detail.php:741
+#: include/data.php:548 include/data.php:823 include/data.php:833
+#: include/data.php:952 include/data.php:961 include/data.php:1087
+#: include/data.php:1257 include/data_detail.php:741
 #: include/data_detail.php:858 include/data_detail.php:967
 msgid "Disabled"
 msgstr "अक्षम"
@@ -441,8 +446,9 @@ msgid "This function is not implemented on Windows platforms"
 msgstr "यह फ़ंक्शन विंडोज प्लेटफॉर्म पर लागू नहीं किया गया है"
 
 #: include/data.php:602
+#, fuzzy
 msgid "Load"
-msgstr "लोड करें"
+msgstr "भार"
 
 #: include/data.php:627
 #, fuzzy
@@ -454,404 +460,406 @@ msgstr "24 घंटे चरम पर"
 msgid "Long run<br/>poller"
 msgstr "आगे जाकर <br/> poller"
 
-#: include/data.php:652 include/data.php:674 include/data.php:698
-#: include/data.php:723 include/data.php:745 include/data_detail.php:580
+#: include/data.php:651 include/data.php:672 include/data.php:695
+#: include/data.php:719 include/data.php:740 include/data_detail.php:580
 #: include/data_detail.php:601
 #, fuzzy
 msgid "Waiting<br/>for data"
 msgstr "इंतज़ार कर रही <br/> डेटा के लिए"
 
-#: include/data.php:682 include/data_detail.php:609
+#: include/data.php:680 include/data_detail.php:609
 #, fuzzy
 msgid "Max thold<br/>triggered:"
 msgstr "मैक्स ने उतारा <br/> शुरू हो रहा:"
 
-#: include/data.php:708 include/data_detail.php:634
+#: include/data.php:705 include/data_detail.php:634
 #, fuzzy
 msgid "Poller<br/>output item:"
 msgstr "Poller <br/> आउटपुट आइटम:"
 
-#: include/data.php:730 include/data_detail.php:655
+#: include/data.php:726 include/data_detail.php:655
 #, fuzzy
 msgid "Failed<br/>polls:"
 msgstr "अनुत्तीर्ण होना <br/> चुनाव:"
 
-#: include/data.php:765
+#: include/data.php:761
 #, fuzzy
 msgid "Datasources: "
 msgstr "डाटा के स्रोत:"
 
-#: include/data.php:794 include/data_detail.php:711
+#: include/data.php:790 include/data_detail.php:711
 #, fuzzy
 msgid "No untemplated datasources found"
 msgstr "कोई भी गैर-सूचीबद्ध डेटा स्रोत नहीं मिले"
 
-#: include/data.php:807 include/data.php:832 include/data_detail.php:723
+#: include/data.php:803 include/data.php:828 include/data_detail.php:723
 #, fuzzy
 msgid "Hosts"
 msgstr "मेजबान"
 
-#: include/data.php:824 include/data.php:955 include/data_detail.php:738
+#: include/data.php:820 include/data.php:949 include/data_detail.php:738
 #: include/data_detail.php:855
 msgid "All"
 msgstr "所有"
 
-#: include/data.php:825 include/data.php:834 include/data.php:1090
+#: include/data.php:821 include/data.php:830 include/data.php:1083
 #: include/data_detail.php:739
+#, fuzzy
 msgid "Up"
 msgstr "ऊपर"
 
-#: include/data.php:826 include/data.php:835 include/data.php:1091
+#: include/data.php:822 include/data.php:831 include/data.php:1084
 #: include/data_detail.php:740
+#, fuzzy
 msgid "Down"
 msgstr "नीचे"
 
-#: include/data.php:828 include/data.php:836 include/data.php:1268
+#: include/data.php:824 include/data.php:832 include/data.php:1259
 #: include/data_detail.php:742 include/data_detail.php:969
 #, fuzzy
 msgid "Recovering"
 msgstr "पुन: प्राप्त करना"
 
-#: include/data.php:856 include/data.php:903 include/data.php:1475
-#: include/data.php:1527 include/data.php:1578 include/data.php:1627
+#: include/data.php:851 include/data.php:897 include/data.php:1465
+#: include/data.php:1515 include/data.php:1565 include/data.php:1612
 #, fuzzy
 msgid "You don't have permissions to any hosts"
 msgstr "आपके पास अनुमति नहीं है"
 
-#: include/data.php:868 include/data.php:873 include/data_detail.php:786
+#: include/data.php:863 include/data.php:868 include/data_detail.php:786
 #, fuzzy
 msgid "Device Templates"
 msgstr "डिवाइस टेम्पलेट"
 
-#: include/data.php:897 include/data_detail.php:810
+#: include/data.php:892 include/data_detail.php:810
 #, fuzzy
 msgid "No device templates found"
 msgstr "कोई उपकरण टेम्पलेट नहीं मिले"
 
-#: include/data.php:915 include/data.php:920 include/data.php:962
+#: include/data.php:909 include/data.php:914 include/data.php:956
 #: include/data_detail.php:822
 #, fuzzy
 msgid "Thresholds"
 msgstr "सीमारेखा"
 
-#: include/data.php:928 include/data_detail.php:829
+#: include/data.php:922 include/data_detail.php:829
 #, fuzzy
 msgid "Thold plugin not installed/running"
 msgstr "स्थापित प्लगइन स्थापित / नहीं चल रहा है"
 
-#: include/data.php:931 include/data.php:1064 include/data.php:1127
+#: include/data.php:925 include/data.php:1057 include/data.php:1119
 #, fuzzy
 msgid "You don't have plugin permission"
 msgstr "आपके पास अनुमति नहीं है"
 
-#: include/data.php:956 include/data.php:966 include/data_detail.php:856
+#: include/data.php:950 include/data.php:960 include/data_detail.php:856
 #, fuzzy
 msgid "Breached"
 msgstr "का उल्लंघन"
 
-#: include/data.php:957 include/data_detail.php:857
+#: include/data.php:951 include/data_detail.php:857
 #, fuzzy
 msgid "Trigged"
 msgstr "trigged"
 
-#: include/data.php:964
+#: include/data.php:958
+#, fuzzy
 msgid "OK"
-msgstr "ठीक है"
+msgstr "ठीक"
 
-#: include/data.php:965
+#: include/data.php:959
 #, fuzzy
 msgid "Triggered"
 msgstr "trigerred"
 
-#: include/data.php:1002
+#: include/data.php:996
 #, fuzzy
 msgid "Cacti version: "
 msgstr "कैक्टि संस्करण:"
 
-#: include/data.php:1013
+#: include/data.php:1007
 #, fuzzy
 msgid "Poller type:"
 msgstr "पोलर प्रकार:"
 
-#: include/data.php:1013
-#, fuzzy
+#: include/data.php:1007
 msgid "Spine"
-msgstr "रीढ़ की हड्डी"
+msgstr ""
 
-#: include/data.php:1015
+#: include/data.php:1009
 #, fuzzy
 msgid "Spine version: "
 msgstr "रीढ़ संस्करण:"
 
-#: include/data.php:1018
+#: include/data.php:1012
 #, fuzzy
 msgid "You are using incorrect spine version!"
 msgstr "आप गलत रीढ़ संस्करण का उपयोग कर रहे हैं!"
 
-#: include/data.php:1022
+#: include/data.php:1016
 #, fuzzy
 msgid "Poller type: "
 msgstr "पोलर प्रकार:"
 
-#: include/data.php:1025
+#: include/data.php:1019
 #, fuzzy
 msgid "Running on: "
 msgstr "पर चल रहा है:"
 
-#: include/data.php:1045 include/data.php:1088
+#: include/data.php:1039 include/data.php:1081
 #, fuzzy
 msgid "Mactrack"
 msgstr "Mactrack"
 
-#: include/data.php:1055 include/data.php:1118
+#: include/data.php:1049 include/data.php:1110
 #, fuzzy
 msgid "Mactrack plugin not installed/running"
 msgstr "Mactrack प्लगइन स्थापित नहीं / चल रहा है"
 
-#: include/data.php:1080
+#: include/data.php:1073
 #, fuzzy, php-format
 msgid "All: %s"
 msgstr "सभी: %s"
 
-#: include/data.php:1081
+#: include/data.php:1074
 #, fuzzy, php-format
 msgid "Up: %s"
 msgstr "यूपीएस"
 
-#: include/data.php:1082
+#: include/data.php:1075
 #, fuzzy, php-format
 msgid "Down: %s"
 msgstr "नीचे: %s"
 
-#: include/data.php:1083
+#: include/data.php:1076
 #, fuzzy, php-format
 msgid "Error: %s"
 msgstr "त्रुटि: %s"
 
-#: include/data.php:1084
+#: include/data.php:1077
 #, fuzzy, php-format
 msgid "Unknown: %s"
 msgstr "अज्ञात: %s"
 
-#: include/data.php:1085
+#: include/data.php:1078
 #, fuzzy, php-format
 msgid "Disabled: %s"
 msgstr "अक्षम: %s"
 
-#: include/data.php:1092
+#: include/data.php:1085
 msgid "Error"
 msgstr "त्रुटि"
 
-#: include/data.php:1093
+#: include/data.php:1086
+#, fuzzy
 msgid "Unknown"
-msgstr "अज्ञात"
+msgstr "अनजान"
 
-#: include/data.php:1109 include/data_detail.php:892
+#: include/data.php:1102 include/data_detail.php:892
 #, fuzzy
 msgid "Mactrack sites"
 msgstr "Mactrack साइट्स"
 
-#: include/data.php:1130 include/data_detail.php:898
+#: include/data.php:1121 include/data_detail.php:898
+#, fuzzy
 msgid "Devices"
-msgstr "डिवाइस"
+msgstr "उपकरण"
 
-#: include/data.php:1130 include/data_detail.php:898
+#: include/data.php:1121 include/data_detail.php:898
 msgid "Site"
 msgstr "साइट"
 
-#: include/data.php:1131 include/data_detail.php:899
+#: include/data.php:1122 include/data_detail.php:899
 #, fuzzy
 msgid "IPs"
 msgstr "आईपी"
 
-#: include/data.php:1131 include/data_detail.php:899
+#: include/data.php:1122 include/data_detail.php:899
 #, fuzzy
 msgid "Ports"
 msgstr "बंदरगाहों"
 
-#: include/data.php:1132 include/data_detail.php:900
+#: include/data.php:1123 include/data_detail.php:900
 #, fuzzy
 msgid "MACs"
 msgstr "MACs"
 
-#: include/data.php:1132 include/data_detail.php:900
+#: include/data.php:1123 include/data_detail.php:900
 #, fuzzy
 msgid "Ports up"
 msgstr "पोर्ट करता है"
 
-#: include/data.php:1133 include/data_detail.php:901
+#: include/data.php:1124 include/data_detail.php:901
 #, fuzzy
 msgid "Device errors"
 msgstr "डिवाइस की त्रुटियां"
 
-#: include/data.php:1148 include/data_detail.php:915
+#: include/data.php:1139 include/data_detail.php:915
 #, fuzzy
 msgid "No mactrack sites found"
 msgstr "कोई भी मैक्रैक साइट नहीं मिली"
 
-#: include/data.php:1162
+#: include/data.php:1153
 #, fuzzy
 msgid "Time synchronization"
 msgstr "समय सिंक्रनाइज़ेशन"
 
-#: include/data.php:1172
+#: include/data.php:1163
 #, fuzzy
 msgid "Wrong NTP server configured - "
 msgstr "कोई NTP सर्वर कॉन्फ़िगर नहीं किया गया है"
 
-#: include/data.php:1176
+#: include/data.php:1167
 #, fuzzy
 msgid "No NTP server configured"
 msgstr "कोई NTP सर्वर कॉन्फ़िगर नहीं किया गया है"
 
-#: include/data.php:1187
+#: include/data.php:1178
 #, fuzzy
 msgid "Failed to get NTP time FROM $ntp_server"
 msgstr "$ Ntp_server से NTP समय प्राप्त करने में विफल"
 
-#: include/data.php:1195
+#: include/data.php:1186
 #, fuzzy, php-format
 msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
 msgstr "कृपया समय की जाँच करें। <br/> यह NTP सर्वर %s से अलग ( %s सेकंड से अधिक) है"
 
-#: include/data.php:1197
+#: include/data.php:1188
 #, fuzzy
 msgid "Localtime is equal to NTP server"
 msgstr "स्थानीय समय NTP सर्वर के बराबर है"
 
-#: include/data.php:1202
+#: include/data.php:1193
 #, fuzzy
 msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
 msgstr "संकेतित NTP सर्वर से संपर्क करने में असमर्थ। <br/> कृपया अपना कॉन्फ़िगरेशन जांचें। <br/>"
 
-#: include/data.php:1205
+#: include/data.php:1196
 #, fuzzy
 msgid "Last check: "
 msgstr "अंतिम जांच:"
 
-#: include/data.php:1226 include/data_detail.php:928
+#: include/data.php:1217 include/data_detail.php:928
 #, fuzzy
 msgid "Poller info"
 msgstr "पोल जानकारी"
 
-#: include/data.php:1232
+#: include/data.php:1223
 #, fuzzy
 msgid "ID/Name/total time/state"
 msgstr "आईडी / नाम / कुल समय / स्थिति"
 
-#: include/data.php:1258 include/data_detail.php:959
+#: include/data.php:1249 include/data_detail.php:959
 #, fuzzy
 msgid "New/Idle"
 msgstr "नई / निष्क्रिय"
 
-#: include/data.php:1264 include/data_detail.php:965
+#: include/data.php:1255 include/data_detail.php:965
 #, fuzzy
 msgid "Unkn/down"
 msgstr "Unkn / नीचे"
 
-#: include/data.php:1275 include/data_detail.php:976
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(all)"
 msgstr "(सब)"
 
-#: include/data.php:1275 include/data_detail.php:976
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(ok)"
 msgstr "(ठीक)"
 
-#: include/data.php:1296
+#: include/data.php:1287
 #, fuzzy, php-format
 msgid "Poller stats (interval %ss)"
 msgstr "पोलर आंकड़े (अंतराल %ss)"
 
-#: include/data.php:1346 include/data.php:1348
+#: include/data.php:1337 include/data.php:1339
 #, fuzzy
 msgid " Poller ID: "
 msgstr "पोल आईडी:"
 
-#: include/data.php:1355
+#: include/data.php:1346
+#, fuzzy
 msgid "ID: "
-msgstr "आईडी :"
+msgstr "ID:"
 
-#: include/data.php:1376 include/data_detail.php:997
+#: include/data.php:1367 include/data_detail.php:997
 #, fuzzy
 msgid "Last thold events"
 msgstr "अंतिम घटनाएँ"
 
-#: include/data.php:1384 include/data_detail.php:1004
+#: include/data.php:1375 include/data_detail.php:1004
 #, fuzzy
 msgid "Plugin Thold isn't installed or started"
 msgstr "प्लगइन थ्रेड स्थापित या प्रारंभ नहीं किया गया है"
 
-#: include/data.php:1420 include/data_detail.php:1039
+#: include/data.php:1411 include/data_detail.php:1039
 #, fuzzy
 msgid "Without events yet"
 msgstr "घटनाओं के बिना अभी तक"
 
-#: include/data.php:1434
+#: include/data.php:1425
 #, fuzzy
 msgid "Top5 ping (avg, current)"
 msgstr "टॉप 5 पिंग (एवीजी, करंट)"
 
-#: include/data.php:1487
+#: include/data.php:1477
 #, fuzzy
 msgid "Top5 worst availability"
 msgstr "Top5 सबसे खराब उपलब्धता"
 
-#: include/data.php:1539
+#: include/data.php:1527
 #, fuzzy
 msgid "Top5 worst polling time"
 msgstr "शीर्ष 5 सबसे खराब मतदान का समय"
 
-#: include/data.php:1590
+#: include/data.php:1577
 #, fuzzy
 msgid "Top5 worst polling ratio (failed, total, ratio)"
 msgstr "शीर्ष 5 सबसे खराब मतदान अनुपात (असफल, कुल, अनुपात)"
 
-#: include/data.php:1640 include/data.php:1645 include/settings.php:68
+#: include/data.php:1625 include/data.php:1630 include/settings.php:68
 #, fuzzy
 msgid "Trends"
 msgstr "रुझान"
 
-#: include/data.php:1662
+#: include/data.php:1647
 #, fuzzy
 msgid "Tholds triggered"
 msgstr "सिलसिला चल पड़ा"
 
-#: include/data.php:1679
+#: include/data.php:1664
 #, fuzzy
 msgid "Hosts down"
 msgstr "मेज़बान नीचे"
 
-#: include/data.php:1708
+#: include/data.php:1693
 #, fuzzy
 msgid "Favourite graph"
 msgstr "पसंदीदा ग्राफ"
 
-#: include/data.php:1801
-#, fuzzy
+#: include/data.php:1789
 msgid "Syslog messages and alerts"
-msgstr "संदेश और अलर्ट Syslog"
+msgstr ""
 
-#: include/data.php:1806
-#, fuzzy
+#: include/data.php:1794
 msgid "Syslog"
-msgstr "syslog"
+msgstr ""
 
-#: include/data.php:1829
+#: include/data.php:1817
 msgid "Total"
-msgstr "कुल"
+msgstr ""
 
-#: include/data.php:1847
-#, fuzzy
+#: include/data.php:1835
 msgid "Incoming"
-msgstr "आने वाली"
+msgstr ""
 
-#: include/data.php:1865
+#: include/data.php:1853
 msgid "Alerts"
-msgstr "警报"
+msgstr ""
 
-#: include/data.php:1891
+#: include/data.php:1878
 #, fuzzy
 msgid "Syslog plugin not installed/running"
 msgstr "स्थापित प्लगइन स्थापित / नहीं चल रहा है"
@@ -863,18 +871,18 @@ msgstr "डेटाबेस की जाँच"
 
 #: include/data_detail.php:77
 #, fuzzy
-msgid "Analyse cacti log - detail"
+msgid "Analyze cacti log - detail"
 msgstr "कैक्टि लॉग का विश्लेषण करें"
 
 #: include/data_detail.php:154
 #, fuzzy
-msgid "Analyse logins - detail"
+msgid "Analyze logins - detail"
 msgstr "लॉग का विश्लेषण करें - लाइनों की संख्या"
 
 #: include/data_detail.php:173
 #, fuzzy
 msgid "failed"
-msgstr "असफल"
+msgstr "अनुत्तीर्ण होना"
 
 #: include/data_detail.php:173
 #, fuzzy
@@ -882,9 +890,8 @@ msgid "success"
 msgstr "सफलता"
 
 #: include/data_detail.php:196
-#, fuzzy
 msgid "Full log"
-msgstr "पूर्ण लॉग"
+msgstr ""
 
 #: include/data_detail.php:226
 #, fuzzy, php-format
@@ -912,9 +919,9 @@ msgid "Datasources with bad indexes - %s:"
 msgstr "डेटासोर्स - खराब अनुक्रमित %s:"
 
 #: include/data_detail.php:389
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s:"
-msgstr "लॉगऑन अलर्ट / चेतावनी - %s:"
+msgstr ""
 
 #: include/data_detail.php:421
 #, fuzzy, php-format
@@ -952,6 +959,7 @@ msgid "RECOVERING"
 msgstr "ठीक हो"
 
 #: include/data_detail.php:766
+#, fuzzy
 msgid "DOWN"
 msgstr "नीचे"
 
@@ -971,21 +979,21 @@ msgid "TRIGGERED"
 msgstr "शुरू हो रहा"
 
 #: include/data_detail.php:933
+#, fuzzy
 msgid "ID"
-msgstr "ID"
+msgstr "ID:"
 
 #: include/data_detail.php:933
 msgid "Name"
-msgstr "नाम"
+msgstr ""
 
 #: include/data_detail.php:934
 msgid "State"
-msgstr "राज्य"
+msgstr ""
 
 #: include/data_detail.php:934
-#, fuzzy
 msgid "Total time"
-msgstr "कुल समय"
+msgstr ""
 
 #: include/data_detail.php:1053
 #, fuzzy
@@ -1023,13 +1031,13 @@ msgid "Reload Panel"
 msgstr "रीलोड पैनल"
 
 #: include/helpers.php:114
+#, fuzzy
 msgid "Show Details"
-msgstr "विवरण देखें"
+msgstr "प्रदर्शन का विवरण"
 
 #: include/helpers.php:122
-#, fuzzy
 msgid "Loading data ..."
-msgstr "डेटा लोड हो रहा है ..."
+msgstr ""
 
 #: include/helpers.php:421
 #, fuzzy
@@ -1047,9 +1055,9 @@ msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "कनेक्शन त्रुटियां - SQL सेवा को पुनरारंभ करने का प्रयास करें।"
 
 #: include/helpers.php:451
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s - check logs."
-msgstr "निरस्त क्लाइंट / कनेक्ट: %s - लॉग लॉग।"
+msgstr ""
 
 #: include/helpers.php:458
 #, fuzzy, php-format
@@ -1057,9 +1065,9 @@ msgid "Connection errors: %s"
 msgstr "कनेक्शन त्रुटियां: %s"
 
 #: include/helpers.php:459
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "निरस्त क्लाइंट / कनेक्ट: %s"
+msgstr ""
 
 #: include/helpers.php:460
 #, fuzzy, php-format
@@ -1098,12 +1106,12 @@ msgstr "पैनलों को सक्षम / अक्षम करें
 
 #: include/settings.php:38
 #, fuzzy
-msgid "Analayse Log"
+msgid "Analyze Log"
 msgstr "कैक्टि लॉग का विश्लेषण करें"
 
 #: include/settings.php:44
 #, fuzzy
-msgid "Analayse Logins"
+msgid "Analyze Logins"
 msgstr "पैनल एनालाइज लॉगिन की अनुमति दें"
 
 #: include/settings.php:50
@@ -1113,12 +1121,12 @@ msgstr "सीमारेखा"
 
 #: include/settings.php:56
 #, fuzzy
-msgid "Analayse Database"
+msgid "Analyze Database"
 msgstr "पैनल एनालायस डेटाबेस की अनुमति दें"
 
 #: include/settings.php:62
 #, fuzzy
-msgid "Analayse Objects"
+msgid "Analyze Objects"
 msgstr "कैक्टि लॉग का विश्लेषण करें"
 
 #: include/settings.php:74
@@ -1127,9 +1135,8 @@ msgid "24h Extremes"
 msgstr "24 घंटे चरम पर"
 
 #: include/settings.php:80
-#, fuzzy
 msgid "NTP Status"
-msgstr "NTP स्थिति"
+msgstr ""
 
 #: include/settings.php:86
 #, fuzzy
@@ -1212,9 +1219,8 @@ msgid "Favourite Graphs"
 msgstr "पसंदीदा ग्राफ"
 
 #: include/settings.php:182
-#, fuzzy
 msgid "Syslog Plugin"
-msgstr "Syslog Plugin"
+msgstr ""
 
 #: include/settings.php:203
 #, fuzzy
@@ -1227,9 +1233,8 @@ msgid "Intropage"
 msgstr "इंट्रापेज पैनल"
 
 #: include/settings.php:258
-#, fuzzy
 msgid "Normal User"
-msgstr "सामान्य उपयोगकर्ता"
+msgstr ""
 
 #: include/variables.php:60
 #, fuzzy
@@ -1257,152 +1262,181 @@ msgid "How often"
 msgstr "कितनी बार"
 
 #: include/variables.php:74
-#, fuzzy
 msgid "Automatically by poller"
-msgstr "स्वचालित रूप से मतदाता द्वारा"
+msgstr ""
 
-#: include/variables.php:75 include/variables.php:95
+#: include/variables.php:75 include/variables.php:108
+#, fuzzy
 msgid "Never"
-msgstr "कभी नहीं"
+msgstr "कभी नहीँ"
 
 #: include/variables.php:76
+#, fuzzy
 msgid "Every Minute"
 msgstr "हर मिनट"
 
-#: include/variables.php:77 include/variables.php:96 include/variables.php:130
+#: include/variables.php:77 include/variables.php:109 include/variables.php:143
 #, fuzzy, php-format
 msgid "Every %d Minutes"
 msgstr "प्रत्येक% d मिनट"
 
-#: include/variables.php:78 include/variables.php:97 include/variables.php:131
+#: include/variables.php:78 include/variables.php:110 include/variables.php:144
 #, fuzzy
 msgid "Every Hour"
 msgstr "प्रत्येक घंटे"
 
 #: include/variables.php:83
 #, fuzzy
-msgid "Analyse log -  number of lines"
-msgstr "लॉग का विश्लेषण करें - लाइनों की संख्या"
+msgid "Poller Timeout"
+msgstr "पोल जानकारी"
 
 #: include/variables.php:84
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr ""
+
+#: include/variables.php:88
+#, fuzzy, php-format
+msgid "%d Minute"
+msgstr "प्रत्येक% d मिनट"
+
+#: include/variables.php:89 include/variables.php:90
+#, fuzzy, php-format
+msgid "%d Minutes"
+msgstr "प्रत्येक% d मिनट"
+
+#: include/variables.php:91 include/variables.php:92
+#, php-format
+msgid "%d Seconds"
+msgstr ""
+
+#: include/variables.php:96
+#, fuzzy
+msgid "Analyze log -  number of lines"
+msgstr "लॉग का विश्लेषण करें - लाइनों की संख्या"
+
+#: include/variables.php:97
 #, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr "लॉग की कितनी लाइनों का विश्लेषण किया जाएगा। बड़ी संख्या में धीमा पृष्ठ लोड हो सकता है"
 
-#: include/variables.php:91
+#: include/variables.php:104
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "कितनी बार DB का विश्लेषण करें"
 
-#: include/variables.php:92
+#: include/variables.php:105
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "पोलर इस कार्य को चलाता है। यह लंबे समय तक मतदाता चलाने का कारण बन सकता है।"
 
-#: include/variables.php:98 include/variables.php:132
+#: include/variables.php:111 include/variables.php:145
 #, fuzzy
 msgid "Every Day"
-msgstr "हर रोज"
+msgstr "हर दिन"
 
-#: include/variables.php:99
+#: include/variables.php:112
 #, fuzzy
 msgid "Every Week"
 msgstr "प्रति सप्ताह"
 
-#: include/variables.php:100
+#: include/variables.php:113
 #, fuzzy
 msgid "Every Month"
 msgstr "हर महीने"
 
-#: include/variables.php:105
+#: include/variables.php:118
 #, fuzzy
-msgid "Analyse DB - Level of db check"
+msgid "Analyze DB - Level of db check"
 msgstr "DB का विश्लेषण करें - db जाँच का स्तर"
 
-#: include/variables.php:106
+#: include/variables.php:119
 #, fuzzy
 msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>"
 msgstr "त्वरित - inforccert लिंक के लिए कोई चेक पंक्तियाँ नहीं <br/> फास्ट - केवल ठीक से बंद तालिकाओं की जांच न करें <br/> परिवर्तित - अंतिम जांच से चेक टेबल बदल गए <br/> मध्यम - पंक्तियों के साथ स्कैन <br/> विस्तारित - पूर्ण पंक्तियाँ और कुंजियाँ <br/> <strong>मध्यम और विस्तारित धीमा पृष्ठ लोड का कारण हो सकता है!</strong>"
 
-#: include/variables.php:109
+#: include/variables.php:122
+#, fuzzy
 msgid "Quick"
-msgstr "तेज"
+msgstr "शीघ्र"
 
-#: include/variables.php:110
+#: include/variables.php:123
+#, fuzzy
 msgid "Fast"
-msgstr "तेज"
+msgstr "उपवास"
 
-#: include/variables.php:111
+#: include/variables.php:124
+#, fuzzy
 msgid "Changed"
-msgstr "परिवर्तित"
+msgstr "बदला हुआ"
 
-#: include/variables.php:112
+#: include/variables.php:125
+#, fuzzy
 msgid "Medium"
 msgstr "मध्यम"
 
-#: include/variables.php:113
+#: include/variables.php:126
+#, fuzzy
 msgid "Extended"
-msgstr "विस्तारित"
+msgstr "विस्तृत"
 
-#: include/variables.php:118
+#: include/variables.php:131
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP (समय) जाँच - IP या DNS नाम NTP सर्वर"
 
-#: include/variables.php:119
+#: include/variables.php:132
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "NTP सर्वर का IP या DNS नाम डालें"
 
-#: include/variables.php:126
+#: include/variables.php:139
 #, fuzzy
 msgid "How often check NTP"
 msgstr "कितनी बार NTP देखें"
 
-#: include/variables.php:127
+#: include/variables.php:140
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr "<strong>पोलर इस कार्य को चलाता है। यह लंबे समय तक मतदाता चलाने का कारण बन सकता है।</strong>"
 
-#: include/variables.php:138
+#: include/variables.php:151
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "रखरखाव कार्यों, डाउन डिवाइसेज़ के बारे में व्यवस्थापक जानकारी पैनल, ।।"
 
-#: include/variables.php:139
+#: include/variables.php:152
 #, fuzzy
 msgid "If isn't empty, panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr "यदि खाली नहीं है, तो पैनल शीर्ष पर प्रदर्शित किया जाएगा। आप html टैग (b, i, ...) का उपयोग कर सकते हैं।"
 
-#: include/variables.php:148
+#: include/variables.php:161
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "मेन्ट प्लगइन - डिस्प्ले अलर्ट से कितने दिन पहले"
 
-#: include/variables.php:149
+#: include/variables.php:162
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "कितने दिन?"
 
-#: include/variables.php:152
+#: include/variables.php:165
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "जब रखरखाव शुरू होता है"
 
-#: include/variables.php:153
+#: include/variables.php:166
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "% द डे से पहले"
 
-#: include/variables.php:154 include/variables.php:155
+#: include/variables.php:167 include/variables.php:168
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "% d दिन पहले"
 
 #: intropage_ajax.php:147 intropage_ajax.php:167
-#, fuzzy
 msgid "Panel not found"
-msgstr "पैनल नहीं मिला"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Display only Errors"

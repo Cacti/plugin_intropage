@@ -93,7 +93,7 @@ $intropage_settings = array(	// default values
 		)
 	),
 	'intropage_analyse_log_rows' => array(
-		'friendly_name' => __('Analyse log -  number of lines', 'intropage'),
+		'friendly_name' => __('Analyze log -  number of lines', 'intropage'),
 		'description' => __('How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load', 'intropage'),
 		'method' => 'textbox',
 		'max_length' => 5,
@@ -115,7 +115,7 @@ $intropage_settings = array(	// default values
 		'default' => '604800',
 	),
 	'intropage_analyse_db_level' => array(
-		'friendly_name' => __('Analyse DB - Level of db check', 'intropage'),
+		'friendly_name' => __('Analyze DB - Level of db check', 'intropage'),
 		'description' => __('Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(

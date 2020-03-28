@@ -7,142 +7,141 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-28 12:11-0400\n"
-"PO-Revision-Date: 2020-03-28 12:31-0400\n"
+"POT-Creation-Date: 2020-03-28 17:55-0400\n"
+"PO-Revision-Date: 2020-03-28 12:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: display.php:32
+#: display.php:34
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage - απόρριψη άδειας"
 
-#: display.php:142
+#: display.php:144
 #, fuzzy
 msgid "You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr "Μπορείτε να απενεργοποιήσετε τις σειρές παραπάνω στις <b>Ρυθμίσεις -> Γενικά -> Απόκρυψη του Πίνακα Ελέγχου Cacti</b> και να χρησιμοποιήσετε ολόκληρη τη σελίδα για Intropage <br/><br/>"
 
-#: display.php:284
+#: display.php:286
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
 msgstr "Απενεργοποίηση μετακίνησης πίνακα / Ενεργοποίηση αντιγραφής κειμένου από πίνακα"
 
-#: display.php:289
+#: display.php:291
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
 msgstr "Ενεργοποίηση μετακίνησης πίνακα / Απενεργοποίηση αντιγραφής κειμένου από πίνακα"
 
-#: display.php:345
+#: display.php:347
 #, fuzzy
 msgid "Error reading new data"
 msgstr "Σφάλμα κατά την ανάγνωση νέων δεδομένων"
 
-#: display.php:378
+#: display.php:380
 msgid "Close"
-msgstr "Κλείσιμο"
+msgstr ""
 
-#: display.php:389
+#: display.php:391
 #, fuzzy
 msgid "Panel Details"
 msgstr "Εμφάνιση Λεπτομερειών"
 
-#: display.php:408
+#: display.php:410
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "Απενεργοποίηση μετακίνησης / ενεργοποίησης πλαισίου αντιγραφής από πίνακα"
 
-#: display.php:412
+#: display.php:414
 #, fuzzy
 msgid "Select action ..."
 msgstr "Επιλογή ενέργειας ..."
 
-#: display.php:423
+#: display.php:425
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "Προσθήκη πλαισίου %s"
 
-#: display.php:425
+#: display.php:427
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "Προσθήκη πλαισίου %s %s"
 
-#: display.php:431
+#: display.php:433
 #, fuzzy
 msgid "Refresh Now"
 msgstr "Ανανέωση τώρα"
 
-#: display.php:434 display.php:436
+#: display.php:436 display.php:438
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "Autorefresh Disabled"
 
-#: display.php:440 display.php:442
+#: display.php:442 display.php:444
 #, fuzzy
 msgid "Autorefresh automatic by poller"
 msgstr "Autorefresh Disabled"
 
-#: display.php:446 display.php:448
+#: display.php:448 display.php:450
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "Autorefresh 1 λεπτό"
 
-#: display.php:452 display.php:454
+#: display.php:454 display.php:456
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "Autorefresh 5 Λεπτά"
 
-#: display.php:458 display.php:460
+#: display.php:460 display.php:462
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "Autorefresh 1 ώρα"
 
-#: display.php:464 display.php:467
+#: display.php:466 display.php:469
 #, fuzzy
 msgid "Sort by - red-yellow-green-gray"
 msgstr "Ταξινόμηση κατά - Κόκκινο-Κίτρινο-Πράσινο-Γκρι"
 
-#: display.php:465
+#: display.php:467
 #, fuzzy
 msgid "Sort by panel priority"
 msgstr "Ταξινόμηση κατά προτεραιότητα πίνακα"
 
-#: display.php:468
+#: display.php:470
 #, fuzzy
 msgid "Sort by panel Priority"
 msgstr "Ταξινόμηση κατά προτεραιότητα πίνακα"
 
-#: display.php:471
+#: display.php:473
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "Επαναφέρετε όλες τις προεπιλογές"
 
-#: display.php:483
+#: display.php:485
 #, fuzzy
 msgid "Set intropage as default login page"
 msgstr "Ορισμός intropage ως προεπιλεγμένης σελίδας"
 
-#: display.php:487
+#: display.php:489
 #, fuzzy
 msgid "Set graph as default login page"
 msgstr "Ορίστε το γράφημα ως προεπιλεγμένη σελίδα"
 
-#: display.php:492
-#, fuzzy
+#: display.php:494
 msgid "Display intropage in console"
-msgstr "Εμφάνιση intropage στην κονσόλα"
+msgstr ""
 
-#: display.php:495
+#: display.php:497
 #, fuzzy
 msgid "Display intropage in tab as default page"
 msgstr "Ορισμός intropage ως προεπιλεγμένης σελίδας"
 
-#: display.php:500
+#: display.php:502
 msgid "Go"
 msgstr "Πήγαινε"
 
@@ -151,9 +150,9 @@ msgstr "Πήγαινε"
 msgid "Database check"
 msgstr "Έλεγχος βάσης δεδομένων"
 
-#: include/data.php:48 include/data.php:614 include/data.php:1182
-#: include/data.php:1363 include/data.php:1470 include/data.php:1522
-#: include/data.php:1573 include/data.php:1622 include/data_detail.php:47
+#: include/data.php:48 include/data.php:614 include/data.php:1173
+#: include/data.php:1354 include/data.php:1461 include/data.php:1511
+#: include/data.php:1561 include/data.php:1608 include/data_detail.php:47
 #: include/data_detail.php:1088 include/data_detail.php:1135
 #: include/data_detail.php:1181 include/data_detail.php:1223
 #, fuzzy
@@ -165,17 +164,17 @@ msgstr "Αναμονή για δεδομένα"
 msgid "Last check"
 msgstr "Τελευταίος έλεγχος"
 
-#: include/data.php:54 include/data.php:1208 include/data_detail.php:53
+#: include/data.php:54 include/data.php:1199 include/data_detail.php:53
 #, fuzzy
 msgid "Checked every 15 minutes"
 msgstr "Έλεγχος κάθε 15 λεπτά"
 
-#: include/data.php:56 include/data.php:1210 include/data_detail.php:55
+#: include/data.php:56 include/data.php:1201 include/data_detail.php:55
 #, fuzzy
 msgid "Checked hourly"
 msgstr "Έλεγχος ανά ώρα"
 
-#: include/data.php:58 include/data.php:1212 include/data_detail.php:57
+#: include/data.php:58 include/data.php:1203 include/data_detail.php:57
 #, fuzzy
 msgid "Checked daily"
 msgstr "Έλεγχος καθημερινά"
@@ -191,13 +190,12 @@ msgid "Checked monthly"
 msgstr "Έλεγχος ανά ώρα"
 
 #: include/data.php:64 include/data_detail.php:63
-#, fuzzy
 msgid "Periodic check is disabled"
-msgstr "Ο περιοδικός έλεγχος είναι απενεργοποιημένος"
+msgstr ""
 
 #: include/data.php:78
 #, fuzzy
-msgid "Analyse cacti log"
+msgid "Analyze cacti log"
 msgstr "Αναλύστε το ημερολόγιο κάκτων"
 
 #: include/data.php:94 include/data_detail.php:92
@@ -210,6 +208,7 @@ msgid "Errors"
 msgstr "Σφάλματα"
 
 #: include/data.php:114 include/data_detail.php:114
+#, fuzzy
 msgid "Warnings"
 msgstr "Προειδοποιήσεις"
 
@@ -240,24 +239,24 @@ msgstr "(Σφάλματα και προειδοποίηση στις τελευ�
 
 #: include/data.php:154
 #, fuzzy
-msgid "Analyse logins"
+msgid "Analyze logins"
 msgstr "Αποτυχία σύνδεσης"
 
-#: include/data.php:171
+#: include/data.php:173
 #, fuzzy
 msgid "Failed logins"
 msgstr "Αποτυχία σύνδεσης"
 
-#: include/data.php:193 include/data_detail.php:208
+#: include/data.php:197 include/data_detail.php:208
 #, fuzzy
-msgid "Analyse tree/host/graph"
+msgid "Analyze tree/host/graph"
 msgstr "Αναλύστε το δέντρο / κεντρικό υπολογιστή / γράφημα"
 
-#: include/data.php:210 include/data.php:230 include/data.php:258
-#: include/data.php:293 include/data.php:330 include/data.php:357
-#: include/data.php:376 include/data.php:394 include/data.php:410
-#: include/data.php:425 include/data.php:563 include/data.php:568
-#: include/data.php:1243 include/data_detail.php:224
+#: include/data.php:214 include/data.php:234 include/data.php:262
+#: include/data.php:296 include/data.php:332 include/data.php:358
+#: include/data.php:377 include/data.php:395 include/data.php:411
+#: include/data.php:426 include/data.php:563 include/data.php:568
+#: include/data.php:1234 include/data_detail.php:224
 #: include/data_detail.php:257 include/data_detail.php:297
 #: include/data_detail.php:317 include/data_detail.php:344
 #: include/data_detail.php:387 include/data_detail.php:419
@@ -267,119 +266,121 @@ msgstr "Αναλύστε το δέντρο / κεντρικό υπολογιστ
 msgid "N/A"
 msgstr "Μη Διαθέσιμο"
 
-#: include/data.php:215
+#: include/data.php:219
 #, fuzzy, php-format
 msgid "Devices with the same IP and port: %s"
 msgstr "Συσκευές με την ίδια διεύθυνση IP και θύρα: %s"
 
-#: include/data.php:235
+#: include/data.php:239
 #, fuzzy, php-format
 msgid "Devices with the same description: %s"
 msgstr "Συσκευές με την ίδια περιγραφή: %s"
 
-#: include/data.php:262
+#: include/data.php:266
 #, fuzzy, php-format
 msgid "Orphaned Data Sources: %s"
 msgstr "Ορφανά δεδομένα: %s"
 
-#: include/data.php:274
+#: include/data.php:277
 #, fuzzy, php-format
 msgid "Poller Output Items: %s"
 msgstr "Στοιχεία εξόδου πολλών στοιχείων: %s"
 
-#: include/data.php:296
+#: include/data.php:299
 #, fuzzy, php-format
 msgid "Datasource - bad indexes: %s"
 msgstr "Πηγή δεδομένων - κακή ευρετήρια: %s"
 
-#: include/data.php:333
-#, fuzzy, php-format
+#: include/data.php:335
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "Thold logonly ειδοποίηση / προειδοποίηση: %s"
+msgstr ""
 
-#: include/data.php:345 include/data_detail.php:407
+#: include/data.php:346 include/data_detail.php:407
 #, fuzzy
 msgid "Information only (no warn/error)"
 msgstr "Μόνο πληροφορίες (χωρίς προειδοποίηση / σφάλμα)"
 
-#: include/data.php:360
+#: include/data.php:361
 #, fuzzy, php-format
 msgid "Devices in more than one tree: %s"
 msgstr "Συσκευές σε περισσότερα από ένα δέντρα: %s"
 
-#: include/data.php:379
+#: include/data.php:380
 #, fuzzy, php-format
 msgid "Hosts without graphs: %s"
 msgstr "Χωρίσματα χωρίς γραφήματα: %s"
 
-#: include/data.php:397
+#: include/data.php:398
 #, fuzzy, php-format
 msgid "Hosts without tree: %s"
 msgstr "Χωριστές χωρίς δέντρο: %s"
 
-#: include/data.php:413
+#: include/data.php:414
 #, fuzzy, php-format
 msgid "Hosts with default public/private community: %s"
 msgstr "Υποδοχές με προεπιλεγμένη δημόσια / ιδιωτική κοινότητα: %s"
 
-#: include/data.php:428
+#: include/data.php:429
 #, fuzzy, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
 msgstr "Παρακολούθηση Plugin - Μη ελεγχόμενοι κεντρικοί υπολογιστές: %s"
 
-#: include/data.php:434 include/data_detail.php:542
+#: include/data.php:435 include/data_detail.php:542
 #, fuzzy, php-format
 msgid "Found %s problems"
 msgstr "Βρέθηκαν προβλήματα %s"
 
-#: include/data.php:436 include/data_detail.php:544
+#: include/data.php:437 include/data_detail.php:544
 #, fuzzy
 msgid "Everything OK"
 msgstr "Ολα καλά"
 
-#: include/data.php:448
+#: include/data.php:449
 #, fuzzy
 msgid "Boost statistics"
 msgstr "Στατιστικά ενίσχυσης"
 
-#: include/data.php:501 include/data.php:1262 include/data_detail.php:963
+#: include/data.php:502 include/data.php:1253 include/data_detail.php:963
+#, fuzzy
 msgid "Idle"
-msgstr "Στροφές βραδυπορίας"
+msgstr "Αεργος"
 
-#: include/data.php:503 include/data.php:1260 include/data_detail.php:961
+#: include/data.php:504 include/data.php:1251 include/data_detail.php:961
+#, fuzzy
 msgid "Running"
-msgstr "Τρέχουσες"
+msgstr "Τρέξιμο"
 
-#: include/data.php:505
+#: include/data.php:506
 #, fuzzy
 msgid "Overrun Warning"
 msgstr "Προειδοποίηση υπέρβασης"
 
-#: include/data.php:508
+#: include/data.php:509
 #, fuzzy
 msgid "Timed Out"
 msgstr "Ο χρόνος εξαντλήθηκε"
 
-#: include/data.php:511
+#: include/data.php:512
 msgid "Other"
 msgstr "Άλλο"
 
-#: include/data.php:514
+#: include/data.php:515
 #, fuzzy
 msgid "Never Run"
 msgstr "Ποτέ μην τρέχεις"
 
-#: include/data.php:519
+#: include/data.php:520
 #, fuzzy, php-format
 msgid "Pending Boost Records: %s"
 msgstr "Εκκρεμείς εγγραφές ώθησης: %s"
 
-#: include/data.php:520
+#: include/data.php:521
 #, fuzzy, php-format
 msgid "Archived Boost Records: %s"
 msgstr "Αρχειοθετημένες εγγραφές ώθησης: %s"
 
-#: include/data.php:524 include/data.php:527 include/data.php:529
+#: include/data.php:525 include/data.php:528 include/data.php:530
 #, fuzzy, php-format
 msgid "Total Boost Records: %s"
 msgstr "Συνολικές εγγραφές ώθησης: %s"
@@ -389,9 +390,9 @@ msgstr "Συνολικές εγγραφές ώθησης: %s"
 msgid "Boost On-demand Updating: %s"
 msgstr "Ενίσχυση Ενημέρωση κατ 'απαίτηση: %s"
 
-#: include/data.php:548 include/data.php:827 include/data.php:837
-#: include/data.php:958 include/data.php:967 include/data.php:1094
-#: include/data.php:1266 include/data_detail.php:741
+#: include/data.php:548 include/data.php:823 include/data.php:833
+#: include/data.php:952 include/data.php:961 include/data.php:1087
+#: include/data.php:1257 include/data_detail.php:741
 #: include/data_detail.php:858 include/data_detail.php:967
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
@@ -455,399 +456,401 @@ msgstr "Εξαιρετικά 24 ώρες"
 msgid "Long run<br/>poller"
 msgstr "Μακροπρόθεσμα <br/> poller"
 
-#: include/data.php:652 include/data.php:674 include/data.php:698
-#: include/data.php:723 include/data.php:745 include/data_detail.php:580
+#: include/data.php:651 include/data.php:672 include/data.php:695
+#: include/data.php:719 include/data.php:740 include/data_detail.php:580
 #: include/data_detail.php:601
 #, fuzzy
 msgid "Waiting<br/>for data"
 msgstr "Αναμονή <br/> για τα δεδομένα"
 
-#: include/data.php:682 include/data_detail.php:609
+#: include/data.php:680 include/data_detail.php:609
 #, fuzzy
 msgid "Max thold<br/>triggered:"
 msgstr "Μέγιστο <br/> ενεργοποιήθηκε:"
 
-#: include/data.php:708 include/data_detail.php:634
+#: include/data.php:705 include/data_detail.php:634
 #, fuzzy
 msgid "Poller<br/>output item:"
 msgstr "Poller <br/> στοιχείο εξόδου:"
 
-#: include/data.php:730 include/data_detail.php:655
+#: include/data.php:726 include/data_detail.php:655
 #, fuzzy
 msgid "Failed<br/>polls:"
 msgstr "Απέτυχε <br/> δημοσκοπήσεις:"
 
-#: include/data.php:765
+#: include/data.php:761
 #, fuzzy
 msgid "Datasources: "
 msgstr "Πηγές δεδομένων:"
 
-#: include/data.php:794 include/data_detail.php:711
+#: include/data.php:790 include/data_detail.php:711
 #, fuzzy
 msgid "No untemplated datasources found"
 msgstr "Δεν βρέθηκαν αναπάντεχες πηγές δεδομένων"
 
-#: include/data.php:807 include/data.php:832 include/data_detail.php:723
+#: include/data.php:803 include/data.php:828 include/data_detail.php:723
 msgid "Hosts"
 msgstr "Διακομιστές"
 
-#: include/data.php:824 include/data.php:955 include/data_detail.php:738
+#: include/data.php:820 include/data.php:949 include/data_detail.php:738
 #: include/data_detail.php:855
 msgid "All"
 msgstr "Όλα"
 
-#: include/data.php:825 include/data.php:834 include/data.php:1090
+#: include/data.php:821 include/data.php:830 include/data.php:1083
 #: include/data_detail.php:739
 msgid "Up"
 msgstr "Πάνω"
 
-#: include/data.php:826 include/data.php:835 include/data.php:1091
+#: include/data.php:822 include/data.php:831 include/data.php:1084
 #: include/data_detail.php:740
 msgid "Down"
 msgstr "Πεσμένος"
 
-#: include/data.php:828 include/data.php:836 include/data.php:1268
+#: include/data.php:824 include/data.php:832 include/data.php:1259
 #: include/data_detail.php:742 include/data_detail.php:969
+#, fuzzy
 msgid "Recovering"
-msgstr "αναληπτικό"
+msgstr "Ανάκτηση"
 
-#: include/data.php:856 include/data.php:903 include/data.php:1475
-#: include/data.php:1527 include/data.php:1578 include/data.php:1627
+#: include/data.php:851 include/data.php:897 include/data.php:1465
+#: include/data.php:1515 include/data.php:1565 include/data.php:1612
 #, fuzzy
 msgid "You don't have permissions to any hosts"
 msgstr "Δεν έχετε άδεια"
 
-#: include/data.php:868 include/data.php:873 include/data_detail.php:786
+#: include/data.php:863 include/data.php:868 include/data_detail.php:786
 #, fuzzy
 msgid "Device Templates"
 msgstr "Πρότυπα συσκευών"
 
-#: include/data.php:897 include/data_detail.php:810
+#: include/data.php:892 include/data_detail.php:810
 #, fuzzy
 msgid "No device templates found"
 msgstr "Δεν βρέθηκαν πρότυπα συσκευών"
 
-#: include/data.php:915 include/data.php:920 include/data.php:962
+#: include/data.php:909 include/data.php:914 include/data.php:956
 #: include/data_detail.php:822
+#, fuzzy
 msgid "Thresholds"
-msgstr "Κατώφλια/'Ορια"
+msgstr "Κατώτατα όρια"
 
-#: include/data.php:928 include/data_detail.php:829
+#: include/data.php:922 include/data_detail.php:829
 #, fuzzy
 msgid "Thold plugin not installed/running"
 msgstr "Το Thold plugin δεν είναι εγκατεστημένο / τρέξιμο"
 
-#: include/data.php:931 include/data.php:1064 include/data.php:1127
+#: include/data.php:925 include/data.php:1057 include/data.php:1119
 #, fuzzy
 msgid "You don't have plugin permission"
 msgstr "Δεν έχετε άδεια"
 
-#: include/data.php:956 include/data.php:966 include/data_detail.php:856
+#: include/data.php:950 include/data.php:960 include/data_detail.php:856
 #, fuzzy
 msgid "Breached"
 msgstr "Παραβιάστηκε"
 
-#: include/data.php:957 include/data_detail.php:857
+#: include/data.php:951 include/data_detail.php:857
 #, fuzzy
 msgid "Trigged"
 msgstr "Ενεργοποιήθηκε"
 
-#: include/data.php:964
+#: include/data.php:958
+#, fuzzy
 msgid "OK"
-msgstr "καλά"
+msgstr "Εντάξει"
 
-#: include/data.php:965
+#: include/data.php:959
 #, fuzzy
 msgid "Triggered"
 msgstr "Τριγώνισε"
 
-#: include/data.php:1002
+#: include/data.php:996
 #, fuzzy
 msgid "Cacti version: "
 msgstr "Έκδοση Cacti:"
 
-#: include/data.php:1013
+#: include/data.php:1007
 #, fuzzy
 msgid "Poller type:"
 msgstr "Τύπος στίλβωσης:"
 
-#: include/data.php:1013
-#, fuzzy
+#: include/data.php:1007
 msgid "Spine"
-msgstr "ΣΠΟΝΔΥΛΙΚΗ ΣΤΗΛΗ"
+msgstr ""
 
-#: include/data.php:1015
+#: include/data.php:1009
 #, fuzzy
 msgid "Spine version: "
 msgstr "Έκδοση σπονδυλικής στήλης:"
 
-#: include/data.php:1018
+#: include/data.php:1012
 #, fuzzy
 msgid "You are using incorrect spine version!"
 msgstr "Χρησιμοποιείτε εσφαλμένη έκδοση σπονδυλικής στήλης!"
 
-#: include/data.php:1022
+#: include/data.php:1016
 #, fuzzy
 msgid "Poller type: "
 msgstr "Τύπος στίλβωσης:"
 
-#: include/data.php:1025
+#: include/data.php:1019
 #, fuzzy
 msgid "Running on: "
 msgstr "Εκτέλεση:"
 
-#: include/data.php:1045 include/data.php:1088
+#: include/data.php:1039 include/data.php:1081
 #, fuzzy
 msgid "Mactrack"
 msgstr "Mactrack"
 
-#: include/data.php:1055 include/data.php:1118
+#: include/data.php:1049 include/data.php:1110
 #, fuzzy
 msgid "Mactrack plugin not installed/running"
 msgstr "Το plugin Mactrack δεν είναι εγκατεστημένο / τρέξιμο"
 
-#: include/data.php:1080
+#: include/data.php:1073
 #, fuzzy, php-format
 msgid "All: %s"
 msgstr "Όλα: %s"
 
-#: include/data.php:1081
+#: include/data.php:1074
 #, fuzzy, php-format
 msgid "Up: %s"
 msgstr "Μέχρι: %s"
 
-#: include/data.php:1082
+#: include/data.php:1075
 #, fuzzy, php-format
 msgid "Down: %s"
 msgstr "Κάτω: %s"
 
-#: include/data.php:1083
-#, php-format
+#: include/data.php:1076
+#, fuzzy, php-format
 msgid "Error: %s"
-msgstr "Σφάλμα: <ph id=\"mtc_1\" equiv-text=\"base64:JXM=\"/>"
+msgstr "Σφάλμα: %s"
 
-#: include/data.php:1084
+#: include/data.php:1077
 #, fuzzy, php-format
 msgid "Unknown: %s"
 msgstr "Άγνωστο: %s"
 
-#: include/data.php:1085
+#: include/data.php:1078
 #, php-format
 msgid "Disabled: %s"
 msgstr "Απενεργοποιημένο: %s"
 
-#: include/data.php:1092
+#: include/data.php:1085
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: include/data.php:1093
+#: include/data.php:1086
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: include/data.php:1109 include/data_detail.php:892
+#: include/data.php:1102 include/data_detail.php:892
 #, fuzzy
 msgid "Mactrack sites"
 msgstr "Τοποθεσίες Mactrack"
 
-#: include/data.php:1130 include/data_detail.php:898
+#: include/data.php:1121 include/data_detail.php:898
 msgid "Devices"
 msgstr "Τύπος Συσκευής"
 
-#: include/data.php:1130 include/data_detail.php:898
+#: include/data.php:1121 include/data_detail.php:898
 msgid "Site"
 msgstr "Ιστοσελίδα"
 
-#: include/data.php:1131 include/data_detail.php:899
+#: include/data.php:1122 include/data_detail.php:899
 #, fuzzy
 msgid "IPs"
 msgstr "IPs"
 
-#: include/data.php:1131 include/data_detail.php:899
+#: include/data.php:1122 include/data_detail.php:899
+#, fuzzy
 msgid "Ports"
-msgstr "Λιμένες"
+msgstr "Λιμάνια"
 
-#: include/data.php:1132 include/data_detail.php:900
+#: include/data.php:1123 include/data_detail.php:900
 #, fuzzy
 msgid "MACs"
 msgstr "MACs"
 
-#: include/data.php:1132 include/data_detail.php:900
+#: include/data.php:1123 include/data_detail.php:900
 #, fuzzy
 msgid "Ports up"
 msgstr "Λιμάνια επάνω"
 
-#: include/data.php:1133 include/data_detail.php:901
+#: include/data.php:1124 include/data_detail.php:901
 #, fuzzy
 msgid "Device errors"
 msgstr "Σφάλματα συσκευής"
 
-#: include/data.php:1148 include/data_detail.php:915
+#: include/data.php:1139 include/data_detail.php:915
 #, fuzzy
 msgid "No mactrack sites found"
 msgstr "Δεν βρέθηκαν τοποθεσίες mactrack"
 
-#: include/data.php:1162
+#: include/data.php:1153
 #, fuzzy
 msgid "Time synchronization"
 msgstr "Συγχρονισμός χρόνου"
 
-#: include/data.php:1172
+#: include/data.php:1163
 #, fuzzy
 msgid "Wrong NTP server configured - "
 msgstr "Δεν έχει ρυθμιστεί ο διακομιστής NTP"
 
-#: include/data.php:1176
+#: include/data.php:1167
 #, fuzzy
 msgid "No NTP server configured"
 msgstr "Δεν έχει ρυθμιστεί ο διακομιστής NTP"
 
-#: include/data.php:1187
+#: include/data.php:1178
 #, fuzzy
 msgid "Failed to get NTP time FROM $ntp_server"
 msgstr "Αποτυχία λήψης χρόνου NTP FROM $ ntp_server"
 
-#: include/data.php:1195
+#: include/data.php:1186
 #, fuzzy, php-format
 msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
 msgstr "Ελέγξτε την ώρα. <br/> Είναι διαφορετικό (περισσότερο από %s δευτερόλεπτα) από διακομιστή NTP %s"
 
-#: include/data.php:1197
+#: include/data.php:1188
 #, fuzzy
 msgid "Localtime is equal to NTP server"
 msgstr "Το Localtime ισούται με το διακομιστή NTP"
 
-#: include/data.php:1202
+#: include/data.php:1193
 #, fuzzy
 msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
 msgstr "Δεν είναι δυνατή η επικοινωνία με τον διακομιστή NTP που υποδεικνύεται. <br/> Ελέγξτε τη διαμόρφωσή σας. <br/>"
 
-#: include/data.php:1205
+#: include/data.php:1196
 #, fuzzy
 msgid "Last check: "
 msgstr "Τελευταίος έλεγχος:"
 
-#: include/data.php:1226 include/data_detail.php:928
+#: include/data.php:1217 include/data_detail.php:928
 #, fuzzy
 msgid "Poller info"
 msgstr "Λεπτομερείς πληροφορίες"
 
-#: include/data.php:1232
+#: include/data.php:1223
 #, fuzzy
 msgid "ID/Name/total time/state"
 msgstr "ID / Όνομα / συνολική ώρα / κατάσταση"
 
-#: include/data.php:1258 include/data_detail.php:959
+#: include/data.php:1249 include/data_detail.php:959
 #, fuzzy
 msgid "New/Idle"
 msgstr "Νέα / Αναμονή"
 
-#: include/data.php:1264 include/data_detail.php:965
+#: include/data.php:1255 include/data_detail.php:965
 #, fuzzy
 msgid "Unkn/down"
 msgstr "Απενεργοποίηση / απενεργοποίηση"
 
-#: include/data.php:1275 include/data_detail.php:976
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(all)"
 msgstr "(όλα)"
 
-#: include/data.php:1275 include/data_detail.php:976
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(ok)"
 msgstr "(Εντάξει)"
 
-#: include/data.php:1296
+#: include/data.php:1287
 #, fuzzy, php-format
 msgid "Poller stats (interval %ss)"
 msgstr "Τα στατιστικά στοιχεία (διάστημα %ss)"
 
-#: include/data.php:1346 include/data.php:1348
+#: include/data.php:1337 include/data.php:1339
 #, fuzzy
 msgid " Poller ID: "
 msgstr "Poller ID:"
 
-#: include/data.php:1355
+#: include/data.php:1346
+#, fuzzy
 msgid "ID: "
-msgstr "Αναγνωριστικό:"
+msgstr "ΤΑΥΤΟΤΗΤΑ:"
 
-#: include/data.php:1376 include/data_detail.php:997
+#: include/data.php:1367 include/data_detail.php:997
 #, fuzzy
 msgid "Last thold events"
 msgstr "Τελευταία γεγονότα"
 
-#: include/data.php:1384 include/data_detail.php:1004
+#: include/data.php:1375 include/data_detail.php:1004
 #, fuzzy
 msgid "Plugin Thold isn't installed or started"
 msgstr "Το Plugin Thold δεν έχει εγκατασταθεί ή δεν έχει ξεκινήσει"
 
-#: include/data.php:1420 include/data_detail.php:1039
+#: include/data.php:1411 include/data_detail.php:1039
 #, fuzzy
 msgid "Without events yet"
 msgstr "Χωρίς συμβάντα ακόμα"
 
-#: include/data.php:1434
+#: include/data.php:1425
 #, fuzzy
 msgid "Top5 ping (avg, current)"
 msgstr "Top5 ping (μέση τιμή, τρέχουσα)"
 
-#: include/data.php:1487
+#: include/data.php:1477
 #, fuzzy
 msgid "Top5 worst availability"
 msgstr "Top5 χειρότερη διαθεσιμότητα"
 
-#: include/data.php:1539
+#: include/data.php:1527
 #, fuzzy
 msgid "Top5 worst polling time"
 msgstr "Top5 χειρότερος χρόνος ψηφοφορίας"
 
-#: include/data.php:1590
+#: include/data.php:1577
 #, fuzzy
 msgid "Top5 worst polling ratio (failed, total, ratio)"
 msgstr "Top5 χειρότερη αναλογία δημοσκόπησης (αποτυχημένη, συνολική, αναλογία)"
 
-#: include/data.php:1640 include/data.php:1645 include/settings.php:68
+#: include/data.php:1625 include/data.php:1630 include/settings.php:68
+#, fuzzy
 msgid "Trends"
 msgstr "Τάσεις"
 
-#: include/data.php:1662
+#: include/data.php:1647
 #, fuzzy
 msgid "Tholds triggered"
 msgstr "Το Tholds πυροδότησε"
 
-#: include/data.php:1679
+#: include/data.php:1664
 #, fuzzy
 msgid "Hosts down"
 msgstr "Φιλοξενεί"
 
-#: include/data.php:1708
+#: include/data.php:1693
 #, fuzzy
 msgid "Favourite graph"
 msgstr "Αγαπημένο γράφημα"
 
-#: include/data.php:1801
-#, fuzzy
+#: include/data.php:1789
 msgid "Syslog messages and alerts"
-msgstr "Syslog μηνύματα και ειδοποιήσεις"
+msgstr ""
 
-#: include/data.php:1806
-#, fuzzy
+#: include/data.php:1794
 msgid "Syslog"
-msgstr "Syslog"
+msgstr ""
 
-#: include/data.php:1829
+#: include/data.php:1817
 msgid "Total"
-msgstr "Σύνολο"
+msgstr ""
 
-#: include/data.php:1847
-#, fuzzy
+#: include/data.php:1835
 msgid "Incoming"
-msgstr "Εισερχόμενος"
+msgstr ""
 
-#: include/data.php:1865
+#: include/data.php:1853
 msgid "Alerts"
-msgstr "Προειδοποιήσεις"
+msgstr ""
 
-#: include/data.php:1891
+#: include/data.php:1878
 #, fuzzy
 msgid "Syslog plugin not installed/running"
 msgstr "Το Thold plugin δεν είναι εγκατεστημένο / τρέξιμο"
@@ -859,26 +862,27 @@ msgstr "Έλεγχος βάσης δεδομένων"
 
 #: include/data_detail.php:77
 #, fuzzy
-msgid "Analyse cacti log - detail"
+msgid "Analyze cacti log - detail"
 msgstr "Αναλύστε το ημερολόγιο κάκτων"
 
 #: include/data_detail.php:154
 #, fuzzy
-msgid "Analyse logins - detail"
+msgid "Analyze logins - detail"
 msgstr "Ανάλυση καταγραφής - αριθμός γραμμών"
 
 #: include/data_detail.php:173
+#, fuzzy
 msgid "failed"
-msgstr "απέτυχε"
+msgstr "Απέτυχε"
 
 #: include/data_detail.php:173
+#, fuzzy
 msgid "success"
-msgstr "επιτυχία"
+msgstr "Επιτυχία"
 
 #: include/data_detail.php:196
-#, fuzzy
 msgid "Full log"
-msgstr "Πλήρες αρχείο καταγραφής"
+msgstr ""
 
 #: include/data_detail.php:226
 #, fuzzy, php-format
@@ -906,9 +910,9 @@ msgid "Datasources with bad indexes - %s:"
 msgstr "Πηγή δεδομένων - κακά ευρετήρια %s:"
 
 #: include/data_detail.php:389
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s:"
-msgstr "Thold logonly προειδοποίηση / προειδοποίηση - %s:"
+msgstr ""
 
 #: include/data_detail.php:421
 #, fuzzy, php-format
@@ -943,7 +947,7 @@ msgstr "Εξαιρετικά 24 ώρες"
 #: include/data_detail.php:750
 #, fuzzy
 msgid "RECOVERING"
-msgstr "αναληπτικό"
+msgstr "ΑΝΑΚΑΛΥΨΗ"
 
 #: include/data_detail.php:766
 #, fuzzy
@@ -966,21 +970,21 @@ msgid "TRIGGERED"
 msgstr "ΠΕΡΙΕΧΟΜΕΝΑ"
 
 #: include/data_detail.php:933
+#, fuzzy
 msgid "ID"
-msgstr "ID"
+msgstr "ΤΑΥΤΟΤΗΤΑ:"
 
 #: include/data_detail.php:933
 msgid "Name"
-msgstr "Όνομα"
+msgstr ""
 
 #: include/data_detail.php:934
 msgid "State"
-msgstr "Νομός"
+msgstr ""
 
 #: include/data_detail.php:934
-#, fuzzy
 msgid "Total time"
-msgstr "Συνολικός χρόνος"
+msgstr ""
 
 #: include/data_detail.php:1053
 #, fuzzy
@@ -1022,9 +1026,8 @@ msgid "Show Details"
 msgstr "Εμφάνιση Λεπτομερειών"
 
 #: include/helpers.php:122
-#, fuzzy
 msgid "Loading data ..."
-msgstr "Τα δεδομένα φορτώνονται ..."
+msgstr ""
 
 #: include/helpers.php:421
 #, fuzzy
@@ -1042,9 +1045,9 @@ msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "Σφάλματα σύνδεσης - προσπαθήστε να κάνετε επανεκκίνηση της υπηρεσίας SQL."
 
 #: include/helpers.php:451
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s - check logs."
-msgstr "Απορριμμένοι πελάτες / συνδέσεις: %s - ελέγξτε τα αρχεία καταγραφής."
+msgstr ""
 
 #: include/helpers.php:458
 #, fuzzy, php-format
@@ -1052,9 +1055,9 @@ msgid "Connection errors: %s"
 msgstr "Σφάλματα σύνδεσης: %s"
 
 #: include/helpers.php:459
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "Απογοητευμένοι πελάτες / συνδέσεις: %s"
+msgstr ""
 
 #: include/helpers.php:460
 #, fuzzy, php-format
@@ -1077,8 +1080,9 @@ msgid "Remove from Dashboard"
 msgstr "Κατάργηση από τον πίνακα ελέγχου"
 
 #: include/helpers.php:481
+#, fuzzy
 msgid "Add to Dashboard"
-msgstr "Προσθήκη στον πίνακα ελέγχου"
+msgstr "Προσθήκη στον πίνακα εργαλείων"
 
 #: include/settings.php:31
 #, fuzzy
@@ -1092,12 +1096,12 @@ msgstr "Ενεργοποίηση / απενεργοποίηση πλαισίων
 
 #: include/settings.php:38
 #, fuzzy
-msgid "Analayse Log"
+msgid "Analyze Log"
 msgstr "Αναλύστε το ημερολόγιο κάκτων"
 
 #: include/settings.php:44
 #, fuzzy
-msgid "Analayse Logins"
+msgid "Analyze Logins"
 msgstr "Να επιτρέπεται η καταχώριση αναλυτικών πλαισίων"
 
 #: include/settings.php:50
@@ -1107,12 +1111,12 @@ msgstr "Κατώτατα όρια"
 
 #: include/settings.php:56
 #, fuzzy
-msgid "Analayse Database"
+msgid "Analyze Database"
 msgstr "Να επιτρέπεται η βάση δεδομένων Analayse"
 
 #: include/settings.php:62
 #, fuzzy
-msgid "Analayse Objects"
+msgid "Analyze Objects"
 msgstr "Αναλύστε το ημερολόγιο κάκτων"
 
 #: include/settings.php:74
@@ -1121,9 +1125,8 @@ msgid "24h Extremes"
 msgstr "Εξαιρετικά 24 ώρες"
 
 #: include/settings.php:80
-#, fuzzy
 msgid "NTP Status"
-msgstr "Κατάσταση NTP"
+msgstr ""
 
 #: include/settings.php:86
 #, fuzzy
@@ -1191,8 +1194,9 @@ msgid "Top 5 Worst Failed Ratio"
 msgstr "Top5 χειρότερη διαθεσιμότητα"
 
 #: include/settings.php:164
+#, fuzzy
 msgid "System Information"
-msgstr "Πληροφορίες συστήματος"
+msgstr "Αφήστε το πλαίσιο Πληροφορίες συστήματος"
 
 #: include/settings.php:170
 #, fuzzy
@@ -1205,9 +1209,8 @@ msgid "Favourite Graphs"
 msgstr "Αγαπημένο γράφημα"
 
 #: include/settings.php:182
-#, fuzzy
 msgid "Syslog Plugin"
-msgstr "Syslog Plugin"
+msgstr ""
 
 #: include/settings.php:203
 #, fuzzy
@@ -1221,11 +1224,12 @@ msgstr "Πίνακες Intropage"
 
 #: include/settings.php:258
 msgid "Normal User"
-msgstr "Απλός Χρήστης"
+msgstr ""
 
 #: include/variables.php:60
+#, fuzzy
 msgid "Display settings"
-msgstr "Εμφάνιση ρυθμίσεων"
+msgstr "Ρυθμίσεις οθόνης"
 
 #: include/variables.php:64
 #, fuzzy
@@ -1248,11 +1252,10 @@ msgid "How often"
 msgstr "Πόσο συχνά"
 
 #: include/variables.php:74
-#, fuzzy
 msgid "Automatically by poller"
-msgstr "Αυτόματα από το poller"
+msgstr ""
 
-#: include/variables.php:75 include/variables.php:95
+#: include/variables.php:75 include/variables.php:108
 msgid "Never"
 msgstr "Ποτέ"
 
@@ -1260,138 +1263,163 @@ msgstr "Ποτέ"
 msgid "Every Minute"
 msgstr "Κάθε Λεπτό"
 
-#: include/variables.php:77 include/variables.php:96 include/variables.php:130
+#: include/variables.php:77 include/variables.php:109 include/variables.php:143
 #, php-format
 msgid "Every %d Minutes"
 msgstr "Κάθε %d λεπτά"
 
-#: include/variables.php:78 include/variables.php:97 include/variables.php:131
+#: include/variables.php:78 include/variables.php:110 include/variables.php:144
 #, fuzzy
 msgid "Every Hour"
 msgstr "Κάθε ώρα"
 
 #: include/variables.php:83
 #, fuzzy
-msgid "Analyse log -  number of lines"
-msgstr "Ανάλυση καταγραφής - αριθμός γραμμών"
+msgid "Poller Timeout"
+msgstr "Λεπτομερείς πληροφορίες"
 
 #: include/variables.php:84
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr ""
+
+#: include/variables.php:88
+#, fuzzy, php-format
+msgid "%d Minute"
+msgstr "Κάθε %d λεπτά"
+
+#: include/variables.php:89 include/variables.php:90
+#, fuzzy, php-format
+msgid "%d Minutes"
+msgstr "Κάθε %d λεπτά"
+
+#: include/variables.php:91 include/variables.php:92
+#, php-format
+msgid "%d Seconds"
+msgstr ""
+
+#: include/variables.php:96
+#, fuzzy
+msgid "Analyze log -  number of lines"
+msgstr "Ανάλυση καταγραφής - αριθμός γραμμών"
+
+#: include/variables.php:97
 #, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr "Πόσες γραμμές καταγραφής θα αναλυθούν. Μεγάλος αριθμός ενδέχεται να προκαλέσει αργή φόρτωση σελίδας"
 
-#: include/variables.php:91
+#: include/variables.php:104
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "Πόσο συχνά αναλύεται το DB"
 
-#: include/variables.php:92
+#: include/variables.php:105
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "Ο Poller τρέχει αυτό το έργο. Θα μπορούσε να προκαλέσει μακρόχρονη πορεία."
 
-#: include/variables.php:98 include/variables.php:132
+#: include/variables.php:111 include/variables.php:145
 #, fuzzy
 msgid "Every Day"
 msgstr "Κάθε μέρα"
 
-#: include/variables.php:99
+#: include/variables.php:112
 msgid "Every Week"
 msgstr "Κάθε Εβδομάδα"
 
-#: include/variables.php:100
+#: include/variables.php:113
 msgid "Every Month"
 msgstr "Κάθε Μήνα"
 
-#: include/variables.php:105
+#: include/variables.php:118
 #, fuzzy
-msgid "Analyse DB - Level of db check"
+msgid "Analyze DB - Level of db check"
 msgstr "Ανάλυση DB - Επίπεδο ελέγχου db"
 
-#: include/variables.php:106
+#: include/variables.php:119
 #, fuzzy
 msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>"
 msgstr "Γρήγορη - Όχι Έλεγχος γραμμών για συνδέσμους πληροφοριών <br/> Γρήγορη - ελέγξτε μόνο τους σωστά κλειστούς πίνακες <br/> Αλλαγή - οι πίνακες ελέγχου άλλαξαν από τον τελευταίο έλεγχο <br/> Μεσαίο - με σάρωση σειρών <br/> Εκτεταμένες - πλήρεις σειρές και πλήκτρα <br/> <strong>Μεσαίο και εκτεταμένο μπορεί να προκαλέσει αργή φόρτωση σελίδας!</strong>"
 
-#: include/variables.php:109
+#: include/variables.php:122
+#, fuzzy
 msgid "Quick"
-msgstr "Προεπισκόπηση"
+msgstr "Γρήγορα"
 
-#: include/variables.php:110
+#: include/variables.php:123
 msgid "Fast"
 msgstr "Γρήγορα"
 
-#: include/variables.php:111
+#: include/variables.php:124
+#, fuzzy
 msgid "Changed"
-msgstr "Τροποποιήθηκε"
+msgstr "Αλλαγή"
 
-#: include/variables.php:112
+#: include/variables.php:125
 msgid "Medium"
 msgstr "Μεσαίο"
 
-#: include/variables.php:113
+#: include/variables.php:126
 msgid "Extended"
 msgstr "Εκτεταμένος"
 
-#: include/variables.php:118
+#: include/variables.php:131
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "Έλεγχος NTP (Time) - Όνομα IP ή DNS του διακομιστή NTP"
 
-#: include/variables.php:119
+#: include/variables.php:132
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "Εισαγάγετε το όνομα IP ή DNS του διακομιστή NTP"
 
-#: include/variables.php:126
+#: include/variables.php:139
 #, fuzzy
 msgid "How often check NTP"
 msgstr "Πόσο συχνά ελέγχετε το NTP"
 
-#: include/variables.php:127
+#: include/variables.php:140
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr "<strong>Ο Poller τρέχει αυτό το έργο. Θα μπορούσε να προκαλέσει μακρόχρονη πορεία.</strong>"
 
-#: include/variables.php:138
+#: include/variables.php:151
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "Πίνακας πληροφοριών διαχειριστή σχετικά με εργασίες συντήρησης, συσκευές κάτω, .."
 
-#: include/variables.php:139
+#: include/variables.php:152
 #, fuzzy
 msgid "If isn't empty, panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr "Εάν δεν είναι άδειο, ο πίνακας θα εμφανιστεί στην κορυφή. Μπορείτε να χρησιμοποιήσετε ετικέτες html (b, i, ...)."
 
-#: include/variables.php:148
+#: include/variables.php:161
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "Προσθήκη plugin - πόσες ημέρες πριν από την εμφάνιση της ειδοποίησης"
 
-#: include/variables.php:149
+#: include/variables.php:162
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "Πόσες μέρες?"
 
-#: include/variables.php:152
+#: include/variables.php:165
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "Κατά την έναρξη της συντήρησης"
 
-#: include/variables.php:153
+#: include/variables.php:166
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "% d Ημέρα πριν"
 
-#: include/variables.php:154 include/variables.php:155
+#: include/variables.php:167 include/variables.php:168
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "% d ημέρες πριν"
 
 #: intropage_ajax.php:147 intropage_ajax.php:167
-#, fuzzy
 msgid "Panel not found"
-msgstr "Ο πίνακας δεν βρέθηκε"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Display only Errors"
