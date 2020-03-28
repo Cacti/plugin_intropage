@@ -159,10 +159,12 @@ function intropage_analyse_login() {
 
 	// active users in last hour:
 	$flog = db_fetch_cell('SELECT count(t.result)
-		FROM (SELECT result FROM user_auth
-		         INNER JOIN user_log ON user_auth.username = user_log.username
-		         ORDER BY user_log.time desc LIMIT 10)
-		as t where t.result=0;');
+		FROM (
+			SELECT result FROM user_auth
+			INNER JOIN user_log ON user_auth.username = user_log.username
+			ORDER BY user_log.time DESC LIMIT 10
+		) AS t
+		WHERE t.result=0;');
 
 	if ($flog > 0) {
 		$result['alarm'] = 'red';
@@ -177,8 +179,10 @@ function intropage_analyse_login() {
 		FROM user_log
 		WHERE time > adddate(now(), INTERVAL -1 HOUR)');
 
-	foreach ($sql_result as $row) {
-		$result['data'] .= $row['username'] . '<br/>';
+	if (cacti_sizeof($sql_result)) {
+		foreach ($sql_result as $row) {
+			$result['data'] .= $row['username'] . '<br/>';
+		}
 	}
 
 	return $result;
@@ -201,9 +205,9 @@ function intropage_analyse_tree_host_graph() {
 	// hosts with same IP
 	if ($_SESSION['allowed_hosts'])	{
 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
-		        FROM host
+			FROM host
 			WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
-	    		AND disabled != 'on'
+			AND disabled != 'on'
 			GROUP BY hostname,snmp_port
 			HAVING NoDups > 1");
 
@@ -266,7 +270,6 @@ function intropage_analyse_tree_host_graph() {
 		}
 	}
 
-
 	// empty poller_output
 	$count = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name = 'poller_output' ORDER BY cur_timestamp DESC LIMIT 1");
 
@@ -304,42 +307,40 @@ function intropage_analyse_tree_host_graph() {
 
 	// thold plugin - logonly alert and warning thold
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
-
 	    $sql_result = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
-		uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
-		FROM thold_data AS td
-		INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
-		LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id
-		LEFT JOIN host AS h ON h.id=gl.host_id
-		LEFT JOIN thold_template AS tt ON tt.id=td.thold_template_id
-		LEFT JOIN data_template_data AS dtd ON dtd.local_data_id=td.local_data_id
-		LEFT JOIN data_template_rrd AS dtr ON dtr.id=td.data_template_rrd_id
-		LEFT JOIN user_auth_perms AS uap0 ON (gl.id=uap0.item_id AND uap0.type=1)
-		LEFT JOIN user_auth_perms AS uap1 ON (gl.host_id=uap1.item_id AND uap1.type=3)
-		LEFT JOIN user_auth_perms AS uap2 ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-		LEFT JOIN plugin_thold_threshold_contact as con ON (td.id = con.thold_id)
-		WHERE
-		    td.thold_enabled = 'on' AND
-		    (td.notify_warning is NULL or td.notify_warning=0) AND
-		    (td.notify_alert is NULL or td.notify_alert =0) AND
-		    (td.notify_extra ='' or td.notify_extra is NULL) AND
-		    (td.notify_warning_extra='' or td.notify_warning_extra is NULL)
-		    AND con.contact_id IS NULL
-		    HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
+			uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
+			FROM thold_data AS td
+			INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
+			LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id
+			LEFT JOIN host AS h ON h.id=gl.host_id
+			LEFT JOIN thold_template AS tt ON tt.id=td.thold_template_id
+			LEFT JOIN data_template_data AS dtd ON dtd.local_data_id=td.local_data_id
+			LEFT JOIN data_template_rrd AS dtr ON dtr.id=td.data_template_rrd_id
+			LEFT JOIN user_auth_perms AS uap0 ON (gl.id=uap0.item_id AND uap0.type=1)
+			LEFT JOIN user_auth_perms AS uap1 ON (gl.host_id=uap1.item_id AND uap1.type=3)
+			LEFT JOIN user_auth_perms AS uap2 ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+			LEFT JOIN plugin_thold_threshold_contact as con ON (td.id = con.thold_id)
+			WHERE
+			    td.thold_enabled = 'on' AND
+			    (td.notify_warning is NULL or td.notify_warning=0) AND
+			    (td.notify_alert is NULL or td.notify_alert =0) AND
+			    (td.notify_extra ='' or td.notify_extra is NULL) AND
+			    (td.notify_warning_extra='' or td.notify_warning_extra is NULL)
+			    AND con.contact_id IS NULL
+			    HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
 
 	    $sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
 	    if (cacti_sizeof($sql_result)) {
-		$result['data'] .= __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<br/>';
+			$result['data'] .= __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<br/>';
 
-		if ($result['alarm'] == 'green') {
-		    $result['alarm'] = 'yellow';
-		}
+			if ($result['alarm'] == 'green') {
+				$result['alarm'] = 'yellow';
+			}
 
-		$total_errors += $sql_count;
+			$total_errors += $sql_count;
 	    }
 	}
-
 
 	// below - only information without red/yellow/green
 	$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
@@ -544,7 +545,6 @@ function intropage_boost() {
 		$boost_rrds_updated      = '';
 	}
 
-
 	$result['data'] .= __('Boost On-demand Updating: %s', $rrd_updates == '' ? __('Disabled', 'intropage') : $boost_status_text, 'intropage') . '<br/>';
 
 	$data_length = db_fetch_cell("SELECT data_length
@@ -647,8 +647,7 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
 		}
-	}
-	else {
+	} else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
 
@@ -669,8 +668,7 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 		}
-	}
-	else {
+	} else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
 
@@ -693,8 +691,7 @@ function intropage_extrem() {
 			foreach ($sql_result as $row) {
 				$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 			}
-		}
-		else {
+		} else {
 			$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 		}
 	} else {
@@ -718,8 +715,7 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 		}
-	}
-	else {
+	} else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
 
@@ -740,10 +736,10 @@ function intropage_extrem() {
 		foreach ($sql_result as $row) {
 			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
 		}
-	}
-	else {
+	} else {
 		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 	}
+
 	$result['data'] .= '</td>';
 
 	$result['data'] .= '</tr></table>';
@@ -850,8 +846,7 @@ function intropage_graph_host() {
 		if ($h_down > 0) {
 			$result['alarm'] = 'red';
 		}
-	}
-	else	{
+	} else {
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -896,8 +891,7 @@ function intropage_graph_host_template() {
 		} else {
 			$result['data'] = __('No device templates found', 'intropage');
 		}
-	}
-	else	{
+	} else {
 	    unset($result['pie']);
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
@@ -1053,7 +1047,6 @@ function intropage_mactrack() {
 
 	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {		$result['alarm'] = 'grey';
 		$result['data']  = __('Mactrack plugin not installed/running', 'intropage');
-
 	} else {
 		$mactrack_id = db_fetch_cell("SELECT id
 			FROM plugin_realms
@@ -1110,7 +1103,6 @@ function intropage_mactrack_sites() {
 		'alarm' => 'grey',
 		'data' => '',
 		'detail' => TRUE,
-
 	);
 
 	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
@@ -1119,14 +1111,13 @@ function intropage_mactrack_sites() {
 		$result['detail'] = FALSE;
 	} else {
 		$mactrack_id = db_fetch_cell("SELECT id
-                        FROM plugin_realms
-                        WHERE plugin='mactrack'
-                        AND display LIKE '%view%'");
+			FROM plugin_realms
+			WHERE plugin='mactrack'
+			AND display LIKE '%view%'");
 
 		if (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = '.$_SESSION['sess_user_id'].' AND realm_id =' . ($mactrack_id + 100))) {
 		    	$result['data'] =  __('You don\'t have plugin permission', 'intropage');
-		}
-		else	{
+		} else {
 			$result['data'] .= '<table><tr><td class="rpad">' . __('Site', 'intropage') . '</td><td class="rpad">' . __('Devices', 'intropage') . '</td>';
 			$result['data'] .= '<td class="rpad">' . __('IPs', 'intropage') . '</td><td class="rpad">' . __('Ports', 'intropage') . '</td>';
 			$result['data'] .= '<td class="rpad">' . __('Ports up', 'intropage') . '</td><td class="rpad">' . __('MACs', 'intropage') . '</td>';
@@ -1140,10 +1131,10 @@ function intropage_mactrack_sites() {
 					$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
 					$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
 
-                    			$result['data'] .= $row;
-            			}
+					$result['data'] .= $row;
+				}
 
-            			$result['data'] .= '</table>';
+				$result['data'] .= '</table>';
 			} else {
 				$result['data'] = __('No mactrack sites found', 'intropage');
 			}
@@ -1462,15 +1453,14 @@ function intropage_top5_ping() {
 					$row .= '<td class="rpad texalirig">' . round($host['cur_time'], 2) . 'ms</td></tr>';
 				}
 
-    				$result['data'] .= $row;
+				$result['data'] .= $row;
 			}
+
 			$result['data'] = '<table>' . $result['data'] . '</table>';
-		}
-		else {	// no data
+		} else {	// no data
 			$result['data'] = __('Waiting for data', 'intropage');
 		}
-	}
-	else	{
+	} else {
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -1499,7 +1489,6 @@ function intropage_top5_availability() {
 			LIMIT 5");
 
 		if (cacti_sizeof($sql_worst_host)) {
-
 			foreach ($sql_worst_host as $host) {
 				if ($console_access) {
 					$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
@@ -1521,8 +1510,7 @@ function intropage_top5_availability() {
 		} else {	// no data
 			$result['data'] = __('Waiting for data', 'intropage');
 		}
-	}
-	else	{
+	} else {
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -1552,7 +1540,6 @@ function intropage_top5_polltime() {
 
 		if (cacti_sizeof($sql_worst_host)) {
 			foreach ($sql_worst_host as $host) {
-
 				if ($console_access) {
 					$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 				} else {
@@ -1568,12 +1555,12 @@ function intropage_top5_polltime() {
 
 				$result['data'] .= $row;
 			}
+
 			$result['data'] = '<table>' . $result['data'] . '</table>';
 		} else {	// no data
 			$result['data'] = __('Waiting for data', 'intropage');
 		}
-	}
-	else	{
+	} else {
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -1615,14 +1602,12 @@ function intropage_top5_pollratio() {
 
 				$result['data'] .= $row;
 			}
-			$result['data'] = '<table>' . $result['data'] . '</table>';
 
-		}
-		else {	// no data
+			$result['data'] = '<table>' . $result['data'] . '</table>';
+		} else {	// no data
 			$result['data'] = __('Waiting for data', 'intropage');
 		}
-	}
-	else	{
+	} else {
 	    $result['detail'] = FALSE;
 	    $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -1735,62 +1720,65 @@ function intropage_maint()	{
 
 	$data = '';
 
-        $schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
-        if (cacti_sizeof($schedules)) {
-                foreach ($schedules as $sc) {
-                        $t = time();
+	$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
+	if (cacti_sizeof($schedules)) {
+		foreach ($schedules as $sc) {
+			$t = time();
 
-                        switch ($sc['mtype']) {
-                                case 1:
-                                        if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-                                                $data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-                                                                ' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
+			switch ($sc['mtype']) {
+				case 1:
+					if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+						$data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+							' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
 
-                                                $hosts = db_fetch_assoc_prepared('SELECT description FROM host
-                                                        INNER JOIN plugin_maint_hosts
-                                                        ON host.id=plugin_maint_hosts.host
-                                                        WHERE schedule = ?',
-                                                        array($sc['id']));
+						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+							INNER JOIN plugin_maint_hosts
+							ON host.id=plugin_maint_hosts.host
+							WHERE schedule = ?',
+							array($sc['id']));
 
-                                                if (cacti_sizeof($hosts)) {
-                                                        foreach ($hosts as $host) {
-                                                                $data .= $host['description'] . ', ';
-                                                        }
-                                                }
+						if (cacti_sizeof($hosts)) {
+							foreach ($hosts as $host) {
+								$data .= $host['description'] . ', ';
+							}
+						}
 
-                                                $data = substr($data, 0, -2) .'<br/><br/>';
-                                        }
-                                break;
+						$data = substr($data, 0, -2) .'<br/><br/>';
+					}
+					break;
 
-                                case 2:
-                                        while ($sc['etime'] < $t) {
-                                                $sc['etime'] += $sc['minterval'];
-                                                $sc['stime'] += $sc['minterval'];
-                                        }
+				case 2:
+					while ($sc['etime'] < $t) {
+						$sc['etime'] += $sc['minterval'];
+						$sc['stime'] += $sc['minterval'];
+					}
 
-                                        if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-                                                $data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-                                                                ' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
+					if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+						$data .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+							' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
 
-                                                $hosts = db_fetch_assoc_prepared('SELECT description FROM host
-                                                        INNER JOIN plugin_maint_hosts
-                                                        ON host.id=plugin_maint_hosts.host
-                                                        WHERE schedule = ?',
-                                                        array($sc['id']));
+						$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+							INNER JOIN plugin_maint_hosts
+							ON host.id=plugin_maint_hosts.host
+							WHERE schedule = ?',
+							array($sc['id']));
 
-                                                if (cacti_sizeof($hosts)) {
-                                                        foreach ($hosts as $host) {
-                                                                $data .= $host['description'] . ', ';
-                                                        }
-                                                }
-                                                $data = substr($data, 0, -2) . '<br/><br/>';
-                                        }
-                                break;
-                        }
-                }
-        }
-        return ($data);
-} 
+						if (cacti_sizeof($hosts)) {
+							foreach ($hosts as $host) {
+								$data .= $host['description'] . ', ';
+							}
+						}
+
+						$data = substr($data, 0, -2) . '<br/><br/>';
+					}
+
+					break;
+			}
+		}
+	}
+
+	return ($data);
+}
 
 // ----------------syslog----------------------
 
@@ -1815,8 +1803,8 @@ function intropage_syslog() {
 			'data3' => array(),
 		),
 	);
-	
-	
+
+
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
 		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
 			FROM plugin_intropage_trends
@@ -1830,12 +1818,12 @@ function intropage_syslog() {
 			foreach ($sql as $row) {
 				array_push($result['line']['label1'], $row['date']);
 				array_push($result['line']['data1'], $val - $row['value']);
-				$val = $row['value'];			
+				$val = $row['value'];
 			}
 			array_shift($result['line']['label1']);
 			array_shift($result['line']['data1']);
 		}
-		
+
 		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
 			FROM plugin_intropage_trends
 			WHERE name='syslog_incoming'
@@ -1848,12 +1836,12 @@ function intropage_syslog() {
 			foreach ($sql as $row) {
 				array_push($result['line']['label2'], $row['date']);
 				array_push($result['line']['data2'], $val - $row['value']);
-				$val = $row['value'];			
+				$val = $row['value'];
 			}
 			array_shift($result['line']['label2']);
 			array_shift($result['line']['data2']);
 		}
-		
+
 		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
 			FROM plugin_intropage_trends
 			WHERE name='syslog_alert'
@@ -1869,7 +1857,7 @@ function intropage_syslog() {
 				if ($row['value']-$val > 0)	{
 				    $result['alert'] = 'yellow';
 				}
-				$val = $row['value'];			
+				$val = $row['value'];
 			}
 			array_shift($result['line']['label3']);
 			array_shift($result['line']['data3']);
@@ -1886,8 +1874,7 @@ function intropage_syslog() {
 				$result['line']['label3'] = array_reverse($result['line']['label3']);
 			}
 		}
-	}
-	else	{
+	} else {
 		$result['data']  = __('Syslog plugin not installed/running', 'intropage');
 		unset($result['line']);
 	}
