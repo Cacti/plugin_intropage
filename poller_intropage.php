@@ -90,9 +90,11 @@ if (cacti_sizeof($parms)) {
 intropage_debug('Intropage Starting Checks');
 
 /* silently end if the registered process is still running, or process table missing */
-if (!register_process_start('intropage', 'master', $config['poller_id'], read_config_option('intropage_timeout'))) {
-	intropage_debug('Another Intropage Process Still Running');
-	exit(0);
+if (function_exists('register_process_start')) {
+	if (!register_process_start('intropage', 'master', $config['poller_id'], read_config_option('intropage_timeout'))) {
+		intropage_debug('Another Intropage Process Still Running');
+		exit(0);
+	}
 }
 
 intropage_gather_stats();
@@ -104,7 +106,9 @@ $stats = 'Time:' . round($poller_end-$poller_start, 2) . ' Checks:' . $checks;
 cacti_log('INTROPAGE STATS: ' . $stats, false, 'SYSTEM');
 set_config_option('stats_intropage', $stats);
 
-unregister_process('intropage', 'master', $config['poller_id']);
+if (function_exists('unregister_process')) {
+	unregister_process('intropage', 'master', $config['poller_id']);
+}
 
 exit(0);
 
