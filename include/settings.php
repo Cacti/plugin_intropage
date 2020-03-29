@@ -35,13 +35,13 @@ function intropage_config_form() {
 			'items' => array(
 				'intropage_analyse_log' => array(
 					'value' => '|arg1:intropage_analyse_log|',
-					'friendly_name' => __('Analayse Log', 'intropage'),
+					'friendly_name' => __('Analyze Log', 'intropage'),
 					//    'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
 				'intropage_analyse_login' => array(
 					'value' => '|arg1:intropage_analyse_login|',
-					'friendly_name' => __('Analayse Logins', 'intropage'),
+					'friendly_name' => __('Analyze Logins', 'intropage'),
 					//    'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
@@ -53,13 +53,13 @@ function intropage_config_form() {
 				),
 				'intropage_analyse_db' => array(
 					'value' => '|arg1:intropage_analyse_db|',
-					'friendly_name' => __('Analayse Database', 'intropage'),
+					'friendly_name' => __('Analyze Database', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
 				'intropage_analyse_tree_host_graph' => array(
 					'value' => '|arg1:intropage_analyse_tree_host_graph|',
-					'friendly_name' => __('Analayse Objects', 'intropage'),
+					'friendly_name' => __('Analyze Objects', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
@@ -215,13 +215,13 @@ function intropage_config_form() {
 					'items' => array(
 							'intropage_analyse_log' => array(
 									'value' => '|arg1:intropage_analyse_log|',
-									'friendly_name' => 'Allow panel Analayse log',
+									'friendly_name' => 'Allow panel Analyze log',
 								//    'form_id' => '|arg1:id|',
 									'default' => '1'
 									),
 							'intropage_analyse_login' => array(
 									'value' => '|arg1:intropage_analyse_login|',
-									'friendly_name' => 'Allow panel Analayse logins',
+									'friendly_name' => 'Allow panel Analyze logins',
 								//    'form_id' => '|arg1:id|',
 									'default' => '1'
 									),
@@ -250,7 +250,8 @@ function intropage_config_settings() {
 	global $tabs, $settings, $config, $intropage_settings;
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 
-	$tabs['intropage']     = 'Intropage';
+	$tabs['intropage'] = __('Intropage', 'intropage');
+
 	$settings['intropage'] = $intropage_settings;
 
 	if (function_exists('auth_augment_roles')) {
@@ -287,7 +288,11 @@ function intropage_console_after() {
 	global $config;
 
 	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
-		$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+		$login_opts = db_fetch_cell_prepared('SELECT login_opts
+			FROM user_auth
+			WHERE id = ?',
+			array($_SESSION['sess_user_id']));
+
 		$_SESSION['login_opts'] = $login_opts;
 	}
 

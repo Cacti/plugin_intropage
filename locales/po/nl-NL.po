@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-01 15:20+0200\n"
-"PO-Revision-Date: 2019-06-09 13:52-0400\n"
+"POT-Creation-Date: 2020-03-28 17:55-0400\n"
+"PO-Revision-Date: 2020-03-28 12:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -18,136 +18,130 @@ msgstr ""
 "X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: display.php:30
+#: display.php:34
 #, fuzzy
 msgid "Intropage - permission denied"
 msgstr "Intropage - toestemming geweigerd"
 
-#: display.php:146
+#: display.php:144
 #, fuzzy
-msgid ""
-"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
-"Cacti Dashboard</b> and use the whole page for Intropage "
-msgstr ""
-"U kunt de rijen hierboven uitschakelen in <b>Instellingen -&gt; Algemeen -"
-"&gt; Verberg Cacti Dashboard </b>en gebruik de hele pagina voor Intropage<br/"
-"><br/>"
+msgid "You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "U kunt de rijen hierboven uitschakelen in <b>Instellingen -&gt; Algemeen -&gt; Verberg Cacti Dashboard </b>en gebruik de hele pagina voor Intropage<br/><br/>"
 
-#: display.php:351
+#: display.php:286
 #, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
-msgstr ""
-"Schakel paneelverplaatsing/tekst uit paneel verplaatsen/kopiëren van tekst "
-"uit paneel uit te schakelen"
+msgstr "Schakel paneelverplaatsing/tekst uit paneel verplaatsen/kopiëren van tekst uit paneel uit te schakelen"
 
-#: display.php:356
+#: display.php:291
 #, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr ""
-"Schakel paneel verplaatsen/uitschakelen van tekst kopiëren uit paneel in/"
-"uitschakelen"
+msgstr "Schakel paneel verplaatsen/uitschakelen van tekst kopiëren uit paneel in/uitschakelen"
 
-#: display.php:394
+#: display.php:347
 #, fuzzy
 msgid "Error reading new data"
 msgstr "Fout bij het lezen van nieuwe gegevens"
 
-#: display.php:415
+#: display.php:380
+msgid "Close"
+msgstr ""
+
+#: display.php:391
+#, fuzzy
+msgid "Panel Details"
+msgstr "Toon details"
+
+#: display.php:410
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "Schakel paneel verplaatsen/inschakelen van kopieertekst van paneel uit"
 
-#: display.php:419
+#: display.php:414
 #, fuzzy
 msgid "Select action ..."
 msgstr "Selecteer actie ...."
 
-#: display.php:430
+#: display.php:425
 #, fuzzy, php-format
 msgid "Add panel %s"
 msgstr "Paneel toevoegen %s"
 
-#: display.php:432
+#: display.php:427
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "Toevoegen paneel %s %s %s"
 
-#: display.php:438
+#: display.php:433
 #, fuzzy
 msgid "Refresh Now"
 msgstr "Nu verversen"
 
-#: display.php:441 display.php:443
+#: display.php:436 display.php:438
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "Autorefresh Uitgeschakeld"
 
-#: display.php:447 display.php:449
+#: display.php:442 display.php:444
+#, fuzzy
+msgid "Autorefresh automatic by poller"
+msgstr "Autorefresh Uitgeschakeld"
+
+#: display.php:448 display.php:450
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "Autorefresh 1 minuut"
 
-#: display.php:453 display.php:455
+#: display.php:454 display.php:456
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "Autorefresh 5 minuten"
 
-#: display.php:459 display.php:461
+#: display.php:460 display.php:462
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "Autorefresh 1 uur"
 
-#: display.php:465 display.php:467
-#, fuzzy
-msgid "Display only Errors"
-msgstr "Alleen weergeven Fouten"
-
-#: display.php:471 display.php:473
-#, fuzzy
-msgid "Display Errors and Warnings"
-msgstr "Fouten en waarschuwingen in de weergave en waarschuwingen"
-
-#: display.php:477 display.php:479
-#, fuzzy
-msgid "Display All"
-msgstr "Toon alle"
-
-#: display.php:483 display.php:486
+#: display.php:466 display.php:469
 #, fuzzy
 msgid "Sort by - red-yellow-green-gray"
 msgstr "Sorteer op - Rood-Geel-Geel-Groen-Groen-Grijs"
 
-#: display.php:484
+#: display.php:467
 #, fuzzy
 msgid "Sort by panel priority"
 msgstr "Sorteer op Panel-prioriteit"
 
-#: display.php:487
+#: display.php:470
 #, fuzzy
 msgid "Sort by panel Priority"
 msgstr "Sorteer op Panel-prioriteit"
 
-#: display.php:491
-#, fuzzy
-msgid "Reset panel Order to Default"
-msgstr "Reset paneel Orde naar standaardinstelling"
-
-#: display.php:494
+#: display.php:473
 #, fuzzy
 msgid "Reset All to Default"
 msgstr "Alles terugzetten op standaardwaarden"
 
-#: display.php:506
+#: display.php:485
 #, fuzzy
-msgid "Set intropage as default page"
+msgid "Set intropage as default login page"
 msgstr "Stel intropagina in als standaardpagina"
 
-#: display.php:508
+#: display.php:489
 #, fuzzy
-msgid "Set graph as default page"
+msgid "Set graph as default login page"
 msgstr "Grafiek als standaardpagina instellen"
 
-#: display.php:513
+#: display.php:494
+msgid "Display intropage in console"
+msgstr ""
+
+#: display.php:497
+#, fuzzy
+msgid "Display intropage in tab as default page"
+msgstr "Stel intropagina in als standaardpagina"
+
+#: display.php:502
 msgid "Go"
 msgstr "Ga"
 
@@ -156,739 +150,852 @@ msgstr "Ga"
 msgid "Database check"
 msgstr "Database controle"
 
-#: include/data.php:49 include/data.php:720 include/data.php:1301
-#: include/data.php:1497 include/data.php:1615 include/data.php:1675
-#: include/data.php:1734 include/data.php:1789
+#: include/data.php:48 include/data.php:614 include/data.php:1173
+#: include/data.php:1354 include/data.php:1461 include/data.php:1511
+#: include/data.php:1561 include/data.php:1608 include/data_detail.php:47
+#: include/data_detail.php:1088 include/data_detail.php:1135
+#: include/data_detail.php:1181 include/data_detail.php:1223
 #, fuzzy
 msgid "Waiting for data"
 msgstr "Wachten op gegevens"
 
-#: include/data.php:52
+#: include/data.php:51 include/data_detail.php:50
 #, fuzzy
 msgid "Last check"
 msgstr "Laatst gecontroleerd"
 
-#: include/data.php:55
-#, fuzzy
-msgid "Checked Every 15 minutes"
-msgstr "Gecontroleerd Elke 15 minuten"
-
-#: include/data.php:57
-#, fuzzy
-msgid "Checked Hourly"
-msgstr "Uurlijks gecontroleerd"
-
-#: include/data.php:59
-#, fuzzy
-msgid "Checked Daily"
-msgstr "Dagelijks gecontroleerd"
-
-#: include/data.php:73
-#, fuzzy
-msgid "Analyse cacti log"
-msgstr "Analyseer cacti logboek van cactussen"
-
-#: include/data.php:89
-#, fuzzy
-msgid "Log file not accessible or empty"
-msgstr "Logboekbestand niet toegankelijk of leeg"
-
-#: include/data.php:109
-msgid "Errors"
-msgstr "Foutmeldingen"
-
-#: include/data.php:111
-msgid "Warnings"
-msgstr "Waarschuwingen"
-
-#: include/data.php:116
-#, fuzzy
-msgid "file is larger than 2GB"
-msgstr "bestand is groter dan 2GB"
-
-#: include/data.php:120
-#, fuzzy
-msgid "Log size OK"
-msgstr "Logformaat OK"
-
-#: include/data.php:124
-#, fuzzy
-msgid "Log size is quite large"
-msgstr "De stamgrootte is vrij groot"
-
-#: include/data.php:127
-#, fuzzy
-msgid "Log size"
-msgstr "Afmetingen logboek"
-
-#: include/data.php:131
-#, fuzzy, php-format
-msgid "(Errors and warning in last %s lines)"
-msgstr "(Fouten en waarschuwingen in de laatste %s lijnen)"
-
-#: include/data.php:151
-#, fuzzy
-msgid "Last 10 logins"
-msgstr "Laatste 10 aanmeldingen"
-
-#: include/data.php:158 include/data.php:226 include/data.php:263
-#: include/data.php:311 include/data.php:332 include/data.php:360
-#: include/data.php:391 include/data.php:439 include/data.php:462
-#: include/data.php:483 include/data.php:504 include/data.php:527
-#: include/data.php:670 include/data.php:675 include/data.php:1370
-msgid "N/A"
-msgstr "N/B"
-
-#: include/data.php:175
-#, fuzzy
-msgid "failed"
-msgstr "Mislukt"
-
-#: include/data.php:175
-#, fuzzy
-msgid "success"
-msgstr "Gelukt"
-
-#: include/data.php:178
-#, fuzzy
-msgid "Failed logins"
-msgstr "Mislukte aanmeldingen"
-
-#: include/data.php:209
-#, fuzzy
-msgid "Analyse tree/host/graph"
-msgstr "Analyseer de boom/gastheer/grafiek van de boom/gastheer/grafiek"
-
-#: include/data.php:227
-#, fuzzy, php-format
-msgid "Devices with the same IP and port %s"
-msgstr "Apparaten met hetzelfde IP en poort %s"
-
-#: include/data.php:232
-#, fuzzy, php-format
-msgid "Devices with the same IP and port: %s"
-msgstr "Apparaten met dezelfde IP- en poort: %s"
-
-#: include/data.php:265
-#, fuzzy, php-format
-msgid "Devices with the same description %s"
-msgstr "Apparaten met dezelfde beschrijving %s"
-
-#: include/data.php:270
-#, fuzzy, php-format
-msgid "Devices with the same description: %s"
-msgstr "Apparaten met dezelfde beschrijving: %s"
-
-#: include/data.php:313
-#, fuzzy, php-format
-msgid "Orphaned Data Sources %s"
-msgstr "Verweesde gegevensbronnen %s"
-
-#: include/data.php:317
-#, fuzzy, php-format
-msgid "Orphaned Data Sources: %s"
-msgstr "Verweesde gegevensbronnen: %s"
-
-#: include/data.php:334
-#, fuzzy, php-format
-msgid "Poller output items %s:"
-msgstr "Poller output items %s:"
-
-#: include/data.php:337
-#, fuzzy, php-format
-msgid "Poller Output Items: %s"
-msgstr "Uitgangspunten van de poller: %s"
-
-#: include/data.php:362
-#, fuzzy, php-format
-msgid "Datasource - bad indexes %s:"
-msgstr "Datasource - slechte indexen - slechte indexen %s:"
-
-#: include/data.php:365
-#, fuzzy, php-format
-msgid "Datasource - bad indexes: %s"
-msgstr "Gegevensbron - slechte indexen: %s"
-
-#: include/data.php:381
-#, fuzzy
-msgid "Information only (no warn/error)"
-msgstr "Alleen informatie (geen waarschuwing/fout)"
-
-#: include/data.php:393
-#, fuzzy, php-format
-msgid "Devices in more than one tree %s"
-msgstr "Inrichtingen in meer dan één boom %s"
-
-#: include/data.php:396
-#, fuzzy, php-format
-msgid "Devices in more than one tree: %s"
-msgstr "Apparaten in meer dan één boom: %s"
-
-#: include/data.php:441
-#, fuzzy, php-format
-msgid "Hosts without graphs %s"
-msgstr "Gastheren zonder grafieken %s"
-
-#: include/data.php:444
-#, fuzzy, php-format
-msgid "Hosts without graphs: %s"
-msgstr "Gastheren zonder grafieken: %s"
-
-#: include/data.php:464
-#, fuzzy, php-format
-msgid "Hosts without tree %s"
-msgstr "Gastheren zonder boom %s"
-
-#: include/data.php:467
-#, fuzzy, php-format
-msgid "Hosts without tree: %s"
-msgstr "Gastheren zonder boom: %s"
-
-#: include/data.php:485
-#, fuzzy, php-format
-msgid "Hosts with default public/private community %s"
-msgstr "Verhuurders met standaard publieke/particuliere gemeenschap %'s"
-
-#: include/data.php:488
-#, fuzzy, php-format
-msgid "Hosts with default public/private community: %s"
-msgstr "Verhuurders met standaard publiek/private gemeenschap: %s"
-
-#: include/data.php:506
-#, fuzzy, php-format
-msgid "Plugin Monitor - Unmonitored hosts %s"
-msgstr "Plugin Monitor - Ongecontroleerde hosts %s"
-
-#: include/data.php:509
-#, fuzzy, php-format
-msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "Plugin Monitor - Ongecontroleerde hosts: %s"
-
-#: include/data.php:529
-#, fuzzy, php-format
-msgid "Plugin Thold - Global notify only %s"
-msgstr "Plugin Thold - Wereldwijde kennisgeving slechts %s"
-
-#: include/data.php:532
-#, fuzzy, php-format
-msgid "Plugin Thold - Global notify only: %s"
-msgstr "Plugin Thold - Alleen wereldwijd aanmelden: %s"
-
-#: include/data.php:541
-#, fuzzy, php-format
-msgid "Found %s problems"
-msgstr "Gevonden %s problemen"
-
-#: include/data.php:543
-#, fuzzy
-msgid "Everything OK"
-msgstr "Alles OK"
-
-#: include/data.php:555
-#, fuzzy
-msgid "Boost statistics"
-msgstr "Verbetering van de statistieken"
-
-#: include/data.php:608 include/data.php:1397
-msgid "Idle"
-msgstr "Inactief"
-
-#: include/data.php:610 include/data.php:1395
-msgid "Running"
-msgstr "Actief"
-
-#: include/data.php:612
-#, fuzzy
-msgid "Overrun Warning"
-msgstr "Waarschuwing voor overschrijding"
-
-#: include/data.php:615
-#, fuzzy
-msgid "Timed Out"
-msgstr "Timed Out"
-
-#: include/data.php:618
-msgid "Other"
-msgstr "Andere"
-
-#: include/data.php:621
-msgid "Never Run"
-msgstr "Nooit gedraaid"
-
-#: include/data.php:626
-#, fuzzy, php-format
-msgid "Pending Boost Records: %s"
-msgstr "Hangende Boost Records: %s"
-
-#: include/data.php:627
-#, fuzzy, php-format
-msgid "Archived Boost Records: %s"
-msgstr "Gearchiveerde Boost Records: %s"
-
-#: include/data.php:631 include/data.php:634 include/data.php:636
-#, fuzzy, php-format
-msgid "Total Boost Records: %s"
-msgstr "Totaal aantal Boost Records: %s"
-
-#: include/data.php:655
-#, fuzzy, php-format
-msgid "Boost On-demand Updating: %s"
-msgstr "Boost On-demand Updating: %s"
-
-#: include/data.php:655 include/data.php:925 include/data.php:935
-#: include/data.php:1068 include/data.php:1077 include/data.php:1214
-#: include/data.php:1401
-msgid "Disabled"
-msgstr "Uitgeschakeld"
-
-#: include/data.php:662
-#, fuzzy, php-format
-msgid "Current Boost Table(s) Size: %s"
-msgstr "Huidige Verhogingstabel(s) Grootte: %s"
-
-#: include/data.php:665
-#, fuzzy, php-format
-msgid "Avg Bytes/Record: %s"
-msgstr "Avg Bytes/Record: %s"
-
-#: include/data.php:672
-#, fuzzy, php-format
-msgid "Last run duration: %s"
-msgstr "Laatste looptijd: %s"
-
-#: include/data.php:674
-#, fuzzy, php-format
-msgid "RRD Updates / Max: %s / %s"
-msgstr "RRD Updates / Maximaal: %s / %s / %s"
-
-#: include/data.php:675
-#, fuzzy, php-format
-msgid "Update Frequency: %s"
-msgstr "Update Frequentie: %s"
-
-#: include/data.php:676
-#, fuzzy, php-format
-msgid "Next Start Time: %s"
-msgstr "Volgende starttijd: %s"
-
-#: include/data.php:687
-#, fuzzy
-msgid "CPU utilization"
-msgstr "CPU-gebruik"
-
-#: include/data.php:691
-#, fuzzy
-msgid "CPU load: "
-msgstr "CPU belasting"
-
-#: include/data.php:698
-#, fuzzy
-msgid "This function is not implemented on Windows platforms"
-msgstr "Deze functie is niet geïmplementeerd op Windows-platforms"
-
-#: include/data.php:708
-#, fuzzy
-msgid "Load"
-msgstr "Balanceer proces belasting"
-
-#: include/data.php:733
-#, fuzzy
-msgid "24 hour extrem"
-msgstr "24 uur extreem"
-
-#: include/data.php:741
-#, fuzzy
-msgid "Long run<br/>poller"
-msgstr "Lange termijn<br/>poller"
-
-#: include/data.php:756 include/data.php:777
-#, fuzzy
-msgid "Waiting<br/>for data"
-msgstr "Wachten<br/>op gegevens"
-
-#: include/data.php:785
-#, fuzzy
-msgid "Max thold<br/>triggered:"
-msgstr "Maximaal aantal<br/>geactiveerd:"
-
-#: include/data.php:810
-#, fuzzy
-msgid "Poller<br/>output item:"
-msgstr "<br/>Uitgang voor de poller:"
-
-#: include/data.php:831
-#, fuzzy
-msgid "Failed<br/>polls:"
-msgstr "Mislukte<br/>peilingen:"
-
-#: include/data.php:864
-#, fuzzy
-msgid "Datasources: "
-msgstr "Databronnen"
-
-#: include/data.php:893
-#, fuzzy
-msgid "No untemplated datasources found"
-msgstr "Geen onbeantwoorde gegevensbronnen gevonden"
-
-#: include/data.php:906 include/data.php:930
-msgid "Hosts"
-msgstr "Hosts"
-
-#: include/data.php:922 include/data.php:1065 include/variables.php:89
-msgid "All"
-msgstr "Alle"
-
-#: include/data.php:923 include/data.php:932 include/data.php:1210
-msgid "Up"
-msgstr "Online"
-
-#: include/data.php:924 include/data.php:933 include/data.php:1211
-msgid "Down"
-msgstr "Offline"
-
-#: include/data.php:926 include/data.php:934 include/data.php:1403
-msgid "Recovering"
-msgstr "Herstellende"
-
-#: include/data.php:949
-#, fuzzy
-msgid "RECOVERING"
-msgstr "Herstellende"
-
-#: include/data.php:965
-#, fuzzy
-msgid "DOWN"
-msgstr "Offline"
-
-#: include/data.php:985 include/data.php:989
-msgid "Device Templates"
-msgstr "Apparaattemplate"
-
-#: include/data.php:1013
-#, fuzzy
-msgid "No device templates found"
-msgstr "Geen apparaattemplates gevonden"
-
-#: include/data.php:1025 include/data.php:1030 include/data.php:1072
-#, fuzzy
-msgid "Thresholds"
-msgstr "Drempels"
-
-#: include/data.php:1038
-#, fuzzy
-msgid "Thold plugin not installed/running"
-msgstr "Thold plugin niet geïnstalleerd/loopt niet"
-
-#: include/data.php:1041 include/data.php:1184
-#, fuzzy
-msgid "You don't have permission"
-msgstr "Je hebt geen toestemming..."
-
-#: include/data.php:1066 include/data.php:1075
-#, fuzzy
-msgid "Breached"
-msgstr "Overtreding"
-
-#: include/data.php:1067
-#, fuzzy
-msgid "Trigged"
-msgstr "Getriggerd"
-
-#: include/data.php:1074
-#, fuzzy
-msgid "OK"
-msgstr "Ok"
-
-#: include/data.php:1076
-#, fuzzy
-msgid "Trigerred"
-msgstr "Trigerred"
-
-#: include/data.php:1088
-#, fuzzy
-msgid "BREACHED"
-msgstr "BREACHED"
-
-#: include/data.php:1098
-#, fuzzy
-msgid "TRIGGERED"
-msgstr "GETRIGGERD"
-
-#: include/data.php:1123
-#, fuzzy
-msgid "Cacti version: "
-msgstr "Cacti versie"
-
-#: include/data.php:1134
-#, fuzzy
-msgid "Poller type:"
-msgstr "Poller type"
-
-#: include/data.php:1136
-#, fuzzy
-msgid "Spine version: "
-msgstr "Ruggengraat versie"
-
-#: include/data.php:1139
-#, fuzzy
-msgid "You are using incorrect spine version!"
-msgstr "U gebruikt de verkeerde versie van de wervelkolom!"
-
-#: include/data.php:1143
-#, fuzzy
-msgid "Poller type: "
-msgstr "Poller type"
-
-#: include/data.php:1146
-#, fuzzy
-msgid "Running on: "
-msgstr "Ik ren door"
-
-#: include/data.php:1166 include/data.php:1208
-#, fuzzy
-msgid "Mactrack"
-msgstr "Mactrack"
-
-#: include/data.php:1176 include/data.php:1241
-#, fuzzy
-msgid "Mactrack plugin not installed/running"
-msgstr "Mactrack-plugin is niet geïnstalleerd/loopt niet"
-
-#: include/data.php:1200
-#, fuzzy, php-format
-msgid "All: %s"
-msgstr "Alle: %s"
-
-#: include/data.php:1201
-#, fuzzy, php-format
-msgid "Up: %s"
-msgstr "Omhoog: %s"
-
-#: include/data.php:1202
-#, fuzzy, php-format
-msgid "Down: %s"
-msgstr "Omlaag: %s"
-
-#: include/data.php:1203
-#, fuzzy, php-format
-msgid "Error: %s"
-msgstr "LDAP foutmelding: %s"
-
-#: include/data.php:1204
-#, fuzzy, php-format
-msgid "Unknown: %s"
-msgstr "Onbekend: %s"
-
-#: include/data.php:1205
-#, fuzzy, php-format
-msgid "Disabled: %s"
-msgstr "Gehandicapten: %s"
-
-#: include/data.php:1212
-msgid "Error"
-msgstr "Fout"
-
-#: include/data.php:1213
-msgid "Unknown"
-msgstr "Onbekend"
-
-#: include/data.php:1229
-#, fuzzy
-msgid "Mactrack sites"
-msgstr "Mactrack sites"
-
-#: include/data.php:1243
-msgid "Devices"
-msgstr "Apparaten"
-
-#: include/data.php:1243
-msgid "Site"
-msgstr "Website"
-
-#: include/data.php:1244
-msgid "IPs"
-msgstr "IP adressen"
-
-#: include/data.php:1244
-msgid "Ports"
-msgstr "Havens"
-
-#: include/data.php:1245
-#, fuzzy
-msgid "MACs"
-msgstr "MAC's"
-
-#: include/data.php:1245
-#, fuzzy
-msgid "Ports up"
-msgstr "Poorten omhoog"
-
-#: include/data.php:1246
-#, fuzzy
-msgid "Device errors"
-msgstr "Fouten in het apparaat"
-
-#: include/data.php:1274
-#, fuzzy
-msgid "No mactrack sites found"
-msgstr "Geen mactrack sites gevonden"
-
-#: include/data.php:1287
-#, fuzzy
-msgid "Time synchronization"
-msgstr "Tijdsynchronisatie"
-
-#: include/data.php:1295
-#, fuzzy
-msgid "No NTP server configured"
-msgstr "Geen NTP-server geconfigureerd"
-
-#: include/data.php:1306
-#, fuzzy
-msgid "Failed to get NTP time FROM $ntp_server"
-msgstr "Niet om NTP-tijd te krijgen van $ntp_server $ntp_server"
-
-#: include/data.php:1314
-#, fuzzy, php-format
-msgid ""
-"Please check time.<br/>It is different (more than %s seconds) FROM NTP "
-"server %s"
-msgstr ""
-"Controleer de tijd.<br/>Het is anders (meer dan %s seconden) vanaf NTP-"
-"server %s"
-
-#: include/data.php:1316
-#, fuzzy
-msgid "Localtime is equal to NTP server"
-msgstr "Localtime is gelijk aan de NTP-server"
-
-#: include/data.php:1321
-#, fuzzy
-msgid ""
-"Unable to contact the NTP server indicated.<br/>Please check your "
-"configuration.<br/>"
-msgstr ""
-"Kan geen contact opnemen met de aangegeven NTP-server.<br/>Controleer uw "
-"configuratie<br/>"
-
-#: include/data.php:1324
-#, fuzzy
-msgid "Last check: "
-msgstr "Laatst gecontroleerd"
-
-#: include/data.php:1327
+#: include/data.php:54 include/data.php:1199 include/data_detail.php:53
 #, fuzzy
 msgid "Checked every 15 minutes"
 msgstr "Elke 15 minuten gecontroleerd"
 
-#: include/data.php:1329
+#: include/data.php:56 include/data.php:1201 include/data_detail.php:55
 #, fuzzy
 msgid "Checked hourly"
 msgstr "Uurlijks gecontroleerd"
 
-#: include/data.php:1331
+#: include/data.php:58 include/data.php:1203 include/data_detail.php:57
 #, fuzzy
 msgid "Checked daily"
 msgstr "Dagelijks gecontroleerd"
 
-#: include/data.php:1355
+#: include/data.php:60 include/data_detail.php:59
+#, fuzzy
+msgid "Checked weekly"
+msgstr "Dagelijks gecontroleerd"
+
+#: include/data.php:62 include/data_detail.php:61
+#, fuzzy
+msgid "Checked monthly"
+msgstr "Uurlijks gecontroleerd"
+
+#: include/data.php:64 include/data_detail.php:63
+msgid "Periodic check is disabled"
+msgstr ""
+
+#: include/data.php:78
+#, fuzzy
+msgid "Analyze cacti log"
+msgstr "Analyseer cacti logboek van cactussen"
+
+#: include/data.php:94 include/data_detail.php:92
+#, fuzzy
+msgid "Log file not accessible or empty"
+msgstr "Logboekbestand niet toegankelijk of leeg"
+
+#: include/data.php:112 include/data_detail.php:112
+msgid "Errors"
+msgstr "Foutmeldingen"
+
+#: include/data.php:114 include/data_detail.php:114
+msgid "Warnings"
+msgstr "Waarschuwingen"
+
+#: include/data.php:119 include/data_detail.php:119
+#, fuzzy
+msgid "file is larger than 2GB"
+msgstr "bestand is groter dan 2GB"
+
+#: include/data.php:123 include/data_detail.php:123
+#, fuzzy
+msgid "Log size OK"
+msgstr "Logformaat OK"
+
+#: include/data.php:127 include/data_detail.php:127
+#, fuzzy
+msgid "Log size is quite large"
+msgstr "De stamgrootte is vrij groot"
+
+#: include/data.php:130 include/data_detail.php:130
+#, fuzzy
+msgid "Log size"
+msgstr "Afmetingen logboek"
+
+#: include/data.php:134 include/data_detail.php:134
+#, fuzzy, php-format
+msgid "(Errors and warning in last %s lines)"
+msgstr "(Fouten en waarschuwingen in de laatste %s lijnen)"
+
+#: include/data.php:154
+#, fuzzy
+msgid "Analyze logins"
+msgstr "Mislukte aanmeldingen"
+
+#: include/data.php:173
+#, fuzzy
+msgid "Failed logins"
+msgstr "Mislukte aanmeldingen"
+
+#: include/data.php:197 include/data_detail.php:208
+#, fuzzy
+msgid "Analyze tree/host/graph"
+msgstr "Analyseer de boom/gastheer/grafiek van de boom/gastheer/grafiek"
+
+#: include/data.php:214 include/data.php:234 include/data.php:262
+#: include/data.php:296 include/data.php:332 include/data.php:358
+#: include/data.php:377 include/data.php:395 include/data.php:411
+#: include/data.php:426 include/data.php:563 include/data.php:568
+#: include/data.php:1234 include/data_detail.php:224
+#: include/data_detail.php:257 include/data_detail.php:297
+#: include/data_detail.php:317 include/data_detail.php:344
+#: include/data_detail.php:387 include/data_detail.php:419
+#: include/data_detail.php:465 include/data_detail.php:487
+#: include/data_detail.php:508 include/data_detail.php:528
+#: include/data_detail.php:944
+msgid "N/A"
+msgstr "N/B"
+
+#: include/data.php:219
+#, fuzzy, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Apparaten met dezelfde IP- en poort: %s"
+
+#: include/data.php:239
+#, fuzzy, php-format
+msgid "Devices with the same description: %s"
+msgstr "Apparaten met dezelfde beschrijving: %s"
+
+#: include/data.php:266
+#, fuzzy, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Verweesde gegevensbronnen: %s"
+
+#: include/data.php:277
+#, fuzzy, php-format
+msgid "Poller Output Items: %s"
+msgstr "Uitgangspunten van de poller: %s"
+
+#: include/data.php:299
+#, fuzzy, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Gegevensbron - slechte indexen: %s"
+
+#: include/data.php:335
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr ""
+
+#: include/data.php:346 include/data_detail.php:407
+#, fuzzy
+msgid "Information only (no warn/error)"
+msgstr "Alleen informatie (geen waarschuwing/fout)"
+
+#: include/data.php:361
+#, fuzzy, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Apparaten in meer dan één boom: %s"
+
+#: include/data.php:380
+#, fuzzy, php-format
+msgid "Hosts without graphs: %s"
+msgstr "Gastheren zonder grafieken: %s"
+
+#: include/data.php:398
+#, fuzzy, php-format
+msgid "Hosts without tree: %s"
+msgstr "Gastheren zonder boom: %s"
+
+#: include/data.php:414
+#, fuzzy, php-format
+msgid "Hosts with default public/private community: %s"
+msgstr "Verhuurders met standaard publiek/private gemeenschap: %s"
+
+#: include/data.php:429
+#, fuzzy, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Plugin Monitor - Ongecontroleerde hosts: %s"
+
+#: include/data.php:435 include/data_detail.php:542
+#, fuzzy, php-format
+msgid "Found %s problems"
+msgstr "Gevonden %s problemen"
+
+#: include/data.php:437 include/data_detail.php:544
+#, fuzzy
+msgid "Everything OK"
+msgstr "Alles OK"
+
+#: include/data.php:449
+#, fuzzy
+msgid "Boost statistics"
+msgstr "Verbetering van de statistieken"
+
+#: include/data.php:502 include/data.php:1253 include/data_detail.php:963
+msgid "Idle"
+msgstr "Inactief"
+
+#: include/data.php:504 include/data.php:1251 include/data_detail.php:961
+msgid "Running"
+msgstr "Actief"
+
+#: include/data.php:506
+#, fuzzy
+msgid "Overrun Warning"
+msgstr "Waarschuwing voor overschrijding"
+
+#: include/data.php:509
+#, fuzzy
+msgid "Timed Out"
+msgstr "Timed Out"
+
+#: include/data.php:512
+msgid "Other"
+msgstr "Andere"
+
+#: include/data.php:515
+msgid "Never Run"
+msgstr "Nooit gedraaid"
+
+#: include/data.php:520
+#, fuzzy, php-format
+msgid "Pending Boost Records: %s"
+msgstr "Hangende Boost Records: %s"
+
+#: include/data.php:521
+#, fuzzy, php-format
+msgid "Archived Boost Records: %s"
+msgstr "Gearchiveerde Boost Records: %s"
+
+#: include/data.php:525 include/data.php:528 include/data.php:530
+#, fuzzy, php-format
+msgid "Total Boost Records: %s"
+msgstr "Totaal aantal Boost Records: %s"
+
+#: include/data.php:548
+#, fuzzy, php-format
+msgid "Boost On-demand Updating: %s"
+msgstr "Boost On-demand Updating: %s"
+
+#: include/data.php:548 include/data.php:823 include/data.php:833
+#: include/data.php:952 include/data.php:961 include/data.php:1087
+#: include/data.php:1257 include/data_detail.php:741
+#: include/data_detail.php:858 include/data_detail.php:967
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: include/data.php:555
+#, fuzzy, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Huidige Verhogingstabel(s) Grootte: %s"
+
+#: include/data.php:558
+#, fuzzy, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Avg Bytes/Record: %s"
+
+#: include/data.php:565
+#, fuzzy, php-format
+msgid "Last run duration: %s"
+msgstr "Laatste looptijd: %s"
+
+#: include/data.php:567
+#, fuzzy, php-format
+msgid "RRD Updates / Max: %s / %s"
+msgstr "RRD Updates / Maximaal: %s / %s / %s"
+
+#: include/data.php:568
+#, fuzzy, php-format
+msgid "Update Frequency: %s"
+msgstr "Update Frequentie: %s"
+
+#: include/data.php:569
+#, fuzzy, php-format
+msgid "Next Start Time: %s"
+msgstr "Volgende starttijd: %s"
+
+#: include/data.php:580
+#, fuzzy
+msgid "CPU utilization"
+msgstr "CPU-gebruik"
+
+#: include/data.php:585
+#, fuzzy
+msgid "CPU load: "
+msgstr "CPU belasting"
+
+#: include/data.php:592
+#, fuzzy
+msgid "This function is not implemented on Windows platforms"
+msgstr "Deze functie is niet geïmplementeerd op Windows-platforms"
+
+#: include/data.php:602
+#, fuzzy
+msgid "Load"
+msgstr "Balanceer proces belasting"
+
+#: include/data.php:627
+#, fuzzy
+msgid "24 hour extrem"
+msgstr "24 uur extreem"
+
+#: include/data.php:636 include/data_detail.php:565
+#, fuzzy
+msgid "Long run<br/>poller"
+msgstr "Lange termijn<br/>poller"
+
+#: include/data.php:651 include/data.php:672 include/data.php:695
+#: include/data.php:719 include/data.php:740 include/data_detail.php:580
+#: include/data_detail.php:601
+#, fuzzy
+msgid "Waiting<br/>for data"
+msgstr "Wachten<br/>op gegevens"
+
+#: include/data.php:680 include/data_detail.php:609
+#, fuzzy
+msgid "Max thold<br/>triggered:"
+msgstr "Maximaal aantal<br/>geactiveerd:"
+
+#: include/data.php:705 include/data_detail.php:634
+#, fuzzy
+msgid "Poller<br/>output item:"
+msgstr "<br/>Uitgang voor de poller:"
+
+#: include/data.php:726 include/data_detail.php:655
+#, fuzzy
+msgid "Failed<br/>polls:"
+msgstr "Mislukte<br/>peilingen:"
+
+#: include/data.php:761
+#, fuzzy
+msgid "Datasources: "
+msgstr "Databronnen"
+
+#: include/data.php:790 include/data_detail.php:711
+#, fuzzy
+msgid "No untemplated datasources found"
+msgstr "Geen onbeantwoorde gegevensbronnen gevonden"
+
+#: include/data.php:803 include/data.php:828 include/data_detail.php:723
+msgid "Hosts"
+msgstr "Hosts"
+
+#: include/data.php:820 include/data.php:949 include/data_detail.php:738
+#: include/data_detail.php:855
+msgid "All"
+msgstr "Alle"
+
+#: include/data.php:821 include/data.php:830 include/data.php:1083
+#: include/data_detail.php:739
+msgid "Up"
+msgstr "Online"
+
+#: include/data.php:822 include/data.php:831 include/data.php:1084
+#: include/data_detail.php:740
+msgid "Down"
+msgstr "Offline"
+
+#: include/data.php:824 include/data.php:832 include/data.php:1259
+#: include/data_detail.php:742 include/data_detail.php:969
+msgid "Recovering"
+msgstr "Herstellende"
+
+#: include/data.php:851 include/data.php:897 include/data.php:1465
+#: include/data.php:1515 include/data.php:1565 include/data.php:1612
+#, fuzzy
+msgid "You don't have permissions to any hosts"
+msgstr "Je hebt geen toestemming..."
+
+#: include/data.php:863 include/data.php:868 include/data_detail.php:786
+msgid "Device Templates"
+msgstr "Apparaattemplate"
+
+#: include/data.php:892 include/data_detail.php:810
+#, fuzzy
+msgid "No device templates found"
+msgstr "Geen apparaattemplates gevonden"
+
+#: include/data.php:909 include/data.php:914 include/data.php:956
+#: include/data_detail.php:822
+#, fuzzy
+msgid "Thresholds"
+msgstr "Drempels"
+
+#: include/data.php:922 include/data_detail.php:829
+#, fuzzy
+msgid "Thold plugin not installed/running"
+msgstr "Thold plugin niet geïnstalleerd/loopt niet"
+
+#: include/data.php:925 include/data.php:1057 include/data.php:1119
+#, fuzzy
+msgid "You don't have plugin permission"
+msgstr "Je hebt geen toestemming..."
+
+#: include/data.php:950 include/data.php:960 include/data_detail.php:856
+#, fuzzy
+msgid "Breached"
+msgstr "Overtreding"
+
+#: include/data.php:951 include/data_detail.php:857
+#, fuzzy
+msgid "Trigged"
+msgstr "Getriggerd"
+
+#: include/data.php:958
+#, fuzzy
+msgid "OK"
+msgstr "Ok"
+
+#: include/data.php:959
+#, fuzzy
+msgid "Triggered"
+msgstr "Trigerred"
+
+#: include/data.php:996
+#, fuzzy
+msgid "Cacti version: "
+msgstr "Cacti versie"
+
+#: include/data.php:1007
+#, fuzzy
+msgid "Poller type:"
+msgstr "Poller type"
+
+#: include/data.php:1007
+msgid "Spine"
+msgstr ""
+
+#: include/data.php:1009
+#, fuzzy
+msgid "Spine version: "
+msgstr "Ruggengraat versie"
+
+#: include/data.php:1012
+#, fuzzy
+msgid "You are using incorrect spine version!"
+msgstr "U gebruikt de verkeerde versie van de wervelkolom!"
+
+#: include/data.php:1016
+#, fuzzy
+msgid "Poller type: "
+msgstr "Poller type"
+
+#: include/data.php:1019
+#, fuzzy
+msgid "Running on: "
+msgstr "Ik ren door"
+
+#: include/data.php:1039 include/data.php:1081
+#, fuzzy
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: include/data.php:1049 include/data.php:1110
+#, fuzzy
+msgid "Mactrack plugin not installed/running"
+msgstr "Mactrack-plugin is niet geïnstalleerd/loopt niet"
+
+#: include/data.php:1073
+#, fuzzy, php-format
+msgid "All: %s"
+msgstr "Alle: %s"
+
+#: include/data.php:1074
+#, fuzzy, php-format
+msgid "Up: %s"
+msgstr "Omhoog: %s"
+
+#: include/data.php:1075
+#, fuzzy, php-format
+msgid "Down: %s"
+msgstr "Omlaag: %s"
+
+#: include/data.php:1076
+#, fuzzy, php-format
+msgid "Error: %s"
+msgstr "LDAP foutmelding: %s"
+
+#: include/data.php:1077
+#, fuzzy, php-format
+msgid "Unknown: %s"
+msgstr "Onbekend: %s"
+
+#: include/data.php:1078
+#, fuzzy, php-format
+msgid "Disabled: %s"
+msgstr "Gehandicapten: %s"
+
+#: include/data.php:1085
+msgid "Error"
+msgstr "Fout"
+
+#: include/data.php:1086
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: include/data.php:1102 include/data_detail.php:892
+#, fuzzy
+msgid "Mactrack sites"
+msgstr "Mactrack sites"
+
+#: include/data.php:1121 include/data_detail.php:898
+msgid "Devices"
+msgstr "Apparaten"
+
+#: include/data.php:1121 include/data_detail.php:898
+msgid "Site"
+msgstr "Website"
+
+#: include/data.php:1122 include/data_detail.php:899
+msgid "IPs"
+msgstr "IP adressen"
+
+#: include/data.php:1122 include/data_detail.php:899
+msgid "Ports"
+msgstr "Havens"
+
+#: include/data.php:1123 include/data_detail.php:900
+#, fuzzy
+msgid "MACs"
+msgstr "MAC's"
+
+#: include/data.php:1123 include/data_detail.php:900
+#, fuzzy
+msgid "Ports up"
+msgstr "Poorten omhoog"
+
+#: include/data.php:1124 include/data_detail.php:901
+#, fuzzy
+msgid "Device errors"
+msgstr "Fouten in het apparaat"
+
+#: include/data.php:1139 include/data_detail.php:915
+#, fuzzy
+msgid "No mactrack sites found"
+msgstr "Geen mactrack sites gevonden"
+
+#: include/data.php:1153
+#, fuzzy
+msgid "Time synchronization"
+msgstr "Tijdsynchronisatie"
+
+#: include/data.php:1163
+#, fuzzy
+msgid "Wrong NTP server configured - "
+msgstr "Geen NTP-server geconfigureerd"
+
+#: include/data.php:1167
+#, fuzzy
+msgid "No NTP server configured"
+msgstr "Geen NTP-server geconfigureerd"
+
+#: include/data.php:1178
+#, fuzzy
+msgid "Failed to get NTP time FROM $ntp_server"
+msgstr "Niet om NTP-tijd te krijgen van $ntp_server $ntp_server"
+
+#: include/data.php:1186
+#, fuzzy, php-format
+msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
+msgstr "Controleer de tijd.<br/>Het is anders (meer dan %s seconden) vanaf NTP-server %s"
+
+#: include/data.php:1188
+#, fuzzy
+msgid "Localtime is equal to NTP server"
+msgstr "Localtime is gelijk aan de NTP-server"
+
+#: include/data.php:1193
+#, fuzzy
+msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
+msgstr "Kan geen contact opnemen met de aangegeven NTP-server.<br/>Controleer uw configuratie<br/>"
+
+#: include/data.php:1196
+#, fuzzy
+msgid "Last check: "
+msgstr "Laatst gecontroleerd"
+
+#: include/data.php:1217 include/data_detail.php:928
 #, fuzzy
 msgid "Poller info"
 msgstr "Poller info"
 
-#: include/data.php:1359
+#: include/data.php:1223
 #, fuzzy
 msgid "ID/Name/total time/state"
 msgstr "ID/naam/totaal tijd/totaal tijd/staat"
 
-#: include/data.php:1393
+#: include/data.php:1249 include/data_detail.php:959
 msgid "New/Idle"
 msgstr "Nieuw/Inactief"
 
-#: include/data.php:1399
+#: include/data.php:1255 include/data_detail.php:965
 #, fuzzy
 msgid "Unkn/down"
 msgstr "Onkennig/neergeslagen"
 
-#: include/data.php:1410
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(all)"
 msgstr "(alle)"
 
-#: include/data.php:1410
+#: include/data.php:1266 include/data_detail.php:976
 #, fuzzy
 msgid "(ok)"
 msgstr "(ok)"
 
-#: include/data.php:1431
+#: include/data.php:1287
 #, fuzzy, php-format
 msgid "Poller stats (interval %ss)"
 msgstr "Pollerstatistieken (interval %ss)"
 
-#: include/data.php:1480 include/data.php:1482
+#: include/data.php:1337 include/data.php:1339
 #, fuzzy
 msgid " Poller ID: "
 msgstr " Poller ID"
 
-#: include/data.php:1489
+#: include/data.php:1346
 msgid "ID: "
 msgstr "ID: "
 
-#: include/data.php:1510
+#: include/data.php:1367 include/data_detail.php:997
 #, fuzzy
 msgid "Last thold events"
 msgstr "Laatste belangrijke gebeurtenissen"
 
-#: include/data.php:1518
+#: include/data.php:1375 include/data_detail.php:1004
 #, fuzzy
 msgid "Plugin Thold isn't installed or started"
 msgstr "Plugin Thold is niet geïnstalleerd of gestart"
 
-#: include/data.php:1553
+#: include/data.php:1411 include/data_detail.php:1039
 #, fuzzy
 msgid "Without events yet"
 msgstr "Zonder evenementen nog niet"
 
-#: include/data.php:1567
+#: include/data.php:1425
 #, fuzzy
 msgid "Top5 ping (avg, current)"
 msgstr "Top5 ping (gemiddeld, actueel)"
 
-#: include/data.php:1627
+#: include/data.php:1477
 #, fuzzy
 msgid "Top5 worst availability"
 msgstr "Top5 slechtste beschikbaarheid"
 
-#: include/data.php:1687
+#: include/data.php:1527
 #, fuzzy
 msgid "Top5 worst polling time"
 msgstr "Top5 slechtste polling tijd"
 
-#: include/data.php:1746
+#: include/data.php:1577
 #, fuzzy
 msgid "Top5 worst polling ratio (failed, total, ratio)"
 msgstr "Top5 slechtste peilingsverhouding (mislukt, totaal, verhouding)"
 
-#: include/data.php:1801 include/data.php:1805
+#: include/data.php:1625 include/data.php:1630 include/settings.php:68
 #, fuzzy
 msgid "Trends"
 msgstr "Trends"
 
-#: include/data.php:1822
+#: include/data.php:1647
 #, fuzzy
 msgid "Tholds triggered"
 msgstr "Draden geactiveerd"
 
-#: include/data.php:1840
+#: include/data.php:1664
 #, fuzzy
 msgid "Hosts down"
 msgstr "Gastheren neer"
 
-#: include/data.php:1869
+#: include/data.php:1693
 #, fuzzy
 msgid "Favourite graph"
 msgstr "Favoriete grafiek"
+
+#: include/data.php:1789
+msgid "Syslog messages and alerts"
+msgstr ""
+
+#: include/data.php:1794
+msgid "Syslog"
+msgstr ""
+
+#: include/data.php:1817
+msgid "Total"
+msgstr ""
+
+#: include/data.php:1835
+msgid "Incoming"
+msgstr ""
+
+#: include/data.php:1853
+msgid "Alerts"
+msgstr ""
+
+#: include/data.php:1878
+#, fuzzy
+msgid "Syslog plugin not installed/running"
+msgstr "Thold plugin niet geïnstalleerd/loopt niet"
+
+#: include/data_detail.php:37
+#, fuzzy
+msgid "Database check - detail"
+msgstr "Database controle"
+
+#: include/data_detail.php:77
+#, fuzzy
+msgid "Analyze cacti log - detail"
+msgstr "Analyseer cacti logboek van cactussen"
+
+#: include/data_detail.php:154
+#, fuzzy
+msgid "Analyze logins - detail"
+msgstr "Analyseer logboek - aantal lijnen"
+
+#: include/data_detail.php:173
+#, fuzzy
+msgid "failed"
+msgstr "Mislukt"
+
+#: include/data_detail.php:173
+#, fuzzy
+msgid "success"
+msgstr "Gelukt"
+
+#: include/data_detail.php:196
+msgid "Full log"
+msgstr ""
+
+#: include/data_detail.php:226
+#, fuzzy, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Apparaten met hetzelfde IP en poort %s"
+
+#: include/data_detail.php:259
+#, fuzzy, php-format
+msgid "Devices with the same description - %s"
+msgstr "Apparaten met dezelfde beschrijving %s"
+
+#: include/data_detail.php:299
+#, fuzzy, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Verweesde gegevensbronnen %s"
+
+#: include/data_detail.php:319
+#, fuzzy, php-format
+msgid "Poller output items - %s:"
+msgstr "Poller output items %s:"
+
+#: include/data_detail.php:346
+#, fuzzy, php-format
+msgid "Datasources with bad indexes - %s:"
+msgstr "Datasource - slechte indexen - slechte indexen %s:"
+
+#: include/data_detail.php:389
+#, php-format
+msgid "Thold logonly alert/warning - %s:"
+msgstr ""
+
+#: include/data_detail.php:421
+#, fuzzy, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Inrichtingen in meer dan één boom %s"
+
+#: include/data_detail.php:467
+#, fuzzy, php-format
+msgid "Hosts without graphs - %s"
+msgstr "Gastheren zonder grafieken %s"
+
+#: include/data_detail.php:489
+#, fuzzy, php-format
+msgid "Hosts without tree - %s"
+msgstr "Gastheren zonder boom %s"
+
+#: include/data_detail.php:510
+#, fuzzy, php-format
+msgid "Hosts with default public/private community - %s"
+msgstr "Verhuurders met standaard publieke/particuliere gemeenschap %'s"
+
+#: include/data_detail.php:530
+#, fuzzy, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Plugin Monitor - Ongecontroleerde hosts %s"
+
+#: include/data_detail.php:557
+#, fuzzy
+msgid "48 hour extrem"
+msgstr "24 uur extreem"
+
+#: include/data_detail.php:750
+#, fuzzy
+msgid "RECOVERING"
+msgstr "Herstellende"
+
+#: include/data_detail.php:766
+#, fuzzy
+msgid "DOWN"
+msgstr "Offline"
+
+#: include/data_detail.php:832
+#, fuzzy
+msgid "You don't have permission"
+msgstr "Je hebt geen toestemming..."
+
+#: include/data_detail.php:864
+#, fuzzy
+msgid "BREACHED"
+msgstr "BREACHED"
+
+#: include/data_detail.php:874
+#, fuzzy
+msgid "TRIGGERED"
+msgstr "GETRIGGERD"
+
+#: include/data_detail.php:933
+#, fuzzy
+msgid "ID"
+msgstr "ID: "
+
+#: include/data_detail.php:933
+msgid "Name"
+msgstr ""
+
+#: include/data_detail.php:934
+msgid "State"
+msgstr ""
+
+#: include/data_detail.php:934
+msgid "Total time"
+msgstr ""
+
+#: include/data_detail.php:1053
+#, fuzzy
+msgid "Top 20 hosts with the worst ping (avg, current)"
+msgstr "Top5 ping (gemiddeld, actueel)"
+
+#: include/data_detail.php:1101
+#, fuzzy
+msgid "Top 20 hosts with the worst availability"
+msgstr "Top5 slechtste beschikbaarheid"
+
+#: include/data_detail.php:1148
+#, fuzzy
+msgid "Top 20 hosts worst polling time"
+msgstr "Top5 slechtste polling tijd"
+
+#: include/data_detail.php:1194
+#, fuzzy
+msgid "Top 20 hosts with the  worst polling ratio (failed, total, ratio)"
+msgstr "Top5 slechtste peilingsverhouding (mislukt, totaal, verhouding)"
 
 #: include/helpers.php:106
 #, fuzzy
@@ -909,222 +1016,206 @@ msgstr "Herladen paneel"
 msgid "Show Details"
 msgstr "Toon details"
 
-#: include/helpers.php:432
+#: include/helpers.php:122
+msgid "Loading data ..."
+msgstr ""
+
+#: include/helpers.php:421
 #, fuzzy
 msgid "DB problem"
 msgstr "DB-probleem"
 
-#: include/helpers.php:434
+#: include/helpers.php:423
 #, fuzzy
 msgid "DB OK"
 msgstr "DB OK"
 
-#: include/helpers.php:446
-#, fuzzy
-msgid "Connection errors - try to restart SQL service, check SQL log, ..."
+#: include/helpers.php:435
+#, fuzzy, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "Verbindingsfouten - probeer de SQL-service opnieuw op te starten."
 
-#: include/helpers.php:462
-msgid "Aborted clients/connects - check logs."
+#: include/helpers.php:451
+#, php-format
+msgid "Aborted clients/connects: %s - check logs."
 msgstr ""
 
-#: include/helpers.php:469
+#: include/helpers.php:458
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "Aansluitfouten: %s"
 
-#: include/helpers.php:470
+#: include/helpers.php:459
 #, php-format
 msgid "Aborted clients/connects: %s"
 msgstr ""
 
-#: include/helpers.php:471
+#: include/helpers.php:460
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "Beschadigde tabellen: %s"
 
-#: include/helpers.php:472
+#: include/helpers.php:461
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "Geheugentabellen: %s"
 
-#: include/helpers.php:473
+#: include/helpers.php:462
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "Alle tabellen: %s"
 
-#: include/helpers.php:490
+#: include/helpers.php:479
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "Verwijderen van het dashboard"
 
-#: include/helpers.php:492
+#: include/helpers.php:481
 #, fuzzy
 msgid "Add to Dashboard"
 msgstr "Toevoegen aan Dashboard"
 
 #: include/settings.php:31
 #, fuzzy
-msgid "Intro Page Options"
-msgstr "Intro Pagina Opties"
-
-#: include/settings.php:34
-#, fuzzy
-msgid ""
-"How we should display the intropage. <strong>For users without console "
-"access you must choose separated tab!</strong>"
-msgstr ""
-"Hoe we de intropagina moeten weergeven. <strong>Voor gebruikers zonder "
-"console toegang moet je een apart tabblad kiezen!</strong>"
-
-#: include/settings.php:39
-#, fuzzy
-msgid ""
-"Show the Intropage plugin screen in console screen (you need console access "
-"permission!)"
-msgstr ""
-"Toon het Intropage-pluginscherm in het consolegerscherm (je hebt toestemming "
-"nodig voor toegang tot de console!)"
-
-#: include/settings.php:43
-#, fuzzy
-msgid "Show the Intropage plugin screen in separated tab"
-msgstr "Toon het Intropage-plugin-scherm in een apart tabblad"
-
-#: include/settings.php:48
-#, fuzzy
-msgid "Intropage panels"
+msgid "Intropage Panels"
 msgstr "Intropage panelen"
 
-#: include/settings.php:50
+#: include/settings.php:33
 #, fuzzy
 msgid "Enable/disable panels"
 msgstr "Panelen in-/uitschakelen"
 
-#: include/settings.php:54
+#: include/settings.php:38
 #, fuzzy
-msgid "Allow panel Analayse Log"
-msgstr "Paneel Analoog logboek toestaan"
+msgid "Analyze Log"
+msgstr "Analyseer cacti logboek van cactussen"
 
-#: include/settings.php:60
+#: include/settings.php:44
 #, fuzzy
-msgid "Allow panel Analayse Logins"
+msgid "Analyze Logins"
 msgstr "Paneel toestaan Analoge logins op het paneel toestaan"
 
-#: include/settings.php:66
+#: include/settings.php:50
 #, fuzzy
-msgid "Allow panel Threshold Events"
-msgstr "Paneel toestaan Drempelgebeurtenissen in het paneel toestaan"
+msgid "Threshold Events"
+msgstr "Drempels"
 
-#: include/settings.php:72
+#: include/settings.php:56
 #, fuzzy
-msgid "Allow panel Analayse Database"
+msgid "Analyze Database"
 msgstr "Paneel toestaan Analoge Databank Analoge Databank"
 
-#: include/settings.php:78
+#: include/settings.php:62
 #, fuzzy
-msgid "Allow panel Analayse Tree, Devices, Graphs"
-msgstr "Paneel toestaan Analoge boom, apparaten, grafieken, apparaten, enz"
+msgid "Analyze Objects"
+msgstr "Analyseer cacti logboek van cactussen"
 
-#: include/settings.php:84
+#: include/settings.php:74
 #, fuzzy
-msgid "Allow panel Trends"
-msgstr "Laat paneel Trends toe"
+msgid "24h Extremes"
+msgstr "24 uur extreem"
 
-#: include/settings.php:90
-#, fuzzy
-msgid "Allow panel 24h Extrems"
-msgstr "Laat paneel 24-uurs Extremen toe"
+#: include/settings.php:80
+msgid "NTP Status"
+msgstr ""
 
-#: include/settings.php:96
+#: include/settings.php:86
 #, fuzzy
-msgid "Allow panel NTP"
-msgstr "Paneel NTP toestaan"
+msgid "Poller Info"
+msgstr "Poller info"
 
-#: include/settings.php:102
+#: include/settings.php:92
 #, fuzzy
-msgid "Allow panel Poller Info"
-msgstr "Paneel Poller Info toestaan"
-
-#: include/settings.php:108
-#, fuzzy
-msgid "Allow panel Poller Stats"
+msgid "Poller Stats"
 msgstr "Laat paneelpollerstatistieken toe"
 
-#: include/settings.php:114
+#: include/settings.php:98
 #, fuzzy
-msgid "Allow panel Graph Device"
+msgid "Graph Device"
 msgstr "Laat paneel Grafiekapparaat toe"
 
-#: include/settings.php:120
+#: include/settings.php:104
 #, fuzzy
-msgid "Allow panel Graph Thresholds"
-msgstr "Paneel toestaan Grafiekdrempels toestaan"
+msgid "Graph Thresholds"
+msgstr "Drempels"
 
-#: include/settings.php:126
+#: include/settings.php:110
 #, fuzzy
-msgid "Allow panel Graph Data Dource"
+msgid "Graph Data Dource"
 msgstr "Paneel toestaan Grafische gegevensbron toestaan"
 
-#: include/settings.php:132
+#: include/settings.php:116
 #, fuzzy
-msgid "Allow panel Graph Device Template"
-msgstr "Laat paneel Grafiekapparaatsjabloon toe"
+msgid "Graph Device Template"
+msgstr "Apparaattemplate"
 
-#: include/settings.php:138
+#: include/settings.php:122
 #, fuzzy
-msgid "Allow panel CPU Utilization"
-msgstr "CPU-gebruik van het paneel toestaan"
+msgid "CPU Utilization"
+msgstr "CPU-gebruik"
 
-#: include/settings.php:144
+#: include/settings.php:128
 #, fuzzy
-msgid "Allow panel MacTrack Plugin"
+msgid "MacTrack Plugin"
 msgstr "Laat paneel MacTrack-plugin op het paneel toe"
 
-#: include/settings.php:150
+#: include/settings.php:134
 #, fuzzy
-msgid "Allow panel MacTrack Sites"
-msgstr "Paneel toestaan voor MacTrack-paneelplaatsen"
+msgid "MacTrack Sites"
+msgstr "Mactrack sites"
 
-#: include/settings.php:156
+#: include/settings.php:140
 #, fuzzy
-msgid "Allow panel Top 5 Ping"
-msgstr "Toestaan paneel Top 5 Ping"
+msgid "Top 5 Ping Times"
+msgstr "Top5 slechtste polling tijd"
 
-#: include/settings.php:162
+#: include/settings.php:146
 #, fuzzy
-msgid "Allow panel Top 5 Availability"
-msgstr "Paneel Top 5 Beschikbaarheid toestaan"
+msgid "Top 5 Availability"
+msgstr "Top5 slechtste beschikbaarheid"
 
-#: include/settings.php:168
+#: include/settings.php:152
 #, fuzzy
-msgid "Allow panel Top 5 worst polling time"
-msgstr "Laat paneel Top 5 slechtste pollingstijd toe"
+msgid "Top 5 Worst Polling"
+msgstr "Top5 slechtste polling tijd"
 
-#: include/settings.php:174
+#: include/settings.php:158
 #, fuzzy
-msgid "Allow panel Top 5 worst polling failed/total ratio"
-msgstr "Laat paneel Top 5 slechtste peiling mislukt/totale verhouding toe"
+msgid "Top 5 Worst Failed Ratio"
+msgstr "Top5 slechtste beschikbaarheid"
 
-#: include/settings.php:180
+#: include/settings.php:164
 #, fuzzy
-msgid "Allow panel System Information"
+msgid "System Information"
 msgstr "Systeeminformatie van het paneel toestaan"
 
-#: include/settings.php:186
+#: include/settings.php:170
 #, fuzzy
-msgid "Allow panel Boost"
-msgstr "Paneel Boost toestaan"
+msgid "Boost Status"
+msgstr "Verbetering van de statistieken"
 
-#: include/settings.php:192
+#: include/settings.php:176
 #, fuzzy
-msgid "Allow panel Favourite Graphs"
-msgstr "Laat paneel Favoriete Grafieken toe"
+msgid "Favourite Graphs"
+msgstr "Favoriete grafiek"
 
-#: include/settings.php:213
+#: include/settings.php:182
+msgid "Syslog Plugin"
+msgstr ""
+
+#: include/settings.php:203
 #, fuzzy
-msgid "Show Intropage (no matter in Console or Tab)"
+msgid "Show Intropage in Tab (not selected = intropage in console)"
 msgstr "Intropage tonen (ongeacht in Console of Tabblad)"
+
+#: include/settings.php:253
+#, fuzzy
+msgid "Intropage"
+msgstr "Intropage panelen"
+
+#: include/settings.php:258
+msgid "Normal User"
+msgstr ""
 
 #: include/variables.php:60
 msgid "Display settings"
@@ -1137,11 +1228,8 @@ msgstr "Belangrijke zaken zullen aan de top staan"
 
 #: include/variables.php:65
 #, fuzzy
-msgid ""
-"If checked Intropage displays important (errors, warnings) information first"
-msgstr ""
-"Indien aangevinkt geeft de Intropage eerst belangrijke (fouten, "
-"waarschuwingen) informatie weer (fouten, waarschuwingen)"
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Indien aangevinkt geeft de Intropage eerst belangrijke (fouten, waarschuwingen) informatie weer (fouten, waarschuwingen)"
 
 #: include/variables.php:70
 #, fuzzy
@@ -1157,7 +1245,7 @@ msgstr "Hoe vaak"
 msgid "Automatically by poller"
 msgstr ""
 
-#: include/variables.php:75
+#: include/variables.php:75 include/variables.php:108
 msgid "Never"
 msgstr "Nooit"
 
@@ -1165,166 +1253,287 @@ msgstr "Nooit"
 msgid "Every Minute"
 msgstr "Iedere minuut"
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:77 include/variables.php:109 include/variables.php:143
 #, php-format
 msgid "Every %d Minutes"
 msgstr "Iedere %d minuten"
 
-#: include/variables.php:78 include/variables.php:107 include/variables.php:141
+#: include/variables.php:78 include/variables.php:110 include/variables.php:144
 msgid "Every Hour"
 msgstr "Ieder uur"
 
 #: include/variables.php:83
-msgid "Display"
-msgstr "Scherm"
+#, fuzzy
+msgid "Poller Timeout"
+msgstr "Poller info"
 
 #: include/variables.php:84
-#, fuzzy
-msgid "What will you see"
-msgstr "Wat zult u zien"
-
-#: include/variables.php:87
-#, fuzzy
-msgid "Only Errors"
-msgstr "Alleen Fouten"
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr ""
 
 #: include/variables.php:88
-#, fuzzy
-msgid "Errors and Warnings"
-msgstr "Fouten en waarschuwingen"
+#, fuzzy, php-format
+msgid "%d Minute"
+msgstr "Iedere %d minuten"
 
-#: include/variables.php:94
+#: include/variables.php:89 include/variables.php:90
+#, fuzzy, php-format
+msgid "%d Minutes"
+msgstr "Iedere %d minuten"
+
+#: include/variables.php:91 include/variables.php:92
+#, php-format
+msgid "%d Seconds"
+msgstr ""
+
+#: include/variables.php:96
 #, fuzzy
-msgid "Analyse log -  number of lines"
+msgid "Analyze log -  number of lines"
 msgstr "Analyseer logboek - aantal lijnen"
 
-#: include/variables.php:95
+#: include/variables.php:97
 #, fuzzy
-msgid ""
-"How many lines of log will be analysed. Big number may causes slow page load"
-msgstr ""
-"Hoeveel regels logboek worden geanalyseerd. Groot aantal kan een langzame "
-"paginabelasting veroorzaken"
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Hoeveel regels logboek worden geanalyseerd. Groot aantal kan een langzame paginabelasting veroorzaken"
 
-#: include/variables.php:102
+#: include/variables.php:104
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "Hoe vaak analyseren DB"
 
-#: include/variables.php:103
+#: include/variables.php:105
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "Poller leidt deze taak. Het kan leiden tot een lange pollerloop."
 
-#: include/variables.php:108 include/variables.php:142
+#: include/variables.php:111 include/variables.php:145
 msgid "Every Day"
 msgstr "Iedere dag"
 
-#: include/variables.php:109
+#: include/variables.php:112
 msgid "Every Week"
 msgstr "Iedere week"
 
-#: include/variables.php:110
+#: include/variables.php:113
 msgid "Every Month"
 msgstr "Elke maand"
 
-#: include/variables.php:115
+#: include/variables.php:118
 #, fuzzy
-msgid "Analyse DB - Level of db check"
+msgid "Analyze DB - Level of db check"
 msgstr "Analyseer DB - Niveau van de db-controle"
 
-#: include/variables.php:116
-#, fuzzy
-msgid ""
-"Quick - No Check rows for inforccert links<br/>Fast - check only not "
-"properly closed tables<br/>Changed - check tables changed from last check<br/"
-">Medium - with rows scan<br/>Extended - full rows and keys<br/"
-"><strong>Medium and extended may causes slow page load!</strong>"
-msgstr ""
-"Snel - Geen rijen controleren op inforccert-links<br/>Snel - alleen niet "
-"goed gesloten tabellen<br/>controleren Gewijzigd - tabellen controleren die "
-"zijn gewijzigd ten opzichte van de laatste controle<br/>Gemiddeld - met "
-"rijen scannen<br/>Uitgebreid - volledige rijen en toetsen<br/"
-"><strong>Gemiddeld en uitgebreid kan leiden tot langzame paginabelasting!</"
-"strong>"
-
 #: include/variables.php:119
+#, fuzzy
+msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>"
+msgstr "Snel - Geen rijen controleren op inforccert-links<br/>Snel - alleen niet goed gesloten tabellen<br/>controleren Gewijzigd - tabellen controleren die zijn gewijzigd ten opzichte van de laatste controle<br/>Gemiddeld - met rijen scannen<br/>Uitgebreid - volledige rijen en toetsen<br/><strong>Gemiddeld en uitgebreid kan leiden tot langzame paginabelasting!</strong>"
+
+#: include/variables.php:122
 msgid "Quick"
 msgstr "Snel"
 
-#: include/variables.php:120
+#: include/variables.php:123
 msgid "Fast"
 msgstr "Snel"
 
-#: include/variables.php:121
+#: include/variables.php:124
 msgid "Changed"
 msgstr "Gewijzigd"
 
-#: include/variables.php:122
+#: include/variables.php:125
 msgid "Medium"
 msgstr "Medium"
 
-#: include/variables.php:123
+#: include/variables.php:126
 msgid "Extended"
 msgstr "Uitgebreid"
 
-#: include/variables.php:128
+#: include/variables.php:131
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP (tijd)controle - IP- of DNS-naam van de NTP-server"
 
-#: include/variables.php:129
+#: include/variables.php:132
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "Voeg de IP- of DNS-naam van de NTP-server in"
 
-#: include/variables.php:136
+#: include/variables.php:139
 #, fuzzy
 msgid "How often check NTP"
 msgstr "Hoe vaak controleren NTP"
 
-#: include/variables.php:137
+#: include/variables.php:140
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
-msgstr ""
-"<strong>Poller leidt deze taak. Het kan leiden tot een lange pollerloop.</"
-"strong>"
+msgstr "<strong>Poller leidt deze taak. Het kan leiden tot een lange pollerloop.</strong>"
 
-#: include/variables.php:148
+#: include/variables.php:151
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "Admin-informatiepaneel over onderhoudstaken, down apparaten, ..."
 
-#: include/variables.php:149
+#: include/variables.php:152
 #, fuzzy
-msgid ""
-"If isn't empty, panel will be displayed on the top. You can use html tags "
-"(b, i, ...)."
-msgstr ""
-"Als het paneel niet leeg is, wordt het paneel bovenaan weergegeven. U kunt "
-"html-tags (b, i, ....) gebruiken."
+msgid "If isn't empty, panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Als het paneel niet leeg is, wordt het paneel bovenaan weergegeven. U kunt html-tags (b, i, ....) gebruiken."
 
-#: include/variables.php:158
+#: include/variables.php:161
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "Maint plugin - hoeveel dagen voor de displaywaarschuwing"
 
-#: include/variables.php:159
+#: include/variables.php:162
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "Hoeveel dagen?</strong>"
 
-#: include/variables.php:162
+#: include/variables.php:165
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "Wanneer het onderhoud begint"
 
-#: include/variables.php:163
+#: include/variables.php:166
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "%d Dag voordien"
 
-#: include/variables.php:164 include/variables.php:165
+#: include/variables.php:167 include/variables.php:168
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "%d Dagen voordien"
+
+#: intropage_ajax.php:147 intropage_ajax.php:167
+msgid "Panel not found"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Display only Errors"
+#~ msgstr "Alleen weergeven Fouten"
+
+#, fuzzy
+#~ msgid "Display Errors and Warnings"
+#~ msgstr "Fouten en waarschuwingen in de weergave en waarschuwingen"
+
+#, fuzzy
+#~ msgid "Display All"
+#~ msgstr "Toon alle"
+
+#, fuzzy
+#~ msgid "Reset panel Order to Default"
+#~ msgstr "Reset paneel Orde naar standaardinstelling"
+
+#, fuzzy
+#~ msgid "Checked Every 15 minutes"
+#~ msgstr "Gecontroleerd Elke 15 minuten"
+
+#, fuzzy
+#~ msgid "Last 10 logins"
+#~ msgstr "Laatste 10 aanmeldingen"
+
+#, fuzzy
+#~ msgid "Plugin Thold - Global notify only %s"
+#~ msgstr "Plugin Thold - Wereldwijde kennisgeving slechts %s"
+
+#, fuzzy
+#~ msgid "Plugin Thold - Global notify only: %s"
+#~ msgstr "Plugin Thold - Alleen wereldwijd aanmelden: %s"
+
+#, fuzzy
+#~ msgid "Intro Page Options"
+#~ msgstr "Intro Pagina Opties"
+
+#, fuzzy
+#~ msgid "How we should display the intropage. <strong>For users without console access you must choose separated tab!</strong>"
+#~ msgstr "Hoe we de intropagina moeten weergeven. <strong>Voor gebruikers zonder console toegang moet je een apart tabblad kiezen!</strong>"
+
+#, fuzzy
+#~ msgid "Show the Intropage plugin screen in console screen (you need console access permission!)"
+#~ msgstr "Toon het Intropage-pluginscherm in het consolegerscherm (je hebt toestemming nodig voor toegang tot de console!)"
+
+#, fuzzy
+#~ msgid "Show the Intropage plugin screen in separated tab"
+#~ msgstr "Toon het Intropage-plugin-scherm in een apart tabblad"
+
+#, fuzzy
+#~ msgid "Allow panel Analayse Log"
+#~ msgstr "Paneel Analoog logboek toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel Threshold Events"
+#~ msgstr "Paneel toestaan Drempelgebeurtenissen in het paneel toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel Analayse Tree, Devices, Graphs"
+#~ msgstr "Paneel toestaan Analoge boom, apparaten, grafieken, apparaten, enz"
+
+#, fuzzy
+#~ msgid "Allow panel Trends"
+#~ msgstr "Laat paneel Trends toe"
+
+#, fuzzy
+#~ msgid "Allow panel 24h Extrems"
+#~ msgstr "Laat paneel 24-uurs Extremen toe"
+
+#, fuzzy
+#~ msgid "Allow panel NTP"
+#~ msgstr "Paneel NTP toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel Poller Info"
+#~ msgstr "Paneel Poller Info toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel Graph Thresholds"
+#~ msgstr "Paneel toestaan Grafiekdrempels toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel Graph Device Template"
+#~ msgstr "Laat paneel Grafiekapparaatsjabloon toe"
+
+#, fuzzy
+#~ msgid "Allow panel CPU Utilization"
+#~ msgstr "CPU-gebruik van het paneel toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel MacTrack Sites"
+#~ msgstr "Paneel toestaan voor MacTrack-paneelplaatsen"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 Ping"
+#~ msgstr "Toestaan paneel Top 5 Ping"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 Availability"
+#~ msgstr "Paneel Top 5 Beschikbaarheid toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 worst polling time"
+#~ msgstr "Laat paneel Top 5 slechtste pollingstijd toe"
+
+#, fuzzy
+#~ msgid "Allow panel Top 5 worst polling failed/total ratio"
+#~ msgstr "Laat paneel Top 5 slechtste peiling mislukt/totale verhouding toe"
+
+#, fuzzy
+#~ msgid "Allow panel Boost"
+#~ msgstr "Paneel Boost toestaan"
+
+#, fuzzy
+#~ msgid "Allow panel Favourite Graphs"
+#~ msgstr "Laat paneel Favoriete Grafieken toe"
+
+#~ msgid "Display"
+#~ msgstr "Scherm"
+
+#, fuzzy
+#~ msgid "What will you see"
+#~ msgstr "Wat zult u zien"
+
+#, fuzzy
+#~ msgid "Only Errors"
+#~ msgstr "Alleen Fouten"
+
+#, fuzzy
+#~ msgid "Errors and Warnings"
+#~ msgstr "Fouten en waarschuwingen"

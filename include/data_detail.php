@@ -74,7 +74,7 @@ function intropage_analyse_log_detail() {
 	global $config, $log;
 
 	$result = array(
-		'name' => __('Analyse cacti log - detail', 'intropage'),
+		'name' => __('Analyze cacti log - detail', 'intropage'),
 		'alarm' => 'green',
 		'detail' => '',
 	);
@@ -151,7 +151,7 @@ function intropage_analyse_login_detail() {
 	global $config;
 
 	$result = array(
-		'name' => __('Analyse logins - detail', 'intropage'),
+		'name' => __('Analyze logins - detail', 'intropage'),
 		'alarm' => 'green',
 		'detail' => '',
 	);
@@ -205,7 +205,7 @@ function intropage_analyse_tree_host_graph_detail() {
 	global $config;
 
 	$result = array(
-		'name' => __('Analyse tree/host/graph', 'intropage'),
+		'name' => __('Analyze tree/host/graph', 'intropage'),
 		'alarm' => 'green',
 		'detail' => '',
 	);

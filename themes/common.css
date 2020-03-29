@@ -99,6 +99,22 @@
 	background: -ms-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
 }
 
+.color_grey, .color_grey i {
+	color: black !important;
+}
+
+.color_yellow, .color_yellow i {
+	color: black !important;
+}
+
+.color_red, .color_red i {
+	color: white !important;
+}
+
+.color_green, .color_green i {
+	color: snow !important;
+}
+
 .rpad {
 	padding-right: 20px;
 }

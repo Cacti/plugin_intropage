@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-01 15:27+0200\n"
+"POT-Creation-Date: 2020-03-28 17:55-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,107 +17,109 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: display.php:30
+#: display.php:34
 msgid "Intropage - permission denied"
 msgstr ""
 
-#: display.php:146
-msgid ""
-"You can disable rows above in <b>Configure -> Settings -> General -> Hide "
-"Cacti Dashboard</b> and use the whole page for Intropage "
+#: display.php:144
+msgid "You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 
-#: display.php:351
+#: display.php:286
 msgid "Disable panel move/Enable copy text from panel"
 msgstr ""
 
-#: display.php:356
+#: display.php:291
 msgid "Enable panel move/Disable copy text from panel"
 msgstr ""
 
-#: display.php:394
+#: display.php:347
 msgid "Error reading new data"
 msgstr ""
 
-#: display.php:415
+#: display.php:380
+msgid "Close"
+msgstr ""
+
+#: display.php:391
+msgid "Panel Details"
+msgstr ""
+
+#: display.php:410
 msgid "Disable panel move/enable copy text from panel"
 msgstr ""
 
-#: display.php:419
+#: display.php:414
 msgid "Select action ..."
 msgstr ""
 
-#: display.php:430
+#: display.php:425
 #, php-format
 msgid "Add panel %s"
 msgstr ""
 
-#: display.php:432
+#: display.php:427
 #, php-format
 msgid "Add panel %s %s"
 msgstr ""
 
-#: display.php:438
+#: display.php:433
 msgid "Refresh Now"
 msgstr ""
 
-#: display.php:441 display.php:443
+#: display.php:436 display.php:438
 msgid "Autorefresh Disabled"
 msgstr ""
 
-#: display.php:447 display.php:449
+#: display.php:442 display.php:444
+msgid "Autorefresh automatic by poller"
+msgstr ""
+
+#: display.php:448 display.php:450
 msgid "Autorefresh 1 Minute"
 msgstr ""
 
-#: display.php:453 display.php:455
+#: display.php:454 display.php:456
 msgid "Autorefresh 5 Minutes"
 msgstr ""
 
-#: display.php:459 display.php:461
+#: display.php:460 display.php:462
 msgid "Autorefresh 1 Hour"
 msgstr ""
 
-#: display.php:465 display.php:467
-msgid "Display only Errors"
-msgstr ""
-
-#: display.php:471 display.php:473
-msgid "Display Errors and Warnings"
-msgstr ""
-
-#: display.php:477 display.php:479
-msgid "Display All"
-msgstr ""
-
-#: display.php:483 display.php:486
+#: display.php:466 display.php:469
 msgid "Sort by - red-yellow-green-gray"
 msgstr ""
 
-#: display.php:484
+#: display.php:467
 msgid "Sort by panel priority"
 msgstr ""
 
-#: display.php:487
+#: display.php:470
 msgid "Sort by panel Priority"
 msgstr ""
 
-#: display.php:491
-msgid "Reset panel Order to Default"
-msgstr ""
-
-#: display.php:494
+#: display.php:473
 msgid "Reset All to Default"
 msgstr ""
 
-#: display.php:506
-msgid "Set intropage as default page"
+#: display.php:485
+msgid "Set intropage as default login page"
 msgstr ""
 
-#: display.php:508
-msgid "Set graph as default page"
+#: display.php:489
+msgid "Set graph as default login page"
 msgstr ""
 
-#: display.php:513
+#: display.php:494
+msgid "Display intropage in console"
+msgstr ""
+
+#: display.php:497
+msgid "Display intropage in tab as default page"
+msgstr ""
+
+#: display.php:502
 msgid "Go"
 msgstr ""
 
@@ -125,650 +127,755 @@ msgstr ""
 msgid "Database check"
 msgstr ""
 
-#: include/data.php:49 include/data.php:720 include/data.php:1301
-#: include/data.php:1497 include/data.php:1615 include/data.php:1675
-#: include/data.php:1734 include/data.php:1789
+#: include/data.php:48 include/data.php:614 include/data.php:1173
+#: include/data.php:1354 include/data.php:1461 include/data.php:1511
+#: include/data.php:1561 include/data.php:1608 include/data_detail.php:47
+#: include/data_detail.php:1088 include/data_detail.php:1135
+#: include/data_detail.php:1181 include/data_detail.php:1223
 msgid "Waiting for data"
 msgstr ""
 
-#: include/data.php:52
+#: include/data.php:51 include/data_detail.php:50
 msgid "Last check"
 msgstr ""
 
-#: include/data.php:55
-msgid "Checked Every 15 minutes"
+#: include/data.php:54 include/data.php:1199 include/data_detail.php:53
+msgid "Checked every 15 minutes"
 msgstr ""
 
-#: include/data.php:57
-msgid "Checked Hourly"
+#: include/data.php:56 include/data.php:1201 include/data_detail.php:55
+msgid "Checked hourly"
 msgstr ""
 
-#: include/data.php:59
-msgid "Checked Daily"
+#: include/data.php:58 include/data.php:1203 include/data_detail.php:57
+msgid "Checked daily"
 msgstr ""
 
-#: include/data.php:73
-msgid "Analyse cacti log"
+#: include/data.php:60 include/data_detail.php:59
+msgid "Checked weekly"
 msgstr ""
 
-#: include/data.php:89
+#: include/data.php:62 include/data_detail.php:61
+msgid "Checked monthly"
+msgstr ""
+
+#: include/data.php:64 include/data_detail.php:63
+msgid "Periodic check is disabled"
+msgstr ""
+
+#: include/data.php:78
+msgid "Analyze cacti log"
+msgstr ""
+
+#: include/data.php:94 include/data_detail.php:92
 msgid "Log file not accessible or empty"
 msgstr ""
 
-#: include/data.php:109
+#: include/data.php:112 include/data_detail.php:112
 msgid "Errors"
 msgstr ""
 
-#: include/data.php:111
+#: include/data.php:114 include/data_detail.php:114
 msgid "Warnings"
 msgstr ""
 
-#: include/data.php:116
+#: include/data.php:119 include/data_detail.php:119
 msgid "file is larger than 2GB"
 msgstr ""
 
-#: include/data.php:120
+#: include/data.php:123 include/data_detail.php:123
 msgid "Log size OK"
 msgstr ""
 
-#: include/data.php:124
+#: include/data.php:127 include/data_detail.php:127
 msgid "Log size is quite large"
 msgstr ""
 
-#: include/data.php:127
+#: include/data.php:130 include/data_detail.php:130
 msgid "Log size"
 msgstr ""
 
-#: include/data.php:131
+#: include/data.php:134 include/data_detail.php:134
 #, php-format
 msgid "(Errors and warning in last %s lines)"
 msgstr ""
 
-#: include/data.php:151
-msgid "Last 10 logins"
+#: include/data.php:154
+msgid "Analyze logins"
 msgstr ""
 
-#: include/data.php:158 include/data.php:226 include/data.php:263
-#: include/data.php:311 include/data.php:332 include/data.php:360
-#: include/data.php:391 include/data.php:439 include/data.php:462
-#: include/data.php:483 include/data.php:504 include/data.php:527
-#: include/data.php:670 include/data.php:675 include/data.php:1370
-msgid "N/A"
-msgstr ""
-
-#: include/data.php:175
-msgid "failed"
-msgstr ""
-
-#: include/data.php:175
-msgid "success"
-msgstr ""
-
-#: include/data.php:178
+#: include/data.php:173
 msgid "Failed logins"
 msgstr ""
 
-#: include/data.php:209
-msgid "Analyse tree/host/graph"
+#: include/data.php:197 include/data_detail.php:208
+msgid "Analyze tree/host/graph"
 msgstr ""
 
-#: include/data.php:227
-#, php-format
-msgid "Devices with the same IP and port %s"
+#: include/data.php:214 include/data.php:234 include/data.php:262
+#: include/data.php:296 include/data.php:332 include/data.php:358
+#: include/data.php:377 include/data.php:395 include/data.php:411
+#: include/data.php:426 include/data.php:563 include/data.php:568
+#: include/data.php:1234 include/data_detail.php:224
+#: include/data_detail.php:257 include/data_detail.php:297
+#: include/data_detail.php:317 include/data_detail.php:344
+#: include/data_detail.php:387 include/data_detail.php:419
+#: include/data_detail.php:465 include/data_detail.php:487
+#: include/data_detail.php:508 include/data_detail.php:528
+#: include/data_detail.php:944
+msgid "N/A"
 msgstr ""
 
-#: include/data.php:232
+#: include/data.php:219
 #, php-format
 msgid "Devices with the same IP and port: %s"
 msgstr ""
 
-#: include/data.php:265
-#, php-format
-msgid "Devices with the same description %s"
-msgstr ""
-
-#: include/data.php:270
+#: include/data.php:239
 #, php-format
 msgid "Devices with the same description: %s"
 msgstr ""
 
-#: include/data.php:313
-#, php-format
-msgid "Orphaned Data Sources %s"
-msgstr ""
-
-#: include/data.php:317
+#: include/data.php:266
 #, php-format
 msgid "Orphaned Data Sources: %s"
 msgstr ""
 
-#: include/data.php:334
-#, php-format
-msgid "Poller output items %s:"
-msgstr ""
-
-#: include/data.php:337
+#: include/data.php:277
 #, php-format
 msgid "Poller Output Items: %s"
 msgstr ""
 
-#: include/data.php:362
-#, php-format
-msgid "Datasource - bad indexes %s:"
-msgstr ""
-
-#: include/data.php:365
+#: include/data.php:299
 #, php-format
 msgid "Datasource - bad indexes: %s"
 msgstr ""
 
-#: include/data.php:381
+#: include/data.php:335
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr ""
+
+#: include/data.php:346 include/data_detail.php:407
 msgid "Information only (no warn/error)"
 msgstr ""
 
-#: include/data.php:393
-#, php-format
-msgid "Devices in more than one tree %s"
-msgstr ""
-
-#: include/data.php:396
+#: include/data.php:361
 #, php-format
 msgid "Devices in more than one tree: %s"
 msgstr ""
 
-#: include/data.php:441
-#, php-format
-msgid "Hosts without graphs %s"
-msgstr ""
-
-#: include/data.php:444
+#: include/data.php:380
 #, php-format
 msgid "Hosts without graphs: %s"
 msgstr ""
 
-#: include/data.php:464
-#, php-format
-msgid "Hosts without tree %s"
-msgstr ""
-
-#: include/data.php:467
+#: include/data.php:398
 #, php-format
 msgid "Hosts without tree: %s"
 msgstr ""
 
-#: include/data.php:485
-#, php-format
-msgid "Hosts with default public/private community %s"
-msgstr ""
-
-#: include/data.php:488
+#: include/data.php:414
 #, php-format
 msgid "Hosts with default public/private community: %s"
 msgstr ""
 
-#: include/data.php:506
-#, php-format
-msgid "Plugin Monitor - Unmonitored hosts %s"
-msgstr ""
-
-#: include/data.php:509
+#: include/data.php:429
 #, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
 msgstr ""
 
-#: include/data.php:529
-#, php-format
-msgid "Plugin Thold - Global notify only %s"
-msgstr ""
-
-#: include/data.php:532
-#, php-format
-msgid "Plugin Thold - Global notify only: %s"
-msgstr ""
-
-#: include/data.php:541
+#: include/data.php:435 include/data_detail.php:542
 #, php-format
 msgid "Found %s problems"
 msgstr ""
 
-#: include/data.php:543
+#: include/data.php:437 include/data_detail.php:544
 msgid "Everything OK"
 msgstr ""
 
-#: include/data.php:555
+#: include/data.php:449
 msgid "Boost statistics"
 msgstr ""
 
-#: include/data.php:608 include/data.php:1397
+#: include/data.php:502 include/data.php:1253 include/data_detail.php:963
 msgid "Idle"
 msgstr ""
 
-#: include/data.php:610 include/data.php:1395
+#: include/data.php:504 include/data.php:1251 include/data_detail.php:961
 msgid "Running"
 msgstr ""
 
-#: include/data.php:612
+#: include/data.php:506
 msgid "Overrun Warning"
 msgstr ""
 
-#: include/data.php:615
+#: include/data.php:509
 msgid "Timed Out"
 msgstr ""
 
-#: include/data.php:618
+#: include/data.php:512
 msgid "Other"
 msgstr ""
 
-#: include/data.php:621
+#: include/data.php:515
 msgid "Never Run"
 msgstr ""
 
-#: include/data.php:626
+#: include/data.php:520
 #, php-format
 msgid "Pending Boost Records: %s"
 msgstr ""
 
-#: include/data.php:627
+#: include/data.php:521
 #, php-format
 msgid "Archived Boost Records: %s"
 msgstr ""
 
-#: include/data.php:631 include/data.php:634 include/data.php:636
+#: include/data.php:525 include/data.php:528 include/data.php:530
 #, php-format
 msgid "Total Boost Records: %s"
 msgstr ""
 
-#: include/data.php:655
+#: include/data.php:548
 #, php-format
 msgid "Boost On-demand Updating: %s"
 msgstr ""
 
-#: include/data.php:655 include/data.php:925 include/data.php:935
-#: include/data.php:1068 include/data.php:1077 include/data.php:1214
-#: include/data.php:1401
+#: include/data.php:548 include/data.php:823 include/data.php:833
+#: include/data.php:952 include/data.php:961 include/data.php:1087
+#: include/data.php:1257 include/data_detail.php:741
+#: include/data_detail.php:858 include/data_detail.php:967
 msgid "Disabled"
 msgstr ""
 
-#: include/data.php:662
+#: include/data.php:555
 #, php-format
 msgid "Current Boost Table(s) Size: %s"
 msgstr ""
 
-#: include/data.php:665
+#: include/data.php:558
 #, php-format
 msgid "Avg Bytes/Record: %s"
 msgstr ""
 
-#: include/data.php:672
+#: include/data.php:565
 #, php-format
 msgid "Last run duration: %s"
 msgstr ""
 
-#: include/data.php:674
+#: include/data.php:567
 #, php-format
 msgid "RRD Updates / Max: %s / %s"
 msgstr ""
 
-#: include/data.php:675
+#: include/data.php:568
 #, php-format
 msgid "Update Frequency: %s"
 msgstr ""
 
-#: include/data.php:676
+#: include/data.php:569
 #, php-format
 msgid "Next Start Time: %s"
 msgstr ""
 
-#: include/data.php:687
+#: include/data.php:580
 msgid "CPU utilization"
 msgstr ""
 
-#: include/data.php:691
+#: include/data.php:585
 msgid "CPU load: "
 msgstr ""
 
-#: include/data.php:698
+#: include/data.php:592
 msgid "This function is not implemented on Windows platforms"
 msgstr ""
 
-#: include/data.php:708
+#: include/data.php:602
 msgid "Load"
 msgstr ""
 
-#: include/data.php:733
+#: include/data.php:627
 msgid "24 hour extrem"
 msgstr ""
 
-#: include/data.php:741
+#: include/data.php:636 include/data_detail.php:565
 msgid "Long run<br/>poller"
 msgstr ""
 
-#: include/data.php:756 include/data.php:777
+#: include/data.php:651 include/data.php:672 include/data.php:695
+#: include/data.php:719 include/data.php:740 include/data_detail.php:580
+#: include/data_detail.php:601
 msgid "Waiting<br/>for data"
 msgstr ""
 
-#: include/data.php:785
+#: include/data.php:680 include/data_detail.php:609
 msgid "Max thold<br/>triggered:"
 msgstr ""
 
-#: include/data.php:810
+#: include/data.php:705 include/data_detail.php:634
 msgid "Poller<br/>output item:"
 msgstr ""
 
-#: include/data.php:831
+#: include/data.php:726 include/data_detail.php:655
 msgid "Failed<br/>polls:"
 msgstr ""
 
-#: include/data.php:864
+#: include/data.php:761
 msgid "Datasources: "
 msgstr ""
 
-#: include/data.php:893
+#: include/data.php:790 include/data_detail.php:711
 msgid "No untemplated datasources found"
 msgstr ""
 
-#: include/data.php:906 include/data.php:930
+#: include/data.php:803 include/data.php:828 include/data_detail.php:723
 msgid "Hosts"
 msgstr ""
 
-#: include/data.php:922 include/data.php:1065 include/variables.php:89
+#: include/data.php:820 include/data.php:949 include/data_detail.php:738
+#: include/data_detail.php:855
 msgid "All"
 msgstr ""
 
-#: include/data.php:923 include/data.php:932 include/data.php:1210
+#: include/data.php:821 include/data.php:830 include/data.php:1083
+#: include/data_detail.php:739
 msgid "Up"
 msgstr ""
 
-#: include/data.php:924 include/data.php:933 include/data.php:1211
+#: include/data.php:822 include/data.php:831 include/data.php:1084
+#: include/data_detail.php:740
 msgid "Down"
 msgstr ""
 
-#: include/data.php:926 include/data.php:934 include/data.php:1403
+#: include/data.php:824 include/data.php:832 include/data.php:1259
+#: include/data_detail.php:742 include/data_detail.php:969
 msgid "Recovering"
 msgstr ""
 
-#: include/data.php:949
-msgid "RECOVERING"
+#: include/data.php:851 include/data.php:897 include/data.php:1465
+#: include/data.php:1515 include/data.php:1565 include/data.php:1612
+msgid "You don't have permissions to any hosts"
 msgstr ""
 
-#: include/data.php:965
-msgid "DOWN"
-msgstr ""
-
-#: include/data.php:985 include/data.php:989
+#: include/data.php:863 include/data.php:868 include/data_detail.php:786
 msgid "Device Templates"
 msgstr ""
 
-#: include/data.php:1013
+#: include/data.php:892 include/data_detail.php:810
 msgid "No device templates found"
 msgstr ""
 
-#: include/data.php:1025 include/data.php:1030 include/data.php:1072
+#: include/data.php:909 include/data.php:914 include/data.php:956
+#: include/data_detail.php:822
 msgid "Thresholds"
 msgstr ""
 
-#: include/data.php:1038
+#: include/data.php:922 include/data_detail.php:829
 msgid "Thold plugin not installed/running"
 msgstr ""
 
-#: include/data.php:1041 include/data.php:1184
-msgid "You don't have permission"
+#: include/data.php:925 include/data.php:1057 include/data.php:1119
+msgid "You don't have plugin permission"
 msgstr ""
 
-#: include/data.php:1066 include/data.php:1075
+#: include/data.php:950 include/data.php:960 include/data_detail.php:856
 msgid "Breached"
 msgstr ""
 
-#: include/data.php:1067
+#: include/data.php:951 include/data_detail.php:857
 msgid "Trigged"
 msgstr ""
 
-#: include/data.php:1074
+#: include/data.php:958
 msgid "OK"
 msgstr ""
 
-#: include/data.php:1076
-msgid "Trigerred"
+#: include/data.php:959
+msgid "Triggered"
 msgstr ""
 
-#: include/data.php:1088
-msgid "BREACHED"
-msgstr ""
-
-#: include/data.php:1098
-msgid "TRIGGERED"
-msgstr ""
-
-#: include/data.php:1123
+#: include/data.php:996
 msgid "Cacti version: "
 msgstr ""
 
-#: include/data.php:1134
+#: include/data.php:1007
 msgid "Poller type:"
 msgstr ""
 
-#: include/data.php:1136
+#: include/data.php:1007
+msgid "Spine"
+msgstr ""
+
+#: include/data.php:1009
 msgid "Spine version: "
 msgstr ""
 
-#: include/data.php:1139
+#: include/data.php:1012
 msgid "You are using incorrect spine version!"
 msgstr ""
 
-#: include/data.php:1143
+#: include/data.php:1016
 msgid "Poller type: "
 msgstr ""
 
-#: include/data.php:1146
+#: include/data.php:1019
 msgid "Running on: "
 msgstr ""
 
-#: include/data.php:1166 include/data.php:1208
+#: include/data.php:1039 include/data.php:1081
 msgid "Mactrack"
 msgstr ""
 
-#: include/data.php:1176 include/data.php:1241
+#: include/data.php:1049 include/data.php:1110
 msgid "Mactrack plugin not installed/running"
 msgstr ""
 
-#: include/data.php:1200
+#: include/data.php:1073
 #, php-format
 msgid "All: %s"
 msgstr ""
 
-#: include/data.php:1201
+#: include/data.php:1074
 #, php-format
 msgid "Up: %s"
 msgstr ""
 
-#: include/data.php:1202
+#: include/data.php:1075
 #, php-format
 msgid "Down: %s"
 msgstr ""
 
-#: include/data.php:1203
+#: include/data.php:1076
 #, php-format
 msgid "Error: %s"
 msgstr ""
 
-#: include/data.php:1204
+#: include/data.php:1077
 #, php-format
 msgid "Unknown: %s"
 msgstr ""
 
-#: include/data.php:1205
+#: include/data.php:1078
 #, php-format
 msgid "Disabled: %s"
 msgstr ""
 
-#: include/data.php:1212
+#: include/data.php:1085
 msgid "Error"
 msgstr ""
 
-#: include/data.php:1213
+#: include/data.php:1086
 msgid "Unknown"
 msgstr ""
 
-#: include/data.php:1229
+#: include/data.php:1102 include/data_detail.php:892
 msgid "Mactrack sites"
 msgstr ""
 
-#: include/data.php:1243
+#: include/data.php:1121 include/data_detail.php:898
 msgid "Devices"
 msgstr ""
 
-#: include/data.php:1243
+#: include/data.php:1121 include/data_detail.php:898
 msgid "Site"
 msgstr ""
 
-#: include/data.php:1244
+#: include/data.php:1122 include/data_detail.php:899
 msgid "IPs"
 msgstr ""
 
-#: include/data.php:1244
+#: include/data.php:1122 include/data_detail.php:899
 msgid "Ports"
 msgstr ""
 
-#: include/data.php:1245
+#: include/data.php:1123 include/data_detail.php:900
 msgid "MACs"
 msgstr ""
 
-#: include/data.php:1245
+#: include/data.php:1123 include/data_detail.php:900
 msgid "Ports up"
 msgstr ""
 
-#: include/data.php:1246
+#: include/data.php:1124 include/data_detail.php:901
 msgid "Device errors"
 msgstr ""
 
-#: include/data.php:1274
+#: include/data.php:1139 include/data_detail.php:915
 msgid "No mactrack sites found"
 msgstr ""
 
-#: include/data.php:1287
+#: include/data.php:1153
 msgid "Time synchronization"
 msgstr ""
 
-#: include/data.php:1295
+#: include/data.php:1163
+msgid "Wrong NTP server configured - "
+msgstr ""
+
+#: include/data.php:1167
 msgid "No NTP server configured"
 msgstr ""
 
-#: include/data.php:1306
+#: include/data.php:1178
 msgid "Failed to get NTP time FROM $ntp_server"
 msgstr ""
 
-#: include/data.php:1314
+#: include/data.php:1186
 #, php-format
-msgid ""
-"Please check time.<br/>It is different (more than %s seconds) FROM NTP "
-"server %s"
+msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
 msgstr ""
 
-#: include/data.php:1316
+#: include/data.php:1188
 msgid "Localtime is equal to NTP server"
 msgstr ""
 
-#: include/data.php:1321
-msgid ""
-"Unable to contact the NTP server indicated.<br/>Please check your "
-"configuration.<br/>"
+#: include/data.php:1193
+msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
 msgstr ""
 
-#: include/data.php:1324
+#: include/data.php:1196
 msgid "Last check: "
 msgstr ""
 
-#: include/data.php:1327
-msgid "Checked every 15 minutes"
-msgstr ""
-
-#: include/data.php:1329
-msgid "Checked hourly"
-msgstr ""
-
-#: include/data.php:1331
-msgid "Checked daily"
-msgstr ""
-
-#: include/data.php:1355
+#: include/data.php:1217 include/data_detail.php:928
 msgid "Poller info"
 msgstr ""
 
-#: include/data.php:1359
+#: include/data.php:1223
 msgid "ID/Name/total time/state"
 msgstr ""
 
-#: include/data.php:1393
+#: include/data.php:1249 include/data_detail.php:959
 msgid "New/Idle"
 msgstr ""
 
-#: include/data.php:1399
+#: include/data.php:1255 include/data_detail.php:965
 msgid "Unkn/down"
 msgstr ""
 
-#: include/data.php:1410
+#: include/data.php:1266 include/data_detail.php:976
 msgid "(all)"
 msgstr ""
 
-#: include/data.php:1410
+#: include/data.php:1266 include/data_detail.php:976
 msgid "(ok)"
 msgstr ""
 
-#: include/data.php:1431
+#: include/data.php:1287
 #, php-format
 msgid "Poller stats (interval %ss)"
 msgstr ""
 
-#: include/data.php:1480 include/data.php:1482
+#: include/data.php:1337 include/data.php:1339
 msgid " Poller ID: "
 msgstr ""
 
-#: include/data.php:1489
+#: include/data.php:1346
 msgid "ID: "
 msgstr ""
 
-#: include/data.php:1510
+#: include/data.php:1367 include/data_detail.php:997
 msgid "Last thold events"
 msgstr ""
 
-#: include/data.php:1518
+#: include/data.php:1375 include/data_detail.php:1004
 msgid "Plugin Thold isn't installed or started"
 msgstr ""
 
-#: include/data.php:1553
+#: include/data.php:1411 include/data_detail.php:1039
 msgid "Without events yet"
 msgstr ""
 
-#: include/data.php:1567
+#: include/data.php:1425
 msgid "Top5 ping (avg, current)"
 msgstr ""
 
-#: include/data.php:1627
+#: include/data.php:1477
 msgid "Top5 worst availability"
 msgstr ""
 
-#: include/data.php:1687
+#: include/data.php:1527
 msgid "Top5 worst polling time"
 msgstr ""
 
-#: include/data.php:1746
+#: include/data.php:1577
 msgid "Top5 worst polling ratio (failed, total, ratio)"
 msgstr ""
 
-#: include/data.php:1801 include/data.php:1805
+#: include/data.php:1625 include/data.php:1630 include/settings.php:68
 msgid "Trends"
 msgstr ""
 
-#: include/data.php:1822
+#: include/data.php:1647
 msgid "Tholds triggered"
 msgstr ""
 
-#: include/data.php:1840
+#: include/data.php:1664
 msgid "Hosts down"
 msgstr ""
 
-#: include/data.php:1869
+#: include/data.php:1693
 msgid "Favourite graph"
+msgstr ""
+
+#: include/data.php:1789
+msgid "Syslog messages and alerts"
+msgstr ""
+
+#: include/data.php:1794
+msgid "Syslog"
+msgstr ""
+
+#: include/data.php:1817
+msgid "Total"
+msgstr ""
+
+#: include/data.php:1835
+msgid "Incoming"
+msgstr ""
+
+#: include/data.php:1853
+msgid "Alerts"
+msgstr ""
+
+#: include/data.php:1878
+msgid "Syslog plugin not installed/running"
+msgstr ""
+
+#: include/data_detail.php:37
+msgid "Database check - detail"
+msgstr ""
+
+#: include/data_detail.php:77
+msgid "Analyze cacti log - detail"
+msgstr ""
+
+#: include/data_detail.php:154
+msgid "Analyze logins - detail"
+msgstr ""
+
+#: include/data_detail.php:173
+msgid "failed"
+msgstr ""
+
+#: include/data_detail.php:173
+msgid "success"
+msgstr ""
+
+#: include/data_detail.php:196
+msgid "Full log"
+msgstr ""
+
+#: include/data_detail.php:226
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr ""
+
+#: include/data_detail.php:259
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr ""
+
+#: include/data_detail.php:299
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr ""
+
+#: include/data_detail.php:319
+#, php-format
+msgid "Poller output items - %s:"
+msgstr ""
+
+#: include/data_detail.php:346
+#, php-format
+msgid "Datasources with bad indexes - %s:"
+msgstr ""
+
+#: include/data_detail.php:389
+#, php-format
+msgid "Thold logonly alert/warning - %s:"
+msgstr ""
+
+#: include/data_detail.php:421
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr ""
+
+#: include/data_detail.php:467
+#, php-format
+msgid "Hosts without graphs - %s"
+msgstr ""
+
+#: include/data_detail.php:489
+#, php-format
+msgid "Hosts without tree - %s"
+msgstr ""
+
+#: include/data_detail.php:510
+#, php-format
+msgid "Hosts with default public/private community - %s"
+msgstr ""
+
+#: include/data_detail.php:530
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr ""
+
+#: include/data_detail.php:557
+msgid "48 hour extrem"
+msgstr ""
+
+#: include/data_detail.php:750
+msgid "RECOVERING"
+msgstr ""
+
+#: include/data_detail.php:766
+msgid "DOWN"
+msgstr ""
+
+#: include/data_detail.php:832
+msgid "You don't have permission"
+msgstr ""
+
+#: include/data_detail.php:864
+msgid "BREACHED"
+msgstr ""
+
+#: include/data_detail.php:874
+msgid "TRIGGERED"
+msgstr ""
+
+#: include/data_detail.php:933
+msgid "ID"
+msgstr ""
+
+#: include/data_detail.php:933
+msgid "Name"
+msgstr ""
+
+#: include/data_detail.php:934
+msgid "State"
+msgstr ""
+
+#: include/data_detail.php:934
+msgid "Total time"
+msgstr ""
+
+#: include/data_detail.php:1053
+msgid "Top 20 hosts with the worst ping (avg, current)"
+msgstr ""
+
+#: include/data_detail.php:1101
+msgid "Top 20 hosts with the worst availability"
+msgstr ""
+
+#: include/data_detail.php:1148
+msgid "Top 20 hosts worst polling time"
+msgstr ""
+
+#: include/data_detail.php:1194
+msgid "Top 20 hosts with the  worst polling ratio (failed, total, ratio)"
 msgstr ""
 
 #: include/helpers.php:106
@@ -787,181 +894,175 @@ msgstr ""
 msgid "Show Details"
 msgstr ""
 
-#: include/helpers.php:432
+#: include/helpers.php:122
+msgid "Loading data ..."
+msgstr ""
+
+#: include/helpers.php:421
 msgid "DB problem"
 msgstr ""
 
-#: include/helpers.php:434
+#: include/helpers.php:423
 msgid "DB OK"
 msgstr ""
 
-#: include/helpers.php:446
-msgid "Connection errors - try to restart SQL service, check SQL log, ..."
+#: include/helpers.php:435
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr ""
 
-#: include/helpers.php:462
-msgid "Aborted clients/connects - check logs."
+#: include/helpers.php:451
+#, php-format
+msgid "Aborted clients/connects: %s - check logs."
 msgstr ""
 
-#: include/helpers.php:469
+#: include/helpers.php:458
 #, php-format
 msgid "Connection errors: %s"
 msgstr ""
 
-#: include/helpers.php:470
+#: include/helpers.php:459
 #, php-format
 msgid "Aborted clients/connects: %s"
 msgstr ""
 
-#: include/helpers.php:471
+#: include/helpers.php:460
 #, php-format
 msgid "Damaged tables: %s"
 msgstr ""
 
-#: include/helpers.php:472
+#: include/helpers.php:461
 #, php-format
 msgid "Memory tables: %s"
 msgstr ""
 
-#: include/helpers.php:473
+#: include/helpers.php:462
 #, php-format
 msgid "All tables: %s"
 msgstr ""
 
-#: include/helpers.php:490
+#: include/helpers.php:479
 msgid "Remove from Dashboard"
 msgstr ""
 
-#: include/helpers.php:492
+#: include/helpers.php:481
 msgid "Add to Dashboard"
 msgstr ""
 
 #: include/settings.php:31
-msgid "Intro Page Options"
+msgid "Intropage Panels"
 msgstr ""
 
-#: include/settings.php:34
-msgid ""
-"How we should display the intropage. <strong>For users without console "
-"access you must choose separated tab!</strong>"
-msgstr ""
-
-#: include/settings.php:39
-msgid ""
-"Show the Intropage plugin screen in console screen (you need console access "
-"permission!)"
-msgstr ""
-
-#: include/settings.php:43
-msgid "Show the Intropage plugin screen in separated tab"
-msgstr ""
-
-#: include/settings.php:48
-msgid "Intropage panels"
-msgstr ""
-
-#: include/settings.php:50
+#: include/settings.php:33
 msgid "Enable/disable panels"
 msgstr ""
 
-#: include/settings.php:54
-msgid "Allow panel Analayse Log"
+#: include/settings.php:38
+msgid "Analyze Log"
 msgstr ""
 
-#: include/settings.php:60
-msgid "Allow panel Analayse Logins"
+#: include/settings.php:44
+msgid "Analyze Logins"
 msgstr ""
 
-#: include/settings.php:66
-msgid "Allow panel Threshold Events"
+#: include/settings.php:50
+msgid "Threshold Events"
 msgstr ""
 
-#: include/settings.php:72
-msgid "Allow panel Analayse Database"
+#: include/settings.php:56
+msgid "Analyze Database"
 msgstr ""
 
-#: include/settings.php:78
-msgid "Allow panel Analayse Tree, Devices, Graphs"
+#: include/settings.php:62
+msgid "Analyze Objects"
 msgstr ""
 
-#: include/settings.php:84
-msgid "Allow panel Trends"
+#: include/settings.php:74
+msgid "24h Extremes"
 msgstr ""
 
-#: include/settings.php:90
-msgid "Allow panel 24h Extrems"
+#: include/settings.php:80
+msgid "NTP Status"
 msgstr ""
 
-#: include/settings.php:96
-msgid "Allow panel NTP"
+#: include/settings.php:86
+msgid "Poller Info"
 msgstr ""
 
-#: include/settings.php:102
-msgid "Allow panel Poller Info"
+#: include/settings.php:92
+msgid "Poller Stats"
 msgstr ""
 
-#: include/settings.php:108
-msgid "Allow panel Poller Stats"
+#: include/settings.php:98
+msgid "Graph Device"
 msgstr ""
 
-#: include/settings.php:114
-msgid "Allow panel Graph Device"
+#: include/settings.php:104
+msgid "Graph Thresholds"
 msgstr ""
 
-#: include/settings.php:120
-msgid "Allow panel Graph Thresholds"
+#: include/settings.php:110
+msgid "Graph Data Dource"
 msgstr ""
 
-#: include/settings.php:126
-msgid "Allow panel Graph Data Dource"
+#: include/settings.php:116
+msgid "Graph Device Template"
 msgstr ""
 
-#: include/settings.php:132
-msgid "Allow panel Graph Device Template"
+#: include/settings.php:122
+msgid "CPU Utilization"
 msgstr ""
 
-#: include/settings.php:138
-msgid "Allow panel CPU Utilization"
+#: include/settings.php:128
+msgid "MacTrack Plugin"
 msgstr ""
 
-#: include/settings.php:144
-msgid "Allow panel MacTrack Plugin"
+#: include/settings.php:134
+msgid "MacTrack Sites"
 msgstr ""
 
-#: include/settings.php:150
-msgid "Allow panel MacTrack Sites"
+#: include/settings.php:140
+msgid "Top 5 Ping Times"
 msgstr ""
 
-#: include/settings.php:156
-msgid "Allow panel Top 5 Ping"
+#: include/settings.php:146
+msgid "Top 5 Availability"
 msgstr ""
 
-#: include/settings.php:162
-msgid "Allow panel Top 5 Availability"
+#: include/settings.php:152
+msgid "Top 5 Worst Polling"
 msgstr ""
 
-#: include/settings.php:168
-msgid "Allow panel Top 5 worst polling time"
+#: include/settings.php:158
+msgid "Top 5 Worst Failed Ratio"
 msgstr ""
 
-#: include/settings.php:174
-msgid "Allow panel Top 5 worst polling failed/total ratio"
+#: include/settings.php:164
+msgid "System Information"
 msgstr ""
 
-#: include/settings.php:180
-msgid "Allow panel System Information"
+#: include/settings.php:170
+msgid "Boost Status"
 msgstr ""
 
-#: include/settings.php:186
-msgid "Allow panel Boost"
+#: include/settings.php:176
+msgid "Favourite Graphs"
 msgstr ""
 
-#: include/settings.php:192
-msgid "Allow panel Favourite Graphs"
+#: include/settings.php:182
+msgid "Syslog Plugin"
 msgstr ""
 
-#: include/settings.php:213
-msgid "Show Intropage (no matter in Console or Tab)"
+#: include/settings.php:203
+msgid "Show Intropage in Tab (not selected = intropage in console)"
+msgstr ""
+
+#: include/settings.php:253
+msgid "Intropage"
+msgstr ""
+
+#: include/settings.php:258
+msgid "Normal User"
 msgstr ""
 
 #: include/variables.php:60
@@ -973,8 +1074,7 @@ msgid "Important things will be at the top"
 msgstr ""
 
 #: include/variables.php:65
-msgid ""
-"If checked Intropage displays important (errors, warnings) information first"
+msgid "If checked Intropage displays important (errors, warnings) information first"
 msgstr ""
 
 #: include/variables.php:70
@@ -989,7 +1089,7 @@ msgstr ""
 msgid "Automatically by poller"
 msgstr ""
 
-#: include/variables.php:75
+#: include/variables.php:75 include/variables.php:108
 msgid "Never"
 msgstr ""
 
@@ -997,136 +1097,140 @@ msgstr ""
 msgid "Every Minute"
 msgstr ""
 
-#: include/variables.php:77 include/variables.php:106 include/variables.php:140
+#: include/variables.php:77 include/variables.php:109 include/variables.php:143
 #, php-format
 msgid "Every %d Minutes"
 msgstr ""
 
-#: include/variables.php:78 include/variables.php:107 include/variables.php:141
+#: include/variables.php:78 include/variables.php:110 include/variables.php:144
 msgid "Every Hour"
 msgstr ""
 
 #: include/variables.php:83
-msgid "Display"
+msgid "Poller Timeout"
 msgstr ""
 
 #: include/variables.php:84
-msgid "What will you see"
-msgstr ""
-
-#: include/variables.php:87
-msgid "Only Errors"
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
 
 #: include/variables.php:88
-msgid "Errors and Warnings"
+#, php-format
+msgid "%d Minute"
 msgstr ""
 
-#: include/variables.php:94
-msgid "Analyse log -  number of lines"
+#: include/variables.php:89 include/variables.php:90
+#, php-format
+msgid "%d Minutes"
 msgstr ""
 
-#: include/variables.php:95
-msgid ""
-"How many lines of log will be analysed. Big number may causes slow page load"
+#: include/variables.php:91 include/variables.php:92
+#, php-format
+msgid "%d Seconds"
 msgstr ""
 
-#: include/variables.php:102
+#: include/variables.php:96
+msgid "Analyze log -  number of lines"
+msgstr ""
+
+#: include/variables.php:97
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr ""
+
+#: include/variables.php:104
 msgid "How often analyze DB"
 msgstr ""
 
-#: include/variables.php:103
+#: include/variables.php:105
 msgid "Poller runs this task. It could cause long poller run."
 msgstr ""
 
-#: include/variables.php:108 include/variables.php:142
+#: include/variables.php:111 include/variables.php:145
 msgid "Every Day"
 msgstr ""
 
-#: include/variables.php:109
+#: include/variables.php:112
 msgid "Every Week"
 msgstr ""
 
-#: include/variables.php:110
+#: include/variables.php:113
 msgid "Every Month"
 msgstr ""
 
-#: include/variables.php:115
-msgid "Analyse DB - Level of db check"
-msgstr ""
-
-#: include/variables.php:116
-msgid ""
-"Quick - No Check rows for inforccert links<br/>Fast - check only not "
-"properly closed tables<br/>Changed - check tables changed from last check<br/"
-">Medium - with rows scan<br/>Extended - full rows and keys<br/"
-"><strong>Medium and extended may causes slow page load!</strong>"
+#: include/variables.php:118
+msgid "Analyze DB - Level of db check"
 msgstr ""
 
 #: include/variables.php:119
-msgid "Quick"
-msgstr ""
-
-#: include/variables.php:120
-msgid "Fast"
-msgstr ""
-
-#: include/variables.php:121
-msgid "Changed"
+msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>"
 msgstr ""
 
 #: include/variables.php:122
-msgid "Medium"
+msgid "Quick"
 msgstr ""
 
 #: include/variables.php:123
+msgid "Fast"
+msgstr ""
+
+#: include/variables.php:124
+msgid "Changed"
+msgstr ""
+
+#: include/variables.php:125
+msgid "Medium"
+msgstr ""
+
+#: include/variables.php:126
 msgid "Extended"
 msgstr ""
 
-#: include/variables.php:128
+#: include/variables.php:131
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr ""
 
-#: include/variables.php:129
+#: include/variables.php:132
 msgid "Insert IP or DNS name of NTP server"
 msgstr ""
 
-#: include/variables.php:136
+#: include/variables.php:139
 msgid "How often check NTP"
 msgstr ""
 
-#: include/variables.php:137
+#: include/variables.php:140
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr ""
 
-#: include/variables.php:148
+#: include/variables.php:151
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr ""
 
-#: include/variables.php:149
-msgid ""
-"If isn't empty, panel will be displayed on the top. You can use html tags "
-"(b, i, ...)."
+#: include/variables.php:152
+msgid "If isn't empty, panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr ""
 
-#: include/variables.php:158
+#: include/variables.php:161
 msgid "Maint plugin - how many days before display alert"
 msgstr ""
 
-#: include/variables.php:159
+#: include/variables.php:162
 msgid "How many days?</strong>"
 msgstr ""
 
-#: include/variables.php:162
+#: include/variables.php:165
 msgid "When maintenance starts"
 msgstr ""
 
-#: include/variables.php:163
+#: include/variables.php:166
 #, php-format
 msgid "%d Day Before"
 msgstr ""
 
-#: include/variables.php:164 include/variables.php:165
+#: include/variables.php:167 include/variables.php:168
 #, php-format
 msgid "%d Days Before"
+msgstr ""
+
+#: intropage_ajax.php:147 intropage_ajax.php:167
+msgid "Panel not found"
 msgstr ""
