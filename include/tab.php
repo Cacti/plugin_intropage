@@ -26,9 +26,12 @@
 function intropage_show_tab() {
 	global $config;
 
+	$console_access = api_plugin_user_realm_auth('index.php');
+	$login_opts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+
 	if (api_user_realm_auth('intropage.php') && isset($_SESSION['sess_user_id'])) {
 
-		if (db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 2)	{
+		if (($console_access && $login_opts !=2) || !$console_access)	{
 			$cp = false;
 			if (basename($_SERVER['PHP_SELF']) == 'intropage.php') {
 				$cp = true;
