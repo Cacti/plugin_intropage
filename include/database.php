@@ -29,7 +29,22 @@ function intropage_drop_database() {
 	db_execute('DROP TABLE plugin_intropage_trends');
 	db_execute('DROP TABLE plugin_intropage_panel');
 	db_execute('UPDATE user_auth SET login_opts=1 WHERE login_opts > 3');
+	// new version
+	db_execute('DROP TABLE plugin_intropage_panel_definition');
+
 }
+
+intropage_add_panel($panelid, $panelJSON) {
+    // insert into plugin_intropage_panel_definition
+    
+    //return last_inserted_id;
+}
+
+intropage_remove_panel($panelid) {
+    // delete from plugin_intropage_panel_data
+    // delete from plugin_intropage_panel_definition
+}
+
 
 function intropage_initialize_database() {
 	global $config, $intropage_settings;
@@ -114,6 +129,30 @@ function intropage_initialize_database() {
 	$data['primary']   = 'id';
 	$data['comment']   = 'panel setting';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel', $data);
+
+	$data              = array();
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
+	$data['columns'][] = array('name' => 'title', 'type' => 'varchar(50)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'file', 'type' => 'varchar(200)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
+	$data['type']      = 'InnoDB';
+	$data['primary']   = 'id';
+	$data['comment']   = 'panel definition';
+	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_definition', $data);
+
+
+	$data              = array();
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
+	$data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'last_update', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
+	$data['columns'][] = array('name' => 'detail', 'type' => 'text', 'NULL' => true);
+	$data['type']      = 'InnoDB';
+	$data['primary']   = 'id';
+	$data['comment']   = 'panel data';
+	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
+
 
 	$sql_insert = '';
 	foreach ($panel as $key => $value) {
@@ -222,6 +261,12 @@ function intropage_upgrade_database() {
 			db_execute("REPLACE INTO plugin_intropage_trends (name,value)
 				VALUES ('ar_poller_finish', '1')");
 		}
+
+		if (cacti_version_compare($oldv,'1.9.0', '<')) {
+			db_execute("ALTER TABLE plugin_intropage_trends ENGINE=InnoDB");
+			db_execute("ALTER TABLE plugin_intropage_user_setting ENGINE=InnoDB");
+			db_execute("ALTER TABLE plugin_intropage_panel ENGINE=InnoDB");
+		}		
 
 		if (!db_column_exists('user_auth', 'intropage_syslog')) {
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
