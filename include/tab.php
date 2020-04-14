@@ -31,7 +31,7 @@ function intropage_show_tab() {
 
 	if (api_user_realm_auth('intropage.php') && isset($_SESSION['sess_user_id'])) {
 
-		if (($console_access && $login_opts !=2) || !$console_access)	{
+		if (($console_access && $login_opts == 4) || !$console_access)	{
 			$cp = false;
 			if (basename($_SERVER['PHP_SELF']) == 'intropage.php') {
 				$cp = true;
