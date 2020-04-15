@@ -60,7 +60,7 @@ function display_information() {
 	include_once($config['base_path'] . '/plugins/intropage/include/actions.php');
 
 	// functions
-	include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
+	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
 
 	// Retrieve user settings and defaults

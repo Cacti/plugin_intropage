@@ -33,8 +33,8 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
 	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/helpers.php');
-	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/helpers.php');
+	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
+	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 
@@ -109,5 +109,18 @@ function intropage_poller_bottom() {
     $extra_args = ' -q ' . $config['base_path'] . '/plugins/intropage/poller_intropage.php';
 
     exec_background($command_string, $extra_args);
+}
+
+
+// maybe not used
+intropage_add_panel($panelid, $panelJSON) {
+    // insert into plugin_intropage_panel_definition
+
+    //return last_inserted_id;
+}
+
+intropage_remove_panel($panelid) {
+    // delete from plugin_intropage_panel_data
+    // delete from plugin_intropage_panel_definition
 }
 

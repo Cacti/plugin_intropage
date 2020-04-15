@@ -87,7 +87,7 @@ else
 // Retrieve access
 $console_access = api_plugin_user_realm_auth('index.php');
 
-include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
+include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 if (isset_request_var('reload_panel') && isset($panel_id)) {
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');

@@ -34,17 +34,6 @@ function intropage_drop_database() {
 
 }
 
-intropage_add_panel($panelid, $panelJSON) {
-    // insert into plugin_intropage_panel_definition
-    
-    //return last_inserted_id;
-}
-
-intropage_remove_panel($panelid) {
-    // delete from plugin_intropage_panel_data
-    // delete from plugin_intropage_panel_definition
-}
-
 
 function intropage_initialize_database() {
 	global $config, $intropage_settings;
@@ -148,6 +137,12 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'detail', 'type' => 'text', 'NULL' => true);
+	$data['columns'][] = array('name' => 'priority', 'type' => 'int(2)', 'default' => '50', 'NULL' => false);
+	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','gray')", 'default' => 'green', 'NULL' => false);
+
+	// for favourite graph id,timespam, ...
+	$data['columns'][] = array('name' => 'extra', 'type' => 'varchar(100)', 'NULL' => true);
+
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'id';
 	$data['comment']   = 'panel data';

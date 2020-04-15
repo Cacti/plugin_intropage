@@ -203,7 +203,7 @@ function intropage_gather_stats() {
 	if (time() > ($last + read_config_option('intropage_ntp_interval')) || $force) {
 		intropage_debug('Checking NTP Statistics');
 
-	    include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
+	    include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 	    ntp_time2();
 
 		$checks++;
@@ -240,7 +240,7 @@ function intropage_gather_stats() {
 		if (time() > ($last + read_config_option('intropage_analyse_db_interval')) || $force) {
 			intropage_debug('Checking Cacti Database');
 
-			include_once($config['base_path'] . '/plugins/intropage/include/helpers.php');
+			include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 			db_check();
 
 			$checks++;
