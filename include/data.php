@@ -23,6 +23,111 @@
  +-------------------------------------------------------------------------+
 */
 
+/*
+prototype
+
+select count(*) from intropage_data where name=db_check_last_run
+if not {
+    replace into intropage_data (db_check_last_run)
+    $result = array (waiting for data);
+
+}
+
+if ($update)       {
+    // prepare data, save it to intropage_data
+    // run in poller and when user click "update icon" on panel
+    // few panels (like check_db) will have here recheck timeout (hour, day, week, ...)     
+}
+
+if ($display)    {
+    // select from intropage_data, returt data in $result array
+}
+     $data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
+        $data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
+        $data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+        $data['columns'][] = array('name' => 'last_update', 'type' => 'int(11)', 'NULL' => true);
+        $data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
+        $data['columns'][] = array('name' => 'detail', 'type' => 'text', 'NULL' => true);
+        $data['columns'][] = array('name' => 'priority', 'type' => 'int(2)', 'default' => '50', 'NULL' => false);
+        $data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','gray')", 'default' => 'green', 'NULL' => false);
+*/
+
+//------------------------------------ analyse_login -----------------------------------------------------
+
+
+function intropage_analyse_login($display=false, $update=false) {
+	global $config;
+
+	$result = array(
+		'name' => __('Analyze logins', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'detail' => TRUE,
+	);
+	
+	// for all users
+	if (db_fetch_cell("SELECT count(*) FROM plugin_intropage_panel_data WHERE 
+				panel_id='analyse_login' AND
+				last_update IS NOT NULL") > 0) {
+	    db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,detail,alarm) 
+			    VALUES ('analyse_login'," . $_SESSION['user_id'] . ",
+			    '" . __('Waiting for data', 'intropage') . "',
+			    '" . __('Waiting for data', 'intropage') . "','gray')");
+	}
+
+	if ($update)	{
+	    // active users in last hour:
+	    $flog = db_fetch_cell('SELECT count(t.result)
+		FROM (
+			SELECT result FROM user_auth
+			INNER JOIN user_log ON user_auth.username = user_log.username
+			ORDER BY user_log.time DESC LIMIT 10
+		) AS t
+		WHERE t.result=0;');
+
+	    if ($flog > 0) {
+		$result['alarm'] = 'red';
+	    }
+
+	    $result['data'] = '<span class="txt_big">' . __('Failed logins', 'intropage') . ': ' . $flog . '</span><br/><br/>';
+
+	    // active users in last hour:
+	    $result['data'] .= '<b>Active users in last hour:</b><br/>';
+
+	    $sql_result = db_fetch_assoc('SELECT DISTINCT username
+		FROM user_log
+		WHERE time > adddate(now(), INTERVAL -1 HOUR)');
+
+	    if (cacti_sizeof($sql_result)) {
+		foreach ($sql_result as $row) {
+			$result['data'] .= $row['username'] . '<br/>';
+		}
+	    }
+
+	    db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,detail,alarm) 
+			    VALUES ('analyse_login'," . $_SESSION['user_id'] . ",
+			    '" . $result['data'] . "',
+			    '" . __('missing!!', 'intropage') . "','gray')");
+	}
+
+	if ($display)    {
+	    if ($update) {
+		return $result;
+	    }
+	    else	{	// without user_id
+	        $result = db_fetch_assoc ("SELECT data, detail, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id='analyse_login'"); 
+
+		$result['name'] = 'Analyse login';
+	    }		
+	    return $result;
+	}
+
+
+}
+
+
+
 //------------------------------------ analyse_db -----------------------------------------------------
 if (!function_exists('array_column')) {
     function array_column($array,$column_name) {

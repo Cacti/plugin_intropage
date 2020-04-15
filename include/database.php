@@ -134,7 +134,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'last_update', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'last_update', 'type' => 'int(11)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'detail', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(2)', 'default' => '50', 'NULL' => false);
@@ -144,7 +144,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'extra', 'type' => 'varchar(100)', 'NULL' => true);
 
 	$data['type']      = 'InnoDB';
-	$data['primary']   = 'id';
+	$data['primary']   = 'panel_id,user_id';
 	$data['comment']   = 'panel data';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
 
