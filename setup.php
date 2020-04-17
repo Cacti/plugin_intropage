@@ -112,14 +112,15 @@ function intropage_poller_bottom() {
 }
 
 
-// maybe not used
-intropage_add_panel($panelid, $panelJSON) {
+// !!! maybe not used
+function intropage_add_panel($panelid, $panelJSON) {
     // insert into plugin_intropage_panel_definition
 
     //return last_inserted_id;
 }
 
-intropage_remove_panel($panelid) {
+// !!! maybe not used
+function intropage_remove_panel($panelid) {
     // delete from plugin_intropage_panel_data
     // delete from plugin_intropage_panel_definition
 }

@@ -76,19 +76,12 @@ if (isset_request_var('autoreload')) {
 // few requered variables
 $maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
-/* now in session
-$hosts = get_allowed_devices();
-if (count($hosts) > 0)
-    $allowed_hosts = implode(',', array_column($hosts, 'id'));
-else
-    $allowed_hosts = false;
-*/
-
 // Retrieve access
 $console_access = api_plugin_user_realm_auth('index.php');
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
+// !!!! tuhle blbou promennou pak prejmenovat
 if (isset_request_var('reload_panel') && isset($panel_id)) {
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
 
@@ -98,6 +91,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 
 	if ($panel)	{
 		// exception for ntp and db_check - get data now!
+/*
 		if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
 			if ($panel['panel'] == 'intropage_ntp')	{
 				ntp_time2();
@@ -107,13 +101,13 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 				db_check();
 			}
 		}
-
-		$pokus = $panel['panel'];
+*/
+		$panel_fn = $panel['panel'];
 
 		if (isset($panel['fav_graph_id'])) { // fav_graph exception
 			$data = intropage_favourite_graph($panel['fav_graph_id']);
 		} else { // normal panel
-			$data = $pokus();
+			$data = $panel_fn(true,true);
 		}
 
 		if (isset_request_var('reload_panel')) {
@@ -147,6 +141,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 		print __('Panel not found');
 	}
 }
+
 
 if (isset_request_var('detail_panel') && isset($panel_id)) {
     include_once($config['base_path'] . '/plugins/intropage/include/data_detail.php');

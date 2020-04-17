@@ -130,7 +130,7 @@ function display_information() {
 			if (isset($xvalue['fav_graph_id'])) { // fav_graph exception
 				$panels[$xkey]['alldata'] = intropage_favourite_graph($xvalue['fav_graph_id']);
 			} else {	// normal panel
-				$panels[$xkey]['alldata'] = $pokus();
+				$panels[$xkey]['alldata'] = $pokus(true,false);
 			}
 
 			if ($logging >= 5) {

@@ -123,6 +123,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'title', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'file', 'type' => 'varchar(200)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'has_detail', 'type' => "enum('yes','no')", 'NULL' => 'no');
 	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'id';
@@ -131,10 +132,11 @@ function intropage_initialize_database() {
 
 
 	$data              = array();
-	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
+//	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'last_update', 'type' => 'int(11)', 'NULL' => true);
+	$data['columns'][] = array('name' => 'page_id', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
+	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'detail', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(2)', 'default' => '50', 'NULL' => false);
@@ -144,10 +146,12 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'extra', 'type' => 'varchar(100)', 'NULL' => true);
 
 	$data['type']      = 'InnoDB';
-	$data['primary']   = 'panel_id,user_id';
+	// not working $data['primary']   = '(`panel_id`,`user_id`)';
 	$data['comment']   = 'panel data';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
 
+	db_execute('ALTER TABLE plugin_intropage_panel_data ADD PRIMARY KEY (panel_id,user_id)');
+	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
 	$sql_insert = '';
 	foreach ($panel as $key => $value) {

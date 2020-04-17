@@ -337,6 +337,7 @@ EOF;
 
 	elseif (isset($dispdata['data'])) {	// display text data
 		print $dispdata['data'];
+		print '<br/>' . $dispdata['last_update'];
 	}
 
 	if (isset($dispdata['detail'])) {

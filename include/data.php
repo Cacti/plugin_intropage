@@ -62,15 +62,18 @@ function intropage_analyse_login($display=false, $update=false) {
 		'name' => __('Analyze logins', 'intropage'),
 		'alarm' => 'green',
 		'data' => '',
-		'detail' => TRUE,
+//		'detail' => TRUE,
+// !!! tohle resim. tady detail nepotrebuju, ale v ajaxu musim brat z definice panelu, jestli ma detail
+// mam to v promenne has_detail v definici - takze resit v ajaxu
+		'last_update' =>  NULL,
 	);
 	
 	// for all users
 	if (db_fetch_cell("SELECT count(*) FROM plugin_intropage_panel_data WHERE 
 				panel_id='analyse_login' AND
-				last_update IS NOT NULL") > 0) {
+				last_update IS NOT NULL") == 0) {
 	    db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,detail,alarm) 
-			    VALUES ('analyse_login'," . $_SESSION['user_id'] . ",
+			    VALUES ('analyse_login'," . $_SESSION['sess_user_id'] . ",
 			    '" . __('Waiting for data', 'intropage') . "',
 			    '" . __('Waiting for data', 'intropage') . "','gray')");
 	}
@@ -96,7 +99,7 @@ function intropage_analyse_login($display=false, $update=false) {
 
 	    $sql_result = db_fetch_assoc('SELECT DISTINCT username
 		FROM user_log
-		WHERE time > adddate(now(), INTERVAL -1 HOUR)');
+		WHERE time > adddate(now(), INTERVAL -1 HOUR) LIMIT 10');
 
 	    if (cacti_sizeof($sql_result)) {
 		foreach ($sql_result as $row) {
@@ -105,25 +108,19 @@ function intropage_analyse_login($display=false, $update=false) {
 	    }
 
 	    db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,detail,alarm) 
-			    VALUES ('analyse_login'," . $_SESSION['user_id'] . ",
+			    VALUES ('analyse_login'," . $_SESSION['sess_user_id'] . ",
 			    '" . $result['data'] . "',
-			    '" . __('missing!!', 'intropage') . "','gray')");
+			    '" . __('missing!!', 'intropage') . "','" . $result['alarm'] . "')");
 	}
 
 	if ($display)    {
-	    if ($update) {
-		return $result;
-	    }
-	    else	{	// without user_id
-	        $result = db_fetch_assoc ("SELECT data, detail, alarm, last_update FROM plugin_intropage_panel_data 
+	        $result = db_fetch_row ("SELECT data, detail, alarm, last_update FROM plugin_intropage_panel_data 
 	    				    WHERE panel_id='analyse_login'"); 
 
 		$result['name'] = 'Analyse login';
-	    }		
-	    return $result;
+
+	        return $result;
 	}
-
-
 }
 
 
@@ -250,48 +247,6 @@ function intropage_analyse_log() {
 	return $result;
 }
 
-//------------------------------------ analyse_login -----------------------------------------------------
-
-function intropage_analyse_login() {
-	global $config;
-
-	$result = array(
-		'name' => __('Analyze logins', 'intropage'),
-		'alarm' => 'green',
-		'data' => '',
-		'detail' => TRUE,
-	);
-
-	// active users in last hour:
-	$flog = db_fetch_cell('SELECT count(t.result)
-		FROM (
-			SELECT result FROM user_auth
-			INNER JOIN user_log ON user_auth.username = user_log.username
-			ORDER BY user_log.time DESC LIMIT 10
-		) AS t
-		WHERE t.result=0;');
-
-	if ($flog > 0) {
-		$result['alarm'] = 'red';
-	}
-
-	$result['data'] = '<span class="txt_big">' . __('Failed logins', 'intropage') . ': ' . $flog . '</span><br/><br/>';
-
-	// active users in last hour:
-	$result['data'] .= '<b>Active users in last hour:</b><br/>';
-
-	$sql_result = db_fetch_assoc('SELECT DISTINCT username
-		FROM user_log
-		WHERE time > adddate(now(), INTERVAL -1 HOUR)');
-
-	if (cacti_sizeof($sql_result)) {
-		foreach ($sql_result as $row) {
-			$result['data'] .= $row['username'] . '<br/>';
-		}
-	}
-
-	return $result;
-}
 
 //------------------------------------ analyse_tree_host_graph  -----------------------------------------------------
 
