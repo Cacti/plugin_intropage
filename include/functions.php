@@ -338,6 +338,7 @@ EOF;
 	elseif (isset($dispdata['data'])) {	// display text data
 		print $dispdata['data'];
 		print '<br/>' . $dispdata['last_update'];
+		print '<br/>' . "repeat every xxx!!! dodelat";
 	}
 
 	if (isset($dispdata['detail'])) {

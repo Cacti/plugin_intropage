@@ -113,7 +113,8 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 		if (isset_request_var('reload_panel')) {
 			intropage_display_data(get_request_var('reload_panel'),$data);
 
-			// change panel color or ena/disa detail
+			// change panel color or ena/disa detail 
+			// !!!!! toto uz brat z definice panelu
 			?>
 			<script type='text/javascript'>
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');

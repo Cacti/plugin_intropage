@@ -65,6 +65,7 @@ function intropage_initialize_database() {
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 
+/*
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 	$sql_insert = '';
 	foreach ($intropage_settings as $key => $value) {
@@ -80,7 +81,7 @@ function intropage_initialize_database() {
 	if ($sql_insert != '') {
 		db_execute("REPLACE INTO settings (name, value) VALUES $sql_insert");
 	}
-
+*/
 	$data              = array();
 	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
@@ -120,20 +121,21 @@ function intropage_initialize_database() {
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel', $data);
 
 	$data              = array();
-	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'title', 'type' => 'varchar(50)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'file', 'type' => 'varchar(200)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'has_detail', 'type' => "enum('yes','no')", 'NULL' => 'no');
+	$data['columns'][] = array('name' => 'priority', 'type' => "int(2)", 'default' => '50', 'NULL' => 'no');
+
 	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
 	$data['type']      = 'InnoDB';
-	$data['primary']   = 'id';
+	$data['primary']   = 'panel_id';
 	$data['comment']   = 'panel definition';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_definition', $data);
 
 
 	$data              = array();
 //	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'page_id', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
@@ -143,7 +145,8 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','gray')", 'default' => 'green', 'NULL' => false);
 
 	// for favourite graph id,timespam, ...
-	$data['columns'][] = array('name' => 'extra', 'type' => 'varchar(100)', 'NULL' => true);
+	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true);
+	$data['columns'][] = array('name' => 'fav_graph_data', 'type' => 'varchar(100)', 'NULL' => true);
 
 	$data['type']      = 'InnoDB';
 	// not working $data['primary']   = '(`panel_id`,`user_id`)';
@@ -153,6 +156,43 @@ function intropage_initialize_database() {
 	db_execute('ALTER TABLE plugin_intropage_panel_data ADD PRIMARY KEY (panel_id,user_id)');
 	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
+
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('intropage_analyse_log','/plugins/intropage/include/data.php','yes',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('intropage_analyse_login','/plugins/intropage/include/data.php','yes',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('intropage_analyse_log','/plugins/intropage/include/data.php','yes',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('intropage_top5_ping','/plugins/intropage/include/data.php','yes',300)");
+
+
+/* !!! tyhle zbyva pridat, budu resit prioritu?		
+		
+'intropage_thold_event']['priority']             = 90;
+'intropage_analyse_db']['priority']              = 62;
+'intropage_analyse_tree_host_graph']['priority'] = 63;
+'intropage_trend']['priority']                   = 40;
+'intropage_extrem']['priority']                  = 41;
+'intropage_ntp']['priority']                     = 50;
+'intropage_poller_info']['priority']             = 51;
+'intropage_poller_stat']['priority']             = 52;
+'intropage_graph_host']['priority']              = 20;
+'intropage_graph_thold']['priority']             = 21;
+'intropage_graph_data_source']['priority']       = 22;
+'intropage_graph_host_template']['priority']     = 23;
+'intropage_cpu']['priority']                     = 53;
+'intropage_mactrack']['priority']                = 20;
+'intropage_mactrack_sites']['priority']          = 21;
+'intropage_top5_availability']['priority']       = 23;
+'intropage_info']['priority']                    = 10;
+'intropage_boost']['priority']                   = 55;
+'intropage_top5_polltime']['priority']           = 24;
+'intropage_top5_pollratio']['priority']          = 25;
+'intropage_syslog']['priority']                  = 42;
+*/
+
+/*
 	$sql_insert = '';
 	foreach ($panel as $key => $value) {
 		if (isset($value['priority']) && !db_fetch_cell("SELECT priority FROM plugin_intropage_panel WHERE panel='$key'")) {
@@ -167,6 +207,7 @@ function intropage_initialize_database() {
 	if ($sql_insert != '') {
 		db_execute("REPLACE INTO plugin_intropage_panel (panel,priority) VALUES $sql_insert");
 	}
+*/
 }
 
 function intropage_upgrade_database() {

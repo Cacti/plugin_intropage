@@ -61,53 +61,58 @@ function display_information() {
 
 	// functions
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
-	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
+	//include_once($config['base_path'] . '/plugins/intropage/include/data.php');
 
 	// Retrieve user settings and defaults
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
+/*
 	$hosts = get_allowed_devices();
 	if (count($hosts) > 0) {
 		$_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
 	} else {
 		$_SESSION['allowed_hosts'] = false;
 	}
+*/
 
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
 
+/* tohle musim resit jinak. Poller mi vygeneruje data pro vsechny, nebudu ty data z ...panel_data mazat
 	// retrieve user setting (and creating if not)
-	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_user_setting WHERE fav_graph_id IS NULL AND user_id = ?', array($_SESSION['sess_user_id'])) == 0) {
-		$all_panel = db_fetch_assoc('SELECT panel,priority FROM plugin_intropage_panel');
+	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data WHERE fav_graph_id IS NULL AND user_id = ?', array($_SESSION['sess_user_id'])) == 0) {
+		$all_panel = db_fetch_assoc('SELECT panel_id,priority FROM plugin_intropage_panel_definition');
 
 		// generating user setting
 		foreach ($all_panel as $one) {
-			if (db_fetch_cell_prepared('SELECT ' . $one['panel'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-				db_execute_prepared('INSERT INTO plugin_intropage_user_setting
-					(user_id, panel, priority)
-					VALUES (?, ?, ?)',
-					array($_SESSION['sess_user_id'], $one['panel'],$one['priority']));
+			if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
+				db_execute_prepared('INSERT INTO plugin_intropage_panel_data
+					(user_id, panel_id, priority, data, alarm)
+					VALUES (?, ?, ?, ?, ?)',
+					array($_SESSION['sess_user_id'], $one['panel_id'],$one['priority'],__('Waiting for data', 'intropage'),'gray'));
 			}
 		}
 	} else { // revoke permissions
-		$all_panel = db_fetch_assoc('SELECT panel FROM plugin_intropage_user_setting');
+		$all_panel = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_data');
 
 		foreach ($all_panel as $one) {
-			if (db_fetch_cell_prepared('SELECT ' . $one['panel'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
-				db_execute_prepared('DELETE FROM plugin_intropage_user_setting
+			if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
+				db_execute_prepared('DELETE FROM plugin_intropage_panel_data
 					WHERE user_id = ?
-					AND panel = ?',
-					array($_SESSION['sess_user_id'], $one['panel']));
+					AND panel_id = ?',
+					array($_SESSION['sess_user_id'], $one['panel_id']));
 			}
 		}
 	}
 
 	$order = ' priority desc';
+*/
 
 	// each favourite graph must have unique name
 	// without this fav_graph is overwritten
 
+//!!! tady jsem skoncil. Resit tu vyhazovani panelu, ke kterym nema prava
 	$panels = db_fetch_assoc_prepared("SELECT id, panel, priority, fav_graph_id
 		FROM plugin_intropage_user_setting
 		WHERE user_id = ?
