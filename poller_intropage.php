@@ -114,6 +114,27 @@ exit(0);
 
 function intropage_gather_stats() {
 	global $config, $force, $checks;
+	
+	$logging = read_config_option('log_verbosity', true);
+
+	// gather data for all panels
+	$data = db_fetch_assoc('SELECT file,panel_id FROM plugin_intropage_panel_definition');
+	foreach ($data as $one)	{
+	
+	    include_once($config['base_path'] . $one['file']);
+    	    $start = microtime(true);
+
+    	    $magic = $one['panel_id'];
+            $magic(false,true,false);
+        
+    	    if ($logging >=5) {    
+        	cacti_log('Debug: gathering data - $magic - duration ' . round(microtime(true) - $start, 2),true,'Intropage');
+	    }
+    	    intropage_debug('gathering data - $magic - duration ' . round(microtime(true) - $start, 2));
+
+	}
+	// end of gathering data 
+
 
 	// cleaning old data
 	intropage_debug('Purging old Intropage Trends');
@@ -259,6 +280,8 @@ function intropage_gather_stats() {
 		array('poller_output', $count));
 
 	$checks++;
+	
+	
 }
 
 function intropage_debug($message) {

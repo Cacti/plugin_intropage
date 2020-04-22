@@ -80,6 +80,55 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
+
+
+function intropage_display_panel($panel_id) {
+	global $config;
+
+	$selectedTheme = get_selected_theme();
+	switch ($selectedTheme) {
+		case 'dark':
+		case 'paper-plane':
+			$bgcolor = '#202020';
+			break;
+		case 'sunrise':
+			$bgcolor = '';
+			break;
+		default:
+			$bgcolor = '#f5f5f5';
+	}
+
+	print '<li id="panel_' . $panel_id . '" class="ui-state-default flexchild">';
+	print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box;">';
+
+	print '<div class="panel_header color_gray">';
+	print '<span class="panel_name"></span>';
+
+	if ($panel_id > 990) {
+		printf("<a href='#' title='" . __esc('You cannot disable this panel', 'intropage') . "' class='header_link'><i class='fa fa-times'></i></a>\n");
+	} else {
+		printf("<a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
+	}
+
+	printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>\n");
+
+	printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a>\n", $panel_id);
+
+	print " </div>\n";
+	print "	<table class='cactiTable'>\n";
+	print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
+
+	print "<div class='panel_data'>\n";
+	print __('Loading data ...', 'intropage');
+	print "</div>\n";	// end of panel_data
+	print "</td></tr>\n\n";
+	html_end_box(false);
+	print "</li>\n\n";
+}
+
+
+
+/*
 function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	global $config;
 
@@ -125,6 +174,7 @@ function intropage_display_panel($panel_id, $type, $header, $dispdata) {
 	html_end_box(false);
 	print "</li>\n\n";
 }
+*/
 
 function intropage_display_data($panel_id,$dispdata) {
 	global $config;
@@ -337,8 +387,8 @@ EOF;
 
 	elseif (isset($dispdata['data'])) {	// display text data
 		print $dispdata['data'];
-		print '<br/>' . $dispdata['last_update'];
-		print '<br/>' . "repeat every xxx!!! dodelat";
+		print '<br/>Last update: ' . $dispdata['last_update'];
+//		print '<br/>' . "repeat every xxx!!! dodelat";
 	}
 
 	if (isset($dispdata['detail'])) {

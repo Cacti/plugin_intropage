@@ -40,7 +40,8 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
 	$panel_id = get_request_var('detail_panel');
 }
 
-get_filter_request_var('autom', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '(true|false)')));
+
+$forced_update = get_filter_request_var('force', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '(true|false)')));
 
 // automatic reload when poller ends
 if (isset_request_var('autoreload')) {
@@ -79,35 +80,19 @@ $maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 // Retrieve access
 $console_access = api_plugin_user_realm_auth('index.php');
 
-include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+//include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 // !!!! tuhle blbou promennou pak prejmenovat
 if (isset_request_var('reload_panel') && isset($panel_id)) {
 	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
 
-	$panel = db_fetch_row_prepared('SELECT panel, fav_graph_id
-		FROM plugin_intropage_user_setting
-		WHERE id = ?', array($panel_id));
-
+	$panel = db_fetch_row_prepared('SELECT * FROM plugin_intropage_panel_data
+		WHERE id = ? AND user_id IN (0,?)', array($panel_id,$_SESSION['sess_user_id']));
 	if ($panel)	{
-		// exception for ntp and db_check - get data now!
-/*
-		if (isset_request_var ('autom') && get_request_var ('autom') == 'true')	{
-			if ($panel['panel'] == 'intropage_ntp')	{
-				ntp_time2();
-			}
-
-			if ($panel['panel'] == 'intropage_analyse_db')	{
-				db_check();
-			}
-		}
-*/
-		$panel_fn = $panel['panel'];
-
 		if (isset($panel['fav_graph_id'])) { // fav_graph exception
 			$data = intropage_favourite_graph($panel['fav_graph_id']);
 		} else { // normal panel
-			$data = $panel_fn(true,true);
+			$data = $panel['panel_id'](true,false,$forced_update);
 		}
 
 		if (isset_request_var('reload_panel')) {
@@ -117,6 +102,8 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 			// !!!!! toto uz brat z definice panelu
 			?>
 			<script type='text/javascript'>
+//			    window.alert($('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_name').html());
+				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_name').html('<?php echo $data['name'];?>');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_yellow');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_red');

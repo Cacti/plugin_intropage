@@ -112,14 +112,14 @@ function intropage_poller_bottom() {
 }
 
 
-// !!! maybe not used
+// !!!! mozna tohle dat do samostatneho souboru
 function intropage_add_panel($panelid, $panelJSON) {
     // insert into plugin_intropage_panel_definition
-
+    // pridat sloupecek do user_auth
     //return last_inserted_id;
 }
 
-// !!! maybe not used
+
 function intropage_remove_panel($panelid) {
     // delete from plugin_intropage_panel_data
     // delete from plugin_intropage_panel_definition

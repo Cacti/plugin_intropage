@@ -134,10 +134,10 @@ function intropage_initialize_database() {
 
 
 	$data              = array();
-//	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
+	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'page_id', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
+	$data['columns'][] = array('name' => 'page_id', 'type' => 'int(1)', 'default' => '1', 'NULL' => false);
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'detail', 'type' => 'text', 'NULL' => true);
@@ -149,22 +149,20 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'fav_graph_data', 'type' => 'varchar(100)', 'NULL' => true);
 
 	$data['type']      = 'InnoDB';
-	// not working $data['primary']   = '(`panel_id`,`user_id`)';
+	$data['primary']   = 'id';
 	$data['comment']   = 'panel data';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
 
-	db_execute('ALTER TABLE plugin_intropage_panel_data ADD PRIMARY KEY (panel_id,user_id)');
+//	db_execute('ALTER TABLE plugin_intropage_panel_data ADD PRIMARY KEY (panel_id,user_id)');
 	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
 
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('intropage_analyse_log','/plugins/intropage/include/data.php','yes',300)");
+		('analyse_log','/plugins/intropage/include/data.php','yes',300)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('intropage_analyse_login','/plugins/intropage/include/data.php','yes',300)");
+		('analyse_login','/plugins/intropage/include/data.php','yes',300)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('intropage_analyse_log','/plugins/intropage/include/data.php','yes',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('intropage_top5_ping','/plugins/intropage/include/data.php','yes',300)");
+		('top5_ping','/plugins/intropage/include/data.php','yes',300)");
 
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		

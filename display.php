@@ -41,6 +41,16 @@ function display_information() {
 
 	$selectedTheme = get_selected_theme();
 
+	if (get_filter_request_var('page_id')) {
+	    $_SESSION['page_id'] = get_filter_request_var('page_id');
+	}
+
+	if (empty($_SESSION['page_id'])) {
+	    $_SESSION['page_id'] = 1; 
+	}
+	
+	    
+
 	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts
 			FROM user_auth
@@ -107,30 +117,57 @@ function display_information() {
 	}
 
 	$order = ' priority desc';
+
+
+
+
+		// generating user setting
+		foreach ($all_panels as $one) {
+			if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
+				db_execute_prepared('INSERT INTO plugin_intropage_panel_data
+					(user_id, panel_id, priority, data, alarm)
+					VALUES (?, ?, ?, ?, ?)',
+					array($_SESSION['sess_user_id'], $one['panel_id'],$one['priority'],__('Waiting for data', 'intropage'),'gray'));
+			}
+		}
 */
+
+//!!! potrebuju tohle?
+
+	$all_panels = db_fetch_assoc_prepared('SELECT * FROM plugin_intropage_panel_data WHERE user_id= ? OR user_id=0', array($_SESSION['sess_user_id']));
+
+	foreach ($all_panels as &$one) {	// remove not allowed panels
+	    if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
+		$one['page_id'] = 0;	// 0 = no display, 1,2,.... page id
+	    }
+	    
+	}
 
 	// each favourite graph must have unique name
 	// without this fav_graph is overwritten
 
-//!!! tady jsem skoncil. Resit tu vyhazovani panelu, ke kterym nema prava
-	$panels = db_fetch_assoc_prepared("SELECT id, panel, priority, fav_graph_id
-		FROM plugin_intropage_user_setting
-		WHERE user_id = ?
-		AND panel != 'intropage_favourite_graph'
+// !!! tady musim jeste resit page_id !!!!
+
+	$panels = db_fetch_assoc_prepared("SELECT *
+		FROM plugin_intropage_panel_data
+		WHERE user_id in (0,?) 
+		AND panel_id != 'intropage_favourite_graph'
 		UNION
-		SELECT id,concat(panel,'_',fav_graph_id) AS panel, priority, fav_graph_id
-		FROM plugin_intropage_user_setting
+		SELECT *
+		FROM plugin_intropage_panel_data
 		WHERE user_id = ?
-		AND panel = 'intropage_favourite_graph'
+		AND panel_id = 'intropage_favourite_graph'
 		AND fav_graph_id IS NOT NULL
-		ORDER BY $order",
+		ORDER BY priority desc",
 		array($_SESSION['sess_user_id'], $_SESSION['sess_user_id']));
 
 	// retrieve data for all panels
+/*
+	 include_once($config['base_path'] . '/plugins/intropage/include/data.php');
+	
 	if (cacti_sizeof($panels)) {
 		foreach ($panels as $xkey => $xvalue) {
-			$pokus = $xvalue['panel'];
-			$start = microtime(true);
+			$pokus = $xvalue['panel_id'];
 
 			if (isset($xvalue['fav_graph_id'])) { // fav_graph exception
 				$panels[$xkey]['alldata'] = intropage_favourite_graph($xvalue['fav_graph_id']);
@@ -138,11 +175,11 @@ function display_information() {
 				$panels[$xkey]['alldata'] = $pokus(true,false);
 			}
 
-			if ($logging >= 5) {
-				cacti_log('debug: ' . $pokus . ', duration ' . round(microtime(true) - $start, 2),true,'Intropage');
-			}
 		}
 	}
+*/	
+	//!!!! tady jsem skoncil. Musim zobrazit panely se spravnym page_id. Asi udelat funkci, ktera vykresli jen prazdne panely
+	// !!! pak zkusit, ze bych tady jen vykreslil prazdne panely a zacal je hned obcerstvovat pomoci javascriptu
 
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on')	{
@@ -157,6 +194,10 @@ function display_information() {
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
+
+
+/*
+// !!!! tady bude podminka - kdyz page_id=1
 
 	// extra maint plugin panel - always first
 
@@ -183,10 +224,11 @@ function display_information() {
 	}
 	// end of admin panel
 
+*/
 	if ($display_important_first == 'on') {  // important first
 		foreach ($panels as $xkey => $xvalue) {
 			if ($xvalue['alldata']['alarm'] == 'red') {
-				intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
+				intropage_display_panel($xvalue['id']);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
@@ -194,7 +236,7 @@ function display_information() {
 		// yellow (errors and warnings)
 		foreach ($panels as $xkey => $xvalue) {
 			if ($xvalue['alldata']['alarm'] == 'yellow') {
-				intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
+				intropage_display_panel($xvalue['id']);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
@@ -202,7 +244,7 @@ function display_information() {
 		// green (all)
 			foreach ($panels as $xkey => $xvalue) {
 				if ($xvalue['alldata']['alarm'] == 'green') {
-					intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
+					intropage_display_panel($xvalue['id']);
 					$panels[$xkey]['displayed'] = true;
 				}
 			}
@@ -210,14 +252,14 @@ function display_information() {
 		// grey and without color
 		foreach ($panels as $xkey => $xvalue) {
 			if (!isset($xvalue['displayed'])) {
-				intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
+				intropage_display_panel($xvalue['id']);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
 
 	} else {	// display only errors/errors and warnings/all - order by priority
 		foreach ($panels as $xkey => $xvalue) {
-			intropage_display_panel($xvalue['id'], $xvalue['alldata']['alarm'], $xvalue['alldata']['name'], $xvalue['alldata']);
+			intropage_display_panel($xvalue['id']);
 		}
 	}
 
@@ -334,13 +376,13 @@ function display_information() {
 		}
 	}
 
-	function reload_panel(panel_id, by_hand, refresh) {
+	function reload_panel(panel_id, forced_update, refresh) {
 		if (!refresh) {
 			$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
 			$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
 		}
 
-		$.get(urlPath+'plugins/intropage/intropage_ajax.php?autom='+by_hand+'&reload_panel='+panel_id)
+		$.get(urlPath+'plugins/intropage/intropage_ajax.php?force='+forced_update+'&reload_panel='+panel_id)
 		.done(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html(data) ;
 
@@ -510,6 +552,8 @@ function display_information() {
 	// end of settings
 
 	print '</div>'; // end of megaobal
+
+	echo "<br/>!!!! page_id = " . $_SESSION['page_id'] . "<br/>";
 
 	return true;
 }
