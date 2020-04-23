@@ -28,6 +28,7 @@ if (isset_request_var('intropage_action') &&
 	$values = explode('_', get_request_var('intropage_action'));
 	// few parameters from input type select has format reset_all, refresh_180, ... first is action
 	$action = array_shift($values);
+//!!!! proc je tu implode?
 	$value  = implode('_', $values);
 
 	switch ($action) {
@@ -41,25 +42,56 @@ if (isset_request_var('intropage_action') &&
 		}
 		break;
 
+	// remove dashboard - only set panels to dashboard = 0
+	case 'removepage':
+		if (filter_var($value, FILTER_VALIDATE_INT))	{
+			db_execute_prepared('UPDATE plugin_intropage_panel_data SET dashboard_id=0
+				WHERE user_id = ? AND dashboard_id = ?',
+				array($_SESSION['sess_user_id'], $value));
+			 $x = read_user_setting('intropage_number_of_dashboards') - 1;
+			 set_user_setting('intropage_number_of_dashboards',$x);
+			
+			$_SESSION['dashboard_id'] = 1;
+
+		}
+		break;
+
+	case 'addpage':
+		if (filter_var($value, FILTER_VALIDATE_INT))	{
+			db_execute_prepared('UPDATE plugin_intropage_panel_data SET dashboard_id=0
+				WHERE user_id = ? AND dashboard_id = ?',
+				array($_SESSION['sess_user_id'], $value));
+
+			 $x = read_user_setting('intropage_number_of_dashboards') + 1;
+			 set_user_setting('intropage_number_of_dashboards',$x);
+
+			 $_SESSION['dashboard_id'] = $x;
+
+
+		}
+		break;
+
+
 	// favourite graphs
 	case 'favgraph':
 		if (get_filter_request_var('graph_id')) {
 			// already fav?
-			if (db_fetch_cell('SELECT COUNT(*) FROM plugin_intropage_user_setting WHERE user_id=' . $_SESSION['sess_user_id'] .
+			//!!!! tady pak pribude jeste test na casovy rozsah
+			if (db_fetch_cell('SELECT COUNT(*) FROM plugin_intropage_panel_data WHERE user_id=' . $_SESSION['sess_user_id'] .
 					' AND fav_graph_id=' . get_request_var('graph_id')) > 0) {
 				db_execute('DELETE FROM plugin_intropage_user_setting WHERE user_id=' . $_SESSION['sess_user_id'] . ' and fav_graph_id=' .  get_request_var('graph_id'));
 			} else { // add to fav
 				// priority for new panel:
-				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_user_setting 
+				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_panel_data 
 					WHERE user_id=' . $_SESSION['sess_user_id']);
 
-				db_execute_prepared('REPLACE INTO plugin_intropage_user_setting
-					(user_id, priority, panel, fav_graph_id)
+				db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
+					(user_id, priority, panel_id, fav_graph_id)
 					VALUES (?, ?, ?, ?)',
 					array(
 						$_SESSION['sess_user_id'],
 						$prio,
-						'intropage_favourite_graph',
+						'favourite_graph',
 						get_request_var('graph_id')
 					)
 				);
@@ -82,7 +114,7 @@ if (isset_request_var('intropage_action') &&
 				}
 
 				if (!$error) {
-    			    		db_execute_prepared('UPDATE plugin_intropage_user_setting
+    			    		db_execute_prepared('UPDATE plugin_intropage_panel_data
             				    SET priority=? WHERE user_id=? and id=?',
             				    array ($priority, $_SESSION['sess_user_id'], $b));
             				    
@@ -92,6 +124,7 @@ if (isset_request_var('intropage_action') &&
 		}
 		break;
 
+/*
 	// reset all panels
 	case 'reset':
 		if ($value == 'all') {
@@ -104,14 +137,11 @@ if (isset_request_var('intropage_action') &&
 			set_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 		}
 		break;
-
+*/
 	case 'addpanel':
 		if (preg_match('/^[a-z0-9\-\_]+$/i', $value)) {
-			db_execute('REPLACE INTO plugin_intropage_user_setting
-				(user_id, panel, priority)
-				SELECT ' . $_SESSION['sess_user_id'] . ', panel, priority
-				FROM plugin_intropage_panel
-				WHERE panel="' . $value . '" LIMIT 1');
+			db_execute('update plugin_intropage_panel_data set dashboard_id=' . $_SESSION['dashboard_id'] . 'WHERE 
+				user_id=' . $_SESSION['sess_user_id'] . ' and panel_id =' . $value);
 		}
 		break;
 
@@ -121,6 +151,7 @@ if (isset_request_var('intropage_action') &&
 		}
 		break;
 
+//!!! tohle je asi mrtve
 	case 'debug':
 		if ($value == 'ena') {
 			set_user_setting('intropage_debug', 1);

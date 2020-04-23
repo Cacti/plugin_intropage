@@ -127,6 +127,7 @@ $intropage_settings = array(	// default values
 		),
 		'default' => 'CHANGED',
 	),
+
 	'intropage_ntp_server' => array(
 		'friendly_name' => __('NTP (time) check - IP or DNS name of NTP server', 'intropage'),
 		'description' => __('Insert IP or DNS name of NTP server', 'intropage'),
@@ -146,6 +147,7 @@ $intropage_settings = array(	// default values
 		),
 		'default' => '3600',
 	),
+
 
 	'intropage_admin_alert' => array(
 		'friendly_name' => __('Admin information panel about maintenance tasks, down devices, ..', 'intropage'),
@@ -168,6 +170,6 @@ $intropage_settings = array(	// default values
 			'604800' => __('%d Days Before', 7, 'intropage')
 		),
 		'default' => '86400',
-	)
+	),
 );
 

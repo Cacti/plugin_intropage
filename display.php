@@ -41,12 +41,12 @@ function display_information() {
 
 	$selectedTheme = get_selected_theme();
 
-	if (get_filter_request_var('page_id')) {
-	    $_SESSION['page_id'] = get_filter_request_var('page_id');
+	if (get_filter_request_var('dashboard_id')) {
+	    $_SESSION['dashboard_id'] = get_filter_request_var('dashboard_id');
 	}
 
-	if (empty($_SESSION['page_id'])) {
-	    $_SESSION['page_id'] = 1; 
+	if (empty($_SESSION['dashboard_id'])) {
+	    $_SESSION['dashboard_id'] = 1; 
 	}
 	
 	    
@@ -76,6 +76,24 @@ function display_information() {
 	// Retrieve user settings and defaults
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
+
+	// number of dashboards
+	if (user_setting_exists('intropage_number_of_dashboards', $_SESSION['sess_user_id'])) {
+	    $number_of_dashboards = read_user_setting('intropage_number_of_dashboards');
+	}
+	else {
+	    $number_of_dashboards = db_fetch_cell('SELECT count(distinct(dashboard_id)) FROM plugin_intropage_panel_data WHERE
+                        dashboard_id > 0 and user_id=' . $_SESSION['sess_user_id']);
+	    if ($number_of_dashboards == 0) { // after fresh install, poller wasn't running yet
+		$number_of_dashboards++; 
+	    }
+
+	    set_user_setting('intropage_number_of_dashboards', $number_of_dashboards);
+	}
+// !!! tady dat prepared	
+
+	
+
 
 /*
 	$hosts = get_allowed_devices();
@@ -133,33 +151,44 @@ function display_information() {
 */
 
 //!!! potrebuju tohle?
-
+/*
 	$all_panels = db_fetch_assoc_prepared('SELECT * FROM plugin_intropage_panel_data WHERE user_id= ? OR user_id=0', array($_SESSION['sess_user_id']));
 
 	foreach ($all_panels as &$one) {	// remove not allowed panels
 	    if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
-		$one['page_id'] = 0;	// 0 = no display, 1,2,.... page id
+		$one['dashboard_id'] = 0;	// 0 = no display, 1,2,.... page id
 	    }
 	    
 	}
-
+*/
 	// each favourite graph must have unique name
 	// without this fav_graph is overwritten
 
-// !!! tady musim jeste resit page_id !!!!
+// !!! tady musim jeste resit dashboard_id !!!!
 
 	$panels = db_fetch_assoc_prepared("SELECT *
 		FROM plugin_intropage_panel_data
-		WHERE user_id in (0,?) 
+		WHERE dashboard_id = ? AND user_id in (0,?) 
 		AND panel_id != 'intropage_favourite_graph'
 		UNION
 		SELECT *
 		FROM plugin_intropage_panel_data
-		WHERE user_id = ?
+		WHERE dashboard_id = ? AND user_id = ?
 		AND panel_id = 'intropage_favourite_graph'
 		AND fav_graph_id IS NOT NULL
 		ORDER BY priority desc",
-		array($_SESSION['sess_user_id'], $_SESSION['sess_user_id']));
+		array($_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id']));
+
+	foreach ($panels as &$one) {	// remove not allowed panels
+	    if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
+//		$one['dashboard_id'] = 0;	// 0 = no display, 1,2,.... page id
+		unset ($one);
+		//!!!! tohle otestovat
+	    }
+	    
+	}
+
+
 
 	// retrieve data for all panels
 /*
@@ -178,7 +207,7 @@ function display_information() {
 		}
 	}
 */	
-	//!!!! tady jsem skoncil. Musim zobrazit panely se spravnym page_id. Asi udelat funkci, ktera vykresli jen prazdne panely
+	//!!!! tady jsem skoncil. Musim zobrazit panely se spravnym dashboard_id. Asi udelat funkci, ktera vykresli jen prazdne panely
 	// !!! pak zkusit, ze bych tady jen vykreslil prazdne panely a zacal je hned obcerstvovat pomoci javascriptu
 
 	// Notice about disable cacti dashboard
@@ -192,12 +221,22 @@ function display_information() {
 	// overlay div for detail
 	print '<div id="overlay"><div id="overlay_detail"></div></div>';
 
+
+	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
+	    if ($f == $_SESSION['dashboard_id']) {
+		print '<a href="?dashboard_id=' . $f . '"><b> ' . $f . ' </b></a>';
+	    }
+	    else {
+		print '<a href="?dashboard_id=' . $f . '"> ' . $f . ' </a>';	    
+	    }
+	}
+
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
 
 /*
-// !!!! tady bude podminka - kdyz page_id=1
+// !!!! tady bude podminka - kdyz dashboard_id=1
 
 	// extra maint plugin panel - always first
 
@@ -460,6 +499,20 @@ function display_information() {
 	print "<select name='intropage_action' size='1'>";
 	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
 
+
+	if ($number_of_dashboards == 1) {
+	    print '<option value="addpage_2">' . __('Add second dashboard', 'intropage') . '</option>';
+	}
+	if ($number_of_dashboards == 2) {
+	    print '<option value="addpage_3">' . __('Add third dashboard', 'intropage') . '</option>';
+	}
+	
+	if ($_SESSION['dashboard_id'] > 1) {
+	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
+	}
+
+
+//!!! tohle predelat, musim brat i z ostatnich page, jestli uz je tam nema
 	$panels = db_fetch_assoc_prepared('SELECT panel FROM plugin_intropage_panel
 	    WHERE panel NOT IN
 	    (SELECT panel FROM plugin_intropage_user_setting WHERE user_id = ?)
@@ -497,7 +550,7 @@ function display_information() {
 		print "<option value='refresh_60'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
 	}
 
-	if ($autorefresh == 300) {
+	if ($autorefresh == 300) { 
 		print "<option value='refresh_300' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	} else {
 		print "<option value='refresh_300'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
@@ -553,7 +606,7 @@ function display_information() {
 
 	print '</div>'; // end of megaobal
 
-	echo "<br/>!!!! page_id = " . $_SESSION['page_id'] . "<br/>";
+	echo "<br/>!!!! dashboard_id = " . $_SESSION['dashboard_id'] . ":$number_of_dashboards<br/>";
 
 	return true;
 }
