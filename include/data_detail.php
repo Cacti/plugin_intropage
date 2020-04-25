@@ -555,7 +555,7 @@ function intropage_extrem_detail() {
 
 	$result = array(
 		'name' => __('48 hour extrem', 'intropage'),
-		'alarm' => 'grey',
+		'alarm' => 'gray',
 		'detail' => '',
 	);
 
@@ -682,7 +682,7 @@ function intropage_graph_data_source_detail() {
 
 	$result = array(
 		'name' => 'Data sources',
-		'alarm' => 'grey',
+		'alarm' => 'gray',
 	);
 
 	$sql_ds = db_fetch_assoc('SELECT data_input.type_id, COUNT(data_input.type_id) AS total
@@ -784,7 +784,7 @@ function intropage_graph_host_template_detail() {
 
 	$result = array(
 		'name' => __('Device Templates', 'intropage'),
-		'alarm' => 'grey',
+		'alarm' => 'gray',
 		'detail' => '',
 	);
 
@@ -825,7 +825,7 @@ function intropage_graph_thold_detail() {
 	);
 
 	if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
-		$result['alarm'] = 'grey';
+		$result['alarm'] = 'gray';
 		$result['detail']  = __('Thold plugin not installed/running', 'intropage');
 		unset($result['pie']);
 	} elseif (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $_SESSION['sess_user_id'] . " AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
@@ -890,7 +890,7 @@ function intropage_mactrack_sites_detail() {
 
 	$result = array(
 		'name' => __('Mactrack sites', 'intropage'),
-		'alarm' => 'grey',
+		'alarm' => 'gray',
 		'detail' => '',
 
 	);
@@ -1192,7 +1192,7 @@ function intropage_top5_pollratio_detail() {
 
 	$result = array(
 		'name' => __('Top 20 hosts with the  worst polling ratio (failed, total, ratio)', 'intropage'),
-		'alarm' => 'grey',
+		'alarm' => 'gray',
 		'detail' => '',
 	);
 

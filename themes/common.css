@@ -89,7 +89,7 @@
 	background: -ms-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
 }
 
-.color_grey {
+.color_gray {
 	background-color: #9c9c9c;
 	background: rgba(255,255,255,1);
 	background: -moz-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
@@ -99,7 +99,7 @@
 	background: -ms-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
 }
 
-.color_grey, .color_grey i {
+.color_gray, .color_gray i {
 	color: black !important;
 }
 

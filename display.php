@@ -288,7 +288,7 @@ function display_information() {
 				}
 			}
 
-		// grey and without color
+		// gray and without color
 		foreach ($panels as $xkey => $xvalue) {
 			if (!isset($xvalue['displayed'])) {
 				intropage_display_panel($xvalue['id']);

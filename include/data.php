@@ -352,3 +352,60 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
 
 
+//------------------------------------ top5_worst polling -----------------------------------------------------
+
+/// !!!!!!!!!!! tady jsem skoncil
+function top5_worst_polling($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$result = array(
+		'name' => __('Top5 worst polling', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+
+
+
+        $result = array(
+                'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
+                'alarm' => 'gray',
+                'data' => '',
+                'detail' => TRUE,
+        );
+
+        if ($_SESSION['allowed_hosts']) {
+                $sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
+                        FROM host
+                        WHERE host.id in (" . $_SESSION['allowed_hosts'] . ")
+                        AND disabled != 'on'
+                        ORDER BY ratio desc
+                        LIMIT 5");
+
+                if (cacti_sizeof($sql_worst_host)) {
+                        foreach ($sql_worst_host as $host) {
+                                if ($console_access) {
+                                        $row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id'])
+                                } else {
+                                        $row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
+                                }
+
+                                $row .= '<td class="rpad texalirig">' . $host['failed_polls'] . '</td>';
+                                $row .= '<td class="rpad texalirig">' . $host['total_polls'] . '</td>';
+                                $row .= '<td class="rpad texalirig">' . round($host['ratio'], 2) . '</td></tr>';
+
+                                $result['data'] .= $row;
+                        }
+
+                        $result['data'] = '<table>' . $result['data'] . '</table>';
+                } else {        // no data
+                        $result['data'] = __('Waiting for data', 'intropage');
+                }
+        } else {
+            $result['detail'] = FALSE;
+            $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+        }
+
+
+        return $result;
+

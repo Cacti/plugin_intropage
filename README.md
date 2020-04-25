@@ -124,7 +124,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 	Add Boost statistics panel
 	Add Orphaned DS to analyze tree/host/graph
 	Add Last thold events panel
-	Add Grey panel for panels without tests and alarms
+	Add Gray panel for panels without tests and alarms
 	Add save panel order (drag and drop)
 
 	1.4 ---

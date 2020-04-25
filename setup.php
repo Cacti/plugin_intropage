@@ -121,7 +121,8 @@ function intropage_add_panel($panelid, $panelJSON) {
 
 
 function intropage_remove_panel($panelid) {
-    // delete from plugin_intropage_panel_data
-    // delete from plugin_intropage_panel_definition
+	db_execute("DELETE FROM plugin_intropage_panel_data WHERE panelid='$panelid'");
+	db_execute("DELETE FROM plugin_intropage_panel_definition WHERE panelid='$panelid'");
+
 }
 
