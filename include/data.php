@@ -354,26 +354,19 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
 //------------------------------------ top5_worst polling -----------------------------------------------------
 
-/// !!!!!!!!!!! tady jsem skoncil
 function top5_worst_polling($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$result = array(
-		'name' => __('Top5 worst polling', 'intropage'),
-		'alarm' => 'green',
+                'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
+		'alarm' => 'gray',
 		'data' => '',
 		'last_update' =>  NULL,
 	);
 
 
-
-        $result = array(
-                'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
-                'alarm' => 'gray',
-                'data' => '',
-                'detail' => TRUE,
-        );
-
+/// !!!!!!!!!!! tady jsem skoncil
+/*
         if ($_SESSION['allowed_hosts']) {
                 $sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
                         FROM host
@@ -408,4 +401,5 @@ function top5_worst_polling($display=false, $update=false, $force_update=false) 
 
 
         return $result;
-
+*/
+}

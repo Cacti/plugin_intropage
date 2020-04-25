@@ -102,7 +102,6 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 			// !!!!! toto uz brat z definice panelu
 			?>
 			<script type='text/javascript'>
-//			    window.alert($('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_name').html());
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_name').html('<?php echo $data['name'];?>');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_yellow');
@@ -111,7 +110,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 
 			<?php
 
-			if (isset($data['detail']) && !empty($data['detail']))	{
+			if (db_fetch_cell("SELECT has_detail FROM plugin_intropage_panel_definition WHERE panel_id='" . $panel['panel_id'] . "'") == 'yes') {
 				print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').show();";
 			} else {
 				print "$('#panel_'+" . get_request_var('reload_panel') . ").find('.maxim').hide();";
@@ -131,16 +130,18 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 }
 
 
+//!!!! tady bych mel osetrovat panel_id
 if (isset_request_var('detail_panel') && isset($panel_id)) {
     include_once($config['base_path'] . '/plugins/intropage/include/data_detail.php');
 
-    $panel = db_fetch_row_prepared('SELECT panel,fav_graph_id
-		FROM plugin_intropage_user_setting
+//!!!! tady jsem skoncil
+    $panel = db_fetch_cell_prepared('SELECT panel_id
+		FROM plugin_intropage_panel_data
 		WHERE id = ?',
 		array($panel_id));
 
 	if ($panel)	{
-	    $pokus = $panel['panel'] . '_detail';
+	    $pokus = $panel . '_detail';
 	    $data = $pokus();
 
 	    print '<div id="block" class="color_' . $data['alarm'] . '" ></div>';

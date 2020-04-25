@@ -117,6 +117,9 @@ function intropage_add_panel($panelid, $panelJSON) {
     // insert into plugin_intropage_panel_definition
     // pridat sloupecek do user_auth
     //return last_inserted_id;
+// !!!! tohle upravit
+ api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+
 }
 
 

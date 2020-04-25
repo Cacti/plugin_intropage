@@ -23,6 +23,15 @@
  +-------------------------------------------------------------------------+
 */
 
+$hosts = get_allowed_devices();
+    if (count($hosts) > 0) {
+            $_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
+    } else {
+            $_SESSION['allowed_hosts'] = false;
+}
+
+
+
 //------------------------------------ analyse_db -----------------------------------------------------
 if (!function_exists('array_column')) {
     function array_column($array,$column_name) {
@@ -30,7 +39,7 @@ if (!function_exists('array_column')) {
     }
 }
 
-function intropage_analyse_db_detail() {
+function analyse_db_detail() {
 	global $config;
 
 	$result = array(
@@ -70,7 +79,7 @@ function intropage_analyse_db_detail() {
 
 //------------------------------------ analyse_log -----------------------------------------------------
 
-function intropage_analyse_log_detail() {
+function analyse_log_detail() {
 	global $config, $log;
 
 	$result = array(
@@ -147,7 +156,7 @@ function intropage_analyse_log_detail() {
 
 //------------------------------------ analyse_login -----------------------------------------------------
 
-function intropage_analyse_login_detail() {
+function analyse_login_detail() {
 	global $config;
 
 	$result = array(
@@ -201,7 +210,7 @@ function intropage_analyse_login_detail() {
 
 //------------------------------------ analyse_tree_host_graph  -----------------------------------------------------
 
-function intropage_analyse_tree_host_graph_detail() {
+function analyse_tree_host_graph_detail() {
 	global $config;
 
 	$result = array(
@@ -550,7 +559,7 @@ function intropage_analyse_tree_host_graph_detail() {
 
 //------------------------------------ extrem -----------------------------------------------------
 
-function intropage_extrem_detail() {
+function extrem_detail() {
 	global $config, $console_access;
 
 	$result = array(
@@ -677,7 +686,7 @@ function intropage_extrem_detail() {
 
 //------------------------------------ graph_datasource -----------------------------------------------------
 
-function intropage_graph_data_source_detail() {
+function graph_data_source_detail() {
 	global $config, $input_types;
 
 	$result = array(
@@ -716,7 +725,7 @@ function intropage_graph_data_source_detail() {
 
 //------------------------------------ graph_host -----------------------------------------------------
 
-function intropage_graph_host_detail() {
+function graph_host_detail() {
 	global $config, $console_access;
 
 	$result = array(
@@ -779,7 +788,7 @@ function intropage_graph_host_detail() {
 
 //------------------------------------ graph host_template -----------------------------------------------------
 
-function intropage_graph_host_template_detail() {
+function graph_host_template_detail() {
 	global $config;
 
 	$result = array(
@@ -815,7 +824,7 @@ function intropage_graph_host_template_detail() {
 
 //------------------------------------ graph_thold -----------------------------------------------------
 
-function intropage_graph_thold_detail() {
+function graph_thold_detail() {
 	global $config, $sql_where;
 
 	$result = array(
@@ -885,7 +894,7 @@ function intropage_graph_thold_detail() {
 
 //------------------------------------ mactrack sites -----------------------------------------------------
 
-function intropage_mactrack_sites_detail() {
+function mactrack_sites_detail() {
 	global $config, $console_access;
 
 	$result = array(
@@ -921,7 +930,7 @@ function intropage_mactrack_sites_detail() {
 
 //------------------------------------ poller_info -----------------------------------------------------
 
-function intropage_poller_info_detail() {
+function poller_info_detail() {
 	global $config;
 
 	$result = array(
@@ -990,7 +999,7 @@ function intropage_poller_info_detail() {
 
 //------------------------------------ thold_events -----------------------------------------------------
 
-function intropage_thold_event_detail() {
+function thold_event_detail() {
 	global $config;
 
 	$result = array(
@@ -1046,7 +1055,7 @@ function intropage_thold_event_detail() {
 
 //------------------------------------ top5_ping -----------------------------------------------------
 
-function intropage_top5_ping_detail() {
+function top5_ping_detail() {
 	global $config, $console_access;
 
 	$result = array(
@@ -1094,7 +1103,7 @@ function intropage_top5_ping_detail() {
 
 //------------------------------------ top5_availability -----------------------------------------------------
 
-function intropage_top5_availability_detail() {
+function top5_availability_detail() {
 	global $config, $console_access;
 
 	$result = array(
@@ -1141,7 +1150,7 @@ function intropage_top5_availability_detail() {
 
 //------------------------------------ top5_polltime -----------------------------------------------------
 
-function intropage_top5_polltime_detail() {
+function top5_polltime_detail() {
 	global $config, $console_access;
 
 	$result = array(
@@ -1187,7 +1196,7 @@ function intropage_top5_polltime_detail() {
 
 //------------------------------------ top5_pollratio -----------------------------------------------------
 
-function intropage_top5_pollratio_detail() {
+function top5_pollratio_detail() {
 	global $config, $console_access;
 
 	$result = array(
