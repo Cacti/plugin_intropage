@@ -40,8 +40,7 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
 	$panel_id = get_request_var('detail_panel');
 }
 
-
-$forced_update = get_filter_request_var('force', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '(true|false)')));
+$forced_update = filter_var(get_request_var('force'), FILTER_VALIDATE_BOOLEAN);
 
 // automatic reload when poller ends
 if (isset_request_var('autoreload')) {
@@ -100,12 +99,15 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 
 			// change panel color or ena/disa detail 
 			// !!!!! toto uz brat z definice panelu
+
 			?>
+
 			<script type='text/javascript'>
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_name').html('<?php echo $data['name'];?>');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_green');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_yellow');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_red');
+				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').removeClass('color_gray');
 				$('#panel_'+<?php print get_request_var('reload_panel');?>).find('.panel_header').addClass('color_<?php print $data['alarm'];?>');
 
 			<?php

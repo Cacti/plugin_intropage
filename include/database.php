@@ -87,10 +87,13 @@ function intropage_initialize_database() {
 	$data              = array();
 	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
+	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'value', 'type' => 'varchar(250)', 'NULL' => true, 'default' => null);
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Intropage trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
+
+	db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
 
 //!!!! tohohle se zbavit
 	// few values
@@ -308,6 +311,10 @@ function intropage_upgrade_database() {
 			db_execute("ALTER TABLE plugin_intropage_user_setting ENGINE=InnoDB");
 			db_execute("ALTER TABLE plugin_intropage_panel ENGINE=InnoDB");
 			db_execute("DELETE FROM plugin_intropage_trends");
+			db_execute("ALTER TABLE plugin_intropage_trends add user_id int(11) ");
+			api_plugin_db_add_column('intropage', 'plugin_intropage_trends', array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'));
+			db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
+			
 
 		}		
 

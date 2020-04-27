@@ -128,9 +128,9 @@ function intropage_gather_stats() {
             $magic(false,true,false);
         
     	    if ($logging >=5) {    
-        	cacti_log('Debug: gathering data - $magic - duration ' . round(microtime(true) - $start, 2),true,'Intropage');
+        	cacti_log('Debug: gathering data - ' . $magic . ' - duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 	    }
-    	    intropage_debug('gathering data - $magic - duration ' . round(microtime(true) - $start, 2));
+    	    intropage_debug('gathering data - ' . $magic . ' - duration ' . round(microtime(true) - $start, 2));
 
 	}
 	// end of gathering data 
@@ -160,6 +160,7 @@ function intropage_gather_stats() {
 		$checks++;
 	}
 
+/*
 	// CPU load - linux only
 	if (!stristr(PHP_OS, 'win')) {
 		intropage_debug('Checking Cacti Server Load Statistics');
@@ -168,12 +169,13 @@ function intropage_gather_stats() {
 		$load[0] = round($load[0], 2);
 
 		db_execute_prepared('REPLACE INTO plugin_intropage_trends
-			(name, cur_timestamp, value) VALUES
-			("cpuload", ?, ?)',
-			array($stat['start'], $load[0]));
+			(name, cur_timestamp, value, user) VALUES
+			("cpuload", ?, ?, ?)',
+			array($stat['start'], $load[0],'0'));
 
 		$checks++;
 	}
+*/
 
 	// failed polls
 	intropage_debug('Checking Cacti Device Failed Poll Statistics');

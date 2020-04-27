@@ -23,6 +23,117 @@
  +-------------------------------------------------------------------------+
 */
 
+
+function intropage_prepare_graph($dispdata) {
+	global $config;
+
+	$selectedTheme = get_selected_theme();
+	switch ($selectedTheme) {
+		case 'dark':
+		case 'paper-plane':
+			$bgcolor = '#202020';
+			break;
+		case 'sunrise':
+			$bgcolor = '';
+			break;
+		default:
+			$bgcolor = '#f5f5f5';
+	}
+
+	$content = "";
+	
+	// line graph
+	if (isset($dispdata['line'])) {
+		$xid = 'x' . substr(md5($dispdata['line']['title1']), 0, 7);
+
+		$content .= "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\"></canvas>\n";
+		$content .=  "<script type='text/javascript'>\n";
+		
+		$title1      = $dispdata['line']['title1'];
+		$line_labels = implode('","', $dispdata['line']['label1']);
+		$line_values = implode(',', $dispdata['line']['data1']);
+
+		if (!empty($dispdata['line']['data2'])) {
+			$line_values2 = implode(',', $dispdata['line']['data2']);
+			$title2       = $dispdata['line']['title2'];
+		}
+		if (!empty($dispdata['line']['data3'])) {
+			$line_values3 = implode(',', $dispdata['line']['data3']);
+			$title3       = $dispdata['line']['title3'];
+		}
+		if (!empty($dispdata['line']['data4'])) {
+			$line_values4 = implode(',', $dispdata['line']['data4']);
+			$title4       = $dispdata['line']['title4'];
+		}
+		if (!empty($dispdata['line']['data5'])) {
+			$line_values5 = implode(',', $dispdata['line']['data5']);
+			$title5       = $dispdata['line']['title5'];
+		}
+
+		$content .= "var $xid = document.getElementById('line_" . $xid . "').getContext('2d');\n";
+		$content .= "new Chart($xid, {\n";
+    		$content .= "type: 'line',\n";
+		$content .= "data: {\n";
+		$content .= "labels: [\"" . $line_labels . "\"],\n";
+		$content .= "datasets: [{\n";
+	    	$content .= "label: '" . $title1 . "',\n";
+	    	$content .= "data: [" . $line_values . "],\n";
+	    	$content .= "borderColor: 'rgba(220,220,220,0.5)',\n";
+	    	$content .= "backgroundColor: 'rgba(220,220,220,0.5)',\n";
+		$content .= "},\n";
+
+		if (!empty($dispdata['line']['data2'])) {
+			$content .= "{\n";
+	    		$content .= "label: '" . $title2 . "',\n";
+    	    		$content .= "data: [" . $line_values2 . "],\n";
+    	    		$content .= "borderColor: '#0f0f00',\n";
+			$content .= "},\n";
+		}
+
+		if (!empty($dispdata['line']['data3'])) {
+			$content .= "{\n";
+	    		$content .= "label: '" . $title3 . "',\n";
+    	    		$content .= "data: [" . $line_values3 . "],\n";
+    	    		$content .= "borderColor: '#f0000f',\n";
+			$content .= "},\n";
+		}
+
+		if (!empty($dispdata['line']['data4'])) {
+			$content .= "{\n";
+	    		$content .= "label: '" . $title4 . "',\n";
+    	    		$content .= "data: [" . $line_values4 . "],\n";
+    	    		$content .= "borderColor: '#f0000f',\n";
+			$content .= "},\n";
+		}
+
+		if (!empty($dispdata['line']['data5'])) {
+			$content .= "{\n";
+	    		$content .= "label: '" . $title5 . "',\n";
+    	    		$content .= "data: [" . $line_values5 . "],\n";
+    	    		$content .= "borderColor: '#f0000f',\n";
+			$content .= "},\n";
+		}
+
+	$content .= "]\n";
+    	$content .= "},\n";
+    	$content .= "options: {\n";
+	$content .= "responsive: false,\n";
+	$content .= "tooltipTemplate: '<%= value %>%'\n";
+    	$content .= "}\n";
+	$content .= "});\n";
+	$content .= "</script>\n";
+	$content .= "</div>\n";
+	} // line graph end
+
+	return (addslashes($content));	
+}
+
+
+
+
+/////////////////////////
+
+
 function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 	if (!(file_exists($log_file) && is_readable($log_file))) {
 		return false;
@@ -396,6 +507,7 @@ EOF;
 		print("</div>\n");
 	}
 }
+
 
 
 function ntp_time($host) {
