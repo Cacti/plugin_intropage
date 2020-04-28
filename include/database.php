@@ -169,6 +169,13 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('top5_ping','/plugins/intropage/include/data.php','yes',300)");
 
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('cpuload','/plugins/intropage/include/data.php','no',60)");
+
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('ntp','/plugins/intropage/include/data.php','no',7200)");
+
+
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		
 		

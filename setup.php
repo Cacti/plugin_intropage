@@ -112,20 +112,31 @@ function intropage_poller_bottom() {
 }
 
 
-// !!!! mozna tohle dat do samostatneho souboru
-function intropage_add_panel($panelid, $panelJSON) {
-    // insert into plugin_intropage_panel_definition
-    // pridat sloupecek do user_auth
-    //return last_inserted_id;
-// !!!! tohle upravit
- api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+// for third party panels.
+// intropage_add_panel('my_panel','/plugins/your_plugin/file.php','yes',3600,20) {
+// panel_id - your name (lowercase, without spaces)
+// file - path to your code. It must contain function my_panel() (and my_panel_detail() if your panel has detail) 
+// example functions are in /plugin/intropage/include/data.php and data_detail.php
+// has_detail - yes or no
+// refresh_interval - in second, min is 60
+// priority - for displaying
+function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority=20) {
+	if (db_execute_prepared("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval, priority) 
+			VALUES ('?','?','?',?,?)", array($panel_id,$file,$has_detail,$refresh_interval,$priority)) == 1) {
 
+ 		api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_panel_id', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+		return ('1');
+	}
+	else {
+		return db_error();		
+	}
 }
 
 
-function intropage_remove_panel($panelid) {
-	db_execute("DELETE FROM plugin_intropage_panel_data WHERE panelid='$panelid'");
-	db_execute("DELETE FROM plugin_intropage_panel_definition WHERE panelid='$panelid'");
-
+function intropage_remove_panel($panel_id) {
+	//!!!! nekdo muze mazat cizi panely
+	db_execute_prepared("DELETE FROM plugin_intropage_panel_data WHERE panel_id='?'", array($panel_id));
+	db_execute_prepared("DELETE FROM plugin_intropage_panel_definition WHERE panel_id='?'", array($panel_id));
+	return ('1');
 }
 

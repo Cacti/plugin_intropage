@@ -160,7 +160,7 @@ function intropage_gather_stats() {
 		$checks++;
 	}
 
-/*
+/* moved to panel
 	// CPU load - linux only
 	if (!stristr(PHP_OS, 'win')) {
 		intropage_debug('Checking Cacti Server Load Statistics');
@@ -218,6 +218,7 @@ function intropage_gather_stats() {
 	db_execute("UPDATE plugin_intropage_trends
 		SET cur_timestamp=now() where name = 'ar_poller_finish'");
 
+/* //!!!! pro ted vypinam, dela mi chyby
 	// check NTP
 	$last = db_fetch_cell("SELECT UNIX_TIMESTAMP(value)
 		FROM plugin_intropage_trends
@@ -233,6 +234,7 @@ function intropage_gather_stats() {
 	} else {
 		intropage_debug('Not Time to Check NTP Statistics');
 	}
+*/
 
 	// plugin syslog
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {

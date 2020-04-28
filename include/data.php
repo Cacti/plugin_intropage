@@ -369,21 +369,21 @@ function cpuload($display=false, $update=false, $force_update=false) {
                                         WHERE panel_id='cpuload'");
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
-		if ($_SESSION['user_sess_id'] == 0)	{ // update in poller
+
+		if ($_SESSION['sess_user_id'] == 0)	{ // update in poller
+
         		if (!stristr(PHP_OS, 'win')) {
                 		$load    = sys_getloadavg();
                 		$load[0] = round($load[0], 2);
 
-                		db_execute_prepared('REPLACE INTO plugin_intropage_trends
-                        		(name, cur_timestamp, value, user) VALUES
-                        		("cpuload", ?, ?, ?)',
-                        		array($stat['start'], $load[0],'0'));
+                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
+                        		(name, value, user_id) VALUES
+                        		('cpuload', ?, ?)", array($load[0],0));
 
-                $checks++;
-        }
-
+			echo db_error();
+        		
+			}
 		}
-
 
 // puvodni kod
         	if (stristr(PHP_OS, 'win')) {
@@ -428,6 +428,96 @@ function cpuload($display=false, $update=false, $force_update=false) {
                 return $result;
         }
 }
+
+
+// -------------------------------------ntp-------------------------------------------
+function ntp($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$result = array(
+		'name' => __('NTP', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	
+	$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id='ntp' AND last_update IS NOT NULL");
+				
+	if (!$id) {				
+	    db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES ('ntp'," . $_SESSION['sess_user_id'] . ",
+			    '" . __('Waiting for data', 'intropage') . "','gray',1000)");
+
+	    $id = db_fetch_insert_id();
+	}
+
+	
+
+	$last_update = db_fetch_cell("SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=" . $_SESSION['sess_user_id'] . 
+					" and panel_id='ntp'");
+
+	$update_interval = db_fetch_cell("SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id='ntp'");
+
+        if ( $force_update || time() > ($last_update + $update_interval))       {
+///////////
+  		$ntp_server = read_config_option('intropage_ntp_server');
+
+		if (!preg_match('/^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z])$/i', $ntp_server))    {
+                	$result['alarm'] = 'red';
+                	$result['data']  = __('Wrong NTP server configured - ' . $ntp_server . '<br/>Please fix it in settings', 'intropage');
+        	}
+        	elseif (empty($ntp_server)) {
+                	$result['alarm'] = 'gray';
+                	$result['data']  = __('No NTP server configured', 'intropage');
+        	} else {
+                	$diff_time = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name='ntp_diff_time'");
+
+                	if ($diff_time === false) {
+                        	$result['alarm'] = 'yellow';
+                        	$result['data']  = __('Waiting for data', 'intropage') . '<br/>';
+                	} elseif ($diff_time != "error") {
+                        	$result['data'] = '<span class="txt_big">' . date('Y-m-d') . '<br/>' . date('H:i:s') . '</span><br/><br/>';
+                        	if ($diff_time > 1400000000)    {
+                                	$result['alarm'] = 'red';
+                                	$result['data'] .= __('Failed to get NTP time FROM $ntp_server', 'intropage') . '<br/>';
+                        	} elseif ($diff_time < -600 || $diff_time > 600) {
+                                        $result['alarm'] = 'red';
+                                } elseif ($diff_time < -120 || $diff_time > 120) {
+                                        $result['alarm'] = 'yellow';
+
+                                	if ($result['alarm'] != 'green') {
+                                        	$result['data'] .= __('Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s', $diff_time, $ntp_server, 'intropage') . '<br/>';
+                                	} else {
+                                        	$result['data'] .= __('Localtime is equal to NTP server', 'intropage') . "<br/>$ntp_server<br/>";
+                                	}
+                        	}
+                	} else {
+                        	$result['alarm'] = 'red';
+                        	$result['data']  = __('Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>', 'intropage');
+                	}
+
+        	}
+
+              	db_execute("REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+                            VALUES (" . $id . ", 'ntp'," . $_SESSION['sess_user_id'] . ",
+                            '" . $result['data'] . "',
+                            '" . $result['alarm'] . "')");
+        }
+
+        if ($display)    {
+                $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id='ntp'"); 
+
+                $result['name'] = 'NTP';
+                return $result;
+        }
+}
+
+
 
 
 

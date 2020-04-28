@@ -180,7 +180,7 @@ function display_information() {
 		array($_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id']));
 
 	foreach ($panels as &$one) {	// remove not allowed panels
-	    if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
+	    if (db_fetch_cell_prepared('SELECT intropage_' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
 //		$one['dashboard_id'] = 0;	// 0 = no display, 1,2,.... page id
 		unset ($one);
 		//!!!! tohle otestovat
@@ -513,10 +513,10 @@ function display_information() {
 
 
 //!!! tohle predelat, musim brat i z ostatnich page, jestli uz je tam nema
-	$panels = db_fetch_assoc_prepared('SELECT panel FROM plugin_intropage_panel
-	    WHERE panel NOT IN
-	    (SELECT panel FROM plugin_intropage_user_setting WHERE user_id = ?)
-	    ORDER BY priority',
+	$panels = db_fetch_assoc_prepared('SELECT panel_id FROM plugin_intropage_data
+	    WHERE panel_id NOT IN
+	    (SELECT panel_id FROM plugin_intropage_panel_definition)
+	    AND user_id in (0,?) ORDER BY priority',
 		array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($panels)) { // allowed panel?
