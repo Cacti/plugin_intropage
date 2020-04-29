@@ -499,13 +499,15 @@ EOF;
 	elseif (isset($dispdata['data'])) {	// display text data
 		print $dispdata['data'];
 		print '<br/>Last update: ' . $dispdata['last_update'];
-//		print '<br/>' . "repeat every xxx!!! dodelat";
+		print '<br/>' . 'Recheck every: ' . $dispdata['recheck'];
+		// !!!! tady pak udela lokalizaci
 	}
-
+/*
 	if (isset($dispdata['detail'])) {
 		printf("<div id=\"%s\" style=\"display: none\">\n", 'detail_' . $panel_id);
 		print("</div>\n");
 	}
+*/
 }
 
 

@@ -95,6 +95,14 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 	        $result = db_fetch_row ("SELECT id,data, alarm, last_update FROM plugin_intropage_panel_data 
 	    				    WHERE panel_id='analyse_login'"); 
 
+		$result['recheck'] = db_fetch_cell("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id='analyse_login'");
+		
+		
 		$result['name'] = 'Analyse login';
 	        return $result;
 	}
@@ -208,6 +216,13 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 	        $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
 	    				    WHERE panel_id='analyse_log'"); 
 
+		$result['recheck'] = db_fetch_cell("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id='analyse_log'");
+
 		$result['name'] = 'Analyse log';
 
 	        return $result;
@@ -236,7 +251,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 	
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
-	    $users = array('id'=>$_SESSION['sess_user_id']);
+	    $users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
 	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
@@ -264,7 +279,6 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-///////
 	    		$x = 0;	// reference
 			//get_allowed_devices($sql_where = '', $order_by = 'description', $limit = '', &$total_rows = 0, $user = 0, $host_id = 0)
 			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
@@ -323,6 +337,13 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 	if ($display)    {
 	        $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
 	    				    WHERE panel_id='top5_ping'"); 
+
+		$result['recheck'] = db_fetch_cell("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id='top5_ping'");
 
 		$result['name'] = 'Top5 ping';
 
@@ -424,6 +445,14 @@ function cpuload($display=false, $update=false, $force_update=false) {
                 $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
                                             WHERE panel_id='cpuload'"); 
 
+		$result['recheck'] = db_fetch_cell("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id='cpuload'");
+
+
                 $result['name'] = 'CPU utilization';
                 return $result;
         }
@@ -515,6 +544,14 @@ function ntp($display=false, $update=false, $force_update=false) {
         if ($display)    {
                 $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
                                             WHERE panel_id='ntp'"); 
+
+		$result['recheck'] = db_fetch_cell("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id='ntp'");
+
 
                 $result['name'] = 'NTP';
                 return $result;
