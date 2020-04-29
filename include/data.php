@@ -32,6 +32,8 @@ include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 function analyse_login($display=false, $update=false, $force_update=false) {
 	global $config;
 
+	$panel_id = 'analyse_login';
+
 	$result = array(
 		'name' => __('Analyze logins', 'intropage'),
 		'alarm' => 'green',
@@ -39,23 +41,25 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 		'last_update' =>  NULL,
 	);
 	
-	$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE 
-				panel_id='analyse_login' AND last_update IS NOT NULL");
-				
-	if (!$id) {				
-		db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-			    VALUES ('analyse_login'," . $_SESSION['sess_user_id'] . ",
-			    '" . __('Waiting for data', 'intropage') . "','gray',1000)");
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id=? AND last_update IS NOT NULL',
+				array($panel_id));
+
+	if (!$id) {			
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES (?, ?, ?,"gray",1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
 
-	$last_update = db_fetch_cell("SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=" . $_SESSION['sess_user_id'] . 
-					" and panel_id='analyse_login'");
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? and panel_id= ?',
+					array($_SESSION['sess_user_id'],$panel_id));
 
-	$update_interval = db_fetch_cell("SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id='analyse_login'");
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval))	{
 
@@ -86,21 +90,23 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 			}
 	    	}
 
-	    	db_execute("REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
-			    VALUES (" . $id . ", 'analyse_login'," . $_SESSION['sess_user_id'] . ",
-			    '" . $result['data'] . "','" . $result['alarm'] . "')");
+	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES ( ?, ?, ?, ?, ?)',
+			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row ("SELECT id,data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id='analyse_login'"); 
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
 
-		$result['recheck'] = db_fetch_cell("SELECT concat(
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
 			FROM plugin_intropage_panel_definition
-			WHERE panel_id='analyse_login'");
+			WHERE panel_id= ?",
+			array($panel_id));
 		
 		
 		$result['name'] = 'Analyse login';
@@ -142,8 +148,11 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 	$update_interval = db_fetch_cell("SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id='analyse_log'");
 
-        if ( $force_update || time() > ($last_update + $update_interval))       {
+echo "        if ( $force_update || ".  time() . " > ($last_update + $update_interval)) \n ";
 
+
+        if ( $force_update || time() > ($last_update + $update_interval))       {
+echo "Jsem in\n";
 	    $log = array(
 		'file' => read_config_option('path_cactilog'),
 		'nbr_lines' => read_config_option('intropage_analyse_log_rows'),
