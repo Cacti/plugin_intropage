@@ -463,7 +463,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 					WHERE panel_id='ntp'");
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
-///////////
+
   		$ntp_server = read_config_option('intropage_ntp_server');
 
 		if (!preg_match('/^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z])$/i', $ntp_server))    {
@@ -474,27 +474,29 @@ function ntp($display=false, $update=false, $force_update=false) {
                 	$result['alarm'] = 'gray';
                 	$result['data']  = __('No NTP server configured', 'intropage');
         	} else {
-                	$diff_time = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name='ntp_diff_time'");
 
-                	if ($diff_time === false) {
-                        	$result['alarm'] = 'yellow';
-                        	$result['data']  = __('Waiting for data', 'intropage') . '<br/>';
-                	} elseif ($diff_time != "error") {
+                	$timestamp = ntp_time($ntp_server);
+
+                	if ($timestamp != "error") {
+                		$diff_time = date('U') - $timestamp;
+
                         	$result['data'] = '<span class="txt_big">' . date('Y-m-d') . '<br/>' . date('H:i:s') . '</span><br/><br/>';
                         	if ($diff_time > 1400000000)    {
+                			 
                                 	$result['alarm'] = 'red';
                                 	$result['data'] .= __('Failed to get NTP time FROM $ntp_server', 'intropage') . '<br/>';
                         	} elseif ($diff_time < -600 || $diff_time > 600) {
                                         $result['alarm'] = 'red';
                                 } elseif ($diff_time < -120 || $diff_time > 120) {
                                         $result['alarm'] = 'yellow';
-
-                                	if ($result['alarm'] != 'green') {
-                                        	$result['data'] .= __('Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s', $diff_time, $ntp_server, 'intropage') . '<br/>';
-                                	} else {
-                                        	$result['data'] .= __('Localtime is equal to NTP server', 'intropage') . "<br/>$ntp_server<br/>";
-                                	}
-                        	}
+				}
+                                
+                                if ($result['alarm'] != 'green') {
+                                       	$result['data'] .= __('Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s', $diff_time, $ntp_server, 'intropage') . '<br/>';
+                                } else {
+                                       	$result['data'] .= __('Localtime is equal to NTP server', 'intropage') . "<br/>$ntp_server<br/>";
+                                }
+                        	
                 	} else {
                         	$result['alarm'] = 'red';
                         	$result['data']  = __('Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>', 'intropage');
@@ -506,6 +508,8 @@ function ntp($display=false, $update=false, $force_update=false) {
                             VALUES (" . $id . ", 'ntp'," . $_SESSION['sess_user_id'] . ",
                             '" . $result['data'] . "',
                             '" . $result['alarm'] . "')");
+
+                            echo db_error();
         }
 
         if ($display)    {

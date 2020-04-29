@@ -537,13 +537,15 @@ function ntp_time($host) {
 		} else {
 		    $timestamp = "error";
 		}
+//		$timestamp = date('U') - $timestamp;
 	} else {
 	    $timestamp = "error";
 	}
 
-	return $timestamp;
+	return ($timestamp);
 }
 
+/*
 function ntp_time2() {
 	$ntp_time = ntp_time (read_config_option('intropage_ntp_server'));
 
@@ -556,6 +558,8 @@ function ntp_time2() {
 	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array($diff_time, 'ntp_diff_time'));
 	db_execute_prepared("UPDATE plugin_intropage_trends SET value = ? WHERE name = ?", array(date('Y-m-d H:i:s', time()),'ntp_testdate'));
 }
+*/
+
 
 function db_check() {
 	$damaged   = 0;
