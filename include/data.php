@@ -23,8 +23,11 @@
  +-------------------------------------------------------------------------+
 */
 
-if (!isset($_SESSION['sess_user_id']))
+//if (!isset($_SESSION['sess_user_id']))	{
+if (isset($run_from_poller))	{
 	$_SESSION['sess_user_id'] = 0;
+
+}
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
@@ -54,8 +57,8 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 	}
 
 	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id= ? and panel_id= ?',
-					array($_SESSION['sess_user_id'],$panel_id));
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -119,6 +122,8 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 //------------------------------------ analyse_log -----------------------------------------------------
 function analyse_log($display=false, $update=false, $force_update=false) {
 	global $config;
+	
+	$panel_id = 'analyse_log';
 
 	$result = array(
 		'name' => __('Analyze log', 'intropage'),
@@ -128,31 +133,35 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 	);
 	
 	
-	$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE 
-				panel_id='analyse_log' AND last_update IS NOT NULL");
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND last_update IS NOT NULL',
+				array($panel_id));
 				
 	if (!$id) {				
-	    db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-			    VALUES ('analyse_log'," . $_SESSION['sess_user_id'] . ",
-			    '" . __('Waiting for data', 'intropage') . "','gray',1000)");
+	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES ( ?, ?, ?, "gray", 1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
 
 	    $id = db_fetch_insert_id();
 	}
 
-	
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+//echo 'SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+//                                        WHERE user_id=' . $_SESSION['sess_user_id'] . " and panel_id='" . $panel_id . "'\n";
+//echo db_error();                                        
+                                        
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
 
-	$last_update = db_fetch_cell("SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=" . $_SESSION['sess_user_id'] . 
-					" and panel_id='analyse_log'");
 
-	$update_interval = db_fetch_cell("SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id='analyse_log'");
-
-echo "        if ( $force_update || ".  time() . " > ($last_update + $update_interval)) \n ";
+//echo "        if ( $force_update || ".  time() . " > (" , $last_update . " + " . $update_interval . ")) \n ";
 
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
-echo "Jsem in\n";
+//echo "Jsem in\n";
 	    $log = array(
 		'file' => read_config_option('path_cactilog'),
 		'nbr_lines' => read_config_option('intropage_analyse_log_rows'),
@@ -162,8 +171,8 @@ echo "Jsem in\n";
 	    $log['lines'] = tail_log($log['file'], $log['nbr_lines']);
 
 	    if (!$log['size'] || empty($log['lines'])) {
-		$result['alarm'] = 'red';
-		$result['data'] .= __('Log file not accessible or empty', 'intropage');
+			$result['alarm'] = 'red';
+			$result['data'] .= __('Log file not accessible or empty', 'intropage');
 	    } else {
 		$error  = 0;
 		$ecount = 0;
@@ -214,23 +223,24 @@ echo "Jsem in\n";
 		}
 	    }
 
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+		    	VALUES ( ?, ?, ?, ?, ?)',
+			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
 
-
-	    db_execute("REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
-			    VALUES (" . $id . ",'analyse_log'," . $_SESSION['sess_user_id'] . ",
-			    '" . $result['data'] . "','" . $result['alarm'] . "')");
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id='analyse_log'"); 
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
 
-		$result['recheck'] = db_fetch_cell("SELECT concat(
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
 			FROM plugin_intropage_panel_definition
-			WHERE panel_id='analyse_log'");
+			WHERE panel_id= ?",
+			array($panel_id));
 
 		$result['name'] = 'Analyse log';
 
@@ -239,13 +249,11 @@ echo "Jsem in\n";
 }
 
 
-
-
-
-
 //------------------------------------ top5_ping -----------------------------------------------------
 function top5_ping($display=false, $update=false, $force_update=false) {
 	global $config;
+
+	$panel_id = 'top5_ping';
 
 	$result = array(
 		'name' => __('Top5 ping', 'intropage'),
@@ -254,10 +262,10 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 		'last_update' =>  NULL,
 	);
 	
-	
-	$update_interval = db_fetch_cell("SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id='top5_ping'");
-	
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 	    $users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -269,22 +277,21 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
 	foreach ($users as $user)	{
 
-		$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE 
-				panel_id='top5_ping' AND user_id=" . $user['id'] . " AND last_update IS NOT NULL");
-				
-		if (!$id) {				
-	    		db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-			    VALUES ('top5_ping'," . $user['id'] . ",
-			    '" . __('Waiting for data', 'intropage') . "','gray',1000)");
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
 
-	    	$id = db_fetch_insert_id();
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+
+	    		$id = db_fetch_insert_id();
 		}
 
-
-		$last_update = db_fetch_cell("SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=" . $user['id'] . 
-					" and panel_id='top5_ping'");
-
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -304,12 +311,13 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 				    	AND user_auth_realm.realm_id=8',
 				    	array($user['id']))) ? true : false;
 	    
-				$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
+				$sql_worst_host = db_fetch_assoc_prepared("SELECT description, id, avg_time, cur_time
 					FROM host
-					WHERE host.id in (" . $allowed_hosts . ")
+					WHERE host.id in ( ? )
 					AND disabled != 'on'
 					ORDER BY avg_time desc
-					LIMIT 5");
+					LIMIT 5",
+					array($allowed_hosts));
 			
 				if (cacti_sizeof($sql_worst_host)) {
 					foreach ($sql_worst_host as $host) {
@@ -344,15 +352,17 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id='top5_ping'"); 
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
 
-		$result['recheck'] = db_fetch_cell("SELECT concat(
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
 			FROM plugin_intropage_panel_definition
-			WHERE panel_id='top5_ping'");
+			WHERE panel_id= ?",
+			array($panel_id));
 
 		$result['name'] = 'Top5 ping';
 
@@ -364,6 +374,8 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 //------------------------------------ cpuload -----------------------------------------------------
 function cpuload($display=false, $update=false, $force_update=false) {
         global $config;
+
+	$panel_id = 'cpuload';
 
         $result = array(
                 'name' => __('CPU utilization', 'intropage'),
@@ -379,43 +391,42 @@ function cpuload($display=false, $update=false, $force_update=false) {
                         'data1' => array(),
                 ),
         );
-        
-       $id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE 
-                                panel_id='cpuload' AND last_update IS NOT NULL");
-                                
-        if (!$id) {                             
-                db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-                            VALUES ('cpuload'," . $_SESSION['sess_user_id'] . ",
-                            '" . __('Waiting for data', 'intropage') . "','gray',1000)");
 
-                $id = db_fetch_insert_id();
-        }
+	if (isset($run_from_poller))	{ // update in poller
 
-        $last_update = db_fetch_cell("SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-                                        WHERE user_id=" . $_SESSION['sess_user_id'] . 
-                                        " and panel_id='cpuload'");
+        	if (!stristr(PHP_OS, 'win')) {
+                	$load    = sys_getloadavg();
+                	$load[0] = round($load[0], 2);
 
-        $update_interval = db_fetch_cell("SELECT refresh_interval FROM plugin_intropage_panel_definition
-                                        WHERE panel_id='cpuload'");
+                	db_execute_prepared("REPLACE INTO plugin_intropage_trends (name, value, user_id) 
+                		VALUES ('cpuload', ?, 0)", 
+                		array($load[0]));
+		}
+	}
+
+
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND last_update IS NOT NULL',
+				array($panel_id));
+				
+	if (!$id) {				
+	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES ( ?, ?, ?, "gray", 1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+	    $id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+                                        
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
 
-		if ($_SESSION['sess_user_id'] == 0)	{ // update in poller
-
-        		if (!stristr(PHP_OS, 'win')) {
-                		$load    = sys_getloadavg();
-                		$load[0] = round($load[0], 2);
-
-                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
-                        		(name, value, user_id) VALUES
-                        		('cpuload', ?, ?)", array($load[0],0));
-
-			echo db_error();
-        		
-			}
-		}
-
-// puvodni kod
         	if (stristr(PHP_OS, 'win')) {
                 	$result['data'] = __('This function is not implemented on Windows platforms', 'intropage');
                 	unset($graph);
@@ -444,23 +455,25 @@ function cpuload($display=false, $update=false, $force_update=false) {
                 	}
         	}
 
-              	db_execute("REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
-                            VALUES (" . $id . ", 'cpuload'," . $_SESSION['sess_user_id'] . ",
-                            '" . $result['data'] . "',
-                            '" . $result['alarm'] . "')");
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+		    	VALUES ( ?, ?, ?, ?, ?)',
+			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+
+
         }
 
         if ($display)    {
-                $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-                                            WHERE panel_id='cpuload'"); 
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
 
-		$result['recheck'] = db_fetch_cell("SELECT concat(
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
 			FROM plugin_intropage_panel_definition
-			WHERE panel_id='cpuload'");
-
+			WHERE panel_id= ?",
+			array($panel_id));
 
                 $result['name'] = 'CPU utilization';
                 return $result;
@@ -472,6 +485,8 @@ function cpuload($display=false, $update=false, $force_update=false) {
 function ntp($display=false, $update=false, $force_update=false) {
 	global $config;
 
+	$panel_id = 'ntp';
+
 	$result = array(
 		'name' => __('NTP', 'intropage'),
 		'alarm' => 'green',
@@ -479,26 +494,25 @@ function ntp($display=false, $update=false, $force_update=false) {
 		'last_update' =>  NULL,
 	);
 	
-	
-	$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE 
-				panel_id='ntp' AND last_update IS NOT NULL");
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND last_update IS NOT NULL',
+				array($panel_id));
 				
 	if (!$id) {				
-	    db_execute("REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-			    VALUES ('ntp'," . $_SESSION['sess_user_id'] . ",
-			    '" . __('Waiting for data', 'intropage') . "','gray',1000)");
+	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES ( ?, ?, ?, "gray", 1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
 
 	    $id = db_fetch_insert_id();
 	}
 
-	
-
-	$last_update = db_fetch_cell("SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=" . $_SESSION['sess_user_id'] . 
-					" and panel_id='ntp'");
-
-	$update_interval = db_fetch_cell("SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id='ntp'");
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+                                        
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -551,16 +565,17 @@ function ntp($display=false, $update=false, $force_update=false) {
         }
 
         if ($display)    {
-                $result = db_fetch_row ("SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-                                            WHERE panel_id='ntp'"); 
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
 
-		$result['recheck'] = db_fetch_cell("SELECT concat(
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
 			FROM plugin_intropage_panel_definition
-			WHERE panel_id='ntp'");
-
+			WHERE panel_id= ?",
+			array($panel_id));
 
                 $result['name'] = 'NTP';
                 return $result;
@@ -569,57 +584,3 @@ function ntp($display=false, $update=false, $force_update=false) {
 
 
 
-
-
-
-//------------------------------------ top5_worst polling -----------------------------------------------------
-
-function top5_worst_polling($display=false, $update=false, $force_update=false) {
-	global $config;
-
-	$result = array(
-                'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
-		'alarm' => 'gray',
-		'data' => '',
-		'last_update' =>  NULL,
-	);
-
-
-/// !!!!!!!!!!! tady jsem skoncil
-/*
-        if ($_SESSION['allowed_hosts']) {
-                $sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
-                        FROM host
-                        WHERE host.id in (" . $_SESSION['allowed_hosts'] . ")
-                        AND disabled != 'on'
-                        ORDER BY ratio desc
-                        LIMIT 5");
-
-                if (cacti_sizeof($sql_worst_host)) {
-                        foreach ($sql_worst_host as $host) {
-                                if ($console_access) {
-                                        $row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id'])
-                                } else {
-                                        $row = '<tr><td class="rpad">' . html_escape($host['description']) . '</td>';
-                                }
-
-                                $row .= '<td class="rpad texalirig">' . $host['failed_polls'] . '</td>';
-                                $row .= '<td class="rpad texalirig">' . $host['total_polls'] . '</td>';
-                                $row .= '<td class="rpad texalirig">' . round($host['ratio'], 2) . '</td></tr>';
-
-                                $result['data'] .= $row;
-                        }
-
-                        $result['data'] = '<table>' . $result['data'] . '</table>';
-                } else {        // no data
-                        $result['data'] = __('Waiting for data', 'intropage');
-                }
-        } else {
-            $result['detail'] = FALSE;
-            $result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
-        }
-
-
-        return $result;
-*/
-}

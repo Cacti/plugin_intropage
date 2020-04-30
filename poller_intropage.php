@@ -119,6 +119,9 @@ function intropage_gather_stats() {
 
 	// gather data for all panels
 	$data = db_fetch_assoc('SELECT file,panel_id FROM plugin_intropage_panel_definition');
+	
+	$run_from_poller = true;
+	
 	foreach ($data as $one)	{
 	
 	    include_once($config['base_path'] . $one['file']);

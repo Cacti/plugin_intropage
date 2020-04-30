@@ -497,7 +497,7 @@ EOF;
 	// end of graph
 
 	elseif (isset($dispdata['data'])) {	// display text data
-		print $dispdata['data'];
+		print stripslashes($dispdata['data']);
 		print '<br/>Last update: ' . $dispdata['last_update'];
 		print '<br/>' . 'Recheck every: ' . $dispdata['recheck'];
 		// !!!! tady pak udela lokalizaci
