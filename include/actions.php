@@ -32,24 +32,33 @@ if (isset_request_var('intropage_action') &&
 	$value  = implode('_', $values);
 
 	switch ($action) {
-
 	// close panel
 	case 'droppanel':
+//!! tady bych mel testovat, zda pridava panel svuj,jestli nefejknul id
+
+	echo "odebiram paneeeeeeeeeeeeeel";
 		if (get_filter_request_var('panel_id')) {
-			db_execute_prepared('DELETE FROM plugin_intropage_user_setting
+			db_execute_prepared('UPDATE plugin_intropage_panel_data SET dashboard_id=0
 				WHERE user_id = ? AND id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
 		break;
 
+	case 'addpanel':
+			db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard (panel_id,user_id,dashboard_id) 
+				VALUES ( ?, ?, ?)',
+				array($value,$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
+		break;
+
+
 	// remove dashboard - only set panels to dashboard = 0
 	case 'removepage':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
-			db_execute_prepared('UPDATE plugin_intropage_panel_data SET dashboard_id=0
+			db_execute_prepared('delete from plugin_intropage_panel_dashboard 
 				WHERE user_id = ? AND dashboard_id = ?',
 				array($_SESSION['sess_user_id'], $value));
-			 $x = read_user_setting('intropage_number_of_dashboards') - 1;
-			 set_user_setting('intropage_number_of_dashboards',$x);
+//			 $x = read_user_setting('intropage_number_of_dashboards') - 1;
+			 set_user_setting('intropage_number_of_dashboards',read_user_setting('intropage_number_of_dashboards')-1);
 			
 			$_SESSION['dashboard_id'] = 1;
 
@@ -58,9 +67,6 @@ if (isset_request_var('intropage_action') &&
 
 	case 'addpage':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
-			db_execute_prepared('UPDATE plugin_intropage_panel_data SET dashboard_id=0
-				WHERE user_id = ? AND dashboard_id = ?',
-				array($_SESSION['sess_user_id'], $value));
 
 			 $x = read_user_setting('intropage_number_of_dashboards') + 1;
 			 set_user_setting('intropage_number_of_dashboards',$x);

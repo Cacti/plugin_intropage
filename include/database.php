@@ -52,7 +52,7 @@ function intropage_initialize_database() {
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpu', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
@@ -140,12 +140,20 @@ function intropage_initialize_database() {
 	$data['comment']   = 'panel definition';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_definition', $data);
 
+	$data              = array();
+	$data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['type']      = 'InnoDB';
+	$data['primary']   = 'panel_id';
+	$data['comment']   = 'panel x dashboard dependency';
+	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_dashboard', $data);
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(1)', 'default' => '1', 'NULL' => false);
+//	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(1)', 'default' => '1', 'NULL' => false);
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(2)', 'default' => '50', 'NULL' => false);
@@ -247,7 +255,7 @@ function intropage_upgrade_database() {
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpu', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));

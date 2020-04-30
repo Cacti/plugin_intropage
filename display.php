@@ -49,8 +49,6 @@ function display_information() {
 	    $_SESSION['dashboard_id'] = 1; 
 	}
 	
-	    
-
 	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts
 			FROM user_auth
@@ -78,22 +76,14 @@ function display_information() {
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
 	// number of dashboards
-	if (user_setting_exists('intropage_number_of_dashboards', $_SESSION['sess_user_id'])) {
-	    $number_of_dashboards = read_user_setting('intropage_number_of_dashboards');
+	if (!user_setting_exists('intropage_number_of_dashboards',$_SESSION['sess_user_id'])) {
+		set_user_setting('intropage_number_of_dashboards',1);
+		$number_of_dashboards = 1;
 	}
 	else {
-	    $number_of_dashboards = db_fetch_cell('SELECT count(distinct(dashboard_id)) FROM plugin_intropage_panel_data WHERE
-                        dashboard_id > 0 and user_id=' . $_SESSION['sess_user_id']);
-	    if ($number_of_dashboards == 0) { // after fresh install, poller wasn't running yet
-		$number_of_dashboards++; 
-	    }
-
-	    set_user_setting('intropage_number_of_dashboards', $number_of_dashboards);
+		$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
 	}
-// !!! tady dat prepared	
-
 	
-
 
 /*
 	$hosts = get_allowed_devices();
@@ -107,65 +97,12 @@ function display_information() {
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
 
-/* tohle musim resit jinak. Poller mi vygeneruje data pro vsechny, nebudu ty data z ...panel_data mazat
-	// retrieve user setting (and creating if not)
-	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data WHERE fav_graph_id IS NULL AND user_id = ?', array($_SESSION['sess_user_id'])) == 0) {
-		$all_panel = db_fetch_assoc('SELECT panel_id,priority FROM plugin_intropage_panel_definition');
 
-		// generating user setting
-		foreach ($all_panel as $one) {
-			if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-				db_execute_prepared('INSERT INTO plugin_intropage_panel_data
-					(user_id, panel_id, priority, data, alarm)
-					VALUES (?, ?, ?, ?, ?)',
-					array($_SESSION['sess_user_id'], $one['panel_id'],$one['priority'],__('Waiting for data', 'intropage'),'gray'));
-			}
-		}
-	} else { // revoke permissions
-		$all_panel = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_data');
-
-		foreach ($all_panel as $one) {
-			if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
-				db_execute_prepared('DELETE FROM plugin_intropage_panel_data
-					WHERE user_id = ?
-					AND panel_id = ?',
-					array($_SESSION['sess_user_id'], $one['panel_id']));
-			}
-		}
-	}
-
-	$order = ' priority desc';
-
-
-
-
-		// generating user setting
-		foreach ($all_panels as $one) {
-			if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-				db_execute_prepared('INSERT INTO plugin_intropage_panel_data
-					(user_id, panel_id, priority, data, alarm)
-					VALUES (?, ?, ?, ?, ?)',
-					array($_SESSION['sess_user_id'], $one['panel_id'],$one['priority'],__('Waiting for data', 'intropage'),'gray'));
-			}
-		}
-*/
-
-//!!! potrebuju tohle?
-/*
-	$all_panels = db_fetch_assoc_prepared('SELECT * FROM plugin_intropage_panel_data WHERE user_id= ? OR user_id=0', array($_SESSION['sess_user_id']));
-
-	foreach ($all_panels as &$one) {	// remove not allowed panels
-	    if (db_fetch_cell_prepared('SELECT ' . $one['panel_id'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) != 'on') {
-		$one['dashboard_id'] = 0;	// 0 = no display, 1,2,.... page id
-	    }
-	    
-	}
-*/
 	// each favourite graph must have unique name
 	// without this fav_graph is overwritten
 
 // !!! tady musim jeste resit dashboard_id !!!!
-
+/*
 	$panels = db_fetch_assoc_prepared("SELECT *
 		FROM plugin_intropage_panel_data
 		WHERE dashboard_id = ? AND user_id in (0,?) 
@@ -179,7 +116,30 @@ function display_information() {
 		ORDER BY priority desc",
 		array($_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id']));
 
+*/
 
+//!!!! ted tu vubec neni priorita
+	$panels = db_fetch_assoc_prepared("SELECT t1.*
+		FROM plugin_intropage_panel_data as t1
+		join plugin_intropage_panel_dashboard as t2
+		on t1.id = t2.panel_id  
+		WHERE t1.user_id in (0,?) AND t2.dashboard_id = ? 
+		AND t1.panel_id != 'intropage_favourite_graph'
+		UNION
+		SELECT t3.*
+		FROM plugin_intropage_panel_data as t3
+		join plugin_intropage_panel_dashboard as t4
+		on t3.id = t4.panel_id  
+		WHERE t3.user_id = ? and t4.dashboard_id = ?
+		AND t3.panel_id = 'intropage_favourite_graph'
+		AND t3.fav_graph_id IS NOT NULL
+		",
+		array( $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+//echo db_error();
+
+
+//!!! tohle je tu asi uplne zbytecne, contac je blbost
+/*
 	foreach ($panels as &$one) {	// remove not allowed panels
 	    if (db_fetch_cell_prepared("SELECT concat('intropage_','?') FROM user_auth WHERE id = '?'", array($one['panel_id'],$_SESSION['sess_user_id'])) != 'on') {
 //		$one['dashboard_id'] = 0;	// 0 = no display, 1,2,.... page id
@@ -188,7 +148,7 @@ function display_information() {
 	    }
 	    
 	}
-
+*/
 
 
 	// retrieve data for all panels
@@ -512,21 +472,45 @@ function display_information() {
 	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
 
-
+// !!! taky testovat, jestli na ne ma pravo
 //!!! tohle predelat, musim brat i z ostatnich page, jestli uz je tam nema
+/*
 	$panels = db_fetch_assoc_prepared('SELECT panel_id FROM plugin_intropage_panel_data
 	    WHERE panel_id NOT IN
 	    (SELECT panel_id FROM plugin_intropage_panel_definition)
 	    AND user_id in (0,?) ORDER BY priority',
 		array($_SESSION['sess_user_id']));
+*/
+//!!! tady predtim byla i priorita
+
+/* asi nemusim vychazet z definice panelu
+	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id not in 
+			(select t1.panel_id from plugin_intropage_panel_data as t1 join plugin_intropage_panel_dashboard as t2 
+			on t1.panel_id=t2.panel_id where t2.user_id= ?)',
+			array($_SESSION['sess_user_id']));
+*/
+
+	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition 
+			where panel_id  not in (select panel_id from plugin_intropage_panel_dashboard where user_id = ?)',
+			array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($panels)) { // allowed panel?
+//	echo "</select>";
 		foreach ($panels as $panel) {
-			if (db_fetch_cell_prepared('SELECT ' . $panel['panel'] . ' FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-				print "<option value='addpanel_" . $panel['panel'] . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel'])), 'intropage') . '</option>';
+			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data 
+			where user_id in (0, ?) and panel_id = ?',
+			array($_SESSION['sess_user_id'],$panel['panel_id']));
+
+//echo 'SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
+//					WHERE id = ' . $_SESSION['sess_user_id'] . "\n";
+			if (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
+					WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
+				print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
+
 			} else {
-				print "<option value='addpanel_" . $panel['panel'] . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel'])), '(admin prohibited)', 'intropage') . '</option>';
+				print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
 			}
+
 		}
 	}
 
@@ -607,7 +591,6 @@ function display_information() {
 
 	print '</div>'; // end of megaobal
 
-	echo "<br/>!!!! dashboard_id = " . $_SESSION['dashboard_id'] . ":$number_of_dashboards<br/>";
 
 	return true;
 }
