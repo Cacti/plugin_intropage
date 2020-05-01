@@ -472,29 +472,20 @@ function display_information() {
 	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
 
-// !!! taky testovat, jestli na ne ma pravo
-//!!! tohle predelat, musim brat i z ostatnich page, jestli uz je tam nema
-/*
-	$panels = db_fetch_assoc_prepared('SELECT panel_id FROM plugin_intropage_panel_data
-	    WHERE panel_id NOT IN
-	    (SELECT panel_id FROM plugin_intropage_panel_definition)
-	    AND user_id in (0,?) ORDER BY priority',
-		array($_SESSION['sess_user_id']));
-*/
 //!!! tady predtim byla i priorita
 
-/* asi nemusim vychazet z definice panelu
+/* 
 	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id not in 
 			(select t1.panel_id from plugin_intropage_panel_data as t1 join plugin_intropage_panel_dashboard as t2 
 			on t1.panel_id=t2.panel_id where t2.user_id= ?)',
 			array($_SESSION['sess_user_id']));
 */
 
-	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition 
-			where panel_id  not in (select panel_id from plugin_intropage_panel_dashboard where user_id = ?)',
-			array($_SESSION['sess_user_id']));
+	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id 
+		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',			
+		array($_SESSION['sess_user_id']));
 
-	if (cacti_sizeof($panels)) { // allowed panel?
+	if (cacti_sizeof($panels)) {
 //	echo "</select>";
 		foreach ($panels as $panel) {
 			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data 
