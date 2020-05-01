@@ -195,6 +195,15 @@ function display_information() {
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
+//!!! lokalizace
+	if (cacti_sizeof($panels) == 0)	{
+		print 'Welcome!' . EOL;
+		print 'You can add panels in two ways:' . EOL;
+		print ' - select prepared panels below' . EOL;
+		print ' - add any graph - click to \'Eye Icon\' which is next to each graph' . EOL;
+		print EOL;
+		print 'You can too add more dashboards below' . EOL;
+	}
 
 /*
 // !!!! tady bude podminka - kdyz dashboard_id=1
