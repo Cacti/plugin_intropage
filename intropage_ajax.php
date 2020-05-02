@@ -79,7 +79,7 @@ $maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 // Retrieve access
 $console_access = api_plugin_user_realm_auth('index.php');
 
-//include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 // !!!! tuhle blbou promennou pak prejmenovat
 if (isset_request_var('reload_panel') && isset($panel_id)) {
@@ -89,7 +89,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 		WHERE id = ? AND user_id IN (0,?)', array($panel_id,$_SESSION['sess_user_id']));
 	if ($panel)	{
 		if (isset($panel['fav_graph_id'])) { // fav_graph exception
-			$data = intropage_favourite_graph($panel['fav_graph_id']);
+			$data = intropage_favourite_graph($panel['fav_graph_id'],$panel['fav_graph_timespan']);
 		} else { // normal panel
 			$data = $panel['panel_id'](true,false,$forced_update);
 		}
@@ -98,7 +98,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 			intropage_display_data(get_request_var('reload_panel'),$data);
 
 			// change panel color or ena/disa detail 
-			// !!!!! toto uz brat z definice panelu
+			// !!!!!  jestli ma detail - to uz brat z definice panelu
 
 			?>
 

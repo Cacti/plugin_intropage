@@ -28,17 +28,12 @@ if (isset_request_var('intropage_action') &&
 	$values = explode('_', get_request_var('intropage_action'));
 	// few parameters from input type select has format reset_all, refresh_180, ... first is action
 	$action = array_shift($values);
-//!!!! proc je tu implode?
 	$value  = implode('_', $values);
 
 	switch ($action) {
-	// close panel
 	case 'droppanel':
-//!! tady bych mel testovat, zda pridava panel svuj,jestli nefejknul id
-
-	echo "odebiram paneeeeeeeeeeeeeel";
 		if (get_filter_request_var('panel_id')) {
-			db_execute_prepared('DELETE from plugin_intropage_panel_dashboard 
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard 
 				WHERE user_id = ? AND panel_id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
@@ -50,57 +45,49 @@ if (isset_request_var('intropage_action') &&
 				array($value,$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
 		break;
 
-
-	// remove dashboard - only set panels to dashboard = 0
 	case 'removepage':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
-			db_execute_prepared('delete from plugin_intropage_panel_dashboard 
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard 
 				WHERE user_id = ? AND dashboard_id = ?',
 				array($_SESSION['sess_user_id'], $value));
-//			 $x = read_user_setting('intropage_number_of_dashboards') - 1;
 			 set_user_setting('intropage_number_of_dashboards',read_user_setting('intropage_number_of_dashboards')-1);
 			
 			$_SESSION['dashboard_id'] = 1;
-
 		}
 		break;
 
 	case 'addpage':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
-
 			 $x = read_user_setting('intropage_number_of_dashboards') + 1;
 			 set_user_setting('intropage_number_of_dashboards',$x);
-
 			 $_SESSION['dashboard_id'] = $x;
-
-
 		}
 		break;
 
-
-	// favourite graphs
 	case 'favgraph':
 		if (get_filter_request_var('graph_id')) {
 			// already fav?
-			//!!!! tady pak pribude jeste test na casovy rozsah
-			if (db_fetch_cell('SELECT COUNT(*) FROM plugin_intropage_panel_data WHERE user_id=' . $_SESSION['sess_user_id'] .
-					' AND fav_graph_id=' . get_request_var('graph_id')) > 0) {
-				db_execute('DELETE FROM plugin_intropage_user_setting WHERE user_id=' . $_SESSION['sess_user_id'] . ' and fav_graph_id=' .  get_request_var('graph_id'));
+			if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data WHERE user_id= ? 
+					AND fav_graph_id= ? AND fav_graph_timespan= ?',
+					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan'])
+					) > 0) {
+				db_execute_prepared('DELETE FROM plugin_intropage_panel_data 
+					WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?',
+					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
 			} else { // add to fav
-				// priority for new panel:
-				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_panel_data 
-					WHERE user_id=' . $_SESSION['sess_user_id']);
+				// priority for new panel: //!!!! dodelat
+//				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_panel_data 
+//					WHERE user_id=' . $_SESSION['sess_user_id']);
 
 				db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
-					(user_id, priority, panel_id, fav_graph_id)
-					VALUES (?, ?, ?, ?)',
-					array(
-						$_SESSION['sess_user_id'],
-						$prio,
-						'favourite_graph',
-						get_request_var('graph_id')
-					)
-				);
+					(user_id, panel_id, fav_graph_id, fav_graph_timespan)
+					VALUES (?, "favourite_graph", ?, ?)',
+					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
+					
+				$id = db_fetch_insert_id();
+				db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
+					(panel_id, user_id, dashboard_id) VALUES ( ?, ?, ?)',
+					array($id, $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
 			}
 		}
 		break;

@@ -23,6 +23,30 @@
  +-------------------------------------------------------------------------+
 */
 
+function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
+        global $config;
+
+        if (isset($fav_graph_id)) {
+                $result = array(
+                        'name' => __('Favourite graph', 'intropage'),
+                        'alarm' => 'gray',
+                        'data' => '',
+                );
+
+                $result['name'] .= ' ' . db_fetch_cell_prepared('SELECT title_cache
+                        FROM graph_templates_graph
+                        WHERE local_graph_id = ?',
+                        array($fav_graph_id));
+
+                $result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
+                        'local_graph_id=' . $fav_graph_id . '&' .
+                        'graph_height=105&' .
+                        'graph_width=300&' .
+                        'graph_nolegend=true"/>';
+
+                return $result;
+	}
+}
 
 function intropage_prepare_graph($dispdata) {
 	global $config;
@@ -641,11 +665,13 @@ function db_check() {
 function intropage_graph_button($data) {
 	global $config;
 
-	if (db_fetch_cell('SELECT intropage_favourite_graph FROM user_auth WHERE id=' . $_SESSION['sess_user_id']) == 'on') {
+	if (db_fetch_cell_prepared('SELECT intropage_favourite_graph FROM user_auth 
+		WHERE id= ?', array($_SESSION['sess_user_id'])) == 'on') {
 		$local_graph_id = $data[1]['local_graph_id'];
 
-		if (db_fetch_cell('SELECT COUNT(*) FROM plugin_intropage_user_setting WHERE user_id=' . $_SESSION['sess_user_id'] .
-			' and fav_graph_id=' . $local_graph_id) > 0) {       // already fav
+		if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data 
+			WHERE user_id= ? AND fav_graph_id= ?', 
+			array($_SESSION['sess_user_id'],$local_graph_id)) > 0) {       // already fav
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
 		} else {       // add to fav
 			$fav = '<i class="fa fa-eye" title="' . __esc('Add to Dashboard', 'intropage') . '"></i>';
