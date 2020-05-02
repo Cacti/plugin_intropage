@@ -197,12 +197,11 @@ function display_information() {
 
 //!!! lokalizace
 	if (cacti_sizeof($panels) == 0)	{
-		print 'Welcome!' . EOL;
-		print 'You can add panels in two ways:' . EOL;
-		print ' - select prepared panels below' . EOL;
-		print ' - add any graph - click to \'Eye Icon\' which is next to each graph' . EOL;
-		print EOL;
-		print 'You can too add more dashboards below' . EOL;
+		print '<div><b>' . __('Welcome!') . '</b><br/><br/>';
+		print __('You can add panels in two ways:') . '<br/>';
+		print ' - ' . __('select prepared panels below') . '<br/>';
+		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph') . '<br/><br/>';
+		print __('You can add more dashboards below, too') . '<br/><br/></div>';
 	}
 
 /*

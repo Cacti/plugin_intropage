@@ -38,8 +38,8 @@ if (isset_request_var('intropage_action') &&
 
 	echo "odebiram paneeeeeeeeeeeeeel";
 		if (get_filter_request_var('panel_id')) {
-			db_execute_prepared('UPDATE plugin_intropage_panel_data SET dashboard_id=0
-				WHERE user_id = ? AND id = ?',
+			db_execute_prepared('DELETE from plugin_intropage_panel_dashboard 
+				WHERE user_id = ? AND panel_id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
 		break;
