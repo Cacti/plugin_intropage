@@ -24,7 +24,8 @@
 */
 
 function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
-        global $config;
+        global $config, $graph_timeshifts;
+
 
         if (isset($fav_graph_id)) {
                 $result = array(
@@ -33,15 +34,26 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
                         'data' => '',
                 );
 
+		include_once($config['base_path'] . '/lib/time.php');
+
                 $result['name'] .= ' ' . db_fetch_cell_prepared('SELECT title_cache
                         FROM graph_templates_graph
                         WHERE local_graph_id = ?',
                         array($fav_graph_id));
 
+		$result['name'] .= ' - ' .  $graph_timeshifts[$fav_graph_timespan];
+
+		$timespan = array();
+		$first_weekdayid = read_user_setting('first_weekdayid');
+		get_timespan( $timespan, time(),$fav_graph_timespan , $first_weekdayid);
+
                 $result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
                         'local_graph_id=' . $fav_graph_id . '&' .
                         'graph_height=105&' .
                         'graph_width=300&' .
+                        'disable_cache=true&' .
+                        'graph_start=' . $timespan['begin_now'] . '&' .
+                        'graph_end=' . $timespan['end_now'] . '&' .
                         'graph_nolegend=true"/>';
 
                 return $result;
@@ -522,8 +534,13 @@ EOF;
 
 	elseif (isset($dispdata['data'])) {	// display text data
 		print stripslashes($dispdata['data']);
-		print '<br/>Last update: ' . $dispdata['last_update'];
-		print '<br/>' . 'Recheck every: ' . $dispdata['recheck'];
+		
+		if (db_fetch_cell('SELECT fav_graph_id FROM plugin_intropage_panel_data where id= ?',
+			array($panel_id)) > 0)	{
+		
+			print '<br/>Last update: ' . $dispdata['last_update'];
+			print '<br/>' . 'Recheck every: ' . $dispdata['recheck'];
+		}
 		// !!!! tady pak udela lokalizaci
 	}
 /*
@@ -670,8 +687,8 @@ function intropage_graph_button($data) {
 		$local_graph_id = $data[1]['local_graph_id'];
 
 		if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data 
-			WHERE user_id= ? AND fav_graph_id= ?', 
-			array($_SESSION['sess_user_id'],$local_graph_id)) > 0) {       // already fav
+			WHERE user_id= ? AND fav_graph_id= ? & fav_graph_timespan= ?', 
+			array($_SESSION['sess_user_id'],$local_graph_id,$_SESSION['sess_current_timespan'] )) > 0) {       // already fav
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
 		} else {       // add to fav
 			$fav = '<i class="fa fa-eye" title="' . __esc('Add to Dashboard', 'intropage') . '"></i>';

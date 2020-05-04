@@ -590,16 +590,6 @@ function display_information() {
 
 	print '</div>'; // end of megaobal
 
-print_r ($_SESSION['sess_current_timespan']);
-include_once($config['base_path'] . '/lib/timespan_settings.php');
-//print_r(initialize_timespan($_SESSION['sess_current_timespan']));
-echo "<br/>";
-print_r( set_timeshift());
-echo "<br/>";
-print_r( set_preset_timespan($timespan));
-
-
-
 	return true;
 }
 
