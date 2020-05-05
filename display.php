@@ -195,12 +195,11 @@ function display_information() {
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
-//!!! lokalizace
 	if (cacti_sizeof($panels) == 0)	{
 		print '<div><b>' . __('Welcome!') . '</b><br/><br/>';
 		print __('You can add panels in two ways:') . '<br/>';
 		print ' - ' . __('select prepared panels below') . '<br/>';
-		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph') . '<br/><br/>';
+		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph. Graph with actual timespan will be added to current dashboard') . '<br/><br/>';
 		print __('You can add more dashboards below, too') . '<br/><br/></div>';
 	}
 
@@ -500,9 +499,12 @@ function display_information() {
 			where user_id in (0, ?) and panel_id = ?',
 			array($_SESSION['sess_user_id'],$panel['panel_id']));
 
-//echo 'SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
-//					WHERE id = ' . $_SESSION['sess_user_id'] . "\n";
-			if (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
+			if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
+					WHERE user_id  in (0, ?) and panel_id= ? ',
+					array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
+				print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
+			}
+			elseif (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
 					WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
 				print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
 

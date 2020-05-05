@@ -83,7 +83,15 @@ include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 // !!!! tuhle blbou promennou pak prejmenovat
 if (isset_request_var('reload_panel') && isset($panel_id)) {
-	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
+
+	$file = db_fetch_cell_prepared('SELECT t1.file AS file FROM plugin_intropage_panel_definition AS t1
+			JOIN plugin_intropage_panel_data AS t2 on t1.panel_id=t2.panel_id where t2.id=?',
+			array($panel_id));
+
+
+	include_once($config['base_path'] . $file);
+
+//	include_once($config['base_path'] . '/plugins/intropage/include/data.php');
 
 	$panel = db_fetch_row_prepared('SELECT * FROM plugin_intropage_panel_data
 		WHERE id = ? AND user_id IN (0,?)', array($panel_id,$_SESSION['sess_user_id']));

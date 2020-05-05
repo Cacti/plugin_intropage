@@ -122,9 +122,9 @@ function intropage_poller_bottom() {
 // priority - for displaying
 function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority=20) {
 	if (db_execute_prepared("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval, priority) 
-			VALUES ('?','?','?',?,?)", array($panel_id,$file,$has_detail,$refresh_interval,$priority)) == 1) {
+			VALUES (?,?,?,?,?)", array($panel_id,$file,$has_detail,$refresh_interval,$priority)) == 1) {
 
- 		api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_panel_id', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+ 		api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_' . $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 		return ('1');
 	}
 	else {
@@ -135,8 +135,8 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
 
 function intropage_remove_panel($panel_id) {
 	//!!!! nekdo muze mazat cizi panely
-	db_execute_prepared("DELETE FROM plugin_intropage_panel_data WHERE panel_id='?'", array($panel_id));
-	db_execute_prepared("DELETE FROM plugin_intropage_panel_definition WHERE panel_id='?'", array($panel_id));
+	db_execute_prepared("DELETE FROM plugin_intropage_panel_data WHERE panel_id= ?", array($panel_id));
+	db_execute_prepared("DELETE FROM plugin_intropage_panel_definition WHERE panel_id= ?", array($panel_id));
 	return ('1');
 }
 

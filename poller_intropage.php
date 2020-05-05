@@ -239,6 +239,7 @@ function intropage_gather_stats() {
 	}
 */
 
+/* moved to syslog plugin
 	// plugin syslog
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
 		intropage_debug('Checking Syslog Statistics');
@@ -256,7 +257,7 @@ function intropage_gather_stats() {
 
 		$checks++;
 	}
-
+*/
 	// check db
 	if (read_config_option('intropage_analyse_db_interval') > 0)	{
 		intropage_debug('Checking Cacti Database Enabled');

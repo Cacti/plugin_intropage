@@ -535,8 +535,8 @@ EOF;
 	elseif (isset($dispdata['data'])) {	// display text data
 		print stripslashes($dispdata['data']);
 		
-		if (db_fetch_cell('SELECT fav_graph_id FROM plugin_intropage_panel_data where id= ?',
-			array($panel_id)) > 0)	{
+		if (is_null(db_fetch_cell_prepared('SELECT fav_graph_id FROM plugin_intropage_panel_data where id= ?',
+			array($panel_id))))	{
 		
 			print '<br/>Last update: ' . $dispdata['last_update'];
 			print '<br/>' . 'Recheck every: ' . $dispdata['recheck'];
