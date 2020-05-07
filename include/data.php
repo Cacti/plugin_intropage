@@ -690,14 +690,15 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 		'data' => '',
 		'last_update' =>  NULL,
 	);
-	
+
+/*	
         $graph = array ('pie' => array(
                         'title' => __('Host templates: ', 'intropage'),
                         'label' => array(),
                         'data' => array(),
                 ),
 	);
-
+*/
 
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
@@ -744,7 +745,16 @@ function graph_host_template($display=false, $update=false, $force_update=false)
     	    		}
 
 	    		if ($allowed_hosts)	{
-/////
+        			$graph = array ('pie' => array(
+                        		'title' => __('Host templates: ', 'intropage'),
+                        		'label' => array(),
+                        		'data' => array(),
+                			),
+				);
+
+
+
+/*  strange result with prepared
                 		$sql_ht = db_fetch_assoc_prepared('SELECT host_template.id as id, name, 
                 			count(host.host_template_id) AS total
                         		FROM host_template LEFT JOIN host
@@ -753,8 +763,19 @@ function graph_host_template($display=false, $update=false, $force_update=false)
                         		ORDER BY total desc LIMIT 6',
                         		array($allowed_hosts));
 
+*/
+                		$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, 
+                			count(host.host_template_id) AS total
+                        		FROM host_template LEFT JOIN host
+                        		ON (host_template.id = host.host_template_id) AND host.id IN ( $allowed_hosts )
+                        		GROUP by host_template_id
+                        		ORDER BY total desc LIMIT 6");
+
+
                 		if (cacti_sizeof($sql_ht)) {
+
                         		foreach ($sql_ht as $item) {
+
                                 		array_push($graph['pie']['label'], substr($item['name'],0,15));
                                 		array_push($graph['pie']['data'], $item['total']);
 
@@ -762,9 +783,10 @@ function graph_host_template($display=false, $update=false, $force_update=false)
                                 		$result['data'] .= $item['total'] . '<br/>';
         				}
                         		$result['data'] = intropage_prepare_graph($graph);
+            				unset($graph);
+
                         	}
         		} else {
-            			unset($graph);
             			$result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 			}
 		
