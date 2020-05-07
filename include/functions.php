@@ -161,6 +161,52 @@ function intropage_prepare_graph($dispdata) {
 	$content .= "</div>\n";
 	} // line graph end
 
+	if (isset($dispdata['pie'])) {
+
+		$labely = array();
+		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
+		foreach ($dispdata['pie']['label'] as $key => $val) {
+			$labely[$key] = $val . ' (' . $dispdata['pie']['data'][$key] . ')';
+		}
+
+		$content .= "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\"></canvas>\n";
+		$content .= "<script type='text/javascript'>\n";
+
+		$pie_labels = implode('","', $labely);
+
+		$pie_values = implode(',', $dispdata['pie']['data']);
+		$pie_title  = $dispdata['pie']['title'];
+		
+		$content .= "var $xid = document.getElementById('pie_" . $xid . "').getContext('2d');\n";
+		$content .= "new Chart($xid, {\n";
+		$content .= "type: 'pie',\n";
+		$content .= "data: {\n";
+		$content .= "labels: [\"" . $pie_labels . "\"],\n";
+		$content .= "datasets: [{\n";
+		$content .= "backgroundColor: [ '#2ecc71', '#e74c3c', '#f1c40f', '#6b6966', '#3498db', '#33ffe6', ],\n";
+		$content .= "data: [" . $pie_values . "]\n";  
+		$content .= "}]\n";
+		$content .= "},\n";
+		$content .= "options: {\n";
+		$content .= "responsive: false,\n";
+		$content .= "title: { display: false, text: '" . $pie_title . "' },\n";
+		$content .= "legend: {\n";
+		$content .= "display: true,\n";
+		$content .= "position: 'right',\n";
+		$content .= "labels: {\n";
+		$content .= "usePointStyle: true,\n";
+		$content .= "}\n";
+		$content .= "},\n";
+		$content .= "tooltipTemplate: '<%= value %>%'\n";
+		$content .= "}\n";
+		$content .= "});\n";
+		$content .= "</script>\n";
+		$content .= "</div>\n";
+	}   // pie graph end 
+
+
+
+
 	return (addslashes($content));	
 }
 

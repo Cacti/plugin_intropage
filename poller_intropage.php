@@ -43,6 +43,8 @@ $checks       = 0;
 
 global $config, $database_default, $purged_r, $purged_n;
 
+$run_from_poller = true;
+
 /* process calling arguments */
 $parms = $_SERVER['argv'];
 array_shift($parms);
@@ -113,14 +115,14 @@ if (function_exists('unregister_process')) {
 exit(0);
 
 function intropage_gather_stats() {
-	global $config, $force, $checks;
+	global $config, $force, $checks, $run_from_poller;
 	
 	$logging = read_config_option('log_verbosity', true);
 
 	// gather data for all panels
 	$data = db_fetch_assoc('SELECT file,panel_id FROM plugin_intropage_panel_definition');
 	
-	$run_from_poller = true;
+//	$run_from_poller = true;
 	
 	foreach ($data as $one)	{
 	
