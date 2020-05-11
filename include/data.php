@@ -310,7 +310,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
 				    	array($user['id']))) ? true : false;
-	    
+/*	    it returns only one row
 				$sql_worst_host = db_fetch_assoc_prepared("SELECT description, id, avg_time, cur_time
 					FROM host
 					WHERE host.id in ( ? )
@@ -318,7 +318,15 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 					ORDER BY avg_time desc
 					LIMIT 5",
 					array($allowed_hosts));
-			
+*/
+				$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
+					FROM host
+					WHERE host.id in ( $allowed_hosts )
+					AND disabled != 'on'
+					ORDER BY avg_time desc
+					LIMIT 5",
+					);
+
 				if (cacti_sizeof($sql_worst_host)) {
 					foreach ($sql_worst_host as $host) {
 						if ($console_access) {
@@ -582,6 +590,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 }
 
 
+// ------------------------- graph data source---------------------
 function graph_data_source($display=false, $update=false, $force_update=false) {
         global $config, $input_types, $run_from_poller;
 
@@ -771,7 +780,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
                         		GROUP by host_template_id
                         		ORDER BY total desc LIMIT 6");
 
-
+//echo "<h3>aaaa:" . cacti_sizeof($sql_ht) . "bbb</h3>";
                 		if (cacti_sizeof($sql_ht)) {
 
                         		foreach ($sql_ht as $item) {
@@ -819,10 +828,253 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 
 
 
+//---------------------------------------graph host-----------------------------
+
+function graph_host($display=false, $update=false, $force_update=false) {
+        global $config;
+
+	$panel_id = 'graph_host';
+
+	$result = array(
+		'name' => __('Hosts', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+
+/*	
+        $graph = array ('pie' => array(
+                        'title' => __('Host templates: ', 'intropage'),
+                        'label' => array(),
+                        'data' => array(),
+                ),
+	);
+
+*/
 
 
 
 
 
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
 
+
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+	    $users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+	}
+
+
+	foreach ($users as $user)	{
+
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
+
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+
+	    		$id = db_fetch_insert_id();
+		}
+
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
+
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
+
+	    		$x = 0;	// reference
+			//get_allowed_devices($sql_where = '', $order_by = 'description', $limit = '', &$total_rows = 0, $user = 0, $host_id = 0)
+			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+
+	    		if (count($allowed) > 0) {
+                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
+    	    		} else {
+                		$allowed_hosts = false;
+    	    		}
+
+
+        		if ($allowed_hosts) {
+				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
+					WHERE user_id = ?
+	    				AND user_auth_realm.realm_id=8',
+	    				array($user['id']))) ? true : false;
+
+
+                		$h_all  = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ')');
+                		$h_up   = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=3 AND disabled=""');
+                		$h_down = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=1 AND disabled=""');
+                		$h_reco = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=2 AND disabled=""');
+                		$h_disa = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND disabled="on"');
+
+                		$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
+                		$url_prefix = $console_access ? '<a href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
+                		$url_suffix = $console_access ? '</a>' : '';
+
+                		$result['data']  = sprintf($url_prefix,'-1') . __('All', 'intropage') . ": $h_all$url_suffix<br/>";
+                		$result['data'] .= sprintf($url_prefix,'=3') . __('Up', 'intropage') . ": $h_up$url_suffix<br/>";
+                		$result['data'] .= sprintf($url_prefix,'=1') . __('Down', 'intropage') . ": $h_down$url_suffix<br/>";
+                		$result['data'] .= sprintf($url_prefix,'=-2') . __('Disabled', 'intropage') . ": $h_disa$url_suffix<br/>";
+                		$result['data'] .= sprintf($url_prefix,'=2') . __('Recovering', 'intropage') . ": $h_reco$url_suffix";
+
+                		if ($count > 0) {
+                        		$graph['pie'] = array(
+                                		'title' => __('Hosts', 'intropage'),
+                                		'label' => array(
+                                        		__('Up', 'intropage'),
+                                        		__('Down', 'intropage'),
+                                       			__('Recovering', 'intropage'),
+                                        		__('Disabled', 'intropage'),
+                                		),
+                                		'data' => array($h_up, $h_down, $h_reco, $h_disa)
+                        		);
+                        		
+                        		$result['data'] = intropage_prepare_graph($graph);
+        				unset($graph);
+				}
+
+                		// alarms and details
+                		if ($h_reco > 0) {
+                        		$result['alarm'] = 'yellow';
+                		}
+
+                		if ($h_down > 0) {
+                        		$result['alarm'] = 'red';
+                		}
+			} else { // no allowed hosts
+            			$result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+        		}
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+				VALUES ( ?, ?, ?, ?, ?)',
+			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+		
+		}
+	} // konec smycky pres vsechny uzivatele
+
+	if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+
+		$result['name'] = 'Hosts';
+
+	        return $result;
+	}
+
+}
+
+
+
+//------------------------- info-------------------------
+function info($display=false, $update=false, $force_update=false) {
+        global $config, $poller_options;
+
+//!!!! mam poller_options?
+
+	$panel_id = 'info';
+
+	$result = array(
+		'name' => __('Info', 'intropage'),
+		'alarm' => 'gray',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+
+        $id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+                                panel_id= ? AND last_update IS NOT NULL',
+                                array($panel_id));
+                                
+        if (!$id) {                             
+            db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+                            VALUES ( ?, ?, ?, "gray", 1000)',
+                            array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+            $id = db_fetch_insert_id();
+        }
+
+        $last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+                                        WHERE user_id=0 and panel_id= ?',
+                                        array($panel_id));
+                                        
+        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+                                        WHERE panel_id= ?',
+                                        array($panel_id));
+
+        if ( $force_update || time() > ($last_update + $update_interval))       {
+
+        	$xdata = '';
+
+        	$result['data'] .= __('Cacti version: ', 'intropage') . CACTI_VERSION . '<br/>';
+
+        	if ($poller_options[read_config_option('poller_type')] == 'spine' && file_exists(read_config_option('path_spine')) && (function_exists('is_executable')) && (is_executable(read_config_option('path_spine')))) {
+                	$spine_version = 'SPINE';
+
+                	exec(read_config_option('path_spine') . ' --version', $out_array);
+
+                	if (sizeof($out_array)) {
+                        	$spine_version = $out_array[0];
+                	}
+
+                	$result['data'] .= __('Poller type:', 'intropage') .' <a href="' . html_escape($config['url_path'] .  'settings.php?tab=poller') . '">' . __('Spine', 'intropage') . '</a><br/>';
+
+                	$result['data'] .= __('Spine version: ', 'intropage') . $spine_version . '<br/>';
+
+                	if (!strpos($spine_version, CACTI_VERSION, 0)) {
+                        	$result['data'] .= '<span class="red">' . __('You are using incorrect spine version!', 'intropage') . '</span><br/>';
+                        	$result['alarm'] = 'red';
+                	}
+        	} else {
+                	$result['data'] .= __('Poller type: ', 'intropage') . ' <a href="' . html_escape($config['url_path'] .  'settings.php?tab=poller') . '">' . $poller_options[read_config_option('poller_type')] . '</a><br/>';
+        	}
+
+        	$result['data'] .= __('Running on: ', 'intropage');
+        	if (function_exists('php_uname')) {
+                	$xdata = php_uname();
+        	} else {
+                	$xdata .= PHP_OS;
+        	}
+
+        	$xdata2 = str_split($xdata, 50);
+        	$xdata  = join('<br/>', $xdata2);
+        	$result['data'] .= $xdata;
+
+	
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			VALUES ( ?, ?, ?, ?, ?)',
+			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+
+        }
+
+	if ($display)    {
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ?',
+                                            array($panel_id)); 
+
+                $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+                        floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+                        MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+                        TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+                        FROM plugin_intropage_panel_definition
+                        WHERE panel_id= ?",
+                        array($panel_id));
+
+                $result['name'] = 'Info';
+                return $result;
+        }
+}
 

@@ -175,18 +175,19 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 		('analyse_login','/plugins/intropage/include/data.php','yes',300)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('top5_ping','/plugins/intropage/include/data.php','yes',300)");
-
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('cpuload','/plugins/intropage/include/data.php','no',60)");
-
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('ntp','/plugins/intropage/include/data.php','no',7200)");
-
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('graph_data_source','/plugins/intropage/include/data.php','no',7200)");
-
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('graph_host_template','/plugins/intropage/include/data.php','no',7200)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('graph_host','/plugins/intropage/include/data.php','no',7200)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('info','/plugins/intropage/include/data.php','no',864000)");
+
 
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		
@@ -196,22 +197,16 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 'intropage_analyse_tree_host_graph']['priority'] = 63;
 'intropage_trend']['priority']                   = 40;
 'intropage_extrem']['priority']                  = 41;
-'intropage_ntp']['priority']                     = 50;
 'intropage_poller_info']['priority']             = 51;
 'intropage_poller_stat']['priority']             = 52;
-'intropage_graph_host']['priority']              = 20;
 'intropage_graph_thold']['priority']             = 21;
-// 'intropage_graph_data_source']['priority']       = 22;
-//'intropage_graph_host_template']['priority']     = 23;
-'intropage_cpu']['priority']                     = 53;
 'intropage_mactrack']['priority']                = 20;
 'intropage_mactrack_sites']['priority']          = 21;
 'intropage_top5_availability']['priority']       = 23;
-'intropage_info']['priority']                    = 10;
 'intropage_boost']['priority']                   = 55;
 'intropage_top5_polltime']['priority']           = 24;
 'intropage_top5_pollratio']['priority']          = 25;
-'intropage_syslog']['priority']                  = 42;
+// - mamm v pluginu 'intropage_syslog']['priority']                  = 42;
 */
 
 /*
