@@ -687,7 +687,7 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 
 
 
-// -----------------------host template
+// -----------------------graph_host template--------------------
 function graph_host_template($display=false, $update=false, $force_update=false) {
 	global $config;
 
@@ -720,7 +720,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	}
 	else	{ // poller wants all
 	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
-	}
+	}	
 
 
 	foreach ($users as $user)	{
@@ -742,7 +742,6 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 					array($user['id'],$panel_id));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
-
 	    		$x = 0;	// reference
 			//get_allowed_devices($sql_where = '', $order_by = 'description', $limit = '', &$total_rows = 0, $user = 0, $host_id = 0)
 			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
@@ -761,18 +760,6 @@ function graph_host_template($display=false, $update=false, $force_update=false)
                 			),
 				);
 
-
-
-/*  strange result with prepared
-                		$sql_ht = db_fetch_assoc_prepared('SELECT host_template.id as id, name, 
-                			count(host.host_template_id) AS total
-                        		FROM host_template LEFT JOIN host
-                        		ON (host_template.id = host.host_template_id) AND host.id IN ( ? )
-                        		GROUP by host_template_id
-                        		ORDER BY total desc LIMIT 6',
-                        		array($allowed_hosts));
-
-*/
                 		$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, 
                 			count(host.host_template_id) AS total
                         		FROM host_template LEFT JOIN host
@@ -780,7 +767,6 @@ function graph_host_template($display=false, $update=false, $force_update=false)
                         		GROUP by host_template_id
                         		ORDER BY total desc LIMIT 6");
 
-//echo "<h3>aaaa:" . cacti_sizeof($sql_ht) . "bbb</h3>";
                 		if (cacti_sizeof($sql_ht)) {
 
                         		foreach ($sql_ht as $item) {
@@ -793,17 +779,17 @@ function graph_host_template($display=false, $update=false, $force_update=false)
         				}
                         		$result['data'] = intropage_prepare_graph($graph);
             				unset($graph);
-
                         	}
         		} else {
             			$result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 			}
-		
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+				VALUES ( ?, ?, ?, ?, ?)',
+			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+
 	    	}
 	    
-	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
-			    VALUES ( ?, ?, ?, ?, ?)',
-			    array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
 	} // konec smycky pres vsechny uzivatele
 	
 
