@@ -191,7 +191,7 @@ function intropage_gather_stats() {
 		array('failed_polls', $count));
 
 	$checks++;
-
+/*
 	// trends - all hosts that are down!!!
 	intropage_debug('Checking Down Host Counts');
 
@@ -203,7 +203,8 @@ function intropage_gather_stats() {
 		AND disabled=''");
 
 	$checks++;
-
+*/
+/*
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' AND status=1")) {
 		intropage_debug('Checking Triggered Thresholds');
 
@@ -216,7 +217,7 @@ function intropage_gather_stats() {
 
 		$checks++;
 	}
-
+*/
 	// automatic autorefresh
 	intropage_debug('Checking Triggered Thresholds');
 

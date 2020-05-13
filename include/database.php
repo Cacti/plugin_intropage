@@ -193,14 +193,14 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 		('maint','/plugins/intropage/include/data.php','no',3600)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('admin_alert','/plugins/intropage/include/data.php','no',3600)");
-
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('trend','/plugins/intropage/include/data.php','no',300)");
 
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		
 		
 'intropage_thold_event']['priority']             = 90;
 'intropage_analyse_tree_host_graph']['priority'] = 63;
-'intropage_trend']['priority']                   = 40;
 'intropage_extrem']['priority']                  = 41;
 'intropage_poller_info']['priority']             = 51;
 'intropage_poller_stat']['priority']             = 52;

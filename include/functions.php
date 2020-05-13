@@ -297,11 +297,11 @@ function intropage_display_panel($panel_id) {
 	print '<div class="panel_header color_gray">';
 	print '<span class="panel_name"></span>';
 
-	if ($panel_id > 990) {
-		printf("<a href='#' title='" . __esc('You cannot disable this panel', 'intropage') . "' class='header_link'><i class='fa fa-times'></i></a>\n");
-	} else {
+//	if ($panel_id > 990) {
+//		printf("<a href='#' title='" . __esc('You cannot disable this panel', 'intropage') . "' class='header_link'><i class='fa fa-times'></i></a>\n");
+//	} else {
 		printf("<a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
-	}
+//	}
 
 	printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>\n");
 

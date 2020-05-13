@@ -1336,7 +1336,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 
         if ($force_update || time() > ($last_update + $update_interval))       {
 
-        	$result['data'] = read_config_option('intropage_admin_alert');
+        	$result['data'] = read_config_option('intropage_admin_alert') . '<br/><br/>';
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
@@ -1361,3 +1361,134 @@ function admin_alert($display=false, $update=false, $force_update=false) {
         }
 
 }
+
+
+
+
+//------------------------------------ trends -----------------------------------------------------
+function trend($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'trend';
+
+	$result = array(
+		'name' => __('Trends', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	if (isset($run_from_poller))	{ // update in poller
+                db_execute("REPLACE INTO plugin_intropage_trends
+                        (name,value)
+                        SELECT 'thold', COUNT(*)
+                        FROM thold_data
+                        WHERE thold_data.thold_alert!=0
+                        OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger");
+                        
+        	db_execute("REPLACE INTO plugin_intropage_trends
+                	(name, value)
+                	SELECT 'host', COUNT(id)
+                	FROM host
+                	WHERE status='1' AND disabled=''");
+	}
+
+
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id=? AND last_update IS NOT NULL',
+				array($panel_id));
+
+	if (!$id) {			
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES (?, ?, ?,"gray",1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+		$id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+	if ( $force_update || time() > ($last_update + $update_interval))	{
+
+        	$graph = array ('line' => array(
+                        	'title' => __('Trends: ', 'intropage'),
+                        	'label1' => array(),
+                        	'data1' => array(),
+                        	'title1' => '',
+                        	'data2' => array(),
+                        	'title2' => '',
+                	),
+		);
+
+        	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+                	$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+                        	FROM plugin_intropage_trends
+                        	WHERE name='thold'
+                        	ORDER BY cur_timestamp desc
+                        	LIMIT 10");
+
+                	if (cacti_sizeof($sql)) {
+                        	$graph['line']['title1'] = __('Tholds triggered', 'intropage');
+                        	foreach ($sql as $row) {
+                                	array_push($graph['line']['label1'], $row['date']);
+                                	array_push($graph['line']['data1'], $row['value']);
+                        	}
+                	}
+        	}
+
+        	$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`, name, value
+                	FROM plugin_intropage_trends
+                	WHERE name='host'
+                	ORDER BY cur_timestamp desc
+                	LIMIT 10");
+
+        	if (cacti_sizeof($sql)) {
+                	$graph['line']['title2'] = __('Hosts down');
+
+                	foreach ($sql as $row) {
+                        	array_push($graph['line']['data2'], $row['value']);
+                	}
+        	}
+
+        	if (count($graph['line']) < 3) {
+                	unset($graph);
+                	$result['data'] = __('Waiting for data','intropage');
+        	} else {
+                	$graph['line']['data1'] = array_reverse($graph['line']['data1']);
+                	$graph['line']['data2'] = array_reverse($graph['line']['data2']);
+                	$graph['line']['label1'] = array_reverse($graph['line']['label1']);
+              		$result['data'] = intropage_prepare_graph($graph);
+			unset($graph);
+        	}
+    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    	VALUES (?,?,?,?,?)',
+			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+	}
+
+	if ($display)    {
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ?',
+                                            array($panel_id)); 
+
+                $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+                        floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+                        MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+                        TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+                        FROM plugin_intropage_panel_definition
+                        WHERE panel_id= ?",
+                        array($panel_id));
+
+                $result['name'] = 'Trends';
+                return $result;
+	}
+}
+
+/*
+                        
+                        */
