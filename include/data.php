@@ -1229,7 +1229,7 @@ function maint($display=false, $update=false, $force_update=false) {
 
                                                 	if (cacti_sizeof($hosts)) {
                                                         	foreach ($hosts as $host) {
-                                                                	$data .= $host['description'] . ', ';
+                                                                	$result['data'] .= $host['description'] . ', ';
                                                         	}
                                                 	}
                                                 	$result['data'] = substr($result['data'], 0, -2) .'<br/><br/>';
