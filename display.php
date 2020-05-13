@@ -203,35 +203,34 @@ function display_information() {
 		print __('You can add more dashboards below, too') . '<br/><br/></div>';
 	}
 
-/*
-// !!!! tady bude podminka - kdyz dashboard_id=1
+
+//  tohle bude asi bezny panel
+//!!!! tady bude podminka - kdyz dashboard_id=1
 
 	// extra maint plugin panel - always first
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
-		$start = microtime(true);
 
-		$tmp['data'] = intropage_maint();
-		if ($tmp['data']) {
-			intropage_display_panel(997, 'red', 'Plugin Maint alert', $tmp);
-			$tmp['data'] = '';
-		}
-
-		if ($logging >= 5) {
-			cacti_log('debug: maint, duration ' . round(microtime(true) - $start, 2),true,'Intropage');
+		$row = db_fetch_assoc("SELECT id,data FROM plugin_intropage_panel_data WHERE panel_id='maint'");
+		if (strlen($row['data']) > 20) {
+			intropage_display_panel($row['id']);
 		}
 	}
-
 	// end of extra maint plugin panel
 
 	// extra admin panel
 	if (strlen(read_config_option('intropage_admin_alert')) > 3) {
-		$tmp['data'] = nl2br(read_config_option('intropage_admin_alert'));
-		intropage_display_panel(998, 'red', 'Admin alert', $tmp);
+		$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE panel_id='admin_alert'");
+		if ($id) {
+			intropage_display_panel($id);
+		}
+
+//		$tmp['data'] = nl2br(read_config_option('intropage_admin_alert'));
+//		intropage_display_panel(998, 'red', 'Admin alert', $tmp);
 	}
 	// end of admin panel
 
-*/
+
 	if ($display_important_first == 'on') {  // important first
 		foreach ($panels as $xkey => $xvalue) {
 			if ($xvalue['alldata']['alarm'] == 'red') {
@@ -499,17 +498,19 @@ function display_information() {
 			where user_id in (0, ?) and panel_id = ?',
 			array($_SESSION['sess_user_id'],$panel['panel_id']));
 
-			if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
-					WHERE user_id  in (0, ?) and panel_id= ? ',
-					array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
-				print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
-			}
-			elseif (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
-					WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-				print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
+			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert')	{
+				if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
+						WHERE user_id  in (0, ?) and panel_id= ? ',
+						array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
+					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
+				}
+				elseif (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
+						WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
+					print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
 
-			} else {
-				print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
+				} else {
+					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
+				}
 			}
 
 		}

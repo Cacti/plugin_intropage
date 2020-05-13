@@ -1183,3 +1183,181 @@ function analyse_db($display=false, $update=false, $force_update=false) {
                 return $result;
         }
 }
+
+
+//---------------------------maint plugin--------------------
+function maint($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'maint';
+
+	$result = array(
+		'name' => __('Maintenance plugin', 'intropage'),
+		'alarm' => 'red',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND last_update IS NOT NULL',
+				array($panel_id));
+				
+	if (!$id) {				
+	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES ( ?, ?, ?, "gray", 1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+	    $id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+                                        
+	$update_interval = read_config_option('intropage_analyse_db_interval');
+
+        if ($force_update || time() > ($last_update + $update_interval))       {
+
+        	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
+
+        	$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
+        	if (cacti_sizeof($schedules)) {
+                	foreach ($schedules as $sc) {
+                        	$t = time();
+
+                        	switch ($sc['mtype']) {
+                                	case 1:
+                                        	if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                	$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                        	' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
+
+                                                	$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        	INNER JOIN plugin_maint_hosts
+                                                        	ON host.id=plugin_maint_hosts.host
+                                                        	WHERE schedule = ?',
+                                                        	array($sc['id']));
+
+                                                	if (cacti_sizeof($hosts)) {
+                                                        	foreach ($hosts as $host) {
+                                                                	$data .= $host['description'] . ', ';
+                                                        	}
+                                                	}
+                                                	$result['data'] = substr($result['data'], 0, -2) .'<br/><br/>';
+                                        	}
+                                        	break;
+
+                                	case 2:
+                                        	while ($sc['etime'] < $t) {
+                                                	$sc['etime'] += $sc['minterval'];
+                                                	$sc['stime'] += $sc['minterval'];
+                                        	}
+
+                                        	if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                	$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                        	' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
+
+                                                	$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        	INNER JOIN plugin_maint_hosts
+                                                        	ON host.id=plugin_maint_hosts.host
+                                                        	WHERE schedule = ?',
+                                                        	array($sc['id']));
+
+                                                	if (cacti_sizeof($hosts)) {
+                                                        	foreach ($hosts as $host) {
+                                                                	$result['data'] .= $host['description'] . ', ';
+                                                        	}
+                                                	}
+
+                                                	$result['data'] = substr($result['data'], 0, -2) . '<br/><br/>';
+                                        	}
+
+         		                       	break;
+				}
+			}
+       		}
+
+    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    	VALUES (?,?,?,?,?)',
+			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+	}
+
+	if ($display)    {
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ?',
+                                            array($panel_id)); 
+
+                $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+                        floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+                        MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+                        TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+                        FROM plugin_intropage_panel_definition
+                        WHERE panel_id= ?",
+                        array($panel_id));
+
+                $result['name'] = 'Maint plugin';
+                return $result;
+        }
+
+}
+
+
+
+
+//---------------------------admin alert--------------------
+function admin_alert($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'admin_alert';
+
+	$result = array(
+		'name' => __('Admin alert', 'intropage'),
+		'alarm' => 'red',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND last_update IS NOT NULL',
+				array($panel_id));
+				
+	if (!$id) {				
+	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES ( ?, ?, ?, "gray", 1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+	    $id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+                                        
+	$update_interval = read_config_option('intropage_analyse_db_interval');
+
+        if ($force_update || time() > ($last_update + $update_interval))       {
+
+        	$result['data'] = read_config_option('intropage_admin_alert');
+
+    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    	VALUES (?,?,?,?,?)',
+			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+	}
+
+	if ($display)    {
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ?',
+                                            array($panel_id)); 
+
+                $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+                        floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+                        MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+                        TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+                        FROM plugin_intropage_panel_definition
+                        WHERE panel_id= ?",
+                        array($panel_id));
+
+                $result['name'] = 'Admin alert';
+                return $result;
+        }
+
+}
