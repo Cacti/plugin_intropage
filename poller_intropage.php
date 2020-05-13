@@ -147,6 +147,7 @@ function intropage_gather_stats() {
 	db_execute("DELETE FROM plugin_intropage_trends
 		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND
 		name IN ('poller','cpuload','failed_polls','host','thold','poller_output','syslog_incoming','syslog_total','syslog_alert')");
+/*
 
 	// poller stats
 	intropage_debug('Checking Data Collector Statistics');
@@ -164,7 +165,7 @@ function intropage_gather_stats() {
 
 		$checks++;
 	}
-
+*/
 /* moved to panel
 	// CPU load - linux only
 	if (!stristr(PHP_OS, 'win')) {

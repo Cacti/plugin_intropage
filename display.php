@@ -204,14 +204,13 @@ function display_information() {
 	}
 
 
-//  tohle bude asi bezny panel
 //!!!! tady bude podminka - kdyz dashboard_id=1
 
 	// extra maint plugin panel - always first
 
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
 
-		$row = db_fetch_assoc("SELECT id,data FROM plugin_intropage_panel_data WHERE panel_id='maint'");
+		$row = db_fetch_row("SELECT id, data FROM plugin_intropage_panel_data WHERE panel_id='maint'");
 		if (strlen($row['data']) > 20) {
 			intropage_display_panel($row['id']);
 		}

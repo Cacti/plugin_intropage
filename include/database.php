@@ -195,6 +195,12 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 		('admin_alert','/plugins/intropage/include/data.php','no',3600)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('trend','/plugins/intropage/include/data.php','no',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('poller_info','plugins/intropage/include/data.php','no',60)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('poller_stat','plugins/intropage/include/data.php','no',60)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('analyse_tree_host_graph','plugins/intropage/include/data.php','no',1800)");
 
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		
@@ -202,8 +208,6 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 'intropage_thold_event']['priority']             = 90;
 'intropage_analyse_tree_host_graph']['priority'] = 63;
 'intropage_extrem']['priority']                  = 41;
-'intropage_poller_info']['priority']             = 51;
-'intropage_poller_stat']['priority']             = 52;
 'intropage_graph_thold']['priority']             = 21;
 'intropage_mactrack']['priority']                = 20;
 'intropage_mactrack_sites']['priority']          = 21;

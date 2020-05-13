@@ -204,9 +204,6 @@ function intropage_prepare_graph($dispdata) {
 		$content .= "</div>\n";
 	}   // pie graph end 
 
-
-
-
 	return (addslashes($content));	
 }
 
