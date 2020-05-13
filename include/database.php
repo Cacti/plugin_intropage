@@ -208,10 +208,12 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('top5_pollratio','plugins/intropage/include/data.php','no',300)");
 
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('thold_event','plugins/intropage/include/data.php','no',300)");
+
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		
 		
-'intropage_thold_event']['priority']             = 90;
 'intropage_extrem']['priority']                  = 41;
 'intropage_graph_thold']['priority']             = 21;
 'intropage_mactrack']['priority']                = 20;

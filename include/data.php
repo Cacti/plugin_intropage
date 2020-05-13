@@ -2457,3 +2457,107 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 }
 
 
+
+//------------------------------------ thold event -----------------------------------------------------
+function thold_event($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'thold_event';
+
+	$result = array(
+		'name' => __('Last thold events', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id=? AND last_update IS NOT NULL',
+				array($panel_id));
+
+	if (!$id) {			
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES (?, ?, ?,"gray",1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+		$id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+	if ( $force_update || time() > ($last_update + $update_interval))	{
+
+        	if (db_fetch_cell("SELECT count(*) FROM plugin_config WHERE directory='thold' AND status = 1") == 0) {
+                	$result['alarm'] = 'yellow';
+                	$result['data']  = __('Plugin Thold isn\'t installed or started', 'intropage');
+                	$result['detail'] = FALSE;
+        	} else {
+                	$sql_result = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
+                        tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
+                        FROM plugin_thold_log AS tl
+                        INNER JOIN thold_data AS td
+                        ON tl.threshold_id=td.id
+                        INNER JOIN graph_local AS gl
+                        ON gl.id=td.local_graph_id
+                        LEFT JOIN graph_templates AS gt
+                        ON gt.id=gl.graph_template_id
+                        LEFT JOIN graph_templates_graph AS gtg
+                        ON gtg.local_graph_id=gl.id
+                        LEFT JOIN host AS h
+                        ON h.id=gl.host_id
+                        LEFT JOIN user_auth_perms AS uap0
+                        ON (gl.id=uap0.item_id AND uap0.type=1)
+                        LEFT JOIN user_auth_perms AS uap1
+                        ON (gl.host_id=uap1.item_id AND uap1.type=3)
+                        LEFT JOIN user_auth_perms AS uap2
+                        ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+                        HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
+                        ORDER BY `time` DESC
+                        LIMIT 10');
+
+                	if (cacti_sizeof($sql_result)) {
+                        	foreach ($sql_result as $row) {
+                                	$result['data'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . html_escape($row['description']) . '<br/>';
+                                	if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
+                                        	$result['alarm'] = 'red';
+                                	} elseif ($result['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
+                                        	$result['alarm'] == 'yellow';
+                                	}
+                        	}
+                	} else {
+                        	$result['data'] = __('Without events yet', 'intropage');
+                	}
+        	}
+
+	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES ( ?, ?, ?, ?, ?)',
+			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+	}
+
+	if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+		
+		
+		$result['name'] = 'Last thold events';
+	        return $result;
+	}
+}
+
+
+
