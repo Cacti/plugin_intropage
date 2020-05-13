@@ -1064,3 +1064,122 @@ function info($display=false, $update=false, $force_update=false) {
         }
 }
 
+
+// -------------------------------------analyse db-------------------------------------------
+function analyse_db($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'analyse_db';
+
+	$result = array(
+		'name' => __('Analyse Database', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND last_update IS NOT NULL',
+				array($panel_id));
+				
+	if (!$id) {				
+	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES ( ?, ?, ?, "gray", 1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+	    $id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+                                        
+	$update_interval = read_config_option('intropage_analyse_db_interval');
+
+        if ($force_update || time() > ($last_update + $update_interval))       {
+
+        		$damaged   = 0;
+        		$memtables = 0;
+
+        		$db_check_level = read_config_option('intropage_analyse_db_level');
+
+        		$tables = db_fetch_assoc('SHOW TABLES');
+
+        		foreach ($tables as $key => $val) {
+                		$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
+
+                		if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
+                       			$memtables++;
+                		} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
+                       			$damaged++;
+                       			$result['data'] .= 'Table ' . $row['Table'] . ' status ' . $row['Msg_text'] . '<br/>';
+                		}
+        		}
+
+        		if ($damaged > 0) {
+                		$result['alarm'] = 'red';
+                		$result['data'] .= '<span class="txt_big">' . __('DB problem', 'intropage') . '</span><br/><br/>';
+        		} else {
+                		$result['data'] .= '<span class="txt_big">' . __('DB OK', 'intropage') . '</span><br/><br/>';
+        		}
+                
+        		// connection errors
+        		$cerrors = 0;
+        		$con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Connection_errors%'");
+
+        		foreach ($con_err as $key => $val) {
+                		$cerrors = $cerrors + $val['Value'];
+        		}
+
+        		if ($cerrors > 0) {     // only yellow
+                		$result['data'] .= __('Connection errors: %s - try to restart SQL service, check SQL log, ...', $cerrors, 'intropage') . '<br/>';
+
+                		if ($result['alarm'] == 'green') {
+                        		$result['alarm'] = 'yellow';
+                		}
+        		}
+
+        		// aborted problems
+        		$aerrors = 0;
+        		$con_err = db_fetch_assoc("SHOW GLOBAL STATUS LIKE '%Aborted_c%'");
+
+        		foreach ($con_err as $key => $val) {
+                		$aerrors = $aerrors + $val['Value'];
+        		}
+
+        		if ($aerrors > 0) {     // only yellow
+                		$result['data'] .= __('Aborted clients/connects: %s - check logs.', $aerrors, 'intropage') . '<br/>';
+
+                		if ($result['alarm'] == 'green') {
+                        		$result['alarm'] = 'yellow';
+                		}
+        		}
+
+        		$result['data'] .= __('Connection errors: %s', $cerrors, 'intropage') . '<br/>';
+        		$result['data'] .= __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<br/>';
+        		$result['data'] .= __('Damaged tables: %s', $damaged, 'intropage') . '<br/>' .
+                		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
+               			__('All tables: %s', count($tables), 'intropage');
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    	VALUES (?,?,?,?,?)',
+			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+	}
+
+
+        if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		if ($update_interval == 0)	{
+			$result['recheck'] = __('Scheduled db check disabled','intropage');
+		}
+		else {
+			$result['recheck'] = "Every " . $update_interval/3600 . "h";
+		}
+		
+                $result['name'] = 'Database check';
+                return $result;
+        }
+}

@@ -187,6 +187,8 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 		('graph_host','/plugins/intropage/include/data.php','no',7200)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('info','/plugins/intropage/include/data.php','no',864000)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('analyse_db','/plugins/intropage/include/data.php','no',864000)");
 
 
 

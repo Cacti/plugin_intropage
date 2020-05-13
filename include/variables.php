@@ -106,7 +106,6 @@ $intropage_settings = array(	// default values
 		'method' => 'drop_array',
 		'array' => array(
 			'0'    		=> __('Never', 'intropage'),
-			'900'   	=> __('Every %d Minutes', 15, 'intropage'),
 			'3600'  	=> __('Every Hour', 'intropage'),
 			'86400' 	=> __('Every Day', 'intropage'),
 			'604800' 	=> __('Every Week', 'intropage'),

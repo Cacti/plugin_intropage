@@ -260,6 +260,7 @@ function intropage_gather_stats() {
 		$checks++;
 	}
 */
+/*
 	// check db
 	if (read_config_option('intropage_analyse_db_interval') > 0)	{
 		intropage_debug('Checking Cacti Database Enabled');
@@ -279,7 +280,7 @@ function intropage_gather_stats() {
 			intropage_debug('Not Time to Check Cacti Database');
 		}
 	}
-
+*/
 	// check poller_table is empty?
 	intropage_debug('Checking For Lingering Poller Output');
 
