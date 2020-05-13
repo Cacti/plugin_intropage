@@ -201,20 +201,22 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 		('poller_stat','plugins/intropage/include/data.php','no',60)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('analyse_tree_host_graph','plugins/intropage/include/data.php','no',1800)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('top5_availability','plugins/intropage/include/data.php','yes',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('top5_polltime','plugins/intropage/include/data.php','no',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('top5_pollratio','plugins/intropage/include/data.php','no',300)");
 
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		
 		
 'intropage_thold_event']['priority']             = 90;
-'intropage_analyse_tree_host_graph']['priority'] = 63;
 'intropage_extrem']['priority']                  = 41;
 'intropage_graph_thold']['priority']             = 21;
 'intropage_mactrack']['priority']                = 20;
 'intropage_mactrack_sites']['priority']          = 21;
-'intropage_top5_availability']['priority']       = 23;
 'intropage_boost']['priority']                   = 55;
-'intropage_top5_polltime']['priority']           = 24;
-'intropage_top5_pollratio']['priority']          = 25;
 // - mamm v pluginu 'intropage_syslog']['priority']                  = 42;
 */
 
