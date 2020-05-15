@@ -207,19 +207,24 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 		('top5_polltime','plugins/intropage/include/data.php','no',300)");
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('top5_pollratio','plugins/intropage/include/data.php','no',300)");
-
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('thold_event','plugins/intropage/include/data.php','no',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('boost','plugins/intropage/include/data.php','no',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('extrem','plugins/intropage/include/data.php','no',300)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('graph_thold','plugins/intropage/include/data.php','no',300)");
+
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('mactrack','plugins/intropage/include/data.php','no',900)");
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('mactrack_sites','plugins/intropage/include/data.php','no',900)");
 
 
 /* !!! tyhle zbyva pridat, budu resit prioritu?		
 		
-'intropage_extrem']['priority']                  = 41;
-'intropage_graph_thold']['priority']             = 21;
-'intropage_mactrack']['priority']                = 20;
-'intropage_mactrack_sites']['priority']          = 21;
-'intropage_boost']['priority']                   = 55;
-// - mamm v pluginu 'intropage_syslog']['priority']                  = 42;
+// !!!! mamm v pluginu 'intropage_syslog']['priority']                  = 42;
 */
 
 /*

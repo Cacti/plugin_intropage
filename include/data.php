@@ -2561,3 +2561,724 @@ function thold_event($display=false, $update=false, $force_update=false) {
 
 
 
+
+//--------------------------------boost--------------------------------
+function boost($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'boost';
+
+	$result = array(
+		'name' => __('Boost statistics', 'intropage'),
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id=? AND last_update IS NOT NULL',
+				array($panel_id));
+
+	if (!$id) {			
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES (?, ?, ?,"gray",1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+		$id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+	if ( $force_update || time() > ($last_update + $update_interval))	{
+
+        	// from lib/boost.php
+        	$rrd_updates     = read_config_option('boost_rrd_update_enable', true);
+        	$last_run_time   = read_config_option('boost_last_run_time', true);
+        	$next_run_time   = read_config_option('boost_next_run_time', true);
+        	$max_records     = read_config_option('boost_rrd_update_max_records', true);
+        	$max_runtime     = read_config_option('boost_rrd_update_max_runtime', true);
+        	$update_interval = read_config_option('boost_rrd_update_interval', true);
+        	$peak_memory     = read_config_option('boost_peak_memory', true);
+        	$detail_stats    = read_config_option('stats_detail_boost', true);
+
+        	/* get the boost table status */
+        	$boost_table_status = db_fetch_assoc("SELECT *
+                FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
+                AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
+
+        	$pending_records = 0;
+        	$arch_records    = 0;
+        	$data_length     = 0;
+        	$engine          = '';
+        	$max_data_length = 0;
+
+        	if (cacti_sizeof($boost_table_status)) {
+                	foreach ($boost_table_status as $table) {
+                        	if ($table['TABLE_NAME'] == 'poller_output_boost') {
+                                	$pending_records += $table['TABLE_ROWS'];
+                        	} else {
+                                	$arch_records += $table['TABLE_ROWS'];
+                        	}
+
+                        	$data_length    += $table['DATA_LENGTH'];
+                        	$data_length    += $table['INDEX_LENGTH'];
+                        	$engine          = $table['ENGINE'];
+                        	$max_data_length = $table['MAX_DATA_LENGTH'];
+                	}
+        	}
+
+        	$total_records  = $pending_records + $arch_records;
+        	$avg_row_length = ($total_records ? intval($data_length / $total_records) : 0);
+
+        	$boost_status = read_config_option('boost_poller_status', true);
+        	if ($boost_status != '') {
+                	$boost_status_array = explode(':', $boost_status);
+
+                	$boost_status_date  = $boost_status_array[1];
+
+                	if (substr_count($boost_status_array[0], 'complete')) {
+                        	$boost_status_text = __('Idle');
+                	} elseif (substr_count($boost_status_array[0], 'running')) {
+                        	$boost_status_text = __('Running');
+                	} elseif (substr_count($boost_status_array[0], 'overrun')) {
+                        	$boost_status_text = __('Overrun Warning');
+                        	$result['alarm']   = 'red';
+                	} elseif (substr_count($boost_status_array[0], 'timeout')) {
+                        	$boost_status_text = __('Timed Out');
+                        	$result['alarm']   = 'red';
+                	} else {
+                        	$boost_status_text = __('Other');
+                	}
+        	} else {
+                	$boost_status_text = __('Never Run');
+                	$boost_status_date = '';
+        	}
+
+        	if ($total_records) {
+                	$result['data'] .= __('Pending Boost Records: %s', number_format_i18n($pending_records, -1), 'intropage') . '<br/>';
+                	$result['data'] .= __('Archived Boost Records: %s', number_format_i18n($arch_records, -1), 'intropage') . '<br/>';
+
+                	if ($total_records > ($max_records - ($max_records / 10)) && $result['alarm'] == 'green') {
+                        	$result['alarm'] = 'yellow';
+                        	$result['data'] .= '<b>' . __('Total Boost Records: %s', number_format_i18n($total_records, -1), 'intropage') . '</b><br/>';
+                	} elseif ($total_records > ($max_records - ($max_records / 20)) && $result['alarm'] == 'green') {
+                        	$result['alarm'] = 'red';
+                        	$result['data'] .= '<b>' . __('Total Boost Records: %s', number_format_i18n($total_records, -1), 'intropage') . '</b><br/>';
+                	} else {
+                        	$result['data'] .= __('Total Boost Records: %s', number_format_i18n($total_records, -1), 'intropage') . '<br/>';
+                	}
+        	}
+
+        	$stats_boost = read_config_option('stats_boost', true);
+        	if ($stats_boost != '') {
+                	$stats_boost_array = explode(' ', $stats_boost);
+
+                	$stats_duration          = explode(':', $stats_boost_array[0]);
+                	$boost_last_run_duration = $stats_duration[1];
+
+                	$stats_rrds         = explode(':', $stats_boost_array[1]);
+                	$boost_rrds_updated = $stats_rrds[1];
+        	} else {
+                	$boost_last_run_duration = '';
+                	$boost_rrds_updated      = '';
+        	}
+
+        	$result['data'] .= __('Boost On-demand Updating: %s', $rrd_updates == '' ? __('Disabled', 'intropage') : $boost_status_text, 'intropage') . '<br/>';
+
+        	$data_length = db_fetch_cell("SELECT data_length
+                	FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
+                	AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
+
+        	/* tell the user how big the table is */
+        	$result['data'] .= __('Current Boost Table(s) Size: %s', human_filesize($data_length), 'intropage') . '<br/>';
+
+        	/* tell the user about the average size/record */
+        	$result['data'] .= __('Avg Bytes/Record: %s', human_filesize($avg_row_length), 'intropage') . '<br/>';
+
+        	if (is_numeric($boost_last_run_duration)) {
+                	$lastduration = $boost_last_run_duration . ' s';
+        	} else {
+                	$lastduration = __('N/A');
+        	}
+        	$result['data'] .= __('Last run duration: %s', $lastduration, 'intropage') . '<br/>';
+
+        	$result['data'] .= __('RRD Updates / Max: %s / %s', $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', number_format_i18n($max_records, -1), 'intropage')  . '<br/>';
+        	$result['data'] .= __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_interval], 'intropage') . '<br/>';
+        	$result['data'] .= __('Next Start Time: %s', $next_run_time, 'intropage') . '<br/>';
+        }
+
+	if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+		
+		
+		$result['name'] = 'Boost';
+	        return $result;
+	}
+}
+
+
+//------------------------------------ extrem -----------------------------------------------------
+function extrem($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'extrem';
+
+	$result = array(
+		'name' => __('24 hours extrem', 'intropage'),
+		'alarm' => 'gray',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+	
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id=? AND last_update IS NOT NULL',
+				array($panel_id));
+
+	if (!$id) {			
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+			    VALUES (?, ?, ?,"gray",1000)',
+			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+		$id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+	if ( $force_update || time() > ($last_update + $update_interval))	{
+
+
+       		$result['data'] .= '<table><tr><td class="rpad">';
+
+        	// long run poller
+        	$result['data'] .= '<strong>' . __('Long run<br/>poller', 'intropage') . ': </strong>';
+
+        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`,
+                	substring(value,instr(value,':')+1) AS xvalue
+                	FROM plugin_intropage_trends
+                	WHERE name='poller'
+                	AND cur_timestamp > date_sub(now(),interval 1 day)
+                	ORDER BY xvalue desc, cur_timestamp
+                	LIMIT 8");
+
+        	if (cacti_sizeof($sql_result)) {
+                	foreach ($sql_result as $row) {
+                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
+                	}
+        	} else {
+                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        	}
+
+        	$result['data'] .= '</td>';
+
+        	// max host down
+        	$result['data'] .= '<td class="rpad texalirig">';
+        	$result['data'] .= '<strong>Max host<br/>down: </strong>';
+
+        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+                	FROM plugin_intropage_trends
+                	WHERE name='host'
+                	AND cur_timestamp > date_sub(now(),interval 1 day)
+                	ORDER BY value desc,cur_timestamp
+                	LIMIT 8");
+
+        	if (cacti_sizeof($sql_result)) {
+                	foreach ($sql_result as $row) {
+                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+                	}
+        	} else {
+                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        	}
+
+        	$result['data'] .= '</td>';
+
+        	// max thold trig
+        	// extrems doesn't use user permission!
+        	$result['data'] .= '<td class="rpad texalirig">';
+        	$result['data'] .= '<strong>' . __('Max thold<br/>triggered:', 'intropage') .'</strong>';
+
+        	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+                	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+                        	FROM plugin_intropage_trends
+                        	WHERE name='thold'
+                        	AND cur_timestamp > date_sub(now(),interval 1 day)
+                        	ORDER BY value desc,cur_timestamp
+                        	LIMIT 8");
+
+                	if (cacti_sizeof($sql_result)) {
+                        	foreach ($sql_result as $row) {
+                                	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+                        	}
+                	} else {
+                        	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+                	}
+        	} else {
+                	$result['data'] .= '<br/>no<br/>plugin<br/>installed<br/>or<br/>running';
+        	}
+
+        	$result['data'] .= '</td>';
+
+        	// poller output items
+        	$result['data'] .= '<td class="rpad texalirig">';
+        	$result['data'] .= '<strong>' . __('Poller<br/>output item:', 'intropage') . '</strong>';
+
+        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+                	FROM plugin_intropage_trends
+                	WHERE name='poller_output'
+                	AND cur_timestamp > date_sub(now(),interval 1 day)
+                	ORDER BY value desc,cur_timestamp
+                	LIMIT 8");
+
+        	if (cacti_sizeof($sql_result)) {
+                	foreach ($sql_result as $row) {
+                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+                	}
+        	} else {
+                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        	}
+
+        	$result['data'] .= '</td>';
+
+        	// poller output items
+        	$result['data'] .= '<td class="rpad texalirig">';
+        	$result['data'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
+
+        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+                	FROM plugin_intropage_trends
+                	WHERE name='failed_polls'
+                	AND cur_timestamp > date_sub(now(),interval 1 day)
+                	ORDER BY value desc,cur_timestamp
+                	LIMIT 8");
+
+        	if (cacti_sizeof($sql_result)) {
+                	foreach ($sql_result as $row) {
+                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+                	}
+        	} else {
+                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        	}
+
+        	$result['data'] .= '</td>';
+        	$result['data'] .= '</tr></table>';
+
+        }
+
+	if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+		
+		
+		$result['name'] = '24 hours extrems';
+	        return $result;
+	}
+}
+
+
+//------------------------------------ graph_thold -----------------------------------------------------
+function graph_thold($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'graph_thold';
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+	    $users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+	}
+
+	foreach ($users as $user)	{
+
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
+
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+
+	    		$id = db_fetch_insert_id();
+		}
+
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
+
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
+
+
+			if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+				$result['alarm'] = 'gray';
+				$result['data']  = __('Thold plugin not installed/running', 'intropage');
+			} elseif (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $user['id'] . " AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
+				$result['data'] = __('You don\'t have plugin permission', 'intropage');
+			} else {
+				// need for thold - isn't any better solution?
+				$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $user['id']);
+   				$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
+
+				$sql_join = ' LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
+					(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
+					(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $user['id'] . '))';
+
+				$t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
+				$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+				$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+				$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
+				$t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
+
+				$count = $t_all + $t_brea + $t_trig + $t_disa;
+
+				$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$user['id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
+				$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
+				$url_suffix = $has_access ? '</a>' : '';
+
+				$result['data']  = sprintf($url_prefix, '-1') . __('All', 'intropage') . ": $t_all$url_suffix<br/>";
+				$result['data'] .= sprintf($url_prefix, '1') . __('Breached', 'intropage') . ": $t_brea$url_suffix<br/>";
+				$result['data'] .= sprintf($url_prefix, '3') . __('Trigged', 'intropage') . ": $t_trig$url_suffix<br/>";
+				$result['data'] .= sprintf($url_prefix, '0') . __('Disabled', 'intropage') . ": $t_disa$url_suffix<br/>";
+
+				if ($count > 0) {
+		                	$graph = array ('pie' => array(
+						'title' => __('Thresholds', 'intropage'),
+						'label' => array(
+							__('OK', 'intropage'),
+							__('Triggered', 'intropage'),
+							__('Breached', 'intropage'),
+							__('Disabled', 'intropage'),
+						),
+						'data' => array($t_all - $t_brea - $t_trig - $t_disa, $t_brea, $t_trig, $t_disa))
+					);
+				
+					$result['data'] = intropage_prepare_graph($graph);
+
+					// alarms and details
+					if ($t_brea > 0) {
+						$result['alarm'] = 'yellow';
+					}
+
+					if ($t_trig > 0) {
+						$result['alarm'] = 'red';
+					}
+				}
+			}
+			
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES (?,?,?,?,?)',
+			    array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+	    
+		} // konec smycky pres vsechny uzivatele
+	}
+
+	if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+
+		$result['name'] = 'graph_thold';
+
+	        return $result;
+	}
+}
+
+
+
+
+
+//------------------------------------ mactrack -----------------------------------------------------
+function mactrack($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'mactrack';
+
+
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+	    $users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+	}
+
+
+	foreach ($users as $user)	{
+
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
+
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+
+	    		$id = db_fetch_insert_id();
+		}
+
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
+
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
+
+			$result = array(
+				'name' => __('Mactrack plugin', 'intropage'),
+				'alarm' => 'green',
+				'data' => '',
+				'last_update' =>  NULL,
+			);
+
+
+			// SELECT id from plugin_realms WHERE plugin='mactrack' and display like '%view%';
+			// = 329 +100
+
+			if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
+				$result['alarm'] = 'gray';
+				$result['data']  = __('Mactrack plugin not installed/running', 'intropage');
+			} else {
+				$mactrack_id = db_fetch_cell("SELECT id FROM plugin_realms
+					WHERE plugin='mactrack'	AND display LIKE '%view%'");
+
+				if (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $user['id'] . ' AND realm_id =' . ($mactrack_id + 100))) {
+					$result['data'] =  __('You don\'t have plugin permission', 'intropage');
+				} else {
+					// mactrack is running and you have permission
+					$m_all  = db_fetch_cell('SELECT COUNT(host_id) FROM mac_track_devices');
+					$m_up   = db_fetch_cell("SELECT COUNT(host_id) FROM mac_track_devices WHERE snmp_status='3'");
+					$m_down = db_fetch_cell("SELECT COUNT(host_id) FROM mac_track_devices WHERE snmp_status='1'");
+					$m_disa = db_fetch_cell("SELECT COUNT(host_id) FROM mac_track_devices WHERE snmp_status='-2'");
+					$m_err  = db_fetch_cell("SELECT COUNT(host_id) FROM mac_track_devices WHERE snmp_status='4'");
+					$m_unkn = db_fetch_cell("SELECT COUNT(host_id) FROM mac_track_devices WHERE snmp_status='0'");
+
+					if ($m_down > 0 || $m_err > 0 || $m_unkn > 0) {
+						$result['alarm'] = 'red';
+					} elseif ($m_disa > 0) {
+						$result['alarm'] = 'yellow';
+					}
+
+					$result['data']  = __('All: %s', $m_all, 'intropage')       . ' | ';
+					$result['data'] .= __('Up: %s', $m_up, 'intropage')         . ' | ';
+					$result['data'] .= __('Down: %s', $m_down, 'intropage')     . ' | ';
+					$result['data'] .= __('Error: %s', $m_err, 'intropage')     . ' | ';
+					$result['data'] .= __('Unknown: %s', $m_unkn, 'intropage')  . ' | ';
+					$result['data'] .= __('Disabled: %s', $m_disa, 'intropage') . ' | ';
+
+		                	$graph = array ('pie' => array(
+						'title' => __('Mactrack', 'intropage'),
+						'label' => array(
+							__('Up', 'intropage'),
+							__('Down', 'intropage'),
+							__('Error', 'intropage'),
+							__('Unknown', 'intropage'),
+							__('Disabled', 'intropage'),
+						),
+						'data' => array($m_up, $m_down, $m_err, $m_unkn, $m_disa))
+					);
+					$result['data'] = intropage_prepare_graph($graph);
+
+				}
+			}
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES (?,?,?,?,?)',
+			    array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+	    
+		} // konec smycky pres vsechny uzivatele
+	}
+
+	if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+
+		$result['name'] = 'Mactrack plugin';
+
+	        return $result;
+	}
+}
+
+
+
+
+
+
+//------------------------------------ mactrack sites -----------------------------------------------------
+function mactrack_sites($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'mactrack_sites';
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+	    $users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+	}
+
+
+	foreach ($users as $user)	{
+
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
+
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+
+	    		$id = db_fetch_insert_id();
+		}
+
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
+
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
+
+			$result = array(
+				'name' => __('Mactrack sites', 'intropage'),
+				'alarm' => 'gray',
+				'data' => '',
+				'last_update' =>  NULL,
+			);
+
+
+			if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='mactrack' AND status=1")) {
+				$result['alarm'] = 'gray';
+				$result['data']  = __('Mactrack plugin not installed/running', 'intropage');
+			} else {
+				$mactrack_id = db_fetch_cell("SELECT id
+					FROM plugin_realms
+					WHERE plugin='mactrack'
+					AND display LIKE '%view%'");
+
+				if (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = '.$user['id'].' AND realm_id =' . ($mactrack_id + 100))) {
+		    			$result['data'] =  __('You don\'t have plugin permission', 'intropage');
+				} else {
+					$result['data'] .= '<table><tr><td class="rpad">' . __('Site', 'intropage') . '</td><td class="rpad">' . __('Devices', 'intropage') . '</td>';
+					$result['data'] .= '<td class="rpad">' . __('IPs', 'intropage') . '</td><td class="rpad">' . __('Ports', 'intropage') . '</td>';
+					$result['data'] .= '<td class="rpad">' . __('Ports up', 'intropage') . '</td><td class="rpad">' . __('MACs', 'intropage') . '</td>';
+					$result['data'] .= '<td class="rpad">' . __('Device errors', 'intropage') . '</td></tr>';
+
+					$sql_result = db_fetch_assoc('SELECT site_name, total_devices, total_device_errors, total_macs, total_ips, total_oper_ports, total_user_ports FROM mac_track_sites  order by total_devices desc limit 8');
+					if (sizeof($sql_result) > 0) {
+						foreach ($sql_result as $site) {
+							$row = '<tr><td>' . $site['site_name'] . '</td><td>' . $site['total_devices'] . '</td>';
+							$row .= '<td>' . $site['total_ips'] . '</td><td>' . $site['total_user_ports'] . '</td>';
+							$row .= '<td>' . $site['total_oper_ports'] . '</td><td>' . $site['total_macs'] . '</td>';
+							$row .= '<td>' . $site['total_device_errors'] . '</td></tr>';
+
+							$result['data'] .= $row;
+						}
+
+					$result['data'] .= '</table>';
+					} else {
+						$result['data'] = __('No mactrack sites found', 'intropage');
+					}
+				}
+			}
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES (?,?,?,?,?)',
+			    array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+	    
+		} // konec smycky pres vsechny uzivatele
+	}
+
+	if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ?',
+	    				    array($panel_id)); 
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+
+		$result['name'] = 'Mactrack sites';
+
+	        return $result;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

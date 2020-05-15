@@ -182,15 +182,159 @@ function display_information() {
 	// overlay div for detail
 	print '<div id="overlay"><div id="overlay_detail"></div></div>';
 
-
+	// switch dahsboards and form
+	print '<div>';
+	print '<div class="float_left">';
 	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
 	    if ($f == $_SESSION['dashboard_id']) {
-		print '<a href="?dashboard_id=' . $f . '"><b> ' . $f . ' </b></a>';
+		print '<a class="db_href db_href_active" href="?dashboard_id=' . $f . '">' . $f . '</a>';
 	    }
 	    else {
-		print '<a href="?dashboard_id=' . $f . '"> ' . $f . ' </a>';	    
+		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $f . '</a>';	    
 	    }
 	}
+	print '</div>';
+	print '<div class="float_right">';	
+////////////
+	// settings
+	print "<form method='post'>";
+
+	print "<a href='#' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='fa fa-clone'></i></a>";
+	print '&nbsp; &nbsp; ';
+
+	print "<select name='intropage_action' size='1' onchange='this.form.submit();'>";
+	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
+
+
+	if ($number_of_dashboards == 1) {
+	    print '<option value="addpage_2">' . __('Add second dashboard', 'intropage') . '</option>';
+	}
+	if ($number_of_dashboards == 2) {
+	    print '<option value="addpage_3">' . __('Add third dashboard', 'intropage') . '</option>';
+	}
+	
+	if ($_SESSION['dashboard_id'] > 1) {
+	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
+	}
+
+//!!! tady predtim byla i priorita
+
+/* 
+	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id not in 
+			(select t1.panel_id from plugin_intropage_panel_data as t1 join plugin_intropage_panel_dashboard as t2 
+			on t1.panel_id=t2.panel_id where t2.user_id= ?)',
+			array($_SESSION['sess_user_id']));
+*/
+
+	$add_panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id 
+		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',			
+		array($_SESSION['sess_user_id']));
+
+	if (cacti_sizeof($add_panels)) {
+//	echo "</select>";
+		foreach ($add_panels as $panel) {
+			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data 
+			where user_id in (0, ?) and panel_id = ?',
+			array($_SESSION['sess_user_id'],$panel['panel_id']));
+
+			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert')	{
+				if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
+						WHERE user_id  in (0, ?) and panel_id= ? ',
+						array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
+					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
+				}
+				elseif (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
+						WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
+					print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
+
+				} else {
+					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
+				}
+			}
+
+		}
+	}
+
+	// only submit :-)
+	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
+
+	if ($autorefresh > 0 || $autorefresh == -1) {
+		print "<option value='refresh_0'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
+	} else {
+		print "<option value='refresh_0' disabled='disabled'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
+	}
+
+	if ($autorefresh == -1) {
+		print "<option value='refresh_-1' disabled='disabled'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
+	} else {
+		print "<option value='refresh_-1'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
+	}
+
+	if ($autorefresh == 60) {
+		print "<option value='refresh_60' disabled='disabled'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
+	} else {
+		print "<option value='refresh_60'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
+	}
+
+	if ($autorefresh == 300) { 
+		print "<option value='refresh_300' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
+	} else {
+		print "<option value='refresh_300'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
+	}
+
+	if ($autorefresh == 3600) {
+		print "<option value='refresh_3600' disabled='disabled'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
+	} else {
+		print "<option value='refresh_3600'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
+	}
+
+	if ($display_important_first == 'on') {
+		print "<option value='important_first' disabled='disabled'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
+		print "<option value='important_no'>" . __('Sort by panel priority', 'intropage') . '</option>';
+	} else {
+		print "<option value='important_first'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
+		print "<option value='important_no' disabled='disabled'>" . __('Sort by panel Priority', 'intropage') . '</option>';
+	}
+
+	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
+
+	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+//	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
+
+	// 0 = console, 1= tab
+	// login options can change user group!
+	// after login: 1=url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
+
+	if (!$console_access) {
+		//
+		if ($lopts < 4) {	// intropage is not default
+        		print "<option value='loginopt_tab'>" . __('Set intropage as default login page', 'intropage') . '</option>';
+                }
+
+		if ($lopts == 4)  {
+			print "<option value='loginopt_graph'>" . __('Set graph as default login page', 'intropage') . '</option>';
+		}
+	}
+	else	{	// intropage in console or in tab
+		if ($lopts == 4) {	// in tab
+        		print "<option value='loginopt_console'>" . __('Display intropage in console', 'intropage') . '</option>';
+                }
+		else {
+			print "<option value='loginopt_tab'>" . __('Display intropage in tab as default page', 'intropage') . '</option>';
+		}
+	}
+
+	print '</select>';
+//	print "<input type='submit' name='intropage_go' value='" . __esc('Go', 'intropage') . "'>";
+
+	print '</form>';
+	// end of settings
+
+
+////////////	
+	print '</div>';	
+	print '<br style="clear: both" />';
+	print '</div>';	
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -456,139 +600,6 @@ function display_information() {
 	print "<div style='clear: both;'></div>";
 	print '</ul>';
 
-	// settings
-	print "<form method='post'>";
-
-	print "<a href='#' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='fa fa-clone'></i></a>";
-	print '&nbsp; &nbsp; ';
-
-	print "<select name='intropage_action' size='1'>";
-	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
-
-
-	if ($number_of_dashboards == 1) {
-	    print '<option value="addpage_2">' . __('Add second dashboard', 'intropage') . '</option>';
-	}
-	if ($number_of_dashboards == 2) {
-	    print '<option value="addpage_3">' . __('Add third dashboard', 'intropage') . '</option>';
-	}
-	
-	if ($_SESSION['dashboard_id'] > 1) {
-	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
-	}
-
-//!!! tady predtim byla i priorita
-
-/* 
-	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id not in 
-			(select t1.panel_id from plugin_intropage_panel_data as t1 join plugin_intropage_panel_dashboard as t2 
-			on t1.panel_id=t2.panel_id where t2.user_id= ?)',
-			array($_SESSION['sess_user_id']));
-*/
-
-	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id 
-		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',			
-		array($_SESSION['sess_user_id']));
-
-	if (cacti_sizeof($panels)) {
-//	echo "</select>";
-		foreach ($panels as $panel) {
-			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data 
-			where user_id in (0, ?) and panel_id = ?',
-			array($_SESSION['sess_user_id'],$panel['panel_id']));
-
-			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert')	{
-				if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
-						WHERE user_id  in (0, ?) and panel_id= ? ',
-						array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
-					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
-				}
-				elseif (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
-						WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-					print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
-
-				} else {
-					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
-				}
-			}
-
-		}
-	}
-
-	// only submit :-)
-	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
-
-	if ($autorefresh > 0 || $autorefresh == -1) {
-		print "<option value='refresh_0'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
-	} else {
-		print "<option value='refresh_0' disabled='disabled'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
-	}
-
-	if ($autorefresh == -1) {
-		print "<option value='refresh_-1' disabled='disabled'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
-	} else {
-		print "<option value='refresh_-1'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
-	}
-
-	if ($autorefresh == 60) {
-		print "<option value='refresh_60' disabled='disabled'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
-	} else {
-		print "<option value='refresh_60'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
-	}
-
-	if ($autorefresh == 300) { 
-		print "<option value='refresh_300' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
-	} else {
-		print "<option value='refresh_300'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
-	}
-
-	if ($autorefresh == 3600) {
-		print "<option value='refresh_3600' disabled='disabled'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
-	} else {
-		print "<option value='refresh_3600'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
-	}
-
-	if ($display_important_first == 'on') {
-		print "<option value='important_first' disabled='disabled'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
-		print "<option value='important_no'>" . __('Sort by panel priority', 'intropage') . '</option>';
-	} else {
-		print "<option value='important_first'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
-		print "<option value='important_no' disabled='disabled'>" . __('Sort by panel Priority', 'intropage') . '</option>';
-	}
-
-	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
-
-	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-//	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-
-	// 0 = console, 1= tab
-	// login options can change user group!
-	// after login: 1=url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
-
-	if (!$console_access) {
-		//
-		if ($lopts < 4) {	// intropage is not default
-        		print "<option value='loginopt_tab'>" . __('Set intropage as default login page', 'intropage') . '</option>';
-                }
-
-		if ($lopts == 4)  {
-			print "<option value='loginopt_graph'>" . __('Set graph as default login page', 'intropage') . '</option>';
-		}
-	}
-	else	{	// intropage in console or in tab
-		if ($lopts == 4) {	// in tab
-        		print "<option value='loginopt_console'>" . __('Display intropage in console', 'intropage') . '</option>';
-                }
-		else {
-			print "<option value='loginopt_tab'>" . __('Display intropage in tab as default page', 'intropage') . '</option>';
-		}
-	}
-
-	print '</select>';
-	print "<input type='submit' name='intropage_go' value='" . __esc('Go', 'intropage') . "'>";
-
-	print '</form>';
-	// end of settings
 
 	print '</div>'; // end of megaobal
 

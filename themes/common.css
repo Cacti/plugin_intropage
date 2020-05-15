@@ -132,3 +132,21 @@
     height: 14px;
     float: right;
 }
+
+.db_href {
+	padding: 3px 5px;
+	background-color: rgba(128,128,128,0.5);
+	margin-right: 5px;
+}
+
+.db_href_active {
+	font-weight: bold;
+}
+
+.float_left {
+	float: left;
+}
+
+.float_right {
+	float: right;
+}
