@@ -30,9 +30,6 @@ $hosts = get_allowed_devices();
             $_SESSION['allowed_hosts'] = false;
 }
 
-
-
-//------------------------------------ analyse_db -----------------------------------------------------
 if (!function_exists('array_column')) {
     function array_column($array,$column_name) {
         return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
