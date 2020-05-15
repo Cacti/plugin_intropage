@@ -218,14 +218,12 @@ db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_de
 
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('mactrack','plugins/intropage/include/data.php','no',900)");
+
 db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('mactrack_sites','plugins/intropage/include/data.php','no',900)");
 
-
-/* !!! tyhle zbyva pridat, budu resit prioritu?		
-		
-// !!!! mamm v pluginu 'intropage_syslog']['priority']                  = 42;
-*/
+db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('plugin_syslog','plugins/intropage/include/data.php','no',900)");
 
 /*
 	$sql_insert = '';

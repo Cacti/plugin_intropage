@@ -23,7 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
-//if (!isset($_SESSION['sess_user_id']))	{
+
 if (isset($run_from_poller))	{
 	$_SESSION['sess_user_id'] = 0;
 
@@ -36,9 +36,10 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'analyse_login';
+	$panel_name = __('Analyze logins', 'intropage');
 
 	$result = array(
-		'name' => __('Analyze logins', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -111,8 +112,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 		
-		
-		$result['name'] = 'Analyse login';
+		$result['name'] = $panel_name;
 	        return $result;
 	}
 }
@@ -124,14 +124,14 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 	global $config;
 	
 	$panel_id = 'analyse_log';
+	$panel_name = __('Analyze log', 'intropage');
 
 	$result = array(
-		'name' => __('Analyze log', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
 	);
-	
 	
 	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
 				panel_id= ? AND last_update IS NOT NULL',
@@ -242,7 +242,7 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Analyse log';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -254,7 +254,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'top5_ping';
-
+	$panel_name = __('Top5 ping', 'intropage');
 	
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -290,7 +290,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
 			$result = array(
-				'name' => __('Top5 ping', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'green',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -378,7 +378,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Top5 ping';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -390,9 +390,10 @@ function cpuload($display=false, $update=false, $force_update=false) {
         global $config, $run_from_poller;
 
 	$panel_id = 'cpuload';
+	$panel_name = __('CPU utilization', 'intropage');
 
         $result = array(
-                'name' => __('CPU utilization', 'intropage'),
+                'name' => $panel_name,
                 'alarm' => 'gray',
                 'data' => '',
                 'last_update' =>  NULL,
@@ -487,7 +488,7 @@ function cpuload($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-                $result['name'] = 'CPU utilization';
+                $result['name'] = $panel_name;
                 return $result;
         }
 }
@@ -498,9 +499,10 @@ function ntp($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'ntp';
-
+	$panel_name = __('NTP', 'intropage');
+	
 	$result = array(
-		'name' => __('NTP', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -586,7 +588,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-                $result['name'] = 'NTP';
+                $result['name'] = $panel_name;
                 return $result;
         }
 }
@@ -597,9 +599,10 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
         global $config, $input_types, $run_from_poller;
 
 	$panel_id = 'graph_data_source';
+	$panel_name = __('Data sources', 'intropage');
                             
         $result = array(
-                'name' => 'Data sources',
+                'name' => $panel_name,
                 'alarm' => 'gray',
                 'data' => '',
 		'last_update' => NULL,
@@ -682,7 +685,7 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Graph data sources';
+                $result['name'] = $panel_name;
                 return $result;
         }
 }
@@ -694,7 +697,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	global $config;
 
 	$panel_id = 'graph_host_template';
-
+	$panel_name = __('Host templates', 'intropage');
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -729,7 +732,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 			$result = array(
-				'name' => __('Host templates', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'gray',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -801,7 +804,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Host templates';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -815,7 +818,7 @@ function graph_host($display=false, $update=false, $force_update=false) {
         global $config;
 
 	$panel_id = 'graph_host';
-
+	$panel_name = __('Hosts', 'intropage');
 
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
@@ -851,7 +854,7 @@ function graph_host($display=false, $update=false, $force_update=false) {
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 			$result = array(
-				'name' => __('Hosts', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'green',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -947,7 +950,7 @@ function graph_host($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Hosts';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -963,9 +966,10 @@ function info($display=false, $update=false, $force_update=false) {
 //!!!! mam poller_options?
 
 	$panel_id = 'info';
+	$panel_name = __('Info', 'intropage');
 
 	$result = array(
-		'name' => __('Info', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'gray',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -1049,7 +1053,7 @@ function info($display=false, $update=false, $force_update=false) {
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Info';
+                $result['name'] = $panel_name;
                 return $result;
         }
 }
@@ -1060,9 +1064,10 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'analyse_db';
+	$panel_name = __('Database check', 'intropage');
 
 	$result = array(
-		'name' => __('Analyse Database', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -1169,7 +1174,7 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 			$result['recheck'] = "Every " . $update_interval/3600 . "h";
 		}
 		
-                $result['name'] = 'Database check';
+                $result['name'] = $panel_name;
                 return $result;
         }
 }
@@ -1180,9 +1185,10 @@ function maint($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'maint';
+	$panel_name = __('Maint plugin', 'intropage');
 
 	$result = array(
-		'name' => __('Maintenance plugin', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'red',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -1284,7 +1290,7 @@ function maint($display=false, $update=false, $force_update=false) {
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Maint plugin';
+                $result['name'] = $panel_name;
                 return $result;
         }
 
@@ -1298,9 +1304,10 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'admin_alert';
+	$panel_name = __('Admin alert', 'intropage');
 
 	$result = array(
-		'name' => __('Admin alert', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'red',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -1346,7 +1353,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Admin alert';
+                $result['name'] = $panel_name;
                 return $result;
         }
 
@@ -1360,9 +1367,10 @@ function trend($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'trend';
+	$panel_name = __('Trends', 'intropage');
 
 	$result = array(
-		'name' => __('Trends', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -1407,7 +1415,7 @@ function trend($display=false, $update=false, $force_update=false) {
 	if ( $force_update || time() > ($last_update + $update_interval))	{
 
         	$graph = array ('line' => array(
-                        	'title' => __('Trends: ', 'intropage'),
+                        	'title' => $panel_name,
                         	'label1' => array(),
                         	'data1' => array(),
                         	'title1' => '',
@@ -1474,7 +1482,7 @@ function trend($display=false, $update=false, $force_update=false) {
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Trends';
+                $result['name'] = $panel_name;
                 return $result;
 	}
 }
@@ -1484,9 +1492,10 @@ function poller_info($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'poller_info';
+	$panel_name = __('Poller info', 'intropage');
 
 	$result = array(
-		'name' => __('Poller info', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -1588,7 +1597,7 @@ function poller_info($display=false, $update=false, $force_update=false) {
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Poller info';
+                $result['name'] = $panel_name;
                 return $result;
 	}
                         
@@ -1601,9 +1610,10 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'poller_stat';
+	$panel_name = __('Poller stats', 'intropage');
 
 	$result = array(
-		'name' => __('Poller stats', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -1739,7 +1749,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Poller stats';
+                $result['name'] = $panel_name;
                 return $result;
 	}
                         
@@ -1754,7 +1764,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 	global $config;
 
 	$panel_id = 'analyse_tree_host_graph';
-
+	$panel_name = __('Analyze tree/host/graph', 'intropage');
 	
 	if (isset($run_from_poller))	{ // update in poller
 	}
@@ -1793,7 +1803,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
 			$result = array(
-				'name' => __('Analyze tree/host/graph', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'green',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -2075,7 +2085,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                         WHERE panel_id= ?",
                         array($panel_id));
 
-                $result['name'] = 'Analyse tree/host/graph';
+                $result['name'] = $panel_name;
 
                 return $result;
 	}
@@ -2089,6 +2099,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'top5_availability';
+	$panel_name = __('Top5 worst availability', 'intropage');
 	
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -2124,7 +2135,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
 			$result = array(
-				'name' => __('Top5 availability', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'green',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -2203,7 +2214,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Top5 worst availability';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -2215,6 +2226,7 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'top5_polltime';
+	$panel_name = __('Top5 worst polling time', 'intropage');
 	
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -2250,7 +2262,7 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
 			$result = array(
-				'name' => __('Top5 worst polling time', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'green',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -2327,7 +2339,7 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Top5 worst polling time';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -2341,6 +2353,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'top5_pollratio';
+	$panel_name = __('Top5 worst polling ratio (failed, total, ratio)', 'intropage');
 	
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -2376,7 +2389,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
 			$result = array(
-				'name' => __('Top5 worst polling ratio (failed, total, ratio)', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'green',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -2450,7 +2463,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Top5 worst polling ratio (failed, total, ratio)';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -2463,9 +2476,10 @@ function thold_event($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'thold_event';
+	$panel_name = __('Last thold events', 'intropage');
 
 	$result = array(
-		'name' => __('Last thold events', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -2554,7 +2568,7 @@ function thold_event($display=false, $update=false, $force_update=false) {
 			array($panel_id));
 		
 		
-		$result['name'] = 'Last thold events';
+		$result['name'] = $panel_name;
 	        return $result;
 	}
 }
@@ -2567,9 +2581,10 @@ function boost($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'boost';
+	$panel_name = __('Boost statistics', 'intropage');
 
 	$result = array(
-		'name' => __('Boost statistics', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'green',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -2727,7 +2742,7 @@ function boost($display=false, $update=false, $force_update=false) {
 			array($panel_id));
 		
 		
-		$result['name'] = 'Boost';
+		$result['name'] = $panel_name;
 	        return $result;
 	}
 }
@@ -2738,9 +2753,10 @@ function extrem($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'extrem';
+	$panel_name = __('24 hours extrem', 'intropage');
 
 	$result = array(
-		'name' => __('24 hours extrem', 'intropage'),
+		'name' => $panel_name,
 		'alarm' => 'gray',
 		'data' => '',
 		'last_update' =>  NULL,
@@ -2898,7 +2914,7 @@ function extrem($display=false, $update=false, $force_update=false) {
 			array($panel_id));
 		
 		
-		$result['name'] = '24 hours extrems';
+		$result['name'] = $panel_name;
 	        return $result;
 	}
 }
@@ -2909,6 +2925,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'graph_thold';
+	$panel_name = __('Thresholds', 'intropage');
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -2923,6 +2940,12 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 	}
 
 	foreach ($users as $user)	{
+		$result = array(
+			'name' => $panel_name,
+			'alarm' => 'gray',
+			'data' => '',
+			'last_update' =>  NULL,
+		);
 
 		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
 				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
@@ -2976,7 +2999,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 
 				if ($count > 0) {
 		                	$graph = array ('pie' => array(
-						'title' => __('Thresholds', 'intropage'),
+						'title' => $panel_name,
 						'label' => array(
 							__('OK', 'intropage'),
 							__('Triggered', 'intropage'),
@@ -3019,7 +3042,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'graph_thold';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -3034,6 +3057,7 @@ function mactrack($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'mactrack';
+	$panel_name = __('Mactrack plugin', 'intropage');
 
 
 
@@ -3071,7 +3095,7 @@ function mactrack($display=false, $update=false, $force_update=false) {
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
 			$result = array(
-				'name' => __('Mactrack plugin', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'green',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -3148,7 +3172,7 @@ function mactrack($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Mactrack plugin';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
@@ -3164,6 +3188,7 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 	global $config;
 
 	$panel_id = 'mactrack_sites';
+	$panel_name = __('Mactrack sites', 'intropage');
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -3199,7 +3224,7 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
 			$result = array(
-				'name' => __('Mactrack sites', 'intropage'),
+				'name' => $panel_name,
 				'alarm' => 'gray',
 				'data' => '',
 				'last_update' =>  NULL,
@@ -3261,24 +3286,187 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 			WHERE panel_id= ?",
 			array($panel_id));
 
-		$result['name'] = 'Mactrack sites';
+		$result['name'] = $panel_name;
 
 	        return $result;
 	}
 }
 
 
+// ----------------syslog----------------------
+
+function plugin_syslog($display=false, $update=false, $force_update=false) {
+        global $config, $run_from_poller;
+
+        $panel_id = 'plugin_syslog';
+        $panel_name = __('Plugin syslog', 'intropage');
+
+        include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+
+        $result = array(
+                'name' => $panel_name,
+                'alarm' => 'gray',
+                'data' => '',
+                'last_update' =>  NULL,
+        );
+
+       $graph = array ('line' => array(
+                        'title' => $panel_name,
+                        'title1' => '',
+                        'label1' => array(),
+                        'data1' => array(),
+                        'title2' => '',
+                        'label2' => array(),
+                        'data2' => array(),
+                        'title3' => '',
+                        'label3' => array(),
+                        'data3' => array(),
+                ),
+        );
+
+        if (isset($run_from_poller))    { // update in poller
+
+                if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
+
+                        // Grab row counts from the information schema, it's faster
+                        $i_rows     = syslog_db_fetch_cell("SELECT TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_NAME = 'syslog_incoming'");
+                        $total_rows = syslog_db_fetch_cell("SELECT TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_NAME = 'syslog'");
+
+                        $alert_rows = syslog_db_fetch_cell_prepared('SELECT ifnull(sum(count),0) FROM syslog_logs WHERE
+                                logtime > date_sub(now(), INTERVAL ? SECOND)',
+                                array(read_config_option('poller_interval')));
+
+                        db_execute_prepared('INSERT INTO plugin_intropage_trends (name,value,user_id) VALUES ("syslog_incoming", ?, 0)',
+                        array($i_rows));
+                        db_execute_prepared('INSERT INTO plugin_intropage_trends (name,value,user_id) VALUES ("syslog_total", ?, 0)',
+                        array ($total_rows));
+                        db_execute_prepared('INSERT INTO plugin_intropage_trends (name,value,user_id) VALUES ("syslog_alert", ?, 0)',
+                        array ($alert_rows));
+                }
+        }
 
 
 
 
+        $id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE
+                                panel_id= ? AND last_update IS NOT NULL', array($panel_id));
+
+        if (!$id) {
+                db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
+                            VALUES ( ?, ?, ? ,"gray",1000)',
+                            array($panel_id,$_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+
+                $id = db_fetch_insert_id();
+        }
+
+        $last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+                                        WHERE user_id= ? and panel_id= ?',
+                                        array( $_SESSION['sess_user_id'], $panel_id));
+
+        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+                                        WHERE panel_id= ?', array($panel_id));
+
+        if ( $force_update || time() > ($last_update + $update_interval))       {
+
+                if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
+                        $sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+                                FROM plugin_intropage_trends
+                                WHERE name='syslog_total'
+                                ORDER BY cur_timestamp desc
+                                LIMIT 11");
+
+                        if (cacti_sizeof($sql)) {
+                                $val = 0;
+                                $graph['line']['title1'] = __('Total', 'intropage');
+                                foreach ($sql as $row) {
+                                        array_push($graph['line']['label1'], $row['date']);
+                                        array_push($graph['line']['data1'], $val - $row['value']);
+                                        $val = $row['value'];
+                                }
+                                array_shift($graph['line']['label1']);
+                                array_shift($graph['line']['data1']);
+                        }
+
+                        $sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+                                FROM plugin_intropage_trends
+                                WHERE name='syslog_incoming'
+                                ORDER BY cur_timestamp desc
+                                LIMIT 11");
+
+                        if (cacti_sizeof($sql)) {
+                                $val = 0;
+                                $graph['line']['title2'] = __('Incoming', 'intropage');
+
+                                foreach ($sql as $row) {
+                                        array_push($graph['line']['label2'], $row['date']);
+                                        array_push($graph['line']['data2'], $val - $row['value']);
+                                        $val = $row['value'];
+                                }
+                                array_shift($graph['line']['label2']);
+                                array_shift($graph['line']['data2']);
+                        }
+
+                        $sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+                                FROM plugin_intropage_trends
+                                WHERE name='syslog_alert'
+                                ORDER BY cur_timestamp desc
+                                LIMIT 11");
+
+                        if (cacti_sizeof($sql)) {
+                                $val = 0;
+                                $graph['line']['title3'] = __('Alerts', 'intropage');
+                                foreach ($sql as $row) {
+                                        array_push($graph['line']['label3'], $row['date']);
+                                        array_push($graph['line']['data3'], $val - $row['value']);
+                                        if ($row['value']-$val > 0)     {
+                                                $result['alert'] = 'yellow';
+                                        }
+                                        $val = $row['value'];
+                                }
+                                array_shift($graph['line']['label3']);
+                                array_shift($graph['line']['data3']);
+
+                                $result['data'] = intropage_prepare_graph($graph);
+
+                                if (cacti_sizeof($sql) < 3) {
+                                        unset($result['line']);
+                                        $result['data'] = 'Waiting for data';
+                                } else {
+                                        $graph['line']['data1'] = array_reverse($graph['line']['data1']);
+                                        $graph['line']['data2'] = array_reverse($graph['line']['data2']);
+                                        $graph['line']['data3'] = array_reverse($graph['line']['data3']);
+                                        $graph['line']['label1'] = array_reverse($graph['line']['label1']);
+                                        $graph['line']['label2'] = array_reverse($graph['line']['label2']);
+                                        $graph['line']['label3'] = array_reverse($graph['line']['label3']);
+                                }
+                        }
+                } else {
+                        $result['data']  = __('Syslog plugin not installed/running', 'intropage');
+                        unset($graph['line']);
+                }
 
 
+                db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
+                        VALUES ( ?, ?, 0, ?, ?)',
+                        array($id,$panel_id,$result['data'],$result['alarm']));
 
+        }
 
+       if ($display)    {
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
+                                            WHERE panel_id= ?',
+                                            array($panel_id));
 
+                $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+                        floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+                        MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+                        TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+                        FROM plugin_intropage_panel_definition
+                        WHERE panel_id= ?",
+                        array($panel_id));
 
+                $result['name'] = $panel_name;
+                return $result;
+        }
 
-
-
-
+}
