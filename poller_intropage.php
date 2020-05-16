@@ -122,8 +122,6 @@ function intropage_gather_stats() {
 	// gather data for all panels
 	$data = db_fetch_assoc('SELECT file,panel_id FROM plugin_intropage_panel_definition');
 	
-//	$run_from_poller = true;
-	
 	foreach ($data as $one)	{
 	
 	    include_once($config['base_path'] . $one['file']);
@@ -140,161 +138,18 @@ function intropage_gather_stats() {
 	}
 	// end of gathering data 
 
-
 	// cleaning old data
 	intropage_debug('Purging old Intropage Trends');
 
 	db_execute("DELETE FROM plugin_intropage_trends
 		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND
 		name IN ('poller','cpuload','failed_polls','host','thold','poller_output','syslog_incoming','syslog_total','syslog_alert')");
-/*
 
-	// poller stats
-	intropage_debug('Checking Data Collector Statistics');
-
-	$stats = db_fetch_assoc('SELECT id, total_time, date_sub(last_update, interval round(total_time) second) AS start
-		FROM poller
-		ORDER BY id
-		LIMIT 5');
-
-	foreach ($stats as $stat) {
-		db_execute_prepared("REPLACE INTO plugin_intropage_trends
-			(name, cur_timestamp, value) VALUES
-			('poller', ?, ?)",
-			array($stat['start'], $stat['id'] . ':' . round($stat['total_time'])));
-
-		$checks++;
-	}
-*/
-/* moved to panel
-	// CPU load - linux only
-	if (!stristr(PHP_OS, 'win')) {
-		intropage_debug('Checking Cacti Server Load Statistics');
-
-		$load    = sys_getloadavg();
-		$load[0] = round($load[0], 2);
-
-		db_execute_prepared('REPLACE INTO plugin_intropage_trends
-			(name, cur_timestamp, value, user) VALUES
-			("cpuload", ?, ?, ?)',
-			array($stat['start'], $load[0],'0'));
-
-		$checks++;
-	}
-*/
-
-	// failed polls
-	intropage_debug('Checking Cacti Device Failed Poll Statistics');
-
-	$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host;');
-	db_execute_prepared('REPLACE INTO plugin_intropage_trends
-		(name, value) VALUES (?, ?)',
-		array('failed_polls', $count));
-
-	$checks++;
-/*
-	// trends - all hosts that are down!!!
-	intropage_debug('Checking Down Host Counts');
-
-	db_execute("REPLACE INTO plugin_intropage_trends
-		(name, value)
-		SELECT 'host', COUNT(id)
-		FROM host
-		WHERE status='1'
-		AND disabled=''");
-
-	$checks++;
-*/
-/*
-	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' AND status=1")) {
-		intropage_debug('Checking Triggered Thresholds');
-
-		db_execute("REPLACE INTO plugin_intropage_trends
-			(name,value)
-			SELECT 'thold', COUNT(*)
-			FROM thold_data
-			WHERE thold_data.thold_alert!=0
-			OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger");
-
-		$checks++;
-	}
-*/
 	// automatic autorefresh
 	intropage_debug('Checking Triggered Thresholds');
 
 	db_execute("UPDATE plugin_intropage_trends
 		SET cur_timestamp=now() where name = 'ar_poller_finish'");
-
-/* //!!!! pro ted vypinam, dela mi chyby
-	// check NTP
-	$last = db_fetch_cell("SELECT UNIX_TIMESTAMP(value)
-		FROM plugin_intropage_trends
-		WHERE name='ntp_testdate'");
-
-	if (time() > ($last + read_config_option('intropage_ntp_interval')) || $force) {
-		intropage_debug('Checking NTP Statistics');
-
-	    include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
-	    ntp_time2();
-
-		$checks++;
-	} else {
-		intropage_debug('Not Time to Check NTP Statistics');
-	}
-*/
-
-/* moved to syslog plugin
-	// plugin syslog
-	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='syslog' and status=1")) {
-		intropage_debug('Checking Syslog Statistics');
-
-		// Grab row counts from the information schema, it's faster
-		$i_rows     = syslog_db_fetch_cell("SELECT TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_NAME = 'syslog_incoming'");
-		$total_rows = syslog_db_fetch_cell("SELECT TABLE_ROWS FROM information_schema.TABLES WHERE TABLE_NAME = 'syslog'");
-
-		$alert_rows = syslog_db_fetch_cell('SELECT ifnull(sum(count),0) FROM syslog_logs WHERE
-			logtime > date_sub(now(), INTERVAL ' . read_config_option('poller_interval') .' SECOND)');
-
-		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_incoming','" . $i_rows . "')");
-		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_total','" . $total_rows . "')");
-		db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('syslog_alert','" . $alert_rows . "')");
-
-		$checks++;
-	}
-*/
-/*
-	// check db
-	if (read_config_option('intropage_analyse_db_interval') > 0)	{
-		intropage_debug('Checking Cacti Database Enabled');
-
-		$last = db_fetch_cell("SELECT UNIX_TIMESTAMP(value)
-			FROM plugin_intropage_trends
-			WHERE name='db_check_testdate'");
-
-		if (time() > ($last + read_config_option('intropage_analyse_db_interval')) || $force) {
-			intropage_debug('Checking Cacti Database');
-
-			include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
-			db_check();
-
-			$checks++;
-		} else {
-			intropage_debug('Not Time to Check Cacti Database');
-		}
-	}
-*/
-	// check poller_table is empty?
-	intropage_debug('Checking For Lingering Poller Output');
-
-	$count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
-
-	db_execute_prepared('REPLACE INTO plugin_intropage_trends
-		(name, value) VALUES (?, ?)',
-		array('poller_output', $count));
-
-	$checks++;
-	
-	
 }
 
 function intropage_debug($message) {

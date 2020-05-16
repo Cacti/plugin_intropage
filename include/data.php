@@ -2643,7 +2643,7 @@ function boost($display=false, $update=false, $force_update=false) {
 
 //------------------------------------ extrem -----------------------------------------------------
 function extrem($display=false, $update=false, $force_update=false) {
-	global $config;
+	global $config, $run_from_poller;
 
 	$panel_id = 'extrem';
 	$panel_name = __('24 hours extrem', 'intropage');
@@ -2654,7 +2654,21 @@ function extrem($display=false, $update=false, $force_update=false) {
 		'data' => '',
 		'last_update' =>  NULL,
 	);
-	
+
+	if (isset($run_from_poller))	{ // update in poller
+
+		$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host;');
+        	db_execute_prepared('REPLACE INTO plugin_intropage_trends
+                	(name, value) VALUES (?, ?)',
+                	array('failed_polls', $count));
+
+	        $count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
+
+        	db_execute_prepared('REPLACE INTO plugin_intropage_trends
+                	(name, value) VALUES (?, ?)',
+                	array('poller_output', $count));
+	}
+
 	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
 				panel_id=? AND last_update IS NOT NULL',
 				array($panel_id));

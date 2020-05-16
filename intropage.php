@@ -31,9 +31,9 @@ include_once($config['base_path'] . '/plugins/intropage/display.php');
 set_default_action();
 
 if (!function_exists("array_column")) {
-    function array_column($array,$column_name) {
-        return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
-    }
+	function array_column($array,$column_name) {
+        	return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
+    	}
 }
 
 if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need header

@@ -23,38 +23,6 @@
  +-------------------------------------------------------------------------+
 */
 
-// priority (order) (bigger number =  highest priority)
-
-// maint plugin and admin alert panels are always visible
-/*
-$panel                                                  = array();
-$panel['intropage_analyse_log']['priority']             = 60;
-$panel['intropage_analyse_login']['priority']           = 61;
-$panel['intropage_thold_event']['priority']             = 90;
-$panel['intropage_analyse_db']['priority']              = 62;
-$panel['intropage_analyse_tree_host_graph']['priority'] = 63;
-$panel['intropage_trend']['priority']                   = 40;
-$panel['intropage_extrem']['priority']                  = 41;
-$panel['intropage_ntp']['priority']                     = 50;
-$panel['intropage_poller_info']['priority']             = 51;
-$panel['intropage_poller_stat']['priority']             = 52;
-$panel['intropage_graph_host']['priority']              = 20;
-$panel['intropage_graph_thold']['priority']             = 21;
-$panel['intropage_graph_data_source']['priority']       = 22;
-$panel['intropage_graph_host_template']['priority']     = 23;
-$panel['intropage_cpu']['priority']                     = 53;
-$panel['intropage_mactrack']['priority']                = 20;
-$panel['intropage_mactrack_sites']['priority']          = 21;
-$panel['intropage_top5_ping']['priority']               = 22;
-$panel['intropage_top5_availability']['priority']       = 23;
-$panel['intropage_info']['priority']                    = 10;
-$panel['intropage_boost']['priority']                   = 55;
-$panel['intropage_top5_polltime']['priority']           = 24;
-$panel['intropage_top5_pollratio']['priority']          = 25;
-$panel['intropage_syslog']['priority']         		= 42;
-*/
-
-
 $intropage_settings = array(	// default values
 	'intropage_display_header' => array(
 		'friendly_name' => __('Display settings', 'intropage'),

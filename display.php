@@ -84,39 +84,8 @@ function display_information() {
 		$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
 	}
 	
-
-/*
-	$hosts = get_allowed_devices();
-	if (count($hosts) > 0) {
-		$_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
-	} else {
-		$_SESSION['allowed_hosts'] = false;
-	}
-*/
-
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
-
-
-	// each favourite graph must have unique name
-	// without this fav_graph is overwritten
-
-// !!! tady musim jeste resit dashboard_id !!!!
-/*
-	$panels = db_fetch_assoc_prepared("SELECT *
-		FROM plugin_intropage_panel_data
-		WHERE dashboard_id = ? AND user_id in (0,?) 
-		AND panel_id != 'intropage_favourite_graph'
-		UNION
-		SELECT *
-		FROM plugin_intropage_panel_data
-		WHERE dashboard_id = ? AND user_id = ?
-		AND panel_id = 'intropage_favourite_graph'
-		AND fav_graph_id IS NOT NULL
-		ORDER BY priority desc",
-		array($_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id']));
-
-*/
 
 //!!!! ted tu vubec neni priorita
 	$panels = db_fetch_assoc_prepared("SELECT t1.*
@@ -135,41 +104,6 @@ function display_information() {
 		AND t3.fav_graph_id IS NOT NULL
 		",
 		array( $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
-//echo db_error();
-
-
-//!!! tohle je tu asi uplne zbytecne, contac je blbost
-/*
-	foreach ($panels as &$one) {	// remove not allowed panels
-	    if (db_fetch_cell_prepared("SELECT concat('intropage_','?') FROM user_auth WHERE id = '?'", array($one['panel_id'],$_SESSION['sess_user_id'])) != 'on') {
-//		$one['dashboard_id'] = 0;	// 0 = no display, 1,2,.... page id
-		unset ($one);
-		//!!!! tohle otestovat - zakazane panely
-	    }
-	    
-	}
-*/
-
-
-	// retrieve data for all panels
-/*
-	 include_once($config['base_path'] . '/plugins/intropage/include/data.php');
-	
-	if (cacti_sizeof($panels)) {
-		foreach ($panels as $xkey => $xvalue) {
-			$pokus = $xvalue['panel_id'];
-
-			if (isset($xvalue['fav_graph_id'])) { // fav_graph exception
-				$panels[$xkey]['alldata'] = intropage_favourite_graph($xvalue['fav_graph_id']);
-			} else {	// normal panel
-				$panels[$xkey]['alldata'] = $pokus(true,false);
-			}
-
-		}
-	}
-*/	
-	//!!!! tady jsem skoncil. Musim zobrazit panely se spravnym dashboard_id. Asi udelat funkci, ktera vykresli jen prazdne panely
-	// !!! pak zkusit, ze bych tady jen vykreslil prazdne panely a zacal je hned obcerstvovat pomoci javascriptu
 
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on')	{
@@ -193,10 +127,10 @@ function display_information() {
 		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $f . '</a>';	    
 	    }
 	}
-	//read_user_setting('intropage_dashboard_name',1)
+
 	print '</div>';
 	print '<div class="float_right">';	
-////////////
+
 	// settings
 	print "<form method='post'>";
 
@@ -205,7 +139,6 @@ function display_information() {
 
 	print "<select name='intropage_action' size='1' onchange='this.form.submit();'>";
 	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
-
 
 	if ($number_of_dashboards == 1) {
 	    print '<option value="addpage_2">' . __('Add second dashboard', 'intropage') . '</option>';
@@ -218,21 +151,11 @@ function display_information() {
 	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
 
-//!!! tady predtim byla i priorita
-
-/* 
-	$panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id not in 
-			(select t1.panel_id from plugin_intropage_panel_data as t1 join plugin_intropage_panel_dashboard as t2 
-			on t1.panel_id=t2.panel_id where t2.user_id= ?)',
-			array($_SESSION['sess_user_id']));
-*/
-
 	$add_panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id 
 		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',			
 		array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($add_panels)) {
-//	echo "</select>";
 		foreach ($add_panels as $panel) {
 			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data 
 			where user_id in (0, ?) and panel_id = ?',
@@ -252,7 +175,6 @@ function display_information() {
 					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
 				}
 			}
-
 		}
 	}
 
@@ -300,7 +222,6 @@ function display_information() {
 	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
 
 	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-//	$lopts_intropage = db_fetch_cell_prepared('SELECT intropage_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 
 	// 0 = console, 1= tab
 	// login options can change user group!
@@ -326,13 +247,9 @@ function display_information() {
 	}
 
 	print '</select>';
-//	print "<input type='submit' name='intropage_go' value='" . __esc('Go', 'intropage') . "'>";
-
 	print '</form>';
 	// end of settings
 
-
-////////////	
 	print '</div>';	
 	print '<br style="clear: both" />';
 	print '</div>';	
@@ -348,7 +265,6 @@ function display_information() {
 		print __('You can add more dashboards from menu, too') . '<br/><br/></div>';
 	}
 
-
 //!!!! tady bude podminka - kdyz dashboard_id=1
 
 	// extra maint plugin panel - always first
@@ -356,7 +272,7 @@ function display_information() {
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
 
 		$row = db_fetch_row("SELECT id, data FROM plugin_intropage_panel_data WHERE panel_id='maint'");
-		if (strlen($row['data']) > 20) {
+		if (strlen($row['data']) > 20 && $_SESSION['dashboard_id'] == 1) {
 			intropage_display_panel($row['id']);
 		}
 	}
@@ -365,15 +281,11 @@ function display_information() {
 	// extra admin panel
 	if (strlen(read_config_option('intropage_admin_alert')) > 3) {
 		$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE panel_id='admin_alert'");
-		if ($id) {
+		if ($id && $_SESSION['dashboard_id'] == 1) {
 			intropage_display_panel($id);
 		}
-
-//		$tmp['data'] = nl2br(read_config_option('intropage_admin_alert'));
-//		intropage_display_panel(998, 'red', 'Admin alert', $tmp);
 	}
 	// end of admin panel
-
 
 	if ($display_important_first == 'on') {  // important first
 		foreach ($panels as $xkey => $xvalue) {
@@ -600,8 +512,6 @@ function display_information() {
 
 	print "<div style='clear: both;'></div>";
 	print '</ul>';
-
-
 	print '</div>'; // end of megaobal
 
 	return true;
