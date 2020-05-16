@@ -193,6 +193,7 @@ function display_information() {
 		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $f . '</a>';	    
 	    }
 	}
+	//read_user_setting('intropage_dashboard_name',1)
 	print '</div>';
 	print '<div class="float_right">';	
 ////////////
@@ -290,10 +291,10 @@ function display_information() {
 
 	if ($display_important_first == 'on') {
 		print "<option value='important_first' disabled='disabled'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
-		print "<option value='important_no'>" . __('Sort by panel priority', 'intropage') . '</option>';
+		print "<option value='important_no'>" . __('Sort by user preference', 'intropage') . '</option>';
 	} else {
 		print "<option value='important_first'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
-		print "<option value='important_no' disabled='disabled'>" . __('Sort by panel Priority', 'intropage') . '</option>';
+		print "<option value='important_no' disabled='disabled'>" . __('Sort by user preference', 'intropage') . '</option>';
 	}
 
 	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
@@ -342,9 +343,9 @@ function display_information() {
 	if (cacti_sizeof($panels) == 0)	{
 		print '<div><b>' . __('Welcome!') . '</b><br/><br/>';
 		print __('You can add panels in two ways:') . '<br/>';
-		print ' - ' . __('select prepared panels below') . '<br/>';
+		print ' - ' . __('select prepared panels from menu') . '<br/>';
 		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph. Graph with actual timespan will be added to current dashboard') . '<br/><br/>';
-		print __('You can add more dashboards below, too') . '<br/><br/></div>';
+		print __('You can add more dashboards from menu, too') . '<br/><br/></div>';
 	}
 
 
@@ -376,7 +377,7 @@ function display_information() {
 
 	if ($display_important_first == 'on') {  // important first
 		foreach ($panels as $xkey => $xvalue) {
-			if ($xvalue['alldata']['alarm'] == 'red') {
+			if ($xvalue['alarm'] == 'red') {
 				intropage_display_panel($xvalue['id']);
 				$panels[$xkey]['displayed'] = true;
 			}
@@ -384,7 +385,7 @@ function display_information() {
 
 		// yellow (errors and warnings)
 		foreach ($panels as $xkey => $xvalue) {
-			if ($xvalue['alldata']['alarm'] == 'yellow') {
+			if ($xvalue['alarm'] == 'yellow') {
 				intropage_display_panel($xvalue['id']);
 				$panels[$xkey]['displayed'] = true;
 			}
@@ -392,7 +393,7 @@ function display_information() {
 
 		// green (all)
 			foreach ($panels as $xkey => $xvalue) {
-				if ($xvalue['alldata']['alarm'] == 'green') {
+				if ($xvalue['alarm'] == 'green') {
 					intropage_display_panel($xvalue['id']);
 					$panels[$xkey]['displayed'] = true;
 				}

@@ -169,61 +169,58 @@ function intropage_initialize_database() {
 	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
 
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('analyse_log','/plugins/intropage/include/data.php','yes',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('analyse_login','/plugins/intropage/include/data.php','yes',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('top5_ping','/plugins/intropage/include/data.php','yes',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('cpuload','/plugins/intropage/include/data.php','no',60)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('ntp','/plugins/intropage/include/data.php','no',7200)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('graph_data_source','/plugins/intropage/include/data.php','no',7200)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('graph_host_template','/plugins/intropage/include/data.php','no',7200)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('graph_host','/plugins/intropage/include/data.php','no',7200)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('graph_data_source','/plugins/intropage/include/data.php','yes',7200)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('graph_host_template','/plugins/intropage/include/data.php','yes',7200)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('graph_host','/plugins/intropage/include/data.php','yes',7200)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('info','/plugins/intropage/include/data.php','no',864000)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('analyse_db','/plugins/intropage/include/data.php','no',864000)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('analyse_db','/plugins/intropage/include/data.php','yes',864000)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('maint','/plugins/intropage/include/data.php','no',3600)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('admin_alert','/plugins/intropage/include/data.php','no',3600)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('trend','/plugins/intropage/include/data.php','no',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('poller_info','plugins/intropage/include/data.php','no',60)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('poller_stat','plugins/intropage/include/data.php','no',60)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('analyse_tree_host_graph','plugins/intropage/include/data.php','no',1800)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('top5_availability','plugins/intropage/include/data.php','yes',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('top5_polltime','plugins/intropage/include/data.php','no',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('top5_pollratio','plugins/intropage/include/data.php','no',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('thold_event','plugins/intropage/include/data.php','no',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('boost','plugins/intropage/include/data.php','no',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('extrem','plugins/intropage/include/data.php','no',300)");
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('graph_thold','plugins/intropage/include/data.php','no',300)");
-
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('mactrack','plugins/intropage/include/data.php','no',900)");
-
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('mactrack_sites','plugins/intropage/include/data.php','no',900)");
-
-db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('plugin_syslog','plugins/intropage/include/data.php','no',900)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('poller_info','/plugins/intropage/include/data.php','yes',60)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('poller_stat','/plugins/intropage/include/data.php','no',60)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('analyse_tree_host_graph','/plugins/intropage/include/data.php','yes',1800)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('top5_availability','/plugins/intropage/include/data.php','yes',300)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('top5_polltime','/plugins/intropage/include/data.php','yes',300)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('top5_pollratio','/plugins/intropage/include/data.php','yes',300)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('thold_event','/plugins/intropage/include/data.php','yes',300)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('boost','/plugins/intropage/include/data.php','no',300)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('extrem','/plugins/intropage/include/data.php','yes',300)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('graph_thold','/plugins/intropage/include/data.php','yes',300)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('mactrack','/plugins/intropage/include/data.php','no',900)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('mactrack_sites','/plugins/intropage/include/data.php','yes',900)");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
+		('plugin_syslog','/plugins/intropage/include/data.php','no',900)");
 
 /*
 	$sql_insert = '';

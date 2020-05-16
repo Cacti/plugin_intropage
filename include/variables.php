@@ -170,5 +170,6 @@ $intropage_settings = array(	// default values
 		),
 		'default' => '86400',
 	),
+	
 );
 

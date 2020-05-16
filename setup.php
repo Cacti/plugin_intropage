@@ -79,7 +79,6 @@ function intropage_page_head() {
 
 	$selectedTheme = get_selected_theme();
 
-	// style for panels
 	print "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
 
 	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
@@ -100,19 +99,19 @@ function intropage_poller_bottom() {
 
 	include_once($config['library_path'] . '/poller.php');
 
-    $command_string = trim(read_config_option('path_php_binary'));
+	$command_string = trim(read_config_option('path_php_binary'));
 
-    if (trim($command_string) == '') {
-        $command_string = 'php';
+    	if (trim($command_string) == '') {
+        	$command_string = 'php';
 	}
 
-    $extra_args = ' -q ' . $config['base_path'] . '/plugins/intropage/poller_intropage.php';
+    	$extra_args = ' -q ' . $config['base_path'] . '/plugins/intropage/poller_intropage.php';
 
-    exec_background($command_string, $extra_args);
+    	exec_background($command_string, $extra_args);
 }
 
 
-// for third party panels.
+// for third party panel
 // intropage_add_panel('my_panel','/plugins/your_plugin/file.php','yes',3600,20) {
 // panel_id - your name (lowercase, without spaces)
 // file - path to your code. It must contain function my_panel() (and my_panel_detail() if your panel has detail) 
@@ -132,9 +131,8 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
 	}
 }
 
-
+// remove third party panel
 function intropage_remove_panel($panel_id) {
-	//!!!! nekdo muze mazat cizi panely
 	db_execute_prepared("DELETE FROM plugin_intropage_panel_data WHERE panel_id= ?", array($panel_id));
 	db_execute_prepared("DELETE FROM plugin_intropage_panel_definition WHERE panel_id= ?", array($panel_id));
 	return ('1');
