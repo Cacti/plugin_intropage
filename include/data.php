@@ -1069,9 +1069,9 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 
        		if ($damaged > 0) {
                		$result['alarm'] = 'red';
-               		$result['data'] .= '<span class="txt_big">' . __('DB problem', 'intropage') . '</span><br/><br/>';
+               		$result['data'] = '<span class="txt_big">' . __('DB problem', 'intropage') . '</span><br/><br/>' . $result['data'];
        		} else {
-               		$result['data'] .= '<span class="txt_big">' . __('DB OK', 'intropage') . '</span><br/><br/>';
+               		$result['data'] = '<span class="txt_big">' . __('DB OK', 'intropage') . '</span><br/><br/>' . $result['data'];
        		}
                 
        		// connection errors
