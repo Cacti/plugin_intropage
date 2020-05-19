@@ -117,8 +117,8 @@ function intropage_config_form() {
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_cpu' => array(
-					'value' => '|arg1:intropage_cpu|',
+				'intropage_cpuload' => array(
+					'value' => '|arg1:intropage_cpuload|',
 					'friendly_name' => __('CPU Utilization', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
@@ -319,7 +319,7 @@ function intropage_user_admin_setup_sql_save($save) {
 	$save['intropage_graph_thold']             = form_input_validate(get_nfilter_request_var('intropage_graph_thold'), 'intropage_graph_thold', '^on$', true, 3);
 	$save['intropage_graph_data_source']       = form_input_validate(get_nfilter_request_var('intropage_graph_data_source'), 'intropage_graph_data_source', '^on$', true, 3);
 	$save['intropage_graph_host_template']     = form_input_validate(get_nfilter_request_var('intropage_graph_host_template'), 'intropage_graph_host_template', '^on$', true, 3);
-	$save['intropage_cpu']                     = form_input_validate(get_nfilter_request_var('intropage_cpu'), 'intropage_cpu', '^on$', true, 3);
+	$save['intropage_cpuload']                 = form_input_validate(get_nfilter_request_var('intropage_cpuload'), 'intropage_cpuload', '^on$', true, 3);
 	$save['intropage_mactrack']                = form_input_validate(get_nfilter_request_var('intropage_mactrack'), 'intropage_mactrack', '^on$', true, 3);
 	$save['intropage_mactrack_sites']          = form_input_validate(get_nfilter_request_var('intropage_mactrack_sites'), 'intropage_mactrack_sites', '^on$', true, 3);
 	$save['intropage_top5_ping']               = form_input_validate(get_nfilter_request_var('intropage_top5_ping'), 'intropage_top5_ping', '^on$', true, 3);
