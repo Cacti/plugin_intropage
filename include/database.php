@@ -188,7 +188,7 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('info','/plugins/intropage/include/data.php','no',864000)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
-		('analyse_db','/plugins/intropage/include/data.php','yes',864000)");
+		('analyse_db','/plugins/intropage/include/data.php','no',864000)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('maint','/plugins/intropage/include/data.php','no',3600)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 

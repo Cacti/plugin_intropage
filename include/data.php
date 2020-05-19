@@ -1124,10 +1124,15 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 
 		if ($update_interval == 0)	{
 			$result['recheck'] = __('Scheduled db check disabled','intropage');
-		}
-		else {
-			$result['recheck'] = "Every " . $update_interval/3600 . "h";
-		}
+		} elseif ($update_interval == 3600) {
+            		$result['recheck'] .= __('Every hour', 'intropage');
+       	 	} elseif ($update_interval == 86400) {
+            		$result['recheck'] .= __('Every day', 'intropage');
+        	} elseif ($update_interval == 604800) {
+            		$result['recheck'] .= __('Every week', 'intropage');
+        	} elseif ($update_interval == 2592000) {
+            		$result['recheck'] .= __('Every month', 'intropage');
+		}	
 		
                 $result['name'] = $panel_name;
                 return $result;
