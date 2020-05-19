@@ -1317,7 +1317,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 
 //------------------------------------ trends -----------------------------------------------------
 function trend($display=false, $update=false, $force_update=false) {
-	global $config;
+	global $config, $run_from_poller;
 
 	$panel_id = 'trend';
 	$panel_name = __('Trends', 'intropage');
@@ -1441,7 +1441,7 @@ function trend($display=false, $update=false, $force_update=false) {
 
 //------------------------------------ poller info -----------------------------------------------------
 function poller_info($display=false, $update=false, $force_update=false) {
-	global $config;
+	global $config, $run_from_poller;
 
 	$panel_id = 'poller_info';
 	$panel_name = __('Poller info', 'intropage');
@@ -1557,7 +1557,7 @@ function poller_info($display=false, $update=false, $force_update=false) {
 
 //------------------------------------ poller stat -----------------------------------------------------
 function poller_stat($display=false, $update=false, $force_update=false) {
-	global $config;
+	global $config, $run_from_poller;
 
 	$panel_id = 'poller_stat';
 	$panel_name = __('Poller stats', 'intropage');
@@ -1701,7 +1701,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 
 // --------------------------------analyse_tree_host_graph
 function analyse_tree_host_graph($display=false, $update=false, $force_update=false) {
-	global $config;
+	global $config, $run_from_poller;
 
 	$panel_id = 'analyse_tree_host_graph';
 	$panel_name = __('Analyze tree/host/graph', 'intropage');
