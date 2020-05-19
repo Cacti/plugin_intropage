@@ -716,7 +716,7 @@ function graph_host_detail() {
 
 		$hosts = db_fetch_assoc("SELECT description FROM host WHERE id IN (" . $_SESSION['allowed_hosts'] . ") AND status=2 AND disabled=''");
 
-		$result['detail'] .= '<b>' . __('RECOVERING', 'intropage') . ':</b><br/>';
+		$result['detail'] .= '<br/><br/><b>' . __('RECOVERING', 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($hosts)) {
 			foreach ($hosts as $host) {
@@ -732,7 +732,7 @@ function graph_host_detail() {
 
 		$hosts = db_fetch_assoc("SELECT description FROM host WHERE id IN (" . $_SESSION['allowed_hosts'] . ") AND status=1 AND disabled=''");
 
-		$result['detail'] .= '<b>' . __('DOWN', 'intropage') . ':</b><br/>';
+		$result['detail'] .= '<br/><br/><b>' . __('DOWN', 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($hosts)) {
 			foreach ($hosts as $host) {
