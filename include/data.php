@@ -2625,6 +2625,10 @@ function boost($display=false, $update=false, $force_update=false) {
         	$result['data'] .= __('RRD Updates / Max: %s / %s', $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', number_format_i18n($max_records, -1), 'intropage')  . '<br/>';
         	$result['data'] .= __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_interval], 'intropage') . '<br/>';
         	$result['data'] .= __('Next Start Time: %s', $next_run_time, 'intropage') . '<br/>';
+
+	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES ( ?, ?, ?, ?, ?)',
+			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
