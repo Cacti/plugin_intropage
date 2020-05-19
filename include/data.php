@@ -1331,15 +1331,15 @@ function trend($display=false, $update=false, $force_update=false) {
 	
 	if (isset($run_from_poller))	{ // update in poller
                 db_execute("REPLACE INTO plugin_intropage_trends
-                        (name,value)
-                        SELECT 'thold', COUNT(*)
+                        (name,value,user_id)
+                        SELECT 'thold', COUNT(*),0
                         FROM thold_data
                         WHERE thold_data.thold_alert!=0
                         OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger");
                         
         	db_execute("REPLACE INTO plugin_intropage_trends
-                	(name, value)
-                	SELECT 'host', COUNT(id)
+                	(name, value, user_id)
+                	SELECT 'host', COUNT(id),0
                 	FROM host
                 	WHERE status='1' AND disabled=''");
 	}
@@ -1577,9 +1577,9 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 
         	foreach ($stats as $stat) {
                 	db_execute_prepared("REPLACE INTO plugin_intropage_trends
-                        	(name, cur_timestamp, value) VALUES
+                        	(name, cur_timestamp, value, user_id) VALUES
                         	('poller', ?, ?)",
-                        	array($stat['start'], $stat['id'] . ':' . round($stat['total_time'])));
+                        	array($stat['start'], $stat['id'] . ':' . round($stat['total_time']),0));
         	}
 	}
 
@@ -2668,13 +2668,13 @@ function extrem($display=false, $update=false, $force_update=false) {
 
 		$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host;');
         	db_execute_prepared('REPLACE INTO plugin_intropage_trends
-                	(name, value) VALUES (?, ?)',
+                	(name, value, user_id) VALUES (?, ?, 0)',
                 	array('failed_polls', $count));
 
 	        $count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
 
         	db_execute_prepared('REPLACE INTO plugin_intropage_trends
-                	(name, value) VALUES (?, ?)',
+                	(name, value, user_id) VALUES (?, ?, 0)',
                 	array('poller_output', $count));
 	}
 
@@ -2812,6 +2812,10 @@ function extrem($display=false, $update=false, $force_update=false) {
 
         	$result['data'] .= '</td>';
         	$result['data'] .= '</tr></table>';
+
+   		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+		    VALUES (?,?,?,?,?)',
+		    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
