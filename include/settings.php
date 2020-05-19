@@ -177,8 +177,8 @@ function intropage_config_form() {
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_syslog' => array(
-					'value' => '|arg1:intropage_syslog|',
+				'intropage_plugin_syslog' => array(
+					'value' => '|arg1:intropage_plugin_syslog|',
 					'friendly_name' => __('Syslog Plugin', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
