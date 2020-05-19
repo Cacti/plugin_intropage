@@ -64,26 +64,6 @@ function intropage_initialize_database() {
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 
-/*
-	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
-	$sql_insert = '';
-	foreach ($intropage_settings as $key => $value) {
-		if (isset($value['default']) && !db_fetch_cell("SELECT value FROM settings WHERE name='$key'")) {
-			if ($sql_insert != '') {
-				$sql_insert .= ',';
-			}
-
-			$sql_insert .= sprintf('(%s,%s)', db_qstr($key), db_qstr($value['default']));
-		}
-	}
-
-	if ($sql_insert != '') {
-		db_execute("REPLACE INTO settings (name, value) VALUES $sql_insert");
-	}
-*/
-
-//!!! tady resit, abych mohl delat replace
-// !!! pokud tady neco zmenim, musim to resit i v updatu
 	$data              = array();
 	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
@@ -94,40 +74,6 @@ function intropage_initialize_database() {
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
 
 	db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
-
-//!!!! tohohle se zbavit
-	// few values
-/*	
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_result', 'Waiting for data')");
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_alarm', 'yellow')");
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', 'Waiting for date')");
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
-	db_execute("REPLACE INTO plugin_intropage_trends (name,value) VALUES ('ar_poller_finish', 'false')");
-*/
-
-/*
-	$data              = array();
-	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => '50');
-	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true, 'default' => null);
-	$data['type']      = 'MyISAM';
-	$data['primary']   = 'id';
-	$data['comment']   = 'intropage user settings';
-	api_plugin_db_table_create('intropage', 'plugin_intropage_user_setting', $data);
-
-	$data              = array();
-	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'panel', 'type' => 'varchar(50)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'priority', 'type' => 'int(1)', 'default' => '0', 'NULL' => false);
-	$data['type']      = 'MyISAM';
-	$data['primary']   = 'id';
-	$data['comment']   = 'panel setting';
-	api_plugin_db_table_create('intropage', 'plugin_intropage_panel', $data);
-*/
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
@@ -164,8 +110,6 @@ function intropage_initialize_database() {
 	$data['primary']   = 'id';
 	$data['comment']   = 'panel data';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
-
-//	db_execute('ALTER TABLE plugin_intropage_panel_data ADD PRIMARY KEY (panel_id,user_id)');
 	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
 
@@ -221,23 +165,6 @@ function intropage_initialize_database() {
 		('mactrack_sites','/plugins/intropage/include/data.php','yes',900)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval) values 
 		('plugin_syslog','/plugins/intropage/include/data.php','no',900)");
-
-/*
-	$sql_insert = '';
-	foreach ($panel as $key => $value) {
-		if (isset($value['priority']) && !db_fetch_cell("SELECT priority FROM plugin_intropage_panel WHERE panel='$key'")) {
-			if ($sql_insert != '') {
-				$sql_insert .= ',';
-			}
-
-			$sql_insert .= sprintf('(%s,%s)', db_qstr($key), db_qstr($value['priority']));
-		}
-	}
-
-	if ($sql_insert != '') {
-		db_execute("REPLACE INTO plugin_intropage_panel (panel,priority) VALUES $sql_insert");
-	}
-*/
 }
 
 function intropage_upgrade_database() {
@@ -355,32 +282,6 @@ function intropage_upgrade_database() {
 			SET version='$current'
 			WHERE directory='intropage'");
 
-/*
-		// I need it, there is also in setup database, here is for update:
-		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_result'") == 0) {
-			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_result', 'Waiting for data')");
-		}
-
-		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_alarm'")== 0 ) {
-			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_alarm', 'yellow')");
-		}
-
-		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_detail'") == 0) {
-			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_detail', NULL)");
-		}
-
-		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='db_check_testdate'") == 0) {
-			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('db_check_testdate', NULL)");
-		}
-
-		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='ntp_diff_time'") == 0) {
-			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('ntp_diff_time', 'Waiting for date')");
-		}
-
-		if (db_fetch_cell("SELECT COUNT(*) FROM plugin_intropage_trends WHERE name='ntp_testdate'") == 0) {
-			db_execute("INSERT INTO plugin_intropage_trends (name,value) VALUES ('ntp_testdate', NULL)");
-		}
-*/
 		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', 1);
 	}
 }
