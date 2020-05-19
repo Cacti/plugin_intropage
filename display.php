@@ -258,7 +258,7 @@ function display_information() {
 	print '<ul id="obal">';
 
 	if (cacti_sizeof($panels) == 0)	{
-		print '<div><b>' . __('Welcome!') . '</b><br/><br/>';
+		print '<div><br/><br/><b>' . __('Welcome!') . '</b><br/><br/>';
 		print __('You can add panels in two ways:') . '<br/>';
 		print ' - ' . __('select prepared panels from menu') . '<br/>';
 		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph. Graph with actual timespan will be added to current dashboard') . '<br/><br/>';
