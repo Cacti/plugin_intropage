@@ -93,7 +93,6 @@ function display_information() {
 		on t1.id = t2.panel_id  
 		WHERE t1.user_id in (0,?) AND t2.dashboard_id = ? 
 		AND t1.panel_id != 'intropage_favourite_graph'
-		ORDER BY t1.priority 
 		UNION
 		SELECT t3.*
 		FROM plugin_intropage_panel_data as t3
@@ -102,7 +101,7 @@ function display_information() {
 		WHERE t3.user_id = ? and t4.dashboard_id = ?
 		AND t3.panel_id = 'intropage_favourite_graph'
 		AND t3.fav_graph_id IS NOT NULL
-		ORDER BY t3.priority
+		ORDER BY priority DESC
 		",
 		array( $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
 
