@@ -75,14 +75,13 @@ if (isset_request_var('intropage_action') &&
 					WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?',
 					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
 			} else { // add to fav
-				// priority for new panel: //!!!! dodelat
-//				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_panel_data 
-//					WHERE user_id=' . $_SESSION['sess_user_id']);
+				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_panel_data 
+					WHERE user_id=' . $_SESSION['sess_user_id']);
 
 				db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
-					(user_id, panel_id, fav_graph_id, fav_graph_timespan)
-					VALUES (?, "favourite_graph", ?, ?)',
-					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
+					(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
+					VALUES (?, "favourite_graph", ?, ?, ?)',
+					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan'], $prio));
 					
 				$id = db_fetch_insert_id();
 				db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard

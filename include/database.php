@@ -79,7 +79,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'file', 'type' => 'varchar(200)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'has_detail', 'type' => "enum('yes','no')", 'NULL' => 'no');
-	$data['columns'][] = array('name' => 'priority', 'type' => "int(2)", 'default' => '50', 'NULL' => 'no');
+	$data['columns'][] = array('name' => 'priority', 'type' => "int(3)", 'default' => '30', 'NULL' => 'no');
 	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'panel_id';
@@ -101,7 +101,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
-	$data['columns'][] = array('name' => 'priority', 'type' => 'int(2)', 'default' => '50', 'NULL' => false);
+	$data['columns'][] = array('name' => 'priority', 'type' => 'int(3)', 'default' => '30', 'NULL' => false);
 	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','gray')", 'default' => 'green', 'NULL' => false);
 	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'fav_graph_timespan', 'type' => 'int(2)', 'default' => '1', 'NULL' => false);

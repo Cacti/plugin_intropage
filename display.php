@@ -87,13 +87,13 @@ function display_information() {
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
 
-//!!!! ted tu vubec neni priorita
 	$panels = db_fetch_assoc_prepared("SELECT t1.*
 		FROM plugin_intropage_panel_data as t1
 		join plugin_intropage_panel_dashboard as t2
 		on t1.id = t2.panel_id  
 		WHERE t1.user_id in (0,?) AND t2.dashboard_id = ? 
 		AND t1.panel_id != 'intropage_favourite_graph'
+		ORDER BY t1.priority 
 		UNION
 		SELECT t3.*
 		FROM plugin_intropage_panel_data as t3
@@ -102,6 +102,7 @@ function display_information() {
 		WHERE t3.user_id = ? and t4.dashboard_id = ?
 		AND t3.panel_id = 'intropage_favourite_graph'
 		AND t3.fav_graph_id IS NOT NULL
+		ORDER BY t3.priority
 		",
 		array( $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
 
