@@ -1578,7 +1578,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
         	foreach ($stats as $stat) {
                 	db_execute_prepared("REPLACE INTO plugin_intropage_trends
                         	(name, cur_timestamp, value, user_id) VALUES
-                        	('poller', ?, ?)",
+                        	('poller', ?, ?, ?)",
                         	array($stat['start'], $stat['id'] . ':' . round($stat['total_time']),0));
         	}
 	}
