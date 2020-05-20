@@ -44,22 +44,22 @@ $forced_update = filter_var(get_request_var('force'), FILTER_VALIDATE_BOOLEAN);
 
 // automatic reload when poller ends
 if (isset_request_var('autoreload')) {
-    $last_poller = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)
+	$last_poller = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)
 		FROM plugin_intropage_trends
 		WHERE name='ar_poller_finish'");
 
-    $last_disp = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
+    	$last_disp = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
 		FROM plugin_intropage_trends
 		WHERE name = ?',
 		array('ar_displayed_' . $_SESSION['sess_user_id']));
 
-    if (!$last_disp) {
+    	if (!$last_disp) {
 		db_execute_prepared('INSERT INTO plugin_intropage_trends (name,value)
 			VALUES (?, NOW())',
 			array('ar_displayed_' . $_SESSION['sess_user_id']));
 
 		$last_disp = $last_poller;
-    }
+    	}
 
 	if ($last_poller > $last_disp)	{  // fix first double reload (login and poller finish after few seconds
 		db_execute_prepared("UPDATE plugin_intropage_trends
@@ -72,12 +72,6 @@ if (isset_request_var('autoreload')) {
 		print '0';
 	}
 }
-
-// few requered variables
-$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
-
-// Retrieve access
-$console_access = api_plugin_user_realm_auth('index.php');
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
@@ -102,8 +96,6 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 			intropage_display_data(get_request_var('reload_panel'),$data);
 
 			// change panel color or ena/disa detail 
-			// !!!!!  jestli ma detail - to uz brat z definice panelu
-
 			?>
 
 			<script type='text/javascript'>
@@ -124,7 +116,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 			?>
 			</script>
 			<?php
-			// end ofchange panel color or ena/disa detail
+			// end of change panel color or ena/disa detail
 		}
 	} elseif ($panel_id == 998) {	// exception for admin alert panel
 		print nl2br(read_config_option('intropage_admin_alert'));
@@ -135,15 +127,13 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 	}
 }
 
-
-//!!!! tady bych mel osetrovat panel_id
 if (isset_request_var('detail_panel') && isset($panel_id)) {
     include_once($config['base_path'] . '/plugins/intropage/include/data_detail.php');
 
     $panel = db_fetch_cell_prepared('SELECT panel_id
 		FROM plugin_intropage_panel_data
-		WHERE id = ?',
-		array($panel_id));
+		WHERE id = ? AND user_id = ?',
+		array($panel_id, $_SESSION['sess_user_id']));
 
 	if ($panel)	{
 	    $pokus = $panel . '_detail';
