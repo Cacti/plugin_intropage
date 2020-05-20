@@ -220,8 +220,6 @@ function display_information() {
 		print "<option value='important_no' disabled='disabled'>" . __('Sort by user preference', 'intropage') . '</option>';
 	}
 
-	print "<option value='reset_all'>" . __('Reset All to Default', 'intropage') . '</option>';
-
 	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
 
 	// 0 = console, 1= tab

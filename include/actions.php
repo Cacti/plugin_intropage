@@ -116,20 +116,6 @@ if (isset_request_var('intropage_action') &&
 		}
 		break;
 
-/*
-	// reset all panels
-	case 'reset':
-		if ($value == 'all') {
-			db_execute_prepared('DELETE FROM plugin_intropage_user_setting
-				WHERE user_id = ?',
-				array($_SESSION['sess_user_id']));
-
-			// default values
-			set_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
-			set_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
-		}
-		break;
-*/
 	case 'addpanel':
 		if (preg_match('/^[a-z0-9\-\_]+$/i', $value)) {
 			db_execute('update plugin_intropage_panel_data set dashboard_id=' . $_SESSION['dashboard_id'] . 'WHERE 
@@ -140,16 +126,6 @@ if (isset_request_var('intropage_action') &&
 	case 'refresh':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
 			set_user_setting('intropage_autorefresh', $value);
-		}
-		break;
-
-//!!! tohle je asi mrtve
-	case 'debug':
-		if ($value == 'ena') {
-			set_user_setting('intropage_debug', 1);
-		}
-		if ($value == 'disa') {
-			set_user_setting('intropage_debug', 0);
 		}
 		break;
 
