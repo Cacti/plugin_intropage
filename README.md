@@ -40,6 +40,11 @@ On intropage page -> below form (user) <br/>
 ## How to add graphs to Intropage/Dashboard?
 Go to graphs, select graph, click to icon Eye
 
+## How to add new panel?
+Have a look to setup.php, function intropage_add_panel and intropage_remove_panel.
+You must include /plugins/intropage/setup.php to your code and run intropage_add_panel with correct parematers.
+Detailed instructions are in setup.php.
+ 
 ## Possible Bugs?
 If you find a problem, let me know via github or https://forums.cacti.net/viewtopic.php?f=5&t=51920
 
@@ -47,6 +52,12 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	1.9 ---
+	Speed-up
+	Multiple dashboards
+	Third party panels
+	New gathering data in separated poller process
+
 	1.8.4 ---
 	Speed-up 
 	Fix automatic refresh after poller finish

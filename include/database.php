@@ -25,15 +25,15 @@
 
 function intropage_drop_database() {
 	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
-	db_execute('DROP TABLE plugin_intropage_user_setting');
-	db_execute('DROP TABLE plugin_intropage_trends');
-	db_execute('DROP TABLE plugin_intropage_panel');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
 	db_execute('UPDATE user_auth SET login_opts=1 WHERE login_opts > 3');
-	// new version
-	db_execute('DROP TABLE plugin_intropage_panel_definition');
-	db_execute('DROP TABLE plugin_intropage_panel_data');
+	// version 2
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_trends');
 }
-
 
 function intropage_initialize_database() {
 	global $config, $intropage_settings;
@@ -112,7 +112,6 @@ function intropage_initialize_database() {
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
 	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
-
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority) values 
 		('analyse_log','/plugins/intropage/include/data.php','yes',300,50)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority) values 
@@ -154,7 +153,7 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority) values 
 		('thold_event','/plugins/intropage/include/data.php','yes',300,77)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority) values 
-		('boost','/plugins/intropage/include/data.php','no',300)");
+		('boost','/plugins/intropage/include/data.php','no',300,47)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority) values 
 		('extrem','/plugins/intropage/include/data.php','yes',300,78)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority) values 
@@ -259,23 +258,20 @@ function intropage_upgrade_database() {
 				VALUES ('ar_poller_finish', '1')");
 		}
 
-// !!!! tady delam
 		if (cacti_version_compare($oldv,'1.9.0', '<')) {
-			db_execute("ALTER TABLE plugin_intropage_trends ENGINE=InnoDB");
-			db_execute("ALTER TABLE plugin_intropage_user_setting ENGINE=InnoDB");
-			db_execute("ALTER TABLE plugin_intropage_panel ENGINE=InnoDB");
-			db_execute("DELETE FROM plugin_intropage_trends");
-			db_execute("ALTER TABLE plugin_intropage_trends add user_id int(11) ");
+			db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
+			db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
+			db_execute('ALTER TABLE plugin_intropage_trends ENGINE=InnoDB');
+			db_execute('ALTER TABLE plugin_intropage_user_setting ENGINE=InnoDB');
+			db_execute('ALTER TABLE plugin_intropage_panel ENGINE=InnoDB');
+			db_execute('DELETE FROM plugin_intropage_trends');
 			api_plugin_db_add_column('intropage', 'plugin_intropage_trends', array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'));
 			db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
-			
-
 		}		
 
 		if (!db_column_exists('user_auth', 'intropage_plugin_syslog')) {
 			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 		}
-
 
 		// Set the new version
 		db_execute("UPDATE plugin_config

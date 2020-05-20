@@ -111,9 +111,10 @@ function intropage_poller_bottom() {
 }
 
 
-// for third party panel
-// intropage_add_panel('my_panel','/plugins/your_plugin/file.php','yes',3600,20) {
-// panel_id - your name (lowercase, without spaces)
+// add third party panel:
+// 1) include this file
+// 2) call intropage_add_panel('my_panel','/plugins/your_plugin/file.php','yes',3600,20) {
+// panel_id - your name (lowercase, without spaces, unique)
 // file - path to your code. It must contain function my_panel() (and my_panel_detail() if your panel has detail) 
 // example functions are in /plugin/intropage/include/data.php and data_detail.php
 // has_detail - yes or no
