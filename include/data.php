@@ -1174,61 +1174,68 @@ function maint($display=false, $update=false, $force_update=false) {
 
         if ($force_update || time() > ($last_update + $update_interval))       {
 
-        	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
+		if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
 
-        	$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
-        	if (cacti_sizeof($schedules)) {
-                	foreach ($schedules as $sc) {
-                        	$t = time();
+        		$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
-                        	switch ($sc['mtype']) {
-                                	case 1:
-                                        	if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-                                                	$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-                                                        	' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
+        		$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
+        		if (cacti_sizeof($schedules)) {
+                		foreach ($schedules as $sc) {
+                        		$t = time();
 
-                                                	$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-                                                        	INNER JOIN plugin_maint_hosts
-                                                        	ON host.id=plugin_maint_hosts.host
-                                                        	WHERE schedule = ?',
-                                                        	array($sc['id']));
+                        		switch ($sc['mtype']) {
+                                		case 1:
+                                        		if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                		$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                        		' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
 
-                                                	if (cacti_sizeof($hosts)) {
-                                                        	foreach ($hosts as $host) {
-                                                                	$result['data'] .= $host['description'] . ', ';
-                                                        	}
-                                                	}
-                                                	$result['data'] = substr($result['data'], 0, -2) .'<br/><br/>';
-                                        	}
-                                        	break;
+                                                		$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        		INNER JOIN plugin_maint_hosts
+                                                        		ON host.id=plugin_maint_hosts.host
+                                                        		WHERE schedule = ?',
+                                                        		array($sc['id']));
 
-                                	case 2:
-                                        	while ($sc['etime'] < $t) {
-                                                	$sc['etime'] += $sc['minterval'];
-                                                	$sc['stime'] += $sc['minterval'];
-                                        	}
+                                                		if (cacti_sizeof($hosts)) {
+                                                        		foreach ($hosts as $host) {
+                                                                		$result['data'] .= $host['description'] . ', ';
+                                                        		}
+                                                		}
+                                                		$result['data'] = substr($result['data'], 0, -2) .'<br/><br/>';
+                                        		}
+                                        		break;
 
-                                        	if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-                                                	$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-                                                        	' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
+                                		case 2:
+                                        		while ($sc['etime'] < $t) {
+                                                		$sc['etime'] += $sc['minterval'];
+                                                		$sc['stime'] += $sc['minterval'];
+                                        		}
 
-                                                	$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-                                                        	INNER JOIN plugin_maint_hosts
-                                                        	ON host.id=plugin_maint_hosts.host
-                                                        	WHERE schedule = ?',
-                                                        	array($sc['id']));
+                                        		if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+                                                		$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                                                        		' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
 
-                                                	if (cacti_sizeof($hosts)) {
-                                                        	foreach ($hosts as $host) {
-                                                                	$result['data'] .= $host['description'] . ', ';
-                                                        	}
-                                                	}
+                                                		$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                                        		INNER JOIN plugin_maint_hosts
+                                                        		ON host.id=plugin_maint_hosts.host
+                                                        		WHERE schedule = ?',
+                                                        		array($sc['id']));
 
-                                                	$result['data'] = substr($result['data'], 0, -2) . '<br/><br/>';
-                                        	}
-         		                       	break;
+                                                		if (cacti_sizeof($hosts)) {
+                                                        		foreach ($hosts as $host) {
+                                                                		$result['data'] .= $host['description'] . ', ';
+                                                        		}
+                                                		}
+
+                                                		$result['data'] = substr($result['data'], 0, -2) . '<br/><br/>';
+                                        		}
+         		                       		break;
+					}
 				}
 			}
+       		}
+       		else {
+       			$result['data'] = __('Maint plugin is not installed', 'intropage');
+       		
        		}
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
