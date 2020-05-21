@@ -310,7 +310,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 					WHERE host.id in ( $allowed_hosts )
 					AND disabled != 'on'
 					ORDER BY avg_time desc
-					LIMIT 5",
+					LIMIT 5"
 					);
 
 				if (cacti_sizeof($sql_worst_host)) {
