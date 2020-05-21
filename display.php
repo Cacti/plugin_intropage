@@ -270,7 +270,7 @@ function display_information() {
 	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
 
 		$row = db_fetch_row("SELECT id, data FROM plugin_intropage_panel_data WHERE panel_id='maint'");
-		if (strlen($row['data']) > 20 && $_SESSION['dashboard_id'] == 1) {
+		if ($row && strlen($row['data']) > 20 && $_SESSION['dashboard_id'] == 1) {
 			intropage_display_panel($row['id']);
 		}
 	}
