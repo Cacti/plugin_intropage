@@ -2477,7 +2477,7 @@ function thold_event($display=false, $update=false, $force_update=false) {
 
 //--------------------------------boost--------------------------------
 function boost($display=false, $update=false, $force_update=false) {
-	global $config;
+	global $config, $boost_refresh_interval, $boost_max_runtime;
 
 	$panel_id = 'boost';
 	$panel_name = __('Boost statistics', 'intropage');
