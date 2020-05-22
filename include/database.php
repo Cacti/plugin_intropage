@@ -24,15 +24,41 @@
 */
 
 function intropage_drop_database() {
-	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
-	db_execute('UPDATE user_auth SET login_opts=1 WHERE login_opts > 3');
-	// version 2
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_trends');
+        db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
+        db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
+        db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
+        db_execute('UPDATE user_auth SET login_opts=1 WHERE login_opts > 3');
+        // version 2
+        db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
+        db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
+        db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
+        db_execute('DROP TABLE IF EXISTS plugin_intropage_trends');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_log');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_login');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_thold_event');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_db');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_tree_host_graph');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_trend');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_extrem');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_ntp');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_poller_info');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_poller_stat');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_host');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_thold');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_data_source');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_host_template');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_cpuload');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_cpu');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_mactrack');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_mactrack_sites');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_ping');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_availability');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_polltime');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_pollratio');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_info');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_boost');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_favourite_graph');
+        db_execute('ALTER TABLE user_auth drop column if exists intropage_syslog');	
 }
 
 function intropage_initialize_database() {
