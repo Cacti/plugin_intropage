@@ -128,11 +128,12 @@ function intropage_poller_bottom() {
 // has_detail - yes or no
 // refresh_interval - in second, min is 60
 // priority - for displaying
-function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority=20) {
-	if (db_execute_prepared("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval, priority) 
-			VALUES (?,?,?,?,?)", array($panel_id,$file,$has_detail,$refresh_interval,$priority)) == 1) {
+// description - small description, it is visible in user auth settings
+function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority=20, $description='') {
+	if (db_execute_prepared('REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval, priority, description) 
+			VALUES (?,?,?,?,?,?)', array($panel_id,$file,$has_detail,$refresh_interval,$priority,$description)) == 1) {
 
- 		api_plugin_db_add_column('intropage', 'plugin_intropage_user_auth', array('name' => 'intropage_' . $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+ 		api_plugin_db_add_column('intropage', 'plugin_intropage_user_auth', array('name' => $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 		return ('1');
 	}
 	else {
@@ -142,8 +143,9 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
 
 // remove third party panel
 function intropage_remove_panel($panel_id) {
-	db_execute_prepared("DELETE FROM plugin_intropage_panel_data WHERE panel_id= ?", array($panel_id));
-	db_execute_prepared("DELETE FROM plugin_intropage_panel_definition WHERE panel_id= ?", array($panel_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id= ?', array($panel_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id= ?', array($panel_id));
+	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',array($panel_id));
 	return ('1');
 }
 

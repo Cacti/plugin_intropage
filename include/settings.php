@@ -342,17 +342,15 @@ function intropage_user_admin_run_action(){
 
 
 	$user = db_fetch_row_prepared('SELECT * FROM plugin_intropage_user_auth WHERE user_id= ?', array(get_request_var('id')));
-	$fields = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_definition');
+	$fields = db_fetch_assoc('SELECT panel_id, description FROM plugin_intropage_panel_definition');
 
 	foreach ($fields as $field) {
 		if ($field['panel_id'] != 'admin_alert' && $field['panel_id'] != 'maint') {
 			$temp[$field['panel_id']] = array(
 				'value' => '|arg1:' . $field['panel_id'] . '|',
 				'method' => 'checkbox',
-//				'friendly_name' => __('Analyze DB', 'intropage'),
-				'friendly_name' => $field['panel_id'],
-				'description' => 'tady bude popis',
-				//    'form_id' => '|arg1:id|',
+				'friendly_name' => ucwords(str_replace('_', ' ', $field['panel_id'])),
+				'description' => $field['description'],
 				'default' => '1'	);
 
 			$fields_intropage_user_edit = $fields_intropage_user_edit + $temp;
