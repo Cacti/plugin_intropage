@@ -145,13 +145,11 @@ function display_information() {
 	print "<select name='intropage_action' size='1' onchange='this.form.submit();'>";
 	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
 
-	if ($number_of_dashboards == 1) {
-	    print '<option value="addpage_2">' . __('Add second dashboard', 'intropage') . '</option>';
-	}
-	if ($number_of_dashboards == 2) {
-	    print '<option value="addpage_3">' . __('Add third dashboard', 'intropage') . '</option>';
-	}
+	if ($number_of_dashboards < 9) {
+	    	print '<option value="addpage_' . ($number_of_dashboards+1) . '">' . __('Add dashboard', 'intropage') . ' ' . ($number_of_dashboards+1) . '</option>';
 	
+	}
+
 	if ($_SESSION['dashboard_id'] > 1) {
 	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
