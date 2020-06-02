@@ -37,10 +37,18 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
+        api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
+        api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
+        api_plugin_register_hook('intropage', 'user_admin_action', 'intropage_user_admin_action', 'includes/settings.php');
+
+        api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 
 	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
+
 	intropage_setup_database();
 }
+
+
 
 function plugin_intropage_uninstall() {
 	global $config;
@@ -124,7 +132,7 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
 	if (db_execute_prepared("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval, priority) 
 			VALUES (?,?,?,?,?)", array($panel_id,$file,$has_detail,$refresh_interval,$priority)) == 1) {
 
- 		api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_' . $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+ 		api_plugin_db_add_column('intropage', 'plugin_intropage_user_auth', array('name' => 'intropage_' . $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 		return ('1');
 	}
 	else {

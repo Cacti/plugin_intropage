@@ -23,6 +23,7 @@
  +-------------------------------------------------------------------------+
 */
 
+/*
 function intropage_config_form() {
 	global $fields_user_user_edit_host, $fields_user_group_edit;
 
@@ -33,152 +34,152 @@ function intropage_config_form() {
 			'description' => __('Enable/disable panels', 'intropage'),
 			'type' => 'flex',
 			'items' => array(
-				'intropage_analyse_log' => array(
-					'value' => '|arg1:intropage_analyse_log|',
+				'analyse_log' => array(
+					'value' => '|arg1:analyse_log|',
 					'friendly_name' => __('Analyze Log', 'intropage'),
 					//    'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_analyse_login' => array(
-					'value' => '|arg1:intropage_analyse_login|',
+				'analyse_login' => array(
+					'value' => '|arg1:analyse_login|',
 					'friendly_name' => __('Analyze Logins', 'intropage'),
 					//    'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_thold_event' => array(
-					'value' => '|arg1:intropage_thold_event|',
+				'thold_event' => array(
+					'value' => '|arg1:thold_event|',
 					'friendly_name' => __('Threshold Events', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_analyse_db' => array(
-					'value' => '|arg1:intropage_analyse_db|',
+				'analyse_db' => array(
+					'value' => '|arg1:analyse_db|',
 					'friendly_name' => __('Analyze Database', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_analyse_tree_host_graph' => array(
-					'value' => '|arg1:intropage_analyse_tree_host_graph|',
+				'analyse_tree_host_graph' => array(
+					'value' => '|arg1:analyse_tree_host_graph|',
 					'friendly_name' => __('Analyze Objects', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-		    		'intropage_trend' => array(
-					'value' => '|arg1:intropage_trend|',
+		    		'trend' => array(
+					'value' => '|arg1:trend|',
 					'friendly_name' => __('Trends', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_extrem' => array(
-					'value' => '|arg1:intropage_extrem|',
+				'extrem' => array(
+					'value' => '|arg1:extrem|',
 					'friendly_name' => __('24h Extremes', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_ntp' => array(
-					'value' => '|arg1:intropage_ntp|',
+				'ntp' => array(
+					'value' => '|arg1:ntp|',
 					'friendly_name' => __('NTP Status', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_poller_info' => array(
-					'value' => '|arg1:intropage_poller_info|',
+				'poller_info' => array(
+					'value' => '|arg1:poller_info|',
 					'friendly_name' => __('Poller Info', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_poller_stat' => array(
-					'value' => '|arg1:intropage_poller_stat|',
+				'poller_stat' => array(
+					'value' => '|arg1:poller_stat|',
 					'friendly_name' => __('Poller Stats', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => '1'
 				),
-				'intropage_graph_host' => array(
-					'value' => '|arg1:intropage_graph_host|',
+				'graph_host' => array(
+					'value' => '|arg1:graph_host|',
 					'friendly_name' => __('Graph Device', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_graph_thold' => array(
-					'value' => '|arg1:intropage_graph_thold|',
+				'graph_thold' => array(
+					'value' => '|arg1:graph_thold|',
 					'friendly_name' => __('Graph Thresholds', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_graph_data_source' => array(
-					'value' => '|arg1:intropage_graph_data_source|',
+				'graph_data_source' => array(
+					'value' => '|arg1:graph_data_source|',
 					'friendly_name' => __('Graph Data Dource', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_graph_host_template' => array(
-					'value' => '|arg1:intropage_graph_host_template|',
+				'graph_host_template' => array(
+					'value' => '|arg1:graph_host_template|',
 					'friendly_name' => __('Graph Device Template', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_cpuload' => array(
-					'value' => '|arg1:intropage_cpuload|',
+				'cpuload' => array(
+					'value' => '|arg1:cpuload|',
 					'friendly_name' => __('CPU Utilization', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_mactrack' => array(
-					'value' => '|arg1:intropage_mactrack|',
+				'mactrack' => array(
+					'value' => '|arg1:mactrack|',
 					'friendly_name' => __('MacTrack Plugin', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_mactrack_sites' => array(
-					'value' => '|arg1:intropage_mactrack_sites|',
+				'mactrack_sites' => array(
+					'value' => '|arg1:mactrack_sites|',
 					'friendly_name' => __('MacTrack Sites', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_top5_ping' => array(
-					'value' => '|arg1:intropage_top5_ping|',
+				'top5_ping' => array(
+					'value' => '|arg1:top5_ping|',
 					'friendly_name' => __('Top 5 Ping Times', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_top5_availability' => array(
-					'value' => '|arg1:intropage_top5_availability|',
+				'top5_availability' => array(
+					'value' => '|arg1:top5_availability|',
 					'friendly_name' => __('Top 5 Availability', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_top5_polltime' => array(
-					'value' => '|arg1:intropage_top5_polltime|',
+				'top5_polltime' => array(
+					'value' => '|arg1:top5_polltime|',
 					'friendly_name' => __('Top 5 Worst Polling', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_top5_pollratio' => array(
-					'value' => '|arg1:intropage_top5_pollratio|',
+				'top5_pollratio' => array(
+					'value' => '|arg1:top5_pollratio|',
 					'friendly_name' => __('Top 5 Worst Failed Ratio', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_info' => array(
-					'value' => '|arg1:intropage_info|',
+				'info' => array(
+					'value' => '|arg1:info|',
 					'friendly_name' => __('System Information', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_boost' => array(
-					'value' => '|arg1:intropage_boost|',
+				'boost' => array(
+					'value' => '|arg1:boost|',
 					'friendly_name' => __('Boost Status', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_favourite_graph' => array(
-					'value' => '|arg1:intropage_favourite_graph|',
+				'favourite_graph' => array(
+					'value' => '|arg1:favourite_graph|',
 					'friendly_name' => __('Favourite Graphs', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
 				),
-				'intropage_plugin_syslog' => array(
-					'value' => '|arg1:intropage_plugin_syslog|',
+				'plugin_syslog' => array(
+					'value' => '|arg1:plugin_syslog|',
 					'friendly_name' => __('Syslog Plugin', 'intropage'),
 					'form_id' => '|arg1:id|',
 					'default' => 'on'
@@ -204,7 +205,7 @@ function intropage_config_form() {
 		)
 	);
 
-	/*
+	
 		// usergroup
 		$temp = array(
 
@@ -243,8 +244,9 @@ function intropage_config_form() {
 		$fields_user_group_edit = $new;
 
 		array_push ($fields_user_group_edit['login_opts']['items'],array("radio_value"=>"4","radio_caption"=>"Show Intropage (no matter in console or tab)"));
-	*/
+	
 }
+*/
 
 function intropage_config_settings() {
 	global $tabs, $settings, $config, $intropage_settings;
@@ -304,33 +306,95 @@ function intropage_console_after() {
 
 function intropage_user_admin_setup_sql_save($save) {
 	global $settings_user;
-
-	$save['intropage_analyse_log']             = form_input_validate(get_nfilter_request_var('intropage_analyse_log'), 'intropage_analyse_log', '^on$', true, 3);
-	$save['intropage_analyse_login']           = form_input_validate(get_nfilter_request_var('intropage_analyse_login'), 'intropage_analyse_login', '^on$', true, 3);
-	$save['intropage_thold_event']             = form_input_validate(get_nfilter_request_var('intropage_thold_event'), 'intropage_thold_event', '^on$', true, 3);
-	$save['intropage_analyse_db']              = form_input_validate(get_nfilter_request_var('intropage_analyse_db'), 'intropage_analyse_db', '^on$', true, 3);
-	$save['intropage_analyse_tree_host_graph'] = form_input_validate(get_nfilter_request_var('intropage_analyse_tree_host_graph'), 'intropage_analyse_tree_host_graph', '^on$', true, 3);
-	$save['intropage_trend']                   = form_input_validate(get_nfilter_request_var('intropage_trend'), 'intropage_trend', '^on$', true, 3);
-	$save['intropage_extrem']                  = form_input_validate(get_nfilter_request_var('intropage_extrem'), 'intropage_extrem', '^on$', true, 3);
-	$save['intropage_ntp']                     = form_input_validate(get_nfilter_request_var('intropage_ntp'), 'intropage_ntp', '^on$', true, 3);
-	$save['intropage_poller_info']             = form_input_validate(get_nfilter_request_var('intropage_poller_info'), 'intropage_poller_info', '^on$', true, 3);
-	$save['intropage_poller_stat']             = form_input_validate(get_nfilter_request_var('intropage_poller_stat'), 'intropage_poller_stat', '^on$', true, 3);
-	$save['intropage_graph_host']              = form_input_validate(get_nfilter_request_var('intropage_graph_host'), 'intropage_graph_host', '^on$', true, 3);
-	$save['intropage_graph_thold']             = form_input_validate(get_nfilter_request_var('intropage_graph_thold'), 'intropage_graph_thold', '^on$', true, 3);
-	$save['intropage_graph_data_source']       = form_input_validate(get_nfilter_request_var('intropage_graph_data_source'), 'intropage_graph_data_source', '^on$', true, 3);
-	$save['intropage_graph_host_template']     = form_input_validate(get_nfilter_request_var('intropage_graph_host_template'), 'intropage_graph_host_template', '^on$', true, 3);
-	$save['intropage_cpuload']                 = form_input_validate(get_nfilter_request_var('intropage_cpuload'), 'intropage_cpuload', '^on$', true, 3);
-	$save['intropage_mactrack']                = form_input_validate(get_nfilter_request_var('intropage_mactrack'), 'intropage_mactrack', '^on$', true, 3);
-	$save['intropage_mactrack_sites']          = form_input_validate(get_nfilter_request_var('intropage_mactrack_sites'), 'intropage_mactrack_sites', '^on$', true, 3);
-	$save['intropage_top5_ping']               = form_input_validate(get_nfilter_request_var('intropage_top5_ping'), 'intropage_top5_ping', '^on$', true, 3);
-	$save['intropage_top5_availability']       = form_input_validate(get_nfilter_request_var('intropage_top5_availability'), 'intropage_top5_availability', '^on$', true, 3);
-	$save['intropage_top5_polltime']           = form_input_validate(get_nfilter_request_var('intropage_top5_polltime'), 'intropage_top5_polltime', '^on$', true, 3);
-	$save['intropage_top5_pollratio']	   = form_input_validate(get_nfilter_request_var('intropage_top5_pollratio'), 'intropage_top5_pollratio', '^on$', true, 3);
-	$save['intropage_info']                    = form_input_validate(get_nfilter_request_var('intropage_info'), 'intropage_info', '^on$', true, 3);
-	$save['intropage_boost']                   = form_input_validate(get_nfilter_request_var('intropage_boost'), 'intropage_boost', '^on$', true, 3);
-	$save['intropage_favourite_graph']         = form_input_validate(get_nfilter_request_var('intropage_favourite_graph'), 'intropage_favourite_graph', '^on$', true, 3);
-	$save['intropage_plugin_syslog']       	   = form_input_validate(get_nfilter_request_var('intropage_syslog'), 'intropage_syslog', '^on$', true, 3);
-	// maint - always visible
-
-	return $save;
 }
+
+
+function intropage_user_admin_tab() {
+
+	print '<li class="subTab">';
+
+	if (get_request_var_request("tab") == "intropage_settings_edit") {
+		print '<a class="tab selected" '; 
+	}
+	else {
+		print '<a class="tab" '; 
+	}
+
+	print 'href="' . htmlspecialchars("/user_admin.php?action=user_edit&tab=intropage_settings_edit&id=" . get_request_var('id')) . '">Intropage</a>';
+	print '</li>';
+
+}
+
+function intropage_user_admin_run_action(){
+
+	input_validate_input_number(get_request_var('id'));
+
+	$fields_intropage_user_edit = array(
+	        'general_header' => array(
+                        'friendly_name' => __('Intropage - All panels', 'intropage'),
+                        'method' => 'spacer',
+                ),
+	);
+
+        if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_user_auth WHERE user_id= ?',array(get_request_var('id'))) == 0) {
+                db_execute_prepared('INSERT INTO plugin_intropage_user_auth (user_id) VALUES ( ? )', array(get_request_var('id')));
+        }
+
+
+	$user = db_fetch_row_prepared('SELECT * FROM plugin_intropage_user_auth WHERE user_id= ?', array(get_request_var('id')));
+	$fields = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_definition');
+
+	foreach ($fields as $field) {
+		if ($field['panel_id'] != 'admin_alert' && $field['panel_id'] != 'maint') {
+			$temp[$field['panel_id']] = array(
+				'value' => '|arg1:' . $field['panel_id'] . '|',
+				'method' => 'checkbox',
+//				'friendly_name' => __('Analyze DB', 'intropage'),
+				'friendly_name' => $field['panel_id'],
+				'description' => 'tady bude popis',
+				//    'form_id' => '|arg1:id|',
+				'default' => '1'	);
+
+			$fields_intropage_user_edit = $fields_intropage_user_edit + $temp;
+		}
+	}
+
+	form_start('?action=user_edit&pokus=pokus&tab=intropage_settings_edit&id=' . get_request_var('id'));
+        html_start_box(__('You can allow/disallow panels for user','intropage'), '100%', '', '3', 'center', '');
+
+        draw_edit_form(
+                array(
+                        'config' => array('no_form_tag' => true),
+                        'fields' => inject_form_variables($fields_intropage_user_edit, (isset($user) ? $user : array()))
+                )
+        );
+
+        html_end_box();
+
+        form_save_button('user_admin.php?action=user_edit&pokus=pokus&tab=general&id=' . get_request_var('id'),'save');
+
+	form_end();
+}
+
+
+function intropage_user_admin_user_save($save){
+
+	$panels = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_definition');
+
+	foreach ($panels as $panel) {
+		if ($panel['panel_id'] != 'admin_alert' && $panel['panel_id'] != 'maint') {
+			db_execute('update plugin_intropage_user_auth set ' . $panel['panel_id'] . '="' . get_nfilter_request_var($panel['panel_id']) .
+			'" WHERE user_id = ' . get_request_var('id'));
+		}
+	}
+
+
+}
+
+
+function intropage_user_admin_action($action){
+	// tohle se pousti, kdyz admin klepne na editaci libovolneho uzivatele
+}
+
+
+?>

@@ -52,6 +52,9 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	1.9.2 ---
+	Move user auth to own table
+
 	1.9 ---
 	Speed-up
 	Multiple dashboards

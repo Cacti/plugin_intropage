@@ -345,7 +345,7 @@ function ntp_time($host) {
 function intropage_graph_button($data) {
 	global $config;
 
-	if (db_fetch_cell_prepared('SELECT intropage_favourite_graph FROM user_auth 
+	if (db_fetch_cell_prepared('SELECT intropage_favourite_graph FROM plugin_intropage_user_auth 
 		WHERE id= ?', array($_SESSION['sess_user_id'])) == 'on') {
 		$local_graph_id = $data[1]['local_graph_id'];
 

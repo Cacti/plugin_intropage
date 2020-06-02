@@ -39,6 +39,11 @@ function display_information() {
 
 	$logging = read_config_option('log_verbosity', true);
 
+	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_user_auth WHERE user_id= ?',array($_SESSION['sess_user_id'])) == 0) {
+		db_execute_prepared('INSERT INTO plugin_intropage_user_auth (user_id) VALUES ( ? )', array($_SESSION['sess_user_id']));
+	}
+
+
 	$selectedTheme = get_selected_theme();
 
 	if (get_filter_request_var('dashboard_id')) {
@@ -167,8 +172,8 @@ function display_information() {
 						array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
 					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
 				}
-				elseif (db_fetch_cell_prepared('SELECT intropage_' . $panel['panel_id'] . ' FROM user_auth 
-						WHERE id = ?', array($_SESSION['sess_user_id'])) == 'on') {
+				elseif (db_fetch_cell_prepared('SELECT ' . $panel['panel_id'] . ' FROM plugin_intropage_user_auth 
+						WHERE user_id = ?', array($_SESSION['sess_user_id'])) == 'on') {
 					print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
 
 				} else {
