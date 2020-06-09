@@ -142,18 +142,8 @@ function display_information() {
 	print "<a href='#' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='fa fa-clone'></i></a>";
 	print '&nbsp; &nbsp; ';
 
-	print "<select name='intropage_action' size='1' onchange='this.form.submit();'>";
-	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
-
-	if ($number_of_dashboards < 9) {
-	    	print '<option value="addpage_' . ($number_of_dashboards+1) . '">' . __('Add dashboard', 'intropage') . ' ' . ($number_of_dashboards+1) . '</option>';
-	
-	}
-
-	if ($_SESSION['dashboard_id'] > 1) {
-	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
-	}
-
+	print "<select name='intropage_addpanel' size='1' onchange='this.form.submit();'>";
+	print '<option value="0">' . __('Add panel ...', 'intropage') . '</option>';
 	$add_panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id 
 		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',			
 		array($_SESSION['sess_user_id']));
@@ -168,11 +158,11 @@ function display_information() {
 				if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
 						WHERE user_id  in (0, ?) and panel_id= ? ',
 						array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
-					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
+					print "<option value='" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
 				}
 				elseif (db_fetch_cell_prepared('SELECT ' . $panel['panel_id'] . ' FROM plugin_intropage_user_auth 
 						WHERE user_id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-					print "<option value='addpanel_" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
+					print "<option value='" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
 
 				} else {
 					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
@@ -180,6 +170,22 @@ function display_information() {
 			}
 		}
 	}
+
+	print '<select/>';
+	print '&nbsp; &nbsp; ';
+
+	print "<select name='intropage_action' size='1' onchange='this.form.submit();'>";
+	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
+
+	if ($number_of_dashboards < 9) {
+	    	print '<option value="addpage_' . ($number_of_dashboards+1) . '">' . __('Add dashboard', 'intropage') . ' ' . ($number_of_dashboards+1) . '</option>';
+	
+	}
+
+	if ($_SESSION['dashboard_id'] > 1) {
+	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
+	}
+
 
 	// only submit :-)
 	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';

@@ -23,6 +23,15 @@
  +-------------------------------------------------------------------------+
 */
 
+if (isset_request_var('intropage_addpanel') &&
+	get_filter_request_var('intropage_addpanel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')))) {
+		db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard (panel_id,user_id,dashboard_id) 
+			VALUES ( ?, ?, ?)',
+			array(get_request_var('intropage_addpanel'),$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
+
+
+}
+
 if (isset_request_var('intropage_action') &&
 	get_filter_request_var('intropage_action', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')))) {
 	$values = explode('_', get_request_var('intropage_action'));
@@ -37,12 +46,6 @@ if (isset_request_var('intropage_action') &&
 				WHERE user_id = ? AND panel_id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
-		break;
-
-	case 'addpanel':
-			db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard (panel_id,user_id,dashboard_id) 
-				VALUES ( ?, ?, ?)',
-				array($value,$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
 		break;
 
 	case 'removepage':
