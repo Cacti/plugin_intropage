@@ -345,12 +345,12 @@ function ntp_time($host) {
 function intropage_graph_button($data) {
 	global $config;
 
-	if (db_fetch_cell_prepared('SELECT intropage_favourite_graph FROM plugin_intropage_user_auth 
-		WHERE id= ?', array($_SESSION['sess_user_id'])) == 'on') {
+	if (db_fetch_cell_prepared('SELECT favourite_graph FROM plugin_intropage_user_auth 
+		WHERE user_id= ?', array($_SESSION['sess_user_id'])) == 'on') {
 		$local_graph_id = $data[1]['local_graph_id'];
 
 		if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data 
-			WHERE user_id= ? AND fav_graph_id= ? & fav_graph_timespan= ?', 
+			WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?', 
 			array($_SESSION['sess_user_id'],$local_graph_id,$_SESSION['sess_current_timespan'] )) > 0) {       // already fav
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
 		} else {       // add to fav
