@@ -97,14 +97,14 @@ function display_information() {
 		join plugin_intropage_panel_dashboard as t2
 		on t1.id = t2.panel_id  
 		WHERE t1.user_id in (0,?) AND t2.dashboard_id = ? 
-		AND t1.panel_id != 'intropage_favourite_graph'
+		AND t1.panel_id != 'favourite_graph'
 		UNION
 		SELECT t3.*
 		FROM plugin_intropage_panel_data as t3
 		join plugin_intropage_panel_dashboard as t4
 		on t3.id = t4.panel_id  
 		WHERE t3.user_id = ? and t4.dashboard_id = ?
-		AND t3.panel_id = 'intropage_favourite_graph'
+		AND t3.panel_id = 'favourite_graph'
 		AND t3.fav_graph_id IS NOT NULL
 		ORDER BY priority DESC
 		",
