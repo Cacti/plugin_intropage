@@ -66,6 +66,8 @@ function intropage_prepare_graph($dispdata) {
 	$selectedTheme = get_selected_theme();
 	switch ($selectedTheme) {
 		case 'dark':
+			$bgcolor = '#161616';
+			break;
 		case 'paper-plane':
 			$bgcolor = '#202020';
 			break;
