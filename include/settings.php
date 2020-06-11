@@ -320,7 +320,7 @@ function intropage_user_admin_tab() {
 		print '<a class="tab" '; 
 	}
 
-	print 'href="' . htmlspecialchars("/user_admin.php?action=user_edit&tab=intropage_settings_edit&id=" . get_request_var('id')) . '">Intropage</a>';
+	print 'href="' . htmlspecialchars("/cacti/user_admin.php?action=user_edit&tab=intropage_settings_edit&id=" . get_request_var('id')) . '">Intropage</a>';
 	print '</li>';
 
 }
