@@ -92,6 +92,25 @@ function display_information() {
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
 
+	// remove admin prohibited panels
+	$panels = db_fetch_assoc_prepared ('SELECT t1.panel_id AS panel_name,t1.id AS id FROM plugin_intropage_panel_data AS t1 
+			JOIN plugin_intropage_panel_dashboard AS t2 
+			ON t1.id=t2.panel_id WHERE t2.user_id= ? AND t2.dashboard_id=?',
+			array($_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
+
+	foreach ($panels as $one) {
+                        if (db_fetch_cell_prepared('SELECT ' . $one['panel_name'] . ' FROM plugin_intropage_user_auth 
+                        	WHERE user_id = ?', array($_SESSION['sess_user_id'])) != 'on') {
+                                db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard 
+                                        WHERE user_id = ?
+                                        AND dashboard_id = ?
+                                        AND panel_id = ?',
+					array($_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $one['id']));
+		}
+        }
+
+
+
 	$panels = db_fetch_assoc_prepared("SELECT t1.*
 		FROM plugin_intropage_panel_data as t1
 		join plugin_intropage_panel_dashboard as t2

@@ -52,6 +52,12 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+
+	2.0.1 ---
+	Fix wrong path (#100)
+	Fix remove permission (#102)
+
+
 	2.0 ---
 	Fix few bugs
 
