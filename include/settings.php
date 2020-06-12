@@ -310,7 +310,8 @@ function intropage_user_admin_setup_sql_save($save) {
 
 
 function intropage_user_admin_tab() {
-
+	global $config;
+	
 	print '<li class="subTab">';
 
 	if (get_request_var_request("tab") == "intropage_settings_edit") {
@@ -320,12 +321,13 @@ function intropage_user_admin_tab() {
 		print '<a class="tab" '; 
 	}
 
-	print 'href="' . htmlspecialchars("/user_admin.php?action=user_edit&tab=intropage_settings_edit&id=" . get_request_var('id')) . '">Intropage</a>';
+	print 'href="' . html_escape($config['url_path'] .  'user_admin.php?action=user_edit&tab=intropage_settings_edit&id=' . get_request_var('id')) . '">Intropage</a>';
 	print '</li>';
 
 }
 
 function intropage_user_admin_run_action(){
+	global $config;
 
 	input_validate_input_number(get_request_var('id'));
 
@@ -357,7 +359,7 @@ function intropage_user_admin_run_action(){
 		}
 	}
 
-	form_start('?action=user_edit&pokus=pokus&tab=intropage_settings_edit&id=' . get_request_var('id'));
+	form_start('?action=user_edit&tab=intropage_settings_edit&id=' . get_request_var('id'));
         html_start_box(__('You can allow/disallow panels for user','intropage'), '100%', '', '3', 'center', '');
 
         draw_edit_form(
@@ -369,7 +371,7 @@ function intropage_user_admin_run_action(){
 
         html_end_box();
 
-        form_save_button('user_admin.php?action=user_edit&pokus=pokus&tab=general&id=' . get_request_var('id'),'save');
+        form_save_button(html_escape($config['url_path'] . 'user_admin.php?action=user_edit&tab=general&id=' . get_request_var('id'),'save'));
 
 	form_end();
 }
