@@ -28,7 +28,7 @@ function intropage_drop_database() {
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
 	db_execute('UPDATE user_auth SET login_opts=1 WHERE login_opts > 3');
-/*
+
 	db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_log');
 	db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_login');
 	db_execute('ALTER TABLE user_auth drop column if exists intropage_thold_event');
@@ -55,7 +55,7 @@ function intropage_drop_database() {
 	db_execute('ALTER TABLE user_auth drop column if exists intropage_boost');
 	db_execute('ALTER TABLE user_auth drop column if exists intropage_favourite_graph');
 	db_execute('ALTER TABLE user_auth drop column if exists intropage_plugin_syslog');
-*/
+
 	// version 2
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
@@ -66,7 +66,6 @@ function intropage_drop_database() {
 function intropage_initialize_database() {
 	global $config;
 /*
-
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
@@ -200,31 +199,31 @@ function intropage_initialize_database() {
 	$data              = array();
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'info', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'boost', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'user_id';
 	$data['comment']   = 'authorization';
@@ -327,8 +326,6 @@ function intropage_upgrade_database() {
 			db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
 			db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
 			db_execute('ALTER TABLE plugin_intropage_trends ENGINE=InnoDB');
-			db_execute('ALTER TABLE plugin_intropage_user_setting ENGINE=InnoDB');
-			db_execute('ALTER TABLE plugin_intropage_panel ENGINE=InnoDB');
 			db_execute('DELETE FROM plugin_intropage_trends');
 			api_plugin_db_add_column('intropage', 'plugin_intropage_trends', array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'));
 			db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
@@ -341,32 +338,31 @@ function intropage_upgrade_database() {
 		if (cacti_version_compare($oldv,'1.9.2', '<')) {
 			$data              = array();
 			$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-			$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+			$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 			$data['columns'][] = array('name' => 'trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+			$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 			$data['columns'][] = array('name' => 'graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 			$data['columns'][] = array('name' => 'graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 			$data['columns'][] = array('name' => 'graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+			$data['columns'][] = array('name' => 'graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 			$data['columns'][] = array('name' => 'cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+			$data['columns'][] = array('name' => 'mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 			$data['columns'][] = array('name' => 'top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 			$data['columns'][] = array('name' => 'top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 			$data['columns'][] = array('name' => 'top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 			$data['columns'][] = array('name' => 'top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+			$data['columns'][] = array('name' => 'info', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+			$data['columns'][] = array('name' => 'boost', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 			$data['columns'][] = array('name' => 'favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-
+			$data['columns'][] = array('name' => 'plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 
 			$data['type']      = 'InnoDB';
 			$data['primary']   = 'user_id';
@@ -389,7 +385,32 @@ function intropage_upgrade_database() {
 				top5_pollratio, info, boost, favourite_graph
 				FROM user_auth');
 				
-			// !!!! mel bych tu jeste asi odebirat sloupce z puvodni user_auth tabulky
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_log');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_login');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_thold_event');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_db');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_tree_host_graph');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_trend');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_extrem');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_ntp');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_poller_info');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_poller_stat');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_host');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_thold');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_data_source');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_host_template');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_cpuload');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_cpu');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_mactrack');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_mactrack_sites');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_ping');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_availability');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_polltime');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_pollratio');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_info');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_boost');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_favourite_graph');
+			db_execute('ALTER TABLE user_auth drop column if exists intropage_plugin_syslog');
 		}
 
 
