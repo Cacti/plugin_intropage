@@ -390,8 +390,8 @@ function intropage_user_admin_user_save($save){
 }
 
 
-function intropage_user_admin_action($action){
+//function intropage_user_admin_action($action){
 	// tohle se pousti, kdyz admin klepne na editaci libovolneho uzivatele
-}
+//}
 
 
