@@ -50,7 +50,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 	if (!$id) {			
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0,__('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -92,7 +92,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    VALUES ( ?, ?, ?, ?, ?)',
-			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -135,7 +135,7 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 	if (!$id) {				
 	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    $id = db_fetch_insert_id();
 	}
@@ -214,7 +214,7 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
 
 	}
 
@@ -405,7 +405,7 @@ function cpuload($display=false, $update=false, $force_update=false) {
 	if (!$id) {				
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -448,9 +448,10 @@ function cpuload($display=false, $update=false, $force_update=false) {
                 	}
         	}
 
+//		$user = isset($run_from_poller) ? 0:
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
         if ($display)    {
@@ -493,7 +494,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 	if (!$id) {				
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			VALUES ( ?, ?, ?, "gray", 1000)',
-			array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -550,7 +551,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			VALUES (?,?,?,?,?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
         if ($display)    {
@@ -600,7 +601,7 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
         if (!$id) {                             
             	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
                             VALUES ( ?, ?, ?, "gray", 1000)',
-                            array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+                            array($panel_id, 0, __('Waiting for data', 'intropage')));
 
             	$id = db_fetch_insert_id();
         }
@@ -646,7 +647,7 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
@@ -940,7 +941,7 @@ function info($display=false, $update=false, $force_update=false) {
         if (!$id) {                             
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
                             VALUES ( ?, ?, ?, "gray", 1000)',
-                            array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+                            array($panel_id, 0, __('Waiting for data', 'intropage')));
 
             	$id = db_fetch_insert_id();
         }
@@ -993,7 +994,7 @@ function info($display=false, $update=false, $force_update=false) {
 
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
@@ -1036,7 +1037,7 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 	if (!$id) {				
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -1114,7 +1115,7 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 		    	VALUES (?,?,?,?,?)',
-		    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+		    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
         if ($display)    {
@@ -1161,7 +1162,7 @@ function maint($display=false, $update=false, $force_update=false) {
 	if (!$id) {				
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -1240,7 +1241,7 @@ function maint($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -1283,7 +1284,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 	if (!$id) {				
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0,__('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1300,7 +1301,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -1358,7 +1359,7 @@ function trend($display=false, $update=false, $force_update=false) {
 	if (!$id) {			
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1425,7 +1426,7 @@ function trend($display=false, $update=false, $force_update=false) {
         	}
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -1472,7 +1473,7 @@ function poller_info($display=false, $update=false, $force_update=false) {
 	if (!$id) {			
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1540,7 +1541,7 @@ function poller_info($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -1597,7 +1598,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 	if (!$id) {			
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1684,7 +1685,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -2401,7 +2402,7 @@ function thold_event($display=false, $update=false, $force_update=false) {
 	if (!$id) {			
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -2460,7 +2461,7 @@ function thold_event($display=false, $update=false, $force_update=false) {
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    VALUES ( ?, ?, ?, ?, ?)',
-			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -2503,7 +2504,7 @@ function boost($display=false, $update=false, $force_update=false) {
 	if (!$id) {			
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -2635,7 +2636,7 @@ function boost($display=false, $update=false, $force_update=false) {
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    VALUES ( ?, ?, ?, ?, ?)',
-			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
@@ -2692,7 +2693,7 @@ function extrem($display=false, $update=false, $force_update=false) {
 	if (!$id) {			
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -2822,7 +2823,7 @@ function extrem($display=false, $update=false, $force_update=false) {
 
    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 		    VALUES (?,?,?,?,?)',
-		    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+		    array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
@@ -3253,7 +3254,7 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
         if (!$id) {
                 db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
                             VALUES ( ?, ?, ? ,"gray",1000)',
-                            array($panel_id,$_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+                            array($panel_id, 0, __('Waiting for data', 'intropage')));
 
                 $id = db_fetch_insert_id();
         }

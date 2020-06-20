@@ -122,7 +122,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['type']      = 'InnoDB';
-	$data['primary']   = 'panel_id';
+//	$data['primary']   = 'panel_id';
 	$data['comment']   = 'panel x dashboard dependency';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_dashboard', $data);
 

@@ -39,10 +39,10 @@ function display_information() {
 
 	$logging = read_config_option('log_verbosity', true);
 
+	// default actual user permissions
 	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_user_auth WHERE user_id= ?',array($_SESSION['sess_user_id'])) == 0) {
 		db_execute_prepared('INSERT INTO plugin_intropage_user_auth (user_id) VALUES ( ? )', array($_SESSION['sess_user_id']));
 	}
-
 
 	$selectedTheme = get_selected_theme();
 
@@ -99,7 +99,7 @@ function display_information() {
 			array($_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
 
 	foreach ($panels as $one) {
-                        if (db_fetch_cell_prepared('SELECT ' . $one['panel_name'] . ' FROM plugin_intropage_user_auth 
+		if (db_fetch_cell_prepared('SELECT ' . $one['panel_name'] . ' FROM plugin_intropage_user_auth 
                         	WHERE user_id = ?', array($_SESSION['sess_user_id'])) != 'on') {
                                 db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard 
                                         WHERE user_id = ?
@@ -108,8 +108,6 @@ function display_information() {
 					array($_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $one['id']));
 		}
         }
-
-
 
 	$panels = db_fetch_assoc_prepared("SELECT t1.*
 		FROM plugin_intropage_panel_data as t1
@@ -128,6 +126,25 @@ function display_information() {
 		ORDER BY priority DESC
 		",
 		array( $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+		
+
+	// remove prohibited panels (for common panels (user_id=0))
+	foreach ($panels as $key=>$value)	{
+		if ($value['user_id'] == 0) {
+                        if (db_fetch_cell_prepared('SELECT ' . $value['panel_id'] . ' FROM plugin_intropage_user_auth 
+                        	WHERE user_id = ?', array($_SESSION['sess_user_id'])) != 'on') {
+				unset ($panels[$key]);
+
+			}
+			else {	// user has permission but no active panel
+                        	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_dashboard 
+                        		WHERE user_id = ? AND dashboard_id= ? AND panel_id=?', 
+                        		array($_SESSION['sess_user_id'], $_SESSION['dashboard_id'],$value['id'])) == 0 ) {
+					unset ($panels[$key]);
+				}
+			}
+		}
+	}
 
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on')	{
@@ -291,7 +308,6 @@ function display_information() {
 		print __('You can add more dashboards from menu, too') . '<br/><br/></div>';
 	}
 
-//!!!! tady bude podminka - kdyz dashboard_id=1
 
 	// extra maint plugin panel - always first
 
