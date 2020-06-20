@@ -304,10 +304,6 @@ function intropage_console_after() {
 	}
 }
 
-function intropage_user_admin_setup_sql_save($save) {
-	global $settings_user;
-}
-
 
 function intropage_user_admin_tab() {
 	global $config;
@@ -372,8 +368,8 @@ function intropage_user_admin_run_action(){
         html_end_box();
 
         form_save_button(html_escape($config['url_path'] . 'user_admin.php?action=user_edit&tab=general&id=' . get_request_var('id'),'save'));
-
 	form_end();
+
 }
 
 
@@ -387,7 +383,9 @@ function intropage_user_admin_user_save($save){
 			'" WHERE user_id = ' . get_request_var('id'));
 		}
 	}
+
 }
+
 
 
 //function intropage_user_admin_action($action){
