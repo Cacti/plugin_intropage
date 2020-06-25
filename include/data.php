@@ -249,10 +249,12 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
-	    $users = array(array('id'=>$_SESSION['sess_user_id']));
+		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
 	}
 
 	foreach ($users as $user)	{
@@ -685,7 +687,10 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+
 	}	
 
 	foreach ($users as $user)	{
@@ -798,7 +803,10 @@ function graph_host($display=false, $update=false, $force_update=false) {
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+
 	}
 
 	foreach ($users as $user)	{
@@ -1726,7 +1734,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+
 	}
 
 	foreach ($users as $user)	{
@@ -2044,7 +2055,10 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+
 	}
 
 	foreach ($users as $user)	{
@@ -2164,7 +2178,9 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
 	}
 
 	foreach ($users as $user)	{
@@ -2282,7 +2298,10 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+
 	}
 
 	foreach ($users as $user)	{
