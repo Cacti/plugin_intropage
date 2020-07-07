@@ -383,7 +383,8 @@ function intropage_user_admin_user_save($save){
 			'" WHERE user_id = ' . get_request_var('id'));
 		}
 	}
-
+	
+	return ($save);
 }
 
 
