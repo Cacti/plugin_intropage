@@ -134,7 +134,7 @@ function intropage_gather_stats() {
         	cacti_log('Debug: gathering data - ' . $magic . ' - duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 	    }
     	    intropage_debug('gathering data - ' . $magic . ' - duration ' . round(microtime(true) - $start, 2));
-
+  	    $checks++;
 	}
 	// end of gathering data 
 
