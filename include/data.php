@@ -66,7 +66,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 	if ( $force_update || time() > ($last_update + $update_interval))	{
 
 	    	$flog = db_fetch_cell('SELECT count(t.result)
-			FROM (
+			FROM ( 
 				SELECT result FROM user_auth
 				INNER JOIN user_log ON user_auth.username = user_log.username
 				ORDER BY user_log.time DESC LIMIT 10
@@ -89,6 +89,24 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 				$result['data'] .= $row['username'] . '<br/>';
 			}
 	    	}
+		$result['data'] .= '<br/><b>' . __('Your last logins', 'intropage') . ':</b><br/>';
+
+		$sql_result = db_fetch_assoc_prepared('SELECT user_log.username, user_auth.full_name, user_log.time, user_log.result, user_log.ip
+                	FROM user_auth
+                	INNER JOIN user_log
+                	ON user_auth.username = user_log.username
+                	WHERE user_log.user_id = ?
+                	ORDER BY user_log.time desc
+                	LIMIT 3',
+                	array($_SESSION['sess_user_id']));
+
+        	if (cacti_sizeof($sql_result)) {
+                	$result['data'] .= '<table>';
+                	foreach ($sql_result as $row) {
+                        	$result['data'] .= sprintf('<tr><td class="rpad">%s </td><td class="rpad">%s</td><td>%s</td></tr>', $row['time'], $row['ip'], ($row['result'] == 0)? __('failed', 'intropage') : __('success', 'intropage'));
+                	}
+                	$result['data'] .= '</table>';
+        	}
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    VALUES ( ?, ?, ?, ?, ?)',
