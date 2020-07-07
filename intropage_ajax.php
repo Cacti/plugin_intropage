@@ -132,7 +132,7 @@ if (isset_request_var('detail_panel') && isset($panel_id)) {
 
     $panel = db_fetch_cell_prepared('SELECT panel_id
 		FROM plugin_intropage_panel_data
-		WHERE id = ? AND user_id = ?',
+		WHERE id = ? AND user_id in (0,?)',
 		array($panel_id, $_SESSION['sess_user_id']));
 
 	if ($panel)	{
