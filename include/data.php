@@ -369,8 +369,8 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
 	if ($display)    {
 	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id)); 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -786,8 +786,8 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 
 	if ($display)    {
 	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id)); 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -804,7 +804,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 }
 
 
-//---------------------------------------graph host-----------------------------
+//--------------------------------------- graph host-----------------------------
 
 function graph_host($display=false, $update=false, $force_update=false) {
         global $config;
@@ -928,8 +928,8 @@ function graph_host($display=false, $update=false, $force_update=false) {
 
 	if ($display)    {
 	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id)); 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2080,8 +2080,8 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 
 	if ($display)    {
                 $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-                                            WHERE panel_id= ?',
-                                            array($panel_id)); 
+                                            WHERE panel_id= ? AND user_id= ?',
+                                            array($panel_id, $_SESSION['sess_user_id'])); 
 
                 $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
                         floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2202,8 +2202,8 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 
 	if ($display)    {
 	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id)); 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2323,8 +2323,8 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 
 	if ($display)    {
 	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id)); 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2440,8 +2440,8 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 
 	if ($display)    {
 	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id)); 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -3030,8 +3030,8 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 
 	if ($display)    {
 	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id)); 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
