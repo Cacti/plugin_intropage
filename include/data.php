@@ -1465,7 +1465,7 @@ function trend($display=false, $update=false, $force_update=false) {
 
 	        	$sql = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`, name, value
         	        	FROM plugin_intropage_trends
-                		WHERE name='host' AND host_id = ?
+                		WHERE name='host' AND user_id = ?
                 		ORDER BY cur_timestamp desc
 	                	LIMIT 10",
 	                	array($user['id']));
