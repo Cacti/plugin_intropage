@@ -146,7 +146,7 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('analyse_log','/plugins/intropage/include/data.php','yes',300,50,'Analyse cacti log (last xxx rows)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_login','/plugins/intropage/include/data.php','yes',300,51,'Analyse last logins')");
+		('analyse_login','/plugins/intropage/include/data.php','yes',300,51,'Analyse last logins. MAY CONTAIN SENSITIVE INFORMATION!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('top5_ping','/plugins/intropage/include/data.php','yes',300,60,'Hosts with the worst ping response')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
