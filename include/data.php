@@ -466,7 +466,6 @@ function cpuload($display=false, $update=false, $force_update=false) {
                 	}
         	}
 
-//		$user = isset($run_from_poller) ? 0:
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			VALUES ( ?, ?, ?, ?, ?)',
 			array($id,$panel_id,0,$result['data'],$result['alarm']));
@@ -690,7 +689,6 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 				VALUES ( ?, ?, ?, ?, ?)',
 				array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
-			
 		}
         }
 
