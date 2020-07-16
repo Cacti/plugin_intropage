@@ -605,73 +605,99 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 		'last_update' => NULL,
         );
 
-        $graph = array ('pie' => array(
-                        'title' => __('Datasources: ', 'intropage'),
-                        'label' => array(),
-                        'data' => array(),
-                ),
-	);
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
 
-        $id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
-                                panel_id= ? AND last_update IS NOT NULL',
-                                array($panel_id));
-                                
-        if (!$id) {                             
-            	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-                            VALUES ( ?, ?, ?, "gray", 1000)',
-                            array($panel_id, 0, __('Waiting for data', 'intropage')));
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+		$users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+	}
 
-            	$id = db_fetch_insert_id();
-        }
+	foreach ($users as $user)	{
 
-        $last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-                                        WHERE user_id=0 and panel_id= ?',
-                                        array($panel_id));
-                                        
-        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-                                        WHERE panel_id= ?',
-                                        array($panel_id));
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
 
-        if ( $force_update || time() > ($last_update + $update_interval))       {
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
 
-        	$sql_ds = db_fetch_assoc('SELECT data_input.type_id, COUNT(data_input.type_id) AS total
-                	FROM data_local
-                	INNER JOIN data_template_data
-                	ON (data_local.id = data_template_data.local_data_id)
-                	LEFT JOIN data_input
-                	ON (data_input.id=data_template_data.data_input_id)
-                	LEFT JOIN data_template
-                	ON (data_local.data_template_id=data_template.id)
-                	WHERE local_data_id<>0
-                	GROUP BY type_id
-                	LIMIT 6');
+	    		$id = db_fetch_insert_id();
+		}
 
-        	if (cacti_sizeof($sql_ds)) {
-                	foreach ($sql_ds as $item) {
-                        	if (!is_null($item['type_id'])) {
-                                	array_push($graph['pie']['label'], preg_replace('/script server/', 'SS', $input_types[$item['type_id']]));
-                                	array_push($graph['pie']['data'], $item['total']);
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
 
-                                	$result['data'] .= preg_replace('/script server/', 'SS', $input_types[$item['type_id']]) . ': ';
-                                	$result['data'] .= $item['total'] . '<br/>';
-                        	}
-                	}
-                       	$result['data'] = intropage_prepare_graph($graph);
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
+
+
+	    		$x = 0;	// reference
+			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+
+	    		if (count($allowed) > 0) {
+                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
+    	    		} else {
+                		$allowed_hosts = false;
+    	    		}
+
+	    		if ($allowed_hosts)	{
+
+			        $graph = array ('pie' => array(
+        	        	        'title' => __('Datasources: ', 'intropage'),
+                	        	'label' => array(),
+                        		'data' => array(),
+                			),
+				);
+
+	                        $sql_ds = db_fetch_assoc_prepared('SELECT data_input.type_id, COUNT(data_input.type_id) AS total
+        	                        FROM data_local
+                	                INNER JOIN data_template_data
+                        	        ON (data_local.id = data_template_data.local_data_id)
+                                	LEFT JOIN data_input
+	                                ON (data_input.id=data_template_data.data_input_id)
+        	                        LEFT JOIN data_template
+                	                ON (data_local.data_template_id=data_template.id)
+                        	        WHERE local_data_id<>0 AND data_local.host_id in ( ? )
+                                	GROUP BY type_id
+	                                LIMIT 6',
+        	                        array($allowed_hosts));
+
+        			if (cacti_sizeof($sql_ds)) {
+                			foreach ($sql_ds as $item) {
+                       			 	if (!is_null($item['type_id'])) {
+                                			array_push($graph['pie']['label'], preg_replace('/script server/', 'SS', $input_types[$item['type_id']]));
+                                			array_push($graph['pie']['data'], $item['total']);
+
+	                                		$result['data'] .= preg_replace('/script server/', 'SS', $input_types[$item['type_id']]) . ': ';
+        	                        		$result['data'] .= $item['total'] . '<br/>';
+                	        		}
+                			}
+                       			$result['data'] = intropage_prepare_graph($graph);
+	        			unset($graph);
+        			}
+			} else {
+            			$result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+			}
 	
-        	} else {
-                	$result['data'] = __('No untemplated datasources found');
-                	unset($graph);
-        	}
 
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
-			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,0,$result['data'],$result['alarm']));
+			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+				VALUES ( ?, ?, ?, ?, ?)',
+				array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+			
+		}
         }
 
 	if ($display)    {
                 $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
-                                            WHERE panel_id= ?',
-                                            array($panel_id)); 
+                                            WHERE panel_id= ? AND user_id= ?',
+                                            array($panel_id, $_SESSION['sess_user_id'])); 
 
                 $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
                         floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -703,10 +729,8 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
 		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
 				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
-
 	}	
 
 	foreach ($users as $user)	{

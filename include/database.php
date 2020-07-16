@@ -146,7 +146,7 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('analyse_log','/plugins/intropage/include/data.php','yes',300,50,'Analyse cacti log (last xxx rows)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_login','/plugins/intropage/include/data.php','yes',300,51,'Analyse last logins. MAY CONTAIN SENSITIVE INFORMATION!')");
+		('analyse_login','/plugins/intropage/include/data.php','yes',300,51,'Analyse last logins. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('top5_ping','/plugins/intropage/include/data.php','yes',300,60,'Hosts with the worst ping response')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
@@ -154,11 +154,11 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('ntp','/plugins/intropage/include/data.php','no',7200,30,'Diference between localtime and NTP')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('graph_data_source','/plugins/intropage/include/data.php','yes',7200,20,'Grap of all datasources')");
+		('graph_data_source','/plugins/intropage/include/data.php','yes',7200,20,'Graph of datasources')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('graph_host_template','/plugins/intropage/include/data.php','yes',7200,19,'Graph of all host templates')");
+		('graph_host_template','/plugins/intropage/include/data.php','yes',7200,19,'Graph of host templates')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('graph_host','/plugins/intropage/include/data.php','yes',7200,18,'Graph of all hosts')");
+		('graph_host','/plugins/intropage/include/data.php','yes',7200,18,'Graph of hosts (up,down,...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('info','/plugins/intropage/include/data.php','no',864000,5,'Info about system/cacti')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
@@ -186,7 +186,7 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('boost','/plugins/intropage/include/data.php','no',300,47,'Information about boost process')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('extrem','/plugins/intropage/include/data.php','yes',300,78,'Table with 24 hours extrems (longest poller run, down hosts)')");
+		('extrem','/plugins/intropage/include/data.php','yes',300,78,'Table with 24 hours extrems (longest poller run, down hosts).MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('graph_thold','/plugins/intropage/include/data.php','yes',300,18,'Plugin Thold graph (all, trigerred, ...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
