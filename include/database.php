@@ -143,9 +143,9 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('trend','/plugins/intropage/include/data.php','no',300,75,'Few trends (down hosts, trigged tholds,...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('poller_info','/plugins/intropage/include/data.php','yes',60,74,'Poller information'. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!)");
+		('poller_info','/plugins/intropage/include/data.php','yes',60,74,'Poller information. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('poller_stat','/plugins/intropage/include/data.php','no',60,73,'Poller statistics'. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!)");
+		('poller_stat','/plugins/intropage/include/data.php','no',60,73,'Poller statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('analyse_tree_host_graph','/plugins/intropage/include/data.php','yes',1800,33,'Analyse trees, hosts, ...')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
