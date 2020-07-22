@@ -260,6 +260,7 @@ function intropage_upgrade_database() {
 			api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
 			api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
     			api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
+			api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
 		}
 
 		// Set the new version
