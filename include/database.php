@@ -61,37 +61,11 @@ function intropage_drop_database() {
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_trends');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_auth');
 }
 
 function intropage_initialize_database() {
 	global $config;
-/*
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-*/
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
@@ -122,7 +96,6 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['type']      = 'InnoDB';
-//	$data['primary']   = 'panel_id';
 	$data['comment']   = 'panel x dashboard dependency';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_dashboard', $data);
 
@@ -144,15 +117,15 @@ function intropage_initialize_database() {
 	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_log','/plugins/intropage/include/data.php','yes',300,50,'Analyse cacti log (last xxx rows)')");
+		('analyse_log','/plugins/intropage/include/data.php','yes',300,50,'Analyse cacti log (last xxx rows). MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('analyse_login','/plugins/intropage/include/data.php','yes',300,51,'Analyse last logins. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('top5_ping','/plugins/intropage/include/data.php','yes',300,60,'Hosts with the worst ping response')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('cpuload','/plugins/intropage/include/data.php','no',60,59,'CPU utilization graph (only Linux)')");
+		('cpuload','/plugins/intropage/include/data.php','no',60,59,'CPU utilization graph (only Linux). MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('ntp','/plugins/intropage/include/data.php','no',7200,30,'Diference between localtime and NTP')");
+		('ntp','/plugins/intropage/include/data.php','no',7200,30,'Diference between localtime and NTP. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('graph_data_source','/plugins/intropage/include/data.php','yes',7200,20,'Graph of datasources')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
@@ -160,19 +133,19 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('graph_host','/plugins/intropage/include/data.php','yes',7200,18,'Graph of hosts (up,down,...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('info','/plugins/intropage/include/data.php','no',864000,5,'Info about system/cacti')");
+		('info','/plugins/intropage/include/data.php','no',864000,5,'Info about system/cacti. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_db','/plugins/intropage/include/data.php','no',864000,7,'Analyse MySQL database')");
+		('analyse_db','/plugins/intropage/include/data.php','no',864000,7,'Analyse MySQL database. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('maint','/plugins/intropage/include/data.php','no',3600,98,'Maint plugin')");
+		('maint','/plugins/intropage/include/data.php','no',300,98,'Maint plugin')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('admin_alert','/plugins/intropage/include/data.php','no',3600,99,'Extra admin notify panel for all users')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('trend','/plugins/intropage/include/data.php','no',300,75,'Few trends (down hosts, trigged tholds,...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('poller_info','/plugins/intropage/include/data.php','yes',60,74,'Poller information')");
+		('poller_info','/plugins/intropage/include/data.php','yes',60,74,'Poller information'. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('poller_stat','/plugins/intropage/include/data.php','no',60,73,'Poller statistics')");
+		('poller_stat','/plugins/intropage/include/data.php','no',60,73,'Poller statistics'. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!)");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('analyse_tree_host_graph','/plugins/intropage/include/data.php','yes',1800,33,'Analyse trees, hosts, ...')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
@@ -184,28 +157,28 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('thold_event','/plugins/intropage/include/data.php','yes',300,77,'Plugin thold - last events')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('boost','/plugins/intropage/include/data.php','no',300,47,'Information about boost process')");
+		('boost','/plugins/intropage/include/data.php','no',300,47,'Information about boost process. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('extrem','/plugins/intropage/include/data.php','yes',300,78,'Table with 24 hours extrems (longest poller run, down hosts).MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
+		('extrem','/plugins/intropage/include/data.php','yes',300,78,'Table with 24 hours extrems (longest poller run, down hosts)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('graph_thold','/plugins/intropage/include/data.php','yes',300,18,'Plugin Thold graph (all, trigerred, ...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('mactrack','/plugins/intropage/include/data.php','no',900,28,'Plugin Mactrack statistics')");
+		('mactrack','/plugins/intropage/include/data.php','no',900,28,'Plugin Mactrack statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('mactrack_sites','/plugins/intropage/include/data.php','yes',900,27,'Plugin Mactrack sites statistics')");
+		('mactrack_sites','/plugins/intropage/include/data.php','yes',900,27,'Plugin Mactrack sites statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('plugin_syslog','/plugins/intropage/include/data.php','no',900,26,'Plugin Syslog statistics')");
+		('plugin_syslog','/plugins/intropage/include/data.php','no',900,26,'Plugin Syslog statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
 	$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
@@ -213,7 +186,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
@@ -242,32 +215,6 @@ function intropage_upgrade_database() {
 
 	if (!cacti_version_compare($oldv, $current, '=')) {
 		if (cacti_version_compare($oldv,'0.9','<')) {
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-
 			db_execute('UPDATE plugin_hooks
 				SET function="intropage_config_form", file="include/settings.php"
 				WHERE name="intropage"
@@ -303,39 +250,24 @@ function intropage_upgrade_database() {
 				WHERE login_opts IN (4,5)');
 		}
 
-		if (cacti_version_compare($oldv,'1.8.1', '<')) {
-			db_execute('ALTER TABLE plugin_intropage_trends
-				CHANGE COLUMN date cur_timestamp timestamp DEFAULT current_timestamp()');
-		}
 
-		if (cacti_version_compare($oldv,'1.8.2', '<')) {
-			db_execute('ALTER TABLE plugin_intropage_trends
-				MODIFY COLUMN value varchar(250) NULL DEFAULT NULL');
-		}
-
-		if (cacti_version_compare($oldv,'1.8.2', '<')) {
-			db_execute("DELETE FROM plugin_intropage_panel
-				WHERE panel='intropage_favourite_graph'");
-			db_execute("DELETE FROM plugin_intropage_user_setting
-				WHERE panel='intropage_favourite_graph' AND fav_graph_id is NULL");
-			db_execute("REPLACE INTO plugin_intropage_trends (name,value)
-				VALUES ('ar_poller_finish', '1')");
-		}
-
-		if (cacti_version_compare($oldv,'1.9.0', '<')) {
-			db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
-			db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
-			db_execute('ALTER TABLE plugin_intropage_trends ENGINE=InnoDB');
-			db_execute('DELETE FROM plugin_intropage_trends');
-			api_plugin_db_add_column('intropage', 'plugin_intropage_trends', array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'));
-			db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
-		}		
-
-		if (!db_column_exists('user_auth', 'intropage_plugin_syslog')) {
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-		}
 
 		if (cacti_version_compare($oldv,'1.9.2', '<')) {
+
+			db_execute('DROP TABLE IF EXISTS plugin_intropage_trends');
+		
+			$data              = array();
+			$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
+			$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
+			$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
+			$data['columns'][] = array('name' => 'value', 'type' => 'varchar(250)', 'NULL' => true, 'default' => null);
+			$data['type']      = 'InnoDB';
+			$data['comment']   = 'Intropage trends';
+			api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
+
+			db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
+		
+		
 			$data              = array();
 			$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 			$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
@@ -411,6 +343,11 @@ function intropage_upgrade_database() {
 			db_execute('ALTER TABLE user_auth drop column if exists intropage_boost');
 			db_execute('ALTER TABLE user_auth drop column if exists intropage_favourite_graph');
 			db_execute('ALTER TABLE user_auth drop column if exists intropage_plugin_syslog');
+
+			db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
+			db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
+
+			db_execute('ALTER TABLE plugin_intropage_trends ENGINE=InnoDB');
 		}
 
 
