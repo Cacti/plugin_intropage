@@ -253,11 +253,14 @@ function intropage_upgrade_database() {
 
 
 		if (cacti_version_compare($oldv,'2.0.1', '<')) {
-		    // a lot of changes, so:
-		    intropage_drop_database();
-		    intropage_initialize_database();
+			// a lot of changes, so:
+		    	intropage_drop_database();
+		    	intropage_initialize_database();
+		    
+			api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
+			api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
+    			api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 		}
-
 
 		// Set the new version
 		db_execute("UPDATE plugin_config
