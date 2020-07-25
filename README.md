@@ -53,6 +53,10 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
 
+	2.0.2 ---
+	All panels with user permission
+	Fix public/private community warning (#110)
+
 	2.0.1 ---
 	Fix wrong path (#100)
 	Fix remove permission (#102)

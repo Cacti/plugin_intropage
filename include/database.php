@@ -251,8 +251,7 @@ function intropage_upgrade_database() {
 		}
 
 
-
-		if (cacti_version_compare($oldv,'2.0.1', '<')) {
+		if (cacti_version_compare($oldv,'2.0.2', '<')) {
 			// a lot of changes, so:
 		    	intropage_drop_database();
 		    	intropage_initialize_database();
