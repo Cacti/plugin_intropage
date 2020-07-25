@@ -311,9 +311,10 @@ function display_information() {
 
 	// extra maint plugin panel - always first
 
-	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
+	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint' AND status=1")) {
 
-		$row = db_fetch_row("SELECT id, data FROM plugin_intropage_panel_data WHERE panel_id='maint'");
+		$row = db_fetch_row_prepared("SELECT id, data FROM plugin_intropage_panel_data WHERE panel_id='maint' and user_id=?",
+				array($_SESSION['sess_user_id']));
 		if ($row && strlen($row['data']) > 20 && $_SESSION['dashboard_id'] == 1) {
 			intropage_display_panel($row['id']);
 		}
