@@ -1417,6 +1417,8 @@ function trend($display=false, $update=false, $force_update=false) {
     	    		}
 
 			if ($allowed_hosts)	{
+/*
+old fast code
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
                         		(name,value,user_id)
                         		SELECT 'thold', COUNT(*),?
@@ -1424,6 +1426,23 @@ function trend($display=false, $update=false, $force_update=false) {
                         		WHERE thold_data.host_id in (" . $allowed_hosts . ") AND thold_data.thold_alert!=0
                         		OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger",
                         		array($user['id']));
+new code from thold plugin
+*/
+
+				include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
+				// right way but it is slow
+				$t_trig = 0; 
+				$x = '';
+				$sql_where = "td.thold_enabled = 'on' AND (((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger) 
+				OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user['id']);
+
+                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
+                        		(name,value,user_id)
+                        		VALUES ('thold', ?,?)",
+                        		array($t_trig,$user['id']));
+
 
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
                         		(name,value,user_id)
@@ -1984,7 +2003,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// thold plugin - logonly alert and warning thold
+        		// I don't use thold get_allowed_thold because of join plugin_thold_threshold_contact
+
         		if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+
             			$sql_result = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
                         		uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
                         		FROM thold_data AS td
@@ -3087,28 +3109,48 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-
 			if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
 				$result['alarm'] = 'gray';
 				$result['data']  = __('Thold plugin not installed/running', 'intropage');
 			} elseif (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $user['id'] . " AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
 				$result['data'] = __('You don\'t have plugin permission', 'intropage');
 			} else {
-				// need for thold - isn't any better solution?
-				$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $user['id']);
-   				$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
+/*
+				// old code, wrong counts
+https://github.com/Cacti/plugin_thold/issues/440
+                               // need for thold - isn't any better solution?
+                               $current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $user['id']);
+                               $sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 
-				$sql_join = ' LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
-					(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
-					(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $user['id'] . '))';
+                               $sql_join = ' LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
+                                       (thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
+                                       (thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $user['id'] . '))';
 
-				$t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
-				$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-				$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-				$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
-				$t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
+                               $t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
+                               $t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+                               $t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+                               $t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
+                               $t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
 
-				$count = $t_all + $t_brea + $t_trig + $t_disa;
+                               $count = $t_all + $t_brea + $t_trig + $t_disa;
+
+*/
+
+				// right way but it is slow
+
+				include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
+				$t_all = 0; $t_brea = 0; $t_trig = 0; $t_disa = 0;
+				$sql_where = '';
+				$x = '';
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_all, $user['id']);
+				$sql_where = "td.thold_enabled = 'on' AND ((td.thold_alert != 0 OR td.bl_alert > 0))";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_brea, $user['id']);
+				$sql_where = "td.thold_enabled = 'on' AND (((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger) 
+						OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user['id']);
+				$sql_where = "td.thold_enabled = 'off'";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $user['id']);
 
 				$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$user['id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
 				$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
@@ -3119,7 +3161,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 				$result['data'] .= sprintf($url_prefix, '3') . __('Trigged', 'intropage') . ": $t_trig$url_suffix<br/>";
 				$result['data'] .= sprintf($url_prefix, '0') . __('Disabled', 'intropage') . ": $t_disa$url_suffix<br/>";
 
-				if ($count > 0) {
+				if ($t_all > 0) {
 		                	$graph = array ('pie' => array(
 						'title' => $panel_name,
 						'label' => array(
