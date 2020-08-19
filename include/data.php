@@ -1406,7 +1406,8 @@ function trend($display=false, $update=false, $force_update=false) {
 		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
 				 ON t1.id=t2.user_id WHERE t1.enabled='on' AND t2.trend='on'");
 		foreach ($users as $user)	{
-			
+/*	
+old fast code		
 			$x= 0;
 			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
 
@@ -1417,8 +1418,8 @@ function trend($display=false, $update=false, $force_update=false) {
     	    		}
 
 			if ($allowed_hosts)	{
-/*
-old fast code
+
+
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
                         		(name,value,user_id)
                         		SELECT 'thold', COUNT(*),?
@@ -1450,6 +1451,8 @@ new code from thold plugin
                         		FROM host
                         		WHERE id in (" . $allowed_hosts . ") AND  status='1' AND disabled=''",
                         		array($user['id']));
+/*
+old code
 			}
 			else	{
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
@@ -1459,6 +1462,7 @@ new code from thold plugin
                         		(name,value,user_id) values ('host,0,?)",
                         		array($user['id']));
 			}
+*/			
                 }
 	}
 
