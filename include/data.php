@@ -1496,7 +1496,7 @@ new code from thold plugin
                         		(name,value,user_id)
                         		SELECT 'host', COUNT(*),?
                         		FROM host
-                        		WHERE id in (" . $allowed_hosts . ") AND  status='1' AND disabled=''",
+                        		WHERE id in (" . $_SESSION['allowed_hosts'][$user['id']] . ") AND  status='1' AND disabled=''",
                         		array($user['id']));
 /*
 old code
@@ -2286,7 +2286,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 
                 		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
                         		FROM host
-                        		WHERE host.id IN (" . $_allowed['allowed_hosts'][$user['id']] . ")
+                        		WHERE host.id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		ORDER BY availability
                         		LIMIT 5");
