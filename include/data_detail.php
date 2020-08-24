@@ -22,11 +22,19 @@
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
-
+$us = read_user_setting('hide_disabled');
+if ($us == 'on') {
+	set_user_setting('hide_disabled','');
+}
 $hosts = get_allowed_devices();
-    if (count($hosts) > 0) {
+if ($us == 'on') {
+	set_user_setting('hide_disabled','on');
+}
+
+
+if (count($hosts) > 0) {
             $_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
-    } else {
+} else {
             $_SESSION['allowed_hosts'] = false;
 }
 

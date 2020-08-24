@@ -33,6 +33,40 @@ if (isset($run_from_poller))	{
 	$_SESSION['sess_user_id'] = 0;
 }
 
+/*
+!!!! tohle nasadit, kdyz to bezi z polleru, ale mozna i pro vsechny. Jen musim obcas resit vyprseni techto dat
+!! nebo nemusim, proste se to pri kazdem polleru naplni znovu, to je ok, budou cerstva
+!!! musim si ale dat pozor v kodu, kdyz to nejde pollerem, abych TAM mel aktualni data
+*/
+
+$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+                         ON t1.id=t2.user_id WHERE t1.enabled='on'");
+    
+$x = 0;
+$_SESSION['allowed_hosts'] = array();
+foreach ($users as $user)       {
+	$us = read_user_setting('hide_disabled',false,false,$user['id']);
+	if ($us == 'on') {
+        	set_user_setting('hide_disabled','',$user['id']);
+	}
+       
+        $allowed = get_allowed_devices('','null',-1,$x,$user['id']);
+
+	if ($us == 'on') {
+        	set_user_setting('hide_disabled','on',$user['id']);
+	}
+
+        if (count($allowed) > 0) {
+        	$_SESSION['allowed_hosts'][$user['id']] = implode(',', array_column($allowed, 'id'));
+        	$_SESSION['allowed_hosts_count'][$user['id']] = count($allowed);
+	} else {
+        	$_SESSION['allowed_hosts'][$user['id']] = false;
+        	$_SESSION['allowed_hosts_count'][$user['id']] = 0;
+
+        }
+}
+
+
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 //------------------------------------ analyse_login -----------------------------------------------------
@@ -305,16 +339,20 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 				'last_update' =>  NULL,
 			);
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;	
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
     	    		} else {
                 		$allowed_hosts = false;
     	    		}
-
 	    		if ($allowed_hosts)	{
+
+*/
+
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -322,7 +360,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
 				$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
 					FROM host
-					WHERE host.id in (" . $allowed_hosts . ")
+					WHERE host.id in (" . $_SESSION['allowed_hosts'][$user['id']]	 . ")
 					AND disabled != 'on'
 					ORDER BY avg_time desc
 					LIMIT 5"
@@ -633,9 +671,9 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
@@ -644,6 +682,8 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
     	    		}
 
 	    		if ($allowed_hosts)	{
+*/
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 
 			        $graph = array ('pie' => array(
         	        	        'title' => __('Datasources: ', 'intropage'),
@@ -660,7 +700,7 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 	                                ON (data_input.id=data_template_data.data_input_id)
         	                        LEFT JOIN data_template
                 	                ON (data_local.data_template_id=data_template.id)
-                        	        WHERE local_data_id<>0 AND data_local.host_id in (' . $allowed_hosts . ' )
+                        	        WHERE local_data_id<>0 AND data_local.host_id in (' . $_SESSION['allowed_hosts'][$user['id']] . ' )
                                 	GROUP BY type_id LIMIT 6');
 
         			if (cacti_sizeof($sql_ds)) {
@@ -675,6 +715,7 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
                 			}
                        			$result['data'] = intropage_prepare_graph($graph);
 	        			unset($graph);
+  
         			}
 			} else {
             			$result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
@@ -751,9 +792,9 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
@@ -762,6 +803,9 @@ function graph_host_template($display=false, $update=false, $force_update=false)
     	    		}
 
 	    		if ($allowed_hosts)	{
+*/
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
+
         			$graph = array ('pie' => array(
                         		'title' => __('Host templates: ', 'intropage'),
                         		'label' => array(),
@@ -772,7 +816,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
                 		$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, 
                 			count(host.host_template_id) AS total
                         		FROM host_template LEFT JOIN host
-                        		ON (host_template.id = host.host_template_id) AND host.id IN ( " . $allowed_hosts . ")
+                        		ON (host_template.id = host.host_template_id) AND host.id IN ( " . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		GROUP by host_template_id
                         		ORDER BY total desc LIMIT 6");
 
@@ -867,9 +911,9 @@ function graph_host($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
@@ -878,6 +922,9 @@ function graph_host($display=false, $update=false, $force_update=false) {
     	    		}
 
         		if ($allowed_hosts) {
+*/
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
+
         			$graph = array ('pie' => array(
                         		'title' => __('Hosts: ', 'intropage'),
                         		'label' => array(),
@@ -891,11 +938,11 @@ function graph_host($display=false, $update=false, $force_update=false) {
 	    				array($user['id']))) ? true : false;
 
 
-                		$h_all  = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ')');
-                		$h_up   = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=3 AND disabled=""');
-                		$h_down = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=1 AND disabled=""');
-                		$h_reco = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=2 AND disabled=""');
-                		$h_disa = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND disabled="on"');
+                		$h_all  = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
+                		$h_up   = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND status=3 AND disabled=""');
+                		$h_down = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND status=1 AND disabled=""');
+                		$h_reco = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND status=2 AND disabled=""');
+                		$h_disa = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND disabled="on"');
 
                 		$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
                 		$url_prefix = $console_access ? '<a href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
@@ -1232,16 +1279,16 @@ function maint($display=false, $update=false, $force_update=false) {
         		$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
 			if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint' and status=1")) {
-
-		    		$x = 0;	// reference
-				$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+		    		$x = 0;
+				$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 	
 		    		if (count($allowed) > 0) {
                 			$allowed_hosts = implode(',', array_column($allowed, 'id'));
     	    			} else {
                 			$allowed_hosts = false;
     	    			}
-
+*/
         			$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
         			if (cacti_sizeof($schedules)) {
                 			foreach ($schedules as $sc) {
@@ -1253,7 +1300,7 @@ function maint($display=false, $update=false, $force_update=false) {
 									$hosts = db_fetch_assoc_prepared('SELECT description FROM host
                                         					      INNER JOIN plugin_maint_hosts
 					                                              ON host.id=plugin_maint_hosts.host
-					                                              WHERE host.id in (' . $allowed_hosts . ') AND schedule = ?',
+					                                              WHERE host.id in (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND schedule = ?',
 					                                              array($sc['id']));
 
 					                                if (cacti_sizeof($hosts)) {
@@ -1279,7 +1326,7 @@ function maint($display=false, $update=false, $force_update=false) {
                                 	                		$hosts = db_fetch_assoc_prepared('SELECT description FROM host
                                         	                		INNER JOIN plugin_maint_hosts
                                                 	        		ON host.id=plugin_maint_hosts.host
-                                                        			WHERE host.id in (' . $allowed_hosts . ') AND schedule = ?',
+                                                        			WHERE host.id in (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND schedule = ?',
                                                         			array($sc['id']));
 
 	                                                		if (cacti_sizeof($hosts)) {
@@ -1408,8 +1455,8 @@ function trend($display=false, $update=false, $force_update=false) {
 		foreach ($users as $user)	{
 /*	
 old fast code		
-			$x= 0;
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+			$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
@@ -1889,22 +1936,23 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                                         AND user_auth_realm.realm_id=8',
                                         array($user['id']))) ? true : false;
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
     	    		} else {
                 		$allowed_hosts = false;
     	    		}
-
+*/
         		$total_errors = 0;
 
         		// hosts with same IP
         		if ($allowed_hosts) {
                 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts . ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		GROUP BY hostname,snmp_port
                         		HAVING NoDups > 1");
@@ -1924,7 +1972,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		if ($allowed_hosts) {
                 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
                         		FROM host
-					WHERE id IN (" . $allowed_hosts . ")
+					WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		GROUP BY description
                         		HAVING NoDups > 1");
@@ -1953,7 +2001,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                 		ON dtr.local_data_id=dtd.local_data_id
                 		LEFT JOIN graph_templates_item AS gti
                 		ON (gti.task_item_id=dtr.id)
-				WHERE dl.host_id IN (' . $allowed_hosts . ') 
+				WHERE dl.host_id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') 
                 		GROUP BY dl.id
                 		HAVING deletable=0
                 		ORDER BY `name_cache` ASC');
@@ -1992,7 +2040,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                 		INNER JOIN data_template AS dt ON dt.id=dl.data_template_id
                 		INNER JOIN host AS h ON h.id = dl.host_id
                 		WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)
-                		AND dl.host_id in (' . $allowed_hosts . ')');
+                		AND dl.host_id in (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
 
         		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
@@ -2031,7 +2079,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                             		(td.notify_extra ='' or td.notify_extra is NULL) AND
                             		(td.notify_warning_extra='' or td.notify_warning_extra is NULL)
                             		AND con.contact_id IS NULL
-                            		AND gl.host_id IN (" . $allowed_hosts . ")
+                            		AND gl.host_id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                             		HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
 
             			$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -2056,7 +2104,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                         		FROM host
                         		INNER JOIN graph_tree_items
                         		ON (host.id = graph_tree_items.host_id)
-                        		WHERE host.id IN (' . $allowed_hosts . ')
+                        		WHERE host.id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')
                         		GROUP BY description
                         		HAVING `count` > 1');
 
@@ -2071,7 +2119,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		if ($allowed_hosts) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts . ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		AND id NOT IN (
 					SELECT DISTINCT host_id
@@ -2090,7 +2138,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		if ($allowed_hosts) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts . ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		AND id NOT IN (
                                 		SELECT DISTINCT host_id
@@ -2109,7 +2157,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts. ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		AND (snmp_community ='public' OR snmp_community='private')
 					AND snmp_version IN (1,2) 
@@ -2127,7 +2175,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                 		if ($allowed_hosts) {
                         		$sql_result = db_fetch_assoc("SELECT id, description, hostname
                                 		FROM host
-                                		WHERE id IN (" . $allowed_hosts . ")
+                                		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                                 		AND monitor != 'on'");
 
                         		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -2218,9 +2266,9 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
@@ -2229,6 +2277,8 @@ function top5_availability($display=false, $update=false, $force_update=false) {
     	    		}
 
 	    		if ($allowed_hosts)	{
+*/
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -2236,7 +2286,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 
                 		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
                         		FROM host
-                        		WHERE host.id IN (" . $allowed_hosts . ")
+                        		WHERE host.id IN (" . $_allowed['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		ORDER BY availability
                         		LIMIT 5");
@@ -2339,9 +2389,9 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
@@ -2350,6 +2400,8 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
     	    		}
 
 	    		if ($allowed_hosts)	{
+*/
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -2357,7 +2409,7 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 
 		                $sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
                 		        FROM host
-                        		WHERE host.id in (" . $allowed_hosts . ")
+                        		WHERE host.id in (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		ORDER BY polling_time desc
                         		LIMIT 5");
@@ -2458,9 +2510,9 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
@@ -2469,6 +2521,8 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
     	    		}
 
 	    		if ($allowed_hosts)	{
+*/
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -2476,7 +2530,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 
                 		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
                         		FROM host
-                        		WHERE host.id in (" . $allowed_hosts . ")
+                        		WHERE host.id in (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		ORDER BY ratio desc
                        	 		LIMIT 5");
@@ -2574,16 +2628,16 @@ function thold_event($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
     	    		} else {
                 		$allowed_hosts = false;
     	    		}
-
+*/
 	        	if (db_fetch_cell("SELECT count(*) FROM plugin_config WHERE directory='thold' AND status = 1") == 0) {
         	        	$result['alarm'] = 'yellow';
                 		$result['data']  = __('Plugin Thold isn\'t installed or started', 'intropage');
@@ -2608,7 +2662,7 @@ function thold_event($display=false, $update=false, $force_update=false) {
                 	        ON (gl.host_id=uap1.item_id AND uap1.type=3)
 	                        LEFT JOIN user_auth_perms AS uap2
         	                ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-                	        WHERE td.host_id IN (' . $allowed_hosts . ')
+                	        WHERE td.host_id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')
 	                        HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
         	                ORDER BY `time` DESC
                 	        LIMIT 10');
@@ -2840,17 +2894,17 @@ function extrem($display=false, $update=false, $force_update=false) {
 		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
 				 ON t1.id=t2.user_id WHERE t1.enabled='on' AND t2.trend='on'");
 		foreach ($users as $user)	{
-			
-			$x= 0;
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*			
+			$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
     	    		} else {
                 		$allowed_hosts = false;
     	    		}
-
-			$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host WHERE id IN (' . $allowed_hosts . ')');
+*/
+			$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
         		db_execute_prepared('REPLACE INTO plugin_intropage_trends
                 		(name, value, user_id) VALUES (?, ?, 0)',
                 		array('failed_polls', $count));
@@ -2901,16 +2955,16 @@ function extrem($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']); 
+/*
+	    		$x = 0;
+			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
 	    		if (count($allowed) > 0) {
                 		$allowed_hosts = implode(',', array_column($allowed, 'id'));
     	    		} else {
                 		$allowed_hosts = false;
     	    		}
-
+*/
 	    		$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -2991,8 +3045,6 @@ function extrem($display=false, $update=false, $force_update=false) {
 
 	        	$result['data'] .= '</td>';
 
-
-
         		// poller output items
         		if ($console_access) {
 		        	$result['data'] .= '<td class="rpad texalirig">';
@@ -3017,7 +3069,6 @@ function extrem($display=false, $update=false, $force_update=false) {
 	        	}
 
 	        	// failed polls
-
 			if ($console_access) {
         			$result['data'] .= '<td class="rpad texalirig">';
 		        	$result['data'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
