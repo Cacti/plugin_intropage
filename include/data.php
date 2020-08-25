@@ -3141,7 +3141,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 	foreach ($users as $user)	{
 		$result = array(
 			'name' => $panel_name,
-			'alarm' => 'gray',
+			'alarm' => 'green',
 			'data' => '',
 			'last_update' =>  NULL,
 		);
