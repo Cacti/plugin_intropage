@@ -60,12 +60,14 @@ foreach ($users as $user)       {
         	$_SESSION['allowed_hosts'][$user['id']] = implode(',', array_column($allowed, 'id'));
         	$_SESSION['allowed_hosts_count'][$user['id']] = count($allowed);
 	} else {
-        	$_SESSION['allowed_hosts'][$user['id']] = false;
+        	$_SESSION['allowed_hosts'][$user['id']] = -1;
         	$_SESSION['allowed_hosts_count'][$user['id']] = 0;
-
         }
 }
 
+//echo "zacinam\n";
+//print_r($_SESSION['allowed_hosts']);
+//echo "\nzacinam\n\n";
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
@@ -1498,6 +1500,11 @@ new code from thold plugin
                         		FROM host
                         		WHERE id in (" . $_SESSION['allowed_hosts'][$user['id']] . ") AND  status='1' AND disabled=''",
                         		array($user['id']));
+//echo "\n\n";
+//echo "resim usera: " . $user['id'] . "\n";
+//print_r($_SESSION['allowed_hosts'][$user['id']]);
+//echo "\n\n";
+
 /*
 old code
 			}
@@ -1949,7 +1956,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		$total_errors = 0;
 
         		// hosts with same IP
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
                         		FROM host
                         		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
@@ -1969,7 +1976,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// same description
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
                         		FROM host
 					WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
@@ -2099,7 +2106,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
         		// device in more trees
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
                         		FROM host
                         		INNER JOIN graph_tree_items
@@ -2116,7 +2123,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// host without graph
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
                         		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
@@ -2135,7 +2142,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// host without tree
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
                         		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
@@ -2153,8 +2160,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// public/private community
-        		if ($allowed_hosts) {
-
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
                         		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
@@ -2172,7 +2178,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 
         		// plugin monitor - host without monitoring
         		if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='monitor'")) { // installed plugin monitor?
-                		if ($allowed_hosts) {
+        			if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                         		$sql_result = db_fetch_assoc("SELECT id, description, hostname
                                 		FROM host
                                 		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")

@@ -35,7 +35,7 @@ if ($us == 'on') {
 if (count($hosts) > 0) {
             $_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
 } else {
-            $_SESSION['allowed_hosts'] = false;
+            $_SESSION['allowed_hosts'] = -1;
 }
 
 if (!function_exists('array_column')) {
@@ -267,7 +267,7 @@ function analyse_tree_host_graph_detail() {
 		ON dtr.local_data_id=dtd.local_data_id
 		LEFT JOIN graph_templates_item AS gti
 		ON (gti.task_item_id=dtr.id)
-		WHERE dl.host_id IN (' . $allowed_hosts . ') 
+		WHERE dl.host_id IN (' . $_SESSION['allowed_hosts'] . ') 
 		GROUP BY dl.id
 		HAVING deletable=0
 		ORDER BY `name_cache` ASC');
@@ -683,7 +683,7 @@ function graph_data_source_detail() {
 		ON (data_input.id=data_template_data.data_input_id)
 		LEFT JOIN data_template
 		ON (data_local.data_template_id=data_template.id)
-	      	WHERE local_data_id<>0 AND data_local.host_id in (' . $allowed_hosts . ')
+	      	WHERE local_data_id<>0 AND data_local.host_id in (' . $_SESSION['allowed_hosts'] . ')
 		GROUP BY type_id');
 
 	$total = 0;

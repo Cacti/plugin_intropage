@@ -52,6 +52,8 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	2.0.3 ---
+	Poller speed up
 
 	2.0.2 ---
 	All panels with user permission
