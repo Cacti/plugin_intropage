@@ -33,11 +33,6 @@ if (isset($run_from_poller))	{
 	$_SESSION['sess_user_id'] = 0;
 }
 
-/*
-!!!! tohle nasadit, kdyz to bezi z polleru, ale mozna i pro vsechny. Jen musim obcas resit vyprseni techto dat
-!! nebo nemusim, proste se to pri kazdem polleru naplni znovu, to je ok, budou cerstva
-!!! musim si ale dat pozor v kodu, kdyz to nejde pollerem, abych TAM mel aktualni data
-*/
 
 $users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
                          ON t1.id=t2.user_id WHERE t1.enabled='on'");
@@ -64,10 +59,6 @@ foreach ($users as $user)       {
         	$_SESSION['allowed_hosts_count'][$user['id']] = 0;
         }
 }
-
-//echo "zacinam\n";
-//print_r($_SESSION['allowed_hosts']);
-//echo "\nzacinam\n\n";
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
@@ -340,19 +331,6 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-
-/*
-	    		$x = 0;	
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-	    		if ($allowed_hosts)	{
-
-*/
 
 	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
@@ -673,18 +651,6 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
-*/
 	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 
 			        $graph = array ('pie' => array(
@@ -794,18 +760,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
-*/
 	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 
         			$graph = array ('pie' => array(
@@ -913,18 +868,7 @@ function graph_host($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-        		if ($allowed_hosts) {
-*/
 	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 
         			$graph = array ('pie' => array(
@@ -1280,16 +1224,7 @@ function maint($display=false, $update=false, $force_update=false) {
         		$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
 			if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint' and status=1")) {
-/*
-		    		$x = 0;
-				$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
-	
-		    		if (count($allowed) > 0) {
-                			$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    			} else {
-                			$allowed_hosts = false;
-    	    			}
-*/
+
         			$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
         			if (cacti_sizeof($schedules)) {
                 			foreach ($schedules as $sc) {
@@ -1942,16 +1877,6 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                                         AND user_auth_realm.realm_id=8',
                                         array($user['id']))) ? true : false;
 
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-*/
         		$total_errors = 0;
 
         		// hosts with same IP
@@ -2271,18 +2196,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
-*/
 	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
@@ -2394,18 +2308,7 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
-*/
 	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
@@ -2515,18 +2418,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
-*/
 	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
@@ -2633,16 +2525,7 @@ function thold_event($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-*/
 	        	if (db_fetch_cell("SELECT count(*) FROM plugin_config WHERE directory='thold' AND status = 1") == 0) {
         	        	$result['alarm'] = 'yellow';
                 		$result['data']  = __('Plugin Thold isn\'t installed or started', 'intropage');
@@ -2899,16 +2782,7 @@ function extrem($display=false, $update=false, $force_update=false) {
 		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
 				 ON t1.id=t2.user_id WHERE t1.enabled='on' AND t2.trend='on'");
 		foreach ($users as $user)	{
-/*			
-			$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-*/
 			$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
         		db_execute_prepared('REPLACE INTO plugin_intropage_trends
                 		(name, value, user_id) VALUES (?, ?, 0)',
@@ -2960,16 +2834,7 @@ function extrem($display=false, $update=false, $force_update=false) {
 				'data' => '',
 				'last_update' =>  NULL,
 			);
-/*
-	    		$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-*/
 	    		$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
