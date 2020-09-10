@@ -1198,7 +1198,6 @@ function analyse_db($display=false, $update=false, $force_update=false) {
        		}
 
        		$result['data'] .= __('Connection errors: %s', $cerrors, 'intropage') . '<br/>';
-       		$result['data'] .= __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<br/>';
        		$result['data'] .= __('Damaged tables: %s', $damaged, 'intropage') . '<br/>' .
                		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
        			__('All tables: %s', count($tables), 'intropage');
