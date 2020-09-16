@@ -1391,27 +1391,23 @@ function trend($display=false, $update=false, $force_update=false) {
 		foreach ($users as $user)	{
 /*	
 old fast code		
-			$x = 0;
-			$allowed =  get_allowed_devices('','null',-1,$x,$user['id']); 
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-			if ($allowed_hosts)	{
+*/
+			if ($_SESSION['allowed_hosts'][$user['id']])	{
 
 
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
                         		(name,value,user_id)
                         		SELECT 'thold', COUNT(*),?
                         		FROM thold_data
-                        		WHERE thold_data.host_id in (" . $allowed_hosts . ") AND thold_data.thold_alert!=0
-                        		OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger",
+                        		WHERE thold_data.host_id in (" . $_SESSION['allowed_hosts'][$user['id']] . ") 
+                        		AND thold_data.thold_enabled = 'on' 
+                        		AND (((thold_data.thold_alert != 0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) 
+					OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)))",
                         		array($user['id']));
+                        		
+/*                        		
 new code from thold plugin
-*/
+
 
 				include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
 
@@ -1426,7 +1422,7 @@ new code from thold plugin
                         		(name,value,user_id)
                         		VALUES ('thold', ?,?)",
                         		array($t_trig,$user['id']));
-
+*/
 
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
                         		(name,value,user_id)
@@ -1434,13 +1430,6 @@ new code from thold plugin
                         		FROM host
                         		WHERE id in (" . $_SESSION['allowed_hosts'][$user['id']] . ") AND  status='1' AND disabled=''",
                         		array($user['id']));
-//echo "\n\n";
-//echo "resim usera: " . $user['id'] . "\n";
-//print_r($_SESSION['allowed_hosts'][$user['id']]);
-//echo "\n\n";
-
-/*
-old code
 			}
 			else	{
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
@@ -1450,7 +1439,7 @@ old code
                         		(name,value,user_id) values ('host,0,?)",
                         		array($user['id']));
 			}
-*/			
+			
                 }
 	}
 
@@ -3041,8 +3030,9 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 				$result['data'] = __('You don\'t have plugin permission', 'intropage');
 			} else {
 /*
-				// old code, wrong counts
+				// old code, faster
 https://github.com/Cacti/plugin_thold/issues/440
+*/
                                // need for thold - isn't any better solution?
                                $current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $user['id']);
                                $sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
@@ -3051,16 +3041,15 @@ https://github.com/Cacti/plugin_thold/issues/440
                                        (thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
                                        (thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $user['id'] . '))';
 
-                               $t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
-                               $t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-                               $t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-                               $t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
+                               $t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND $sql_where");
+                               $t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+                               $t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
                                $t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
 
                                $count = $t_all + $t_brea + $t_trig + $t_disa;
 
-*/
 
+/*
 				// right way but it is slow
 
 				include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
@@ -3076,7 +3065,7 @@ https://github.com/Cacti/plugin_thold/issues/440
 				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user['id']);
 				$sql_where = "td.thold_enabled = 'off'";
 				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $user['id']);
-
+*/
 				$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$user['id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
 				$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
 				$url_suffix = $has_access ? '</a>' : '';

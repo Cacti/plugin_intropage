@@ -54,6 +54,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 ## Changelog
 	2.0.3 ---
 	Poller speed up
+	Fix a lot of small bugs
 
 	2.0.2 ---
 	All panels with user permission

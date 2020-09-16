@@ -821,6 +821,7 @@ function graph_thold_detail() {
 	} elseif (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $_SESSION['sess_user_id'] . " AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
 		$result['detail'] = __('You don\'t have permission', 'intropage');
 	} else {
+/* better code, slower
 		include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
 
                 // right way but it is slow
@@ -835,9 +836,10 @@ function graph_thold_detail() {
                 $t_trig_result = get_allowed_thresholds($sql_where, 'null', '', $t_trig, $_SESSION['sess_user_id']);
                 $sql_where = "td.thold_enabled = 'off'";
                 $x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $_SESSION['sess_user_id']);
-
+*/
 /* old fast code, but wrong counts	
 https://github.com/Cacti/plugin_thold/issues/440
+*/
 		// need for thold - isn't any better solution?
 		$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
    		$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
@@ -846,16 +848,14 @@ https://github.com/Cacti/plugin_thold/issues/440
 			(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $_SESSION['sess_user_id'] . ') OR
 			(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $_SESSION['sess_user_id'] . '))';
 
-		$t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
-		$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND
-		 thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
-
+		$t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where AND thold_data.thold_enabled='on' ");
+		$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND ((thold_data.thold_alert!=0 AND
+		 	thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
 		$t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
 
 		$count = $t_all + $t_brea + $t_trig + $t_disa;
-*/
+
 
 		$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$_SESSION['sess_user_id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
 		$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
@@ -869,9 +869,10 @@ https://github.com/Cacti/plugin_thold/issues/440
 		// alarms and details
 		if ($t_brea > 0) {
 			$result['alarm'] = 'yellow';
-//			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
 			$result['detail'] .= '<b>' . __('BREACHED', 'intropage') . ':</b><br/>';
-			foreach ($t_brea_result as $host) {
+//			foreach ($t_brea_result as $host) {
+			foreach ($hosts as $host) {
 				$result['detail'] .= html_escape($host['name_cache']) . '<br/>';
 			}
 			$result['detail'] .= '<br/><br/>';
@@ -879,9 +880,11 @@ https://github.com/Cacti/plugin_thold/issues/440
 
 		if ($t_trig > 0) {
 			$result['alarm'] = 'red';
-//			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND ((thold_data.thold_alert!=0 AND
+							 	thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
 			$result['detail'] .= '<b>' . __('TRIGGERED', 'intropage') .':</b><br/>';
-			foreach ($t_trig_result as $host) {
+			foreach ($hosts as $host) {
+//			foreach ($t_trig_result as $host) {
 				$result['detail'] .= html_escape($host['name_cache']) . '<br/>';
 			}
 			$result['detail'] .= '<br/><br/>';
@@ -1012,9 +1015,10 @@ function thold_event_detail() {
 		$result['alarm'] = 'yellow';
 		$result['detail']  = __('Plugin Thold isn\'t installed or started', 'intropage');
 	} else {
-		include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+//		include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
 
 /* old faster code	
+*/
 		$sql_result = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 			FROM plugin_thold_log AS tl
@@ -1037,9 +1041,9 @@ function thold_event_detail() {
 			WHERE td.host_id in (' . $_SESSION['allowed_hosts'] . ') 
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 			ORDER BY `time` DESC
-			LIMIT 20');
-*/
-		$sql_result = get_allowed_threshold_logs('','tl.time desc', 30); 
+			LIMIT 30');
+
+//		$sql_result = get_allowed_threshold_logs('','tl.time desc', 30); 
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
