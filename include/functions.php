@@ -1,5 +1,5 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
@@ -279,7 +279,7 @@ function human_filesize($bytes, $decimals = 2) {
 function intropage_display_panel($panel_id) {
 	global $config;
 
-	print '<li id="panel_' . $panel_id . '" class="ui-state-default flexchild">';
+	print '<li id="panel_' . $panel_id . '" class="flexchild">';
 	print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box;">';
 
 	print '<div class="panel_header color_gray">';

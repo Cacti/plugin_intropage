@@ -1,5 +1,5 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
@@ -51,9 +51,9 @@ function display_information() {
 	}
 
 	if (empty($_SESSION['dashboard_id'])) {
-	    $_SESSION['dashboard_id'] = 1; 
+	    $_SESSION['dashboard_id'] = 1;
 	}
-	
+
 	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts
 			FROM user_auth
@@ -88,21 +88,21 @@ function display_information() {
 	else {
 		$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
 	}
-	
+
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
 
 	$panels = db_fetch_assoc_prepared("SELECT t1.*
 		FROM plugin_intropage_panel_data as t1
 		join plugin_intropage_panel_dashboard as t2
-		on t1.id = t2.panel_id  
-		WHERE t1.user_id in (0,?) AND t2.dashboard_id = ? 
+		on t1.id = t2.panel_id
+		WHERE t1.user_id in (0,?) AND t2.dashboard_id = ?
 		AND t1.panel_id != 'favourite_graph'
 		UNION
 		SELECT t3.*
 		FROM plugin_intropage_panel_data as t3
 		join plugin_intropage_panel_dashboard as t4
-		on t3.id = t4.panel_id  
+		on t3.id = t4.panel_id
 		WHERE t3.user_id = ? and t4.dashboard_id = ?
 		AND t3.panel_id = 'favourite_graph'
 		AND t3.fav_graph_id IS NOT NULL
@@ -129,12 +129,12 @@ function display_information() {
 		print '<a class="db_href db_href_active" href="?dashboard_id=' . $f . '">' . $f . '</a>';
 	    }
 	    else {
-		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $f . '</a>';	    
+		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $f . '</a>';
 	    }
 	}
 
 	print '</div>';
-	print '<div class="float_right">';	
+	print '<div class="float_right">';
 
 	// settings
 	print "<form method='post'>";
@@ -144,23 +144,23 @@ function display_information() {
 
 	print "<select name='intropage_addpanel' size='1' onchange='this.form.submit();'>";
 	print '<option value="0">' . __('Add panel ...', 'intropage') . '</option>';
-	$add_panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id 
-		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',			
+	$add_panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id
+		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',
 		array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($add_panels)) {
 		foreach ($add_panels as $panel) {
-			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data 
+			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data
 			where user_id in (0, ?) and panel_id = ?',
 			array($_SESSION['sess_user_id'],$panel['panel_id']));
 
 			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert')	{
-				if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
+				if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data
 						WHERE user_id  in (0, ?) and panel_id= ? ',
 						array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
 					print "<option value='" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
 				}
-				elseif (db_fetch_cell_prepared('SELECT ' . $panel['panel_id'] . ' FROM plugin_intropage_user_auth 
+				elseif (db_fetch_cell_prepared('SELECT ' . $panel['panel_id'] . ' FROM plugin_intropage_user_auth
 						WHERE user_id = ?', array($_SESSION['sess_user_id'])) == 'on') {
 					print "<option value='" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
 
@@ -178,14 +178,12 @@ function display_information() {
 	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
 
 	if ($number_of_dashboards < 9) {
-	    	print '<option value="addpage_' . ($number_of_dashboards+1) . '">' . __('Add dashboard', 'intropage') . ' ' . ($number_of_dashboards+1) . '</option>';
-	
+		print '<option value="addpage_' . ($number_of_dashboards+1) . '">' . __('Add dashboard', 'intropage') . ' ' . ($number_of_dashboards+1) . '</option>';
 	}
 
 	if ($_SESSION['dashboard_id'] > 1) {
 	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
-
 
 	// only submit :-)
 	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
@@ -208,7 +206,7 @@ function display_information() {
 		print "<option value='refresh_60'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
 	}
 
-	if ($autorefresh == 300) { 
+	if ($autorefresh == 300) {
 		print "<option value='refresh_300' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	} else {
 		print "<option value='refresh_300'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
@@ -257,9 +255,9 @@ function display_information() {
 	print '</form>';
 	// end of settings
 
-	print '</div>';	
+	print '</div>';
 	print '<br style="clear: both" />';
-	print '</div>';	
+	print '</div>';
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
@@ -376,6 +374,32 @@ function display_information() {
 		});
 
 		$('#obal').sortable({
+			tolerance: 'pointer',
+			//forcePlaceholderSite: true,
+			//cursorAt: { left: 5 },
+			placeholder: 'sortable-placeholder',
+			revert: true,
+			delay: 100,
+			scroll: false,
+			helper: 'clone',
+			forceHelperSize: true,
+			dropOnEmpty: true,
+			start: function(event, ui) {
+				// Make the item it's actual size
+				ui.item.css('width', 'auto');
+				ui.item.find('.cactiTable').css('width', 'auto');
+
+				// Reduce jitter
+				$('this').find('li').css('flex-grow', 2);
+
+				// Make the helper the right size
+				var width = ui.item.width();
+				$('.ui-sortable-placeholder').css('width', width);
+			},
+			stop: function(event, ui) {
+				ui.item.find('.cactiTable').css('width', '100%');
+				$('this').find('li').css('flex-grow', '1');
+			},
 			update: function( event, ui ) {	// change order
 				var xdata = new Array();
 				$('#obal li').each(function() {
@@ -523,4 +547,3 @@ function display_information() {
 
 	return true;
 }
-
