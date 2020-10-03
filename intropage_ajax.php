@@ -40,7 +40,7 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
 	$panel_id = get_request_var('detail_panel');
 }
 
-$forced_update = filter_var(get_request_var('force'), FILTER_VALIDATE_BOOLEAN);
+$forced_update = filter_var(get_nfilter_request_var('force'), FILTER_VALIDATE_BOOLEAN);
 
 // automatic reload when poller ends
 if (isset_request_var('autoreload')) {
@@ -75,8 +75,10 @@ if (isset_request_var('autoreload')) {
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
-if (isset_request_var('reload_panel') && isset($panel_id)) {
+// Close the session to allow other tabs to operate
+session_write_close();
 
+if (isset_request_var('reload_panel') && isset($panel_id)) {
 	$file = db_fetch_cell_prepared('SELECT t1.file AS file
 		FROM plugin_intropage_panel_definition AS t1
 		INNER JOIN plugin_intropage_panel_data AS t2
