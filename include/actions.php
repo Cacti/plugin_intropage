@@ -25,11 +25,9 @@
 
 if (isset_request_var('intropage_addpanel') &&
 	get_filter_request_var('intropage_addpanel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')))) {
-		db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard (panel_id,user_id,dashboard_id) 
+		db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard (panel_id,user_id,dashboard_id)
 			VALUES ( ?, ?, ?)',
 			array(get_request_var('intropage_addpanel'),$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
-
-
 }
 
 if (isset_request_var('intropage_action') &&
@@ -42,7 +40,7 @@ if (isset_request_var('intropage_action') &&
 	switch ($action) {
 	case 'droppanel':
 		if (get_filter_request_var('panel_id')) {
-			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard 
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
 				WHERE user_id = ? AND panel_id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
@@ -50,11 +48,11 @@ if (isset_request_var('intropage_action') &&
 
 	case 'removepage':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
-			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard 
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
 				WHERE user_id = ? AND dashboard_id = ?',
 				array($_SESSION['sess_user_id'], $value));
 			 set_user_setting('intropage_number_of_dashboards',read_user_setting('intropage_number_of_dashboards')-1);
-			
+
 			$_SESSION['dashboard_id'] = 1;
 		}
 		break;
@@ -70,22 +68,24 @@ if (isset_request_var('intropage_action') &&
 	case 'favgraph':
 		if (get_filter_request_var('graph_id')) {
 			// already fav?
-			if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data WHERE user_id= ? 
+			if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data WHERE user_id= ?
 					AND fav_graph_id= ? AND fav_graph_timespan= ?',
 					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan'])
 					) > 0) {
-				db_execute_prepared('DELETE FROM plugin_intropage_panel_data 
+				db_execute_prepared('DELETE FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?',
 					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
 			} else { // add to fav
-				$prio = db_fetch_cell('SELECT max(priority)+1 FROM plugin_intropage_panel_data 
-					WHERE user_id=' . $_SESSION['sess_user_id']);
+				$prio = db_fetch_cell_prepared('SELECT max(priority)+1
+					FROM plugin_intropage_panel_data
+					WHERE user_id = ?',
+					array($_SESSION['sess_user_id']));
 
 				db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
 					(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
 					VALUES (?, "favourite_graph", ?, ?, ?)',
 					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan'], $prio));
-					
+
 				$id = db_fetch_insert_id();
 				db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
 					(panel_id, user_id, dashboard_id) VALUES ( ?, ?, ?)',
@@ -100,8 +100,10 @@ if (isset_request_var('intropage_action') &&
 			$error = false;
 			$order = array();
 			$priority = 90; // >90 are fav. graphs
+
 			foreach (get_request_var('xdata') as $data) {
 				list($a, $b) = explode('_', $data);
+
 				if (filter_var($b, FILTER_VALIDATE_INT)) {
 					array_push($order, $b);
 				} else {
@@ -109,11 +111,13 @@ if (isset_request_var('intropage_action') &&
 				}
 
 				if (!$error) {
-    			    		db_execute_prepared('UPDATE plugin_intropage_panel_data
-            				    SET priority=? WHERE user_id=? and id=?',
-            				    array ($priority, $_SESSION['sess_user_id'], $b));
-            				    
-            				    $priority--;
+					db_execute_prepared('UPDATE plugin_intropage_panel_data
+						SET priority = ?
+						WHERE user_id = ?
+						AND id = ?',
+						array ($priority, $_SESSION['sess_user_id'], $b));
+
+   					$priority--;
 				}
 			}
 		}
@@ -121,8 +125,11 @@ if (isset_request_var('intropage_action') &&
 
 	case 'addpanel':
 		if (preg_match('/^[a-z0-9\-\_]+$/i', $value)) {
-			db_execute('update plugin_intropage_panel_data set dashboard_id=' . $_SESSION['dashboard_id'] . 'WHERE 
-				user_id=' . $_SESSION['sess_user_id'] . ' and panel_id =' . $value);
+			db_execute_prepared('UPDATE plugin_intropage_panel_data
+				SET dashboard_id = ?
+				WHERE user_id = ?
+				AND panel_id = ?',
+				array($_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $value));
 		}
 		break;
 
@@ -143,13 +150,11 @@ if (isset_request_var('intropage_action') &&
 	case 'loginopt':
 		if ($value == 'graph') {
 			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 3 WHERE id = ?', array($_SESSION['sess_user_id']));
-		}
-		elseif ($value == 'console') {
+		} elseif ($value == 'console') {
 			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 2 WHERE id = ?', array($_SESSION['sess_user_id']));
+		} elseif ($value == 'tab') {
+			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 4 WHERE id = ?', array($_SESSION['sess_user_id']));
 		}
-		elseif ($value == 'tab') { 
-                       db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 4 WHERE id = ?', array($_SESSION['sess_user_id']));
-                }
-
 	}
 }
+
