@@ -22,12 +22,20 @@
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
-
+$us = read_user_setting('hide_disabled');
+if ($us == 'on') {
+	set_user_setting('hide_disabled','');
+}
 $hosts = get_allowed_devices();
-    if (count($hosts) > 0) {
+if ($us == 'on') {
+	set_user_setting('hide_disabled','on');
+}
+
+
+if (count($hosts) > 0) {
             $_SESSION['allowed_hosts'] = implode(',', array_column($hosts, 'id'));
-    } else {
-            $_SESSION['allowed_hosts'] = false;
+} else {
+            $_SESSION['allowed_hosts'] = -1;
 }
 
 if (!function_exists('array_column')) {
@@ -171,7 +179,7 @@ function analyse_login_detail() {
 //------------------------------------ analyse_tree_host_graph  -----------------------------------------------------
 
 function analyse_tree_host_graph_detail() {
-	global $config;
+	global $config, $console_access;
 
 	$result = array(
 		'name' => __('Analyze tree/host/graph', 'intropage'),
@@ -259,6 +267,7 @@ function analyse_tree_host_graph_detail() {
 		ON dtr.local_data_id=dtd.local_data_id
 		LEFT JOIN graph_templates_item AS gti
 		ON (gti.task_item_id=dtr.id)
+		WHERE dl.host_id IN (' . $_SESSION['allowed_hosts'] . ') 
 		GROUP BY dl.id
 		HAVING deletable=0
 		ORDER BY `name_cache` ASC');
@@ -281,24 +290,25 @@ function analyse_tree_host_graph_detail() {
 	}
 
 	// empty poller_output
-	$sql_result = db_fetch_assoc('SELECT local_data_id,rrd_name FROM poller_output');
+	if ($console_access) {
+		$sql_result = db_fetch_assoc('SELECT local_data_id,rrd_name FROM poller_output');
 
-	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
+		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
-	$result['detail'] .= '<br/><b>' . __('Poller output items - %s:', $sql_count, 'intropage') . '</b><br/>';
+		$result['detail'] .= '<br/><b>' . __('Poller output items - %s:', $sql_count, 'intropage') . '</b><br/>';
 
-	if (cacti_sizeof($sql_result)) {
+		if (cacti_sizeof($sql_result)) {
 
-		if ($result['alarm'] == 'green') {
-			$result['alarm'] = 'yellow';
+			if ($result['alarm'] == 'green') {
+				$result['alarm'] = 'yellow';
+			}
+
+			foreach ($sql_result as $row) {
+				$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
+				html_escape($row['rrd_name']) . '</a><br/>';
+			}
+			$total_errors += $sql_count;
 		}
-
-		foreach ($sql_result as $row) {
-			$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
-			html_escape($row['rrd_name']) . '</a><br/>';
-
-		}
-		$total_errors += $sql_count;
 	}
 
 	// DS - bad indexes
@@ -307,8 +317,9 @@ function analyse_tree_host_graph_detail() {
 		INNER JOIN data_template_data AS dtd
 		ON dl.id=dtd.local_data_id
 		INNER JOIN data_template AS dt ON dt.id=dl.data_template_id
-		INNER JOIN host AS h ON h.id = dl.host_id
-		WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)');
+		INNER  JOIN host AS h ON h.id = dl.host_id
+		WHERE dl.host_id in (' . $_SESSION['allowed_hosts'] . ')
+		AND (dl.snmp_index = "" AND dl.snmp_query_id > 0)');
 
 	$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
@@ -345,6 +356,7 @@ function analyse_tree_host_graph_detail() {
 		LEFT JOIN user_auth_perms AS uap2 ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
 		LEFT JOIN plugin_thold_threshold_contact as con ON (td.id = con.thold_id)
 		WHERE
+		    td.host_id in (" . $_SESSION['allowed_hosts'] . ") AND
 		    td.thold_enabled = 'on' AND
 		    (td.notify_warning is NULL or td.notify_warning=0) AND
 		    (td.notify_alert is NULL or td.notify_alert =0) AND
@@ -472,6 +484,7 @@ function analyse_tree_host_graph_detail() {
 			WHERE id IN (" . $_SESSION['allowed_hosts'] . ")
 			AND disabled != 'on'
 			AND (snmp_community ='public' OR snmp_community='private')
+			AND snmp_version IN (1,2) 
 			ORDER BY description");
 
 		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -531,25 +544,27 @@ function extrem_detail() {
 	$result['detail'] .= '<table><tr><td class="rpad">';
 
 	// long run poller
-	$result['detail'] .= '<strong>' . __('Long run<br/>poller', 'intropage') . ': </strong>';
+	if($console_access) {
+		$result['detail'] .= '<strong>' . __('Long run<br/>poller', 'intropage') . ': </strong>';
 
-	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`,
-		substring(value,instr(value,':')+1) AS xvalue
-		FROM plugin_intropage_trends
-		WHERE name='poller'
-		AND cur_timestamp > date_sub(now(),interval 2 day)
-		ORDER BY xvalue desc, cur_timestamp
-		LIMIT 10");
+		$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`,
+			substring(value,instr(value,':')+1) AS xvalue
+			FROM plugin_intropage_trends
+			WHERE name='poller'
+			AND cur_timestamp > date_sub(now(),interval 2 day)
+			ORDER BY xvalue desc, cur_timestamp
+			LIMIT 10");
 
-	if (cacti_sizeof($sql_result)) {
-		foreach ($sql_result as $row) {
-			$result['detail'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
+		if (cacti_sizeof($sql_result)) {
+			foreach ($sql_result as $row) {
+				$result['detail'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
+			}
+		} else {
+			$result['detail'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
 		}
-	} else {
-		$result['detail'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
-	}
 
-	$result['detail'] .= '</td>';
+		$result['detail'] .= '</td>';
+	}
 
 	// max host down
 	$result['detail'] .= '<td class="rpad texalirig">';
@@ -558,6 +573,7 @@ function extrem_detail() {
 	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='host'
+		AND user_id = " . $_SESS['sess_user_id'] . "
 		AND cur_timestamp > date_sub(now(),interval 2 day)
 		ORDER BY value desc,cur_timestamp
 		LIMIT 10");
@@ -581,6 +597,7 @@ function extrem_detail() {
 		$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 			FROM plugin_intropage_trends
 			WHERE name='thold'
+			AND user_id = " . $_SESSION['sess_user_id'] . "
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value desc,cur_timestamp
 			LIMIT 10");
@@ -599,46 +616,50 @@ function extrem_detail() {
 	$result['detail'] .= '</td>';
 
 	// poller output items
-	$result['detail'] .= '<td class="rpad texalirig">';
-	$result['detail'] .= '<strong>' . __('Poller<br/>output item:', 'intropage') . '</strong>';
+	if ($console_access) {
+		$result['detail'] .= '<td class="rpad texalirig">';
+		$result['detail'] .= '<strong>' . __('Poller<br/>output item:', 'intropage') . '</strong>';
 
-	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
-		FROM plugin_intropage_trends
-		WHERE name='poller_output'
-		AND cur_timestamp > date_sub(now(),interval 2 day)
-		ORDER BY value desc,cur_timestamp
-		LIMIT 10");
+		$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE name='poller_output'
+			AND cur_timestamp > date_sub(now(),interval 2 day)
+			ORDER BY value desc,cur_timestamp
+			LIMIT 10");
 
-	if (cacti_sizeof($sql_result)) {
-		foreach ($sql_result as $row) {
-			$result['detail'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+		if (cacti_sizeof($sql_result)) {
+			foreach ($sql_result as $row) {
+				$result['detail'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+			}
+		} else {
+			$result['detail'] .= '<br/>Waiting<br/>for data';
 		}
-	} else {
-		$result['detail'] .= '<br/>Waiting<br/>for data';
+
+		$result['detail'] .= '</td>';
 	}
 
-	$result['detail'] .= '</td>';
+	// failed polls
+	if ($console_access) {
+	
+		$result['detail'] .= '<td class="rpad texalirig">';
+		$result['detail'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
 
-	// poller output items
-	$result['detail'] .= '<td class="rpad texalirig">';
-	$result['detail'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
+		$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE name='failed_polls'
+			AND cur_timestamp > date_sub(now(),interval 2 day)
+			ORDER BY value desc,cur_timestamp
+			LIMIT 10");
 
-	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
-		FROM plugin_intropage_trends
-		WHERE name='failed_polls'
-		AND cur_timestamp > date_sub(now(),interval 2 day)
-		ORDER BY value desc,cur_timestamp
-		LIMIT 10");
-
-	if (cacti_sizeof($sql_result)) {
-		foreach ($sql_result as $row) {
-			$result['detail'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+		if (cacti_sizeof($sql_result)) {
+			foreach ($sql_result as $row) {
+				$result['detail'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+			}
+		} else {
+			$result['detail'] .= '<br/>Waiting<br/>for data';
 		}
-	} else {
-		$result['detail'] .= '<br/>Waiting<br/>for data';
+		$result['detail'] .= '</td>';
 	}
-	$result['detail'] .= '</td>';
-
 	$result['detail'] .= '</tr></table>';
 
 	return $result;
@@ -662,7 +683,7 @@ function graph_data_source_detail() {
 		ON (data_input.id=data_template_data.data_input_id)
 		LEFT JOIN data_template
 		ON (data_local.data_template_id=data_template.id)
-		WHERE local_data_id<>0
+	      	WHERE local_data_id<>0 AND data_local.host_id in (' . $_SESSION['allowed_hosts'] . ')
 		GROUP BY type_id');
 
 	$total = 0;
@@ -800,6 +821,25 @@ function graph_thold_detail() {
 	} elseif (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $_SESSION['sess_user_id'] . " AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
 		$result['detail'] = __('You don\'t have permission', 'intropage');
 	} else {
+/* better code, slower
+		include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
+                // right way but it is slow
+                $t_all = 0; $t_brea = 0; $t_trig = 0; $t_disa = 0;
+                $sql_where = '';
+                $x = '';
+                $x = get_allowed_thresholds($sql_where, 'null', 1, $t_all, $_SESSION['sess_user_id']);
+                $sql_where = "td.thold_enabled = 'on' AND ((td.thold_alert != 0 OR td.bl_alert > 0))";
+                $t_brea_result = get_allowed_thresholds($sql_where, 'null', '', $t_brea, $_SESSION['sess_user_id']);
+                $sql_where = "td.thold_enabled = 'on' AND (((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger)
+                               OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
+                $t_trig_result = get_allowed_thresholds($sql_where, 'null', '', $t_trig, $_SESSION['sess_user_id']);
+                $sql_where = "td.thold_enabled = 'off'";
+                $x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $_SESSION['sess_user_id']);
+*/
+/* old fast code, but wrong counts	
+https://github.com/Cacti/plugin_thold/issues/440
+*/
 		// need for thold - isn't any better solution?
 		$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $_SESSION['sess_user_id']);
    		$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
@@ -808,14 +848,14 @@ function graph_thold_detail() {
 			(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $_SESSION['sess_user_id'] . ') OR
 			(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $_SESSION['sess_user_id'] . '))';
 
-		$t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
-		$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
-
+		$t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where AND thold_data.thold_enabled='on' ");
+		$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+		$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND ((thold_data.thold_alert!=0 AND
+		 	thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
 		$t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
 
 		$count = $t_all + $t_brea + $t_trig + $t_disa;
+
 
 		$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$_SESSION['sess_user_id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
 		$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
@@ -829,20 +869,23 @@ function graph_thold_detail() {
 		// alarms and details
 		if ($t_brea > 0) {
 			$result['alarm'] = 'yellow';
-			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
 			$result['detail'] .= '<b>' . __('BREACHED', 'intropage') . ':</b><br/>';
+//			foreach ($t_brea_result as $host) {
 			foreach ($hosts as $host) {
-				$result['detail'] .= html_escape($host['description']) . '<br/>';
+				$result['detail'] .= html_escape($host['name_cache']) . '<br/>';
 			}
 			$result['detail'] .= '<br/><br/>';
 		}
 
 		if ($t_trig > 0) {
 			$result['alarm'] = 'red';
-			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
+			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND ((thold_data.thold_alert!=0 AND
+							 	thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
 			$result['detail'] .= '<b>' . __('TRIGGERED', 'intropage') .':</b><br/>';
 			foreach ($hosts as $host) {
-				$result['detail'] .= html_escape($host['description']) . '<br/>';
+//			foreach ($t_trig_result as $host) {
+				$result['detail'] .= html_escape($host['name_cache']) . '<br/>';
 			}
 			$result['detail'] .= '<br/><br/>';
 		}
@@ -972,6 +1015,10 @@ function thold_event_detail() {
 		$result['alarm'] = 'yellow';
 		$result['detail']  = __('Plugin Thold isn\'t installed or started', 'intropage');
 	} else {
+//		include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
+/* old faster code	
+*/
 		$sql_result = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 			FROM plugin_thold_log AS tl
@@ -991,9 +1038,12 @@ function thold_event_detail() {
 			ON (gl.host_id=uap1.item_id AND uap1.type=3)
 			LEFT JOIN user_auth_perms AS uap2
 			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+			WHERE td.host_id in (' . $_SESSION['allowed_hosts'] . ') 
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 			ORDER BY `time` DESC
-			LIMIT 20');
+			LIMIT 30');
+
+//		$sql_result = get_allowed_threshold_logs('','tl.time desc', 30); 
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
@@ -1003,6 +1053,7 @@ function thold_event_detail() {
 				} elseif ($result['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
 					$result['alarm'] == 'yellow';
 				}
+				
 			}
 		} else {
 			$result['detail'] = __('Without events yet', 'intropage');

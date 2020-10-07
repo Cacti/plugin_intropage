@@ -23,8 +23,41 @@
  +-------------------------------------------------------------------------+
 */
 
+if (!function_exists('array_column')) {
+    function array_column($array,$column_name) {
+        return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
+    }
+}
+
 if (isset($run_from_poller))	{
 	$_SESSION['sess_user_id'] = 0;
+}
+
+
+$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+                         ON t1.id=t2.user_id WHERE t1.enabled='on'");
+    
+$x = 0;
+$_SESSION['allowed_hosts'] = array();
+foreach ($users as $user)       {
+	$us = read_user_setting('hide_disabled',false,false,$user['id']);
+	if ($us == 'on') {
+        	set_user_setting('hide_disabled','',$user['id']);
+	}
+       
+        $allowed = get_allowed_devices('','null',-1,$x,$user['id']);
+
+	if ($us == 'on') {
+        	set_user_setting('hide_disabled','on',$user['id']);
+	}
+
+        if (count($allowed) > 0) {
+        	$_SESSION['allowed_hosts'][$user['id']] = implode(',', array_column($allowed, 'id'));
+        	$_SESSION['allowed_hosts_count'][$user['id']] = count($allowed);
+	} else {
+        	$_SESSION['allowed_hosts'][$user['id']] = -1;
+        	$_SESSION['allowed_hosts_count'][$user['id']] = 0;
+        }
 }
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
@@ -50,7 +83,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0,__('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -64,8 +97,9 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval))	{
-		$flog = db_fetch_cell('SELECT count(t.result)
-			FROM (
+
+    $flog = db_fetch_cell('SELECT count(t.result)
+			FROM ( 
 				SELECT result FROM user_auth
 				INNER JOIN user_log ON user_auth.username = user_log.username
 				ORDER BY user_log.time DESC LIMIT 10
@@ -89,11 +123,27 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 			foreach ($sql_result as $row) {
 				$result['data'] .= $row['username'] . '<br/>';
 			}
-		}
+   	}
+		$result['data'] .= '<br/><b>' . __('Last logins', 'intropage') . ':</b><br/>';
 
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
-			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+		$sql_result = db_fetch_assoc('SELECT user_log.username, user_auth.full_name, user_log.time, user_log.result, user_log.ip
+                	FROM user_auth
+                	INNER JOIN user_log
+                	ON user_auth.username = user_log.username
+                	ORDER BY user_log.time desc
+                	LIMIT 3');
+
+        	if (cacti_sizeof($sql_result)) {
+                	$result['data'] .= '<table>';
+                	foreach ($sql_result as $row) {
+                        	$result['data'] .= sprintf('<tr><td class="rpad">%s </td><td class="rpad">%s</td><td>%s</td></tr>', $row['time'], $row['ip'], ($row['result'] == 0)? __('failed', 'intropage') : __('success', 'intropage'));
+                	}
+                	$result['data'] .= '</table>';
+        	}
+
+	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES ( ?, ?, ?, ?, ?)',
+			    array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -137,7 +187,7 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    $id = db_fetch_insert_id();
 	}
@@ -215,7 +265,7 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -248,11 +298,12 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 					WHERE panel_id= ?',
 					array($panel_id));
 
-	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
-	    $users = array(array('id'=>$_SESSION['sess_user_id']));
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    $users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
 	}
 
 	foreach ($users as $user)	{
@@ -282,33 +333,15 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 				'last_update' =>  NULL,
 			);
 
-			$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']);
-
-			if (count($allowed) > 0) {
-				$allowed_hosts = implode(',', array_column($allowed, 'id'));
-			} else {
-				$allowed_hosts = false;
-			}
-
-			if ($allowed_hosts)	{
-				$console_access = (db_fetch_assoc_prepared('SELECT realm_id
-					FROM user_auth_realm
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
+				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
-					AND user_auth_realm.realm_id=8',
-					array($user['id']))) ? true : false;
-/*	    it returns only one row
-				$sql_worst_host = db_fetch_assoc_prepared("SELECT description, id, avg_time, cur_time
-					FROM host
-					WHERE host.id in ( ? )
-					AND disabled != 'on'
-					ORDER BY avg_time desc
-					LIMIT 5",
-					array($allowed_hosts));
-*/
+				    	AND user_auth_realm.realm_id=8',
+				    	array($user['id']))) ? true : false;
+
 				$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
 					FROM host
-					WHERE host.id in ( $allowed_hosts )
+					WHERE host.id in (" . $_SESSION['allowed_hosts'][$user['id']]	 . ")
 					AND disabled != 'on'
 					ORDER BY avg_time desc
 					LIMIT 5"
@@ -410,7 +443,7 @@ function cpuload($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -455,7 +488,7 @@ function cpuload($display=false, $update=false, $force_update=false) {
 
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
         if ($display)    {
@@ -498,7 +531,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			VALUES ( ?, ?, ?, "gray", 1000)',
-			array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -555,7 +588,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			VALUES (?,?,?,?,?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
         if ($display)    {
@@ -591,73 +624,87 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 		'last_update' => NULL,
         );
 
-        $graph = array ('pie' => array(
-                        'title' => __('Datasources: ', 'intropage'),
-                        'label' => array(),
-                        'data' => array(),
-                ),
-	);
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
 
-        $id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE
-                                panel_id= ? AND last_update IS NOT NULL',
-                                array($panel_id));
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+		$users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+	}
 
-        if (!$id) {
-            	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-                            VALUES ( ?, ?, ?, "gray", 1000)',
-                            array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+	foreach ($users as $user)	{
 
-            	$id = db_fetch_insert_id();
-        }
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
 
-        $last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-                                        WHERE user_id=0 and panel_id= ?',
-                                        array($panel_id));
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
 
-        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-                                        WHERE panel_id= ?',
-                                        array($panel_id));
+	    		$id = db_fetch_insert_id();
+		}
 
-        if ( $force_update || time() > ($last_update + $update_interval))       {
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
 
-        	$sql_ds = db_fetch_assoc('SELECT data_input.type_id, COUNT(data_input.type_id) AS total
-                	FROM data_local
-                	INNER JOIN data_template_data
-                	ON (data_local.id = data_template_data.local_data_id)
-                	LEFT JOIN data_input
-                	ON (data_input.id=data_template_data.data_input_id)
-                	LEFT JOIN data_template
-                	ON (data_local.data_template_id=data_template.id)
-                	WHERE local_data_id<>0
-                	GROUP BY type_id
-                	LIMIT 6');
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-        	if (cacti_sizeof($sql_ds)) {
-                	foreach ($sql_ds as $item) {
-                        	if (!is_null($item['type_id'])) {
-                                	array_push($graph['pie']['label'], preg_replace('/script server/', 'SS', $input_types[$item['type_id']]));
-                                	array_push($graph['pie']['data'], $item['total']);
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 
-                                	$result['data'] .= preg_replace('/script server/', 'SS', $input_types[$item['type_id']]) . ': ';
-                                	$result['data'] .= $item['total'] . '<br/>';
-                        	}
-                	}
-                       	$result['data'] = intropage_prepare_graph($graph);
+			        $graph = array ('pie' => array(
+        	        	        'title' => __('Datasources: ', 'intropage'),
+                	        	'label' => array(),
+                        		'data' => array(),
+                			),
+				);
 
-        	} else {
-                	$result['data'] = __('No untemplated datasources found');
-                	unset($graph);
-        	}
+	                        $sql_ds = db_fetch_assoc('SELECT data_input.type_id, COUNT(data_input.type_id) AS total
+        	                        FROM data_local
+                	                INNER JOIN data_template_data
+                        	        ON (data_local.id = data_template_data.local_data_id)
+                                	LEFT JOIN data_input
+	                                ON (data_input.id=data_template_data.data_input_id)
+        	                        LEFT JOIN data_template
+                	                ON (data_local.data_template_id=data_template.id)
+                        	        WHERE local_data_id<>0 AND data_local.host_id in (' . $_SESSION['allowed_hosts'][$user['id']] . ' )
+                                	GROUP BY type_id LIMIT 6');
 
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
-			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+        			if (cacti_sizeof($sql_ds)) {
+                			foreach ($sql_ds as $item) {
+                       			 	if (!is_null($item['type_id'])) {
+                                			array_push($graph['pie']['label'], preg_replace('/script server/', 'SS', $input_types[$item['type_id']]));
+                                			array_push($graph['pie']['data'], $item['total']);
+
+	                                		$result['data'] .= preg_replace('/script server/', 'SS', $input_types[$item['type_id']]) . ': ';
+        	                        		$result['data'] .= $item['total'] . '<br/>';
+                	        		}
+                			}
+                       			$result['data'] = intropage_prepare_graph($graph);
+	        			unset($graph);
+  
+        			}
+			} else {
+            			$result['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+			}
+	
+
+			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+				VALUES ( ?, ?, ?, ?, ?)',
+				array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+		}
         }
 
 	if ($display)    {
-                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-                                            WHERE panel_id= ?',
-                                            array($panel_id));
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ? AND user_id= ?',
+                                            array($panel_id, $_SESSION['sess_user_id'])); 
 
                 $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
                         floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -689,8 +736,9 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
-	}
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+	}	
 
 	foreach ($users as $user)	{
 
@@ -718,16 +766,8 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 				'last_update' =>  NULL,
 			);
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']);
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
         			$graph = array ('pie' => array(
                         		'title' => __('Host templates: ', 'intropage'),
                         		'label' => array(),
@@ -738,7 +778,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
                 		$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name,
                 			count(host.host_template_id) AS total
                         		FROM host_template LEFT JOIN host
-                        		ON (host_template.id = host.host_template_id) AND host.id IN ( $allowed_hosts )
+                        		ON (host_template.id = host.host_template_id) AND host.id IN ( " . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		GROUP by host_template_id
                         		ORDER BY total desc LIMIT 6");
 
@@ -766,9 +806,9 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -785,7 +825,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 }
 
 
-//---------------------------------------graph host-----------------------------
+//--------------------------------------- graph host-----------------------------
 
 function graph_host($display=false, $update=false, $force_update=false) {
         global $config;
@@ -802,7 +842,10 @@ function graph_host($display=false, $update=false, $force_update=false) {
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+
 	}
 
 	foreach ($users as $user)	{
@@ -831,16 +874,8 @@ function graph_host($display=false, $update=false, $force_update=false) {
 				'last_update' =>  NULL,
 			);
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']);
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-        		if ($allowed_hosts) {
         			$graph = array ('pie' => array(
                         		'title' => __('Hosts: ', 'intropage'),
                         		'label' => array(),
@@ -854,11 +889,11 @@ function graph_host($display=false, $update=false, $force_update=false) {
 	    				array($user['id']))) ? true : false;
 
 
-                		$h_all  = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ')');
-                		$h_up   = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=3 AND disabled=""');
-                		$h_down = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=1 AND disabled=""');
-                		$h_reco = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND status=2 AND disabled=""');
-                		$h_disa = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $allowed_hosts . ') AND disabled="on"');
+                		$h_all  = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
+                		$h_up   = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND status=3 AND disabled=""');
+                		$h_down = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND status=1 AND disabled=""');
+                		$h_reco = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND status=2 AND disabled=""');
+                		$h_disa = db_fetch_cell('SELECT count(id) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND disabled="on"');
 
                 		$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
                 		$url_prefix = $console_access ? '<a href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
@@ -905,9 +940,9 @@ function graph_host($display=false, $update=false, $force_update=false) {
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -945,7 +980,7 @@ function info($display=false, $update=false, $force_update=false) {
         if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
                             VALUES ( ?, ?, ?, "gray", 1000)',
-                            array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+                            array($panel_id, 0, __('Waiting for data', 'intropage')));
 
             	$id = db_fetch_insert_id();
         }
@@ -998,7 +1033,7 @@ function info($display=false, $update=false, $force_update=false) {
 
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			VALUES ( ?, ?, ?, ?, ?)',
-			array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
@@ -1041,7 +1076,7 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -1112,14 +1147,13 @@ function analyse_db($display=false, $update=false, $force_update=false) {
        		}
 
        		$result['data'] .= __('Connection errors: %s', $cerrors, 'intropage') . '<br/>';
-       		$result['data'] .= __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<br/>';
        		$result['data'] .= __('Damaged tables: %s', $damaged, 'intropage') . '<br/>' .
                		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
        			__('All tables: %s', count($tables), 'intropage');
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 		    	VALUES (?,?,?,?,?)',
-		    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+		    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
         if ($display)    {
@@ -1159,99 +1193,112 @@ function maint($display=false, $update=false, $force_update=false) {
 		'last_update' =>  NULL,
 	);
 
-	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE
-				panel_id= ? AND last_update IS NOT NULL',
-				array($panel_id));
-
-	if (!$id) {
-	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
-
-	    	$id = db_fetch_insert_id();
-	}
-
-	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=0 and panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
 					array($panel_id));
 
-	$update_interval = read_config_option('intropage_analyse_db_interval');
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+	}
 
-        if ($force_update || time() > ($last_update + $update_interval))       {
+	foreach ($users as $user)	{
 
-		if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
+
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+
+	    		$id = db_fetch_insert_id();
+		}
+
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
+
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
 
         		$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
-        		$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
-        		if (cacti_sizeof($schedules)) {
-                		foreach ($schedules as $sc) {
-                        		$t = time();
+			if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint' and status=1")) {
 
-                        		switch ($sc['mtype']) {
-                                		case 1:
-                                        		if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-                                                		$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-                                                        		' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
+        			$schedules = db_fetch_assoc("SELECT * FROM plugin_maint_schedules WHERE enabled='on'");
+        			if (cacti_sizeof($schedules)) {
+                			foreach ($schedules as $sc) {
+                        			$t = time();
 
-                                                		$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-                                                        		INNER JOIN plugin_maint_hosts
-                                                        		ON host.id=plugin_maint_hosts.host
-                                                        		WHERE schedule = ?',
-                                                        		array($sc['id']));
+                        			switch ($sc['mtype']) {
+                                			case 1:
+                                        			if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
+									$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                        					      INNER JOIN plugin_maint_hosts
+					                                              ON host.id=plugin_maint_hosts.host
+					                                              WHERE host.id in (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND schedule = ?',
+					                                              array($sc['id']));
 
-                                                		if (cacti_sizeof($hosts)) {
-                                                        		foreach ($hosts as $host) {
-                                                                		$result['data'] .= $host['description'] . ', ';
-                                                        		}
-                                                		}
-                                                		$result['data'] = substr($result['data'], 0, -2) .'<br/><br/>';
-                                        		}
-                                        		break;
+					                                if (cacti_sizeof($hosts)) {
+					                                	$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+					                                                      ' - ' . $sc['name'] . ' (One time)<br/>Affected hosts:</b> ';
 
-                                		case 2:
-                                        		while ($sc['etime'] < $t) {
-                                                		$sc['etime'] += $sc['minterval'];
-                                                		$sc['stime'] += $sc['minterval'];
-                                        		}
+					                                        foreach ($hosts as $host) {
+                                        						$result['data'] .= $host['description'] . ', ';
+										}
+									}
+					                                $result['data'] = substr($result['data'], 0, -2) .'<br/><br/>';
+								}
+                                       			break;
 
-                                        		if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-                                                		$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
-                                                        		' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
+                                			case 2:
+                                        			while ($sc['etime'] < $t) {
+                                                			$sc['etime'] += $sc['minterval'];
+                                                			$sc['stime'] += $sc['minterval'];
+	                                        		}
 
-                                                		$hosts = db_fetch_assoc_prepared('SELECT description FROM host
-                                                        		INNER JOIN plugin_maint_hosts
-                                                        		ON host.id=plugin_maint_hosts.host
-                                                        		WHERE schedule = ?',
-                                                        		array($sc['id']));
+                	                        		if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
 
-                                                		if (cacti_sizeof($hosts)) {
-                                                        		foreach ($hosts as $host) {
-                                                                		$result['data'] .= $host['description'] . ', ';
-                                                        		}
-                                                		}
+                                	                		$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+                                        	                		INNER JOIN plugin_maint_hosts
+                                                	        		ON host.id=plugin_maint_hosts.host
+                                                        			WHERE host.id in (' . $_SESSION['allowed_hosts'][$user['id']] . ') AND schedule = ?',
+                                                        			array($sc['id']));
 
-                                                		$result['data'] = substr($result['data'], 0, -2) . '<br/><br/>';
-                                        		}
-         		                       		break;
+	                                                		if (cacti_sizeof($hosts)) {
+	        	                                        		$result['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) . ' - ' . date('d. m . Y  H:i', $sc['etime']) .
+                        		                                		' - ' . $sc['name'] . ' (Reoccurring)<br/>Affected hosts:</b> ';
+			                                                		
+        	                                                		foreach ($hosts as $host) {
+                	                                                		$result['data'] .= $host['description'] . ', ';
+                        	                                		}
+                                	                		}
+
+                                        	        		$result['data'] = substr($result['data'], 0, -2) . '<br/><br/>';
+                                        			}
+							break;
+						}
 					}
 				}
-			}
-       		}
-       		else {
-       			$result['data'] = __('Maint plugin is not installed', 'intropage');
+        		}
+        		else {
+       				$result['data'] = __('Maint plugin is not installed/enabled', 'intropage');
+        		}
 
-       		}
-
-    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
+    			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+		}
 	}
 
 	if ($display)    {
-                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-                                            WHERE panel_id= ?',
-                                            array($panel_id));
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ? AND user_id= ?',
+                                            array($panel_id, $_SESSION['sess_user_id'])); 
 
                 $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
                         floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -1288,7 +1335,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0,__('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1305,7 +1352,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -1342,101 +1389,158 @@ function trend($display=false, $update=false, $force_update=false) {
 	);
 
 	if (isset($run_from_poller))	{ // update in poller
-                db_execute("REPLACE INTO plugin_intropage_trends
-                        (name,value,user_id)
-                        SELECT 'thold', COUNT(*),0
-                        FROM thold_data
-                        WHERE thold_data.thold_alert!=0
-                        OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger");
+	
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on' AND t2.trend='on'");
+		foreach ($users as $user)	{
+/*	
+old fast code		
+*/
+			if ($_SESSION['allowed_hosts'][$user['id']])	{
 
-        	db_execute("REPLACE INTO plugin_intropage_trends
-                	(name, value, user_id)
-                	SELECT 'host', COUNT(id),0
-                	FROM host
-                	WHERE status='1' AND disabled=''");
+
+                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
+                        		(name,value,user_id)
+                        		SELECT 'thold', COUNT(*),?
+                        		FROM thold_data
+                        		WHERE thold_data.host_id in (" . $_SESSION['allowed_hosts'][$user['id']] . ") 
+                        		AND thold_data.thold_enabled = 'on' 
+                        		AND (((thold_data.thold_alert != 0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) 
+					OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)))",
+                        		array($user['id']));
+                        		
+/*                        		
+new code from thold plugin
+
+
+				include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
+				// right way but it is slow
+				$t_trig = 0; 
+				$x = '';
+				$sql_where = "td.thold_enabled = 'on' AND (((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger) 
+				OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user['id']);
+
+                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
+                        		(name,value,user_id)
+                        		VALUES ('thold', ?,?)",
+                        		array($t_trig,$user['id']));
+*/
+
+                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
+                        		(name,value,user_id)
+                        		SELECT 'host', COUNT(*),?
+                        		FROM host
+                        		WHERE id in (" . $_SESSION['allowed_hosts'][$user['id']] . ") AND  status='1' AND disabled=''",
+                        		array($user['id']));
+			}
+			else	{
+                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
+                        		(name,value,user_id) values ('thold,0,?)",
+                        		array($user['id']));
+                		db_execute_prepared("REPLACE INTO plugin_intropage_trends
+                        		(name,value,user_id) values ('host,0,?)",
+                        		array($user['id']));
+			}
+			
+                }
 	}
-
-	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE
-				panel_id=? AND last_update IS NOT NULL',
-				array($panel_id));
-
-	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
-
-		$id = db_fetch_insert_id();
-	}
-
-	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=0 and panel_id= ?',
-					array($panel_id));
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
 					array($panel_id));
 
-	if ( $force_update || time() > ($last_update + $update_interval))	{
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+	}
 
-        	$graph = array ('line' => array(
-                        	'title' => $panel_name,
-                        	'label1' => array(),
-                        	'data1' => array(),
-                        	'title1' => '',
-                        	'data2' => array(),
-                        	'title2' => '',
-                	),
-		);
+	foreach ($users as $user)	{
 
-        	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
-                	$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
-                        	FROM plugin_intropage_trends
-                        	WHERE name='thold'
-                        	ORDER BY cur_timestamp desc
-                        	LIMIT 10");
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
 
-                	if (cacti_sizeof($sql)) {
-                        	$graph['line']['title1'] = __('Tholds triggered', 'intropage');
-                        	foreach ($sql as $row) {
-                                	array_push($graph['line']['label1'], $row['date']);
-                                	array_push($graph['line']['data1'], $row['value']);
-                        	}
-                	}
-        	}
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
 
-        	$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`, name, value
-                	FROM plugin_intropage_trends
-                	WHERE name='host'
-                	ORDER BY cur_timestamp desc
-                	LIMIT 10");
+	    		$id = db_fetch_insert_id();
+		}
 
-        	if (cacti_sizeof($sql)) {
-                	$graph['line']['title2'] = __('Hosts down');
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
 
-                	foreach ($sql as $row) {
-                        	array_push($graph['line']['data2'], $row['value']);
-                	}
-        	}
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-        	if (count($graph['line']) < 3) {
-                	unset($graph);
-                	$result['data'] = __('Waiting for data','intropage');
-        	} else {
-                	$graph['line']['data1'] = array_reverse($graph['line']['data1']);
-                	$graph['line']['data2'] = array_reverse($graph['line']['data2']);
-                	$graph['line']['label1'] = array_reverse($graph['line']['label1']);
-              		$result['data'] = intropage_prepare_graph($graph);
-			unset($graph);
-        	}
-    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
+	        	$graph = array ('line' => array(
+        		               	'title' => $panel_name,
+                        		'label1' => array(),
+                        		'data1' => array(),
+	                        	'title1' => '',
+        	                	'data2' => array(),
+                	        	'title2' => '',	
+	                	),
+			);
+
+	        	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+        	        	$sql = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+                	        	FROM plugin_intropage_trends
+                        		WHERE name='thold' AND user_id = ?
+                        		ORDER BY cur_timestamp desc
+                        		LIMIT 10",
+                        		array($user['id']));
+
+	                	if (cacti_sizeof($sql)) {
+        	                	$graph['line']['title1'] = __('Tholds triggered', 'intropage');
+                	        	foreach ($sql as $row) {
+                        	        	array_push($graph['line']['label1'], $row['date']);
+                                		array_push($graph['line']['data1'], $row['value']);
+                        		}
+                		}
+        		}
+
+	        	$sql = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`, name, value
+        	        	FROM plugin_intropage_trends
+                		WHERE name='host' AND user_id = ?
+                		ORDER BY cur_timestamp desc
+	                	LIMIT 10",
+	                	array($user['id']));
+
+	        	if (cacti_sizeof($sql)) {
+        	        	$graph['line']['title2'] = __('Hosts down');
+
+                		foreach ($sql as $row) {
+                        		array_push($graph['line']['data2'], $row['value']);
+                		}
+        		}
+
+	        	if (count($graph['line']) < 3) {
+        	        	unset($graph);
+                		$result['data'] = __('Waiting for data','intropage');
+	        	} else {
+        	        	$graph['line']['data1'] = array_reverse($graph['line']['data1']);
+                		$graph['line']['data2'] = array_reverse($graph['line']['data2']);
+                		$graph['line']['label1'] = array_reverse($graph['line']['label1']);
+	              		$result['data'] = intropage_prepare_graph($graph);
+				unset($graph);
+        		}
+    			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+		}
 	}
 
 	if ($display)    {
-                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-                                            WHERE panel_id= ?',
-                                            array($panel_id));
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ? AND user_id= ?',
+                                            array($panel_id, $_SESSION['sess_user_id'])); 
 
                 $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
                         floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -1477,7 +1581,7 @@ function poller_info($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1545,7 +1649,7 @@ function poller_info($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -1602,7 +1706,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1689,7 +1793,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			    	VALUES (?,?,?,?,?)',
-			    	array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    	array($id,$panel_id,0,$result['data'],$result['alarm']));
 	}
 
 	if ($display)    {
@@ -1730,7 +1834,8 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
 	}
 
 	foreach ($users as $user)	{
@@ -1760,22 +1865,17 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 				'last_update' =>  NULL,
 			);
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']);
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
+        		 $console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
+                                        WHERE user_id = ?
+                                        AND user_auth_realm.realm_id=8',
+                                        array($user['id']))) ? true : false;
         		$total_errors = 0;
 
         		// hosts with same IP
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts . ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		GROUP BY hostname,snmp_port
                         		HAVING NoDups > 1");
@@ -1792,10 +1892,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// same description
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
                         		FROM host
-					WHERE id IN (" . $allowed_hosts . ")
+					WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		GROUP BY description
                         		HAVING NoDups > 1");
@@ -1824,6 +1924,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                 		ON dtr.local_data_id=dtd.local_data_id
                 		LEFT JOIN graph_templates_item AS gti
                 		ON (gti.task_item_id=dtr.id)
+				WHERE dl.host_id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ') 
                 		GROUP BY dl.id
                 		HAVING deletable=0
                 		ORDER BY `name_cache` ASC');
@@ -1840,18 +1941,19 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// empty poller_output
-        		$count = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name = 'poller_output' ORDER BY cur_timestamp DESC LIMIT 1");
+			if ($console_access)	{
+	        		$count = db_fetch_cell("SELECT value FROM plugin_intropage_trends WHERE name = 'poller_output' ORDER BY cur_timestamp DESC LIMIT 1");
 
-        		if ($count>0) {
-                		$result['data'] .= __('Poller Output Items: %s', $count, 'intropage') . '<br/>';
+        			if ($count>0) {
+                			$result['data'] .= __('Poller Output Items: %s', $count, 'intropage') . '<br/>';
+	
+        	        		if ($result['alarm'] == 'green') {
+                	        		$result['alarm'] = 'yellow';
+                			}
 
-                		if ($result['alarm'] == 'green') {
-                        		$result['alarm'] = 'yellow';
-                		}
-
-                		$total_errors += $count;
-        		}
-
+                			$total_errors += $count;
+        			}
+			}
 
         		// DS - bad indexes
         		$sql_result = db_fetch_assoc('SELECT dtd.local_data_id,dtd.name_cache
@@ -1860,7 +1962,8 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                 		ON dl.id=dtd.local_data_id
                 		INNER JOIN data_template AS dt ON dt.id=dl.data_template_id
                 		INNER JOIN host AS h ON h.id = dl.host_id
-                		WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)');
+                		WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)
+                		AND dl.host_id in (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
 
         		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
 
@@ -1875,7 +1978,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// thold plugin - logonly alert and warning thold
+        		// I don't use thold get_allowed_thold because of join plugin_thold_threshold_contact
+
         		if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+
             			$sql_result = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
                         		uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
                         		FROM thold_data AS td
@@ -1896,6 +2002,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                             		(td.notify_extra ='' or td.notify_extra is NULL) AND
                             		(td.notify_warning_extra='' or td.notify_warning_extra is NULL)
                             		AND con.contact_id IS NULL
+                            		AND gl.host_id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                             		HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
 
             			$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -1915,12 +2022,12 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
         		// device in more trees
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
                         		FROM host
                         		INNER JOIN graph_tree_items
                         		ON (host.id = graph_tree_items.host_id)
-                        		WHERE host.id IN (' . $allowed_hosts . ')
+                        		WHERE host.id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')
                         		GROUP BY description
                         		HAVING `count` > 1');
 
@@ -1932,10 +2039,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// host without graph
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts . ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		AND id NOT IN (
 					SELECT DISTINCT host_id
@@ -1951,10 +2058,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// host without tree
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts . ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		AND id NOT IN (
                                 		SELECT DISTINCT host_id
@@ -1969,12 +2076,13 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
         		}
 
         		// public/private community
-        		if ($allowed_hosts) {
+        		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc("SELECT id, description
                         		FROM host
-                        		WHERE id IN (" . $allowed_hosts . ")
+                        		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		AND (snmp_community ='public' OR snmp_community='private')
+					AND snmp_version IN (1,2) 
                         		ORDER BY description");
 
                 		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -1986,10 +2094,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 
         		// plugin monitor - host without monitoring
         		if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='monitor'")) { // installed plugin monitor?
-                		if ($allowed_hosts) {
+        			if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                         		$sql_result = db_fetch_assoc("SELECT id, description, hostname
                                 		FROM host
-                                		WHERE id IN (" . $allowed_hosts . ")
+                                		WHERE id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                                 		AND monitor != 'on'");
 
                         		$sql_count  = ($sql_result === false) ? __('N/A', 'intropage') : count($sql_result);
@@ -2015,9 +2123,9 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 	}
 
 	if ($display)    {
-                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-                                            WHERE panel_id= ?',
-                                            array($panel_id));
+                $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+                                            WHERE panel_id= ? AND user_id= ?',
+                                            array($panel_id, $_SESSION['sess_user_id'])); 
 
                 $result['recheck'] = db_fetch_cell_prepared("SELECT concat(
                         floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2048,7 +2156,10 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+//	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+
 	}
 
 	foreach ($users as $user)	{
@@ -2078,16 +2189,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 				'last_update' =>  NULL,
 			);
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']);
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -2095,7 +2197,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 
                 		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
                         		FROM host
-                        		WHERE host.id IN (" . $allowed_hosts . ")
+                        		WHERE host.id IN (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		ORDER BY availability
                         		LIMIT 5");
@@ -2134,9 +2236,9 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2168,7 +2270,8 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
 	}
 
 	foreach ($users as $user)	{
@@ -2198,16 +2301,7 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 				'last_update' =>  NULL,
 			);
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']);
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -2215,7 +2309,7 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 
 		                $sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
                 		        FROM host
-                        		WHERE host.id in (" . $allowed_hosts . ")
+                        		WHERE host.id in (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		ORDER BY polling_time desc
                         		LIMIT 5");
@@ -2253,9 +2347,9 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2286,7 +2380,8 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
 	}
 	else	{ // poller wants all
-	    	$users = db_fetch_assoc("SELECT id FROM user_auth WHERE enabled='on'");
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
 	}
 
 	foreach ($users as $user)	{
@@ -2316,16 +2411,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 				'last_update' =>  NULL,
 			);
 
-	    		$x = 0;	// reference
-			$allowed =  get_allowed_devices('','description',-1,$x,$user['id']);
-
-	    		if (count($allowed) > 0) {
-                		$allowed_hosts = implode(',', array_column($allowed, 'id'));
-    	    		} else {
-                		$allowed_hosts = false;
-    	    		}
-
-	    		if ($allowed_hosts)	{
+	    		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0)	{
 				$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
 					WHERE user_id = ?
 				    	AND user_auth_realm.realm_id=8',
@@ -2333,7 +2419,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 
                 		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls, total_polls, failed_polls/total_polls as ratio
                         		FROM host
-                        		WHERE host.id in (" . $allowed_hosts . ")
+                        		WHERE host.id in (" . $_SESSION['allowed_hosts'][$user['id']] . ")
                         		AND disabled != 'on'
                         		ORDER BY ratio desc
                        	 		LIMIT 5");
@@ -2367,9 +2453,9 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2392,86 +2478,100 @@ function thold_event($display=false, $update=false, $force_update=false) {
 	$panel_id = 'thold_event';
 	$panel_name = __('Last thold events', 'intropage');
 
-	$result = array(
-		'name' => $panel_name,
-		'alarm' => 'green',
-		'data' => '',
-		'last_update' =>  NULL,
-	);
-
-	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE
-				panel_id=? AND last_update IS NOT NULL',
-				array($panel_id));
-
-	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
-
-		$id = db_fetch_insert_id();
-	}
-
-	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=0 and panel_id= ?',
-					array($panel_id));
-
+	
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
 					array($panel_id));
 
-	if ( $force_update || time() > ($last_update + $update_interval))	{
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+	}
 
-        	if (db_fetch_cell("SELECT count(*) FROM plugin_config WHERE directory='thold' AND status = 1") == 0) {
-                	$result['alarm'] = 'yellow';
-                	$result['data']  = __('Plugin Thold isn\'t installed or started', 'intropage');
-                	$result['detail'] = FALSE;
-        	} else {
-                	$sql_result = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
-                        tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
-                        FROM plugin_thold_log AS tl
-                        INNER JOIN thold_data AS td
-                        ON tl.threshold_id=td.id
-                        INNER JOIN graph_local AS gl
-                        ON gl.id=td.local_graph_id
-                        LEFT JOIN graph_templates AS gt
-                        ON gt.id=gl.graph_template_id
-                        LEFT JOIN graph_templates_graph AS gtg
-                        ON gtg.local_graph_id=gl.id
-                        LEFT JOIN host AS h
-                        ON h.id=gl.host_id
-                        LEFT JOIN user_auth_perms AS uap0
-                        ON (gl.id=uap0.item_id AND uap0.type=1)
-                        LEFT JOIN user_auth_perms AS uap1
-                        ON (gl.host_id=uap1.item_id AND uap1.type=3)
-                        LEFT JOIN user_auth_perms AS uap2
-                        ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-                        HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
-                        ORDER BY `time` DESC
-                        LIMIT 10');
+	foreach ($users as $user)	{
 
-                	if (cacti_sizeof($sql_result)) {
-                        	foreach ($sql_result as $row) {
-                                	$result['data'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . html_escape($row['description']) . '<br/>';
-                                	if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
-                                        	$result['alarm'] = 'red';
-                                	} elseif ($result['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
-                                        	$result['alarm'] == 'yellow';
-                                	}
-                        	}
-                	} else {
-                        	$result['data'] = __('Without events yet', 'intropage');
-                	}
-        	}
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
 
-	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
-			    VALUES ( ?, ?, ?, ?, ?)',
-			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+
+	    		$id = db_fetch_insert_id();
+		}
+
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
+
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
+
+			$result = array(
+				'name' => $panel_name,
+				'alarm' => 'green',
+				'data' => '',
+				'last_update' =>  NULL,
+			);
+
+	        	if (db_fetch_cell("SELECT count(*) FROM plugin_config WHERE directory='thold' AND status = 1") == 0) {
+        	        	$result['alarm'] = 'yellow';
+                		$result['data']  = __('Plugin Thold isn\'t installed or started', 'intropage');
+                		$result['detail'] = FALSE;
+	        	} else {
+        	        	$sql_result = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
+                	        tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
+                        	FROM plugin_thold_log AS tl
+	                        INNER JOIN thold_data AS td
+        	                ON tl.threshold_id=td.id
+	                        INNER JOIN graph_local AS gl
+        	                ON gl.id=td.local_graph_id
+                	        LEFT JOIN graph_templates AS gt
+	                        ON gt.id=gl.graph_template_id
+        	                LEFT JOIN graph_templates_graph AS gtg
+                	        ON gtg.local_graph_id=gl.id
+	                        LEFT JOIN host AS h
+        	                ON h.id=gl.host_id
+                	        LEFT JOIN user_auth_perms AS uap0
+	                        ON (gl.id=uap0.item_id AND uap0.type=1)
+        	                LEFT JOIN user_auth_perms AS uap1
+                	        ON (gl.host_id=uap1.item_id AND uap1.type=3)
+	                        LEFT JOIN user_auth_perms AS uap2
+        	                ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+                	        WHERE td.host_id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')
+	                        HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
+        	                ORDER BY `time` DESC
+                	        LIMIT 10');
+
+	                	if (cacti_sizeof($sql_result)) {
+        	                	foreach ($sql_result as $row) {
+                	                	$result['data'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . html_escape($row['description']) . '<br/>';
+                        	        	if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
+                                	        	$result['alarm'] = 'red';
+                                		} elseif ($result['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
+	                                        	$result['alarm'] == 'yellow';
+        	                        	}
+                	        	}
+                		} else {
+                        		$result['data'] = __('Without events yet', 'intropage');
+                		}
+        		}
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES (?,?,?,?,?)',
+			    array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+		}
+
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2508,7 +2608,7 @@ function boost($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
 			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+			    array($panel_id, 0, __('Waiting for data', 'intropage')));
 
 		$id = db_fetch_insert_id();
 	}
@@ -2640,7 +2740,7 @@ function boost($display=false, $update=false, $force_update=false) {
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 			    VALUES ( ?, ?, ?, ?, ?)',
-			    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
+			    array($id,$panel_id,0,$result['data'],$result['alarm']));
         }
 
 	if ($display)    {
@@ -2669,171 +2769,204 @@ function extrem($display=false, $update=false, $force_update=false) {
 	$panel_id = 'extrem';
 	$panel_name = __('24 hours extrem', 'intropage');
 
-	$result = array(
-		'name' => $panel_name,
-		'alarm' => 'gray',
-		'data' => '',
-		'last_update' =>  NULL,
-	);
-
 	if (isset($run_from_poller))	{ // update in poller
 
-		$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host;');
-        	db_execute_prepared('REPLACE INTO plugin_intropage_trends
-                	(name, value, user_id) VALUES (?, ?, 0)',
-                	array('failed_polls', $count));
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on' AND t2.trend='on'");
+		foreach ($users as $user)	{
 
-	        $count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
+			$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
+        		db_execute_prepared('REPLACE INTO plugin_intropage_trends
+                		(name, value, user_id) VALUES (?, ?, 0)',
+                		array('failed_polls', $count));
+
+		        $count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
+		}
 
         	db_execute_prepared('REPLACE INTO plugin_intropage_trends
                 	(name, value, user_id) VALUES (?, ?, 0)',
                 	array('poller_output', $count));
 	}
 
-	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE
-				panel_id=? AND last_update IS NOT NULL',
-				array($panel_id));
-
-	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, $_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
-
-		$id = db_fetch_insert_id();
-	}
-
-	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=0 and panel_id= ?',
-					array($panel_id));
-
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
 					array($panel_id));
 
-	if ( $force_update || time() > ($last_update + $update_interval))	{
+	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
+		$users = array(array('id'=>$_SESSION['sess_user_id']));
+	}
+	else	{ // poller wants all
+		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
+				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
+	}
 
-       		$result['data'] .= '<table><tr><td class="rpad">';
+	foreach ($users as $user)	{
 
-        	// long run poller
-        	$result['data'] .= '<strong>' . __('Long run<br/>poller', 'intropage') . ': </strong>';
+		$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE 
+				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
+				array($panel_id,$user['id']));
 
-        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`,
-                	substring(value,instr(value,':')+1) AS xvalue
-                	FROM plugin_intropage_trends
-                	WHERE name='poller'
-                	AND cur_timestamp > date_sub(now(),interval 1 day)
-                	ORDER BY xvalue desc, cur_timestamp
-                	LIMIT 8");
+		if (!$id) {				
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
+				VALUES ( ?, ?, ?, "gray", 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
 
-        	if (cacti_sizeof($sql_result)) {
-                	foreach ($sql_result as $row) {
-                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
-                	}
-        	} else {
-                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
-        	}
+	    		$id = db_fetch_insert_id();
+		}
 
-        	$result['data'] .= '</td>';
+		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id= ? AND panel_id= ?',
+					array($user['id'],$panel_id));
 
-        	// max host down
-        	$result['data'] .= '<td class="rpad texalirig">';
-        	$result['data'] .= '<strong>Max host<br/>down: </strong>';
+        	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
-                	FROM plugin_intropage_trends
-                	WHERE name='host'
-                	AND cur_timestamp > date_sub(now(),interval 1 day)
-                	ORDER BY value desc,cur_timestamp
-                	LIMIT 8");
+			$result = array(
+				'name' => $panel_name,
+				'alarm' => 'gray',
+				'data' => '',
+				'last_update' =>  NULL,
+			);
 
-        	if (cacti_sizeof($sql_result)) {
-                	foreach ($sql_result as $row) {
-                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
-                	}
-        	} else {
-                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
-        	}
+	    		$console_access = (db_fetch_assoc_prepared('SELECT realm_id FROM user_auth_realm
+					WHERE user_id = ?
+				    	AND user_auth_realm.realm_id=8',
+				    	array($user['id']))) ? true : false;
 
-        	$result['data'] .= '</td>';
+			if ($console_access) {
+		       		$result['data'] = '<table><tr><td class="rpad">';
 
-        	// max thold trig
-        	// extrems doesn't use user permission!
-        	$result['data'] .= '<td class="rpad texalirig">';
-        	$result['data'] .= '<strong>' . __('Max thold<br/>triggered:', 'intropage') .'</strong>';
+        			// long run poller
+        			$result['data'] .= '<strong>' . __('Long run<br/>poller', 'intropage') . ': </strong>';
 
-        	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
-                	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
-                        	FROM plugin_intropage_trends
-                        	WHERE name='thold'
-                        	AND cur_timestamp > date_sub(now(),interval 1 day)
-                        	ORDER BY value desc,cur_timestamp
-                        	LIMIT 8");
+        			$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`,
+                			substring(value,instr(value,':')+1) AS xvalue
+		               		FROM plugin_intropage_trends
+                			WHERE name='poller'
+                			AND cur_timestamp > date_sub(now(),interval 1 day)
+                			ORDER BY xvalue desc, cur_timestamp
+                			LIMIT 8");
 
-                	if (cacti_sizeof($sql_result)) {
-                        	foreach ($sql_result as $row) {
-                                	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
-                        	}
-                	} else {
-                        	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
-                	}
-        	} else {
-                	$result['data'] .= '<br/>no<br/>plugin<br/>installed<br/>or<br/>running';
-        	}
+		        	if (cacti_sizeof($sql_result)) {
+        		        	foreach ($sql_result as $row) {
+                		        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['xvalue'] . 's';
+                			}
+		        	} else {
+        		        	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        			}
 
-        	$result['data'] .= '</td>';
+		        	$result['data'] .= '</td>';
+			}
 
-        	// poller output items
-        	$result['data'] .= '<td class="rpad texalirig">';
-        	$result['data'] .= '<strong>' . __('Poller<br/>output item:', 'intropage') . '</strong>';
 
-        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
-                	FROM plugin_intropage_trends
-                	WHERE name='poller_output'
-                	AND cur_timestamp > date_sub(now(),interval 1 day)
-                	ORDER BY value desc,cur_timestamp
-                	LIMIT 8");
+	        	// max host down
+        		$result['data'] .= '<td class="rpad texalirig">';
+        		$result['data'] .= '<strong>Max host<br/>down: </strong>';
 
-        	if (cacti_sizeof($sql_result)) {
-                	foreach ($sql_result as $row) {
-                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
-                	}
-        	} else {
-                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
-        	}
+	        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+        	        	FROM plugin_intropage_trends
+                		WHERE name='host'
+                		AND user_id = " . $user['id'] . "
+                		AND cur_timestamp > date_sub(now(),interval 1 day)
+	                	ORDER BY value desc,cur_timestamp
+        	        	LIMIT 8");
 
-        	$result['data'] .= '</td>';
+	        	if (cacti_sizeof($sql_result)) {
+        	        	foreach ($sql_result as $row) {
+                	        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+                		}
+        		} else {
+                		$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        		}
 
-        	// poller output items
-        	$result['data'] .= '<td class="rpad texalirig">';
-        	$result['data'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
+	        	$result['data'] .= '</td>';
 
-        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
-                	FROM plugin_intropage_trends
-                	WHERE name='failed_polls'
-                	AND cur_timestamp > date_sub(now(),interval 1 day)
-                	ORDER BY value desc,cur_timestamp
-                	LIMIT 8");
+        		// max thold trig
+        		// extrems doesn't use user permission!
+	        	$result['data'] .= '<td class="rpad texalirig">';
+        		$result['data'] .= '<strong>' . __('Max thold<br/>triggered:', 'intropage') .'</strong>';
 
-        	if (cacti_sizeof($sql_result)) {
-                	foreach ($sql_result as $row) {
-                        	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
-                	}
-        	} else {
-                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
-        	}
+        		if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
+                		$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+                        		FROM plugin_intropage_trends
+		                       	WHERE name='thold'
+	                		AND user_id = " . $user['id'] . "
+                	        	AND cur_timestamp > date_sub(now(),interval 1 day)
+                        		ORDER BY value desc,cur_timestamp
+                        		LIMIT 8");
 
-        	$result['data'] .= '</td>';
-        	$result['data'] .= '</tr></table>';
+	                	if (cacti_sizeof($sql_result)) {
+        	                	foreach ($sql_result as $row) {
+                	                	$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+                        		}
+	                	} else {
+        	                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+                		}
+	        	} else {
+        	        	$result['data'] .= '<br/>no<br/>plugin<br/>installed<br/>or<br/>running';
+        		}
 
-   		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
-		    VALUES (?,?,?,?,?)',
-		    array($id,$panel_id,$_SESSION['sess_user_id'],$result['data'],$result['alarm']));
-        }
+	        	$result['data'] .= '</td>';
+
+        		// poller output items
+        		if ($console_access) {
+		        	$result['data'] .= '<td class="rpad texalirig">';
+        			$result['data'] .= '<strong>' . __('Poller<br/>output item:', 'intropage') . '</strong>';
+
+		        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+                			FROM plugin_intropage_trends
+		                	WHERE name='poller_output'
+                			AND cur_timestamp > date_sub(now(),interval 1 day)
+		                	ORDER BY value desc,cur_timestamp
+                			LIMIT 8");
+
+		        	if (cacti_sizeof($sql_result)) {
+                			foreach ($sql_result as $row) {
+                        			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+	    		            	}
+		        	} else {
+                			$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        			}	
+
+	        		$result['data'] .= '</td>';
+	        	}
+
+	        	// failed polls
+			if ($console_access) {
+        			$result['data'] .= '<td class="rpad texalirig">';
+		        	$result['data'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
+
+        			$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+		                	FROM plugin_intropage_trends
+                			WHERE name='failed_polls'
+		                	AND cur_timestamp > date_sub(now(),interval 1 day)
+                			ORDER BY value desc,cur_timestamp
+		                	LIMIT 8");
+
+		        	if (cacti_sizeof($sql_result)) {
+                			foreach ($sql_result as $row) {
+                        			$result['data'] .= '<br/>' . $row['date'] . ' ' . $row['value'];
+		                	}
+        			} else {
+		                	$result['data'] .= '<br/>' . __('Waiting<br/>for data', 'intropage');
+        			}
+
+		        	$result['data'] .= '</td>';
+			}
+
+        		$result['data'] .= '</tr></table>';
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm) 
+			    VALUES (?,?,?,?,?)',
+			    array($id,$panel_id,$user['id'],$result['data'],$result['alarm']));
+		}
+	}
+
+
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -2870,7 +3003,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 	foreach ($users as $user)	{
 		$result = array(
 			'name' => $panel_name,
-			'alarm' => 'gray',
+			'alarm' => 'green',
 			'data' => '',
 			'last_update' =>  NULL,
 		);
@@ -2893,29 +3026,49 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
-
 			if (!db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='thold' and status=1")) {
 				$result['alarm'] = 'gray';
 				$result['data']  = __('Thold plugin not installed/running', 'intropage');
 			} elseif (!db_fetch_cell('SELECT DISTINCT user_id FROM user_auth_realm WHERE user_id = ' . $user['id'] . " AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold%')")) {
 				$result['data'] = __('You don\'t have plugin permission', 'intropage');
 			} else {
-				// need for thold - isn't any better solution?
-				$current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $user['id']);
-   				$sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
+/*
+				// old code, faster
+https://github.com/Cacti/plugin_thold/issues/440
+*/
+                               // need for thold - isn't any better solution?
+                               $current_user  = db_fetch_row('SELECT * FROM user_auth WHERE id=' . $user['id']);
+                               $sql_where = get_graph_permissions_sql($current_user['policy_graphs'], $current_user['policy_hosts'], $current_user['policy_graph_templates']);
 
-				$sql_join = ' LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
-					(thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
-					(thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $user['id'] . '))';
+                               $sql_join = ' LEFT JOIN host ON thold_data.host_id=host.id     LEFT JOIN user_auth_perms ON ((thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=1 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
+                                       (thold_data.host_id=user_auth_perms.item_id AND user_auth_perms.type=3 AND user_auth_perms.user_id= ' . $user['id'] . ') OR
+                                       (thold_data.graph_template_id=user_auth_perms.item_id AND user_auth_perms.type=4 AND user_auth_perms.user_id= ' . $user['id'] . '))';
 
-				$t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE $sql_where");
-				$t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
-				$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE (thold_data.thold_alert!=0 OR thold_data.bl_fail_count >= thold_data.bl_fail_trigger) AND $sql_where");
-				$t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert>0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
-				$t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
+                               $t_all  = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND $sql_where");
+                               $t_brea = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+                               $t_trig = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND ((thold_data.thold_alert!=0 AND thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
+                               $t_disa = db_fetch_cell("SELECT COUNT(*) FROM thold_data $sql_join WHERE thold_data.thold_enabled='off' AND $sql_where");
 
-				$count = $t_all + $t_brea + $t_trig + $t_disa;
+                               $count = $t_all + $t_brea + $t_trig + $t_disa;
 
+
+/*
+				// right way but it is slow
+
+				include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
+				$t_all = 0; $t_brea = 0; $t_trig = 0; $t_disa = 0;
+				$sql_where = '';
+				$x = '';
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_all, $user['id']);
+				$sql_where = "td.thold_enabled = 'on' AND ((td.thold_alert != 0 OR td.bl_alert > 0))";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_brea, $user['id']);
+				$sql_where = "td.thold_enabled = 'on' AND (((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger) 
+						OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user['id']);
+				$sql_where = "td.thold_enabled = 'off'";
+				$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $user['id']);
+*/
 				$has_access = db_fetch_cell('SELECT COUNT(*) FROM user_auth_realm WHERE user_id = '.$user['id']." AND realm_id IN (SELECT id + 100 FROM plugin_realms WHERE file LIKE '%thold_graph.php%')");
 				$url_prefix = $has_access ? '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">' : '';
 				$url_suffix = $has_access ? '</a>' : '';
@@ -2925,7 +3078,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 				$result['data'] .= sprintf($url_prefix, '3') . __('Trigged', 'intropage') . ": $t_trig$url_suffix<br/>";
 				$result['data'] .= sprintf($url_prefix, '0') . __('Disabled', 'intropage') . ": $t_disa$url_suffix<br/>";
 
-				if ($count > 0) {
+				if ($t_all > 0) {
 		                	$graph = array ('pie' => array(
 						'title' => $panel_name,
 						'label' => array(
@@ -2957,9 +3110,9 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 	}
 
 	if ($display)    {
-	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
-	    				    WHERE panel_id= ?',
-	    				    array($panel_id));
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data 
+	    				    WHERE panel_id= ? AND user_id= ?',
+	    				    array($panel_id, $_SESSION['sess_user_id'])); 
 
 		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
 			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
@@ -3258,7 +3411,7 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
         if (!$id) {
                 db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
                             VALUES ( ?, ?, ? ,"gray",1000)',
-                            array($panel_id,$_SESSION['sess_user_id'],__('Waiting for data', 'intropage')));
+                            array($panel_id, 0, __('Waiting for data', 'intropage')));
 
                 $id = db_fetch_insert_id();
         }

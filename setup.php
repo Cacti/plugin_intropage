@@ -31,7 +31,7 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
-	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
+//	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
@@ -39,9 +39,11 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_action', 'intropage_user_admin_action', 'includes/settings.php');
+	//api_plugin_register_hook('intropage', 'user_admin_action', 'intropage_user_admin_action', 'includes/settings.php');
 
 	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
+
+       api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
 
 	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
 
@@ -148,5 +150,12 @@ function intropage_remove_panel($panel_id) {
 	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',array($panel_id));
 
 	return ('1');
+}
+
+function intropage_user_remove($user_id) {
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id= ?', array($user_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id= ?', array($user_id));
+	db_execute_prepared('DELETE FROM settings_user WHERE user_id= ?', array($user_id));
+
 }
 
