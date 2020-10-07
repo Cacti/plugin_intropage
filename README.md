@@ -52,6 +52,10 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	2.0.4 ---
+	Better work with panels (#115)
+	Compatibility with RHEL7/old php (#115)
+		
 	2.0.3 ---
 	Poller speed up
 	Fix a lot of small bugs
