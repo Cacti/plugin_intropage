@@ -1,5 +1,5 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
@@ -40,7 +40,7 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
 	$panel_id = get_request_var('detail_panel');
 }
 
-$forced_update = filter_var(get_request_var('force'), FILTER_VALIDATE_BOOLEAN);
+$forced_update = filter_var(get_nfilter_request_var('force'), FILTER_VALIDATE_BOOLEAN);
 
 // automatic reload when poller ends
 if (isset_request_var('autoreload')) {
@@ -75,11 +75,15 @@ if (isset_request_var('autoreload')) {
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
-if (isset_request_var('reload_panel') && isset($panel_id)) {
+// Close the session to allow other tabs to operate
+session_write_close();
 
+	$panel = db_fetch_row_prepared('SELECT *
+		FROM plugin_intropage_panel_data
+		WHERE id = ?
+		AND user_id IN (0,?)',
+		array($panel_id, $_SESSION['sess_user_id']));
 
-	$panel = db_fetch_row_prepared('SELECT * FROM plugin_intropage_panel_data
-		WHERE id = ? AND user_id IN (0,?)', array($panel_id,$_SESSION['sess_user_id']));
 	if ($panel)	{
 		if (isset($panel['fav_graph_id'])) { // fav_graph exception
 			$data = intropage_favourite_graph($panel['fav_graph_id'],$panel['fav_graph_timespan']);
@@ -94,7 +98,7 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 		if (isset_request_var('reload_panel')) {
 			intropage_display_data(get_request_var('reload_panel'),$data);
 
-			// change panel color or ena/disa detail 
+			// change panel color or ena/disa detail
 			?>
 
 			<script type='text/javascript'>
@@ -120,7 +124,9 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 	} elseif ($panel_id == 998) {	// exception for admin alert panel
 		print nl2br(read_config_option('intropage_admin_alert'));
 	} elseif ($panel_id == 997) {	// exception for maint panel
-		print intropage_maint();
+		if (function_exists('intropage_maint')) {
+			print intropage_maint();
+		}
 	} else {
 		print __('Panel not found');
 	}

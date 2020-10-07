@@ -1,5 +1,5 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
@@ -140,7 +140,7 @@ function intropage_initialize_database() {
 		('maint','/plugins/intropage/include/data.php','no',300,98,'Maint plugin')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('admin_alert','/plugins/intropage/include/data.php','no',3600,99,'Extra admin notify panel for all users')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values
 		('trend','/plugins/intropage/include/data.php','no',300,75,'Few trends (down hosts, trigged tholds,...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('poller_info','/plugins/intropage/include/data.php','yes',60,74,'Poller information. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
@@ -148,19 +148,19 @@ function intropage_initialize_database() {
 		('poller_stat','/plugins/intropage/include/data.php','no',60,73,'Poller statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('analyse_tree_host_graph','/plugins/intropage/include/data.php','yes',1800,33,'Analyse trees, hosts, ...')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values
 		('top5_availability','/plugins/intropage/include/data.php','yes',300,61,'Host with the worst availability')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values
 		('top5_polltime','/plugins/intropage/include/data.php','yes',300,62,'Hosts with the worst polling time')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values
 		('top5_pollratio','/plugins/intropage/include/data.php','yes',300,63,'Hosts with the worst polling ratio')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values
 		('thold_event','/plugins/intropage/include/data.php','yes',300,77,'Plugin thold - last events')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('boost','/plugins/intropage/include/data.php','no',300,47,'Information about boost process. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('extrem','/plugins/intropage/include/data.php','yes',300,78,'Table with 24 hours extrems (longest poller run, down hosts)')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values
 		('graph_thold','/plugins/intropage/include/data.php','yes',300,18,'Plugin Thold graph (all, trigerred, ...)')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('mactrack','/plugins/intropage/include/data.php','no',900,28,'Plugin Mactrack statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");

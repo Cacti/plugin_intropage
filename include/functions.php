@@ -1,5 +1,5 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
@@ -23,40 +23,48 @@
  +-------------------------------------------------------------------------+
 */
 
+if (!function_exists('array_column')) {
+    function array_column($array,$column_name) {
+        return array_map(function($element) use($column_name) {
+			return $element[$column_name];
+		}, $array);
+    }
+}
+
 function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
-        global $config, $graph_timeshifts;
+	global $config, $graph_timeshifts;
 
-
-        if (isset($fav_graph_id)) {
-                $result = array(
-                        'name' => __('Favourite graph', 'intropage'),
-                        'alarm' => 'gray',
-                        'data' => '',
-                );
+	if (isset($fav_graph_id)) {
+		$result = array(
+			'name' => __('Favourite graph', 'intropage'),
+			'alarm' => 'gray',
+			'data' => '',
+		);
 
 		include_once($config['base_path'] . '/lib/time.php');
 
-                $result['name'] .= ' ' . db_fetch_cell_prepared('SELECT title_cache
-                        FROM graph_templates_graph
-                        WHERE local_graph_id = ?',
-                        array($fav_graph_id));
+		$result['name'] .= ' ' . db_fetch_cell_prepared('SELECT title_cache
+			FROM graph_templates_graph
+			WHERE local_graph_id = ?',
+			array($fav_graph_id));
 
 		$result['name'] .= ' - ' .  $graph_timeshifts[$fav_graph_timespan];
 
 		$timespan = array();
 		$first_weekdayid = read_user_setting('first_weekdayid');
+
 		get_timespan( $timespan, time(),$fav_graph_timespan , $first_weekdayid);
 
-                $result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
-                        'local_graph_id=' . $fav_graph_id . '&' .
-                        'graph_height=105&' .
-                        'graph_width=300&' .
-                        'disable_cache=true&' .
-                        'graph_start=' . $timespan['begin_now'] . '&' .
-                        'graph_end=' . $timespan['end_now'] . '&' .
-                        'graph_nolegend=true"/>';
+		$result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
+			'local_graph_id=' . $fav_graph_id . '&' .
+			'graph_height=105&' .
+			'graph_width=300&' .
+			'disable_cache=true&' .
+			'graph_start=' . $timespan['begin_now'] . '&' .
+			'graph_end=' . $timespan['end_now'] . '&' .
+			'graph_nolegend=true"/>';
 
-                return $result;
+		return $result;
 	}
 }
 
@@ -79,14 +87,14 @@ function intropage_prepare_graph($dispdata) {
 	}
 
 	$content = "";
-	
+
 	// line graph
 	if (isset($dispdata['line'])) {
 		$xid = 'x' . substr(md5($dispdata['line']['title1']), 0, 7);
 
 		$content .= "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\"></canvas>\n";
 		$content .=  "<script type='text/javascript'>\n";
-		
+
 		$title1      = $dispdata['line']['title1'];
 		$line_labels = implode('","', $dispdata['line']['label1']);
 		$line_values = implode(',', $dispdata['line']['data1']);
@@ -95,14 +103,17 @@ function intropage_prepare_graph($dispdata) {
 			$line_values2 = implode(',', $dispdata['line']['data2']);
 			$title2       = $dispdata['line']['title2'];
 		}
+
 		if (!empty($dispdata['line']['data3'])) {
 			$line_values3 = implode(',', $dispdata['line']['data3']);
 			$title3       = $dispdata['line']['title3'];
 		}
+
 		if (!empty($dispdata['line']['data4'])) {
 			$line_values4 = implode(',', $dispdata['line']['data4']);
 			$title4       = $dispdata['line']['title4'];
 		}
+
 		if (!empty($dispdata['line']['data5'])) {
 			$line_values5 = implode(',', $dispdata['line']['data5']);
 			$title5       = $dispdata['line']['title5'];
@@ -110,61 +121,60 @@ function intropage_prepare_graph($dispdata) {
 
 		$content .= "var $xid = document.getElementById('line_" . $xid . "').getContext('2d');\n";
 		$content .= "new Chart($xid, {\n";
-    		$content .= "type: 'line',\n";
+		$content .= "type: 'line',\n";
 		$content .= "data: {\n";
 		$content .= "labels: [\"" . $line_labels . "\"],\n";
 		$content .= "datasets: [{\n";
-	    	$content .= "label: '" . $title1 . "',\n";
-	    	$content .= "data: [" . $line_values . "],\n";
-	    	$content .= "borderColor: 'rgba(220,220,220,0.5)',\n";
-	    	$content .= "backgroundColor: 'rgba(220,220,220,0.5)',\n";
+		$content .= "label: '" . $title1 . "',\n";
+		$content .= "data: [" . $line_values . "],\n";
+		$content .= "borderColor: 'rgba(220,220,220,0.5)',\n";
+		$content .= "backgroundColor: 'rgba(220,220,220,0.5)',\n";
 		$content .= "},\n";
 
 		if (!empty($dispdata['line']['data2'])) {
 			$content .= "{\n";
-	    		$content .= "label: '" . $title2 . "',\n";
-    	    		$content .= "data: [" . $line_values2 . "],\n";
-    	    		$content .= "borderColor: '#0f0f00',\n";
+			$content .= "label: '" . $title2 . "',\n";
+			$content .= "data: [" . $line_values2 . "],\n";
+			$content .= "borderColor: '#0f0f00',\n";
 			$content .= "},\n";
 		}
 
 		if (!empty($dispdata['line']['data3'])) {
 			$content .= "{\n";
-	    		$content .= "label: '" . $title3 . "',\n";
-    	    		$content .= "data: [" . $line_values3 . "],\n";
-    	    		$content .= "borderColor: '#f0000f',\n";
+			$content .= "label: '" . $title3 . "',\n";
+			$content .= "data: [" . $line_values3 . "],\n";
+			$content .= "borderColor: '#f0000f',\n";
 			$content .= "},\n";
 		}
 
 		if (!empty($dispdata['line']['data4'])) {
 			$content .= "{\n";
-	    		$content .= "label: '" . $title4 . "',\n";
-    	    		$content .= "data: [" . $line_values4 . "],\n";
-    	    		$content .= "borderColor: '#f0000f',\n";
+			$content .= "label: '" . $title4 . "',\n";
+			$content .= "data: [" . $line_values4 . "],\n";
+			$content .= "borderColor: '#f0000f',\n";
 			$content .= "},\n";
 		}
 
 		if (!empty($dispdata['line']['data5'])) {
 			$content .= "{\n";
-	    		$content .= "label: '" . $title5 . "',\n";
-    	    		$content .= "data: [" . $line_values5 . "],\n";
-    	    		$content .= "borderColor: '#f0000f',\n";
+			$content .= "label: '" . $title5 . "',\n";
+			$content .= "data: [" . $line_values5 . "],\n";
+			$content .= "borderColor: '#f0000f',\n";
 			$content .= "},\n";
 		}
 
-	$content .= "]\n";
-    	$content .= "},\n";
-    	$content .= "options: {\n";
-	$content .= "responsive: false,\n";
-	$content .= "tooltipTemplate: '<%= value %>%'\n";
-    	$content .= "}\n";
-	$content .= "});\n";
-	$content .= "</script>\n";
-	$content .= "</div>\n";
+		$content .= "]\n";
+		$content .= "},\n";
+		$content .= "options: {\n";
+		$content .= "responsive: false,\n";
+		$content .= "tooltipTemplate: '<%= value %>%'\n";
+		$content .= "}\n";
+		$content .= "});\n";
+		$content .= "</script>\n";
+		$content .= "</div>\n";
 	} // line graph end
 
 	if (isset($dispdata['pie'])) {
-
 		$labely = array();
 		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
 		foreach ($dispdata['pie']['label'] as $key => $val) {
@@ -178,7 +188,7 @@ function intropage_prepare_graph($dispdata) {
 
 		$pie_values = implode(',', $dispdata['pie']['data']);
 		$pie_title  = $dispdata['pie']['title'];
-		
+
 		$content .= "var $xid = document.getElementById('pie_" . $xid . "').getContext('2d');\n";
 		$content .= "new Chart($xid, {\n";
 		$content .= "type: 'pie',\n";
@@ -186,7 +196,7 @@ function intropage_prepare_graph($dispdata) {
 		$content .= "labels: [\"" . $pie_labels . "\"],\n";
 		$content .= "datasets: [{\n";
 		$content .= "backgroundColor: [ '#2ecc71', '#e74c3c', '#f1c40f', '#6b6966', '#3498db', '#33ffe6', ],\n";
-		$content .= "data: [" . $pie_values . "]\n";  
+		$content .= "data: [" . $pie_values . "]\n";
 		$content .= "}]\n";
 		$content .= "},\n";
 		$content .= "options: {\n";
@@ -204,9 +214,9 @@ function intropage_prepare_graph($dispdata) {
 		$content .= "});\n";
 		$content .= "</script>\n";
 		$content .= "</div>\n";
-	}   // pie graph end 
+	}   // pie graph end
 
-	return (addslashes($content));	
+	return (addslashes($content));
 }
 
 function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
@@ -269,7 +279,7 @@ function human_filesize($bytes, $decimals = 2) {
 function intropage_display_panel($panel_id) {
 	global $config;
 
-	print '<li id="panel_' . $panel_id . '" class="ui-state-default flexchild">';
+	print '<li id="panel_' . $panel_id . '" class="flexchild">';
 	print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box;">';
 
 	print '<div class="panel_header color_gray">';
@@ -298,10 +308,10 @@ function intropage_display_data($panel_id,$dispdata) {
 
 	if (isset($dispdata['data'])) {	// display text data
 		print stripslashes($dispdata['data']);
-		
+
 		if (is_null(db_fetch_cell_prepared('SELECT fav_graph_id FROM plugin_intropage_panel_data where id= ?',
 			array($panel_id))))	{
-		
+
 			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'];
 			print '<br/>' . __('Recheck every','intropage') .': ' . $dispdata['recheck'];
 		}
@@ -309,7 +319,6 @@ function intropage_display_data($panel_id,$dispdata) {
 }
 
 function ntp_time($host) {
-
 	$timestamp = -1;
 	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
@@ -342,16 +351,15 @@ function ntp_time($host) {
 	return ($timestamp);
 }
 
-
 function intropage_graph_button($data) {
 	global $config;
 
-	if (db_fetch_cell_prepared('SELECT favourite_graph FROM plugin_intropage_user_auth 
+	if (db_fetch_cell_prepared('SELECT favourite_graph FROM plugin_intropage_user_auth
 		WHERE user_id= ?', array($_SESSION['sess_user_id'])) == 'on') {
 		$local_graph_id = $data[1]['local_graph_id'];
 
-		if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data 
-			WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?', 
+		if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data
+			WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?',
 			array($_SESSION['sess_user_id'],$local_graph_id,$_SESSION['sess_current_timespan'] )) > 0) {       // already fav
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
 		} else {       // add to fav

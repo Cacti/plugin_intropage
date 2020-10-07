@@ -1,5 +1,5 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
@@ -138,6 +138,6 @@ $intropage_settings = array(	// default values
 		),
 		'default' => '86400',
 	),
-	
+
 );
 

@@ -1,5 +1,5 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
@@ -205,7 +205,7 @@ function intropage_config_form() {
 		)
 	);
 
-	
+
 		// usergroup
 		$temp = array(
 
@@ -244,7 +244,7 @@ function intropage_config_form() {
 		$fields_user_group_edit = $new;
 
 		array_push ($fields_user_group_edit['login_opts']['items'],array("radio_value"=>"4","radio_caption"=>"Show Intropage (no matter in console or tab)"));
-	
+
 }
 */
 
@@ -311,10 +311,10 @@ function intropage_user_admin_tab() {
 	print '<li class="subTab">';
 
 	if (get_request_var_request("tab") == "intropage_settings_edit") {
-		print '<a class="tab selected" '; 
+		print '<a class="tab selected" ';
 	}
 	else {
-		print '<a class="tab" '; 
+		print '<a class="tab" ';
 	}
 
 	print 'href="' . html_escape($config['url_path'] .  'user_admin.php?action=user_edit&tab=intropage_settings_edit&id=' . get_request_var('id')) . '">Intropage</a>';
