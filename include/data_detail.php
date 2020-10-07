@@ -869,7 +869,7 @@ https://github.com/Cacti/plugin_thold/issues/440
 		// alarms and details
 		if ($t_brea > 0) {
 			$result['alarm'] = 'yellow';
-			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
+			$hosts           = db_fetch_assoc("SELECT name_cache FROM thold_data $sql_join WHERE thold_data.thold_enabled='on' AND (thold_data.thold_alert!=0 OR thold_data.bl_alert>0) AND $sql_where");
 			$result['detail'] .= '<b>' . __('BREACHED', 'intropage') . ':</b><br/>';
 //			foreach ($t_brea_result as $host) {
 			foreach ($hosts as $host) {
@@ -880,7 +880,7 @@ https://github.com/Cacti/plugin_thold/issues/440
 
 		if ($t_trig > 0) {
 			$result['alarm'] = 'red';
-			$hosts           = db_fetch_assoc("SELECT description FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND ((thold_data.thold_alert!=0 AND
+			$hosts           = db_fetch_assoc("SELECT name_cache FROM thold_data $sql_join WHERE thold_data.thold_enabled = 'on' AND ((thold_data.thold_alert!=0 AND
 							 	thold_data.thold_fail_count >= thold_data.thold_fail_trigger) OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)) AND $sql_where");
 			$result['detail'] .= '<b>' . __('TRIGGERED', 'intropage') .':</b><br/>';
 			foreach ($hosts as $host) {

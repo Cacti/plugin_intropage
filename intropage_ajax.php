@@ -75,14 +75,17 @@ if (isset_request_var('autoreload')) {
 
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
-// Close the session to allow other tabs to operate
-session_write_close();
+if (isset_request_var('reload_panel') && isset($panel_id)) {
 
 	$panel = db_fetch_row_prepared('SELECT *
 		FROM plugin_intropage_panel_data
 		WHERE id = ?
 		AND user_id IN (0,?)',
 		array($panel_id, $_SESSION['sess_user_id']));
+
+// Close the session to allow other tabs to operate
+session_write_close();
+
 
 	if ($panel)	{
 		if (isset($panel['fav_graph_id'])) { // fav_graph exception
