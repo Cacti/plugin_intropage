@@ -3083,8 +3083,8 @@ https://github.com/Cacti/plugin_thold/issues/440
 						'title' => $panel_name,
 						'label' => array(
 							__('OK', 'intropage'),
-							__('Triggered', 'intropage'),
 							__('Breached', 'intropage'),
+							__('Triggered', 'intropage'),
 							__('Disabled', 'intropage'),
 						),
 						'data' => array($t_all - $t_brea - $t_trig - $t_disa, $t_brea, $t_trig, $t_disa))
