@@ -548,13 +548,12 @@ function ntp($display=false, $update=false, $force_update=false) {
 
   		$ntp_server = read_config_option('intropage_ntp_server');
 
-		if (!preg_match('/^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z])$/i', $ntp_server))    {
-                	$result['alarm'] = 'red';
-                	$result['data']  = __('Wrong NTP server configured - ' . $ntp_server . '<br/>Please fix it in settings', 'intropage');
-        	}
-        	elseif (empty($ntp_server)) {
+        	if (empty($ntp_server)) {
                 	$result['alarm'] = 'gray';
                 	$result['data']  = __('No NTP server configured', 'intropage');
+		} elseif (!filter_var(trim($ntp_server), FILTER_VALIDATE_IP) && !filter_var(trim($ntp_server), FILTER_VALIDATE_DOMAIN))    {
+                	$result['alarm'] = 'red';
+                	$result['data']  = __('Wrong NTP server configured - ' . $ntp_server . '<br/>Please fix it in settings', 'intropage');
         	} else {
 
                 	$timestamp = ntp_time($ntp_server);
