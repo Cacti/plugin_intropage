@@ -135,7 +135,7 @@ function intropage_initialize_database() {
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('info','/plugins/intropage/include/data.php','no',864000,5,'Info about system/cacti. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_db','/plugins/intropage/include/data.php','no',864000,7,'Analyse MySQL database. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
+		('analyse_db','/plugins/intropage/include/data.php','no',86400000,7,'Analyse MySQL database. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('maint','/plugins/intropage/include/data.php','no',300,98,'Maint plugin')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
