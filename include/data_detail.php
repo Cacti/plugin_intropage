@@ -44,6 +44,7 @@ if (!function_exists('array_column')) {
     }
 }
 
+$console_access = api_plugin_user_realm_auth('index.php');
 
 //------------------------------------ analyse_log -----------------------------------------------------
 
@@ -553,7 +554,7 @@ function extrem_detail() {
 			WHERE name='poller'
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY xvalue desc, cur_timestamp
-			LIMIT 10");
+			LIMIT 14");
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
@@ -570,13 +571,14 @@ function extrem_detail() {
 	$result['detail'] .= '<td class="rpad texalirig">';
 	$result['detail'] .= '<strong>Max host<br/>down: </strong>';
 
-	$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
+	$sql_result = db_fetch_assoc_prepared ("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE name='host'
-		AND user_id = " . $_SESS['sess_user_id'] . "
+		AND user_id =  ? 
 		AND cur_timestamp > date_sub(now(),interval 2 day)
 		ORDER BY value desc,cur_timestamp
-		LIMIT 10");
+		LIMIT 14",
+		array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($sql_result)) {
 		foreach ($sql_result as $row) {
@@ -600,7 +602,7 @@ function extrem_detail() {
 			AND user_id = " . $_SESSION['sess_user_id'] . "
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 10");
+			LIMIT 14");
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
@@ -625,7 +627,7 @@ function extrem_detail() {
 			WHERE name='poller_output'
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 10");
+			LIMIT 14");
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
@@ -649,7 +651,7 @@ function extrem_detail() {
 			WHERE name='failed_polls'
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 10");
+			LIMIT 14");
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {

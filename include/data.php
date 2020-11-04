@@ -1426,15 +1426,13 @@ new code from thold plugin - it is slower but correct count
                         		VALUES ('thold', ?,?)",
                         		array($t_trig,$user['id']));
 
-/*
-
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
                         		(name,value,user_id)
                         		SELECT 'host', COUNT(*),?
                         		FROM host
                         		WHERE id in (" . $_SESSION['allowed_hosts'][$user['id']] . ") AND  status='1' AND disabled=''",
                         		array($user['id']));
-*/
+
 			}
 			else	{
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
@@ -2863,13 +2861,14 @@ function extrem($display=false, $update=false, $force_update=false) {
         		$result['data'] .= '<td class="rpad texalirig">';
         		$result['data'] .= '<strong>Max host<br/>down: </strong>';
 
-	        	$sql_result = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+	        	$sql_result = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
         	        	FROM plugin_intropage_trends
                 		WHERE name='host'
-                		AND user_id = " . $user['id'] . "
+                		AND user_id = ? 
                 		AND cur_timestamp > date_sub(now(),interval 1 day)
 	                	ORDER BY value desc,cur_timestamp
-        	        	LIMIT 8");
+        	        	LIMIT 8",
+        	        	array($user['id']));
 
 	        	if (cacti_sizeof($sql_result)) {
         	        	foreach ($sql_result as $row) {
