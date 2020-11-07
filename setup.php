@@ -40,11 +40,8 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
 	//api_plugin_register_hook('intropage', 'user_admin_action', 'intropage_user_admin_action', 'includes/settings.php');
-
 	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
-
-       api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
-
+	api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
 	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
 
 	intropage_setup_database();
@@ -156,6 +153,5 @@ function intropage_user_remove($user_id) {
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id= ?', array($user_id));
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id= ?', array($user_id));
 	db_execute_prepared('DELETE FROM settings_user WHERE user_id= ?', array($user_id));
-
 }
 

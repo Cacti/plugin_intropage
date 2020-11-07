@@ -3524,3 +3524,98 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
                 return $result;
         }
 }
+
+
+// -------------------------------------plugin webseer-------------------------------------------
+function webseer($display=false, $update=false, $force_update=false) {
+	global $config;
+
+	$panel_id = 'webseer';
+	$panel_name = __('Webseer plugin', 'intropage');
+
+	$result = array(
+		'name' => $panel_name,
+		'alarm' => 'green',
+		'data' => '',
+		'last_update' =>  NULL,
+	);
+
+	$id = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data WHERE
+				panel_id= ? AND last_update IS NOT NULL',
+				array($panel_id));
+
+	if (!$id) {
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
+			VALUES ( ?, ?, ?, "gray", 1000)',
+			array($panel_id, 0, __('Waiting for data', 'intropage')));
+
+	    	$id = db_fetch_insert_id();
+	}
+
+	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
+					WHERE user_id=0 and panel_id= ?',
+					array($panel_id));
+
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
+					WHERE panel_id= ?',
+					array($panel_id));
+
+        if ( $force_update || time() > ($last_update + $update_interval))       {
+        	if (db_fetch_cell("SELECT count(*) FROM plugin_config WHERE directory='webseer' AND status = 1") == 0) {
+       	        	$result['alarm'] = 'yellow';
+               		$result['data']  = __('Plugin Webseer isn\'t installed or started', 'intropage');
+               		$result['detail'] = FALSE;
+        	} else {
+        		$all = db_fetch_cell('SELECT count(*) FROM plugin_webseer_urls');
+        		$disa = db_fetch_cell("SELECT count(*) FROM plugin_webseer_urls WHERE enabled != 'on'");
+        		$ok = db_fetch_cell("SELECT count(*) FROM plugin_webseer_urls WHERE enabled = 'on' AND result = 1");
+        		$ko = db_fetch_assoc("SELECT * FROM plugin_webseer_urls WHERE enabled = 'on' AND result != 1");
+        		
+			$result['data']  = __('Number of checks: ', 'intropage') . $all . '<br/>';
+			$result['data'] .= __('Disabled: ', 'intropage') . $disa . '<br/>';
+			$result['data'] .= __('Status up: ', 'intropage') . $ok . '<br/>';
+			$result['data'] .= __('Status down: ', 'intropage') . cacti_sizeof($ko) . '<br/><br/>';
+
+			if (cacti_sizeof($ko) > 0)	{
+				$count = 0;
+				$result['alarm'] = 'red';
+				$result['data'] .= '<table>';
+				$result['data'] .= '<tr><td colspan="3"><strong>' . __('First 3 failed sites', 'intropage') . '</td></tr>';
+				$result['data'] .= '<tr><td class="rpad">' . __('url', 'intropage') . '</td>' . 
+							'<td class="rpad">' . __('Status', 'intropage') . '</td>' .
+							'<td class="rpad">' . __('HTTP code', 'intropage') . '</td></tr>';
+
+				foreach ($ko as $row)	{
+					if ($count < 3)	{
+						$result['data'] .= '<td class="rpad">' . $row['url'] . '</td>' . 
+							'<td class="rpad">' . $row['result'] . '</td>' . 
+							'<td class="rpad">' . $row['http_code'] . '</td></tr>'; 
+					}
+					$count++;
+				}
+				$result['data'] .= '</table>';
+			}
+		}
+		
+	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
+			VALUES (?,?,?,?,?)',
+			array($id,$panel_id,0,$result['data'],$result['alarm']));
+        }
+
+        if ($display)    {
+	        $result = db_fetch_row_prepared('SELECT id, data, alarm, last_update FROM plugin_intropage_panel_data
+			    WHERE panel_id= ?',
+			    array($panel_id));
+
+		$result['recheck'] = db_fetch_cell_prepared("SELECT concat(
+			floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im'))
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id= ?",
+			array($panel_id));
+
+                $result['name'] = $panel_name;
+                return $result;
+        }
+}

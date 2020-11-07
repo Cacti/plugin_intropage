@@ -168,6 +168,8 @@ function intropage_initialize_database() {
 		('mactrack_sites','/plugins/intropage/include/data.php','yes',900,27,'Plugin Mactrack sites statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
 	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 		('plugin_syslog','/plugins/intropage/include/data.php','no',900,26,'Plugin Syslog statistics. MAY CONTAIN SENSITIVE INFORMATION FOR ALL USERS!')");
+	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+		('webseer','/plugins/intropage/include/data.php','yes',60,36,'Plugin webseer')");
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
@@ -197,9 +199,11 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'boost', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['columns'][] = array('name' => 'plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'webseer', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'user_id';
-	$data['comment']   = 'authorization';
+	$data['comment']   = 'author
+	ization';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_user_auth', $data);
 }
 
@@ -260,6 +264,18 @@ function intropage_upgrade_database() {
 			api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
     			api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 			api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
+		}
+
+		if (cacti_version_compare($oldv, '2.0.4', '<=')) {
+
+			db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
+				('webseer','/plugins/intropage/include/data.php','yes',60,36,'Plugin webseer')");
+
+			db_add_column('plugin_intropage_user_auth', array(
+                        	'name' => 'webseer',
+                        	'type' => 'char(2)',
+                        	'NULL' => false,
+                        	'default' => 'on'));
 		}
 
 		// Set the new version

@@ -1252,3 +1252,49 @@ function top5_pollratio_detail() {
 	return $result;
 }
 
+//------------------------------------ webseer_plugin -----------------------------------------------------
+
+function webseer_detail() {
+	global $config, $log;
+
+	$result = array(
+		'name' => __('Webseer plugin - detail', 'intropage'),
+		'alarm' => 'green',
+		'detail' => '',
+	);
+
+	$logs = db_fetch_assoc ('SELECT pwul.lastcheck, pwul.result, pwul.http_code, pwul.error, pwu.url
+				FROM plugin_webseer_urls_log AS pwul
+				INNER JOIN plugin_webseer_urls AS pwu ON pwul.url_id=pwu.id
+				WHERE pwu.id = 1
+				ORDER BY pwul.lastcheck DESC limit 20');
+
+	$result['detail']  = '<table><tr>';
+	$result['detail'] .= '<td>' . __('Date', 'intropage') . '</td>' . 
+				'<td>' . __('URL', 'intropage') . '</td>' .
+				'<td>' . __('Result', 'intropage') . '</td>' .
+				'<td>' . __('HTTP code', 'intropage') . '</td>' .
+				'<td>' . __('Error', 'intropage') . '</td></tr>';
+
+	foreach ($logs as $log)	{
+		$result['detail'] .= '<tr>';
+		$result['detail'] .= '<td class="rpad texalirig">' . $log['lastcheck'] . '</td>';
+		$result['detail'] .= '<td class="rpad">' . $log['url'] . '</td>';
+		if ($log['result'] == 1)	{
+			$result['detail'] .= '<td class="rpad texalirig">' . __('OK') . '</td>';
+		}
+		else	{
+			$result['detail'] .= '<td class="rpad texalirig">' . __('Failed') . '</td>';
+		}
+		$result['detail'] .= '<td class="rpad texalirig">' . $log['http_code'] . '</td>';
+		$result['detail'] .= '<td class="rpad texalirig">' . $log['error'] . '</td></tr>';
+
+		if ($log['result'] != 1)	{
+			$result['alarm'] = 'red';
+		}
+	}
+
+	$result['detail'] .= '</table>';
+
+	return $result;
+}
