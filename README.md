@@ -54,6 +54,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 ## Changelog
 	2.0.5 ---
 	Add panel webseer plugin
+	User can set red/yellow/green alarm for checks
 	
 	2.0.4 ---
 	Better work with panels (#115)
