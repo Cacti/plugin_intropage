@@ -115,7 +115,6 @@ $intropage_settings = array(	// default values
 		'default' => '3600',
 	),
 
-
 	'intropage_admin_alert' => array(
 		'friendly_name' => __('Admin information panel about maintenance tasks, down devices, ..', 'intropage'),
 		'description' => __('If isn\'t empty, panel will be displayed on the top. You can use html tags (b, i, ...).', 'intropage'),
@@ -137,6 +136,187 @@ $intropage_settings = array(	// default values
 			'604800' => __('%d Days Before', 7, 'intropage')
 		),
 		'default' => '86400',
+	),
+	'intropage_display_header2' => array(
+		'friendly_name' => __('Alarm settings', 'intropage'),
+		'method' => 'spacer',
+	),
+	'intropage_alert_db_abort' => array(
+		'friendly_name' => __('Alarm DB check aborted clients', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_same_description' => array(
+		'friendly_name' => __('Alarm Host with the same description', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yelow',
+	),
+	'intropage_alert_orphaned_ds' => array(
+		'friendly_name' => __('Alarm orphaned data source', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_poller_output' => array(
+		'friendly_name' => __('Alarm non-empty poller output', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_bad_indexes' => array(
+		'friendly_name' => __('Alarm Bad indexes data source', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_thold_logonly' => array(
+		'friendly_name' => __('Alarm Thershold logonly action', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_same_ip' => array(
+		'friendly_name' => __('Alarm device with the same IP/port', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_more_trees' => array(
+		'friendly_name' => __('Alarm device in more trees', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_without_tree' => array(
+		'friendly_name' => __('Alarm device without tree', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_default_community' => array(
+		'friendly_name' => __('Alarm device with default public/private community', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_without_monitoring' => array(
+		'friendly_name' => __('Alarm device without monitoring', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_without_graph' => array(
+		'friendly_name' => __('Alarm device without graph', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+
+	'intropage_alert_worst_polling_time' => array(
+		'friendly_name' => __('Alarm red/yellow polling time', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'10/5' => __('10s/5s red/yellow', 'intropage'),
+			'20/10'  => __('20s/10s red/yellow', 'intropage'),
+			'40/20' => __('40s/20s red/yellow', 'intropage')
+		),
+		'default' => '20/10',
+	),
+	'intropage_alert_worst_polling_ratio' => array(
+		'friendly_name' => __('Alarm red/yellow failed/all ratio', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'0.2/0.1' => __('0.1/0.2 red/yellow', 'intropage'),
+			'0.4/0.2'  => __('20s/10s red/yellow', 'intropage'),
+			'0.5/more' => __('more red/yellow', 'intropage')
+		),
+		'default' => '0.4/0.2',
+	),
+	'intropage_alert_worst_ping' => array(
+		'friendly_name' => __('Alarm red/yellow ping', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'20/10' => __('20/10ms red/yellow', 'intropage'),
+			'50/20'  => __('50/20ms red/yellow', 'intropage'),
+			'100/200' => __('100/200+ms red/yellow', 'intropage')
+		),
+		'default' => '20/10',
+	),
+	'intropage_alert_worst_availability' => array(
+		'friendly_name' => __('Alarm red/yellow worst availability', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'99/95' => '99/95% ' . __('red/yellow', 'intropage'),
+			'95/85'  => '95/85% ' . __('red/yellow', 'intropage'),
+			'85/0' => '85/84-0% ' . __('red/yellow', 'intropage')
+		),
+		'default' => '99/95',
 	),
 
 );

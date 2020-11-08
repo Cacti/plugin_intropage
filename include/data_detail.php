@@ -206,7 +206,14 @@ function analyse_tree_host_graph_detail() {
 		if (cacti_sizeof($sql_result)) {
 			$total_errors += $sql_count;
 			if (count($sql_result) > 0) {
-				$result['alarm'] = 'red';
+				$color = read_config_option('intropage_alert_same_ip');
+                                if ($color == 'red')    {
+                                	$result['alarm'] = 'red';
+                                }
+                                elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                                	$result['alarm'] = 'yellow';
+                                }
+
 				foreach ($sql_result as $row) {
 
 					$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
@@ -239,7 +246,14 @@ function analyse_tree_host_graph_detail() {
 		if (cacti_sizeof($sql_result)) {
 			$total_errors += $sql_count;
 			if (count($sql_result) > 0) {
-				$result['alarm'] = 'red';
+				$color = read_config_option('intropage_alert_same_description');
+                                if ($color == 'red')    {
+                                	$result['alarm'] = 'red';
+                                }
+                                elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                                	$result['alarm'] = 'yellow';
+				}
+
 				foreach ($sql_result as $row) {
 					$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
 						FROM host
@@ -280,9 +294,14 @@ function analyse_tree_host_graph_detail() {
 	if (cacti_sizeof($sql_result)) {
 		$total_errors += $sql_count;
 
-		if ($result['alarm'] == 'green') {
-			$result['alarm'] = 'yellow';
-		}
+                $color = read_config_option('intropage_alert_orphaned_ds');
+
+                if ($color == 'red')    {
+			$result['alarm'] = 'red';
+                }
+                elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                	$result['alarm'] = 'yellow';
+                }
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
@@ -299,9 +318,12 @@ function analyse_tree_host_graph_detail() {
 		$result['detail'] .= '<br/><b>' . __('Poller output items - %s:', $sql_count, 'intropage') . '</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
-
-			if ($result['alarm'] == 'green') {
-				$result['alarm'] = 'yellow';
+			$color = read_config_option('intropage_alert_poller_output');
+                        if ($color == 'red')    {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                        	$result['alarm'] = 'yellow';
 			}
 
 			foreach ($sql_result as $row) {
@@ -327,10 +349,13 @@ function analyse_tree_host_graph_detail() {
 	$result['detail'] .= '<br/><b>' . __('Datasources with bad indexes - %s:', $sql_count, 'intropage') . '</b><br/>';
 
 	if (cacti_sizeof($sql_result)) {
-
-		if ($result['alarm'] == 'green') {
-			$result['alarm'] = 'yellow';
-		}
+		$color = read_config_option('intropage_alert_bad_indexes');
+                if ($color == 'red')    {
+                	$result['alarm'] = 'red';
+                }
+                elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                	$result['alarm'] = 'yellow';
+                }
 
 		foreach ($sql_result as $row) {
 			$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
@@ -371,9 +396,13 @@ function analyse_tree_host_graph_detail() {
 	    $result['detail'] .= '<br/><b>' . __('Thold logonly alert/warning - %s:', $sql_count, 'intropage') . '</b><br/>';
 
 	    if (cacti_sizeof($sql_result)) {
-			if ($result['alarm'] == 'green') {
+			$color = read_config_option('intropage_alert_thold_logonly');
+                        if ($color == 'red')    {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $color == "yellow") {
 				$result['alarm'] = 'yellow';
-			}
+                        }
 
 			foreach ($sql_result as $row) {
 				$result['detail'] .= '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id']) . '">' .
@@ -386,7 +415,7 @@ function analyse_tree_host_graph_detail() {
 
 
 	// below - only information without red/yellow/green
-	$result['detail'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
+	//$result['detail'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
 
 	// device in more trees
 	if ($_SESSION['allowed_hosts'])	{
@@ -403,6 +432,13 @@ function analyse_tree_host_graph_detail() {
 		$result['detail'] .= '<br/><b>' . __('Devices in more than one tree - %s', $sql_count, 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
+			$color = read_config_option('intropage_alert_more_trees');
+                        if ($color == 'red')    {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                        	$result['alarm'] = 'yellow';
+                        }
 
 			foreach ($sql_result as $row) {
 				$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description,
@@ -449,6 +485,14 @@ function analyse_tree_host_graph_detail() {
 		$result['detail'] .= '<br/><b>' . __('Hosts without graphs - %s', $sql_count, 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
+			$color = read_config_option('intropage_alert_without_graph');
+                        if ($color == 'red')    {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                        	$result['alarm'] = 'yellow';
+                        }
+
 			foreach ($sql_result as $row) {
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
 			}
@@ -471,6 +515,13 @@ function analyse_tree_host_graph_detail() {
 		$result['detail'] .= '<br/><b>' . __('Hosts without tree - %s', $sql_count, 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
+			$color = read_config_option('intropage_alert_without_tree');
+                        if ($color == 'red')    {
+                        	$result['alarm'] = 'red';
+			}
+                        elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                        	$result['alarm'] = 'yellow';
+                        }
 
 			foreach ($sql_result as $row) {
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
@@ -493,6 +544,13 @@ function analyse_tree_host_graph_detail() {
 		$result['detail'] .= '<br/><b>' . __('Hosts with default public/private community - %s', $sql_count, 'intropage') . ':</b><br/>';
 
 		if (cacti_sizeof($sql_result)) {
+			$color = read_config_option('intropage_alert_default_community');
+                        if ($color == 'red')    {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                                $result['alarm'] = 'yellow';
+                        }
 
 			foreach ($sql_result as $row) {
 				$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
@@ -513,6 +571,13 @@ function analyse_tree_host_graph_detail() {
 			$result['detail'] .= '<br/><b>' . __('Plugin Monitor - Unmonitored hosts - %s', $sql_count, 'intropage') . ':</b><br/>';
 
 			if (cacti_sizeof($sql_result)) {
+				$color = read_config_option('intropage_alert_without_monitoring');
+                                if ($color == 'red')    {
+                                	$result['alarm'] = 'red';
+				}
+                                elseif ($result['alarm'] == 'green' && $color == "yellow") {
+                                	$result['alarm'] = 'yellow';
+                                }
 
 				foreach ($sql_result as $row) {
 					$result['detail'] .= sprintf('<a href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), html_escape($row['hostname']), $row['id']);
@@ -1070,13 +1135,13 @@ function thold_event_detail() {
 }
 
 
-//------------------------------------ top5_ping -----------------------------------------------------
+//------------------------------------ top5_worst_ping -----------------------------------------------------
 
 function top5_ping_detail() {
 	global $config, $console_access;
 
 	$result = array(
-		'name' => __('Top 20 hosts with the worst ping (avg, current)', 'intropage'),
+		'name' => __('Top 20 hosts with the worst ping', 'intropage'),
 		'alarm' => 'green',
 		'detail' => '',
 	);
@@ -1085,11 +1150,21 @@ function top5_ping_detail() {
 		FROM host
 		WHERE host.id in (" . $_SESSION['allowed_hosts'] . ")
 		AND disabled != 'on'
-		ORDER BY avg_time desc
+		ORDER BY cur_time desc
 		LIMIT 20");
 
 	if (cacti_sizeof($sql_worst_host)) {
+		$color = read_config_option('intropage_alert_worst_ping');
+                list($red,$yellow) = explode ('/',$color);
+
 		foreach ($sql_worst_host as $host) {
+			if ($host['cur_time'] > $red) {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $host['cur_time'] > $yellow)     {
+                        	$result['alarm'] = 'yellow';
+			}
+
 			if ($console_access) {
 				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 			} else {
@@ -1108,7 +1183,11 @@ function top5_ping_detail() {
 			$result['detail'] .= $row;
 
 		}
-		$result['detail'] = '<table>' . $result['detail'] . '</table>';
+                $result['detail'] = '<table>' .
+                                    	'<tr><td>' . __('Host', 'intropage') . '</td>' .
+					'<td>' . __('Average', 'intropage') . '</td>' .
+                                        '<td>' . __('Current', 'intropage') . '</td></tr>' .
+                                        $result['detail'] . '</table>';
 
 	} else {	// no data
 		$result['detail'] = __('Waiting for data', 'intropage');
@@ -1116,7 +1195,6 @@ function top5_ping_detail() {
 
 	return $result;
 }
-
 
 //------------------------------------ top5_availability -----------------------------------------------------
 
@@ -1137,8 +1215,18 @@ function top5_availability_detail() {
 		LIMIT 20");
 
 	if (cacti_sizeof($sql_worst_host)) {
+		$color = read_config_option('intropage_alert_worst_availability');
+                list($red,$yellow) = explode ('/',$color);
+
 
 		foreach ($sql_worst_host as $host) {
+			if ($host['availability'] < $red) {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $host['availability'] < $yellow) {
+                        	$result['alarm'] = 'yellow';
+			}
+
 			if ($console_access) {
 				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 			} else {
@@ -1184,7 +1272,16 @@ function top5_polltime_detail() {
 		LIMIT 20");
 
 	if (cacti_sizeof($sql_worst_host)) {
+		$color = read_config_option('intropage_alert_worst_polling_time');
+                list($red,$yellow) = explode ('/',$color);
+
 		foreach ($sql_worst_host as $host) {
+			if ($host['polling_time'] > $red) {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $host['polling_time'] > $yellow) {
+                        	$result['alarm'] = 'yellow';
+                        }
 
 			if ($console_access) {
 				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
@@ -1212,12 +1309,11 @@ function top5_polltime_detail() {
 
 
 //------------------------------------ top5_pollratio -----------------------------------------------------
-
 function top5_pollratio_detail() {
 	global $config, $console_access;
 
 	$result = array(
-		'name' => __('Top 20 hosts with the  worst polling ratio (failed, total, ratio)', 'intropage'),
+		'name' => __('Top 20 hosts with the  worst polling ratio', 'intropage'),
 		'alarm' => 'gray',
 		'detail' => '',
 	);
@@ -1230,7 +1326,17 @@ function top5_pollratio_detail() {
 		LIMIT 20");
 
 	if (cacti_sizeof($sql_worst_host)) {
+		$color = read_config_option('intropage_alert_worst_polling_ratio');
+                list($red,$yellow) = explode ('/',$color);
+
 		foreach ($sql_worst_host as $host) {
+			if ($host['ratio'] > $red) {
+                        	$result['alarm'] = 'red';
+                        }
+                        elseif ($result['alarm'] == 'green' && $host['ratio'] > $yellow)        {
+                        	$result['alarm'] = 'yellow';
+                        }
+
 			if ($console_access) {
 				$row = '<tr><td class="rpad"><a href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a>';
 			} else {
@@ -1243,7 +1349,14 @@ function top5_pollratio_detail() {
 
 			$result['detail'] .= $row;
 		}
-		$result['detail'] = '<table>' . $result['detail'] . '</table>';
+
+		$result['detail'] = '<table>' .
+                	'<tr><td>' . __('Host', 'intropage') . '</td>' .
+                        '<td>' . __('Failed', 'intropage') . '</td>' .
+                        '<td>' . __('Total', 'intropage') . '</td>' .
+                        '<td>' . __('Ratio', 'intropage') . '</td></tr>' .
+                        $result['detail'] . '</table>';
+
 
 	} else {	// no data
 		$result['detail'] = __('Waiting for data', 'intropage');
