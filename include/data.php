@@ -252,7 +252,7 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 			if (!empty($log_size_note)) {
 				$result['data'] .= '(' . $log_size_note . ')<br/>';
 			}
-			$result['data'] .= '<br/>' . __('(Errors and warning in last %s lines)', read_config_option('intropage_analyse_log_rows'), 'intropage');
+			$result['data'] .= '<br/>' . __('(Errors and warning in last %s lines)', read_config_option('intropage_analyse_log_rows'), 'intropage') . '<br/>';
 
 			if ($error > 0) {
 				$result['alarm'] = 'red';
@@ -1171,7 +1171,7 @@ function analyse_db($display=false, $update=false, $force_update=false) {
        		$result['data'] .= __('Connection errors: %s', $cerrors, 'intropage') . '<br/>';
        		$result['data'] .= __('Damaged tables: %s', $damaged, 'intropage') . '<br/>' .
                		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
-       			__('All tables: %s', count($tables), 'intropage');
+       			__('All tables: %s', count($tables), 'intropage') . '<br/>';
 
     		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (id,panel_id,user_id,data,alarm)
 		    	VALUES (?,?,?,?,?)',

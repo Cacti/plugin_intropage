@@ -312,8 +312,11 @@ function intropage_display_data($panel_id,$dispdata) {
 		if (is_null(db_fetch_cell_prepared('SELECT fav_graph_id FROM plugin_intropage_panel_data where id= ?',
 			array($panel_id))))	{
 
-			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'];
-			print '<br/>' . __('Recheck every','intropage') .': ' . $dispdata['recheck'];
+
+			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'] . '/' . 
+				 __('Recheck','intropage') .': ' . $dispdata['recheck'];
+//			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'];
+//			print '<br/>' . __('Recheck every','intropage') .': ' . $dispdata['recheck'];
 		}
 	}
 }
