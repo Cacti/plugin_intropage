@@ -303,7 +303,9 @@ function display_information() {
 		print __('You can add panels in two ways:') . '<br/>';
 		print ' - ' . __('select prepared panels from menu') . '<br/>';
 		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph. Graph with actual timespan will be added to current dashboard') . '<br/><br/>';
-		print __('You can add more dashboards from menu, too') . '<br/><br/></div>';
+		print __('You can add more dashboards from menu, too') . '<br/><br/>';
+		print __('You can add your own panel. Please read setup.php, function intropage_add_panel and intropage_remove_panel') . '<br/><br/></div>';
+		
 	}
 
 
