@@ -1186,13 +1186,13 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 		if ($update_interval == 0)	{
 			$result['recheck'] = __('Scheduled db check disabled','intropage');
 		} elseif ($update_interval == 3600) {
-            		$result['recheck'] = __('Every hour', 'intropage');
+            		$result['recheck'] = __('hour', 'intropage');
        	 	} elseif ($update_interval == 86400) {
-            		$result['recheck'] = __('Every day', 'intropage');
+            		$result['recheck'] = __('day', 'intropage');
         	} elseif ($update_interval == 604800) {
-            		$result['recheck'] = __('Every week', 'intropage');
+            		$result['recheck'] = __('week', 'intropage');
         	} elseif ($update_interval == 2592000) {
-            		$result['recheck'] = __('Every month', 'intropage');
+            		$result['recheck'] = __('month', 'intropage');
 		}
 
                 $result['name'] = $panel_name;

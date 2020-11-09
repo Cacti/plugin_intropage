@@ -314,7 +314,7 @@ function intropage_display_data($panel_id,$dispdata) {
 
 
 			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'] . '/' . 
-				 __('Recheck','intropage') .': ' . $dispdata['recheck'];
+				 __('Recheck every','intropage') .': ' . $dispdata['recheck'];
 //			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'];
 //			print '<br/>' . __('Recheck every','intropage') .': ' . $dispdata['recheck'];
 		}
