@@ -1415,10 +1415,10 @@ function trend($display=false, $update=false, $force_update=false) {
 		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
 				 ON t1.id=t2.user_id WHERE t1.enabled='on' AND t2.trend='on'");
 		foreach ($users as $user)	{
+			if ($_SESSION['allowed_hosts'][$user['id']])	{
+
 /*	
 old fast code		
-*/
-			if ($_SESSION['allowed_hosts'][$user['id']])	{
 
 
                 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
@@ -1431,7 +1431,7 @@ old fast code
 					OR (thold_data.bl_alert > 0 AND thold_data.bl_fail_count >= thold_data.bl_fail_trigger)))",
                         		array($user['id']));
                         		
-/*                        		
+                        		
 new code from thold plugin - it is slower but correct count
 */
 
