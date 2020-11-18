@@ -36,6 +36,15 @@ if (!function_exists("array_column")) {
     	}
 }
 
+if (empty($_SESSION['login_opts']))     {   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+	$login_opts = db_fetch_cell_prepared('SELECT login_opts
+		FROM user_auth
+		WHERE id = ?',
+		array($_SESSION['sess_user_id']));
+
+	$_SESSION['login_opts'] = $login_opts;
+}
+
 if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need header
 	general_header();
 }
