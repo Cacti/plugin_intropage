@@ -76,6 +76,14 @@ if (isset_request_var('intropage_action') &&
 					WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?',
 					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
 			} else { // add to fav
+				if ($_SESSION['sess_current_timespan'] == 0)	{
+					raise_message('custom_error',__('Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour'));
+					$span = 1;
+				}
+				else	{
+					$span = $_SESSION['sess_current_timespan'];
+				}
+
 				$prio = db_fetch_cell_prepared('SELECT max(priority)+1
 					FROM plugin_intropage_panel_data
 					WHERE user_id = ?',
@@ -84,7 +92,7 @@ if (isset_request_var('intropage_action') &&
 				db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
 					(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
 					VALUES (?, "favourite_graph", ?, ?, ?)',
-					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan'], $prio));
+					array($_SESSION['sess_user_id'],get_request_var('graph_id'), $span, $prio));
 
 				$id = db_fetch_insert_id();
 				db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard

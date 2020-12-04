@@ -361,9 +361,13 @@ function intropage_graph_button($data) {
 		WHERE user_id= ?', array($_SESSION['sess_user_id'])) == 'on') {
 		$local_graph_id = $data[1]['local_graph_id'];
 
-		if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data
+
+		if ($_SESSION['sess_current_timespan'] == 0)	{	// zoom or custom timespan
+			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Cannot add to Dashboard. Custom timespan.', 'intropage') . '"></i>';
+		}
+		else if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data
 			WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?',
-			array($_SESSION['sess_user_id'],$local_graph_id,$_SESSION['sess_current_timespan'] )) > 0) {       // already fav
+			array($_SESSION['sess_user_id'],$local_graph_id,$_SESSION['sess_current_timespan'])) > 0) {       // already fav
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
 		} else {       // add to fav
 			$fav = '<i class="fa fa-eye" title="' . __esc('Add to Dashboard', 'intropage') . '"></i>';
