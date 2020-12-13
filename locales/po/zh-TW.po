@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-28 17:55-0400\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2020-12-12 22:15-0500\n"
 "PO-Revision-Date: 2020-03-28 12:11-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,1393 +23,1706 @@ msgstr ""
 msgid "Intropage - permission denied"
 msgstr "Intropage  - 許可被拒絕"
 
-#: display.php:144
+#: display.php:151
 #, fuzzy
 msgid "You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr "您可以在<b>設置 - >常規 - >隱藏仙人掌儀表板中</b>禁用上面的行，並使用整個頁面進行Intropage <br/><br/>"
 
-#: display.php:286
-#, fuzzy
-msgid "Disable panel move/Enable copy text from panel"
-msgstr "禁用面板移動/從面板啟用複製文本"
-
-#: display.php:291
-#, fuzzy
-msgid "Enable panel move/Disable copy text from panel"
-msgstr "啟用面板移動/禁用面板中的複製文本"
-
-#: display.php:347
-#, fuzzy
-msgid "Error reading new data"
-msgstr "讀取新數據時出錯"
-
-#: display.php:380
-msgid "Close"
-msgstr ""
-
-#: display.php:391
-#, fuzzy
-msgid "Panel Details"
-msgstr "顯示詳細資料"
-
-#: display.php:410
+#: display.php:178
 #, fuzzy
 msgid "Disable panel move/enable copy text from panel"
 msgstr "禁用面板從面板移動/啟用複製文本"
 
-#: display.php:414
+#: display.php:182
 #, fuzzy
-msgid "Select action ..."
-msgstr "選擇行動......"
-
-#: display.php:425
-#, fuzzy, php-format
-msgid "Add panel %s"
+msgid "Add panel ..."
 msgstr "添加面板％s"
 
-#: display.php:427
+#: display.php:197 display.php:204
 #, fuzzy, php-format
 msgid "Add panel %s %s"
 msgstr "添加面板％s％s"
 
-#: display.php:433
+#: display.php:201
+#, fuzzy, php-format
+msgid "Add panel %s"
+msgstr "添加面板％s"
+
+#: display.php:214
+#, fuzzy
+msgid "Select action ..."
+msgstr "選擇行動......"
+
+#: display.php:217
+#, fuzzy
+msgid "Add dashboard"
+msgstr "添加到儀表板"
+
+#: display.php:221
+#, fuzzy
+msgid "Remove current dashboard"
+msgstr "從儀表板中刪除"
+
+#: display.php:225
 #, fuzzy
 msgid "Refresh Now"
 msgstr "立即刷新"
 
-#: display.php:436 display.php:438
+#: display.php:228 display.php:230
 #, fuzzy
 msgid "Autorefresh Disabled"
 msgstr "Autorefresh已禁用"
 
-#: display.php:442 display.php:444
+#: display.php:234 display.php:236
 #, fuzzy
 msgid "Autorefresh automatic by poller"
 msgstr "Autorefresh已禁用"
 
-#: display.php:448 display.php:450
+#: display.php:240 display.php:242
 #, fuzzy
 msgid "Autorefresh 1 Minute"
 msgstr "自動刷新1分鐘"
 
-#: display.php:454 display.php:456
+#: display.php:246 display.php:248
 #, fuzzy
 msgid "Autorefresh 5 Minutes"
 msgstr "自動清新5分鐘"
 
-#: display.php:460 display.php:462
+#: display.php:252 display.php:254
 #, fuzzy
 msgid "Autorefresh 1 Hour"
 msgstr "自動翻新1小時"
 
-#: display.php:466 display.php:469
+#: display.php:258 display.php:261
 #, fuzzy
 msgid "Sort by - red-yellow-green-gray"
 msgstr "排序方式 - 紅 - 黃 - 綠 - 灰"
 
-#: display.php:467
-#, fuzzy
-msgid "Sort by panel priority"
-msgstr "按面板優先級排序"
+#: display.php:259 display.php:262
+msgid "Sort by user preference"
+msgstr ""
 
-#: display.php:470
-#, fuzzy
-msgid "Sort by panel Priority"
-msgstr "按面板優先級排序"
-
-#: display.php:473
-#, fuzzy
-msgid "Reset All to Default"
-msgstr "全部重置為默認值"
-
-#: display.php:485
+#: display.php:274
 #, fuzzy
 msgid "Set intropage as default login page"
 msgstr "將intropage設置為默認頁面"
 
-#: display.php:489
+#: display.php:278
 #, fuzzy
 msgid "Set graph as default login page"
 msgstr "將圖形設置為默認頁面"
 
-#: display.php:494
+#: display.php:283
 msgid "Display intropage in console"
 msgstr ""
 
-#: display.php:497
+#: display.php:286
 #, fuzzy
 msgid "Display intropage in tab as default page"
 msgstr "將intropage設置為默認頁面"
 
-#: display.php:502
-msgid "Go"
-msgstr "送出"
-
-#: include/data.php:37
-msgid "Database check"
-msgstr "檢查資料庫"
-
-#: include/data.php:48 include/data.php:614 include/data.php:1173
-#: include/data.php:1354 include/data.php:1461 include/data.php:1511
-#: include/data.php:1561 include/data.php:1608 include/data_detail.php:47
-#: include/data_detail.php:1088 include/data_detail.php:1135
-#: include/data_detail.php:1181 include/data_detail.php:1223
-#, fuzzy
-msgid "Waiting for data"
-msgstr "等待數據"
-
-#: include/data.php:51 include/data_detail.php:50
-#, fuzzy
-msgid "Last check"
-msgstr "最後檢查"
-
-#: include/data.php:54 include/data.php:1199 include/data_detail.php:53
-#, fuzzy
-msgid "Checked every 15 minutes"
-msgstr "每15分鐘檢查一次"
-
-#: include/data.php:56 include/data.php:1201 include/data_detail.php:55
-#, fuzzy
-msgid "Checked hourly"
-msgstr "每小時檢查一次"
-
-#: include/data.php:58 include/data.php:1203 include/data_detail.php:57
-#, fuzzy
-msgid "Checked daily"
-msgstr "每天檢查"
-
-#: include/data.php:60 include/data_detail.php:59
-#, fuzzy
-msgid "Checked weekly"
-msgstr "每日檢查"
-
-#: include/data.php:62 include/data_detail.php:61
-#, fuzzy
-msgid "Checked monthly"
-msgstr "每小時檢查一次"
-
-#: include/data.php:64 include/data_detail.php:63
-msgid "Periodic check is disabled"
+#: display.php:302
+msgid "Welcome!"
 msgstr ""
 
-#: include/data.php:78
+#: display.php:303
+msgid "You can add panels in two ways:"
+msgstr ""
+
+#: display.php:304
+msgid "select prepared panels from menu"
+msgstr ""
+
+#: display.php:305
+msgid "add any graph - click to 'Eye Icon' which is next to each graph. Graph with actual timespan will be added to current dashboard"
+msgstr ""
+
+#: display.php:306
+msgid "You can add more dashboards from menu, too"
+msgstr ""
+
+#: display.php:307
+msgid "You can add your own panel. Please read setup.php, function intropage_add_panel and intropage_remove_panel"
+msgstr ""
+
+#: display.php:464
 #, fuzzy
-msgid "Analyze cacti log"
-msgstr "分析仙人掌日誌"
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "禁用面板移動/從面板啟用複製文本"
 
-#: include/data.php:94 include/data_detail.php:92
+#: display.php:469
 #, fuzzy
-msgid "Log file not accessible or empty"
-msgstr "日誌文件無法訪問或為空"
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "啟用面板移動/禁用面板中的複製文本"
 
-#: include/data.php:112 include/data_detail.php:112
-msgid "Errors"
-msgstr "錯誤"
-
-#: include/data.php:114 include/data_detail.php:114
-msgid "Warnings"
-msgstr "警告"
-
-#: include/data.php:119 include/data_detail.php:119
+#: display.php:525
 #, fuzzy
-msgid "file is larger than 2GB"
-msgstr "文件大於2GB"
+msgid "Error reading new data"
+msgstr "讀取新數據時出錯"
 
-#: include/data.php:123 include/data_detail.php:123
+#: display.php:558
+msgid "Close"
+msgstr ""
+
+#: display.php:569
 #, fuzzy
-msgid "Log size OK"
-msgstr "日誌大小好"
+msgid "Panel Details"
+msgstr "顯示詳細資料"
 
-#: include/data.php:127 include/data_detail.php:127
-#, fuzzy
-msgid "Log size is quite large"
-msgstr "日誌大小非常大"
+#: include/actions.php:80
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr ""
 
-#: include/data.php:130 include/data_detail.php:130
-#, fuzzy
-msgid "Log size"
-msgstr "日誌大小"
-
-#: include/data.php:134 include/data_detail.php:134
-#, fuzzy, php-format
-msgid "(Errors and warning in last %s lines)"
-msgstr "（最後％s行中的錯誤和警告）"
-
-#: include/data.php:154
+#: include/data.php:70
 #, fuzzy
 msgid "Analyze logins"
 msgstr "登錄失敗"
 
-#: include/data.php:173
+#: include/data.php:86 include/data.php:190 include/data.php:318
+#: include/data.php:387 include/data.php:461 include/data.php:500
+#: include/data.php:549 include/data.php:662 include/data.php:766
+#: include/data.php:874 include/data.php:997 include/data.php:1093
+#: include/data.php:1239 include/data.php:1360 include/data.php:1493
+#: include/data.php:1548 include/data.php:1606 include/data.php:1731
+#: include/data.php:1808 include/data.php:1872 include/data.php:2268
+#: include/data.php:2329 include/data.php:2390 include/data.php:2449
+#: include/data.php:2508 include/data.php:2573 include/data.php:2633
+#: include/data.php:2741 include/data.php:2942 include/data.php:3149
+#: include/data.php:3288 include/data.php:3409 include/data.php:3544
+#: include/data.php:3681 include/data_detail.php:1193
+#: include/data_detail.php:1249 include/data_detail.php:1304
+#: include/data_detail.php:1362
+#, fuzzy
+msgid "Waiting for data"
+msgstr "等待數據"
+
+#: include/data.php:113
 #, fuzzy
 msgid "Failed logins"
 msgstr "登錄失敗"
 
-#: include/data.php:197 include/data_detail.php:208
+#: include/data.php:127
 #, fuzzy
-msgid "Analyze tree/host/graph"
-msgstr "分析樹/主機/圖"
+msgid "Last logins"
+msgstr "最後10次登錄"
 
-#: include/data.php:214 include/data.php:234 include/data.php:262
-#: include/data.php:296 include/data.php:332 include/data.php:358
-#: include/data.php:377 include/data.php:395 include/data.php:411
-#: include/data.php:426 include/data.php:563 include/data.php:568
-#: include/data.php:1234 include/data_detail.php:224
-#: include/data_detail.php:257 include/data_detail.php:297
-#: include/data_detail.php:317 include/data_detail.php:344
-#: include/data_detail.php:387 include/data_detail.php:419
-#: include/data_detail.php:465 include/data_detail.php:487
-#: include/data_detail.php:508 include/data_detail.php:528
-#: include/data_detail.php:944
-msgid "N/A"
-msgstr "不适用"
-
-#: include/data.php:219
-#, fuzzy, php-format
-msgid "Devices with the same IP and port: %s"
-msgstr "具有相同IP和端口的設備：％s"
-
-#: include/data.php:239
-#, fuzzy, php-format
-msgid "Devices with the same description: %s"
-msgstr "具有相同描述的設備：％s"
-
-#: include/data.php:266
-#, fuzzy, php-format
-msgid "Orphaned Data Sources: %s"
-msgstr "孤立數據源：％s"
-
-#: include/data.php:277
-#, fuzzy, php-format
-msgid "Poller Output Items: %s"
-msgstr "輪詢輸出項目：％s"
-
-#: include/data.php:299
-#, fuzzy, php-format
-msgid "Datasource - bad indexes: %s"
-msgstr "數據源 - 壞索引：％s"
-
-#: include/data.php:335
-#, php-format
-msgid "Thold logonly alert/warning: %s"
-msgstr ""
-
-#: include/data.php:346 include/data_detail.php:407
-#, fuzzy
-msgid "Information only (no warn/error)"
-msgstr "僅供參考（無警告/錯誤）"
-
-#: include/data.php:361
-#, fuzzy, php-format
-msgid "Devices in more than one tree: %s"
-msgstr "多個樹中的設備：％s"
-
-#: include/data.php:380
-#, fuzzy, php-format
-msgid "Hosts without graphs: %s"
-msgstr "沒有圖表的主機：％s"
-
-#: include/data.php:398
-#, fuzzy, php-format
-msgid "Hosts without tree: %s"
-msgstr "沒有樹的主機：％s"
-
-#: include/data.php:414
-#, fuzzy, php-format
-msgid "Hosts with default public/private community: %s"
-msgstr "擁有默認公共/私人社區的主機：％s"
-
-#: include/data.php:429
-#, fuzzy, php-format
-msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "插件監視器 - 未監視的主機：％s"
-
-#: include/data.php:435 include/data_detail.php:542
-#, fuzzy, php-format
-msgid "Found %s problems"
-msgstr "找到了％s的問題"
-
-#: include/data.php:437 include/data_detail.php:544
-#, fuzzy
-msgid "Everything OK"
-msgstr "一切還好"
-
-#: include/data.php:449
-#, fuzzy
-msgid "Boost statistics"
-msgstr "提升統計數據"
-
-#: include/data.php:502 include/data.php:1253 include/data_detail.php:963
-msgid "Idle"
-msgstr "閒置"
-
-#: include/data.php:504 include/data.php:1251 include/data_detail.php:961
-msgid "Running"
-msgstr "運行"
-
-#: include/data.php:506
-#, fuzzy
-msgid "Overrun Warning"
-msgstr "超限警告"
-
-#: include/data.php:509
-msgid "Timed Out"
-msgstr "逾時"
-
-#: include/data.php:512
-msgid "Other"
-msgstr "其他"
-
-#: include/data.php:515
-#, fuzzy
-msgid "Never Run"
-msgstr "永不運行"
-
-#: include/data.php:520
-#, fuzzy, php-format
-msgid "Pending Boost Records: %s"
-msgstr "等待提升記錄：％s"
-
-#: include/data.php:521
-#, fuzzy, php-format
-msgid "Archived Boost Records: %s"
-msgstr "存檔的提升記錄：％s"
-
-#: include/data.php:525 include/data.php:528 include/data.php:530
-#, fuzzy, php-format
-msgid "Total Boost Records: %s"
-msgstr "總提升記錄：％s"
-
-#: include/data.php:548
-#, fuzzy, php-format
-msgid "Boost On-demand Updating: %s"
-msgstr "提升按需更新：％s"
-
-#: include/data.php:548 include/data.php:823 include/data.php:833
-#: include/data.php:952 include/data.php:961 include/data.php:1087
-#: include/data.php:1257 include/data_detail.php:741
-#: include/data_detail.php:858 include/data_detail.php:967
-msgid "Disabled"
-msgstr "停用"
-
-#: include/data.php:555
-#, fuzzy, php-format
-msgid "Current Boost Table(s) Size: %s"
-msgstr "當前升壓表大小：％s"
-
-#: include/data.php:558
-#, fuzzy, php-format
-msgid "Avg Bytes/Record: %s"
-msgstr "平均字節數/記錄：％s"
-
-#: include/data.php:565
-#, fuzzy, php-format
-msgid "Last run duration: %s"
-msgstr "上次運行時間：％s"
-
-#: include/data.php:567
-#, fuzzy, php-format
-msgid "RRD Updates / Max: %s / %s"
-msgstr "RRD更新/最大：％s /％s"
-
-#: include/data.php:568
-#, fuzzy, php-format
-msgid "Update Frequency: %s"
-msgstr "更新頻率：％s"
-
-#: include/data.php:569
-#, fuzzy, php-format
-msgid "Next Start Time: %s"
-msgstr "下一個開始時間：％s"
-
-#: include/data.php:580
-#, fuzzy
-msgid "CPU utilization"
-msgstr "CPU利用率"
-
-#: include/data.php:585
-#, fuzzy
-msgid "CPU load: "
-msgstr "CPU負載："
-
-#: include/data.php:592
-#, fuzzy
-msgid "This function is not implemented on Windows platforms"
-msgstr "Windows平台上未實現此功能"
-
-#: include/data.php:602
-msgid "Load"
-msgstr "載入"
-
-#: include/data.php:627
-#, fuzzy
-msgid "24 hour extrem"
-msgstr "24小時極端"
-
-#: include/data.php:636 include/data_detail.php:565
-#, fuzzy
-msgid "Long run<br/>poller"
-msgstr "長跑<br/>輪詢"
-
-#: include/data.php:651 include/data.php:672 include/data.php:695
-#: include/data.php:719 include/data.php:740 include/data_detail.php:580
-#: include/data_detail.php:601
-#, fuzzy
-msgid "Waiting<br/>for data"
-msgstr "等候<br/>對於數據"
-
-#: include/data.php:680 include/data_detail.php:609
-#, fuzzy
-msgid "Max thold<br/>triggered:"
-msgstr "最大的<br/>觸發："
-
-#: include/data.php:705 include/data_detail.php:634
-#, fuzzy
-msgid "Poller<br/>output item:"
-msgstr "輪詢<br/>輸出項目："
-
-#: include/data.php:726 include/data_detail.php:655
-#, fuzzy
-msgid "Failed<br/>polls:"
-msgstr "失敗<br/>民調："
-
-#: include/data.php:761
-#, fuzzy
-msgid "Datasources: "
-msgstr "數據源："
-
-#: include/data.php:790 include/data_detail.php:711
-#, fuzzy
-msgid "No untemplated datasources found"
-msgstr "找不到未經模板化的數據源"
-
-#: include/data.php:803 include/data.php:828 include/data_detail.php:723
-msgid "Hosts"
-msgstr "主機"
-
-#: include/data.php:820 include/data.php:949 include/data_detail.php:738
-#: include/data_detail.php:855
-msgid "All"
-msgstr "全部"
-
-#: include/data.php:821 include/data.php:830 include/data.php:1083
-#: include/data_detail.php:739
-msgid "Up"
-msgstr "向上"
-
-#: include/data.php:822 include/data.php:831 include/data.php:1084
-#: include/data_detail.php:740
-msgid "Down"
-msgstr "向下"
-
-#: include/data.php:824 include/data.php:832 include/data.php:1259
-#: include/data_detail.php:742 include/data_detail.php:969
-#, fuzzy
-msgid "Recovering"
-msgstr "恢復"
-
-#: include/data.php:851 include/data.php:897 include/data.php:1465
-#: include/data.php:1515 include/data.php:1565 include/data.php:1612
-#, fuzzy
-msgid "You don't have permissions to any hosts"
-msgstr "你沒有權限"
-
-#: include/data.php:863 include/data.php:868 include/data_detail.php:786
-#, fuzzy
-msgid "Device Templates"
-msgstr "設備模板"
-
-#: include/data.php:892 include/data_detail.php:810
-#, fuzzy
-msgid "No device templates found"
-msgstr "找不到設備模板"
-
-#: include/data.php:909 include/data.php:914 include/data.php:956
-#: include/data_detail.php:822
-#, fuzzy
-msgid "Thresholds"
-msgstr "閾值"
-
-#: include/data.php:922 include/data_detail.php:829
-#, fuzzy
-msgid "Thold plugin not installed/running"
-msgstr "Thold插件未安裝/運行"
-
-#: include/data.php:925 include/data.php:1057 include/data.php:1119
-#, fuzzy
-msgid "You don't have plugin permission"
-msgstr "你沒有權限"
-
-#: include/data.php:950 include/data.php:960 include/data_detail.php:856
-#, fuzzy
-msgid "Breached"
-msgstr "突破"
-
-#: include/data.php:951 include/data_detail.php:857
-#, fuzzy
-msgid "Trigged"
-msgstr "觸發"
-
-#: include/data.php:958
-#, fuzzy
-msgid "OK"
-msgstr "確定"
-
-#: include/data.php:959
-#, fuzzy
-msgid "Triggered"
-msgstr "Trigerred"
-
-#: include/data.php:996
-#, fuzzy
-msgid "Cacti version: "
-msgstr "仙人掌版："
-
-#: include/data.php:1007
-#, fuzzy
-msgid "Poller type:"
-msgstr "輪詢類型："
-
-#: include/data.php:1007
-msgid "Spine"
-msgstr ""
-
-#: include/data.php:1009
-#, fuzzy
-msgid "Spine version: "
-msgstr "脊柱版本："
-
-#: include/data.php:1012
-#, fuzzy
-msgid "You are using incorrect spine version!"
-msgstr "您使用的脊椎版本不正確！"
-
-#: include/data.php:1016
-#, fuzzy
-msgid "Poller type: "
-msgstr "輪詢類型："
-
-#: include/data.php:1019
-#, fuzzy
-msgid "Running on: "
-msgstr "運行："
-
-#: include/data.php:1039 include/data.php:1081
-#, fuzzy
-msgid "Mactrack"
-msgstr "Mactrack"
-
-#: include/data.php:1049 include/data.php:1110
-#, fuzzy
-msgid "Mactrack plugin not installed/running"
-msgstr "Mactrack插件未安裝/運行"
-
-#: include/data.php:1073
-#, fuzzy, php-format
-msgid "All: %s"
-msgstr "全部：％s"
-
-#: include/data.php:1074
-#, fuzzy, php-format
-msgid "Up: %s"
-msgstr "UPS"
-
-#: include/data.php:1075
-#, fuzzy, php-format
-msgid "Down: %s"
-msgstr "下：％s"
-
-#: include/data.php:1076
-#, php-format
-msgid "Error: %s"
-msgstr "錯誤: %s"
-
-#: include/data.php:1077
-#, fuzzy, php-format
-msgid "Unknown: %s"
-msgstr "未知：％s"
-
-#: include/data.php:1078
-#, fuzzy, php-format
-msgid "Disabled: %s"
-msgstr "已禁用：％s"
-
-#: include/data.php:1085
-msgid "Error"
-msgstr "錯誤"
-
-#: include/data.php:1086
-msgid "Unknown"
-msgstr "未知"
-
-#: include/data.php:1102 include/data_detail.php:892
-#, fuzzy
-msgid "Mactrack sites"
-msgstr "Mactrack網站"
-
-#: include/data.php:1121 include/data_detail.php:898
-msgid "Devices"
-msgstr "設備"
-
-#: include/data.php:1121 include/data_detail.php:898
-msgid "Site"
-msgstr "網站"
-
-#: include/data.php:1122 include/data_detail.php:899
-#, fuzzy
-msgid "IPs"
-msgstr "IP地址"
-
-#: include/data.php:1122 include/data_detail.php:899
-#, fuzzy
-msgid "Ports"
-msgstr "端口"
-
-#: include/data.php:1123 include/data_detail.php:900
-msgid "MACs"
-msgstr "MACs"
-
-#: include/data.php:1123 include/data_detail.php:900
-#, fuzzy
-msgid "Ports up"
-msgstr "港口"
-
-#: include/data.php:1124 include/data_detail.php:901
-#, fuzzy
-msgid "Device errors"
-msgstr "設備錯誤"
-
-#: include/data.php:1139 include/data_detail.php:915
-#, fuzzy
-msgid "No mactrack sites found"
-msgstr "找不到mactrack網站"
-
-#: include/data.php:1153
-#, fuzzy
-msgid "Time synchronization"
-msgstr "時間同步"
-
-#: include/data.php:1163
-#, fuzzy
-msgid "Wrong NTP server configured - "
-msgstr "沒有配置NTP服務器"
-
-#: include/data.php:1167
-#, fuzzy
-msgid "No NTP server configured"
-msgstr "沒有配置NTP服務器"
-
-#: include/data.php:1178
-#, fuzzy
-msgid "Failed to get NTP time FROM $ntp_server"
-msgstr "無法從$ ntp_server獲得NTP時間"
-
-#: include/data.php:1186
-#, fuzzy, php-format
-msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
-msgstr "請檢查時間。 <br/>與NTP服務器％s不同（超過％s秒）"
-
-#: include/data.php:1188
-#, fuzzy
-msgid "Localtime is equal to NTP server"
-msgstr "Localtime等於NTP服務器"
-
-#: include/data.php:1193
-#, fuzzy
-msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
-msgstr "無法聯繫指示的NTP服務器。 <br/>請檢查您的配置。 <br/>"
-
-#: include/data.php:1196
-#, fuzzy
-msgid "Last check: "
-msgstr "最後檢查："
-
-#: include/data.php:1217 include/data_detail.php:928
-#, fuzzy
-msgid "Poller info"
-msgstr "輪詢信息"
-
-#: include/data.php:1223
-#, fuzzy
-msgid "ID/Name/total time/state"
-msgstr "ID /名稱/總時間/狀態"
-
-#: include/data.php:1249 include/data_detail.php:959
-#, fuzzy
-msgid "New/Idle"
-msgstr "新/空閒"
-
-#: include/data.php:1255 include/data_detail.php:965
-#, fuzzy
-msgid "Unkn/down"
-msgstr "UNKN /向下"
-
-#: include/data.php:1266 include/data_detail.php:976
-#, fuzzy
-msgid "(all)"
-msgstr "（所有）"
-
-#: include/data.php:1266 include/data_detail.php:976
-#, fuzzy
-msgid "(ok)"
-msgstr "（好）"
-
-#: include/data.php:1287
-#, fuzzy, php-format
-msgid "Poller stats (interval %ss)"
-msgstr "輪詢統計（間隔％ss）"
-
-#: include/data.php:1337 include/data.php:1339
-#, fuzzy
-msgid " Poller ID: "
-msgstr "投票人ID："
-
-#: include/data.php:1346
-msgid "ID: "
-msgstr "代碼:"
-
-#: include/data.php:1367 include/data_detail.php:997
-#, fuzzy
-msgid "Last thold events"
-msgstr "最後的事件"
-
-#: include/data.php:1375 include/data_detail.php:1004
-#, fuzzy
-msgid "Plugin Thold isn't installed or started"
-msgstr "插件Thold未安裝或啟動"
-
-#: include/data.php:1411 include/data_detail.php:1039
-#, fuzzy
-msgid "Without events yet"
-msgstr "沒有事件"
-
-#: include/data.php:1425
-#, fuzzy
-msgid "Top5 ping (avg, current)"
-msgstr "Top5 ping（平均，當前）"
-
-#: include/data.php:1477
-#, fuzzy
-msgid "Top5 worst availability"
-msgstr "Top5最差的可用性"
-
-#: include/data.php:1527
-#, fuzzy
-msgid "Top5 worst polling time"
-msgstr "Top5最糟糕的投票時間"
-
-#: include/data.php:1577
-#, fuzzy
-msgid "Top5 worst polling ratio (failed, total, ratio)"
-msgstr "Top5最差投票率（失敗，總數，比率）"
-
-#: include/data.php:1625 include/data.php:1630 include/settings.php:68
-msgid "Trends"
-msgstr "趨勢"
-
-#: include/data.php:1647
-#, fuzzy
-msgid "Tholds triggered"
-msgstr "Tholds觸發了"
-
-#: include/data.php:1664
-#, fuzzy
-msgid "Hosts down"
-msgstr "主持人"
-
-#: include/data.php:1693
-#, fuzzy
-msgid "Favourite graph"
-msgstr "最喜歡的圖表"
-
-#: include/data.php:1789
-msgid "Syslog messages and alerts"
-msgstr ""
-
-#: include/data.php:1794
-msgid "Syslog"
-msgstr ""
-
-#: include/data.php:1817
-msgid "Total"
-msgstr ""
-
-#: include/data.php:1835
-msgid "Incoming"
-msgstr ""
-
-#: include/data.php:1853
-msgid "Alerts"
-msgstr ""
-
-#: include/data.php:1878
-#, fuzzy
-msgid "Syslog plugin not installed/running"
-msgstr "Thold插件未安裝/運行"
-
-#: include/data_detail.php:37
-#, fuzzy
-msgid "Database check - detail"
-msgstr "檢查資料庫"
-
-#: include/data_detail.php:77
-#, fuzzy
-msgid "Analyze cacti log - detail"
-msgstr "分析仙人掌日誌"
-
-#: include/data_detail.php:154
-#, fuzzy
-msgid "Analyze logins - detail"
-msgstr "分析日誌 - 行數"
-
-#: include/data_detail.php:173
+#: include/data.php:139 include/data_detail.php:151
 #, fuzzy
 msgid "failed"
 msgstr "失敗"
 
-#: include/data_detail.php:173
+#: include/data.php:139 include/data_detail.php:151
 #, fuzzy
 msgid "success"
 msgstr "成功"
 
-#: include/data_detail.php:196
-msgid "Full log"
+#: include/data.php:174
+#, fuzzy
+msgid "Analyze log"
+msgstr "分析仙人掌日誌"
+
+#: include/data.php:214 include/data_detail.php:70
+#, fuzzy
+msgid "Log file not accessible or empty"
+msgstr "日誌文件無法訪問或為空"
+
+#: include/data.php:233 include/data_detail.php:90
+msgid "Errors"
+msgstr "錯誤"
+
+#: include/data.php:235 include/data_detail.php:92
+msgid "Warnings"
+msgstr "警告"
+
+#: include/data.php:240 include/data_detail.php:97
+#, fuzzy
+msgid "file is larger than 2GB"
+msgstr "文件大於2GB"
+
+#: include/data.php:244 include/data_detail.php:101
+#, fuzzy
+msgid "Log size OK"
+msgstr "日誌大小好"
+
+#: include/data.php:248 include/data_detail.php:105
+#, fuzzy
+msgid "Log size is quite large"
+msgstr "日誌大小非常大"
+
+#: include/data.php:251 include/data_detail.php:108
+#, fuzzy
+msgid "Log size"
+msgstr "日誌大小"
+
+#: include/data.php:255 include/data_detail.php:112
+#, fuzzy, php-format
+msgid "(Errors and warning in last %s lines)"
+msgstr "（最後％s行中的錯誤和警告）"
+
+#: include/data.php:295
+msgid "Top5 ping"
 msgstr ""
 
-#: include/data_detail.php:226
-#, fuzzy, php-format
-msgid "Devices with the same IP and port - %s"
-msgstr "具有相同IP和端口％s的設備"
+#: include/data.php:382 include/data.php:2566 include/data_detail.php:1187
+#: include/data_detail.php:1354
+#, fuzzy
+msgid "Host"
+msgstr "主機"
 
-#: include/data_detail.php:259
-#, fuzzy, php-format
-msgid "Devices with the same description - %s"
-msgstr "具有相同描述％s的設備"
-
-#: include/data_detail.php:299
-#, fuzzy, php-format
-msgid "Orphaned Data Sources - %s"
-msgstr "孤立數據源％s"
-
-#: include/data_detail.php:319
-#, fuzzy, php-format
-msgid "Poller output items - %s:"
-msgstr "輪詢輸出項％s："
-
-#: include/data_detail.php:346
-#, fuzzy, php-format
-msgid "Datasources with bad indexes - %s:"
-msgstr "數據源 - 壞索引％s："
-
-#: include/data_detail.php:389
-#, php-format
-msgid "Thold logonly alert/warning - %s:"
+#: include/data.php:383 include/data_detail.php:1188
+msgid "Average"
 msgstr ""
 
-#: include/data_detail.php:421
-#, fuzzy, php-format
-msgid "Devices in more than one tree - %s"
-msgstr "多個樹中的設備％s"
+#: include/data.php:384 include/data_detail.php:1189
+msgid "Current"
+msgstr ""
 
-#: include/data_detail.php:467
-#, fuzzy, php-format
-msgid "Hosts without graphs - %s"
-msgstr "主機沒有圖表％s"
-
-#: include/data_detail.php:489
-#, fuzzy, php-format
-msgid "Hosts without tree - %s"
-msgstr "沒有樹％s的主機"
-
-#: include/data_detail.php:510
-#, fuzzy, php-format
-msgid "Hosts with default public/private community - %s"
-msgstr "擁有默認公共/私人社區％s的主機"
-
-#: include/data_detail.php:530
-#, fuzzy, php-format
-msgid "Plugin Monitor - Unmonitored hosts - %s"
-msgstr "插件監視器 - 未監視的主機％s"
-
-#: include/data_detail.php:557
+#: include/data.php:390 include/data.php:708 include/data.php:813
+#: include/data.php:947 include/data.php:2332 include/data.php:2452
+#: include/data.php:2576
 #, fuzzy
-msgid "48 hour extrem"
-msgstr "24小時極端"
-
-#: include/data_detail.php:750
-#, fuzzy
-msgid "RECOVERING"
-msgstr "RECOVERING"
-
-#: include/data_detail.php:766
-#, fuzzy
-msgid "DOWN"
-msgstr "向下"
-
-#: include/data_detail.php:832
-#, fuzzy
-msgid "You don't have permission"
+msgid "You don't have permissions to any hosts"
 msgstr "你沒有權限"
 
-#: include/data_detail.php:864
+#: include/data.php:426
 #, fuzzy
-msgid "BREACHED"
-msgstr "突破"
+msgid "CPU utilization"
+msgstr "CPU利用率"
 
-#: include/data_detail.php:874
+#: include/data.php:437
 #, fuzzy
-msgid "TRIGGERED"
-msgstr "觸發的"
+msgid "CPU load: "
+msgstr "CPU負載："
 
-#: include/data_detail.php:933
+#: include/data.php:477
 #, fuzzy
-msgid "ID"
-msgstr "代碼:"
+msgid "This function is not implemented on Windows platforms"
+msgstr "Windows平台上未實現此功能"
 
-#: include/data_detail.php:933
-msgid "Name"
+#: include/data.php:488
+msgid "Load"
+msgstr "載入"
+
+#: include/data.php:533
+msgid "NTP"
 msgstr ""
 
-#: include/data_detail.php:934
-msgid "State"
+#: include/data.php:568
+#, fuzzy
+msgid "No NTP server configured"
+msgstr "沒有配置NTP服務器"
+
+#: include/data.php:571
+#, fuzzy
+msgid "Wrong NTP server configured - "
+msgstr "沒有配置NTP服務器"
+
+#: include/data.php:583
+#, fuzzy
+msgid "Failed to get NTP time FROM $ntp_server"
+msgstr "無法從$ ntp_server獲得NTP時間"
+
+#: include/data.php:591
+#, fuzzy, php-format
+msgid "Please check time.<br/>It is different (more than %s seconds) FROM NTP server %s"
+msgstr "請檢查時間。 <br/>與NTP服務器％s不同（超過％s秒）"
+
+#: include/data.php:593
+#, fuzzy
+msgid "Localtime is equal to NTP server"
+msgstr "Localtime等於NTP服務器"
+
+#: include/data.php:598
+#, fuzzy
+msgid "Unable to contact the NTP server indicated.<br/>Please check your configuration.<br/>"
+msgstr "無法聯繫指示的NTP服務器。 <br/>請檢查您的配置。 <br/>"
+
+#: include/data.php:632
+#, fuzzy
+msgid "Data sources"
+msgstr "數據源："
+
+#: include/data.php:676
+#, fuzzy
+msgid "Datasources: "
+msgstr "數據源："
+
+#: include/data.php:742
+#, fuzzy
+msgid "Host templates"
+msgstr "提升統計數據"
+
+#: include/data.php:786
+msgid "Host templates: "
 msgstr ""
 
-#: include/data_detail.php:934
-msgid "Total time"
+#: include/data.php:848 include/data.php:924 include/data_detail.php:780
+msgid "Hosts"
+msgstr "主機"
+
+#: include/data.php:894
+#, fuzzy
+msgid "Hosts: "
+msgstr "主機"
+
+#: include/data.php:916 include/data.php:3206 include/data_detail.php:795
+#: include/data_detail.php:935
+msgid "All"
+msgstr "全部"
+
+#: include/data.php:917 include/data.php:926 include/data.php:3343
+#: include/data_detail.php:796
+msgid "Up"
+msgstr "向上"
+
+#: include/data.php:918 include/data.php:927 include/data.php:3344
+#: include/data_detail.php:797
+msgid "Down"
+msgstr "向下"
+
+#: include/data.php:919 include/data.php:929 include/data.php:1655
+#: include/data.php:2848 include/data.php:3209 include/data.php:3218
+#: include/data.php:3347 include/data_detail.php:798
+#: include/data_detail.php:938 include/data_detail.php:1050
+msgid "Disabled"
+msgstr "停用"
+
+#: include/data.php:920 include/data.php:928 include/data.php:1657
+#: include/data_detail.php:799 include/data_detail.php:1052
+#, fuzzy
+msgid "Recovering"
+msgstr "恢復"
+
+#: include/data.php:981
+msgid "Info"
 msgstr ""
 
-#: include/data_detail.php:1053
+#: include/data.php:1014
 #, fuzzy
-msgid "Top 20 hosts with the worst ping (avg, current)"
-msgstr "Top5 ping（平均，當前）"
+msgid "Cacti version: "
+msgstr "仙人掌版："
 
-#: include/data_detail.php:1101
+#: include/data.php:1025
 #, fuzzy
-msgid "Top 20 hosts with the worst availability"
-msgstr "Top5最差的可用性"
+msgid "Poller type:"
+msgstr "輪詢類型："
 
-#: include/data_detail.php:1148
-#, fuzzy
-msgid "Top 20 hosts worst polling time"
-msgstr "Top5最糟糕的投票時間"
-
-#: include/data_detail.php:1194
-#, fuzzy
-msgid "Top 20 hosts with the  worst polling ratio (failed, total, ratio)"
-msgstr "Top5最差投票率（失敗，總數，比率）"
-
-#: include/helpers.php:106
-#, fuzzy
-msgid "You cannot disable this panel"
-msgstr "您無法禁用此面板"
-
-#: include/helpers.php:108
-#, fuzzy
-msgid "Disable panel"
-msgstr "禁用面板"
-
-#: include/helpers.php:111
-#, fuzzy
-msgid "Reload Panel"
-msgstr "重新加載面板"
-
-#: include/helpers.php:114
-msgid "Show Details"
-msgstr "顯示詳細資料"
-
-#: include/helpers.php:122
-msgid "Loading data ..."
+#: include/data.php:1025
+msgid "Spine"
 msgstr ""
 
-#: include/helpers.php:421
+#: include/data.php:1027
+#, fuzzy
+msgid "Spine version: "
+msgstr "脊柱版本："
+
+#: include/data.php:1030
+#, fuzzy
+msgid "You are using incorrect spine version!"
+msgstr "您使用的脊椎版本不正確！"
+
+#: include/data.php:1034
+#, fuzzy
+msgid "Poller type: "
+msgstr "輪詢類型："
+
+#: include/data.php:1037
+#, fuzzy
+msgid "Running on: "
+msgstr "運行："
+
+#: include/data.php:1077
+msgid "Database check"
+msgstr "檢查資料庫"
+
+#: include/data.php:1126
 #, fuzzy
 msgid "DB problem"
 msgstr "DB問題"
 
-#: include/helpers.php:423
+#: include/data.php:1128
 #, fuzzy
 msgid "DB OK"
 msgstr "DB OK"
 
-#: include/helpers.php:435
+#: include/data.php:1142
 #, fuzzy, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "連接錯誤 - 嘗試重新啟動SQL服務。"
 
-#: include/helpers.php:451
+#: include/data.php:1161
 #, php-format
 msgid "Aborted clients/connects: %s - check logs."
 msgstr ""
 
-#: include/helpers.php:458
+#: include/data.php:1171
 #, fuzzy, php-format
 msgid "Connection errors: %s"
 msgstr "連接錯誤：％s"
 
-#: include/helpers.php:459
-#, php-format
-msgid "Aborted clients/connects: %s"
-msgstr ""
-
-#: include/helpers.php:460
+#: include/data.php:1172
 #, fuzzy, php-format
 msgid "Damaged tables: %s"
 msgstr "損壞的表：％s"
 
-#: include/helpers.php:461
+#: include/data.php:1173
 #, fuzzy, php-format
 msgid "Memory tables: %s"
 msgstr "內存表：％s"
 
-#: include/helpers.php:462
+#: include/data.php:1174
 #, fuzzy, php-format
 msgid "All tables: %s"
 msgstr "所有表格：％s"
 
-#: include/helpers.php:479
+#: include/data.php:1187
+msgid "Scheduled db check disabled"
+msgstr ""
+
+#: include/data.php:1189
+msgid "hour"
+msgstr ""
+
+#: include/data.php:1191
+msgid "day"
+msgstr ""
+
+#: include/data.php:1193
+msgid "week"
+msgstr ""
+
+#: include/data.php:1195
+msgid "month"
+msgstr ""
+
+#: include/data.php:1209
+msgid "Maint plugin"
+msgstr ""
+
+#: include/data.php:1311
+#, fuzzy
+msgid "Maint plugin is not installed/enabled"
+msgstr "Mactrack插件未安裝/運行"
+
+#: include/data.php:1344
+msgid "Admin alert"
+msgstr ""
+
+#: include/data.php:1404
+msgid "Trends"
+msgstr "趨勢"
+
+#: include/data.php:1523
+#, fuzzy
+msgid "Tholds triggered"
+msgstr "Tholds觸發了"
+
+#: include/data.php:1539
+#, fuzzy
+msgid "Hosts down"
+msgstr "主持人"
+
+#: include/data.php:1585 include/data_detail.php:1011
+#, fuzzy
+msgid "Poller info"
+msgstr "輪詢信息"
+
+#: include/data.php:1621
+#, fuzzy
+msgid "ID/Name/total time/state"
+msgstr "ID /名稱/總時間/狀態"
+
+#: include/data.php:1632 include/data.php:1905 include/data.php:1932
+#: include/data.php:1968 include/data.php:2013 include/data.php:2058
+#: include/data.php:2089 include/data.php:2116 include/data.php:2141
+#: include/data.php:2166 include/data.php:2189 include/data.php:2863
+#: include/data.php:2868 include/data_detail.php:202
+#: include/data_detail.php:242 include/data_detail.php:290
+#: include/data_detail.php:316 include/data_detail.php:347
+#: include/data_detail.php:394 include/data_detail.php:430
+#: include/data_detail.php:483 include/data_detail.php:513
+#: include/data_detail.php:542 include/data_detail.php:569
+#: include/data_detail.php:1027
+msgid "N/A"
+msgstr "不适用"
+
+#: include/data.php:1647 include/data_detail.php:1042
+#, fuzzy
+msgid "New/Idle"
+msgstr "新/空閒"
+
+#: include/data.php:1649 include/data.php:2804 include/data_detail.php:1044
+msgid "Running"
+msgstr "運行"
+
+#: include/data.php:1651 include/data.php:2802 include/data_detail.php:1046
+msgid "Idle"
+msgstr "閒置"
+
+#: include/data.php:1653 include/data_detail.php:1048
+#, fuzzy
+msgid "Unkn/down"
+msgstr "UNKN /向下"
+
+#: include/data.php:1664 include/data_detail.php:1059
+#, fuzzy
+msgid "(all)"
+msgstr "（所有）"
+
+#: include/data.php:1664 include/data_detail.php:1059
+#, fuzzy
+msgid "(ok)"
+msgstr "（好）"
+
+#: include/data.php:1701
+#, fuzzy
+msgid "Poller stats"
+msgstr "允許面板輪詢統計"
+
+#: include/data.php:1792 include/data.php:1794
+#, fuzzy
+msgid " Poller ID: "
+msgstr "投票人ID："
+
+#: include/data.php:1801
+msgid "ID: "
+msgstr "代碼:"
+
+#: include/data.php:1845 include/data_detail.php:186
+#, fuzzy
+msgid "Analyze tree/host/graph"
+msgstr "分析樹/主機/圖"
+
+#: include/data.php:1910
+#, fuzzy, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "具有相同IP和端口的設備：％s"
+
+#: include/data.php:1938
+#, fuzzy, php-format
+msgid "Devices with the same description: %s"
+msgstr "具有相同描述的設備：％s"
+
+#: include/data.php:1972
+#, fuzzy, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "孤立數據源：％s"
+
+#: include/data.php:1989
+#, fuzzy, php-format
+msgid "Poller Output Items: %s"
+msgstr "輪詢輸出項目：％s"
+
+#: include/data.php:2017
+#, fuzzy, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "數據源 - 壞索引：％s"
+
+#: include/data.php:2062
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr ""
+
+#: include/data.php:2100
+#, fuzzy, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "多個樹中的設備：％s"
+
+#: include/data.php:2127
+#, fuzzy, php-format
+msgid "Hosts without graphs: %s"
+msgstr "沒有圖表的主機：％s"
+
+#: include/data.php:2152
+#, fuzzy, php-format
+msgid "Hosts without tree: %s"
+msgstr "沒有樹的主機：％s"
+
+#: include/data.php:2177
+#, fuzzy, php-format
+msgid "Hosts with default public/private community: %s"
+msgstr "擁有默認公共/私人社區的主機：％s"
+
+#: include/data.php:2200
+#, fuzzy, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "插件監視器 - 未監視的主機：％s"
+
+#: include/data.php:2206 include/data_detail.php:590
+#, fuzzy, php-format
+msgid "Found %s problems"
+msgstr "找到了％s的問題"
+
+#: include/data.php:2208 include/data_detail.php:592
+#, fuzzy
+msgid "Everything OK"
+msgstr "一切還好"
+
+#: include/data.php:2243
+#, fuzzy
+msgid "Top5 worst availability"
+msgstr "Top5最差的可用性"
+
+#: include/data.php:2366
+#, fuzzy
+msgid "Top5 worst polling time"
+msgstr "Top5最糟糕的投票時間"
+
+#: include/data.php:2485
+#, fuzzy
+msgid "Top5 worst polling ratio (failed, total, ratio)"
+msgstr "Top5最差投票率（失敗，總數，比率）"
+
+#: include/data.php:2567 include/data_detail.php:1355
+#: include/data_detail.php:1400
+#, fuzzy
+msgid "Failed"
+msgstr "失敗"
+
+#: include/data.php:2568 include/data.php:3567 include/data_detail.php:1356
+msgid "Total"
+msgstr ""
+
+#: include/data.php:2569 include/data_detail.php:1357
+msgid "Ratio"
+msgstr ""
+
+#: include/data.php:2609 include/data_detail.php:1080
+#, fuzzy
+msgid "Last thold events"
+msgstr "最後的事件"
+
+#: include/data.php:2653 include/data_detail.php:1087
+#, fuzzy
+msgid "Plugin Thold isn't installed or started"
+msgstr "插件Thold未安裝或啟動"
+
+#: include/data.php:2690 include/data_detail.php:1130
+#, fuzzy
+msgid "Without events yet"
+msgstr "沒有事件"
+
+#: include/data.php:2725
+#, fuzzy
+msgid "Boost statistics"
+msgstr "提升統計數據"
+
+#: include/data.php:2806
+#, fuzzy
+msgid "Overrun Warning"
+msgstr "超限警告"
+
+#: include/data.php:2809
+msgid "Timed Out"
+msgstr "逾時"
+
+#: include/data.php:2812
+msgid "Other"
+msgstr "其他"
+
+#: include/data.php:2815
+#, fuzzy
+msgid "Never Run"
+msgstr "永不運行"
+
+#: include/data.php:2820
+#, fuzzy, php-format
+msgid "Pending Boost Records: %s"
+msgstr "等待提升記錄：％s"
+
+#: include/data.php:2821
+#, fuzzy, php-format
+msgid "Archived Boost Records: %s"
+msgstr "存檔的提升記錄：％s"
+
+#: include/data.php:2825 include/data.php:2828 include/data.php:2830
+#, fuzzy, php-format
+msgid "Total Boost Records: %s"
+msgstr "總提升記錄：％s"
+
+#: include/data.php:2848
+#, fuzzy, php-format
+msgid "Boost On-demand Updating: %s"
+msgstr "提升按需更新：％s"
+
+#: include/data.php:2855
+#, fuzzy, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "當前升壓表大小：％s"
+
+#: include/data.php:2858
+#, fuzzy, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "平均字節數/記錄：％s"
+
+#: include/data.php:2865
+#, fuzzy, php-format
+msgid "Last run duration: %s"
+msgstr "上次運行時間：％s"
+
+#: include/data.php:2867
+#, fuzzy, php-format
+msgid "RRD Updates / Max: %s / %s"
+msgstr "RRD更新/最大：％s /％s"
+
+#: include/data.php:2868
+#, fuzzy, php-format
+msgid "Update Frequency: %s"
+msgstr "更新頻率：％s"
+
+#: include/data.php:2869
+#, fuzzy, php-format
+msgid "Next Start Time: %s"
+msgstr "下一個開始時間：％s"
+
+#: include/data.php:2900
+#, fuzzy
+msgid "24 hours extrem"
+msgstr "24小時極端"
+
+#: include/data.php:2969 include/data_detail.php:614
+#, fuzzy
+msgid "Long run<br/>poller"
+msgstr "長跑<br/>輪詢"
+
+#: include/data.php:2984 include/data.php:3009 include/data.php:3033
+#: include/data.php:3058 include/data.php:3081 include/data_detail.php:629
+#: include/data_detail.php:653
+#, fuzzy
+msgid "Waiting<br/>for data"
+msgstr "等候<br/>對於數據"
+
+#: include/data.php:3017 include/data_detail.php:661
+#, fuzzy
+msgid "Max thold<br/>triggered:"
+msgstr "最大的<br/>觸發："
+
+#: include/data.php:3044 include/data_detail.php:688
+#, fuzzy
+msgid "Poller<br/>output item:"
+msgstr "輪詢<br/>輸出項目："
+
+#: include/data.php:3067 include/data_detail.php:712
+#, fuzzy
+msgid "Failed<br/>polls:"
+msgstr "失敗<br/>民調："
+
+#: include/data.php:3121 include/data_detail.php:879
+#, fuzzy
+msgid "Thresholds"
+msgstr "閾值"
+
+#: include/data.php:3162 include/data_detail.php:886
+#, fuzzy
+msgid "Thold plugin not installed/running"
+msgstr "Thold插件未安裝/運行"
+
+#: include/data.php:3164 include/data.php:3317 include/data.php:3437
+#, fuzzy
+msgid "You don't have plugin permission"
+msgstr "你沒有權限"
+
+#: include/data.php:3207 include/data.php:3217 include/data_detail.php:936
+#, fuzzy
+msgid "Breached"
+msgstr "突破"
+
+#: include/data.php:3208 include/data_detail.php:937
+#, fuzzy
+msgid "Trigged"
+msgstr "觸發"
+
+#: include/data.php:3215 include/data_detail.php:1397
+#, fuzzy
+msgid "OK"
+msgstr "確定"
+
+#: include/data.php:3216
+#, fuzzy
+msgid "Triggered"
+msgstr "Trigerred"
+
+#: include/data.php:3266
+#, fuzzy
+msgid "Mactrack plugin"
+msgstr "允許面板MacTrack插件"
+
+#: include/data.php:3311 include/data.php:3429
+#, fuzzy
+msgid "Mactrack plugin not installed/running"
+msgstr "Mactrack插件未安裝/運行"
+
+#: include/data.php:3333
+#, fuzzy, php-format
+msgid "All: %s"
+msgstr "全部：％s"
+
+#: include/data.php:3334
+#, fuzzy, php-format
+msgid "Up: %s"
+msgstr "UPS"
+
+#: include/data.php:3335
+#, fuzzy, php-format
+msgid "Down: %s"
+msgstr "下：％s"
+
+#: include/data.php:3336
+#, php-format
+msgid "Error: %s"
+msgstr "錯誤: %s"
+
+#: include/data.php:3337
+#, fuzzy, php-format
+msgid "Unknown: %s"
+msgstr "未知：％s"
+
+#: include/data.php:3338
+#, fuzzy, php-format
+msgid "Disabled: %s"
+msgstr "已禁用：％s"
+
+#: include/data.php:3341
+#, fuzzy
+msgid "Mactrack"
+msgstr "Mactrack"
+
+#: include/data.php:3345 include/data_detail.php:1390
+msgid "Error"
+msgstr "錯誤"
+
+#: include/data.php:3346
+msgid "Unknown"
+msgstr "未知"
+
+#: include/data.php:3387 include/data_detail.php:975
+#, fuzzy
+msgid "Mactrack sites"
+msgstr "Mactrack網站"
+
+#: include/data.php:3439 include/data_detail.php:981
+msgid "Devices"
+msgstr "設備"
+
+#: include/data.php:3439 include/data_detail.php:981
+msgid "Site"
+msgstr "網站"
+
+#: include/data.php:3440 include/data_detail.php:982
+#, fuzzy
+msgid "IPs"
+msgstr "IP地址"
+
+#: include/data.php:3440 include/data_detail.php:982
+#, fuzzy
+msgid "Ports"
+msgstr "端口"
+
+#: include/data.php:3441 include/data_detail.php:983
+msgid "MACs"
+msgstr "MACs"
+
+#: include/data.php:3441 include/data_detail.php:983
+#, fuzzy
+msgid "Ports up"
+msgstr "港口"
+
+#: include/data.php:3442 include/data_detail.php:984
+#, fuzzy
+msgid "Device errors"
+msgstr "設備錯誤"
+
+#: include/data.php:3457 include/data_detail.php:998
+#, fuzzy
+msgid "No mactrack sites found"
+msgstr "找不到mactrack網站"
+
+#: include/data.php:3492
+msgid "Plugin syslog"
+msgstr ""
+
+#: include/data.php:3585
+msgid "Incoming"
+msgstr ""
+
+#: include/data.php:3604
+msgid "Alerts"
+msgstr ""
+
+#: include/data.php:3631
+#, fuzzy
+msgid "Syslog plugin not installed/running"
+msgstr "Thold插件未安裝/運行"
+
+#: include/data.php:3665
+msgid "Webseer plugin"
+msgstr ""
+
+#: include/data.php:3697
+#, fuzzy
+msgid "Plugin Webseer isn't installed or started"
+msgstr "插件Thold未安裝或啟動"
+
+#: include/data.php:3705
+msgid "Number of checks: "
+msgstr ""
+
+#: include/data.php:3706
+#, fuzzy
+msgid "Disabled: "
+msgstr "已禁用：％s"
+
+#: include/data.php:3707
+msgid "Status up: "
+msgstr ""
+
+#: include/data.php:3708
+#, fuzzy
+msgid "Status down: "
+msgstr "主持人"
+
+#: include/data.php:3714
+msgid "First 3 failed sites"
+msgstr ""
+
+#: include/data.php:3715
+msgid "url"
+msgstr ""
+
+#: include/data.php:3716
+#, fuzzy
+msgid "Status"
+msgstr "提升統計數據"
+
+#: include/data.php:3717 include/data_detail.php:1389
+msgid "HTTP code"
+msgstr ""
+
+#: include/data_detail.php:55
+#, fuzzy
+msgid "Analyze cacti log - detail"
+msgstr "分析仙人掌日誌"
+
+#: include/data_detail.php:132
+#, fuzzy
+msgid "Analyze logins - detail"
+msgstr "分析日誌 - 行數"
+
+#: include/data_detail.php:174
+msgid "Full log"
+msgstr ""
+
+#: include/data_detail.php:204
+#, fuzzy, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "具有相同IP和端口％s的設備"
+
+#: include/data_detail.php:244
+#, fuzzy, php-format
+msgid "Devices with the same description - %s"
+msgstr "具有相同描述％s的設備"
+
+#: include/data_detail.php:292
+#, fuzzy, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "孤立數據源％s"
+
+#: include/data_detail.php:318
+#, fuzzy, php-format
+msgid "Poller output items - %s:"
+msgstr "輪詢輸出項％s："
+
+#: include/data_detail.php:349
+#, fuzzy, php-format
+msgid "Datasources with bad indexes - %s:"
+msgstr "數據源 - 壞索引％s："
+
+#: include/data_detail.php:396
+#, php-format
+msgid "Thold logonly alert/warning - %s:"
+msgstr ""
+
+#: include/data_detail.php:432
+#, fuzzy, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "多個樹中的設備％s"
+
+#: include/data_detail.php:485
+#, fuzzy, php-format
+msgid "Hosts without graphs - %s"
+msgstr "主機沒有圖表％s"
+
+#: include/data_detail.php:515
+#, fuzzy, php-format
+msgid "Hosts without tree - %s"
+msgstr "沒有樹％s的主機"
+
+#: include/data_detail.php:544
+#, fuzzy, php-format
+msgid "Hosts with default public/private community - %s"
+msgstr "擁有默認公共/私人社區％s的主機"
+
+#: include/data_detail.php:571
+#, fuzzy, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "插件監視器 - 未監視的主機％s"
+
+#: include/data_detail.php:605
+#, fuzzy
+msgid "48 hour extrem"
+msgstr "24小時極端"
+
+#: include/data_detail.php:768
+#, fuzzy
+msgid "No untemplated datasources found"
+msgstr "找不到未經模板化的數據源"
+
+#: include/data_detail.php:807
+#, fuzzy
+msgid "RECOVERING"
+msgstr "RECOVERING"
+
+#: include/data_detail.php:823
+#, fuzzy
+msgid "DOWN"
+msgstr "向下"
+
+#: include/data_detail.php:843
+#, fuzzy
+msgid "Device Templates"
+msgstr "設備模板"
+
+#: include/data_detail.php:867
+#, fuzzy
+msgid "No device templates found"
+msgstr "找不到設備模板"
+
+#: include/data_detail.php:889
+#, fuzzy
+msgid "You don't have permission"
+msgstr "你沒有權限"
+
+#: include/data_detail.php:944
+#, fuzzy
+msgid "BREACHED"
+msgstr "突破"
+
+#: include/data_detail.php:956
+#, fuzzy
+msgid "TRIGGERED"
+msgstr "觸發的"
+
+#: include/data_detail.php:1016
+#, fuzzy
+msgid "ID"
+msgstr "代碼:"
+
+#: include/data_detail.php:1016
+msgid "Name"
+msgstr ""
+
+#: include/data_detail.php:1017
+msgid "State"
+msgstr ""
+
+#: include/data_detail.php:1017
+msgid "Total time"
+msgstr ""
+
+#: include/data_detail.php:1144
+#, fuzzy
+msgid "Top 20 hosts with the worst ping"
+msgstr "Top5 ping（平均，當前）"
+
+#: include/data_detail.php:1205
+#, fuzzy
+msgid "Top 20 hosts with the worst availability"
+msgstr "Top5最差的可用性"
+
+#: include/data_detail.php:1262
+#, fuzzy
+msgid "Top 20 hosts worst polling time"
+msgstr "Top5最糟糕的投票時間"
+
+#: include/data_detail.php:1316
+#, fuzzy
+msgid "Top 20 hosts with the  worst polling ratio"
+msgstr "Top5最糟糕的投票時間"
+
+#: include/data_detail.php:1374
+#, fuzzy
+msgid "Webseer plugin - detail"
+msgstr "分析日誌 - 行數"
+
+#: include/data_detail.php:1386
+msgid "Date"
+msgstr ""
+
+#: include/data_detail.php:1387
+msgid "URL"
+msgstr ""
+
+#: include/data_detail.php:1388
+msgid "Result"
+msgstr ""
+
+#: include/functions.php:39
+#, fuzzy
+msgid "Favourite graph"
+msgstr "最喜歡的圖表"
+
+#: include/functions.php:288
+#, fuzzy
+msgid "Disable panel"
+msgstr "禁用面板"
+
+#: include/functions.php:290
+#, fuzzy
+msgid "Reload Panel"
+msgstr "重新加載面板"
+
+#: include/functions.php:292
+msgid "Show Details"
+msgstr "顯示詳細資料"
+
+#: include/functions.php:299
+msgid "Loading data ..."
+msgstr ""
+
+#: include/functions.php:316
+msgid "Last update"
+msgstr ""
+
+#: include/functions.php:317
+msgid "Recheck every"
+msgstr ""
+
+#: include/functions.php:366
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr ""
+
+#: include/functions.php:371
 #, fuzzy
 msgid "Remove from Dashboard"
 msgstr "從儀表板中刪除"
 
-#: include/helpers.php:481
+#: include/functions.php:373
 #, fuzzy
 msgid "Add to Dashboard"
 msgstr "添加到儀表板"
 
-#: include/settings.php:31
-#, fuzzy
-msgid "Intropage Panels"
-msgstr "內向板"
-
-#: include/settings.php:33
-#, fuzzy
-msgid "Enable/disable panels"
-msgstr "啟用/禁用面板"
-
-#: include/settings.php:38
-#, fuzzy
-msgid "Analyze Log"
-msgstr "分析仙人掌日誌"
-
-#: include/settings.php:44
-#, fuzzy
-msgid "Analyze Logins"
-msgstr "允許面板Analayse登錄"
-
-#: include/settings.php:50
-#, fuzzy
-msgid "Threshold Events"
-msgstr "閾值"
-
-#: include/settings.php:56
-#, fuzzy
-msgid "Analyze Database"
-msgstr "允許面板Analayse數據庫"
-
-#: include/settings.php:62
-#, fuzzy
-msgid "Analyze Objects"
-msgstr "分析仙人掌日誌"
-
-#: include/settings.php:74
-#, fuzzy
-msgid "24h Extremes"
-msgstr "24小時極端"
-
-#: include/settings.php:80
-msgid "NTP Status"
-msgstr ""
-
-#: include/settings.php:86
-#, fuzzy
-msgid "Poller Info"
-msgstr "輪詢信息"
-
-#: include/settings.php:92
-#, fuzzy
-msgid "Poller Stats"
-msgstr "允許面板輪詢統計"
-
-#: include/settings.php:98
-#, fuzzy
-msgid "Graph Device"
-msgstr "允許面板圖形設備"
-
-#: include/settings.php:104
-#, fuzzy
-msgid "Graph Thresholds"
-msgstr "閾值"
-
-#: include/settings.php:110
-#, fuzzy
-msgid "Graph Data Dource"
-msgstr "允許面板圖數據源"
-
-#: include/settings.php:116
-#, fuzzy
-msgid "Graph Device Template"
-msgstr "設備模板"
-
-#: include/settings.php:122
-#, fuzzy
-msgid "CPU Utilization"
-msgstr "CPU利用率"
-
-#: include/settings.php:128
-#, fuzzy
-msgid "MacTrack Plugin"
-msgstr "允許面板MacTrack插件"
-
-#: include/settings.php:134
-#, fuzzy
-msgid "MacTrack Sites"
-msgstr "Mactrack網站"
-
-#: include/settings.php:140
-#, fuzzy
-msgid "Top 5 Ping Times"
-msgstr "Top5最糟糕的投票時間"
-
-#: include/settings.php:146
-#, fuzzy
-msgid "Top 5 Availability"
-msgstr "Top5最差的可用性"
-
-#: include/settings.php:152
-#, fuzzy
-msgid "Top 5 Worst Polling"
-msgstr "Top5最糟糕的投票時間"
-
-#: include/settings.php:158
-#, fuzzy
-msgid "Top 5 Worst Failed Ratio"
-msgstr "Top5最差的可用性"
-
-#: include/settings.php:164
-#, fuzzy
-msgid "System Information"
-msgstr "允許面板系統信息"
-
-#: include/settings.php:170
-#, fuzzy
-msgid "Boost Status"
-msgstr "提升統計數據"
-
-#: include/settings.php:176
-#, fuzzy
-msgid "Favourite Graphs"
-msgstr "最喜歡的圖表"
-
-#: include/settings.php:182
-msgid "Syslog Plugin"
-msgstr ""
-
-#: include/settings.php:203
-#, fuzzy
-msgid "Show Intropage in Tab (not selected = intropage in console)"
-msgstr "顯示Intropage（無論在控制台或選項卡中）"
-
-#: include/settings.php:253
+#: include/settings.php:255
 #, fuzzy
 msgid "Intropage"
 msgstr "內向板"
 
-#: include/settings.php:258
+#: include/settings.php:260
 msgid "Normal User"
 msgstr ""
 
-#: include/variables.php:60
+#: include/settings.php:332
+#, fuzzy
+msgid "Intropage - All panels"
+msgstr "內向板"
+
+#: include/settings.php:359
+msgid "You can allow/disallow panels for user"
+msgstr ""
+
+#: include/variables.php:28
 msgid "Display settings"
 msgstr "顯示設定"
 
-#: include/variables.php:64
+#: include/variables.php:32
 #, fuzzy
 msgid "Important things will be at the top"
 msgstr "重要的事情將在頂部"
 
-#: include/variables.php:65
+#: include/variables.php:33
 #, fuzzy
 msgid "If checked Intropage displays important (errors, warnings) information first"
 msgstr "如果選中Intropage，則首先顯示重要（錯誤，警告）信息"
 
-#: include/variables.php:70
+#: include/variables.php:38
 #, fuzzy
 msgid "Automatic refresh page"
 msgstr "自動刷新頁面"
 
-#: include/variables.php:71
+#: include/variables.php:39
 #, fuzzy
 msgid "How often"
 msgstr "多常"
 
-#: include/variables.php:74
+#: include/variables.php:42
 msgid "Automatically by poller"
 msgstr ""
 
-#: include/variables.php:75 include/variables.php:108
+#: include/variables.php:43 include/variables.php:76
 msgid "Never"
 msgstr "從不"
 
-#: include/variables.php:76
+#: include/variables.php:44
 msgid "Every Minute"
 msgstr "每分鐘"
 
-#: include/variables.php:77 include/variables.php:109 include/variables.php:143
+#: include/variables.php:45 include/variables.php:111
 #, php-format
 msgid "Every %d Minutes"
 msgstr "每 %d 分鐘"
 
-#: include/variables.php:78 include/variables.php:110 include/variables.php:144
+#: include/variables.php:46 include/variables.php:77 include/variables.php:112
 #, fuzzy
 msgid "Every Hour"
 msgstr "每隔一小時"
 
-#: include/variables.php:83
+#: include/variables.php:51
 #, fuzzy
 msgid "Poller Timeout"
 msgstr "輪詢信息"
 
-#: include/variables.php:84
+#: include/variables.php:52
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
 
-#: include/variables.php:88
+#: include/variables.php:56
 #, fuzzy, php-format
 msgid "%d Minute"
 msgstr "每 %d 分鐘"
 
-#: include/variables.php:89 include/variables.php:90
+#: include/variables.php:57 include/variables.php:58
 #, fuzzy, php-format
 msgid "%d Minutes"
 msgstr "每 %d 分鐘"
 
-#: include/variables.php:91 include/variables.php:92
+#: include/variables.php:59 include/variables.php:60
 #, php-format
 msgid "%d Seconds"
 msgstr ""
 
-#: include/variables.php:96
+#: include/variables.php:64
 #, fuzzy
 msgid "Analyze log -  number of lines"
 msgstr "分析日誌 - 行數"
 
-#: include/variables.php:97
+#: include/variables.php:65
 #, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr "將分析多少行日誌。大數字可能導致頁面加載緩慢"
 
-#: include/variables.php:104
+#: include/variables.php:72
 #, fuzzy
 msgid "How often analyze DB"
 msgstr "經常分析DB"
 
-#: include/variables.php:105
+#: include/variables.php:73
 #, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
 msgstr "Poller執行此任務。它可能導致長輪詢運行。"
 
-#: include/variables.php:111 include/variables.php:145
+#: include/variables.php:78 include/variables.php:113
 msgid "Every Day"
 msgstr "每天"
 
-#: include/variables.php:112
+#: include/variables.php:79
 msgid "Every Week"
 msgstr "每週"
 
-#: include/variables.php:113
+#: include/variables.php:80
 #, fuzzy
 msgid "Every Month"
 msgstr "每個月"
 
-#: include/variables.php:118
+#: include/variables.php:85
 #, fuzzy
 msgid "Analyze DB - Level of db check"
 msgstr "分析數據庫 - 數據庫檢查的級別"
 
-#: include/variables.php:119
+#: include/variables.php:86
 #, fuzzy
 msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/><strong>Medium and extended may causes slow page load!</strong>"
 msgstr "快速 - 否檢查inforccert鏈接的行<br/>快速 - 僅檢查未正確關閉的表格<br/>已更改 - 檢查上次檢查後更改的表格<br/>中 - 帶行掃描<br/>擴展 - 完整的行和鍵<br/> <strong>中等和擴展可能導致頁面加載緩慢！</strong>"
 
-#: include/variables.php:122
+#: include/variables.php:89
 #, fuzzy
 msgid "Quick"
 msgstr "快"
 
-#: include/variables.php:123
+#: include/variables.php:90
 msgid "Fast"
 msgstr "快速"
 
-#: include/variables.php:124
+#: include/variables.php:91
 msgid "Changed"
 msgstr "變更"
 
-#: include/variables.php:125
+#: include/variables.php:92
 msgid "Medium"
 msgstr "中"
 
-#: include/variables.php:126
+#: include/variables.php:93
 msgid "Extended"
 msgstr "擴展"
 
-#: include/variables.php:131
+#: include/variables.php:99
 #, fuzzy
 msgid "NTP (time) check - IP or DNS name of NTP server"
 msgstr "NTP（時間）檢查 -  NTP服務器的IP或DNS名稱"
 
-#: include/variables.php:132
+#: include/variables.php:100
 #, fuzzy
 msgid "Insert IP or DNS name of NTP server"
 msgstr "插入NTP服務器的IP或DNS名稱"
 
-#: include/variables.php:139
+#: include/variables.php:107
 #, fuzzy
 msgid "How often check NTP"
 msgstr "經常檢查NTP"
 
-#: include/variables.php:140
+#: include/variables.php:108
 #, fuzzy
 msgid "<strong>Poller runs this task. It could cause long poller run.</strong>"
 msgstr "<strong>Poller執行此任務。它可能導致長輪詢運行。</strong>"
 
-#: include/variables.php:151
+#: include/variables.php:119
 #, fuzzy
 msgid "Admin information panel about maintenance tasks, down devices, .."
 msgstr "管理信息面板，關於維護任務，關閉設備，.."
 
-#: include/variables.php:152
+#: include/variables.php:120
 #, fuzzy
 msgid "If isn't empty, panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr "如果不為空，則面板將顯示在頂部。您可以使用html標籤（b，i，...）。"
 
-#: include/variables.php:161
+#: include/variables.php:129
 #, fuzzy
 msgid "Maint plugin - how many days before display alert"
 msgstr "維護插件 - 顯示警報前多少天"
 
-#: include/variables.php:162
+#: include/variables.php:130
 #, fuzzy
 msgid "How many days?</strong>"
 msgstr "多少天？"
 
-#: include/variables.php:165
+#: include/variables.php:133
 #, fuzzy
 msgid "When maintenance starts"
 msgstr "維護開始時"
 
-#: include/variables.php:166
+#: include/variables.php:134
 #, fuzzy, php-format
 msgid "%d Day Before"
 msgstr "％d前一天"
 
-#: include/variables.php:167 include/variables.php:168
+#: include/variables.php:135 include/variables.php:136
 #, fuzzy, php-format
 msgid "%d Days Before"
 msgstr "％d天前"
 
-#: intropage_ajax.php:147 intropage_ajax.php:167
+#: include/variables.php:141
+#, fuzzy
+msgid "Alarm settings"
+msgstr "顯示設定"
+
+#: include/variables.php:145
+msgid "Alarm DB check aborted clients"
+msgstr ""
+
+#: include/variables.php:146 include/variables.php:157
+#: include/variables.php:168 include/variables.php:179
+#: include/variables.php:190 include/variables.php:201
+#: include/variables.php:212 include/variables.php:223
+#: include/variables.php:234 include/variables.php:245
+#: include/variables.php:256 include/variables.php:267
+#: include/variables.php:279 include/variables.php:290
+#: include/variables.php:301 include/variables.php:312
+msgid "<strong>How to be notified?</strong>"
+msgstr ""
+
+#: include/variables.php:149 include/variables.php:160
+#: include/variables.php:171 include/variables.php:182
+#: include/variables.php:193 include/variables.php:204
+#: include/variables.php:215 include/variables.php:226
+#: include/variables.php:237 include/variables.php:248
+#: include/variables.php:259 include/variables.php:270
+msgid "Red alarm"
+msgstr ""
+
+#: include/variables.php:150 include/variables.php:161
+#: include/variables.php:172 include/variables.php:183
+#: include/variables.php:194 include/variables.php:205
+#: include/variables.php:216 include/variables.php:227
+#: include/variables.php:238 include/variables.php:249
+#: include/variables.php:260 include/variables.php:271
+msgid "Yellow alarm"
+msgstr ""
+
+#: include/variables.php:151 include/variables.php:162
+#: include/variables.php:173 include/variables.php:184
+#: include/variables.php:195 include/variables.php:206
+#: include/variables.php:217 include/variables.php:228
+#: include/variables.php:239 include/variables.php:250
+#: include/variables.php:261 include/variables.php:272
+msgid "Green alarm"
+msgstr ""
+
+#: include/variables.php:156
+#, fuzzy
+msgid "Alarm Host with the same description"
+msgstr "具有相同描述的設備：％s"
+
+#: include/variables.php:167
+#, fuzzy
+msgid "Alarm orphaned data source"
+msgstr "孤立數據源：％s"
+
+#: include/variables.php:178
+msgid "Alarm non-empty poller output"
+msgstr ""
+
+#: include/variables.php:189
+msgid "Alarm Bad indexes data source"
+msgstr ""
+
+#: include/variables.php:200
+msgid "Alarm Thershold logonly action"
+msgstr ""
+
+#: include/variables.php:211
+#, fuzzy
+msgid "Alarm device with the same IP/port"
+msgstr "具有相同IP和端口的設備：％s"
+
+#: include/variables.php:222
+#, fuzzy
+msgid "Alarm device in more trees"
+msgstr "多個樹中的設備：％s"
+
+#: include/variables.php:233
+msgid "Alarm device without tree"
+msgstr ""
+
+#: include/variables.php:244
+#, fuzzy
+msgid "Alarm device with default public/private community"
+msgstr "擁有默認公共/私人社區的主機：％s"
+
+#: include/variables.php:255
+msgid "Alarm device without monitoring"
+msgstr ""
+
+#: include/variables.php:266
+msgid "Alarm device without graph"
+msgstr ""
+
+#: include/variables.php:278
+#, fuzzy
+msgid "Alarm red/yellow polling time"
+msgstr "允許面板排名前五的最差輪詢時間"
+
+#: include/variables.php:282
+msgid "10s/5s red/yellow"
+msgstr ""
+
+#: include/variables.php:283 include/variables.php:294
+msgid "20s/10s red/yellow"
+msgstr ""
+
+#: include/variables.php:284
+msgid "40s/20s red/yellow"
+msgstr ""
+
+#: include/variables.php:289
+msgid "Alarm red/yellow failed/all ratio"
+msgstr ""
+
+#: include/variables.php:293
+msgid "0.1/0.2 red/yellow"
+msgstr ""
+
+#: include/variables.php:295
+msgid "more red/yellow"
+msgstr ""
+
+#: include/variables.php:300
+msgid "Alarm red/yellow ping"
+msgstr ""
+
+#: include/variables.php:304
+msgid "20/10ms red/yellow"
+msgstr ""
+
+#: include/variables.php:305
+msgid "50/20ms red/yellow"
+msgstr ""
+
+#: include/variables.php:306
+msgid "100/200+ms red/yellow"
+msgstr ""
+
+#: include/variables.php:311
+#, fuzzy
+msgid "Alarm red/yellow worst availability"
+msgstr "Top5最差的可用性"
+
+#: include/variables.php:315 include/variables.php:316
+#: include/variables.php:317
+msgid "red/yellow"
+msgstr ""
+
+#: intropage_ajax.php:134 intropage_ajax.php:154
 msgid "Panel not found"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Sort by panel Priority"
+#~ msgstr "按面板優先級排序"
+
+#, fuzzy
+#~ msgid "Reset All to Default"
+#~ msgstr "全部重置為默認值"
+
+#~ msgid "Go"
+#~ msgstr "送出"
+
+#, fuzzy
+#~ msgid "Last check"
+#~ msgstr "最後檢查"
+
+#, fuzzy
+#~ msgid "Checked every 15 minutes"
+#~ msgstr "每15分鐘檢查一次"
+
+#, fuzzy
+#~ msgid "Checked hourly"
+#~ msgstr "每小時檢查一次"
+
+#, fuzzy
+#~ msgid "Checked daily"
+#~ msgstr "每天檢查"
+
+#, fuzzy
+#~ msgid "Checked weekly"
+#~ msgstr "每日檢查"
+
+#, fuzzy
+#~ msgid "Checked monthly"
+#~ msgstr "每小時檢查一次"
+
+#, fuzzy
+#~ msgid "Analyze cacti log"
+#~ msgstr "分析仙人掌日誌"
+
+#, fuzzy
+#~ msgid "Information only (no warn/error)"
+#~ msgstr "僅供參考（無警告/錯誤）"
+
+#, fuzzy
+#~ msgid "Time synchronization"
+#~ msgstr "時間同步"
+
+#, fuzzy
+#~ msgid "Last check: "
+#~ msgstr "最後檢查："
+
+#, fuzzy
+#~ msgid "Poller stats (interval %ss)"
+#~ msgstr "輪詢統計（間隔％ss）"
+
+#, fuzzy
+#~ msgid "Top5 ping (avg, current)"
+#~ msgstr "Top5 ping（平均，當前）"
+
+#, fuzzy
+#~ msgid "Database check - detail"
+#~ msgstr "檢查資料庫"
+
+#, fuzzy
+#~ msgid "Top 20 hosts with the  worst polling ratio (failed, total, ratio)"
+#~ msgstr "Top5最差投票率（失敗，總數，比率）"
+
+#, fuzzy
+#~ msgid "You cannot disable this panel"
+#~ msgstr "您無法禁用此面板"
+
+#, fuzzy
+#~ msgid "Enable/disable panels"
+#~ msgstr "啟用/禁用面板"
+
+#, fuzzy
+#~ msgid "Analyze Logins"
+#~ msgstr "允許面板Analayse登錄"
+
+#, fuzzy
+#~ msgid "Threshold Events"
+#~ msgstr "閾值"
+
+#, fuzzy
+#~ msgid "Analyze Database"
+#~ msgstr "允許面板Analayse數據庫"
+
+#, fuzzy
+#~ msgid "Analyze Objects"
+#~ msgstr "分析仙人掌日誌"
+
+#, fuzzy
+#~ msgid "24h Extremes"
+#~ msgstr "24小時極端"
+
+#, fuzzy
+#~ msgid "Poller Info"
+#~ msgstr "輪詢信息"
+
+#, fuzzy
+#~ msgid "Graph Device"
+#~ msgstr "允許面板圖形設備"
+
+#, fuzzy
+#~ msgid "Graph Thresholds"
+#~ msgstr "閾值"
+
+#, fuzzy
+#~ msgid "Graph Data Dource"
+#~ msgstr "允許面板圖數據源"
+
+#, fuzzy
+#~ msgid "Graph Device Template"
+#~ msgstr "設備模板"
+
+#, fuzzy
+#~ msgid "CPU Utilization"
+#~ msgstr "CPU利用率"
+
+#, fuzzy
+#~ msgid "MacTrack Sites"
+#~ msgstr "Mactrack網站"
+
+#, fuzzy
+#~ msgid "Top 5 Ping Times"
+#~ msgstr "Top5最糟糕的投票時間"
+
+#, fuzzy
+#~ msgid "Top 5 Availability"
+#~ msgstr "Top5最差的可用性"
+
+#, fuzzy
+#~ msgid "Top 5 Worst Polling"
+#~ msgstr "Top5最糟糕的投票時間"
+
+#, fuzzy
+#~ msgid "Top 5 Worst Failed Ratio"
+#~ msgstr "Top5最差的可用性"
+
+#, fuzzy
+#~ msgid "System Information"
+#~ msgstr "允許面板系統信息"
+
+#, fuzzy
+#~ msgid "Favourite Graphs"
+#~ msgstr "最喜歡的圖表"
+
+#, fuzzy
+#~ msgid "Show Intropage in Tab (not selected = intropage in console)"
+#~ msgstr "顯示Intropage（無論在控制台或選項卡中）"
 
 #, fuzzy
 #~ msgid "Display only Errors"
@@ -1430,10 +1743,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Checked Every 15 minutes"
 #~ msgstr "每15分鐘檢查一次"
-
-#, fuzzy
-#~ msgid "Last 10 logins"
-#~ msgstr "最後10次登錄"
 
 #, fuzzy
 #~ msgid "Plugin Thold - Global notify only %s"
@@ -1488,8 +1797,8 @@ msgstr ""
 #~ msgstr "允許面板輪詢器信息"
 
 #, fuzzy
-#~ msgid "Allow panel Graph Thresholds"
-#~ msgstr "允許面板圖形閾值"
+#~ msgid "Sort by panel priority"
+#~ msgstr "按面板優先級排序"
 
 #, fuzzy
 #~ msgid "Allow panel Graph Device Template"
@@ -1510,10 +1819,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Allow panel Top 5 Availability"
 #~ msgstr "允許面板前5個可用性"
-
-#, fuzzy
-#~ msgid "Allow panel Top 5 worst polling time"
-#~ msgstr "允許面板排名前五的最差輪詢時間"
 
 #, fuzzy
 #~ msgid "Allow panel Top 5 worst polling failed/total ratio"
@@ -1540,3 +1845,7 @@ msgstr ""
 #, fuzzy
 #~ msgid "Errors and Warnings"
 #~ msgstr "錯誤和警告"
+
+#, fuzzy
+#~ msgid "Allow panel Graph Thresholds"
+#~ msgstr "允許面板圖形閾值"
