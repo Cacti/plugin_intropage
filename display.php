@@ -92,6 +92,9 @@ function display_information() {
 	// Retrieve access
 	$console_access = api_plugin_user_realm_auth('index.php');
 
+        $lopts = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?',
+		array($_SESSION['sess_user_id']));
+
 	// remove admin prohibited panels
 	$panels = db_fetch_assoc_prepared ('SELECT t1.panel_id AS panel_name,t1.id AS id FROM plugin_intropage_panel_data AS t1 
 			JOIN plugin_intropage_panel_dashboard AS t2 
@@ -152,20 +155,39 @@ function display_information() {
 	    print '<a href="' . $config['url_path'] . 'settings.php"><i class="fas fa-link"></i></a><br/><br/>';
 	}
 
+	$dnames = db_fetch_assoc_prepared ('SELECT dashboard_id, name FROM plugin_intropage_dashboard WHERE user_id = ? ORDER BY dashboard_id',
+			array($_SESSION['sess_user_id']));
+
+	$dnames = array_column($dnames,'name','dashboard_id');
+	$dashboard_name = array();
+	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
+		if (array_key_exists($f,$dnames))	{
+			$dashboard_name[$f] = $dnames[$f];
+		}
+		else	{
+			$dashboard_name[$f] = $f;
+		}
+	}
+
 	// Intropage Display ----------------------------------
 
 	// overlay div for detail
 	print '<div id="overlay"><div id="overlay_detail"></div></div>';
+
+	if (isset_request_var('intropage_configure'))	{
+		display_setting();
+		return true;
+	}
 
 	// switch dahsboards and form
 	print '<div>';
 	print '<div class="float_left">';
 	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
 	    if ($f == $_SESSION['dashboard_id']) {
-		print '<a class="db_href db_href_active" href="?dashboard_id=' . $f . '">' . $f . '</a>';
+		print '<a class="db_href db_href_active" href="?dashboard_id=' . $f . '">' . $dashboard_name[$f] . '</a>';
 	    }
 	    else {
-		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $f . '</a>';
+		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $dashboard_name[$f] . '</a>';
 	    }
 	}
 
@@ -176,6 +198,14 @@ function display_information() {
 	print "<form method='post'>";
 
 	print "<a href='#' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='fa fa-clone'></i></a>";
+	print '&nbsp; &nbsp; ';
+	
+        if ($lopts == 4) { // in tab
+		print '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_configure=true"><i class="fa fa-cog"></i></a>';
+	} else {        // in console
+		print '<a href="' . htmlspecialchars($config['url_path']) . '?intropage_configure=true"><i class="fa fa-cog"></i></a>';
+	}
+
 	print '&nbsp; &nbsp; ';
 
 	print "<select name='intropage_addpanel' size='1' onchange='this.form.submit();'>";
@@ -199,7 +229,6 @@ function display_information() {
 				elseif (db_fetch_cell_prepared('SELECT ' . $panel['panel_id'] . ' FROM plugin_intropage_user_auth
 						WHERE user_id = ?', array($_SESSION['sess_user_id'])) == 'on') {
 					print "<option value='" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
-
 				} else {
 					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
 				}
@@ -218,7 +247,7 @@ function display_information() {
 	}
 
 	if ($_SESSION['dashboard_id'] > 1) {
-	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
+		print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
 
 	// only submit :-)
@@ -262,17 +291,15 @@ function display_information() {
 		print "<option value='important_no' disabled='disabled'>" . __('Sort by user preference', 'intropage') . '</option>';
 	}
 
-	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-
 	// 0 = console, 1= tab
 	// login options can change user group!
 	// after login: 1=url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
 
 	if (!$console_access) {
-		//
+	
 		if ($lopts < 4) {	// intropage is not default
-        		print "<option value='loginopt_tab'>" . __('Set intropage as default login page', 'intropage') . '</option>';
-                }
+       			print "<option value='loginopt_tab'>" . __('Set intropage as default login page', 'intropage') . '</option>';
+               	}
 
 		if ($lopts == 4)  {
 			print "<option value='loginopt_graph'>" . __('Set graph as default login page', 'intropage') . '</option>';
@@ -280,7 +307,7 @@ function display_information() {
 	}
 	else	{	// intropage in console or in tab
 		if ($lopts == 4) {	// in tab
-        		print "<option value='loginopt_console'>" . __('Display intropage in console', 'intropage') . '</option>';
+       			print "<option value='loginopt_console'>" . __('Display intropage in console', 'intropage') . '</option>';
                 }
 		else {
 			print "<option value='loginopt_tab'>" . __('Display intropage in tab as default page', 'intropage') . '</option>';
@@ -305,9 +332,7 @@ function display_information() {
 		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph. Graph with actual timespan will be added to current dashboard') . '<br/><br/>';
 		print __('You can add more dashboards from menu, too') . '<br/><br/>';
 		print __('You can add your own panel. Please read setup.php, function intropage_add_panel and intropage_remove_panel') . '<br/><br/></div>';
-		
 	}
-
 
 	// extra maint plugin panel - always first
 
@@ -361,7 +386,6 @@ function display_information() {
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
-
 	} else {	// display only errors/errors and warnings/all - order by priority
 		foreach ($panels as $xkey => $xvalue) {
 			intropage_display_panel($xvalue['id']);
@@ -378,9 +402,7 @@ function display_information() {
 	// display/hide detail
 	$(function () {
 		resizeObal();
-
 		initPage();
-
 		reload_all();
 	});
 
@@ -390,8 +412,7 @@ function display_information() {
 			if (refresh !== null) {
 				clearTimeout(refresh);
 			}
-
-			refresh = setInterval(reload_all, intropage_autorefresh*1000);
+				refresh = setInterval(reload_all, intropage_autorefresh*1000);
 		}
 
 		// automatic autorefresh after poller end
@@ -400,10 +421,9 @@ function display_information() {
 				clearTimeout(refresh);
 			}
 			setTimeout(function() {		// fix first double load
-			    refresh = setInterval(testPoller, 10000);
+				refresh = setInterval(testPoller, 10000);
 			},30000);
 		}
-
 
 		$('.article').hide();
 
@@ -496,7 +516,6 @@ function display_information() {
 				reload_panel(panel_id, false, false);
 			    });
 			}
-			//     reload_all();  - it is without reload effect
 		});
 	}
 
@@ -574,7 +593,6 @@ function display_information() {
 			});
 		});
 	});
-
 	</script>
 
 	<?php

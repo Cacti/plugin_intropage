@@ -386,3 +386,36 @@ function intropage_graph_button($data) {
 	}
 }
 
+function display_setting ()	{
+
+	$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
+	
+	$dnames = db_fetch_assoc_prepared ('SELECT dashboard_id, name FROM plugin_intropage_dashboard WHERE user_id = ? ORDER BY dashboard_id',
+			array($_SESSION['sess_user_id']));
+
+	$dnames = array_column($dnames,'name','dashboard_id');
+	$dashboard_name = array();
+	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
+		if (array_key_exists($f,$dnames))	{
+			$dashboard_name[$f] = $dnames[$f];
+		}
+		else	{
+			$dashboard_name[$f] = $f;
+		}
+	}
+
+	print '<div>';
+	print "<form method='post'>";
+		
+	print '<b>' . __('Configure dashboard names:', 'intropage') . '</b><br/>';
+
+	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
+		print __('Dashboard %s: ', $f, 'intropage');
+		print '<input type="text" name="name_' . $f . '" value="' . $dashboard_name[$f]  . '"></br><br/>';
+	}
+	print '<br/><br/>';
+	print '<input type="hidden" name="intropage_rename" value="true">';
+	print '<input type="submit" value="' . __('Save', 'intropage') . '">';
+	print '</div>';
+}
+

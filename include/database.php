@@ -62,6 +62,7 @@ function intropage_drop_database() {
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_trends');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_auth');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_dashboard');
 }
 
 function intropage_initialize_database() {
@@ -202,9 +203,18 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'webseer', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'user_id';
-	$data['comment']   = 'author
-	ization';
+	$data['comment']   = 'authorization';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_user_auth', $data);
+
+	$data              = array();
+	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => true);
+	$data['type']      = 'InnoDB';
+	$data['comment']   = 'panel x dashboard name';
+	api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
+	db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id,dashboard_id)');
+
 }
 
 function intropage_upgrade_database() {
@@ -254,7 +264,6 @@ function intropage_upgrade_database() {
 				WHERE login_opts IN (4,5)');
 		}
 
-
 		if (cacti_version_compare($oldv,'2.0.2', '<')) {
 			// a lot of changes, so:
 		    	intropage_drop_database();
@@ -267,7 +276,6 @@ function intropage_upgrade_database() {
 		}
 
 		if (cacti_version_compare($oldv, '2.0.4', '<=')) {
-
 			db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
 				('webseer','/plugins/intropage/include/data.php','yes',60,36,'Plugin webseer')");
 
@@ -276,6 +284,17 @@ function intropage_upgrade_database() {
                         	'type' => 'char(2)',
                         	'NULL' => false,
                         	'default' => 'on'));
+		}
+
+		if (cacti_version_compare($oldv, '2.0.5', '<=')) {
+			$data              = array();
+			$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+			$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
+			$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => true);
+			$data['type']      = 'InnoDB';
+			$data['comment']   = 'panel x dashboard name';
+			api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
+			db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id,dashboard_id)');
 		}
 
 		// Set the new version
