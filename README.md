@@ -52,6 +52,11 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	2.0.6 ---
+	Add dashboard names
+	User can rename dashboards
+	Fix favourite graphs with zoomed/custom timespan
+	
 	2.0.5 ---
 	Add panel webseer plugin
 	User can set red/yellow/green alarm for checks

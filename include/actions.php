@@ -30,6 +30,23 @@ if (isset_request_var('intropage_addpanel') &&
 			array(get_request_var('intropage_addpanel'),$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
 }
 
+
+if (isset_request_var('intropage_rename'))	{
+	$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
+
+	for ($f = 1; $f <= $number_of_dashboards; $f++) {
+		$name = get_filter_request_var('name_' .$f, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([ a-zA-Z0-9_-]+)$/')));
+		if(!preg_match('/[a-zA-Z0-9]/', $name))	{
+			$name = $f;
+		}
+		
+		db_execute_prepared('REPLACE INTO plugin_intropage_dashboard (user_id,dashboard_id,name) 
+			VALUES (?, ?, ?)',
+			array($_SESSION['sess_user_id'], $f, $name ));
+	}
+	unset_request_var('intropage_configure');
+}
+
 if (isset_request_var('intropage_action') &&
 	get_filter_request_var('intropage_action', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')))) {
 	$values = explode('_', get_request_var('intropage_action'));
@@ -38,6 +55,7 @@ if (isset_request_var('intropage_action') &&
 	$value  = implode('_', $values);
 
 	switch ($action) {
+
 	case 'droppanel':
 		if (get_filter_request_var('panel_id')) {
 			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
@@ -130,7 +148,7 @@ if (isset_request_var('intropage_action') &&
 			}
 		}
 		break;
-
+/*
 	case 'addpanel':
 		if (preg_match('/^[a-z0-9\-\_]+$/i', $value)) {
 			db_execute_prepared('UPDATE plugin_intropage_panel_data
@@ -140,7 +158,7 @@ if (isset_request_var('intropage_action') &&
 				array($_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $value));
 		}
 		break;
-
+*/
 	case 'refresh':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
 			set_user_setting('intropage_autorefresh', $value);
