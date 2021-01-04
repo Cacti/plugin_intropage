@@ -414,6 +414,12 @@ function display_setting ()	{
 		print '<input type="text" name="name_' . $f . '" value="' . $dashboard_name[$f]  . '"></br><br/>';
 	}
 	print '<br/><br/>';
+	print '<b>' . __('Configure dashboard refresh interval:', 'intropage') . '</b><br/>';
+
+
+
+
+	print '<br/><br/>';
 	print '<input type="hidden" name="intropage_rename" value="true">';
 	print '<input type="submit" value="' . __('Save', 'intropage') . '">';
 	print '</div>';

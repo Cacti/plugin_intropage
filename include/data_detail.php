@@ -711,12 +711,14 @@ function extrem_detail() {
 		$result['detail'] .= '<td class="rpad texalirig">';
 		$result['detail'] .= '<strong>' . __('Failed<br/>polls:', 'intropage') . '</strong>';
 
-		$sql_result = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
+		$sql_result = db_fetch_assoc_prepared("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 			FROM plugin_intropage_trends
 			WHERE name='failed_polls'
+			AND user_id=?
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 14");
+			LIMIT 14",
+			array($_SESSION['sess_user_id']));
 
 		if (cacti_sizeof($sql_result)) {
 			foreach ($sql_result as $row) {
