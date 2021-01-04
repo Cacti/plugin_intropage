@@ -54,6 +54,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 ## Changelog
 	2.0.6 ---
 	Add dashboard names
+	Add panel config
 	User can rename dashboards
 	Fix favourite graphs with zoomed/custom timespan
 	

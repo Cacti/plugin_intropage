@@ -108,6 +108,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(3)', 'default' => '30', 'NULL' => false);
 	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','gray')", 'default' => 'green', 'NULL' => false);
+	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
 	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'fav_graph_timespan', 'type' => 'int(2)', 'default' => '1', 'NULL' => false);
 
@@ -295,6 +296,15 @@ function intropage_upgrade_database() {
 			$data['comment']   = 'panel x dashboard name';
 			api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
 			db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id,dashboard_id)');
+
+			db_add_column('plugin_intropage_panel_data', array(
+                        	'name' => 'refresh_interval',
+                        	'type' => 'int(9)',
+                        	'NULL' => false,
+                        	'default' => '3600',
+                        	'after' => 'alarm'));
+
+
 		}
 
 		// Set the new version

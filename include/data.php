@@ -81,9 +81,12 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, 0,__('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+			
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,refresh_interval,last_update)
+			    VALUES (?, ?, ?,"gray",?,1000)',
+			    array($panel_id, 0,__('Waiting for data', 'intropage'), $interval));
 
 		$id = db_fetch_insert_id();
 	}
@@ -92,13 +95,13 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= 0',
 					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval))	{
 
-    $flog = db_fetch_cell('SELECT count(t.result)
+	$flog = db_fetch_cell('SELECT count(t.result)
 			FROM ( 
 				SELECT result FROM user_auth
 				INNER JOIN user_log ON user_auth.username = user_log.username
@@ -123,7 +126,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 			foreach ($sql_result as $row) {
 				$result['data'] .= $row['username'] . '<br/>';
 			}
-   	}
+   		}
 		$result['data'] .= '<br/><b>' . __('Last logins', 'intropage') . ':</b><br/>';
 
 		$sql_result = db_fetch_assoc('SELECT user_log.username, user_auth.full_name, user_log.time, user_log.result, user_log.ip
@@ -185,19 +188,22 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-	    db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+	
+	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,refresh_interval, last_update)
+			    VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    array($panel_id, 0, __('Waiting for data', 'intropage'),$interval));
 
-	    $id = db_fetch_insert_id();
+	    	$id = db_fetch_insert_id();
 	}
 
 	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id = 0',
 					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval)) {
@@ -294,9 +300,6 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 	$panel_id = 'top5_ping';
 	$panel_name = __('Top5 ping', 'intropage');
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -312,10 +315,13 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
 			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
-				(panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-				array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+				(panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+				array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 			$id = db_fetch_insert_id();
 		}
@@ -324,6 +330,11 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 			FROM plugin_intropage_panel_data
 			WHERE user_id= ? AND panel_id= ?',
 			array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= 0',
+					array($panel_id));
+
 
 		if ( $force_update || time() > ($last_update + $update_interval)) {
 			$result = array(
@@ -456,9 +467,12 @@ function cpuload($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+	
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			    VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -467,8 +481,8 @@ function cpuload($display=false, $update=false, $force_update=false) {
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id = 0',
 					array($panel_id));
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
@@ -544,9 +558,12 @@ function ntp($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			VALUES ( ?, ?, ?, "gray", 1000)',
-			array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+	
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -555,8 +572,8 @@ function ntp($display=false, $update=false, $force_update=false) {
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id = 0',
 					array($panel_id));
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
@@ -638,9 +655,6 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 		'last_update' => NULL,
         );
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -657,9 +671,12 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {				
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update) 
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -667,6 +684,10 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -741,10 +762,6 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	$panel_id = 'graph_host_template';
 	$panel_name = __('Host templates', 'intropage');
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
-
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -761,9 +778,12 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'),$interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -771,6 +791,10 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 			$result = array(
@@ -847,9 +871,6 @@ function graph_host($display=false, $update=false, $force_update=false) {
 	$panel_id = 'graph_host';
 	$panel_name = __('Hosts', 'intropage');
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
@@ -869,9 +890,12 @@ function graph_host($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -879,6 +903,10 @@ function graph_host($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id,$user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 			$result = array(
@@ -992,9 +1020,12 @@ function info($display=false, $update=false, $force_update=false) {
                                 array($panel_id));
 
         if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-                            VALUES ( ?, ?, ?, "gray", 1000)',
-                            array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+        
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+                            VALUES ( ?, ?, ?, "gray", ?, 1000)',
+                            array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
             	$id = db_fetch_insert_id();
         }
@@ -1003,8 +1034,8 @@ function info($display=false, $update=false, $force_update=false) {
                                         WHERE user_id=0 and panel_id= ?',
                                         array($panel_id));
 
-        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-                                        WHERE panel_id= ?',
+        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+                                        WHERE panel_id= ? AND user_id=0',
                                         array($panel_id));
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
@@ -1088,9 +1119,12 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			    VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
 	    	$id = db_fetch_insert_id();
 	}
@@ -1215,9 +1249,6 @@ function maint($display=false, $update=false, $force_update=false) {
 		'last_update' =>  NULL,
 	);
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -1233,10 +1264,13 @@ function maint($display=false, $update=false, $force_update=false) {
 				panel_id= ? AND user_id= ? AND last_update IS NOT NULL',
 				array($panel_id,$user['id']));
 
-		if (!$id) {				
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+		if (!$id) {
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update) 
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -1244,6 +1278,10 @@ function maint($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -1355,9 +1393,12 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES ( ?, ?, ?, "gray", 1000)',
-			    array($panel_id, 0,__('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+	
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			    VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    array($panel_id, 0,__('Waiting for data', 'intropage'), $interval));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1366,7 +1407,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = read_config_option('intropage_analyse_db_interval');
+	$update_interval = 300;	// exception
 
         if ($force_update || time() > ($last_update + $update_interval))       {
 
@@ -1469,9 +1510,6 @@ new code from thold plugin - it is slower but correct count
                 }
 	}
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -1488,9 +1526,12 @@ new code from thold plugin - it is slower but correct count
 				array($panel_id,$user['id']));
 
 		if (!$id) {				
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update) 
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -1498,6 +1539,11 @@ new code from thold plugin - it is slower but correct count
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
+
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -1601,9 +1647,12 @@ function poller_info($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			    VALUES (?, ?, ?,"gray", ?, 1000)',
+			    array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1612,8 +1661,8 @@ function poller_info($display=false, $update=false, $force_update=false) {
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id=0',
 					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval))	{
@@ -1726,9 +1775,12 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			    VALUES (?, ?, ?, "gray", ?, 1000)',
+			    array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
 		$id = db_fetch_insert_id();
 	}
@@ -1737,8 +1789,8 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id=0',
 					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval))	{
@@ -1847,10 +1899,6 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 	if (isset($run_from_poller))	{ // update in poller
 	}
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
-
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -1867,9 +1915,12 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -1877,6 +1928,11 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
+
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -2073,9 +2129,6 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
             			}
         		}
 
-        		// below - only information without red/yellow/green
-//        		$result['data'] .= '<br/><b>' . __('Information only (no warn/error)') . ':</b><br/>';
-
         		// device in more trees
         		if ($_SESSION['allowed_hosts_count'][$user['id']] > 0) {
                 		$sql_result = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
@@ -2263,9 +2316,12 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -2273,6 +2329,10 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -2385,9 +2445,12 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -2395,6 +2458,10 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -2484,9 +2551,6 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 	$panel_id = 'top5_pollratio';
 	$panel_name = __('Top5 worst polling ratio (failed, total, ratio)', 'intropage');
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -2503,9 +2567,12 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+		
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -2513,6 +2580,11 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
+
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -2609,9 +2681,6 @@ function thold_event($display=false, $update=false, $force_update=false) {
 	$panel_name = __('Last thold events', 'intropage');
 
 	
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -2628,9 +2697,12 @@ function thold_event($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {				
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update) 
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -2638,6 +2710,11 @@ function thold_event($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
+
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -2736,9 +2813,12 @@ function boost($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			    VALUES (?, ?, ?,"gray",1000)',
-			    array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			    VALUES (?, ?, ?, "gray", ?, 1000)',
+			    array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
 		$id = db_fetch_insert_id();
 	}
@@ -2747,8 +2827,8 @@ function boost($display=false, $update=false, $force_update=false) {
 					WHERE user_id=0 and panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id=0',
 					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval))	{
@@ -2918,9 +2998,6 @@ function extrem($display=false, $update=false, $force_update=false) {
                 	array('poller_output', $count));
 	}
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -2937,9 +3014,12 @@ function extrem($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {				
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update) 
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update) 
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -2947,6 +3027,10 @@ function extrem($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -3120,9 +3204,6 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 	$panel_id = 'graph_thold';
 	$panel_name = __('Thresholds', 'intropage');
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    $users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -3144,9 +3225,12 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -3154,6 +3238,10 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -3265,9 +3353,6 @@ function mactrack($display=false, $update=false, $force_update=false) {
 	$panel_id = 'mactrack';
 	$panel_name = __('Mactrack plugin', 'intropage');
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -3283,9 +3368,12 @@ function mactrack($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -3293,6 +3381,10 @@ function mactrack($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -3386,9 +3478,6 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 	$panel_id = 'mactrack_sites';
 	$panel_name = __('Mactrack sites', 'intropage');
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
-					array($panel_id));
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    $users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -3404,9 +3493,12 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 				array($panel_id,$user['id']));
 
 		if (!$id) {
-	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-				VALUES ( ?, ?, ?, "gray", 1000)',
-			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage')));
+			$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+				array($panel_id));
+
+	    		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+				VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			    	array($panel_id, $user['id'],__('Waiting for data', 'intropage'), $interval));
 
 	    		$id = db_fetch_insert_id();
 		}
@@ -3414,6 +3506,10 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 		$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
 					WHERE user_id= ? AND panel_id= ?',
 					array($user['id'],$panel_id));
+
+		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
         	if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -3539,9 +3635,12 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
                                 panel_id= ? AND last_update IS NOT NULL', array($panel_id));
 
         if (!$id) {
-                db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-                            VALUES ( ?, ?, ? ,"gray",1000)',
-                            array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+
+                db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+                            VALUES ( ?, ?, ? ,"gray", ?, 1000)',
+                            array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
                 $id = db_fetch_insert_id();
         }
@@ -3550,8 +3649,9 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
                                         WHERE user_id= ? and panel_id= ?',
                                         array( $_SESSION['sess_user_id'], $panel_id));
 
-        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-                                        WHERE panel_id= ?', array($panel_id));
+        $update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+                                        WHERE panel_id= ? AND user_id=0',
+                                        array($panel_id));
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
 
@@ -3676,19 +3776,22 @@ function webseer($display=false, $update=false, $force_update=false) {
 				array($panel_id));
 
 	if (!$id) {
-		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,last_update)
-			VALUES ( ?, ?, ?, "gray", 1000)',
-			array($panel_id, 0, __('Waiting for data', 'intropage')));
+		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
+			array($panel_id));
+
+		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id, user_id, data, alarm, refresh_interval, last_update)
+			VALUES ( ?, ?, ?, "gray", ?, 1000)',
+			array($panel_id, 0, __('Waiting for data', 'intropage'), $interval));
 
 	    	$id = db_fetch_insert_id();
 	}
 
 	$last_update = db_fetch_cell_prepared('SELECT unix_timestamp(last_update) FROM plugin_intropage_panel_data
-					WHERE user_id=0 and panel_id= ?',
+					WHERE user_id=0 AND panel_id= ?',
 					array($panel_id));
 
-	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
-					WHERE panel_id= ?',
+	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
+					WHERE panel_id= ? AND user_id=0',
 					array($panel_id));
 
         if ( $force_update || time() > ($last_update + $update_interval))       {
