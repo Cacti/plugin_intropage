@@ -83,7 +83,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 	if (!$id) {
 		$interval = db_fetch_cell_prepared ("SELECT refresh_interval FROM plugin_intropage_panel_definition where panel_id=?",
 			array($panel_id));
-			
+			echo "\n$panel_id = $interval \n";
 		db_execute_prepared('REPLACE INTO plugin_intropage_panel_data (panel_id,user_id,data,alarm,refresh_interval,last_update)
 			    VALUES (?, ?, ?,"gray",?,1000)',
 			    array($panel_id, 0,__('Waiting for data', 'intropage'), $interval));
@@ -2987,11 +2987,12 @@ function extrem($display=false, $update=false, $force_update=false) {
 
 			$count = db_fetch_cell('SELECT SUM(failed_polls) FROM host WHERE id IN (' . $_SESSION['allowed_hosts'][$user['id']] . ')');
         		db_execute_prepared('REPLACE INTO plugin_intropage_trends
-                		(name, value, user_id) VALUES (?, ?, 0)',
-                		array('failed_polls', $count));
+                		(name, value, user_id) VALUES (?, ?, ?)',
+                		array('failed_polls', $count, $user['id']));
 
-		        $count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
 		}
+
+	        $count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
 
         	db_execute_prepared('REPLACE INTO plugin_intropage_trends
                 	(name, value, user_id) VALUES (?, ?, 0)',
