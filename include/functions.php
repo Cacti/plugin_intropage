@@ -411,17 +411,43 @@ function display_setting ()	{
 
 	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
 		print __('Dashboard %s: ', $f, 'intropage');
-		print '<input type="text" name="name_' . $f . '" value="' . $dashboard_name[$f]  . '"></br><br/>';
+		print '<input type="text" name="name_' . $f . '" value="' . $dashboard_name[$f]  . '"></br>';
 	}
 	print '<br/><br/>';
-	print '<b>' . __('Configure dashboard refresh interval:', 'intropage') . '</b><br/>';
 
+        $panels = db_fetch_assoc_prepared('SELECT t1.panel_id AS panel_id,t1.id AS id, refresh_interval, t1.user_id AS user_id
+        		FROM plugin_intropage_panel_data AS t1
+                        JOIN plugin_intropage_panel_dashboard AS t2
+                        ON t1.id=t2.panel_id 
+                        WHERE t2.user_id= ?
+                        ORDER BY t2.dashboard_id',
+                        array($_SESSION['sess_user_id']));
 
+	if (cacti_sizeof($panels))	{
+		print '<b>' . __('Configure dashboard refresh interval:', 'intropage') . '</b><br/>';
+		print __('Interval 60 - 999999999 seconds. Short interval can cause long poller run!');
+		print '<br/><br/><table>';
+	
 
+		foreach ($panels as $panel)	{
+			print '<tr><td>';
+			print ucwords(str_replace('_', ' ', $panel['panel_id'])) . " :  ";
+			print '</td><td>';
+			print '<input type="text" name="crefresh_' . $panel['id'] . '" value="' . $panel['refresh_interval']  . '"> ';
+			if ($panel['user_id'] == 0)	{
+				
+				print __('Common panel - refresh interval is the same for all users!');
+			}
+			print '</td></tr>';
+			
+		}
+		print '</table>';
+	}
 
 	print '<br/><br/>';
-	print '<input type="hidden" name="intropage_rename" value="true">';
+	print '<input type="hidden" name="intropage_settings" value="true">';
 	print '<input type="submit" value="' . __('Save', 'intropage') . '">';
 	print '</div>';
+
 }
 

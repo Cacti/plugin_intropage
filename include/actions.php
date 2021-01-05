@@ -31,7 +31,9 @@ if (isset_request_var('intropage_addpanel') &&
 }
 
 
-if (isset_request_var('intropage_rename'))	{
+if (isset_request_var('intropage_settings'))	{
+	
+	// dashboard names
 	$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
 
 	for ($f = 1; $f <= $number_of_dashboards; $f++) {
@@ -44,6 +46,28 @@ if (isset_request_var('intropage_rename'))	{
 			VALUES (?, ?, ?)',
 			array($_SESSION['sess_user_id'], $f, $name ));
 	}
+
+	// panel refresh
+        $panels = db_fetch_assoc_prepared('SELECT t1.panel_id AS panel_name,t1.id AS id FROM plugin_intropage_panel_data AS t1
+                        JOIN plugin_intropage_panel_dashboard AS t2
+                        ON t1.id=t2.panel_id WHERE t2.user_id= ?',
+                        array($_SESSION['sess_user_id']));
+
+	if (cacti_sizeof($panels))      {
+	
+		foreach ($panels as $panel)	{
+	
+			$interval = get_filter_request_var('crefresh_' .$panel['id'], FILTER_VALIDATE_INT);
+			if ($interval >= 60 && $interval <= 999999999)	{
+				db_execute_prepared('UPDATE plugin_intropage_panel_data 
+					SET refresh_interval= ?
+					WHERE id= ?',
+					array($interval, $panel['id']));
+			}
+					
+		}
+	}
+
 	unset_request_var('intropage_configure');
 }
 
