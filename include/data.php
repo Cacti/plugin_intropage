@@ -327,8 +327,8 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 			array($user['id'],$panel_id));
 
 		$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_data
-					WHERE panel_id= ? AND user_id= 0',
-					array($panel_id));
+					WHERE panel_id= ? AND user_id= ?',
+					array($panel_id, $user['id']));
 
 
 		if ( $force_update || time() > ($last_update + $update_interval)) {
@@ -513,7 +513,7 @@ function cpuload($display=false, $update=false, $force_update=false) {
 
         if ($display)    {
 	        $result = db_fetch_row_prepared("SELECT id, data, alarm, last_update,
-	        	concatfloor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+	        	concat(floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 			MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 			TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im')) AS recheck
 	        	FROM plugin_intropage_panel_data
@@ -2779,7 +2779,7 @@ function boost($display=false, $update=false, $force_update=false) {
         	$next_run_time   = read_config_option('boost_next_run_time', true);
         	$max_records     = read_config_option('boost_rrd_update_max_records', true);
         	$max_runtime     = read_config_option('boost_rrd_update_max_runtime', true);
-        	$update_interval = read_config_option('boost_rrd_update_interval', true);
+        	$update_int = read_config_option('boost_rrd_update_interval', true);
         	$peak_memory     = read_config_option('boost_peak_memory', true);
         	$detail_stats    = read_config_option('stats_detail_boost', true);
 
@@ -2885,7 +2885,7 @@ function boost($display=false, $update=false, $force_update=false) {
         	$result['data'] .= __('Last run duration: %s', $lastduration, 'intropage') . '<br/>';
 
         	$result['data'] .= __('RRD Updates / Max: %s / %s', $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', number_format_i18n($max_records, -1), 'intropage')  . '<br/>';
-        	$result['data'] .= __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_interval], 'intropage') . '<br/>';
+        	$result['data'] .= __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_int], 'intropage') . '<br/>';
         	$result['data'] .= __('Next Start Time: %s', $next_run_time, 'intropage') . '<br/>';
 
 	    	db_execute_prepared('REPLACE INTO plugin_intropage_panel_data 

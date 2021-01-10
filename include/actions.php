@@ -33,6 +33,10 @@ if (isset_request_var('intropage_addpanel') &&
 
 if (isset_request_var('intropage_settings'))	{
 	
+	if (get_request_var('intropage_cancel'))	{
+		return;	
+	}
+	
 	// dashboard names
 	$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
 
@@ -50,7 +54,8 @@ if (isset_request_var('intropage_settings'))	{
 	// panel refresh
         $panels = db_fetch_assoc_prepared('SELECT t1.panel_id AS panel_name,t1.id AS id FROM plugin_intropage_panel_data AS t1
                         JOIN plugin_intropage_panel_dashboard AS t2
-                        ON t1.id=t2.panel_id WHERE t2.user_id= ?',
+                        ON t1.id=t2.panel_id WHERE t2.user_id= ?
+                        AND t1.fav_graph_id IS NULL',
                         array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($panels))      {

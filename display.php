@@ -307,10 +307,10 @@ function display_information() {
 	}
 	else	{	// intropage in console or in tab
 		if ($lopts == 4) {	// in tab
-       			print "<option value='loginopt_console'>" . __('Display intropage in console', 'intropage') . '</option>';
+       			print "<option value='loginopt_console'>" . __('Display intropage in console (needs relogin)', 'intropage') . '</option>';
                 }
 		else {
-			print "<option value='loginopt_tab'>" . __('Display intropage in tab as default page', 'intropage') . '</option>';
+			print "<option value='loginopt_tab'>" . __('Display intropage in tab as default page (needs relogin)', 'intropage') . '</option>';
 		}
 	}
 

@@ -315,8 +315,6 @@ function intropage_display_data($panel_id,$dispdata) {
 
 			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'] . '/' . 
 				 __('Recheck every','intropage') .': ' . $dispdata['recheck'];
-//			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'];
-//			print '<br/>' . __('Recheck every','intropage') .': ' . $dispdata['recheck'];
 		}
 	}
 }
@@ -420,6 +418,7 @@ function display_setting ()	{
                         JOIN plugin_intropage_panel_dashboard AS t2
                         ON t1.id=t2.panel_id 
                         WHERE t2.user_id= ?
+                        AND t1.fav_graph_id IS NULL 
                         ORDER BY t2.dashboard_id',
                         array($_SESSION['sess_user_id']));
 
@@ -434,6 +433,10 @@ function display_setting ()	{
 			print ucwords(str_replace('_', ' ', $panel['panel_id'])) . " :  ";
 			print '</td><td>';
 			print '<input type="text" name="crefresh_' . $panel['id'] . '" value="' . $panel['refresh_interval']  . '"> ';
+			if ($panel['panel_id'] == 'analyse_db')	{
+				print __('Only admin can set this in Console -> Configuration -> Settings');
+			
+			}
 			if ($panel['user_id'] == 0)	{
 				
 				print __('Common panel - refresh interval is the same for all users!');
@@ -446,7 +449,9 @@ function display_setting ()	{
 
 	print '<br/><br/>';
 	print '<input type="hidden" name="intropage_settings" value="true">';
+	print '<input type="submit" name="cancel" value="' . __('Cancel', 'intropage') . '"> ';
 	print '<input type="submit" value="' . __('Save', 'intropage') . '">';
+
 	print '</div>';
 
 }
