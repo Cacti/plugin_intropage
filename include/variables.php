@@ -51,13 +51,16 @@ $intropage_settings = array(	// default values
 		'friendly_name' => __('Poller Timeout'),
 		'description' => __('The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti.'),
 		'method' => 'drop_array',
-		'default' => '300',
+		'default' => '1800',
 		'array' => array(
 			60   => __('%d Minute', 1),
 			300  => __('%d Minutes', 5),
 			600  => __('%d Minutes', 10),
-			900  => __('%d Seconds', 15),
-			1200 => __('%d Seconds', 20)
+			900  => __('%d Minutes', 15),
+			1200 => __('%d Minutes', 20),
+			1800 => __('%d Minutes', 30),
+			2400 => __('%d Minutes', 40),
+			3600 => __('%d Hour', 1)
 		)
 	),
 	'intropage_analyse_log_rows' => array(
