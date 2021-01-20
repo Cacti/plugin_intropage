@@ -1,7 +1,7 @@
 <?php
 /* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2015-2020 Petr Macek                                      |
+ | Copyright (C) 2015-2021 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -317,7 +317,7 @@ function intropage_user_admin_tab() {
 		print '<a class="tab" ';
 	}
 
-	print 'href="' . html_escape($config['url_path'] .  'user_admin.php?action=user_edit&tab=intropage_settings_edit&id=' . get_request_var('id')) . '">Intropage</a>';
+	print 'href="' . html_escape($config['url_path'] .  'user_admin.php?action=user_edit&tab=intropage_settings_edit&id=' . get_filter_request_var('id')) . '">Intropage</a>';
 	print '</li>';
 
 }

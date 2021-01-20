@@ -1,7 +1,7 @@
 <?php
 /* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2015-2020 Petr Macek                                      |
+ | Copyright (C) 2015-2021 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -40,6 +40,7 @@ if (get_filter_request_var('detail_panel', FILTER_VALIDATE_REGEXP, array('option
 	$panel_id = get_request_var('detail_panel');
 }
 
+// gef_filter_request_var doesn't know boolean
 $forced_update = filter_var(get_nfilter_request_var('force'), FILTER_VALIDATE_BOOLEAN);
 
 // automatic reload when poller ends
@@ -85,7 +86,6 @@ if (isset_request_var('reload_panel') && isset($panel_id)) {
 
 // Close the session to allow other tabs to operate
 session_write_close();
-
 
 	if ($panel)	{
 		if (isset($panel['fav_graph_id'])) { // fav_graph exception

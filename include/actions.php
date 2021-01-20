@@ -1,7 +1,7 @@
 <?php
 /* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2015-2020 Petr Macek                                      |
+ | Copyright (C) 2015-2021 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -27,7 +27,7 @@ if (isset_request_var('intropage_addpanel') &&
 	get_filter_request_var('intropage_addpanel', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')))) {
 		db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard (panel_id,user_id,dashboard_id)
 			VALUES ( ?, ?, ?)',
-			array(get_request_var('intropage_addpanel'),$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
+			array(get_nfilter_request_var('intropage_addpanel'),$_SESSION['sess_user_id'],$_SESSION['dashboard_id']));
 }
 
 
@@ -48,7 +48,7 @@ if (isset_request_var('intropage_settings'))	{
 		
 		db_execute_prepared('REPLACE INTO plugin_intropage_dashboard (user_id,dashboard_id,name) 
 			VALUES (?, ?, ?)',
-			array($_SESSION['sess_user_id'], $f, $name ));
+			array($_SESSION['sess_user_id'], $f, $name));
 	}
 
 	// panel refresh
@@ -59,7 +59,6 @@ if (isset_request_var('intropage_settings'))	{
                         array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($panels))      {
-	
 		foreach ($panels as $panel)	{
 	
 			$interval = get_filter_request_var('crefresh_' .$panel['id'], FILTER_VALIDATE_INT);
@@ -69,7 +68,6 @@ if (isset_request_var('intropage_settings'))	{
 					WHERE id= ?',
 					array($interval, $panel['id']));
 			}
-					
 		}
 	}
 
@@ -177,17 +175,7 @@ if (isset_request_var('intropage_action') &&
 			}
 		}
 		break;
-/*
-	case 'addpanel':
-		if (preg_match('/^[a-z0-9\-\_]+$/i', $value)) {
-			db_execute_prepared('UPDATE plugin_intropage_panel_data
-				SET dashboard_id = ?
-				WHERE user_id = ?
-				AND panel_id = ?',
-				array($_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $value));
-		}
-		break;
-*/
+
 	case 'refresh':
 		if (filter_var($value, FILTER_VALIDATE_INT))	{
 			set_user_setting('intropage_autorefresh', $value);
