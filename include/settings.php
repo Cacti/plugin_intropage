@@ -307,7 +307,7 @@ function intropage_console_after() {
 
 function intropage_user_admin_tab() {
 	global $config;
-	
+
 	print '<li class="subTab">';
 
 	if (get_request_var_request("tab") == "intropage_settings_edit") {
@@ -379,11 +379,13 @@ function intropage_user_admin_user_save($save){
 
 	foreach ($panels as $panel) {
 		if ($panel['panel_id'] != 'admin_alert' && $panel['panel_id'] != 'maint') {
-			db_execute('update plugin_intropage_user_auth set ' . $panel['panel_id'] . '="' . get_nfilter_request_var($panel['panel_id']) .
-			'" WHERE user_id = ' . get_request_var('id'));
+			db_execute_prepared('UPDATE plugin_intropage_user_auth
+				SET `' . $panel['panel_id'] . '` = ?
+				WHERE user_id = ?',
+				array(get_nfilter_request_var($panel['panel_id']), get_nfilter_request_var('id')));
 		}
 	}
-	
+
 	return ($save);
 }
 
