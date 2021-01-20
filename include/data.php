@@ -69,6 +69,7 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'analyse_login';
 	$panel_name = __('Analyze logins', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -101,8 +102,8 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 					array($panel_id));
 
 	if ( $force_update || time() > ($last_update + $update_interval))	{
-
-	$flog = db_fetch_cell('SELECT count(t.result)
+		
+		$flog = db_fetch_cell('SELECT count(t.result)
 			FROM ( 
 				SELECT result FROM user_auth
 				INNER JOIN user_log ON user_auth.username = user_log.username
@@ -149,6 +150,8 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 			(id,panel_id,user_id,data,alarm,refresh_interval) 
 			VALUES ( ?, ?, ?, ?, ?, ?)',
 			array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+			
+		$checks++;
 	}
 
 	if ($display)    {
@@ -163,6 +166,8 @@ function analyse_login($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -172,6 +177,7 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'analyse_log';
 	$panel_name = __('Analyze log', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -270,6 +276,8 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 			(id,panel_id,user_id,data,alarm,refresh_interval)
 			VALUES ( ?, ?, ?, ?, ?, ?)',
 			array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+		
+		$checks++;
 	}
 
 	if ($display)    {
@@ -284,6 +292,8 @@ function analyse_log($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+	
+	return $checks;
 }
 
 //------------------------------------ top5_worst_ping -----------------------------------------------------
@@ -292,7 +302,7 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'top5_ping';
 	$panel_name = __('Top5 ping', 'intropage');
-
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -400,6 +410,8 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 				(id,panel_id,user_id,data,alarm,refresh_interval)
 				VALUES (?, ?, ?, ?, ?, ?)',
 				array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+			
+			$checks++;
 		}
 	}
 
@@ -414,8 +426,10 @@ function top5_ping($display=false, $update=false, $force_update=false) {
 
 		$result['name'] = $panel_name;
 
-        return $result;
+        	return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -425,6 +439,7 @@ function cpuload($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'cpuload';
 	$panel_name = __('CPU utilization', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -509,6 +524,8 @@ function cpuload($display=false, $update=false, $force_update=false) {
 			(id,panel_id,user_id,data,alarm,refresh_interval)
 			VALUES ( ?, ?, ?, ?, ?, ?)',
 			array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+
+		$checks++;
         }
 
         if ($display)    {
@@ -523,6 +540,8 @@ function cpuload($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+        
+        return $checks;
 }
 
 
@@ -532,6 +551,7 @@ function ntp($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'ntp';
 	$panel_name = __('NTP', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -608,6 +628,8 @@ function ntp($display=false, $update=false, $force_update=false) {
 	    		(id,panel_id,user_id,data,alarm,refresh_interval)
 			VALUES (?, ?, ?, ?, ?, ?)',
 			array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+
+		$checks++;
         }
 
         if ($display)    {
@@ -622,6 +644,8 @@ function ntp($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+        
+        return $checks;
 }
 
 
@@ -631,6 +655,7 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'graph_data_source';
 	$panel_name = __('Data sources', 'intropage');
+	$checks = 0;
 
         $result = array(
                 'name' => $panel_name,
@@ -717,6 +742,8 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
 				(id,panel_id,user_id,data,alarm,refresh_interval) 
 				VALUES ( ?, ?, ?, ?, ?, ?)',
 				array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+				
+			$checks++;
 		}
         }
 
@@ -732,6 +759,8 @@ function graph_data_source($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+        
+        return $checks;
 }
 
 
@@ -741,7 +770,7 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 
 	$panel_id = 'graph_host_template';
 	$panel_name = __('Host templates', 'intropage');
-
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -821,6 +850,8 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 	    			(id,panel_id,user_id,data,alarm,refresh_interval)
 				VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 	    	}
 	}
 
@@ -837,6 +868,8 @@ function graph_host_template($display=false, $update=false, $force_update=false)
 
 	        return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -847,8 +880,7 @@ function graph_host($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'graph_host';
 	$panel_name = __('Hosts', 'intropage');
-
-
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -856,7 +888,6 @@ function graph_host($display=false, $update=false, $force_update=false) {
 	else	{ // poller wants all
 		$users = db_fetch_assoc("SELECT t1.id AS id FROM user_auth AS t1 JOIN plugin_intropage_user_auth AS t2
 				 ON t1.id=t2.user_id WHERE t1.enabled='on'");
-
 	}
 
 	foreach ($users as $user)	{
@@ -955,6 +986,8 @@ function graph_host($display=false, $update=false, $force_update=false) {
 	    			(id,panel_id,user_id,data,alarm,refresh_interval)
 				VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -971,6 +1004,8 @@ function graph_host($display=false, $update=false, $force_update=false) {
 
 	        return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -980,6 +1015,7 @@ function info($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'info';
 	$panel_name = __('Info', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -1053,6 +1089,8 @@ function info($display=false, $update=false, $force_update=false) {
 			(id,panel_id,user_id,data,alarm,refresh_interval)
 			VALUES ( ?, ?, ?, ?, ?, ?)',
 			array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+
+		$checks++;
         }
 
 	if ($display)    {
@@ -1067,6 +1105,8 @@ function info($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+        
+        return $checks;
 }
 
 
@@ -1076,6 +1116,7 @@ function analyse_db($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'analyse_db';
 	$panel_name = __('Database check', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -1181,6 +1222,8 @@ function analyse_db($display=false, $update=false, $force_update=false) {
     			(id,panel_id,user_id,data,alarm,refresh_interval)
 		    	VALUES ( ?, ?, ?, ?, ?, ?)',
 		    	array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+
+		$checks++;
 	}
 
         if ($display)    {
@@ -1204,6 +1247,8 @@ function analyse_db($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+        
+        return $checks;
 }
 
 
@@ -1213,6 +1258,7 @@ function maint($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'maint';
 	$panel_name = __('Maint plugin', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -1325,6 +1371,8 @@ function maint($display=false, $update=false, $force_update=false) {
     				(id,panel_id,user_id,data,alarm,refresh_interval) 
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -1340,6 +1388,8 @@ function maint($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+        
+        return $checks;
 }
 
 
@@ -1349,6 +1399,7 @@ function admin_alert($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'admin_alert';
 	$panel_name = __('Admin alert', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -1386,6 +1437,8 @@ function admin_alert($display=false, $update=false, $force_update=false) {
     				(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+
+		$checks++;
 	}
 
 	if ($display)    {
@@ -1400,6 +1453,8 @@ function admin_alert($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+	
+	return $checks;
 }
 
 
@@ -1409,6 +1464,7 @@ function trend($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'trend';
 	$panel_name = __('Trends', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -1569,6 +1625,8 @@ new code from thold plugin - it is slower but correct count
     				(id,panel_id,user_id,data,alarm,refresh_interval) 
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -1584,6 +1642,8 @@ new code from thold plugin - it is slower but correct count
                 $result['name'] = $panel_name;
                 return $result;
 	}
+	
+	return $checks;
 }
 
 //------------------------------------ poller info -----------------------------------------------------
@@ -1592,6 +1652,7 @@ function poller_info($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'poller_info';
 	$panel_name = __('Poller info', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -1685,6 +1746,8 @@ function poller_info($display=false, $update=false, $force_update=false) {
     				(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+		
+		$checks++;
 	}
 
 	if ($display)    {
@@ -1699,6 +1762,8 @@ function poller_info($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -1708,6 +1773,7 @@ function poller_stat($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'poller_stat';
 	$panel_name = __('Poller stats', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -1829,6 +1895,8 @@ function poller_stat($display=false, $update=false, $force_update=false) {
     				(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+		$checks++;
+
 	}
 
 	if ($display)    {
@@ -1843,6 +1911,8 @@ function poller_stat($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -1852,10 +1922,10 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 
 	$panel_id = 'analyse_tree_host_graph';
 	$panel_name = __('Analyze tree/host/graph', 'intropage');
+	$checks = 0;
 
 	if (isset($run_from_poller))	{ // update in poller
 	}
-
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -2224,6 +2294,7 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
 				VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
 
+			$checks++;
 		}
 	}
 
@@ -2239,6 +2310,8 @@ function analyse_tree_host_graph($display=false, $update=false, $force_update=fa
                 $result['name'] = $panel_name;
                 return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -2248,6 +2321,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'top5_availability';
 	$panel_name = __('Top5 worst availability', 'intropage');
+	$checks = 0;
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
@@ -2349,6 +2423,7 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
 
+			$checks++;
 		}
 	}
 
@@ -2364,6 +2439,8 @@ function top5_availability($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -2373,11 +2450,11 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'top5_polltime';
 	$panel_name = __('Top5 worst polling time', 'intropage');
+	$checks = 0;
 
 	$update_interval = db_fetch_cell_prepared('SELECT refresh_interval FROM plugin_intropage_panel_definition
 					WHERE panel_id= ?',
 					array($panel_id));
-
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 		$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -2472,6 +2549,8 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 	    			(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -2487,6 +2566,8 @@ function top5_polltime($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -2496,7 +2577,7 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'top5_pollratio';
 	$panel_name = __('Top5 worst polling ratio (failed, total, ratio)', 'intropage');
-
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -2598,6 +2679,8 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 	    			(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -2613,6 +2696,8 @@ function top5_pollratio($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -2622,8 +2707,7 @@ function thold_event($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'thold_event';
 	$panel_name = __('Last thold events', 'intropage');
-
-	
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only	
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -2715,6 +2799,8 @@ function thold_event($display=false, $update=false, $force_update=false) {
 	    			(id,panel_id,user_id,data,alarm,refresh_interval) 
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 
 	}
@@ -2731,6 +2817,8 @@ function thold_event($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -2740,6 +2828,7 @@ function boost($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'boost';
 	$panel_name = __('Boost statistics', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -2892,6 +2981,8 @@ function boost($display=false, $update=false, $force_update=false) {
 	    			(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+
+		$checks++;
         }
 
 	if ($display)    {
@@ -2906,6 +2997,8 @@ function boost($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -2915,6 +3008,7 @@ function extrem($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'extrem';
 	$panel_name = __('24 hours extrem', 'intropage');
+	$checks = 0;
 
 	if (isset($run_from_poller))	{ // update in poller
 
@@ -3112,6 +3206,8 @@ function extrem($display=false, $update=false, $force_update=false) {
 	    			(id,panel_id,user_id,data,alarm,refresh_interval) 
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -3129,6 +3225,8 @@ function extrem($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -3138,7 +3236,7 @@ function graph_thold($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'graph_thold';
 	$panel_name = __('Thresholds', 'intropage');
-
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    $users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -3260,6 +3358,8 @@ https://github.com/Cacti/plugin_thold/issues/440
 	    			(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -3275,6 +3375,8 @@ https://github.com/Cacti/plugin_thold/issues/440
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -3284,7 +3386,7 @@ function mactrack($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'mactrack';
 	$panel_name = __('Mactrack plugin', 'intropage');
-
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    	$users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -3382,7 +3484,8 @@ function mactrack($display=false, $update=false, $force_update=false) {
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
 
-		} // konec smycky pres vsechny uzivatele
+			$checks++;
+		} 
 	}
 
 	if ($display)    {
@@ -3397,6 +3500,8 @@ function mactrack($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+	
+	return $checks;
 }
 
 
@@ -3406,7 +3511,7 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'mactrack_sites';
 	$panel_name = __('Mactrack sites', 'intropage');
-
+	$checks = 0;
 
 	if ($_SESSION['sess_user_id'] > 0)	{ // specific user wants his panel only
 	    $users = array(array('id'=>$_SESSION['sess_user_id']));
@@ -3488,6 +3593,8 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 	    			(id,panel_id,user_id,data,alarm,refresh_interval)
 			    	VALUES ( ?, ?, ?, ?, ?, ?)',
 			    	array($id,$panel_id,$user['id'],$result['data'],$result['alarm'],$update_interval));
+
+			$checks++;
 		}
 	}
 
@@ -3503,6 +3610,8 @@ function mactrack_sites($display=false, $update=false, $force_update=false) {
 		$result['name'] = $panel_name;
 	        return $result;
 	}
+
+	return $checks;
 }
 
 
@@ -3512,6 +3621,7 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
 
         $panel_id = 'plugin_syslog';
         $panel_name = __('Plugin syslog', 'intropage');
+	$checks = 0;
 
         include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
@@ -3663,6 +3773,7 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
                         VALUES ( ?, ?, 0, ?, ?, ?)',
                         array($id,$panel_id,$result['data'],$result['alarm'],$update_interval));
 
+		$checks++;
         }
 
        if ($display)    {
@@ -3677,6 +3788,8 @@ function plugin_syslog($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+
+	return $checks;
 }
 
 
@@ -3686,6 +3799,7 @@ function webseer($display=false, $update=false, $force_update=false) {
 
 	$panel_id = 'webseer';
 	$panel_name = __('Webseer plugin', 'intropage');
+	$checks = 0;
 
 	$result = array(
 		'name' => $panel_name,
@@ -3758,6 +3872,8 @@ function webseer($display=false, $update=false, $force_update=false) {
 	    		(id,panel_id,user_id,data,alarm,refresh_interval)
 			VALUES ( ?, ?, ?, ?, ?, ?)',
 			array($id,$panel_id,0,$result['data'],$result['alarm'],$update_interval));
+
+		$checks++;
         }
 
         if ($display)    {
@@ -3772,4 +3888,6 @@ function webseer($display=false, $update=false, $force_update=false) {
                 $result['name'] = $panel_name;
                 return $result;
         }
+
+	return $checks;
 }

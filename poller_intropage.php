@@ -128,13 +128,13 @@ function intropage_gather_stats() {
     	    $start = microtime(true);
 
     	    $magic = $one['panel_id'];
-            $magic(false,true,false);
+            $checks += $magic(false,true,false);
 
     	    if ($logging >=5) {
         	cacti_log('Debug: gathering data - ' . $magic . ' - duration ' . round(microtime(true) - $start, 2),true,'Intropage');
 	    }
     	    intropage_debug('gathering data - ' . $magic . ' - duration ' . round(microtime(true) - $start, 2));
-  	    $checks++;
+  	    
 	}
 	// end of gathering data
 

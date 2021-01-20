@@ -52,6 +52,9 @@ If you find a problem, let me know via github or https://forums.cacti.net/viewto
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 ## Changelog
+	2.0.7 ---
+	Poller number of checks
+
 	2.0.6 ---
 	Add dashboard names
 	Add panel config - refresh interval
