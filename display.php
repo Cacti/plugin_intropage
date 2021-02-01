@@ -152,7 +152,7 @@ function display_information() {
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on')	{
 	    print __('You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
-	    print '<a href="' . $config['url_path'] . 'settings.php"><i class="fas fa-link"></i></a><br/><br/>';
+	    print '<a class="pic" href="' . $config['url_path'] . 'settings.php"><i class="fas fa-link"></i></a><br/><br/>';
 	}
 
 	$dnames = db_fetch_assoc_prepared ('SELECT dashboard_id, name FROM plugin_intropage_dashboard WHERE user_id = ? ORDER BY dashboard_id',
@@ -179,16 +179,16 @@ function display_information() {
 		return true;
 	}
 
-	// switch dahsboards and form
+	// switch dashboards and form
 	print '<div>';
 	print '<div class="float_left">';
 	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
-	    if ($f == $_SESSION['dashboard_id']) {
-		print '<a class="db_href db_href_active" href="?dashboard_id=' . $f . '">' . $dashboard_name[$f] . '</a>';
-	    }
-	    else {
-		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $dashboard_name[$f] . '</a>';
-	    }
+		if ($f == $_SESSION['dashboard_id']) {
+			print '<a class="hyperLink db_href db_href_active" href="?dashboard_id=' . $f . '">' . $dashboard_name[$f] . '</a>';
+		}
+		else {
+			print '<a class="hyperLink db_href" href="?dashboard_id=' . $f . '">' . $dashboard_name[$f] . '</a>';
+		}
 	}
 
 	print '</div>';
@@ -201,9 +201,9 @@ function display_information() {
 	print '&nbsp; &nbsp; ';
 	
         if ($lopts == 4) { // in tab
-		print '<a href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_configure=true"><i class="fa fa-cog"></i></a>';
+		print '<a class="pic" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_configure=true"><i class="fa fa-cog"></i></a>';
 	} else {        // in console
-		print '<a href="' . htmlspecialchars($config['url_path']) . '?intropage_configure=true"><i class="fa fa-cog"></i></a>';
+		print '<a class="pic" href="' . htmlspecialchars($config['url_path']) . 'index.php?intropage_configure=true&header=false"><i class="fa fa-cog"></i></a>';
 	}
 
 	print '&nbsp; &nbsp; ';

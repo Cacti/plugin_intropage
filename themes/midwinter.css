@@ -1,0 +1,17 @@
+.flexchild {
+	background-color: #242635 !important;
+}
+
+.panel_data {
+	padding: 4px;
+}
+
+.panel_data > div {
+	background-color: #242635 !important;
+}
+
+.header_link {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
