@@ -1,7 +1,7 @@
 <?php
-/* vim: ts=4
+/*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2015-2021 Petr Macek                                      |
+ | Copyright (C) 2004-2021 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -18,7 +18,6 @@
  | This code is designed, written, and maintained by the Cacti Group. See  |
  | about.php and/or the AUTHORS file for specific developer information.   |
  +-------------------------------------------------------------------------+
- | https://github.com/xmacan/                                              |
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
@@ -31,15 +30,12 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
-//	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
-	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
-	//api_plugin_register_hook('intropage', 'user_admin_action', 'intropage_user_admin_action', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
 	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);

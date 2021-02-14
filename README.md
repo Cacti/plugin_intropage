@@ -11,7 +11,7 @@ Plugin displays usefull information and favourite graphs on console screen or se
 * ...
 
 ## Author
-Petr Macek (petr.macek@kostax.cz)
+The Cacti group
 
 ## Screenshot
 ![Screenshot](https://user-images.githubusercontent.com/26485719/41935583-78f73d32-798a-11e8-83f4-768d2e454a79.png)
@@ -54,6 +54,7 @@ Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 ## Changelog
 	2.0.7 ---
 	Poller number of checks
+	Add midwinter theme
 
 	2.0.6 ---
 	Add dashboard names
