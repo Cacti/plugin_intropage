@@ -349,7 +349,7 @@ function intropage_upgrade_database() {
 			WHERE directory = 'intropage'",
 			array(
 				$info['version'],
-				$info['authro'],
+				$info['author'],
 				$info['homepage']
 			)
 		);
