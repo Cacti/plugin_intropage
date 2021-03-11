@@ -284,6 +284,7 @@ function intropage_upgrade_database() {
 					ADD COLUMN requires varchar(128) NOT NULL default "" AFTER alarm,
 					ADD COLUMN update_func varchar(30) NOT NULL default "" AFTER requires,
 					ADD COLUMN details_func varchar(30) NOT NULL default "" AFTER update_func,
+					ADD COLUMN class varchar(30) NOT NULL default "" AFTER level,
 					ADD COLUMN trends_func varchar(30) NOT NULL default "" AFTER details_func');
 			}
 
