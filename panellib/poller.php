@@ -59,7 +59,7 @@ function register_poller() {
 			'priority'     => 73,
 			'alarm'        => 'green',
 			'requires'     => false,
-			'update_func'  => 'poller_info',
+			'update_func'  => 'poller_stat',
 			'details_func' => false,
 			'trends_func'  => 'poller_stat_trend'
 		),
