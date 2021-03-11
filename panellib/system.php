@@ -420,7 +420,7 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-				$data[$key]['poller'] = $row['date'] . ' ' . $row['xvalue'] . 's';
+				$fin_data[$key]['poller'] = $row['date'] . ' ' . $row['xvalue'] . 's';
 			}
 		}
 	}
@@ -439,7 +439,7 @@ function extrem($panel, $user_id) {
 
 	if (cacti_sizeof($data)) {
 		foreach ($data as $key => $row) {
-			$data[$key]['down'] = $row['date'] . ' ' . $row['value'];
+			$fin_data[$key]['down'] = $row['date'] . ' ' . $row['value'];
 		}
 	}
 
@@ -458,7 +458,7 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $row) {
-				$data[$key]['thold'] = $row['date'] . ' ' . $row['value'];
+				$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'];
 			}
 		}
 	}
@@ -476,7 +476,7 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-				$data[$key]['pout'] = $row['date'] . ' ' . $row['value'];
+				$fin_data[$key]['pout'] = $row['date'] . ' ' . $row['value'];
 			}
 		}
 	}
@@ -494,7 +494,7 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-				$data[$key]['failed'] = $row['date'] . ' ' . $row['value'];
+				$fin_data[$key]['failed'] = $row['date'] . ' ' . $row['value'];
 			}
 		}
 	}
@@ -508,7 +508,7 @@ function extrem($panel, $user_id) {
 
 	$panel['data'] .= '</tr>';
 
-	foreach($data as $key => $rdata) {
+	foreach($fin_data as $key => $rdata) {
 		$panel['data'] .= '<tr>';
 
 		foreach($columns as $index => $col) {

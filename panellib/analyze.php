@@ -398,6 +398,8 @@ function trend_collect() {
 	// update in poller
 	$users = get_user_list();
 
+        include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
 	foreach ($users as $user) {
 		$allowed_devices = intropage_get_allowed_devices($user['id']);
 
