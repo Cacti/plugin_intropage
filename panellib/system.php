@@ -361,7 +361,7 @@ function boost($panel, $user_id) {
 
 	$panel['data'] .= '<tr><td>' . __('RRD Updates / Max: %s / %s', $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
 	$panel['data'] .= '<tr><td>' . __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_int], 'intropage') . '</td></tr>';
-	$panel['data'] .= '<tr><td>' . __('Next Start Time: %s', date('Y-m-d H:i:s', $next_run_time), 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Next Start Time: %s', $next_run_time, 'intropage') . '</td></tr>';
 
 	$panel['data'] .= '</table>';
 
