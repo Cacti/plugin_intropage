@@ -1,7 +1,8 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2021 The Cacti Group                                 |
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
+ | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -18,6 +19,7 @@
  | This code is designed, written, and maintained by the Cacti Group. See  |
  | about.php and/or the AUTHORS file for specific developer information.   |
  +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */

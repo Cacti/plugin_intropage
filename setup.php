@@ -1,7 +1,8 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2021 The Cacti Group                                 |
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
+ | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -18,6 +19,7 @@
  | This code is designed, written, and maintained by the Cacti Group. See  |
  | about.php and/or the AUTHORS file for specific developer information.   |
  +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
@@ -25,48 +27,75 @@
 function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'config_form', 'intropage_config_form', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'config_arrays', 'intropage_config_arrays', 'setup.php');
+
 	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'include/settings.php');
+
 	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'include/tab.php');
 	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
+
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
+
+//	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
+
 	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
+
+	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
+
+	//api_plugin_register_hook('intropage', 'user_admin_action', 'intropage_user_admin_action', 'includes/settings.php');
+
 	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
-	api_plugin_register_realm('intropage', 'intropage.php,intropage_ajax.php', 'Plugin Intropage - view', 1);
+
+	api_plugin_register_realm('intropage', 'intropage.php', 'Intropage Viewer', 1);
+	api_plugin_register_realm('intropage', 'intropage_admin.php', 'Intropage Administration', 1);
+
+	$realms = array(
+		__('Intropage Viewer', 'intropage'),
+		__('Intropage Administration', 'intropage')
+	);
 
 	intropage_setup_database();
 }
-
-
 
 function plugin_intropage_uninstall() {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+
 	intropage_drop_database();
+}
+
+function intropage_config_arrays() {
+	auth_augment_roles(__('Normal User'), array('intropage.php'));
+	auth_augment_roles(__('System Administration'), array('intropage_admin.php'));
 }
 
 function plugin_intropage_version() {
 	global $config;
+
 	$info = parse_ini_file($config['base_path'] . '/plugins/intropage/INFO', true);
+
 	return $info['info'];
 }
 
 function plugin_intropage_upgrade() {
 	// Here we will upgrade to the newest version
 	intropage_check_upgrade();
+
 	return false;
 }
 
 function plugin_intropage_check_config() {
 	// Here we will check to ensure everything is configured
 	intropage_check_upgrade();
+
 	return true;
 }
 
@@ -74,6 +103,7 @@ function intropage_check_upgrade() {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+
 	intropage_upgrade_database();
 }
 
@@ -104,15 +134,14 @@ function intropage_poller_bottom() {
 
 	$command_string = trim(read_config_option('path_php_binary'));
 
-    	if (trim($command_string) == '') {
-        	$command_string = 'php';
+	if (trim($command_string) == '') {
+		$command_string = 'php';
 	}
 
 	$extra_args = ' -q ' . $config['base_path'] . '/plugins/intropage/poller_intropage.php';
 
 	exec_background($command_string, $extra_args);
 }
-
 
 // add third party panel:
 // 1) include this file
@@ -138,16 +167,16 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
 
 // remove third party panel
 function intropage_remove_panel($panel_id) {
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id= ?', array($panel_id));
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id= ?', array($panel_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id = ?', array($panel_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id = ?', array($panel_id));
 	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',array($panel_id));
 
 	return ('1');
 }
 
 function intropage_user_remove($user_id) {
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id= ?', array($user_id));
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id= ?', array($user_id));
-	db_execute_prepared('DELETE FROM settings_user WHERE user_id= ?', array($user_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', array($user_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id = ?', array($user_id));
+	db_execute_prepared('DELETE FROM settings_user WHERE user_id = ?', array($user_id));
 }
 

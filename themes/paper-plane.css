@@ -20,3 +20,12 @@
 	color: white;
 }
 
+#megaobal, #obal, #main {
+	padding: 3px;
+	color: lightgrey !important;
+}
+
+.intro_glyph {
+	color: lightgrey !important;
+	vertical-align: middle;
+}

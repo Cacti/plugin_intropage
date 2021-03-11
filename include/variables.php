@@ -1,7 +1,8 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2021 The Cacti Group                                 |
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
+ | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -18,13 +19,14 @@
  | This code is designed, written, and maintained by the Cacti Group. See  |
  | about.php and/or the AUTHORS file for specific developer information.   |
  +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
 
 $intropage_settings = array(	// default values
 	'intropage_display_header' => array(
-		'friendly_name' => __('Display settings', 'intropage'),
+		'friendly_name' => __('Display Settings', 'intropage'),
 		'method' => 'spacer',
 	),
 	'intropage_display_important_first' => array(
@@ -32,6 +34,12 @@ $intropage_settings = array(	// default values
 		'description' => __('If checked Intropage displays important (errors, warnings) information first', 'intropage'),
 		'method' => 'checkbox',
 		'default' => 'off',
+	),
+	'intropage_unregister' => array(
+		'friendly_name' => __('Automatically Uninstall Panels', 'intropage'),
+		'description' => __('If a Panel is installed and requried plugin is removed, automatically uninstall the panel too', 'intropage'),
+		'method' => 'checkbox',
+		'default' => '',
 	),
 	'intropage_autorefresh' => array(
 		'friendly_name' => __('Automatic refresh page', 'intropage'),
@@ -118,7 +126,7 @@ $intropage_settings = array(	// default values
 	),
 
 	'intropage_admin_alert' => array(
-		'friendly_name' => __('Admin information panel about maintenance tasks, down devices, ..', 'intropage'),
+		'friendly_name' => __('Admin information panel about maintenance tasks, down Devices, ..', 'intropage'),
 		'description' => __('If isn\'t empty, panel will be displayed on the top. You can use html tags (b, i, ...).', 'intropage'),
 		'method' => 'textarea',
 		'max_length' => 1000,
@@ -140,7 +148,7 @@ $intropage_settings = array(	// default values
 		'default' => '86400',
 	),
 	'intropage_display_header2' => array(
-		'friendly_name' => __('Alarm settings', 'intropage'),
+		'friendly_name' => __('Alarm Settings', 'intropage'),
 		'method' => 'spacer',
 	),
 	'intropage_alert_db_abort' => array(
@@ -210,7 +218,7 @@ $intropage_settings = array(	// default values
 		'default' => 'red',
 	),
 	'intropage_alert_same_ip' => array(
-		'friendly_name' => __('Alarm device with the same IP/port', 'intropage'),
+		'friendly_name' => __('Alarm Device with the same IP/port', 'intropage'),
 		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
@@ -221,7 +229,7 @@ $intropage_settings = array(	// default values
 		'default' => 'yellow',
 	),
 	'intropage_alert_more_trees' => array(
-		'friendly_name' => __('Alarm device in more trees', 'intropage'),
+		'friendly_name' => __('Alarm Device in more Trees', 'intropage'),
 		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
@@ -232,7 +240,7 @@ $intropage_settings = array(	// default values
 		'default' => 'yellow',
 	),
 	'intropage_alert_without_tree' => array(
-		'friendly_name' => __('Alarm device without tree', 'intropage'),
+		'friendly_name' => __('Alarm Device without Tree', 'intropage'),
 		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
@@ -243,7 +251,7 @@ $intropage_settings = array(	// default values
 		'default' => 'yellow',
 	),
 	'intropage_alert_default_community' => array(
-		'friendly_name' => __('Alarm device with default public/private community', 'intropage'),
+		'friendly_name' => __('Alarm Device with default public/private community', 'intropage'),
 		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
@@ -254,7 +262,7 @@ $intropage_settings = array(	// default values
 		'default' => 'yellow',
 	),
 	'intropage_alert_without_monitoring' => array(
-		'friendly_name' => __('Alarm device without monitoring', 'intropage'),
+		'friendly_name' => __('Alarm Device without monitoring', 'intropage'),
 		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(
@@ -265,7 +273,7 @@ $intropage_settings = array(	// default values
 		'default' => 'yellow',
 	),
 	'intropage_alert_without_graph' => array(
-		'friendly_name' => __('Alarm device without graph', 'intropage'),
+		'friendly_name' => __('Alarm Device without Graph', 'intropage'),
 		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
 		'method' => 'drop_array',
 		'array' => array(

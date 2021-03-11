@@ -1,7 +1,8 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2021 The Cacti Group                                 |
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
+ | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -18,6 +19,7 @@
  | This code is designed, written, and maintained by the Cacti Group. See  |
  | about.php and/or the AUTHORS file for specific developer information.   |
  +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
@@ -25,32 +27,19 @@
 chdir('../../');
 include_once('./include/auth.php');
 include_once($config['base_path'] . '/plugins/intropage/include/settings.php');
+include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 include_once($config['base_path'] . '/plugins/intropage/display.php');
 
-set_default_action();
+global $panels, $registry, $login_opts;
 
-if (!function_exists("array_column")) {
-	function array_column($array,$column_name) {
-        	return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
-    	}
-}
+$login_opts = get_login_opts();
 
-if (empty($_SESSION['login_opts']))     {   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
-	$login_opts = db_fetch_cell_prepared('SELECT login_opts
-		FROM user_auth
-		WHERE id = ?',
-		array($_SESSION['sess_user_id']));
+$panels = initialize_panel_library();
 
-	$_SESSION['login_opts'] = $login_opts;
-}
+process_page_request_variables();
 
-if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need header
-	general_header();
-}
+general_header();
 
 display_information();
 
-if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need footer
-	bottom_footer();
-}
-
+bottom_footer();

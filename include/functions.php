@@ -1,7 +1,8 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2021 The Cacti Group                                 |
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
+ | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -18,9 +19,38 @@
  | This code is designed, written, and maintained by the Cacti Group. See  |
  | about.php and/or the AUTHORS file for specific developer information.   |
  +-------------------------------------------------------------------------+
+ | https://github.com/xmacan/                                              |
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
+
+define('PANEL_SYSTEM', 0);
+define('PANEL_USER',   1);
+
+if (isset($run_from_poller)) {
+	$_SESSION['sess_user_id'] = 0;
+}
+
+function intropage_get_allowed_devices($user_id) {
+	$x  = 0;
+	$us = read_user_setting('hide_disabled', false, false, $user_id);
+
+	if ($us == 'on') {
+		set_user_setting('hide_disabled', '', $user_id);
+	}
+
+	$allowed = get_allowed_devices('', 'null', -1, $x, $user_id);
+
+	if ($us == 'on') {
+		set_user_setting('hide_disabled', 'on', $user_id);
+	}
+
+	if (cacti_count($allowed)) {
+		return implode(',', array_column($allowed, 'id'));
+	} else {
+		return false;
+	}
+}
 
 if (!function_exists('array_column')) {
     function array_column($array,$column_name) {
@@ -30,13 +60,771 @@ if (!function_exists('array_column')) {
     }
 }
 
+function process_page_request_variables() {
+	set_default_action();
+
+	if (isset_request_var('intropage_addpanel')) {
+		intropage_action_add_panel();
+	} elseif (isset_request_var('action') && isset_request_var('save_settings')) {
+		intropage_action_settings();
+	} elseif (isset_request_var('intropage_action')) {
+		intropage_actions();
+	} elseif (get_request_var('action') != '') {
+		switch(get_request_var('action')) {
+			case 'configure':
+				intropage_configure_panel();
+
+				break;
+			case 'autoreload':
+				intropage_autoreload();
+
+				break;
+			case 'reload':
+				intropage_reload_panel();
+
+				break;
+			case 'details':
+				intropage_detail_panel();
+
+				break;
+		}
+
+		exit;
+	}
+}
+
+function intropage_action_add_panel() {
+	$dashboard_id = get_filter_request_var('dashboard_id');
+
+	if (is_numeric(get_nfilter_request_var('intropage_addpanel'))) {
+		$addpanel = get_filter_request_var('intropage_addpanel');
+	} else {
+		$panel_id = get_nfilter_request_var('intropage_addpanel');
+
+		$panel = db_fetch_row_prepared('SELECT *
+			FROM plugin_intropage_panel_definition
+			WHERE panel_id = ?',
+			array($panel_id));
+
+		$save = array();
+
+		$save['id']               = 0;
+		$save['panel_id']         = $panel_id;
+		$save['user_id']          = ($panel['level'] == PANEL_SYSTEM ? 0 : $_SESSION['sess_user_id']);
+		$save['last_update']      = '0000-00-00';
+		$save['data']             = '';
+		$save['priority']         = $panel['priority'];
+		$save['alarm']            = $panel['alarm'];
+		$save['refresh_interval'] = $panel['refresh'];
+
+		$addpanel = sql_save($save, 'plugin_intropage_panel_data');
+	}
+
+	if ($addpanel != '' && $dashboard_id > 0) {
+		db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
+			(panel_id, user_id, dashboard_id)
+			VALUES (?, ?, ?)',
+			array($addpanel, $_SESSION['sess_user_id'], $dashboard_id));
+
+		// Refresh the data if allowed
+	}
+}
+
+function intropage_action_settings() {
+	foreach($_POST as $var => $value) {
+		if (strpos($var, 'name_') !== false) {
+			$dashboard_id = str_replace('name_', '', $var);
+
+			db_execute_prepared('REPLACE INTO plugin_intropage_dashboard
+				(user_id, dashboard_id, name)
+				VALUES (?, ?, ?)',
+				array($_SESSION['sess_user_id'], $dashboard_id, $value));
+		}
+	}
+
+	// panel refresh
+	$panels = db_fetch_assoc_prepared('SELECT t1.panel_id AS panel_name, t1.id AS id
+		FROM plugin_intropage_panel_data AS t1
+		INNER JOIN plugin_intropage_panel_dashboard AS t2
+		ON t1.id=t2.panel_id
+		WHERE t2.user_id = ?
+		AND t1.fav_graph_id IS NULL',
+		array($_SESSION['sess_user_id']));
+
+	if (cacti_sizeof($panels)) {
+		foreach ($panels as $panel) {
+			$interval = get_filter_request_var('crefresh_' . $panel['id'], FILTER_VALIDATE_INT);
+
+			if ($interval >= 60 && $interval <= 999999999) {
+				db_execute_prepared('UPDATE plugin_intropage_panel_data
+					SET refresh_interval = ?
+					WHERE id = ?',
+					array($interval, $panel['id']));
+			}
+		}
+	}
+
+	raise_message(1);
+}
+
+function intropage_actions() {
+	global $login_opts, $config;
+
+	$actionvar = get_filter_request_var('intropage_action', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')));
+
+	$values = explode('_', $actionvar);
+
+	// few parameters from input type select has format reset_all, refresh_180, ... first is action
+	$action = $values[0];
+
+	if (isset($values[1])) {
+		$value = trim($values[1]);
+	} else {
+		$value = '';
+	}
+
+	switch ($action) {
+	case 'droppanel':
+		if (get_filter_request_var('panel_id')) {
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+				WHERE user_id = ? AND panel_id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+		}
+
+		break;
+	case 'removepage':
+		if (filter_var($value, FILTER_VALIDATE_INT)) {
+			db_execute_prepared('DELETE FROM plugin_intropage_dashboard
+				WHERE user_id = ?
+				AND dashboard_id = ?',
+				array($_SESSION['sess_user_id'], $value));
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+				WHERE user_id = ?
+				AND dashboard_id = ?',
+				array($_SESSION['sess_user_id'], $value));
+
+			$dashboard_id = db_fetch_cell_prepared('SELECT MIN(dashboard_id)
+				FROM plugin_intropage_dashboard
+				WHERE user_id = ?',
+				array($_SESSION['sess_user_id']));
+
+			raise_message('dashboard_removed', __('Dashboard has been removed', 'intropage'), MESSAGE_LEVEL_INFO);
+
+			if ($login_opts == 4) {
+				header('Location: ' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?header=false&dashboard_id=' . $dashboard_id);
+			} else {
+				header('Location: ' . html_escape($config['url_path']) . 'index.php?header=false&dashboard_id=' . $dashboard_id);
+			}
+
+			exit;
+		}
+
+		break;
+	case 'addpage':
+		if (filter_var($value, FILTER_VALIDATE_INT)) {
+			$dashboard_id = db_fetch_cell_prepared('SELECT MAX(dashboard_id)+1
+				FROM plugin_intropage_dashboard
+				WHERE user_id = ?',
+				array($_SESSION['sess_user_id']));
+
+			db_execute_prepared('INSERT INTO plugin_intropage_dashboard
+				(user_id, dashboard_id, name)
+				VALUES (?, ?, ?)',
+				array($_SESSION['sess_user_id'], $dashboard_id, __('New Dashboard', 'intropage')));
+
+			raise_message('dashboard_added', __('Dashboard has been added', 'intropage'), MESSAGE_LEVEL_INFO);
+
+			if ($login_opts == 4) {
+				header('Location: ' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?header=false&dashboard_id=' . $dashboard_id);
+			} else {
+				header('Location: ' . html_escape($config['url_path']) . 'index.php?header=false&dashboard_id=' . $dashboard_id);
+			}
+
+			exit;
+		}
+
+		break;
+	case 'favgraph':
+		if (get_filter_request_var('graph_id')) {
+			// already fav?
+			$exists = db_fetch_cell_prepared('SELECT COUNT(*)
+				FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND fav_graph_id = ?
+				AND fav_graph_timespan = ?',
+				array($_SESSION['sess_user_id'], get_request_var('graph_id'), $_SESSION['sess_current_timespan']));
+
+			if ($exists) {
+				db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+					WHERE user_id = ?
+					AND fav_graph_id = ?
+					AND fav_graph_timespan = ?',
+					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
+			}
+
+			if ($_SESSION['sess_current_timespan'] == 0) {
+				raise_message('custom_error',__('Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour'));
+				$span = 1;
+			} else {
+				$span = $_SESSION['sess_current_timespan'];
+			}
+
+			$prio = db_fetch_cell_prepared('SELECT MAX(priority) + 1
+				FROM plugin_intropage_panel_data
+				WHERE user_id = ?',
+				array($_SESSION['sess_user_id']));
+
+			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
+				(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
+				VALUES (?, "favourite_graph", ?, ?, ?)',
+				array($_SESSION['sess_user_id'],get_request_var('graph_id'), $span, $prio));
+
+			$id = db_fetch_insert_id();
+			db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
+				(panel_id, user_id, dashboard_id) VALUES ( ?, ?, ?)',
+				array($id, $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+		}
+
+		break;
+	case 'order':
+		if (isset_request_var('xdata')) {
+			$error = false;
+			$order = array();
+			$priority = 90; // >90 are fav. graphs
+
+			foreach (get_nfilter_request_var('xdata') as $data) {
+				list($a, $b) = explode('_', $data);
+
+				if (filter_var($b, FILTER_VALIDATE_INT)) {
+					array_push($order, $b);
+				} else {
+					$error = true;
+				}
+
+				if (!$error) {
+					db_execute_prepared('UPDATE plugin_intropage_panel_data
+						SET priority = ?
+						WHERE user_id = ?
+						AND id = ?',
+						array ($priority, $_SESSION['sess_user_id'], $b));
+
+  					$priority--;
+				}
+			}
+		}
+
+		break;
+	case 'refresh':
+		if (filter_var($value, FILTER_VALIDATE_INT)) {
+			set_user_setting('intropage_autorefresh', $value);
+		}
+
+		break;
+	case 'important':
+		if ($value == 'first') {
+			set_user_setting('intropage_display_important_first', 'on');
+		} else {
+			set_user_setting('intropage_display_important_first', 'off');
+		}
+
+		break;
+	case 'loginopt':
+		if ($value == 'graph') {
+			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 3 WHERE id = ?', array($_SESSION['sess_user_id']));
+		} elseif ($value == 'console') {
+			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 2 WHERE id = ?', array($_SESSION['sess_user_id']));
+		} elseif ($value == 'tab') {
+			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 4 WHERE id = ?', array($_SESSION['sess_user_id']));
+		}
+	}
+}
+
+function is_panel_enabled($panel_id) {
+	$panels = initialize_panel_library();
+
+	// Panel library prunes unavailable panels
+	if (!isset($panels[$panel_id])) {
+		return false;
+	}
+
+	return true;
+}
+
+function is_panel_allowed($panel_id, $user_id = 0) {
+	static $permissions = array();
+
+	if ($user_id == 0) {
+		$user_id = $_SESSION['sess_user_id'];
+	}
+
+	if (!isset($permissions[$user_id])) {
+		$perms = json_decode(
+			db_fetch_cell_prepared('SELECT permissions
+				FROM plugin_intropage_user_auth
+				WHERE user_id = ?',
+				array($user_id)),
+			true
+		);
+
+		$permissions[$user_id] = $perms;
+	}
+
+	if (isset($permissions[$user_id][$panel_id])) {
+		if ($permissions[$user_id][$panel_id] == 'on') {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function get_allowed_panels($user_id = 0) {
+	if ($user_id == 0) {
+		$user_id = $_SESSION['sess_user_id'];
+	}
+
+	return json_decode(
+		db_fetch_cell_prepared('SELECT permissions
+			FROM plugin_intropage_user_auth
+			WHERE user_id = ?',
+			array($user_id)),
+		true
+	);
+}
+
+function intropage_reload_panel() {
+	global $panels;
+
+	$panel_id = get_filter_request_var('panel_id');
+
+	$forced_update = get_nfilter_request_var('force') == 'true' ? true:false;
+
+	$panel = db_fetch_row_prepared('SELECT *
+		FROM plugin_intropage_panel_data
+		WHERE id = ?
+		AND user_id IN (0, ?)',
+		array($panel_id, $_SESSION['sess_user_id']));
+
+	// Close the session to allow other tabs to operate
+	session_write_close();
+
+	if (cacti_sizeof($panel)) {
+		// Source panel
+		$spanel = $panels[$panel['panel_id']];
+
+		if ($panel['fav_graph_id'] > 0) {
+			$data = intropage_favourite_graph($panel['fav_graph_id'], $panel['fav_graph_timespan']);
+		} elseif (cacti_sizeof($spanel)) {
+			$function = $spanel['update_func'];
+			$user_id  = ($spanel['level'] == PANEL_SYSTEM ? 0 : $_SESSION['sess_user_id']);
+
+			$qpanel = get_panel_details($panel['panel_id'], $user_id);
+
+			if (function_exists($function)) {
+				if ($forced_update || time() > ($qpanel['last'] + $qpanel['refresh'])) {
+					// Reload the data
+					$function($qpanel, $user_id);
+				}
+
+				// Return the data for display
+				$data = display_panel_results($qpanel['panel_id'], $user_id);
+			} else {
+				$data = __('The Panel includes a render function but it does not exist.', 'intropage');
+			}
+		} else {
+			$data = __('The Panel does not have a render function.', 'intropage');
+		}
+
+		intropage_display_data($panel_id, $data);
+
+		$css  = isset($data['alarm']) && $data['alarm'] !== '' ? $data['alarm'] : 'grey';
+		$name = isset($data['name'])  ? html_escape($data['name']):__esc('Not Found', 'intropage');
+
+		?>
+		<script type='text/javascript'>
+			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_name').html('<?php print $name;?>');
+			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_green');
+			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_yellow');
+			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_red');
+			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_grey');
+			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').addClass('color_<?php print $css;?>');
+		<?php
+
+		if (!empty($spanel['details_func'])) {
+			print "$('#panel_'+" . get_request_var('panel_id') . ").find('.maxim').show();";
+		} else {
+			print "$('#panel_'+" . get_request_var('panel_id') . ").find('.maxim').hide();";
+		}
+		?>
+		</script>
+		<?php
+	} elseif ($panel_id == 998) {	// exception for admin alert panel
+		print nl2br(read_config_option('intropage_admin_alert'));
+	} elseif ($panel_id == 997) {	// exception for maint panel
+		if (function_exists('intropage_maint')) {
+			print intropage_maint();
+		}
+	} else {
+		print __('Panel not found');
+	}
+
+	exit;
+}
+
+function intropage_detail_panel() {
+	global $panels;
+
+	$panel_id = get_filter_request_var('panel_id');
+
+	if ($panel_id != 'analyze_db') {
+		$forced_update = filter_var(get_nfilter_request_var('force'), FILTER_VALIDATE_BOOLEAN);
+	} else {
+		$forced_update = false;
+	}
+
+	$panel = get_panel_details($panel_id, $_SESSION['sess_user_id']);
+
+	// Close the session to allow other tabs to operate
+	session_write_close();
+
+	if (cacti_sizeof($panel)) {
+		$spanel         = $panel['definition'];
+		$data['alarm']  = $spanel['alarm'];
+		$data['name']   = $spanel['name'];
+		$data['detail'] = '';
+
+		$function = $spanel['details_func'];
+
+		if (function_exists($function)) {
+			$data = $function();
+		} else {
+			$data['detail'] = __('Details Function does not exist.', 'intropage');
+		}
+
+		print '<div id="block" class="color_' . $data['alarm'] . '" ></div>';
+		print '<h3 style="display: inline">'  . $data['name']  . '</h3>';
+		print '<br/><br/>' . $data['detail'];
+	} else {
+		print __('Panel Not Found');
+	}
+
+	exit;
+}
+
+function intropage_autoreload() {
+	$last_poller = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)
+		FROM plugin_intropage_trends
+		WHERE name='ar_poller_finish'");
+
+	$last_disp = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
+		FROM plugin_intropage_trends
+		WHERE name = ?',
+		array('ar_displayed_' . $_SESSION['sess_user_id']));
+
+	if (!$last_disp) {
+		db_execute_prepared('INSERT INTO plugin_intropage_trends (name,value)
+			VALUES (?, NOW())',
+			array('ar_displayed_' . $_SESSION['sess_user_id']));
+
+		$last_disp = $last_poller;
+	}
+
+	if ($last_poller > $last_disp) {
+		db_execute_prepared("UPDATE plugin_intropage_trends
+			SET cur_timestamp = NOW(), value = NOW()
+			WHERE name = ?",
+			array('ar_displayed_' . $_SESSION['sess_user_id']));
+
+		print '1';
+	} else {
+		print '0';
+	}
+
+	exit;
+}
+
+function get_panel_details($panel_id, $user_id = 0) {
+	// Either fetch by row id or panel_id
+	if (is_numeric($panel_id)) {
+		$panel = db_fetch_row_prepared('SELECT *, UNIX_TIMESTAMP(last_update) AS ts
+			FROM plugin_intropage_panel_data
+			WHERE id = ?
+			AND user_id IN (0, ?)
+			LIMIT 1',
+			array($panel_id, $user_id));
+
+		$panel_id = $panel['panel_id'];
+	} else {
+		$panel = db_fetch_row_prepared('SELECT *, UNIX_TIMESTAMP(last_update) AS ts
+			FROM plugin_intropage_panel_data
+			WHERE panel_id = ?
+			AND user_id IN(0, ?)
+			LIMIT 1',
+			array($panel_id, $user_id));
+	}
+
+	$definition = db_fetch_row_prepared('SELECT *
+		FROM plugin_intropage_panel_definition
+		WHERE panel_id = ?',
+		array($panel_id));
+
+	if (cacti_sizeof($panel)) {
+		$last_update      = $panel['ts'];
+		$refresh_interval = $panel['refresh_interval'];
+		$next_update      = $last_update + $refresh_interval - time();
+
+		$panel['name']    = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
+	} else {
+		$last_update      = time();
+		$refresh_interval = $definition['refresh'];
+		$next_update      = $refresh_interval;
+
+		$panel = array();
+
+		$panel['id']               = 0;
+		$panel['panel_id']         = $panel_id;
+		$panel['user_id']          = ($definition['level'] == PANEL_SYSTEM ? 0 : $_SESSION['sess_user_id']);
+		$panel['last_update']      = $last_update;
+		$panel['data']             = '';
+		$panel['priority']         = $definition['priority'];
+		$panel['alarm']            = $definition['alarm'];
+		$panel['refresh_interval'] = $definition['refresh'];
+		$panel['force']            = (isset($definition['force']) ? $definition['force']:true;
+
+		$panel['id']   = sql_save($panel, 'plugin_intropage_panel_data');
+		$panel['name'] = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
+	}
+
+	return array(
+		'id'         => $panel['id'],
+		'panel_id'   => $panel_id,
+		'name'       => $panel['name'],
+		'last'       => $last_update,
+		'data'       => '',
+		'next'       => $next_update,
+		'alarm'      => $panel['alarm'],
+		'refresh'    => $refresh_interval,
+		'panel'      => $panel,
+		'definition' => $definition
+	);
+}
+
+function intropage_readable_interval($value, $round = 0, $short = true) {
+	if ($value <= 0) {
+		return '-';
+	}
+
+	if ($value < 60) {
+		$value = round($value, $round);
+		return $short ? __('%s Sec', $value, 'intropage') : __('%s Seconds', $value, 'intropage');
+	} else {
+		$value = $value / 60;
+	}
+
+	if ($value < 60) {
+		$value = round($value, $round);
+		return $short ? __('%s Min', $value, 'intropage') : __('%s Minutes', $value, 'intropage');
+	} else {
+		$value = $value / 60;
+	}
+
+	if ($value < 24) {
+		$value = round($value, $round);
+		return $short ? __('%s Hrs', $value, 'intropage') : __('%s Hours', $value, 'intropage');
+	} else {
+		$value = $value / 24;
+		$value = round($value, $round);
+		return __('%s Days', $value, 'intropage');
+	}
+}
+
+function get_user_list() {
+	global $config;
+
+	if ($config['is_web'] && $_SESSION['sess_user_id'] > 0) {
+		// specific user wants his panel only
+		$users = array(
+			array(
+				'id' => $_SESSION['sess_user_id']
+			)
+		);
+	} else { // poller wants all
+		$users = db_fetch_assoc("SELECT t1.id AS id
+			FROM user_auth AS t1
+			JOIN plugin_intropage_user_auth AS t2
+			ON t1.id = t2.user_id
+			WHERE t1.enabled = 'on'");
+	}
+
+	return $users;
+}
+
+function save_panel_result($panel, $user_id = 0) {
+	db_execute_prepared('UPDATE plugin_intropage_panel_data
+		SET data = ?, alarm = ?, user_id = ?, last_update = NOW()
+		WHERE id = ?',
+		array($panel['data'], $panel['alarm'], $user_id, $panel['id']));
+}
+
+function display_panel_results($panel_id, $user_id = 0) {
+	$panel = get_panel_details($panel_id, $user_id);
+
+	$data = db_fetch_row_prepared("SELECT id, data, alarm, last_update,
+		concat(floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
+		MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
+		TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im')) AS recheck
+		FROM plugin_intropage_panel_data
+		WHERE panel_id = ?
+		AND user_id = ?",
+		array($panel_id, $user_id));
+
+	if (cacti_sizeof($data) && trim($data['data']) == '') {
+		if ($panel['force'] == true) {
+			$data['data'] = __('No Data Present.  Either Force Update, or wait for next Cacti Polling cycle.', 'intropage');
+		} else {
+			$data['data'] = __('No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti\'s Poller to perform the check.', 'intropage');
+		}
+	}
+
+	$data['name'] = $panel['name'];
+
+	return $data;
+}
+
+function get_console_access($user_id) {
+	return (db_fetch_assoc_prepared('SELECT realm_id
+		FROM user_auth_realm
+		WHERE user_id = ?
+		AND user_auth_realm.realm_id=8',
+		array($user_id))) ? true : false;
+}
+
+function initialize_panel_library() {
+	global $config, $registry;
+
+	static $panel_library = array();
+
+	if (!sizeof($panel_library)) {
+		$panels    = array();
+		$uninstall = array();
+
+		$files  = glob($config['base_path'] . '/plugins/intropage/panellib/*.php');
+
+		if (cacti_sizeof($files)) {
+			foreach($files as $file) {
+				$basename = str_replace('.php', '', basename($file));
+
+				if (basename($file) != 'index.php') {
+					include_once($file);
+				}
+
+				if (function_exists('register_' . $basename)) {
+					$base_panels = call_user_func('register_' . $basename);
+
+					// Check to see if the panel should be activated
+					foreach($base_panels as $panel_id => $p) {
+						if (isset($p['requires']) && $p['requires'] !== false) {
+							$plugins = explode(' ', $p['requires']);
+							foreach($plugins as $plugin) {
+								$status = db_fetch_cell_prepared('SELECT `status`
+									FROM plugin_config
+									WHERE directory = ?',
+									array($plugin));
+
+								if (empty($status)) {
+									$uninstall[] = $panel_id;
+									unset($base_panels[$panel_id]);
+									break;
+								}
+							}
+						}
+					}
+
+					$panels += $base_panels;
+				}
+			}
+		}
+
+		// Handle unregistered panels
+		if (cacti_sizeof($uninstall) && read_config_option('intropage_unregister') == 'on') {
+			foreach($uninstall as $panel_id) {
+				$id = db_fetch_cell_prepared('SELECT id
+					FROM plugin_intropage_panel_data
+					WHERE panel_id = ?',
+					array($panel_id));
+
+				if ($id > 0) {
+					db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+						WHERE panel_id = ?',
+						array($id));
+
+					db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+						WHERE id = ?',
+						array($id));
+
+					db_execute_prepared('DELETE FROM plugin_intropage_definition
+						WHERE panel_id = ?',
+						array($panel_id));
+				}
+			}
+		}
+
+		$panel_library = $panels;
+
+		$_SESSION['intropage_panel_library'] = $panel_library;
+	}
+
+	return $panel_library;
+}
+
+function update_registered_panels($panels) {
+	$prefix = 'INSERT INTO plugin_intropage_panel_definition
+		(panel_id, name, level, class, priority, alarm, requires, update_func, details_func, trends_func, refresh, description) VALUES';
+
+	$suffix = 'ON DUPLICATE KEY UPDATE
+		name=VALUES(name),
+		level=VALUES(level),
+		class=VALUES(class),
+		priority=VALUES(priority),
+		alarm=VALUES(alarm),
+		requires=VALUES(requires),
+		update_func=VALUES(update_func),
+		details_func=VALUES(details_func),
+		trends_func=VALUES(trends_func),
+		description=VALUES(description)';
+
+	$sql = array();
+
+	if (cacti_sizeof($panels)) {
+		foreach($panels as $panel_id => $panel) {
+			$sql[] = '(' .
+				db_qstr($panel_id)              . ', ' .
+				db_qstr($panel['name'])         . ', ' .
+				db_qstr($panel['level'])        . ', ' .
+				db_qstr($panel['class'])        . ', ' .
+				db_qstr($panel['priority'])     . ', ' .
+				db_qstr($panel['alarm'])        . ', ' .
+				db_qstr($panel['requires'])     . ', ' .
+				db_qstr($panel['update_func'])  . ', ' .
+				db_qstr($panel['details_func']) . ', ' .
+				db_qstr($panel['trends_func'])  . ', ' .
+				db_qstr($panel['refresh'])      . ', ' .
+				db_qstr($panel['description'])  .
+				')';
+		}
+
+		db_execute($prefix . implode(', ', $sql) . $suffix);
+	}
+}
+
 function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 	global $config, $graph_timeshifts;
 
 	if (isset($fav_graph_id)) {
 		$result = array(
 			'name' => __('Favourite graph', 'intropage'),
-			'alarm' => 'gray',
+			'alarm' => 'grey',
 			'data' => '',
 		);
 
@@ -75,6 +863,9 @@ function intropage_prepare_graph($dispdata) {
 		case 'dark':
 			$bgcolor = '#161616';
 			break;
+		case 'midwinter':
+			$bgcolor = '#242635';
+			break;
 		case 'paper-plane':
 			$bgcolor = '#202020';
 			break;
@@ -91,8 +882,8 @@ function intropage_prepare_graph($dispdata) {
 	if (isset($dispdata['line'])) {
 		$xid = 'x' . substr(md5($dispdata['line']['title1']), 0, 7);
 
-		$content .= "<div style=\"background: $bgcolor;\"><canvas id=\"line_$xid\"></canvas>\n";
-		$content .=  "<script type='text/javascript'>\n";
+		$content .= "<div class='chart_wrapper center'><canvas id=\"line_$xid\"></canvas>";
+		$content .=  "<script type='text/javascript'>";
 
 		$title1      = $dispdata['line']['title1'];
 		$line_labels = implode('","', $dispdata['line']['label1']);
@@ -118,59 +909,60 @@ function intropage_prepare_graph($dispdata) {
 			$title5       = $dispdata['line']['title5'];
 		}
 
-		$content .= "var $xid = document.getElementById('line_" . $xid . "').getContext('2d');\n";
-		$content .= "new Chart($xid, {\n";
-		$content .= "type: 'line',\n";
-		$content .= "data: {\n";
-		$content .= "labels: [\"" . $line_labels . "\"],\n";
-		$content .= "datasets: [{\n";
-		$content .= "label: '" . $title1 . "',\n";
-		$content .= "data: [" . $line_values . "],\n";
-		$content .= "borderColor: 'rgba(220,220,220,0.5)',\n";
-		$content .= "backgroundColor: 'rgba(220,220,220,0.5)',\n";
-		$content .= "},\n";
+		$content .= "var $xid = document.getElementById('line_" . $xid . "').getContext('2d');";
+		$content .= "new Chart($xid, {";
+		$content .= "type: 'line',";
+		$content .= "options: {responsive: true, maintainAspectRatio: false},";
+		$content .= "data: {";
+		$content .= "labels: [\"" . $line_labels . "\"],";
+		$content .= "datasets: [{";
+		$content .= "label: '" . $title1 . "',";
+		$content .= "data: [" . $line_values . "],";
+		$content .= "borderColor: 'rgba(220,220,220,0.5)',";
+		$content .= "backgroundColor: 'rgba(220,220,220,0.5)',";
+		$content .= "},";
 
 		if (!empty($dispdata['line']['data2'])) {
-			$content .= "{\n";
-			$content .= "label: '" . $title2 . "',\n";
-			$content .= "data: [" . $line_values2 . "],\n";
-			$content .= "borderColor: '#0f0f00',\n";
-			$content .= "},\n";
+			$content .= "{";
+			$content .= "label: '" . $title2 . "',";
+			$content .= "data: [" . $line_values2 . "],";
+			$content .= "borderColor: '#0f0f00',";
+			$content .= "},";
 		}
 
 		if (!empty($dispdata['line']['data3'])) {
-			$content .= "{\n";
-			$content .= "label: '" . $title3 . "',\n";
-			$content .= "data: [" . $line_values3 . "],\n";
-			$content .= "borderColor: '#f0000f',\n";
-			$content .= "},\n";
+			$content .= "{";
+			$content .= "label: '" . $title3 . "',";
+			$content .= "data: [" . $line_values3 . "],";
+			$content .= "borderColor: '#f0000f',";
+			$content .= "},";
 		}
 
 		if (!empty($dispdata['line']['data4'])) {
-			$content .= "{\n";
-			$content .= "label: '" . $title4 . "',\n";
-			$content .= "data: [" . $line_values4 . "],\n";
-			$content .= "borderColor: '#f0000f',\n";
-			$content .= "},\n";
+			$content .= "{";
+			$content .= "label: '" . $title4 . "',";
+			$content .= "data: [" . $line_values4 . "],";
+			$content .= "borderColor: '#f0000f',";
+			$content .= "},";
 		}
 
 		if (!empty($dispdata['line']['data5'])) {
-			$content .= "{\n";
-			$content .= "label: '" . $title5 . "',\n";
-			$content .= "data: [" . $line_values5 . "],\n";
-			$content .= "borderColor: '#f0000f',\n";
-			$content .= "},\n";
+			$content .= "{";
+			$content .= "label: '" . $title5 . "',";
+			$content .= "data: [" . $line_values5 . "],";
+			$content .= "borderColor: '#f0000f',";
+			$content .= "},";
 		}
 
-		$content .= "]\n";
-		$content .= "},\n";
-		$content .= "options: {\n";
-		$content .= "responsive: false,\n";
-		$content .= "tooltipTemplate: '<%= value %>%'\n";
-		$content .= "}\n";
-		$content .= "});\n";
-		$content .= "</script>\n";
-		$content .= "</div>\n";
+		$content .= "]";
+		$content .= "},";
+		$content .= "options: {";
+		$content .= "responsive: false,";
+		$content .= "tooltipTemplate: '<%= value %>%'";
+		$content .= "}";
+		$content .= "});";
+		$content .= "</script>";
+		$content .= "</div>";
 	} // line graph end
 
 	if (isset($dispdata['pie'])) {
@@ -180,39 +972,39 @@ function intropage_prepare_graph($dispdata) {
 			$labely[$key] = $val . ' (' . $dispdata['pie']['data'][$key] . ')';
 		}
 
-		$content .= "<div style=\"background: $bgcolor;\"><canvas id=\"pie_$xid\"></canvas>\n";
-		$content .= "<script type='text/javascript'>\n";
+		$content .= "<div class='chart_wrapper center'><canvas id=\"pie_$xid\"></canvas>";
+		$content .= "<script type='text/javascript'>";
 
 		$pie_labels = implode('","', $labely);
 
 		$pie_values = implode(',', $dispdata['pie']['data']);
 		$pie_title  = $dispdata['pie']['title'];
 
-		$content .= "var $xid = document.getElementById('pie_" . $xid . "').getContext('2d');\n";
-		$content .= "new Chart($xid, {\n";
-		$content .= "type: 'pie',\n";
-		$content .= "data: {\n";
-		$content .= "labels: [\"" . $pie_labels . "\"],\n";
-		$content .= "datasets: [{\n";
-		$content .= "backgroundColor: [ '#2ecc71', '#e74c3c', '#f1c40f', '#6b6966', '#3498db', '#33ffe6', ],\n";
-		$content .= "data: [" . $pie_values . "]\n";
-		$content .= "}]\n";
-		$content .= "},\n";
-		$content .= "options: {\n";
-		$content .= "responsive: false,\n";
-		$content .= "title: { display: false, text: '" . $pie_title . "' },\n";
-		$content .= "legend: {\n";
-		$content .= "display: true,\n";
-		$content .= "position: 'right',\n";
-		$content .= "labels: {\n";
-		$content .= "usePointStyle: true,\n";
-		$content .= "}\n";
-		$content .= "},\n";
-		$content .= "tooltipTemplate: '<%= value %>%'\n";
-		$content .= "}\n";
-		$content .= "});\n";
-		$content .= "</script>\n";
-		$content .= "</div>\n";
+		$content .= "var $xid = document.getElementById('pie_" . $xid . "').getContext('2d');";
+		$content .= "new Chart($xid, {";
+		$content .= "type: 'pie',";
+		$content .= "data: {";
+		$content .= "labels: [\"" . $pie_labels . "\"],";
+		$content .= "datasets: [{";
+		$content .= "backgroundColor: [ '#2ecc71', '#e74c3c', '#f1c40f', '#6b6966', '#3498db', '#33ffe6', ],";
+		$content .= "data: [" . $pie_values . "]";
+		$content .= "}]";
+		$content .= "},";
+		$content .= "options: {";
+		$content .= "responsive: false,";
+		$content .= "title: { display: false, text: '" . $pie_title . "' },";
+		$content .= "legend: {";
+		$content .= "display: true,";
+		$content .= "position: 'right',";
+		$content .= "labels: {";
+		$content .= "usePointStyle: true,";
+		$content .= "}";
+		$content .= "},";
+		$content .= "tooltipTemplate: '<%= value %>%'";
+		$content .= "}";
+		$content .= "});";
+		$content .= "</script>";
+		$content .= "</div>";
 	}   // pie graph end
 
 	return (addslashes($content));
@@ -278,43 +1070,46 @@ function human_filesize($bytes, $decimals = 2) {
 function intropage_display_panel($panel_id) {
 	global $config;
 
-	print '<li id="panel_' . $panel_id . '" class="flexchild">';
-	print '<div class="cactiTable" style="text-align:left; float: left; box-sizing: border-box;">';
+	$panels = initialize_panel_library();
 
-	print '<div class="panel_header color_gray">';
+	$k_id = db_fetch_cell_prepared('SELECT panel_id
+		FROM plugin_intropage_panel_data
+		WHERE id = ?',
+		array($panel_id));
+
+	$width = $panels[$k_id]['width'];
+
+	print '<li id="panel_' . $panel_id . '" class="' . $width . ' flexchild">';
+	print '<div class="panel_wrapper">';
+
+	print '<div class="panel_header color_grey">';
 	print '<span class="panel_name"></span>';
 
-	printf("<a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>\n", "?intropage_action=droppanel&panel_id=$panel_id");
+	printf("<a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "?intropage_action=droppanel&panel_id=$panel_id");
 
-	printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>\n");
+	if (isset($panels[$k_id]['force']) && $panels[$k_id]['force'] === true) {
+		printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>");
+	}
 
-	printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a>\n", $panel_id);
+	printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id);
 
-	print " </div>\n";
-	print "	<table class='cactiTable'>\n";
-	print "	    <tr><td class='textArea' style='vertical-align: top;'>\n";
+	print ' </div>';
+	print "	<table class='cactiTable'>";
+	print "	    <tr><td class='textArea' style='vertical-align: top;'>";
 
-	print "<div class='panel_data'>\n";
+	print "<div class='panel_data'>";
 	print __('Loading data ...', 'intropage');
-	print "</div>\n";	// end of panel_data
-	print "</td></tr>\n\n";
+	print '</div>';	// end of panel_data
+	print '</td></tr>';
 	html_end_box(false);
-	print "</li>\n\n";
+	print '</li>';
 }
 
-function intropage_display_data($panel_id,$dispdata) {
-	global $config;
-
-	if (isset($dispdata['data'])) {	// display text data
-		print stripslashes($dispdata['data']);
-
-		if (is_null(db_fetch_cell_prepared('SELECT fav_graph_id FROM plugin_intropage_panel_data where id= ?',
-			array($panel_id))))	{
-
-
-			print '<br/>' . __('Last update','intropage') . ': ' . $dispdata['last_update'] . '/' . 
-				 __('Recheck every','intropage') .': ' . $dispdata['recheck'];
-		}
+function intropage_display_data($panel_id, $data) {
+	if (isset($data['data']) && trim($data['data']) != '') {
+		print stripslashes($data['data']);
+	} else {
+		print '<table class="cactiTable"><tr><td>' . __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage') . '</td></tr></table>';
 	}
 }
 
@@ -342,116 +1137,187 @@ function ntp_time($host) {
 			// Unix time is seconds since 0000 UT on 1 January 1970
 			$timestamp -= 2208988800;
 		} else {
-		    $timestamp = "error";
+		    $timestamp = 'error';
 		}
 	} else {
-	    $timestamp = "error";
+	    $timestamp = 'error';
 	}
 
 	return ($timestamp);
 }
 
 function intropage_graph_button($data) {
-	global $config;
+	global $config, $login_opts;
 
-	if (db_fetch_cell_prepared('SELECT favourite_graph FROM plugin_intropage_user_auth
-		WHERE user_id= ?', array($_SESSION['sess_user_id'])) == 'on') {
+	if (is_panel_allowed('favourite_graph')) {
 		$local_graph_id = $data[1]['local_graph_id'];
-
 
 		if ($_SESSION['sess_current_timespan'] == 0)	{	// zoom or custom timespan
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Cannot add to Dashboard. Custom timespan.', 'intropage') . '"></i>';
-		}
-		else if (db_fetch_cell_prepared('SELECT COUNT(*) FROM plugin_intropage_panel_data
-			WHERE user_id= ? AND fav_graph_id= ? AND fav_graph_timespan= ?',
-			array($_SESSION['sess_user_id'],$local_graph_id,$_SESSION['sess_current_timespan'])) > 0) {       // already fav
-			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
-		} else {       // add to fav
-			$fav = '<i class="fa fa-eye" title="' . __esc('Add to Dashboard', 'intropage') . '"></i>';
+		} else {
+			$present = db_fetch_cell_prepared('SELECT COUNT(*)
+				FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND fav_graph_id = ?
+				AND fav_graph_timespan = ?',
+				array($_SESSION['sess_user_id'], $local_graph_id, $_SESSION['sess_current_timespan']));
+
+			if ($present) {
+				$fav = '<i class="fa fa-eye-slash" title="' . __esc('Remove from Dashboard', 'intropage') . '"></i>';
+			} else {
+				$fav = '<i class="fa fa-eye" title="' . __esc('Add to Dashboard', 'intropage') . '"></i>';
+			}
 		}
 
-		$lopts = db_fetch_cell_prepared('SELECT login_opts
-			FROM user_auth
-			WHERE id = ?',
-			array($_SESSION['sess_user_id']));
-
-		if ($lopts == 4) { // in tab
-			print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . 'plugins/intropage/intropage.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
-		} else {	// in console
-			print '<a class="iconLink" href="' . htmlspecialchars($config['url_path']) . '?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
+		if ($login_opts == 4) {
+			print '<a class="iconLink" href="' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
+		} else {
+			print '<a class="iconLink" href="' . html_escape($config['url_path']) . 'index.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
 		}
 	}
 }
 
-function display_setting ()	{
-
-	$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
-	
-	$dnames = db_fetch_assoc_prepared ('SELECT dashboard_id, name FROM plugin_intropage_dashboard WHERE user_id = ? ORDER BY dashboard_id',
+function get_login_opts() {
+	if (empty($_SESSION['intropage_login_opts'])) {
+		// potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+		$login_opts = db_fetch_cell_prepared('SELECT login_opts
+			FROM user_auth
+			WHERE id = ?',
 			array($_SESSION['sess_user_id']));
 
-	$dnames = array_column($dnames,'name','dashboard_id');
-	$dashboard_name = array();
-	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
-		if (array_key_exists($f,$dnames))	{
-			$dashboard_name[$f] = $dnames[$f];
-		}
-		else	{
-			$dashboard_name[$f] = $f;
-		}
+		$_SESSION['intropage_login_opts'] = $login_opts;
 	}
+
+	return $_SESSION['intropage_login_opts'];
+}
+
+function intropage_configure_panel() {
+	global $config, $login_opts;
+
+	$dashboards = array_rekey(
+		db_fetch_assoc_prepared('SELECT dashboard_id, name
+			FROM plugin_intropage_dashboard
+			WHERE user_id = ?
+			ORDER BY dashboard_id',
+			array($_SESSION['sess_user_id'])),
+		'dashboard_id', 'name'
+	);
 
 	print '<div>';
-	print "<form method='post'>";
-		
-	print '<b>' . __('Configure dashboard names:', 'intropage') . '</b><br/>';
 
-	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
-		print __('Dashboard %s: ', $f, 'intropage');
-		print '<input type="text" name="name_' . $f . '" value="' . $dashboard_name[$f]  . '"></br>';
+	if ($login_opts == 4) {
+		$pageName = $config['url_path'] . 'plugins/intropage/intropage.php';
+	} else {
+		$pageName = 'index.php';
 	}
-	print '<br/><br/>';
 
-        $panels = db_fetch_assoc_prepared('SELECT t1.panel_id AS panel_id,t1.id AS id, refresh_interval, t1.user_id AS user_id
-        		FROM plugin_intropage_panel_data AS t1
-                        JOIN plugin_intropage_panel_dashboard AS t2
-                        ON t1.id=t2.panel_id 
-                        WHERE t2.user_id= ?
-                        AND t1.fav_graph_id IS NULL 
-                        ORDER BY t2.dashboard_id',
-                        array($_SESSION['sess_user_id']));
+	form_start($pageName);
+
+	html_start_box(__('Dashboard Names', 'intropage'), '100%', '', '3', 'center', '');
+
+	$class = 'odd';
+
+	foreach($dashboards as $f => $name) {
+		$class = ($class == 'odd' ? 'even':'odd');
+
+		print '<div id="row_name_' . $f . '" class="formRow ' . $class . '">
+			<div class="formColumnLeft">
+				<div class="formFieldName">' . __('Dashboard %s', $f, 'intropage') . '</div>
+			</div>
+			<div class="formColumnRight">
+				<div class="formData">';
+
+		print '<input type="text" name="name_' . $f . '" value="' . html_escape($name)  . '"></br>';
+
+		print '</div></div>';
+	}
+
+	html_end_box();
+
+	$intervals = array(
+		'60'    => __('%d Minute', 1, 'intropage'),
+		'120'   => __('%d Minutes', 2, 'intropage'),
+		'180'   => __('%d Minutes', 3, 'intropage'),
+		'240'   => __('%d Minutes', 4, 'intropage'),
+		'300'   => __('%d Minutes', 5, 'intropage'),
+		'600'   => __('%d Minutes', 10, 'intropage'),
+		'1200'  => __('%d Minutes', 20, 'intropage'),
+		'1800'  => __('%d Minutes', 30, 'intropage'),
+		'3600'  => __('%d Hour', 1, 'intropage'),
+		'7200'  => __('%d Hours', 2, 'intropage'),
+		'14400' => __('%d Hours', 4, 'intropage'),
+		'28800' => __('%d Hours', 8, 'intropage'),
+		'43200' => __('%d Hours', 12, 'intropage'),
+		'86400' => __('%d Day', 1, 'intropage')
+	);
+
+	$panels = db_fetch_assoc_prepared('SELECT t1.panel_id, t1.id,
+		pd.name, pd.level, pd.description,
+		refresh_interval, refresh AS default_refresh, t1.user_id AS user_id
+		FROM plugin_intropage_panel_data AS t1
+		INNER JOIN plugin_intropage_panel_dashboard AS t2
+		ON t1.id = t2.panel_id
+		INNER JOIN plugin_intropage_panel_definition AS pd
+		ON pd.panel_id = t1.panel_id
+		WHERE t2.user_id = ?
+		AND t1.fav_graph_id IS NULL
+		ORDER BY level, name, t2.dashboard_id',
+		array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($panels))	{
-		print '<b>' . __('Configure dashboard refresh interval:', 'intropage') . '</b><br/>';
-		print __('Interval 60 - 999999999 seconds. Short interval can cause long poller run!');
-		print '<br/><br/><table>';
-	
+		html_start_box(__('Panel Refresh Intervals', 'intropage'), '100%', '', '3', 'center', '');
+
+		$class = 'odd';
+		$prev_level = -1;
 
 		foreach ($panels as $panel)	{
-			print '<tr><td>';
-			print ucwords(str_replace('_', ' ', $panel['panel_id'])) . " :  ";
-			print '</td><td>';
-			print '<input type="text" name="crefresh_' . $panel['id'] . '" value="' . $panel['refresh_interval']  . '"> ';
-			if ($panel['panel_id'] == 'analyse_db')	{
-				print __('Only admin can set this in Console -> Configuration -> Settings');
-			
+			$class = ($class == 'odd' ? 'even':'odd');
+
+			// Don't show admin pages to normal users
+			if ($panel['level'] == 0 && !api_user_realm_auth('intropage_admin.php')) {
+				continue;
 			}
-			if ($panel['user_id'] == 0)	{
-				
-				print __('Common panel - refresh interval is the same for all users!');
+
+			if ($prev_level != $panel['level']) {
+				if ($panel['level'] == 0) {
+					print '<div class="spacer formHeader">' . __('Global Refresh (Identical for All Users)', 'intropage') . '</div>';
+				} else {
+					print '<div class="spacer formHeader">' . __('User Refresh (Applicable to Your Account Only)', 'intropage') . '</div>';
+				}
 			}
-			print '</td></tr>';
-			
+
+			print '<div id="row_crefresh_' . $panel['id'] . '" class="formRow ' . $class . '">
+				<div class="formColumnLeft">
+					<div class="formFieldName">' . $panel['name'] . '</div>
+					<div class="cactiTooltipHint fa fa-question-circle">
+						<span style="display:none;">' . $panel['description'] . '<span>
+					</div>
+				</div>
+				<div class="formColumnRight">
+					<div class="formData">';
+
+			form_dropdown(
+				'crefresh_' . $panel['id'],
+				$intervals, '', '',
+				$panel['refresh_interval'],
+				__('Default', 'intropage'),
+				$panel['default_refresh']
+			);
+
+			print '</div></div>';
+
+			$prev_level = $panel['level'];
 		}
-		print '</table>';
+
+		html_end_box();
 	}
 
-	print '<br/><br/>';
-	print '<input type="hidden" name="intropage_settings" value="true">';
-	print '<input type="submit" name="cancel" value="' . __('Cancel', 'intropage') . '"> ';
-	print '<input type="submit" value="' . __('Save', 'intropage') . '">';
+	form_hidden_box('save_settings', 0, 1);
+
+	form_save_button($pageName, 'save');
+
+	form_end();
 
 	print '</div>';
-
 }
 
