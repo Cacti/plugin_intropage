@@ -129,7 +129,7 @@ function analyse_login($panel, $user_id) {
 
 	$panel['data']  = '<table class="cactiTable">';
 
-	$panel['data'] .= '<tr><td><span class="txt_big">' . __('Total Failed Logins:', 'intropage') . number_format_i18n($flog) . '</span></td></tr>';
+	$panel['data'] .= '<tr><td><span class="txt_big">' . __('Total Failed Logins: %s', number_format_i18n($flog), 'intropage') . '</span></td></tr>';
 
 	$panel['data'] .= '<tr><td><b>' . __('Active Users in Last Hour:', 'intropage') . '</b>';
 
