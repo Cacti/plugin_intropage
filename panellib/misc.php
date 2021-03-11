@@ -250,7 +250,7 @@ function webseer($panel, $user_id) {
 			foreach ($ko as $row) {
 				if ($count < 3) {
 					$panel['data'] .= '<td class="rpad">' . $row['url'] . '</td>' .
-						'<td class="rpad">' . $row['panel'] . '</td>' .
+						'<td class="rpad">' . $row['display_name'] . '</td>' .
 						'<td class="rpad">' . $row['http_code'] . '</td></tr>';
 				}
 

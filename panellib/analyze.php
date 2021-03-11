@@ -129,7 +129,7 @@ function analyse_login($panel, $user_id) {
 
 	$panel['data']  = '<table class="cactiTable">';
 
-	$panel['data'] .= '<tr><td><span class="txt_big">' . __('Total Failed Logins:', 'intropage') . number_format_i18n($flog) . '</span></td></tr>';
+	$panel['data'] .= '<tr><td><span class="txt_big">' . __('Total Failed Logins: %s', number_format_i18n($flog), 'intropage') . '</span></td></tr>';
 
 	$panel['data'] .= '<tr><td><b>' . __('Active Users in Last Hour:', 'intropage') . '</b>';
 
@@ -397,6 +397,8 @@ function analyse_db($panel, $user_id) {
 function trend_collect() {
 	// update in poller
 	$users = get_user_list();
+
+        include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
 
 	foreach ($users as $user) {
 		$allowed_devices = intropage_get_allowed_devices($user['id']);

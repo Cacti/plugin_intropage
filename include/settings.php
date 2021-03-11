@@ -234,7 +234,7 @@ function intropage_user_admin_user_save($save){
 			foreach($permissions as $panel_id => $data) {
 				$exists = db_fetch_cell_prepared('SELECT id FROM plugin_intropage_panel_data
 					WHERE panel_id = ?
-					AND user_id = ?',
+					AND user_id in (0, ?)',
 					array($panel_id, $user_id));
 
 				if (!$exists) {
