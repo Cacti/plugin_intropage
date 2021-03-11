@@ -1,6 +1,7 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
@@ -24,96 +25,159 @@
 */
 
 function display_information() {
-	global $config, $sql_where;
+	global $config, $sql_where, $login_opts, $panels, $registry;
 
+	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
 
 	intropage_upgrade_database();
 
+	$panels = initialize_panel_library();
+
+	$login_opts = get_login_opts();
+
 	if (!api_user_realm_auth('intropage.php')) {
-		print __('Intropage - permission denied', 'intropage') . '<br/><br/>';
-		return false;
+		raise_message('intropage_permissions', __('Intropage - Permission Denied', 'intropage'), MESSAGE_LEVEL_ERROR);
+		exit;
 	}
 
 	$debug_start = microtime(true);
 
 	$logging = read_config_option('log_verbosity', true);
 
-	if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_user_auth WHERE user_id= ?',array($_SESSION['sess_user_id'])) == 0) {
-		db_execute_prepared('INSERT INTO plugin_intropage_user_auth (user_id) VALUES ( ? )', array($_SESSION['sess_user_id']));
-	}
+	// default actual user permissions
+	$user_panels = cacti_sizeof(get_allowed_panels());
 
+	if ($user_panels == 0) {
+		db_execute_prepared('INSERT INTO plugin_intropage_user_auth
+			(user_id)
+			VALUES (?)',
+			array($_SESSION['sess_user_id']));
+	}
 
 	$selectedTheme = get_selected_theme();
 
-	if (get_filter_request_var('dashboard_id')) {
+	if (get_filter_request_var('dashboard_id') > 0) {
 	    $_SESSION['dashboard_id'] = get_filter_request_var('dashboard_id');
+	} elseif (empty($_SESSION['dashboard_id'])) {
+	    $_SESSION['dashboard_id'] = 1;
+		set_request_var('dashboard_id', 1);
+	} else {
+		set_request_var('dashboard_id', $_SESSION['dashboard_id']);
 	}
 
-	if (empty($_SESSION['dashboard_id'])) {
-	    $_SESSION['dashboard_id'] = 1; 
-	}
-	
-	if (empty($_SESSION['login_opts']))	{   // potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
-		$login_opts = db_fetch_cell_prepared('SELECT login_opts
-			FROM user_auth
-			WHERE id = ?',
-			array($_SESSION['sess_user_id']));
-
-		$_SESSION['login_opts'] = $login_opts;
-	}
-
-	if ($_SESSION['login_opts'] == 4) {  // in tab
-		$url_path = $config['url_path'] . 'plugins/intropage/intropage.php';
-	} else { // in console
-		$url_path = $config['url_path'];
-	}
-
-	// actions
-	include_once($config['base_path'] . '/plugins/intropage/include/actions.php');
-
-	// functions
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
-	//include_once($config['base_path'] . '/plugins/intropage/include/data.php');
+	$dashboard_id = get_request_var('dashboard_id');
 
 	// Retrieve user settings and defaults
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 
 	// number of dashboards
-	if (!user_setting_exists('intropage_number_of_dashboards',$_SESSION['sess_user_id'])) {
-		set_user_setting('intropage_number_of_dashboards',1);
-		$number_of_dashboards = 1;
-	}
-	else {
-		$number_of_dashboards = read_user_setting('intropage_number_of_dashboards',1);
-	}
-	
-	// Retrieve access
+	$number_of_dashboards = db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM plugin_intropage_dashboard
+		WHERE user_id = ?',
+		array($_SESSION['sess_user_id']));
+
+	// console access
 	$console_access = api_plugin_user_realm_auth('index.php');
 
+	// remove admin prohibited panels
+	$panels = db_fetch_assoc_prepared ('SELECT t1.panel_id AS panel_name, t1.id AS id
+		FROM plugin_intropage_panel_data AS t1
+		INNER JOIN plugin_intropage_panel_dashboard AS t2
+		ON t1.id = t2.panel_id
+		WHERE t2.user_id = ?
+		AND t2.dashboard_id = ?',
+		array($_SESSION['sess_user_id'], $dashboard_id));
+
+	if (cacti_sizeof($panels)) {
+		foreach ($panels as $one) {
+			$allowed = is_panel_allowed($one['panel_name']);
+
+			if (!$allowed) {
+				db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+					WHERE user_id = ?
+					AND dashboard_id = ?
+					AND panel_id = ?',
+					array($_SESSION['sess_user_id'], $dashboard_id, $one['id']));
+			}
+		}
+	}
+
+	// User allowed panels
 	$panels = db_fetch_assoc_prepared("SELECT t1.*
 		FROM plugin_intropage_panel_data as t1
-		join plugin_intropage_panel_dashboard as t2
-		on t1.id = t2.panel_id  
-		WHERE t1.user_id in (0,?) AND t2.dashboard_id = ? 
+		INNER JOIN plugin_intropage_panel_dashboard as t2
+		ON t1.id = t2.panel_id
+		WHERE t1.user_id in (0, ?)
+		AND t2.dashboard_id = ?
 		AND t1.panel_id != 'favourite_graph'
 		UNION
 		SELECT t3.*
 		FROM plugin_intropage_panel_data as t3
-		join plugin_intropage_panel_dashboard as t4
-		on t3.id = t4.panel_id  
-		WHERE t3.user_id = ? and t4.dashboard_id = ?
+		INNER JOIN plugin_intropage_panel_dashboard AS t4
+		ON t3.id = t4.panel_id
+		WHERE t3.user_id = ?
+		AND t4.dashboard_id = ?
 		AND t3.panel_id = 'favourite_graph'
 		AND t3.fav_graph_id IS NOT NULL
-		ORDER BY priority DESC
-		",
-		array( $_SESSION['sess_user_id'], $_SESSION['dashboard_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+		ORDER BY priority DESC",
+		array(
+			$_SESSION['sess_user_id'],
+			$dashboard_id,
+			$_SESSION['sess_user_id'],
+			$dashboard_id
+		)
+	);
+
+	// remove prohibited panels (for common panels (user_id=0))
+	foreach ($panels as $key => $value) {
+		if ($value['user_id'] == 0) {
+			$allowed = is_panel_allowed($value['panel_id']);
+
+			if (!$allowed) {
+				unset ($panels[$key]);
+			} else {
+				// user has permission but no active panel
+				$upanels = db_fetch_cell_prepared('SELECT COUNT(*)
+					FROM plugin_intropage_panel_dashboard
+					WHERE user_id = ?
+					AND dashboard_id = ?
+					AND panel_id = ?',
+					array($_SESSION['sess_user_id'], $dashboard_id, $value['id']));
+
+				if ($upanels == 0) {
+					unset ($panels[$key]);
+				}
+			}
+		}
+	}
 
 	// Notice about disable cacti dashboard
-	if (read_config_option('hide_console') != 'on')	{
-	    print __('You can disable rows above in <b>Configure -> Settings -> General -> Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
-	    print '<a href="' . $config['url_path'] . 'settings.php"><i class="fas fa-link"></i></a><br/><br/>';
+	if (read_config_option('hide_console') != 'on') {
+	    print '<table class="cactiTable"><tr><td class="textAreaNotes">' . __('You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
+	    print '<a class="pic" href="' . $config['url_path'] . 'settings.php"><i class="intro_glyph fas fa-link"></i></a></td></tr></table></br>';
+	}
+
+	$dashboards = array_rekey(
+		db_fetch_assoc_prepared ('SELECT dashboard_id, name
+			FROM plugin_intropage_dashboard
+			WHERE user_id = ?
+			ORDER BY dashboard_id',
+			array($_SESSION['sess_user_id'])),
+		'dashboard_id', 'name'
+	);
+
+	if (!cacti_sizeof($dashboards)) {
+		$dashboard_id  = 1;
+		$dashboards[1] = __('Default', 'intropage');
+
+		$_SESSION['dashboard_id'] = 1;
+
+		db_execute_prepared('INSERT INTO plugin_intropage_dashboard
+			(user_id, dashboard_id, name)
+			VALUES (?, ?, ?)',
+			array($_SESSION['sess_user_id'], $dashboard_id, $dashboards[1]));
 	}
 
 	// Intropage Display ----------------------------------
@@ -124,68 +188,97 @@ function display_information() {
 	// switch dahsboards and form
 	print '<div>';
 	print '<div class="float_left">';
-	for ($f = 1; $f <= $number_of_dashboards; $f++)	{
-	    if ($f == $_SESSION['dashboard_id']) {
-		print '<a class="db_href db_href_active" href="?dashboard_id=' . $f . '">' . $f . '</a>';
-	    }
-	    else {
-		print '<a class="db_href" href="?dashboard_id=' . $f . '">' . $f . '</a>';	    
-	    }
+	print "<div class='tabs'><nav><ul>";
+
+	if (cacti_sizeof($dashboards)) {
+		foreach ($dashboards as $dbid => $db_name) {
+			print "<li><a class='tab pic" . ($dbid == $dashboard_id ? " selected'" : "'") .
+				" href='" . html_escape($config['url_path'] .
+				($login_opts == 4 ? 'plugins/intropage/intropage.php?':'index.php?') .
+				'dashboard_id=' . $dbid . '&header=false') .
+				"'>" . html_escape($db_name) . '</a></li>';
+		}
 	}
 
+	print "</ul></nav></div>";
 	print '</div>';
-	print '<div class="float_right">';	
+	print '<div class="float_right">';
 
 	// settings
 	print "<form method='post'>";
 
-	print "<a href='#' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='fa fa-clone'></i></a>";
+	print "<a href='#' class='pic' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='intro_glyph fa fa-clone'></i></a>";
 	print '&nbsp; &nbsp; ';
 
-	print "<select name='intropage_addpanel' size='1' onchange='this.form.submit();'>";
-	print '<option value="0">' . __('Add panel ...', 'intropage') . '</option>';
-	$add_panels = db_fetch_assoc_prepared('select panel_id from plugin_intropage_panel_definition where panel_id  not in (select t1.panel_id 
-		from plugin_intropage_panel_data as t1 join  plugin_intropage_panel_dashboard as t2 on t1.id=t2.panel_id where  t2.user_id = ?)',			
-		array($_SESSION['sess_user_id']));
+	print '<a class="pic" href="' . html_escape($config['url_path'] . ($login_opts == 4 ? 'plugins/intropage/intropage.php?':'index.php?') . 'action=configure') . '"><i class="intro_glyph fa fa-cog"></i></a>';
+
+	print '&nbsp; &nbsp; ';
+
+	print "<select id='intropage_addpanel'>";
+	print '<option value="0">' . __('Panels ...', 'intropage') . '</option>';
+
+	$add_panels = db_fetch_assoc_prepared('SELECT ppd.id, pd.panel_id, pd.name
+		FROM plugin_intropage_panel_definition AS pd
+		LEFT JOIN plugin_intropage_panel_data AS ppd
+		ON pd.panel_id = ppd.panel_id
+		WHERE pd.panel_id NOT IN (
+			SELECT t1.panel_id
+			FROM plugin_intropage_panel_data AS t1
+			INNER JOIN plugin_intropage_panel_dashboard AS t2
+			ON t1.id = t2.panel_id
+			WHERE t2.user_id = ?
+			AND t2.dashboard_id = ?
+		)
+		ORDER BY pd.name',
+		array($_SESSION['sess_user_id'], $dashboard_id));
 
 	if (cacti_sizeof($add_panels)) {
 		foreach ($add_panels as $panel) {
-			$uniqid = db_fetch_cell_prepared('select id from plugin_intropage_panel_data 
-			where user_id in (0, ?) and panel_id = ?',
-			array($_SESSION['sess_user_id'],$panel['panel_id']));
+			$uniqid = db_fetch_cell_prepared('SELECT id
+				FROM plugin_intropage_panel_data
+				WHERE user_id IN (0, ?)
+				AND panel_id = ?',
+				array($_SESSION['sess_user_id'],$panel['panel_id']));
 
-			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert')	{
-				if (db_fetch_cell_prepared('SELECT count(*) FROM plugin_intropage_panel_data 
-						WHERE user_id  in (0, ?) and panel_id= ? ',
-						array($_SESSION['sess_user_id'],$panel['panel_id'])) == 0) {
-					print "<option value='" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(wait one poller cycle)', 'intropage') . '</option>';
-				}
-				elseif (db_fetch_cell_prepared('SELECT ' . $panel['panel_id'] . ' FROM plugin_intropage_user_auth 
-						WHERE user_id = ?', array($_SESSION['sess_user_id'])) == 'on') {
-					print "<option value='" . $uniqid . "'>" . __('Add panel %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), 'intropage') . '</option>';
+			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert') {
+				$allowed = is_panel_allowed($panel['panel_id']);
 
+				$enabled = is_panel_enabled($panel['panel_id']);
+
+				if ($uniqid > 0) {
+					if ($allowed) {
+						if ($enabled) {
+							print "<option value='" . $uniqid . "'>" . html_escape($panel['name']) . '</option>';
+						}
+					} else {
+						print "<option value='addpanel_" .  $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
+					}
 				} else {
-					print "<option value='addpanel_" .  $uniqid . "' disabled=\"disabled\">" . __('Add panel %s %s', ucwords(str_replace('_', ' ', $panel['panel_id'])), '(admin prohibited)', 'intropage') . '</option>';
+					if ($allowed) {
+						if ($enabled) {
+							print "<option value='" . $panel['panel_id'] . "'>" . html_escape($panel['name']) . '</option>';
+						}
+					} else {
+						print "<option value='addpanel_" .  $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
+					}
 				}
 			}
 		}
 	}
 
-	print '<select/>';
+	print '</select>';
 	print '&nbsp; &nbsp; ';
 
-	print "<select name='intropage_action' size='1' onchange='this.form.submit();'>";
-	print '<option value="0">' . __('Select action ...', 'intropage') . '</option>';
+	print "<select id='intropage_action'>";
+	print '<option value="0">' . __('Actions ...', 'intropage') . '</option>';
 
 	if ($number_of_dashboards < 9) {
-	    	print '<option value="addpage_' . ($number_of_dashboards+1) . '">' . __('Add dashboard', 'intropage') . ' ' . ($number_of_dashboards+1) . '</option>';
-	
+		print '<option value="addpage_1">' . __('Add New Dashboard', 'intropage') . '</option>';
 	}
 
-	if ($_SESSION['dashboard_id'] > 1) {
-	    print '<option value="removepage_' .  $_SESSION['dashboard_id'] . '">' . __('Remove current dashboard', 'intropage') . '</option>';
+	if ($dashboard_id > 1) {
+		print '<option value="removepage_' . $dashboard_id . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
-
 
 	// only submit :-)
 	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
@@ -197,9 +290,9 @@ function display_information() {
 	}
 
 	if ($autorefresh == -1) {
-		print "<option value='refresh_-1' disabled='disabled'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
+		print "<option value='refresh_-1' disabled='disabled'>" . __('Autorefresh ly Poller', 'intropage') . '</option>';
 	} else {
-		print "<option value='refresh_-1'>" . __('Autorefresh automatic by poller', 'intropage') . '</option>';
+		print "<option value='refresh_-1'>" . __('Autorefresh by Poller', 'intropage') . '</option>';
 	}
 
 	if ($autorefresh == 60) {
@@ -208,7 +301,7 @@ function display_information() {
 		print "<option value='refresh_60'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
 	}
 
-	if ($autorefresh == 300) { 
+	if ($autorefresh == 300) {
 		print "<option value='refresh_300' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
 	} else {
 		print "<option value='refresh_300'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
@@ -221,35 +314,27 @@ function display_information() {
 	}
 
 	if ($display_important_first == 'on') {
-		print "<option value='important_first' disabled='disabled'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
-		print "<option value='important_no'>" . __('Sort by user preference', 'intropage') . '</option>';
+		print "<option value='important_first' disabled='disabled'>" . __('Sort by Severity', 'intropage') . '</option>';
+		print "<option value='important_no'>" . __('Sort by User Preference', 'intropage') . '</option>';
 	} else {
-		print "<option value='important_first'>" . __('Sort by - red-yellow-green-gray', 'intropage') . '</option>';
-		print "<option value='important_no' disabled='disabled'>" . __('Sort by user preference', 'intropage') . '</option>';
+		print "<option value='important_first'>" . __('Sort by Severity', 'intropage') . '</option>';
+		print "<option value='important_no' disabled='disabled'>" . __('Sort by User Preference', 'intropage') . '</option>';
 	}
-
-	$lopts           = db_fetch_cell_prepared('SELECT login_opts FROM user_auth WHERE id = ?', array($_SESSION['sess_user_id']));
-
-	// 0 = console, 1= tab
-	// login options can change user group!
-	// after login: 1=url, 2=console, 3=graphs, 4=intropage tab, 5=intropage in console !!!
 
 	if (!$console_access) {
-		//
-		if ($lopts < 4) {	// intropage is not default
-        		print "<option value='loginopt_tab'>" . __('Set intropage as default login page', 'intropage') . '</option>';
-                }
-
-		if ($lopts == 4)  {
-			print "<option value='loginopt_graph'>" . __('Set graph as default login page', 'intropage') . '</option>';
+		if ($login_opts < 4) {
+			// intropage is not default
+			print "<option value='loginopt_tab'>" . __('Set Intropage as Default Login Page', 'intropage') . '</option>';
+		} elseif ($login_opts == 4) {
+			print "<option value='loginopt_graph'>" . __('Set graph as Default Login Page', 'intropage') . '</option>';
 		}
-	}
-	else	{	// intropage in console or in tab
-		if ($lopts == 4) {	// in tab
-        		print "<option value='loginopt_console'>" . __('Display intropage in console', 'intropage') . '</option>';
-                }
-		else {
-			print "<option value='loginopt_tab'>" . __('Display intropage in tab as default page', 'intropage') . '</option>';
+	} else {
+		// intropage in console or in tab
+		if ($login_opts == 4) {
+			// in tab
+			print "<option value='loginopt_console'>" . __('Display Intropage in Console', 'intropage') . '</option>';
+		} else {
+			print "<option value='loginopt_tab'>" . __('Display Intropage in Tab as Default Page', 'intropage') . '</option>';
 		}
 	}
 
@@ -257,29 +342,44 @@ function display_information() {
 	print '</form>';
 	// end of settings
 
-	print '</div>';	
+	print '</div>';
 	print '<br style="clear: both" />';
-	print '</div>';	
+	print '</div>';
 
 	print '<div id="megaobal">';
 	print '<ul id="obal">';
 
-	if (cacti_sizeof($panels) == 0)	{
-		print '<div><br/><br/><b>' . __('Welcome!') . '</b><br/><br/>';
-		print __('You can add panels in two ways:') . '<br/>';
-		print ' - ' . __('select prepared panels from menu') . '<br/>';
-		print ' - ' . __('add any graph - click to \'Eye Icon\' which is next to each graph. Graph with actual timespan will be added to current dashboard') . '<br/><br/>';
-		print __('You can add more dashboards from menu, too') . '<br/><br/></div>';
+	if (cacti_sizeof($panels) == 0) {
+		print '<table class="cactiTable">';
+		print '<tr><td>';
+		print '<h2>' . __('Welcome to Intropage!', 'intropage') . '</h2>';
+		print '</td></tr>';
+
+		print '<tr class="tableRow">';
+		print '<td class="textAreaNotes top left">' . __('You can Add Dashboard Panels in two ways:', 'intropage');
+		print '<ul>';
+		print '<li>' . __('Select prepared Dashboard Panels from the menu to the right.') . '</li>';
+		print '<li>' . __('Add any Cacti Graph by Clicking the \'Eye Icon\' which is next to each Cacti Graph. Graph with actual timespan will be added to current dashboard', 'intropage') . '</li>';
+		print '</ul>';
+		print '</td></tr>';
+
+		html_end_box();
 	}
 
-//!!!! tady bude podminka - kdyz dashboard_id=1
+	$first_db = db_fetch_cell_prepared('SELECT MIN(IFNULL(dashboard_id, 1))
+		FROM plugin_intropage_dashboard
+		WHERE user_id = ?',
+		array($_SESSION['sess_user_id']));
 
 	// extra maint plugin panel - always first
+	if (api_plugin_is_enabled('maint')) {
+		$row = db_fetch_row_prepared("SELECT id, data
+			FROM plugin_intropage_panel_data
+			WHERE panel_id = 'maint'
+			AND user_id = ?",
+			array($_SESSION['sess_user_id']));
 
-	if (db_fetch_cell("SELECT directory FROM plugin_config WHERE directory='maint'")) {
-
-		$row = db_fetch_row("SELECT id, data FROM plugin_intropage_panel_data WHERE panel_id='maint'");
-		if ($row && strlen($row['data']) > 20 && $_SESSION['dashboard_id'] == 1) {
+		if ($row && strlen($row['data']) > 20 && $dashboard_id == $first_db) {
 			intropage_display_panel($row['id']);
 		}
 	}
@@ -287,8 +387,11 @@ function display_information() {
 
 	// extra admin panel
 	if (strlen(read_config_option('intropage_admin_alert')) > 3) {
-		$id = db_fetch_cell("SELECT id FROM plugin_intropage_panel_data WHERE panel_id='admin_alert'");
-		if ($id && $_SESSION['dashboard_id'] == 1) {
+		$id = db_fetch_cell("SELECT id
+			FROM plugin_intropage_panel_data
+			WHERE panel_id='admin_alert'");
+
+		if ($id && $dashboard_id == $first_db) {
 			intropage_display_panel($id);
 		}
 	}
@@ -311,26 +414,29 @@ function display_information() {
 		}
 
 		// green (all)
-			foreach ($panels as $xkey => $xvalue) {
-				if ($xvalue['alarm'] == 'green') {
-					intropage_display_panel($xvalue['id']);
-					$panels[$xkey]['displayed'] = true;
-				}
+		foreach ($panels as $xkey => $xvalue) {
+			if ($xvalue['alarm'] == 'green') {
+				intropage_display_panel($xvalue['id']);
+				$panels[$xkey]['displayed'] = true;
 			}
+		}
 
-		// gray and without color
+		// grey and without color
 		foreach ($panels as $xkey => $xvalue) {
 			if (!isset($xvalue['displayed'])) {
 				intropage_display_panel($xvalue['id']);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
-
 	} else {	// display only errors/errors and warnings/all - order by priority
 		foreach ($panels as $xkey => $xvalue) {
 			intropage_display_panel($xvalue['id']);
 		}
 	}
+
+	print '</ul>';
+	print '<ul class="cloned-slides"></ul>';
+	print '</div>'; // end of megaobal
 
 	?>
 	<script type='text/javascript'>
@@ -338,15 +444,88 @@ function display_information() {
 	var refresh;
 	var intropage_autorefresh = <?php print $autorefresh;?>;
 	var intropage_drag = true;
+	var intropage_page = '';
+	var dashboard_id = <?php print $dashboard_id;?>;
 
 	// display/hide detail
 	$(function () {
-		resizeObal();
+		$('.flexchild').css('background-color', $('body').css('background-color'));
+
+		$('#intropage_addpanel').unbind().change(function() {
+			addPanel();
+		});
+
+		$('#intropage_action').unbind().change(function() {
+			actionPanel();
+		});
+
+		$(window).resize(function() {
+			resizeCharts();
+		});
+
+		if (pageName == 'index.php') {
+			intropage_page = urlPath + pageName;
+		} else {
+			intropage_page = urlPath + 'plugins/intropage/intropage.php';
+		}
 
 		initPage();
-
 		reload_all();
+		setupHidden();
+		resizeCharts();
 	});
+
+	function resizeCharts() {
+		$('.chart_wrapper > canvas[id^="line_"]').each(function() {
+			var width  = $(this).closest('.panel_wrapper').width() - 10;
+			var height = $(this).closest('.panel_wrapper').height() - 34;
+			$(this).css({ height: height });
+			$(this).css({ width: width });
+		});
+	}
+
+	function setupHidden() {
+		$('.flexchild').each(function(i) {
+			var item = $(this);
+			var item_clone = item.clone();
+			item.data('clone', item_clone);
+			var position = item.position();
+			item_clone.css({ left: position.left, top: position.top, visibility: 'hidden' }).attr('data-pos', i+1);
+			$('#cloned-slides').append(item_clone);
+		});
+	}
+
+	function addPanel() {
+		$.post(intropage_page, {
+			header: 'false',
+			dashboard_id: dashboard_id,
+			__csrf_magic: csrfMagicToken,
+			intropage_addpanel: $('#intropage_addpanel').val()
+		}).done(function(data) {
+			$('#main').html(data);
+			applySkin();
+			initPage();
+		});
+	}
+
+	function actionPanel() {
+		var option = $('#intropage_action').val();
+
+		if (option == 'loginopt_tab' || option == 'loginopt_console') {
+			document.location = intropage_page+'?dashboard_id='+dashboard_id+'&intropage_action='+option;
+		} else {
+			$.post(intropage_page, {
+				header: 'false',
+				dashboard_id: dashboard_id,
+				__csrf_magic: csrfMagicToken,
+				intropage_action: option
+			}).done(function(data) {
+				$('#main').html(data);
+				applySkin();
+				initPage();
+			});
+		}
+	}
 
 	function initPage() {
 		// autorefresh
@@ -363,35 +542,89 @@ function display_information() {
 			if (refresh !== null) {
 				clearTimeout(refresh);
 			}
-			setTimeout(function() {		// fix first double load
-			    refresh = setInterval(testPoller, 10000);
+			setTimeout(function() {
+				// fix first double load
+				refresh = setInterval(testPoller, 10000);
 			},30000);
 		}
 
-
 		$('.article').hide();
 
-		$(window).resize(function() {
-			resizeObal();
-		});
-
 		$('#obal').sortable({
-			update: function( event, ui ) {	// change order
+			tolerance: 'pointer',
+			forcePlaceholderSize: true,
+			forceHelperSize: false,
+			placeholder: '.flexchild',
+			handle: '.panel_header',
+			helpler: 'clone',
+			delay: 500,
+			revert: 'invalid',
+			scroll: false,
+			dropOnEmpty: false,
+			start: function(e, ui){
+				var minWidth = Math.min.apply(null,
+					$('.flexchild').map(function() {
+						return $(this).width();
+					}).get()
+				);
+
+				ui.helper.width(minWidth);
+				$('#obal .flexchild').css({'width': minWidth, 'flex-grow': '0'});
+
+				ui.helper.addClass('exclude-me');
+				ui.helper.data('clone').hide();
+				$('.cloned-slides .flexchild').css('visibility', 'visible');
+			},
+			stop: function(event, ui) {
+				$('#obal .flexchild.exclude-me').each(function() {
+					var item = $(this);
+					var clone = item.data('clone');
+					var position = item.position();
+
+					clone.css('left', position.left);
+					clone.css('top', position.top);
+					clone.show();
+
+					item.removeClass('exclude-me');
+					$('.flexchild').css('width', '');
+				});
+
+				$('#obal .flexchild').each(function() {
+					var item = $(this);
+					var clone = item.data('clone');
+
+					clone.attr('data-pos', item.index());
+				});
+
+				$('#obal .flexchild').css('visibility', 'visible');
+				$('.cloned-slides .flexchild').css('visibility', 'hidden');
+				$('#obal .flexchild').css({'width': '', 'flex-grow': '1'});
+			},
+			change: function(event, ui) {
+            	$('#obal li:not(.exclude-me, .ui-sortable-placeholder)').each(function() {
+					var item = $(this);
+					var clone = item.data('clone');
+					clone.stop(true, false);
+					var position = item.position();
+					clone.animate({ left: position.left, top:position.top}, 500);
+				});
+			},
+			update: function(event, ui) {
+				// change order
 				var xdata = new Array();
 				$('#obal li').each(function() {
 					xdata.push($(this).attr('id'));
 				});
 
-				$.get('<?php print $url_path;?>', { xdata:xdata, intropage_action:'order' });
+				$.get(intropage_page, { xdata:xdata, intropage_action:'order' });
 			}
-		});
-
-		$('#sortable').disableSelection();
+		}).disableSelection();
 
 		$('.droppanel').click(function(event) {
 			event.preventDefault();
 			panel_div_id = $(this).attr('data-panel');
 			$('#'+panel_div_id).remove();
+			$('#intropage_addpanel option[value="add'+panel_div_id+'"]').removeAttr('disabled');
 			$.get($(this).attr('href'));
 		});
 
@@ -426,23 +659,15 @@ function display_information() {
 	}
 
 	function testPoller() {
-		$.get(urlPath+'plugins/intropage/intropage_ajax.php?&autoreload=true')
+		$.get(urlPath+'plugins/intropage/intropage.php?&action=autoreload')
 		.done(function(data) {
-			if (data == 1)	{
-			    $('#obal li').each(function() {
-				var panel_id = $(this).attr('id').split('_').pop();
-				reload_panel(panel_id, false, false);
+			if (data == 1) {
+				$('#obal li').each(function() {
+					var panel_id = $(this).attr('id').split('_').pop();
+					reload_panel(panel_id, false, false);
 			    });
 			}
-			//     reload_all();  - it is without reload effect
 		});
-	}
-
-	function resizeObal() {
-		if (navigator.userAgent.search('MSIE 10') > 0 ||
-			(navigator.userAgent.search('Trident') > 0 && navigator.userAgent.search('rv:11') > 0 )) {
-			$('#obal').css('max-width',($(window).width()-190));
-		}
 	}
 
 	function reload_panel(panel_id, forced_update, refresh) {
@@ -451,21 +676,23 @@ function display_information() {
 			$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
 		}
 
-		$.get(urlPath+'plugins/intropage/intropage_ajax.php?force='+forced_update+'&reload_panel='+panel_id)
+		$.get(urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id)
 		.done(function(data) {
-			$('#panel_'+panel_id).find('.panel_data').html(data) ;
+			$('#panel_'+panel_id).find('.panel_data').html(data);
 
 			if (!refresh) {
-				$('#panel_'+panel_id).find('.panel_data').css('opacity',1);
+				$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
 			}
+
+			resizeCharts();
 		})
 		.fail(function(data) {
 			$('#panel_'+panel_id).find('.panel_data').html('<?php print __('Error reading new data', 'intropage');?>');
 		});
 	}
 
-	function reload_all()	{
-		$('#obal li').each(function() {
+	function reload_all() {
+		$('#obal li.flexchild').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
 			reload_panel(panel_id, false, true);
 		});
@@ -473,10 +700,10 @@ function display_information() {
 
 	// detail to the new window
 	$('.maxim').click(function(event) {
-   	    event.preventDefault();
-	    panel_id = $(this).attr('detail-panel');
+		event.preventDefault();
+		panel_id = $(this).attr('detail-panel');
 
-		$.get(urlPath+'plugins/intropage/intropage_ajax.php?detail_panel='+panel_id, function(data) {
+		$.get(urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id, function(data) {
 			$('#overlay_detail').html(data);
 			width = $('#overlay_detail').textWidth() + 150;
 			windowWidth = $(window).width();
@@ -512,15 +739,8 @@ function display_information() {
 			});
 		});
 	});
-
 	</script>
 
 	<?php
-
-	print "<div style='clear: both;'></div>";
-	print '</ul>';
-	print '</div>'; // end of megaobal
-
 	return true;
 }
-

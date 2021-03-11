@@ -1,6 +1,7 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |

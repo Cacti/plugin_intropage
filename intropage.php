@@ -1,6 +1,7 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
@@ -26,23 +27,19 @@
 chdir('../../');
 include_once('./include/auth.php');
 include_once($config['base_path'] . '/plugins/intropage/include/settings.php');
+include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 include_once($config['base_path'] . '/plugins/intropage/display.php');
 
-set_default_action();
+global $panels, $registry, $login_opts;
 
-if (!function_exists("array_column")) {
-	function array_column($array,$column_name) {
-        	return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
-    	}
-}
+$login_opts = get_login_opts();
 
-if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need header
-	general_header();
-}
+$panels = initialize_panel_library();
+
+process_page_request_variables();
+
+general_header();
 
 display_information();
 
-if ($_SESSION['login_opts'] == 4 || $_SESSION['login_opts'] == 1) {	// separated tab, we need footer
-	bottom_footer();
-}
-
+bottom_footer();

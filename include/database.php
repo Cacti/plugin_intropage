@@ -1,6 +1,7 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
@@ -27,72 +28,48 @@ function intropage_drop_database() {
 	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
-	db_execute('UPDATE user_auth SET login_opts=1 WHERE login_opts > 3');
-/*
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_log');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_login');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_thold_event');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_db');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_analyse_tree_host_graph');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_trend');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_extrem');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_ntp');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_poller_info');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_poller_stat');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_host');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_thold');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_data_source');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_graph_host_template');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_cpuload');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_cpu');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_mactrack');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_mactrack_sites');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_ping');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_availability');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_polltime');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_top5_pollratio');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_info');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_boost');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_favourite_graph');
-	db_execute('ALTER TABLE user_auth drop column if exists intropage_plugin_syslog');
-*/
+	db_execute('UPDATE user_auth SET login_opts = 1 WHERE login_opts > 3');
+
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_log');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_login');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_thold_event');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_db');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_tree_host_graph');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_trend');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_extrem');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_ntp');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_poller_info');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_poller_stat');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_host');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_thold');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_data_source');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_host_template');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_cpuload');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_cpu');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_mactrack');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_mactrack_sites');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_ping');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_availability');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_polltime');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_pollratio');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_info');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_boost');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_favourite_graph');
+	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_plugin_syslog');
+
 	// version 2
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_trends');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_auth');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_dashboard');
 }
 
 function intropage_initialize_database() {
 	global $config;
-/*
 
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-	api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-*/
+	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
@@ -103,19 +80,26 @@ function intropage_initialize_database() {
 	$data['comment']   = 'Intropage trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
 
-	db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
+	db_execute('ALTER TABLE plugin_intropage_trends
+		MODIFY COLUMN cur_timestamp TIMESTAMP default current_timestamp ON UPDATE current_timestamp');
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'file', 'type' => 'varchar(200)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'has_detail', 'type' => "enum('yes','no')", 'NULL' => 'no');
-	$data['columns'][] = array('name' => 'priority', 'type' => "int(3)", 'default' => '30', 'NULL' => 'no');
-	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
+	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'level', 'type' => 'tinyint', 'unsigned' => true, 'default' => 0);
+	$data['columns'][] = array('name' => 'class', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'priority', 'type' => 'tinyint', 'unsigned' => true, 'default' => 0);
+	$data['columns'][] = array('name' => 'alarm', 'type' => 'varchar(10)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'requires', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'update_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'details_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'trends_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
+	$data['columns'][] = array('name' => 'refresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600');
 	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(200)', 'default' => '', 'NULL' => true);
 
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'panel_id';
-	$data['comment']   = 'panel definition';
+	$data['comment']   = 'Panels Definitions of panels in panel library';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_definition', $data);
 
 	$data              = array();
@@ -123,7 +107,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['type']      = 'InnoDB';
-	$data['primary']   = 'panel_id';
+	$data['primary']   = 'panel_id`, `user_id`, `dashboard_id';
 	$data['comment']   = 'panel x dashboard dependency';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_dashboard', $data);
 
@@ -134,7 +118,8 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(3)', 'default' => '30', 'NULL' => false);
-	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','gray')", 'default' => 'green', 'NULL' => false);
+	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','grey')", 'default' => 'green', 'NULL' => false);
+	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
 	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'fav_graph_timespan', 'type' => 'int(2)', 'default' => '1', 'NULL' => false);
 
@@ -142,93 +127,56 @@ function intropage_initialize_database() {
 	$data['primary']   = 'id';
 	$data['comment']   = 'panel data';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
-	db_execute('ALTER TABLE plugin_intropage_panel_data modify last_update timestamp default current_timestamp on update current_timestamp');
 
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_log','/plugins/intropage/include/data.php','yes',300,50,'Analyse cacti log (last xxx rows)')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_login','/plugins/intropage/include/data.php','yes',300,51,'Analyse last logins')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('top5_ping','/plugins/intropage/include/data.php','yes',300,60,'Hosts with the worst ping response')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('cpuload','/plugins/intropage/include/data.php','no',60,59,'CPU utilization graph (only Linux)')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('ntp','/plugins/intropage/include/data.php','no',7200,30,'Diference between localtime and NTP')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('graph_data_source','/plugins/intropage/include/data.php','yes',7200,20,'Grap of all datasources')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('graph_host_template','/plugins/intropage/include/data.php','yes',7200,19,'Graph of all host templates')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('graph_host','/plugins/intropage/include/data.php','yes',7200,18,'Graph of all hosts')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('info','/plugins/intropage/include/data.php','no',864000,5,'Info about system/cacti')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_db','/plugins/intropage/include/data.php','no',864000,7,'Analyse MySQL database')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('maint','/plugins/intropage/include/data.php','no',3600,98,'Maint plugin')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('admin_alert','/plugins/intropage/include/data.php','no',3600,99,'Extra admin notify panel for all users')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('trend','/plugins/intropage/include/data.php','no',300,75,'Few trends (down hosts, trigged tholds,...)')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('poller_info','/plugins/intropage/include/data.php','yes',60,74,'Poller information')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('poller_stat','/plugins/intropage/include/data.php','no',60,73,'Poller statistics')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('analyse_tree_host_graph','/plugins/intropage/include/data.php','yes',1800,33,'Analyse trees, hosts, ...')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('top5_availability','/plugins/intropage/include/data.php','yes',300,61,'Host with the worst availability')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('top5_polltime','/plugins/intropage/include/data.php','yes',300,62,'Hosts with the worst polling time')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('top5_pollratio','/plugins/intropage/include/data.php','yes',300,63,'Hosts with the worst polling ratio')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('thold_event','/plugins/intropage/include/data.php','yes',300,77,'Plugin thold - last events')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('boost','/plugins/intropage/include/data.php','no',300,47,'Information about boost process')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('extrem','/plugins/intropage/include/data.php','yes',300,78,'Table with 24 hours extrems (longest poller run, down hosts)')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('graph_thold','/plugins/intropage/include/data.php','yes',300,18,'Plugin Thold graph (all, trigerred, ...)')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('mactrack','/plugins/intropage/include/data.php','no',900,28,'Plugin Mactrack statistics')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('mactrack_sites','/plugins/intropage/include/data.php','yes',900,27,'Plugin Mactrack sites statistics')");
-	db_execute("REPLACE INTO plugin_intropage_panel_definition (panel_id,file,has_detail,refresh_interval,priority,description) values 
-		('plugin_syslog','/plugins/intropage/include/data.php','no',900,26,'Plugin Syslog statistics')");
+	db_execute('ALTER TABLE plugin_intropage_panel_data
+		MODIFY last_update timestamp default current_timestamp ON UPDATE current_timestamp');
+
+	$panels = initialize_panel_library();
+
+	update_registered_panels($panels);
+
+	foreach($panels as $panel_id => $panel) {
+		if ($panel['level'] == 0) {
+			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
+				(panel_id, user_id, priority, alarm, refresh_interval)
+				VALUES(?, "0", ?, ?, ?)',
+				array($panel_id, $panel['priority'], $panel['alarm'], $panel['refresh']));
+		} else {
+			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
+				(panel_id, user_id, priority, alarm, refresh_interval)
+				VALUES(?, ?, ?, ?, ?)',
+				array($panel_id, $_SESSION['sess_user_id'], $panel['priority'], $panel['alarm'], $panel['refresh']));
+		}
+	}
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-	$data['columns'][] = array('name' => 'plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
+	$data['columns'][] = array('name' => 'permissions', 'type' => 'blob', 'NULL' => false, 'default' => '');
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'user_id';
 	$data['comment']   = 'authorization';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_user_auth', $data);
+
+	$permissions = array();
+	foreach($panels as $panel_id => $panel) {
+		$permissions[$panel_id] = 'on';
+	}
+
+	db_execute_prepared('INSERT INTO plugin_intropage_user_auth
+		(user_id, permissions)
+		VALUES (?, ?)',
+		array($_SESSION['sess_user_id'], json_encode($permissions)));
+
+	$data              = array();
+	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => true);
+	$data['type']      = 'InnoDB';
+	$data['comment']   = 'panel x dashboard name';
+	api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
+
+	db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
 }
 
 function intropage_upgrade_database() {
@@ -239,164 +187,172 @@ function intropage_upgrade_database() {
 	$info = $info['info'];
 
 	$current = $info['version'];
-	$oldv    = db_fetch_cell('SELECT version FROM plugin_config WHERE directory="intropage"');
+	$oldv    = db_fetch_cell('SELECT version FROM plugin_config WHERE directory = "intropage"');
 
 	if (!cacti_version_compare($oldv, $current, '=')) {
 		if (cacti_version_compare($oldv,'0.9','<')) {
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
+			db_execute('UPDATE plugin_hooks
+				SET function = "intropage_config_form", file = "include/settings.php"
+				WHERE name = "intropage"
+				AND hook = "config_form"');
 
 			db_execute('UPDATE plugin_hooks
-				SET function="intropage_config_form", file="include/settings.php"
-				WHERE name="intropage"
-				AND hook="config_form"');
+				SET function = "intropage_config_settings", file = "include/settings.php"
+				WHERE name = "intropage"
+				AND hook = "config_settings"');
 
 			db_execute('UPDATE plugin_hooks
-				SET function="intropage_config_settings", file="include/settings.php"
-				WHERE name="intropage"
-				AND hook="config_settings"');
+				SET function = "intropage_show_tab", file = "include/tab.php"
+				WHERE name = "intropage"
+				AND hook = "top_header_tabs"');
 
 			db_execute('UPDATE plugin_hooks
-				SET function="intropage_show_tab", file="include/tab.php"
-				WHERE name="intropage"
-				AND hook="top_header_tabs"');
+				SET function = "intropage_show_tab", file = "include/tab.php"
+				WHERE name = "intropage"
+				AND hook = "top_graph_header_tabs"');
 
 			db_execute('UPDATE plugin_hooks
-				SET function="intropage_show_tab", file="include/tab.php"
-				WHERE name="intropage"
-				AND hook="top_graph_header_tabs"');
+				SET function = "intropage_login_options_navigate", file = "include/settings.php"
+				WHERE name = "intropage"
+				AND hook = "login_options_navigate"');
 
 			db_execute('UPDATE plugin_hooks
-				SET function="intropage_login_options_navigate", file="include/settings.php"
-				WHERE name="intropage"
-				AND hook="login_options_navigate"');
-
-			db_execute('UPDATE plugin_hooks
-				SET function="intropage_console_after", file="include/settings.php"
-				WHERE name="intropage"
-				AND hook="console_after"');
+				SET function ="intropage_console_after", file = "include/settings.php"
+				WHERE name = "intropage"
+				AND hook = "console_after"');
 
 			db_execute('UPDATE user_auth
-				SET login_opts=1
+				SET login_opts = 1
 				WHERE login_opts IN (4,5)');
 		}
 
-		if (cacti_version_compare($oldv,'1.8.1', '<')) {
-			db_execute('ALTER TABLE plugin_intropage_trends
-				CHANGE COLUMN date cur_timestamp timestamp DEFAULT current_timestamp()');
+		if (cacti_version_compare($oldv,'2.0.2', '<')) {
+			// a lot of changes, so:
+			intropage_drop_database();
+			intropage_initialize_database();
+
+			api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
+			api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
+			api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
+			api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
 		}
 
-		if (cacti_version_compare($oldv,'1.8.2', '<')) {
-			db_execute('ALTER TABLE plugin_intropage_trends
-				MODIFY COLUMN value varchar(250) NULL DEFAULT NULL');
+		if (cacti_version_compare($oldv, '2.0.4', '<=')) {
+			db_add_column('plugin_intropage_user_auth',
+				array(
+					'name'    => 'webseer',
+					'type'    => 'char(2)',
+					'NULL'    => false,
+					'default' => 'on'
+				)
+			);
 		}
 
-		if (cacti_version_compare($oldv,'1.8.2', '<')) {
-			db_execute("DELETE FROM plugin_intropage_panel
-				WHERE panel='intropage_favourite_graph'");
-			db_execute("DELETE FROM plugin_intropage_user_setting
-				WHERE panel='intropage_favourite_graph' AND fav_graph_id is NULL");
-			db_execute("REPLACE INTO plugin_intropage_trends (name,value)
-				VALUES ('ar_poller_finish', '1')");
-		}
+		if (cacti_version_compare($oldv, '2.0.5', '<=')) {
+			$data = array();
 
-		if (cacti_version_compare($oldv,'1.9.0', '<')) {
-			db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
-			db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
-			db_execute('ALTER TABLE plugin_intropage_trends ENGINE=InnoDB');
-			db_execute('ALTER TABLE plugin_intropage_user_setting ENGINE=InnoDB');
-			db_execute('ALTER TABLE plugin_intropage_panel ENGINE=InnoDB');
-			db_execute('DELETE FROM plugin_intropage_trends');
-			api_plugin_db_add_column('intropage', 'plugin_intropage_trends', array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'));
-			db_execute('ALTER TABLE plugin_intropage_trends modify cur_timestamp timestamp default current_timestamp on update current_timestamp');
-		}		
-
-		if (!db_column_exists('user_auth', 'intropage_plugin_syslog')) {
-			api_plugin_db_add_column('intropage', 'user_auth', array('name' => 'intropage_plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
-		}
-
-		if (cacti_version_compare($oldv,'1.9.2', '<')) {
-			$data              = array();
 			$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-			$data['columns'][] = array('name' => 'analyse_log', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'analyse_login', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'analyse_db', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'thold_event', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'analyse_tree_host_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'trend', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'extrem', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'ntp', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'poller_info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'poller_stat', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'graph_host', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'graph_thold', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'graph_data_source', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'graph_host_template', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'cpuload', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'mactrack', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'mactrack_sites', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'top5_ping', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'top5_availability', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'top5_polltime', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'top5_pollratio', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'info', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'boost', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'favourite_graph', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-			$data['columns'][] = array('name' => 'plugin_syslog', 'type' => 'char(2)', 'NULL' => false, 'default' => 'on');
-
-
+			$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
+			$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => true);
 			$data['type']      = 'InnoDB';
-			$data['primary']   = 'user_id';
-			$data['comment']   = 'authorization';
-			api_plugin_db_table_create('intropage', 'plugin_intropage_user_auth', $data);
+			$data['comment']   = 'panel x dashboard name';
 
-			db_execute('INSERT INTO plugin_intropage_user_auth (
-				user_id, analyse_log, analyse_login, analyse_db, thold_event,
-				analyse_tree_host_graph, trend, extrem, ntp,
-				poller_info, poller_stat, graph_host, graph_thold,
-				graph_data_source, graph_host_template, cpuload, mactrack,
-				mactrack_sites, top5_ping, top5_availability, top5_polltime,
-				top5_pollratio, info, boost, favourite_graph
-				) 
-				SELECT id, analyse_log, analyse_login, analyse_db, thold_event,
-				analyse_tree_host_graph, trend, extrem, ntp,
-				poller_info, poller_stat, graph_host, graph_thold,
-				graph_data_source, graph_host_template, cpuload, mactrack,
-				mactrack_sites, top5_ping, top5_availability, top5_polltime,
-				top5_pollratio, info, boost, favourite_graph
-				FROM user_auth');
-				
-			// !!!! mel bych tu jeste asi odebirat sloupce z puvodni user_auth tabulky
+			api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
+
+			db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
+
+			db_add_column('plugin_intropage_panel_data',
+				array(
+					'name'    => 'refresh_interval',
+					'type'    => 'int(9)',
+					'NULL'    => false,
+					'default' => '3600',
+					'after'   => 'alarm'
+				)
+			);
 		}
 
+		if (cacti_version_compare($oldv, '3.0.0', '<=')) {
+			if (db_column_exists('plugin_intropage_panel_definition', 'file')) {
+				db_execute('ALTER TABLE plugin_intropage_panel_definition
+					DROP COLUMN `file`,
+					DROP COLUMN `has_detail`,
+					CHANGE COLUMN refresh_interval refresh int(10) unsigned NOT NULL default "30",
+					ADD COLUMN name varchar(30) NOT NULL default "" AFTER panel_id,
+					ADD COLUMN level int(10) unsigned NOT NULL default "0" AFTER name,
+					ADD COLUMN alarm varchar(10) NOT NULL default "" AFTER priority,
+					ADD COLUMN requires varchar(128) NOT NULL default "" AFTER alarm,
+					ADD COLUMN update_func varchar(30) NOT NULL default "" AFTER requires,
+					ADD COLUMN details_func varchar(30) NOT NULL default "" AFTER update_func,
+					ADD COLUMN trends_func varchar(30) NOT NULL default "" AFTER details_func');
+			}
+
+			if (!db_column_exists('plugin_intropage_user_auth', 'permissions')) {
+				db_execute('ALTER TABLE plugin_intropage_user_auth
+					ADD COLUMN permissions BLOB default "" AFTER login_opts');
+
+				$panels      = initialize_panel_library();
+				$permissions = db_fetch_assoc('SELECT * FROM plugin_intropage_user_auth');
+
+				if (cacti_sizeof($permissions)) {
+					foreach($permissions as $p) {
+						$user = $p['user_id'];
+						$opts = $p['login_opts'];
+
+						unset($p['user_id']);
+						unset($p['login_opts']);
+
+						// Remove panels that are no longer published
+						foreach($p as $panel_id => $data) {
+							if (!isset($panels[$panel_id])) {
+								unset($p[$panel_id]);
+							}
+						}
+
+						$perms = json_encode($p);
+
+						db_execute_prepared('UPDATE plugin_intropage_user_auth
+							SET permissions = ?
+							WHERE user_id = ?',
+							array($perms, $user));
+					}
+				}
+
+				$columns = db_fetch_assoc('SHOW COLUMNS FROM plugin_intropage_user_auth');
+
+				foreach($columns as $c) {
+					switch($c['Field']) {
+						case 'user_id':
+						case 'login_opts':
+						case 'permissions':
+							break;
+						default:
+							db_execute('ALTER TABLE plugin_intropage_user_auth DROP COLUMN ' . $c['Field']);
+							break;
+					}
+				}
+			}
+
+			db_execute('UPDATE plugin_intropage_panel_data
+				SET alarm = "grey" WHERE alarm = "gray"');
+
+			db_execute('ALTER TABLE plugin_intropage_panel_dashboard
+				ADD PRIMARY KEY (panel_id, user_id, dashboard_id)');
+
+			db_execute('ALTER TABLE plugin_intropage_panel_data
+				MODIFY COLUMN `alarm` enum("red","green","yellow","grey") COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT "green"');
+		}
 
 		// Set the new version
-		db_execute("UPDATE plugin_config
-			SET version='$current'
-			WHERE directory='intropage'");
+		db_execute_prepared("UPDATE plugin_config
+			SET version = ?, author = ?, webpage = ?
+			WHERE directory = 'intropage'",
+			array(
+				$info['version'],
+				$info['authro'],
+				$info['homepage']
+			)
+		);
 
 		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', 1);
 	}

@@ -1,6 +1,7 @@
 <?php
-/*
+/* vim: ts=4
  +-------------------------------------------------------------------------+
+ | Copyright (C) 2021 The Cacti Group, Inc.                                |
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
@@ -25,7 +26,7 @@
 
 $intropage_settings = array(	// default values
 	'intropage_display_header' => array(
-		'friendly_name' => __('Display settings', 'intropage'),
+		'friendly_name' => __('Display Settings', 'intropage'),
 		'method' => 'spacer',
 	),
 	'intropage_display_important_first' => array(
@@ -33,6 +34,12 @@ $intropage_settings = array(	// default values
 		'description' => __('If checked Intropage displays important (errors, warnings) information first', 'intropage'),
 		'method' => 'checkbox',
 		'default' => 'off',
+	),
+	'intropage_unregister' => array(
+		'friendly_name' => __('Automatically Uninstall Panels', 'intropage'),
+		'description' => __('If a Panel is installed and requried plugin is removed, automatically uninstall the panel too', 'intropage'),
+		'method' => 'checkbox',
+		'default' => '',
 	),
 	'intropage_autorefresh' => array(
 		'friendly_name' => __('Automatic refresh page', 'intropage'),
@@ -51,13 +58,16 @@ $intropage_settings = array(	// default values
 		'friendly_name' => __('Poller Timeout'),
 		'description' => __('The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti.'),
 		'method' => 'drop_array',
-		'default' => '300',
+		'default' => '1800',
 		'array' => array(
 			60   => __('%d Minute', 1),
 			300  => __('%d Minutes', 5),
 			600  => __('%d Minutes', 10),
-			900  => __('%d Seconds', 15),
-			1200 => __('%d Seconds', 20)
+			900  => __('%d Minutes', 15),
+			1200 => __('%d Minutes', 20),
+			1800 => __('%d Minutes', 30),
+			2400 => __('%d Minutes', 40),
+			3600 => __('%d Hour', 1)
 		)
 	),
 	'intropage_analyse_log_rows' => array(
@@ -115,9 +125,8 @@ $intropage_settings = array(	// default values
 		'default' => '3600',
 	),
 
-
 	'intropage_admin_alert' => array(
-		'friendly_name' => __('Admin information panel about maintenance tasks, down devices, ..', 'intropage'),
+		'friendly_name' => __('Admin information panel about maintenance tasks, down Devices, ..', 'intropage'),
 		'description' => __('If isn\'t empty, panel will be displayed on the top. You can use html tags (b, i, ...).', 'intropage'),
 		'method' => 'textarea',
 		'max_length' => 1000,
@@ -138,6 +147,187 @@ $intropage_settings = array(	// default values
 		),
 		'default' => '86400',
 	),
-	
+	'intropage_display_header2' => array(
+		'friendly_name' => __('Alarm Settings', 'intropage'),
+		'method' => 'spacer',
+	),
+	'intropage_alert_db_abort' => array(
+		'friendly_name' => __('Alarm DB check aborted clients', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_same_description' => array(
+		'friendly_name' => __('Alarm Host with the same description', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yelow',
+	),
+	'intropage_alert_orphaned_ds' => array(
+		'friendly_name' => __('Alarm orphaned data source', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_poller_output' => array(
+		'friendly_name' => __('Alarm non-empty poller output', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_bad_indexes' => array(
+		'friendly_name' => __('Alarm Bad indexes data source', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_thold_logonly' => array(
+		'friendly_name' => __('Alarm Thershold logonly action', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'red',
+	),
+	'intropage_alert_same_ip' => array(
+		'friendly_name' => __('Alarm Device with the same IP/port', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_more_trees' => array(
+		'friendly_name' => __('Alarm Device in more Trees', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_without_tree' => array(
+		'friendly_name' => __('Alarm Device without Tree', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_default_community' => array(
+		'friendly_name' => __('Alarm Device with default public/private community', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_without_monitoring' => array(
+		'friendly_name' => __('Alarm Device without monitoring', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+	'intropage_alert_without_graph' => array(
+		'friendly_name' => __('Alarm Device without Graph', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'red'   => __('Red alarm', 'intropage'),
+			'yellow'  => __('Yellow alarm', 'intropage'),
+			'green' => __('Green alarm', 'intropage')
+		),
+		'default' => 'yellow',
+	),
+
+	'intropage_alert_worst_polling_time' => array(
+		'friendly_name' => __('Alarm red/yellow polling time', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'10/5' => __('10s/5s red/yellow', 'intropage'),
+			'20/10'  => __('20s/10s red/yellow', 'intropage'),
+			'40/20' => __('40s/20s red/yellow', 'intropage')
+		),
+		'default' => '20/10',
+	),
+	'intropage_alert_worst_polling_ratio' => array(
+		'friendly_name' => __('Alarm red/yellow failed/all ratio', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'0.2/0.1' => __('0.1/0.2 red/yellow', 'intropage'),
+			'0.4/0.2'  => __('20s/10s red/yellow', 'intropage'),
+			'0.5/more' => __('more red/yellow', 'intropage')
+		),
+		'default' => '0.4/0.2',
+	),
+	'intropage_alert_worst_ping' => array(
+		'friendly_name' => __('Alarm red/yellow ping', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'20/10' => __('20/10ms red/yellow', 'intropage'),
+			'50/20'  => __('50/20ms red/yellow', 'intropage'),
+			'100/200' => __('100/200+ms red/yellow', 'intropage')
+		),
+		'default' => '20/10',
+	),
+	'intropage_alert_worst_availability' => array(
+		'friendly_name' => __('Alarm red/yellow worst availability', 'intropage'),
+		'description' => __('<strong>How to be notified?</strong>', 'intropage'),
+		'method' => 'drop_array',
+		'array' => array(
+			'99/95' => '99/95% ' . __('red/yellow', 'intropage'),
+			'95/85'  => '95/85% ' . __('red/yellow', 'intropage'),
+			'85/0' => '85/84-0% ' . __('red/yellow', 'intropage')
+		),
+		'default' => '99/95',
+	),
+
 );
 
