@@ -590,7 +590,7 @@ function get_panel_details($panel_id, $user_id = 0) {
 		$panel['priority']         = $definition['priority'];
 		$panel['alarm']            = $definition['alarm'];
 		$panel['refresh_interval'] = $definition['refresh'];
-		$panel['force']            = (isset($definition['force']) ? $definition['force']:true;
+		$panel['force']            = isset($definition['force']) ? $definition['force']:true;
 
 		$panel['id']   = sql_save($panel, 'plugin_intropage_panel_data');
 		$panel['name'] = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
