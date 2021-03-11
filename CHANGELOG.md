@@ -1,5 +1,8 @@
 # Changelog
 
+--- 3.0.1 ---
+* Correct syntax error in functions.php
+
 --- 3.0.0 ---
 * Redesign for sustainability and extensibility
 * New 'Panellib' design to allow for easy customization
@@ -8,6 +11,9 @@
 * Add additional core functions to reduce code duplication
 * New table columns
 * Allow Panels to not allow 'Forced Refresh'
+* Fix erratic behavior when moving panels on page
+* Better support for mobile browsers
+* Support panel widths
 
 --- 2.0.6 ---
 * Add dashboard names
