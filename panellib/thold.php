@@ -292,6 +292,8 @@ function thold_event_detail() {
 		$panel['alarm']  = 'yellow';
 		$panel['detail'] = __('Plugin Thold isn\'t installed or started', 'intropage');
 	} else {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+
 		$data = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 			FROM plugin_thold_log AS tl
@@ -311,7 +313,7 @@ function thold_event_detail() {
 			ON (gl.host_id=uap1.item_id AND uap1.type=3)
 			LEFT JOIN user_auth_perms AS uap2
 			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-			WHERE td.host_id in (' . $_SESSION['allowed_hosts'][$_SESSION['sess_user_id']] . ')
+			WHERE td.host_id in (' . $allowed_devices . ')
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 			ORDER BY `time` DESC
 			LIMIT 30');
