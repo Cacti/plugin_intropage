@@ -395,6 +395,8 @@ function analyse_db($panel, $user_id) {
 
 //------------------------------------ trends -----------------------------------------------------
 function trend_collect() {
+	global $config;
+
 	// update in poller
 	$users = get_user_list();
 
