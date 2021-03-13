@@ -24,13 +24,13 @@
  +-------------------------------------------------------------------------+
 */
 
-$intropage_settings = array(	// default values
-	$status_colors => array(
-		'red'    => __('Red Status', 'intropage'),
-		'yellow' => __('Yellow Status', 'intropage'),
-		'green'  => __('Green Status', 'intropage')
-	);
+$status_colors = array(
+	'red'    => __('Red Status', 'intropage'),
+	'yellow' => __('Yellow Status', 'intropage'),
+	'green'  => __('Green Status', 'intropage')
+);
 
+$intropage_settings = array(
 	'intropage_display_header' => array(
 		'friendly_name' => __('Display Settings', 'intropage'),
 		'method'        => 'spacer',
