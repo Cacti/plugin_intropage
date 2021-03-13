@@ -1095,7 +1095,7 @@ function intropage_display_panel($panel_id) {
 
 	print ' </div>';
 	print "	<table class='cactiTable'>";
-	print "	    <tr><td class='textArea' style='vertical-align: top;'>";
+	print "	    <tr><td>";
 
 	print "<div class='panel_data'>";
 	print __('Loading data ...', 'intropage');
