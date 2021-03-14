@@ -131,11 +131,10 @@ function top5_ping($panel, $user_id) {
 				if ($host['cur_time'] > $red) {
 					$panel['alarm'] = 'red';
 					$class = 'deviceAlertBg';
-				} elseif ($panel['alarm'] == 'green' && $host['cur_time'] > $yellow) {
-					$panel['alarm'] = 'yellow';
-					$class = 'deviceWarningBg';
-				} elseif ($panel['alarm'] == 'green' && $host['cur_time'] > 1000) {
-					$panel['alarm'] = 'yellow';
+				} elseif ($host['cur_time'] > $yellow) {
+					if ($panel['alarm'] == 'green') {
+						$panel['alarm'] = 'yellow';
+					}
 					$class = 'deviceWarningBg';
 				} else {
 					$class = '';
