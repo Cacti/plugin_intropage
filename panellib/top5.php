@@ -130,24 +130,25 @@ function top5_ping($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['cur_time'] > $red) {
 					$panel['alarm'] = 'red';
+					$class = 'deviceAlertBg';
 				} elseif ($panel['alarm'] == 'green' && $host['cur_time'] > $yellow) {
 					$panel['alarm'] = 'yellow';
+					$class = 'deviceWarningBg';
+				} elseif ($panel['alarm'] == 'green' && $host['cur_time'] > 1000) {
+					$panel['alarm'] = 'yellow';
+					$class = 'deviceWarningBg';
+				} else {
+					$class = '';
 				}
 
 				if ($console_access) {
-					$row = '<tr><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
+					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
 				} else {
-					$row = '<tr><td class="left">' . html_escape($host['description']) . '</td>';
+					$row = '<tr class="' . $class . '"><td class="left">' . html_escape($host['description']) . '</td>';
 				}
 
 				$row .= '<td class="right">' . round($host['avg_time'], 2) . 'ms</td>';
-
-				if ($host['cur_time'] > 1000) {
-					$panel['alarm'] = 'yellow';
-					$row .= '<td class="right"><b>' . round($host['cur_time'], 2) . ' ms</b></td></tr>';
-				} else {
-					$row .= '<td class="right">'    . round($host['cur_time'], 2) . ' ms</td></tr>';
-				}
+				$row .= '<td class="right">' . round($host['cur_time'], 2) . ' ms</td></tr>';
 
 				$panel['data'] .= $row;
 			}
@@ -183,7 +184,7 @@ function top5_availability($panel, $user_id) {
 
 		if (cacti_sizeof($sql_worst_host)) {
 			$color = read_config_option('intropage_alert_worst_availability');
-			list($red, $yellow) = explode ('/',$color);
+			list($red, $yellow) = explode ('/', $color);
 
 			$panel['data'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
@@ -192,23 +193,23 @@ function top5_availability($panel, $user_id) {
 				'</tr>';
 
 			foreach ($sql_worst_host as $host) {
-				if ($console_access) {
-					$row = '<tr><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
-				} else {
-					$row = '<tr><td class="left">' . html_escape($host['description']) . '</td>';
-				}
-
 				if ($host['availability'] < $red) {
 					$panel['alarm'] = 'red';
+					$class = 'deviceAlertBg';
 				} elseif ($panel['alarm'] == 'green' && $host['availability'] < $yellow) {
 					$panel['alarm'] = 'yellow';
+					$class = 'deviceWarningBg';
+				} else {
+					$class = '';
 				}
 
-				if ($host['availability'] < $red) {
-					$row .= '<td class="right"><b>' . round($host['availability'], 2) . ' %</b></td></tr>';
+				if ($console_access) {
+					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
 				} else {
-					$row .= '<td class="right">'    . round($host['availability'], 2) . ' %</td></tr>';
+					$row = '<tr class="' . $class . '"><td class="left">' . html_escape($host['description']) . '</td>';
 				}
+
+				$row .= '<td class="right">' . round($host['availability'], 2) . ' %</td></tr>';
 
 				$panel['data'] .= $row;
 			}
@@ -253,23 +254,23 @@ function top5_polltime($panel, $user_id) {
 				'</tr>';
 
 			foreach ($sql_worst_host as $host) {
-				if ($console_access) {
-					$row = '<tr><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
-				} else {
-					$row = '<tr><td class="left">' . html_escape($host['description']) . '</td>';
-				}
-
 				if ($host['polling_time'] > $red) {
 					$panel['alarm'] = 'red';
+					$class = 'deviceAlertBg';
 				} elseif ($panel['alarm'] == 'green' && $host['polling_time'] > $yellow) {
 					$panel['alarm'] = 'yellow';
+					$class = 'deviceWarningBg';
+				} else {
+					$class = '';
 				}
 
-				if ($host['polling_time'] > $red) {
-					$row .= '<td class="right"><b>' . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</b></td></tr>';
+				if ($console_access) {
+					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
 				} else {
-					$row .= '<td class="right">'    . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
+					$row = '<tr class="' . $class . '"><td class="left">' . html_escape($host['description']) . '</td>';
 				}
+
+				$row .= '<td class="right">' . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
 
 				$panel['data'] .= $row;
 			}
@@ -317,18 +318,20 @@ function top5_pollratio($panel, $user_id) {
 				'</tr>';
 
 			foreach ($sql_worst_host as $host) {
-				$panel['alarm'] = 'red';
-
 				if ($host['ratio'] > $red) {
 					$panel['alarm'] = 'red';
+					$class = 'deviceAlertBg';
 				} elseif ($panel['alarm'] == 'green' && $host['ratio'] > $yellow) {
 					$panel['alarm'] = 'yellow';
+					$class = 'deviceWarningBg';
+				} else {
+					$class = '';
 				}
 
 				if ($console_access) {
-					$row = '<tr><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
+					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
 				} else {
-					$row = '<tr><td class="left">' . html_escape($host['description']) . '</td>';
+					$row = '<tr class="' . $class . '"><td class="left">' . html_escape($host['description']) . '</td>';
 				}
 
 				$row .= '<td class="right">' . number_format_i18n($host['failed_polls'], 0) . '</td>';
@@ -400,9 +403,9 @@ function top5_ping_detail() {
 
 			if ($host['cur_time'] > 1000) {
 				$panel['alarm'] = 'yellow';
-				$row .= '<td class="right"><b>' . round($host['cur_time'], 2) . ' ms</b></td></tr>';
+				$row .= '<td class="right">' . round($host['cur_time'], 2) . ' ms</td></tr>';
 			} else {
-				$row .= '<td class="right">'    . round($host['cur_time'], 2) . ' ms</td></tr>';
+				$row .= '<td class="right">' . round($host['cur_time'], 2) . ' ms</td></tr>';
 			}
 
 			$panel['detail'] .= $row;
@@ -457,9 +460,9 @@ function top5_availability_detail() {
 
 			if ($host['availability'] < 90) {
 				$panel['alarm'] = 'yellow';
-				$row .= '<td class="right"><b>' . round($host['availability'], 2) . ' %</b></td></tr>';
+				$row .= '<td class="right">' . round($host['availability'], 2) . ' %</td></tr>';
 			} else {
-				$row .= '<td class="right">'    . round($host['availability'], 2) . ' %</td></tr>';
+				$row .= '<td class="right">' . round($host['availability'], 2) . ' %</td></tr>';
 			}
 
 			$panel['detail'] .= $row;
@@ -522,9 +525,9 @@ function top5_polltime_detail() {
 
 			if ($host['polling_time'] > 30) {
 				$panel['alarm'] = 'yellow';
-				$row .= '<td class="right"><b>' . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</b></td></tr>';
+				$row .= '<td class="right">' . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
 			} else {
-				$row .= '<td class="right">'    . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
+				$row .= '<td class="right">' . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
 			}
 
 			$panel['detail'] .= $row;

@@ -280,6 +280,7 @@ function analyse_db($panel, $user_id) {
 	$memtables = 0;
 
 	$panel['alarm'] = 'green';
+	$panel['data']  = '';
 
 	db_execute_prepared('UPDATE plugin_intropage_panel_data
 		SET last_update = NOW()
@@ -290,7 +291,6 @@ function analyse_db($panel, $user_id) {
 	$db_check_level = read_config_option('intropage_analyse_db_level');
 
 	$tables = db_fetch_assoc('SHOW TABLES');
-
 
 	foreach ($tables as $key => $val) {
 		$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
@@ -313,7 +313,7 @@ function analyse_db($panel, $user_id) {
 				<td></td>
 			</tr>' . $panel['data'];
 	} else {
-		$panel['data']  = '<table class="cactiTable">
+		$panel['data'] = '<table class="cactiTable">
 			<tr>
 				<td><span class="txt_big">' . __('DB OK', 'intropage') . '</span></td>
 			</tr>
@@ -337,7 +337,7 @@ function analyse_db($panel, $user_id) {
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 	}
@@ -351,20 +351,21 @@ function analyse_db($panel, $user_id) {
 	}
 
 	if ($aerrors > 0) {
-		$panel['data'] .= __('Aborted clients/connects: %s - check logs.', $aerrors, 'intropage') . '<br/>';
+		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s.  Run \'SET GLOBAL log_warnings = 1;\' from the mysql CLI and set in server.cnf to silence.', $aerrors, 'intropage') . '</td></tr>';
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 	}
 
-	$panel['data'] .= __('Connection errors: %s', $cerrors, 'intropage') . '<br/>';
+	$panel['data'] .= '<tr><td>' . __('Connection errors: %s', $cerrors, 'intropage') . '</td></tr>';
 
-	$panel['data'] .= __('Damaged tables: %s', $damaged, 'intropage') . '<br/>' .
-		__('Memory tables: %s', $memtables, 'intropage') . '<br/>' .
-		__('All tables: %s', count($tables), 'intropage') . '<br/>';
+	$panel['data'] .=
+		'<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage')   . '</td></tr>' .
+		'<tr><td>' . __('Memory tables: %s', $memtables, 'intropage')  . '</td></tr>' .
+		'<tr><td>' . __('All tables: %s', count($tables), 'intropage') . '</td></tr>';
 
 	save_panel_result($panel, $user_id);
 

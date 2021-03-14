@@ -266,7 +266,7 @@ $intropage_settings = array(
 		'array'         => array(
 			'20/10'   => __('10ms  / 20ms Yellow / Red', 'intropage'),
 			'50/20'   => __('20ms  / 50ms Yellow / Red', 'intropage'),
-			'100/200' => __('100ms / 200+ms Yellow / Red', 'intropage')
+			'200/100' => __('100ms / 200+ms Yellow / Red', 'intropage')
 		),
 	),
 	'intropage_alert_worst_availability' => array(

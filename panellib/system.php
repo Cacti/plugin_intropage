@@ -307,23 +307,6 @@ function boost($panel, $user_id) {
 
 	$panel['data'] = '<table class="cactiTable">';
 
-	$panel['data'] .= '<tr><td>' . __('Parallel Processes: %s', number_format_i18n($parallel, -1), 'intropage') . '</td></tr>';
-
-	if ($total_records) {
-		$panel['data'] .= '<tr><td>' . __('Pending Boost Records: %s', number_format_i18n($pending_records, -1), 'intropage') . '</td></tr>';
-		$panel['data'] .= '<tr><td>' . __('Archived Boost Records: %s', number_format_i18n($arch_records, -1), 'intropage') . '</td></tr>';
-
-		if ($total_records > ($max_records - ($max_records / 10)) && $panel['alarm'] == 'green') {
-			$panel['alarm'] = 'yellow';
-			$panel['data'] .= '<tr><td>' . '<b>' . __('Total Boost Records: %s', number_format_i18n($total_records, -1), 'intropage') . '</td></tr>';
-		} elseif ($total_records > ($max_records - ($max_records / 20)) && $panel['alarm'] == 'green') {
-			$panel['alarm'] = 'red';
-			$panel['data'] .= '<tr><td>' . '<b>' . __('Total Boost Records: %s', number_format_i18n($total_records, -1), 'intropage') . '</td></tr>';
-		} else {
-			$panel['data'] .= '<tr><td>' . __('Total Boost Records: %s', number_format_i18n($total_records, -1), 'intropage') . '</td></tr>';
-		}
-	}
-
 	$stats_boost = read_config_option('stats_boost', true);
 
 	if ($stats_boost != '') {
@@ -339,11 +322,36 @@ function boost($panel, $user_id) {
 		$boost_rrds_updated      = '';
 	}
 
-	$panel['data'] .= '<tr><td>' . __('Boost On-demand Updating: %s', $rrd_updates == '' ? __('Disabled', 'intropage') : $boost_status_text, 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Boost Status is: %s', $rrd_updates == '' ? __('Disabled', 'intropage') : $boost_status_text, 'intropage') . '</td></tr>';
+
+	$panel['data'] .= '<tr><td><hr></td></tr>';
+
+	$panel['data'] .= '<tr><td>' . __('Parallel Processes: %s', number_format_i18n($parallel, -1), 'intropage') . '</td></tr>';
+
+	$panel['data'] .= '<tr><td>' . __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_int], 'intropage') . '</td></tr>';
+
+	$panel['data'] .= '<tr><td>' . __('Pending Records Threshold: %s', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
+
+	$panel['data'] .= '<tr><td>' . __('Approximate Next Start Time: %s', date('Y-m-d H:i:s', $next_run_time), 'intropage') . '</td></tr>';
+
+	$panel['data'] .= '<tr><td><hr></td></tr>';
+
+	if ($total_records) {
+		$panel['data'] .= '<tr><td>' . __('Pending Boost Records: %s', number_format_i18n($pending_records, -1), 'intropage') . '</td></tr>';
+		$panel['data'] .= '<tr><td>' . __('Archived Boost Records: %s', number_format_i18n($arch_records, -1), 'intropage') . '</td></tr>';
+
+		if ($total_records > ($max_records - ($max_records / 10)) && $panel['alarm'] == 'green') {
+			$panel['alarm'] = 'yellow';
+		} elseif ($total_records > ($max_records - ($max_records / 20)) && $panel['alarm'] == 'green') {
+			$panel['alarm'] = 'red';
+		}
+	}
 
 	$data_length = db_fetch_cell("SELECT data_length
 		FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
 		AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
+
+	$panel['data'] .= '<tr><td><hr></td></tr>';
 
 	/* tell the user how big the table is */
 	$panel['data'] .= '<tr><td>' . __('Current Boost Table(s) Size: %s', human_filesize($data_length), 'intropage') . '</td></tr>';
@@ -357,11 +365,12 @@ function boost($panel, $user_id) {
 		$lastduration = __('N/A');
 	}
 
+	$panel['data'] .= '<tr><td><hr></td></tr>';
+
 	$panel['data'] .= '<tr><td>' . __('Last run duration: %s', $lastduration, 'intropage') . '</td></tr>';
 
-	$panel['data'] .= '<tr><td>' . __('RRD Updates / Max: %s / %s', $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
-	$panel['data'] .= '<tr><td>' . __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_int], 'intropage') . '</td></tr>';
-	$panel['data'] .= '<tr><td>' . __('Next Start Time: %s', $next_run_time, 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Last run updates: %s', $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', 'intropage') . '</td></tr>';
+
 	$panel['data'] .= '</table>';
 
 	save_panel_result($panel, $user_id);
