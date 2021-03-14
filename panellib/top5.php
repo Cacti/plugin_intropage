@@ -203,12 +203,12 @@ function top5_availability($panel, $user_id) {
 				}
 
 				if ($console_access) {
-					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
+					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 40)) . '</a></td>';
 				} else {
-					$row = '<tr class="' . $class . '"><td class="left">' . html_escape($host['description']) . '</td>';
+					$row = '<tr class="' . $class . '"><td class="left">' . html_escape(substr($host['description'], 0, 40)) . '</td>';
 				}
 
-				$row .= '<td class="right">' . round($host['availability'], 2) . ' %</td></tr>';
+				$row .= '<td class="right">' . round($host['availability'],2) . ' %</td></tr>';
 
 				$panel['data'] .= $row;
 			}
@@ -264,9 +264,9 @@ function top5_polltime($panel, $user_id) {
 				}
 
 				if ($console_access) {
-					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
+					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 40)) . '</a></td>';
 				} else {
-					$row = '<tr class="' . $class . '"><td class="left">' . html_escape($host['description']) . '</td>';
+					$row = '<tr class="' . $class . '"><td class="left">' . html_escape(substr($host['description'], 0, 40)) . '</td>';
 				}
 
 				$row .= '<td class="right">' . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
@@ -328,9 +328,9 @@ function top5_pollratio($panel, $user_id) {
 				}
 
 				if ($console_access) {
-					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
+					$row = '<tr class="' . $class . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 40)) . '</a></td>';
 				} else {
-					$row = '<tr class="' . $class . '"><td class="left">' . html_escape($host['description']) . '</td>';
+					$row = '<tr class="' . $class . '"><td class="left">' . html_escape(substr($host['description'], 0, 40)) . '</td>';
 				}
 
 				$row .= '<td class="right">' . number_format_i18n($host['failed_polls'], 0) . '</td>';
@@ -457,7 +457,7 @@ function top5_availability_detail() {
 				$row = '<tr><td class="left">' . html_escape($host['description']) . '</td>';
 			}
 
-			if ($host['availability'] < 90) {
+			if ($host['availability'] < $yellow) {
 				$panel['alarm'] = 'yellow';
 				$row .= '<td class="right">' . round($host['availability'], 2) . ' %</td></tr>';
 			} else {
