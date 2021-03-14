@@ -213,3 +213,11 @@
 		width: calc(100% - 1em);
 	}
 }
+
+.deviceAlertBg	{
+	background-color: red;
+}
+
+.deviceWarningBg	{
+	background-color: yellow;
+}
