@@ -332,6 +332,10 @@ function boost($panel, $user_id) {
 
 	$panel['data'] .= '<tr><td>' . __('Pending Records Threshold: %s', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
 
+	if (is_numeric($next_run_time)) {
+		$next_run_time = date('Y-m-d H-i:s', $next_run_time);
+	}
+	
 	$panel['data'] .= '<tr><td>' . __('Approximate Next Start Time: %s', $next_run_time, 'intropage') . '</td></tr>';
 
 	$panel['data'] .= '<tr><td><hr></td></tr>';
