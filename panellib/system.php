@@ -147,7 +147,7 @@ function cpuload($panel, $user_id) {
 			FROM plugin_intropage_trends
 			WHERE name='cpuload'
 			ORDER BY cur_timestamp desc
-			LIMIT 10");
+			LIMIT 15");
 
 		if (cacti_sizeof($sql)) {
 			$graph['line']['title1'] = __('Load', 'intropage');
@@ -332,7 +332,11 @@ function boost($panel, $user_id) {
 
 	$panel['data'] .= '<tr><td>' . __('Pending Records Threshold: %s', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
 
-	$panel['data'] .= '<tr><td>' . __('Approximate Next Start Time: %s', date('Y-m-d H:i:s', $next_run_time), 'intropage') . '</td></tr>';
+	if (is_numeric($next_run_time)) {
+		$next_run_time = date('Y-m-d H-i:s', $next_run_time);
+	}
+	
+	$panel['data'] .= '<tr><td>' . __('Approximate Next Start Time: %s', $next_run_time, 'intropage') . '</td></tr>';
 
 	$panel['data'] .= '<tr><td><hr></td></tr>';
 
