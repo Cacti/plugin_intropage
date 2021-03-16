@@ -1177,9 +1177,17 @@ function intropage_graph_button($data) {
 	}
 }
 
-function get_login_opts() {
-	if (empty($_SESSION['intropage_login_opts'])) {
-		// potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+function get_login_opts($refresh = false) {
+	if (isset_request_var('intropage_action') &&
+		get_nfilter_request_var('intropage_action') == 'loginopt_console') {
+		$_SESSION['intropage_login_opts'] = 1;
+	} elseif (isset_request_var('intropage_action') &&
+		get_nfilter_request_var('intropage_action') == 'loginopt_tab') {
+		$_SESSION['intropage_login_opts'] = 4;
+	} elseif (isset_request_var('intropage_action') &&
+		get_nfilter_request_var('intropage_action') == 'loginopt_graph') {
+		$_SESSION['intropage_login_opts'] = 2;
+	} elseif (empty($_SESSION['intropage_login_opts']) || $refresh) {
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts
 			FROM user_auth
 			WHERE id = ?',

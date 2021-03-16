@@ -1,5 +1,18 @@
 # Changelog
 
+--- 3.0.2 ---
+* Reduce the width of some titles to conserve space
+* Reduce the length of hostnames to conserve space
+* Make switching between tab and console view instantaneous
+* CSS Corrections in modern theme to properly place content
+* Missing some critical includes
+* Correct issues with alarm coloring rule adherence
+* Adjust boost settings to work with latest and legacy boost
+* Fix a number of SQL errors
+* Support Midwinter Theme
+* QA on a number of reworked panels
+* Remove inline styles where possible
+
 --- 3.0.1 ---
 * Correct syntax error in functions.php
 

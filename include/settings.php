@@ -39,7 +39,6 @@ function intropage_config_settings() {
 
 function intropage_login_options_navigate() {
 	global $config, $login_opts;
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 	$console_access = api_plugin_user_realm_auth('index.php');
 
@@ -65,7 +64,7 @@ function intropage_console_after() {
 	include_once($config['base_path'] . '/plugins/intropage/display.php');
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
-	$login_opts = get_login_opts();
+	$login_opts = get_login_opts(true);
 
 	if ($login_opts != 4) {
 		$panels = initialize_panel_library();

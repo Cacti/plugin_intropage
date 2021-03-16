@@ -511,8 +511,10 @@ function display_information() {
 	function actionPanel() {
 		var option = $('#intropage_action').val();
 
-		if (option == 'loginopt_tab' || option == 'loginopt_console') {
-			document.location = intropage_page+'?dashboard_id='+dashboard_id+'&intropage_action='+option;
+		if (option == 'loginopt_tab') {
+			document.location = urlPath + 'plugins/intropage/intropage.php?dashboard_id='+dashboard_id+'&intropage_action='+option;
+		} else if (option == 'loginopt_console') {
+			document.location = urlPath + 'index.php?dashboard_id='+dashboard_id+'&intropage_action='+option;
 		} else {
 			$.post(intropage_page, {
 				header: 'false',
