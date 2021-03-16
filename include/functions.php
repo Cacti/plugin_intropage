@@ -502,9 +502,9 @@ function intropage_detail_panel() {
 			$data['detail'] = __('Details Function does not exist.', 'intropage');
 		}
 
-		print '<div id="block" class="color_' . $data['alarm'] . '" ></div>';
-		print '<h3 style="display: inline">'  . $data['name']  . '</h3>';
-		print '<br/><br/>' . $data['detail'];
+		print '<div class="cactiTableTitle">'  . $data['name']  . '</div>';
+		print '<div class="cactiTableButton"><i class="fas fa-circle color_' . $data['alarm'] . '_bubble"></i></div>';
+		print $data['detail'];
 	} else {
 		print __('Panel Not Found');
 	}

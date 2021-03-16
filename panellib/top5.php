@@ -28,13 +28,13 @@ function register_top5() {
 	global $registry;
 
 	$registry['top5'] = array(
-		'name'        => __('Top 5 Panels', 'intropage'),
+		'name'        => __('Top/Bottom 5 Panels', 'intropage'),
 		'description' => __('Panels that provide information trending information about Cacti data collection.', 'intropage')
 	);
 
 	$panels = array(
 		'top5_ping' => array(
-			'name'         => __('Top 5 Ping', 'intropage'),
+			'name'         => __('Bottom 5 Ping', 'intropage'),
 			'description'  => __('Devices with the worst ping response', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -49,7 +49,7 @@ function register_top5() {
 			'trends_func'  => false
 		),
 		'top5_availability' => array(
-			'name'         => __('Top 5 Worst Availability', 'intropage'),
+			'name'         => __('Bottom 5 Availability', 'intropage'),
 			'description'  => __('Devices with the worst availability/reachability', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -64,7 +64,7 @@ function register_top5() {
 			'trends_func'  => false
 		),
 		'top5_polltime' => array(
-			'name'         => __('Top 5 Worst Polling Time', 'intropage'),
+			'name'         => __('Bottom 5 Polling Time', 'intropage'),
 			'description'  => __('Devices with the worst polling time', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -79,7 +79,7 @@ function register_top5() {
 			'trends_func'  => false
 		),
 		'top5_pollratio' => array(
-			'name'         => __('Top 5 Worst Polling Ratio', 'intropage'),
+			'name'         => __('Bottom 5 Polling Ratio', 'intropage'),
 			'description'  => __('Devices with the worst polling ratio', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -361,7 +361,7 @@ function top5_ping_detail() {
 		'detail' => '',
 	);
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
 	if ($allowed_devices != '') {
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time

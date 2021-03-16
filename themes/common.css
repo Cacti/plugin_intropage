@@ -91,6 +91,10 @@
 	text-align: right;
 }
 
+.cactiTable .panel_data span {
+	line-height: initial;
+}
+
 .color_red {
 	background: rgba(255,255,255,1) !important;
 	background: -moz-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
@@ -98,6 +102,10 @@
 	background: -webkit-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
 	background: -o-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
 	background: -ms-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
+}
+
+.color_red_bubble {
+	color: rgba(221,20,20,1);
 }
 
 .color_yellow {
@@ -110,6 +118,10 @@
 	background: -ms-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,230,0,1) 100%) !important;
 }
 
+.color_yellow_bubble {
+	color: rgba(230,230,0,1);
+}
+
 .color_green {
 	background-color: #457915;
 	background: rgba(255,255,255,1);
@@ -120,6 +132,10 @@
 	background: -ms-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
 }
 
+.color_green_bubble {
+	color: rgba(69,121,0,1);
+}
+
 .color_grey {
 	background-color: #9c9c9c;
 	background: rgba(255,255,255,1);
@@ -128,6 +144,10 @@
 	background: -webkit-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
 	background: -o-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
 	background: -ms-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
+}
+
+.color_grey_bubble {
+	color: rgba(156,156,156,1);
 }
 
 .color_grey, .color_grey i {
