@@ -872,22 +872,22 @@ function intropage_prepare_graph($dispdata) {
 		case 'sunrise':
 			$bgcolor = '';
 			break;
+		case 'paw':
+			$bgcolor = '#ffffff';
+			break;
 		default:
 			$bgcolor = '#f5f5f5';
 	}
 
-	$content = "";
+	$content = '';
 
 	// line graph
 	if (isset($dispdata['line'])) {
 		$xid = 'x' . substr(md5($dispdata['line']['title1']), 0, 7);
 
-		$content .= "<div class='chart_wrapper center'><canvas id=\"line_$xid\"></canvas>";
-		$content .=  "<script type='text/javascript'>";
-
+		$line_labels = "'" . implode("','", $dispdata['line']['label1']) . "'";
 		$title1      = $dispdata['line']['title1'];
-		$line_labels = implode('","', $dispdata['line']['label1']);
-		$line_values = implode(',', $dispdata['line']['data1']);
+		$line_values1 = implode(',', $dispdata['line']['data1']);
 
 		if (!empty($dispdata['line']['data2'])) {
 			$line_values2 = implode(',', $dispdata['line']['data2']);
@@ -909,104 +909,115 @@ function intropage_prepare_graph($dispdata) {
 			$title5       = $dispdata['line']['title5'];
 		}
 
-		$content .= "var $xid = document.getElementById('line_" . $xid . "').getContext('2d');";
-		$content .= "new Chart($xid, {";
-		$content .= "type: 'line',";
-		$content .= "options: {responsive: true, maintainAspectRatio: false},";
-		$content .= "data: {";
-		$content .= "labels: [\"" . $line_labels . "\"],";
-		$content .= "datasets: [{";
-		$content .= "label: '" . $title1 . "',";
-		$content .= "data: [" . $line_values . "],";
-		$content .= "borderColor: 'rgba(220,220,220,0.5)',";
-		$content .= "backgroundColor: 'rgba(220,220,220,0.5)',";
-		$content .= "},";
+		$content .= "<div class='chart_wrapper center' style='background-color: ". $bgcolor . "' id=\"line_$xid\"></div>";
+		$content .=  "<script type='text/javascript'>";
+
+		$content .= "var line_$xid = c3.generate({";
+		$content .= " bindto: \"#line_$xid\",";
+		$content .= " size: {";
+		$content .= "  height: 180";
+		$content .= " },";
+		$content .= " data: {";
+		$content .= "  x: 'x',";
+		$content .= "  xFormat: '%H:%M',";
+		$content .= "  columns: [";
+		$content .= "   ['x',"  . $line_labels . "],";
+		$content .= "   ['" . $dispdata['line']['title1'] . "', " . $line_values1 . "],";
 
 		if (!empty($dispdata['line']['data2'])) {
-			$content .= "{";
-			$content .= "label: '" . $title2 . "',";
-			$content .= "data: [" . $line_values2 . "],";
-			$content .= "borderColor: '#0f0f00',";
-			$content .= "},";
+			$content .= "   ['" . $title2 . "',"    . $line_values2 . "],";
 		}
-
 		if (!empty($dispdata['line']['data3'])) {
-			$content .= "{";
-			$content .= "label: '" . $title3 . "',";
-			$content .= "data: [" . $line_values3 . "],";
-			$content .= "borderColor: '#f0000f',";
-			$content .= "},";
+			$content .= "   ['" . $title3 . "',"    . $line_values3 . "],";
 		}
-
 		if (!empty($dispdata['line']['data4'])) {
-			$content .= "{";
-			$content .= "label: '" . $title4 . "',";
-			$content .= "data: [" . $line_values4 . "],";
-			$content .= "borderColor: '#f0000f',";
-			$content .= "},";
+			$content .= "   ['" . $title4 . "',"    . $line_values4 . "],";
 		}
-
 		if (!empty($dispdata['line']['data5'])) {
-			$content .= "{";
-			$content .= "label: '" . $title5 . "',";
-			$content .= "data: [" . $line_values5 . "],";
-			$content .= "borderColor: '#f0000f',";
-			$content .= "},";
+			$content .= "   ['" . $title5 . "',"    . $line_values5 . "],";
+		}
+		$content .= "  ],";
+
+		if (!empty($dispdata['line']['unit2'])) {
+			$content .= "  axes: {";
+			$content .= "   " . strtr($title2,' ' ,'_') . ": 'y2'";
+			$content .= "  }";
 		}
 
-		$content .= "]";
-		$content .= "},";
-		$content .= "options: {";
-		$content .= "responsive: false,";
-		$content .= "tooltipTemplate: '<%= value %>%'";
-		$content .= "}";
+		$content .= " },";
+		$content .= " axis: { ";
+		$content .= "  x: { ";
+		$content .= "   type: 'timeseries',";
+		$content .= "   tick: { ";
+		$content .= "    format: '%H:%M' ";
+		$content .= "   }"; 
+		$content .= "  },"; 
+
+		if (!empty($dispdata['line']['unit1'])) {
+			$content .= "  y: { ";
+			$content .= "   label: {";
+			$content .= "    text: '" . $dispdata['line']['unit1'] . "',";
+			$content .= "    position: 'outer-middle'";
+			$content .= "   }";
+			$content .= "  },";
+		}
+
+		if (!empty($dispdata['line']['unit2'])) {
+			$content .= "  y2: { ";
+			$content .= "   show: true,";
+			$content .= "   label: {";
+			$content .= "    text: '" . $dispdata['line']['unit2'] . "',";
+			$content .= "    position: 'outer-middle'";
+			$content .= "   }";
+			$content .= "  },";
+		}
+
+		$content .= " },";
 		$content .= "});";
 		$content .= "</script>";
-		$content .= "</div>";
 	} // line graph end
 
 	if (isset($dispdata['pie'])) {
-		$labely = array();
+
 		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
-		foreach ($dispdata['pie']['label'] as $key => $val) {
-			$labely[$key] = $val . ' (' . $dispdata['pie']['data'][$key] . ')';
+
+		$content .= "<div class='chart_wrapper center' style='background-color: ". $bgcolor . "' id=\"pie_$xid\"></div>";
+		$content .=  "<script type='text/javascript'>";
+
+		$content .= "var pie_$xid = c3.generate({";
+
+		$content .= " bindto: \"#pie_$xid\",";
+
+		$content .= " size: {";
+		$content .= "  height: 180";
+		$content .= " },";
+
+		$content .= " data: {";
+		$content .= "  columns: [";
+
+		foreach ($dispdata['pie']['data'] as $key => $value) {
+			$content .= "['" . $dispdata['pie']['label'][$key] . "', " . $value . "],";
 		}
 
-		$content .= "<div class='chart_wrapper center'><canvas id=\"pie_$xid\"></canvas>";
-		$content .= "<script type='text/javascript'>";
+		$content .= "  ],";
+		$content .= "  type: 'pie',";
+		$content .= "  },";
 
-		$pie_labels = implode('","', $labely);
+		$content .= "  pie: {";
+		$content .= "    label: {";
+		$content .= "      format: function (value, radio, id) {";
+		$content .= "        return (value);";
+		$content .= "      }";
+		$content .= "    }";
+		$content .= "  },";
 
-		$pie_values = implode(',', $dispdata['pie']['data']);
-		$pie_title  = $dispdata['pie']['title'];
+		$content .= "tooltip: { format: { value: function (value, ratio, id) { return (value); } } },";
+		$content .= "legend: { position: 'right' },";
 
-		$content .= "var $xid = document.getElementById('pie_" . $xid . "').getContext('2d');";
-		$content .= "new Chart($xid, {";
-		$content .= "type: 'pie',";
-		$content .= "data: {";
-		$content .= "labels: [\"" . $pie_labels . "\"],";
-		$content .= "datasets: [{";
-		$content .= "backgroundColor: [ '#2ecc71', '#e74c3c', '#f1c40f', '#6b6966', '#3498db', '#33ffe6', ],";
-		$content .= "data: [" . $pie_values . "]";
-		$content .= "}]";
-		$content .= "},";
-		$content .= "options: {";
-		$content .= "responsive: false,";
-		$content .= "title: { display: false, text: '" . $pie_title . "' },";
-		$content .= "legend: {";
-		$content .= "display: true,";
-		$content .= "position: 'right',";
-		$content .= "labels: {";
-		$content .= "usePointStyle: true,";
-		$content .= "}";
-		$content .= "},";
-		$content .= "tooltipTemplate: '<%= value %>%'";
-		$content .= "}";
 		$content .= "});";
 		$content .= "</script>";
 		$content .= "</div>";
 	}   // pie graph end
-
 	return (addslashes($content));
 }
 

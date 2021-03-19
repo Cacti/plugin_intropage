@@ -206,7 +206,7 @@ function poller_stat($panel, $user_id) {
 				WHERE name='poller'
 				AND value LIKE ?
 				ORDER BY cur_timestamp DESC
-				LIMIT 10",
+				LIMIT 20",
 				array($xpoller['id'] . ':%'));
 
 			$poller_time = array_reverse($poller_time);
@@ -226,6 +226,7 @@ function poller_stat($panel, $user_id) {
 				array_push($graph['line']['data' . $new_index], $time);
 
 				$graph['line']['title' . $new_index] = __('ID: ', 'intropage') . $xpoller['id'];
+				$graph['line']['unit1'] = __('Seconds');
 			}
 
 			$new_index++;

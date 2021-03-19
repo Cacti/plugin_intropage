@@ -469,7 +469,7 @@ function trend($panel, $user_id) {
 			WHERE name='thold'
 			AND user_id = ?
 			ORDER BY cur_timestamp desc
-			LIMIT 10",
+			LIMIT 20",
 			array($user_id));
 
 		if (cacti_sizeof($sql)) {
@@ -479,6 +479,8 @@ function trend($panel, $user_id) {
 				array_push($graph['line']['label1'], $row['date']);
 				array_push($graph['line']['data1'], $row['value']);
 			}
+			
+			$graph['line']['unit1'] = __('Tholds triggered', 'intropage');
 		}
 	}
 
@@ -487,7 +489,7 @@ function trend($panel, $user_id) {
 		WHERE name='host'
 		AND user_id = ?
 		ORDER BY cur_timestamp desc
-		LIMIT 10",
+		LIMIT 20",
 		array($user_id));
 
 	if (cacti_sizeof($sql)) {
@@ -496,6 +498,7 @@ function trend($panel, $user_id) {
 		foreach ($sql as $row) {
 			array_push($graph['line']['data2'], $row['value']);
 		}
+		$graph['line']['unit2'] = __('Hosts down');
 	}
 
 	if (count($graph['line']) < 3) {

@@ -147,7 +147,7 @@ function cpuload($panel, $user_id) {
 			FROM plugin_intropage_trends
 			WHERE name='cpuload'
 			ORDER BY cur_timestamp desc
-			LIMIT 10");
+			LIMIT 20");
 
 		if (cacti_sizeof($sql)) {
 			$graph['line']['title1'] = __('Load', 'intropage');
@@ -159,6 +159,7 @@ function cpuload($panel, $user_id) {
 
 			$graph['line']['data1']  = array_reverse($graph['line']['data1']);
 			$graph['line']['label1'] = array_reverse($graph['line']['label1']);
+			$graph['line']['unit1'] = '%';
 
 			$panel['data'] = intropage_prepare_graph($graph);
 		} else {
