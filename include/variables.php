@@ -98,7 +98,7 @@ $intropage_settings = array(
 	),
 	'intropage_analyse_db_level' => array(
 		'friendly_name' => __('Analyze DB - Level of db check', 'intropage'),
-		'description'   => __('Quick - No Check rows for inforccert links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may causes slow page load!', 'intropage'),
+		'description'   => __('Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => array(
 			'QUICK'    => __('Quick', 'intropage'),

@@ -207,7 +207,6 @@ function poller_stat($panel, $user_id) {
 				AND value LIKE ?
 				ORDER BY cur_timestamp DESC
 				LIMIT 20",
-
 				array($xpoller['id'] . ':%'));
 
 			$poller_time = array_reverse($poller_time);
