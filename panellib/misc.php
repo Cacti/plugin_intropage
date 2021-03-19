@@ -143,7 +143,7 @@ function maint($panel, $user_id) {
 
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
-	if (api_plugin_is_enabled('maint')) {
+	if (api_plugin_is_enabled('maint') && $maint_days_before >= 0) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
 
 		if ($allowed_devices !== false) {

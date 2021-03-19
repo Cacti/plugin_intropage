@@ -207,6 +207,7 @@ function poller_stat($panel, $user_id) {
 				AND value LIKE ?
 				ORDER BY cur_timestamp DESC
 				LIMIT 20",
+
 				array($xpoller['id'] . ':%'));
 
 			$poller_time = array_reverse($poller_time);
@@ -313,7 +314,7 @@ function poller_info_detail() {
 
 	$panel['detail'] = '<br/><br/>' . $row;
 
-	if ($sql_pollers === false || $count > $ok) {
+	if ($pollers === false || $count > $ok) {
 		$panel['alarm'] = 'red';
 	} else {
 		$panel['alarm'] = 'green';
