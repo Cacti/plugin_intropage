@@ -131,6 +131,8 @@ function intropage_user_admin_run_action(){
 
 	$fields = db_fetch_assoc('SELECT panel_id, level, class, name, description
 		FROM plugin_intropage_panel_definition
+		UNION
+		SELECT "favourite_graph", 1, "graphs", "Favorite Graphs", "Allow you to add your favorite graphs to the dashboard of your choice"
 		ORDER BY level, class, name');
 
 	$prev_level = -1;
@@ -228,6 +230,10 @@ function intropage_user_admin_user_save($save){
 			} else {
 				$permissions[$panel['panel_id']] = (isset_request_var($panel['panel_id']) ? 'on':'');
 			}
+		}
+
+		if (isset_request_var('favourite_graph')) {
+			$permissions['favourite_graph'] = 'on';
 		}
 
 		if ($permmode) {

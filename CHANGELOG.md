@@ -12,6 +12,7 @@
 * Support Midwinter Theme
 * QA on a number of reworked panels
 * Remove inline styles where possible
+* issue#133 - Add favourite graph is not possible in 3.0.x
 * issue#138 - Copy text from panel is broken
 
 --- 3.0.1 ---

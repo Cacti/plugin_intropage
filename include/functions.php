@@ -842,14 +842,15 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 
 		get_timespan( $timespan, time(),$fav_graph_timespan , $first_weekdayid);
 
-		$result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
-			'local_graph_id=' . $fav_graph_id . '&' .
-			'graph_height=105&' .
-			'graph_width=300&' .
-			'disable_cache=true&' .
-			'graph_start=' . $timespan['begin_now'] . '&' .
-			'graph_end=' . $timespan['end_now'] . '&' .
-			'graph_nolegend=true"/>';
+		$result['data'] = '<table class="cactiTable"><tr><td class="center"><img src="' . $config['url_path'] .
+			'graph_image.php' .
+			'?local_graph_id=' . $fav_graph_id .
+			'&graph_height=100' .
+			'&graph_width=300' .
+			'&disable_cache=true' .
+			'&graph_start=' . $timespan['begin_now'] .
+			'&graph_end=' . $timespan['end_now'] .
+			'&graph_nolegend=true"/></td></tr></tr>';
 
 		return $result;
 	}
