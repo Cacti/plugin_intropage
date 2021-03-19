@@ -372,7 +372,7 @@ function display_information() {
 		array($_SESSION['sess_user_id']));
 
 	// extra maint plugin panel - always first
-	if (api_plugin_is_enabled('maint')) {
+	if (api_plugin_is_enabled('maint') && (read_config_option('intropage_maint_plugin_days_before') >= 0)) {
 		$row = db_fetch_row_prepared("SELECT id, data
 			FROM plugin_intropage_panel_data
 			WHERE panel_id = 'maint'
@@ -511,8 +511,10 @@ function display_information() {
 	function actionPanel() {
 		var option = $('#intropage_action').val();
 
-		if (option == 'loginopt_tab' || option == 'loginopt_console') {
-			document.location = intropage_page+'?dashboard_id='+dashboard_id+'&intropage_action='+option;
+		if (option == 'loginopt_tab') {
+			document.location = urlPath + 'plugins/intropage/intropage.php?dashboard_id='+dashboard_id+'&intropage_action='+option;
+		} else if (option == 'loginopt_console') {
+			document.location = urlPath + 'index.php?dashboard_id='+dashboard_id+'&intropage_action='+option;
 		} else {
 			$.post(intropage_page, {
 				header: 'false',
@@ -618,7 +620,7 @@ function display_information() {
 
 				$.get(intropage_page, { xdata:xdata, intropage_action:'order' });
 			}
-		}).disableSelection();
+		});
 
 		$('.droppanel').click(function(event) {
 			event.preventDefault();

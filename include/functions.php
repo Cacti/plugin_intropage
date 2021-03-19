@@ -502,9 +502,9 @@ function intropage_detail_panel() {
 			$data['detail'] = __('Details Function does not exist.', 'intropage');
 		}
 
-		print '<div id="block" class="color_' . $data['alarm'] . '" ></div>';
-		print '<h3 style="display: inline">'  . $data['name']  . '</h3>';
-		print '<br/><br/>' . $data['detail'];
+		print '<div class="cactiTableTitle">'  . $data['name']  . '</div>';
+		print '<div class="cactiTableButton"><i class="fas fa-circle color_' . $data['alarm'] . '_bubble"></i></div>';
+		print $data['detail'];
 	} else {
 		print __('Panel Not Found');
 	}
@@ -680,7 +680,7 @@ function display_panel_results($panel_id, $user_id = 0) {
 		array($panel_id, $user_id));
 
 	if (cacti_sizeof($data) && trim($data['data']) == '') {
-		if ($panel['force'] == true) {
+		if (!empty($panel['force']) && $panel['force']) {
 			$data['data'] = __('No Data Present.  Either Force Update, or wait for next Cacti Polling cycle.', 'intropage');
 		} else {
 			$data['data'] = __('No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti\'s Poller to perform the check.', 'intropage');
@@ -842,14 +842,15 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 
 		get_timespan( $timespan, time(),$fav_graph_timespan , $first_weekdayid);
 
-		$result['data'] = '<img src="' . $config['url_path'] . 'graph_image.php?' .
-			'local_graph_id=' . $fav_graph_id . '&' .
-			'graph_height=105&' .
-			'graph_width=300&' .
-			'disable_cache=true&' .
-			'graph_start=' . $timespan['begin_now'] . '&' .
-			'graph_end=' . $timespan['end_now'] . '&' .
-			'graph_nolegend=true"/>';
+		$result['data'] = '<table class="cactiTable"><tr><td class="center"><img src="' . $config['url_path'] .
+			'graph_image.php' .
+			'?local_graph_id=' . $fav_graph_id .
+			'&graph_height=100' .
+			'&graph_width=300' .
+			'&disable_cache=true' .
+			'&graph_start=' . $timespan['begin_now'] .
+			'&graph_end=' . $timespan['end_now'] .
+			'&graph_nolegend=true"/></td></tr></tr>';
 
 		return $result;
 	}
@@ -1188,9 +1189,17 @@ function intropage_graph_button($data) {
 	}
 }
 
-function get_login_opts() {
-	if (empty($_SESSION['intropage_login_opts'])) {
-		// potrebuju to mit v session, protoze treba mi zmeni z konzole na tab a pak spatne vykresluju
+function get_login_opts($refresh = false) {
+	if (isset_request_var('intropage_action') &&
+		get_nfilter_request_var('intropage_action') == 'loginopt_console') {
+		$_SESSION['intropage_login_opts'] = 1;
+	} elseif (isset_request_var('intropage_action') &&
+		get_nfilter_request_var('intropage_action') == 'loginopt_tab') {
+		$_SESSION['intropage_login_opts'] = 4;
+	} elseif (isset_request_var('intropage_action') &&
+		get_nfilter_request_var('intropage_action') == 'loginopt_graph') {
+		$_SESSION['intropage_login_opts'] = 2;
+	} elseif (empty($_SESSION['intropage_login_opts']) || $refresh) {
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts
 			FROM user_auth
 			WHERE id = ?',

@@ -141,6 +141,7 @@ $intropage_settings = array(
 		'description'   => __('How many days before a scheduled maintenance schedule should a warning be displayed?', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => array(
+			'-1'     => __('Never warn', 'intropage'),
 			'0'      => __('When maintenance starts', 'intropage'),
 			'86400'  => __('%d Day Before', 1, 'intropage'),
 			'259200' => __('%d Days Before', 3, 'intropage'),

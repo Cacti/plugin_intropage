@@ -313,7 +313,7 @@ function poller_info_detail() {
 
 	$panel['detail'] = '<br/><br/>' . $row;
 
-	if ($sql_pollers === false || $count > $ok) {
+	if ($pollers === false || $count > $ok) {
 		$panel['alarm'] = 'red';
 	} else {
 		$panel['alarm'] = 'green';

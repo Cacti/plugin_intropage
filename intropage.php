@@ -32,7 +32,7 @@ include_once($config['base_path'] . '/plugins/intropage/display.php');
 
 global $panels, $registry, $login_opts;
 
-$login_opts = get_login_opts();
+$login_opts = get_login_opts(true);
 
 $panels = initialize_panel_library();
 
