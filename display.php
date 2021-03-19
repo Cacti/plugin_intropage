@@ -620,7 +620,7 @@ function display_information() {
 
 				$.get(intropage_page, { xdata:xdata, intropage_action:'order' });
 			}
-		}).disableSelection();
+		});
 
 		$('.droppanel').click(function(event) {
 			event.preventDefault();
