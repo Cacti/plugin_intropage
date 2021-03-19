@@ -680,7 +680,7 @@ function display_panel_results($panel_id, $user_id = 0) {
 		array($panel_id, $user_id));
 
 	if (cacti_sizeof($data) && trim($data['data']) == '') {
-		if ($panel['force'] == true) {
+		if (!empty($panel['force']) && $panel['force']) {
 			$data['data'] = __('No Data Present.  Either Force Update, or wait for next Cacti Polling cycle.', 'intropage');
 		} else {
 			$data['data'] = __('No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti\'s Poller to perform the check.', 'intropage');

@@ -372,7 +372,7 @@ function display_information() {
 		array($_SESSION['sess_user_id']));
 
 	// extra maint plugin panel - always first
-	if (api_plugin_is_enabled('maint')) {
+	if (api_plugin_is_enabled('maint') && (read_config_option('intropage_maint_plugin_days_before') >= 0)) {
 		$row = db_fetch_row_prepared("SELECT id, data
 			FROM plugin_intropage_panel_data
 			WHERE panel_id = 'maint'
