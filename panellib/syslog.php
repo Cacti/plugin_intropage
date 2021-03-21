@@ -111,7 +111,7 @@ function plugin_syslog($panel, $user_id) {
 			FROM plugin_intropage_trends
 			WHERE name='syslog_total'
 			ORDER BY cur_timestamp desc
-			LIMIT 11");
+			LIMIT 20");
 
 		if (cacti_sizeof($sql)) {
 			$val = 0;
@@ -131,7 +131,7 @@ function plugin_syslog($panel, $user_id) {
 			FROM plugin_intropage_trends
 			WHERE name='syslog_incoming'
 			ORDER BY cur_timestamp desc
-			LIMIT 11");
+			LIMIT 20");
 
 		if (cacti_sizeof($sql)) {
 			$val = 0;
@@ -151,7 +151,7 @@ function plugin_syslog($panel, $user_id) {
 			FROM plugin_intropage_trends
 			WHERE name='syslog_alert'
 			ORDER BY cur_timestamp desc
-			LIMIT 11");
+			LIMIT 20");
 
 		if (cacti_sizeof($sql)) {
 			$val = 0;
@@ -170,8 +170,7 @@ function plugin_syslog($panel, $user_id) {
 
 			array_shift($graph['line']['label3']);
 			array_shift($graph['line']['data3']);
-
-			$panel['data'] = intropage_prepare_graph($graph);
+			$graph['line']['unit1'] = __('Messages', 'intropage');
 
 			if (cacti_sizeof($sql) < 3) {
 				unset($panel['line']);
@@ -183,7 +182,9 @@ function plugin_syslog($panel, $user_id) {
 				$graph['line']['label1'] = array_reverse($graph['line']['label1']);
 				$graph['line']['label2'] = array_reverse($graph['line']['label2']);
 				$graph['line']['label3'] = array_reverse($graph['line']['label3']);
+				$panel['data'] = intropage_prepare_graph($graph);
 			}
+
 		}
 	} else {
 		$panel['data']  = __('Syslog plugin not installed/running', 'intropage');

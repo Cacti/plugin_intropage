@@ -147,7 +147,7 @@ function cpuload($panel, $user_id) {
 			FROM plugin_intropage_trends
 			WHERE name='cpuload'
 			ORDER BY cur_timestamp desc
-			LIMIT 15");
+			LIMIT 20");
 
 		if (cacti_sizeof($sql)) {
 			$graph['line']['title1'] = __('Load', 'intropage');
@@ -159,6 +159,7 @@ function cpuload($panel, $user_id) {
 
 			$graph['line']['data1']  = array_reverse($graph['line']['data1']);
 			$graph['line']['label1'] = array_reverse($graph['line']['label1']);
+			$graph['line']['unit1'] = '%';
 
 			$panel['data'] = intropage_prepare_graph($graph);
 		} else {
@@ -456,22 +457,24 @@ function extrem($panel, $user_id) {
 	}
 
 	// max thold trig
-	// extrems doesn't use user permission!
 	if (api_plugin_is_enabled('thold')) {
 		$columns['thold'] = __('Triggered', 'intropage');
 
-		$data = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+		$data = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 			FROM plugin_intropage_trends
 			WHERE name='thold'
-			AND user_id = " . $user_id . "
+			AND user_id = ?
 			AND cur_timestamp > date_sub(now(),interval 1 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 8");
+			LIMIT 8",
+			array($user_id));
 
 		if (cacti_sizeof($data)) {
-			foreach ($data as $row) {
+			foreach ($data as $key => $row) {
 				$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'];
 			}
+
+
 		}
 	}
 
@@ -655,7 +658,7 @@ function extrem_detail() {
 
 			$i = 0;
 			foreach ($data as $row) {
-				$columns[$i][$j] = $row['date'] . ' ' . $row['value'];
+				$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
 				$i++;
 			}
 		}
