@@ -1271,7 +1271,7 @@ function intropage_configure_panel() {
 		'86400' => __('%d Day', 1, 'intropage')
 	);
 
-	$panels = db_fetch_assoc_prepared('SELECT t1.panel_id, t1.id,
+	$panels = db_fetch_assoc_prepared('SELECT DISTINCTROW t1.panel_id, t1.id,
 		pd.name, pd.level, pd.description,
 		refresh_interval, refresh AS default_refresh, t1.user_id AS user_id
 		FROM plugin_intropage_panel_data AS t1
