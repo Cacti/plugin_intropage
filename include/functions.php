@@ -248,6 +248,7 @@ function intropage_actions() {
 	case 'favgraph':
 		if (get_filter_request_var('graph_id')) {
 			// already fav?
+
 			$exists = db_fetch_cell_prepared('SELECT COUNT(*)
 				FROM plugin_intropage_panel_data
 				WHERE user_id = ?
@@ -275,7 +276,7 @@ function intropage_actions() {
 				WHERE user_id = ?',
 				array($_SESSION['sess_user_id']));
 
-			db_execute_prepared('REPLACE INTO plugin_intropage_panel_data
+			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
 				(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
 				VALUES (?, "favourite_graph", ?, ?, ?)',
 				array($_SESSION['sess_user_id'],get_request_var('graph_id'), $span, $prio));
@@ -410,8 +411,10 @@ function intropage_reload_panel() {
 	session_write_close();
 
 	if (cacti_sizeof($panel)) {
-		// Source panel
-		$spanel = $panels[$panel['panel_id']];
+		// Source panel (not favgraph)
+		if (isset($panels[$panel['panel_id']])) {
+			$spanel = $panels[$panel['panel_id']];
+		}
 
 		if ($panel['fav_graph_id'] > 0) {
 			$data = intropage_favourite_graph($panel['fav_graph_id'], $panel['fav_graph_timespan']);
@@ -1089,7 +1092,12 @@ function intropage_display_panel($panel_id) {
 		WHERE id = ?',
 		array($panel_id));
 
-	$width = $panels[$k_id]['width'];
+	if ($k_id == 'favourite_graph') {
+		$width = 'quarter-panel';
+	}
+	else {
+		$width = $panels[$k_id]['width'];
+	}
 
 	print '<li id="panel_' . $panel_id . '" class="' . $width . ' flexchild">';
 	print '<div class="panel_wrapper">';
@@ -1271,7 +1279,7 @@ function intropage_configure_panel() {
 		'86400' => __('%d Day', 1, 'intropage')
 	);
 
-	$panels = db_fetch_assoc_prepared('SELECT t1.panel_id, t1.id,
+	$panels = db_fetch_assoc_prepared('SELECT DISTINCTROW t1.panel_id, t1.id,
 		pd.name, pd.level, pd.description,
 		refresh_interval, refresh AS default_refresh, t1.user_id AS user_id
 		FROM plugin_intropage_panel_data AS t1
