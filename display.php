@@ -229,8 +229,9 @@ function display_information() {
 			WHERE t2.user_id = ?
 			AND t2.dashboard_id = ?
 		)
+		AND ppd.user_id = ?
 		ORDER BY pd.name',
-		array($_SESSION['sess_user_id'], $dashboard_id));
+		array($_SESSION['sess_user_id'], $dashboard_id,$_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($add_panels)) {
 		foreach ($add_panels as $panel) {
