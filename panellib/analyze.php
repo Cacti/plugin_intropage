@@ -503,7 +503,7 @@ function trend($panel, $user_id) {
 		$graph['line']['unit2'] = __('Hosts down');
 	}
 
-	if (count($graph['line']) < 3) {
+	if (count($graph['line']['data1']) < 3) {
 		unset($graph);
 		$panel['data'] = __('Waiting for data','intropage');
 	} else {
