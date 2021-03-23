@@ -536,8 +536,7 @@ function extrem($panel, $user_id) {
 		}
 
 		$panel['data'] .= '</table>';
-	}
-	else {
+	} else {
 		$panel['data'] .=  __('Waiting for data', 'intropage');
 	}
 
