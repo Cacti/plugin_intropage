@@ -417,6 +417,7 @@ function extrem($panel, $user_id) {
 
 	$colums = array();
 	$data   = array();
+	$fin_data   = array();
 
 	$console_access = get_console_access($user_id);
 
@@ -514,26 +515,31 @@ function extrem($panel, $user_id) {
 		}
 	}
 
-	// Create table from data
-	$panel['data'] = '<table class="cactiTable"><tr class="tableHeader">';
+	if (cacti_sizeof($fin_data)) {
+		// Create table from data
+		$panel['data'] = '<table class="cactiTable"><tr class="tableHeader">';
 
-	foreach($columns as $col) {
-		$panel['data'] .= '<th class="right">' . $col . '</th>';
-	}
-
-	$panel['data'] .= '</tr>';
-
-	foreach($fin_data as $key => $rdata) {
-		$panel['data'] .= '<tr>';
-
-		foreach($columns as $index => $col) {
-			$panel['data'] .= '<td class="right">' . (isset($rdata[$index]) ? $rdata[$index]:'-') . '</td>';
+		foreach($columns as $col) {
+			$panel['data'] .= '<th class="right">' . $col . '</th>';
 		}
 
 		$panel['data'] .= '</tr>';
-	}
 
-	$panel['data'] .= '</table>';
+		foreach($fin_data as $key => $rdata) {
+			$panel['data'] .= '<tr>';
+
+			foreach($columns as $index => $col) {
+				$panel['data'] .= '<td class="right">' . (isset($rdata[$index]) ? $rdata[$index]:'-') . '</td>';
+			}
+
+			$panel['data'] .= '</tr>';
+		}
+
+		$panel['data'] .= '</table>';
+	}
+	else {
+		$panel['data'] .=  __('Waiting for data', 'intropage');
+	}
 
 	save_panel_result($panel, $user_id);
 }
