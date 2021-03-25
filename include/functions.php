@@ -862,27 +862,6 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 function intropage_prepare_graph($dispdata) {
 	global $config;
 
-	$selectedTheme = get_selected_theme();
-	switch ($selectedTheme) {
-		case 'dark':
-			$bgcolor = '#161616';
-			break;
-		case 'midwinter':
-			$bgcolor = '#242635';
-			break;
-		case 'paper-plane':
-			$bgcolor = '#202020';
-			break;
-		case 'sunrise':
-			$bgcolor = '';
-			break;
-		case 'paw':
-			$bgcolor = '#ffffff';
-			break;
-		default:
-			$bgcolor = '#f5f5f5';
-	}
-
 	$content = '';
 
 	// line graph
@@ -913,7 +892,7 @@ function intropage_prepare_graph($dispdata) {
 			$title5       = $dispdata['line']['title5'];
 		}
 
-		$content .= "<div class='chart_wrapper center' style='background-color: ". $bgcolor . "' id=\"line_$xid\"></div>";
+		$content .= "<div class='chart_wrapper center' id=\"line_$xid\"></div>";
 		$content .=  "<script type='text/javascript'>";
 
 		$content .= "var line_$xid = c3.generate({";
@@ -954,8 +933,8 @@ function intropage_prepare_graph($dispdata) {
 		$content .= "   type: 'timeseries',";
 		$content .= "   tick: { ";
 		$content .= "    format: '%H:%M' ";
-		$content .= "   }"; 
-		$content .= "  },"; 
+		$content .= "   }";
+		$content .= "  },";
 
 		if (!empty($dispdata['line']['unit1'])) {
 			$content .= "  y: { ";
@@ -982,10 +961,9 @@ function intropage_prepare_graph($dispdata) {
 	} // line graph end
 
 	if (isset($dispdata['pie'])) {
-
 		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
 
-		$content .= "<div class='chart_wrapper center' style='background-color: ". $bgcolor . "' id=\"pie_$xid\"></div>";
+		$content .= "<div class='chart_wrapper center' id=\"pie_$xid\"></div>";
 		$content .=  "<script type='text/javascript'>";
 
 		$content .= "var pie_$xid = c3.generate({";
