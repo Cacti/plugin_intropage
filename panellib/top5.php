@@ -306,7 +306,7 @@ function top5_pollratio($panel, $user_id) {
 		$console_access = get_console_access($user_id);
 
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls,
-			total_polls, CAST(failed_polls/total_polls AS DOUBLE) AS ratio
+			total_polls, CAST(failed_polls/total_polls AS DECIMAL(5,4)) AS ratio
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
 			AND disabled != 'on'
@@ -567,7 +567,7 @@ function top5_pollratio_detail() {
 	);
 
 	$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls,
-		total_polls, CAST(failed_polls/total_polls AS DOUBLE) AS ratio
+		total_polls, CAST(failed_polls/total_polls AS DECIMAL(5,4)) AS ratio
 		FROM host
 		WHERE disabled != 'on'
 		ORDER BY ratio DESC
