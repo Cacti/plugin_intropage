@@ -327,9 +327,7 @@ function boost($panel, $user_id) {
 
 	$panel['data'] .= '<tr><td><hr></td></tr>';
 
-	$panel['data'] .= '<tr><td>' . __('Parallel Processes: %s', number_format_i18n($parallel, -1), 'intropage') . '</td></tr>';
-
-	$panel['data'] .= '<tr><td>' . __('Update Frequency: %s', $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_int], 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Processes/Frequency: %s / %s', number_format_i18n($parallel, -1), $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_int], 'intropage') . '</td></tr>';
 
 	$panel['data'] .= '<tr><td>' . __('Pending Records Threshold: %s', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
 
@@ -338,8 +336,6 @@ function boost($panel, $user_id) {
 	}
 
 	$panel['data'] .= '<tr><td>' . __('Approximate Next Start Time: %s', $next_run_time, 'intropage') . '</td></tr>';
-
-	$panel['data'] .= '<tr><td><hr></td></tr>';
 
 	if ($total_records) {
 		$panel['data'] .= '<tr><td>' . __('Pending/Archived Records: %s / %s', number_format_i18n($pending_records, -1), number_format_i18n($arch_records, -1), 'intropage') . '</td></tr>';
@@ -371,9 +367,7 @@ function boost($panel, $user_id) {
 
 	$panel['data'] .= '<tr><td><hr></td></tr>';
 
-	$panel['data'] .= '<tr><td>' . __('Last run duration: %s', $lastduration, 'intropage') . '</td></tr>';
-
-	$panel['data'] .= '<tr><td>' . __('Last run updates: %s', $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Last run duration/updates: %s / %s', $lastduration, $boost_rrds_updated != '' ? number_format_i18n($boost_rrds_updated, -1) : '-', 'intropage') . '</td></tr>';
 
 	$panel['data'] .= '</table>';
 

@@ -311,6 +311,7 @@ function analyse_db($panel, $user_id) {
 			<tr>
 				<td><span class="txt_big">' . __('DB: Problems', 'intropage') . '</span></td>
 			</tr>
+			<tr><td><hr></td></tr>
 			<tr>
 				<td></td>
 			</tr>' . $panel['data'];
@@ -319,6 +320,7 @@ function analyse_db($panel, $user_id) {
 			<tr>
 				<td><span class="txt_big">' . __('DB: OK', 'intropage') . '</span></td>
 			</tr>
+			<tr><td><hr></td></tr>
 			<tr>
 				<td></td>
 			</tr>' . $panel['data'];
@@ -481,7 +483,7 @@ function trend($panel, $user_id) {
 				array_push($graph['line']['label1'], $row['date']);
 				array_push($graph['line']['data1'], $row['value']);
 			}
-			
+
 			$graph['line']['unit1'] = __('Tholds triggered', 'intropage');
 		}
 	}
