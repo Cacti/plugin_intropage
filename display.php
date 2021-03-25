@@ -464,6 +464,10 @@ function display_information() {
 			resizeCharts();
 		});
 
+		$(window).on('orientationchange', function() {
+			resizeCharts();
+		}).trigger('orientationchange');
+
 		if (pageName == 'index.php') {
 			intropage_page = urlPath + pageName;
 		} else {
@@ -477,11 +481,15 @@ function display_information() {
 	});
 
 	function resizeCharts() {
-		$('.chart_wrapper > canvas[id^="line_"]').each(function() {
-			var width  = $(this).closest('.panel_wrapper').width() - 10;
-			var height = $(this).closest('.panel_wrapper').height() - 34;
-			$(this).css({ height: height });
-			$(this).css({ width: width });
+		$('.chart_wrapper:has(svg)').each(function() {
+			var chart      = $(this).attr('id');
+			var windWidth  = $(window).width() - 34;
+			var panelWidth = $(this).closest('.panel_wrapper').width() - 34;
+			var width = Math.min(windWidth, panelWidth);
+			var height     = $(this).closest('.panel_wrapper').height() - 34;
+			//console.log('Chart:'+chart+', Width:'+width+', Height:'+height);
+
+			eval(chart).resize({ width: width, height:height });
 		});
 	}
 
