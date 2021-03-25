@@ -171,6 +171,8 @@ function analyse_login($panel, $user_id) {
 				'<th class="left">' . __('Status', 'intropage') . '</td>' .
 			'</tr>';
 
+		$i = 0;
+
 		foreach ($rows as $row) {
 			if ($row['result'] == 0) {
 				$status = __('Failed', 'intropage');
@@ -180,12 +182,14 @@ function analyse_login($panel, $user_id) {
 				$status = __('Success - Token', 'intropage');
 			}
 
-			$panel['data'] .= sprintf('<tr>' .
+			$panel['data'] .= sprintf('<tr class="%s">' .
 				'<td class="left">%s</td>' .
 				'<td class="left">%s</td>' .
 				'<td class="left">%s</td>' .
 				'<td>%s</td>' .
-			'</tr>', substr($row['time'], 5), $row['username'], $row['ip'], $status);
+			'</tr>', $i % 2 == 0 ? 'even':'odd', substr($row['time'], 5), $row['username'], $row['ip'], $status);
+
+			$i++;
 		}
 
 		$panel['data'] .= '</table>';

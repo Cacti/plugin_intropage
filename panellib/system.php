@@ -468,8 +468,6 @@ function extrem($panel, $user_id) {
 			foreach ($data as $key => $row) {
 				$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'];
 			}
-
-
 		}
 	}
 
@@ -519,14 +517,17 @@ function extrem($panel, $user_id) {
 
 		$panel['data'] .= '</tr>';
 
+		$i = 0;
 		foreach($fin_data as $key => $rdata) {
-			$panel['data'] .= '<tr>';
+			$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 
 			foreach($columns as $index => $col) {
 				$panel['data'] .= '<td class="right">' . (isset($rdata[$index]) ? $rdata[$index]:'-') . '</td>';
 			}
 
 			$panel['data'] .= '</tr>';
+
+			$i++;
 		}
 
 		$panel['data'] .= '</table>';
