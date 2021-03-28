@@ -280,7 +280,7 @@ function webseer_detail() {
 		ON pwul.url_id=pwu.id
 		WHERE pwu.id = 1
 		ORDER BY pwul.lastcheck DESC
-		LIMIT 20');
+		LIMIT 40');
 
 	$panel['detail'] = '<table class="cactiTable"><tr class="tableHeader">';
 

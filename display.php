@@ -25,7 +25,7 @@
 */
 
 function display_information() {
-	global $config, $sql_where, $login_opts, $panels, $registry;
+	global $config, $sql_where, $login_opts, $panels, $registry, $trend_timespans;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
@@ -71,6 +71,7 @@ function display_information() {
 	// Retrieve user settings and defaults
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
+	$timespan                = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'));
 
 	// number of dashboards
 	$number_of_dashboards = db_fetch_cell_prepared('SELECT COUNT(*)
@@ -214,61 +215,7 @@ function display_information() {
 
 	print '&nbsp; &nbsp; ';
 
-	print "<select id='intropage_addpanel'>";
-	print '<option value="0">' . __('Panels ...', 'intropage') . '</option>';
-
-	$add_panels = db_fetch_assoc_prepared('SELECT ppd.id, pd.panel_id, pd.name
-		FROM plugin_intropage_panel_definition AS pd
-		LEFT JOIN plugin_intropage_panel_data AS ppd
-		ON pd.panel_id = ppd.panel_id
-		WHERE pd.panel_id NOT IN (
-			SELECT t1.panel_id
-			FROM plugin_intropage_panel_data AS t1
-			INNER JOIN plugin_intropage_panel_dashboard AS t2
-			ON t1.id = t2.panel_id
-			WHERE t2.user_id = ?
-			AND t2.dashboard_id = ?
-		)
-		AND ppd.user_id = ?
-		ORDER BY pd.name',
-		array($_SESSION['sess_user_id'], $dashboard_id,$_SESSION['sess_user_id']));
-
-	if (cacti_sizeof($add_panels)) {
-		foreach ($add_panels as $panel) {
-			$uniqid = db_fetch_cell_prepared('SELECT id
-				FROM plugin_intropage_panel_data
-				WHERE user_id IN (0, ?)
-				AND panel_id = ?',
-				array($_SESSION['sess_user_id'],$panel['panel_id']));
-
-			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert') {
-				$allowed = is_panel_allowed($panel['panel_id']);
-
-				$enabled = is_panel_enabled($panel['panel_id']);
-
-				if ($uniqid > 0) {
-					if ($allowed) {
-						if ($enabled) {
-							print "<option value='" . $uniqid . "'>" . html_escape($panel['name']) . '</option>';
-						}
-					} else {
-						print "<option value='addpanel_" .  $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
-					}
-				} else {
-					if ($allowed) {
-						if ($enabled) {
-							print "<option value='" . $panel['panel_id'] . "'>" . html_escape($panel['name']) . '</option>';
-						}
-					} else {
-						print "<option value='addpanel_" .  $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
-					}
-				}
-			}
-		}
-	}
-
-	print '</select>';
-	print '&nbsp; &nbsp; ';
+	intropage_addpanel_select($dashboard_id);
 
 	print "<select id='intropage_action'>";
 	print '<option value="0">' . __('Actions ...', 'intropage') . '</option>';
@@ -281,38 +228,51 @@ function display_information() {
 		print '<option value="removepage_' . $dashboard_id . '">' . __('Remove current dashboard', 'intropage') . '</option>';
 	}
 
-	// only submit :-)
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
 	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
 
 	if ($autorefresh > 0 || $autorefresh == -1) {
-		print "<option value='refresh_0'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
+		print "<option value='refresh_0'>" . __('Refresh Disabled', 'intropage') . '</option>';
 	} else {
-		print "<option value='refresh_0' disabled='disabled'>" . __('Autorefresh Disabled', 'intropage') . '</option>';
+		print "<option value='refresh_0' disabled='disabled'>" . __('Refresh Disabled', 'intropage') . '</option>';
 	}
 
 	if ($autorefresh == -1) {
-		print "<option value='refresh_-1' disabled='disabled'>" . __('Autorefresh ly Poller', 'intropage') . '</option>';
+		print "<option value='refresh_-1' disabled='disabled'>" . __('Refresh by Poller', 'intropage') . '</option>';
 	} else {
-		print "<option value='refresh_-1'>" . __('Autorefresh by Poller', 'intropage') . '</option>';
+		print "<option value='refresh_-1'>" . __('Refresh by Poller', 'intropage') . '</option>';
 	}
 
 	if ($autorefresh == 60) {
-		print "<option value='refresh_60' disabled='disabled'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
+		print "<option value='refresh_60' disabled='disabled'>" . __('Refresh Every 1 Minute', 'intropage') . '</option>';
 	} else {
-		print "<option value='refresh_60'>" . __('Autorefresh 1 Minute', 'intropage') . '</option>';
+		print "<option value='refresh_60'>" . __('Refresh Every 1 Minute', 'intropage') . '</option>';
 	}
 
 	if ($autorefresh == 300) {
-		print "<option value='refresh_300' disabled='disabled'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
+		print "<option value='refresh_300' disabled='disabled'>" . __('Refresh Every 5 Minutes', 'intropage') . '</option>';
 	} else {
-		print "<option value='refresh_300'>" . __('Autorefresh 5 Minutes', 'intropage') . '</option>';
+		print "<option value='refresh_300'>" . __('Refresh Every 5 Minutes', 'intropage') . '</option>';
 	}
 
 	if ($autorefresh == 3600) {
-		print "<option value='refresh_3600' disabled='disabled'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
+		print "<option value='refresh_3600' disabled='disabled'>" . __('Refresh Every Hour', 'intropage') . '</option>';
 	} else {
-		print "<option value='refresh_3600'>" . __('Autorefresh 1 Hour', 'intropage') . '</option>';
+		print "<option value='refresh_3600'>" . __('Refresh Every Hour', 'intropage') . '</option>';
 	}
+
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
+	foreach($trend_timespans as $key => $value) {
+		if ($timespan == $key) {
+			print "<option value='timespan_$key' disabled='disabled'>" . $value . '</option>';
+		} else {
+			print "<option value='timespan_$key'>" . $value . '</option>';
+		}
+	}
+
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
 
 	if ($display_important_first == 'on') {
 		print "<option value='important_first' disabled='disabled'>" . __('Sort by Severity', 'intropage') . '</option>';
@@ -320,6 +280,12 @@ function display_information() {
 	} else {
 		print "<option value='important_first'>" . __('Sort by Severity', 'intropage') . '</option>';
 		print "<option value='important_no' disabled='disabled'>" . __('Sort by User Preference', 'intropage') . '</option>';
+	}
+
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
+	if (api_plugin_user_realm_auth('intropage_admin.php')) {
+		print "<option value='forcereload'>" . __('Reload Panel Definitions', 'intropage') . '</option>';
 	}
 
 	if (!$console_access) {
@@ -381,7 +347,7 @@ function display_information() {
 			array($_SESSION['sess_user_id']));
 
 		if ($row && strlen($row['data']) > 20 && $dashboard_id == $first_db) {
-			intropage_display_panel($row['id']);
+			intropage_display_panel($row['id'], $dashboard_id);
 		}
 	}
 	// end of extra maint plugin panel
@@ -393,7 +359,7 @@ function display_information() {
 			WHERE panel_id='admin_alert'");
 
 		if ($id && $dashboard_id == $first_db) {
-			intropage_display_panel($id);
+			intropage_display_panel($id, $dashboard_id);
 		}
 	}
 	// end of admin panel
@@ -401,7 +367,7 @@ function display_information() {
 	if ($display_important_first == 'on') {  // important first
 		foreach ($panels as $xkey => $xvalue) {
 			if ($xvalue['alarm'] == 'red') {
-				intropage_display_panel($xvalue['id']);
+				intropage_display_panel($xvalue['id'], $dashboard_id);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
@@ -409,7 +375,7 @@ function display_information() {
 		// yellow (errors and warnings)
 		foreach ($panels as $xkey => $xvalue) {
 			if ($xvalue['alarm'] == 'yellow') {
-				intropage_display_panel($xvalue['id']);
+				intropage_display_panel($xvalue['id'], $dashboard_id);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
@@ -417,7 +383,7 @@ function display_information() {
 		// green (all)
 		foreach ($panels as $xkey => $xvalue) {
 			if ($xvalue['alarm'] == 'green') {
-				intropage_display_panel($xvalue['id']);
+				intropage_display_panel($xvalue['id'], $dashboard_id);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
@@ -425,13 +391,13 @@ function display_information() {
 		// grey and without color
 		foreach ($panels as $xkey => $xvalue) {
 			if (!isset($xvalue['displayed'])) {
-				intropage_display_panel($xvalue['id']);
+				intropage_display_panel($xvalue['id'], $dashboard_id);
 				$panels[$xkey]['displayed'] = true;
 			}
 		}
 	} else {	// display only errors/errors and warnings/all - order by priority
 		foreach ($panels as $xkey => $xvalue) {
-			intropage_display_panel($xvalue['id']);
+			intropage_display_panel($xvalue['id'], $dashboard_id);
 		}
 	}
 
@@ -633,10 +599,22 @@ function display_information() {
 
 		$('.droppanel').click(function(event) {
 			event.preventDefault();
-			panel_div_id = $(this).attr('data-panel');
+			var panel_div_id = $(this).attr('data-panel');
+			var page = $(this).attr('href');
+
 			$('#'+panel_div_id).remove();
-			$('#intropage_addpanel option[value="add'+panel_div_id+'"]').removeAttr('disabled');
-			$.get($(this).attr('href'));
+
+			$.get(page, function() {
+				$.get(page.replace('droppanel', 'addpanelselect&header=false'), function(data) {
+					$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
+					$('#intropage_addpanel').selectmenu().unbind().change(function() {
+						addPanel();
+					});
+
+					applySkin();
+					resizeCharts();
+				});
+			});
 		});
 
 		// enable/disable move panel/copy text

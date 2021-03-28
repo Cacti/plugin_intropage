@@ -453,7 +453,7 @@ function trend_collect() {
 	}
 }
 
-function trend($panel, $user_id) {
+function trend($panel, $user_id, $timespan = 0) {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
@@ -471,53 +471,55 @@ function trend($panel, $user_id) {
 		),
 	);
 
+	if ($timespan == 0) {
+		if (isset($_SESSION['sess_user_id'])) {
+			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+		} else {
+			$timespan = $panel['refresh_interval'];
+		}
+	}
+
+	if (!isset($panel['refresh_interval'])) {
+		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+			FROM plugin_intropage_panel_data
+			WHERE id = ?',
+			array($panel['id']));
+	} else {
+		$refresh = $panel['refresh_interval'];
+	}
+
 	if (api_plugin_is_enabled('thold')) {
-		$sql = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`,
+			MAX(CASE WHEN name='thold' THEN value ELSE NULL END) AS thold,
+			MAX(CASE WHEN name='host' THEN value ELSE NULL END) AS host
 			FROM plugin_intropage_trends
-			WHERE name='thold'
+			WHERE cur_timestamp > DATE_SUB(NOW(), INTERVAL ? SECOND)
+			AND name IN ('host', 'thold')
 			AND user_id = ?
-			ORDER BY cur_timestamp desc
-			LIMIT 20",
-			array($user_id));
+			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+			ORDER BY cur_timestamp ASC",
+			array($timespan, $user_id));
 
-		if (cacti_sizeof($sql)) {
-			$graph['line']['title1'] = __('Tholds triggered', 'intropage');
+		if (cacti_sizeof($rows)) {
+			$graph['line']['title1'] = __('Tholds Triggered', 'intropage');
+			$graph['line']['title2'] = __('Devices Down');
+			$graph['line']['unit1']['title'] = __('Thresholds', 'intropage');
+			$graph['line']['unit1']['series'] = array('data1');
+			$graph['line']['unit2']['title']  = __('Devices');
+			$graph['line']['unit2']['series'] = array('data2');
 
-			foreach ($sql as $row) {
-				array_push($graph['line']['label1'], $row['date']);
-				array_push($graph['line']['data1'], $row['value']);
+			foreach ($rows as $row) {
+                $graph['line']['label1'][] = $row['date'];
+                $graph['line']['data1'][]  = $row['thold'];
+                $graph['line']['data2'][]  = $row['host'];
 			}
 
-			$graph['line']['unit1'] = __('Tholds triggered', 'intropage');
+			$panel['data'] = intropage_prepare_graph($graph);
+
+			unset($graph);
 		}
-	}
-
-	$sql = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%h:%i') as `date`, name, value
-		FROM plugin_intropage_trends
-		WHERE name='host'
-		AND user_id = ?
-		ORDER BY cur_timestamp desc
-		LIMIT 20",
-		array($user_id));
-
-	if (cacti_sizeof($sql)) {
-		$graph['line']['title2'] = __('Hosts down');
-
-		foreach ($sql as $row) {
-			array_push($graph['line']['data2'], $row['value']);
-		}
-		$graph['line']['unit2'] = __('Hosts down');
-	}
-
-	if (count($graph['line']['data1']) < 3) {
-		unset($graph);
-		$panel['data'] = __('Waiting for data','intropage');
 	} else {
-		$graph['line']['data1'] = array_reverse($graph['line']['data1']);
-		$graph['line']['data2'] = array_reverse($graph['line']['data2']);
-		$graph['line']['label1'] = array_reverse($graph['line']['label1']);
-		$panel['data'] = intropage_prepare_graph($graph);
-		unset($graph);
+		$panel['data'] = __('Waiting for data','intropage');
 	}
 
 	save_panel_result($panel, $user_id);

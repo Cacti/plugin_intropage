@@ -101,11 +101,14 @@ if (function_exists('register_process_start')) {
 	}
 }
 
+// Make intropage first to gather correct stats
+intropage_correct_load_order();
+
 $stats = intropage_gather_stats();
 
 $poller_end = microtime(true);
 
-$pstats = 'Time:' . round($poller_end-$poller_start, 2) . ', Details:' . $stats['details'] . ', Trends:' . $stats['trends'];
+$pstats = 'Time:' . round($poller_end-$poller_start, 2) . ', Checks:' . $stats['checks'] . ', Details:' . $stats['details'] . ', Trends:' . $stats['trends'];
 
 cacti_log('INTROPAGE STATS: ' . $pstats, false, 'SYSTEM');
 set_config_option('stats_intropage', $pstats);
@@ -116,21 +119,74 @@ if (function_exists('unregister_process')) {
 
 exit(0);
 
+function intropage_correct_load_order() {
+	while (true) {
+		$intro_order = db_fetch_cell('SELECT id FROM plugin_config WHERE directory="intropage"');
+
+		if ($intro_order > 1) {
+			api_plugin_moveup('intropage');
+		} else {
+			break;
+		}
+	}
+}
+
 function intropage_gather_stats() {
 	global $config, $force, $checks, $run_from_poller;
 
 	$logging = read_config_option('log_verbosity', true);
 	$trends  = 0;
 	$details = 0;
+	$checks  = 0;
 
 	$panels = initialize_panel_library();
 
-	$upanels = db_fetch_assoc('SELECT pd.panel_id, ud.id, ud.user_id, level, pd.refresh, ud.refresh_interval
+	$upanels = db_fetch_assoc('SELECT pd.panel_id, ud.id, ud.user_id, level,
+		pd.refresh, ud.refresh_interval, pd.update_func
 		FROM plugin_intropage_panel_definition AS pd
 		LEFT JOIN plugin_intropage_panel_data AS ud
 		ON pd.panel_id = ud.panel_id
 		WHERE UNIX_TIMESTAMP(last_update) < UNIX_TIMESTAMP() - refresh_interval
 		OR (last_update IS NULL AND level = 0)');
+
+	$tpanels = db_fetch_assoc('SELECT pd.panel_id, ud.id, ud.user_id, level,
+		pd.refresh, ud.trend_interval, ud.refresh_interval, pd.trends_func
+		FROM plugin_intropage_panel_definition AS pd
+		LEFT JOIN plugin_intropage_panel_data AS ud
+		ON pd.panel_id = ud.panel_id
+		WHERE UNIX_TIMESTAMP(last_trend_update) < UNIX_TIMESTAMP() - trend_interval
+		AND pd.trends_func != ""
+		OR (last_update IS NULL AND level = 0)');
+
+	if (cacti_sizeof($tpanels)) {
+		foreach($tpanels as $panel) {
+   	    	$start = microtime(true);
+
+			// Get trends next
+			if (isset($panel['trends_func']) && $panel['trends_func'] != '') {
+				$function = $panel['trends_func'];
+
+				if (function_exists($function)) {
+					db_execute_prepared('UPDATE plugin_intropage_panel_data
+						SET last_trend_update = NOW()
+						WHERE id = ?',
+						array($panel['id']));
+
+					$function();
+
+					if ($logging >= 5) {
+						cacti_log(sprintf('DEBUG: gathering trend function:%s, duration:%4.3f', $function,  microtime(true) - $start), false, 'INTROPAGE');
+					}
+
+					intropage_debug(sprintf('gathering trend function:%s, duration:%4.3f', $function, microtime(true) - $start));
+
+					$trends++;
+				} else {
+					cacti_log('WARNING: Unable to find update function ' . $function . ' for panel ' . $panel['name'], false, 'INTROPAGE');
+				}
+			}
+		}
+	}
 
 	foreach ($upanels as $upanel) {
    	    $start = microtime(true);
@@ -166,10 +222,10 @@ function intropage_gather_stats() {
 				$details += $function($qpanel, $upanel['user_id']);
 
 				if ($logging >= 5) {
-					cacti_log('DEBUG: gathering data - ' . $function . ' - duration ' . round(microtime(true) - $start, 2), false, 'INTROPAGE');
+					cacti_log(sprintf('DEBUG: gathering data function:%s, duration:%4.3f', $function,  microtime(true) - $start), false, 'INTROPAGE');
 				}
 
-				intropage_debug('gathering data - ' . $function . ' - duration ' . round(microtime(true) - $start, 2));
+				intropage_debug(sprintf('gathering data function:%s, duration:%4.3f', $function, microtime(true) - $start));
 			} else {
 				cacti_log('WARNING: Unable to find update function ' . $function . ' for panel ' . $panel['name'], false, 'INTROPAGE');
 			}
@@ -177,25 +233,9 @@ function intropage_gather_stats() {
 			$details++;
 		}
 
-		// Get trends next
-		if (isset($panel['trends_func']) && $panel['trends_func'] != '') {
-			$function = $panel['trends_func'];
-
-			if (function_exists($function)) {
-				$trends += $function();
-
-				if ($logging >= 5) {
-					cacti_log('DEBUG: gathering trend data - ' . $function . ' - duration ' . round(microtime(true) - $start, 2), false, 'INTROPAGE');
-				}
-
-				intropage_debug('gathering data - ' . $function . ' - duration ' . round(microtime(true) - $start, 2));
-			} else {
-				cacti_log('WARNING: Unable to find update function ' . $function . ' for panel ' . $panel['name'], false, 'INTROPAGE');
-			}
-		}
-
   	    $checks++;
 	}
+
 	// end of gathering data
 
 	// cleaning old data
@@ -212,7 +252,7 @@ function intropage_gather_stats() {
 		SET cur_timestamp = now()
 		WHERE name = 'ar_poller_finish'");
 
-	return array('details' => $details, 'trends' => $trends);
+	return array('checks' => $checks, 'details' => $details, 'trends' => $trends);
 }
 
 function intropage_debug($message) {

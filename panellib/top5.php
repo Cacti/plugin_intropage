@@ -381,7 +381,7 @@ function top5_ping_detail() {
 			WHERE host.id in (" . $allowed_devices . ")
 			AND disabled != 'on'
 			ORDER BY cur_time desc
-			LIMIT 20");
+			LIMIT 40");
 	} else {
 		$sql_worst_host = array();
 	}
@@ -445,7 +445,7 @@ function top5_availability_detail() {
 		FROM host
 		WHERE disabled != 'on'
 		ORDER BY availability
-		LIMIT 20");
+		LIMIT 40");
 
 	if (cacti_sizeof($sql_worst_host)) {
 		$color = read_config_option('intropage_alert_worst_availability');
@@ -508,7 +508,7 @@ function top5_polltime_detail() {
 			WHERE host.id in (" . $allowed_devices . ")
 			AND disabled != 'on'
 			ORDER BY polling_time DESC
-			LIMIT 20");
+			LIMIT 40");
 	} else {
 		$sql_worst_host = array();
 	}
@@ -571,7 +571,7 @@ function top5_pollratio_detail() {
 		FROM host
 		WHERE disabled != 'on'
 		ORDER BY ratio DESC
-		LIMIT 20");
+		LIMIT 40");
 
 	if (cacti_sizeof($sql_worst_host)) {
 		$color = read_config_option('intropage_alert_worst_polling_ratio');

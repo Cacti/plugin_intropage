@@ -48,7 +48,7 @@ $intropage_settings = array(
 		'default'       => '',
 	),
 	'intropage_autorefresh' => array(
-		'friendly_name' => __('Automatic refresh page', 'intropage'),
+		'friendly_name' => __('Automatic Page Refresh', 'intropage'),
 		'description'   => __('How often', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => array(
@@ -59,6 +59,13 @@ $intropage_settings = array(
 			'3600' => __('Every Hour', 'intropage'),
 		),
 		'default'       => '60',
+	),
+	'intropage_timespan' => array(
+		'friendly_name' => __('Trend Timespan', 'intropage'),
+		'description'   => __('For Trend charts, what should be the default timespan for those charts.', 'intropage'),
+		'method'        => 'drop_array',
+		'default'       => '14400',
+		'array'         => $trend_timespans
 	),
 	'intropage_timeout' => array(
 		'friendly_name' => __('Poller Timeout', 'intropage'),
@@ -110,7 +117,7 @@ $intropage_settings = array(
 		'default'       => 'CHANGED',
 	),
 	'intropage_ntp_server' => array(
-		'friendly_name' => __('NTP (time) check - IP or DNS name of NTP server', 'intropage'),
+		'friendly_name' => __('NTP Time Check - IP or DNS name of NTP server', 'intropage'),
 		'description'   => __('Insert IP or DNS name of NTP server', 'intropage'),
 		'method'        => 'textbox',
 		'max_length' => 50,
@@ -128,8 +135,8 @@ $intropage_settings = array(
 		'default'       => '3600',
 	),
 	'intropage_admin_alert' => array(
-		'friendly_name' => __('Admin information panel about maintenance tasks, down Devices, ..', 'intropage'),
-		'description'   => __('If isn\'t empty, panel will be displayed on the top. You can use html tags (b, i, ...).', 'intropage'),
+		'friendly_name' => __('Admin Information Panel about Maintenance Tasks, Down Devices, ..', 'intropage'),
+		'description'   => __('If isn\'t empty, Panel will be displayed on the top. You can use html tags (b, i, ...).', 'intropage'),
 		'method'        => 'textarea',
 		'max_length' => 1000,
 		'textarea_rows' => '4',
@@ -161,21 +168,21 @@ $intropage_settings = array(
 		'default'       => 'yellow',
 	),
 	'intropage_alert_same_description' => array(
-		'friendly_name' => __('Alarm Host with the same description', 'intropage'),
+		'friendly_name' => __('Alarm Host with the same Description', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
 		'default'       => 'yelow',
 	),
 	'intropage_alert_orphaned_ds' => array(
-		'friendly_name' => __('Alarm orphaned Data Source', 'intropage'),
+		'friendly_name' => __('Alarm Orphaned Data Source', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
 		'default'       => 'yellow',
 	),
 	'intropage_alert_poller_output' => array(
-		'friendly_name' => __('Alarm non-empty poller output', 'intropage'),
+		'friendly_name' => __('Alarm non-empty Poller Output', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
@@ -196,35 +203,35 @@ $intropage_settings = array(
 		'default'       => 'red',
 	),
 	'intropage_alert_same_ip' => array(
-		'friendly_name' => __('Alarm Device with the same IP/port', 'intropage'),
+		'friendly_name' => __('Alarm Devices with the same IP/port', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
 		'default'       => 'yellow',
 	),
 	'intropage_alert_more_trees' => array(
-		'friendly_name' => __('Alarm Device in more Trees', 'intropage'),
+		'friendly_name' => __('Alarm Device in more than one Tree', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
 		'default'       => 'yellow',
 	),
 	'intropage_alert_without_tree' => array(
-		'friendly_name' => __('Alarm Device without Tree', 'intropage'),
+		'friendly_name' => __('Alarm Device without a Tree', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
 		'default'       => 'yellow',
 	),
 	'intropage_alert_default_community' => array(
-		'friendly_name' => __('Alarm Device with default public/private community', 'intropage'),
+		'friendly_name' => __('Alarm Device with Default public/private SNMP Community', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
 		'default'       => 'yellow',
 	),
 	'intropage_alert_without_monitoring' => array(
-		'friendly_name' => __('Alarm Device without monitoring', 'intropage'),
+		'friendly_name' => __('Alarm Device without Monitoring', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
@@ -238,7 +245,7 @@ $intropage_settings = array(
 		'default'       => 'yellow',
 	),
 	'intropage_alert_worst_polling_time' => array(
-		'friendly_name' => __('Alarm Red/Yellow polling time', 'intropage'),
+		'friendly_name' => __('Alarm Red/Yellow Polling Time', 'intropage'),
 		'description'   => __('Polling times above these thresholds will trigger a Warning or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'default'       => '20/10',
@@ -249,7 +256,7 @@ $intropage_settings = array(
 		),
 	),
 	'intropage_alert_worst_polling_ratio' => array(
-		'friendly_name' => __('Alarm Red/Yellow failed/all ratio', 'intropage'),
+		'friendly_name' => __('Alarm Red/Yellow Failed/All Ratio', 'intropage'),
 		'description'   => __('The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'default'       => '0.4/0.2',
@@ -260,7 +267,7 @@ $intropage_settings = array(
 		),
 	),
 	'intropage_alert_worst_ping' => array(
-		'friendly_name' => __('Alarm Red/Yellow ping', 'intropage'),
+		'friendly_name' => __('Alarm Red/Yellow Ping', 'intropage'),
 		'description'   => __('Ping latency above these levels will trigger a Warning or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'default'       => '20/10',
@@ -271,7 +278,7 @@ $intropage_settings = array(
 		),
 	),
 	'intropage_alert_worst_availability' => array(
-		'friendly_name' => __('Alarm Red/Yellow worst availability', 'intropage'),
+		'friendly_name' => __('Alarm Red/Yellow Worst Availability', 'intropage'),
 		'description'   => __('Availability below these levels will trigger either a Yellow or a Red status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'default'       => '99/95',

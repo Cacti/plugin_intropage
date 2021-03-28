@@ -83,7 +83,7 @@ function register_system() {
 			'description'  => __('Table with 24 hours of Polling Extremes (longest poller run, down hosts)', 'intropage'),
 			'class'        => 'system',
 			'level'        => PANEL_USER,
-			'refresh'      => 300,
+			'refresh'      => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 78,
@@ -98,7 +98,7 @@ function register_system() {
 			'description'  => __('CPU utilization Graph (only Linux).', 'intropage'),
 			'class'        => 'system',
 			'level'        => PANEL_SYSTEM,
-			'refresh'      => 60,
+			'refresh'      => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 59,
@@ -126,40 +126,58 @@ function cpuload_trend() {
 }
 
 //------------------------------------ cpuload -----------------------------------------------------
-function cpuload($panel, $user_id) {
+function cpuload($panel, $user_id, $timespan = 0) {
 	global $config;
 
 	$panel['alarm'] = 'green';
 
 	$graph = array (
 		'line' => array(
-			'title'  => __('CPU load: ', 'intropage'),
+			'title'  => __('CPU Load: ', 'intropage'),
 			'label1' => array(),
 			'data1'  => array(),
 		),
 	);
 
+	if ($timespan == 0) {
+		if (isset($_SESSION['sess_user_id'])) {
+			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+		} else {
+			$timespan = $panel['refresh_interval'];
+		}
+	}
+
+	if (!isset($panel['refresh_interval'])) {
+		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+			FROM plugin_intropage_panel_data
+			WHERE id = ?',
+			array($panel['id']));
+	} else {
+		$refresh = $panel['refresh_interval'];
+	}
+
 	if (stristr(PHP_OS, 'win')) {
 		$panel['data'] = __('This function is not implemented on Windows platforms', 'intropage');
 		unset($graph);
 	} else {
-		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, AVG(value) AS average, MAX(value) AS max
 			FROM plugin_intropage_trends
-			WHERE name='cpuload'
-			ORDER BY cur_timestamp desc
-			LIMIT 20");
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'cpuload'
+			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
 
-		if (cacti_sizeof($sql)) {
-			$graph['line']['title1'] = __('Load', 'intropage');
+		if (cacti_sizeof($rows)) {
+			$graph['line']['title1'] = __('Avg CPU', 'intropage');
+			$graph['line']['title2'] = __('Max CPU', 'intropage');
+			$graph['line']['unit1']['title'] = 'Percent (%)';
 
-			foreach ($sql as $row) {
-				array_push($graph['line']['label1'], $row['date']);
-				array_push($graph['line']['data1'], $row['value']);
+			foreach ($rows as $row) {
+				$graph['line']['label1'][] = $row['date'];
+				$graph['line']['data1'][]  = $row['average'];
+				$graph['line']['data2'][]  = $row['max'];
 			}
-
-			$graph['line']['data1']  = array_reverse($graph['line']['data1']);
-			$graph['line']['label1'] = array_reverse($graph['line']['label1']);
-			$graph['line']['unit1'] = '%';
 
 			$panel['data'] = intropage_prepare_graph($graph);
 		} else {

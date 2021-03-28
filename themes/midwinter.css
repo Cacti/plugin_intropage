@@ -3,7 +3,7 @@
 }
 
 .panel_data {
-	padding: 4px;
+	padding: 0px 4px;
 }
 
 .panel_data > div {
@@ -15,3 +15,24 @@
 	padding-right: 2px;
 }
 
+.c3-axis-x text, .c3-axis-y text, .c3-axis-y2 text, .c3-legend-item text {
+	fill: #7e818f;
+}
+
+.c3 .c3-axis path, .c3 .c3-axis line {
+	stroke: #7e818f;
+}
+
+.c3-chart-arc text {
+	fill: white;
+}
+
+.c3-chart-arc path {
+	stroke: #7e818f;
+}
+
+circle {
+	stroke: #7e818f;
+	stroke-width: 1px;
+	fill: transparent !important;
+}

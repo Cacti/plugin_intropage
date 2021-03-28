@@ -1,5 +1,25 @@
 # Changelog
 
+--- 3.0.3 ---
+
+* Add user selectable timespan for timeseries charts
+* Convert Charting from Chart.js to C3.js
+* Add Trend Intervals to gathering sampling data frequency separate from rendering
+* Add Windows to Timeseries charts and provide peak and average values for some
+* Allow Poller Runtimes to have fractional values stored in trend table
+* More fine tuning for mobile devices
+* When dropping a panel, update panel dropdowns to show that it can be added again
+* Force chart resize on more actions inside the browser, like dropping a panel
+* Update Line chart API to allow the user to specify the left or right axes by series name
+* Add some dividers between action types in Actions... dropdown
+* Fix GUI issues where Administrators lost their ability to set refresh intervals for Admin panels
+* Fix database issue where dropping a panel did not remove the data record for user level panels
+* Fix some issues where undefined variable errors could be logged
+* Bump minimum required version to Cacti 1.2.17
+* Force Intropage to have load order 1 always so that it can inspect key tables
+* Add support for Midwinter theme
+* Support Poller intervals down to every 10 seconds
+
 --- 3.0.2 ---
 * Reduce the width of some titles to conserve space
 * Reduce the length of hostnames to conserve space

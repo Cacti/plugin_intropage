@@ -143,21 +143,36 @@ function intropage_action_settings() {
 	}
 
 	// panel refresh
-	$panels = db_fetch_assoc_prepared('SELECT t1.panel_id AS panel_name, t1.id AS id
-		FROM plugin_intropage_panel_data AS t1
-		INNER JOIN plugin_intropage_panel_dashboard AS t2
-		ON t1.id=t2.panel_id
-		WHERE t2.user_id = ?
-		AND t1.fav_graph_id IS NULL',
-		array($_SESSION['sess_user_id']));
+	if (api_user_realm_auth('intropage_admin.php')) {
+		$panels = db_fetch_assoc_prepared('SELECT pda.panel_id AS panel_name, pda.id AS id
+			FROM plugin_intropage_panel_data AS pda
+			WHERE pda.user_id IN (0, ?)
+			AND pda.fav_graph_id IS NULL',
+			array($_SESSION['sess_user_id']));
+	} else {
+		$panels = db_fetch_assoc_prepared('SELECT pda.panel_id AS panel_name, pda.id AS id
+			FROM plugin_intropage_panel_data AS pda
+			WHERE pda.user_id = ?
+			AND pda.fav_graph_id IS NULL',
+			array($_SESSION['sess_user_id']));
+	}
 
 	if (cacti_sizeof($panels)) {
 		foreach ($panels as $panel) {
 			$interval = get_filter_request_var('crefresh_' . $panel['id'], FILTER_VALIDATE_INT);
 
-			if ($interval >= 60 && $interval <= 999999999) {
+			if ($interval >= 0 && $interval <= 999999999) {
 				db_execute_prepared('UPDATE plugin_intropage_panel_data
 					SET refresh_interval = ?
+					WHERE id = ?',
+					array($interval, $panel['id']));
+			}
+
+			$interval = get_filter_request_var('trefresh_' . $panel['id'], FILTER_VALIDATE_INT);
+
+			if ($interval >= 0 && $interval <= 999999999) {
+				db_execute_prepared('UPDATE plugin_intropage_panel_data
+					SET trend_interval = ?
 					WHERE id = ?',
 					array($interval, $panel['id']));
 			}
@@ -184,10 +199,23 @@ function intropage_actions() {
 	}
 
 	switch ($action) {
+	case 'addpanelselect':
+		intropage_addpanel_select(get_filter_request_var('panel_id'), get_filter_request_var('dashboard_id'));
+
+		exit;
+
+		break;
 	case 'droppanel':
 		if (get_filter_request_var('panel_id')) {
 			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
-				WHERE user_id = ? AND panel_id = ?',
+				WHERE user_id = ?
+				AND panel_id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+
+			// Delete user data, but not system user data
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
 		}
 
@@ -322,6 +350,35 @@ function intropage_actions() {
 		}
 
 		break;
+	case 'timespan':
+		$timespan = $value;
+
+		if (filter_var($value, FILTER_VALIDATE_INT)) {
+			set_user_setting('intropage_timespan', $value);
+		}
+
+		$panels = db_fetch_assoc_prepared('SELECT DISTINCT ipd.panel_id
+			FROM plugin_intropage_panel_dashboard AS ipda
+			INNER JOIN plugin_intropage_panel_data AS ipd
+			ON ipda.panel_id = ipd.id
+			WHERE ipda.user_id = ?',
+			array($_SESSION['sess_user_id']));
+
+		foreach($panels as $panel) {
+			$qpanel = get_panel_details($panel['panel_id'], $_SESSION['sess_user_id']);
+
+			if (isset($qpanel['definition']['trends_func']) && $qpanel['definition']['trends_func'] != '') {
+				if (function_exists($qpanel['definition']['update_func'])) {
+					if ($qpanel['definition']['level'] == 0) {
+						$qpanel['definition']['update_func']($qpanel, 0, $timespan);
+					} else {
+						$qpanel['definition']['update_func']($qpanel, $_SESSION['sess_user_id'], $timespan);
+					}
+				}
+			}
+		}
+
+		break;
 	case 'important':
 		if ($value == 'first') {
 			set_user_setting('intropage_display_important_first', 'on');
@@ -338,6 +395,16 @@ function intropage_actions() {
 		} elseif ($value == 'tab') {
 			db_fetch_cell_prepared('UPDATE user_auth SET login_opts = 4 WHERE id = ?', array($_SESSION['sess_user_id']));
 		}
+
+		break;
+	case 'forcereload':
+		$panels = initialize_panel_library();
+
+		update_registered_panels($panels);
+
+		raise_message('panellibrefresh', __('Intropage Panel Library Refreshed from Panel Library', 'intropage'), MESSAGE_LEVEL_INFO);
+
+		break;
 	}
 }
 
@@ -593,7 +660,6 @@ function get_panel_details($panel_id, $user_id = 0) {
 		$panel['priority']         = $definition['priority'];
 		$panel['alarm']            = $definition['alarm'];
 		$panel['refresh_interval'] = $definition['refresh'];
-		$panel['force']            = isset($definition['force']) ? $definition['force']:true;
 
 		$panel['id']   = sql_save($panel, 'plugin_intropage_panel_data');
 		$panel['name'] = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
@@ -679,7 +745,7 @@ function display_panel_results($panel_id, $user_id = 0) {
 		TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im')) AS recheck
 		FROM plugin_intropage_panel_data
 		WHERE panel_id = ?
-		AND user_id = ?",
+		AND user_id IN (0, ?)",
 		array($panel_id, $user_id));
 
 	if (cacti_sizeof($data) && trim($data['data']) == '') {
@@ -795,6 +861,7 @@ function update_registered_panels($panels) {
 		update_func=VALUES(update_func),
 		details_func=VALUES(details_func),
 		trends_func=VALUES(trends_func),
+		refresh=VALUES(refresh),
 		description=VALUES(description)';
 
 	$sql = array();
@@ -868,96 +935,88 @@ function intropage_prepare_graph($dispdata) {
 	if (isset($dispdata['line'])) {
 		$xid = 'x' . substr(md5($dispdata['line']['title1']), 0, 7);
 
-		$line_labels = "'" . implode("','", $dispdata['line']['label1']) . "'";
-		$title1      = $dispdata['line']['title1'];
-		$line_values1 = implode(',', $dispdata['line']['data1']);
+		// Start chart attributes
+		$chart = array(
+			'bindto' => "#line_$xid",
+			'size'   => array('height' => '180'),
+			'data'   => array(
+				'x'       => 'x',
+				'xFormat' => '%Y-%m-%d %H:%M:%S'
+			)
+		);
 
-		if (!empty($dispdata['line']['data2'])) {
-			$line_values2 = implode(',', $dispdata['line']['data2']);
-			$title2       = $dispdata['line']['title2'];
+		$columns   = array();
+		$axes      = array();
+		$axis      = array();
+
+		// Add the X Axis first
+		$columns[] = array_merge(array('x'), $dispdata['line']['label1']);
+
+		// Add upto 5 Lines
+		for ($i = 1; $i < 6; $i++) {
+			if (isset($dispdata['line']["data$i"])) {
+				$columns[] = array_merge(array($dispdata['line']["title$i"]), $dispdata['line']["data$i"]);
+
+				if (isset($dispdata['line']['unit2']['series'])) {
+					if (in_array("data$i", $dispdata['line']['unit2']['series'], true)) {
+						$axes[$dispdata['line']["title$i"]] = 'y2';
+					} else {
+						$axes[$dispdata['line']["title$i"]] = 'y';
+					}
+				} else {
+					$axes[$dispdata['line']["title$i"]] = 'y';
+				}
+			}
 		}
 
-		if (!empty($dispdata['line']['data3'])) {
-			$line_values3 = implode(',', $dispdata['line']['data3']);
-			$title3       = $dispdata['line']['title3'];
+		// Setup Axes support
+		if (isset($dispdata['line']['unit2']['series'])) {
+			$axes = array();
+
+			foreach($dispdata['line']['unit2']['series'] as $series) {
+				$number = str_replace('data', '', $series);
+				$axes[$dispdata['line']["title$number"]] = 'y2';
+			}
 		}
 
-		if (!empty($dispdata['line']['data4'])) {
-			$line_values4 = implode(',', $dispdata['line']['data4']);
-			$title4       = $dispdata['line']['title4'];
+		// Setup the Axis
+		$axis['x'] = array(
+			'type' => 'timeseries',
+			'tick' => array(
+				'format' => '%H:%M'
+			)
+		);
+
+		if (isset($dispdata['line']['unit1'])) {
+			$axis['y'] = array(
+				'label' => array(
+					'text' => $dispdata['line']['unit1']['title'],
+					'position' => 'outer-middle'
+				),
+				'show' => true
+			);
 		}
 
-		if (!empty($dispdata['line']['data5'])) {
-			$line_values5 = implode(',', $dispdata['line']['data5']);
-			$title5       = $dispdata['line']['title5'];
+		if (isset($dispdata['line']['unit2'])) {
+			$axis['y2'] = array(
+				'label' => array(
+					'text' => $dispdata['line']['unit2']['title'],
+					'position' => 'outer-middle'
+				),
+				'show' => true
+			);
 		}
 
-		$content .= "<div class='chart_wrapper center' id=\"line_$xid\"></div>";
-		$content .=  "<script type='text/javascript'>";
+		$chart['data']['columns'] = $columns;
+		$chart['data']['axes']    = $axes;
+		$chart['axis']            = $axis;
 
-		$content .= "var line_$xid = c3.generate({";
-		$content .= " bindto: \"#line_$xid\",";
-		$content .= " size: {";
-		$content .= "  height: 180";
-		$content .= " },";
-		$content .= " data: {";
-		$content .= "  x: 'x',";
-		$content .= "  xFormat: '%H:%M',";
-		$content .= "  columns: [";
-		$content .= "   ['x',"  . $line_labels . "],";
-		$content .= "   ['" . $dispdata['line']['title1'] . "', " . $line_values1 . "],";
+		$chart_data = json_encode($chart);
 
-		if (!empty($dispdata['line']['data2'])) {
-			$content .= "   ['" . $title2 . "',"    . $line_values2 . "],";
-		}
-		if (!empty($dispdata['line']['data3'])) {
-			$content .= "   ['" . $title3 . "',"    . $line_values3 . "],";
-		}
-		if (!empty($dispdata['line']['data4'])) {
-			$content .= "   ['" . $title4 . "',"    . $line_values4 . "],";
-		}
-		if (!empty($dispdata['line']['data5'])) {
-			$content .= "   ['" . $title5 . "',"    . $line_values5 . "],";
-		}
-		$content .= "  ],";
-
-		if (!empty($dispdata['line']['unit2'])) {
-			$content .= "  axes: {";
-			$content .= "   " . strtr($title2,' ' ,'_') . ": 'y2'";
-			$content .= "  }";
-		}
-
-		$content .= " },";
-		$content .= " axis: { ";
-		$content .= "  x: { ";
-		$content .= "   type: 'timeseries',";
-		$content .= "   tick: { ";
-		$content .= "    format: '%H:%M' ";
-		$content .= "   }";
-		$content .= "  },";
-
-		if (!empty($dispdata['line']['unit1'])) {
-			$content .= "  y: { ";
-			$content .= "   label: {";
-			$content .= "    text: '" . $dispdata['line']['unit1'] . "',";
-			$content .= "    position: 'outer-middle'";
-			$content .= "   }";
-			$content .= "  },";
-		}
-
-		if (!empty($dispdata['line']['unit2'])) {
-			$content .= "  y2: { ";
-			$content .= "   show: true,";
-			$content .= "   label: {";
-			$content .= "    text: '" . $dispdata['line']['unit2'] . "',";
-			$content .= "    position: 'outer-middle'";
-			$content .= "   }";
-			$content .= "  },";
-		}
-
-		$content .= " },";
-		$content .= "});";
-		$content .= "</script>";
+		$content .= '<div class="chart_wrapper center" id="line_' . $xid. '"></div>';
+		$content .= '<script type="text/javascript">';
+		$content .= 'var line_' . $xid . ' = c3.generate(' . $chart_data . ')';
+		$content .= '</script>';
 	} // line graph end
 
 	if (isset($dispdata['pie'])) {
@@ -1000,7 +1059,8 @@ function intropage_prepare_graph($dispdata) {
 		$content .= "</script>";
 		$content .= "</div>";
 	}   // pie graph end
-	return (addslashes($content));
+
+	return ($content);
 }
 
 function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
@@ -1060,7 +1120,7 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
-function intropage_display_panel($panel_id) {
+function intropage_display_panel($panel_id, $dashboard_id) {
 	global $config;
 
 	$panels = initialize_panel_library();
@@ -1083,7 +1143,7 @@ function intropage_display_panel($panel_id) {
 	print '<div class="panel_header color_grey">';
 	print '<span class="panel_name"></span>';
 
-	printf("<a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "?intropage_action=droppanel&panel_id=$panel_id");
+	printf("<a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=$dashboard_id");
 
 	if (isset($panels[$k_id]['force']) && $panels[$k_id]['force'] === true) {
 		printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>");
@@ -1105,10 +1165,68 @@ function intropage_display_panel($panel_id) {
 
 function intropage_display_data($panel_id, $data) {
 	if (isset($data['data']) && trim($data['data']) != '') {
-		print stripslashes($data['data']);
+		print $data['data'];
 	} else {
 		print '<table class="cactiTable"><tr><td>' . __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage') . '</td></tr></table>';
 	}
+}
+
+function intropage_addpanel_select($dashboard_id) {
+	print "<select id='intropage_addpanel'>";
+	print '<option value="0">' . __('Panels ...', 'intropage') . '</option>';
+
+	$add_panels = db_fetch_assoc_prepared('SELECT ppd.id, ppd.user_id, pd.panel_id, pd.name
+		FROM plugin_intropage_panel_definition AS pd
+		LEFT JOIN plugin_intropage_panel_data AS ppd
+		ON pd.panel_id = ppd.panel_id
+		WHERE pd.panel_id NOT IN (
+			SELECT pda.panel_id
+			FROM plugin_intropage_panel_data AS pda
+			INNER JOIN plugin_intropage_panel_dashboard AS pd
+			ON pda.id = pd.panel_id
+			WHERE pd.user_id IN (0, ?)
+			AND pd.dashboard_id = ?
+		)
+		AND (ppd.user_id IS NULL OR ppd.user_id = 0)
+		ORDER BY pd.name',
+		array($_SESSION['sess_user_id'], $dashboard_id));
+
+	if (cacti_sizeof($add_panels)) {
+		foreach ($add_panels as $panel) {
+			$uniqid = db_fetch_cell_prepared('SELECT id
+				FROM plugin_intropage_panel_data
+				WHERE user_id IN (0, ?)
+				AND panel_id = ?',
+				array($_SESSION['sess_user_id'],$panel['panel_id']));
+
+			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert') {
+				$allowed = is_panel_allowed($panel['panel_id']);
+
+				$enabled = is_panel_enabled($panel['panel_id']);
+
+				if ($uniqid > 0) {
+					if ($allowed) {
+						if ($enabled) {
+							print "<option value='" . $uniqid . "'>" . html_escape($panel['name']) . '</option>';
+						}
+					} else {
+						print "<option value='addpanel_" .  $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
+					}
+				} else {
+					if ($allowed) {
+						if ($enabled) {
+							print "<option value='" . $panel['panel_id'] . "'>" . html_escape($panel['name']) . '</option>';
+						}
+					} else {
+						print "<option value='addpanel_" .  $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
+					}
+				}
+			}
+		}
+	}
+
+	print '</select>';
+	print '&nbsp; &nbsp;';
 }
 
 function ntp_time($host) {
@@ -1198,7 +1316,7 @@ function get_login_opts($refresh = false) {
 }
 
 function intropage_configure_panel() {
-	global $config, $login_opts;
+	global $config, $login_opts, $trend_timespans, $intropage_intervals;
 
 	$dashboards = array_rekey(
 		db_fetch_assoc_prepared('SELECT dashboard_id, name
@@ -1240,41 +1358,21 @@ function intropage_configure_panel() {
 
 	html_end_box();
 
-	$intervals = array(
-		'60'    => __('%d Minute', 1, 'intropage'),
-		'120'   => __('%d Minutes', 2, 'intropage'),
-		'180'   => __('%d Minutes', 3, 'intropage'),
-		'240'   => __('%d Minutes', 4, 'intropage'),
-		'300'   => __('%d Minutes', 5, 'intropage'),
-		'600'   => __('%d Minutes', 10, 'intropage'),
-		'1200'  => __('%d Minutes', 20, 'intropage'),
-		'1800'  => __('%d Minutes', 30, 'intropage'),
-		'3600'  => __('%d Hour', 1, 'intropage'),
-		'7200'  => __('%d Hours', 2, 'intropage'),
-		'14400' => __('%d Hours', 4, 'intropage'),
-		'28800' => __('%d Hours', 8, 'intropage'),
-		'43200' => __('%d Hours', 12, 'intropage'),
-		'86400' => __('%d Day', 1, 'intropage')
-	);
-
-	$panels = db_fetch_assoc_prepared('SELECT DISTINCTROW t1.panel_id, t1.id,
+	$panels = db_fetch_assoc_prepared('SELECT pda.panel_id, pda.id,
 		pd.name, pd.level, pd.description,
-		refresh_interval, refresh AS default_refresh, t1.user_id AS user_id
-		FROM plugin_intropage_panel_data AS t1
-		INNER JOIN plugin_intropage_panel_dashboard AS t2
-		ON t1.id = t2.panel_id
+		refresh_interval, refresh AS default_refresh, pda.user_id AS user_id
+		FROM plugin_intropage_panel_data AS pda
 		INNER JOIN plugin_intropage_panel_definition AS pd
-		ON pd.panel_id = t1.panel_id
-		WHERE t2.user_id = ?
-		AND t1.fav_graph_id IS NULL
-		ORDER BY level, name, t2.dashboard_id',
+		ON pd.panel_id = pda.panel_id
+		WHERE pda.user_id = ?
+		AND pda.fav_graph_id IS NULL
+		ORDER BY level, name',
 		array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($panels))	{
-		html_start_box(__('Panel Refresh Intervals', 'intropage'), '100%', '', '3', 'center', '');
+		html_start_box(__('User Level Panel Update Frequencies', 'intropage'), '100%', '', '3', 'center', '');
 
 		$class = 'odd';
-		$prev_level = -1;
 
 		foreach ($panels as $panel)	{
 			$class = ($class == 'odd' ? 'even':'odd');
@@ -1282,14 +1380,6 @@ function intropage_configure_panel() {
 			// Don't show admin pages to normal users
 			if ($panel['level'] == 0 && !api_user_realm_auth('intropage_admin.php')) {
 				continue;
-			}
-
-			if ($prev_level != $panel['level']) {
-				if ($panel['level'] == 0) {
-					print '<div class="spacer formHeader">' . __('Global Refresh (Identical for All Users)', 'intropage') . '</div>';
-				} else {
-					print '<div class="spacer formHeader">' . __('User Refresh (Applicable to Your Account Only)', 'intropage') . '</div>';
-				}
 			}
 
 			print '<div id="row_crefresh_' . $panel['id'] . '" class="formRow ' . $class . '">
@@ -1304,18 +1394,111 @@ function intropage_configure_panel() {
 
 			form_dropdown(
 				'crefresh_' . $panel['id'],
-				$intervals, '', '',
+				$intropage_intervals, '', '',
 				$panel['refresh_interval'],
 				__('Default', 'intropage'),
 				$panel['default_refresh']
 			);
 
 			print '</div></div>';
-
-			$prev_level = $panel['level'];
 		}
 
 		html_end_box();
+	}
+
+	if (api_plugin_user_realm_auth('intropage_admin.php')) {
+		$panels = db_fetch_assoc_prepared('SELECT DISTINCTROW pda.panel_id, pda.id,
+			pd.name, pd.level, pd.description,
+			refresh_interval, refresh AS default_refresh, pda.user_id AS user_id
+			FROM plugin_intropage_panel_data AS pda
+			INNER JOIN plugin_intropage_panel_definition AS pd
+			ON pd.panel_id = pda.panel_id
+			WHERE pda.user_id = 0
+			AND pd.level = 0
+			AND pda.fav_graph_id IS NULL
+			ORDER BY level, name',
+			array($_SESSION['sess_user_id']));
+
+		if (cacti_sizeof($panels))	{
+			html_start_box(__('System Panel Update Frequencies (All Authorized Users)', 'intropage'), '100%', '', '3', 'center', '');
+
+			$class = 'odd';
+
+			foreach ($panels as $panel)	{
+				$class = ($class == 'odd' ? 'even':'odd');
+
+				// Don't show admin pages to normal users
+				if ($panel['level'] == 0 && !api_user_realm_auth('intropage_admin.php')) {
+					continue;
+				}
+
+				print '<div id="row_crefresh_' . $panel['id'] . '" class="formRow ' . $class . '">
+					<div class="formColumnLeft">
+						<div class="formFieldName">' . $panel['name'] . '</div>
+						<div class="cactiTooltipHint fa fa-question-circle">
+							<span style="display:none;">' . $panel['description'] . '<span>
+						</div>
+					</div>
+					<div class="formColumnRight">
+						<div class="formData">';
+
+				form_dropdown(
+					'crefresh_' . $panel['id'],
+					$intropage_intervals, '', '',
+					$panel['refresh_interval'],
+					__('Default', 'intropage'),
+					$panel['default_refresh']
+				);
+
+				print '</div></div>';
+			}
+
+			html_end_box();
+		}
+
+		$panels = db_fetch_assoc_prepared('SELECT DISTINCTROW pda.panel_id, pda.id,
+			pd.name, pd.level, pd.description,
+			trend_interval, refresh AS default_refresh, pda.user_id AS user_id
+			FROM plugin_intropage_panel_data AS pda
+			INNER JOIN plugin_intropage_panel_definition AS pd
+			ON pd.panel_id = pda.panel_id
+			WHERE pda.user_id = 0
+			AND pda.fav_graph_id IS NULL
+			AND pd.trends_func != ""
+			ORDER BY level, name',
+			array($_SESSION['sess_user_id']));
+
+		if (cacti_sizeof($panels))	{
+			html_start_box(__('Trend Update Frequencies', 'intropage'), '100%', '', '3', 'center', '');
+
+			$class = 'odd';
+
+			foreach ($panels as $panel)	{
+				$class = ($class == 'odd' ? 'even':'odd');
+
+				print '<div id="row_crefresh_' . $panel['id'] . '" class="formRow ' . $class . '">
+					<div class="formColumnLeft">
+						<div class="formFieldName">' . $panel['name'] . '</div>
+						<div class="cactiTooltipHint fa fa-question-circle">
+							<span style="display:none;">' . $panel['description'] . '<span>
+						</div>
+					</div>
+					<div class="formColumnRight">
+						<div class="formData">';
+
+				form_dropdown(
+					'trefresh_' . $panel['id'],
+					$intropage_intervals, '', '',
+					$panel['trend_interval'],
+					__('Default', 'intropage'),
+					$panel['default_refresh']
+				);
+
+				print '</div></div>';
+			}
+
+			html_end_box();
+		}
 	}
 
 	form_hidden_box('save_settings', 0, 1);

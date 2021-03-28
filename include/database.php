@@ -116,10 +116,12 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
+	$data['columns'][] = array('name' => 'last_trend_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(3)', 'default' => '30', 'NULL' => false);
 	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','grey')", 'default' => 'green', 'NULL' => false);
 	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
+	$data['columns'][] = array('name' => 'trend_interval', 'type' => 'int(9)', 'default' => '300', 'NULL' => false);
 	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'fav_graph_timespan', 'type' => 'int(2)', 'default' => '1', 'NULL' => false);
 
@@ -342,6 +344,18 @@ function intropage_upgrade_database() {
 
 			db_execute('ALTER TABLE plugin_intropage_panel_data
 				MODIFY COLUMN `alarm` enum("red","green","yellow","grey") COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT "green"');
+		}
+
+		if (cacti_version_compare($oldv, '3.0.3', '<=')) {
+			if (!db_column_exists('plugin_intropage_panel_data', 'trend_interval')) {
+				db_execute('ALTER TABLE plugin_intropage_panel_data
+					ADD COLUMN trend_interval INT(9) UNSIGNED NOT NULL default "300" AFTER refresh_interval');
+			}
+
+			if (!db_column_exists('plugin_intropage_panel_data', 'last_trend_update')) {
+				db_execute('ALTER TABLE plugin_intropage_panel_data
+					ADD COLUMN last_trend_update TIMESTAMP NOT NULL default CURRENT_TIMESTAMP AFTER last_update');
+			}
 		}
 
 		// Set the new version

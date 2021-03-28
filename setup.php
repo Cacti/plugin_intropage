@@ -73,8 +73,49 @@ function plugin_intropage_uninstall() {
 }
 
 function intropage_config_arrays() {
+	global $intropage_intervals, $trend_timespans;
+
 	auth_augment_roles(__('Normal User'), array('intropage.php'));
 	auth_augment_roles(__('System Administration'), array('intropage_admin.php'));
+
+	$trend_timespans = array(
+		3600  => __('Timespan Last 1 Hour', 'intropage'),
+		7200  => __('Timespan Last %d Hours', 2, 'intropage'),
+		10800 => __('Timespan Last %d Hours', 3, 'intropage'),
+		14400 => __('Timespan Last %d Hours', 4, 'intropage'),
+		21600 => __('Timespan Last %d Hours', 6, 'intropage'),
+		43200 => __('Timespan Last %d Hours', 12, 'intropage'),
+		86400 => __('Timespan Last 1 Day', 'intropage')
+	);
+
+	$poller_interval = read_config_option('poller_interval');
+
+	$intropage_intervals = array(
+		'10'    => __('%d Seconds', 10, 'intropage'),
+		'15'    => __('%d Seconds', 15, 'intropage'),
+		'20'    => __('%d Seconds', 20, 'intropage'),
+		'30'    => __('%d Seconds', 30, 'intropage'),
+		'60'    => __('%d Minute', 1, 'intropage'),
+		'120'   => __('%d Minutes', 2, 'intropage'),
+		'180'   => __('%d Minutes', 3, 'intropage'),
+		'240'   => __('%d Minutes', 4, 'intropage'),
+		'300'   => __('%d Minutes', 5, 'intropage'),
+		'600'   => __('%d Minutes', 10, 'intropage'),
+		'1200'  => __('%d Minutes', 20, 'intropage'),
+		'1800'  => __('%d Minutes', 30, 'intropage'),
+		'3600'  => __('%d Hour', 1, 'intropage'),
+		'7200'  => __('%d Hours', 2, 'intropage'),
+		'14400' => __('%d Hours', 4, 'intropage'),
+		'28800' => __('%d Hours', 8, 'intropage'),
+		'43200' => __('%d Hours', 12, 'intropage'),
+		'86400' => __('%d Day', 1, 'intropage')
+	);
+
+	foreach($intropage_intervals as $key => $name) {
+		if ($key < $poller_interval) {
+			unset($intropage_intervals[$key]);
+		}
+	}
 }
 
 function plugin_intropage_version() {

@@ -25,7 +25,8 @@
 */
 
 function intropage_config_settings() {
-	global $tabs, $settings, $config, $intropage_settings;
+	global $tabs, $settings, $config, $intropage_settings, $trend_timespans;
+
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
 
 	$tabs['intropage'] = __('Intropage', 'intropage');
@@ -129,10 +130,10 @@ function intropage_user_admin_run_action(){
 		$user = $permissions;
 	}
 
-	$fields = db_fetch_assoc('SELECT panel_id, level, class, name, description
+	$fields = db_fetch_assoc('SELECT panel_id, level, class, name, alarm, description
 		FROM plugin_intropage_panel_definition
 		UNION
-		SELECT "favourite_graph", 1, "graphs", "Favorite Graphs", "Allow you to add your favorite graphs to the dashboard of your choice"
+		SELECT "favourite_graph", 1, "graphs", "Favorite Graphs", "green", "Allow you to add your favorite graphs to the dashboard of your choice"
 		ORDER BY level, class, name');
 
 	$prev_level = -1;
@@ -254,7 +255,7 @@ function intropage_user_admin_user_save($save){
 					$save['id']               = 0;
 					$save['panel_id']         = $panel_id;
 
-					if ($panel['level'] == 0) {
+					if (isset($panel['level']) && $panel['level'] == 0) {
 						$save['user_id'] = 0;
 					} else {
 						$save['user_id'] = $user_id;
@@ -262,9 +263,9 @@ function intropage_user_admin_user_save($save){
 
 					$save['last_update']      = '0000-00-00';
 					$save['data']             = '';
-					$save['priority']         = $panel['priority'];
-					$save['alarm']            = $panel['alarm'];
-					$save['refresh_interval'] = $panel['refresh'];
+					$save['priority']         = (isset($panel['priority']) ? $panel['priority']:99);
+					$save['alarm']            = (isset($panel['alarm']) ? $panel['alarm']:'green');
+					$save['refresh_interval'] = (isset($panel['refresh']) ? $panel['refresh']:300);
 
 					$id = sql_save($save, 'plugin_intropage_panel_data');
 				}

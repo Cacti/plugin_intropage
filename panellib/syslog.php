@@ -37,10 +37,10 @@ function register_syslog() {
 			'name'         => __('Syslog Details', 'intropage'),
 			'description'  => __('Various Syslog Plugin statistics.', 'intropage'),
 			'class'        => 'syslog',
-			'level'        => PANEL_USER,
-			'refresh'      => 900,
+			'level'        => PANEL_SYSTEM,
+			'refresh'      => read_config_option('poller_interval'),
 			'force'        => true,
-			'width'        => 'quarter-panel',
+			'width'        => 'half-panel',
 			'priority'     => 26,
 			'alarm'        => 'grey',
 			'requires'     => 'syslog',
@@ -64,9 +64,9 @@ function plugin_syslog_trend() {
 			FROM information_schema.TABLES
 			WHERE TABLE_NAME = 'syslog'");
 
-		$alert_rows = syslog_db_fetch_cell_prepared('SELECT ifnull(sum(count),0)
+		$alert_rows = syslog_db_fetch_cell_prepared('SELECT IFNULL(SUM(count),0)
 			FROM syslog_logs WHERE
-			logtime > date_sub(now(), INTERVAL ? SECOND)',
+			logtime > DATE_SUB(NOW(), INTERVAL ? SECOND)',
 			array(read_config_option('poller_interval')));
 
 		db_execute_prepared('INSERT INTO plugin_intropage_trends
@@ -87,7 +87,7 @@ function plugin_syslog_trend() {
 }
 
 // ----------------syslog----------------------
-function plugin_syslog($panel, $user_id) {
+function plugin_syslog($panel, $user_id, $timespan = 0) {
 	$panel['alarm'] = 'green';
 
 	$graph = array (
@@ -105,86 +105,88 @@ function plugin_syslog($panel, $user_id) {
 		),
 	);
 
+	if ($timespan == 0) {
+		if (isset($_SESSION['sess_user_id'])) {
+			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+		} else {
+			$timespan = $panel['refresh_interval'];
+		}
+	}
+
+	if (!isset($panel['refresh_interval'])) {
+		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+			FROM plugin_intropage_panel_data
+			WHERE id = ?',
+			array($panel['id']));
+	} else {
+		$refresh = $panel['refresh_interval'];
+	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
+		// Get the syslog records
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`,
+			MAX(CASE WHEN name='syslog_total' THEN value ELSE NULL END) AS syslog_total,
+			SUM(CASE WHEN name='syslog_incoming' THEN value ELSE NULL END) AS syslog_incoming,
+			SUM(CASE WHEN name='syslog_alert' THEN value ELSE NULL END) AS syslog_alert
 			FROM plugin_intropage_trends
-			WHERE name='syslog_total'
-			ORDER BY cur_timestamp desc
-			LIMIT 20");
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name IN ('syslog_total', 'syslog_incoming', 'syslog_alert')
+			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
 
-		if (cacti_sizeof($sql)) {
-			$val = 0;
-			$graph['line']['title1'] = __('Total', 'intropage');
+		if (cacti_sizeof($rows)) {
+			// Converted syslog_total to total new rows;
+			$nrows      = array();
+			$last_total = 0;
 
-			foreach ($sql as $row) {
-				array_push($graph['line']['label1'], $row['date']);
-				array_push($graph['line']['data1'], $val - $row['value']);
-				$val = $row['value'];
-			}
+			foreach($rows as $index => $row) {
+				$total  = $row['syslog_total'];
+				$totali = $row['syslog_incoming'];
 
-			array_shift($graph['line']['label1']);
-			array_shift($graph['line']['data1']);
-		}
+				if ($index > 0) {
+					$row['syslog_total'] = $total - $last_total;
 
-		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
-			FROM plugin_intropage_trends
-			WHERE name='syslog_incoming'
-			ORDER BY cur_timestamp desc
-			LIMIT 20");
+					if ($row['syslog_total'] < 0) {
+						$row['syslog_total'] = 0;
+					}
 
-		if (cacti_sizeof($sql)) {
-			$val = 0;
-			$graph['line']['title2'] = __('Incoming', 'intropage');
+					$row['syslog_incoming'] = $totali + $last_totali;
 
-			foreach ($sql as $row) {
-				array_push($graph['line']['label2'], $row['date']);
-				array_push($graph['line']['data2'], $val - $row['value']);
-				$val = $row['value'];
-			}
+					$nrows[] = $row;
 
-			array_shift($graph['line']['label2']);
-			array_shift($graph['line']['data2']);
-		}
-
-		$sql = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, name, value
-			FROM plugin_intropage_trends
-			WHERE name='syslog_alert'
-			ORDER BY cur_timestamp desc
-			LIMIT 20");
-
-		if (cacti_sizeof($sql)) {
-			$val = 0;
-			$graph['line']['title3'] = __('Alerts', 'intropage');
-
-			foreach ($sql as $row) {
-				array_push($graph['line']['label3'], $row['date']);
-				array_push($graph['line']['data3'], $val - $row['value']);
-
-				if ($row['value']-$val > 0)     {
-					$panel['alert'] = 'yellow';
+					$last_totali = 0;
+				} else {
+					$last_totali = $totali;
 				}
 
-				$val = $row['value'];
+				$last_total  = $total;
 			}
 
-			array_shift($graph['line']['label3']);
-			array_shift($graph['line']['data3']);
-			$graph['line']['unit1'] = __('Messages', 'intropage');
+			$graph['line']['title1'] = __('Incoming', 'intropage');
+			$graph['line']['title2'] = __('Alerts', 'intropage');
+			$graph['line']['title3'] = __('Stored', 'intropage');
 
-			if (cacti_sizeof($sql) < 3) {
-				unset($panel['line']);
-				$panel['data'] = 'Waiting for data';
-			} else {
-				$graph['line']['data1'] = array_reverse($graph['line']['data1']);
-				$graph['line']['data2'] = array_reverse($graph['line']['data2']);
-				$graph['line']['data3'] = array_reverse($graph['line']['data3']);
-				$graph['line']['label1'] = array_reverse($graph['line']['label1']);
-				$graph['line']['label2'] = array_reverse($graph['line']['label2']);
-				$graph['line']['label3'] = array_reverse($graph['line']['label3']);
-				$panel['data'] = intropage_prepare_graph($graph);
+			$graph['line']['unit1']['title']  = __('Messages', 'intropage');
+			$graph['line']['unit1']['series'] = array('data1', 'data2', 'data3');
+
+//			$graph['line']['unit2']['title']  = __('Messages', 'intropage');
+//			$graph['line']['unit2']['series'] = array('data3');
+
+			foreach($nrows as $row) {
+				$graph['line']['label1'][] = $row['date'];
+				$graph['line']['data1'][]  = $row['syslog_incoming'];
+				$graph['line']['data2'][]  = $row['syslog_alert'];
+				$graph['line']['data3'][]  = $row['syslog_total'];
+
+				if ($row['syslog_alert'] > 0) {
+					$panel['alert'] = 'yellow';
+				}
 			}
 
+			$panel['data'] = intropage_prepare_graph($graph);
+		} else {
+			$panel['data'] = 'Waiting for data';
 		}
 	} else {
 		$panel['data']  = __('Syslog plugin not installed/running', 'intropage');

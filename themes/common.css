@@ -217,20 +217,44 @@
 	width: calc(50% - 1em);
 }
 
+// Tablets in Portrait mode
 @media screen and (max-width: 640px) {
 	.quarter-panel {
-		min-width: 340px;
+		min-width: calc(50% - 1em);
 		width: calc(50% - 1em);
 	}
 
 	.third-panel {
-		min-width: 460px;
+		min-width: calc(75% - 1em);
 		width: calc(75% - 1em);
 	}
 
 	.half-panel {
-		min-width: 580px;
+		min-width: calc(100% - 1em);
+		width: calc(100% - 1em);
+		overflow-x: auto;
+	}
+}
+
+// iPhone and other devices
+// in Portrait mode
+@media screen and (max-width: 420px) {
+	.quarter-panel {
+		min-width: calc(100% - 1em);
+		width: calc(100% - 1em);
+	}
+
+	.third-panel {
+		min-width: calc(100% - 1em);
+		width: calc(100% - 1em);
+	}
+
+	.half-panel {
+		min-width: calc(100% - 1em);
 		width: calc(100% - 1em);
 	}
 }
 
+.panel_data h4 {
+	margin: 2px 0px;
+}

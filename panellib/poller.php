@@ -38,7 +38,7 @@ function register_poller() {
 			'description'  => __('Various information about your Cacti poller.', 'intropage'),
 			'class'        => 'poller',
 			'level'        => PANEL_SYSTEM,
-			'refresh'      => 60,
+			'refresh'      => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 74,
@@ -53,7 +53,7 @@ function register_poller() {
 			'description'  => __('Various Cacti poller statistics.', 'intropage'),
 			'class'        => 'poller',
 			'level'        => PANEL_SYSTEM,
-			'refresh'      => 60,
+			'refresh'      => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 73,
@@ -75,8 +75,6 @@ function poller_info_trend() {
 //------------------------------------ poller info -----------------------------------------------------
 function poller_info($panel, $user_id) {
 	global $config;
-
-	$panel['data'] = '<b>' . __('ID/Name/Total Time/State', 'intropage') . '</b><br/>';
 
 	$panel['alarm'] = 'green';
 
@@ -133,7 +131,7 @@ function poller_info($panel, $user_id) {
 	}
 
 	$panel['data'] =
-		'<center><span class="txt_huge">' . $ok    . '</span> ' . __('(ok)', 'intropage') . ' / ' .
+		'<center><span class="txt_huge">' . $ok . '</span> ' . __('(ok)', 'intropage') . ' / ' .
 		'<span class="txt_huge">' . $count . '</span> ' . __('(all)', 'intropage') . '<br/><br/></center>' .
 		$details;
 
@@ -147,21 +145,20 @@ function poller_info($panel, $user_id) {
 }
 
 function poller_stat_trend() {
-	$stats = db_fetch_assoc('SELECT id, total_time, date_sub(last_update, interval round(total_time) second) AS start
+	$stats = db_fetch_assoc('SELECT id, total_time, DATE_SUB(last_update, INTERVAL ROUND(total_time) SECOND) AS start
 		FROM poller
-		ORDER BY id
-		LIMIT 5');
+		ORDER BY avg_time DESC');
 
 	foreach ($stats as $stat) {
 		db_execute_prepared("REPLACE INTO plugin_intropage_trends
 			(name, cur_timestamp, value, user_id) VALUES
 			('poller', ?, ?, ?)",
-			array($stat['start'], $stat['id'] . ':' . round($stat['total_time']),0));
+			array($stat['start'], $stat['id'] . ':' . round($stat['total_time']),4));
 	}
 }
 
 //------------------------------------ poller stat -----------------------------------------------------
-function poller_stat($panel, $user_id) {
+function poller_stat($panel, $user_id, $timespan = 0) {
 	global $config, $run_from_poller;
 
 	$poller_interval = read_config_option('poller_interval');
@@ -188,57 +185,63 @@ function poller_stat($panel, $user_id) {
 		),
 	);
 
+	if ($timespan == 0) {
+		if (isset($_SESSION['sess_user_id'])) {
+			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+		} else {
+			$timespan = $panel['refresh_interval'];
+		}
+	}
+
+	if (!isset($panel['refresh_interval'])) {
+		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+			FROM plugin_intropage_panel_data
+			WHERE id = ?',
+			array($panel['id']));
+	} else {
+		$refresh = $panel['refresh_interval'];
+	}
+
 	$pollers = db_fetch_assoc('SELECT p.id
-		FROM poller p
+		FROM poller AS p
 		LEFT JOIN poller_time pt
 		ON pt.poller_id = p.id
 		WHERE p.disabled = ""
 		GROUP BY p.id
-		ORDER BY id
+		ORDER BY avg_time DESC
 		LIMIT 5');
 
 	if (cacti_sizeof($pollers)) {
 		$new_index = 1;
 
 		foreach ($pollers as $xpoller) {
-			$poller_time = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+			$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, AVG(SUBSTRING_INDEX(value, ':', -1)) AS value
 				FROM plugin_intropage_trends
-				WHERE name='poller'
+				WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+				AND name = 'poller'
 				AND value LIKE ?
-				ORDER BY cur_timestamp DESC
-				LIMIT 20",
-				array($xpoller['id'] . ':%'));
+				GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+				ORDER BY cur_timestamp ASC",
+				array($timespan, $xpoller['id'] . ':%'));
 
-			$poller_time = array_reverse($poller_time);
-
-			foreach ($poller_time as $one_poller) {
-				list($id, $time) = explode(':', $one_poller['value']);
-
-				if ($time > ($poller_interval - 10)) {
+			foreach ($rows as $row) {
+				if ($row['value'] > ($poller_interval - 10)) {
 					$panel['alarm'] = 'red';
-					$panel['data'] .= '<b>' . $one_poller['date'] . __(' Poller ID: ', 'intropage') . $xpoller['id'] . ' ' . $time . 's</b><br/>';
-				} else {
-					$panel['data'] .= $one_poller['date'] . __(' Poller ID: ', 'intropage') . $xpoller['id'] . ' ' . $time . 's<br/>';
 				}
 
 				// graph data
-				array_push($graph['line']['label' . $new_index], $one_poller['date']);
-				array_push($graph['line']['data' . $new_index], $time);
-
-				$graph['line']['title' . $new_index] = __('ID: ', 'intropage') . $xpoller['id'];
-				$graph['line']['unit1'] = __('Seconds');
+				$graph['line']['label' . $new_index][] = $row['date'];
+				$graph['line']['data'  . $new_index][] = round($row['value'], 2);
+				$graph['line']['title' . $new_index]   = __('ID: ', 'intropage') . $xpoller['id'];
+				$graph['line']['unit1']['title']       = __('Seconds', 'intropage');
 			}
 
 			$new_index++;
 		}
-	}
 
-	if (count($graph['line']['data1']) < 3) {
-		$panel['data'] = __('Waiting for data', 'intropage');
-		unset($graph);
-	} else {
 		$panel['data'] = intropage_prepare_graph($graph);
-		unset($graph);
+	} else {
+		$panel['data'] = __('Waiting for data', 'intropage');
 	}
 
 	save_panel_result($panel, $user_id);
