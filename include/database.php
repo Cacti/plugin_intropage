@@ -141,14 +141,14 @@ function intropage_initialize_database() {
 	foreach($panels as $panel_id => $panel) {
 		if ($panel['level'] == 0) {
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
-				(panel_id, user_id, priority, alarm, refresh_interval)
-				VALUES(?, "0", ?, ?, ?)',
-				array($panel_id, $panel['priority'], $panel['alarm'], $panel['refresh']));
+				(panel_id, user_id, priority, alarm, refresh_interval, trend_interval)
+				VALUES(?, "0", ?, ?, ?, ?)',
+				array($panel_id, $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']));
 		} else {
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
-				(panel_id, user_id, priority, alarm, refresh_interval)
-				VALUES(?, ?, ?, ?, ?)',
-				array($panel_id, $_SESSION['sess_user_id'], $panel['priority'], $panel['alarm'], $panel['refresh']));
+				(panel_id, user_id, priority, alarm, refresh_interval, trend_interval)
+				VALUES(?, ?, ?, ?, ?, ?)',
+				array($panel_id, $_SESSION['sess_user_id'], $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']));
 		}
 	}
 
