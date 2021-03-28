@@ -667,7 +667,7 @@ function display_information() {
 
 		$.get(urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id)
 		.done(function(data) {
-			$('#panel_'+panel_id).find('.panel_data').html(data);
+			$('#panel_'+panel_id).find('.panel_data').empty().html(data);
 
 			if (!refresh) {
 				$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
