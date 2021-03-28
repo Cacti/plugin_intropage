@@ -39,6 +39,7 @@ function register_analyze() {
 			'class'        => 'analyze',
 			'level'        => PANEL_SYSTEM,
 			'refresh'      => 300,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 51,
@@ -54,6 +55,7 @@ function register_analyze() {
 			'class'        => 'analyze',
 			'level'        => PANEL_SYSTEM,
 			'refresh'      => 300,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 50,
@@ -69,6 +71,7 @@ function register_analyze() {
 			'class'        => 'analyze',
 			'level'        => PANEL_SYSTEM,
 			'refresh'      => 86400,
+			'trefresh'     => false,
 			'force'        => false,
 			'width'        => 'quarter-panel',
 			'priority'     => 7,
@@ -83,7 +86,8 @@ function register_analyze() {
 			'description'  => __('Few trends (down hosts, trigged tholds,...)', 'intropage'),
 			'class'        => 'analyze',
 			'level'        => PANEL_USER,
-			'refresh'      => 300,
+			'refresh'      => 900,
+			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 75,
@@ -99,6 +103,7 @@ function register_analyze() {
 			'class'        => 'analyze',
 			'level'        => PANEL_USER,
 			'refresh'      => 1800,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 33,
@@ -263,6 +268,8 @@ function analyse_log($panel, $user_id) {
 		if (!empty($log_size_note)) {
 			$panel['data'] .= '<tr><td class="txt_big">' . $log_size_note . '</td></tr>';
 		}
+
+		$panel['data'] .= '<tr><td><hr></td></tr>';
 
 		$panel['data'] .= '<tr><td>' . __('Errors and Warnings from last %s lines)', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
 

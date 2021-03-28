@@ -39,6 +39,7 @@ function register_graphs() {
 			'class'        => 'graphs',
 			'level'        => PANEL_USER,
 			'refresh'      => 300,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 78,
@@ -54,6 +55,7 @@ function register_graphs() {
 			'class'        => 'graphs',
 			'level'        => PANEL_USER,
 			'refresh'      => 7200,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 18,
@@ -69,6 +71,7 @@ function register_graphs() {
 			'class'        => 'graphs',
 			'level'        => PANEL_USER,
 			'refresh'      => 7200,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 19,
@@ -160,9 +163,6 @@ function graph_host_template($panel, $user_id) {
 			foreach ($sql_ht as $item) {
 				array_push($graph['pie']['label'], substr($item['name'],0,15));
 				array_push($graph['pie']['data'], $item['total']);
-
-				$panel['data'] .= $item['name'] . ': ';
-				$panel['data'] .= $item['total'] . '<br/>';
 			}
 
 			$panel['data'] = intropage_prepare_graph($graph);
@@ -187,7 +187,7 @@ function graph_host($panel, $user_id) {
 	if ($allowed_devices !== false) {
 		$graph = array(
 			'pie' => array(
-				'title' => __('Hosts: ', 'intropage'),
+				'title' => __('Devices: ', 'intropage'),
 				'label' => array(),
 				'data'  => array(),
 			),
@@ -234,7 +234,7 @@ function graph_host($panel, $user_id) {
 
 		if ($count > 0) {
 			$graph['pie'] = array(
-				'title' => __('Hosts', 'intropage'),
+				'title' => __('Devices', 'intropage'),
 				'label' => array(
 					__('Up', 'intropage'),
 					__('Down', 'intropage'),
@@ -270,7 +270,7 @@ function graph_data_source_detail() {
 
 	$panel = array(
 		'name'   => __('Data Sources', 'intropage'),
-		'alarm'  => 'grey',
+		'alarm'  => 'green',
 		'detail' => ''
 	);
 
@@ -287,16 +287,31 @@ function graph_data_source_detail() {
 
 	$total = 0;
 
+	$panel['detail'] .= '<table class="cactiTable">';
+
 	if (cacti_sizeof($sql_ds)) {
+		$panel['detail'] .= '<tr class="tableHeader">
+			<th class="left">'  . __('Data Type', 'intropage') . '</th>
+			<th class="right">' . __('Data Sources')           . '</th>
+		</tr>';
+
+		$i = 0;
 		foreach ($sql_ds as $item) {
 			if (!is_null($item['type_id'])) {
-				$panel['detail'] .= preg_replace('/script server/', 'SS', $input_types[$item['type_id']]) . ': ';
-				$panel['detail'] .= $item['total'] . '<br/>';
+				$class = ($i % 2 == 0 ? 'odd':'even');
+				$panel['detail'] .= '<tr class="' . $class . '"><td class="left">' . preg_replace('/script server/', 'SS', $input_types[$item['type_id']]) . '</td>';
+				$panel['detail'] .= '<td class="right">' . number_format_i18n($item['total'], -1) . '</td></tr>';
+
 				$total += $item['total'];
+				$i++;
 			}
 		}
 
-		$panel['detail'] .= '<br/><b> Total: ' . $total . '</b><br/>';
+		$class = ($i % 2 == 0 ? 'odd':'even');
+
+		$panel['detail'] .= '<tr class="' . $class . '" rowspan="2"><td class="left">' . __('Total', 'intropage') . '</td><td class="right">' . number_format_i18n($total, -1) . '</td></tr>';
+
+		$panel['detail'] .= '</table>';
 	} else {
 		$panel['detail'] = __('No untemplated datasources found');
 	}
@@ -309,12 +324,12 @@ function graph_host_detail() {
 	global $config, $console_access;
 
 	$panel = array(
-		'name'   => __('Hosts', 'intropage'),
+		'name'   => __('Devices', 'intropage'),
 		'alarm'  => 'green',
 		'detail' => '',
 	);
 
-	$h_all  = db_fetch_cell("SELECT COUNT(id) FROM host");
+	$h_all = db_fetch_cell("SELECT COUNT(id) FROM host");
 
 	$h_up = db_fetch_cell("SELECT COUNT(id)
 		FROM host
@@ -337,52 +352,110 @@ function graph_host_detail() {
 
 	$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
 
-	$url_prefix = $console_access ? '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?host_status=%s') . '">' : '';
-	$url_suffix = $console_access ? '</a>' : '';
+	$panel['detail']  = '<table class="cactiTable">';
+	$panel['detail'] .= '<tr class="tableHeader"><th class="left">' . __esc('Status', 'intropage') . '</th><th class="right">' . __esc('Device Count', 'intropage') . '</th></tr>';
 
-	$panel['detail']  = sprintf($url_prefix, '-1')  . __('All', 'intropage')        . ": $h_all$url_suffix<br/>";
-	$panel['detail'] .= sprintf($url_prefix, '=3')  . __('Up', 'intropage')         . ": $h_up$url_suffix<br/>";
-	$panel['detail'] .= sprintf($url_prefix, '=1')  . __('Down', 'intropage')       . ": $h_down$url_suffix<br/>";
-	$panel['detail'] .= sprintf($url_prefix, '=-2') . __('Disabled', 'intropage')   . ": $h_disa$url_suffix<br/>";
-	$panel['detail'] .= sprintf($url_prefix, '=2')  . __('Recovering', 'intropage') . ": $h_reco$url_suffix";
+	$status = array(
+		array(
+			'class'  => 'odd',
+			'status' => '-1',
+			'text'   => __esc('All', 'intropage'),
+			'value'  => $h_all
+		),
+		array(
+			'class'  => 'even',
+			'status' => '3',
+			'text'   => __esc('Up', 'intropage'),
+			'value'  => $h_up
+		),
+		array(
+			'class'  => 'odd',
+			'status' => '1',
+			'text'   => __esc('Down', 'intropage'),
+			'value'  => $h_down
+		),
+		array(
+			'class'  => 'even',
+			'status' => '-2',
+			'text'   => __esc('Disabled', 'intropage'),
+			'value'  => $h_disa
+		),
+		array(
+			'class'  => 'even',
+			'status' => '2',
+			'text'   => __esc('Recovering', 'intropage'),
+			'value'  => $h_reco
+		)
+	);
+
+	foreach($status as $s) {
+		if (api_plugin_user_realm_auth('host.php')) {
+			$panel['detail'] .= '<tr class="' . $s['class'] . '">';
+			$panel['detail'] .= '<td class="left">';
+			$panel['detail'] .= '<a class="pic linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?host_status=' . $s['status']) . '">' . $s['text'] . '</a>';
+			$panel['detail'] .= '</td>';
+			$panel['detail'] .= '<td class="right">' . number_format_i18n($s['value'], -1) . '</td>';
+			$panel['detail'] .= '</tr>';
+		} else {
+			$panel['detail'] .= '<tr class="' . $s['class'] . '">';
+			$panel['detail'] .= '<td class="left">' . $s['text'] . '</td>';
+			$panel['detail'] .= '<td class="right">' . number_format_i18n($s['value'], -1) . '</td>';
+			$panel['detail'] .= '</tr>';
+		}
+	}
+
+	$panel['detail'] .= '</table>';
+
+	return $panel;
 
 	// alarms and details
+	$i = 0;
 	if ($h_reco > 0) {
 		$panel['alarm'] = 'yellow';
+
+		$panel['detail'] .= '<table class="cactiTable">';
 
 		$hosts = db_fetch_assoc("SELECT description
 			FROM host
 			WHERE status = 2
 			AND disabled = ''");
 
-		$panel['detail'] .= '<br/><br/><b>' . __('Recovering:', 'intropage') . '</b><br/>';
+		$panel['detail'] .= '<tr class="tableHeader"><th class="left" colspan="2">' . __('Recovering Devices', 'intropage') . '</th></tr>';
 
 		if (cacti_sizeof($hosts)) {
+			$i = 0;
 			foreach ($hosts as $host) {
-				$panel['detail'] .= html_escape($host['description']) . '<br/>';
+				$class = ($i % 2 == 0 ? 'odd':'even');
+				$panel['detail'] .= '<tr class="' . $class . '"><td colspan="2">' . html_escape($host['description']) . '</td</tr>';
+				$i++;
 			}
 		}
 
-		$panel['detail'] .= '<br/><br/>';
+		$panel['detail'] .= '</table>';
 	}
 
 	if ($h_down > 0) {
 		$panel['alarm'] = 'red';
+
+		$panel['detail'] .= '<table class="cactiTable">';
 
 		$hosts = db_fetch_assoc("SELECT description
 			FROM host
 			WHERE status = 1
 			AND disabled = ''");
 
-		$panel['detail'] .= '<br/><br/><b>' . __('Down:', 'intropage') . '</b><br/>';
+		$panel['detail'] .= '<tr class="tableHeader"><th class="left" colspan="2">' . __('Down Devices', 'intropage') . '</th></tr>';
 
 		if (cacti_sizeof($hosts)) {
+			$i = 0;
 			foreach ($hosts as $host) {
-				$panel['detail'] .= html_escape($host['description']) . '<br/>';
+				$class = ($i % 2 == 0 ? 'odd':'even');
+				$panel['detail'] .= '<tr class="' . $class . '"><td colspan="2">' . html_escape($host['description']) . '</td</tr>';
+				$i++;
 			}
 		}
 
-		$panel['detail'] .= '<br/><br/>';
+		$panel['detail'] .= '</table>';
 	}
 
 	return $panel;
@@ -394,11 +467,11 @@ function graph_host_template_detail() {
 
 	$panel = array(
 		'name' => __('Device Templates', 'intropage'),
-		'alarm' => 'grey',
+		'alarm' => 'green',
 		'detail' => '',
 	);
 
-	$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name, COUNT(host.host_template_id) AS total
+	$rows = db_fetch_assoc("SELECT host_template.id as id, name, COUNT(host.host_template_id) AS total
 		FROM host_template
 		LEFT JOIN host
 		ON (host_template.id = host.host_template_id)
@@ -407,15 +480,29 @@ function graph_host_template_detail() {
 
 	$total = 0;
 
-	if (cacti_sizeof($sql_ht)) {
-		foreach ($sql_ht as $item) {
-			$panel['detail'] .= $item['name'] . ': ';
-			$panel['detail'] .= $item['total'] . '<br/>';
+	if (cacti_sizeof($rows)) {
+		$panel['detail'] .= '<table class="cactiTable">
+			<tr class="tableHeader">
+				<th class="left">'  . __('Template Name', 'intropage') . '</th>
+				<th class="right">' . __('Total Devices', 'intropage') . '</th>
+			</tr>';
+
+		$i = 0;
+		foreach ($rows as $item) {
+			$class = ($i % 2 == 0 ? 'odd':'even');
+			$panel['detail'] .= '<tr class="' . $class . '"><td class="left">' . html_escape($item['name']) . '</td>';
+			$panel['detail'] .= '<td class="right">'   . number_format_i18n($item['total'], -1)             . '</td></tr>';
 			$total += $item['total'];
+			$i++;
 		}
 
-		$panel['detail'] .= '<br/><b> Total: ' . $total . '</b><br/>';
+		$class = ($i % 2 == 0 ? 'odd':'even');
+		$panel['detail'] .= '<tr class="' . $class . '">
+			<td class="left">'  . __('Total', 'intropage')       . '</td>
+			<td class="right">' . number_format_i18n($total, -1) . '</td>
+		</tr>';
 
+		$panel['detail'] .= '</table>';
 	} else {
 		$panel['detail'] = __('No device templates found', 'intropage');
 	}

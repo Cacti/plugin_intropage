@@ -39,6 +39,7 @@ function register_mactrack() {
 			'class'        => 'mactrack',
 			'level'        => PANEL_USER,
 			'refresh'      => 900,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 28,
@@ -54,6 +55,7 @@ function register_mactrack() {
 			'class'        => 'mactrack',
 			'level'        => PANEL_USER,
 			'refresh'      => 900,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 27,
@@ -178,19 +180,19 @@ function mactrack_sites_detail() {
 
 	$panel = array(
 		'name'   => __('MacTrack Sites', 'intropage'),
-		'alarm'  => 'grey',
+		'alarm'  => 'green',
 		'detail' => '',
 	);
 
 	$panel['detail'] = '<table class="cactiTable">' .
-		'<tr>' .
-		'<td class="left">'  . __('Site', 'intropage')          . '</td>' .
-		'<td class="right">' . __('Devices', 'intropage')       . '</td>' .
-		'<td class="right">' . __('IPs', 'intropage')           . '</td>' .
-		'<td class="right">' . __('Ports', 'intropage')         . '</td>' .
-		'<td class="right">' . __('Ports up', 'intropage')      . '</td>' .
-		'<td class="right">' . __('MACs', 'intropage')          . '</td>' .
-		'<td class="right">' . __('Device Errors', 'intropage') . '</td>' .
+		'<tr class="tableHeader">' .
+		'<th class="left">'  . __('Site', 'intropage')          . '</td>' .
+		'<th class="right">' . __('Devices', 'intropage')       . '</td>' .
+		'<th class="right">' . __('IPs', 'intropage')           . '</td>' .
+		'<th class="right">' . __('Ports', 'intropage')         . '</td>' .
+		'<th class="right">' . __('Ports up', 'intropage')      . '</td>' .
+		'<th class="right">' . __('MACs', 'intropage')          . '</td>' .
+		'<th class="right">' . __('Device Errors', 'intropage') . '</td>' .
 	'</tr>';
 
 	$data = db_fetch_assoc('SELECT *
@@ -208,6 +210,10 @@ function mactrack_sites_detail() {
 				'<td class="right">' . $site['total_macs']             . '</td>' .
 				'<td class="right">' . $site['total_device_errors']    . '</td>' .
 			'</tr>';
+
+			if ($site['total_device_errors'] > 0) {
+				$panel['alarm'] = 'red';
+			}
 
 			$panel['detail'] .= $row;
 		}

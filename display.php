@@ -681,21 +681,30 @@ function display_information() {
 	}
 
 	function reload_all() {
-		$('#obal li.flexchild').each(function() {
-			var panel_id = $(this).attr('id').split('_').pop();
-			reload_panel(panel_id, false, true);
-		});
+		if ($('#overlay').dialog('instance') === undefined) {
+			$('#obal li.flexchild').each(function() {
+				var panel_id = $(this).attr('id').split('_').pop();
+				reload_panel(panel_id, false, true);
+			});
+		} else if (!$('#overlay').dialog('isOpen')) {
+			$('#obal li.flexchild').each(function() {
+				var panel_id = $(this).attr('id').split('_').pop();
+				reload_panel(panel_id, false, true);
+			});
+		}
 	}
 
 	// detail to the new window
 	$('.maxim').click(function(event) {
 		event.preventDefault();
-		panel_id = $(this).attr('detail-panel');
+		var panel_id = $(this).attr('detail-panel');
 
 		$.get(urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id, function(data) {
 			$('#overlay_detail').html(data);
-			width = $('#overlay_detail').textWidth() + 150;
-			windowWidth = $(window).width();
+
+			var width = $('#overlay_detail').textWidth() + 150;
+			var windowWidth = $(window).width();
+
 			if (width > 1200) {
 				width = 1200;
 			}

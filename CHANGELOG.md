@@ -19,6 +19,9 @@
 * Force Intropage to have load order 1 always so that it can inspect key tables
 * Add support for Midwinter theme
 * Support Poller intervals down to every 10 seconds
+* Make panel definitions trend interval aware
+* Convert many details pages to table rendering
+* Block page refresh when a dialog is active
 
 --- 3.0.2 ---
 * Reduce the width of some titles to conserve space

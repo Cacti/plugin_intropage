@@ -39,6 +39,7 @@ function register_thold() {
 			'class'        => 'thold',
 			'level'        => PANEL_USER,
 			'refresh'      => 300,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'half-panel',
 			'priority'     => 77,
@@ -54,6 +55,7 @@ function register_thold() {
 			'class'        => 'thold',
 			'level'        => PANEL_USER,
 			'refresh'      => 300,
+			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 18,
@@ -240,13 +242,48 @@ function graph_thold_detail() {
 
 		$count = $t_all + $t_brea + $t_trig + $t_disa;
 
-		$url_prefix = '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">';
+		$panel['detail'] = '<table class="cactiTable">';
+		$panel['detail'] .= '<tr class="tableHeader"><th class="left">' . __('Status', 'intropage') . '</th><th class="right">' . __('Thresholds', 'intropage') . '</th></tr>';
+
 		$url_suffix = '</a>';
 
-		$panel['detail']  = sprintf($url_prefix, '-1') . __('All: ', 'intropage')      . "$t_all$url_suffix<br/>";
-		$panel['detail'] .= sprintf($url_prefix, '1')  . __('Breached: ', 'intropage') . "$t_brea$url_suffix<br/>";
-		$panel['detail'] .= sprintf($url_prefix, '3')  . __('Trigged: ', 'intropage')  . "$t_trig$url_suffix<br/>";
-		$panel['detail'] .= sprintf($url_prefix, '0')  . __('Disabled: ', 'intropage') . "$t_disa$url_suffix<br/><br/>";
+		if (api_plugin_user_realm_auth('thold_graph.php')) {
+			$url_prefix = '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">';
+
+			$panel['detail'] .= '<tr class="odd">
+				<td class="left">'  . sprintf($url_prefix, '-1') . __('All', 'intropage') . '</a></td>
+				<td class="right">' . number_format_i18n($t_all, -1) . '</td></tr>';
+
+			$panel['detail'] .= '<tr class="even">
+				<td class="left">'  . sprintf($url_prefix, '1') . __('Breached', 'intropage') . '</a></td>
+				<td class="right">' . number_format_i18n($t_brea, -1) . '</td></tr>';
+
+			$panel['detail'] .= '<tr class="odd">
+				<td class="left">'  . sprintf($url_prefix, '3') . __('Triggered', 'intropage') . '</a></td>
+				<td class="right">' . number_format_i18n($t_trig, -1) . '</td></tr>';
+
+			$panel['detail'] .= '<tr class="even">
+				<td class="left">'  . sprintf($url_prefix, '0') . __('Disabled', 'intropage') . '</a></td>
+				<td class="right">' . number_format_i18n($t_disa, -1) . '</td></tr>';
+		} else {
+			$panel['detail'] .= '<tr class="odd">
+				<td class="left">'  . __('All', 'intropage')         . '</td>
+				<td class="right">' . number_format_i18n($t_all, -1) . '</td></tr>';
+
+			$panel['detail'] .= '<tr class="even">
+				<td class="left">'  . __('Breached', 'intropage')     . '</td>
+				<td class="right">' . number_format_i18n($t_brea, -1) . '</td></tr>';
+
+			$panel['detail'] .= '<tr class="odd">
+				<td class="left">'  . __('Triggered', 'intropage')    . '</td>
+				<td class="right">' . number_format_i18n($t_trig, -1) . '</td></tr>';
+
+			$panel['detail'] .= '<tr class="even">
+				<td class="left">'  . __('Disabled', 'intropage')     . '</td>
+				<td class="right">' . number_format_i18n($t_disa, -1) . '</td></tr>';
+		}
+
+		$panel['detail'] .= '</table>';
 
 		// alarms and details
 		if ($t_brea > 0) {
@@ -319,18 +356,25 @@ function thold_event_detail() {
 			LIMIT 30');
 
 		if (cacti_sizeof($data)) {
-			$panel['detail'] .= '<table class="tableRow">';
+			$panel['detail'] .= '<table class="cactiTable">';
+			$panel['detail'] .= '<tr class="tableHeader"><th class="left">' . __('Description', 'intropage') . '</th>
+				<th class="right">' . __('Date', 'intropage') . '</th></tr>';
 
+			$i = 0;
 			foreach ($data as $row) {
-				$panel['detail'] .= '<tr><td style="white-space:pre">';
-				$panel['detail'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . html_escape($row['description']);
-				$panel['detail'] .= '</td></tr>';
+				$class = ($i % 2 == 0 ? 'odd':'even');
+				$panel['detail'] .= '<tr class="' . $class . '">
+					<td class="left">'  . html_escape($row['description'])  . '</td>
+					<td class="right">' . date('Y-m-d H:i:s', $row['time']) . '</td>
+				</tr>';
+
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
 					$panel['alarm'] = 'red';
 				} elseif ($panel['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
 					$panel['alarm'] == 'yellow';
 				}
 
+				$i++;
 			}
 
 			$panel['detail'] .= '</table>';

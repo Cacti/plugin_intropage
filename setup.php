@@ -101,6 +101,7 @@ function intropage_config_arrays() {
 		'240'   => __('%d Minutes', 4, 'intropage'),
 		'300'   => __('%d Minutes', 5, 'intropage'),
 		'600'   => __('%d Minutes', 10, 'intropage'),
+		'900'   => __('%d Minutes', 15, 'intropage'),
 		'1200'  => __('%d Minutes', 20, 'intropage'),
 		'1800'  => __('%d Minutes', 30, 'intropage'),
 		'3600'  => __('%d Hour', 1, 'intropage'),

@@ -642,12 +642,14 @@ function get_panel_details($panel_id, $user_id = 0) {
 	if (cacti_sizeof($panel)) {
 		$last_update      = $panel['ts'];
 		$refresh_interval = $panel['refresh_interval'];
+		$trend_interval   = $panel['trend_interval'];
 		$next_update      = $last_update + $refresh_interval - time();
 
 		$panel['name']    = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
 	} else {
 		$last_update      = time();
 		$refresh_interval = $definition['refresh'];
+		$trend_interval   = $definition['trefresh'];
 		$next_update      = $refresh_interval;
 
 		$panel = array();
@@ -660,6 +662,7 @@ function get_panel_details($panel_id, $user_id = 0) {
 		$panel['priority']         = $definition['priority'];
 		$panel['alarm']            = $definition['alarm'];
 		$panel['refresh_interval'] = $definition['refresh'];
+		$panel['trend_interval']   = $definition['trefresh'];
 
 		$panel['id']   = sql_save($panel, 'plugin_intropage_panel_data');
 		$panel['name'] = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
@@ -674,6 +677,7 @@ function get_panel_details($panel_id, $user_id = 0) {
 		'next'       => $next_update,
 		'alarm'      => $panel['alarm'],
 		'refresh'    => $refresh_interval,
+		'trefresh'   => $trend_interval,
 		'panel'      => $panel,
 		'definition' => $definition
 	);
@@ -849,7 +853,7 @@ function initialize_panel_library() {
 
 function update_registered_panels($panels) {
 	$prefix = 'INSERT INTO plugin_intropage_panel_definition
-		(panel_id, name, level, class, priority, alarm, requires, update_func, details_func, trends_func, refresh, description) VALUES';
+		(panel_id, name, level, class, priority, alarm, requires, update_func, details_func, trends_func, refresh, trefresh, description) VALUES';
 
 	$suffix = 'ON DUPLICATE KEY UPDATE
 		name=VALUES(name),
@@ -862,6 +866,7 @@ function update_registered_panels($panels) {
 		details_func=VALUES(details_func),
 		trends_func=VALUES(trends_func),
 		refresh=VALUES(refresh),
+		trefresh=VALUES(trefresh),
 		description=VALUES(description)';
 
 	$sql = array();
@@ -880,8 +885,9 @@ function update_registered_panels($panels) {
 				db_qstr($panel['details_func']) . ', ' .
 				db_qstr($panel['trends_func'])  . ', ' .
 				db_qstr($panel['refresh'])      . ', ' .
+				db_qstr($panel['trefresh'])     . ', ' .
 				db_qstr($panel['description'])  .
-				')';
+			')';
 		}
 
 		db_execute($prefix . implode(', ', $sql) . $suffix);
@@ -954,7 +960,7 @@ function intropage_prepare_graph($dispdata) {
 
 		// Add upto 5 Lines
 		for ($i = 1; $i < 6; $i++) {
-			if (isset($dispdata['line']["data$i"])) {
+			if (isset($dispdata['line']["data$i"]) && cacti_sizeof($dispdata['line']["data$i"])) {
 				$columns[] = array_merge(array($dispdata['line']["title$i"]), $dispdata['line']["data$i"]);
 
 				if (isset($dispdata['line']['unit2']['series'])) {

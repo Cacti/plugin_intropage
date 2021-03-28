@@ -95,6 +95,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'details_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'trends_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
 	$data['columns'][] = array('name' => 'refresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600');
+	$data['columns'][] = array('name' => 'trefresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600');
 	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(200)', 'default' => '', 'NULL' => true);
 
 	$data['type']      = 'InnoDB';
@@ -355,6 +356,11 @@ function intropage_upgrade_database() {
 			if (!db_column_exists('plugin_intropage_panel_data', 'last_trend_update')) {
 				db_execute('ALTER TABLE plugin_intropage_panel_data
 					ADD COLUMN last_trend_update TIMESTAMP NOT NULL default CURRENT_TIMESTAMP AFTER last_update');
+			}
+
+			if (!db_column_exists('plugin_intropage_panel_definition', 'trefresh')) {
+				db_execute('ALTER TABLE plugin_intropage_panel_definition
+					ADD COLUMN trefresh INT(10) UNSIGNED default "3600" AFTER refresh');
 			}
 		}
 
