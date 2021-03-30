@@ -83,12 +83,12 @@ function display_information() {
 	$console_access = api_plugin_user_realm_auth('index.php');
 
 	// remove admin prohibited panels
-	$panels = db_fetch_assoc_prepared ('SELECT t1.panel_id AS panel_name, t1.id AS id
-		FROM plugin_intropage_panel_data AS t1
-		INNER JOIN plugin_intropage_panel_dashboard AS t2
-		ON t1.id = t2.panel_id
-		WHERE t2.user_id = ?
-		AND t2.dashboard_id = ?',
+	$panels = db_fetch_assoc_prepared ('SELECT pd.panel_id AS panel_name, pd.id AS id
+		FROM plugin_intropage_panel_data AS pd
+		INNER JOIN plugin_intropage_panel_dashboard AS pda
+		ON pd.id = pda.panel_id
+		WHERE pda.user_id = ?
+		AND pda.dashboard_id = ?',
 		array($_SESSION['sess_user_id'], $dashboard_id));
 
 	if (cacti_sizeof($panels)) {
@@ -106,13 +106,13 @@ function display_information() {
 	}
 
 	// User allowed panels
-	$panels = db_fetch_assoc_prepared("SELECT t1.*
-		FROM plugin_intropage_panel_data as t1
-		INNER JOIN plugin_intropage_panel_dashboard as t2
-		ON t1.id = t2.panel_id
-		WHERE t1.user_id in (0, ?)
-		AND t2.dashboard_id = ?
-		AND t1.panel_id != 'favourite_graph'
+	$panels = db_fetch_assoc_prepared("SELECT pd.*
+		FROM plugin_intropage_panel_data AS pd
+		INNER JOIN plugin_intropage_panel_dashboard AS pda
+		ON pd.id = pda.panel_id
+		WHERE pd.user_id in (0, ?)
+		AND pda.dashboard_id = ?
+		AND pd.panel_id != 'favourite_graph'
 		UNION
 		SELECT t3.*
 		FROM plugin_intropage_panel_data as t3

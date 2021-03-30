@@ -1021,6 +1021,7 @@ function intropage_prepare_graph($dispdata) {
 
 		$content .= '<div class="chart_wrapper center" id="line_' . $xid. '"></div>';
 		$content .= '<script type="text/javascript">';
+		$content .= 'if (line_' . $xid . ' != undefined) { delete line_' . $xid . '; }';
 		$content .= 'var line_' . $xid . ' = c3.generate(' . $chart_data . ')';
 		$content .= '</script>';
 	} // line graph end
@@ -1030,6 +1031,7 @@ function intropage_prepare_graph($dispdata) {
 
 		$content .= "<div class='chart_wrapper center' id=\"pie_$xid\"></div>";
 		$content .=  "<script type='text/javascript'>";
+		$content .= 'if (pie_' . $xid . ' != undefined) { delete pie_' . $xid . '; }';
 
 		$content .= "var pie_$xid = c3.generate({";
 
@@ -1181,7 +1183,7 @@ function intropage_addpanel_select($dashboard_id) {
 	print "<select id='intropage_addpanel'>";
 	print '<option value="0">' . __('Panels ...', 'intropage') . '</option>';
 
-	$add_panels = db_fetch_assoc_prepared('SELECT ppd.id, ppd.user_id, pd.panel_id, pd.name
+	$add_panels = db_fetch_assoc_prepared('SELECT DISTINCT pd.panel_id, pd.name
 		FROM plugin_intropage_panel_definition AS pd
 		LEFT JOIN plugin_intropage_panel_data AS ppd
 		ON pd.panel_id = ppd.panel_id
@@ -1193,7 +1195,6 @@ function intropage_addpanel_select($dashboard_id) {
 			WHERE pd.user_id IN (0, ?)
 			AND pd.dashboard_id = ?
 		)
-		AND (ppd.user_id IS NULL OR ppd.user_id = 0)
 		ORDER BY pd.name',
 		array($_SESSION['sess_user_id'], $dashboard_id));
 
