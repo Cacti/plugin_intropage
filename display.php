@@ -644,6 +644,7 @@ function display_information() {
 			var panel_id = $(this).attr('id').split('_').pop();
 
 			reload_panel(panel_id, true, false);
+			Pace.stop();
 		});
 	}
 
@@ -654,6 +655,7 @@ function display_information() {
 				$('#obal li').each(function() {
 					var panel_id = $(this).attr('id').split('_').pop();
 					reload_panel(panel_id, false, false);
+					Pace.stop();
 			    });
 			}
 		});
@@ -667,6 +669,11 @@ function display_information() {
 
 		$.get(urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id)
 		.done(function(data) {
+			if ($('#panel_'+panel_id).find('.chart_wrapper').length) {
+				chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
+				eval(chart_id).destroy();
+			}
+
 			$('#panel_'+panel_id).find('.panel_data').empty().html(data);
 
 			if (!refresh) {
@@ -692,6 +699,7 @@ function display_information() {
 				reload_panel(panel_id, false, true);
 			});
 		}
+		Pace.stop();
 	}
 
 	// detail to the new window
