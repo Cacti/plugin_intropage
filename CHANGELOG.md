@@ -4,6 +4,7 @@
 
 * Swapping out c3 for billboard
 * Attempt to cleanup more memory leaks
+* Properly keep panels that have plugin requirements from being selectable
 
 --- 3.0.3 ---
 

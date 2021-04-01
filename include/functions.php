@@ -416,6 +416,23 @@ function is_panel_enabled($panel_id) {
 		return false;
 	}
 
+	if ($panels[$panel_id]['requires'] !== false) {
+		$plugins = explode(',', $panels[$panel_id]['requires']);
+		$good    = true;
+
+		foreach($plugins as $plugin) {
+			$plugin = trim('plugin');
+
+			if (!api_plugin_is_enabled($plugin)) {
+				$good = false;
+			}
+		}
+
+		if (!$good) {
+			return false;
+		}
+	}
+
 	return true;
 }
 
