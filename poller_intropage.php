@@ -163,7 +163,7 @@ function intropage_gather_stats() {
    	    	$start = microtime(true);
 
 			// Get trends next
-			if (isset($panel['trends_func']) && $panel['trends_func'] != '') {
+			if (isset($panel['trends_func']) && $panel['trends_func'] != '' && is_panel_enabled($panel['panel_id'])) {
 				$function = $panel['trends_func'];
 
 				if (function_exists($function)) {
@@ -213,7 +213,7 @@ function intropage_gather_stats() {
 		}
 
 		// Get details first
-		if (isset($panel['update_func']) && $panel['update_func'] != '') {
+		if (isset($panel['update_func']) && $panel['update_func'] != '' && is_panel_enabled($upanel['panel_id'])) {
 			$qpanel = get_panel_details($upanel['panel_id'], $upanel['user_id']);
 
 			$function = $panel['update_func'];
