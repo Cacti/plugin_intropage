@@ -413,6 +413,7 @@ function display_information() {
 	var intropage_drag = true;
 	var intropage_page = '';
 	var dashboard_id = <?php print $dashboard_id;?>;
+	var panels = {};
 
 	// display/hide detail
 	$(function () {
@@ -455,7 +456,9 @@ function display_information() {
 			var height     = $(this).closest('.panel_wrapper').height() - 34;
 			//console.log('Chart:'+chart+', Width:'+width+', Height:'+height);
 
-			eval(chart).resize({ width: width, height:height });
+			if (panels[chart] != undefined) {
+				panels[chart].resize({ width: width, height:height });
+			}
 		});
 	}
 
@@ -671,7 +674,9 @@ function display_information() {
 		.done(function(data) {
 			if ($('#panel_'+panel_id).find('.chart_wrapper').length) {
 				chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
-				eval(chart_id).destroy();
+				if (panels[chart_id] != undefined) {
+					panels[chart_id].destroy();
+				}
 			}
 
 			$('#panel_'+panel_id).find('.panel_data').empty().html(data);
@@ -679,8 +684,6 @@ function display_information() {
 			if (!refresh) {
 				$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
 			}
-
-			clearAllTimeouts();
 
 			resizeCharts();
 		})
