@@ -60,7 +60,7 @@ function register_thold() {
 			'width'        => 'quarter-panel',
 			'priority'     => 18,
 			'alarm'        => 'green',
-			'requires'     => false,
+			'requires'     => 'thold',
 			'update_func'  => 'graph_thold',
 			'details_func' => 'graph_thold_detail',
 			'trends_func'  => false
