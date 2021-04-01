@@ -1021,8 +1021,7 @@ function intropage_prepare_graph($dispdata) {
 
 		$content .= '<div class="chart_wrapper center" id="line_' . $xid. '"></div>';
 		$content .= '<script type="text/javascript">';
-		$content .= 'if (line_' . $xid . ' != undefined) { delete line_' . $xid . '; }';
-		$content .= 'var line_' . $xid . ' = c3.generate(' . $chart_data . ')';
+		$content .= 'var line_' . $xid . ' = bb.generate(' . $chart_data . ')';
 		$content .= '</script>';
 	} // line graph end
 
@@ -1030,11 +1029,8 @@ function intropage_prepare_graph($dispdata) {
 		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
 
 		$content .= "<div class='chart_wrapper center' id=\"pie_$xid\"></div>";
-		$content .=  "<script type='text/javascript'>";
-		$content .= 'if (pie_' . $xid . ' != undefined) { delete pie_' . $xid . '; }';
-
-		$content .= "var pie_$xid = c3.generate({";
-
+		$content .= '<script type="text/javascript">';
+		$content .= "var pie_$xid = bb.generate({";
 		$content .= " bindto: \"#pie_$xid\",";
 
 		$content .= " size: {";

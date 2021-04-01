@@ -180,8 +180,8 @@ function cpuload($panel, $user_id, $timespan = 0) {
 
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
-				$graph['line']['data1'][]  = $row['average'];
-				$graph['line']['data2'][]  = $row['max'];
+				$graph['line']['data1'][]  = round($row['average'], 2);
+				$graph['line']['data2'][]  = round($row['max'], 2);
 			}
 
 			$panel['data'] = intropage_prepare_graph($graph);

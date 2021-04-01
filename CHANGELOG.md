@@ -1,5 +1,10 @@
 # Changelog
 
+--- 4.0.0 ---
+
+* Swapping out c3 for billboard
+* Attempt to cleanup more memory leaks
+
 --- 3.0.3 ---
 
 * Add user selectable timespan for timeseries charts

@@ -15,19 +15,19 @@
 	padding-right: 2px;
 }
 
-.c3-axis-x text, .c3-axis-y text, .c3-axis-y2 text, .c3-legend-item text {
+.bb-axis-x text, .bb-axis-y text, .bb-axis-y2 text, .bb-legend-item text {
 	fill: #7e818f;
 }
 
-.c3 .c3-axis path, .c3 .c3-axis line {
+.bb .bb-axis path, .bb .bb-axis line {
 	stroke: #7e818f;
 }
 
-.c3-chart-arc text {
+.bb-chart-arc text {
 	fill: white;
 }
 
-.c3-chart-arc path {
+.bb-chart-arc path {
 	stroke: #7e818f;
 }
 

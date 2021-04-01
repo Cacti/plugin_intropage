@@ -633,9 +633,9 @@ function display_information() {
 		});
 
 		// reload single panel function
-		$('.reload_panel_now').off('click').on('click', function() {
+		$('.reload_panel_now').off('click').on('click', function(event) {
 			if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
-				e.stopPropagation();
+				event.stopPropagation();
 				return false;
 			}
 
@@ -680,6 +680,8 @@ function display_information() {
 				$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
 			}
 
+			clearAllTimeouts();
+
 			resizeCharts();
 		})
 		.fail(function(data) {
@@ -699,6 +701,7 @@ function display_information() {
 				reload_panel(panel_id, false, true);
 			});
 		}
+
 		Pace.stop();
 	}
 
