@@ -5,7 +5,8 @@
 * Swapping out c3 for billboard
 * Attempt to cleanup more memory leaks
 * Properly keep panels that have plugin requirements from being selectable
-* Don't run the polling functions for the panel if the required plugins are not enabled
+* Dont run the polling functions for the panel if the required plugins are not enabled
+* Trend function in panellib analyze requires thold but was not indicated
 
 --- 3.0.3 ---
 

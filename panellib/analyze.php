@@ -92,7 +92,7 @@ function register_analyze() {
 			'width'        => 'quarter-panel',
 			'priority'     => 75,
 			'alarm'        => 'green',
-			'requires'     => false,
+			'requires'     => 'thold',
 			'update_func'  => 'trend',
 			'details_func' => false,
 			'trends_func'  => 'trend_collect'
