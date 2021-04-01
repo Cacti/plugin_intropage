@@ -421,7 +421,7 @@ function is_panel_enabled($panel_id) {
 		$good    = true;
 
 		foreach($plugins as $plugin) {
-			$plugin = trim('plugin');
+			$plugin = trim($plugin);
 
 			if (!api_plugin_is_enabled($plugin)) {
 				$good = false;
