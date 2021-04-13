@@ -409,6 +409,7 @@ function display_information() {
 	<script type='text/javascript'>
 
 	var refresh;
+	var pollerRefresh;
 	var intropage_autorefresh = <?php print $autorefresh;?>;
 	var intropage_drag = true;
 	var intropage_page = '';
@@ -416,7 +417,7 @@ function display_information() {
 	var panels = {};
 
 	// display/hide detail
-	$(function () {
+	$(function() {
 		$('.flexchild').css('background-color', $('body').css('background-color'));
 
 		$('#intropage_addpanel').unbind().change(function() {
@@ -442,9 +443,6 @@ function display_information() {
 		}
 
 		initPage();
-		reload_all();
-		setupHidden();
-		resizeCharts();
 	});
 
 	function resizeCharts() {
@@ -507,26 +505,20 @@ function display_information() {
 		}
 	}
 
-	function initPage() {
-		// autorefresh
+	function setPageRefresh() {
+		clearAllTimeouts();
+
 		if (intropage_autorefresh > 0) {
-			if (refresh !== null) {
-				clearTimeout(refresh);
-			}
-
 			refresh = setInterval(reload_all, intropage_autorefresh*1000);
-		}
-
-		// automatic autorefresh after poller end
-		if (intropage_autorefresh == -1) {
-			if (refresh !== null) {
-				clearTimeout(refresh);
-			}
-			setTimeout(function() {
-				// fix first double load
+		} else if (intropage_autorefresh == -1) {
+			pollerRefresh = setTimeout(function() {
 				refresh = setInterval(testPoller, 10000);
-			},30000);
+			}, 30000);
 		}
+	}
+
+	function initPage() {
+		setPageRefresh();
 
 		$('.article').hide();
 
@@ -649,6 +641,10 @@ function display_information() {
 			reload_panel(panel_id, true, false);
 			Pace.stop();
 		});
+
+		reload_all();
+		setupHidden();
+		resizeCharts();
 	}
 
 	function testPoller() {
@@ -660,6 +656,8 @@ function display_information() {
 					reload_panel(panel_id, false, false);
 					Pace.stop();
 			    });
+
+				setPageRefresh();
 			}
 		});
 	}
@@ -706,6 +704,7 @@ function display_information() {
 		}
 
 		Pace.stop();
+		setPageRefresh();
 	}
 
 	// detail to the new window
