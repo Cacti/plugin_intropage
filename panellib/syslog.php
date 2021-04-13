@@ -120,7 +120,7 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 			WHERE id = ?',
 			array($panel['id']));
 	} else {
-		$refresh = $panel['refresh_interval'];
+		$refresh = $panel['refresh'];
 	}
 
 	if (api_plugin_is_enabled('syslog')) {

@@ -158,7 +158,7 @@ function cpuload($panel, $user_id, $timespan = 0) {
 			WHERE id = ?',
 			array($panel['id']));
 	} else {
-		$refresh = $panel['refresh_interval'];
+		$refresh = $panel['refresh'];
 	}
 
 	if (stristr(PHP_OS, 'win')) {
