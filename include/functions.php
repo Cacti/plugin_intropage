@@ -1275,6 +1275,10 @@ function intropage_graph_button($data) {
 	if (is_panel_allowed('favourite_graph')) {
 		$local_graph_id = $data[1]['local_graph_id'];
 
+		if (!isset($_SESSION['sess_current_timespan'])) {
+			$_SESSION['sess_current_timespan'] = read_user_setting('default_timespan');
+		}
+
 		if ($_SESSION['sess_current_timespan'] == 0)	{	// zoom or custom timespan
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Cannot add to Dashboard. Custom timespan.', 'intropage') . '"></i>';
 		} else {
@@ -1515,5 +1519,64 @@ function intropage_configure_panel() {
 	form_end();
 
 	print '</div>';
+}
+
+
+function human_readable ($bytes, $decimal = false) {
+
+	$minus = false;
+
+	if ($bytes < 0) {
+		$bytes *= -1;
+		$minus = true;
+	}
+
+	if ($bytes > 1000) {
+		$BYTE_UNITS = array(" ", "K", "M", "G", "T", "P", "E", "Z", "Y");
+		$BYTE_PRECISION = array(0, 0, 1, 2, 2, 3, 3, 4, 4);
+
+		if ($decimal) {
+			$BYTE_NEXT = 1000;
+		} else {
+			$BYTE_NEXT = 1024;
+		}
+
+		for ($i = 0; ($bytes / $BYTE_NEXT) >= 0.9 && $i < count($BYTE_UNITS); $i++) {
+			$bytes /= $BYTE_NEXT;
+		}
+		if ($minus) {
+			$bytes *= -1;
+		}
+		return round($bytes, $BYTE_PRECISION[$i]) . $BYTE_UNITS[$i];
+	}
+	elseif ($bytes == 0) {
+		return (0);
+	}
+	elseif ($bytes < 1) {
+		$BYTE_UNITS = array(" ","m", "µ", "n", "p", "f", "a", "Z", "y");
+		$BYTE_PRECISION = array(2, 2, 2, 4, 4, 4, 5, 5, 5);
+
+		if ($decimal) {
+			$BYTE_NEXT = 1000;
+		} else {
+			$BYTE_NEXT = 1024;
+		}
+		for ($i = 0; ($bytes * $BYTE_NEXT) <= 1  && $i < count($BYTE_UNITS) ; $i++) {
+			$bytes *= $BYTE_NEXT;
+		}
+
+		if ($minus) {
+			$bytes *= -1;
+		}
+
+		return round($bytes, $BYTE_PRECISION[$i]) . $BYTE_UNITS[$i];
+	}
+	else    {
+		if ($minus) {
+			$bytes *= -1;
+		}
+
+		return (round($bytes,2));
+	}
 }
 

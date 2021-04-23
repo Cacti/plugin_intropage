@@ -22,6 +22,7 @@
 * Make panel definitions trend interval aware
 * Convert many details pages to table rendering
 * Block page refresh when a dialog is active
+* Add bussiest panels
 
 --- 3.0.2 ---
 * Reduce the width of some titles to conserve space
