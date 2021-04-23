@@ -1275,6 +1275,10 @@ function intropage_graph_button($data) {
 	if (is_panel_allowed('favourite_graph')) {
 		$local_graph_id = $data[1]['local_graph_id'];
 
+		if (!isset($_SESSION['sess_current_timespan'])) {
+			$_SESSION['sess_current_timespan'] = read_user_setting('default_timespan');
+		}
+
 		if ($_SESSION['sess_current_timespan'] == 0)	{	// zoom or custom timespan
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Cannot add to Dashboard. Custom timespan.', 'intropage') . '"></i>';
 		} else {
