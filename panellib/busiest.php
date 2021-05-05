@@ -142,7 +142,7 @@ function busiest_cpu($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
@@ -187,7 +187,7 @@ function busiest_cpu($panel, $user_id) {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -230,11 +230,11 @@ function busiest_load($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-		$panel['data'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -274,7 +274,7 @@ function busiest_load($panel, $user_id) {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -317,7 +317,7 @@ function busiest_hdd($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
@@ -371,7 +371,7 @@ function busiest_hdd($panel, $user_id) {
 
 		$avg = $avg/count($xavg);
 
-		if (cacti_sizeof($result))	{
+		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">'  . $ds['name'] . '</th>' .
@@ -381,7 +381,7 @@ function busiest_hdd($panel, $user_id) {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -430,7 +430,7 @@ function busiest_uptime($panel, $user_id) {
 
 		$columns = " id, description, snmp_sysUpTimeInstance";
 		$query = ' FROM host 
-			WHERE id IN (' . $allowed_devices . ')  
+			WHERE id IN (' . $allowed_devices . ')
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 5';
 
@@ -447,7 +447,7 @@ function busiest_uptime($panel, $user_id) {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
@@ -483,7 +483,7 @@ function busiest_traffic($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
@@ -543,7 +543,7 @@ function busiest_traffic($panel, $user_id) {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -586,7 +586,7 @@ function busiest_interface_error($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
@@ -628,7 +628,7 @@ function busiest_interface_error($panel, $user_id) {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -675,7 +675,7 @@ function busiest_cpu_detail() {
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
@@ -719,7 +719,7 @@ function busiest_cpu_detail() {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -767,7 +767,7 @@ function busiest_load_detail() {
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
@@ -811,7 +811,7 @@ function busiest_load_detail() {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -860,7 +860,7 @@ function busiest_hdd_detail() {
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
-	if (read_config_option('dsstats_enable') != 'on')       {
+	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
@@ -926,7 +926,7 @@ function busiest_hdd_detail() {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -998,7 +998,7 @@ function busiest_uptime_detail() {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
@@ -1085,7 +1085,7 @@ function busiest_traffic_detail() {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
@@ -1162,7 +1162,7 @@ function busiest_interface_error_detail() {
 
 			$i = 0;
 
-			foreach ($result as $row)       {
+			foreach ($result as $row) {
 
 				if ($console_access) {
 					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
