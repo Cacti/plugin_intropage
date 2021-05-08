@@ -557,13 +557,13 @@ function busiest_traffic($panel, $user_id) {
 					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($row['name'],0,50)) . '</td>';
 				}
 
-				$panel['data'] .= "<td class='right'>" . human_readable($row['xvalue']) . 'B</td>';
-				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak']) . 'B</td></tr>';
+				$panel['data'] .= "<td class='right'>" . human_readable($row['xvalue'], false) . 'B</td>';
+				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak'], false) . 'B</td></tr>';
 
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg) . 'B</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg, false) . 'B</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -1099,13 +1099,13 @@ function busiest_traffic_detail() {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . human_readable($row['xvalue']) . 'B</td>';
-				$panel['detail'] .= "<td class='right'>" . human_readable($row['xpeak']) . 'B</td></tr>';
+				$panel['detail'] .= "<td class='right'>" . human_readable($row['xvalue'], false) . 'B</td>';
+				$panel['detail'] .= "<td class='right'>" . human_readable($row['xpeak'], false) . 'B</td></tr>';
 
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg) . 'B</td></tr>';
+			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg, false) . 'B</td></tr>';
 			$panel['detail'] .= '</table>';
 
 		} else {
