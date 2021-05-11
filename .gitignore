@@ -1,0 +1,3 @@
+.git*
+
+locales/po/*.mo
