@@ -1534,3 +1534,23 @@ function intropage_configure_panel() {
 	print '</div>';
 }
 
+function human_readable ($bytes, $decimal = true) {
+
+	if ($decimal) {
+		$factor = 1000;
+	} else {
+		$factor = 1024;
+	}
+
+	if ($bytes === 0) {
+		return 0;
+	} elseif ($bytes  < 1) {
+		$sizes = array(0 => '', -1 => 'm', -2 => 'µ', -3 => 'n', -4 => 'p');
+	} else {
+		$sizes = array(0 => '', 1 => 'K', 2 => 'M', 3 => 'G', 4 => 'T', 5=> 'P');
+	}
+
+	$i = floor(log($bytes) / log($factor));
+	return round($bytes / pow($factor, $i), 2).' '.$sizes[$i];
+}
+
