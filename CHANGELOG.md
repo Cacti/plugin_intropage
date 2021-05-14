@@ -7,7 +7,8 @@
 * Properly keep panels that have plugin requirements from being selectable
 * Dont run the polling functions for the panel if the required plugins are not enabled
 * Trend function in panellib analyze requires thold but was not indicated
-* Feature #161 - Add busiest panels (DS Stats)
+* feature#161: Add busiest panels (DS Stats)
+* issue#162: When user is not logged in, wrong panel data key can cause errors to appear
 
 --- 3.0.3 ---
 
