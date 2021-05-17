@@ -2,13 +2,15 @@
 
 --- 4.0.0 ---
 
-* Swapping out c3 for billboard
+* issue#143: Swapping out c3 for billboard
 * Attempt to cleanup more memory leaks
 * Properly keep panels that have plugin requirements from being selectable
 * Dont run the polling functions for the panel if the required plugins are not enabled
 * Trend function in panellib analyze requires thold but was not indicated
 * feature#161: Add busiest panels (DS Stats)
+* issue#159: Fix missing fav_graph permission
 * issue#162: When user is not logged in, wrong panel data key can cause errors to appear
+
 
 --- 3.0.3 ---
 
