@@ -365,11 +365,13 @@ function busiest_hdd($panel, $user_id) {
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
 		$avg = 0;
-		foreach ($xavg as $row) {
-			$avg+=$row['xvalue'];
-		}
 
-		$avg = $avg/count($xavg);
+		if ($xavg) {
+			foreach ($xavg as $row) {
+				$avg+=$row['xvalue'];
+			}
+			$avg = $avg/count($xavg);
+		}
 
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable">' .
@@ -524,13 +526,14 @@ function busiest_traffic($panel, $user_id) {
 			AND rrd_name=\'traffic_out\' ';
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-
 		$avg = 0;
-		foreach ($xavg as $row) {
-			$avg+=$row['xvalue'];
-		}
 
-		$avg = $avg/count($xavg);
+		if ($xavg) {
+			foreach ($xavg as $row) {
+				$avg+=$row['xvalue'];
+			}
+			$avg = $avg/count($xavg);
+		}
 
 		if (cacti_sizeof($result)) {
 
@@ -909,11 +912,12 @@ function busiest_hdd_detail() {
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
 		$avg = 0;
 
-		foreach ($xavg as $row) {
-			$avg+=$row['xvalue'];
+		if ($xavg) {
+			foreach ($xavg as $row) {
+				$avg+=$row['xvalue'];
+			}
+			$avg = $avg/count($xavg);
 		}
-
-		$avg = $avg/count($xavg);
 
 		if (cacti_sizeof($result)) {
 
@@ -1066,13 +1070,14 @@ function busiest_traffic_detail() {
 			AND rrd_name=\'traffic_out\' ';
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-
 		$avg = 0;
-		foreach ($xavg as $row) {
-			$avg+=$row['xvalue'];
-		}
 
-		$avg = $avg/count($xavg);
+		if ($xavg) {
+			foreach ($xavg as $row) {
+				$avg+=$row['xvalue'];
+			}
+			$avg = $avg/count($xavg);
+		}
 
 		if (cacti_sizeof($result)) {
 
