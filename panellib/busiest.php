@@ -526,7 +526,6 @@ function busiest_traffic($panel, $user_id) {
 			AND rrd_name=\'traffic_out\' ';
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-
 		$avg = 0;
 
 		if ($xavg) {
@@ -1071,7 +1070,6 @@ function busiest_traffic_detail() {
 			AND rrd_name=\'traffic_out\' ';
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-
 		$avg = 0;
 
 		if ($xavg) {
