@@ -11,7 +11,7 @@
 * issue#159: Fix missing fav_graph permission
 * issue#162: When user is not logged in, wrong panel data key can cause errors to appear
 * issue#165: Fix PHP warning division by zero
-
+* feature#164: Line graph add zoom, pie graph add tooltip percentage 
 
 --- 3.0.3 ---
 
