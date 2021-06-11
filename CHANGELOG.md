@@ -2,15 +2,17 @@
 
 --- 4.0.0 ---
 
-* issue#143: Swapping out c3 for billboard
 * Attempt to cleanup more memory leaks
 * Properly keep panels that have plugin requirements from being selectable
 * Dont run the polling functions for the panel if the required plugins are not enabled
 * Trend function in panellib analyze requires thold but was not indicated
-* feature#161: Add busiest panels (DS Stats)
+
+* issue#143: Swapping out c3 for billboard
+* issue#157: No panel can be added after install Intropage
 * issue#159: Fix missing fav_graph permission
 * issue#162: When user is not logged in, wrong panel data key can cause errors to appear
 * issue#165: Fix PHP warning division by zero
+* feature#161: Add busiest panels (DS Stats)
 * feature#164: Line graph add zoom, pie graph add tooltip percentage 
 
 --- 3.0.3 ---

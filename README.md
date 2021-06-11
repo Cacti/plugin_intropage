@@ -64,23 +64,6 @@ in the file and how they gather their data.
 If you find a problem, let me know via github or
 https://forums.cacti.net/viewtopic.php?f=5&t=51920
 
-## Changelog
-
--- develop --
-
-* More minor fixups
-
-* Minor update for 1.2.17 compatibility
-
-* Merge pull request #129 from xmacan/bugfixes
-
-* Minor tweaks for Midwinter theme
-
-* issue#134: Impossible to remove Maintenance widget
-
-* issue#132: get_login_opts missing causing plugin to crash
-
-
 ## Thanks
 
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
