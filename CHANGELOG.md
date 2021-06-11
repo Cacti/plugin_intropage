@@ -12,6 +12,7 @@
 * issue#159: Fix missing fav_graph permission
 * issue#162: When user is not logged in, wrong panel data key can cause errors to appear
 * issue#165: Fix PHP warning division by zero
+* issue#166: Division by zero error
 * issue#167: Duplicate attempts to insert user panel settings when no panels allocated
 * feature#161: Add busiest panels (DS Stats)
 * feature#164: Line graph add zoom, pie graph add tooltip percentage 

@@ -1551,6 +1551,7 @@ function human_readable ($bytes, $decimal = true) {
 	}
 
 	$i = floor(log($bytes) / log($factor));
-	return round($bytes / pow($factor, $i), 2).' '.$sizes[$i];
+	$d = pow($factor, $i);
+	return round(empty($d)?0:($bytes / pow($factor, $i)), 2).' '.$sizes[$i];
 }
 
