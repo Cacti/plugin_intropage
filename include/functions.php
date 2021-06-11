@@ -469,13 +469,12 @@ function get_allowed_panels($user_id = 0) {
 		$user_id = $_SESSION['sess_user_id'];
 	}
 
-	return json_decode(
-		db_fetch_cell_prepared('SELECT permissions
+	$permissions =	db_fetch_cell_prepared('SELECT permissions
 			FROM plugin_intropage_user_auth
 			WHERE user_id = ?',
-			array($user_id)),
-		true
-	);
+			array($user_id));
+
+	return ($permission === false) ? false : json_decode($permissions,true);
 }
 
 function intropage_reload_panel() {

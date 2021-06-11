@@ -48,11 +48,13 @@ function display_information() {
 	// default actual user permissions
 	$user_panels = cacti_sizeof(get_allowed_panels());
 
-	if ($user_panels == 0) {
+	if ($user_panels === false) {
 		db_execute_prepared('INSERT INTO plugin_intropage_user_auth
 			(user_id)
 			VALUES (?)',
 			array($_SESSION['sess_user_id']));
+
+		$user_panels = 0;
 	}
 
 	$selectedTheme = get_selected_theme();
