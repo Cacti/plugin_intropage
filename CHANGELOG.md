@@ -14,6 +14,7 @@
 * issue#165: Fix PHP warning division by zero
 * issue#166: Division by zero error
 * issue#167: Duplicate attempts to insert user panel settings when no panels allocated
+* issue#168: Fix typo in variable name
 * feature#161: Add busiest panels (DS Stats)
 * feature#164: Line graph add zoom, pie graph add tooltip percentage 
 
