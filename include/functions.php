@@ -474,7 +474,7 @@ function get_allowed_panels($user_id = 0) {
 			WHERE user_id = ?',
 			array($user_id));
 
-	return ($permission === false) ? false : json_decode($permissions,true);
+	return ($permissions === false) ? false : json_decode($permissions,true);
 }
 
 function intropage_reload_panel() {
