@@ -915,7 +915,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 
 	if (isset($fav_graph_id)) {
 		$result = array(
-			'name' => __('Favourite graph', 'intropage'),
+			'name' => '', // we don't need name here
 			'alarm' => 'grey',
 			'data' => '',
 		);
