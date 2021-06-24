@@ -135,24 +135,24 @@ function top5_ping($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['cur_time'] > $red) {
 					$panel['alarm'] = 'red';
-					$class = 'deviceAlertBg';
+					$icon = 'fa-exclamation-triangle';
 				} elseif ($host['cur_time'] > $yellow) {
 					if ($panel['alarm'] == 'green') {
 						$panel['alarm'] = 'yellow';
-						$class = 'deviceWarningBg';
 					}
+					$icon = 'fa-thermometer-half';
 				} else {
-					$class = '';
+					$icon = false;
 				}
 
 				if ($console_access) {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape($host['description']) . '</a></td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'],0,37)) . '</a></td>';
 				} else {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($host['description']) . '</td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'],0,37)) . '</td>';
 				}
 
 				$row .= "<td class='right'>" . round($host['avg_time'], 2) . 'ms</td>';
-				$row .= "<td class='right $class'>" . round($host['cur_time'], 2) . ' ms</td></tr>';
+				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['cur_time'], 2) . ' ms</td></tr>';
 
 				$panel['data'] .= $row;
 
@@ -202,21 +202,23 @@ function top5_availability($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['availability'] < $red) {
 					$panel['alarm'] = 'red';
-					$class = 'deviceAlertBg';
-				} elseif ($panel['alarm'] == 'green' && $host['availability'] < $yellow) {
-					$panel['alarm'] = 'yellow';
-					$class = 'deviceWarningBg';
+					$icon = 'fa-exclamation-triangle';
+				} elseif ($host['availability'] < $yellow) {
+					if ($panel['alarm'] == 'green') {
+						$panel['alarm'] = 'yellow';
+					}
+					$icon = 'fa-thermometer-half';
 				} else {
-					$class = '';
+					$icon = false;
 				}
 
 				if ($console_access) {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 40)) . '</a></td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 37)) . '</a></td>';
 				} else {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 40)) . '</td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 37)) . '</td>';
 				}
 
-				$row .= "<td class='right $class'>" . round($host['availability'],2) . ' %</td></tr>';
+				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['availability'],2) . ' %</td></tr>';
 
 				$panel['data'] .= $row;
 
@@ -266,21 +268,23 @@ function top5_polltime($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['polling_time'] > $red) {
 					$panel['alarm'] = 'red';
-					$class = 'deviceAlertBg';
-				} elseif ($panel['alarm'] == 'green' && $host['polling_time'] > $yellow) {
-					$panel['alarm'] = 'yellow';
-					$class = 'deviceWarningBg';
+					$icon = 'fa-exclamation-triangle';
+				} elseif ($host['polling_time'] > $yellow) {
+					if ($panel['alarm'] == 'green') {
+						$panel['alarm'] = 'yellow';
+					}
+					$icon = 'fa-thermometer-half';
 				} else {
-					$class = '';
+					$icon = false;
 				}
 
 				if ($console_access) {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 40)) . '</a></td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 37)) . '</a></td>';
 				} else {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 40)) . '</td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 37)) . '</td>';
 				}
 
-				$row .= "<td class='right $class'>" . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
+				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
 
 				$panel['data'] .= $row;
 
@@ -333,23 +337,25 @@ function top5_pollratio($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['ratio'] > $red) {
 					$panel['alarm'] = 'red';
-					$class = 'deviceAlertBg';
-				} elseif ($panel['alarm'] == 'green' && $host['ratio'] > $yellow) {
-					$panel['alarm'] = 'yellow';
-					$class = 'deviceWarningBg';
+					$icon = 'fa-exclamation-triangle';
+				} elseif ( $host['ratio'] > $yellow) {
+					if ($panel['alarm'] == 'green') {
+						$panel['alarm'] = 'yellow';
+					}
+					$icon = 'fa-thermometer-half';
 				} else {
-					$class = '';
+					$icon = false;
 				}
 
 				if ($console_access) {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 40)) . '</a></td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $host['id']) . '">' . html_escape(substr($host['description'], 0, 37)) . '</a></td>';
 				} else {
-					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 40)) . '</td>';
+					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 37)) . '</td>';
 				}
 
 				$row .= "<td class='right'>" . number_format_i18n($host['failed_polls'], 0) . '</td>';
 				$row .= "<td class='right'>" . number_format_i18n($host['total_polls'], 0)  . '</td>';
-				$row .= "<td class='right $class'>" . round($host['ratio'] * 100, 3)               . ' %</td></tr>';
+				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['ratio'] * 100, 3)               . ' %</td></tr>';
 
 				$panel['data'] .= $row;
 
@@ -405,12 +411,14 @@ function top5_ping_detail() {
 		foreach ($sql_worst_host as $host) {
 			if ($host['cur_time'] > $red) {
 				$panel['alarm'] = 'red';
-				$class = 'deviceAlertBg';
-			} elseif ($panel['alarm'] == 'green' && $host['cur_time'] > $yellow)     {
-				$panel['alarm'] = 'yellow';
-				$class = 'deviceWarningBg';
+				$icon = 'fa-exclamation-triangle';
+			} elseif ($host['cur_time'] > $yellow)     {
+				if ($panel['alarm'] == 'green') {
+					$panel['alarm'] = 'yellow';
+				}
+				$icon = 'fa-thermometer-half';
 			} else {
-				$class = '';
+				$icon = false;
 			}
 
 			if ($console_access) {
@@ -420,7 +428,7 @@ function top5_ping_detail() {
 			}
 
 			$row .= '<td class="right">' . round($host['avg_time'], 2) . ' ms</td>';
-			$row .= "<td class='right $class'>" . round($host['cur_time'], 2) . ' ms</td></tr>';
+			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['cur_time'], 2) . ' ms</td></tr>';
 
 			$panel['detail'] .= $row;
 
@@ -464,13 +472,15 @@ function top5_availability_detail() {
 		$i = 0;
 		foreach ($sql_worst_host as $host) {
 			if ($host['availability'] < $red) {
-   				$panel['alarm'] = 'red';
-				$class = 'deviceAlertBg';
-			} elseif ($panel['alarm'] == 'green' && $host['availability'] < $yellow) {
-				$panel['alarm'] = 'yellow';
-				$class = 'deviceWarningBg';
+				$panel['alarm'] = 'red';
+				$icon = 'fa-exclamation-triangle';
+			} elseif ($host['availability'] < $yellow) {
+				if ($panel['alarm'] == 'green') {
+					$panel['alarm'] = 'yellow';
+				}
+				$icon = 'fa-thermometer-half';
 			} else {
-				$class = '';
+				$icon = false;
 			}
 
 			if ($console_access) {
@@ -479,7 +489,7 @@ function top5_availability_detail() {
 				$row = '<tr class="' . ($i % 2 == 0 ? 'odd':'even') . '"><td class="left">' . html_escape($host['description']) . '</td>';
 			}
 
-			$row .= "<td class='right $class'>" . round($host['availability'], 2) . ' %</td></tr>';
+			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['availability'], 2) . ' %</td></tr>';
 
 			$panel['detail'] .= $row;
 
@@ -531,12 +541,14 @@ function top5_polltime_detail() {
 		foreach ($sql_worst_host as $host) {
 			if ($host['polling_time'] > $red) {
 				$panel['alarm'] = 'red';
-				$class = 'deviceAlertBg';
-			} elseif ($panel['alarm'] == 'green' && $host['polling_time'] > $yellow) {
-				$panel['alarm'] = 'yellow';
-				$class = 'deviceWarningBg';
+				$icon = 'fa-exclamation-triangle';
+			} elseif ($host['polling_time'] > $yellow) {
+				if ($panel['alarm'] == 'green') {
+					$panel['alarm'] = 'yellow';
+				}
+				$icon = 'fa-thermometer-half';
 			} else {
-				$class = '';
+				$icon = false;
 			}
 
 			if ($console_access) {
@@ -545,7 +557,7 @@ function top5_polltime_detail() {
 				$row = '<tr class="' . ($i % 2 == 0 ? 'odd':'even') . '"><td class="left">' . html_escape($host['description']) . '</td>';
 			}
 
-			$row .= "<td class='right $class'>" . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
+			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
 
 			$panel['detail'] .= $row;
 
@@ -593,12 +605,14 @@ function top5_pollratio_detail() {
 		foreach ($sql_worst_host as $host) {
 			if ($host['ratio'] > $red) {
 				$panel['alarm'] = 'red';
-				$class = 'deviceAlertBg';
-			} elseif ($panel['alarm'] == 'green' && $host['ratio'] > $yellow)        {
-				$panel['alarm'] = 'yellow';
-				$class = 'deviceWarningBg';
+				$icon = 'fa-exclamation-triangle';
+			} elseif ($host['ratio'] > $yellow)        {
+				if ($panel['alarm'] == 'green') {
+					$panel['alarm'] = 'yellow';
+				}
+				$icon = 'fa-thermometer-half';
 			} else {
-				$class = '';
+				$icon = false;
 			}
 
 			if ($console_access) {
@@ -609,7 +623,7 @@ function top5_pollratio_detail() {
 
 			$row .= "<td class='right'>" . number_format_i18n($host['failed_polls'], 0) . '</td>';
 			$row .= "<td class='right'>" . number_format_i18n($host['total_polls'], 0)  . '</td>';
-			$row .= "<td class='right $class'>" . round($host['ratio']* 100, 3)                . ' %</td></tr>';
+			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['ratio']* 100, 3)                . ' %</td></tr>';
 
 			$panel['detail'] .= $row;
 
