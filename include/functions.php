@@ -658,7 +658,7 @@ function get_panel_details($panel_id, $user_id = 0) {
 	// favourite graph exception
 	if (!cacti_sizeof($definition)) {
 		$definition = array ();
-		
+
 		$definition['name']	= '';
 		$definition['refresh']	= 300;
 		$definition['trefresh']	= false;
