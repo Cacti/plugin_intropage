@@ -16,6 +16,7 @@
 * issue#167: Duplicate attempts to insert user panel settings when no panels allocated
 * issue#168: Fix typo in variable name
 * issue#169: Shortening the panel name Favourite graph
+* issue#171: Better TOP/Bottom5 panel styles
 * issue#172: Fix PHP notice when favourite graph exists and timespan changes
 * feature#161: Add busiest panels (DS Stats)
 * feature#164: Line graph add zoom, pie graph add tooltip percentage 
