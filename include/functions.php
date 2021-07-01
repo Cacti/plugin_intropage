@@ -657,12 +657,14 @@ function get_panel_details($panel_id, $user_id = 0) {
 
 	// favourite graph exception
 	if (!cacti_sizeof($definition)) {
-		$definition['name'] = '';
-		$definition['refresh'] = 300;
-		$definition['trefresh'] = false;
-		$definition['level'] = $_SESSION['sess_user_id'];
-		$definition['priority'] = 99;
-		$definition['alarm'] = 'grey';
+		$definition = array ();
+		
+		$definition['name']	= '';
+		$definition['refresh']	= 300;
+		$definition['trefresh']	= false;
+		$definition['level']	= $_SESSION['sess_user_id'];
+		$definition['priority']	= 99;
+		$definition['alarm']	= 'grey';
 	}
 
 	if (cacti_sizeof($panel)) {
