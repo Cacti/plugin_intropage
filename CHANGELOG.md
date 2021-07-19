@@ -20,6 +20,8 @@
 * issue#172: Fix PHP notice when favourite graph exists and timespan changes
 * feature#161: Add busiest panels (DS Stats)
 * feature#164: Line graph add zoom, pie graph add tooltip percentage 
+* feature#174: New panel for DSstats (all/null)
+
 
 --- 3.0.3 ---
 
