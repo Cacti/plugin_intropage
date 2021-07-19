@@ -113,6 +113,22 @@ function register_analyze() {
 			'details_func' => 'analyse_tree_host_graph_detail',
 			'trends_func'  => false
 		),
+		'analyse_ds_stat' => array(
+			'name'         => __('Analyze DS stats', 'intropage'),
+			'description'  => __('Analyze data source stats', 'intropage'),
+			'class'        => 'analyze',
+			'level'        => PANEL_SYSTEM,
+			'refresh'      => 300,
+			'trefresh'     => true,
+			'force'        => true,
+			'width'        => 'quarter-panel',
+			'priority'     => 44,
+			'alarm'        => 'green',
+			'requires'     => false,
+			'update_func'  => 'analyse_ds_stats',
+			'details_func' => false,
+			'trends_func'  => 'ds_stats_trend'
+		),
 	);
 
 	return $panels;
@@ -873,6 +889,111 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 	save_panel_result($panel, $user_id);
 }
+
+//------------------------------------ analyse_ds_stats -----------------------------------------------------
+function analyse_ds_stats($panel, $user_id, $timespan = 0) {
+	global $config;
+
+	$panel['alarm'] = 'green';
+
+	$graph = array (
+		'line' => array(
+			'title'  => __('DS stats: ', 'intropage'),
+			'label1' => array(),
+			'data1'  => array(),
+			'label2' => array(),
+			'data2'  => array(),
+		),
+	);
+
+	if ($timespan == 0) {
+		if (isset($_SESSION['sess_user_id'])) {
+			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+		} else {
+			$timespan = $panel['refresh'];
+		}
+	}
+
+	if (!isset($panel['refresh_interval'])) {
+		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+			FROM plugin_intropage_panel_data
+			WHERE id = ?',
+			array($panel['id']));
+	} else {
+		$refresh = $panel['refresh'];
+	}
+
+	if (read_config_option('dsstats_enable') != 'on') {
+		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
+		$panel['alarm'] = 'grey';
+		unset($graph);
+	} else {
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'dsstats_all'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+		if (cacti_sizeof($rows)) {
+			$graph['line']['title1'] = __('DS all records ', 'intropage');
+			$graph['line']['unit1']['title'] = 'All [count]';
+
+			foreach ($rows as $row) {
+				$graph['line']['label1'][] = $row['date'];
+				$graph['line']['data1'][]  = $row['value'];
+			}
+
+			$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+				FROM plugin_intropage_trends
+				WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+				AND name = 'dsstats_null'
+				ORDER BY cur_timestamp ASC",
+				array($timespan));
+
+			if (cacti_sizeof($rows)) {
+				$graph['line']['title2'] = __('DS null records ', 'intropage');
+				$graph['line']['unit2']['title'] = 'Null [count]';
+
+				foreach ($rows as $row) {
+					$graph['line']['label2'][] = $row['date'];
+					$graph['line']['data2'][]  = $row['value'];
+				}
+			} else {
+				unset($graph['line']['label2']);
+				unset($graph['line']['data2']);
+				unset($graph['line']['title2']);
+				unset($graph['line']['unit2']);
+			}
+
+			$panel['data'] = intropage_prepare_graph($graph);
+		} else {
+			unset($graph);
+			$panel['data'] = __('Waiting for data', 'intropage');
+		}
+	}
+
+	save_panel_result($panel, $user_id);
+}
+
+
+function ds_stats_trend () {
+
+	$count = db_fetch_cell("SELECT count(*) FROM data_source_stats_hourly_last");
+
+	db_execute_prepared('REPLACE INTO plugin_intropage_trends
+		(name, value, user_id)
+		VALUES (?, ?, 0)',
+		array('dsstats_all', $count));
+
+	$count = db_fetch_cell("SELECT count(*) FROM data_source_stats_hourly_last WHERE value IS NULL");
+
+	db_execute_prepared('REPLACE INTO plugin_intropage_trends
+		(name, value, user_id)
+		VALUES (?, ?, 0)',
+		array('dsstats_null', $count));
+}
+
 
 //------------------------------------ analyse_log -----------------------------------------------------
 function analyse_log_detail() {
