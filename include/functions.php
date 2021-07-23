@@ -1522,61 +1522,24 @@ function intropage_configure_panel() {
 }
 
 
-function human_readable ($bytes, $decimal = false) {
+function human_readable ($bytes, $decimal = true) {
 
-	$minus = false;
-
-	if ($bytes < 0) {
-		$bytes *= -1;
-		$minus = true;
+	if ($decimal) {
+		$factor = 1000;
+	} else {
+		$factor = 1024;
 	}
 
-	if ($bytes > 1000) {
-		$BYTE_UNITS = array(" ", "K", "M", "G", "T", "P", "E", "Z", "Y");
-		$BYTE_PRECISION = array(0, 0, 1, 2, 2, 3, 3, 4, 4);
-
-		if ($decimal) {
-			$BYTE_NEXT = 1000;
-		} else {
-			$BYTE_NEXT = 1024;
-		}
-
-		for ($i = 0; ($bytes / $BYTE_NEXT) >= 0.9 && $i < count($BYTE_UNITS); $i++) {
-			$bytes /= $BYTE_NEXT;
-		}
-		if ($minus) {
-			$bytes *= -1;
-		}
-		return round($bytes, $BYTE_PRECISION[$i]) . $BYTE_UNITS[$i];
+	if ($bytes === 0) {
+		return 0;
+	} elseif ($bytes  < 1) {
+		$sizes = array(0 => '', -1 => 'm', -2 => 'µ', -3 => 'n', -4 => 'p');
+	} else {
+		$sizes = array(0 => '', 1 => 'K', 2 => 'M', 3 => 'G', 4 => 'T', 5=> 'P');
 	}
-	elseif ($bytes == 0) {
-		return (0);
-	}
-	elseif ($bytes < 1) {
-		$BYTE_UNITS = array(" ","m", "µ", "n", "p", "f", "a", "Z", "y");
-		$BYTE_PRECISION = array(2, 2, 2, 4, 4, 4, 5, 5, 5);
 
-		if ($decimal) {
-			$BYTE_NEXT = 1000;
-		} else {
-			$BYTE_NEXT = 1024;
-		}
-		for ($i = 0; ($bytes * $BYTE_NEXT) <= 1  && $i < count($BYTE_UNITS) ; $i++) {
-			$bytes *= $BYTE_NEXT;
-		}
-
-		if ($minus) {
-			$bytes *= -1;
-		}
-
-		return round($bytes, $BYTE_PRECISION[$i]) . $BYTE_UNITS[$i];
-	}
-	else    {
-		if ($minus) {
-			$bytes *= -1;
-		}
-
-		return (round($bytes,2));
-	}
+	$i = floor(log($bytes) / log($factor));
+	$d = pow($factor, $i);
+	return round(empty($d)?0:($bytes / pow($factor, $i)), 2).' '.$sizes[$i];
 }
 
