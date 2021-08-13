@@ -243,7 +243,7 @@ function intropage_gather_stats() {
 
 	db_execute("DELETE FROM plugin_intropage_trends
 		WHERE cur_timestamp < date_sub(now(), INTERVAL 2 DAY) AND
-		name IN ('poller','cpuload','failed_polls','host','thold','poller_output','syslog_incoming','syslog_total','syslog_alert')");
+		name IN ('poller','cpuload','failed_polls','host','thold','poller_output','syslog_incoming','syslog_total','syslog_alert','dsstats_all','dsstats_null')");
 
 	// automatic autorefresh
 	intropage_debug('Checking Triggered Thresholds');
