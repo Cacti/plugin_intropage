@@ -278,6 +278,8 @@ function intropage_upgrade_database() {
 		}
 
 		if (cacti_version_compare($oldv, '3.0.0', '<=')) {
+			include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+
 			if (db_column_exists('plugin_intropage_panel_definition', 'file')) {
 				db_execute('ALTER TABLE plugin_intropage_panel_definition
 					DROP COLUMN `file`,
