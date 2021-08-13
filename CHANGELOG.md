@@ -23,6 +23,7 @@
 * Convert many details pages to table rendering
 * Block page refresh when a dialog is active
 * Add bussiest panels
+* Fix division by 0 in bussiest panels
 
 --- 3.0.2 ---
 * Reduce the width of some titles to conserve space
