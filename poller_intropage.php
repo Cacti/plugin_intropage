@@ -141,7 +141,7 @@ function intropage_gather_stats() {
 
 	$panels = initialize_panel_library();
 
-	$upanels = db_fetch_assoc('SELECT pd.panel_id, ud.id, ud.user_id, level,
+	$upanels = db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
 		pd.refresh, ud.refresh_interval, pd.update_func
 		FROM plugin_intropage_panel_definition AS pd
 		LEFT JOIN plugin_intropage_panel_data AS ud
@@ -149,7 +149,7 @@ function intropage_gather_stats() {
 		WHERE UNIX_TIMESTAMP(last_update) < UNIX_TIMESTAMP() - refresh_interval
 		OR (last_update IS NULL AND level = 0)');
 
-	$tpanels = db_fetch_assoc('SELECT pd.panel_id, ud.id, ud.user_id, level,
+	$tpanels = db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
 		pd.refresh, ud.trend_interval, ud.refresh_interval, pd.trends_func
 		FROM plugin_intropage_panel_definition AS pd
 		LEFT JOIN plugin_intropage_panel_data AS ud
