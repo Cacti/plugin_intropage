@@ -1,7 +1,6 @@
 # Changelog
 
 --- 4.0.0 ---
-
 * Attempt to cleanup more memory leaks
 * Properly keep panels that have plugin requirements from being selectable
 * Dont run the polling functions for the panel if the required plugins are not enabled
@@ -18,12 +17,14 @@
 * issue#169: Shortening the panel name Favourite graph
 * issue#171: Better TOP/Bottom5 panel styles
 * issue#172: Fix PHP notice when favourite graph exists and timespan changes
+* issue#177: Fix PHP error during update from 3.x
+* issue#178: Fix missing panel name in log message
 * feature#161: Add busiest panels (DS Stats)
 * feature#164: Line graph add zoom, pie graph add tooltip percentage
+* feature#174: New panel for DSstats (all/null)
 * feature#182: Normal or wide (more panels on a line) display
 
 --- 3.0.3 ---
-
 * Add user selectable timespan for timeseries charts
 * Convert Charting from Chart.js to C3.js
 * Add Trend Intervals to gathering sampling data frequency separate from rendering
