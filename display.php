@@ -72,6 +72,7 @@ function display_information() {
 
 	// Retrieve user settings and defaults
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
+	$display_wide            = read_user_setting('intropage_display_wide', read_config_option('intropage_display_wide'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 	$timespan                = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'));
 
@@ -181,6 +182,17 @@ function display_information() {
 			(user_id, dashboard_id, name)
 			VALUES (?, ?, ?)',
 			array($_SESSION['sess_user_id'], $dashboard_id, $dashboards[1]));
+	}
+
+	// wide or normal number of panels on line
+	if ($display_wide == 'on') {
+		$width1 = 'calc(25% - 1em)';
+		$width2 = 'calc(33% - 1em)';
+		$width3 = 'calc(50% - 1em)';
+	} else {
+		$width1 = 'calc(33% - 1em)';
+		$width2 = 'calc(50% - 1em)';
+		$width3 = 'calc(66% - 1em)';
 	}
 
 	// Intropage Display ----------------------------------
@@ -307,6 +319,16 @@ function display_information() {
 		}
 	}
 
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
+	if ($display_wide == 'on') {
+		print "<option value='displaywide'>" . __('Less panels on a line', 'intropage') . '</option>';
+		print "<option value='displaywide_on' disabled='disabled'>" . __('More panels on a line', 'intropage') . '</option>';
+	} else {
+		print "<option value='displaywide' disabled='disabled'>" . __('Less panels on a line', 'intropage') . '</option>';
+		print "<option value='displaywide_on'>" . __('More panels on a line', 'intropage') . '</option>';
+	}
+
 	print '</select>';
 	print '</form>';
 	// end of settings
@@ -423,6 +445,10 @@ function display_information() {
 	var intropage_text_close = '<?php print __('Close', 'intropage');?>';
 
 	var panels = {};
+
+	$('.quarter-panel').css('width', '<?php echo $width1;?>');
+	$('.third-panel').css('width', '<?php echo $width2;?>');
+	$('.half-panel').css('width', '<?php echo $width3;?>');
 
 	</script>
 
