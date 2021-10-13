@@ -405,6 +405,14 @@ function intropage_actions() {
 		raise_message('panellibrefresh', __('Intropage Panel Library Refreshed from Panel Library', 'intropage'), MESSAGE_LEVEL_INFO);
 
 		break;
+	case 'displaywide':
+		if ($value == 'on') {
+			set_user_setting('intropage_display_wide', 'on');
+		} else {
+			set_user_setting('intropage_display_wide', 'off');
+		}
+
+		break;
 	}
 }
 

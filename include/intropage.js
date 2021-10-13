@@ -104,6 +104,10 @@ function initPage() {
 
 	$('.article').hide();
 
+	$('.quarter-panel').css('width', intropage_panel_quarter_width);
+	$('.third-panel').css('width', intropage_panel_third_width);
+	$('.half-panel').css('width', intropage_panel_half_width);
+
 	$('#obal').sortable({
 		tolerance: 'pointer',
 		forcePlaceholderSize: true,
