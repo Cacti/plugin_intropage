@@ -131,9 +131,6 @@ function intropage_initialize_database() {
 	$data['comment']   = 'panel data';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_data', $data);
 
-	db_execute('ALTER TABLE plugin_intropage_panel_data
-		MODIFY last_update timestamp default current_timestamp ON UPDATE current_timestamp');
-
 	$panels = initialize_panel_library();
 
 	update_registered_panels($panels);
@@ -368,6 +365,11 @@ function intropage_upgrade_database() {
 				db_execute('ALTER TABLE plugin_intropage_panel_definition
 					ADD COLUMN trefresh INT(10) UNSIGNED default "3600" AFTER refresh');
 			}
+		}
+
+		if (cacti_version_compare($oldv, '4.0.1', '<=')) {
+			db_execute('ALTER TABLE plugin_intropage_panel_data
+				CHANGE last_update last_update timestamp NOT NULL default current_timestamp');
 		}
 
 		// Set the new version
