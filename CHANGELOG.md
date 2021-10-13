@@ -1,5 +1,9 @@
 # Changelog
 
+--- 3.0.4 ---
+
+* Fix panel refresh (#179)
+
 --- 3.0.3 ---
 
 * Add user selectable timespan for timeseries charts
