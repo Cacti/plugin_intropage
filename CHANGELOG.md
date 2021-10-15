@@ -1,5 +1,10 @@
 # Changelog
 
+--- 4.0.1 ---
+
+* issue#181: Fix autorefresh
+
+
 --- 4.0.0 ---
 
 * Attempt to cleanup more memory leaks
