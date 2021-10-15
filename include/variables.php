@@ -41,6 +41,12 @@ $intropage_settings = array(
 		'method'        => 'checkbox',
 		'default'       => 'off',
 	),
+	'intropage_display_wide' => array(
+		'friendly_name' => __('Display more panels on a line', 'intropage'),
+		'description'   => __('For wide screen', 'intropage'),
+		'method'        => 'checkbox',
+		'default'       => 'off',
+	),
 	'intropage_unregister' => array(
 		'friendly_name' => __('Automatically Uninstall Panels', 'intropage'),
 		'description'   => __('If a Panel is installed and requried plugin is removed, automatically uninstall the panel too', 'intropage'),
