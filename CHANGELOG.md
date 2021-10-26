@@ -3,7 +3,8 @@
 --- 4.0.1 ---
 
 * issue#181: Fix autorefresh
-
+* feature#180: Add Mb/MB option
+* feature#182: Selectable number of panels per line
 
 --- 4.0.0 ---
 
