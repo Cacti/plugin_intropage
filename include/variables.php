@@ -162,6 +162,16 @@ $intropage_settings = array(
 		),
 		'default'       => '86400',
 	),
+	'intropage_mb' => array(
+		'friendly_name' => __('Network stats in', 'intropage'),
+		'description'   => __('bytes or bits', 'intropage'),
+		'method'        => 'drop_array',
+		'array'         => array(
+			'B'   => __('Bytes', 'intropage'),
+			'b'    => __('Bits', 'intropage'),
+		),
+		'default'       => 'b',
+	),
 	'intropage_display_header2' => array(
 		'friendly_name' => __('Alarm Settings', 'intropage'),
 		'method'        => 'spacer',
