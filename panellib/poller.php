@@ -65,6 +65,23 @@ function register_poller() {
 			'details_func' => false,
 			'trends_func'  => 'poller_stat_trend'
 		),
+		'poller_output_items' => array(
+			'name'         => __('Poller Output Items', 'intropage'),
+			'description'  => __('Various Cacti poller statistics.', 'intropage'),
+			'class'        => 'poller',
+			'level'        => PANEL_SYSTEM,
+			'refresh'      => 900,
+			'trefresh'     => read_config_option('poller_interval'),
+			'force'        => true,
+			'width'        => 'quarter-panel',
+			'priority'     => 83,
+			'alarm'        => 'green',
+			'requires'     => false,
+			'update_func'  => 'poller_output_items',
+			'details_func' => false,
+			'trends_func'  => 'poller_output_items_trend'
+		),
+
 	);
 
 	return $panels;
@@ -326,4 +343,88 @@ function poller_info_detail() {
 
 	return $panel;
 }
+
+//------------------------------------ poller_output_items -----------------------------------------------------
+
+function poller_output_items_trend() {
+
+	$count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
+
+	db_execute_prepared('REPLACE INTO plugin_intropage_trends
+		(name, value, user_id)
+		VALUES (?, ?, 0)',
+		array('poller_output', $count));
+}
+
+function poller_output_items($panel, $user_id, $timespan = 0) {
+	global $config, $run_from_poller;
+
+	$poller_interval = read_config_option('poller_interval');
+	$color = read_config_option('intropage_alert_poller_output');
+
+	$panel['alarm'] = 'green';
+
+	$graph = array (
+		'line' => array(
+			'title1' => '',
+			'label1' => array(),
+			'data1'  => array(),
+		),
+	);
+
+	if ($timespan == 0) {
+		if (isset($_SESSION['sess_user_id'])) {
+			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+		} else {
+			$timespan = $panel['refresh'];
+		}
+	}
+
+	if (!isset($panel['refresh_interval'])) {
+		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+			FROM plugin_intropage_panel_data
+			WHERE id = ?',
+			array($panel['id']));
+	} else {
+		$refresh = $panel['refresh_interval'];
+	}
+
+	$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+		FROM plugin_intropage_trends
+		WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+		AND name = 'poller_output'
+		GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+		ORDER BY cur_timestamp ASC",
+		array($timespan));
+
+
+
+	if (cacti_sizeof($rows)) {
+		foreach ($rows as $row) {
+			if ($row['value'] > 0) {
+				if ($color == 'red') {
+					$panel['alarm'] = 'red';
+				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+					$panel['alarm'] = 'yellow';
+				}
+			}
+
+			// graph data
+			$graph['line']['label1'][] = $row['date'];
+			$graph['line']['data1'][] = $row['value'];
+			$graph['line']['title1'] = __('Poller output items ', 'intropage');
+			$graph['line']['unit1']['title']       = __('Items', 'intropage');
+		}
+
+		$panel['data'] = intropage_prepare_graph($graph);
+	} else {
+		$panel['data'] = __('Waiting for data', 'intropage');
+	}
+
+	save_panel_result($panel, $user_id);
+}
+
+
+
+
 
