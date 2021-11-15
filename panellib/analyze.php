@@ -649,29 +649,6 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	// empty poller_output
-	if ($console_access) {
-		$count = db_fetch_cell("SELECT value
-			FROM plugin_intropage_trends
-			WHERE name = 'poller_output'
-			ORDER BY cur_timestamp DESC
-			LIMIT 1");
-
-		if ($count > 0) {
-			$panel['data'] .= __('Poller Output Items: %s', $count, 'intropage') . '<br/>';
-
-			$color = read_config_option('intropage_alert_poller_output');
-
-			if ($color == 'red') {
-				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-				$panel['alarm'] = 'yellow';
-			}
-
-			$total_errors += $count;
-		}
-	}
-
 	if ($allowed_devices != '') {
 		$data = db_fetch_assoc('SELECT dtd.local_data_id,dtd.name_cache
 			FROM data_local AS dl
@@ -1276,31 +1253,6 @@ function analyse_tree_host_graph_detail() {
 		foreach ($data as $row) {
 			$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
 			html_escape($row['name_cache']) . '</a><br/>';
-		}
-	}
-
-	// empty poller_output
-	if ($console_access) {
-		$data = db_fetch_assoc('SELECT local_data_id,rrd_name FROM poller_output');
-
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
-
-		$panel['detail'] .= '<h4>' . __('Poller output items - %s', $sql_count, 'intropage') . '</h4>';
-
-		if (cacti_sizeof($data)) {
-			$color = read_config_option('intropage_alert_poller_output');
-
-			if ($color == 'red')    {
-				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-				$panel['alarm'] = 'yellow';
-			}
-
-			foreach ($data as $row) {
-				$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
-				html_escape($row['rrd_name']) . '</a><br/>';
-			}
-			$total_errors += $sql_count;
 		}
 	}
 

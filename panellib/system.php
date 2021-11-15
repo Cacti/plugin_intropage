@@ -417,13 +417,6 @@ function extrem_trend() {
 			}
 		}
 	}
-
-	$count = db_fetch_cell("SELECT COUNT(local_data_id) FROM poller_output");
-
-	db_execute_prepared('REPLACE INTO plugin_intropage_trends
-		(name, value, user_id)
-		VALUES (?, ?, 0)',
-		array('poller_output', $count));
 }
 
 //------------------------------------ extrem -----------------------------------------------------
