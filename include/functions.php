@@ -1575,13 +1575,15 @@ function human_readable ($bytes, $decimal = true) {
 	$i = floor(log(abs($bytes)) / log($factor));
 	$d = pow($factor, $i);
 
-	if ($i > $max) {
+	if ($i < 0 || $i > $max) {
 		if (function_exists('cacti_log')) {
 			cacti_log('INTROPAGE WARNING: Bytes = [' . $bytes  .'], Factor = [' . $factor . '], i = [' . $i . '] d = [' . $d . ']');
+			cacti_debug_backtrace('intropage-hr');
 		} else {
 			print 'INTROPAGE WARNING: Bytes = [' . $bytes  .'], Factor = [' . $factor . '], i = [' . $i . '] d = [' . $d . ']';
 		}
 		$size = '<unknown>';
+		$i = 1;
 	} else {
 		$size = $sizes[$i];
 	}
