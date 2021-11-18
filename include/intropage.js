@@ -2,14 +2,6 @@
 $(function() {
 	$('.flexchild').css('background-color', $('body').css('background-color'));
 
-	$('#intropage_addpanel').unbind().change(function() {
-		addPanel();
-	});
-
-	$('#intropage_action').unbind().change(function() {
-		actionPanel();
-	});
-
 	$(window).resize(function() {
 		resizeCharts();
 	});
@@ -100,6 +92,14 @@ function setPageRefresh() {
 }
 
 function initPage() {
+	$('#intropage_addpanel').unbind().change(function() {
+		addPanel();
+	});
+
+	$('#intropage_action').unbind().change(function() {
+		actionPanel();
+	});
+
 	setPageRefresh();
 
 	$('.article').hide();

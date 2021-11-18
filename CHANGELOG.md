@@ -3,6 +3,7 @@
 --- 4.0.1 ---
 
 * issue#181: Fix autorefresh
+* issue#191: Adding panels does not work as expected
 * feature#180: Add Mb/MB option
 * feature#182: Selectable number of panels per line
 * feature#188: Poller output items graph panel
