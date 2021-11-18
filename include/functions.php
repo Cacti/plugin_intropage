@@ -1565,13 +1565,26 @@ function human_readable ($bytes, $decimal = true) {
 	if ($bytes === 0) {
 		return 0;
 	} elseif ($bytes  < 1) {
-		$sizes = array(0 => '', -1 => 'm', -2 => 'µ', -3 => 'n', -4 => 'p');
+		$sizes = array(0 => '', 1 => 'm', 2 => 'µ', 3 => 'n', 4 => 'p');
+		$max = 4;
 	} else {
 		$sizes = array(0 => '', 1 => 'K', 2 => 'M', 3 => 'G', 4 => 'T', 5=> 'P');
+		$max = 5;
 	}
 
-	$i = floor(log($bytes) / log($factor));
+	$i = floor(log(abs($bytes)) / log($factor));
 	$d = pow($factor, $i);
-	return round(empty($d)?0:($bytes / pow($factor, $i)), 2).' '.$sizes[$i];
-}
 
+	if ($i > $max) {
+		if (function_exists('cacti_log')) {
+			cacti_log('INTROPAGE WARNING: Bytes = [' . $bytes  .'], Factor = [' . $factor . '], i = [' . $i . '] d = [' . $d . ']');
+		} else {
+			print 'INTROPAGE WARNING: Bytes = [' . $bytes  .'], Factor = [' . $factor . '], i = [' . $i . '] d = [' . $d . ']';
+		}
+		$size = '<unknown>';
+	} else {
+		$size = $sizes[$i];
+	}
+
+	return round(empty($d)?0:($bytes / pow($factor, $i)), 2).' '.$size;
+}
