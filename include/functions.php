@@ -1565,17 +1565,15 @@ function human_readable ($bytes, $decimal = true) {
 	if ($bytes === 0) {
 		return 0;
 	} elseif ($bytes  < 1) {
-		$sizes = array(0 => '', 1 => 'm', 2 => 'µ', 3 => 'n', 4 => 'p');
-		$max = 4;
+		$sizes = array(-1 => 'm', -2 => 'µ',- 3 => 'n', -4 => 'p');
 	} else {
 		$sizes = array(0 => '', 1 => 'K', 2 => 'M', 3 => 'G', 4 => 'T', 5=> 'P');
-		$max = 5;
 	}
 
-	$i = floor(log(abs($bytes)) / log($factor));
+	$i = (int) floor(log(abs($bytes)) / log($factor));
 	$d = pow($factor, $i);
 
-	if ($i < 0 || $i > $max) {
+	if (!array_key_exists ($i, $sizes)) {
 		if (function_exists('cacti_log')) {
 			cacti_log('INTROPAGE WARNING: Bytes = [' . $bytes  .'], Factor = [' . $factor . '], i = [' . $i . '] d = [' . $d . ']');
 			cacti_debug_backtrace('intropage-hr');
