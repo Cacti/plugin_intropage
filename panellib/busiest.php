@@ -204,6 +204,10 @@ function busiest_cpu($panel, $user_id) {
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
 
+				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
+					cacti_log('INTROPAGE WARNING: Problem with DSSTAT data. Local data ID = ' . $row['ldid'] . '. Please investigate or clear DSSTAT data.');
+				}
+
 				$i++;
 			}
 
@@ -399,6 +403,10 @@ function busiest_hdd($panel, $user_id) {
 
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
+
+				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
+					cacti_log('INTROPAGE WARNING: Problem with DSSTAT data. Local data ID = ' . $row['ldid'] . '. Please investigate or clear DSSTAT data.');
+				}
 
 				$i++;
 			}
