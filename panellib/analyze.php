@@ -465,12 +465,12 @@ function trend_collect() {
 		} else {
 			db_execute_prepared("REPLACE INTO plugin_intropage_trends
 				(name,value,user_id)
-				VALUES ('thold, 0, ?)",
+				VALUES ('thold', 0, ?)",
 				array($user['id']));
 
 			db_execute_prepared("REPLACE INTO plugin_intropage_trends
 				(name,value,user_id)
-				VALUES ('host, 0, ?)",
+				VALUES ('host', 0, ?)",
 				array($user['id']));
 		}
 	}
