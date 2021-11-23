@@ -212,7 +212,7 @@ function busiest_cpu($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -413,7 +413,7 @@ function busiest_hdd($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -767,7 +767,7 @@ function busiest_cpu_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
 
@@ -976,7 +976,7 @@ function busiest_hdd_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
 
