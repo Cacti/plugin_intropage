@@ -162,12 +162,13 @@ function busiest_cpu($panel, $user_id) {
 			FROM data_template
 			WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak  ";
+		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS t1 
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
+			t2.average IS NOT  NULL AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY t2.average DESC
 			LIMIT 5';
@@ -254,12 +255,13 @@ function busiest_load($panel, $user_id) {
 			FROM data_template
 			WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak  ";
+		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS t1 
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
+			t2.average IS NOT  NULL AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY t2.average DESC
 			LIMIT 5';
@@ -633,7 +635,8 @@ function busiest_interface_error($panel, $user_id) {
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . '
+			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t2.average IS NOT NULL 
 			ORDER BY t2.average DESC
 			LIMIT 5';
 
@@ -719,12 +722,13 @@ function busiest_cpu_detail() {
 			FROM data_template
 			WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak  ";
+		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS t1 
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
+			t2.average IS NOT  NULL AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY t2.average DESC
 			LIMIT 30';
@@ -811,12 +815,13 @@ function busiest_load_detail() {
 			FROM data_template
 			WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak  ";
+		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS t1 
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
+			t2.average IS NOT  NULL AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY t2.average DESC
 			LIMIT 30';
@@ -925,7 +930,7 @@ function busiest_hdd_detail() {
 		$query = ' FROM data_template_data AS t1 
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
 			t2.rrd_name=\'hdd_used\' AND
 			t1.data_template_id = ' . $ds['id'] . '
 			AND t2.rrd_name=\'hdd_used\'';
@@ -1169,7 +1174,8 @@ function busiest_interface_error_detail() {
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . '
+			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t2.average IS NOT  NULL
 			ORDER BY t2.average DESC
 			LIMIT 30';
 
