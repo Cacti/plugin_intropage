@@ -1067,6 +1067,7 @@ function busiest_traffic_detail() {
 	);
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
+	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), $_SESSION['sess_user_id']);
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
@@ -1130,13 +1131,25 @@ function busiest_traffic_detail() {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . human_readable($row['xvalue'], false) . 'B</td>';
-				$panel['detail'] .= "<td class='right'>" . human_readable($row['xpeak'], false) . 'B</td></tr>';
+				if ($intropage_mb == 'b') {
+					$row['xvalue'] *= 8;
+					$row['xpeak'] *= 8;
+					$units = 'b';
+				} else {
+					$units = 'B';
+				}
+
+				$panel['detail'] .= "<td class='right'>" . human_readable($row['xvalue'], false) . $units . '</td>';
+				$panel['detail'] .= "<td class='right'>" . human_readable($row['xpeak'], false) . $units . '</td></tr>';
 
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg, false) . 'B</td></tr>';
+			if ($intropage_mb == 'b') {
+				$avg *= 8;
+			}
+
+			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
 			$panel['detail'] .= '</table>';
 
 		} else {
