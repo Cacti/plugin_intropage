@@ -11,7 +11,7 @@ Plugin displays usefull information and favourite graphs on console screen or se
 * worst ping and availability
 * ...
 
-## Orininal Author
+## Original Author
 
 All thanks goes to Petr Macek (petr.macek@kostax.cz) the original author of Intropage!
 He has turned over the Intropage Plguin to the broader Cacti community for long term
@@ -28,15 +28,20 @@ and future.
 - Check file permission (Linux/unix - readable for www server)
 - Enable plugin (Console > Configuration > Plugins)
 - Configure Plugin (Console > Configuration > Settings > Intropage Tab)
-- Add Panel Permissions to user accounts (Console > Users > (edit) > Intropage>
+- Add Panel Permissions to user accounts (Console > Users > (edit) > Intropage)
 
 ## Upgrade
-
+- Disable plugin in the console
 - TGZ old intropage directory for recovery
 - Remove old directory
 - Recreate directory with new files
 - Check file permission (Linux/unix - readable for www server)
-- Configure Intropage (Console > Settings > Intropage tab)
+- Enable plugin in the console 
+- Configure Intropage (Console > Configuration > Settings > Intropage tab)
+- Add permission to users (Console > Configuration > Users > (edit) > Intropage Tab) 
+
+More information about installation and ugrade plugins:
+https://github.com/Cacti/documentation/blob/develop/Plugins.md 
 
 ## Configuration
 
@@ -48,7 +53,7 @@ will not start rendering until at least one user has access to a Panel.
 
 ## How to Add Graphs to Intropage/Dashboard?
 
-Go to graphs, select graph, click to icon Eye.  Graphs will be rendered in SVG format
+Go to graphs, select graph, click to icon Eye. Graphs will be rendered in SVG format
 only.
 
 ## How to add new Panel Libraries and Panels?
