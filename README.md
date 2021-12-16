@@ -41,7 +41,7 @@ and future.
 - Add permission to users (Console > Configuration > Users > (edit) > Intropage Tab) 
 
 More information about installation and ugrade plugins:
-https://github.com/Cacti/documentation/blob/develop/Plugins.md 
+https://docs.cacti.net/Plugins.md 
 
 ## Configuration
 
