@@ -25,39 +25,7 @@
 */
 
 function intropage_drop_database() {
-	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_setting');
-	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel');
 	db_execute('UPDATE user_auth SET login_opts = 1 WHERE login_opts > 3');
-
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_log');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_login');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_thold_event');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_db');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_analyse_tree_host_graph');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_trend');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_extrem');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_ntp');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_poller_info');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_poller_stat');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_host');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_thold');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_data_source');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_graph_host_template');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_cpuload');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_cpu');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_mactrack');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_mactrack_sites');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_ping');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_availability');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_polltime');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_top5_pollratio');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_info');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_boost');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_favourite_graph');
-	db_execute('ALTER TABLE user_auth DROP COLUMN IF EXISTS intropage_plugin_syslog');
-
-	// version 2
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
@@ -192,87 +160,6 @@ function intropage_upgrade_database() {
 	$oldv    = db_fetch_cell('SELECT version FROM plugin_config WHERE directory = "intropage"');
 
 	if (!cacti_version_compare($oldv, $current, '=')) {
-		if (cacti_version_compare($oldv,'0.9','<')) {
-			db_execute('UPDATE plugin_hooks
-				SET function = "intropage_config_form", file = "include/settings.php"
-				WHERE name = "intropage"
-				AND hook = "config_form"');
-
-			db_execute('UPDATE plugin_hooks
-				SET function = "intropage_config_settings", file = "include/settings.php"
-				WHERE name = "intropage"
-				AND hook = "config_settings"');
-
-			db_execute('UPDATE plugin_hooks
-				SET function = "intropage_show_tab", file = "include/tab.php"
-				WHERE name = "intropage"
-				AND hook = "top_header_tabs"');
-
-			db_execute('UPDATE plugin_hooks
-				SET function = "intropage_show_tab", file = "include/tab.php"
-				WHERE name = "intropage"
-				AND hook = "top_graph_header_tabs"');
-
-			db_execute('UPDATE plugin_hooks
-				SET function = "intropage_login_options_navigate", file = "include/settings.php"
-				WHERE name = "intropage"
-				AND hook = "login_options_navigate"');
-
-			db_execute('UPDATE plugin_hooks
-				SET function ="intropage_console_after", file = "include/settings.php"
-				WHERE name = "intropage"
-				AND hook = "console_after"');
-
-			db_execute('UPDATE user_auth
-				SET login_opts = 1
-				WHERE login_opts IN (4,5)');
-		}
-
-		if (cacti_version_compare($oldv,'2.0.2', '<')) {
-			// a lot of changes, so:
-			intropage_drop_database();
-			intropage_initialize_database();
-
-			api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
-			api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
-			api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
-			api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
-		}
-
-		if (cacti_version_compare($oldv, '2.0.4', '<=')) {
-			db_add_column('plugin_intropage_user_auth',
-				array(
-					'name'    => 'webseer',
-					'type'    => 'char(2)',
-					'NULL'    => false,
-					'default' => 'on'
-				)
-			);
-		}
-
-		if (cacti_version_compare($oldv, '2.0.5', '<=')) {
-			$data = array();
-
-			$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-			$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
-			$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => true);
-			$data['type']      = 'InnoDB';
-			$data['comment']   = 'panel x dashboard name';
-
-			api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
-
-			db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
-
-			db_add_column('plugin_intropage_panel_data',
-				array(
-					'name'    => 'refresh_interval',
-					'type'    => 'int(9)',
-					'NULL'    => false,
-					'default' => '3600',
-					'after'   => 'alarm'
-				)
-			);
-		}
 
 		if (cacti_version_compare($oldv, '3.0.0', '<=')) {
 			include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
