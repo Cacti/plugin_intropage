@@ -117,7 +117,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
-	$data['columns'][] = array('name' => 'last_trend_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
+	$data['columns'][] = array('name' => 'last_trend_update', 'type' => 'timestamp', 'NULL' => false);
 	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
 	$data['columns'][] = array('name' => 'priority', 'type' => 'int(3)', 'default' => '30', 'NULL' => false);
 	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','grey')", 'default' => 'green', 'NULL' => false);
