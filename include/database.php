@@ -26,6 +26,7 @@
 
 function intropage_drop_database() {
 	db_execute('UPDATE user_auth SET login_opts = 1 WHERE login_opts > 3');
+	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_data');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_dashboard');
