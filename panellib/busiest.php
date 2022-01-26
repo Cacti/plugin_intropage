@@ -156,11 +156,11 @@ function busiest_cpu($panel, $user_id) {
 	
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
@@ -220,7 +220,7 @@ function busiest_cpu($panel, $user_id) {
 		}
 
 	} else {
-		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	save_panel_result($panel, $user_id);
@@ -249,11 +249,11 @@ function busiest_load($panel, $user_id) {
 	
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='9b82d44eb563027659683765f92c9757'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
@@ -308,7 +308,7 @@ function busiest_load($panel, $user_id) {
 		}
 
 	} else {
-		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	save_panel_result($panel, $user_id);
@@ -337,11 +337,11 @@ function busiest_hdd($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name
+		FROM data_template
+		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " name_cache AS name, t2.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
@@ -421,7 +421,7 @@ function busiest_hdd($panel, $user_id) {
 		}
 
 	} else {
-		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	save_panel_result($panel, $user_id);
@@ -438,7 +438,7 @@ function busiest_uptime($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices) {
 
 		$columns = " id, description, snmp_sysUpTimeInstance";
 		$query = ' FROM host 
@@ -510,11 +510,11 @@ function busiest_traffic($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " name_cache AS name, t2.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
@@ -597,7 +597,7 @@ function busiest_traffic($panel, $user_id) {
 		}
 
 	} else {
-		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	save_panel_result($panel, $user_id);
@@ -626,11 +626,11 @@ function busiest_interface_error($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='36335cd98633963a575b70639cd2fdad'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
@@ -683,7 +683,7 @@ function busiest_interface_error($panel, $user_id) {
 		}
 
 	} else {
-		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	save_panel_result($panel, $user_id);
@@ -716,11 +716,11 @@ function busiest_cpu_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
@@ -776,7 +776,7 @@ function busiest_cpu_detail() {
 		}
 
 	} else {
-		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	return $panel;
@@ -809,11 +809,11 @@ function busiest_load_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='9b82d44eb563027659683765f92c9757'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
@@ -869,7 +869,7 @@ function busiest_load_detail() {
 		}
 
 	} else {
-		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	return $panel;
@@ -903,11 +903,11 @@ function busiest_hdd_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " name_cache AS name, t2.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
@@ -985,7 +985,7 @@ function busiest_hdd_detail() {
 		}
 
 	} else {
-		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	return $panel;
@@ -1006,7 +1006,7 @@ function busiest_uptime_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices) {
 
 		$columns = " id, description, snmp_sysUpTimeInstance";
 
@@ -1071,11 +1071,11 @@ function busiest_traffic_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " name_cache AS name, t2.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
@@ -1157,7 +1157,7 @@ function busiest_traffic_detail() {
 		}
 
 	} else {
-		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	return ($panel);
@@ -1178,11 +1178,11 @@ function busiest_interface_error_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	$ds = db_fetch_row("SELECT id,name 
+		FROM data_template
+		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-		$ds = db_fetch_row("SELECT id,name 
-			FROM data_template
-			WHERE hash='36335cd98633963a575b70639cd2fdad'");
+	if ($allowed_devices && $ds) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
@@ -1235,7 +1235,7 @@ function busiest_interface_error_detail() {
 		}
 
 	} else {
-		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
 	return ($panel);
