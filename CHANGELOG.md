@@ -5,7 +5,7 @@
 * issue#181: Fix autorefresh
 * issue#191: Adding panels does not work as expected
 * issue#192: Human Readable calculations can result in offset errors
-* issue#194: Fix busiest panel dispaly after dsstats reset
+* issue#194: Fix busiest panel display after dsstats reset
 * feature#180: Add Mb/MB option
 * feature#182: Selectable number of panels per line
 * feature#188: Poller output items graph panel
