@@ -12,11 +12,10 @@
 
 --- 4.0.0 ---
 
-* Attempt to cleanup more memory leaks
-* Properly keep panels that have plugin requirements from being selectable
-* Dont run the polling functions for the panel if the required plugins are not enabled
-* Trend function in panellib analyze requires thold but was not indicated
-
+* issue: Attempt to cleanup more memory leaks
+* issue: Properly keep panels that have plugin requirements from being selectable
+* issue: Don't run the polling functions for the panel if the required plugins are not enabled
+* issue: Trend function in panellib analyze requires thold but was not indicated
 * issue#143: Swapping out c3 for billboard
 * issue#157: No panel can be added after install Intropage
 * issue#159: Fix missing fav_graph permission
@@ -33,7 +32,6 @@
 * feature#161: Add busiest panels (DS Stats)
 * feature#164: Line graph add zoom, pie graph add tooltip percentage 
 * feature#174: New panel for DSstats (all/null)
-
 
 --- 3.0.3 ---
 
