@@ -1,5 +1,8 @@
 # Changelog
 
+--- develop ---
+* issue: Clear warnings issued on 'busiest' panel when interface traffic is zero
+
 --- 4.0.1 ---
 
 * issue#181: Fix autorefresh

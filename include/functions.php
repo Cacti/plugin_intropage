@@ -1,7 +1,7 @@
 <?php
 /* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2021 The Cacti Group, Inc.                                |
+ | Copyright (C) 2021-2022 The Cacti Group, Inc.                           |
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
@@ -1562,10 +1562,10 @@ function human_readable ($bytes, $decimal = true) {
 		$factor = 1024;
 	}
 
-	if ($bytes === 0) {
+	if ($bytes == 0) {
 		return 0;
-	} elseif ($bytes  < 1) {
-		$sizes = array(-1 => 'm', -2 => 'µ',- 3 => 'n', -4 => 'p');
+	} elseif ($bytes < 1) {
+		$sizes = array(0 => '', -1 => 'm', -2 => 'µ',- 3 => 'n', -4 => 'p');
 	} else {
 		$sizes = array(0 => '', 1 => 'K', 2 => 'M', 3 => 'G', 4 => 'T', 5=> 'P');
 	}
@@ -1573,7 +1573,7 @@ function human_readable ($bytes, $decimal = true) {
 	$i = (int) floor(log(abs($bytes)) / log($factor));
 	$d = pow($factor, $i);
 
-	if (!array_key_exists ($i, $sizes)) {
+	if (!array_key_exists($i, $sizes)) {
 		if (function_exists('cacti_log')) {
 			cacti_log('INTROPAGE WARNING: Bytes = [' . $bytes  .'], Factor = [' . $factor . '], i = [' . $i . '] d = [' . $d . ']');
 			cacti_debug_backtrace('intropage-hr');

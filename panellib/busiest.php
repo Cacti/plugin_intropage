@@ -1,7 +1,7 @@
 <?php
 /* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2021 The Cacti Group, Inc.                                |
+ | Copyright (C) 2021-2022 The Cacti Group, Inc.                           |
  | Copyright (C) 2015-2020 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
@@ -153,10 +153,10 @@ function busiest_cpu($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 	}
-	
+
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
@@ -164,7 +164,7 @@ function busiest_cpu($panel, $user_id) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t3.host_id IN (' . $allowed_devices . ') AND
@@ -246,10 +246,10 @@ function busiest_load($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 	}
-	
+
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
@@ -257,7 +257,7 @@ function busiest_load($panel, $user_id) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t3.host_id IN (' . $allowed_devices . ') AND
@@ -347,10 +347,10 @@ function busiest_hdd($panel, $user_id) {
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
 			t2.rrd_name=\'hdd_used\' AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY xvalue DESC
@@ -361,10 +361,10 @@ function busiest_hdd($panel, $user_id) {
 		// avg
 		$columns = " t1.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
 			t2.rrd_name=\'hdd_used\' AND
 			t1.data_template_id = ' . $ds['id'] . '
 			AND t2.rrd_name=\'hdd_used\'';
@@ -441,7 +441,7 @@ function busiest_uptime($panel, $user_id) {
 	if ($allowed_devices) {
 
 		$columns = " id, description, snmp_sysUpTimeInstance";
-		$query = ' FROM host 
+		$query = ' FROM host
 			WHERE id IN (' . $allowed_devices . ')
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 5';
@@ -510,7 +510,7 @@ function busiest_traffic($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
@@ -523,12 +523,12 @@ function busiest_traffic($panel, $user_id) {
 		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly  AS t2 ON t1.local_data_id = t2.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . '
 			AND rrd_name=\'traffic_out\'
-			ORDER BY xvalue DESC 
+			ORDER BY xvalue DESC
 			LIMIT 5';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
-		$columns = " name_cache AS name, t1.local_data_id AS ldid, 
+		$columns = " name_cache AS name, t1.local_data_id AS ldid,
 			average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
@@ -578,7 +578,7 @@ function busiest_traffic($panel, $user_id) {
 				} else {
 					$units = 'B';
 				}
-				
+
 				$panel['data'] .= "<td class='right'>" . human_readable($row['xvalue'], false) . $units . '</td>';
 				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak'], false) . $units .'</td></tr>';
 
@@ -588,7 +588,7 @@ function busiest_traffic($panel, $user_id) {
 			if ($intropage_mb == 'b') {
 				$avg *= 8;
 			}
-			
+
 			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
 			$panel['data'] .= '</table>';
 
@@ -626,7 +626,7 @@ function busiest_interface_error($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
@@ -636,7 +636,7 @@ function busiest_interface_error($panel, $user_id) {
 
 		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t2.average IS NOT NULL 
+			t2.average IS NOT NULL
 			ORDER BY t2.average DESC
 			LIMIT 5';
 
@@ -716,7 +716,7 @@ function busiest_cpu_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
@@ -724,7 +724,7 @@ function busiest_cpu_detail() {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t3.host_id IN (' . $allowed_devices . ') AND
@@ -809,7 +809,7 @@ function busiest_load_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
@@ -817,7 +817,7 @@ function busiest_load_detail() {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t3.host_id IN (' . $allowed_devices . ') AND
@@ -903,7 +903,7 @@ function busiest_hdd_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
@@ -913,10 +913,10 @@ function busiest_hdd_detail() {
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND 
+			WHERE t3.host_id IN (' . $allowed_devices . ') AND
 			t2.rrd_name=\'hdd_used\' AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY xvalue DESC
@@ -927,7 +927,7 @@ function busiest_hdd_detail() {
 		// avg
 		$columns = " t1.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t3.host_id IN (' . $allowed_devices . ') AND
@@ -1010,8 +1010,8 @@ function busiest_uptime_detail() {
 
 		$columns = " id, description, snmp_sysUpTimeInstance";
 
-		$query = ' FROM host 
-			WHERE id IN (' . $allowed_devices . ')  
+		$query = ' FROM host
+			WHERE id IN (' . $allowed_devices . ')
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 30';
 
@@ -1071,7 +1071,7 @@ function busiest_traffic_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
@@ -1084,12 +1084,12 @@ function busiest_traffic_detail() {
 		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly  AS t2 ON t1.local_data_id = t2.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . '
 			AND rrd_name=\'traffic_out\'
-			ORDER BY xvalue DESC 
+			ORDER BY xvalue DESC
 			LIMIT 30';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
-		$columns = " t1.local_data_id AS ldid, average/(SELECT average FROM data_source_stats_hourly 
+		$columns = " t1.local_data_id AS ldid, average/(SELECT average FROM data_source_stats_hourly
 			WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue ";
 
 		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
@@ -1178,7 +1178,7 @@ function busiest_interface_error_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name 
+	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
