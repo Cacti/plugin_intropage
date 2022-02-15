@@ -1,5 +1,5 @@
 .flexchild {
-	background-color: #242635 !important;
+	background-color: var(--background) !important;
 }
 
 .panel_data {
@@ -7,7 +7,7 @@
 }
 
 .panel_data > div {
-	background-color: #242635 !important;
+	background-color: var(--background) !important;
 }
 
 .header_link {
