@@ -146,7 +146,7 @@ function busiest_cpu($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -239,7 +239,7 @@ function busiest_load($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -327,7 +327,7 @@ function busiest_hdd($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -500,7 +500,7 @@ function busiest_traffic($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -616,7 +616,7 @@ function busiest_interface_error($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -706,7 +706,7 @@ function busiest_cpu_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -799,7 +799,7 @@ function busiest_load_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
@@ -893,7 +893,7 @@ function busiest_hdd_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
 			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}

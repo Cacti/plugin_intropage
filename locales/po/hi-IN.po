@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2021-03-10 19:25-0500\n"
-"PO-Revision-Date: 2020-03-28 12:11-0400\n"
+"PO-Revision-Date: 2022-02-15 15:53-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hi_IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: display.php:39
 #, fuzzy
@@ -30,7 +30,7 @@ msgstr "आप <b>सेटिंग्स</b> में ऊपर की पं
 
 #: display.php:172 include/functions.php:1301
 msgid "Default"
-msgstr ""
+msgstr "डिफ़ॉल्ट"
 
 #: display.php:209
 #, fuzzy
@@ -38,8 +38,9 @@ msgid "Disable panel move/enable copy text from panel"
 msgstr "पैनल से पैनल मूव / सक्षम पाठ अक्षम करें"
 
 #: display.php:217
+#, fuzzy
 msgid "Panels ..."
-msgstr ""
+msgstr "पैनल..."
 
 #: display.php:253 display.php:261
 #, fuzzy, php-format
@@ -49,7 +50,7 @@ msgstr "आपके पास अनुमति नहीं है"
 #: display.php:272
 #, fuzzy
 msgid "Actions ..."
-msgstr "कार्रवाई चुनें ..."
+msgstr "कार्रवाइयाँ"
 
 #: display.php:275
 #, fuzzy
@@ -102,8 +103,9 @@ msgid "Sort by Severity"
 msgstr "पैनल प्राथमिकता द्वारा क्रमबद्ध करें"
 
 #: display.php:317 display.php:320
+#, fuzzy
 msgid "Sort by User Preference"
-msgstr ""
+msgstr "उपयोगकर्ता वरीयता के आधार पर छाँटें"
 
 #: display.php:326
 #, fuzzy
@@ -131,16 +133,19 @@ msgid "Welcome to Intropage!"
 msgstr "इंट्रापेज पैनल"
 
 #: display.php:358
+#, fuzzy
 msgid "You can Add Dashboard Panels in two ways:"
-msgstr ""
+msgstr "आप डैशबोर्ड पैनल को दो तरह से जोड़ सकते हैं:"
 
 #: display.php:360
+#, fuzzy
 msgid "Select prepared Dashboard Panels from the menu to the right."
-msgstr ""
+msgstr "मेनू से दाईं ओर तैयार डैशबोर्ड पैनल चुनें।"
 
 #: display.php:361
+#, fuzzy
 msgid "Add any Cacti Graph by Clicking the 'Eye Icon' which is next to each Cacti Graph. Graph with actual timespan will be added to current dashboard"
-msgstr ""
+msgstr "प्रत्येक कैक्टि ग्राफ के आगे 'आई आइकन' पर क्लिक करके कोई भी कैक्टि ग्राफ जोड़ें। वास्तविक समयावधि वाला ग्राफ़ वर्तमान डैशबोर्ड में जोड़ा जाएगा"
 
 #: display.php:634
 #, fuzzy
@@ -159,7 +164,7 @@ msgstr "नया डेटा पढ़ने में त्रुटि"
 
 #: display.php:722
 msgid "Close"
-msgstr ""
+msgstr "बंद"
 
 #: display.php:733
 #, fuzzy
@@ -167,8 +172,9 @@ msgid "Panel Details"
 msgstr "प्रदर्शन का विवरण"
 
 #: include/functions.php:211
+#, fuzzy
 msgid "Dashboard has been removed"
-msgstr ""
+msgstr "डैशबोर्ड हटा दिया गया है"
 
 #: include/functions.php:233
 #, fuzzy
@@ -176,51 +182,58 @@ msgid "New Dashboard"
 msgstr "डैशबोर्ड में जोड़ें"
 
 #: include/functions.php:235
+#, fuzzy
 msgid "Dashboard has been added"
-msgstr ""
+msgstr "डैशबोर्ड जोड़ा गया है"
 
 #: include/functions.php:266
+#, fuzzy
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
-msgstr ""
+msgstr "ज़ूम किए गए या कस्टम टाइमपेन्ड ग्राफ़ को नहीं जोड़ सकते, टाइमपैन को पिछले आधे घंटे में बदल सकते हैं"
 
 #: include/functions.php:432
+#, fuzzy
 msgid "The Panel includes a render function but it does not exist."
-msgstr ""
+msgstr "पैनल में एक रेंडर फ़ंक्शन शामिल है लेकिन यह मौजूद नहीं है।"
 
 #: include/functions.php:435
+#, fuzzy
 msgid "The Panel does not have a render function."
-msgstr ""
+msgstr "पैनल में रेंडर फ़ंक्शन नहीं है।"
 
 #: include/functions.php:441
 msgid "Not Found"
-msgstr ""
+msgstr "नहीं मिला"
 
 #: include/functions.php:468
+#, fuzzy
 msgid "Panel not found"
-msgstr ""
+msgstr "पैनल नहीं मिला"
 
 #: include/functions.php:501
+#, fuzzy
 msgid "Details Function does not exist."
-msgstr ""
+msgstr "विवरण फ़ंक्शन मौजूद नहीं है।"
 
 #: include/functions.php:508
+#, fuzzy
 msgid "Panel Not Found"
-msgstr ""
+msgstr "पैनल नहीं मिला"
 
 #: include/functions.php:576 include/functions.php:594
-#, php-format
+#, fuzzy, php-format
 msgid " [ Updates in %s ]"
-msgstr ""
+msgstr " [ में अपडेट %s ]"
 
 #: include/functions.php:618
-#, php-format
+#, fuzzy, php-format
 msgid "%s Sec"
-msgstr ""
+msgstr "%s सेकंड"
 
 #: include/functions.php:618
-#, php-format
+#, fuzzy, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s सेकंड"
 
 #: include/functions.php:625
 #, fuzzy, php-format
@@ -233,27 +246,29 @@ msgid "%s Minutes"
 msgstr "प्रत्येक% d मिनट"
 
 #: include/functions.php:632
-#, php-format
+#, fuzzy, php-format
 msgid "%s Hours"
-msgstr ""
+msgstr "%s घंटे"
 
 #: include/functions.php:632
-#, php-format
+#, fuzzy, php-format
 msgid "%s Hrs"
-msgstr ""
+msgstr "%s घंटे"
 
 #: include/functions.php:636
-#, php-format
+#, fuzzy, php-format
 msgid "%s Days"
-msgstr ""
+msgstr "%s दिन"
 
 #: include/functions.php:682
+#, fuzzy
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
-msgstr ""
+msgstr "कोई डेटा मौजूद नहीं है। या तो फोर्स अपडेट करें, या अगले कैक्टि पोलिंग चक्र की प्रतीक्षा करें।"
 
 #: include/functions.php:684
+#, fuzzy
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
-msgstr ""
+msgstr "कोई डेटा मौजूद नहीं है। यह पैनल जबरन अद्यतन की अनुमति नहीं देता है। आपको कैक्टि के पोलर के चेक करने के लिए इंतजार करना होगा।"
 
 #: include/functions.php:824
 #, fuzzy
@@ -271,21 +286,23 @@ msgid "Reload Panel"
 msgstr "रीलोड पैनल"
 
 #: include/functions.php:1092
-#, fuzzy
 msgid "Show Details"
-msgstr "प्रदर्शन का विवरण"
+msgstr "विवरण देखें"
 
 #: include/functions.php:1099
+#, fuzzy
 msgid "Loading data ..."
-msgstr ""
+msgstr "डेटा लोड हो रहा है ..."
 
 #: include/functions.php:1110
+#, fuzzy
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
-msgstr ""
+msgstr "डाटा प्राप्त नहीं हुआ। या तो अगले चेक की प्रतीक्षा करें,<br/> या यदि उपलब्ध हो तो फ़ोर्स रीलोड का उपयोग करें।"
 
 #: include/functions.php:1154
+#, fuzzy
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr ""
+msgstr "डैशबोर्ड में नहीं जोड़ा जा सकता. कस्टम समय अवधि।"
 
 #: include/functions.php:1164
 #, fuzzy
@@ -298,8 +315,9 @@ msgid "Add to Dashboard"
 msgstr "डैशबोर्ड में जोड़ें"
 
 #: include/functions.php:1214
+#, fuzzy
 msgid "Dashboard Names"
-msgstr ""
+msgstr "डैशबोर्ड नाम"
 
 #: include/functions.php:1223
 #, fuzzy, php-format
@@ -322,15 +340,15 @@ msgid "%d Minutes"
 msgstr "प्रत्येक% d मिनट"
 
 #: include/functions.php:1244 include/variables.php:69
-#, php-format
+#, fuzzy, php-format
 msgid "%d Hour"
-msgstr ""
+msgstr "%d घंटा"
 
 #: include/functions.php:1245 include/functions.php:1246
 #: include/functions.php:1247 include/functions.php:1248
-#, php-format
+#, fuzzy, php-format
 msgid "%d Hours"
-msgstr ""
+msgstr "%d घंटे"
 
 #: include/functions.php:1249
 #, fuzzy, php-format
@@ -343,12 +361,14 @@ msgid "Panel Refresh Intervals"
 msgstr "प्रदर्शन का विवरण"
 
 #: include/functions.php:1281
+#, fuzzy
 msgid "Global Refresh (Identical for All Users)"
-msgstr ""
+msgstr "वैश्विक रीफ़्रेश (सभी उपयोगकर्ताओं के लिए समान)"
 
 #: include/functions.php:1283
+#, fuzzy
 msgid "User Refresh (Applicable to Your Account Only)"
-msgstr ""
+msgstr "उपयोगकर्ता ताज़ा करें (केवल आपके खाते पर लागू)"
 
 #: include/settings.php:30 include/settings.php:88
 #, fuzzy
@@ -357,27 +377,32 @@ msgstr "इंट्रापेज पैनल"
 
 #: include/settings.php:35 setup.php:75
 msgid "Normal User"
-msgstr ""
+msgstr "सामान्य उपयोगकर्ता"
 
 #: include/settings.php:142
+#, fuzzy
 msgid "System Level Panels"
-msgstr ""
+msgstr "सिस्टम स्तर पैनल"
 
 #: include/settings.php:143
+#, fuzzy
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
-msgstr ""
+msgstr "पैनल जो प्रशासनिक या बिजली उपयोगकर्ताओं के उपयोग के लिए उपयुक्त हैं और आम तौर पर सामान्य उपयोगकर्ताओं के लिए लागू नहीं होते हैं। पैनल आमतौर पर समग्र सिस्टम उपयोग के बारे में होते हैं।"
 
 #: include/settings.php:146
+#, fuzzy
 msgid "User Level Panels"
-msgstr ""
+msgstr "उपयोगकर्ता स्तर के पैनल"
 
 #: include/settings.php:147
+#, fuzzy
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
-msgstr ""
+msgstr "पैनल जो सामान्य उपयोगकर्ताओं के उपयोग के लिए उपयुक्त हैं। अनुमतियाँ वर्तमान उपयोगकर्ता द्वारा देखी जा सकने वाली चीज़ों तक सीमित हैं।"
 
 #: include/settings.php:189
+#, fuzzy
 msgid "You can Allow/Disallow Panels for User"
-msgstr ""
+msgstr "आप उपयोगकर्ता के लिए पैनलों को अनुमति/अस्वीकार कर सकते हैं"
 
 #: include/variables.php:28
 #, fuzzy
@@ -395,12 +420,14 @@ msgid "If checked Intropage displays important (errors, warnings) information fi
 msgstr "यदि जाँच की गई इंट्रॉज महत्वपूर्ण (त्रुटियों, चेतावनियों) को पहले प्रदर्शित करता है"
 
 #: include/variables.php:38
+#, fuzzy
 msgid "Automatically Uninstall Panels"
-msgstr ""
+msgstr "पैनलों को स्वचालित रूप से अनइंस्टॉल करें"
 
 #: include/variables.php:39
+#, fuzzy
 msgid "If a Panel is installed and requried plugin is removed, automatically uninstall the panel too"
-msgstr ""
+msgstr "यदि कोई पैनल स्थापित है और आवश्यक प्लगइन हटा दिया गया है, तो स्वचालित रूप से पैनल को भी अनइंस्टॉल कर दें"
 
 #: include/variables.php:44
 #, fuzzy
@@ -413,16 +440,15 @@ msgid "How often"
 msgstr "कितनी बार"
 
 #: include/variables.php:48
+#, fuzzy
 msgid "Automatically by poller"
-msgstr ""
+msgstr "पोलर द्वारा स्वचालित रूप से"
 
 #: include/variables.php:49 include/variables.php:85
-#, fuzzy
 msgid "Never"
-msgstr "कभी नहीँ"
+msgstr "कभी नहीं"
 
 #: include/variables.php:50
-#, fuzzy
 msgid "Every Minute"
 msgstr "हर मिनट"
 
@@ -442,8 +468,9 @@ msgid "Poller Timeout"
 msgstr "पोल जानकारी"
 
 #: include/variables.php:58
+#, fuzzy
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
-msgstr ""
+msgstr "समय की मात्रा, मिनटों में, कैक्टि द्वारा बाधित और मारे जाने से पहले इंट्रोपेज बैकग्राउंड पोलर चल सकता है।"
 
 #: include/variables.php:73
 #, fuzzy
@@ -468,7 +495,7 @@ msgstr "पोलर इस कार्य को चलाता है। य
 #: include/variables.php:87 include/variables.php:122
 #, fuzzy
 msgid "Every Day"
-msgstr "हर दिन"
+msgstr "हर रोज"
 
 #: include/variables.php:88
 #, fuzzy
@@ -491,29 +518,24 @@ msgid "Quick - No Check rows for inforccert links<br/>Fast - check only not prop
 msgstr "त्वरित - inforccert लिंक के लिए कोई चेक पंक्तियाँ नहीं <br/> फास्ट - केवल ठीक से बंद तालिकाओं की जांच न करें <br/> परिवर्तित - अंतिम जांच से चेक टेबल बदल गए <br/> मध्यम - पंक्तियों के साथ स्कैन <br/> विस्तारित - पूर्ण पंक्तियाँ और कुंजियाँ <br/> <strong>मध्यम और विस्तारित धीमा पृष्ठ लोड का कारण हो सकता है!</strong>"
 
 #: include/variables.php:98
-#, fuzzy
 msgid "Quick"
-msgstr "शीघ्र"
+msgstr "तेज"
 
 #: include/variables.php:99
-#, fuzzy
 msgid "Fast"
-msgstr "उपवास"
+msgstr "तेज"
 
 #: include/variables.php:100
-#, fuzzy
 msgid "Changed"
-msgstr "बदला हुआ"
+msgstr "परिवर्तित"
 
 #: include/variables.php:101
-#, fuzzy
 msgid "Medium"
 msgstr "मध्यम"
 
 #: include/variables.php:102
-#, fuzzy
 msgid "Extended"
-msgstr "विस्तृत"
+msgstr "विस्तारित"
 
 #: include/variables.php:108
 #, fuzzy
@@ -576,8 +598,9 @@ msgid "Alarm Settings"
 msgstr "प्रदर्शन सेटिंग्स"
 
 #: include/variables.php:154
+#, fuzzy
 msgid "Alarm DB check aborted clients"
-msgstr ""
+msgstr "अलार्म डीबी चेक निरस्त क्लाइंट"
 
 #: include/variables.php:155 include/variables.php:166
 #: include/variables.php:177 include/variables.php:188
@@ -587,8 +610,9 @@ msgstr ""
 #: include/variables.php:265 include/variables.php:276
 #: include/variables.php:288 include/variables.php:299
 #: include/variables.php:310 include/variables.php:321
+#, fuzzy
 msgid "<strong>How to be notified?</strong>"
-msgstr ""
+msgstr "<strong>कैसे सूचित किया जाए?</strong>"
 
 #: include/variables.php:158 include/variables.php:169
 #: include/variables.php:180 include/variables.php:191
@@ -596,8 +620,9 @@ msgstr ""
 #: include/variables.php:224 include/variables.php:235
 #: include/variables.php:246 include/variables.php:257
 #: include/variables.php:268 include/variables.php:279
+#, fuzzy
 msgid "Red alarm"
-msgstr ""
+msgstr "लाल अलार्म"
 
 #: include/variables.php:159 include/variables.php:170
 #: include/variables.php:181 include/variables.php:192
@@ -605,8 +630,9 @@ msgstr ""
 #: include/variables.php:225 include/variables.php:236
 #: include/variables.php:247 include/variables.php:258
 #: include/variables.php:269 include/variables.php:280
+#, fuzzy
 msgid "Yellow alarm"
-msgstr ""
+msgstr "पीला अलार्म"
 
 #: include/variables.php:160 include/variables.php:171
 #: include/variables.php:182 include/variables.php:193
@@ -614,8 +640,9 @@ msgstr ""
 #: include/variables.php:226 include/variables.php:237
 #: include/variables.php:248 include/variables.php:259
 #: include/variables.php:270 include/variables.php:281
+#, fuzzy
 msgid "Green alarm"
-msgstr ""
+msgstr "हरा अलार्म"
 
 #: include/variables.php:165
 #, fuzzy
@@ -628,16 +655,19 @@ msgid "Alarm orphaned data source"
 msgstr "अनाथ डेटा स्रोत: %s"
 
 #: include/variables.php:187
+#, fuzzy
 msgid "Alarm non-empty poller output"
-msgstr ""
+msgstr "अलार्म गैर-खाली पोलर आउटपुट"
 
 #: include/variables.php:198
+#, fuzzy
 msgid "Alarm Bad indexes data source"
-msgstr ""
+msgstr "अलार्म खराब इंडेक्स डेटा स्रोत"
 
 #: include/variables.php:209
+#, fuzzy
 msgid "Alarm Thershold logonly action"
-msgstr ""
+msgstr "अलार्म थर्सहोल्ड लॉगऑनली कार्रवाई"
 
 #: include/variables.php:220
 #, fuzzy
@@ -675,44 +705,54 @@ msgid "Alarm red/yellow polling time"
 msgstr "पैनल शीर्ष 5 सबसे खराब मतदान समय की अनुमति दें"
 
 #: include/variables.php:291
+#, fuzzy
 msgid "10s/5s red/yellow"
-msgstr ""
+msgstr "10s/5s लाल/पीला"
 
 #: include/variables.php:292 include/variables.php:303
+#, fuzzy
 msgid "20s/10s red/yellow"
-msgstr ""
+msgstr "20s/10s लाल/पीला"
 
 #: include/variables.php:293
+#, fuzzy
 msgid "40s/20s red/yellow"
-msgstr ""
+msgstr "40s/20s लाल/पीला"
 
 #: include/variables.php:298
+#, fuzzy
 msgid "Alarm red/yellow failed/all ratio"
-msgstr ""
+msgstr "अलार्म लाल/पीला विफल/सभी अनुपात"
 
 #: include/variables.php:302
+#, fuzzy
 msgid "0.1/0.2 red/yellow"
-msgstr ""
+msgstr "0.1/0.2 लाल/पीला"
 
 #: include/variables.php:304
+#, fuzzy
 msgid "more red/yellow"
-msgstr ""
+msgstr "अधिक लाल/पीला"
 
 #: include/variables.php:309
+#, fuzzy
 msgid "Alarm red/yellow ping"
-msgstr ""
+msgstr "अलार्म लाल/पीला पिंग"
 
 #: include/variables.php:313
+#, fuzzy
 msgid "20/10ms red/yellow"
-msgstr ""
+msgstr "20/10ms लाल/पीला"
 
 #: include/variables.php:314
+#, fuzzy
 msgid "50/20ms red/yellow"
-msgstr ""
+msgstr "50/20ms लाल/पीला"
 
 #: include/variables.php:315
+#, fuzzy
 msgid "100/200+ms red/yellow"
-msgstr ""
+msgstr "100/200+ms लाल/पीला"
 
 #: include/variables.php:320
 #, fuzzy
@@ -721,8 +761,9 @@ msgstr "Top5 सबसे खराब उपलब्धता"
 
 #: include/variables.php:324 include/variables.php:325
 #: include/variables.php:326
+#, fuzzy
 msgid "red/yellow"
-msgstr ""
+msgstr "लाल पीला"
 
 #: panellib/analyze.php:30
 #, fuzzy
@@ -730,8 +771,9 @@ msgid "Analysis Panels"
 msgstr "पैनलों को सक्षम / अक्षम करें"
 
 #: panellib/analyze.php:31
+#, fuzzy
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
-msgstr ""
+msgstr "पैनल जो कैक्टि और उसके प्लगइन्स के वर्तमान व्यवहार का विश्लेषण करते हैं।"
 
 #: panellib/analyze.php:36
 #, fuzzy
@@ -739,8 +781,9 @@ msgid "Analyze Logins"
 msgstr "पैनल एनालाइज लॉगिन की अनुमति दें"
 
 #: panellib/analyze.php:37
+#, fuzzy
 msgid "Analyze the last several Cacti logins for trends and errors."
-msgstr ""
+msgstr "प्रवृत्तियों और त्रुटियों के लिए पिछले कई कैक्टि लॉगिन का विश्लेषण करें।"
 
 #: panellib/analyze.php:51
 #, fuzzy
@@ -748,8 +791,9 @@ msgid "Analyze Logs"
 msgstr "कैक्टि लॉग का विश्लेषण करें"
 
 #: panellib/analyze.php:52
+#, fuzzy
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
-msgstr ""
+msgstr "कैक्टि की लॉग फ़ाइल में सामान्य त्रुटियों की तलाश करें जो चिंता का कारण होनी चाहिए।"
 
 #: panellib/analyze.php:66
 #, fuzzy
@@ -757,8 +801,9 @@ msgid "Database Checks"
 msgstr "डेटाबेस की जाँच"
 
 #: panellib/analyze.php:67
+#, fuzzy
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
-msgstr ""
+msgstr "सामान्य त्रुटियों के लिए MySQL/MariaDB डेटाबेस का विश्लेषण करें। ध्यान दें कि इस प्रक्रिया में बहुत बड़े सिस्टम पर लंबा समय लग सकता है।"
 
 #: panellib/analyze.php:81
 #, fuzzy
@@ -766,8 +811,9 @@ msgid "Trend Details"
 msgstr "प्रदर्शन का विवरण"
 
 #: panellib/analyze.php:82
+#, fuzzy
 msgid "Few trends (down hosts, trigged tholds,...)"
-msgstr ""
+msgstr "कुछ रुझान (मेजबान नीचे, ट्रिगर हो गया,...)"
 
 #: panellib/analyze.php:96
 #, fuzzy
@@ -775,8 +821,9 @@ msgid "Analyze Cacti Objects"
 msgstr "कैक्टि लॉग का विश्लेषण करें"
 
 #: panellib/analyze.php:97
+#, fuzzy
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr ""
+msgstr "पेड़ों, रेखांकन, मेजबानों का विश्लेषण करें, ..."
 
 #: panellib/analyze.php:131
 #, fuzzy
@@ -784,8 +831,9 @@ msgid "Total Failed Logins:"
 msgstr "लॉग किए गए विफल"
 
 #: panellib/analyze.php:133
+#, fuzzy
 msgid "Active Users in Last Hour:"
-msgstr ""
+msgstr "अंतिम घंटे में सक्रिय उपयोगकर्ता:"
 
 #: panellib/analyze.php:152
 #, fuzzy
@@ -794,34 +842,34 @@ msgstr "अंतिम 10 लॉगिन"
 
 #: panellib/analyze.php:165 panellib/analyze.php:960 panellib/misc.php:287
 msgid "Date"
-msgstr ""
+msgstr "दिनांक"
 
 #: panellib/analyze.php:166
 msgid "Username"
-msgstr ""
+msgstr "उपयोगकर्ता नाम"
 
 #: panellib/analyze.php:167 panellib/analyze.php:961
 msgid "IP Address"
-msgstr ""
+msgstr "IP सिरनामा"
 
 #: panellib/analyze.php:168 panellib/misc.php:246
-#, fuzzy
 msgid "Status"
-msgstr "आंकड़ों को बूस्ट करें"
+msgstr "ऑर्डर स्थिति"
 
 #: panellib/analyze.php:173 panellib/analyze.php:972 panellib/misc.php:302
 #: panellib/system.php:486 panellib/top5.php:313 panellib/top5.php:564
-#, fuzzy
 msgid "Failed"
-msgstr "अनुत्तीर्ण होना"
+msgstr "असफल"
 
 #: panellib/analyze.php:175 panellib/analyze.php:974
+#, fuzzy
 msgid "Success - Login"
-msgstr ""
+msgstr "सफलता - लॉगिन"
 
 #: panellib/analyze.php:177 panellib/analyze.php:976
+#, fuzzy
 msgid "Success - Token"
-msgstr ""
+msgstr "सफलता - टोकन"
 
 #: panellib/analyze.php:211 panellib/analyze.php:873
 #, fuzzy
@@ -831,12 +879,12 @@ msgstr "लॉग फ़ाइल सुलभ या खाली नहीं"
 #: panellib/analyze.php:231
 #, fuzzy
 msgid "Errors: "
-msgstr "त्रुटियाँ"
+msgstr "गल्तियां"
 
 #: panellib/analyze.php:236
 #, fuzzy
 msgid "Warnings: "
-msgstr "चेतावनी"
+msgstr "चेतावनियां"
 
 #: panellib/analyze.php:243
 #, fuzzy
@@ -864,9 +912,9 @@ msgid "Errors and Warnings from last %s lines)"
 msgstr "(त्रुटियों और अंतिम %s लाइनों में चेतावनी)"
 
 #: panellib/analyze.php:301
-#, php-format
+#, fuzzy, php-format
 msgid "Table %s status %s"
-msgstr ""
+msgstr "तालिका %s स्थिति %s"
 
 #: panellib/analyze.php:309
 #, fuzzy
@@ -884,9 +932,9 @@ msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "कनेक्शन त्रुटियां - SQL सेवा को पुनरारंभ करने का प्रयास करें।"
 
 #: panellib/analyze.php:353
-#, php-format
+#, fuzzy, php-format
 msgid "Aborted clients/connects: %s - check logs."
-msgstr ""
+msgstr "निरस्त क्लाइंट/कनेक्ट: %s - लॉग जांचें।"
 
 #: panellib/analyze.php:362
 #, fuzzy, php-format
@@ -909,24 +957,29 @@ msgid "All tables: %s"
 msgstr "सभी टेबल: %s"
 
 #: panellib/analyze.php:378
+#, fuzzy
 msgid "Scheduled db check disabled"
-msgstr ""
+msgstr "अनुसूचित डीबी जांच अक्षम"
 
 #: panellib/analyze.php:380
+#, fuzzy
 msgid "hour"
-msgstr ""
+msgstr "1 घंटा"
 
 #: panellib/analyze.php:382
+#, fuzzy
 msgid "day"
-msgstr ""
+msgstr "दिन"
 
 #: panellib/analyze.php:384
+#, fuzzy
 msgid "week"
-msgstr ""
+msgstr "सप्ताह"
 
 #: panellib/analyze.php:386
+#, fuzzy
 msgid "month"
-msgstr ""
+msgstr "महीना"
 
 #: panellib/analyze.php:470
 #, fuzzy
@@ -956,9 +1009,8 @@ msgstr "डाटा का इंतजार है"
 #: panellib/analyze.php:1320 panellib/analyze.php:1345
 #: panellib/analyze.php:1369 panellib/poller.php:91 panellib/poller.php:273
 #: panellib/system.php:356 panellib/system.php:362 panellib/system.php:661
-#, fuzzy
 msgid "N/A"
-msgstr "एन / ए"
+msgstr "लागू नहीं"
 
 #: panellib/analyze.php:535
 #, fuzzy, php-format
@@ -986,9 +1038,9 @@ msgid "Datasource - bad indexes: %s"
 msgstr "डेटासोर्स - खराब इंडेक्स: %s"
 
 #: panellib/analyze.php:698
-#, php-format
+#, fuzzy, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr ""
+msgstr "लॉगऑनली अलर्ट/चेतावनी रोकें: %s"
 
 #: panellib/analyze.php:732
 #, fuzzy, php-format
@@ -1026,18 +1078,17 @@ msgid "Everything OK"
 msgstr "सब ठीक है"
 
 #: panellib/analyze.php:856
+#, fuzzy
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
-msgstr ""
+msgstr "कैक्टि लॉग विवरण का विश्लेषण करें [चेतावनी/त्रुटियां]"
 
 #: panellib/analyze.php:893
-#, fuzzy
 msgid "Errors"
-msgstr "त्रुटियाँ"
+msgstr "गल्तियां"
 
 #: panellib/analyze.php:898
-#, fuzzy
 msgid "Warnings"
-msgstr "चेतावनी"
+msgstr "चेतावनियां"
 
 #: panellib/analyze.php:903
 #, fuzzy
@@ -1056,23 +1107,26 @@ msgstr "लॉग का विश्लेषण करें - लाइनो
 
 #: panellib/analyze.php:962
 msgid "User"
-msgstr ""
+msgstr "उपयोगकर्ता "
 
 #: panellib/analyze.php:963 panellib/misc.php:289
 msgid "Result"
-msgstr ""
+msgstr "नतीजा"
 
 #: panellib/analyze.php:992
+#, fuzzy
 msgid "Active Users in Last 2 Hours:"
-msgstr ""
+msgstr "पिछले 2 घंटों में सक्रिय उपयोगकर्ता:"
 
 #: panellib/analyze.php:1003
+#, fuzzy
 msgid "No Active Users"
-msgstr ""
+msgstr "कोई सक्रिय उपयोगकर्ता नहीं"
 
 #: panellib/analyze.php:1009
+#, fuzzy
 msgid "View Full User Log"
-msgstr ""
+msgstr "पूरा उपयोगकर्ता लॉग देखें"
 
 #: panellib/analyze.php:1020
 #, fuzzy
@@ -1105,9 +1159,9 @@ msgid "Datasources with bad indexes - %s:"
 msgstr "डेटासोर्स - खराब अनुक्रमित %s:"
 
 #: panellib/analyze.php:1218
-#, php-format
+#, fuzzy, php-format
 msgid "Thold logonly alert/warning - %s:"
-msgstr ""
+msgstr "लॉगऑनली अलर्ट/चेतावनी रोकें - %s:"
 
 #: panellib/analyze.php:1247
 #, fuzzy, php-format
@@ -1140,8 +1194,9 @@ msgid "Graphical Panels"
 msgstr "इंट्रापेज पैनल"
 
 #: panellib/graphs.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
-msgstr ""
+msgstr "पैनल जो ग्राफिकल तरीके से कैक्टि और उसके प्लगइन्स के बारे में जानकारी प्रदान करते हैं।"
 
 #: panellib/graphs.php:36 panellib/graphs.php:271
 #, fuzzy
@@ -1169,8 +1224,9 @@ msgid "Devices by Status"
 msgstr "डिवाइस टेम्पलेट"
 
 #: panellib/graphs.php:67
+#, fuzzy
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr ""
+msgstr "स्थिति के अनुसार उपकरणों का ग्राफ़ (ऊपर, नीचे,...)"
 
 #: panellib/graphs.php:94
 #, fuzzy
@@ -1200,13 +1256,11 @@ msgstr "所有"
 
 #: panellib/graphs.php:229 panellib/graphs.php:238 panellib/graphs.php:343
 #: panellib/mactrack.php:104
-#, fuzzy
 msgid "Up"
 msgstr "ऊपर"
 
 #: panellib/graphs.php:230 panellib/graphs.php:239 panellib/graphs.php:344
 #: panellib/mactrack.php:105
-#, fuzzy
 msgid "Down"
 msgstr "नीचे"
 
@@ -1253,8 +1307,9 @@ msgid "MacTrack Panels"
 msgstr "Mactrack साइट्स"
 
 #: panellib/mactrack.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti's MacTrack plugins."
-msgstr ""
+msgstr "पैनल जो कैक्टि के मैकट्रैक प्लगइन्स के बारे में जानकारी प्रदान करते हैं।"
 
 #: panellib/mactrack.php:36
 #, fuzzy
@@ -1262,8 +1317,9 @@ msgid "MacTrack Plugin"
 msgstr "पैनल मैकट्रैक प्लगिन की अनुमति दें"
 
 #: panellib/mactrack.php:37
+#, fuzzy
 msgid "Various MacTrack collection and site statistics."
-msgstr ""
+msgstr "विभिन्न MacTrack संग्रह और साइट आँकड़े।"
 
 #: panellib/mactrack.php:51 panellib/mactrack.php:179
 #, fuzzy
@@ -1271,8 +1327,9 @@ msgid "MacTrack Sites"
 msgstr "Mactrack साइट्स"
 
 #: panellib/mactrack.php:52
+#, fuzzy
 msgid "Various MacTrack Site statistics."
-msgstr ""
+msgstr "विभिन्न MacTrack साइट आँकड़े।"
 
 #: panellib/mactrack.php:78 panellib/mactrack.php:129
 #, fuzzy
@@ -1319,9 +1376,8 @@ msgid "Error"
 msgstr "त्रुटि"
 
 #: panellib/mactrack.php:107
-#, fuzzy
 msgid "Unknown"
-msgstr "अनजान"
+msgstr "अज्ञात"
 
 #: panellib/mactrack.php:115 panellib/mactrack.php:168 panellib/thold.php:199
 #, fuzzy
@@ -1333,9 +1389,8 @@ msgid "Site"
 msgstr "साइट"
 
 #: panellib/mactrack.php:134 panellib/mactrack.php:187
-#, fuzzy
 msgid "Devices"
-msgstr "उपकरण"
+msgstr "डिवाइस"
 
 #: panellib/mactrack.php:135 panellib/mactrack.php:188
 #, fuzzy
@@ -1368,20 +1423,24 @@ msgid "No mactrack sites found"
 msgstr "कोई भी मैक्रैक साइट नहीं मिली"
 
 #: panellib/misc.php:30
+#, fuzzy
 msgid "Miscelaneous Panels"
-msgstr ""
+msgstr "विविध पैनल"
 
 #: panellib/misc.php:31
+#, fuzzy
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr ""
+msgstr "पैनल जो कैक्टि के बारे में सामान्य गैर-वर्गीकृत डेटा हैं।"
 
 #: panellib/misc.php:36
+#, fuzzy
 msgid "NTP Status"
-msgstr ""
+msgstr "एनटीपी स्थिति"
 
 #: panellib/misc.php:37
+#, fuzzy
 msgid "Checking your Cacti system clock for drift from a known baseline."
-msgstr ""
+msgstr "एक ज्ञात आधार रेखा से बहाव के लिए अपनी कैक्टि सिस्टम घड़ी की जाँच करना।"
 
 #: panellib/misc.php:51
 #, fuzzy
@@ -1389,8 +1448,9 @@ msgid "Maint Plugin Details"
 msgstr "प्रदर्शन का विवरण"
 
 #: panellib/misc.php:52
+#, fuzzy
 msgid "Maint Plugin details on upcoming schedules"
-msgstr ""
+msgstr "आगामी शेड्यूल पर प्लगइन विवरण बनाए रखें"
 
 #: panellib/misc.php:66
 #, fuzzy
@@ -1398,8 +1458,9 @@ msgid "Webseer Details"
 msgstr "प्रदर्शन का विवरण"
 
 #: panellib/misc.php:67
+#, fuzzy
 msgid "Plugin webseer URL Service Check Details"
-msgstr ""
+msgstr "प्लगइन वेबसीर URL सेवा विवरण की जाँच करें"
 
 #: panellib/misc.php:97
 #, fuzzy
@@ -1417,13 +1478,14 @@ msgid "Failed to get NTP time from %s"
 msgstr "$ Ntp_server से NTP समय प्राप्त करने में विफल"
 
 #: panellib/misc.php:119
+#, fuzzy
 msgid "Please check time as it is off by more"
-msgstr ""
+msgstr "कृपया समय की जांच करें क्योंकि यह अधिक से अधिक बंद है"
 
 #: panellib/misc.php:120
-#, php-format
+#, fuzzy, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr ""
+msgstr "NTP सर्वर से %s सेकंड से अधिक %s।"
 
 #: panellib/misc.php:122
 #, fuzzy
@@ -1436,8 +1498,9 @@ msgid "Unable to contact the NTP server indicated."
 msgstr "संकेतित NTP सर्वर से संपर्क करने में असमर्थ। <br/> कृपया अपना कॉन्फ़िगरेशन जांचें। <br/>"
 
 #: panellib/misc.php:128
+#, fuzzy
 msgid "Please check your configuration."
-msgstr ""
+msgstr "कृपया अपनी कॉन्फ़िगरेशन जांचें।"
 
 #: panellib/misc.php:212
 #, fuzzy
@@ -1450,17 +1513,19 @@ msgid "Plugin Webseer isn't installed or started"
 msgstr "प्लगइन थ्रेड स्थापित या प्रारंभ नहीं किया गया है"
 
 #: panellib/misc.php:234
+#, fuzzy
 msgid "Number of checks: "
-msgstr ""
+msgstr "चेक की संख्या:"
 
 #: panellib/misc.php:235 panellib/thold.php:248
 #, fuzzy
 msgid "Disabled: "
-msgstr "अक्षम: %s"
+msgstr "अक्षम"
 
 #: panellib/misc.php:236
+#, fuzzy
 msgid "Status up: "
-msgstr ""
+msgstr "स्थिति ऊपर:"
 
 #: panellib/misc.php:237
 #, fuzzy
@@ -1468,29 +1533,31 @@ msgid "Status down: "
 msgstr "मेज़बान नीचे"
 
 #: panellib/misc.php:244
+#, fuzzy
 msgid "First 3 failed sites"
-msgstr ""
+msgstr "पहली 3 असफल साइटें"
 
 #: panellib/misc.php:245
 msgid "url"
-msgstr ""
+msgstr "url"
 
 #: panellib/misc.php:247 panellib/misc.php:290
+#, fuzzy
 msgid "HTTP code"
-msgstr ""
+msgstr "HTTP कोड"
 
 #: panellib/misc.php:271
+#, fuzzy
 msgid "Webseer Plugin - Details"
-msgstr ""
+msgstr "वेबसीर प्लगइन - विवरण"
 
 #: panellib/misc.php:288
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: panellib/misc.php:300 panellib/thold.php:179
-#, fuzzy
 msgid "OK"
-msgstr "ठीक"
+msgstr "ठीक है"
 
 #: panellib/poller.php:30
 #, fuzzy
@@ -1498,8 +1565,9 @@ msgid "Poller Panels"
 msgstr "पैनल पोलर आँकड़े की अनुमति दें"
 
 #: panellib/poller.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti's polling process."
-msgstr ""
+msgstr "पैनल जो कैक्टि की मतदान प्रक्रिया के बारे में जानकारी प्रदान करते हैं।"
 
 #: panellib/poller.php:36
 #, fuzzy
@@ -1507,8 +1575,9 @@ msgid "Poller Information"
 msgstr "पोल जानकारी"
 
 #: panellib/poller.php:37
+#, fuzzy
 msgid "Various information about your Cacti poller."
-msgstr ""
+msgstr "आपके कैक्टि पोलर के बारे में विभिन्न जानकारी।"
 
 #: panellib/poller.php:51
 #, fuzzy
@@ -1516,8 +1585,9 @@ msgid "Poller Statistics"
 msgstr "पैनल पोलर आँकड़े की अनुमति दें"
 
 #: panellib/poller.php:52
+#, fuzzy
 msgid "Various Cacti poller statistics."
-msgstr ""
+msgstr "विभिन्न कैक्टि पोलर आँकड़े।"
 
 #: panellib/poller.php:78
 #, fuzzy
@@ -1525,21 +1595,21 @@ msgid "ID/Name/Total Time/State"
 msgstr "आईडी / नाम / कुल समय / स्थिति"
 
 #: panellib/poller.php:98 panellib/poller.php:257
-#, fuzzy
 msgid "ID"
-msgstr "ID:"
+msgstr "ID"
 
 #: panellib/poller.php:99 panellib/poller.php:258
 msgid "Name"
-msgstr ""
+msgstr "नाम"
 
 #: panellib/poller.php:100 panellib/poller.php:259
 msgid "State"
-msgstr ""
+msgstr "राज्य"
 
 #: panellib/poller.php:101 panellib/poller.php:260
+#, fuzzy
 msgid "Total Time"
-msgstr ""
+msgstr "कुल समय"
 
 #: panellib/poller.php:110 panellib/poller.php:289
 #, fuzzy
@@ -1547,14 +1617,12 @@ msgid "New/Idle"
 msgstr "नई / निष्क्रिय"
 
 #: panellib/poller.php:112 panellib/poller.php:291 panellib/system.php:292
-#, fuzzy
 msgid "Running"
 msgstr "चल रहा है"
 
 #: panellib/poller.php:114 panellib/poller.php:293 panellib/system.php:290
-#, fuzzy
 msgid "Idle"
-msgstr "बेकार"
+msgstr "आइडल"
 
 #: panellib/poller.php:116 panellib/poller.php:295
 #, fuzzy
@@ -1563,9 +1631,9 @@ msgstr "Unkn / नीचे"
 
 #: panellib/poller.php:127 panellib/top5.php:268 panellib/top5.php:270
 #: panellib/top5.php:524 panellib/top5.php:526
-#, php-format
+#, fuzzy, php-format
 msgid "%s Secs"
-msgstr ""
+msgstr "%s सेकंड"
 
 #: panellib/poller.php:135 panellib/poller.php:310
 #, fuzzy
@@ -1583,9 +1651,8 @@ msgid " Poller ID: "
 msgstr "पोल आईडी:"
 
 #: panellib/poller.php:227
-#, fuzzy
 msgid "ID: "
-msgstr "ID:"
+msgstr "आईडी :"
 
 #: panellib/poller.php:250
 #, fuzzy
@@ -1593,12 +1660,14 @@ msgid "Poller Details"
 msgstr "पैनल पोलर आँकड़े की अनुमति दें"
 
 #: panellib/poller.php:261
+#, fuzzy
 msgid "Average Time"
-msgstr ""
+msgstr "औसत समय"
 
 #: panellib/poller.php:262
+#, fuzzy
 msgid "Max Time"
-msgstr ""
+msgstr "अधिकतम समय"
 
 #: panellib/syslog.php:30
 #, fuzzy
@@ -1606,8 +1675,9 @@ msgid "Syslog Panels"
 msgstr "रीलोड पैनल"
 
 #: panellib/syslog.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti's Syslog message processing."
-msgstr ""
+msgstr "पैनल जो कैक्टि के Syslog संदेश प्रसंस्करण के बारे में जानकारी प्रदान करते हैं।"
 
 #: panellib/syslog.php:36
 #, fuzzy
@@ -1615,20 +1685,22 @@ msgid "Syslog Details"
 msgstr "प्रदर्शन का विवरण"
 
 #: panellib/syslog.php:37
+#, fuzzy
 msgid "Various Syslog Plugin statistics."
-msgstr ""
+msgstr "विभिन्न Syslog प्लगइन आँकड़े।"
 
 #: panellib/syslog.php:117 panellib/top5.php:314 panellib/top5.php:565
 msgid "Total"
-msgstr ""
+msgstr "कुल"
 
 #: panellib/syslog.php:137
+#, fuzzy
 msgid "Incoming"
-msgstr ""
+msgstr "आने वाली"
 
 #: panellib/syslog.php:157
 msgid "Alerts"
-msgstr ""
+msgstr "警报"
 
 #: panellib/syslog.php:188
 #, fuzzy
@@ -1641,8 +1713,9 @@ msgid "System Panels"
 msgstr "इंट्रापेज पैनल"
 
 #: panellib/system.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti system performance."
-msgstr ""
+msgstr "पैनल जो कैक्टि सिस्टम के प्रदर्शन के बारे में जानकारी प्रदान करते हैं।"
 
 #: panellib/system.php:36
 #, fuzzy
@@ -1650,16 +1723,19 @@ msgid "Information"
 msgstr "पैनल सिस्टम की जानकारी दें"
 
 #: panellib/system.php:37
+#, fuzzy
 msgid "Various system information about the Cacti system itself."
-msgstr ""
+msgstr "कैक्टि प्रणाली के बारे में ही विभिन्न प्रणाली की जानकारी।"
 
 #: panellib/system.php:51
+#, fuzzy
 msgid "Administrative Alerts"
-msgstr ""
+msgstr "प्रशासनिक अलर्ट"
 
 #: panellib/system.php:52
+#, fuzzy
 msgid "Extra admin notify panel for all users"
-msgstr ""
+msgstr "सभी उपयोगकर्ताओं के लिए अतिरिक्त व्यवस्थापक सूचना पैनल"
 
 #: panellib/system.php:66
 #, fuzzy
@@ -1667,8 +1743,9 @@ msgid "Boost Statistics"
 msgstr "आंकड़ों को बूस्ट करें"
 
 #: panellib/system.php:67
+#, fuzzy
 msgid "Information about Cacti's performance boost process."
-msgstr ""
+msgstr "कैक्टि के प्रदर्शन को बढ़ावा देने की प्रक्रिया के बारे में जानकारी।"
 
 #: panellib/system.php:81
 #, fuzzy
@@ -1676,8 +1753,9 @@ msgid "24 Hour Extremes"
 msgstr "24 घंटे चरम पर"
 
 #: panellib/system.php:82
+#, fuzzy
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
-msgstr ""
+msgstr "24 घंटे के मतदान चरम के साथ तालिका (सबसे लंबी पोलर रन, डाउन होस्ट)"
 
 #: panellib/system.php:96
 #, fuzzy
@@ -1700,9 +1778,8 @@ msgid "This function is not implemented on Windows platforms"
 msgstr "यह फ़ंक्शन विंडोज प्लेटफॉर्म पर लागू नहीं किया गया है"
 
 #: panellib/system.php:152
-#, fuzzy
 msgid "Load"
-msgstr "भार"
+msgstr "लोड करें"
 
 #: panellib/system.php:183
 #, fuzzy
@@ -1715,8 +1792,9 @@ msgid "Poller Type:"
 msgstr "पोलर प्रकार:"
 
 #: panellib/system.php:196
+#, fuzzy
 msgid "Spine"
-msgstr ""
+msgstr "रीढ़ की हड्डी"
 
 #: panellib/system.php:200
 #, fuzzy
@@ -1744,9 +1822,8 @@ msgid "Overrun Warning"
 msgstr "ओवररन वार्निंग"
 
 #: panellib/system.php:297
-#, fuzzy
 msgid "Timed Out"
-msgstr "समय समााप्त"
+msgstr "समय समााप्त हो जाना"
 
 #: panellib/system.php:300
 msgid "Other"
@@ -1758,9 +1835,9 @@ msgid "Never Run"
 msgstr "कभी मत दौडना"
 
 #: panellib/system.php:309
-#, php-format
+#, fuzzy, php-format
 msgid "Parallel Processes: %s"
-msgstr ""
+msgstr "समानांतर प्रक्रियाएं: %s"
 
 #: panellib/system.php:312
 #, fuzzy, php-format
@@ -1843,8 +1920,9 @@ msgid "Long Running Poller"
 msgstr "आगे जाकर <br/> poller"
 
 #: panellib/system.php:577
+#, fuzzy
 msgid "Max Device Down"
-msgstr ""
+msgstr "मैक्स डिवाइस डाउन"
 
 #: panellib/system.php:598
 #, fuzzy
@@ -1867,8 +1945,9 @@ msgid "Threshold Panels"
 msgstr "सीमारेखा"
 
 #: panellib/thold.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti Thresholding Plugin."
-msgstr ""
+msgstr "पैनल जो कैक्टि थ्रेसहोल्डिंग प्लगइन के बारे में जानकारी प्रदान करते हैं।"
 
 #: panellib/thold.php:36 panellib/thold.php:285
 #, fuzzy
@@ -1886,8 +1965,9 @@ msgid "Threshold"
 msgstr "सीमारेखा"
 
 #: panellib/thold.php:52
+#, fuzzy
 msgid "Threshold Plugin Graph (all, trigerred, ...)"
-msgstr ""
+msgstr "दहलीज प्लगइन ग्राफ (सभी, ट्रिगर, ...)"
 
 #: panellib/thold.php:78 panellib/thold.php:292
 #, fuzzy
@@ -1950,8 +2030,9 @@ msgid "Top 5 Panels"
 msgstr "शीर्ष 5 सबसे खराब मतदान का समय"
 
 #: panellib/top5.php:31
+#, fuzzy
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr ""
+msgstr "पैनल जो कैक्टि डेटा संग्रह के बारे में जानकारी ट्रेंडिंग जानकारी प्रदान करते हैं।"
 
 #: panellib/top5.php:36
 #, fuzzy
@@ -1996,26 +2077,25 @@ msgstr "समान IP और पोर्ट वाले डिवाइस: 
 #: panellib/top5.php:124 panellib/top5.php:250 panellib/top5.php:312
 #: panellib/top5.php:380 panellib/top5.php:440 panellib/top5.php:505
 #: panellib/top5.php:563
-#, fuzzy
 msgid "Host"
-msgstr "मेजबान"
+msgstr "होस्ट"
 
 #: panellib/top5.php:125 panellib/top5.php:381
 msgid "Average"
-msgstr ""
+msgstr "औसत"
 
 #: panellib/top5.php:126 panellib/top5.php:382
 msgid "Current"
-msgstr ""
+msgstr "वर्तमान"
 
 #: panellib/top5.php:189
-#, fuzzy
 msgid "Hostname"
-msgstr "मेजबान"
+msgstr "होस्टनांऽ"
 
 #: panellib/top5.php:190
+#, fuzzy
 msgid "Availability/Reachability"
-msgstr ""
+msgstr "उपलब्धता / पहुंच योग्यता"
 
 #: panellib/top5.php:251 panellib/top5.php:506
 #, fuzzy
@@ -2023,8 +2103,9 @@ msgid "Polling Time"
 msgstr "पोल जानकारी"
 
 #: panellib/top5.php:315 panellib/top5.php:566
+#, fuzzy
 msgid "Ratio"
-msgstr ""
+msgstr "अनुपात"
 
 #: panellib/top5.php:356
 #, fuzzy
@@ -2037,9 +2118,8 @@ msgid "Top 20 Hosts with the Worst Availability"
 msgstr "Top5 सबसे खराब उपलब्धता"
 
 #: panellib/top5.php:441
-#, fuzzy
 msgid "Availability"
-msgstr "Top5 सबसे खराब उपलब्धता"
+msgstr "उपलब्धता"
 
 #: panellib/top5.php:481
 #, fuzzy
@@ -2062,9 +2142,8 @@ msgid "Intropage Administration"
 msgstr "परिचय पृष्ठ विकल्प"
 
 #: setup.php:76
-#, fuzzy
 msgid "System Administration"
-msgstr "पैनल सिस्टम की जानकारी दें"
+msgstr "तंत्र प्रशासन"
 
 #, fuzzy
 #~ msgid "Add %s"

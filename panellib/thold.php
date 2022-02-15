@@ -167,7 +167,7 @@ function graph_thold($panel, $user_id) {
 		$sql_where = "td.thold_enabled = 'off'";
 		$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $user_id);
 
-		$url_prefix = '<a href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">';
+		$url_prefix = '<a class="pic" href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">';
 		$url_suffix = '</a>';
 
 		$panel['data']  = sprintf($url_prefix, '-1') . __('All', 'intropage')      . ": $t_all$url_suffix<br/>";
