@@ -223,7 +223,7 @@ function graph_host($panel, $user_id) {
 			AND disabled = "on"');
 
 		$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
-		$url_prefix = $console_access ? '<a href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
+		$url_prefix = $console_access ? '<a class="pic" href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
 		$url_suffix = $console_access ? '</a>' : '';
 
 		$panel['data']  = sprintf($url_prefix,'-1')  . __('All', 'intropage')        . ": $h_all$url_suffix<br/>";
