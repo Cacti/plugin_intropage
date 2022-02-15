@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2021-03-10 19:25-0500\n"
-"PO-Revision-Date: 2020-03-28 12:11-0400\n"
+"PO-Revision-Date: 2022-02-15 15:49-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: display.php:39
 #, fuzzy
@@ -30,7 +30,7 @@ msgstr "Можете да деактивирате редовете по-гор�
 
 #: display.php:172 include/functions.php:1301
 msgid "Default"
-msgstr ""
+msgstr "По подразбиране"
 
 #: display.php:209
 #, fuzzy
@@ -38,8 +38,9 @@ msgid "Disable panel move/enable copy text from panel"
 msgstr "Деактивиране на преместването на панела / активиране на копирането на текст от панела"
 
 #: display.php:217
+#, fuzzy
 msgid "Panels ..."
-msgstr ""
+msgstr "панели..."
 
 #: display.php:253 display.php:261
 #, fuzzy, php-format
@@ -49,7 +50,7 @@ msgstr "Нямате разрешение"
 #: display.php:272
 #, fuzzy
 msgid "Actions ..."
-msgstr "Изберете действие ..."
+msgstr "Действия"
 
 #: display.php:275
 #, fuzzy
@@ -102,8 +103,9 @@ msgid "Sort by Severity"
 msgstr "Сортиране по приоритет на панела"
 
 #: display.php:317 display.php:320
+#, fuzzy
 msgid "Sort by User Preference"
-msgstr ""
+msgstr "Сортиране по потребителски предпочитания"
 
 #: display.php:326
 #, fuzzy
@@ -131,16 +133,19 @@ msgid "Welcome to Intropage!"
 msgstr "Интропажни панели"
 
 #: display.php:358
+#, fuzzy
 msgid "You can Add Dashboard Panels in two ways:"
-msgstr ""
+msgstr "Можете да добавите панели за управление по два начина:"
 
 #: display.php:360
+#, fuzzy
 msgid "Select prepared Dashboard Panels from the menu to the right."
-msgstr ""
+msgstr "Изберете подготвени панели за табло от менюто вдясно."
 
 #: display.php:361
+#, fuzzy
 msgid "Add any Cacti Graph by Clicking the 'Eye Icon' which is next to each Cacti Graph. Graph with actual timespan will be added to current dashboard"
-msgstr ""
+msgstr "Добавете всяка графика на кактуси, като щракнете върху „Иконата на очите“, която е до всяка графика на кактуси. Графика с действителен период от време ще бъде добавена към текущото табло за управление"
 
 #: display.php:634
 #, fuzzy
@@ -159,7 +164,7 @@ msgstr "Грешка при четене на нови данни"
 
 #: display.php:722
 msgid "Close"
-msgstr ""
+msgstr "Затвори"
 
 #: display.php:733
 #, fuzzy
@@ -167,8 +172,9 @@ msgid "Panel Details"
 msgstr "Покажи детайли"
 
 #: include/functions.php:211
+#, fuzzy
 msgid "Dashboard has been removed"
-msgstr ""
+msgstr "Таблото за управление е премахнато"
 
 #: include/functions.php:233
 #, fuzzy
@@ -176,51 +182,58 @@ msgid "New Dashboard"
 msgstr "Добавяне към таблото за управление"
 
 #: include/functions.php:235
+#, fuzzy
 msgid "Dashboard has been added"
-msgstr ""
+msgstr "Таблото за управление е добавено"
 
 #: include/functions.php:266
+#, fuzzy
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
-msgstr ""
+msgstr "Не може да се добави увеличена или персонализирана графика с времеви интервал, променяйки времевия период на Последен половин час"
 
 #: include/functions.php:432
+#, fuzzy
 msgid "The Panel includes a render function but it does not exist."
-msgstr ""
+msgstr "Панелът включва функция за изобразяване, но тя не съществува."
 
 #: include/functions.php:435
+#, fuzzy
 msgid "The Panel does not have a render function."
-msgstr ""
+msgstr "Панелът няма функция за изобразяване."
 
 #: include/functions.php:441
 msgid "Not Found"
-msgstr ""
+msgstr "Не е намерен"
 
 #: include/functions.php:468
+#, fuzzy
 msgid "Panel not found"
-msgstr ""
+msgstr "Панелът не е намерен"
 
 #: include/functions.php:501
+#, fuzzy
 msgid "Details Function does not exist."
-msgstr ""
+msgstr "Подробности Функцията не съществува."
 
 #: include/functions.php:508
+#, fuzzy
 msgid "Panel Not Found"
-msgstr ""
+msgstr "Панелът не е намерен"
 
 #: include/functions.php:576 include/functions.php:594
-#, php-format
+#, fuzzy, php-format
 msgid " [ Updates in %s ]"
-msgstr ""
+msgstr " [ Актуализации в %s ]"
 
 #: include/functions.php:618
-#, php-format
+#, fuzzy, php-format
 msgid "%s Sec"
-msgstr ""
+msgstr "%s сек"
 
 #: include/functions.php:618
-#, php-format
+#, fuzzy, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s секунди"
 
 #: include/functions.php:625
 #, fuzzy, php-format
@@ -233,27 +246,29 @@ msgid "%s Minutes"
 msgstr "Всеки% d минути"
 
 #: include/functions.php:632
-#, php-format
+#, fuzzy, php-format
 msgid "%s Hours"
-msgstr ""
+msgstr "%s часа"
 
 #: include/functions.php:632
-#, php-format
+#, fuzzy, php-format
 msgid "%s Hrs"
-msgstr ""
+msgstr "%s ч"
 
 #: include/functions.php:636
 #, php-format
 msgid "%s Days"
-msgstr ""
+msgstr "%s Дни"
 
 #: include/functions.php:682
+#, fuzzy
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
-msgstr ""
+msgstr "Няма налични данни. Или принудително актуализиране, или изчакайте следващия цикъл на анкетиране на кактуси."
 
 #: include/functions.php:684
+#, fuzzy
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
-msgstr ""
+msgstr "Няма данни. Този панел не позволява принудителни актуализации. Ще трябва да изчакате до Ccti's Poller, за да извърши проверката."
 
 #: include/functions.php:824
 #, fuzzy
@@ -275,16 +290,19 @@ msgid "Show Details"
 msgstr "Покажи детайли"
 
 #: include/functions.php:1099
+#, fuzzy
 msgid "Loading data ..."
-msgstr ""
+msgstr "Данните се зареждат..."
 
 #: include/functions.php:1110
+#, fuzzy
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
-msgstr ""
+msgstr "Няма намерени данни. Или изчакайте следващата проверка,<br/> или използвайте Принудително презареждане, ако е налично."
 
 #: include/functions.php:1154
+#, fuzzy
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr ""
+msgstr "Не може да се добави към таблото за управление. Персонализиран период от време."
 
 #: include/functions.php:1164
 #, fuzzy
@@ -297,8 +315,9 @@ msgid "Add to Dashboard"
 msgstr "Добавяне към таблото за управление"
 
 #: include/functions.php:1214
+#, fuzzy
 msgid "Dashboard Names"
-msgstr ""
+msgstr "Имена на таблото за управление"
 
 #: include/functions.php:1223
 #, fuzzy, php-format
@@ -306,9 +325,9 @@ msgid "Dashboard %s"
 msgstr "Добавяне към таблото за управление"
 
 #: include/functions.php:1236 include/variables.php:62
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minute"
-msgstr "Всеки% d минути"
+msgstr "%d минута"
 
 #: include/functions.php:1237 include/functions.php:1238
 #: include/functions.php:1239 include/functions.php:1240
@@ -316,20 +335,20 @@ msgstr "Всеки% d минути"
 #: include/functions.php:1243 include/variables.php:63 include/variables.php:64
 #: include/variables.php:65 include/variables.php:66 include/variables.php:67
 #: include/variables.php:68
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minutes"
-msgstr "Всеки% d минути"
+msgstr "%d минути"
 
 #: include/functions.php:1244 include/variables.php:69
 #, php-format
 msgid "%d Hour"
-msgstr ""
+msgstr "%d час"
 
 #: include/functions.php:1245 include/functions.php:1246
 #: include/functions.php:1247 include/functions.php:1248
 #, php-format
 msgid "%d Hours"
-msgstr ""
+msgstr "%d часа"
 
 #: include/functions.php:1249
 #, fuzzy, php-format
@@ -342,12 +361,14 @@ msgid "Panel Refresh Intervals"
 msgstr "Покажи детайли"
 
 #: include/functions.php:1281
+#, fuzzy
 msgid "Global Refresh (Identical for All Users)"
-msgstr ""
+msgstr "Глобално опресняване (идентично за всички потребители)"
 
 #: include/functions.php:1283
+#, fuzzy
 msgid "User Refresh (Applicable to Your Account Only)"
-msgstr ""
+msgstr "Обновяване на потребителя (приложимо само за вашия акаунт)"
 
 #: include/settings.php:30 include/settings.php:88
 #, fuzzy
@@ -355,33 +376,38 @@ msgid "Intropage"
 msgstr "Интропажни панели"
 
 #: include/settings.php:35 setup.php:75
+#, fuzzy
 msgid "Normal User"
-msgstr ""
+msgstr "Нормален потребител"
 
 #: include/settings.php:142
+#, fuzzy
 msgid "System Level Panels"
-msgstr ""
+msgstr "Панели на системно ниво"
 
 #: include/settings.php:143
+#, fuzzy
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
-msgstr ""
+msgstr "Панели, които са подходящи за достъп от администратори или опитни потребители и обикновено не са приложими за обикновени потребители. Панелите обикновено се отнасят за цялостното използване на системата."
 
 #: include/settings.php:146
+#, fuzzy
 msgid "User Level Panels"
-msgstr ""
+msgstr "Панели на потребителско ниво"
 
 #: include/settings.php:147
+#, fuzzy
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
-msgstr ""
+msgstr "Панели, които са подходящи за достъп на обикновените потребители. Разрешенията са ограничени до това, което текущият потребител може да види."
 
 #: include/settings.php:189
+#, fuzzy
 msgid "You can Allow/Disallow Panels for User"
-msgstr ""
+msgstr "Можете да разрешите/забраните панели за потребител"
 
 #: include/variables.php:28
-#, fuzzy
 msgid "Display Settings"
-msgstr "Настройки на дисплея"
+msgstr "Display Settings"
 
 #: include/variables.php:32
 #, fuzzy
@@ -394,12 +420,14 @@ msgid "If checked Intropage displays important (errors, warnings) information fi
 msgstr "Ако е избрано, Intropage показва важни (грешки, предупреждения) информация"
 
 #: include/variables.php:38
+#, fuzzy
 msgid "Automatically Uninstall Panels"
-msgstr ""
+msgstr "Автоматично деинсталиране на панели"
 
 #: include/variables.php:39
+#, fuzzy
 msgid "If a Panel is installed and requried plugin is removed, automatically uninstall the panel too"
-msgstr ""
+msgstr "Ако панелът е инсталиран и необходимият плъгин е премахнат, автоматично деинсталирайте и панела"
 
 #: include/variables.php:44
 #, fuzzy
@@ -412,22 +440,22 @@ msgid "How often"
 msgstr "Колко често"
 
 #: include/variables.php:48
+#, fuzzy
 msgid "Automatically by poller"
-msgstr ""
+msgstr "Автоматично чрез анкета"
 
 #: include/variables.php:49 include/variables.php:85
 msgid "Never"
 msgstr "Никога"
 
 #: include/variables.php:50
-#, fuzzy
 msgid "Every Minute"
-msgstr "Всяка минута"
+msgstr "През 1 минута"
 
 #: include/variables.php:51 include/variables.php:120
-#, fuzzy, php-format
+#, php-format
 msgid "Every %d Minutes"
-msgstr "Всеки% d минути"
+msgstr "На всеки %d минути"
 
 #: include/variables.php:52 include/variables.php:86 include/variables.php:121
 #, fuzzy
@@ -440,8 +468,9 @@ msgid "Poller Timeout"
 msgstr "Инфо за полъри"
 
 #: include/variables.php:58
+#, fuzzy
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
-msgstr ""
+msgstr "Времето, в минути, през което фоновият полер на Intropage може да работи, преди да бъде прекъснат и убит от Кактуси."
 
 #: include/variables.php:73
 #, fuzzy
@@ -464,7 +493,6 @@ msgid "Poller runs this task. It could cause long poller run."
 msgstr "Poller изпълнява тази задача. Това би могло да причини дълъг полетов ход."
 
 #: include/variables.php:87 include/variables.php:122
-#, fuzzy
 msgid "Every Day"
 msgstr "Всеки ден"
 
@@ -505,9 +533,8 @@ msgid "Medium"
 msgstr "Среден"
 
 #: include/variables.php:102
-#, fuzzy
 msgid "Extended"
-msgstr "продължен"
+msgstr "Разширени"
 
 #: include/variables.php:108
 #, fuzzy
@@ -570,8 +597,9 @@ msgid "Alarm Settings"
 msgstr "Настройки на дисплея"
 
 #: include/variables.php:154
+#, fuzzy
 msgid "Alarm DB check aborted clients"
-msgstr ""
+msgstr "Проверка на алармен DB прекъснати клиенти"
 
 #: include/variables.php:155 include/variables.php:166
 #: include/variables.php:177 include/variables.php:188
@@ -581,8 +609,9 @@ msgstr ""
 #: include/variables.php:265 include/variables.php:276
 #: include/variables.php:288 include/variables.php:299
 #: include/variables.php:310 include/variables.php:321
+#, fuzzy
 msgid "<strong>How to be notified?</strong>"
-msgstr ""
+msgstr "<strong>Как да бъдете уведомени?</strong>"
 
 #: include/variables.php:158 include/variables.php:169
 #: include/variables.php:180 include/variables.php:191
@@ -590,8 +619,9 @@ msgstr ""
 #: include/variables.php:224 include/variables.php:235
 #: include/variables.php:246 include/variables.php:257
 #: include/variables.php:268 include/variables.php:279
+#, fuzzy
 msgid "Red alarm"
-msgstr ""
+msgstr "Червена аларма"
 
 #: include/variables.php:159 include/variables.php:170
 #: include/variables.php:181 include/variables.php:192
@@ -599,8 +629,9 @@ msgstr ""
 #: include/variables.php:225 include/variables.php:236
 #: include/variables.php:247 include/variables.php:258
 #: include/variables.php:269 include/variables.php:280
+#, fuzzy
 msgid "Yellow alarm"
-msgstr ""
+msgstr "Жълта аларма"
 
 #: include/variables.php:160 include/variables.php:171
 #: include/variables.php:182 include/variables.php:193
@@ -608,8 +639,9 @@ msgstr ""
 #: include/variables.php:226 include/variables.php:237
 #: include/variables.php:248 include/variables.php:259
 #: include/variables.php:270 include/variables.php:281
+#, fuzzy
 msgid "Green alarm"
-msgstr ""
+msgstr "Зелена аларма"
 
 #: include/variables.php:165
 #, fuzzy
@@ -622,16 +654,19 @@ msgid "Alarm orphaned data source"
 msgstr "Източници на данни: %s"
 
 #: include/variables.php:187
+#, fuzzy
 msgid "Alarm non-empty poller output"
-msgstr ""
+msgstr "Алармен изход за непразен полер"
 
 #: include/variables.php:198
+#, fuzzy
 msgid "Alarm Bad indexes data source"
-msgstr ""
+msgstr "Аларма Лош източник на данни за индекси"
 
 #: include/variables.php:209
+#, fuzzy
 msgid "Alarm Thershold logonly action"
-msgstr ""
+msgstr "Аларма Thershold действие само при влизане"
 
 #: include/variables.php:220
 #, fuzzy
@@ -669,44 +704,54 @@ msgid "Alarm red/yellow polling time"
 msgstr "Позволете на панела Топ 5 най-лошото време за анкетиране"
 
 #: include/variables.php:291
+#, fuzzy
 msgid "10s/5s red/yellow"
-msgstr ""
+msgstr "10s/5s червено/жълто"
 
 #: include/variables.php:292 include/variables.php:303
+#, fuzzy
 msgid "20s/10s red/yellow"
-msgstr ""
+msgstr "20s/10s червено/жълто"
 
 #: include/variables.php:293
+#, fuzzy
 msgid "40s/20s red/yellow"
-msgstr ""
+msgstr "40s/20s червено/жълто"
 
 #: include/variables.php:298
+#, fuzzy
 msgid "Alarm red/yellow failed/all ratio"
-msgstr ""
+msgstr "Алармата червено/жълто неуспешно/всички съотношение"
 
 #: include/variables.php:302
+#, fuzzy
 msgid "0.1/0.2 red/yellow"
-msgstr ""
+msgstr "0,1/0,2 червено/жълто"
 
 #: include/variables.php:304
+#, fuzzy
 msgid "more red/yellow"
-msgstr ""
+msgstr "повече червено/жълто"
 
 #: include/variables.php:309
+#, fuzzy
 msgid "Alarm red/yellow ping"
-msgstr ""
+msgstr "Червен/жълт пинг на алармата"
 
 #: include/variables.php:313
+#, fuzzy
 msgid "20/10ms red/yellow"
-msgstr ""
+msgstr "20/10ms червено/жълто"
 
 #: include/variables.php:314
+#, fuzzy
 msgid "50/20ms red/yellow"
-msgstr ""
+msgstr "50/20ms червено/жълто"
 
 #: include/variables.php:315
+#, fuzzy
 msgid "100/200+ms red/yellow"
-msgstr ""
+msgstr "100/200+ms червено/жълто"
 
 #: include/variables.php:320
 #, fuzzy
@@ -715,8 +760,9 @@ msgstr "Топ 5 на най-лошата наличност"
 
 #: include/variables.php:324 include/variables.php:325
 #: include/variables.php:326
+#, fuzzy
 msgid "red/yellow"
-msgstr ""
+msgstr "червено/жълто"
 
 #: panellib/analyze.php:30
 #, fuzzy
@@ -724,8 +770,9 @@ msgid "Analysis Panels"
 msgstr "Активиране / деактивиране на панелите"
 
 #: panellib/analyze.php:31
+#, fuzzy
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
-msgstr ""
+msgstr "Панели, които анализират текущото поведение на Cacti и неговите плъгини."
 
 #: panellib/analyze.php:36
 #, fuzzy
@@ -733,8 +780,9 @@ msgid "Analyze Logins"
 msgstr "Позволете панела Анализиране на вход"
 
 #: panellib/analyze.php:37
+#, fuzzy
 msgid "Analyze the last several Cacti logins for trends and errors."
-msgstr ""
+msgstr "Анализирайте последните няколко влизания в Cacti за тенденции и грешки."
 
 #: panellib/analyze.php:51
 #, fuzzy
@@ -742,8 +790,9 @@ msgid "Analyze Logs"
 msgstr "Анализирайте кактусовия дневник"
 
 #: panellib/analyze.php:52
+#, fuzzy
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
-msgstr ""
+msgstr "Потърсете често срещани грешки в регистрационния файл на Cacti, които трябва да са причина за безпокойство."
 
 #: panellib/analyze.php:66
 #, fuzzy
@@ -751,8 +800,9 @@ msgid "Database Checks"
 msgstr "Проверка на базата данни"
 
 #: panellib/analyze.php:67
+#, fuzzy
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
-msgstr ""
+msgstr "Анализирайте базата данни MySQL/MariaDB за често срещани грешки. Имайте предвид, че този процес може да отнеме много време на много големи системи."
 
 #: panellib/analyze.php:81
 #, fuzzy
@@ -760,8 +810,9 @@ msgid "Trend Details"
 msgstr "Покажи детайли"
 
 #: panellib/analyze.php:82
+#, fuzzy
 msgid "Few trends (down hosts, trigged tholds,...)"
-msgstr ""
+msgstr "Малко тенденции (нападане на хостове, задействани задържания,...)"
 
 #: panellib/analyze.php:96
 #, fuzzy
@@ -769,8 +820,9 @@ msgid "Analyze Cacti Objects"
 msgstr "Анализирайте кактусовия дневник"
 
 #: panellib/analyze.php:97
+#, fuzzy
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr ""
+msgstr "Анализирайте дървета, графики, хостове, ..."
 
 #: panellib/analyze.php:131
 #, fuzzy
@@ -778,8 +830,9 @@ msgid "Total Failed Logins:"
 msgstr "Неуспешно влизане"
 
 #: panellib/analyze.php:133
+#, fuzzy
 msgid "Active Users in Last Hour:"
-msgstr ""
+msgstr "Активни потребители през последния час:"
 
 #: panellib/analyze.php:152
 #, fuzzy
@@ -788,34 +841,34 @@ msgstr "Последните 10 влизания"
 
 #: panellib/analyze.php:165 panellib/analyze.php:960 panellib/misc.php:287
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: panellib/analyze.php:166
 msgid "Username"
-msgstr ""
+msgstr "Потребител"
 
 #: panellib/analyze.php:167 panellib/analyze.php:961
 msgid "IP Address"
-msgstr ""
+msgstr "IP Адрес"
 
 #: panellib/analyze.php:168 panellib/misc.php:246
-#, fuzzy
 msgid "Status"
-msgstr "Статистика за повишаване"
+msgstr "Статус"
 
 #: panellib/analyze.php:173 panellib/analyze.php:972 panellib/misc.php:302
 #: panellib/system.php:486 panellib/top5.php:313 panellib/top5.php:564
-#, fuzzy
 msgid "Failed"
 msgstr "Провалена"
 
 #: panellib/analyze.php:175 panellib/analyze.php:974
+#, fuzzy
 msgid "Success - Login"
-msgstr ""
+msgstr "Успех - Вход"
 
 #: panellib/analyze.php:177 panellib/analyze.php:976
+#, fuzzy
 msgid "Success - Token"
-msgstr ""
+msgstr "Успех - Токен"
 
 #: panellib/analyze.php:211 panellib/analyze.php:873
 #, fuzzy
@@ -823,9 +876,8 @@ msgid "Log file not accessible or empty"
 msgstr "Регистрационният файл не е достъпен или празен"
 
 #: panellib/analyze.php:231
-#, fuzzy
 msgid "Errors: "
-msgstr "Грешки"
+msgstr "Грешки: "
 
 #: panellib/analyze.php:236
 #, fuzzy
@@ -858,9 +910,9 @@ msgid "Errors and Warnings from last %s lines)"
 msgstr "(Грешки и предупреждения в последните %s реда)"
 
 #: panellib/analyze.php:301
-#, php-format
+#, fuzzy, php-format
 msgid "Table %s status %s"
-msgstr ""
+msgstr "Състояние на таблица %s %s"
 
 #: panellib/analyze.php:309
 #, fuzzy
@@ -878,9 +930,9 @@ msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr "Грешки при свързване - опитайте да рестартирате SQL услугата."
 
 #: panellib/analyze.php:353
-#, php-format
+#, fuzzy, php-format
 msgid "Aborted clients/connects: %s - check logs."
-msgstr ""
+msgstr "Прекъснати клиенти/свързване: %s - проверка на регистрационните файлове."
 
 #: panellib/analyze.php:362
 #, fuzzy, php-format
@@ -903,24 +955,25 @@ msgid "All tables: %s"
 msgstr "Всички таблици: %s"
 
 #: panellib/analyze.php:378
+#, fuzzy
 msgid "Scheduled db check disabled"
-msgstr ""
+msgstr "Планираната проверка на db е деактивирана"
 
 #: panellib/analyze.php:380
 msgid "hour"
-msgstr ""
+msgstr "час"
 
 #: panellib/analyze.php:382
 msgid "day"
-msgstr ""
+msgstr "ден"
 
 #: panellib/analyze.php:384
 msgid "week"
-msgstr ""
+msgstr "седмица"
 
 #: panellib/analyze.php:386
 msgid "month"
-msgstr ""
+msgstr "месец"
 
 #: panellib/analyze.php:470
 #, fuzzy
@@ -979,9 +1032,9 @@ msgid "Datasource - bad indexes: %s"
 msgstr "Източник на данни - лоши индекси: %s"
 
 #: panellib/analyze.php:698
-#, php-format
+#, fuzzy, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr ""
+msgstr "Задръжте сигнал/предупреждение само при влизане: %s"
 
 #: panellib/analyze.php:732
 #, fuzzy, php-format
@@ -1019,15 +1072,15 @@ msgid "Everything OK"
 msgstr "Всичко е наред"
 
 #: panellib/analyze.php:856
+#, fuzzy
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
-msgstr ""
+msgstr "Анализирайте подробности за дневника на кактусите [Предупреждения/Грешки]"
 
 #: panellib/analyze.php:893
 msgid "Errors"
 msgstr "Грешки"
 
 #: panellib/analyze.php:898
-#, fuzzy
 msgid "Warnings"
 msgstr "Предупреждения"
 
@@ -1048,23 +1101,26 @@ msgstr "Анализирайте дневника - брой линии"
 
 #: panellib/analyze.php:962
 msgid "User"
-msgstr ""
+msgstr "Потребител"
 
 #: panellib/analyze.php:963 panellib/misc.php:289
 msgid "Result"
-msgstr ""
+msgstr "Резултат"
 
 #: panellib/analyze.php:992
+#, fuzzy
 msgid "Active Users in Last 2 Hours:"
-msgstr ""
+msgstr "Активни потребители през последните 2 часа:"
 
 #: panellib/analyze.php:1003
+#, fuzzy
 msgid "No Active Users"
-msgstr ""
+msgstr "Няма активни потребители"
 
 #: panellib/analyze.php:1009
+#, fuzzy
 msgid "View Full User Log"
-msgstr ""
+msgstr "Вижте пълния потребителски дневник"
 
 #: panellib/analyze.php:1020
 #, fuzzy
@@ -1097,9 +1153,9 @@ msgid "Datasources with bad indexes - %s:"
 msgstr "Източник на данни - лоши индекси %s:"
 
 #: panellib/analyze.php:1218
-#, php-format
+#, fuzzy, php-format
 msgid "Thold logonly alert/warning - %s:"
-msgstr ""
+msgstr "Задръжте сигнал/предупреждение само при влизане - %s:"
 
 #: panellib/analyze.php:1247
 #, fuzzy, php-format
@@ -1132,13 +1188,13 @@ msgid "Graphical Panels"
 msgstr "Интропажни панели"
 
 #: panellib/graphs.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
-msgstr ""
+msgstr "Панели, които предоставят информация за Cacti и техните плъгини по графичен начин."
 
 #: panellib/graphs.php:36 panellib/graphs.php:271
-#, fuzzy
 msgid "Data Sources"
-msgstr "Източници на данни:"
+msgstr "Източници на данни"
 
 #: panellib/graphs.php:37
 #, fuzzy
@@ -1161,8 +1217,9 @@ msgid "Devices by Status"
 msgstr "Шаблони за устройства"
 
 #: panellib/graphs.php:67
+#, fuzzy
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr ""
+msgstr "Графика на устройствата по статус (нагоре, надолу,...)"
 
 #: panellib/graphs.php:94
 #, fuzzy
@@ -1243,8 +1300,9 @@ msgid "MacTrack Panels"
 msgstr "Mactrack сайтове"
 
 #: panellib/mactrack.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti's MacTrack plugins."
-msgstr ""
+msgstr "Панели, които предоставят информация за плъгините MacTrack на Cacti."
 
 #: panellib/mactrack.php:36
 #, fuzzy
@@ -1252,8 +1310,9 @@ msgid "MacTrack Plugin"
 msgstr "Разрешаване на панел MacTrack Plugin"
 
 #: panellib/mactrack.php:37
+#, fuzzy
 msgid "Various MacTrack collection and site statistics."
-msgstr ""
+msgstr "Различни статистически данни за събиране на MacTrack и сайтове."
 
 #: panellib/mactrack.php:51 panellib/mactrack.php:179
 #, fuzzy
@@ -1261,8 +1320,9 @@ msgid "MacTrack Sites"
 msgstr "Mactrack сайтове"
 
 #: panellib/mactrack.php:52
+#, fuzzy
 msgid "Various MacTrack Site statistics."
-msgstr ""
+msgstr "Различни статистически данни за сайта на MacTrack."
 
 #: panellib/mactrack.php:78 panellib/mactrack.php:129
 #, fuzzy
@@ -1330,9 +1390,8 @@ msgid "IPs"
 msgstr "IP адреси"
 
 #: panellib/mactrack.php:136 panellib/mactrack.php:189
-#, fuzzy
 msgid "Ports"
-msgstr "Пристанища"
+msgstr "Портове"
 
 #: panellib/mactrack.php:137 panellib/mactrack.php:190
 #, fuzzy
@@ -1355,20 +1414,24 @@ msgid "No mactrack sites found"
 msgstr "Не са намерени сайтове на mactrack"
 
 #: panellib/misc.php:30
+#, fuzzy
 msgid "Miscelaneous Panels"
-msgstr ""
+msgstr "Различни панели"
 
 #: panellib/misc.php:31
+#, fuzzy
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr ""
+msgstr "Панели, които обобщават некатегоризирани данни за кактусите."
 
 #: panellib/misc.php:36
+#, fuzzy
 msgid "NTP Status"
-msgstr ""
+msgstr "Състояние на NTP"
 
 #: panellib/misc.php:37
+#, fuzzy
 msgid "Checking your Cacti system clock for drift from a known baseline."
-msgstr ""
+msgstr "Проверка на системния часовник Cacti за отклонение от известна базова линия."
 
 #: panellib/misc.php:51
 #, fuzzy
@@ -1376,8 +1439,9 @@ msgid "Maint Plugin Details"
 msgstr "Покажи детайли"
 
 #: panellib/misc.php:52
+#, fuzzy
 msgid "Maint Plugin details on upcoming schedules"
-msgstr ""
+msgstr "Поддържайте подробности за приставката за предстоящите графици"
 
 #: panellib/misc.php:66
 #, fuzzy
@@ -1385,8 +1449,9 @@ msgid "Webseer Details"
 msgstr "Покажи детайли"
 
 #: panellib/misc.php:67
+#, fuzzy
 msgid "Plugin webseer URL Service Check Details"
-msgstr ""
+msgstr "Подробности за проверка на URL услугата на плъгин webseer"
 
 #: panellib/misc.php:97
 #, fuzzy
@@ -1404,13 +1469,14 @@ msgid "Failed to get NTP time from %s"
 msgstr "Неуспешно получаване на NTP време от $ ntp_server"
 
 #: panellib/misc.php:119
+#, fuzzy
 msgid "Please check time as it is off by more"
-msgstr ""
+msgstr "Моля, проверете времето, тъй като изтича с повече"
 
 #: panellib/misc.php:120
-#, php-format
+#, fuzzy, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr ""
+msgstr "от %s секунди от NTP сървър %s."
 
 #: panellib/misc.php:122
 #, fuzzy
@@ -1423,8 +1489,9 @@ msgid "Unable to contact the NTP server indicated."
 msgstr "Не може да се свърже с посочения NTP сървър. <br/> Моля, проверете конфигурацията си. <br/>"
 
 #: panellib/misc.php:128
+#, fuzzy
 msgid "Please check your configuration."
-msgstr ""
+msgstr "Моля, проверете конфигурацията си."
 
 #: panellib/misc.php:212
 #, fuzzy
@@ -1437,17 +1504,19 @@ msgid "Plugin Webseer isn't installed or started"
 msgstr "Добавката не е инсталирана или стартирана"
 
 #: panellib/misc.php:234
+#, fuzzy
 msgid "Number of checks: "
-msgstr ""
+msgstr "Брой проверки:"
 
 #: panellib/misc.php:235 panellib/thold.php:248
 #, fuzzy
 msgid "Disabled: "
-msgstr "Деактивирано: %s"
+msgstr "Изключен"
 
 #: panellib/misc.php:236
+#, fuzzy
 msgid "Status up: "
-msgstr ""
+msgstr "Статус нагоре:"
 
 #: panellib/misc.php:237
 #, fuzzy
@@ -1455,29 +1524,32 @@ msgid "Status down: "
 msgstr "Хостове надолу"
 
 #: panellib/misc.php:244
+#, fuzzy
 msgid "First 3 failed sites"
-msgstr ""
+msgstr "Първите 3 неуспешни сайта"
 
 #: panellib/misc.php:245
+#, fuzzy
 msgid "url"
-msgstr ""
+msgstr "URL"
 
 #: panellib/misc.php:247 panellib/misc.php:290
+#, fuzzy
 msgid "HTTP code"
-msgstr ""
+msgstr "HTTP код"
 
 #: panellib/misc.php:271
+#, fuzzy
 msgid "Webseer Plugin - Details"
-msgstr ""
+msgstr "Приставка за Webseer - Подробности"
 
 #: panellib/misc.php:288
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: panellib/misc.php:300 panellib/thold.php:179
-#, fuzzy
 msgid "OK"
-msgstr "Добре"
+msgstr "ОК"
 
 #: panellib/poller.php:30
 #, fuzzy
@@ -1485,8 +1557,9 @@ msgid "Poller Panels"
 msgstr "Разрешаване на панелни статистики"
 
 #: panellib/poller.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti's polling process."
-msgstr ""
+msgstr "Панели, които предоставят информация за процеса на гласуване на Cacti."
 
 #: panellib/poller.php:36
 #, fuzzy
@@ -1494,8 +1567,9 @@ msgid "Poller Information"
 msgstr "Инфо за полъри"
 
 #: panellib/poller.php:37
+#, fuzzy
 msgid "Various information about your Cacti poller."
-msgstr ""
+msgstr "Различна информация за вашия полер за кактуси."
 
 #: panellib/poller.php:51
 #, fuzzy
@@ -1503,8 +1577,9 @@ msgid "Poller Statistics"
 msgstr "Разрешаване на панелни статистики"
 
 #: panellib/poller.php:52
+#, fuzzy
 msgid "Various Cacti poller statistics."
-msgstr ""
+msgstr "Различни статистики за анкетиране на кактуси."
 
 #: panellib/poller.php:78
 #, fuzzy
@@ -1512,21 +1587,20 @@ msgid "ID/Name/Total Time/State"
 msgstr "ID / име / общо време / състояние"
 
 #: panellib/poller.php:98 panellib/poller.php:257
-#, fuzzy
 msgid "ID"
-msgstr "ID: "
+msgstr "ID"
 
 #: panellib/poller.php:99 panellib/poller.php:258
 msgid "Name"
-msgstr ""
+msgstr "Име"
 
 #: panellib/poller.php:100 panellib/poller.php:259
 msgid "State"
-msgstr ""
+msgstr "Област"
 
 #: panellib/poller.php:101 panellib/poller.php:260
 msgid "Total Time"
-msgstr ""
+msgstr "Общо време"
 
 #: panellib/poller.php:110 panellib/poller.php:289
 #, fuzzy
@@ -1538,9 +1612,8 @@ msgid "Running"
 msgstr "실행 중"
 
 #: panellib/poller.php:114 panellib/poller.php:293 panellib/system.php:290
-#, fuzzy
 msgid "Idle"
-msgstr "Празен"
+msgstr "Празен ход"
 
 #: panellib/poller.php:116 panellib/poller.php:295
 #, fuzzy
@@ -1549,19 +1622,18 @@ msgstr "Unkn / надолу"
 
 #: panellib/poller.php:127 panellib/top5.php:268 panellib/top5.php:270
 #: panellib/top5.php:524 panellib/top5.php:526
-#, php-format
+#, fuzzy, php-format
 msgid "%s Secs"
-msgstr ""
+msgstr "%s сек"
 
 #: panellib/poller.php:135 panellib/poller.php:310
 #, fuzzy
 msgid "(ok)"
-msgstr "(Добре)"
+msgstr "Добре"
 
 #: panellib/poller.php:136 panellib/poller.php:310
-#, fuzzy
 msgid "(all)"
-msgstr "(всичко)"
+msgstr "(всички)"
 
 #: panellib/poller.php:218 panellib/poller.php:220
 #, fuzzy
@@ -1578,12 +1650,14 @@ msgid "Poller Details"
 msgstr "Разрешаване на панелни статистики"
 
 #: panellib/poller.php:261
+#, fuzzy
 msgid "Average Time"
-msgstr ""
+msgstr "Средно време"
 
 #: panellib/poller.php:262
+#, fuzzy
 msgid "Max Time"
-msgstr ""
+msgstr "Максимално време"
 
 #: panellib/syslog.php:30
 #, fuzzy
@@ -1591,8 +1665,9 @@ msgid "Syslog Panels"
 msgstr "Презареждане на панела"
 
 #: panellib/syslog.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti's Syslog message processing."
-msgstr ""
+msgstr "Панели, които предоставят информация за обработката на съобщения в Syslog на Cacti."
 
 #: panellib/syslog.php:36
 #, fuzzy
@@ -1600,20 +1675,21 @@ msgid "Syslog Details"
 msgstr "Покажи детайли"
 
 #: panellib/syslog.php:37
+#, fuzzy
 msgid "Various Syslog Plugin statistics."
-msgstr ""
+msgstr "Различни статистики за Syslog Plugin."
 
 #: panellib/syslog.php:117 panellib/top5.php:314 panellib/top5.php:565
 msgid "Total"
-msgstr ""
+msgstr "Общо"
 
 #: panellib/syslog.php:137
 msgid "Incoming"
-msgstr ""
+msgstr "Входящ"
 
 #: panellib/syslog.php:157
 msgid "Alerts"
-msgstr ""
+msgstr "Известия"
 
 #: panellib/syslog.php:188
 #, fuzzy
@@ -1626,25 +1702,28 @@ msgid "System Panels"
 msgstr "Интропажни панели"
 
 #: panellib/system.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti system performance."
-msgstr ""
+msgstr "Панели, които предоставят информация за производителността на системата Cacti."
 
 #: panellib/system.php:36
-#, fuzzy
 msgid "Information"
-msgstr "Разрешаване на панелна информация за панела"
+msgstr "Информация"
 
 #: panellib/system.php:37
+#, fuzzy
 msgid "Various system information about the Cacti system itself."
-msgstr ""
+msgstr "Различна системна информация за самата система Cacti."
 
 #: panellib/system.php:51
+#, fuzzy
 msgid "Administrative Alerts"
-msgstr ""
+msgstr "Административни сигнали"
 
 #: panellib/system.php:52
+#, fuzzy
 msgid "Extra admin notify panel for all users"
-msgstr ""
+msgstr "Допълнителен панел за уведомяване на администратор за всички потребители"
 
 #: panellib/system.php:66
 #, fuzzy
@@ -1652,8 +1731,9 @@ msgid "Boost Statistics"
 msgstr "Статистика за повишаване"
 
 #: panellib/system.php:67
+#, fuzzy
 msgid "Information about Cacti's performance boost process."
-msgstr ""
+msgstr "Информация за процеса на повишаване на производителността на Cacti."
 
 #: panellib/system.php:81
 #, fuzzy
@@ -1661,8 +1741,9 @@ msgid "24 Hour Extremes"
 msgstr "24 часа екстрем"
 
 #: panellib/system.php:82
+#, fuzzy
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
-msgstr ""
+msgstr "Таблица с 24 часа Polling Extreme (най-дълъг цикъл на анкетиране, прекратени хостове)"
 
 #: panellib/system.php:96
 #, fuzzy
@@ -1700,7 +1781,7 @@ msgstr "Тип полеър:"
 
 #: panellib/system.php:196
 msgid "Spine"
-msgstr ""
+msgstr "Гръбнак"
 
 #: panellib/system.php:200
 #, fuzzy
@@ -1720,7 +1801,7 @@ msgstr "Тип полеър:"
 #: panellib/system.php:212
 #, fuzzy
 msgid "Running on: "
-msgstr "Работи се от:"
+msgstr "실행 중"
 
 #: panellib/system.php:294
 #, fuzzy
@@ -1742,9 +1823,9 @@ msgid "Never Run"
 msgstr "Никога не бягай"
 
 #: panellib/system.php:309
-#, php-format
+#, fuzzy, php-format
 msgid "Parallel Processes: %s"
-msgstr ""
+msgstr "Паралелни процеси: %s"
 
 #: panellib/system.php:312
 #, fuzzy, php-format
@@ -1812,9 +1893,8 @@ msgid "Triggered"
 msgstr "Trigerred"
 
 #: panellib/system.php:468
-#, fuzzy
 msgid "Poller"
-msgstr "Инфо за полъри"
+msgstr "Анкетиращ"
 
 #: panellib/system.php:531
 #, fuzzy
@@ -1827,8 +1907,9 @@ msgid "Long Running Poller"
 msgstr "Дълго бягане <br/> анкета, той"
 
 #: panellib/system.php:577
+#, fuzzy
 msgid "Max Device Down"
-msgstr ""
+msgstr "Макс. устройство надолу"
 
 #: panellib/system.php:598
 #, fuzzy
@@ -1851,8 +1932,9 @@ msgid "Threshold Panels"
 msgstr "Прагове"
 
 #: panellib/thold.php:31
+#, fuzzy
 msgid "Panels that provide information about Cacti Thresholding Plugin."
-msgstr ""
+msgstr "Панели, които предоставят информация за Cacti Thresholding Plugin."
 
 #: panellib/thold.php:36 panellib/thold.php:285
 #, fuzzy
@@ -1865,13 +1947,13 @@ msgid "Threshold Plugin Latest Events"
 msgstr "Прагове"
 
 #: panellib/thold.php:51
-#, fuzzy
 msgid "Threshold"
-msgstr "Прагове"
+msgstr "Предел"
 
 #: panellib/thold.php:52
+#, fuzzy
 msgid "Threshold Plugin Graph (all, trigerred, ...)"
-msgstr ""
+msgstr "Графика на приставката за прагове (всички, задействани, ...)"
 
 #: panellib/thold.php:78 panellib/thold.php:292
 #, fuzzy
@@ -1906,7 +1988,7 @@ msgstr "Прагове"
 #: panellib/thold.php:245
 #, fuzzy
 msgid "All: "
-msgstr "Всички: %s"
+msgstr "(всички)"
 
 #: panellib/thold.php:246 panellib/thold.php:253
 #, fuzzy
@@ -1934,8 +2016,9 @@ msgid "Top 5 Panels"
 msgstr "Най-лошото време за анкетиране"
 
 #: panellib/top5.php:31
+#, fuzzy
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr ""
+msgstr "Панели, които предоставят актуална информация за събирането на данни за кактуси."
 
 #: panellib/top5.php:36
 #, fuzzy
@@ -1980,26 +2063,25 @@ msgstr "Устройства със същия IP адрес и порт: %s"
 #: panellib/top5.php:124 panellib/top5.php:250 panellib/top5.php:312
 #: panellib/top5.php:380 panellib/top5.php:440 panellib/top5.php:505
 #: panellib/top5.php:563
-#, fuzzy
 msgid "Host"
-msgstr "Силите"
+msgstr "Хост"
 
 #: panellib/top5.php:125 panellib/top5.php:381
 msgid "Average"
-msgstr ""
+msgstr "Средно"
 
 #: panellib/top5.php:126 panellib/top5.php:382
 msgid "Current"
-msgstr ""
+msgstr "Текущ"
 
 #: panellib/top5.php:189
-#, fuzzy
 msgid "Hostname"
-msgstr "Силите"
+msgstr "Име на хост"
 
 #: panellib/top5.php:190
+#, fuzzy
 msgid "Availability/Reachability"
-msgstr ""
+msgstr "Наличност/достъпност"
 
 #: panellib/top5.php:251 panellib/top5.php:506
 #, fuzzy
@@ -2008,7 +2090,7 @@ msgstr "Инфо за полъри"
 
 #: panellib/top5.php:315 panellib/top5.php:566
 msgid "Ratio"
-msgstr ""
+msgstr "Съотношение"
 
 #: panellib/top5.php:356
 #, fuzzy
@@ -2021,9 +2103,8 @@ msgid "Top 20 Hosts with the Worst Availability"
 msgstr "Топ 5 на най-лошата наличност"
 
 #: panellib/top5.php:441
-#, fuzzy
 msgid "Availability"
-msgstr "Топ 5 на най-лошата наличност"
+msgstr "Наличност"
 
 #: panellib/top5.php:481
 #, fuzzy
@@ -2046,9 +2127,8 @@ msgid "Intropage Administration"
 msgstr "Опции за начална страница"
 
 #: setup.php:76
-#, fuzzy
 msgid "System Administration"
-msgstr "Разрешаване на панелна информация за панела"
+msgstr "Системна администрация"
 
 #, fuzzy
 #~ msgid "Add %s"
