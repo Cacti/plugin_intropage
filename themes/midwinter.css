@@ -36,3 +36,15 @@ circle {
 	stroke-width: 1px;
 	fill: transparent !important;
 }
+
+.txt_med {
+	font-size: var(--fs-semilarge);
+}
+
+.txt_big {
+	font-size: var(--fs-large);
+}
+
+.txt_huge {
+	font-size: var(--fs-king);
+}
