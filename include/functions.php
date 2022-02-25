@@ -954,7 +954,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 
 		get_timespan( $timespan, time(),$fav_graph_timespan , $first_weekdayid);
 
-		$result['data'] = '<table class="cactiTable"><tr><td class="center"><img src="' . $config['url_path'] .
+		$result['data'] = '<table class="cactiTable"><tr><td class="center"><img class="intrograph" src="' . $config['url_path'] .
 			'graph_image.php' .
 			'?local_graph_id=' . $fav_graph_id .
 			'&graph_height=100' .
@@ -1173,8 +1173,7 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 
 	if ($k_id == 'favourite_graph') {
 		$width = 'quarter-panel';
-	}
-	else {
+	} else {
 		$width = $panels[$k_id]['width'];
 	}
 

@@ -3,10 +3,12 @@ $(function() {
 	$('.flexchild').css('background-color', $('body').css('background-color'));
 
 	$(window).resize(function() {
+		resizeGraphsPanel();
 		resizeCharts();
 	});
 
 	$(window).on('orientationchange', function() {
+		resizeGraphsPanel();
 		resizeCharts();
 	}).trigger('orientationchange');
 
@@ -30,6 +32,38 @@ function resizeCharts() {
 
 		if (panels[chart] != undefined) {
 			panels[chart].resize({ width: width, height:height });
+		}
+	});
+}
+
+function resizeGraphsPanel() {
+	$('img.intrograph').each(function() {
+		var graphWidth = $(this).width();
+		var panel      = $(this).closest('.flexchild');
+		var panelWidth = panel.width();
+		var quarter    = parseInt(($('#main').width() / 4) - 10);
+		var third      = parseInt(($('#main').width() / 3) - 10);
+
+		//console.log('Graph:'+graphWidth+', Panel:'+panelWidth+', Quarter:'+quarter+', Third:'+third);
+		if (graphWidth > panelWidth) {
+			console.log('resizing');
+			if (panel.hasClass('quarter-panel')) {
+				panel.removeClass('quarter-panel').addClass('third-panel');
+			} else if (panel.hasClass('third-panel')) {
+				panel.removeClass('third-panel').addClass('half-panel');
+			}
+		} else if (panel.hasClass('half-panel')) {
+			if (graphWidth < third) {
+				panel.removeClass('half-width').addClass('third-width');
+			}
+
+			if (graphWidth < quarter) {
+				panel.removeClass('third-width').addClass('quarter-width');
+			}
+		} else if (panel.hasClass('third-panel')) {
+			if (graphWidth < quarter) {
+				panel.removeClass('third-width').addClass('quarter-width');
+			}
 		}
 	});
 }
@@ -157,6 +191,9 @@ function initPage() {
 			$('#obal .flexchild').css('visibility', 'visible');
 			$('.cloned-slides .flexchild').css('visibility', 'hidden');
 			$('#obal .flexchild').css({'width': '', 'flex-grow': '1'});
+
+			resizeGraphsPanel();
+			resizeCharts();
 		},
 		change: function(event, ui) {
 			$('#obal li:not(.exclude-me, .ui-sortable-placeholder)').each(function() {
@@ -193,6 +230,7 @@ function initPage() {
 				});
 
 				applySkin();
+				resizeGraphsPanel();
 				resizeCharts();
 			});
 		});
@@ -230,6 +268,7 @@ function initPage() {
 
 	reload_all();
 	setupHidden();
+	resizeGraphsPanel();
 	resizeCharts();
 }
 
@@ -269,6 +308,7 @@ function reload_panel(panel_id, forced_update, refresh) {
 			$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
 		}
 
+		resizeGraphsPanel();
 		resizeCharts();
 	})
 	.fail(function(data) {
