@@ -46,7 +46,6 @@ function resizeGraphsPanel() {
 
 		//console.log('Graph:'+graphWidth+', Panel:'+panelWidth+', Quarter:'+quarter+', Third:'+third);
 		if (graphWidth > panelWidth) {
-			console.log('resizing');
 			if (panel.hasClass('quarter-panel')) {
 				panel.removeClass('quarter-panel').addClass('third-panel');
 			} else if (panel.hasClass('third-panel')) {
@@ -310,6 +309,7 @@ function reload_panel(panel_id, forced_update, refresh) {
 
 		resizeGraphsPanel();
 		resizeCharts();
+		ajaxAnchors();
 	})
 	.fail(function(data) {
 		$('#panel_'+panel_id).find('.panel_data').html(intropage_text_data_error);
