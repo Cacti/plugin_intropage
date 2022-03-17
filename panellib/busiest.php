@@ -141,6 +141,12 @@ function busiest_cpu($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
+	
+	$text_len = 55;
+
+	if (read_user_setting('intropage_display_wide') == 'on') {
+		$text_len = 47;	
+	}
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
@@ -190,17 +196,13 @@ function busiest_cpu($panel, $user_id) {
 
 			foreach ($result as $row) {
 
-				if ($console_access) {
 				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
+					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
+					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
+					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape(substr($row['name'],0,50)) . '</a></td>';
-				} else {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($row['name'],0,50)) . '</td>';
-				}
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
 
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
@@ -234,6 +236,12 @@ function busiest_load($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
+
+	$text_len = 55;
+
+	if (read_user_setting('intropage_display_wide') == 'on') {
+		$text_len = 47;	
+	}
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
@@ -282,17 +290,13 @@ function busiest_load($panel, $user_id) {
 
 			foreach ($result as $row) {
 
-				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
+					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
+					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
+					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
+					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape(substr($row['name'],0,50)) . '</a></td>';
-				} else {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($row['name'],0,50)) . '</td>';
-				}
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
 
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . '</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . '</td></tr>';
@@ -322,6 +326,12 @@ function busiest_hdd($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
+
+	$text_len = 55;
+
+	if (read_user_setting('intropage_display_wide') == 'on') {
+		$text_len = 47;	
+	}
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
@@ -391,17 +401,13 @@ function busiest_hdd($panel, $user_id) {
 
 			foreach ($result as $row) {
 
-				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
+					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
+					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
+					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
+					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape(substr($row['name'],0,50)) . '</a></td>';
-				} else {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($row['name'],0,50)) . '</td>';
-				}
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
 
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
@@ -435,6 +441,12 @@ function busiest_uptime($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
+
+	$text_len = 55;
+
+	if (read_user_setting('intropage_display_wide') == 'on') {
+		$text_len = 47;	
+	}
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
@@ -494,6 +506,13 @@ function busiest_traffic($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
+
+	$text_len = 55;
+
+	if (read_user_setting('intropage_display_wide') == 'on') {
+		$text_len = 47;	
+	}
+
 	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), $_SESSION['sess_user_id']);
 
 	if (read_config_option('dsstats_enable') != 'on') {
@@ -559,17 +578,13 @@ function busiest_traffic($panel, $user_id) {
 
 			foreach ($result as $row) {
 
-				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
+					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
+					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
+					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
+					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape(substr($row['name'],0,50)) . '</a></td>';
-				} else {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($row['name'],0,50)) . '</td>';
-				}
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
 
 				if ($intropage_mb == 'b') {
 					$row['xvalue'] *= 8;
@@ -611,6 +626,12 @@ function busiest_interface_error($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
+
+	$text_len = 55;
+
+	if (read_user_setting('intropage_display_wide') == 'on') {
+		$text_len = 47;	
+	}
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
@@ -657,17 +678,13 @@ function busiest_interface_error($panel, $user_id) {
 
 			foreach ($result as $row) {
 
-				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
+					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
+					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
+					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
+					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape(substr($row['name'],0,50)) . '</a></td>';
-				} else {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($row['name'],0,50)) . '</td>';
-				}
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
 
 				$panel['data'] .= "<td class='right'>" . human_readable($row['xvalue']) . '</td>';
 				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak']) . '</td></tr>';
@@ -756,7 +773,7 @@ function busiest_cpu_detail() {
 						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 						WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain bus_graph" bus_id="' . $graph_id . '" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
