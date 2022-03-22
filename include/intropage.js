@@ -350,7 +350,7 @@ $('body').on('mouseover','.bus_graph', function() {
 	event.preventDefault();
 	var id = $(this).attr('bus_id');
 
-	data = '<img src="https://kaktus.kostax.cz/graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '"></img>'; 
+	data = '<img src="https://kaktus.kostax.cz/graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />'; 
 	$('#overlay_detail').html(data);
 
 	$('#overlay').dialog({
