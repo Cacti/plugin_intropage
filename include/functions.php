@@ -962,7 +962,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 			'&disable_cache=true' .
 			'&graph_start=' . $timespan['begin_now'] .
 			'&graph_end=' . $timespan['end_now'] .
-			'&graph_nolegend=true"/></td></tr></tr>';
+			'&graph_nolegend=true" /></td></tr></table>';
 
 		return $result;
 	}
