@@ -1181,15 +1181,15 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 	print '<div class="panel_wrapper">';
 
 	print '<div class="panel_header color_grey">';
-	print '<span class="panel_name"></span>';
+	print '<div class="panel_name"></div>';
 
-	printf("<a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=$dashboard_id");
+	printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=$dashboard_id");
 
 	if (isset($panels[$k_id]['force']) && $panels[$k_id]['force'] === true) {
 		printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>");
 	}
 
-	printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id);
+	printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a></div>", $panel_id);
 
 	print ' </div>';
 	print "	<table class='cactiTable'>";

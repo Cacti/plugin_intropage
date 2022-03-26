@@ -48,6 +48,17 @@
 	font-weight: bold;
 	height: 16px;
 	cursor: move;
+	white-space: nowrap;
+}
+
+.panel_name {
+	float:left;
+}
+
+.panel_actions {
+	white-space:nowrap;
+	float:right;
+	text-align:right;
 }
 
 .header_link {
