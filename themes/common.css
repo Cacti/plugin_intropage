@@ -47,7 +47,9 @@
 	padding: 4px;
 	font-weight: bold;
 	height: 16px;
+	width: 100%;
 	cursor: move;
+	display: inline-block;
 	white-space: nowrap;
 }
 
@@ -59,6 +61,7 @@
 	white-space:nowrap;
 	float:right;
 	text-align:right;
+	margin-right: 5px;
 }
 
 .header_link {
