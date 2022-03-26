@@ -269,6 +269,8 @@ function initPage() {
 	setupHidden();
 	resizeGraphsPanel();
 	resizeCharts();
+
+	$(window).trigger('resize');
 }
 
 function testPoller() {
