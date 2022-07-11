@@ -5,6 +5,7 @@
 * issue: Clear warnings issued on 'busiest' panel when interface traffic is zero
 * issue: Ensure that panels with links use callbacks
 * issue: Vertical scroll bar was not appearing on some themes
+* feature#208: Add select all to permissions tab
 
 --- 4.0.1 ---
 
