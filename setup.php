@@ -25,7 +25,6 @@
 */
 
 function plugin_intropage_install() {
-	api_plugin_register_hook('intropage', 'config_form', 'intropage_config_form', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'config_arrays', 'intropage_config_arrays', 'setup.php');
 
@@ -37,9 +36,8 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
 
-//	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
-
 	api_plugin_register_hook('intropage', 'user_group_admin_setup_sql_save', 'intropage_user_group_admin_setup_sql_save', 'include/settings.php');
+	
 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
 

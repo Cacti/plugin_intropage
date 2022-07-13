@@ -33,9 +33,9 @@ function register_misc() {
 	);
 
 	$panels = array(
-		'ntp' => array(
-			'name'         => __('NTP Status', 'intropage'),
-			'description'  => __('Checking your Cacti system clock for drift from a known baseline.', 'intropage'),
+		'ntp_dns' => array(
+			'name'         => __('NTP/DNS Status', 'intropage'),
+			'description'  => __('Checking your Cacti system clock for drift from a known baseline and DNS resolving check', 'intropage'),
 			'class'        => 'misc',
 			'level'        => PANEL_SYSTEM,
 			'refresh'      => 7200,
@@ -45,7 +45,7 @@ function register_misc() {
 			'priority'     => 30,
 			'alarm'        => 'green',
 			'requires'     => false,
-			'update_func'  => 'ntp',
+			'update_func'  => 'ntp_dns',
 			'details_func' => false,
 			'trends_func'  => false
 		),
@@ -86,11 +86,13 @@ function register_misc() {
 	return $panels;
 }
 
-// -------------------------------------ntp-------------------------------------------
-function ntp($panel, $user_id) {
+// -------------------------------------ntp_dns-------------------------------------------
+function ntp_dns($panel, $user_id) {
 	global $config;
 
 	$ntp_server = read_config_option('intropage_ntp_server');
+
+	$dns_host = read_config_option('intropage_dns_host');
 
 	$panel['data'] = '<table class="cactiTable">';
 
@@ -98,7 +100,8 @@ function ntp($panel, $user_id) {
 
 	if (empty($ntp_server)) {
 		$panel['alarm'] = 'grey';
-		$panel['data']  .= '<tr><td>' . __('No NTP server configured', 'intropage') . '</td></tr>';
+		$panel['data']  .= '<tr><td>' . __('No NTP server configured', 'intropage') . '<br/><br/></td></tr>';
+
 	} elseif (!filter_var(trim($ntp_server), FILTER_VALIDATE_IP) && !filter_var(trim($ntp_server), FILTER_VALIDATE_DOMAIN)) {
 		$panel['alarm'] = 'red';
 		$panel['data']  .= '<tr><td>' . __('Wrong NTP server configured - %s<br/>Please fix it in settings', $ntp_server, 'intropage') . '</td></tr>';
@@ -112,7 +115,7 @@ function ntp($panel, $user_id) {
 
 			if ($diff_time > 1400000000) {
 				$panel['alarm'] = 'red';
-				$panel['data'] .= '<tr><td>' . __('Failed to get NTP time from %s', $ntp_server, 'intropage') . '</td></tr>';
+				$panel['data'] .= '<tr><td>' . __('Failed to get NTP time from %s', $ntp_server, 'intropage') . '<br/><br/></td></tr>';
 			} elseif ($diff_time < -600 || $diff_time > 600) {
 				$panel['alarm'] = 'red';
 			} elseif ($diff_time < -120 || $diff_time > 120) {
@@ -121,14 +124,34 @@ function ntp($panel, $user_id) {
 
 			if ($panel['alarm'] != 'green') {
 				$panel['data'] .= '<tr><td>' . __('Please check time as it is off by more', 'intropage') . '</td></tr>';
-				$panel['data'] .= '<tr><td>' . __('than %s seconds from NTP server %s.', $diff_time, $ntp_server, 'intropage') . '</td></tr>';
+				$panel['data'] .= '<tr><td>' . __('than %s seconds from NTP server %s.', $diff_time, $ntp_server, 'intropage') . '<br/><br/></td></tr>';
 			} else {
 				$panel['data'] .= '<tr><td>' . __('Localtime is equal to NTP server', 'intropage') . '</td></tr>';
-				$panel['data'] .= '<tr><td>' . $ntp_server . '</td></tr>';
+				$panel['data'] .= '<tr><td>' . $ntp_server . '<br/><br/></td></tr>';
 			}
 		} else {
 			$panel['alarm'] = 'red';
 			$panel['data']  .= '<tr><td>' . __('Unable to contact the NTP server indicated.', 'intropage') . '</td></tr>';
+			$panel['data']  .= '<tr><td>' . __('Please check your configuration.', 'intropage') . '<br/><br/></td></tr>';
+		}
+	}
+
+
+	if (empty($dns_host)) {
+		$panel['alarm'] = 'grey';
+		$panel['data']  .= '<tr><td>' . __('No DNS hostname configured', 'intropage') . '</td></tr>';
+	} elseif (!filter_var(trim($dns_host), FILTER_VALIDATE_DOMAIN)) {
+		$panel['alarm'] = 'red';
+		$panel['data']  .= '<tr><td>' . __('Wrong DNS hostname configured - %s<br/>Please fix it in settings', $dns_host, 'intropage') . '</td></tr>';
+	} else {
+		
+		$dns_respond = @cacti_gethostinfo($dns_host, DNS_ANY);
+		
+		if ($dns_respond) {
+			$panel['data'] .= '<tr><td>' . __('DNS hostname (%s) resolving ok.', $dns_host, 'intropage') . '</td></tr>';
+		} else {
+			$panel['alarm'] = 'red';
+			$panel['data']  .= '<tr><td>' . __('DNS hostname (%s) resolving failed.', $dns_host, 'intropage') . '</td></tr>';
 			$panel['data']  .= '<tr><td>' . __('Please check your configuration.', 'intropage') . '</td></tr>';
 		}
 	}
