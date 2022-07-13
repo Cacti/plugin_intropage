@@ -136,6 +136,8 @@ function intropage_user_admin_run_action(){
 		SELECT "favourite_graph", 1, "graphs", "Favorite Graphs", "green", "Allow you to add your favorite graphs to the dashboard of your choice"
 		ORDER BY level, class, name');
 
+       	$header_label = __('[edit: %s]', db_fetch_cell_prepared('SELECT username FROM user_auth WHERE id = ?', array(get_request_var('id'))));
+
 	$prev_level = -1;
 	$prev_class = -1;
 	$i          = 0;
@@ -190,7 +192,10 @@ function intropage_user_admin_run_action(){
 
 	form_start('user_admin.php?action=user_edit&tab=intropage_settings_edit&id=' . get_request_var('id'));
 
-	html_start_box(__('You can Allow/Disallow Panels for User','intropage'), '100%', '', '3', 'center', '');
+	print '<div>';	
+	print "<div class='cactiTableTitle'><span style='padding:3px;'>" . __('You can Allow/Disallow Panels for User','intropage') . ' ' . $header_label . '</span></div>';
+	print "<div class='cactiTableButton'><span style='padding:3px;'><input class='checkbox' type='checkbox' id='all' name='all' title='Select All' onClick='selectAllPerms(this.checked)'></a><label class='formCheckboxLabel' title='Select All' for='all'></label></span></div>";
+	print '</div>';
 
 	draw_edit_form(
 		array(
@@ -198,8 +203,17 @@ function intropage_user_admin_run_action(){
 			'fields' => inject_form_variables($fields_intropage_user_edit, (isset($user) ? $user : array()))
 		)
 	);
-
-	html_end_box();
+?>
+<script type='text/javascript'>
+	function selectAllPerms(checked) {
+		if (checked) {
+			$('input[type="checkbox"]').prop('checked', true);
+		} else {
+			$('input[type="checkbox"]').prop('checked', false);
+		}
+	}
+	</script>
+<?php
 
 	form_save_button(html_escape($config['url_path'] . 'user_admin.php?action=user_edit&tab=general&id=' . get_request_var('id'), 'save'));
 }
