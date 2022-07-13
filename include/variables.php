@@ -140,6 +140,24 @@ $intropage_settings = array(
 		),
 		'default'       => '3600',
 	),
+	'intropage_dns_host' => array(
+		'friendly_name' => __('DNS Check - Any DNS name', 'intropage'),
+		'description'   => __('Insert DNS name for test', 'intropage'),
+		'method'        => 'textbox',
+		'max_length' => 50,
+		'default'       => 'cacti.net',
+	),
+	'intropage_dns_interval' => array(
+		'friendly_name' => __('How often check DNS', 'intropage'),
+		'description'   => __('Poller runs this task. It could cause long poller run.', 'intropage'),
+		'method'        => 'drop_array',
+		'array'         => array(
+			'900'   => __('Every %d Minutes', 15, 'intropage'),
+			'3600'  => __('Every Hour', 'intropage'),
+			'86400' => __('Every Day', 'intropage')
+		),
+		'default'       => '3600',
+	),
 	'intropage_admin_alert' => array(
 		'friendly_name' => __('Admin Information Panel about Maintenance Tasks, Down Devices, ..', 'intropage'),
 		'description'   => __('If isn\'t empty, Panel will be displayed on the top. You can use html tags (b, i, ...).', 'intropage'),

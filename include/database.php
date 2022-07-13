@@ -260,6 +260,12 @@ function intropage_upgrade_database() {
 				CHANGE last_update last_update timestamp NOT NULL default current_timestamp');
 		}
 
+		if (cacti_version_compare($oldv, '4.0.2', '<=')) {
+			db_execute("UPDATE plugin_intropage_panel_definition SET panel_id='ntp_dns', name='NTP/DNS check' WHERE panel_id='ntp'");
+			db_execute("UPDATE plugin_intropage_panel_data SET panel_id='ntp_dns' WHERE panel_id='ntp'");			
+			db_execute("UPDATE plugin_intropage_user_auth set permissions=REPLACE(permissions,'ntp','ntp_dns')");
+		}
+
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config
 			SET version = ?, author = ?, webpage = ?
