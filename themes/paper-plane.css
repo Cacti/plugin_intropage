@@ -8,8 +8,17 @@
 	padding: 4px;
 }
 
-.textArea {
+.panel_data td {
 	background-color: #202020;
+	color: snow;
+}
+
+.panel_data a, .panel_data a:visited {
+	color: #93CEFF;
+}
+
+.textArea {
+	background-color: snow;
 }
 
 .panel_header {
