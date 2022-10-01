@@ -380,20 +380,16 @@ $('.maxim').click(function(event) {
 	});
 });
 
-$('body').on('mouseout','.bus_graph', function() {
-	setTimeout(function() { 
-		$('#overlay_detail').empty();
-		$('#overlay').dialog('close');
-    	}, 1000);
-});
 
-$('body').on('mouseover','.bus_graph', function() {
+
+
+$('body').on('click','.bus_graph', function() {
 
 	event.preventDefault();
+
 	var id = $(this).attr('bus_id');
 
-	data = '<img src="https://kaktus.kostax.cz/graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />'; 
-	$('#overlay_detail').html(data);
+	data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />'; 
 
 	$('#overlay').dialog({
 		modal: true,
@@ -415,9 +411,8 @@ $('body').on('mouseover','.bus_graph', function() {
 		title: 'Bussiest graph',
 	});
 
-	$('#block').click(function() {
-		$('#overlay').dialog('close');
-	});
+	$('#overlay_detail').html(data);
+
 });
 
 
