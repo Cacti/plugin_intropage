@@ -5,6 +5,7 @@
 * issue: Clear warnings issued on 'busiest' panel when interface traffic is zero
 * issue: Ensure that panels with links use callbacks
 * issue: Vertical scroll bar was not appearing on some themes
+* issue: Fix javascript for displaying topX graph
 * feature#208: Add select all to permissions tab
 * feature: Add DNS resolving check
 
