@@ -143,11 +143,13 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => true);
+	$data['columns'][] = array('name' => 'shared', 'type' => 'int(1)', 'NULL' => false, 'default' => 0);
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'panel x dashboard name';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
 
 	db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
+
 }
 
 function intropage_upgrade_database() {
@@ -265,6 +267,12 @@ function intropage_upgrade_database() {
 			db_execute("UPDATE plugin_intropage_panel_data SET panel_id='ntp_dns' WHERE panel_id='ntp'");			
 			db_execute("UPDATE plugin_intropage_user_auth set permissions=REPLACE(permissions,'ntp','ntp_dns')");
 		}
+
+		if (cacti_version_compare($oldv, '4.0.3', '<=')) {
+			db_execute('ALTER TABLE plugin_intropage_dashboard
+					ADD COLUMN shared INT(1) NOT NULL default "0"');
+		}
+
 
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config

@@ -217,5 +217,6 @@ function intropage_user_remove($user_id) {
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', array($user_id));
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id = ?', array($user_id));
 	db_execute_prepared('DELETE FROM settings_user WHERE user_id = ?', array($user_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_dashboard_share WHERE user_id = ?', array($user_id));
 }
 
