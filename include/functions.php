@@ -202,6 +202,9 @@ function intropage_actions() {
 	} else {
 		$value = '';
 	}
+	if (isset($values[2])) {
+		$value_ext = trim($values[2]);
+	}
 
 	switch ($action) {
 	case 'addpanelselect':
@@ -417,6 +420,80 @@ function intropage_actions() {
 			set_user_setting('intropage_display_wide', 'off');
 		}
 
+		break;
+	case 'share':
+		db_execute_prepared ('UPDATE plugin_intropage_dashboard 
+			SET shared = 1
+			WHERE user_id = ? AND dashboard_id = ?',
+			array ($_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+		break;
+	case 'unshare':
+		db_execute_prepared ('UPDATE plugin_intropage_dashboard 
+			SET shared = 0
+			WHERE user_id = ? AND dashboard_id = ?',
+			array ($_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+
+		break;
+	case 'useshared':
+
+		if (filter_var($value, FILTER_VALIDATE_INT) && filter_var($value_ext, FILTER_VALIDATE_INT)) {
+			$shared = db_fetch_cell_prepared('SELECT shared FROM plugin_intropage_dashboard 
+				WHERE dashboard_id = ? AND user_id = ?',
+				array($value, $value_ext));
+				
+			if ($shared) {
+				$username = get_username($value_ext);
+				
+				$dashboard = db_fetch_row_prepared ('SELECT name, user_id 
+					FROM plugin_intropage_dashboard 
+					WHERE dashboard_id = ? AND user_id = ?',
+					array ($value, $value_ext));
+
+				$new_dashboard_id = db_fetch_cell_prepared('SELECT MAX(dashboard_id)+1
+					FROM plugin_intropage_dashboard
+					WHERE user_id = ?',
+					array($_SESSION['sess_user_id']));
+
+				db_execute_prepared('INSERT INTO plugin_intropage_dashboard
+					(user_id, dashboard_id, name)
+					VALUES (?, ?, ?)',
+					array($_SESSION['sess_user_id'], $new_dashboard_id, $username . '-' . $dashboard['name']));
+
+				$ids_panels = db_fetch_assoc_prepared('SELECT panel_id
+					FROM plugin_intropage_panel_dashboard
+					WHERE dashboard_id = ? AND user_id = ?',
+					array($value, $value_ext));
+
+				foreach ($ids_panels as $id_panel) {
+					db_execute_prepared('INSERT INTO plugin_intropage_panel_data
+						(panel_id,user_id,data,priority,refresh_interval,trend_interval,fav_graph_id,fav_graph_timespan)
+						SELECT panel_id, ? ,data,priority,refresh_interval,trend_interval,fav_graph_id,fav_graph_timespan
+						FROM plugin_intropage_panel_data
+						WHERE id = ?',
+						array ($_SESSION['sess_user_id'],$id_panel['panel_id']));
+					
+					$last = db_fetch_insert_id();
+
+					db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
+						(panel_id, user_id, dashboard_id)
+						VALUES (?, ?, ?)',
+						array($last, $_SESSION['sess_user_id'], $new_dashboard_id));
+				}
+
+				raise_message('dashboard_added', __('Dashboard has been added, please wait few poller cycle for data', 'intropage'), MESSAGE_LEVEL_INFO);
+
+				if ($login_opts == 4) {
+					header('Location: ' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?header=false&dashboard_id=' . $new_dashboard_id);
+				} else {
+					header('Location: ' . html_escape($config['url_path']) . 'index.php?header=false&dashboard_id=' . $new_dashboard_id);
+				}
+
+				exit;
+
+			} else {
+				raise_message('share_panel_error', __('Error - trying share non-shared dashboard', 'intropage'), MESSAGE_LEVEL_INFO);
+			}
+		}
 		break;
 	}
 }

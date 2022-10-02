@@ -8,6 +8,7 @@
 * issue: Fix javascript for displaying topX graph
 * feature#208: Add select all to permissions tab
 * feature: Add DNS resolving check
+* feature#203: Add dashboard sharing
 
 --- 4.0.1 ---
 

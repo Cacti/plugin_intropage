@@ -95,6 +95,9 @@ function display_information() {
 		array($_SESSION['sess_user_id'], $dashboard_id));
 
 	if (cacti_sizeof($panels)) {
+
+		$removed = 0;
+
 		foreach ($panels as $one) {
 			$allowed = is_panel_allowed($one['panel_name']);
 
@@ -104,7 +107,19 @@ function display_information() {
 					AND dashboard_id = ?
 					AND panel_id = ?',
 					array($_SESSION['sess_user_id'], $dashboard_id, $one['id']));
+
+				db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+					WHERE user_id = ?
+					AND panel_id = ?',
+					array($_SESSION['sess_user_id'], $one['id']));
+
+				$removed++;
 			}
+		}
+		
+		if ($removed > 0) {
+			raise_message('intropage_permissions', __('One or more panels was removed due to insuficient permissions. Contact administrator.', 'intropage'), MESSAGE_LEVEL_ERROR);
+			cacti_log('INTROPAGE WARNING: One or more panels was removed to user ' . $_SESSION['sess_user_id'] . ' due to insuficient permissons');
 		}
 	}
 
@@ -329,6 +344,45 @@ function display_information() {
 		print "<option value='displaywide_on'>" . __('More panels on a line', 'intropage') . '</option>';
 	}
 
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
+	$actual = db_fetch_row_prepared('SELECT shared,
+		(SELECT COUNT(panel_id) FROM plugin_intropage_panel_dashboard WHERE dashboard_id = t2.dashboard_id) as panels
+		FROM  plugin_intropage_dashboard AS t2
+		WHERE user_id = ? AND dashboard_id = ?',
+		array ($_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+
+	if ($actual['shared']) {
+		print "<option value='unshare'>" . __('Cancel sharing', 'intropage') . '</option>';	
+	} else {
+		if ($actual['panels'] > 0) {
+			print "<option value='share'>" . __('Share this dashboard', 'intropage') . '</option>';	
+		} else {
+			print "<option value=''>" . __('Share empty dashboard not allowed', 'intropage') . '</option>';	
+		}
+	}
+
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
+	$shared_dashboards = db_fetch_assoc_prepared('SELECT dashboard_id,name,user_id FROM plugin_intropage_dashboard
+		WHERE shared = 1 AND user_id != ?',
+		array ($_SESSION['sess_user_id']));
+
+	if (cacti_sizeof($shared_dashboards) > 0) {
+
+		foreach  ($shared_dashboards as $sd) {
+			$text = ' (' . get_username($sd['user_id']) . ' - ' . $sd['name'] . ')' ; 
+		
+			if ($number_of_dashboards < 9) {
+				print "<option value='useshared_" .  $sd['dashboard_id'] . "_" . $sd['user_id'] . "'>" . __('Use shared dashboard', 'intropage') . $text . '</option>';	
+			} else {
+				print "<option value='useshared_" .  $sd['dashboard_id'] . "_" . $sd['user_id'] . "' disabled='disabled'>" . __('Cannot use shared dashboard - dashboard limit reached.', 'intropage') . $text . '</option>';	
+			}
+		}
+	} else {
+		print '<option value="" disabled="disabled">' . __('No shared dashboards', 'intropage') . '</option>';
+	}
+
 	print '</select>';
 	print '</form>';
 	// end of settings
@@ -347,12 +401,41 @@ function display_information() {
 		print '</td></tr>';
 
 		print '<tr class="tableRow">';
-		print '<td class="textAreaNotes top left">' . __('You can Add Dashboard Panels in two ways:', 'intropage');
+		print '<td class="textAreaNotes top left">' . __('You can Add Dashboard Panels in more ways:', 'intropage');
 		print '<ul>';
-		print '<li>' . __('Select prepared Dashboard Panels from the menu to the right.') . '</li>';
-		print '<li>' . __('Add any Cacti Graph by Clicking the \'Eye Icon\' which is next to each Cacti Graph. Graph with actual timespan will be added to current dashboard', 'intropage') . '</li>';
-		print '</ul>';
+		print '<li>' . __('Select prepared panels from the menu to the right. Panel can be grayed out. It is due to permissions, ask administrator') . '</li>';
+		print '<li>' . __('Add any Cacti Graph, use icon', 'intropage') . '<i class="fa fa-eye"></i></li>';
+		print '<li>' . __('You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md') . '</li>';
+		print '</ul><br/>';
 		print '</td></tr>';
+
+		print '<tr class="tableRow">';
+		print '<td class="textAreaNotes top left">' . __('You can share dashboards to other users:', 'intropage');
+		print '<ul>';
+		print '<li>' . __('use "Share this dashboard" option in Actions menu - Every user can use it as template.') . '</li>';
+		print '</ul><br/>';
+		print '</td></tr>';
+
+		print '<tr class="tableRow">';
+		print '<td class="textAreaNotes top left">' . __('You can use shared dashboard using the Actions menu:', 'intropage');
+		print '<ul>';
+		print '<li>' . __('Use "Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions.') . '</li>';
+		print '</ul><br/>';
+		print '</td></tr>';
+
+		print '<tr class="tableRow">';
+		print '<td class="textAreaNotes top left">' . __('Customization:', 'intropage');
+		print '<ul>';
+		print '<li>' . __('You can create up to 9 dashboards. Every dashboard can be named, use icon') . '<i class="intro_glyph fa fa-cog"></i></li>';
+		print '<li>' . __('Intopage can be displayed in console or in separated tab. You can change it in Action menu') . '</li>';
+		print '<li>' . __('If you want to copy text from panel, you have to disable drag and drop function, use icon') . '<i class="intro_glyph fa fa-clone"></i></li>';
+
+
+
+		print '</ul><br/>';
+		print '</td></tr>';
+
+
 
 		html_end_box();
 	}
