@@ -40,6 +40,7 @@ function intropage_config_settings() {
 
 function intropage_login_options_navigate() {
 	global $config, $login_opts;
+	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 	$console_access = api_plugin_user_realm_auth('index.php');
 
