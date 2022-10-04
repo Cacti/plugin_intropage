@@ -327,7 +327,7 @@ function intropage_new_user_permission ($user_id) {
 		$panels = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_definition WHERE level = 1');
 
 		foreach ($panels as $panel) {
-			$permissions[$panel['panel_id']] = 'on'ů
+			$permissions[$panel['panel_id']] = 'on';
 		}
 
 		$permissions['favourite_graph'] = 'on';
