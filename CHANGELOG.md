@@ -9,6 +9,7 @@
 * feature#208: Add select all to permissions tab
 * feature: Add DNS resolving check
 * feature#203: Add dashboard sharing
+* feature: Change default permission - allow user level panels for new user
 
 --- 4.0.1 ---
 
