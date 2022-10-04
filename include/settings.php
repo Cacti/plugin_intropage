@@ -301,8 +301,56 @@ function intropage_user_admin_user_save($save){
 	return ($save);
 }
 
-//function intropage_user_admin_action($action){
-	// tohle se pousti, kdyz admin klepne na editaci libovolneho uzivatele
-//}
+function intropage_new_user_permission ($user_id) {
+
+	$permissions = array();
+
+	$exists = db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM plugin_intropage_user_auth
+		WHERE user_id = ?',
+		array($user_id));
+
+	if (!$exists) {
+		db_execute_prepared('INSERT INTO plugin_intropage_user_auth
+			(user_id)
+			VALUES (?)',
+			array($user_id));
+	}
+
+	$user = db_fetch_row_prepared('SELECT *
+		FROM plugin_intropage_user_auth
+		WHERE user_id = ?',
+		array($user_id));
+
+	if ($user['permissions'] == '') {
+
+		$panels = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_definition WHERE level = 1');
+
+		foreach ($panels as $panel) {
+			$permissions[$panel['panel_id']] = 'on'ů
+		}
+
+		$permissions['favourite_graph'] = 'on';
+
+		db_execute_prepared('UPDATE plugin_intropage_user_auth
+			SET permissions = ?
+			WHERE user_id = ?',
+			array(json_encode($permissions), $user_id));
+	}
+}
+
+
+function intropage_copy_user($user){
+
+	intropage_new_user_permission ($user['new_id']);
+	return ($user);
+}
+
+
+function intropage_user_admin_setup_sql_save($save){
+
+	intropage_new_user_permission ($save['id']);
+	return ($save);
+}
 
 
