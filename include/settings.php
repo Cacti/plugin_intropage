@@ -40,6 +40,7 @@ function intropage_config_settings() {
 
 function intropage_login_options_navigate() {
 	global $config, $login_opts;
+
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 	$console_access = api_plugin_user_realm_auth('index.php');
@@ -68,12 +69,14 @@ function intropage_console_after() {
 
 	$login_opts = get_login_opts(true);
 
-	if ($login_opts != 4) {
-		$panels = initialize_panel_library();
+	if ($config['poller_id'] == 1 || ($config['poller_id'] > 1 && $config['connection'] == 'online')) {
+		if ($login_opts != 4) {
+			$panels = initialize_panel_library();
 
-		process_page_request_variables();
+			process_page_request_variables();
 
-		display_information();
+			display_information();
+		}
 	}
 }
 
@@ -193,7 +196,7 @@ function intropage_user_admin_run_action(){
 
 	form_start('user_admin.php?action=user_edit&tab=intropage_settings_edit&id=' . get_request_var('id'));
 
-	print '<div>';	
+	print '<div>';
 	print "<div class='cactiTableTitle'><span style='padding:3px;'>" . __('You can Allow/Disallow Panels for User','intropage') . ' ' . $header_label . '</span></div>';
 	print "<div class='cactiTableButton'><span style='padding:3px;'><input class='checkbox' type='checkbox' id='all' name='all' title='Select All' onClick='selectAllPerms(this.checked)'></a><label class='formCheckboxLabel' title='Select All' for='all'></label></span></div>";
 	print '</div>';
@@ -204,8 +207,9 @@ function intropage_user_admin_run_action(){
 			'fields' => inject_form_variables($fields_intropage_user_edit, (isset($user) ? $user : array()))
 		)
 	);
-?>
-<script type='text/javascript'>
+
+	?>
+	<script type='text/javascript'>
 	function selectAllPerms(checked) {
 		if (checked) {
 			$('input[type="checkbox"]').prop('checked', true);
@@ -214,7 +218,7 @@ function intropage_user_admin_run_action(){
 		}
 	}
 	</script>
-<?php
+	<?php
 
 	form_save_button(html_escape($config['url_path'] . 'user_admin.php?action=user_edit&tab=general&id=' . get_request_var('id'), 'save'));
 }
