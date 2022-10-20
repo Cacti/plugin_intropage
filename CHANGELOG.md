@@ -6,6 +6,7 @@
 * issue: Ensure that panels with links use callbacks
 * issue: Vertical scroll bar was not appearing on some themes
 * issue: Fix javascript for displaying topX graph
+* issue#220: Fix php warning config_form does not exists
 * feature#208: Add select all to permissions tab
 * feature: Add DNS resolving check
 * feature#203: Add dashboard sharing

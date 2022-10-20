@@ -271,6 +271,9 @@ function intropage_upgrade_database() {
 		if (cacti_version_compare($oldv, '4.0.3', '<=')) {
 			db_execute('ALTER TABLE plugin_intropage_dashboard
 					ADD COLUMN shared INT(1) NOT NULL default "0"');
+
+			db_execute('DELETE FROM plugin_hooks
+					WHERE FUNCTION = "intropage_config_form"');
 		}
 
 
