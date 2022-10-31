@@ -1,6 +1,6 @@
 # Changelog
 
---- develop ---
+--- 4.0.2 ---
 
 * issue: Clear warnings issued on 'busiest' panel when interface traffic is zero
 * issue: Ensure that panels with links use callbacks
