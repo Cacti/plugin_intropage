@@ -97,8 +97,12 @@ function intropage_user_admin_tab() {
 
 }
 
-function intropage_user_admin_run_action(){
+function intropage_user_admin_run_action($current_tab){
 	global $config, $registry;
+
+	if ($current_tab != 'intropage_settings_edit') {
+		return $current_tab;
+	}
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
@@ -221,6 +225,8 @@ function intropage_user_admin_run_action(){
 	<?php
 
 	form_save_button(html_escape($config['url_path'] . 'user_admin.php?action=user_edit&tab=general&id=' . get_request_var('id'), 'save'));
+
+	return false;
 }
 
 function intropage_user_admin_user_save($save){
