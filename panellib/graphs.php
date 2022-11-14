@@ -404,9 +404,7 @@ function graph_host_detail() {
 		}
 	}
 
-	$panel['detail'] .= '</table>';
-
-	return $panel;
+	$panel['detail'] .= '</table><br/><br/>';
 
 	// alarms and details
 	$i = 0;
@@ -431,7 +429,7 @@ function graph_host_detail() {
 			}
 		}
 
-		$panel['detail'] .= '</table>';
+		$panel['detail'] .= '</table><br/><br/>';
 	}
 
 	if ($h_down > 0) {
