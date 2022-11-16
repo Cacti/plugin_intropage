@@ -404,7 +404,7 @@ function graph_host_detail() {
 		}
 		
 		if (($s['status'] == 1 || $s['status'] == 2) && $s['value'] > 0) {
-			$h = db_fetch_assoc("SELECT id, description
+			$h = db_fetch_assoc("SELECT id, description, status_fail_date
 				FROM host
 				WHERE status = " . $s['status'] . 
 				" AND disabled = ''");
@@ -412,7 +412,7 @@ function graph_host_detail() {
 			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
 			foreach ($h as $r) {
-				$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ')<br/>';
+				$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
 			}
 
 			$panel['detail'] .= '</td></tr>';
