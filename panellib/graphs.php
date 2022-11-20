@@ -376,15 +376,15 @@ function graph_host_detail() {
 		),
 		array(
 			'class'  => 'even',
-			'status' => '-2',
-			'text'   => __esc('Disabled', 'intropage'),
-			'value'  => $h_disa
-		),
-		array(
-			'class'  => 'even',
 			'status' => '2',
 			'text'   => __esc('Recovering', 'intropage'),
 			'value'  => $h_reco
+		),
+		array(
+			'class'  => 'even',
+			'status' => '-2',
+			'text'   => __esc('Disabled', 'intropage'),
+			'value'  => $h_disa
 		)
 	);
 
@@ -392,70 +392,41 @@ function graph_host_detail() {
 		if (api_plugin_user_realm_auth('host.php')) {
 			$panel['detail'] .= '<tr class="' . $s['class'] . '">';
 			$panel['detail'] .= '<td class="left">';
-			$panel['detail'] .= '<a class="pic linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?host_status=' . $s['status']) . '">' . $s['text'] . '</a>';
+			$panel['detail'] .= '<a class="pic linkEditMain bold" href="' . html_escape($config['url_path'] . 'host.php?host_status=' . $s['status']) . '">' . $s['text'] . '</a>';
 			$panel['detail'] .= '</td>';
 			$panel['detail'] .= '<td class="right">' . number_format_i18n($s['value'], -1) . '</td>';
 			$panel['detail'] .= '</tr>';
 		} else {
-			$panel['detail'] .= '<tr class="' . $s['class'] . '">';
+			$panel['detail'] .= '<tr class="' . $s['class'] . ' bold">';
 			$panel['detail'] .= '<td class="left">' . $s['text'] . '</td>';
 			$panel['detail'] .= '<td class="right">' . number_format_i18n($s['value'], -1) . '</td>';
 			$panel['detail'] .= '</tr>';
+		}
+		
+		if (($s['status'] == 1 || $s['status'] == 2) && $s['value'] > 0) {
+			$h = db_fetch_assoc("SELECT id, description, status_fail_date
+				FROM host
+				WHERE status = " . $s['status'] . 
+				" AND disabled = ''");
+
+			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
+
+			foreach ($h as $r) {
+				$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
+			}
+
+			$panel['detail'] .= '</td></tr>';
 		}
 	}
 
 	$panel['detail'] .= '</table>';
 
-	return $panel;
-
-	// alarms and details
-	$i = 0;
 	if ($h_reco > 0) {
 		$panel['alarm'] = 'yellow';
-
-		$panel['detail'] .= '<table class="cactiTable">';
-
-		$hosts = db_fetch_assoc("SELECT description
-			FROM host
-			WHERE status = 2
-			AND disabled = ''");
-
-		$panel['detail'] .= '<tr class="tableHeader"><th class="left" colspan="2">' . __('Recovering Devices', 'intropage') . '</th></tr>';
-
-		if (cacti_sizeof($hosts)) {
-			$i = 0;
-			foreach ($hosts as $host) {
-				$class = ($i % 2 == 0 ? 'odd':'even');
-				$panel['detail'] .= '<tr class="' . $class . '"><td colspan="2">' . html_escape($host['description']) . '</td</tr>';
-				$i++;
-			}
-		}
-
-		$panel['detail'] .= '</table>';
 	}
 
 	if ($h_down > 0) {
 		$panel['alarm'] = 'red';
-
-		$panel['detail'] .= '<table class="cactiTable">';
-
-		$hosts = db_fetch_assoc("SELECT description
-			FROM host
-			WHERE status = 1
-			AND disabled = ''");
-
-		$panel['detail'] .= '<tr class="tableHeader"><th class="left" colspan="2">' . __('Down Devices', 'intropage') . '</th></tr>';
-
-		if (cacti_sizeof($hosts)) {
-			$i = 0;
-			foreach ($hosts as $host) {
-				$class = ($i % 2 == 0 ? 'odd':'even');
-				$panel['detail'] .= '<tr class="' . $class . '"><td colspan="2">' . html_escape($host['description']) . '</td</tr>';
-				$i++;
-			}
-		}
-
-		$panel['detail'] .= '</table>';
 	}
 
 	return $panel;

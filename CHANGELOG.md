@@ -1,5 +1,7 @@
 # Changelog
 
+* feature#226: Panel Devices - add what devices are down and fail date
+
 --- 4.0.2 ---
 
 * issue: Clear warnings issued on 'busiest' panel when interface traffic is zero
