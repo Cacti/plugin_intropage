@@ -222,16 +222,24 @@ function initPage() {
 		$('#'+panel_div_id).remove();
 
 		$.get(page, function() {
-			$.get(page.replace('droppanel', 'addpanelselect&header=false'), function(data) {
-				$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
-				$('#intropage_addpanel').selectmenu().unbind().change(function() {
-					addPanel();
-				});
+			var url = page.replace('droppanel', 'addpanelselect&header=false');
 
-				applySkin();
-				resizeGraphsPanel();
-				resizeCharts();
-			});
+			$.get(url)
+				.done(function(data) {
+					checkForRedirects(data, url);
+
+					$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
+					$('#intropage_addpanel').selectmenu().unbind().change(function() {
+						addPanel();
+					});
+
+					applySkin();
+					resizeGraphsPanel();
+					resizeCharts();
+				})
+				.fail(function(data) {
+					getPresentHTTPErrorOrRedirect(data, url);
+				});
 		});
 	});
 
@@ -274,8 +282,12 @@ function initPage() {
 }
 
 function testPoller() {
-	$.get(urlPath+'plugins/intropage/intropage.php?&action=autoreload')
+	var url = urlPath+'plugins/intropage/intropage.php?&action=autoreload';
+
+	$.get(url)
 	.done(function(data) {
+		checkForRedirects(data, url);
+
 		if (data == 1) {
 			$('#obal li').each(function() {
 				var panel_id = $(this).attr('id').split('_').pop();
@@ -285,6 +297,9 @@ function testPoller() {
 
 			setPageRefresh();
 		}
+	})
+	.fail(function(data) {
+		getPresentHTTPErrorOrRedirect(data, href);
 	});
 }
 
@@ -294,8 +309,12 @@ function reload_panel(panel_id, forced_update, refresh) {
 		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
 	}
 
-	$.get(urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id)
+	var url = urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id;
+
+	$.get(url)
 	.done(function(data) {
+		checkForRedirects(data, url);
+
 		if ($('#panel_'+panel_id).find('.chart_wrapper').length) {
 			chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
 			if (panels[chart_id] != undefined) {
@@ -341,7 +360,12 @@ $('.maxim').click(function(event) {
 	event.preventDefault();
 	var panel_id = $(this).attr('detail-panel');
 
-	$.get(urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id, function(data) {
+	var url = urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id;
+
+	$.get(url)
+	.done(function(data) {
+		checkForRedirects(data, url);
+
 		$('#overlay_detail').html(data);
 
 		var width = $('#overlay_detail').textWidth() + 150;
@@ -377,6 +401,9 @@ $('.maxim').click(function(event) {
 		$('#block').click(function() {
 			$('#overlay').dialog('close');
 		});
+	})
+	.fail(function(data) {
+		getPresentHTTPErrorOrRedirect(data, href);
 	});
 });
 
@@ -389,7 +416,7 @@ $('body').on('click','.bus_graph', function() {
 
 	var id = $(this).attr('bus_id');
 
-	data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />'; 
+	data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />';
 
 	$('#overlay').dialog({
 		modal: true,
