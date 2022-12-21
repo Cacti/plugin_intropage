@@ -267,9 +267,9 @@ function intropage_upgrade_database() {
 			db_execute("UPDATE plugin_intropage_panel_data SET panel_id='ntp_dns' WHERE panel_id='ntp'");			
 			db_execute("UPDATE plugin_intropage_user_auth set permissions=REPLACE(permissions,'ntp','ntp_dns')");
 			db_execute('ALTER TABLE plugin_intropage_dashboard ADD COLUMN shared INT(1) NOT NULL default "0"');
-			db_execute('DELETE FROM plugin_hooks WHERE FUNCTION = "intropage_config_form"');
-    }
-
+			db_execute('DELETE FROM plugin_hooks WHERE FUNCTION = "intropage_config_form" AND name="intropage"');
+		}
+		
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config
 			SET version = ?, author = ?, webpage = ?
