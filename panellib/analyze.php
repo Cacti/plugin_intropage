@@ -72,7 +72,7 @@ function register_analyze() {
 			'level'        => PANEL_SYSTEM,
 			'refresh'      => 86400,
 			'trefresh'     => false,
-			'force'        => true,
+			'force'        => false,
 			'width'        => 'quarter-panel',
 			'priority'     => 7,
 			'alarm'        => 'green',
