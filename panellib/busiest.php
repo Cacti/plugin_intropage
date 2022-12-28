@@ -129,6 +129,23 @@ function register_busiest() {
 			'details_func' => 'busiest_interface_error_detail',
 			'trends_func'  => false
 		),
+		'busiest_interface_utilization' => array(
+			'name'         => __('Busiest Interface utilization', 'intropage'),
+			'description'  => __('Ports with the highest interface utilization', 'intropage'),
+			'class'        => 'busiest',
+			'level'        => PANEL_USER,
+			'refresh'      => 300,
+			'trefresh'     => false,
+			'force'        => true,
+			'width'        => 'quarter-panel',
+			'priority'     => 68,
+			'alarm'        => 'grey',
+			'requires'     => false,
+			'update_func'  => 'busiest_interface_util',
+			'details_func' => 'busiest_interface_util_detail',
+			'trends_func'  => false
+		),
+
 	);
 
 	return $panels;
@@ -707,6 +724,110 @@ function busiest_interface_error($panel, $user_id) {
 }
 
 
+//------------------------------------ busiest_traffic_utilization -----------------------------------------------------
+function busiest_interface_util($panel, $user_id) {
+	global $config;
+
+	include_once($config['base_path'] . '/lib/api_data_source.php');
+
+	$panel['alarm'] = 'grey';
+
+	$console_access = get_console_access($user_id);
+
+	$text_len = 55;
+
+	if (read_user_setting('intropage_display_wide') == 'on') {
+		$text_len = 47;
+	}
+
+	if (read_config_option('dsstats_enable') != 'on') {
+		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
+
+		if ($console_access) {
+			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+		} else {
+			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+		}
+
+		save_panel_result($panel, $user_id);
+	}
+
+	$allowed_devices = intropage_get_allowed_devices($user_id);
+
+	$ds = db_fetch_row("SELECT id,name
+		FROM data_template
+		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
+
+	if ($allowed_devices && $ds) {
+
+		$perc = array();
+
+		$result = db_fetch_assoc("SELECT t2.local_data_id, rrd_name, value,
+			t3.host_id AS `host_id`, t3.snmp_query_id AS `snmp_query_id`, t3.snmp_index AS `snmp_index`
+			FROM data_source_stats_hourly_cache AS t2
+			LEFT JOIN data_local AS t3 on t3.id=t2.local_data_id
+			LEFT JOIN data_template_data AS t4 ON t4.local_data_id = t2.local_data_id
+			WHERE t3.host_id IN (" . $allowed_devices . ") AND
+			t4.data_template_id = " . $ds['id'] . " AND value > 0 AND
+			time > date_sub(now(), INTERVAL 5 MINUTE) ORDER BY value DESC");
+
+		foreach ($result as $row) {
+
+			$speed = api_data_source_get_interface_speed ($row)/8;
+
+			$key = $row['local_data_id'] . '-' . $row['rrd_name'];
+			$perc[$key] = round(100 * $row['value'] / $speed, 2);
+		}
+
+		if (cacti_sizeof($perc)) {
+
+			arsort($perc, SORT_NUMERIC);
+
+			$panel['data'] = '<table class="cactiTable">' .
+				'<tr class="tableHeader">' .
+					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="right">' . __('Direction', 'intropage') . '</th>' .
+					'<th class="right">%</th>' .
+				'</tr>';
+
+			$i = 0;
+
+			foreach ($perc as $key=>$value) {
+				list($real_key,$direction) = explode ('-', $key);
+
+				$gdata = db_fetch_row ('SELECT DISTINCT(local_graph_id) AS graph_id,name_cache FROM graph_templates_item
+					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
+					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
+					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
+					WHERE data_template_data.local_data_id=' . $real_key);
+
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
+				$panel['data'] .= html_escape(substr($gdata['name_cache'],0,$text_len)) . '</td>';
+				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
+				$panel['data'] .= "<td class='right'>" . $value . '</td>';
+
+				$i++;
+
+				if ($i > 4) {
+					break;
+				}
+			}
+
+			$panel['data'] .= '<tr><td colspan="2">' . __('Time interval last 5 minues') . '</td></tr>';
+			$panel['data'] .= '</table>';
+
+		} else {
+			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
+		}
+
+	} else {
+		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
+	}
+
+	save_panel_result($panel, $user_id);
+}
+
+
 //------------------------------------ busiest_cpu_detail  -----------------------------------------------------
 function busiest_cpu_detail() {
 	global $config;
@@ -1258,3 +1379,91 @@ function busiest_interface_error_detail() {
 	return ($panel);
 }
 
+//------------------------------------ busiest_traffic_utilization_detail-----------------------------------------------
+function busiest_interface_util_detail() {
+	global $config;
+
+	$panel = array(
+		'name'   => __('Busiest interface utilization', 'intropage'),
+		'alarm'  => 'grey',
+		'detail' => '',
+	);
+
+	include_once($config['base_path'] . '/lib/api_data_source.php');
+
+	$console_access = get_console_access($_SESSION['sess_user_id']);
+
+	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+
+	$ds = db_fetch_row("SELECT id,name
+		FROM data_template
+		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
+
+	if ($allowed_devices && $ds) {
+
+		$perc = array();
+
+		$result = db_fetch_assoc("SELECT t2.local_data_id, rrd_name, value,
+			t3.host_id AS `host_id`, t3.snmp_query_id AS `snmp_query_id`, t3.snmp_index AS `snmp_index`
+			FROM data_source_stats_hourly_cache AS t2
+			LEFT JOIN data_local AS t3 on t3.id=t2.local_data_id
+			LEFT JOIN data_template_data AS t4 ON t4.local_data_id = t2.local_data_id
+			WHERE t3.host_id IN (" . $allowed_devices . ") AND
+			t4.data_template_id = " . $ds['id'] . " AND value > 0 AND
+			time > date_sub(now(), INTERVAL 5 MINUTE) ORDER BY value DESC");
+
+		foreach ($result as $row) {
+
+			$speed = api_data_source_get_interface_speed ($row)/8;
+
+			$key = $row['local_data_id'] . '-' . $row['rrd_name'];
+			$perc[$key] = round(100 * $row['value'] / $speed,2);
+		}
+
+		if (cacti_sizeof($perc)) {
+
+			arsort($perc, SORT_NUMERIC);
+
+			$panel['detail'] = '<table class="cactiTable">' .
+				'<tr class="tableHeader">' .
+					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="right">' . __('Direction', 'intropage') . '</th>' .
+					'<th class="right">%</th>' .
+				'</tr>';
+
+			$i = 0;
+
+			foreach ($perc as $key=>$value) {
+				list($real_key,$direction) = explode ('-', $key);
+
+				$gdata = db_fetch_row ('SELECT DISTINCT(local_graph_id) AS graph_id,name_cache FROM graph_templates_item
+					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
+					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
+					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
+					WHERE data_template_data.local_data_id=' . $real_key);
+
+				$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
+				$panel['detail'] .= html_escape($gdata['name_cache']) . '</td>';
+				$panel['detail'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
+				$panel['detail'] .= "<td class='right'>" . $value . '</td>';
+
+				$i++;
+
+				if ($i > 30) {
+					break;
+				}
+			}
+
+			$panel['detail'] .= '<tr><td colspan="2">' . __('Time interval last 5 minues', 'intropage') . '</td></tr>';
+			$panel['detail'] .= '</table>';
+
+		} else {
+			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
+		}
+
+	} else {
+		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
+	}
+
+	return($panel);
+}
