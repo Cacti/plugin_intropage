@@ -382,7 +382,7 @@ function analyse_db($panel, $user_id) {
 	}
 
 	if ($aerrors > 0) {
-		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s.  Run \'SET GLOBAL log_warnings = 1;\' from the mysql CLI and set in server.cnf to silence.', $aerrors, 'intropage') . '</td></tr>';
+		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s.  Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', $aerrors, 'intropage') . '</td></tr>';
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
