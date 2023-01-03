@@ -2,6 +2,7 @@
 
 * feature#226: Panel Devices - add what devices are down and fail date
 * feature#228: Add Busiest panel - top utilized ports
+* issue#235: Bussiest panels do not respect permissions
 
 --- 4.0.2 ---
 

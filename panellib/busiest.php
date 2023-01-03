@@ -556,9 +556,12 @@ function busiest_traffic($panel, $user_id) {
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly  AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . '
-			AND rrd_name=\'traffic_out\'
+		$query = ' FROM data_template_data AS t1 
+			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
+			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
+			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t3.host_id IN (' . $allowed_devices . ') AND
+			rrd_name=\'traffic_out\'
 			ORDER BY xvalue DESC
 			LIMIT 5';
 
@@ -672,13 +675,21 @@ function busiest_interface_error($panel, $user_id) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
+		$query = ' FROM data_template_data AS t1 
+			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
+			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t3.host_id IN (' . $allowed_devices . ') AND			
 			t2.average IS NOT NULL
 			ORDER BY t2.average DESC
 			LIMIT 5';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
+
+		$query = ' FROM data_template_data AS t1 
+			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
+			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t2.average IS NOT NULL';
 
 		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
 
@@ -1219,9 +1230,12 @@ function busiest_traffic_detail() {
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly  AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . '
-			AND rrd_name=\'traffic_out\'
+		$query = ' FROM data_template_data AS t1 
+			LEFT JOIN data_source_stats_hourly  AS t2 ON t1.local_data_id = t2.local_data_id
+			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
+			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t3.host_id IN (' . $allowed_devices . ') AND
+			rrd_name=\'traffic_out\'
 			ORDER BY xvalue DESC
 			LIMIT 30';
 
@@ -1324,13 +1338,20 @@ function busiest_interface_error_detail() {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
+		$query = ' FROM data_template_data AS t1 
+			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
+			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id			
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t3.host_id IN (' . $allowed_devices . ') AND			
 			t2.average IS NOT  NULL
 			ORDER BY t2.average DESC
 			LIMIT 30';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
+
+		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
+			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
+			t2.average IS NOT NULL';
 
 		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
 
