@@ -281,6 +281,7 @@ function intropage_upgrade_database() {
 			)
 		);
 
+	        $panels = initialize_panel_library();
 		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', 1);
 	}
 }
