@@ -4,6 +4,7 @@
 
 * feature#228: Add Busiest panel - top utilized ports
 
+* issue#237: Fix PHP 8.x warning - trim function
 
 --- 4.0.2 ---
 
