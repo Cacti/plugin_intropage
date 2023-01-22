@@ -870,7 +870,7 @@ function display_panel_results($panel_id, $user_id = 0) {
 		AND user_id IN (0, ?)",
 		array($panel_id, $user_id));
 
-	if (cacti_sizeof($data) && trim($data['data']) == '') {
+	if (cacti_sizeof($data) && trim((string) $data['data']) == '') {
 		if (!empty($panel['force']) && $panel['force']) {
 			$data['data'] = __('No Data Present.  Either Force Update, or wait for next Cacti Polling cycle.', 'intropage');
 		} else {
@@ -1286,7 +1286,7 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 }
 
 function intropage_display_data($panel_id, $data) {
-	if (isset($data['data']) && trim($data['data']) != '') {
+	if (isset($data['data']) && trim((string) $data['data']) != '') {
 		print $data['data'];
 	} else {
 		print '<table class="cactiTable"><tr><td>' . __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage') . '</td></tr></table>';
