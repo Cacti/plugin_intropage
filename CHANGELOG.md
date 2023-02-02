@@ -3,9 +3,12 @@
 * feature#226: Panel Devices - add what devices are down and fail date
 
 * feature#228: Add Busiest panel - top utilized ports
+
 * issue#235: Bussiest panels do not respect permissions
 
 * issue#237: Fix PHP 8.x warning - trim function
+
+* issue#243: Fix PopUp - Error message of missing Intropage permissions 
 
 --- 4.0.2 ---
 
