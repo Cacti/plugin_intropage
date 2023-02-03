@@ -78,7 +78,6 @@ function intropage_console_after() {
 			display_information();
 		}
 	}
-}
 
 function intropage_user_admin_tab() {
 	global $config;
