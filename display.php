@@ -75,6 +75,7 @@ function display_information() {
 	$display_wide            = read_user_setting('intropage_display_wide', read_config_option('intropage_display_wide'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 	$timespan                = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'));
+	$number_of_lines         = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
 
 	// number of dashboards
 	$number_of_dashboards = db_fetch_cell_prepared('SELECT COUNT(*)
@@ -255,6 +256,28 @@ function display_information() {
 
 	if ($dashboard_id > 1) {
 		print '<option value="removepage_' . $dashboard_id . '">' . __('Remove current dashboard', 'intropage') . '</option>';
+	}
+
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
+	print "<option value=''>" . __('Number of lines', 'intropage') . '</option>';
+
+	if ($number_of_lines == 5) {
+		print "<option value='lines_5' disabled='disabled'>" . __('%d lines', 5, 'intropage') . '</option>';
+	} else {
+		print "<option value='lines_5'>" . __('%d lines', 5, 'intropage') . '</option>';
+	}
+
+	if ($number_of_lines == 10) {
+		print "<option value='lines_10' disabled='disabled'>" . __('%d lines', 10, 'intropage') . '</option>';
+	} else {
+		print "<option value='lines_10'>" . __('%d lines', 10, 'intropage') . '</option>';
+	}
+
+	if ($number_of_lines == 20) {
+		print "<option value='lines_20' disabled='disabled'>" . __('%d lines', 20, 'intropage') . '</option>';
+	} else {
+		print "<option value='lines_20'>" . __('%d lines', 20, 'intropage') . '</option>';
 	}
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';

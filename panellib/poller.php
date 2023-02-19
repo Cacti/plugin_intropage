@@ -95,6 +95,8 @@ function poller_info_trend() {
 function poller_info($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'green';
 
 	$sql_pollers = db_fetch_assoc('SELECT p.id, name, status, last_update, total_time
@@ -104,7 +106,7 @@ function poller_info($panel, $user_id) {
 		WHERE p.disabled = ""
 		GROUP BY p.id
 		ORDER BY p.id
-		LIMIT 5');
+		LIMIT ' . $lines);
 
 	$count    = $sql_pollers === false ? __('N/A', 'intropage') : count($sql_pollers);
 	$ok       = 0;
@@ -180,6 +182,8 @@ function poller_stat_trend() {
 function poller_stat($panel, $user_id, $timespan = 0) {
 	global $config, $run_from_poller;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'green';
@@ -228,7 +232,7 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 		WHERE p.disabled = ""
 		GROUP BY p.id
 		ORDER BY avg_time DESC
-		LIMIT 5');
+		LIMIT ' . $lines);
 
 	if (cacti_sizeof($pollers)) {
 		$new_index = 1;
@@ -270,6 +274,8 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 function poller_info_detail() {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	
 	$panel = array(
 		'name'   => __('Poller Details', 'intropage'),
 		'alarm'  => 'green',
@@ -292,7 +298,8 @@ function poller_info_detail() {
 		ON pt.poller_id = p.id
 		WHERE p.disabled = ""
 		GROUP BY p.id
-		ORDER BY p.id');
+		ORDER BY p.id
+		LIMIT ' . $lines);
 
 	$count    = $pollers === false ? __('N/A', 'intropage') : cacti_count($pollers);
 	$ok       = 0;
@@ -397,8 +404,6 @@ function poller_output_items($panel, $user_id, $timespan = 0) {
 		ORDER BY cur_timestamp ASC",
 		array($timespan));
 
-
-
 	if (cacti_sizeof($rows)) {
 		foreach ($rows as $row) {
 			if ($row['value'] > 0) {
@@ -423,8 +428,4 @@ function poller_output_items($panel, $user_id, $timespan = 0) {
 
 	save_panel_result($panel, $user_id);
 }
-
-
-
-
 

@@ -358,6 +358,12 @@ function intropage_actions() {
 		}
 
 		break;
+	case 'lines':
+		if (filter_var($value, FILTER_VALIDATE_INT)) {
+			set_user_setting('intropage_number_of_lines', $value);
+		}
+
+		break;
 	case 'timespan':
 		$timespan = $value;
 

@@ -74,7 +74,7 @@ function plugin_intropage_uninstall() {
 }
 
 function intropage_config_arrays() {
-	global $intropage_intervals, $trend_timespans;
+	global $intropage_intervals, $trend_timespans, $panel_lines;
 
 	auth_augment_roles(__('Normal User'), array('intropage.php'));
 	auth_augment_roles(__('System Administration'), array('intropage_admin.php'));

@@ -155,6 +155,8 @@ function register_busiest() {
 function busiest_cpu($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
@@ -194,7 +196,7 @@ function busiest_cpu($panel, $user_id) {
 			t2.average IS NOT  NULL AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY t2.average DESC
-			LIMIT 5';
+			LIMIT ' . $lines;
 
 		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -250,6 +252,8 @@ function busiest_cpu($panel, $user_id) {
 function busiest_load($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
@@ -289,7 +293,7 @@ function busiest_load($panel, $user_id) {
 			t2.average IS NOT  NULL AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY t2.average DESC
-			LIMIT 5';
+			LIMIT ' . $lines;
 
 		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -340,6 +344,8 @@ function busiest_load($panel, $user_id) {
 function busiest_hdd($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
@@ -381,7 +387,7 @@ function busiest_hdd($panel, $user_id) {
 			t2.rrd_name=\'hdd_used\' AND
 			t1.data_template_id = ' . $ds['id'] . '
 			ORDER BY xvalue DESC
-			LIMIT 5';
+			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -455,6 +461,8 @@ function busiest_hdd($panel, $user_id) {
 function busiest_uptime($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
@@ -473,7 +481,7 @@ function busiest_uptime($panel, $user_id) {
 		$query = ' FROM host
 			WHERE id IN (' . $allowed_devices . ')
 			ORDER BY snmp_sysUpTimeInstance DESC
-			LIMIT 5';
+			LIMIT ' . $lines;
 
 		$avg = db_fetch_cell ('SELECT avg(snmp_sysUpTimeInstance)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -520,6 +528,8 @@ function busiest_uptime($panel, $user_id) {
 function busiest_traffic($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
@@ -563,7 +573,7 @@ function busiest_traffic($panel, $user_id) {
 			t3.host_id IN (' . $allowed_devices . ') AND
 			rrd_name=\'traffic_out\'
 			ORDER BY xvalue DESC
-			LIMIT 5';
+			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -643,6 +653,8 @@ function busiest_traffic($panel, $user_id) {
 function busiest_interface_error($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
@@ -682,7 +694,7 @@ function busiest_interface_error($panel, $user_id) {
 			t3.host_id IN (' . $allowed_devices . ') AND			
 			t2.average IS NOT NULL
 			ORDER BY t2.average DESC
-			LIMIT 5';
+			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -738,6 +750,8 @@ function busiest_interface_error($panel, $user_id) {
 //------------------------------------ busiest_traffic_utilization -----------------------------------------------------
 function busiest_interface_util($panel, $user_id) {
 	global $config;
+
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
 	include_once($config['base_path'] . '/lib/api_data_source.php');
 
@@ -819,7 +833,7 @@ function busiest_interface_util($panel, $user_id) {
 
 				$i++;
 
-				if ($i > 4) {
+				if ($i > $lines) {
 					break;
 				}
 			}
