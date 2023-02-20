@@ -274,10 +274,10 @@ function display_information() {
 		print "<option value='lines_10'>" . __('%d lines', 10, 'intropage') . '</option>';
 	}
 
-	if ($number_of_lines == 20) {
-		print "<option value='lines_20' disabled='disabled'>" . __('%d lines', 20, 'intropage') . '</option>';
+	if ($number_of_lines == 15) {
+		print "<option value='lines_15' disabled='disabled'>" . __('%d lines', 15, 'intropage') . '</option>';
 	} else {
-		print "<option value='lines_20'>" . __('%d lines', 20, 'intropage') . '</option>';
+		print "<option value='lines_15'>" . __('%d lines', 15, 'intropage') . '</option>';
 	}
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';

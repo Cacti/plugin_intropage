@@ -91,7 +91,6 @@ function process_page_request_variables() {
 				intropage_display_graph();
 
 				break;
-
 		}
 
 		exit;
@@ -1021,6 +1020,16 @@ function update_registered_panels($panels) {
 function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 	global $config, $graph_timeshifts;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $_SESSION['sess_user_id']);
+
+	if ($lines == 5) {
+		$graph_height = 100;
+	} elseif ($lines == 10) {
+		$graph_height = 170;
+	} else {
+		$graph_height = 250;
+	}
+
 	if (isset($fav_graph_id)) {
 		$result = array(
 			'name' => '', // we don't need name here
@@ -1045,7 +1054,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 		$result['data'] = '<table class="cactiTable"><tr><td class="center"><img class="intrograph" src="' . $config['url_path'] .
 			'graph_image.php' .
 			'?local_graph_id=' . $fav_graph_id .
-			'&graph_height=100' .
+			'&graph_height=' . $graph_height . 
 			'&graph_width=300' .
 			'&disable_cache=true' .
 			'&graph_start=' . $timespan['begin_now'] .
@@ -1058,6 +1067,16 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 
 function intropage_prepare_graph($dispdata) {
 	global $config;
+
+        $lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $_SESSION['sess_user_id']);
+
+        if ($lines == 5) {
+                $graph_height = 100;
+        } elseif ($lines == 10) {
+                $graph_height = 200;
+        } else {
+                $graph_height = 270;
+        }
 
 	$content = '';
 
@@ -1072,7 +1091,7 @@ function intropage_prepare_graph($dispdata) {
 				'enabled'	=> 'true',
 				'type'		=> 'drag'
 			),
-			'size'   => array('height' => '180'),
+			'size'   => array('height' => $graph_height),
 			'data'   => array(
 				'x'       => 'x',
 				'xFormat' => '%Y-%m-%d %H:%M:%S'
@@ -1160,7 +1179,7 @@ function intropage_prepare_graph($dispdata) {
 		$content .= " bindto: \"#pie_$xid\",";
 
 		$content .= " size: {";
-		$content .= "  height: 180";
+		$content .= "  height: $graph_height";
 		$content .= " },";
 
 		$content .= " data: {";

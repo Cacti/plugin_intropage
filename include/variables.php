@@ -73,7 +73,7 @@ $intropage_settings = array(
 		'array'         => array(
 			'5'  => __('%d lines', 5, 'intropage'),
 			'10' => __('%d lines', 10, 'intropage'),
-			'20' => __('%d lines', 20, 'intropage'),
+			'15' => __('%d lines', 15, 'intropage'),
 		),
 		'default'       => '5',
 	),
