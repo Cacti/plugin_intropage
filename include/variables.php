@@ -66,6 +66,17 @@ $intropage_settings = array(
 		),
 		'default'       => '60',
 	),
+	'intropage_number_of_lines' => array(
+		'friendly_name' => __('Number of panel lines', 'intropage'),
+		'description'   => __('How many lines in panel', 'intropage'),
+		'method'        => 'drop_array',
+		'array'         => array(
+			'5'  => __('%d lines', 5, 'intropage'),
+			'10' => __('%d lines', 10, 'intropage'),
+			'15' => __('%d lines', 15, 'intropage'),
+		),
+		'default'       => '5',
+	),
 	'intropage_timespan' => array(
 		'friendly_name' => __('Trend Timespan', 'intropage'),
 		'description'   => __('For Trend charts, what should be the default timespan for those charts.', 'intropage'),

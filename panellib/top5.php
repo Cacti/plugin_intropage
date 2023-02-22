@@ -106,6 +106,8 @@ function register_top5() {
 function top5_ping($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'green';
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
@@ -118,7 +120,7 @@ function top5_ping($panel, $user_id) {
 			WHERE host.id in (" . $allowed_devices . ")
 			AND disabled != 'on'
 			ORDER BY cur_time desc
-			LIMIT 5");
+			LIMIT " . $lines);
 
 		if (cacti_sizeof($sql_worst_host)) {
 			$color = read_config_option('intropage_alert_worst_ping');
@@ -173,6 +175,8 @@ function top5_ping($panel, $user_id) {
 //------------------------------------ top5_availability -----------------------------------------------------
 function top5_availability($panel, $user_id) {
 	global $config;
+	
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);	
 
 	$panel['alarm'] = 'green';
 
@@ -186,7 +190,7 @@ function top5_availability($panel, $user_id) {
 			WHERE host.id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
 			ORDER BY availability
-			LIMIT 5");
+			LIMIT " . $lines);
 
 		if (cacti_sizeof($sql_worst_host)) {
 			$color = read_config_option('intropage_alert_worst_availability');
@@ -240,6 +244,8 @@ function top5_availability($panel, $user_id) {
 function top5_polltime($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'green';
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
@@ -252,7 +258,7 @@ function top5_polltime($panel, $user_id) {
 			WHERE host.id in (" . $allowed_devices . ")
 			AND disabled != 'on'
 			ORDER BY polling_time desc
-			LIMIT 5");
+			LIMIT " . $lines);
 
 		if (cacti_sizeof($sql_worst_host)) {
 			$color = read_config_option('intropage_alert_worst_polling_time');
@@ -306,6 +312,8 @@ function top5_polltime($panel, $user_id) {
 function top5_pollratio($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'green';
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
@@ -319,7 +327,7 @@ function top5_pollratio($panel, $user_id) {
 			WHERE host.id in (" . $allowed_devices . ")
 			AND disabled != 'on'
 			ORDER BY ratio DESC
-			LIMIT 5");
+			LIMIT " . $lines);
 
 		if (cacti_sizeof($sql_worst_host)) {
 			$color = read_config_option('intropage_alert_worst_polling_ratio');

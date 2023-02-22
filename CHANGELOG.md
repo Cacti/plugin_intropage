@@ -4,6 +4,8 @@
 
 * feature#228: Add Busiest panel - top utilized ports
 
+* feature#350: Selectable number of lines in panel
+
 * issue#235: Bussiest panels do not respect permissions
 
 * issue#237: Fix PHP 8.x warning - trim function

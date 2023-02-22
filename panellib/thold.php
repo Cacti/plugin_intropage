@@ -74,6 +74,8 @@ function register_thold() {
 function thold_event($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
 	$panel['alarm'] = 'green';
 
 	if (!api_plugin_is_enabled('thold')) {
@@ -106,7 +108,7 @@ function thold_event($panel, $user_id) {
 				WHERE td.host_id IN (' . $allowed_devices . ')
 				HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 				ORDER BY `time` DESC
-				LIMIT 10');
+				LIMIT ' . $lines);
 		} else {
 			$data = array();
 		}

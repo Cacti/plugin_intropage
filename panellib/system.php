@@ -422,6 +422,8 @@ function extrem_trend() {
 //------------------------------------ extrem -----------------------------------------------------
 function extrem($panel, $user_id) {
 	global $config;
+	
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
 	$panel['alarm'] = 'grey';
 
@@ -440,7 +442,7 @@ function extrem($panel, $user_id) {
 			WHERE name='poller'
 			AND cur_timestamp > date_sub(now(),interval 1 day)
 			ORDER BY xvalue desc, cur_timestamp
-			LIMIT 8");
+			LIMIT $lines");
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
@@ -458,7 +460,7 @@ function extrem($panel, $user_id) {
 		AND user_id = ?
 		AND cur_timestamp > date_sub(now(),interval 1 day)
 		ORDER BY value desc,cur_timestamp
-		LIMIT 8",
+		LIMIT $lines",
 		array($user_id));
 
 	if (cacti_sizeof($data)) {
@@ -477,7 +479,7 @@ function extrem($panel, $user_id) {
 			AND user_id = ?
 			AND cur_timestamp > date_sub(now(),interval 1 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 8",
+			LIMIT $lines",
 			array($user_id));
 
 		if (cacti_sizeof($data)) {
@@ -496,7 +498,7 @@ function extrem($panel, $user_id) {
 			WHERE name='poller_output'
 			AND cur_timestamp > date_sub(now(),interval 1 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 8");
+			LIMIT $lines");
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
@@ -514,7 +516,7 @@ function extrem($panel, $user_id) {
 			WHERE name = 'failed_polls'
 			AND cur_timestamp > date_sub(now(), interval 1 day)
 			ORDER BY value desc, cur_timestamp
-			LIMIT 8");
+			LIMIT $lines");
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
@@ -558,6 +560,8 @@ function extrem($panel, $user_id) {
 function extrem_detail() {
 	global $config, $console_access;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
+
 	$panel = array(
 		'name'   => __('48 Hour Extreme Polling', 'intropage'),
 		'alarm'  => 'grey',
@@ -578,7 +582,7 @@ function extrem_detail() {
 			WHERE name='poller'
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY xvalue desc, cur_timestamp
-			LIMIT 14");
+			LIMIT 25");
 
 		if (cacti_sizeof($data)) {
 			$j = 0;
@@ -599,7 +603,7 @@ function extrem_detail() {
 		AND user_id =  ?
 		AND cur_timestamp > date_sub(now(),interval 2 day)
 		ORDER BY value desc,cur_timestamp
-		LIMIT 14",
+		LIMIT 25",
 		array($_SESSION['sess_user_id']));
 
 	if (cacti_sizeof($data)) {
@@ -621,7 +625,7 @@ function extrem_detail() {
 			AND user_id = " . $_SESSION['sess_user_id'] . "
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value DESC, cur_timestamp
-			LIMIT 14");
+			LIMIT 25");
 
 		if (cacti_sizeof($data)) {
 			$j++;
@@ -643,7 +647,7 @@ function extrem_detail() {
 			WHERE name='poller_output'
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 14");
+			LIMIT 25");
 
 		if (cacti_sizeof($data)) {
 			$j++;
@@ -664,7 +668,7 @@ function extrem_detail() {
 			AND user_id=?
 			AND cur_timestamp > date_sub(now(),interval 2 day)
 			ORDER BY value desc,cur_timestamp
-			LIMIT 14",
+			LIMIT 25",
 			array($_SESSION['sess_user_id']));
 
 		if (cacti_sizeof($data)) {

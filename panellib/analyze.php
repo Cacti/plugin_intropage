@@ -138,6 +138,8 @@ function register_analyze() {
 function analyse_login($panel, $user_id) {
 	global $config;
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	
 	$flog = db_fetch_cell('SELECT COUNT(*)
 		FROM user_log
 		WHERE result = 0');
@@ -150,30 +152,7 @@ function analyse_login($panel, $user_id) {
 
 	$panel['data']  = '<table class="cactiTable">';
 
-	$panel['data'] .= '<tr><td><span class="txt_big">' . __('Total Failed Logins: %s', number_format_i18n($flog), 'intropage') . '</span></td></tr>';
-
-	$panel['data'] .= '<tr><td>' . __('Active Users in Last Hour:', 'intropage');
-
-	$data = db_fetch_assoc('SELECT DISTINCT username
-		FROM user_log
-		WHERE time > adddate(now(), INTERVAL -1 HOUR)
-		LIMIT 10');
-
-	if (cacti_sizeof($data)) {
-		$i = 0;
-		foreach ($data as $row) {
-			$panel['data'] .= ($i > 0 ? ', ':' ') . html_escape($row['username']);
-			$i++;
-		}
-	} else {
-		$panel['data'] .= __('None', 'intropage');
-	}
-
-	$panel['data'] .= '</td></tr>';
-
-	$panel['data'] .= '</table><table class="cactiTable">';
-
-	$panel['data'] .= '<tr><td><h4>' . __('Last 5 Logins', 'intropage') . '</h4></td></tr>';
+//	$panel['data'] .= '<tr><td><h4>' . __('Last 5 Logins', 'intropage') . '</h4></td></tr>';
 
 	$rows = db_fetch_assoc('SELECT user_log.username, user_auth.full_name,
 		user_log.time, user_log.result, user_log.ip
@@ -181,7 +160,7 @@ function analyse_login($panel, $user_id) {
 		INNER JOIN user_log
 		ON user_auth.username = user_log.username
 		ORDER BY user_log.time desc
-		LIMIT 5');
+		LIMIT ' . $lines);
 
 	if (cacti_sizeof($rows)) {
 		$panel['data'] .=
@@ -212,9 +191,35 @@ function analyse_login($panel, $user_id) {
 
 			$i++;
 		}
-
-		$panel['data'] .= '</table>';
 	}
+
+	$panel['data'] .= '</table><br/>';
+	
+	$panel['data'] .= '<table class="cactiTable">';
+
+	$panel['data'] .= '<tr><td>' . __('Total Failed Logins: %s', number_format_i18n($flog), 'intropage') . '</td></tr>';
+
+	$panel['data'] .= '<tr><td>' . __('Active Users in Last Hour:', 'intropage');
+
+	$data = db_fetch_assoc('SELECT DISTINCT username
+		FROM user_log
+		WHERE time > adddate(now(), INTERVAL -1 HOUR)
+		LIMIT 10');
+
+	if (cacti_sizeof($data)) {
+		$i = 0;
+		foreach ($data as $row) {
+			$panel['data'] .= ($i > 0 ? ', ':' ') . html_escape($row['username']);
+			$i++;
+		}
+	} else {
+		$panel['data'] .= __('None', 'intropage');
+	}
+
+	$panel['data'] .= '</td></tr>';
+
+	$panel['data'] .= '</table>';
+
 
 	save_panel_result($panel, $user_id);
 }
@@ -222,6 +227,8 @@ function analyse_login($panel, $user_id) {
 //------------------------------------ analyse_log -----------------------------------------------------
 function analyse_log($panel, $user_id) {
 	global $config;
+
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
 	$panel['data']  = '';
 	$panel['alarm'] = 'green';
@@ -287,7 +294,7 @@ function analyse_log($panel, $user_id) {
 
 		$panel['data'] .= '<tr><td><hr></td></tr>';
 
-		$panel['data'] .= '<tr><td>' . __('Errors and Warnings from last %s lines)', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
+		$panel['data'] .= '<tr><td>' . __('Errors and Warnings from last %s lines', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
 
 		if ($error > 0) {
 			$panel['alarm'] = 'red';
