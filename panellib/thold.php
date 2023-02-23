@@ -55,7 +55,7 @@ function register_thold() {
 			'class'        => 'thold',
 			'level'        => PANEL_USER,
 			'refresh'      => 300,
-			'trefresh'     => false,
+			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 18,
@@ -63,7 +63,7 @@ function register_thold() {
 			'requires'     => 'thold',
 			'update_func'  => 'graph_thold',
 			'details_func' => 'graph_thold_detail',
-			'trends_func'  => false
+			'trends_func'  => 'thold_collect'
 		),
 	);
 
@@ -138,67 +138,131 @@ function thold_event($panel, $user_id) {
 }
 
 //------------------------------------ graph_thold -----------------------------------------------------
-function graph_thold($panel, $user_id) {
+function graph_thold($panel, $user_id, $timespan = 0) {
 	global $config;
 
 	$panel['alarm'] = 'green';
 
 	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
 
+	$graph = array (
+        	'line' => array(
+			'title'  => __('Thresholds: ', 'intropage'),
+			'label1' => array(),
+			'data1'  => array(),
+			'label2' => array(),
+			'data2'  => array(),
+			'label3' => array(),
+			'data3'  => array(),
+		),
+	);
+
 	if (!api_plugin_is_enabled('thold')) {
 		$panel['alarm'] = 'grey';
 		$panel['data']  = __('Thold plugin not installed/running', 'intropage');
 	} elseif (api_plugin_user_realm_auth('thold_graph.php')) {
-		$t_all  = 0;
-		$t_brea = 0;
-		$t_trig = 0;
-		$t_disa = 0;
 
-		$sql_where = '';
-
-		$x = '';
-		$x = get_allowed_thresholds($sql_where, 'null', 1, $t_all, $user_id);
-
-		$sql_where = "td.thold_enabled = 'on' AND ((td.thold_alert != 0 OR td.bl_alert > 0))";
-		$x = get_allowed_thresholds($sql_where, 'null', 1, $t_brea, $user_id);
-
-		$sql_where = "td.thold_enabled = 'on' AND (((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger)
-			OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
-		$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user_id);
-
-		$sql_where = "td.thold_enabled = 'off'";
-		$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $user_id);
-
-		$url_prefix = '<a class="pic" href="' . html_escape($config['url_path'] . 'plugins/thold/thold_graph.php?tab=thold&triggered=%s') . '">';
-		$url_suffix = '</a>';
-
-		$panel['data']  = sprintf($url_prefix, '-1') . __('All', 'intropage')      . ": $t_all$url_suffix<br/>";
-		$panel['data'] .= sprintf($url_prefix, '1')  . __('Breached', 'intropage') . ": $t_brea$url_suffix<br/>";
-		$panel['data'] .= sprintf($url_prefix, '3')  . __('Trigged', 'intropage')  . ": $t_trig$url_suffix<br/>";
-		$panel['data'] .= sprintf($url_prefix, '0')  . __('Disabled', 'intropage') . ": $t_disa$url_suffix<br/>";
-
-		if ($t_all > 0) {
-			$graph = array ('pie' => array(
-				'title' => $panel['name'],
-				'label' => array(
-					__('OK', 'intropage'),
-					__('Triggered', 'intropage'),
-					__('Breached', 'intropage'),
-					__('Disabled', 'intropage'),
-				),
-				'data' => array($t_all - $t_brea - $t_trig - $t_disa, $t_trig, $t_brea, $t_disa))
-			);
-
-			$panel['data'] = intropage_prepare_graph($graph, $user_id);
-
-			// alarms and details
-			if ($t_brea > 0) {
-				$panel['alarm'] = 'yellow';
+		$first = true;
+       
+		if ($timespan == 0) {
+                	if (isset($_SESSION['sess_user_id'])) {
+				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+			} else {
+				$timespan = $panel['refresh'];
 			}
+		}
 
-			if ($t_trig > 0) {
-				$panel['alarm'] = 'red';
-			}
+		if (!isset($panel['refresh_interval'])) {
+			$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+				FROM plugin_intropage_panel_data
+				WHERE id = ?',
+				array($panel['id']));
+		} else {
+			$refresh = $panel['refresh'];
+		}
+
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'thold_trig'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+                if (cacti_sizeof($rows)) {
+                
+                        $graph['line']['title1'] = __('Trigerred', 'intropage');
+                        $graph['line']['unit1']['title'] = 'Triggered [count]';
+
+			foreach ($rows as $row) {
+				if ($first) {
+					if ($row['value'] > 0) {
+						$panel['alarm'] = 'red';
+					}
+					$first = false;
+				}
+
+				$graph['line']['label1'][] = $row['date'];
+				$graph['line']['data1'][]  = $row['value'];
+                        }
+		} else {
+			unset($graph['line']['label1']);
+			unset($graph['line']['data1']);
+		}
+		
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'thold_brea'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+                if (cacti_sizeof($rows)) {
+                
+                        $graph['line']['title2'] = __('Breached', 'intropage');
+                        $graph['line']['unit2']['title'] = 'Breached [count]';
+
+			foreach ($rows as $row) {
+				if ($first) {
+					if ($row['value'] > 0) {
+						$panel['alarm'] = 'yellow';
+					}
+					$first = false;
+				}
+
+				$graph['line']['label2'][] = $row['date'];
+				$graph['line']['data2'][]  = $row['value'];
+                        }
+		} else {
+			unset($graph['line']['label2']);
+			unset($graph['line']['data2']);
+		}
+
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'thold_disa'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+                if (cacti_sizeof($rows)) {
+                
+                        $graph['line']['title3'] = __('Disabled', 'intropage');
+                        $graph['line']['unit3']['title'] = 'Disabled [count]';
+
+			foreach ($rows as $row) {
+				$graph['line']['label3'][] = $row['date'];
+				$graph['line']['data3'][]  = $row['value'];
+                        }
+		} else {
+			unset($graph['line']['label3']);
+			unset($graph['line']['data3']);
+		}
+
+		if (isset($graph['line']['data1']) || isset($graph['line']['data2']) || isset($graph['line']['data3'])) {
+	                $panel['data'] = intropage_prepare_graph($graph, $user_id);
+                } else {
+                        unset($graph);
+                        $panel['data'] = __('Waiting for data', 'intropage');
 		}
 	} else {
 		$panel['data'] = __('You don\'t have plugin permission', 'intropage');
@@ -387,4 +451,73 @@ function thold_event_detail() {
 
 	return $panel;
 }
+
+function thold_collect() {
+	global $config;
+
+	// update in poller
+	$users = get_user_list();
+
+	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+
+	foreach ($users as $user) {
+		$t_brea = 0;
+		$t_trig = 0;
+		$t_disa = 0;
+
+		$allowed_devices = intropage_get_allowed_devices($user['id']);
+
+		if ($allowed_devices !== false) {
+
+			$x      = '';
+			$sql_where = '';
+
+			$sql_where = "td.thold_enabled = 'on' AND ((td.thold_alert != 0 OR td.bl_alert > 0))";
+			$x = get_allowed_thresholds($sql_where, 'null', 1, $t_brea, $user['id']);
+
+			$sql_where = "td.thold_enabled = 'off'";
+			$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $user['id']);
+
+			$sql_where = "td.thold_enabled = 'on'
+				AND (((td.thold_alert != 0
+				AND td.thold_fail_count >= td.thold_fail_trigger)
+				OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
+
+			$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user['id']);
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('thold_brea', ?, ?)",
+				array($t_brea, $user['id']));
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('thold_disa', ?, ?)",
+				array($t_disa, $user['id']));
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('thold_trig', ?, ?)",
+				array($t_trig, $user['id']));
+
+		} else {
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('thold_brea', 0, ?)",
+				array($user['id']));
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('thold_disa', 0, ?)",
+				array($user['id']));
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('thold_trig', 0, ?)",
+				array($user['id']));
+		}
+	}
+}
+
+
 

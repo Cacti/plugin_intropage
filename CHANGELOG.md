@@ -1,10 +1,14 @@
 # Changelog
 
+--- 4.0.3 ---
+
 * feature#226: Panel Devices - add what devices are down and fail date
 
 * feature#228: Add Busiest panel - top utilized ports
 
 * feature#350: Selectable number of lines in panel
+
+* feature: Better trends - line graphs for hosts and tholds
 
 * issue#235: Bussiest panels do not respect permissions
 

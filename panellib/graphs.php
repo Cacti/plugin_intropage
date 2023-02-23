@@ -70,8 +70,8 @@ function register_graphs() {
 			'description'  => __('Graph of Devices by Status (up,down,...)', 'intropage'),
 			'class'        => 'graphs',
 			'level'        => PANEL_USER,
-			'refresh'      => 7200,
-			'trefresh'     => false,
+			'refresh'      => 300,
+			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'priority'     => 19,
@@ -79,7 +79,7 @@ function register_graphs() {
 			'requires'     => false,
 			'update_func'  => 'graph_host',
 			'details_func' => 'graph_host_detail',
-			'trends_func'  => false
+			'trends_func'  => 'host_collect'
 		),
 	);
 
@@ -177,92 +177,138 @@ function graph_host_template($panel, $user_id) {
 }
 
 //--------------------------------------- graph host-----------------------------
-function graph_host($panel, $user_id) {
+function graph_host($panel, $user_id, $timespan = 0) {
 	global $config;
-
+ 
+        $panel['alarm'] = 'green';
+ 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
-
-	$panel['alarm'] = 'green';
-
-	if ($allowed_devices !== false) {
-		$graph = array(
-			'pie' => array(
-				'title' => __('Devices: ', 'intropage'),
-				'label' => array(),
-				'data'  => array(),
-			),
+ 
+        if ($allowed_devices !== false) {
+		$graph = array (
+                	'line' => array(
+				'title'  => __('Devices: ', 'intropage'),
+				'label1' => array(),
+				'data1'  => array(),
+				'label2' => array(),
+				'data2'  => array(),
+				'label3' => array(),
+				'data3'  => array(),
+                       ),
 		);
 
-		$console_access = get_console_access($user_id);
-
-		$h_all = db_fetch_cell('SELECT COUNT(id)
-			FROM host
-			WHERE id IN (' . $allowed_devices . ')');
-
-		$h_up = db_fetch_cell('SELECT COUNT(id)
-			FROM host
-			WHERE id IN (' . $allowed_devices . ')
-			AND status = 3
-			AND disabled = ""');
-
-		$h_down = db_fetch_cell('SELECT COUNT(id)
-			FROM host
-			WHERE id IN (' . $allowed_devices . ')
-			AND status = 1
-			AND disabled = ""');
-
-		$h_reco = db_fetch_cell('SELECT COUNT(id)
-			FROM host
-			WHERE id IN (' . $allowed_devices . ')
-			AND status = 2
-			AND disabled = ""');
-
-		$h_disa = db_fetch_cell('SELECT COUNT(id)
-			FROM host
-			WHERE id IN (' . $allowed_devices . ')
-			AND disabled = "on"');
-
-		$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
-		$url_prefix = $console_access ? '<a class="pic" href="' . html_escape($config['url_path']) . 'host.php?host_status=%s">' : '';
-		$url_suffix = $console_access ? '</a>' : '';
-
-		$panel['data']  = sprintf($url_prefix,'-1')  . __('All', 'intropage')        . ": $h_all$url_suffix<br/>";
-		$panel['data'] .= sprintf($url_prefix,'=3')  . __('Up', 'intropage')         . ": $h_up$url_suffix<br/>";
-		$panel['data'] .= sprintf($url_prefix,'=1')  . __('Down', 'intropage')       . ": $h_down$url_suffix<br/>";
-		$panel['data'] .= sprintf($url_prefix,'=-2') . __('Disabled', 'intropage')   . ": $h_disa$url_suffix<br/>";
-		$panel['data'] .= sprintf($url_prefix,'=2')  . __('Recovering', 'intropage') . ": $h_reco$url_suffix";
-
-		if ($count > 0) {
-			$graph['pie'] = array(
-				'title' => __('Devices', 'intropage'),
-				'label' => array(
-					__('Up', 'intropage'),
-					__('Down', 'intropage'),
-					__('Recovering', 'intropage'),
-					__('Disabled', 'intropage'),
-				),
-				'data' => array($h_up, $h_down, $h_reco, $h_disa)
-			);
-
-			$panel['data'] = intropage_prepare_graph($graph, $user_id);
-
-			unset($graph);
+		$first = true;
+       
+		if ($timespan == 0) {
+                	if (isset($_SESSION['sess_user_id'])) {
+				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+			} else {
+				$timespan = $panel['refresh'];
+			}
 		}
 
-		// alarms and details
-		if ($h_reco > 0) {
-			$panel['alarm'] = 'yellow';
+		if (!isset($panel['refresh_interval'])) {
+			$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+				FROM plugin_intropage_panel_data
+				WHERE id = ?',
+				array($panel['id']));
+		} else {
+			$refresh = $panel['refresh'];
 		}
 
-		if ($h_down > 0) {
-			$panel['alarm'] = 'red';
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'host_down'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+                if (cacti_sizeof($rows)) {
+                
+                        $graph['line']['title1'] = __('Down', 'intropage');
+                        $graph['line']['unit1']['title'] = 'Down [count]';
+
+			foreach ($rows as $row) {
+				if ($first) {
+					if ($row['value'] > 0) {
+						$panel['alarm'] = 'red';
+					}
+					$first = false;
+				}
+
+				$graph['line']['label1'][] = $row['date'];
+				$graph['line']['data1'][]  = $row['value'];
+                        }
+
+			$first = true;
+                        
+		} else {
+                        unset($graph['line']['label1']);
+                        unset($graph['line']['data1']);
 		}
+
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'host_reco'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+		if (cacti_sizeof($rows)) {
+                               
+			$graph['line']['title2'] = __('Recovering', 'intropage');
+			$graph['line']['unit2']['title'] = 'Recovering [count]';
+
+			foreach ($rows as $row) {
+				if ($first) {
+					if ($row['value'] > 0 && $panel['alarm'] == 'green') {
+						$panel['alarm'] = 'yellow';
+					}
+					$first = false;
+				}
+
+				$graph['line']['label2'][] = $row['date'];
+				$graph['line']['data2'][]  = $row['value'];
+			}
+		} else {
+			unset($graph['line']['label2']);
+			unset($graph['line']['data2']);
+		}
+
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'host_disa'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+		if (cacti_sizeof($rows)) {
+			$graph['line']['title3'] = __('Disabled', 'intropage');
+			$graph['line']['unit3']['title'] = 'Disabled [count]';
+
+			foreach ($rows as $row) {
+				$graph['line']['label3'][] = $row['date'];
+				$graph['line']['data3'][]  = $row['value'];
+			}
+		} else {
+			unset($graph['line']['label3']);
+			unset($graph['line']['data3']);
+		}
+
+
+                if (isset($graph['line']['data1']) || isset($graph['line']['data2']) || isset($graph['line']['data3'])) {
+                        $panel['data'] = intropage_prepare_graph($graph, $user_id);
+                } else {
+                        unset($graph);
+                        $panel['data'] = __('Waiting for data', 'intropage');
+                }
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
-
+ 
 	save_panel_result($panel, $user_id);
 }
+
 
 //------------------------------------ graph_datasource -----------------------------------------------------
 function graph_data_source_detail() {
@@ -481,3 +527,65 @@ function graph_host_template_detail() {
 	return $panel;
 }
 
+
+//------------------------------------ graphs host -----------------------------------------------------
+function host_collect() {
+	global $config;
+
+	// update in poller
+	$users = get_user_list();
+
+	foreach ($users as $user) {
+		$allowed_devices = intropage_get_allowed_devices($user['id']);
+
+		if ($allowed_devices !== false) {
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				SELECT 'host_down', COUNT(*),?
+				FROM host
+				WHERE id in (" . $allowed_devices . ")
+				AND  status='1'
+				AND disabled=''",
+				array($user['id']));
+
+			db_execute_prepared("INSERT INTO plugin_intropage_trends
+				(name,value,user_id)
+				SELECT 'host_reco', COUNT(*),?
+				FROM host
+				WHERE id in (" . $allowed_devices . ")
+				AND status='2'
+				AND disabled=''",
+				array($user['id']));
+
+			db_execute_prepared("INSERT INTO plugin_intropage_trends
+				(name,value,user_id)
+				SELECT 'host_disa', COUNT(*),?
+				FROM host
+				WHERE id in (" . $allowed_devices . ")
+				AND disabled='on'",
+				array($user['id']));
+		} else {
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('host_down', 0, ?)",
+				array($user['id']));
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('host_down', 0, ?)",
+				array($user['id']));
+
+                       db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('host_reco', 0, ?)",
+				array($user['id']));
+
+                       db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name,value,user_id)
+				VALUES ('host_disa', 0, ?)",
+				array($user['id']));
+		}
+	}
+}
