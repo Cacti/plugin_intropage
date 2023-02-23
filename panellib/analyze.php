@@ -544,7 +544,7 @@ function trend($panel, $user_id, $timespan = 0) {
                 $graph['line']['data2'][]  = $row['host'];
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 
 			unset($graph);
 		}
@@ -956,7 +956,7 @@ function analyse_ds_stats($panel, $user_id, $timespan = 0) {
 				unset($graph['line']['unit2']);
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 		} else {
 			unset($graph);
 			$panel['data'] = __('Waiting for data', 'intropage');

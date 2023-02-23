@@ -189,7 +189,7 @@ function graph_thold($panel, $user_id) {
 				'data' => array($t_all - $t_brea - $t_trig - $t_disa, $t_trig, $t_brea, $t_disa))
 			);
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 
 			// alarms and details
 			if ($t_brea > 0) {

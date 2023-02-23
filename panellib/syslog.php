@@ -185,7 +185,7 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 				}
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 		} else {
 			$panel['data'] = 'Waiting for data';
 		}

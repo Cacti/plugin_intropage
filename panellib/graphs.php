@@ -123,7 +123,7 @@ function graph_data_source($panel, $user_id) {
 				}
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 
 			unset($graph);
 		}
@@ -165,7 +165,7 @@ function graph_host_template($panel, $user_id) {
 				array_push($graph['pie']['data'], $item['total']);
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 
 			unset($graph);
 		}
@@ -244,7 +244,7 @@ function graph_host($panel, $user_id) {
 				'data' => array($h_up, $h_down, $h_reco, $h_disa)
 			);
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 
 			unset($graph);
 		}

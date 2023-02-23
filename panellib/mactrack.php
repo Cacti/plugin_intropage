@@ -113,7 +113,7 @@ function mactrack($panel, $user_id) {
 			'data' => array($m_up, $m_down, $m_err, $m_unkn, $m_disa))
 		);
 
-		$panel['data'] = intropage_prepare_graph($graph);
+		$panel['data'] = intropage_prepare_graph($graph, $user_id);
 	} else {
 		$panel['data'] =  __('You don\'t have plugin permission', 'intropage');
 	}

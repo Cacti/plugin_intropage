@@ -1065,10 +1065,10 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 	}
 }
 
-function intropage_prepare_graph($dispdata) {
+function intropage_prepare_graph($dispdata, $user_id) {
 	global $config;
 
-        $lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $_SESSION['sess_user_id']);
+        $lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
         if ($lines == 5) {
                 $graph_height = 100;

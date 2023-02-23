@@ -184,7 +184,7 @@ function cpuload($panel, $user_id, $timespan = 0) {
 				$graph['line']['data2'][]  = round($row['max'], 2);
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 		} else {
 			unset($graph);
 
