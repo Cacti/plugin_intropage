@@ -57,7 +57,7 @@ function register_analyze() {
 			'refresh'      => 300,
 			'trefresh'     => false,
 			'force'        => true,
-			'width'        => 'quarter-panel',
+			'width'        => 'half-panel',
 			'priority'     => 50,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -243,19 +243,22 @@ function analyse_log($panel, $user_id) {
 					$ecount++;
 				}
 			}
+			
 		}
 
 		$panel['data'] .= '<table class="cactiTable">';
 
-		$panel['data'] .= '<tr><td><span class="txt_big">' . __('Errors: ', 'intropage') . $error . '</span>' .
+		$panel['data'] .= '<tr><td colspan="4">' . __('Analyze last %s log lines', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
+
+		$panel['data'] .= '<tr><td class="bold">' . __('Errors: ', 'intropage') . $error . 
 			'<a class="linkEditMain" href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '">' .
 				'<i class="fa fa-external-link"></i>' .
-			'</a></td></tr>';
+			'</a></td>';
 
-		$panel['data'] .= '<tr><td><span class="txt_big">' . __('Warnings: ', 'intropage') . $warn . '</span>' .
+		$panel['data'] .= '<td class="bold">' . __('Warnings: ', 'intropage') . $warn . 
 			'<a class="linkEditMain" href="clog.php?message_type=2&tail_lines=' . $log['nbr_lines'] . '">' .
 				'<i class="fa fa-external-link"></i>' .
-			'</a></td></tr>';
+			'</a></td>';
 
 		if ($log['size'] < 0) {
 			$panel['alarm'] = 'red';
@@ -270,15 +273,19 @@ function analyse_log($panel, $user_id) {
 			$log_size_note   = __('Log Size: Quite Large', 'intropage');
 		}
 
-		$panel['data'] .= '<tr><td><span class="txt_big">' . __('Log Size: ', 'intropage') . $log_size_text . '</span></td></tr>';
+		$panel['data'] .= '<td class="bold">' . __('Log Size: ', 'intropage') . $log_size_text;
 
 		if (!empty($log_size_note)) {
-			$panel['data'] .= '<tr><td class="txt_big">' . $log_size_note . '</td></tr>';
+			$panel['data'] .= ' (' . $log_size_note . ')</td></tr>';
 		}
 
-		$panel['data'] .= '<tr><td><hr></td></tr>';
+		$panel['data'] .= '<tr><td colspan="4"><br/>' . __('Last log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
 
-		$panel['data'] .= '<tr><td>' . __('Errors and Warnings from last %s lines', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
+		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 2));
+
+		foreach ($log['lines'] as $line) {
+			$panel['data'] .= '<tr><td colspan="4"><div title="' . addslashes($line) . '">' . substr($line,0,90) . ' ...</div></td></tr>';
+		}
 
 		if ($error > 0) {
 			$panel['alarm'] = 'red';
@@ -291,6 +298,7 @@ function analyse_log($panel, $user_id) {
 
 	save_panel_result($panel, $user_id);
 }
+
 
 // -------------------------------------analyse db-------------------------------------------
 function analyse_db($panel, $user_id) {
@@ -1376,4 +1384,5 @@ function analyse_tree_host_graph_detail() {
 
 	return $panel;
 }
+
 
