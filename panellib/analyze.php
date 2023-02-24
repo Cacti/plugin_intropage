@@ -81,22 +81,6 @@ function register_analyze() {
 			'details_func' => false,
 			'trends_func'  => false
 		),
-		'trend' => array(
-			'name'         => __('Trend Details', 'intropage'),
-			'description'  => __('Few trends (down hosts, trigged tholds,...)', 'intropage'),
-			'class'        => 'analyze',
-			'level'        => PANEL_USER,
-			'refresh'      => 900,
-			'trefresh'     => read_config_option('poller_interval'),
-			'force'        => true,
-			'width'        => 'quarter-panel',
-			'priority'     => 75,
-			'alarm'        => 'green',
-			'requires'     => 'thold',
-			'update_func'  => 'trend',
-			'details_func' => false,
-			'trends_func'  => 'trend_collect'
-		),
 		'analyse_tree_host_graph' => array(
 			'name'         => __('Analyze Cacti Objects', 'intropage'),
 			'description'  => __('Analyze Trees, Graphs, Hosts, ...', 'intropage'),
@@ -432,128 +416,7 @@ function analyse_db($panel, $user_id) {
 	}
 }
 
-//------------------------------------ trends -----------------------------------------------------
-function trend_collect() {
-	global $config;
 
-	// update in poller
-	$users = get_user_list();
-
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
-
-	foreach ($users as $user) {
-		$allowed_devices = intropage_get_allowed_devices($user['id']);
-
-		if ($allowed_devices !== false) {
-			// right way but it is slow
-			$t_trig = 0;
-			$x      = '';
-
-			$sql_where = "td.thold_enabled = 'on'
-				AND (((td.thold_alert != 0
-				AND td.thold_fail_count >= td.thold_fail_trigger)
-				OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger)))";
-
-			$x = get_allowed_thresholds($sql_where, 'null', 1, $t_trig, $user['id']);
-
-			db_execute_prepared("REPLACE INTO plugin_intropage_trends
-				(name,value,user_id)
-				VALUES ('thold', ?, ?)",
-				array($t_trig, $user['id']));
-
-			db_execute_prepared("REPLACE INTO plugin_intropage_trends
-				(name,value,user_id)
-				SELECT 'host', COUNT(*),?
-				FROM host
-				WHERE id in (" . $allowed_devices . ")
-				AND  status='1'
-				AND disabled=''",
-				array($user['id']));
-		} else {
-			db_execute_prepared("REPLACE INTO plugin_intropage_trends
-				(name,value,user_id)
-				VALUES ('thold', 0, ?)",
-				array($user['id']));
-
-			db_execute_prepared("REPLACE INTO plugin_intropage_trends
-				(name,value,user_id)
-				VALUES ('host', 0, ?)",
-				array($user['id']));
-		}
-	}
-}
-
-function trend($panel, $user_id, $timespan = 0) {
-	global $config;
-
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
-
-	$panel['alarm'] = 'green';
-
-	$graph = array (
-		'line' => array(
-			'title' => $panel['name'],
-			'label1' => array(),
-			'data1' => array(),
-			'title1' => '',
-			'data2' => array(),
-			'title2' => '',
-		),
-	);
-
-	if ($timespan == 0) {
-		if (isset($_SESSION['sess_user_id'])) {
-			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
-		} else {
-			$timespan = $panel['refresh'];
-		}
-	}
-
-	if (!isset($panel['refresh_interval'])) {
-		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
-			FROM plugin_intropage_panel_data
-			WHERE id = ?',
-			array($panel['id']));
-	} else {
-		$refresh = $panel['refresh_interval'];
-	}
-
-	if (api_plugin_is_enabled('thold')) {
-		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`,
-			MAX(CASE WHEN name='thold' THEN value ELSE NULL END) AS thold,
-			MAX(CASE WHEN name='host' THEN value ELSE NULL END) AS host
-			FROM plugin_intropage_trends
-			WHERE cur_timestamp > DATE_SUB(NOW(), INTERVAL ? SECOND)
-			AND name IN ('host', 'thold')
-			AND user_id = ?
-			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
-			ORDER BY cur_timestamp ASC",
-			array($timespan, $user_id));
-
-		if (cacti_sizeof($rows)) {
-			$graph['line']['title1'] = __('Tholds Triggered', 'intropage');
-			$graph['line']['title2'] = __('Devices Down');
-			$graph['line']['unit1']['title'] = __('Thresholds', 'intropage');
-			$graph['line']['unit1']['series'] = array('data1');
-			$graph['line']['unit2']['title']  = __('Devices');
-			$graph['line']['unit2']['series'] = array('data2');
-
-			foreach ($rows as $row) {
-                $graph['line']['label1'][] = $row['date'];
-                $graph['line']['data1'][]  = $row['thold'];
-                $graph['line']['data2'][]  = $row['host'];
-			}
-
-			$panel['data'] = intropage_prepare_graph($graph);
-
-			unset($graph);
-		}
-	} else {
-		$panel['data'] = __('Waiting for data','intropage');
-	}
-
-	save_panel_result($panel, $user_id);
-}
 
 // --------------------------------analyse_tree_host_graph
 function analyse_tree_host_graph($panel, $user_id) {
@@ -956,7 +819,7 @@ function analyse_ds_stats($panel, $user_id, $timespan = 0) {
 				unset($graph['line']['unit2']);
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 		} else {
 			unset($graph);
 			$panel['data'] = __('Waiting for data', 'intropage');

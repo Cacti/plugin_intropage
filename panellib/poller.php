@@ -262,7 +262,7 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 			$new_index++;
 		}
 
-		$panel['data'] = intropage_prepare_graph($graph);
+		$panel['data'] = intropage_prepare_graph($graph, $user_id);
 	} else {
 		$panel['data'] = __('Waiting for data', 'intropage');
 	}
@@ -421,7 +421,7 @@ function poller_output_items($panel, $user_id, $timespan = 0) {
 			$graph['line']['unit1']['title']       = __('Items', 'intropage');
 		}
 
-		$panel['data'] = intropage_prepare_graph($graph);
+		$panel['data'] = intropage_prepare_graph($graph, $user_id);
 	} else {
 		$panel['data'] = __('Waiting for data', 'intropage');
 	}

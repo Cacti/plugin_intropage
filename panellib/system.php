@@ -184,7 +184,7 @@ function cpuload($panel, $user_id, $timespan = 0) {
 				$graph['line']['data2'][]  = round($row['max'], 2);
 			}
 
-			$panel['data'] = intropage_prepare_graph($graph);
+			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 		} else {
 			unset($graph);
 
@@ -456,7 +456,7 @@ function extrem($panel, $user_id) {
 
 	$data = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 		FROM plugin_intropage_trends
-		WHERE name='host'
+		WHERE name='host_down'
 		AND user_id = ?
 		AND cur_timestamp > date_sub(now(),interval 1 day)
 		ORDER BY value desc,cur_timestamp
@@ -599,7 +599,7 @@ function extrem_detail() {
 	// max host down
 	$data = db_fetch_assoc_prepared ("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 		FROM plugin_intropage_trends
-		WHERE name='host'
+		WHERE name='host_down'
 		AND user_id =  ?
 		AND cur_timestamp > date_sub(now(),interval 2 day)
 		ORDER BY value desc,cur_timestamp

@@ -269,6 +269,13 @@ function intropage_upgrade_database() {
 			db_execute('ALTER TABLE plugin_intropage_dashboard ADD COLUMN shared INT(1) NOT NULL default "0"');
 			db_execute('DELETE FROM plugin_hooks WHERE FUNCTION = "intropage_config_form" AND name="intropage"');
 		}
+
+		if (cacti_version_compare($oldv, '4.0.3', '<=')) {
+			db_execute("UPDATE plugin_intropage_trends SET name='host_down' WHERE name='host'");
+			db_execute("UPDATE plugin_intropage_trends SET name='thold_trig' WHERE name='thold'");
+			db_execute("DELETE FROM plugin_intropage_panel_definition WHERE panel_id = 'trend'");
+			db_execute("DELETE FROM plugin_intropage_panel_data WHERE panel_id = 'trend'");
+		}
 		
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config
