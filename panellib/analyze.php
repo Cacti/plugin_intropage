@@ -57,7 +57,7 @@ function register_analyze() {
 			'refresh'      => 300,
 			'trefresh'     => false,
 			'force'        => true,
-			'width'        => 'quarter-panel',
+			'width'        => 'half-panel',
 			'priority'     => 50,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -847,30 +847,26 @@ function ds_stats_trend () {
 		array('dsstats_null', $count));
 }
 
-
 //------------------------------------ analyse_log -----------------------------------------------------
-function analyse_log_detail() {
-	global $log;
+function analyse_log($panel, $user_id) {
+	global $config;
 
-	$panel = array(
-		'name'   => __('Analyze Cacti Log Details [ Warnings/Errors ]', 'intropage'),
-		'alarm'  => 'green',
-		'detail' => '',
-	);
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
+	$panel['data']  = '';
+	$panel['alarm'] = 'green';
 
 	$log = array(
-		'file'      => read_config_option('path_cactilog'),
+		'file' => read_config_option('path_cactilog'),
 		'nbr_lines' => read_config_option('intropage_analyse_log_rows'),
 	);
 
 	$log['size']  = @filesize($log['file']);
-	$log['lines'] = tail_log($log['file'], $log['nbr_lines']*2);
-
-	$panel['detail'] .= '<table class="cactiTable">';
+	$log['lines'] = tail_log($log['file'], $log['nbr_lines']);
 
 	if (!$log['size'] || empty($log['lines'])) {
 		$panel['alarm'] = 'red';
-		$panel['detail'] .= '<tr><td>' . __('Log file not accessible or empty', 'intropage') . '</td></tr>';
+		$panel['data'] .= __('Log file not accessible or empty', 'intropage');
 	} else {
 		$error  = 0;
 		$ecount = 0;
@@ -886,21 +882,26 @@ function analyse_log_detail() {
 					$ecount++;
 				}
 			}
+			
 		}
 
-		$panel['detail'] .= '<tr><td>' .
-			'<a class="linkEditMain txt_med" href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '">' .
-				__('Errors', 'intropage') . ': ' . $error . '<i class="fas fa-link"></i>' .
-			'</a></td></tr>';
+		$panel['data'] .= '<table class="cactiTable">';
 
-		$panel['detail'] .= '<tr><td>' .
-			'<a class="linkEditMain txt_med" href="clog.php?message_type=2&tail_lines=' . $log['nbr_lines'] . '">' .
-				__('Warnings', 'intropage') . ': ' . $warn . '<i class="fas fa-link"></i>' .
-			'</a></td></tr>';
+		$panel['data'] .= '<tr><td colspan="4">' . __('Analyze last %s log lines', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
+
+		$panel['data'] .= '<tr><td class="bold">' . __('Errors: ', 'intropage') . $error . 
+			'<a class="linkEditMain" href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '">' .
+				'<i class="fa fa-external-link"></i>' .
+			'</a></td>';
+
+		$panel['data'] .= '<td class="bold">' . __('Warnings: ', 'intropage') . $warn . 
+			'<a class="linkEditMain" href="clog.php?message_type=2&tail_lines=' . $log['nbr_lines'] . '">' .
+				'<i class="fa fa-external-link"></i>' .
+			'</a></td>';
 
 		if ($log['size'] < 0) {
 			$panel['alarm'] = 'red';
-			$log_size_text   = __('WARNING: File is Larger than 2GB', 'intropage');
+			$log_size_text   = __('Log Size: Larger than 2GB', 'intropage');
 			$log_size_note   = '';
 		} elseif ($log['size'] < 255999999) {
 			$log_size_text   = human_filesize($log['size']);
@@ -911,20 +912,18 @@ function analyse_log_detail() {
 			$log_size_note   = __('Log Size: Quite Large', 'intropage');
 		}
 
-		$panel['detail'] .= '<tr><td class="txt_med">' . __('Log Size', 'intropage') . ': ' . $log_size_text . '</td></tr>';
+		$panel['data'] .= '<td class="bold">' . __('Log Size: ', 'intropage') . $log_size_text;
 
 		if (!empty($log_size_note)) {
-			$panel['detail'] .= '<tr><td class="txt_med">' . $log_size_note . '<hr></td></tr>';
+			$panel['data'] .= ' (' . $log_size_note . ')</td></tr>';
 		}
 
+		$panel['data'] .= '<tr><td colspan="4"><br/>' . __('Last log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
+
+		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 2));
+
 		foreach ($log['lines'] as $line) {
-			if (preg_match('/(WARN|ERROR|FATAL)/', $line, $matches)) {
-				if (strcmp($matches[1], 'WARN') === 0) {
-					$panel['detail'] .= '<tr><td>' . $line . '</td></tr>';
-				} elseif (strcmp($matches[1], 'ERROR') === 0 || strcmp($matches[1], 'FATAL') === 0) {
-					$panel['detail'] .= '<tr><td>' . $line .'</td></tr>';
-				}
-			}
+			$panel['data'] .= '<tr><td colspan="4"><div title="' . addslashes($line) . '">' . substr($line,0,90) . ' ...</div></td></tr>';
 		}
 
 		if ($error > 0) {
@@ -932,9 +931,11 @@ function analyse_log_detail() {
 		} elseif ($warn > 0) {
 			$panel['alarm'] = 'yellow';
 		}
+
+		$panel['data'] . '</table>';
 	}
 
-	return $panel;
+	save_panel_result($panel, $user_id);
 }
 
 //------------------------------------ analyse_login -----------------------------------------------------
@@ -1376,4 +1377,5 @@ function analyse_tree_host_graph_detail() {
 
 	return $panel;
 }
+
 

@@ -10,6 +10,8 @@
 
 * feature: Better trends - line graphs for hosts and tholds
 
+* feature: Better analyze log panel
+
 * issue#235: Bussiest panels do not respect permissions
 
 * issue#237: Fix PHP 8.x warning - trim function
