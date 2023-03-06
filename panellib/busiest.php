@@ -203,10 +203,10 @@ function busiest_cpu($panel, $user_id) {
 
 		if (cacti_sizeof($result)) {
 
-			$panel['data'] = '<table class="cactiTable">' .
+			$panel['data'] = '<table class="cactiTable intropage_fixed">' .
 
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left intropage_first">'  . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -221,10 +221,11 @@ function busiest_cpu($panel, $user_id) {
 					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<td class="left intropage_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
-				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
-				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
+				$panel['data'] .= "<td class='right intropage_1'>" . round($row['xvalue'], 2) . ' %</td>';
+				$panel['data'] .= "<td class='right intropage_1'>" . round($row['xpeak'], 2) . ' %</td></tr>';
 
 				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
 					cacti_log('INTROPAGE WARNING: Problem with DSSTAT data. Local data ID = ' . $row['ldid'] . '. Please investigate or clear DSSTAT data.');
@@ -233,7 +234,7 @@ function busiest_cpu($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr><td colspan="2">' . __('Average of all allowed DS') . '</td><td>' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -300,9 +301,9 @@ function busiest_load($panel, $user_id) {
 
 		if (cacti_sizeof($result)) {
 
-			$panel['data'] = '<table class="cactiTable">' .
+			$panel['data'] = '<table class="cactiTable intropage_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left intropage_first">'  . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -317,7 +318,8 @@ function busiest_load($panel, $user_id) {
 					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<td class="left intropage_loglines"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . '</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . '</td></tr>';
@@ -325,7 +327,7 @@ function busiest_load($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['data'] .= '<tr><td colspan="2">' . __('Average of all allowed DS') . '</td><td>' . round($avg, 2) . '</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -413,9 +415,9 @@ function busiest_hdd($panel, $user_id) {
 		}
 
 		if (cacti_sizeof($result)) {
-			$panel['data'] = '<table class="cactiTable">' .
+			$panel['data'] = '<table class="cactiTable intropage_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left intropage_first">'  . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -430,7 +432,8 @@ function busiest_hdd($panel, $user_id) {
 					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<td class="left intropage_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
@@ -442,7 +445,7 @@ function busiest_hdd($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr><td colspan="2">' . __('Average of all allowed DS') . '</td><td>' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -488,9 +491,9 @@ function busiest_uptime($panel, $user_id) {
 
 		if (cacti_sizeof($result)) {
 
-			$panel['data'] = '<table class="cactiTable">' .
+			$panel['data'] = '<table class="cactiTable intropage_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . __('Host', 'intropage') . '</th>' .
+					'<th class="left intropage_first">'  . __('Host', 'intropage') . '</th>' .
 					'<th class="right">' . __('Uptime', 'intropage') . '</th>' .
 				'</tr>';
 
@@ -499,9 +502,9 @@ function busiest_uptime($panel, $user_id) {
 			foreach ($result as $row) {
 
 				if ($console_access) {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
+					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left intropage_loglines"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
 				} else {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['description']) . '</td>';
+					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left intropage_loglines">' . html_escape($row['description']) . '</td>';
 				}
 
 				$panel['data'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance']/100) . '</td>';
@@ -509,7 +512,7 @@ function busiest_uptime($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed hosts') . '</td><td colspan="2">' . get_daysfromtime($avg/100) . '</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('Average of all allowed hosts') . '</td><td>' . get_daysfromtime($avg/100) . '</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -597,9 +600,9 @@ function busiest_traffic($panel, $user_id) {
 
 		if (cacti_sizeof($result)) {
 
-			$panel['data'] = '<table class="cactiTable">' .
+			$panel['data'] = '<table class="cactiTable intropage_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left intropage_first">'  . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -614,7 +617,8 @@ function busiest_traffic($panel, $user_id) {
 					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<td class="left intropage_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				if ($intropage_mb == 'b') {
 					$row['xvalue'] *= 8;
@@ -707,9 +711,9 @@ function busiest_interface_error($panel, $user_id) {
 
 		if (cacti_sizeof($result)) {
 
-			$panel['data'] = '<table class="cactiTable">' .
+			$panel['data'] = '<table class="cactiTable intropage_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left intropage_first">'  . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -724,7 +728,8 @@ function busiest_interface_error($panel, $user_id) {
 					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 					WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape(substr($row['name'],0,$text_len)) . '</td>';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<td class="left intropage_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				$panel['data'] .= "<td class='right'>" . human_readable($row['xvalue']) . '</td>';
 				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak']) . '</td></tr>';
@@ -808,9 +813,9 @@ function busiest_interface_util($panel, $user_id) {
 
 			arsort($perc, SORT_NUMERIC);
 
-			$panel['data'] = '<table class="cactiTable">' .
+			$panel['data'] = '<table class="cactiTable intropage_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left intropage_first">'  . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Direction', 'intropage') . '</th>' .
 					'<th class="right">%</th>' .
 				'</tr>';
@@ -826,8 +831,9 @@ function busiest_interface_util($panel, $user_id) {
 					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 					WHERE data_template_data.local_data_id=' . $real_key);
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
-				$panel['data'] .= html_escape(substr($gdata['name_cache'],0,$text_len)) . '</td>';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<td class="left intropage_loglines" title="' . $gdata['name_cache'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
+				$panel['data'] .= html_escape($gdata['name_cache']) . '</td>';
 				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
 				$panel['data'] .= "<td class='right'>" . $value . '</td>';
 
@@ -1128,7 +1134,7 @@ function busiest_hdd_detail() {
 						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
 						WHERE data_template_data.local_data_id=' . $row['ldid']);
 
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a style="white-space: overflow" class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
