@@ -160,12 +160,6 @@ function busiest_cpu($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
-	
-	$text_len = 55;
-
-	if (read_user_setting('intropage_display_wide') == 'on') {
-		$text_len = 47;	
-	}
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
@@ -259,12 +253,6 @@ function busiest_load($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	$text_len = 55;
-
-	if (read_user_setting('intropage_display_wide') == 'on') {
-		$text_len = 47;	
-	}
-
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
@@ -351,12 +339,6 @@ function busiest_hdd($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
-
-	$text_len = 55;
-
-	if (read_user_setting('intropage_display_wide') == 'on') {
-		$text_len = 47;	
-	}
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
@@ -470,12 +452,6 @@ function busiest_uptime($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	$text_len = 55;
-
-	if (read_user_setting('intropage_display_wide') == 'on') {
-		$text_len = 47;	
-	}
-
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
 	if ($allowed_devices) {
@@ -536,12 +512,6 @@ function busiest_traffic($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
-
-	$text_len = 55;
-
-	if (read_user_setting('intropage_display_wide') == 'on') {
-		$text_len = 47;	
-	}
 
 	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), $_SESSION['sess_user_id']);
 
@@ -663,12 +633,6 @@ function busiest_interface_error($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	$text_len = 55;
-
-	if (read_user_setting('intropage_display_wide') == 'on') {
-		$text_len = 47;	
-	}
-
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
@@ -763,12 +727,6 @@ function busiest_interface_util($panel, $user_id) {
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);
-
-	$text_len = 55;
-
-	if (read_user_setting('intropage_display_wide') == 'on') {
-		$text_len = 47;
-	}
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
