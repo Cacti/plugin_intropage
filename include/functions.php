@@ -1087,14 +1087,22 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		// Start chart attributes
 		$chart = array(
 			'bindto' => "#line_$xid",
+			'point' => array (
+				'r' => 1.5
+				),
+			
 			'zoom' => array(
 				'enabled'	=> 'true',
 				'type'		=> 'drag'
 			),
+			'legend_funguje_ale_nechci' => array(
+				'position' => 'right'),
 			'size'   => array('height' => $graph_height),
 			'data'   => array(
+
+				'type' => "spline",
 				'x'       => 'x',
-				'xFormat' => '%Y-%m-%d %H:%M:%S'
+				'Format' => '%Y-%m-%d %H:%M:%S'
 			)
 		);
 		$columns   = array();
@@ -1135,15 +1143,21 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$axis['x'] = array(
 			'type' => 'timeseries',
 			'tick' => array(
-				'format' => '%H:%M'
+				'format' => '%H:%M',
+				'culling' => array ('max' => 6),
+				
 			)
 		);
 
 		if (isset($dispdata['line']['unit1'])) {
 			$axis['y'] = array(
+				'tick' => array(
+					'culling' => array ('max' => 8)
+				
+				),
+				
 				'label' => array(
 					'text' => $dispdata['line']['unit1']['title'],
-					'position' => 'outer-middle'
 				),
 				'show' => true
 			);
@@ -1151,9 +1165,13 @@ function intropage_prepare_graph($dispdata, $user_id) {
 
 		if (isset($dispdata['line']['unit2'])) {
 			$axis['y2'] = array(
+				'tick' => array(
+					'culling' => array ('max' => 8)
+				
+				),
+
 				'label' => array(
 					'text' => $dispdata['line']['unit2']['title'],
-					'position' => 'outer-middle'
 				),
 				'show' => true
 			);
@@ -1205,8 +1223,43 @@ function intropage_prepare_graph($dispdata, $user_id) {
 
 		$content .= "});";
 		$content .= "</script>";
-		$content .= "</div>";
 	}   // pie graph end
+
+	if (isset($dispdata['treemap'])) {
+		$xid = 'x'. substr(md5($dispdata['treemap']['title']), 0, 7);
+
+		$content .= "<div class='chart_wrapper center' id=\"treemap_$xid\"></div>";
+		$content .= '<script type="text/javascript">';
+		$content .= 'panels.treemap_' . $xid . ' = bb.generate({';
+		$content .= " bindto: \"#treemap_$xid\",";
+
+		$content .= " size: {";
+		$content .= "  height: $graph_height";
+		$content .= " },";
+
+		$content .= " data: {";
+		$content .= "  columns: [";
+
+		foreach ($dispdata['treemap']['data'] as $key => $value) {
+			$content .= "['" . $dispdata['treemap']['label'][$key] . "', " . $value . "],";
+		}
+
+		$content .= "  ],";
+		$content .= "  type: 'treemap',";
+		$content .= "  labels: {";
+		$content .= "    colors: '#fff'";
+		$content .= "  }";
+		$content .= "  },";
+
+		$content .= "  treemap: {";
+		$content .= "    label: {";
+		$content .= "      threshold: 0.03, show: true,";
+		$content .= "    }";
+		$content .= "  },";
+
+		$content .= "});";
+		$content .= "</script>";
+	}   // treemap graph end
 
 	return ($content);
 }
@@ -1660,7 +1713,7 @@ function intropage_configure_panel() {
 	print '</div>';
 }
 
-function human_readable ($bytes, $decimal = true) {
+function human_readable ($bytes, $decimal = true, $precision = 2) {
 
 	if ($decimal) {
 		$factor = 1000;
@@ -1692,7 +1745,7 @@ function human_readable ($bytes, $decimal = true) {
 		$size = $sizes[$i];
 	}
 
-	return round(empty($d)?0:($bytes / pow($factor, $i)), 2).' '.$size;
+	return round(empty($d)?0:($bytes / pow($factor, $i)), $precision).' '.$size;
 }
 
 function intropage_display_graph () {

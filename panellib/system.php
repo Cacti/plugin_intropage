@@ -176,7 +176,7 @@ function cpuload($panel, $user_id, $timespan = 0) {
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title1'] = __('Avg CPU', 'intropage');
 			$graph['line']['title2'] = __('Max CPU', 'intropage');
-			$graph['line']['unit1']['title'] = 'Percent (%)';
+			$graph['line']['unit1']['title'] = '%';
 
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
@@ -203,11 +203,9 @@ function info($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$panel['data'] .= '<table class="cactiTable">';
+	$panel['data'] .= '<table class="cactiTable inpa_fixed">';
 
-	$panel['data'] .= '<tr><td class="txt_med">' . __('Cacti Version: ', 'intropage') . CACTI_VERSION . '</td></tr>';
-
-	$panel['data'] .= '<tr><td><hr></td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Cacti Version: ', 'intropage') . CACTI_VERSION . '</td></tr>';
 
 	if ($poller_options[read_config_option('poller_type')] == 'spine' && file_exists(read_config_option('path_spine')) && (function_exists('is_executable')) && (is_executable(read_config_option('path_spine')))) {
 		$spine_version = 'SPINE';
@@ -220,8 +218,6 @@ function info($panel, $user_id) {
 
 		$panel['data'] .= '<tr><td>' . __('Poller Type:', 'intropage') .' <a class="linkEditMain" href="' . html_escape($config['url_path'] .  'settings.php?tab=poller') . '">' . __('Spine', 'intropage') . '</a></td></tr>';
 
-		$panel['data'] .= '<tr><td><hr></td></tr>';
-
 		$panel['data'] .= '<tr><td>' . __('Spine version: ', 'intropage') . $spine_version . '<br/></td></tr>';
 
 		if (!strpos($spine_version, CACTI_VERSION, 0)) {
@@ -229,12 +225,9 @@ function info($panel, $user_id) {
 			$panel['alarm'] = 'red';
 		}
 
-		$panel['data'] .= '<tr><td><hr></td></tr>';
 	} else {
 		$panel['data'] .= '<tr><td>' . __('Poller Type: ', 'intropage') . ' <a class="linkEditMain" href="' . html_escape($config['url_path'] .  'settings.php?tab=poller') . '">' . $poller_options[read_config_option('poller_type')] . '</a><br/></td></tr>';
 	}
-
-	$panel['data'] .= '<tr><td>' . __('Running on: ', 'intropage') . '</td></tr>';
 
 	if (function_exists('php_uname')) {
 		$xdata = php_uname();
@@ -242,10 +235,10 @@ function info($panel, $user_id) {
 		$xdata .= PHP_OS;
 	}
 
-	$xdata2 = str_split($xdata, 50);
-	$xdata  = join('<br/>', $xdata2);
-	$panel['data'] .= '<tr><td>' . $xdata . '</td></tr>';
+	$panel['data'] .= '<tr><td class="inpa_loglines" title="' . $xdata . '"><br/>' . __('Running on: ', 'intropage') . $xdata . '</td></tr>';
 
+	$panel['data'] .= '</table>';
+	
 	save_panel_result($panel, $user_id);
 }
 
@@ -253,7 +246,7 @@ function info($panel, $user_id) {
 function admin_alert($panel, $user_id) {
 	global $config;
 
-	$panel['data'] = read_config_option('intropage_admin_alert') . '<br/><br/>';
+	$panel['data'] .= '<div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
 
 	save_panel_result($panel, $user_id);
 }
@@ -475,7 +468,7 @@ function extrem($panel, $user_id) {
 
 		$data = db_fetch_assoc_prepared("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 			FROM plugin_intropage_trends
-			WHERE name='thold'
+			WHERE name='thold_trig'
 			AND user_id = ?
 			AND cur_timestamp > date_sub(now(),interval 1 day)
 			ORDER BY value desc,cur_timestamp

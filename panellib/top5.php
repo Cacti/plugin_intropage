@@ -34,7 +34,7 @@ function register_top5() {
 
 	$panels = array(
 		'top5_ping' => array(
-			'name'         => __('Bottom 5 Ping', 'intropage'),
+			'name'         => __('Bottom Ping', 'intropage'),
 			'description'  => __('Devices with the worst ping response', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -50,7 +50,7 @@ function register_top5() {
 			'trends_func'  => false
 		),
 		'top5_availability' => array(
-			'name'         => __('Bottom 5 Availability', 'intropage'),
+			'name'         => __('Bottom Availability', 'intropage'),
 			'description'  => __('Devices with the worst availability/reachability', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -66,7 +66,7 @@ function register_top5() {
 			'trends_func'  => false
 		),
 		'top5_polltime' => array(
-			'name'         => __('Bottom 5 Polling Time', 'intropage'),
+			'name'         => __('Bottom Polling Time', 'intropage'),
 			'description'  => __('Devices with the worst polling time', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -82,7 +82,7 @@ function register_top5() {
 			'trends_func'  => false
 		),
 		'top5_pollratio' => array(
-			'name'         => __('Bottom 5 Polling Ratio', 'intropage'),
+			'name'         => __('Bottom Polling Ratio', 'intropage'),
 			'description'  => __('Devices with the worst polling ratio', 'intropage'),
 			'class'        => 'top5',
 			'level'        => PANEL_USER,
@@ -153,7 +153,7 @@ function top5_ping($panel, $user_id) {
 					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'],0,37)) . '</td>';
 				}
 
-				$row .= "<td class='right'>" . round($host['avg_time'], 2) . 'ms</td>';
+				$row .= "<td class='right'>" . round($host['avg_time'], 2) . ' ms</td>';
 				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['cur_time'], 2) . ' ms</td></tr>';
 
 				$panel['data'] .= $row;

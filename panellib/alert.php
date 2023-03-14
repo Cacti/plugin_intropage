@@ -66,7 +66,7 @@ function alert_host($panel, $user_id) {
 
 	if ($allowed_devices != '') {
 		$console_access = get_console_access($user_id);
-
+// predelat - precist proste hodne zaznamu a ty statusy resit az v podminkach
 		$sql_host_reco = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, 'Recovering' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")

@@ -141,34 +141,65 @@ function graph_host_template($panel, $user_id) {
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
 	if ($allowed_devices !== false) {
-		$graph = array(
-			'pie' => array(
-				'title' => __('Device Templates: ', 'intropage'),
-				'label' => array(),
-				'data'  => array(),
-			),
-		);
+		if (cacti_version_compare(get_cacti_version(), '1.2.25', '>=')) {
+			$graph = array(
+				'treemap' => array(
+					'title' => __('Device Templates: ', 'intropage'),
+					'label' => array(),
+					'data'  => array(),
+				),
+			);
 
-		$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name,
-			COUNT(host.host_template_id) AS total
-			FROM host_template
-			LEFT JOIN host
-			ON host_template.id = host.host_template_id
-			WHERE host.id IN ( " . $allowed_devices . ")
-			GROUP BY host_template_id
-			ORDER BY total DESC
-			LIMIT 6");
+			$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name,
+				COUNT(host.host_template_id) AS total
+				FROM host_template
+				LEFT JOIN host
+				ON host_template.id = host.host_template_id
+				WHERE host.id IN ( " . $allowed_devices . ")
+				GROUP BY host_template_id
+				ORDER BY total DESC
+				LIMIT 20");
 
-		if (cacti_sizeof($sql_ht)) {
-			foreach ($sql_ht as $item) {
-				array_push($graph['pie']['label'], substr($item['name'],0,15));
-				array_push($graph['pie']['data'], $item['total']);
+			if (cacti_sizeof($sql_ht)) {
+				foreach ($sql_ht as $item) {
+					array_push($graph['treemap']['label'], substr($item['name'],0,20));
+					array_push($graph['treemap']['data'], $item['total']);
+				}
+
 			}
+		} else {
+		
+			$graph = array(
+				'pie' => array(
+					'title' => __('Device Templates: ', 'intropage'),
+					'label' => array(),
+					'data'  => array(),
+				),
+			);
 
-			$panel['data'] = intropage_prepare_graph($graph, $user_id);
+			$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name,
+				COUNT(host.host_template_id) AS total
+				FROM host_template
+				LEFT JOIN host
+				ON host_template.id = host.host_template_id
+				WHERE host.id IN ( " . $allowed_devices . ")
+				GROUP BY host_template_id
+				ORDER BY total DESC
+				LIMIT 6");
 
-			unset($graph);
+			if (cacti_sizeof($sql_ht)) {
+				foreach ($sql_ht as $item) {
+					array_push($graph['pie']['label'], substr($item['name'],0,15));
+					array_push($graph['pie']['data'], $item['total']);
+				}
+			}
 		}
+
+		$panel['data'] = intropage_prepare_graph($graph, $user_id);
+
+		unset($graph);
+
+
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -226,7 +257,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
                 if (cacti_sizeof($rows)) {
                 
                         $graph['line']['title1'] = __('Down', 'intropage');
-                        $graph['line']['unit1']['title'] = 'Down [count]';
+                        $graph['line']['unit1']['title'] = 'Down';
 
 			foreach ($rows as $row) {
 				if ($first) {
@@ -257,7 +288,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 		if (cacti_sizeof($rows)) {
                                
 			$graph['line']['title2'] = __('Recovering', 'intropage');
-			$graph['line']['unit2']['title'] = 'Recovering [count]';
+			$graph['line']['unit2']['title'] = 'Recovering';
 
 			foreach ($rows as $row) {
 				if ($first) {
@@ -284,7 +315,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title3'] = __('Disabled', 'intropage');
-			$graph['line']['unit3']['title'] = 'Disabled [count]';
+			$graph['line']['unit3']['title'] = 'Disabled';
 
 			foreach ($rows as $row) {
 				$graph['line']['label3'][] = $row['date'];
@@ -528,7 +559,7 @@ function graph_host_template_detail() {
 }
 
 
-//------------------------------------ graphs host -----------------------------------------------------
+//------------------------------------ host collect -----------------------------------------------------
 function host_collect() {
 	global $config;
 
@@ -545,11 +576,11 @@ function host_collect() {
 				SELECT 'host_down', COUNT(*),?
 				FROM host
 				WHERE id in (" . $allowed_devices . ")
-				AND  status='1'
+				AND status='1'
 				AND disabled=''",
 				array($user['id']));
 
-			db_execute_prepared("INSERT INTO plugin_intropage_trends
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
 				(name,value,user_id)
 				SELECT 'host_reco', COUNT(*),?
 				FROM host
@@ -558,7 +589,7 @@ function host_collect() {
 				AND disabled=''",
 				array($user['id']));
 
-			db_execute_prepared("INSERT INTO plugin_intropage_trends
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
 				(name,value,user_id)
 				SELECT 'host_disa', COUNT(*),?
 				FROM host
@@ -566,7 +597,6 @@ function host_collect() {
 				AND disabled='on'",
 				array($user['id']));
 		} else {
-
 			db_execute_prepared("REPLACE INTO plugin_intropage_trends
 				(name,value,user_id)
 				VALUES ('host_down', 0, ?)",
