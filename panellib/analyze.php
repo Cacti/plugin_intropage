@@ -136,15 +136,13 @@ function analyse_login($panel, $user_id) {
 
 	$panel['data']  = '<table class="cactiTable">';
 
-//	$panel['data'] .= '<tr><td><h4>' . __('Last 5 Logins', 'intropage') . '</h4></td></tr>';
-
 	$rows = db_fetch_assoc('SELECT user_log.username, user_auth.full_name,
 		user_log.time, user_log.result, user_log.ip
 		FROM user_auth
 		INNER JOIN user_log
 		ON user_auth.username = user_log.username
 		ORDER BY user_log.time desc
-		LIMIT ' . $lines);
+		LIMIT ' . ($lines-3));
 
 	if (cacti_sizeof($rows)) {
 		$panel['data'] .=
@@ -178,32 +176,24 @@ function analyse_login($panel, $user_id) {
 	}
 
 	$panel['data'] .= '</table><br/>';
-	
-	$panel['data'] .= '<table class="cactiTable">';
+
+	$panel['data'] .= '<table class="cactiTable inpa_fixed">';
 
 	$panel['data'] .= '<tr><td>' . __('Total Failed Logins: %s', number_format_i18n($flog), 'intropage') . '</td></tr>';
 
-	$panel['data'] .= '<tr><td>' . __('Active Users in Last Hour:', 'intropage');
-
 	$data = db_fetch_assoc('SELECT DISTINCT username
 		FROM user_log
-		WHERE time > adddate(now(), INTERVAL -1 HOUR)
-		LIMIT 10');
+		WHERE time > adddate(now(), INTERVAL -1 HOUR)');
 
 	if (cacti_sizeof($data)) {
-		$i = 0;
-		foreach ($data as $row) {
-			$panel['data'] .= ($i > 0 ? ', ':' ') . html_escape($row['username']);
-			$i++;
-		}
+		$text = implode (', ', array_column($data,'username'));
 	} else {
-		$panel['data'] .= __('None', 'intropage');
+		$text = __('None', 'intropage');
 	}
 
-	$panel['data'] .= '</td></tr>';
+	$panel['data'] .= '<tr><td class="inpa_first inpa_loglines" title="' . $text . '">' . __('Active Users in Last Hour: ', 'intropage');
 
-	$panel['data'] .= '</table>';
-
+	$panel['data'] .= $text . '</td></tr></table>';
 
 	save_panel_result($panel, $user_id);
 }
@@ -227,7 +217,7 @@ function analyse_log($panel, $user_id) {
 
 	if (!$log['size'] || empty($log['lines'])) {
 		$panel['alarm'] = 'red';
-		$panel['data'] .= __('Log file not accessible or empty', 'intropage');
+		$panel['data'] = __('Log file not accessible or empty', 'intropage');
 	} else {
 		$error  = 0;
 		$ecount = 0;
@@ -243,12 +233,11 @@ function analyse_log($panel, $user_id) {
 					$ecount++;
 				}
 			}
-			
 		}
 
-		$panel['data'] .= '<table class="cactiTable">';
+		$panel['data'] .= '<table class="cactiTable inpa_fixed">';
 
-		$panel['data'] .= '<tr><td colspan="4">' . __('Analyze last %s log lines', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
+		$panel['data'] .= '<tr><td colspan="3">' . __('Analyze last %s log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
 
 		$panel['data'] .= '<tr><td class="bold">' . __('Errors: ', 'intropage') . $error . 
 			'<a class="linkEditMain" href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '">' .
@@ -279,21 +268,30 @@ function analyse_log($panel, $user_id) {
 			$panel['data'] .= ' (' . $log_size_note . ')</td></tr>';
 		}
 
-		$panel['data'] .= '<tr><td colspan="4"><br/>' . __('Last log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
-
+		$panel['data'] .= '<tr><td class="inpa_loglines" colspan=3><br/>';
+		$panel['data'] .= __('Last log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '<br/>';
+		$panel['data'] .= '</td></tr>';
+		
 		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 2));
 
 		foreach ($log['lines'] as $line) {
-			$panel['data'] .= '<tr><td colspan="4"><div title="' . addslashes($line) . '">' . substr($line,0,90) . ' ...</div></td></tr>';
+			$panel['data'] .= '<tr><td class="inpa_loglines" colspan="3" title="' . $line . '">';
+
+			if (strlen($line) > 3) {
+				$panel['data'] .= $line;
+			}
+			
+			$panel['data'] .= '</td></tr>';
+
 		}
+
+		$panel['data'] .= '</table>';
 
 		if ($error > 0) {
 			$panel['alarm'] = 'red';
 		} elseif ($warn > 0) {
 			$panel['alarm'] = 'yellow';
 		}
-
-		$panel['data'] . '</table>';
 	}
 
 	save_panel_result($panel, $user_id);
@@ -346,7 +344,6 @@ function analyse_db($panel, $user_id) {
 			<tr>
 				<td><span class="txt_big">' . __('DB: OK', 'intropage') . '</span></td>
 			</tr>
-			<tr><td><hr></td></tr>
 			<tr>
 				<td></td>
 			</tr>' . $panel['data'];
@@ -381,7 +378,7 @@ function analyse_db($panel, $user_id) {
 	}
 
 	if ($aerrors > 0) {
-		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s.  Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', $aerrors, 'intropage') . '</td></tr>';
+		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s', $aerrors, 'intropage') . '</td></tr>';
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
@@ -396,6 +393,10 @@ function analyse_db($panel, $user_id) {
 		'<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage')   . '</td></tr>' .
 		'<tr><td>' . __('Memory tables: %s', $memtables, 'intropage')  . '</td></tr>' .
 		'<tr><td>' . __('All tables: %s', count($tables), 'intropage') . '</td></tr>';
+
+	if ($aerrors > 0) {
+		$panel['data'] .= '<tr><td><br/><br/>' . __('Aborted clients/connects - Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', 'intropage') . '</td></tr>';
+	}
 
 	save_panel_result($panel, $user_id);
 
@@ -737,13 +738,13 @@ function analyse_tree_host_graph($panel, $user_id) {
 	if ($total_errors > 0) {
 		$panel['data'] = '<table class="cactiTable">
 			<tr>
-				<td><span class="txt_big">' . __('Found %s problems', $total_errors, 'intropage') . '</span><br/>' . $panel['data'] . '</td>
+				<td><span class="txt_med">' . __('Found %s problems', $total_errors, 'intropage') . '</span><br/><br/>' . $panel['data'] . '</td>
 			</tr>
 		</table>';
 	} else {
 		$panel['data'] = '<table class="cactiTable">
 			<tr>
-				<td><span class="txt_big">' . __('Everything OK', 'intropage') . '</span><br/>' . $panel['data'] . '</td>
+				<td><span class="txt_med">' . __('Everything OK', 'intropage') . '</span><br/>' . $panel['data'] . '</td>
 			</tr>
 		</table>';;
 	}
@@ -798,7 +799,7 @@ function analyse_ds_stats($panel, $user_id, $timespan = 0) {
 
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title1'] = __('DS all records ', 'intropage');
-			$graph['line']['unit1']['title'] = 'All [count]';
+			$graph['line']['unit1']['title'] = 'All';
 
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
@@ -814,7 +815,7 @@ function analyse_ds_stats($panel, $user_id, $timespan = 0) {
 
 			if (cacti_sizeof($rows)) {
 				$graph['line']['title2'] = __('DS null records ', 'intropage');
-				$graph['line']['unit2']['title'] = 'Null [count]';
+				$graph['line']['unit2']['title'] = 'Null';
 
 				foreach ($rows as $row) {
 					$graph['line']['label2'][] = $row['date'];

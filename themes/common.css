@@ -293,3 +293,16 @@
 .panel_data h4 {
 	margin: 2px 0px;
 }
+
+.inpa_loglines {
+	overflow: hidden; white-space: nowrap; text-overflow: ellipsis; 
+}
+
+.inpa_fixed {
+	table-layout: fixed;
+}
+
+
+.inpa_first {
+	width: 70%;
+}

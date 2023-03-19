@@ -114,11 +114,12 @@ function thold_event($panel, $user_id) {
 		}
 
 		if (cacti_sizeof($data)) {
-			$panel['data'] .= '<table class="tableRow">';
+			
+			$panel['data'] .= '<table class="cactiTable inpa_fixed">';
 
 			foreach ($data as $row) {
-				$panel['data'] .= '<tr><td style="white-space:pre">';
-				$panel['data'] .= date('Y-m-d H:i:s', $row['time']) . ' - ' . html_escape($row['description']);
+				$panel['data'] .= '<tr><td class="inpa_first inpa_loglines" title="' . html_escape($row['description']) . '">';
+				$panel['data'] .= date('y-m-d H:i:s', $row['time']) . ' ' . html_escape($row['description']);
 				$panel['data'] .= '</td></tr>';
 
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
@@ -127,7 +128,7 @@ function thold_event($panel, $user_id) {
 					$panel['alarm'] == 'yellow';
 				}
 			}
-
+			
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Without events yet', 'intropage');
@@ -191,7 +192,7 @@ function graph_thold($panel, $user_id, $timespan = 0) {
                 if (cacti_sizeof($rows)) {
                 
                         $graph['line']['title1'] = __('Trigerred', 'intropage');
-                        $graph['line']['unit1']['title'] = 'Triggered [count]';
+                        $graph['line']['unit1']['title'] = 'Triggered';
 
 			foreach ($rows as $row) {
 				if ($first) {
@@ -219,7 +220,7 @@ function graph_thold($panel, $user_id, $timespan = 0) {
                 if (cacti_sizeof($rows)) {
                 
                         $graph['line']['title2'] = __('Breached', 'intropage');
-                        $graph['line']['unit2']['title'] = 'Breached [count]';
+                        $graph['line']['unit2']['title'] = 'Breached';
 
 			foreach ($rows as $row) {
 				if ($first) {
@@ -247,7 +248,7 @@ function graph_thold($panel, $user_id, $timespan = 0) {
                 if (cacti_sizeof($rows)) {
                 
                         $graph['line']['title3'] = __('Disabled', 'intropage');
-                        $graph['line']['unit3']['title'] = 'Disabled [count]';
+                        $graph['line']['unit3']['title'] = 'Disabled';
 
 			foreach ($rows as $row) {
 				$graph['line']['label3'][] = $row['date'];
@@ -518,6 +519,4 @@ function thold_collect() {
 		}
 	}
 }
-
-
 
