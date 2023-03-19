@@ -136,6 +136,7 @@ function ntp_dns($panel, $user_id) {
 		} else {
 			$panel['alarm'] = 'red';
 			$panel['data']  .= '<tr><td>' . __('Unable to contact the NTP server indicated.', 'intropage') . '</td></tr>';
+			$panel['data']  .= '<tr><td>' . $ntp_server . '</td></tr>';
 			$panel['data']  .= '<tr><td>' . __('Please check your configuration.', 'intropage') . '</td></tr>';
 		}
 	}

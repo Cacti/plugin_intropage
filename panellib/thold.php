@@ -41,7 +41,7 @@ function register_thold() {
 			'refresh'      => 300,
 			'trefresh'     => false,
 			'force'        => true,
-			'width'        => 'quarter-panel',	// !! ma byt half
+			'width'        => 'half-panel',
 			'priority'     => 77,
 			'alarm'        => 'green',
 			'requires'     => 'thold',

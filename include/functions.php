@@ -1071,7 +1071,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
         $lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
         if ($lines == 5) {
-                $graph_height = 100;
+                $graph_height = 150;
         } elseif ($lines == 10) {
                 $graph_height = 200;
         } else {
@@ -1087,6 +1087,8 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		// Start chart attributes
 		$chart = array(
 			'bindto' => "#line_$xid",
+			'size'   => array('height' => 100,'width' => 150),
+
 			'point' => array (
 				'r' => 1.5
 				),
@@ -1095,9 +1097,6 @@ function intropage_prepare_graph($dispdata, $user_id) {
 				'enabled'	=> 'true',
 				'type'		=> 'drag'
 			),
-			'legend_funguje_ale_nechci' => array(
-				'position' => 'right'),
-			'size'   => array('height' => $graph_height),
 			'data'   => array(
 
 				'type' => "spline",
@@ -1182,7 +1181,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$chart['axis']            = $axis;
 
 		$chart_data = json_encode($chart);
-		$content .= '<div class="chart_wrapper center" id="line_' . $xid. '"></div>';
+		$content .= '<div style="height: ' . $graph_height . 'px;" class="chart_wrapper center" id="line_' . $xid. '"></div>';
 		$content .= '<script type="text/javascript">';
 		$content .= 'panels.line_' . $xid . ' = bb.generate(' . $chart_data . ');';
 		$content .= '</script>';
