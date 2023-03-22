@@ -275,10 +275,10 @@ function webseer($panel, $user_id) {
 		$logs = db_fetch_assoc ('SELECT pwul.lastcheck, pwul.result, pwul.http_code, pwul.error, pwu.url
 	                FROM plugin_webseer_urls_log AS pwul
         	        INNER JOIN plugin_webseer_urls AS pwu
-		       	ON pwul.url_id=pwu.id
+		       	ON pwul.url_id = pwu.id
                 	WHERE pwu.id = 1
 	                ORDER BY pwul.lastcheck DESC
-        	        LIMIT ' . $lines - 3); 
+        	        LIMIT ' . ($lines - 3)); 
                 
 		if (cacti_sizeof($logs) > 0) {
 			
