@@ -141,7 +141,7 @@ function graph_host_template($panel, $user_id) {
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
 	if ($allowed_devices !== false) {
-		if (cacti_version_compare(get_cacti_version(), '1.2.25', '>=')) {
+		if (cacti_version_compare(get_cacti_version(), '1.2.24', '>=')) {
 			$graph = array(
 				'treemap' => array(
 					'title' => __('Device Templates: ', 'intropage'),

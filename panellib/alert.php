@@ -59,6 +59,10 @@ function alert_host($panel, $user_id) {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+        if ($important_period == -1) {
+                $important_period = time();
+        }
 
 	$panel['alarm'] = 'green';
 
@@ -66,46 +70,38 @@ function alert_host($panel, $user_id) {
 
 	if ($allowed_devices != '') {
 		$console_access = get_console_access($user_id);
-// predelat - precist proste hodne zaznamu a ty statusy resit az v podminkach
-		$sql_host_reco = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, 'Recovering' AS state
+
+		$sql_host_reco = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Recovering' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
-			AND status_event_count > 0 AND status = 2 AND status_rec_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			AND status_event_count > 0 AND status = 2 AND status_rec_date > DATE_SUB(now(), INTERVAL 10 DAY)
 			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
 			LIMIT " . $lines);
 
-		$sql_host_up = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, 'Up' AS state
+		$sql_host_up = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Up' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
-			AND status_event_count = 0 AND status = 3 AND status_rec_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			AND status_event_count = 0 AND status = 3 AND status_rec_date > DATE_SUB(now(), INTERVAL 10 DAY)
 			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
 			LIMIT " . $lines);
 
-		$sql_host_fall = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, 'Falling' AS state
+		$sql_host_fall = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Falling' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
-			AND status = 3 AND status_fail_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			AND status = 3 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
 			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
 
-		$sql_host_down = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, 'Down' AS state
+		$sql_host_down = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Down' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
-			AND status = 1 AND status_fail_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			AND status = 1 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
 			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
-
-		if (cacti_sizeof($sql_host_fall) > 0) {
-			$panel['alarm'] = 'yellow';
-		}
-
-		if (cacti_sizeof($sql_host_down) > 0) {
-			$panel['alarm'] = 'red';
-		}
 
 
 		$result = $sql_host_reco + $sql_host_up + $sql_host_fall + $sql_host_down;
@@ -128,12 +124,39 @@ function alert_host($panel, $user_id) {
 					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				}
 
-				$row .= '<td>' . $line['chdate'] . '</td>';
+				$row .= '<td>' . $line['chdate'] . '</td><td>';
+
+                                $color = 'grey';
+
+                                if ($line['secs'] > (time()-($important_period))) {
+                                        if (preg_match('/(UP)/i', $line['state'])) {
+                                                $color = 'green';
+                                        } elseif (preg_match('/(DOWN)/i', $line['state'])) {
+                                                $color = 'red';
+                                        } elseif (preg_match('/(RECOVERING|FALLING)/i', $line['state'])) {
+                                                $color = 'yellow';
+                                        }
+                                }
+
+				if ($panel['alarm'] == 'grey' && $color == 'green') {
+					$panel['alarm'] = 'green';
+				}
+
+				if ($panel['alarm'] == 'green' && $color == 'yellow') {
+					$panel['alarm'] = 'yellow';
+				}
+
+				if ($panel['alarm'] == 'yellow' && $color == 'red') {
+					$panel['alarm'] = 'red';
+				}
+
+                                $row .= '<span class="inpa_sq color_' . $color . '"></span>';
+
 
 				if ($console_access) {
-					$row .= '<td><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $line['id']) . '">' . html_escape(substr($line['description'],0,37)) . '</a></td>';
+					$row .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $line['id']) . '">' . html_escape(substr($line['description'],0,37)) . '</a></td>';
 				} else {
-					$row .= '<td>' . html_escape(substr($line['description'],0,37)) . '</td>';
+					$row .= html_escape(substr($line['description'],0,37)) . '</td>';
 				}
 
 				$row .= '<td>'  . $line['state'] . '</td></tr>';
@@ -165,13 +188,18 @@ function alert_host($panel, $user_id) {
 function alert_host_detail() {
 	global $config, $console_access;
 
+        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+        if ($important_period == -1) {
+                $important_period = time();
+        }
+
 	$panel = array(
 		'name'   => __('Host alerts', 'intropage'),
 		'alarm'  => 'green',
 		'detail' => '',
 	);
 
-	$lines = 10;
+	$lines = 20;
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
@@ -179,45 +207,37 @@ function alert_host_detail() {
 
 		$console_access = get_console_access($_SESSION['sess_user_id']);
 
-		$sql_host_reco = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, 'Recovering' AS state
+		$sql_host_reco = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Recovering' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
-			AND status_event_count > 0 AND status = 2 AND status_rec_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			AND status_event_count > 0 AND status = 2 AND status_rec_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
 			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
 			LIMIT " . $lines);
 
-		$sql_host_up = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, 'Up' AS state
+		$sql_host_up = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Up' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
-			AND status_event_count = 0 AND status = 3 AND status_rec_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			AND status_event_count = 0 AND status = 3 AND status_rec_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
 			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
 			LIMIT " . $lines);
 
-		$sql_host_fall = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, 'Falling' AS state
+		$sql_host_fall = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Falling' AS state
 			FROM host
 			WHERE host.id in (" . $allowed_devices . ")
-			AND status = 3 AND status_fail_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			AND status = 3 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
 			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
 
-		$sql_host_down = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, 'Down' AS state
+		$sql_host_down = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Down' AS state
 			FROM host
-			WHERE id in (" . $allowed_devices . ")
-			AND status = 1 AND status_fail_date > DATE_SUB(now(), INTERVAL 30 MINUTE)
+			WHERE host.id in (" . $allowed_devices . ")
+			AND status = 1 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
 			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
-
-		if (cacti_sizeof($sql_host_fall) > 0) {
-			$panel['alarm'] = 'yellow';
-		}
-
-		if (cacti_sizeof($sql_host_down) > 0) {
-			$panel['alarm'] = 'red';
-		}
 
 		$result = $sql_host_reco + $sql_host_up + $sql_host_fall + $sql_host_down;
 		
@@ -238,13 +258,38 @@ function alert_host_detail() {
 					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				}
 
+				$row .= '<td>' . $line['chdate'] . '</td><td>';
 
-				$row .= '<td>' . $line['chdate'] . '</td>';
+                                $color = 'grey';
+
+                                if ($line['secs'] > (time()-($important_period))) {
+                                        if (preg_match('/(UP)/i', $line['state'])) {
+                                                $color = 'green';
+                                        } elseif (preg_match('/(DOWN)/i', $line['state'])) {
+                                                $color = 'red';
+                                        } elseif (preg_match('/(RECOVERING|FALLING)/i', $line['state'])) {
+                                                $color = 'yellow';
+                                        }
+                                }
+
+				if ($panel['alarm'] == 'grey' && $color == 'green') {
+					$panel['alarm'] = 'green';
+				}
+
+				if ($panel['alarm'] == 'green' && $color == 'yellow') {
+					$panel['alarm'] = 'yellow';
+				}
+
+				if ($panel['alarm'] == 'yellow' && $color == 'red') {
+					$panel['alarm'] = 'red';
+				}
+
+                                $row .= '<span class="inpa_sq color_' . $color . '"></span>';
 
 				if ($console_access) {
-					$row .= '<td><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $line['id']) . '">' . html_escape(substr($line['description'],0,37)) . '</a></td>';
+					$row .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $line['id']) . '">' . html_escape(substr($line['description'],0,37)) . '</a></td>';
 				} else {
-					$row .= '<td>' . html_escape(substr($line['description'],0,37)) . '</td>';
+					$row .= html_escape(substr($line['description'],0,37)) . '</td>';
 				}
 
 				$row .= '<td>'  . $line['state'] . '</td></tr>';

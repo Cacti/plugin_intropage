@@ -100,11 +100,11 @@ function ntp_dns($panel, $user_id) {
 
 	if (empty($ntp_server)) {
 		$panel['alarm'] = 'grey';
-		$panel['data']  .= '<tr><td>' . __('No NTP server configured', 'intropage') . '</td></tr>';
+		$panel['data']  .= '<tr><td>' . __('No NTP server configured', 'intropage') . '<span class="inpa_sq color_grey"></span></td></tr>';
 
 	} elseif (!filter_var(trim($ntp_server), FILTER_VALIDATE_IP) && !filter_var(trim($ntp_server), FILTER_VALIDATE_DOMAIN)) {
 		$panel['alarm'] = 'red';
-		$panel['data']  .= '<tr><td>' . __('Wrong NTP server configured - %s<br/>Please fix it in settings', $ntp_server, 'intropage') . '</td></tr>';
+		$panel['data']  .= '<tr><td>' . __('Wrong NTP server configured - %s<br/>Please fix it in settings', $ntp_server, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 	} else {
 		$timestamp = ntp_time($ntp_server);
 		
@@ -120,7 +120,7 @@ function ntp_dns($panel, $user_id) {
 
 			if ($diff_time > 1400000000) {
 				$panel['alarm'] = 'red';
-				$panel['data'] .= '<tr><td>' . __('Failed to get NTP time from %s', $ntp_server, 'intropage') . '</td></tr>';
+				$panel['data'] .= '<tr><td>' . __('Failed to get NTP time from %s', $ntp_server, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 			} elseif ($diff_time < -600 || $diff_time > 600) {
 				$panel['alarm'] = 'red';
 			} elseif ($diff_time < -120 || $diff_time > 120) {
@@ -128,7 +128,7 @@ function ntp_dns($panel, $user_id) {
 			}
 
 			if ($panel['alarm'] != 'green') {
-				$panel['data'] .= '<tr><td>' . __('Please check time as it is off by more', 'intropage') . '</td></tr>';
+				$panel['data'] .= '<tr><td>' . __('Please check time as it is off by more', 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 				$panel['data'] .= '<tr><td>' . __('than %s seconds from NTP server %s.', $diff_time, $ntp_server, 'intropage') . '</td></tr>';
 			} else {
 				$panel['data'] .= '<tr><td>' . __('Localtime is equal to NTP server', 'intropage') . ' ' . $ntp_server . '</td></tr>';
@@ -146,10 +146,10 @@ function ntp_dns($panel, $user_id) {
 
 	if (empty($dns_host)) {
 		$panel['alarm'] = 'grey';
-		$panel['data']  .= '<tr><td>' . __('No DNS hostname configured', 'intropage') . '</td></tr>';
+		$panel['data']  .= '<tr><td>' . __('No DNS hostname configured', 'intropage') . '<span class="inpa_sq color_grey"></span></td></tr>';
 	} elseif (!filter_var(trim($dns_host), FILTER_VALIDATE_DOMAIN)) {
 		$panel['alarm'] = 'red';
-		$panel['data']  .= '<tr><td>' . __('Wrong DNS hostname configured - %s<br/>Please fix it in settings', $dns_host, 'intropage') . '</td></tr>';
+		$panel['data']  .= '<tr><td>' . __('Wrong DNS hostname configured - %s<br/>Please fix it in settings', $dns_host, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 	} else {
 		
 		$dns_respond = @cacti_gethostinfo($dns_host, DNS_ANY);
@@ -158,7 +158,7 @@ function ntp_dns($panel, $user_id) {
 			$panel['data'] .= '<tr><td>' . __('DNS hostname (%s) resolving ok.', $dns_host, 'intropage') . '</td></tr>';
 		} else {
 			$panel['alarm'] = 'red';
-			$panel['data']  .= '<tr><td>' . __('DNS hostname (%s) resolving failed.', $dns_host, 'intropage') . '</td></tr>';
+			$panel['data']  .= '<tr><td>' . __('DNS hostname (%s) resolving failed.', $dns_host, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 			$panel['data']  .= '<tr><td>' . __('Please check your configuration.', 'intropage') . '</td></tr>';
 		}
 	}
@@ -254,6 +254,10 @@ function webseer($panel, $user_id) {
 	$panel['alarm'] = 'green';
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+        if ($important_period == -1) {
+                $important_period = time();
+        }
 	
 	if (!api_plugin_is_enabled('webseer')) {
 		$panel['alarm']  = 'yellow';
@@ -272,13 +276,14 @@ function webseer($panel, $user_id) {
 		$panel['data']  = __('Number of checks (all/disabled): ', 'intropage') . $all . ' / ' . $disa . '<br/>';
 		$panel['data'] .= __('Status (up/down): ', 'intropage') . $ok . ' / ' . $ko . '<br/><br/>';
 
-		$logs = db_fetch_assoc ('SELECT pwul.lastcheck, pwul.result, pwul.http_code, pwul.error, pwu.url
+		$logs = db_fetch_assoc ('SELECT pwul.lastcheck, pwul.result, pwul.http_code, pwul.error, pwu.url,
+			UNIX_TIMESTAMP(pwul.lastcheck) AS secs
 	                FROM plugin_webseer_urls_log AS pwul
         	        INNER JOIN plugin_webseer_urls AS pwu
 		       	ON pwul.url_id=pwu.id
                 	WHERE pwu.id = 1
 	                ORDER BY pwul.lastcheck DESC
-        	        LIMIT ' . $lines - 3); 
+        	        LIMIT ' . $lines - 4); 
                 
 		if (cacti_sizeof($logs) > 0) {
 			
@@ -289,10 +294,37 @@ function webseer($panel, $user_id) {
 				'<td class="rpad">' . __('HTTP code', 'intropage') . '</td></tr>';
 
 			foreach ($logs as $row) {
+                                $color = 'grey';
+                                $text = '';
+
+                                if ($row['http_code'] == 200) {
+	                                if ($row['secs'] > (time()-($important_period))) {
+                                                $color = 'green';
+					}
+                                        $text = __('OK');
+
+                                } else {
+	                               if ($row['secs'] > (time()-($important_period))) {
+                                                $color = 'red';
+					}
+                                        $text = __('Failed');
+				}
+
+                                if ($panel['alarm'] == 'grey' && $color == 'green') {
+                                        $panel['alarm'] = 'green';
+                                }
+
+                                if ($panel['alarm'] == 'green' && $color == 'yellow') {
+                                        $panel['alarm'] = 'yellow';
+                                }
+
+                                if ($panel['alarm'] == 'yellow' && $color == 'red') {
+                                        $panel['alarm'] = 'red';
+                                }
 
 				$panel['data'] .= '<td class="rpad">' . $row['lastcheck'] . '</td>' .
 					'<td class="rpad">' . $row['url'] . '</td>' .
-					'<td class="rpad">' . $row['http_code'] . '</td></tr>';
+					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . $row['http_code'] . ' (' . $text . ')</td></tr>';
 			}
 
 			$panel['data'] .= '</table>';
@@ -306,13 +338,19 @@ function webseer($panel, $user_id) {
 function webseer_detail() {
 	global $config, $log;
 
+        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
+        if ($important_period == -1) {
+                $important_period = time();
+        }
+
 	$panel = array(
 		'name'   => __('Webseer Plugin - Details', 'intropage'),
-		'alarm'  => 'green',
+		'alarm'  => 'grey',
 		'detail' => '',
 	);
 
-	$logs = db_fetch_assoc ('SELECT pwul.lastcheck, pwul.result, pwul.http_code, pwul.error, pwu.url
+	$logs = db_fetch_assoc ('SELECT pwul.lastcheck, pwul.result, pwul.http_code, pwul.error, pwu.url,
+		UNIX_TIMESTAMP(pwul.lastcheck) AS secs
 		FROM plugin_webseer_urls_log AS pwul
 		INNER JOIN plugin_webseer_urls AS pwu
 		ON pwul.url_id=pwu.id
@@ -331,19 +369,29 @@ function webseer_detail() {
 	'</tr>';
 
 	foreach ($logs as $log)	{
+		$color = 'grey';
+
 		$panel['detail'] .= '<tr>';
 		$panel['detail'] .= '<td class="left">' . $log['lastcheck'] . '</td>';
 		$panel['detail'] .= '<td class="left">' . $log['url'] . '</td>';
 
 		if ($log['result'] == 1) {
-			$panel['detail'] .= '<td class="left">' . __('OK') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK') . '</td>';
+
+                        if ($log['secs'] > (time()-($important_period))) {
+				$color = 'green';
+			}
 		} else {
-			$panel['detail'] .= '<td class="left">' . __('Failed') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed') . '</td>';
+
+                        if ($log['secs'] > (time()-($important_period))) {
+				$color = 'red';
+			}
 		}
 		$panel['detail'] .= '<td class="right">' . $log['http_code'] . '</td>';
 		$panel['detail'] .= '<td class="right">' . $log['error'] . '</td></tr>';
 
-		if ($log['result'] != 1)	{
+		if ($color == 'red')	{
 			$panel['alarm'] = 'red';
 		}
 	}

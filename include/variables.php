@@ -66,6 +66,19 @@ $intropage_settings = array(
 		),
 		'default'       => '60',
 	),
+	'intropage_important_period' => array(
+		'friendly_name' => __('Important period', 'intropage'),
+		'description'   => __('From now to past. Affects row coloring, older events will not be highlighted, only displayed', 'intropage'),
+		'method'        => 'drop_array',
+		'array'         => array(
+			'-1'    => __('Disabled', 'intropage'),
+			'900'   => __('15 minutes', 'intropage'),
+			'3600'  => __('1 hour', 'intropage'),
+			'14400' => __('4 hours', 'intropage'),
+			'86400' => __('1 day', 'intropage'),
+		),
+		'default'       => '3600',
+	),
 	'intropage_number_of_lines' => array(
 		'friendly_name' => __('Number of panel lines', 'intropage'),
 		'description'   => __('How many lines in panel', 'intropage'),

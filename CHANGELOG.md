@@ -1,5 +1,9 @@
 # Changelog
 
+* feature#259 - improve all panels
+
+* New event highlighting system
+
 --- 4.0.3 ---
 
 * feature#226: Panel Devices - add what devices are down and fail date

@@ -74,6 +74,7 @@ function display_information() {
 	$display_important_first = read_user_setting('intropage_display_important_first', read_config_option('intropage_display_important_first'));
 	$display_wide            = read_user_setting('intropage_display_wide', read_config_option('intropage_display_wide'));
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
+	$important_period        = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'));
 	$timespan                = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'));
 	$number_of_lines         = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
 
@@ -260,24 +261,22 @@ function display_information() {
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';
 
-	print "<option value=''>" . __('Number of lines', 'intropage') . '</option>';
-
 	if ($number_of_lines == 5) {
-		print "<option value='lines_5' disabled='disabled'>" . __('%d lines', 5, 'intropage') . '</option>';
+		print "<option value='lines_5' disabled='disabled'>" . __('Number of lines - %d', 5, 'intropage') . '</option>';
 	} else {
-		print "<option value='lines_5'>" . __('%d lines', 5, 'intropage') . '</option>';
+		print "<option value='lines_5'>" . __('Number of lines - %d', 5, 'intropage') . '</option>';
 	}
 
 	if ($number_of_lines == 10) {
-		print "<option value='lines_10' disabled='disabled'>" . __('%d lines', 10, 'intropage') . '</option>';
+		print "<option value='lines_10' disabled='disabled'>" . __('Number of lines - %d', 10, 'intropage') . '</option>';
 	} else {
-		print "<option value='lines_10'>" . __('%d lines', 10, 'intropage') . '</option>';
+		print "<option value='lines_10'>" . __('Number of lines - %d', 10, 'intropage') . '</option>';
 	}
 
 	if ($number_of_lines == 15) {
-		print "<option value='lines_15' disabled='disabled'>" . __('%d lines', 15, 'intropage') . '</option>';
+		print "<option value='lines_15' disabled='disabled'>" . __('Number of lines - %d', 15, 'intropage') . '</option>';
 	} else {
-		print "<option value='lines_15'>" . __('%d lines', 15, 'intropage') . '</option>';
+		print "<option value='lines_15'>" . __('Number of lines - %d', 15, 'intropage') . '</option>';
 	}
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';
@@ -312,6 +311,38 @@ function display_information() {
 		print "<option value='refresh_3600' disabled='disabled'>" . __('Refresh Every Hour', 'intropage') . '</option>';
 	} else {
 		print "<option value='refresh_3600'>" . __('Refresh Every Hour', 'intropage') . '</option>';
+	}
+
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
+	if ($important_period == -1) {
+		print "<option value='period_-1' disabled='disabled'>" . __('Important period - disabled', 'intropage') . '</option>';
+	} else {
+		print "<option value='period_-1'>" . __('Important period - disabled', 'intropage') . '</option>';
+	}
+
+	if ($important_period == 900) {
+		print "<option value='period_900' disabled='disabled'>" . __('Important period - 15 minutes', 'intropage') . '</option>';
+	} else {
+		print "<option value='period_900'>" . __('Important period - 15 minutes', 'intropage') . '</option>';
+	}
+
+	if ($important_period == 3600) {
+		print "<option value='period_3600' disabled='disabled'>" . __('Important period - 1 hour', 'intropage') . '</option>';
+	} else {
+		print "<option value='period_3600'>" . __('Important period - 1 hour', 'intropage') . '</option>';
+	}
+
+	if ($important_period == 14400) {
+		print "<option value='period_14400' disabled='disabled'>" . __('Important period - 4 hours', 'intropage') . '</option>';
+	} else {
+		print "<option value='period_14400'>" . __('Important period - 4 hours', 'intropage') . '</option>';
+	}
+
+	if ($important_period == 86400) {
+		print "<option value='period_86400' disabled='disabled'>" . __('Important period - 1 day', 'intropage') . '</option>';
+	} else {
+		print "<option value='period_86400'>" . __('Important period - 1 day', 'intropage') . '</option>';
 	}
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';

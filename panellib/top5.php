@@ -137,14 +137,14 @@ function top5_ping($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['cur_time'] > $red) {
 					$panel['alarm'] = 'red';
-					$icon = 'fa-exclamation-triangle';
+					$color = 'red';
 				} elseif ($host['cur_time'] > $yellow) {
 					if ($panel['alarm'] == 'green') {
 						$panel['alarm'] = 'yellow';
 					}
-					$icon = 'fa-thermometer-half';
+					$color = 'yellow';
 				} else {
-					$icon = false;
+					$color = 'green';
 				}
 
 				if ($console_access) {
@@ -154,7 +154,7 @@ function top5_ping($panel, $user_id) {
 				}
 
 				$row .= "<td class='right'>" . round($host['avg_time'], 2) . ' ms</td>';
-				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['cur_time'], 2) . ' ms</td></tr>';
+				$row .= "<td class='right'>" . round($host['cur_time'], 2) . " ms <span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 				$panel['data'] .= $row;
 
@@ -206,14 +206,14 @@ function top5_availability($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['availability'] < $red) {
 					$panel['alarm'] = 'red';
-					$icon = 'fa-exclamation-triangle';
+					$color = 'red';
 				} elseif ($host['availability'] < $yellow) {
 					if ($panel['alarm'] == 'green') {
 						$panel['alarm'] = 'yellow';
 					}
-					$icon = 'fa-thermometer-half';
+					$color = 'yellow';
 				} else {
-					$icon = false;
+					$color = 'green';
 				}
 
 				if ($console_access) {
@@ -222,7 +222,7 @@ function top5_availability($panel, $user_id) {
 					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 37)) . '</td>';
 				}
 
-				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['availability'],2) . ' %</td></tr>';
+				$row .= "<td class='right'>" . round($host['availability'],2) . " % <span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 				$panel['data'] .= $row;
 
@@ -274,14 +274,14 @@ function top5_polltime($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['polling_time'] > $red) {
 					$panel['alarm'] = 'red';
-					$icon = 'fa-exclamation-triangle';
+					$color = 'red';
 				} elseif ($host['polling_time'] > $yellow) {
 					if ($panel['alarm'] == 'green') {
 						$panel['alarm'] = 'yellow';
 					}
-					$icon = 'fa-thermometer-half';
+					$color = 'yellow';
 				} else {
-					$icon = false;
+					$color = 'green';
 				}
 
 				if ($console_access) {
@@ -290,7 +290,7 @@ function top5_polltime($panel, $user_id) {
 					$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($host['description'], 0, 37)) . '</td>';
 				}
 
-				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
+				$row .= "<td class='right'>" . __('%s Secs', round($host['polling_time'], 2), 'intropage') . "<span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 				$panel['data'] .= $row;
 
@@ -345,14 +345,14 @@ function top5_pollratio($panel, $user_id) {
 			foreach ($sql_worst_host as $host) {
 				if ($host['ratio'] > $red) {
 					$panel['alarm'] = 'red';
-					$icon = 'fa-exclamation-triangle';
+					$color = 'red';
 				} elseif ( $host['ratio'] > $yellow) {
 					if ($panel['alarm'] == 'green') {
 						$panel['alarm'] = 'yellow';
 					}
-					$icon = 'fa-thermometer-half';
+					$color = 'yellow';
 				} else {
-					$icon = false;
+					$color = 'green';
 				}
 
 				if ($console_access) {
@@ -363,7 +363,7 @@ function top5_pollratio($panel, $user_id) {
 
 				$row .= "<td class='right'>" . number_format_i18n($host['failed_polls'], 0) . '</td>';
 				$row .= "<td class='right'>" . number_format_i18n($host['total_polls'], 0)  . '</td>';
-				$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['ratio'] * 100, 3)               . ' %</td></tr>';
+				$row .= "<td class='right'>" . round($host['ratio'] * 100, 3)               . " % <span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 				$panel['data'] .= $row;
 
@@ -419,14 +419,14 @@ function top5_ping_detail() {
 		foreach ($sql_worst_host as $host) {
 			if ($host['cur_time'] > $red) {
 				$panel['alarm'] = 'red';
-				$icon = 'fa-exclamation-triangle';
+				$color = 'red';
 			} elseif ($host['cur_time'] > $yellow)     {
 				if ($panel['alarm'] == 'green') {
 					$panel['alarm'] = 'yellow';
 				}
-				$icon = 'fa-thermometer-half';
+				$color = 'yellow';
 			} else {
-				$icon = false;
+				$color = 'green';
 			}
 
 			if ($console_access) {
@@ -436,7 +436,7 @@ function top5_ping_detail() {
 			}
 
 			$row .= '<td class="right">' . round($host['avg_time'], 2) . ' ms</td>';
-			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['cur_time'], 2) . ' ms</td></tr>';
+			$row .= "<td class='right'>" . round($host['cur_time'], 2) . " ms <span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 			$panel['detail'] .= $row;
 
@@ -481,14 +481,14 @@ function top5_availability_detail() {
 		foreach ($sql_worst_host as $host) {
 			if ($host['availability'] < $red) {
 				$panel['alarm'] = 'red';
-				$icon = 'fa-exclamation-triangle';
+				$color = 'red';
 			} elseif ($host['availability'] < $yellow) {
 				if ($panel['alarm'] == 'green') {
 					$panel['alarm'] = 'yellow';
 				}
-				$icon = 'fa-thermometer-half';
+				$color = 'yellow';
 			} else {
-				$icon = false;
+				$color = 'green';
 			}
 
 			if ($console_access) {
@@ -497,7 +497,7 @@ function top5_availability_detail() {
 				$row = '<tr class="' . ($i % 2 == 0 ? 'odd':'even') . '"><td class="left">' . html_escape($host['description']) . '</td>';
 			}
 
-			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['availability'], 2) . ' %</td></tr>';
+			$row .= "<td class='right'>" . round($host['availability'], 2) . " % <span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 			$panel['detail'] .= $row;
 
@@ -549,14 +549,14 @@ function top5_polltime_detail() {
 		foreach ($sql_worst_host as $host) {
 			if ($host['polling_time'] > $red) {
 				$panel['alarm'] = 'red';
-				$icon = 'fa-exclamation-triangle';
+				$color = 'red';
 			} elseif ($host['polling_time'] > $yellow) {
 				if ($panel['alarm'] == 'green') {
 					$panel['alarm'] = 'yellow';
 				}
-				$icon = 'fa-thermometer-half';
+				$color = 'yellow';
 			} else {
-				$icon = false;
+				$color = 'green';
 			}
 
 			if ($console_access) {
@@ -565,7 +565,7 @@ function top5_polltime_detail() {
 				$row = '<tr class="' . ($i % 2 == 0 ? 'odd':'even') . '"><td class="left">' . html_escape($host['description']) . '</td>';
 			}
 
-			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . __('%s Secs', round($host['polling_time'], 2), 'intropage') . '</td></tr>';
+			$row .= "<td class='right'>" . __('%s Secs', round($host['polling_time'], 2), 'intropage') . " <span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 			$panel['detail'] .= $row;
 
@@ -613,14 +613,14 @@ function top5_pollratio_detail() {
 		foreach ($sql_worst_host as $host) {
 			if ($host['ratio'] > $red) {
 				$panel['alarm'] = 'red';
-				$icon = 'fa-exclamation-triangle';
+				$color = 'red';
 			} elseif ($host['ratio'] > $yellow)        {
 				if ($panel['alarm'] == 'green') {
 					$panel['alarm'] = 'yellow';
 				}
-				$icon = 'fa-thermometer-half';
+				$color = 'yellow';
 			} else {
-				$icon = false;
+				$color = 'green';
 			}
 
 			if ($console_access) {
@@ -631,7 +631,7 @@ function top5_pollratio_detail() {
 
 			$row .= "<td class='right'>" . number_format_i18n($host['failed_polls'], 0) . '</td>';
 			$row .= "<td class='right'>" . number_format_i18n($host['total_polls'], 0)  . '</td>';
-			$row .= "<td class='right'>" . ($icon ? "<i class='fas " . $icon . "'></i> " : " ") . round($host['ratio']* 100, 3)                . ' %</td></tr>';
+			$row .= "<td class='right'>" . round($host['ratio']* 100, 3)                . " % <span class='inpa_sq color_" . $color . "'></span></td></tr>";
 
 			$panel['detail'] .= $row;
 
