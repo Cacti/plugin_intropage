@@ -50,7 +50,7 @@ function resizeCharts() {
 		var windWidth  = $(window).width() - 34;
 		var panelWidth = $(this).closest('.panel_wrapper').width() - 34;
 		var width = Math.min(windWidth, panelWidth);
-		var height     = $(this).closest('.chart_wrapper').height() - 34;
+		var height     = $(this).closest('.panel_wrapper').height() - 54;
 //		console.log('Chart:'+chart+', Width:'+width+', Height:'+height);
 
 		if (panels[chart] != undefined) {

@@ -797,7 +797,7 @@ function busiest_interface_util($panel, $user_id) {
 
 				$i++;
 
-				if ($i > $lines) {
+				if ($i >= $lines) {
 					break;
 				}
 			}

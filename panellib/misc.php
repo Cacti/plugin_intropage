@@ -280,9 +280,10 @@ function webseer($panel, $user_id) {
 			UNIX_TIMESTAMP(pwul.lastcheck) AS secs
 	                FROM plugin_webseer_urls_log AS pwul
         	        INNER JOIN plugin_webseer_urls AS pwu
-		       	ON pwul.url_id=pwu.id
+		       	ON pwul.url_id = pwu.id
                 	WHERE pwu.id = 1
 	                ORDER BY pwul.lastcheck DESC
+
         	        LIMIT ' . $lines - 4); 
                 
 		if (cacti_sizeof($logs) > 0) {
