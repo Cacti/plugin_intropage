@@ -159,7 +159,7 @@ function mactrack_sites($panel, $user_id) {
 					'<td class="right">' . $site['total_user_ports']       . '</td>' .
 					'<td class="right">' . $site['total_oper_ports']       . '</td>' .
 					'<td class="right">' . $site['total_macs']             . '</td>' .
-					'<td class="right">' . $site['total_device_errors']    . '</td>' .
+					'<td class="right">' . $site['total_device_errors']    . '<span class="inpa_sq color_red"></span></td>' .
 				'</tr>';
 
 				$panel['data'] .= $row;
@@ -210,7 +210,7 @@ function mactrack_sites_detail() {
 				'<td class="right">' . $site['total_user_ports']       . '</td>' .
 				'<td class="right">' . $site['total_oper_ports']       . '</td>' .
 				'<td class="right">' . $site['total_macs']             . '</td>' .
-				'<td class="right">' . $site['total_device_errors']    . '</td>' .
+				'<td class="right">' . $site['total_device_errors']    . '<span class="inpa_sq color_red"></span></td>' .
 			'</tr>';
 
 			if ($site['total_device_errors'] > 0) {

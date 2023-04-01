@@ -96,6 +96,7 @@ function poller_info($panel, $user_id) {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'green';
 
@@ -122,6 +123,9 @@ function poller_info($panel, $user_id) {
 			'</tr>';
 
 		foreach ($sql_pollers as $poller) {
+		
+			$color = 'green';
+
 			if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) {
 				$ok++;
 			}
@@ -134,18 +138,30 @@ function poller_info($panel, $user_id) {
 				$status = __('Idle', 'intropage');
 			} elseif ($poller['status'] == 3) {
 				$status = __('Unkn/down', 'intropage');
+				$color = 'red';
 			} elseif ($poller['status'] == 4) {
 				$status = __('Disabled', 'intropage');
 			} elseif ($poller['status'] == 5) {
 				$status = __('Recovering', 'intropage');
+				$color = 'yellow';
 			}
+
+
 
 			$details .= '<tr>' .
 				'<td class="left">'  . $poller['id']                . '</td>' .
 				'<td class="left">'  . html_escape($poller['name']) . '</td>' .
-				'<td class="left">'  . $status . '</td>' .
-				'<td class="right">' . __('%s Secs', round($poller['total_time'], 2), 'intropage') . ' </td>' .
-			'</tr>';
+				'<td class="left"><span class="inpa_sq color_' . $color . '"></span>'  . $status . '</td>';
+
+			$color = 'green';
+			
+			if (($poller['total_time']/$poller_interval) > 0.9) {
+				$color = 'red';
+			} elseif (($poller['total_time']/$poller_interval) > 0.7) {
+				$color = 'yellow';
+			}
+				
+			$details .= '<td class="right"><span class="inpa_sq color_' . $color . '"></span>' . __('%s Secs', round($poller['total_time'], 2), 'intropage') . ' </td></tr>';
 		}
 
 		$details .= '</table>';
@@ -183,7 +199,6 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 	global $config, $run_from_poller;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'green';
@@ -238,6 +253,7 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 		$new_index = 1;
 
 		foreach ($pollers as $xpoller) {
+	
 			$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, AVG(SUBSTRING_INDEX(value, ':', -1)) AS value
 				FROM plugin_intropage_trends
 				WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
@@ -274,8 +290,9 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 function poller_info_detail() {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-	
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $_SESSION['sess_user_id']);
+	$poller_interval = read_config_option('poller_interval');	
+
 	$panel = array(
 		'name'   => __('Poller Details', 'intropage'),
 		'alarm'  => 'green',
@@ -307,6 +324,9 @@ function poller_info_detail() {
 
 	if (cacti_sizeof($pollers)) {
 		foreach ($pollers as $poller) {
+		
+			$color = 'green';
+		
 			if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) {
 				$ok++;
 			}
@@ -323,14 +343,20 @@ function poller_info_detail() {
 			} elseif ($poller['status'] == 2) {
 				$row .= '<td class="left">' . __('Idle', 'intropage')       . '</td>';
 			} elseif ($poller['status'] == 3) {
-				$row .= '<td class="left">' . __('Unkn/down', 'intropage')  . '</td>';
+				$row .= '<td class="left">' . __('Unkn/down', 'intropage')  . '<span class="inpa_sq color_red"></span></td>';
 			} elseif ($poller['status'] == 4) {
 				$row .= '<td class="left">' . __('Disabled', 'intropage')   . '</td>';
 			} elseif ($poller['status'] == 5) {
-				$row .= '<td class="left">' . __('Recovering', 'intropage') . '</td>';
+				$row .= '<td class="left">' . __('Recovering', 'intropage') . '<span class="inpa_sq color_yellow"></span></td>';
 			}
 
-			$row .= '<td class="right">' . round($poller['total_time'], 2) . 's</td>';
+			if (($poller['total_time']/$poller_interval) > 0.9) {
+				$color = 'red';
+			} elseif (($poller['total_time']/$poller_interval) > 0.7) {
+				$color = 'yellow';
+			}
+
+			$row .= '<td class="right">' . round($poller['total_time'], 2) . 's <span class="inpa_sq color_' . $color . '"></span></td>';
 			$row .= '<td class="right">' . round($poller['avg_time'], 2)   . 's</td>';
 			$row .= '<td class="right">' . round($poller['max_time'], 2)   . 's</td>';
 

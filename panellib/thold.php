@@ -75,6 +75,10 @@ function thold_event($panel, $user_id) {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+	if ($important_period == -1) {
+		$important_period = time();
+	}
 
 	$panel['alarm'] = 'green';
 
@@ -119,7 +123,38 @@ function thold_event($panel, $user_id) {
 
 			foreach ($data as $row) {
 				$panel['data'] .= '<tr><td class="inpa_first inpa_loglines" title="' . html_escape($row['description']) . '">';
-				$panel['data'] .= date('y-m-d H:i:s', $row['time']) . ' ' . html_escape($row['description']);
+				// zkousim
+				
+				$panel['data'] .= date('y-m-d H:i:s', $row['time']);
+				
+				$color = 'grey';
+
+				if ($row['time'] > (time()-($important_period))) { 
+					if (preg_match('/(NORMAL)/i', $row['description'])) {
+						$color = 'green';
+					} elseif (preg_match('/(ALERT|ERROR)/i', $row['description'])) {
+						$color = 'red';
+					} elseif (preg_match('/(WARNING)/i', $row['description'])) {
+						$color = 'yellow';
+					}
+				}
+
+                                if ($panel['alarm'] == 'grey' && $color == 'green') {
+                                        $panel['alarm'] = 'green';
+                                }
+
+                                if ($panel['alarm'] == 'green' && $color == 'yellow') {
+                                        $panel['alarm'] = 'yellow';
+                                }
+
+                                if ($panel['alarm'] == 'yellow' && $color == 'red') {
+                                        $panel['alarm'] = 'red';
+                                }
+
+				
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>';
+				
+				$panel['data'] .= html_escape($row['description']);
 				$panel['data'] .= '</td></tr>';
 
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
@@ -322,11 +357,11 @@ function graph_thold_detail() {
 				<td class="right">' . number_format_i18n($t_all, -1) . '</td></tr>';
 
 			$panel['detail'] .= '<tr class="even">
-				<td class="left">'  . sprintf($url_prefix, '1') . __('Breached', 'intropage') . '</a></td>
+				<td class="left">'  . sprintf($url_prefix, '1') . __('Breached', 'intropage') . '</a><span class="inpa_sq color_yellow"></span></td>
 				<td class="right">' . number_format_i18n($t_brea, -1) . '</td></tr>';
 
 			$panel['detail'] .= '<tr class="odd">
-				<td class="left">'  . sprintf($url_prefix, '3') . __('Triggered', 'intropage') . '</a></td>
+				<td class="left">'  . sprintf($url_prefix, '3') . __('Triggered', 'intropage') . '</a><span class="inpa_sq color_red"></span></td>
 				<td class="right">' . number_format_i18n($t_trig, -1) . '</td></tr>';
 
 			$panel['detail'] .= '<tr class="even">
@@ -339,11 +374,11 @@ function graph_thold_detail() {
 
 			$panel['detail'] .= '<tr class="even">
 				<td class="left">'  . __('Breached', 'intropage')     . '</td>
-				<td class="right">' . number_format_i18n($t_brea, -1) . '</td></tr>';
+				<td class="right"></span>' . number_format_i18n($t_brea, -1) . '<span class="inpa_sq color_yellow"></td></tr>';
 
 			$panel['detail'] .= '<tr class="odd">
 				<td class="left">'  . __('Triggered', 'intropage')    . '</td>
-				<td class="right">' . number_format_i18n($t_trig, -1) . '</td></tr>';
+				<td class="right">' . number_format_i18n($t_trig, -1) . '<span class="inpa_sq color_red"></span></td></tr>';
 
 			$panel['detail'] .= '<tr class="even">
 				<td class="left">'  . __('Disabled', 'intropage')     . '</td>

@@ -221,7 +221,7 @@ function info($panel, $user_id) {
 		$panel['data'] .= '<tr><td>' . __('Spine version: ', 'intropage') . $spine_version . '<br/></td></tr>';
 
 		if (!strpos($spine_version, CACTI_VERSION, 0)) {
-			$panel['data'] .= '<tr><td><span class="deviceDown">' . __('You are using incorrect spine version!', 'intropage') . '</span></td></tr>';
+			$panel['data'] .= '<tr><td>' . __('You are using incorrect spine version!', 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 			$panel['alarm'] = 'red';
 		}
 
@@ -246,7 +246,7 @@ function info($panel, $user_id) {
 function admin_alert($panel, $user_id) {
 	global $config;
 
-	$panel['data'] .= '<div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
+	$panel['data'] .= '<span class="inpa_sq color_red"></span><div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
 
 	save_panel_result($panel, $user_id);
 }
@@ -417,6 +417,7 @@ function extrem($panel, $user_id) {
 	global $config;
 	
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'grey';
 
@@ -433,13 +434,21 @@ function extrem($panel, $user_id) {
 			substring(value,instr(value,':')+1) AS xvalue
 			FROM plugin_intropage_trends
 			WHERE name='poller'
-			AND cur_timestamp > date_sub(now(),interval 1 day)
+			AND cur_timestamp > date_sub(now(),interval 1 day)			
 			ORDER BY xvalue desc, cur_timestamp
 			LIMIT $lines");
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-				$fin_data[$key]['poller'] = $row['date'] . ' ' . $row['xvalue'] . 's';
+	                        if (($row['xvalue']/$poller_interval) > 0.9) {
+        	                        $color = 'red';
+                	        } elseif (($row['xvalue']/$poller_interval) > 0.7) {
+                        	        $color = 'yellow';
+                        	} else {
+                        		$color = 'green';
+                        	}
+			
+				$fin_data[$key]['poller'] = $row['date'] . ' ' . $row['xvalue'] . 's <span class="inpa_sq color_' . $color . '"></span>';
 			}
 		}
 	}
@@ -458,7 +467,12 @@ function extrem($panel, $user_id) {
 
 	if (cacti_sizeof($data)) {
 		foreach ($data as $key => $row) {
-			$fin_data[$key]['down'] = $row['date'] . ' ' . $row['value'];
+
+			if ($row['value'] > 0) {
+				$fin_data[$key]['down'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+			} else {
+				$fin_data[$key]['down'] = $row['date'] . ' ' . $row['value'];			
+			}
 		}
 	}
 
@@ -477,14 +491,18 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-				$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'];
+				if ($row['value'] > 0) {			
+					$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+				} else {			
+					$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_green"></span>';
+				}
 			}
 		}
 	}
 
 	// poller output items
 	if ($console_access) {
-		$columns['pout'] = __('Poller', 'intropage');
+		$columns['pout'] = __('Poller out. itms', 'intropage');
 
 		$data = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
 			FROM plugin_intropage_trends
@@ -495,7 +513,11 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-				$fin_data[$key]['pout'] = $row['date'] . ' ' . $row['value'];
+				if ($row['value'] > 0) {
+					$fin_data[$key]['pout'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+				} else {
+					$fin_data[$key]['pout'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_green"></span>';
+				}
 			}
 		}
 	}
@@ -554,7 +576,8 @@ function extrem_detail() {
 	global $config, $console_access;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
-
+	$poller_interval = read_config_option('poller_interval');
+	
 	$panel = array(
 		'name'   => __('48 Hour Extreme Polling', 'intropage'),
 		'alarm'  => 'grey',
@@ -573,7 +596,7 @@ function extrem_detail() {
 			substring(value,instr(value,':')+1) AS xvalue
 			FROM plugin_intropage_trends
 			WHERE name='poller'
-			AND cur_timestamp > date_sub(now(),interval 2 day)
+			AND cur_timestamp > date_sub(now(), interval 2 day)
 			ORDER BY xvalue desc, cur_timestamp
 			LIMIT 25");
 
@@ -583,7 +606,15 @@ function extrem_detail() {
 
 			$i = 0;
 			foreach ($data as $row) {
-				$trows[$i][$j] = $row['date'] . ' ' . $row['xvalue'] . 's';
+	                        if (($row['xvalue']/$poller_interval) > 0.9) {
+        	                        $color = 'red';
+                	        } elseif (($row['xvalue']/$poller_interval) > 0.7) {
+                        	        $color = 'yellow';
+                        	} else {
+                        		$color = 'green';
+                        	}
+
+				$trows[$i][$j] = $row['date'] . ' ' . $row['xvalue'] . 's <span class="inpa_sq color_' . $color . '"></span>';
 				$i++;
 			}
 		}
@@ -606,19 +637,26 @@ function extrem_detail() {
 
 		$i = 0;
 		foreach ($data as $row) {
-			$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
+			if ($row['value'] > 0) {
+				$trows[$i][$j]  = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+			} else {
+				$trows[$i][$j]  = $row['date'] . ' ' . $row['value'];			
+			}
+
 			$i++;
 		}
 	}
 
 	if (api_plugin_is_enabled('thold')) {
-		$data = db_fetch_assoc("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
+
+		$data = db_fetch_assoc_prepared("SELECT date_format(cur_timestamp,'%d.%m. %H:%i') AS `date`, value
 			FROM plugin_intropage_trends
-			WHERE name='thold'
-			AND user_id = " . $_SESSION['sess_user_id'] . "
-			AND cur_timestamp > date_sub(now(),interval 2 day)
-			ORDER BY value DESC, cur_timestamp
-			LIMIT 25");
+			WHERE name='thold_trig'
+			AND user_id = ?
+			AND cur_timestamp > date_sub(now(), interval 2 day)
+			ORDER BY value desc,cur_timestamp
+			LIMIT 25",
+			array($_SESSION['sess_user_id']));
 
 		if (cacti_sizeof($data)) {
 			$j++;
@@ -627,7 +665,12 @@ function extrem_detail() {
 
 			$i = 0;
 			foreach ($data as $row) {
-				$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
+				if ($row['value'] > 0) {			
+					$trows[$i][$j] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+				} else {			
+					$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
+				}
+
 				$i++;
 			}
 		}
@@ -649,7 +692,12 @@ function extrem_detail() {
 
 			$i = 0;
 			foreach ($data as $row) {
-				$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
+				if ($row['value'] > 0) {
+					$trows[$i][$j] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+				} else {
+					$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
+				}
+
 				$i++;
 			}
 		}
