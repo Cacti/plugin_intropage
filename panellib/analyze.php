@@ -237,6 +237,11 @@ function analyse_log($panel, $user_id) {
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
+        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
+        if ($important_period == -1) {
+                $important_period = time();
+        }
+
 	$panel['data']  = '';
 	$panel['alarm'] = 'green';
 
@@ -307,15 +312,71 @@ function analyse_log($panel, $user_id) {
 		
 		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 3));
 
+	        $datechar = array(
+        	        GDC_HYPHEN => '-',
+                	GDC_SLASH  => '/',
+                	GDC_DOT    => '.'
+        	);
+        
+        	$date_fmt        = read_config_option('default_date_format');
+        	$dateCharSetting = read_config_option('default_datechar');
+
+        	if (!isset($datechar[$dateCharSetting])) {
+                	$dateCharSetting = GDC_SLASH;
+        	}
+
+        	$datecharacter = $datechar[$dateCharSetting];
+      
+        	switch ($date_fmt) {
+			case GD_MO_D_Y:
+				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_MN_D_Y:
+				$format = 'M' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_D_MO_Y:
+                        	$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_D_MN_Y:
+                        	$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_Y_MO_D:
+                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+			break;
+			case GD_Y_MN_D:
+                        	$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
+			break;
+			default:
+                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+			break;
+        	}
+
 		foreach ($log['lines'] as $line) {
-			$panel['data'] .= '<tr><td class="inpa_loglines" colspan="3" title="' . $line . '">';
 
-			if (strlen($line) > 3) {
-				$panel['data'] .= $line;
-			}
+			$color = 'grey';
 			
-			$panel['data'] .= '</td></tr>';
+			if (strlen($line) > 3) {
+				
+				$date = explode(' - ', $line);
+			
+				$d_p = date_parse_from_format($format, $date[0]);
+				$timestamp = mktime ($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
 
+				if ($timestamp > (time()-($important_period))) {		
+                                        if (preg_match('/( ERROR|FATAL)/', $line)) {
+                                                $color = 'red';
+                                        } elseif (preg_match('/( WARNING)/', $line)) {
+                                                $color = 'yellow';
+                                        } else {
+                                        	$color = 'green';
+                                        }
+				}
+
+				$panel['data'] .= '<tr><td class="inpa_loglines" colspan="3" title="' . $line . '"><span class="inpa_sq color_' . $color . '"></span>';
+
+				$panel['data'] .= $line;
+				$panel['data'] .= '</td></tr>';
+			}
 		}
 
 		$panel['data'] .= '</table>';
@@ -497,7 +558,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					$panel['alarm'] = 'yellow';
 				}
 
-				$panel['data'] .= __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
 			}
 		}
 	}
@@ -524,7 +585,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					$panel['alarm'] = 'yellow';
 				}
 
-				$panel['data'] .= __('Devices with the same description: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
 			}
 		}
 	}
@@ -569,7 +630,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 			$panel['alarm'] = 'yellow';
 		}
 
-		$panel['data'] .= __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<br/>';
 
 	}
 
@@ -596,7 +657,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
 			$panel['alarm'] = 'yellow';
 		}
-		$panel['data'] .= __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<br/>';
 
 
 		$total_errors += $sql_count;
@@ -647,7 +708,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<br/>';
 
 			$total_errors += $sql_count;
 		}
@@ -673,7 +734,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -699,7 +760,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Hosts without graphs: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts without graphs: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -724,7 +785,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Hosts without tree: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts without tree: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -748,7 +809,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -770,7 +831,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					$panel['alarm'] = 'yellow';
 				}
 
-				$panel['data'] .= __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '<br/>';
 			}
 		}
 	}
@@ -901,6 +962,11 @@ function ds_stats_trend () {
 function analyse_log_detail() {
 	global $log;
 
+        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
+        if ($important_period == -1) {
+                $important_period = time();
+        }
+
 	$panel = array(
 		'name'   => __('Analyze Cacti Log Details [ Warnings/Errors ]', 'intropage'),
 		'alarm'  => 'green',
@@ -966,14 +1032,76 @@ function analyse_log_detail() {
 			$panel['detail'] .= '<tr><td class="txt_med">' . $log_size_note . '<hr></td></tr>';
 		}
 
+	        $datechar = array(
+        	        GDC_HYPHEN => '-',
+                	GDC_SLASH  => '/',
+                	GDC_DOT    => '.'
+        	);
+        
+        	$date_fmt        = read_config_option('default_date_format');
+        	$dateCharSetting = read_config_option('default_datechar');
+
+        	if (!isset($datechar[$dateCharSetting])) {
+                	$dateCharSetting = GDC_SLASH;
+        	}
+
+        	$datecharacter = $datechar[$dateCharSetting];
+      
+        	switch ($date_fmt) {
+			case GD_MO_D_Y:
+				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_MN_D_Y:
+				$format = 'M' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_D_MO_Y:
+                        	$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_D_MN_Y:
+                        	$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
+			break;
+			case GD_Y_MO_D:
+                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+			break;
+			case GD_Y_MN_D:
+                        	$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
+			break;
+			default:
+                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+			break;
+        	}
+
+		$count = 0;
+		
 		foreach ($log['lines'] as $line) {
-			if (preg_match('/(WARN|ERROR|FATAL)/', $line, $matches)) {
-				if (strcmp($matches[1], 'WARN') === 0) {
-					$panel['detail'] .= '<tr><td>' . $line . '</td></tr>';
-				} elseif (strcmp($matches[1], 'ERROR') === 0 || strcmp($matches[1], 'FATAL') === 0) {
-					$panel['detail'] .= '<tr><td>' . $line .'</td></tr>';
-				}
+			
+			if ($count > 99) {
+				break;
 			}
+			
+			$color = 'grey';
+			
+			if (strlen($line) > 3) {
+				
+				$date = explode(' - ', $line);
+			
+				$d_p = date_parse_from_format($format, $date[0]);
+				$timestamp = mktime ($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
+
+				if ($timestamp > (time()-($important_period))) {		
+                                        if (preg_match('/( ERROR)/', $line)) {
+                                                $color = 'red';
+                                        } elseif (preg_match('/( WARNING)/', $line)) {
+                                                $color = 'yellow';
+                                        } else {
+                                        	$color = 'green';
+                                        }
+				}
+
+				$panel['detail'] .= '<tr><td class="inpa_loglines"><span class="inpa_sq color_' . $color . '"></span>' . $line . '</td></tr>';
+			}
+
+			$count++;
 		}
 
 		if ($error > 0) {
@@ -994,6 +1122,7 @@ function analyse_login_detail() {
         if ($important_period == -1) {
                 $important_period = time();
         }
+
         $lines = 20;
 
 	$panel = array(
