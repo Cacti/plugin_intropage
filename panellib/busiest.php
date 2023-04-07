@@ -196,7 +196,6 @@ function busiest_cpu($panel, $user_id) {
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
-
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 
 				'<tr class="tableHeader">' .
@@ -208,12 +207,12 @@ function busiest_cpu($panel, $user_id) {
 			$i = 0;
 
 			foreach ($result as $row) {
-
-				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
+				$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
 					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
 					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
 					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id=' . $row['ldid']);
+					WHERE data_template_data.local_data_id = ?',
+					array($row['ldid']));
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
@@ -222,7 +221,12 @@ function busiest_cpu($panel, $user_id) {
 				$panel['data'] .= "<td class='right intropage_1'>" . round($row['xpeak'], 2) . ' %</td></tr>';
 
 				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
-					cacti_log('INTROPAGE WARNING: Problem with DSSTAT data. Local data ID = ' . $row['ldid'] . '. Please investigate or clear DSSTAT data.');
+					$host_id = db_fetch_cell_prepared('SELECT host_id
+						FROM data_local
+						WHERE id = ?',
+						array($row['ldid']));
+
+					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}.  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
 				}
 
 				$i++;
@@ -421,7 +425,12 @@ function busiest_hdd($panel, $user_id) {
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
 
 				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
-					cacti_log('INTROPAGE WARNING: Problem with DSSTAT data. Local data ID = ' . $row['ldid'] . '. Please investigate or clear DSSTAT data.');
+					$host_id = db_fetch_cell_prepared('SELECT host_id
+						FROM data_local
+						WHERE id = ?',
+						array($row['ldid']));
+
+					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}.  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
 				}
 
 				$i++;
@@ -539,7 +548,7 @@ function busiest_traffic($panel, $user_id) {
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
@@ -655,18 +664,18 @@ function busiest_interface_error($panel, $user_id) {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t3.host_id IN (' . $allowed_devices . ') AND			
+			t3.host_id IN (' . $allowed_devices . ') AND
 			t2.average IS NOT NULL
 			ORDER BY t2.average DESC
 			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
 			t2.average IS NOT NULL';
@@ -1208,7 +1217,7 @@ function busiest_traffic_detail() {
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly  AS t2 ON t1.local_data_id = t2.local_data_id
 			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
@@ -1316,11 +1325,11 @@ function busiest_interface_error_detail() {
 
 		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 
+		$query = ' FROM data_template_data AS t1
 			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id			
+			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
 			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t3.host_id IN (' . $allowed_devices . ') AND			
+			t3.host_id IN (' . $allowed_devices . ') AND
 			t2.average IS NOT  NULL
 			ORDER BY t2.average DESC
 			LIMIT 30';

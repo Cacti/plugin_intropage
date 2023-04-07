@@ -1,6 +1,11 @@
 # Changelog
 
+
+--- develop ---
+
 * feature#259 - improve all panels
+
+* issue#272: Improve Intropage logging in two places to increase the ability to diagnose issues
 
 * New event highlighting system
 
