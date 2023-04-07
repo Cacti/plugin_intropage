@@ -226,7 +226,7 @@ function busiest_cpu($panel, $user_id) {
 						WHERE id = ?',
 						array($row['ldid']));
 
-					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}.  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
+					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}].  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
 				}
 
 				$i++;
@@ -430,7 +430,7 @@ function busiest_hdd($panel, $user_id) {
 						WHERE id = ?',
 						array($row['ldid']));
 
-					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}.  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
+					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}].  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
 				}
 
 				$i++;
