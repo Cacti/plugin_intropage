@@ -193,7 +193,7 @@ function busiest_cpu($panel, $user_id) {
 			ORDER BY dsh.average DESC
 			LIMIT ' . $lines;
 
-		$avg = db_fetch_cell ('SELECT AVG(average)' . $query);
+		$avg = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
@@ -207,11 +207,12 @@ function busiest_cpu($panel, $user_id) {
 			$i = 0;
 
 			foreach ($result as $row) {
-				$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id = ?',
+				$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+					FROM graph_templates_item AS gti
+					LEFT JOIN data_template_rrd AS dtr
+					ON gti.task_item_id = dtr.id
+					WHERE dtr.local_data_id = ?
+					LIMIT 1',
 					array($row['ldid']));
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
@@ -271,7 +272,7 @@ function busiest_load($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	$ds = db_fetch_row("SELECT id,name
+	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
@@ -282,14 +283,14 @@ function busiest_load($panel, $user_id) {
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
-			ON dl.id=dtd.local_data_id
+			ON dl.id = dtd.local_data_id
 			WHERE dl.host_id IN (' . $allowed_devices . ')
 			AND dsh.average IS NOT NULL
 			AND dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY dsh.average DESC
 			LIMIT ' . $lines;
 
-		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
+		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
@@ -303,11 +304,13 @@ function busiest_load($panel, $user_id) {
 			$i = 0;
 
 			foreach ($result as $row) {
-				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+					FROM graph_templates_item AS gti
+					LEFT JOIN data_template_rrd AS dtr
+					ON gti.task_item_id = dtr.id
+					WHERE dtr.local_data_id = ?
+					LIMIT 1',
+					array($row['ldid']));
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
@@ -363,31 +366,35 @@ function busiest_hdd($panel, $user_id) {
 
 	if ($allowed_devices && $ds) {
 
-		$columns = " name_cache AS name, t2.local_data_id AS ldid,
+		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.rrd_name=\'hdd_used\' AND
-			t1.data_template_id = ' . $ds['id'] . '
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.rrd_name = \'hdd_used\' AND
+			dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY xvalue DESC
 			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		// avg
-		$columns = " t1.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
+		$columns = " dtd.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.rrd_name=\'hdd_used\' AND
-			t1.data_template_id = ' . $ds['id'] . '
-			AND t2.rrd_name=\'hdd_used\'';
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.rrd_name = \'hdd_used\' AND
+			dtd.data_template_id = ' . $ds['id'] . '
+			AND dsh.rrd_name = \'hdd_used\'';
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
 		$avg = 0;
@@ -396,6 +403,7 @@ function busiest_hdd($panel, $user_id) {
 			foreach ($xavg as $row) {
 				$avg+=$row['xvalue'];
 			}
+
 			$avg = $avg/count($xavg);
 		}
 
@@ -410,12 +418,13 @@ function busiest_hdd($panel, $user_id) {
 			$i = 0;
 
 			foreach ($result as $row) {
-
-				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+					FROM graph_templates_item AS gti
+					LEFT JOIN data_template_rrd AS dtr
+					ON gti.task_item_id = dtr.id
+					WHERE dtr.local_data_id = ?
+					LIMIT 1',
+					array($row['ldid']));
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
@@ -470,7 +479,7 @@ function busiest_uptime($panel, $user_id) {
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT ' . $lines;
 
-		$avg = db_fetch_cell ('SELECT avg(snmp_sysUpTimeInstance)' . $query);
+		$avg    = db_fetch_cell('SELECT AVG(snmp_sysUpTimeInstance)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
@@ -543,27 +552,29 @@ function busiest_traffic($panel, $user_id) {
 
 	if ($allowed_devices && $ds) {
 
-		$columns = " name_cache AS name, t2.local_data_id AS ldid,
+		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t3.host_id IN (' . $allowed_devices . ') AND
-			rrd_name=\'traffic_out\'
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			AND dl.host_id IN (' . $allowed_devices . ')
+			AND rrd_name =\'traffic_out\'
 			ORDER BY xvalue DESC
 			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
-		$columns = " name_cache AS name, t1.local_data_id AS ldid,
+		$columns = " name_cache AS name, dtd.local_data_id AS ldid,
 			average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . '
+		$query = ' FROM data_template_data AS dtd LEFT JOIN data_source_stats_hourly AS dsh ON dtd.local_data_id = dsh.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . '
 			AND rrd_name=\'traffic_out\' ';
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
@@ -573,11 +584,11 @@ function busiest_traffic($panel, $user_id) {
 			foreach ($xavg as $row) {
 				$avg+=$row['xvalue'];
 			}
+
 			$avg = $avg/count($xavg);
 		}
 
 		if (cacti_sizeof($result)) {
-
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
 					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
@@ -588,12 +599,13 @@ function busiest_traffic($panel, $user_id) {
 			$i = 0;
 
 			foreach ($result as $row) {
-
-				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+					FROM graph_templates_item AS gti
+					LEFT JOIN data_template_rrd AS dtr
+					ON gti.task_item_id = dtr.id
+					WHERE dtr.local_data_id = ?
+					LIMIT 1',
+					array($row['ldid']));
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
@@ -655,34 +667,35 @@ function busiest_interface_error($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	$ds = db_fetch_row("SELECT id,name
+	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
 	if ($allowed_devices && $ds) {
+		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
-
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t3.host_id IN (' . $allowed_devices . ') AND
-			t2.average IS NOT NULL
-			ORDER BY t2.average DESC
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . ' AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.average IS NOT NULL
+			ORDER BY dsh.average DESC
 			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t2.average IS NOT NULL';
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			AND dsh.average IS NOT NULL';
 
-		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
+		$avg = db_fetch_cell('SELECT AVG(average)' . $query);
 
 		if (cacti_sizeof($result)) {
-
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
 					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
@@ -693,12 +706,13 @@ function busiest_interface_error($panel, $user_id) {
 			$i = 0;
 
 			foreach ($result as $row) {
-
-				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id=' . $row['ldid']);
+				$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+					FROM graph_templates_item AS gti
+					LEFT JOIN data_template_rrd AS dtr
+					ON gti.task_item_id = dtr.id
+					WHERE dtr.local_data_id = ?
+					LIMIT 1',
+					array($row['ldid']));
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
@@ -755,17 +769,20 @@ function busiest_interface_util($panel, $user_id) {
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
 	if ($allowed_devices && $ds) {
-
 		$perc = array();
 
-		$result = db_fetch_assoc("SELECT t2.local_data_id, rrd_name, value,
-			t3.host_id AS `host_id`, t3.snmp_query_id AS `snmp_query_id`, t3.snmp_index AS `snmp_index`
-			FROM data_source_stats_hourly_cache AS t2
-			LEFT JOIN data_local AS t3 on t3.id=t2.local_data_id
-			LEFT JOIN data_template_data AS t4 ON t4.local_data_id = t2.local_data_id
-			WHERE t3.host_id IN (" . $allowed_devices . ") AND
-			t4.data_template_id = " . $ds['id'] . " AND value > 0 AND
-			time > date_sub(now(), INTERVAL 5 MINUTE) ORDER BY value DESC");
+		$result = db_fetch_assoc("SELECT dsh.local_data_id, rrd_name, value,
+			dl.host_id AS `host_id`, dl.snmp_query_id AS `snmp_query_id`, dl.snmp_index AS `snmp_index`
+			FROM data_source_stats_hourly_cache AS dsh
+			LEFT JOIN data_local AS dl
+			ON dl.id = dsh.local_data_id
+			LEFT JOIN data_template_data AS dtd
+			ON dtd.local_data_id = dsh.local_data_id
+			WHERE dl.host_id IN (" . $allowed_devices . ")
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND value > 0
+			AND time > date_sub(now(), INTERVAL 5 MINUTE)
+			ORDER BY value DESC");
 
 		foreach ($result as $row) {
 
@@ -776,7 +793,6 @@ function busiest_interface_util($panel, $user_id) {
 		}
 
 		if (cacti_sizeof($perc)) {
-
 			arsort($perc, SORT_NUMERIC);
 
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
@@ -791,11 +807,15 @@ function busiest_interface_util($panel, $user_id) {
 			foreach ($perc as $key=>$value) {
 				list($real_key,$direction) = explode ('-', $key);
 
-				$gdata = db_fetch_row ('SELECT DISTINCT(local_graph_id) AS graph_id,name_cache FROM graph_templates_item
-					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id=' . $real_key);
+				$gdata = db_fetch_row ('SELECT DISTINCT(gti.local_graph_id) AS graph_id, name_cache
+					FROM graph_templates_item AS gti
+					LEFT JOIN data_template_rrd AS dtr
+					ON gti.task_item_id = dtr.id)
+					LEFT JOIN data_template_data AS dtr
+					ON dtr.local_data_id = dtd.local_data_id
+					WHERE dtd.local_data_id = ?
+					LIMIT 1',
+					array($real_key));
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $gdata['name_cache'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
@@ -851,28 +871,29 @@ function busiest_cpu_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name
+	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
 	if ($allowed_devices && $ds) {
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
+		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.average IS NOT  NULL AND
-			t1.data_template_id = ' . $ds['id'] . '
-			ORDER BY t2.average DESC
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.average IS NOT NULL
+			AND dtd.data_template_id = ' . $ds['id'] . '
+			ORDER BY dsh.average DESC
 			LIMIT 30';
 
-		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
+		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
-
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">'  . $ds['name'] . '</th>' .
@@ -883,13 +904,14 @@ function busiest_cpu_detail() {
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+					$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+						FROM graph_templates_item AS gti
+						LEFT JOIN data_template_rrd AS dtr
+						ON gti.task_item_id = dtr.id
+						WHERE dtr.local_data_id = ?
+						LIMIT 1',
+						array($row['ldid']));
 
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain bus_graph" bus_id="' . $graph_id . '" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
@@ -950,22 +972,23 @@ function busiest_load_detail() {
 
 	if ($allowed_devices && $ds) {
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
+		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.average IS NOT  NULL AND
-			t1.data_template_id = ' . $ds['id'] . '
-			ORDER BY t2.average DESC
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ')
+			AND dsh.average IS NOT NULL
+			AND dtd.data_template_id = ' . $ds['id'] . '
+			ORDER BY dsh.average DESC
 			LIMIT 30';
 
-		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
+		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
-
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">'  . $ds['name'] . '</th>' .
@@ -976,13 +999,14 @@ function busiest_load_detail() {
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+					$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+						FROM graph_templates_item AS gti
+						LEFT JOIN data_template_rrd AS dtr
+						ON gti.task_item_id = dtr.id
+						WHERE dtr.local_data_id = ?
+						LIMIT 1',
+						array($row['ldid']));
 
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
@@ -1044,31 +1068,33 @@ function busiest_hdd_detail() {
 
 	if ($allowed_devices && $ds) {
 
-		$columns = " name_cache AS name, t2.local_data_id AS ldid,
+		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.rrd_name=\'hdd_used\' AND
-			t1.data_template_id = ' . $ds['id'] . '
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ')
+			AND dsh.rrd_name = \'hdd_used\'
+			AND dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY xvalue DESC
 			LIMIT 30';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		// avg
-		$columns = " t1.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
+		$columns = " dtd.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.rrd_name=\'hdd_used\' AND
-			t1.data_template_id = ' . $ds['id'] . '
-			AND t2.rrd_name=\'hdd_used\'';
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl on dl.id=dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ')
+			AND dsh.rrd_name = \'hdd_used\'
+			AND dtd.data_template_id = ' . $ds['id'];
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
 		$avg = 0;
@@ -1077,11 +1103,11 @@ function busiest_hdd_detail() {
 			foreach ($xavg as $row) {
 				$avg+=$row['xvalue'];
 			}
+
 			$avg = $avg/count($xavg);
 		}
 
 		if (cacti_sizeof($result)) {
-
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">'  . $ds['name'] . '</th>' .
@@ -1092,13 +1118,14 @@ function busiest_hdd_detail() {
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+					$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+						FROM graph_templates_item AS gti
+						LEFT JOIN data_template_rrd AS dtr
+						ON gti.task_item_id = dtr.id
+						WHERE dtr.local_data_id = ?
+						LIMIT 1',
+						array($row['ldid']));
 
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a style="white-space: overflow" class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
@@ -1150,7 +1177,7 @@ function busiest_uptime_detail() {
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 30';
 
-		$avg = db_fetch_cell ('SELECT avg(snmp_sysUpTimeInstance)' . $query);
+		$avg = db_fetch_cell('SELECT AVG(snmp_sysUpTimeInstance)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
@@ -1206,33 +1233,37 @@ function busiest_traffic_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name
+	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
 	if ($allowed_devices && $ds) {
 
-		$columns = " name_cache AS name, t2.local_data_id AS ldid,
+		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly  AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t3.host_id IN (' . $allowed_devices . ') AND
-			rrd_name=\'traffic_out\'
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			AND dl.host_id IN (' . $allowed_devices . ')
+			AND rrd_name = \'traffic_out\'
 			ORDER BY xvalue DESC
 			LIMIT 30';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
-		$columns = " t1.local_data_id AS ldid, average/(SELECT average FROM data_source_stats_hourly
+		$columns = " dtd.local_data_id AS ldid, average/(SELECT average FROM data_source_stats_hourly
 			WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue ";
 
-		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . '
-			AND rrd_name=\'traffic_out\' ';
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			AND rrd_name = \'traffic_out\' ';
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
 		$avg = 0;
@@ -1241,11 +1272,11 @@ function busiest_traffic_detail() {
 			foreach ($xavg as $row) {
 				$avg+=$row['xvalue'];
 			}
+
 			$avg = $avg/count($xavg);
 		}
 
 		if (cacti_sizeof($result)) {
-
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">'  . $ds['name'] . '</th>' .
@@ -1256,13 +1287,14 @@ function busiest_traffic_detail() {
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+					$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+						FROM graph_templates_item AS gti
+						LEFT JOIN data_template_rrd AS dtr
+						ON gti.task_item_id = dtr.id
+						WHERE dtr.local_data_id = ?
+						LIMIT 1',
+						array($row['ldid']));
 
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
@@ -1316,33 +1348,35 @@ function busiest_interface_error_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	$ds = db_fetch_row("SELECT id,name
+	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
 	if ($allowed_devices && $ds) {
+		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
-
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t3.host_id IN (' . $allowed_devices . ') AND
-			t2.average IS NOT  NULL
-			ORDER BY t2.average DESC
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id=dtd.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			AND dl.host_id IN (' . $allowed_devices . ')
+			AND dsh.average IS NOT NULL
+			ORDER BY dsh.average DESC
 			LIMIT 30';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
-		$query = ' FROM data_template_data AS t1 LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			WHERE t1.data_template_id = ' . $ds['id'] . ' AND
-			t2.average IS NOT NULL';
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			AND dsh.average IS NOT NULL';
 
-		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
+		$avg = db_fetch_cell('SELECT AVG(average)' . $query);
 
 		if (cacti_sizeof($result)) {
-
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">'  . $ds['name'] . '</th>' .
@@ -1353,13 +1387,14 @@ function busiest_interface_error_detail() {
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				if ($console_access) {
-					$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
-						LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-						LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-						LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-						WHERE data_template_data.local_data_id=' . $row['ldid']);
+					$graph_id = db_fetch_cell_prepared('SELECT DISTINCT(gti.local_graph_id)
+						FROM graph_templates_item AS gti
+						LEFT JOIN data_template_rrd AS dtr
+						ON gti.task_item_id = dtr.id
+						WHERE dtr.local_data_id = ?
+						LIMIT 1',
+						array($row['ldid']));
 
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
@@ -1410,17 +1445,20 @@ function busiest_interface_util_detail() {
 
 		$perc = array();
 
-		$result = db_fetch_assoc("SELECT t2.local_data_id, rrd_name, value,
-			t3.host_id AS `host_id`, t3.snmp_query_id AS `snmp_query_id`, t3.snmp_index AS `snmp_index`
-			FROM data_source_stats_hourly_cache AS t2
-			LEFT JOIN data_local AS t3 on t3.id=t2.local_data_id
-			LEFT JOIN data_template_data AS t4 ON t4.local_data_id = t2.local_data_id
-			WHERE t3.host_id IN (" . $allowed_devices . ") AND
-			t4.data_template_id = " . $ds['id'] . " AND value > 0 AND
-			time > date_sub(now(), INTERVAL 5 MINUTE) ORDER BY value DESC");
+		$result = db_fetch_assoc("SELECT dsh.local_data_id, rrd_name, value,
+			dl.host_id AS `host_id`, dl.snmp_query_id AS `snmp_query_id`, dl.snmp_index AS `snmp_index`
+			FROM data_source_stats_hourly_cache AS dsh
+			LEFT JOIN data_local AS dl
+			ON dl.id = dsh.local_data_id
+			LEFT JOIN data_template_data AS dtd
+			ON dtd.local_data_id = dsh.local_data_id
+			WHERE dl.host_id IN (" . $allowed_devices . ")
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND value > 0
+			AND time > date_sub(now(), INTERVAL 5 MINUTE)
+			ORDER BY value DESC");
 
 		foreach ($result as $row) {
-
 			$speed = api_data_source_get_interface_speed ($row)/8;
 
 			$key = $row['local_data_id'] . '-' . $row['rrd_name'];
@@ -1428,7 +1466,6 @@ function busiest_interface_util_detail() {
 		}
 
 		if (cacti_sizeof($perc)) {
-
 			arsort($perc, SORT_NUMERIC);
 
 			$panel['detail'] = '<table class="cactiTable">' .
@@ -1440,14 +1477,18 @@ function busiest_interface_util_detail() {
 
 			$i = 0;
 
-			foreach ($perc as $key=>$value) {
+			foreach ($perc as $key => $value) {
 				list($real_key,$direction) = explode ('-', $key);
 
-				$gdata = db_fetch_row ('SELECT DISTINCT(local_graph_id) AS graph_id,name_cache FROM graph_templates_item
-					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
-					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)
-					LEFT JOIN data_template_data ON (data_local.id=data_template_data.local_data_id)
-					WHERE data_template_data.local_data_id=' . $real_key);
+				$gdata = db_fetch_row_prepared('SELECT DISTINCT(gti.local_graph_id) AS graph_id, name_cache
+					FROM graph_templates_item AS gti
+					LEFT JOIN data_template_rrd AS dtr
+					ON gti.task_item_id = dtr.id
+					LEFT JOIN data_template_data AS dtd
+					ON dtr.local_data_id = dtd.local_data_id
+					WHERE dtd.local_data_id = ?
+					LIMIT 1',
+					array($real_key));
 
 				$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
 				$panel['detail'] .= html_escape($gdata['name_cache']) . '</td>';
