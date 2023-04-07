@@ -558,7 +558,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					$panel['alarm'] = 'yellow';
 				}
 
-				$panel['data'] .= __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
 			}
 		}
 	}
@@ -585,7 +585,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					$panel['alarm'] = 'yellow';
 				}
 
-				$panel['data'] .= __('Devices with the same description: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
 			}
 		}
 	}
@@ -630,7 +630,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 			$panel['alarm'] = 'yellow';
 		}
 
-		$panel['data'] .= __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<br/>';
 
 	}
 
@@ -657,7 +657,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
 			$panel['alarm'] = 'yellow';
 		}
-		$panel['data'] .= __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<br/>';
 
 
 		$total_errors += $sql_count;
@@ -708,7 +708,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<br/>';
 
 			$total_errors += $sql_count;
 		}
@@ -734,7 +734,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -760,7 +760,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Hosts without graphs: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts without graphs: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -785,7 +785,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Hosts without tree: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts without tree: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -809,7 +809,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -831,7 +831,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					$panel['alarm'] = 'yellow';
 				}
 
-				$panel['data'] .= __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span><br/>';
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '<br/>';
 			}
 		}
 	}
