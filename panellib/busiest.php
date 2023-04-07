@@ -175,29 +175,29 @@ function busiest_cpu($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	$ds = db_fetch_row("SELECT id,name
+	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
-		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
+		WHERE hash = 'f6e7d21c19434666bbdac00ccef9932f'");
 
 	if ($allowed_devices && $ds) {
+		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
-
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.average IS NOT  NULL AND
-			t1.data_template_id = ' . $ds['id'] . '
-			ORDER BY t2.average DESC
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id = dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ')
+			AND dsh.average IS NOT NULL
+			AND dtd.data_template_id = ' . $ds['id'] . '
+			ORDER BY dsh.average DESC
 			LIMIT ' . $lines;
 
-		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
+		$avg = db_fetch_cell ('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
-
 				'<tr class="tableHeader">' .
 					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
@@ -276,23 +276,23 @@ function busiest_load($panel, $user_id) {
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
 	if ($allowed_devices && $ds) {
+		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$columns = " t1.local_data_id AS ldid, concat(t1.name_cache,' - ', t2.rrd_name) AS name, t2.average AS xvalue, t2.peak AS xpeak ";
-
-		$query = ' FROM data_template_data AS t1
-			LEFT JOIN data_source_stats_hourly AS t2 ON t1.local_data_id = t2.local_data_id
-			LEFT JOIN data_local AS t3 on t3.id=t1.local_data_id
-			WHERE t3.host_id IN (' . $allowed_devices . ') AND
-			t2.average IS NOT  NULL AND
-			t1.data_template_id = ' . $ds['id'] . '
-			ORDER BY t2.average DESC
+		$query = ' FROM data_template_data AS dtd
+			LEFT JOIN data_source_stats_hourly AS dsh
+			ON dtd.local_data_id = dsh.local_data_id
+			LEFT JOIN data_local AS dl
+			ON dl.id=dtd.local_data_id
+			WHERE dl.host_id IN (' . $allowed_devices . ')
+			AND dsh.average IS NOT NULL
+			AND dtd.data_template_id = ' . $ds['id'] . '
+			ORDER BY dsh.average DESC
 			LIMIT ' . $lines;
 
 		$avg = db_fetch_cell ('SELECT avg(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
-
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
 					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
@@ -303,7 +303,6 @@ function busiest_load($panel, $user_id) {
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				$graph_id = db_fetch_cell ('SELECT DISTINCT(local_graph_id) FROM graph_templates_item
 					LEFT JOIN data_template_rrd ON (graph_templates_item.task_item_id=data_template_rrd.id)
 					LEFT JOIN data_local ON (data_template_rrd.local_data_id=data_local.id)

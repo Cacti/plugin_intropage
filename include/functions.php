@@ -433,13 +433,13 @@ function intropage_actions() {
 
 		break;
 	case 'share':
-		db_execute_prepared ('UPDATE plugin_intropage_dashboard 
+		db_execute_prepared ('UPDATE plugin_intropage_dashboard
 			SET shared = 1
 			WHERE user_id = ? AND dashboard_id = ?',
 			array ($_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
 		break;
 	case 'unshare':
-		db_execute_prepared ('UPDATE plugin_intropage_dashboard 
+		db_execute_prepared ('UPDATE plugin_intropage_dashboard
 			SET shared = 0
 			WHERE user_id = ? AND dashboard_id = ?',
 			array ($_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
@@ -448,15 +448,15 @@ function intropage_actions() {
 	case 'useshared':
 
 		if (filter_var($value, FILTER_VALIDATE_INT) && filter_var($value_ext, FILTER_VALIDATE_INT)) {
-			$shared = db_fetch_cell_prepared('SELECT shared FROM plugin_intropage_dashboard 
+			$shared = db_fetch_cell_prepared('SELECT shared FROM plugin_intropage_dashboard
 				WHERE dashboard_id = ? AND user_id = ?',
 				array($value, $value_ext));
-				
+
 			if ($shared) {
 				$username = get_username($value_ext);
-				
-				$dashboard = db_fetch_row_prepared ('SELECT name, user_id 
-					FROM plugin_intropage_dashboard 
+
+				$dashboard = db_fetch_row_prepared ('SELECT name, user_id
+					FROM plugin_intropage_dashboard
 					WHERE dashboard_id = ? AND user_id = ?',
 					array ($value, $value_ext));
 
@@ -482,7 +482,7 @@ function intropage_actions() {
 						FROM plugin_intropage_panel_data
 						WHERE id = ?',
 						array ($_SESSION['sess_user_id'],$id_panel['panel_id']));
-					
+
 					$last = db_fetch_insert_id();
 
 					db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
@@ -1060,7 +1060,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 		$result['data'] = '<table class="cactiTable"><tr><td class="center"><img class="intrograph" src="' . $config['url_path'] .
 			'graph_image.php' .
 			'?local_graph_id=' . $fav_graph_id .
-			'&graph_height=' . $graph_height . 
+			'&graph_height=' . $graph_height .
 			'&graph_width=300' .
 			'&disable_cache=true' .
 			'&graph_start=' . $timespan['begin_now'] .
@@ -1093,23 +1093,24 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		// Start chart attributes
 		$chart = array(
 			'bindto' => "#line_$xid",
-			'size'   => array('height' => 100,'width' => 150),
-
+			'size' => array(
+				'height' => 100,
+				'width'  => 150
+			),
 			'point' => array (
 				'r' => 1.5
-				),
-			
-			'zoom' => array(
-				'enabled'	=> 'true',
-				'type'		=> 'drag'
 			),
-			'data'   => array(
-
-				'type' => "spline",
-				'x'       => 'x',
+			'zoom' => array(
+				'enabled' => 'true',
+				'type'    => 'drag'
+			),
+			'data' => array(
+				'type'   => 'line',
+				'x'      => 'x',
 				'Format' => '%Y-%m-%d %H:%M:%S'
 			)
 		);
+
 		$columns   = array();
 		$axes      = array();
 		$axis      = array();
@@ -1148,19 +1149,16 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$axis['x'] = array(
 			'type' => 'timeseries',
 			'tick' => array(
-				'format' => '%H:%M',
-				'culling' => array ('max' => 6),
-				
+				'format'  => '%H:%M',
+				'culling' => array('max' => 6),
 			)
 		);
 
 		if (isset($dispdata['line']['unit1'])) {
 			$axis['y'] = array(
 				'tick' => array(
-					'culling' => array ('max' => 8)
-				
+					'culling' => array('max' => 8)
 				),
-				
 				'label' => array(
 					'text' => $dispdata['line']['unit1']['title'],
 				),
@@ -1172,9 +1170,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 			$axis['y2'] = array(
 				'tick' => array(
 					'culling' => array ('max' => 8)
-				
 				),
-
 				'label' => array(
 					'text' => $dispdata['line']['unit2']['title'],
 				),
