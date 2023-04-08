@@ -127,7 +127,7 @@ function analyse_login($panel, $user_id) {
         if ($important_period == -1) {
                 $important_period = time();
         }
-        	
+
 	$flog = db_fetch_cell('SELECT COUNT(*)
 		FROM user_log
 		WHERE result = 0');
@@ -166,33 +166,33 @@ function analyse_login($panel, $user_id) {
 			if ($row['result'] == 0) {
 				$status = __('Failed', 'intropage');
 
-				if ($row['secs'] > (time()-($important_period))) {		
+				if ($row['secs'] > (time()-($important_period))) {
 					$color = 'red';
 				}
 
 			} elseif ($row['result'] == 1) {
 				$status = __('Success - Login', 'intropage');
 
-				if ($row['secs'] > (time()-($important_period))) {		
+				if ($row['secs'] > (time()-($important_period))) {
 					$color = 'green';
 				}
 
 			} else {
 				$status = __('Success - Token', 'intropage');
 
-				if ($row['secs'] > (time()-($important_period))) {		
+				if ($row['secs'] > (time()-($important_period))) {
 					$color = 'green';
 				}
 			}
-                        
+
 			if ($panel['alarm'] == 'grey' && $color == 'green') {
 				$panel['alarm'] = 'green';
 			}
- 
+
 			if ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
-          
+
 			if ($panel['alarm'] == 'yellow' && $color == 'red') {
 				$panel['alarm'] = 'red';
 			}
@@ -237,10 +237,16 @@ function analyse_log($panel, $user_id) {
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
-        if ($important_period == -1) {
-                $important_period = time();
-        }
+	if (isset($_SESSION['sess_user_id'])) {
+		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
+	} else {
+		$admin_user       = read_config_option('admin_user');
+		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $admin_user);
+	}
+
+	if ($important_period == -1) {
+		$important_period = time();
+	}
 
 	$panel['data']  = '';
 	$panel['alarm'] = 'green';
@@ -277,12 +283,12 @@ function analyse_log($panel, $user_id) {
 
 		$panel['data'] .= '<tr><td colspan="3">' . __('Analyze last %s log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '</td></tr>';
 
-		$panel['data'] .= '<tr><td class="bold">' . __('Errors: ', 'intropage') . $error . 
+		$panel['data'] .= '<tr><td class="bold">' . __('Errors: ', 'intropage') . $error .
 			'<a class="linkEditMain" href="clog.php?message_type=3&tail_lines=' . $log['nbr_lines'] . '">' .
 				'<i class="fa fa-external-link"></i>' .
 			'</a></td>';
 
-		$panel['data'] .= '<td class="bold">' . __('Warnings: ', 'intropage') . $warn . 
+		$panel['data'] .= '<td class="bold">' . __('Warnings: ', 'intropage') . $warn .
 			'<a class="linkEditMain" href="clog.php?message_type=2&tail_lines=' . $log['nbr_lines'] . '">' .
 				'<i class="fa fa-external-link"></i>' .
 			'</a></td>';
@@ -309,7 +315,7 @@ function analyse_log($panel, $user_id) {
 		$panel['data'] .= '<tr><td class="inpa_loglines" colspan=3><br/>';
 		$panel['data'] .= __('Last log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '<br/>';
 		$panel['data'] .= '</td></tr>';
-		
+
 		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 3));
 
 	        $datechar = array(
@@ -317,7 +323,7 @@ function analyse_log($panel, $user_id) {
                 	GDC_SLASH  => '/',
                 	GDC_DOT    => '.'
         	);
-        
+
         	$date_fmt        = read_config_option('default_date_format');
         	$dateCharSetting = read_config_option('default_datechar');
 
@@ -326,7 +332,7 @@ function analyse_log($panel, $user_id) {
         	}
 
         	$datecharacter = $datechar[$dateCharSetting];
-      
+
         	switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
@@ -354,15 +360,15 @@ function analyse_log($panel, $user_id) {
 		foreach ($log['lines'] as $line) {
 
 			$color = 'grey';
-			
+
 			if (strlen($line) > 3) {
-				
+
 				$date = explode(' - ', $line);
-			
+
 				$d_p = date_parse_from_format($format, $date[0]);
 				$timestamp = mktime ($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
 
-				if ($timestamp > (time()-($important_period))) {		
+				if ($timestamp > (time()-($important_period))) {
                                         if (preg_match('/( ERROR|FATAL)/', $line)) {
                                                 $color = 'red';
                                         } elseif (preg_match('/( WARNING)/', $line)) {
@@ -592,24 +598,24 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 	if ($allowed_devices != '') {
 
-		$data = db_fetch_assoc("SELECT 
-    		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step, 
-    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id 
-		FROM data_local AS dl 
-    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id 
-    		INNER JOIN data_template AS dt ON dt.id = dl.data_template_id 
-    		LEFT JOIN host AS h ON h.id = dl.host_id 
-		INNER JOIN ( 
-		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti 
-        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id 
-        	LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id 
-        	LEFT JOIN host AS h ON h.id = gl.host_id 
-		WHERE graph_type_id IN (4,5,6,7,8,20) AND 
-          	task_item_id IS NULL AND cdef_id NOT IN ( 
-              	SELECT c.id FROM cdef AS c 
-		INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id 
-		WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%')) 
-          	)) AS dtr ON dl.id = dtr.local_data_id 
+		$data = db_fetch_assoc("SELECT
+    		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
+    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
+		FROM data_local AS dl
+    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
+    		INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
+    		LEFT JOIN host AS h ON h.id = dl.host_id
+		INNER JOIN (
+		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti
+        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
+        	LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
+        	LEFT JOIN host AS h ON h.id = gl.host_id
+		WHERE graph_type_id IN (4,5,6,7,8,20) AND
+          	task_item_id IS NULL AND cdef_id NOT IN (
+              	SELECT c.id FROM cdef AS c
+		INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id
+		WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%'))
+          	)) AS dtr ON dl.id = dtr.local_data_id
 		WHERE dl.host_id IN (" . $allowed_devices . ") AND
 		((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
 		ORDER BY `name_cache` ASC");
@@ -962,10 +968,16 @@ function ds_stats_trend () {
 function analyse_log_detail() {
 	global $log;
 
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
-        if ($important_period == -1) {
-                $important_period = time();
-        }
+	if (isset($_SESSION['sess_user_id'])) {
+		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
+	} else {
+		$admin_user       = read_config_option('admin_user');
+		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $admin_user);
+	}
+
+	if ($important_period == -1) {
+		$important_period = time();
+	}
 
 	$panel = array(
 		'name'   => __('Analyze Cacti Log Details [ Warnings/Errors ]', 'intropage'),
@@ -1037,7 +1049,7 @@ function analyse_log_detail() {
                 	GDC_SLASH  => '/',
                 	GDC_DOT    => '.'
         	);
-        
+
         	$date_fmt        = read_config_option('default_date_format');
         	$dateCharSetting = read_config_option('default_datechar');
 
@@ -1046,7 +1058,7 @@ function analyse_log_detail() {
         	}
 
         	$datecharacter = $datechar[$dateCharSetting];
-      
+
         	switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
@@ -1072,23 +1084,23 @@ function analyse_log_detail() {
         	}
 
 		$count = 0;
-		
+
 		foreach ($log['lines'] as $line) {
-			
+
 			if ($count > 99) {
 				break;
 			}
-			
+
 			$color = 'grey';
-			
+
 			if (strlen($line) > 3) {
-				
+
 				$date = explode(' - ', $line);
-			
+
 				$d_p = date_parse_from_format($format, $date[0]);
 				$timestamp = mktime ($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
 
-				if ($timestamp > (time()-($important_period))) {		
+				if ($timestamp > (time()-($important_period))) {
                                         if (preg_match('/( ERROR)/', $line)) {
                                                 $color = 'red';
                                         } elseif (preg_match('/( WARNING)/', $line)) {
@@ -1118,12 +1130,18 @@ function analyse_log_detail() {
 function analyse_login_detail() {
 	global $config;
 
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
-        if ($important_period == -1) {
-                $important_period = time();
-        }
+	if (isset($_SESSION['sess_user_id'])) {
+		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
+	} else {
+		$admin_user       = read_config_option('admin_user');
+		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $admin_user);
+	}
 
-        $lines = 20;
+	if ($important_period == -1) {
+		$important_period = time();
+	}
+
+	$lines = 20;
 
 	$panel = array(
 		'name'   => __('Analyze Logins Detail', 'intropage'),
@@ -1131,7 +1149,7 @@ function analyse_login_detail() {
 		'detail' => '',
 	);
 
-	$data = db_fetch_assoc('SELECT user_log.username, user_auth.full_name, user_log.time, 
+	$data = db_fetch_assoc('SELECT user_log.username, user_auth.full_name, user_log.time,
 		user_log.result, user_log.ip, UNIX_TIMESTAMP(user_log.time) AS secs
 		FROM user_auth
 		INNER JOIN user_log
@@ -1150,26 +1168,26 @@ function analyse_login_detail() {
 
 		foreach ($data as $row) {
 
-			$color = 'grey';		
+			$color = 'grey';
 
 			if ($row['result'] == 0) {
 				$status = __('Failed', 'intropage');
 
-				if ($row['secs'] > (time()-($important_period))) {		
+				if ($row['secs'] > (time()-($important_period))) {
 					$color = 'red';
 				}
 
 			} elseif ($row['result'] == 1) {
 				$status = __('Success - Login', 'intropage');
 
-				if ($row['secs'] > (time()-($important_period))) {		
+				if ($row['secs'] > (time()-($important_period))) {
 					$color = 'green';
 				}
 
 			} else {
 				$status = __('Success - Token', 'intropage');
 
-				if ($row['secs'] > (time()-($important_period))) {		
+				if ($row['secs'] > (time()-($important_period))) {
 					$color = 'green';
 				}
 			}
@@ -1213,8 +1231,13 @@ function analyse_login_detail() {
 //------------------------------------ analyse_tree_host_graph  -----------------------------------------------------
 function analyse_tree_host_graph_detail() {
 	global $config, $console_access;
-	
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+
+	if (isset($_SESSION['sess_user_id'])) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	} else {
+		$admin_user      = read_config_option('admin_user');
+		$allowed_devices = intropage_get_allowed_devices($admin_user);
+	}
 
 	$panel = array(
 		'name'   => __('Analyze Tree, Graphs, Hosts', 'intropage'),
@@ -1297,28 +1320,28 @@ function analyse_tree_host_graph_detail() {
 		}
 	}
 
-	$data = db_fetch_assoc("SELECT 
-    		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step, 
-    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id 
-		FROM data_local AS dl 
-    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id 
-    		INNER JOIN data_template AS dt ON dt.id = dl.data_template_id 
-    		LEFT JOIN host AS h ON h.id = dl.host_id 
-		INNER JOIN ( 
-    		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti 
-        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id 
-        	LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id 
-        	LEFT JOIN host AS h ON h.id = gl.host_id 
-		WHERE graph_type_id IN (4,5,6,7,8,20) AND 
-          	task_item_id IS NULL AND cdef_id NOT IN ( 
-              	SELECT c.id FROM cdef AS c 
-		INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id 
-		WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%')) 
-		)) AS dtr ON dl.id = dtr.local_data_id 
+	$data = db_fetch_assoc("SELECT
+    		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
+    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
+		FROM data_local AS dl
+    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
+    		INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
+    		LEFT JOIN host AS h ON h.id = dl.host_id
+		INNER JOIN (
+    		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti
+        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
+        	LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
+        	LEFT JOIN host AS h ON h.id = gl.host_id
+		WHERE graph_type_id IN (4,5,6,7,8,20) AND
+          	task_item_id IS NULL AND cdef_id NOT IN (
+              	SELECT c.id FROM cdef AS c
+		INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id
+		WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%'))
+		)) AS dtr ON dl.id = dtr.local_data_id
 		WHERE dl.host_id IN (" . $allowed_devices . ") AND
 		((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
 		ORDER BY `name_cache` ASC");
-			
+
 	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
 
 	$color = read_config_option('intropage_alert_orphaned_ds');
