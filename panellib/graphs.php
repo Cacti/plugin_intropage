@@ -140,8 +140,14 @@ function graph_host_template($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
+	if (defined('CACTI_VERSION')) {
+		$cv = CACTI_VERSION;
+	} else {
+		$cv = get_cacti_version();
+	}
+
 	if ($allowed_devices !== false) {
-		if (cacti_version_compare(get_cacti_version(), '1.2.24', '>=')) {
+		if (cacti_version_compare($cv, '1.2.24', '>=')) {
 			$graph = array(
 				'treemap' => array(
 					'title' => __('Device Templates: ', 'intropage'),
@@ -168,7 +174,7 @@ function graph_host_template($panel, $user_id) {
 
 			}
 		} else {
-		
+
 			$graph = array(
 				'pie' => array(
 					'title' => __('Device Templates: ', 'intropage'),
@@ -210,11 +216,11 @@ function graph_host_template($panel, $user_id) {
 //--------------------------------------- graph host-----------------------------
 function graph_host($panel, $user_id, $timespan = 0) {
 	global $config;
- 
+
         $panel['alarm'] = 'green';
- 
+
 	$allowed_devices = intropage_get_allowed_devices($user_id);
- 
+
         if ($allowed_devices !== false) {
 		$graph = array (
                 	'line' => array(
@@ -229,7 +235,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 		);
 
 		$first = true;
-       
+
 		if ($timespan == 0) {
                 	if (isset($_SESSION['sess_user_id'])) {
 				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
@@ -255,7 +261,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			array($timespan));
 
                 if (cacti_sizeof($rows)) {
-                
+
                         $graph['line']['title1'] = __('Down', 'intropage');
                         $graph['line']['unit1']['title'] = 'Down';
 
@@ -272,7 +278,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
                         }
 
 			$first = true;
-                        
+
 		} else {
                         unset($graph['line']['label1']);
                         unset($graph['line']['data1']);
@@ -286,7 +292,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			array($timespan));
 
 		if (cacti_sizeof($rows)) {
-                               
+
 			$graph['line']['title2'] = __('Recovering', 'intropage');
 			$graph['line']['unit2']['title'] = 'Recovering';
 
@@ -336,7 +342,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
- 
+
 	save_panel_result($panel, $user_id);
 }
 
@@ -479,11 +485,11 @@ function graph_host_detail() {
 			$panel['detail'] .= '<td class="right">' . number_format_i18n($s['value'], -1) . '</td>';
 			$panel['detail'] .= '</tr>';
 		}
-		
+
 		if (($s['status'] == 1 || $s['status'] == 2) && $s['value'] > 0) {
 			$h = db_fetch_assoc("SELECT id, description, status_fail_date
 				FROM host
-				WHERE status = " . $s['status'] . 
+				WHERE status = " . $s['status'] .
 				" AND disabled = ''");
 
 			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
