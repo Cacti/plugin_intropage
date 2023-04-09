@@ -333,7 +333,7 @@ function analyse_log($panel, $user_id) {
 
 // -------------------------------------analyse db-------------------------------------------
 function analyse_db($panel, $user_id) {
-	global $config;
+	global $config, $database_default;
 
 	$damaged   = 0;
 	$memtables = 0;
@@ -346,6 +346,17 @@ function analyse_db($panel, $user_id) {
 		WHERE panel_id = ?
 		AND user_id = 0',
 		array($panel['panel_id']));
+
+	$size = db_fetch_cell_prepared('SELECT SUM(DATA_LENGTH+INDEX_LENGTH) 
+		FROM information_schema.TABLES WHERE TABLE_SCHEMA=?',
+		array($database_default));
+
+	if ($size > 1073741824) {
+		$panel['alarm'] = 'grey';
+		$panel['data']  = __('Skipping DB check. Database too large');
+		save_panel_result($panel, $user_id);
+		return '';
+	}
 
 	$db_check_level = read_config_option('intropage_analyse_db_level');
 
