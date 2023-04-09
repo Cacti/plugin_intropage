@@ -187,9 +187,11 @@ function busiest_cpu($panel, $user_id) {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ')
-			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = ' . $ds['id'] . '
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.average IS NOT NULL AND
+			dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY dsh.average DESC
 			LIMIT ' . $lines;
 
@@ -284,9 +286,11 @@ function busiest_load($panel, $user_id) {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ')
-			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = ' . $ds['id'] . '
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.average IS NOT NULL AND
+			dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY dsh.average DESC
 			LIMIT ' . $lines;
 
@@ -375,7 +379,9 @@ function busiest_hdd($panel, $user_id) {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ') AND
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dl.host_id IN (' . $allowed_devices . ') AND
 			dsh.rrd_name = \'hdd_used\' AND
 			dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY xvalue DESC
@@ -475,7 +481,8 @@ function busiest_uptime($panel, $user_id) {
 
 		$columns = " id, description, snmp_sysUpTimeInstance";
 		$query = ' FROM host
-			WHERE id IN (' . $allowed_devices . ')
+			WHERE id IN (' . $allowed_devices . ') AND
+			disabled != "on"
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT ' . $lines;
 
@@ -561,9 +568,11 @@ function busiest_traffic($panel, $user_id) {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . '
-			AND dl.host_id IN (' . $allowed_devices . ')
-			AND rrd_name =\'traffic_out\'
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dtd.data_template_id = ' . $ds['id'] . ' AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			rrd_name =\'traffic_out\'
 			ORDER BY xvalue DESC
 			LIMIT ' . $lines;
 
@@ -679,7 +688,9 @@ function busiest_interface_error($panel, $user_id) {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . ' AND
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dtd.data_template_id = ' . $ds['id'] . ' AND
 			dl.host_id IN (' . $allowed_devices . ') AND
 			dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
@@ -778,10 +789,12 @@ function busiest_interface_util($panel, $user_id) {
 			ON dl.id = dsh.local_data_id
 			LEFT JOIN data_template_data AS dtd
 			ON dtd.local_data_id = dsh.local_data_id
-			WHERE dl.host_id IN (" . $allowed_devices . ")
-			AND dtd.data_template_id = " . $ds['id'] . "
-			AND value > 0
-			AND time > date_sub(now(), INTERVAL 5 MINUTE)
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != 'on' AND
+			dl.host_id IN (" . $allowed_devices . ") AND
+			dtd.data_template_id = " . $ds['id'] . " AND
+			value > 0 AND
+			time > DATE_SUB(NOW(), INTERVAL 5 MINUTE)
 			ORDER BY value DESC");
 
 		foreach ($result as $row) {
@@ -807,11 +820,11 @@ function busiest_interface_util($panel, $user_id) {
 			foreach ($perc as $key=>$value) {
 				list($real_key,$direction) = explode ('-', $key);
 
-				$gdata = db_fetch_row ('SELECT DISTINCT(gti.local_graph_id) AS graph_id, name_cache
+				$gdata = db_fetch_row_prepared ('SELECT DISTINCT(gti.local_graph_id) AS graph_id, name_cache
 					FROM graph_templates_item AS gti
 					LEFT JOIN data_template_rrd AS dtr
-					ON gti.task_item_id = dtr.id)
-					LEFT JOIN data_template_data AS dtr
+					ON gti.task_item_id = dtr.id
+					LEFT JOIN data_template_data AS dtd
 					ON dtr.local_data_id = dtd.local_data_id
 					WHERE dtd.local_data_id = ?
 					LIMIT 1',
@@ -884,9 +897,11 @@ function busiest_cpu_detail() {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.average IS NOT NULL
-			AND dtd.data_template_id = ' . $ds['id'] . '
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.average IS NOT NULL AND
+			dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY dsh.average DESC
 			LIMIT 30';
 
@@ -979,9 +994,11 @@ function busiest_load_detail() {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ')
-			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = ' . $ds['id'] . '
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.average IS NOT NULL AND
+			dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY dsh.average DESC
 			LIMIT 30';
 
@@ -1077,9 +1094,11 @@ function busiest_hdd_detail() {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ')
-			AND dsh.rrd_name = \'hdd_used\'
-			AND dtd.data_template_id = ' . $ds['id'] . '
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.rrd_name = \'hdd_used\' AND
+			dtd.data_template_id = ' . $ds['id'] . '
 			ORDER BY xvalue DESC
 			LIMIT 30';
 
@@ -1173,7 +1192,8 @@ function busiest_uptime_detail() {
 		$columns = " id, description, snmp_sysUpTimeInstance";
 
 		$query = ' FROM host
-			WHERE id IN (' . $allowed_devices . ')
+			WHERE disabled != "on" AND 
+			id IN (' . $allowed_devices . ')
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 30';
 
@@ -1248,9 +1268,11 @@ function busiest_traffic_detail() {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . '
-			AND dl.host_id IN (' . $allowed_devices . ')
-			AND rrd_name = \'traffic_out\'
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dtd.data_template_id = ' . $ds['id'] . ' AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			rrd_name = \'traffic_out\'
 			ORDER BY xvalue DESC
 			LIMIT 30';
 
@@ -1360,9 +1382,11 @@ function busiest_interface_error_detail() {
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id=dtd.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . '
-			AND dl.host_id IN (' . $allowed_devices . ')
-			AND dsh.average IS NOT NULL
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != "on" AND
+			dtd.data_template_id = ' . $ds['id'] . ' AND
+			dl.host_id IN (' . $allowed_devices . ') AND
+			dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
 			LIMIT 30';
 
@@ -1452,10 +1476,12 @@ function busiest_interface_util_detail() {
 			ON dl.id = dsh.local_data_id
 			LEFT JOIN data_template_data AS dtd
 			ON dtd.local_data_id = dsh.local_data_id
-			WHERE dl.host_id IN (" . $allowed_devices . ")
-			AND dtd.data_template_id = " . $ds['id'] . "
-			AND value > 0
-			AND time > date_sub(now(), INTERVAL 5 MINUTE)
+			LEFT JOIN host as h on h.id = dl.host_id
+			WHERE h.disabled != 'on' AND
+			dl.host_id IN (" . $allowed_devices . ") AND
+			dtd.data_template_id = " . $ds['id'] . " AND
+			value > 0 AND
+			time > date_sub(now(), INTERVAL 5 MINUTE)
 			ORDER BY value DESC");
 
 		foreach ($result as $row) {
