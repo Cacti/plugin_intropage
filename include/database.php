@@ -40,6 +40,16 @@ function intropage_initialize_database() {
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
+	if (!isset($_SESSION['sess_user_id'])) {
+		$user_id = read_config_option('admin_user');
+
+		if (empty($user_id)) {
+			$user_id = db_fetch_cell('SELECT id FROM user_auth ORDER BY id ASC LIMIT 1');
+		}
+	} else {
+		$user_id = $_SESSION['sess_user_id'];
+	}
+
 	$data              = array();
 	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
 	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
@@ -114,7 +124,7 @@ function intropage_initialize_database() {
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
 				(panel_id, user_id, priority, alarm, refresh_interval, trend_interval)
 				VALUES(?, ?, ?, ?, ?, ?)',
-				array($panel_id, $_SESSION['sess_user_id'], $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']));
+				array($panel_id, $user_id, $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']));
 		}
 	}
 
@@ -137,7 +147,7 @@ function intropage_initialize_database() {
 	db_execute_prepared('INSERT INTO plugin_intropage_user_auth
 		(user_id, permissions)
 		VALUES (?, ?)',
-		array($_SESSION['sess_user_id'], json_encode($permissions)));
+		array($user_id, json_encode($permissions)));
 
 	$data              = array();
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
@@ -264,7 +274,7 @@ function intropage_upgrade_database() {
 
 		if (cacti_version_compare($oldv, '4.0.2', '<=')) {
 			db_execute("UPDATE plugin_intropage_panel_definition SET panel_id='ntp_dns', name='NTP/DNS check' WHERE panel_id='ntp'");
-			db_execute("UPDATE plugin_intropage_panel_data SET panel_id='ntp_dns' WHERE panel_id='ntp'");			
+			db_execute("UPDATE plugin_intropage_panel_data SET panel_id='ntp_dns' WHERE panel_id='ntp'");
 			db_execute("UPDATE plugin_intropage_user_auth set permissions=REPLACE(permissions,'ntp','ntp_dns')");
 			db_execute('ALTER TABLE plugin_intropage_dashboard ADD COLUMN shared INT(1) NOT NULL default "0"');
 			db_execute('DELETE FROM plugin_hooks WHERE FUNCTION = "intropage_config_form" AND name="intropage"');
@@ -276,7 +286,7 @@ function intropage_upgrade_database() {
 			db_execute("DELETE FROM plugin_intropage_panel_definition WHERE panel_id = 'trend'");
 			db_execute("DELETE FROM plugin_intropage_panel_data WHERE panel_id = 'trend'");
 		}
-		
+
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config
 			SET version = ?, author = ?, webpage = ?
