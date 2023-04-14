@@ -284,7 +284,7 @@ function webseer($panel, $user_id) {
                 	WHERE pwu.id = 1
 	                ORDER BY pwul.lastcheck DESC
 
-        	        LIMIT ' . $lines - 4); 
+        	        LIMIT ' . ($lines - 4));
                 
 		if (cacti_sizeof($logs) > 0) {
 			
