@@ -217,11 +217,19 @@ function busiest_cpu($panel, $user_id) {
 					LIMIT 1',
 					array($row['ldid']));
 
+				$color = 'green';
+
+				if ($row['xvalue'] > 70) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 50) {
+					$color = 'yellow';
+				}
+
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
-				$panel['data'] .= "<td class='right intropage_1'>" . round($row['xvalue'], 2) . ' %</td>';
-				$panel['data'] .= "<td class='right intropage_1'>" . round($row['xpeak'], 2) . ' %</td></tr>';
+				$panel['data'] .= '<td class="right intropage_1">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
+				$panel['data'] .= '<td class="right intropage_1">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
 				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
 					$host_id = db_fetch_cell_prepared('SELECT host_id
@@ -316,10 +324,18 @@ function busiest_load($panel, $user_id) {
 					LIMIT 1',
 					array($row['ldid']));
 
+				$color = 'green';
+
+				if ($row['xvalue'] > 1) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 0.5) {
+					$color = 'yellow';
+				}
+
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
-				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . '</td>';
+				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . '<span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . '</td></tr>';
 
 				$i++;
@@ -432,11 +448,19 @@ function busiest_hdd($panel, $user_id) {
 					LIMIT 1',
 					array($row['ldid']));
 
+				$color = 'green';
+
+				if ($row['xvalue'] > 90) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 70) {
+					$color = 'yellow';
+				}
+
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
-				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
-				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
+				$panel['data'] .= '<td class="right">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
+				$panel['data'] .= '<td class="right">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
 				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
 					$host_id = db_fetch_cell_prepared('SELECT host_id
@@ -725,11 +749,19 @@ function busiest_interface_error($panel, $user_id) {
 					LIMIT 1',
 					array($row['ldid']));
 
+				$color = 'green';
+
+				if ($row['xvalue'] > 20) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 0) {
+					$color = 'yellow';
+				}
+
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
-				$panel['data'] .= "<td class='right'>" . human_readable($row['xvalue']) . '</td>';
-				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak']) . '</td></tr>';
+				$panel['data'] .= '<td class="right">' . human_readable($row['xvalue']) . ' <span class="inpa_sq color_' . $color . '"></span></td>';
+				$panel['data'] .= '<td class="right">' . human_readable($row['xpeak']) . '</td></tr>';
 
 				$i++;
 			}
@@ -830,11 +862,19 @@ function busiest_interface_util($panel, $user_id) {
 					LIMIT 1',
 					array($real_key));
 
+				$color = 'green';
+
+				if ($value > 90) {
+					$color = 'red';
+				} elseif ($value > 60) {
+					$color = 'yellow';
+				}
+
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $gdata['name_cache'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
 				$panel['data'] .= html_escape($gdata['name_cache']) . '</td>';
 				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
-				$panel['data'] .= "<td class='right'>" . $value . '</td>';
+				$panel['data'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></span></td>';
 
 				$i++;
 
@@ -933,7 +973,15 @@ function busiest_cpu_detail() {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
+				$color = 'green';
+
+				if ($row['xvalue'] > 70) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 50) {
+					$color = 'yellow';
+				}
+
+				$panel['detail'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['detail'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
 
 				$i++;
@@ -1030,8 +1078,16 @@ function busiest_load_detail() {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . round($row['xvalue'], 2) . '</td>';
-				$panel['detail'] .= "<td class='right'>" . round($row['xpeak'], 2) . '</td></tr>';
+				$color = 'green';
+
+				if ($row['xvalue'] > 1) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 0.5) {
+					$color = 'yellow';
+				}
+
+				$panel['detail'] .= '<td class="right">' . round($row['xvalue'], 2) . ' <span class="inpa_sq color_' . $color . '"></td>';
+				$panel['detail'] .= '<td class="right">' . round($row['xpeak'], 2) . '</td></tr>';
 
 				$i++;
 			}
@@ -1151,8 +1207,16 @@ function busiest_hdd_detail() {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . round($row['xvalue'], 2) . ' %</td>';
-				$panel['detail'] .= "<td class='right'>" . round($row['xpeak'], 2) . ' %</td></tr>';
+				$color = 'green';
+
+				if ($row['xvalue'] > 90) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 70) {
+					$color = 'yellow';
+				}
+
+				$panel['detail'] .= '<td class="right">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></td>';
+				$panel['detail'] .= '<td class="right">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
 				$i++;
 			}
@@ -1425,8 +1489,16 @@ function busiest_interface_error_detail() {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . human_readable($row['xvalue']) . ' Err/Discard</td>';
-				$panel['detail'] .= "<td class='right'>" . human_readable($row['xpeak']) . ' Err/Discard</td></tr>';
+				$color = 'green';
+
+				if ($row['xvalue'] > 20) {
+					$color = 'red';
+				} elseif ($row['xvalue'] > 0) {
+					$color = 'yellow';
+				}
+
+				$panel['detail'] .= '<td class="right">' . human_readable($row['xvalue']) . ' Err/Discard <span class="inpa_sq color_' . $color . '"></td>';
+				$panel['detail'] .= '<td class="right">' . human_readable($row['xpeak']) . ' Err/Discard</td></tr>';
 
 				$i++;
 			}
@@ -1516,10 +1588,18 @@ function busiest_interface_util_detail() {
 					LIMIT 1',
 					array($real_key));
 
+				$color = 'green';
+
+				if ($value > 90) {
+					$color = 'red';
+				} elseif ($value > 60) {
+					$color = 'yellow';
+				}
+
 				$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
 				$panel['detail'] .= html_escape($gdata['name_cache']) . '</td>';
 				$panel['detail'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
-				$panel['detail'] .= "<td class='right'>" . $value . '</td>';
+				$panel['detail'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></td>';
 
 				$i++;
 
