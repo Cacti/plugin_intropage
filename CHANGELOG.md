@@ -9,6 +9,8 @@
 
 * issue#272: Improve Intropage logging in two places to increase the ability to diagnose issues
 
+* feature: Limit database check to size 1GB
+
 * New event highlighting system
 
 --- 4.0.3 ---
