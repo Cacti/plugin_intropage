@@ -302,7 +302,11 @@ function boost($panel, $user_id) {
 	if ($boost_status != '') {
 		$boost_status_array = explode(':', $boost_status);
 
-		$boost_status_date  = $boost_status_array[1];
+		if (isset($boost_status_array[1])) {
+			$boost_status_date = $boost_status_array[1];
+		} else {
+			$boost_status_date = null;
+		}
 
 		if (substr_count($boost_status_array[0], 'complete')) {
 			$boost_status_text = __('Idle', 'intropage');
