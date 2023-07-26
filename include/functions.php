@@ -602,7 +602,7 @@ function intropage_reload_panel() {
 
 		if ($panel['fav_graph_id'] > 0) {
 			$data = intropage_favourite_graph($panel['fav_graph_id'], $panel['fav_graph_timespan']);
-		} elseif (cacti_sizeof($spanel)) {
+		} elseif (isset($spanel) && cacti_sizeof($spanel) > 0) {
 			$function = $spanel['update_func'];
 			$user_id  = ($spanel['level'] == PANEL_SYSTEM ? 0 : $_SESSION['sess_user_id']);
 
