@@ -11,6 +11,8 @@
 
 * issue#274: Fix dashboard settings issues 
 
+* issue#282: Fix shared dashboard detection 
+
 * issue#284: Data gathering sometimes returns incorrect data   
 
 * feature: Limit database check to size 1GB

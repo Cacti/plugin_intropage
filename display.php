@@ -401,19 +401,23 @@ function display_information() {
 	print '<option value="" disabled="disabled">─────────────────────────</option>';
 
 	$actual = db_fetch_row_prepared('SELECT shared,
-		(SELECT COUNT(panel_id) FROM plugin_intropage_panel_dashboard WHERE dashboard_id = t2.dashboard_id) as panels
+		(SELECT COUNT(panel_id) FROM plugin_intropage_panel_dashboard WHERE dashboard_id = t2.dashboard_id AND user_id = ?) as panels
 		FROM  plugin_intropage_dashboard AS t2
 		WHERE user_id = ? AND dashboard_id = ?',
-		array ($_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
+		array ($_SESSION['sess_user_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
 
-	if ($actual['shared']) {
-		print "<option value='unshare'>" . __('Cancel sharing', 'intropage') . '</option>';	
-	} else {
-		if ($actual['panels'] > 0) {
-			print "<option value='share'>" . __('Share this dashboard', 'intropage') . '</option>';	
+	if (!empty($actual)) {
+		if ($actual['shared']) {
+			print "<option value='unshare'>" . __('Cancel sharing', 'intropage') . '</option>';
 		} else {
-			print "<option value=''>" . __('Share empty dashboard not allowed', 'intropage') . '</option>';	
+			if ($actual['panels'] > 0) {
+				print "<option value='share'>" . __('Share this dashboard', 'intropage') . '</option>';	
+			} else {
+				print "<option value=''>" . __('Share empty dashboard not allowed', 'intropage') . '</option>';	
+			}
 		}
+	} else {
+		cacti_log('INTROPAGE WARNING: Empty result of SQL query shared dashboard, please investigate', false, 'INTROPAGE');
 	}
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';
