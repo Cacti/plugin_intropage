@@ -1620,8 +1620,7 @@ function intropage_configure_panel() {
 			WHERE pda.user_id = 0
 			AND pd.level = 0
 			AND pda.fav_graph_id IS NULL
-			ORDER BY level, name',
-			array($_SESSION['sess_user_id']));
+			ORDER BY level, name');
 
 		if (cacti_sizeof($panels))	{
 			html_start_box(__('System Panel Update Frequencies (All Authorized Users)', 'intropage'), '100%', '', '3', 'center', '');
@@ -1666,7 +1665,7 @@ function intropage_configure_panel() {
 			FROM plugin_intropage_panel_data AS pda
 			INNER JOIN plugin_intropage_panel_definition AS pd
 			ON pd.panel_id = pda.panel_id
-			WHERE pda.user_id = 0
+			WHERE pda.user_id = ?
 			AND pda.fav_graph_id IS NULL
 			AND pd.trends_func != ""
 			ORDER BY level, name',
