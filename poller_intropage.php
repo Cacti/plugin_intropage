@@ -219,7 +219,13 @@ function intropage_gather_stats() {
 			$function = $panel['update_func'];
 
 			if (function_exists($function)) {
-				$details += $function($qpanel, $upanel['user_id']);
+				$data= $function($qpanel, $upanel['user_id']);
+
+				if (is_string($data)) {
+					$details += $data;
+				} else {
+					cacti_log(sprintf('INTROPAGE WARNING: Problem with data gathering, function %s, returned %d', $function, $data), false, 'INTROPAGE');
+				}
 
 				if ($logging >= 5) {
 					cacti_log(sprintf('DEBUG: gathering data function:%s, duration:%4.3f', $function,  microtime(true) - $start), false, 'INTROPAGE');
