@@ -224,7 +224,7 @@ function intropage_gather_stats() {
 				if (is_string($data)) {
 					$details += $data;
 				} else {
-					cacti_log(sprintf('INTROPAGE WARNING: Problem with data gathering, function %s, returned %i', $function, $data), false, 'INTROPAGE');
+					cacti_log(sprintf('INTROPAGE WARNING: Problem with data gathering, function %s, returned %d', $function, $data), false, 'INTROPAGE');
 				}
 
 				if ($logging >= 5) {
