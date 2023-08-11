@@ -179,7 +179,7 @@ function busiest_cpu($panel, $user_id) {
 		FROM data_template
 		WHERE hash = 'f6e7d21c19434666bbdac00ccef9932f'");
 
-	if ($allowed_devices && $ds) {
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS dtd
@@ -286,7 +286,7 @@ function busiest_load($panel, $user_id) {
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-	if ($allowed_devices && $ds) {
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS dtd
@@ -384,8 +384,7 @@ function busiest_hdd($panel, $user_id) {
 		FROM data_template
 		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-	if ($allowed_devices && $ds) {
-
+	if ($allowed_devices != '' && $ds) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
@@ -501,8 +500,7 @@ function busiest_uptime($panel, $user_id) {
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
-	if ($allowed_devices) {
-
+	if ($allowed_devices != '') {
 		$columns = " id, description, snmp_sysUpTimeInstance";
 		$query = ' FROM host
 			WHERE id IN (' . $allowed_devices . ') AND
@@ -581,8 +579,7 @@ function busiest_traffic($panel, $user_id) {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices && $ds) {
-
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
@@ -704,7 +701,7 @@ function busiest_interface_error($panel, $user_id) {
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-	if ($allowed_devices && $ds) {
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS dtd
@@ -811,7 +808,7 @@ function busiest_interface_util($panel, $user_id) {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices && $ds) {
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$perc = array();
 
 		$result = db_fetch_assoc("SELECT dsh.local_data_id, rrd_name, value,
@@ -928,8 +925,7 @@ function busiest_cpu_detail() {
 		FROM data_template
 		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
-	if ($allowed_devices && $ds) {
-
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS dtd
@@ -1033,8 +1029,7 @@ function busiest_load_detail() {
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-	if ($allowed_devices && $ds) {
-
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS dtd
@@ -1139,8 +1134,7 @@ function busiest_hdd_detail() {
 		FROM data_template
 		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-	if ($allowed_devices && $ds) {
-
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
@@ -1251,12 +1245,11 @@ function busiest_uptime_detail() {
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-	if ($allowed_devices) {
-
+	if ($allowed_devices != '') {
 		$columns = " id, description, snmp_sysUpTimeInstance";
 
 		$query = ' FROM host
-			WHERE disabled != "on" AND 
+			WHERE disabled != "on" AND
 			id IN (' . $allowed_devices . ')
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 30';
@@ -1265,7 +1258,6 @@ function busiest_uptime_detail() {
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
-
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">'  . __('Host', 'intropage') . '</th>' .
@@ -1275,7 +1267,6 @@ function busiest_uptime_detail() {
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				if ($console_access) {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
 				} else {
@@ -1321,8 +1312,7 @@ function busiest_traffic_detail() {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices && $ds) {
-
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
@@ -1438,7 +1428,7 @@ function busiest_interface_error_detail() {
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-	if ($allowed_devices && $ds) {
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		$query = ' FROM data_template_data AS dtd
@@ -1537,8 +1527,7 @@ function busiest_interface_util_detail() {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices && $ds) {
-
+	if ($allowed_devices != '' && cacti_sizeof($ds)) {
 		$perc = array();
 
 		$result = db_fetch_assoc("SELECT dsh.local_data_id, rrd_name, value,
