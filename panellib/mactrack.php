@@ -150,7 +150,7 @@ function mactrack_sites($panel, $user_id) {
 			ORDER BY total_devices DESC
 			LIMIT ' . $lines);
 
-		if (sizeof($data) > 0) {
+		if (cacti_sizeof($data)) {
 			foreach ($data as $site) {
 				$row = '<tr>' .
 					'<td class="left">'  . html_escape($site['site_name']) . '</td>' .
@@ -201,7 +201,7 @@ function mactrack_sites_detail() {
 		FROM mac_track_sites
 		ORDER BY total_devices DESC');
 
-	if (sizeof($data) > 0) {
+	if (cacti_sizeof($data)) {
 		foreach ($data as $site) {
 			$row = '<tr>' .
 				'<td class="left">'  . html_escape($site['site_name']) . '</td>' .
