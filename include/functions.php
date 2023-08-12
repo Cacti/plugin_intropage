@@ -87,10 +87,6 @@ function process_page_request_variables() {
 				intropage_detail_panel();
 
 				break;
-			case 'graph':
-				intropage_display_graph();
-
-				break;
 		}
 
 		exit;
@@ -1746,10 +1742,4 @@ function human_readable ($bytes, $decimal = true, $precision = 2) {
 	}
 
 	return round(empty($d)?0:($bytes / pow($factor, $i)), $precision).' '.$size;
-}
-
-function intropage_display_graph () {
-	// tady jeste bude timespan, asi
-	$x = intropage_favourite_graph (2064, 1);
-	print $x['data'];
 }
