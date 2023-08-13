@@ -55,6 +55,10 @@ function register_syslog() {
 }
 
 function plugin_syslog_trend() {
+	global $config;
+
+	include_once($config['base_path'] . '/plugins/syslog/database.php');
+
 	if (api_plugin_is_enabled('syslog')) {
 		// Grab row counts from the information schema, it's faster
 		$i_rows = syslog_db_fetch_cell("SELECT TABLE_ROWS

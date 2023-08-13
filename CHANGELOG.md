@@ -15,6 +15,8 @@
 
 * issue#284: Data gathering sometimes returns incorrect data   
 
+* issue: Intropage disables itself if syslog is not ordered first in the load order
+
 * feature: Limit database check to size 1GB
 
 * New event highlighting system
