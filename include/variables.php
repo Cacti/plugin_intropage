@@ -260,6 +260,13 @@ $intropage_settings = array(
 		'array'         => $status_colors,
 		'default'       => 'red',
 	),
+	'intropage_bulk_walk_size' => array(
+		'friendly_name' => __('Alarm when device bulk_walk_size is not optimized', 'intropage'),
+		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
+		'method'        => 'drop_array',
+		'array'         => $status_colors,
+		'default'       => 'red',
+	),
 	'intropage_alert_same_ip' => array(
 		'friendly_name' => __('Alarm Devices with the same IP/port', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
