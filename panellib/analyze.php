@@ -581,6 +581,30 @@ function analyse_tree_host_graph($panel, $user_id) {
 	}
 
 	if ($allowed_devices != '') {
+		$count = db_fetch_cell("SELECT COUNT(*)
+			FROM host
+			WHERE id IN (" . $allowed_devices . ")
+			AND disabled != 'on'
+			AND bulk_walk_size < 1");
+
+		$color = read_config_option('intropage_bulk_walk_size');
+
+		if (cacti_sizeof($data)) {
+			$total_errors += $count;
+
+			if ($data > 0) {
+				if ($color == 'red') {
+					$panel['alarm'] = 'red';
+				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+					$panel['alarm'] = 'yellow';
+				}
+
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage') . '<br/>';
+			}
+		}
+	}
+
+	if ($allowed_devices != '') {
 		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
 			FROM host
 			WHERE id IN (" . $allowed_devices . ")
@@ -1291,6 +1315,37 @@ function analyse_tree_host_graph_detail() {
 						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row2['description']), html_escape($row2['hostname']), $row2['id']);
 					}
 				}
+			}
+		}
+	}
+
+	if ($allowed_devices != '') {
+		$data = db_fetch_assoc("SELECT id, description, bulk_walk_size
+			FROM host
+			WHERE id IN (" . $allowed_devices . ")
+			AND disabled != 'on'
+			AND bulk_walk_size < 1");
+
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+
+		$color = read_config_option('intropage_bulk_walk_size');
+
+		$panel['detail'] .= '<h4>' . __('Not optimized Bulk Walk Size devices - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+
+		if (cacti_sizeof($data)) {
+			$total_errors += $sql_count;
+
+			if (count($data) > 0) {
+				if ($color == 'red') {
+					$panel['alarm'] = 'red';
+				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+					$panel['alarm'] = 'yellow';
+				}
+			}
+
+			foreach ($data as $row) {
+				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d, Bulk walk size: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id'], $row['bulk_walk_size']);
 			}
 		}
 	}

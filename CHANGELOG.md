@@ -19,6 +19,8 @@
 
 * feature: Limit database check to size 1GB
 
+* feature: add check for Device Bulk walk size
+
 * New event highlighting system
 
 --- 4.0.3 ---
