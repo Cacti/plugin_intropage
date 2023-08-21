@@ -417,7 +417,7 @@ function display_information() {
 			}
 		}
 	} else {
-		cacti_log('INTROPAGE WARNING: Empty result of SQL query shared dashboard, please investigate', false, 'INTROPAGE');
+		cacti_log('WARNING: Empty result of SQL query shared dashboard, please investigate', false, 'INTROPAGE');
 	}
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';

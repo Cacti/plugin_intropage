@@ -219,12 +219,12 @@ function intropage_gather_stats() {
 			$function = $panel['update_func'];
 
 			if (function_exists($function)) {
-				$data= $function($qpanel, $upanel['user_id']);
+				$data = $function($qpanel, $upanel['user_id']);
 
 				if (is_string($data)) {
-					$details += $data;
-				} else {
-					cacti_log(sprintf('INTROPAGE WARNING: Problem with data gathering, function %s, returned %d', $function, $data), false, 'INTROPAGE');
+					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (string) %s', $function, $data), false, 'INTROPAGE');
+				} elseif (is_int($data) && data != 0) {
+					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (int) %d', $function, $data), false, 'INTROPAGE');
 				}
 
 				if ($logging >= 5) {
