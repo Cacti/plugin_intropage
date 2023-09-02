@@ -414,7 +414,7 @@ function analyse_db($panel, $user_id) {
 		AND user_id = 0',
 		array($panel['panel_id']));
 
-	$size = db_fetch_cell_prepared('SELECT SUM(DATA_LENGTH+INDEX_LENGTH) 
+	$size = db_fetch_cell_prepared('SELECT SUM(DATA_LENGTH+INDEX_LENGTH)
 		FROM information_schema.TABLES WHERE TABLE_SCHEMA=?',
 		array($database_default));
 
@@ -506,7 +506,7 @@ function analyse_db($panel, $user_id) {
 	$panel['data'] .=
 		'<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage')   . '</td></tr>' .
 		'<tr><td>' . __('Memory tables: %s', $memtables, 'intropage')  . '</td></tr>' .
-		'<tr><td>' . __('All tables: %s', count($tables), 'intropage') . '</td></tr>';
+		'<tr><td>' . __('All tables: %s', cacti_count($tables), 'intropage') . '</td></tr>';
 
 	if ($aerrors > 0) {
 		$panel['data'] .= '<tr><td><br/><br/>' . __('Aborted clients/connects - Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', 'intropage') . '</td></tr>';
@@ -550,6 +550,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 	$console_access = get_console_access($user_id);
 
 	$total_errors = 0;
+	$data         = array();
 
 	$allowed_devices = intropage_get_allowed_devices($user_id);
 
@@ -561,22 +562,20 @@ function analyse_tree_host_graph($panel, $user_id) {
 			GROUP BY hostname,snmp_port
 			HAVING NoDups > 1");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_alert_same_ip');
 
 		if (cacti_sizeof($data)) {
 			$total_errors += $sql_count;
 
-			if (count($data) > 0) {
-				if ($color == 'red') {
-					$panel['alarm'] = 'red';
-				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-					$panel['alarm'] = 'yellow';
-				}
-
-				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
 			}
+
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -585,7 +584,6 @@ function analyse_tree_host_graph($panel, $user_id) {
 			FROM host
 			WHERE id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
-			AND snmp_version != 0
 			AND bulk_walk_size < 1");
 
 		$color = read_config_option('intropage_bulk_walk_size');
@@ -593,15 +591,13 @@ function analyse_tree_host_graph($panel, $user_id) {
 		if (cacti_sizeof($data)) {
 			$total_errors += $count;
 
-			if ($data > 0) {
-				if ($color == 'red') {
-					$panel['alarm'] = 'red';
-				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-					$panel['alarm'] = 'yellow';
-				}
-
-				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage') . '<br/>';
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
 			}
+
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage') . '<br/>';
 		}
 	}
 
@@ -613,27 +609,24 @@ function analyse_tree_host_graph($panel, $user_id) {
 			GROUP BY description
 			HAVING NoDups > 1");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		if (cacti_sizeof($data)) {
 			$total_errors += $sql_count;
 
 			$color = read_config_option('intropage_alert_same_description');
 
-			if (count($data) > 0) {
-				if ($color == 'red') {
-					$panel['alarm'] = 'red';
-				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-					$panel['alarm'] = 'yellow';
-				}
-
-				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
 			}
+
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
 	if ($allowed_devices != '') {
-
 		$data = db_fetch_assoc("SELECT
     		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
     		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
@@ -659,7 +652,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 		$data = array();
 	}
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	if (cacti_sizeof($data)) {
 		$total_errors += $sql_count;
@@ -668,7 +661,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 
@@ -686,21 +679,21 @@ function analyse_tree_host_graph($panel, $user_id) {
 			WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)
 			AND dl.host_id in (' . $allowed_devices . ')');
 	} else {
-		$datas = array();
+		$data = array();
 	}
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	if (cacti_sizeof($data)) {
 		$color = read_config_option('intropage_alert_bad_indexes');
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
-		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<br/>';
 
+		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<br/>';
 
 		$total_errors += $sql_count;
 	}
@@ -738,15 +731,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 			$data = array();
 		}
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		if (cacti_sizeof($data)) {
-
 			$color = read_config_option('intropage_alert_thold_logonly');
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
@@ -765,14 +757,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 			GROUP BY description
 			HAVING `count` > 1');
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		if (cacti_sizeof($data)) {
 			$color = read_config_option('intropage_alert_more_trees');
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
@@ -791,14 +783,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 			)
 			AND snmp_version != 0");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		if (cacti_sizeof($data)) {
 			$color = read_config_option('intropage_alert_without_graph');
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
@@ -816,14 +808,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 				FROM graph_tree_items
 			)");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		if (cacti_sizeof($data)) {
 			$color = read_config_option('intropage_alert_without_tree');
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
@@ -840,14 +832,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 			AND snmp_version IN (1,2)
 			ORDER BY description");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		if (cacti_sizeof($data)) {
 			$color = read_config_option('intropage_alert_default_community');
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
@@ -862,14 +854,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 				WHERE id IN (" . $allowed_devices . ")
 				AND monitor != 'on'");
 
-			$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+			$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 			if (cacti_sizeof($data)) {
 				$color = read_config_option('intropage_alert_without_monitoring');
 
 				if ($color == 'red') {
 					$panel['alarm'] = 'red';
-				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+				} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 					$panel['alarm'] = 'yellow';
 				}
 
@@ -984,14 +976,14 @@ function analyse_ds_stats($panel, $user_id, $timespan = 0) {
 
 function ds_stats_trend () {
 
-	$count = db_fetch_cell("SELECT count(*) FROM data_source_stats_hourly_last");
+	$count = db_fetch_cell("SELECT COUNT(*) FROM data_source_stats_hourly_last");
 
 	db_execute_prepared('REPLACE INTO plugin_intropage_trends
 		(name, value, user_id)
 		VALUES (?, ?, 0)',
 		array('dsstats_all', $count));
 
-	$count = db_fetch_cell("SELECT count(*) FROM data_source_stats_hourly_last WHERE value IS NULL");
+	$count = db_fetch_cell("SELECT COUNT(*) FROM data_source_stats_hourly_last WHERE value IS NULL");
 
 	db_execute_prepared('REPLACE INTO plugin_intropage_trends
 		(name, value, user_id)
@@ -1203,7 +1195,6 @@ function analyse_login_detail() {
 			'</tr>';
 
 		foreach ($data as $row) {
-
 			$color = 'grey';
 
 			if ($row['result'] == 0) {
@@ -1289,7 +1280,7 @@ function analyse_tree_host_graph_detail() {
 		GROUP BY hostname,snmp_port
 		HAVING NoDups > 1");
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_same_ip');
 
@@ -1298,23 +1289,20 @@ function analyse_tree_host_graph_detail() {
 	if (cacti_sizeof($data)) {
 		$total_errors += $sql_count;
 
-		if (count($data) > 0) {
+		if ($color == 'red')    {
+			$panel['alarm'] = 'red';
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+			$panel['alarm'] = 'yellow';
+		}
 
-			if ($color == 'red')    {
-				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-				$panel['alarm'] = 'yellow';
-			}
+		foreach ($data as $row) {
+			$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
+				FROM host
+				WHERE hostname = " . db_qstr($row['hostname']) . " AND snmp_port=" . $row['snmp_port']);
 
-			foreach ($data as $row) {
-				$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
-					FROM host
-					WHERE hostname = " . db_qstr($row['hostname']) . " AND snmp_port=" . $row['snmp_port']);
-
-				if (cacti_sizeof($sql_hosts)) {
-					foreach ($sql_hosts as $row2) {
-						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row2['description']), html_escape($row2['hostname']), $row2['id']);
-					}
+			if (cacti_sizeof($sql_hosts)) {
+				foreach ($sql_hosts as $row2) {
+					$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row2['description']), html_escape($row2['hostname']), $row2['id']);
 				}
 			}
 		}
@@ -1325,10 +1313,9 @@ function analyse_tree_host_graph_detail() {
 			FROM host
 			WHERE id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
-			AND snmp_version != 0
 			AND bulk_walk_size < 1");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_bulk_walk_size');
 
@@ -1338,12 +1325,10 @@ function analyse_tree_host_graph_detail() {
 		if (cacti_sizeof($data)) {
 			$total_errors += $sql_count;
 
-			if (count($data) > 0) {
-				if ($color == 'red') {
-					$panel['alarm'] = 'red';
-				} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-					$panel['alarm'] = 'yellow';
-				}
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
 			}
 
 			foreach ($data as $row) {
@@ -1358,7 +1343,7 @@ function analyse_tree_host_graph_detail() {
 		GROUP BY description
 		HAVING NoDups > 1");
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_same_description');
 
@@ -1366,23 +1351,21 @@ function analyse_tree_host_graph_detail() {
 
 	if (cacti_sizeof($data)) {
 		$total_errors += $sql_count;
-		if (count($data) > 0) {
 
-			if ($color == 'red')    {
-				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
-				$panel['alarm'] = 'yellow';
-			}
+		if ($color == 'red')    {
+			$panel['alarm'] = 'red';
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+			$panel['alarm'] = 'yellow';
+		}
 
-			foreach ($data as $row) {
-				$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
-					FROM host
-					WHERE description = " . db_qstr($row['description']));
+		foreach ($data as $row) {
+			$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
+				FROM host
+				WHERE description = " . db_qstr($row['description']));
 
-				if (cacti_sizeof($sql_hosts)) {
-					foreach ($sql_hosts as $row2) {
-						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row2['id'], html_escape($row2['description']), $row2['id']);
-					}
+			if (cacti_sizeof($sql_hosts)) {
+				foreach ($sql_hosts as $row2) {
+					$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row2['id'], html_escape($row2['description']), $row2['id']);
 				}
 			}
 		}
@@ -1410,7 +1393,7 @@ function analyse_tree_host_graph_detail() {
 		((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
 		ORDER BY `name_cache` ASC");
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_orphaned_ds');
 
@@ -1421,7 +1404,7 @@ function analyse_tree_host_graph_detail() {
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 
@@ -1442,17 +1425,16 @@ function analyse_tree_host_graph_detail() {
 		ON h.id = dl.host_id
 		WHERE dl.snmp_index = "" AND dl.snmp_query_id > 0');
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_bad_indexes');
 
 	$panel['detail'] .= '<h4>' . __('Datasources with bad indexes - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 	if (cacti_sizeof($data)) {
-
 		if ($color == 'red')    {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 
@@ -1461,6 +1443,7 @@ function analyse_tree_host_graph_detail() {
 			html_escape($row['name_cache']) . '</a><br/>';
 
 		}
+
 		$total_errors += $sql_count;
 	}
 
@@ -1488,17 +1471,16 @@ function analyse_tree_host_graph_detail() {
 				AND con.contact_id IS NULL
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_alert_thold_logonly');
 
 		$panel['detail'] .= '<h4>' . __('Thold logonly alert/warning - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 		if (cacti_sizeof($data)) {
-
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
@@ -1518,17 +1500,16 @@ function analyse_tree_host_graph_detail() {
 		GROUP BY description
 		HAVING `count` > 1');
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_more_trees');
 
 	$panel['detail'] .= '<h4>' . __('Devices in more than one tree - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 	if (cacti_sizeof($data)) {
-
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 
@@ -1568,17 +1549,16 @@ function analyse_tree_host_graph_detail() {
 		)
 		AND snmp_version != 0");
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_without_graph');
 
 	$panel['detail'] .= '<h4>' . __('Devices without Graphs - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 	if (cacti_sizeof($data)) {
-
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 
@@ -1595,17 +1575,16 @@ function analyse_tree_host_graph_detail() {
 			FROM graph_tree_items
 		)");
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_without_tree');
 
 	$panel['detail'] .= '<h4>' . __('Devices without tree - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 	if (cacti_sizeof($data)) {
-
 		if ($color == 'red')    {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 
@@ -1621,17 +1600,16 @@ function analyse_tree_host_graph_detail() {
 		AND snmp_version IN (1,2)
 		ORDER BY description");
 
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	$color = read_config_option('intropage_alert_default_community');
 
 	$panel['detail'] .= '<h4>' . __('Hosts with default public/private community - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 	if (cacti_sizeof($data)) {
-
 		if ($color == 'red')    {
 			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 			$panel['alarm'] = 'yellow';
 		}
 
@@ -1646,17 +1624,16 @@ function analyse_tree_host_graph_detail() {
 			FROM host
 			WHERE monitor != 'on'");
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : count($data);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_alert_without_monitoring');
 
 		$panel['detail'] .= '<h4>' . __('Plugin Monitor - Unmonitored hosts - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 		if (cacti_sizeof($data)) {
-
 			if ($color == 'red')    {
 				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == "yellow") {
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
@@ -1674,5 +1651,4 @@ function analyse_tree_host_graph_detail() {
 
 	return $panel;
 }
-
 
