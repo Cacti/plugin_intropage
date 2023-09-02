@@ -169,7 +169,7 @@ $intropage_settings = array(
 		'description'   => __('Insert DNS name for test', 'intropage'),
 		'method'        => 'textbox',
 		'max_length' => 50,
-		'default'       => 'cacti.net',
+		'default'       => 'dns.google',
 	),
 	'intropage_dns_interval' => array(
 		'friendly_name' => __('How often check DNS', 'intropage'),

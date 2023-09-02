@@ -91,23 +91,20 @@ function ntp_dns($panel, $user_id) {
 	global $config;
 
 	$ntp_server = read_config_option('intropage_ntp_server');
+	$dns_host   = read_config_option('intropage_dns_host');
 
-	$dns_host = read_config_option('intropage_dns_host');
-
-	$panel['data'] = '<table class="cactiTable">';
-
+	$panel['data']  = '<table class="cactiTable">';
 	$panel['alarm'] = 'green';
 
 	if (empty($ntp_server)) {
 		$panel['alarm'] = 'grey';
 		$panel['data']  .= '<tr><td>' . __('No NTP server configured', 'intropage') . '<span class="inpa_sq color_grey"></span></td></tr>';
-
 	} elseif (!filter_var(trim($ntp_server), FILTER_VALIDATE_IP) && !filter_var(trim($ntp_server), FILTER_VALIDATE_DOMAIN)) {
 		$panel['alarm'] = 'red';
 		$panel['data']  .= '<tr><td>' . __('Wrong NTP server configured - %s<br/>Please fix it in settings', $ntp_server, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 	} else {
 		$timestamp = ntp_time($ntp_server);
-		
+
 		// try again
 		if ($timestamp == 'error') {
 			$timestamp = ntp_time($ntp_server);
@@ -143,7 +140,6 @@ function ntp_dns($panel, $user_id) {
 
 	$panel['data']  .= '<tr><td colspan="2"><br/><br/></td></tr>';
 
-
 	if (empty($dns_host)) {
 		$panel['alarm'] = 'grey';
 		$panel['data']  .= '<tr><td>' . __('No DNS hostname configured', 'intropage') . '<span class="inpa_sq color_grey"></span></td></tr>';
@@ -151,10 +147,9 @@ function ntp_dns($panel, $user_id) {
 		$panel['alarm'] = 'red';
 		$panel['data']  .= '<tr><td>' . __('Wrong DNS hostname configured - %s<br/>Please fix it in settings', $dns_host, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 	} else {
-		
-		$dns_respond = @cacti_gethostinfo($dns_host, DNS_ANY);
-		
-		if ($dns_respond) {
+		$dns_response = cacti_gethostinfo($dns_host, DNS_ANY);
+
+		if ($dns_response) {
 			$panel['data'] .= '<tr><td>' . __('DNS hostname (%s) resolving ok.', $dns_host, 'intropage') . '</td></tr>';
 		} else {
 			$panel['alarm'] = 'red';
@@ -196,7 +191,7 @@ function maint($panel, $user_id) {
 								ON host.id=plugin_maint_hosts.host
 								WHERE host.id in (' . $allowed_devices . ') AND schedule = ?',
 								array($sc['id']));
-                                                                
+
 							if (cacti_sizeof($hosts)) {
 								$panel['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) .
 									' - ' . date('d. m . Y  H:i', $sc['etime']) .
@@ -205,7 +200,7 @@ function maint($panel, $user_id) {
 								$text = 'Affected hosts:</b> ' . implode (', ', array_column($hosts,'description'));
 
 								$panel['data'] .= '<div class="inpa_loglines" title="' . $text . '">' . $text . '</div><br/><br/>';
-	
+
 							}
 						}
 
@@ -227,7 +222,7 @@ function maint($panel, $user_id) {
 								$panel['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) .
 									' - ' . date('d. m . Y  H:i', $sc['etime']) .
 									' - ' . $sc['name'] . ' (Reoccurring)<br/>';
-									
+
 								$text = 'Affected hosts:</b> ' . implode (', ', array_column($hosts,'description'));
 
 								$panel['data'] .= '<div class="inpa_loglines" title="' . $text . '">' . $text . '</div><br/><br/>';
@@ -258,7 +253,7 @@ function webseer($panel, $user_id) {
         if ($important_period == -1) {
                 $important_period = time();
         }
-	
+
 	if (!api_plugin_is_enabled('webseer')) {
 		$panel['alarm']  = 'yellow';
 		$panel['data']   = __('Plugin Webseer isn\'t installed or started', 'intropage');
@@ -285,9 +280,9 @@ function webseer($panel, $user_id) {
 	                ORDER BY pwul.lastcheck DESC
 
         	        LIMIT ' . ($lines - 4));
-                
+
 		if (cacti_sizeof($logs) > 0) {
-			
+
 			$panel['data'] .= '<table class="cactiTable">';
 			$panel['data'] .= '<tr><td colspan="3"><strong>' . __('Last log messages', 'intropage') . '</strong></td></tr>';
 			$panel['data'] .= '<tr><td class="rpad">' . __('Date', 'intropage') . '</td>' .
