@@ -584,6 +584,8 @@ function analyse_tree_host_graph($panel, $user_id) {
 			FROM host
 			WHERE id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
+			AND availability_method > 0
+			AND snmp_version != 0
 			AND bulk_walk_size < 1");
 
 		$color = read_config_option('intropage_bulk_walk_size');
