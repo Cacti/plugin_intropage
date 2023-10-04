@@ -399,7 +399,7 @@ function extrem_trend() {
 	$users = get_user_list();
 
 	foreach ($users as $user) {
-		if (is_panel_allowed('trend', $user['id'])) {
+		if (is_panel_allowed('extrem', $user['id'])) {
 			$allowed_devices = intropage_get_allowed_devices($user['id']);
 
 			if ($allowed_devices !== false) {
