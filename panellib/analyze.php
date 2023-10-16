@@ -497,48 +497,25 @@ function analyse_db($panel, $user_id) {
 			$panel['alarm'] = 'yellow';
 		}
 
-		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></td></tr>';
-
+		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span>';
+		$panel['data'] .= display_tooltip(__('Aborted clients/connects - Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', 'intropage'));
+		$panel['data'] .= '</td></tr>';
 	}
 
 	$panel['data'] .= '<tr><td>' . __('Connection errors: %s', $cerrors, 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage');
 
-	$panel['data'] .=
-		'<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage')   . '</td></tr>' .
+	if ($damaged > 0) {
+		$panel['data'] .= display_tooltip(__('You should run check and repair table commands'));
+	}
+
+	$panel['data'] .= '</td></tr>' .
 		'<tr><td>' . __('Memory tables: %s', $memtables, 'intropage')  . '</td></tr>' .
 		'<tr><td>' . __('All tables: %s', cacti_count($tables), 'intropage') . '</td></tr>';
 
-	if ($aerrors > 0) {
-		$panel['data'] .= '<tr><td><br/><br/>' . __('Aborted clients/connects - Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', 'intropage') . '</td></tr>';
-	}
-
 	save_panel_result($panel, $user_id);
 
-	if (true == false) {
-		$data = db_fetch_row_prepared('SELECT *
-			FROM plugin_intropage_panel_data
-			WHERE panel_id = ?',
-			array($panel_id));
-
-		// exception - refresh is in intropage settings
-		if ($data['refresh_interval'] == 0) {
-			$data['recheck'] = __('Scheduled db check disabled','intropage');
-		} elseif ($data['refresh_interval'] == 3600) {
-			$data['recheck'] = __('hour', 'intropage');
-		} elseif ($data['refresh_interval'] == 86400) {
-			$data['recheck'] = __('day', 'intropage');
-		} elseif ($data['refresh_interval'] == 604800) {
-			$data['recheck'] = __('week', 'intropage');
-		} elseif ($data['refresh_interval'] == 2592000) {
-			$data['recheck'] = __('month', 'intropage');
-		}
-
-		$data['name'] = $panel['name'];
-
-		return $data;
-	}
 }
-
 
 
 // --------------------------------analyse_tree_host_graph
@@ -561,7 +538,6 @@ function analyse_tree_host_graph($panel, $user_id) {
 			AND disabled != 'on'
 			GROUP BY hostname,snmp_port
 			HAVING NoDups > 1");
-
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_alert_same_ip');
@@ -580,26 +556,31 @@ function analyse_tree_host_graph($panel, $user_id) {
 	}
 
 	if ($allowed_devices != '') {
-		$count = db_fetch_cell("SELECT COUNT(*)
+		// need only devices with any snmp data
+		$count = db_fetch_cell("SELECT count(host.id)
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
+			LEFT OUTER JOIN data_local
+			ON host.id = data_local.host_id
+			WHERE host.id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
 			AND availability_method > 0
 			AND snmp_version != 0
-			AND bulk_walk_size < 1");
+			AND bulk_walk_size < 1
+			AND data_local.host_id IS NOT NULL");
 
 		$color = read_config_option('intropage_bulk_walk_size');
 
-		if (cacti_sizeof($data)) {
-			$total_errors += $count;
+		$total_errors += $count;
 
+		if ($count > 0) {
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
 			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage') . '<br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage');
+			$panel['data'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
 		}
 	}
 
@@ -1311,18 +1292,23 @@ function analyse_tree_host_graph_detail() {
 	}
 
 	if ($allowed_devices != '') {
-		$data = db_fetch_assoc("SELECT id, description, bulk_walk_size
+
+		$data = db_fetch_assoc("SELECT host.id as `id`, description, bulk_walk_size
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
+			LEFT OUTER JOIN data_local
+			ON host.id = data_local.host_id
+			WHERE host.id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
-			AND bulk_walk_size < 1");
+			AND availability_method > 0
+			AND snmp_version != 0
+			AND bulk_walk_size < 1
+			AND data_local.host_id IS NOT NULL");
 
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_bulk_walk_size');
 
 		$panel['detail'] .= '<h4>' . __('Not optimized Bulk Walk Size devices - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
 
 		if (cacti_sizeof($data)) {
 			$total_errors += $sql_count;
@@ -1337,6 +1323,11 @@ function analyse_tree_host_graph_detail() {
 				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d, Bulk walk size: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id'], $row['bulk_walk_size']);
 			}
 		}
+
+		if ($sql_count > 0) {
+			$panel['detail'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
+		}
+
 	}
 
 	$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, description

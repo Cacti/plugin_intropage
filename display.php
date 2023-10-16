@@ -461,7 +461,7 @@ function display_information() {
 		print '<tr class="tableRow">';
 		print '<td class="textAreaNotes top left">' . __('You can Add Dashboard Panels in more ways:', 'intropage');
 		print '<ul>';
-		print '<li>' . __('Select prepared panels from the menu to the right. Panel can be grayed out. It is due to permissions, ask administrator') . '</li>';
+		print '<li>' . __('Select prepared panels from the "Panels menu". Panel can be grayed out. It is due to permissions, ask administrator') . '</li>';
 		print '<li>' . __('Add any Cacti Graph, use icon', 'intropage') . '<i class="fa fa-eye"></i></li>';
 		print '<li>' . __('You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md') . '</li>';
 		print '</ul><br/>';

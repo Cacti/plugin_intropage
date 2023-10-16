@@ -147,10 +147,15 @@ function ntp_dns($panel, $user_id) {
 		$panel['alarm'] = 'red';
 		$panel['data']  .= '<tr><td>' . __('Wrong DNS hostname configured - %s<br/>Please fix it in settings', $dns_host, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 	} else {
+		$start = microtime(true);
+
 		$dns_response = cacti_gethostinfo($dns_host, DNS_ANY);
+
+		$total_time = 1000*(microtime(true) - $start);
 
 		if ($dns_response) {
 			$panel['data'] .= '<tr><td>' . __('DNS hostname (%s) resolving ok.', $dns_host, 'intropage') . '</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('DNS resolv time: %s ms', round($total_time,2), 'intropage') . '</td></tr>';
 		} else {
 			$panel['alarm'] = 'red';
 			$panel['data']  .= '<tr><td>' . __('DNS hostname (%s) resolving failed.', $dns_host, 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
