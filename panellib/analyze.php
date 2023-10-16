@@ -497,20 +497,21 @@ function analyse_db($panel, $user_id) {
 			$panel['alarm'] = 'yellow';
 		}
 
-		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></td></tr>';
-
+		$panel['data'] .= '<tr><td>' . __('Aborted clients/connects: %s', $aerrors, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span>';
+		$panel['data'] .= display_tooltip(__('Aborted clients/connects - Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', 'intropage'));
+		$panel['data'] .= '</td></tr>';
 	}
 
 	$panel['data'] .= '<tr><td>' . __('Connection errors: %s', $cerrors, 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage');
 
-	$panel['data'] .=
-		'<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage')   . '</td></tr>' .
+	if ($damaged > 0) {
+		$panel['data'] .= display_tooltip(__('You should run check and repair table commands'));
+	}
+
+	$panel['data'] .= '</td></tr>' .
 		'<tr><td>' . __('Memory tables: %s', $memtables, 'intropage')  . '</td></tr>' .
 		'<tr><td>' . __('All tables: %s', cacti_count($tables), 'intropage') . '</td></tr>';
-
-	if ($aerrors > 0) {
-		$panel['data'] .= '<tr><td><br/><br/>' . __('Aborted clients/connects - Run \'SET GLOBAL log_warnings = 1;\' or \' log_error_verbosity = 1;\' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence.', 'intropage') . '</td></tr>';
-	}
 
 	save_panel_result($panel, $user_id);
 
@@ -595,15 +596,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 		$total_errors += $count;
 
-		if ($color == 'red') {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
-		}
-
-		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage') . '<br/>';
-
 		if ($count > 0) {
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage');
 			$panel['data'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
 		}
 	}
