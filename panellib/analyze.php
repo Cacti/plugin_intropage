@@ -561,7 +561,6 @@ function analyse_tree_host_graph($panel, $user_id) {
 			AND disabled != 'on'
 			GROUP BY hostname,snmp_port
 			HAVING NoDups > 1");
-
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_alert_same_ip');
@@ -580,26 +579,32 @@ function analyse_tree_host_graph($panel, $user_id) {
 	}
 
 	if ($allowed_devices != '') {
-		$count = db_fetch_cell("SELECT COUNT(*)
+		// need only devices with any snmp data
+		$count = db_fetch_cell("SELECT count(host.id)
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
+			LEFT OUTER JOIN data_local
+			ON host.id = data_local.host_id
+			WHERE host.id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
 			AND availability_method > 0
 			AND snmp_version != 0
-			AND bulk_walk_size < 1");
+			AND bulk_walk_size < 1
+			AND data_local.host_id IS NOT NULL");
 
 		$color = read_config_option('intropage_bulk_walk_size');
 
-		if (cacti_sizeof($data)) {
-			$total_errors += $count;
+		$total_errors += $count;
 
-			if ($color == 'red') {
-				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-				$panel['alarm'] = 'yellow';
-			}
+		if ($color == 'red') {
+			$panel['alarm'] = 'red';
+		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+			$panel['alarm'] = 'yellow';
+		}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage') . '<br/>';
+		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage') . '<br/>';
+
+		if ($count > 0) {
+			$panel['data'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
 		}
 	}
 
@@ -1311,18 +1316,23 @@ function analyse_tree_host_graph_detail() {
 	}
 
 	if ($allowed_devices != '') {
-		$data = db_fetch_assoc("SELECT id, description, bulk_walk_size
+
+		$data = db_fetch_assoc("SELECT host.id as `id`, description, bulk_walk_size
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
+			LEFT OUTER JOIN data_local
+			ON host.id = data_local.host_id
+			WHERE host.id IN (" . $allowed_devices . ")
 			AND disabled != 'on'
-			AND bulk_walk_size < 1");
+			AND availability_method > 0
+			AND snmp_version != 0
+			AND bulk_walk_size < 1
+			AND data_local.host_id IS NOT NULL");
 
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		$color = read_config_option('intropage_bulk_walk_size');
 
 		$panel['detail'] .= '<h4>' . __('Not optimized Bulk Walk Size devices - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
 
 		if (cacti_sizeof($data)) {
 			$total_errors += $sql_count;
@@ -1337,6 +1347,11 @@ function analyse_tree_host_graph_detail() {
 				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d, Bulk walk size: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id'], $row['bulk_walk_size']);
 			}
 		}
+
+		if ($sql_count > 0) {
+			$panel['detail'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
+		}
+
 	}
 
 	$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, description
