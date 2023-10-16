@@ -515,31 +515,7 @@ function analyse_db($panel, $user_id) {
 
 	save_panel_result($panel, $user_id);
 
-	if (true == false) {
-		$data = db_fetch_row_prepared('SELECT *
-			FROM plugin_intropage_panel_data
-			WHERE panel_id = ?',
-			array($panel_id));
-
-		// exception - refresh is in intropage settings
-		if ($data['refresh_interval'] == 0) {
-			$data['recheck'] = __('Scheduled db check disabled','intropage');
-		} elseif ($data['refresh_interval'] == 3600) {
-			$data['recheck'] = __('hour', 'intropage');
-		} elseif ($data['refresh_interval'] == 86400) {
-			$data['recheck'] = __('day', 'intropage');
-		} elseif ($data['refresh_interval'] == 604800) {
-			$data['recheck'] = __('week', 'intropage');
-		} elseif ($data['refresh_interval'] == 2592000) {
-			$data['recheck'] = __('month', 'intropage');
-		}
-
-		$data['name'] = $panel['name'];
-
-		return $data;
-	}
 }
-
 
 
 // --------------------------------analyse_tree_host_graph
