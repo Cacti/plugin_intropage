@@ -281,6 +281,19 @@ function initPage() {
 		}
 	});
 
+	// display/hide red/yellow/green square notifications
+	$('#switch_square').off('click').on('click', function() {
+		if (!intropage_square) {
+			$('.inpa_sq').css('display','none');
+			$('#switch_square').attr('title', intropage_text_square_disable);
+			intropage_square = true;
+		} else {
+			$('.inpa_sq').css('display','inline-block');
+			$('#switch_square').attr('title', intropage_text_square_enable);
+			intropage_square = false;
+		}
+	});
+
 	// reload single panel function
 	$('.reload_panel_now').off('click').on('click', function(event) {
 		if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
