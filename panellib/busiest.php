@@ -916,7 +916,7 @@ function busiest_cpu_detail() {
 			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
-		save_panel_result($panel, $user_id);
+		save_panel_result($panel, $_SESSION['sess_user_id']);
 	}
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
@@ -1020,7 +1020,7 @@ function busiest_load_detail() {
 			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
-		save_panel_result($panel, $user_id);
+		save_panel_result($panel, $_SESSION['sess_user_id']);
 	}
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
@@ -1125,7 +1125,7 @@ function busiest_hdd_detail() {
 			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
-		save_panel_result($panel, $user_id);
+		save_panel_result($panel, $_SESSION['sess_user_id']);
 	}
 
 	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
