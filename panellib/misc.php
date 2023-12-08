@@ -149,7 +149,7 @@ function ntp_dns($panel, $user_id) {
 	} else {
 		$start = microtime(true);
 
-		$dns_response = cacti_gethostinfo($dns_host, DNS_ANY);
+		$dns_response = cacti_gethostinfo($dns_host, DNS_A | DNS_CNAME | DNS_AAAA);
 
 		$total_time = 1000*(microtime(true) - $start);
 
