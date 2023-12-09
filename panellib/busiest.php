@@ -880,7 +880,7 @@ function busiest_interface_util($panel, $user_id) {
 				}
 			}
 
-			$panel['data'] .= '<tr><td colspan="2">' . __('Time interval last 5 minues') . '</td></tr>';
+			$panel['data'] .= '<tr><td colspan="2">' . __('Time interval last 5 minutes') . '</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -1597,7 +1597,7 @@ function busiest_interface_util_detail() {
 				}
 			}
 
-			$panel['detail'] .= '<tr><td colspan="2">' . __('Time interval last 5 minues', 'intropage') . '</td></tr>';
+			$panel['detail'] .= '<tr><td colspan="2">' . __('Time interval last 5 minutes', 'intropage') . '</td></tr>';
 			$panel['detail'] .= '</table>';
 
 		} else {

@@ -425,7 +425,7 @@ function extrem($panel, $user_id) {
 
 	$panel['alarm'] = 'grey';
 
-	$colums = array();
+	$columns = array();
 	$data   = array();
 	$fin_data   = array();
 

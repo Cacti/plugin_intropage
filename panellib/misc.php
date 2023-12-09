@@ -28,7 +28,7 @@ function register_misc() {
 	global $registry;
 
 	$registry['misc'] = array(
-		'name'        => __('Miscelaneous Panels', 'intropage'),
+		'name'        => __('Miscellaneous Panels', 'intropage'),
 		'description' => __('Panels that general non-categorized data about Cacti\'s.', 'intropage')
 	);
 

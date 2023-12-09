@@ -49,7 +49,7 @@ $intropage_settings = array(
 	),
 	'intropage_unregister' => array(
 		'friendly_name' => __('Automatically Uninstall Panels', 'intropage'),
-		'description'   => __('If a Panel is installed and requried plugin is removed, automatically uninstall the panel too', 'intropage'),
+		'description'   => __('If a Panel is installed and required plugin is removed, automatically uninstall the panel too', 'intropage'),
 		'method'        => 'checkbox',
 		'default'       => '',
 	),
@@ -254,7 +254,7 @@ $intropage_settings = array(
 		'default'       => 'red',
 	),
 	'intropage_alert_thold_logonly' => array(
-		'friendly_name' => __('Alarm Thershold logonly action', 'intropage'),
+		'friendly_name' => __('Alarm Threshold logonly action', 'intropage'),
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,

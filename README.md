@@ -2,7 +2,7 @@
 
 ## Intropage/Dashboard plugin for Cacti
 
-Plugin displays usefull information and favourite graphs on console screen or
+Plugin displays useful information and favourite graphs on console screen or
 separated tab:
 
 * trends
@@ -11,7 +11,7 @@ separated tab:
 
 * poller statistics
 
-* thresholds (all, trigged, ...)
+* thresholds (all, triggered, ...)
 
 * logs analyze
 
@@ -22,7 +22,7 @@ separated tab:
 ## Original Author
 
 All thanks goes to Petr Macek (petr.macek@kostax.cz) the original author of
-Intropage! He has turned over the Intropage Plguin to the broader Cacti
+Intropage! He has turned over the Intropage Plugin to the broader Cacti
 community for long term management.  We would like to thank him for all his
 contributions past, present and future.
 

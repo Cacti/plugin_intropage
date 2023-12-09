@@ -120,8 +120,8 @@ function display_information() {
 		}
 		
 		if ($removed > 0) {
-			raise_message('intropage_permissions', __('One or more panels was removed due to insuficient permissions. Contact administrator.', 'intropage'), MESSAGE_LEVEL_ERROR);
-			cacti_log('INTROPAGE WARNING: One or more panels was removed to user ' . $_SESSION['sess_user_id'] . ' due to insuficient permissons');
+			raise_message('intropage_permissions', __('One or more panels was removed due to insufficient permissions. Contact administrator.', 'intropage'), MESSAGE_LEVEL_ERROR);
+			cacti_log('INTROPAGE WARNING: One or more panels was removed to user ' . $_SESSION['sess_user_id'] . ' due to insufficient permissions');
 		}
 	}
 
