@@ -239,11 +239,13 @@ function display_information() {
 	// settings
 	print "<form method='post'>";
 
+	print "<a href='#' class='pic' id='switch_square' title='" . __esc('Hide red/yellow/green square notifications', 'intropage') . "'><i class='intro_glyph fa fa-minus-square'></i></a>";
+	print '&nbsp; &nbsp; ';
+
 	print "<a href='#' class='pic' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='intro_glyph fa fa-clone'></i></a>";
 	print '&nbsp; &nbsp; ';
 
 	print '<a class="pic" href="' . html_escape($config['url_path'] . ($login_opts == 4 ? 'plugins/intropage/intropage.php?':'index.php?') . 'action=configure') . '"><i class="intro_glyph fa fa-cog"></i></a>';
-
 	print '&nbsp; &nbsp; ';
 
 	intropage_addpanel_select($dashboard_id);
@@ -577,11 +579,15 @@ function display_information() {
 	var pollerRefresh;
 	var intropage_autorefresh = <?php print $autorefresh;?>;
 	var intropage_drag = true;
+	var intropage_square = true;
 	var intropage_page = '';
 	var dashboard_id = <?php print $dashboard_id;?>;
 	var intropage_text_panel_details = '<?php print __('Panel Details', 'intropage');?>';
 	var intropage_text_panel_disable = '<?php print __esc('Disable panel move/Enable copy text from panel', 'intropage');?>';
 	var intropage_text_panel_enable = '<?php print __esc('Enable panel move/Disable copy text from panel', 'intropage');?>';
+	var intropage_text_square_disable = '<?php print __esc('Hide red/yellow/green square notifications', 'intropage');?>';
+	var intropage_text_square_enable = '<?php print __esc('Show red/yellow/green square notifications', 'intropage');?>';
+
 	var intropage_text_data_error = '<?php print __('Error reading new data', 'intropage');?>';
 	var intropage_text_close = '<?php print __('Close', 'intropage');?>';
 

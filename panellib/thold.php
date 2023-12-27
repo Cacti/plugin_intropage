@@ -123,10 +123,7 @@ function thold_event($panel, $user_id) {
 
 			foreach ($data as $row) {
 				$panel['data'] .= '<tr><td class="inpa_first inpa_loglines" title="' . html_escape($row['description']) . '">';
-				// zkousim
-				
-				$panel['data'] .= date('y-m-d H:i:s', $row['time']);
-				
+
 				$color = 'grey';
 
 				if ($row['time'] > (time()-($important_period))) { 
@@ -151,10 +148,11 @@ function thold_event($panel, $user_id) {
                                         $panel['alarm'] = 'red';
                                 }
 
-				
 				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>';
-				
-				$panel['data'] .= html_escape($row['description']);
+
+				$panel['data'] .= date('y-m-d H:i:s', $row['time']);
+
+				$panel['data'] .= ' ' . html_escape($row['description']);
 				$panel['data'] .= '</td></tr>';
 
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {

@@ -51,7 +51,6 @@ function resizeCharts() {
 		var panelWidth = $(this).closest('.panel_wrapper').width() - 34;
 		var width = Math.min(windWidth, panelWidth);
 		var height     = $(this).closest('.panel_wrapper').height() - 54;
-//		console.log('Chart:'+chart+', Width:'+width+', Height:'+height);
 
 		if (panels[chart] != undefined) {
 			panels[chart].resize({ width: width, height:height });
@@ -281,6 +280,21 @@ function initPage() {
 		}
 	});
 
+	// display/hide red/yellow/green square notifications
+	$('#switch_square').off('click').on('click', function() {
+
+		if (intropage_square) {
+			intropage_square = false;
+			$('.inpa_sq').css('display','none');
+			$('#switch_square').attr('title', intropage_text_square_disable);
+		} else {
+			intropage_square = true;
+			$('.inpa_sq').css('display','inline-block');
+			$('#switch_square').attr('title', intropage_text_square_enable);
+		}
+	});
+
+
 	// reload single panel function
 	$('.reload_panel_now').off('click').on('click', function(event) {
 		if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
@@ -303,6 +317,9 @@ function initPage() {
 
 	$(window).trigger('resize');
 }
+
+
+
 
 function testPoller() {
 	var url = urlPath+'plugins/intropage/intropage.php?&action=autoreload';
