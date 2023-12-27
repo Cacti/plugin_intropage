@@ -285,12 +285,10 @@ function initPage() {
 	$('#switch_square').off('click').on('click', function() {
 
 		if (intropage_square) {
-			console.log('aaaa - false');
 			intropage_square = false;
 			$('.inpa_sq').css('display','none');
 			$('#switch_square').attr('title', intropage_text_square_disable);
 		} else {
-			console.log('bbbb - true');
 			intropage_square = true;
 			$('.inpa_sq').css('display','inline-block');
 			$('#switch_square').attr('title', intropage_text_square_enable);
