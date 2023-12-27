@@ -265,7 +265,6 @@ function initPage() {
 		});
 	});
 
-//  tady to bylo
 	// enable/disable move panel/copy text
 	$('#switch_copytext').off('click').on('click', function() {
 		if (!intropage_drag) {
