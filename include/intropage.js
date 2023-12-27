@@ -51,7 +51,6 @@ function resizeCharts() {
 		var panelWidth = $(this).closest('.panel_wrapper').width() - 34;
 		var width = Math.min(windWidth, panelWidth);
 		var height     = $(this).closest('.panel_wrapper').height() - 54;
-//		console.log('Chart:'+chart+', Width:'+width+', Height:'+height);
 
 		if (panels[chart] != undefined) {
 			panels[chart].resize({ width: width, height:height });
@@ -266,6 +265,7 @@ function initPage() {
 		});
 	});
 
+//  tady to bylo
 	// enable/disable move panel/copy text
 	$('#switch_copytext').off('click').on('click', function() {
 		if (!intropage_drag) {
@@ -283,16 +283,20 @@ function initPage() {
 
 	// display/hide red/yellow/green square notifications
 	$('#switch_square').off('click').on('click', function() {
-		if (!intropage_square) {
+
+		if (intropage_square) {
+			console.log('aaaa - false');
+			intropage_square = false;
 			$('.inpa_sq').css('display','none');
 			$('#switch_square').attr('title', intropage_text_square_disable);
-			intropage_square = true;
 		} else {
+			console.log('bbbb - true');
+			intropage_square = true;
 			$('.inpa_sq').css('display','inline-block');
 			$('#switch_square').attr('title', intropage_text_square_enable);
-			intropage_square = false;
 		}
 	});
+
 
 	// reload single panel function
 	$('.reload_panel_now').off('click').on('click', function(event) {
@@ -316,6 +320,9 @@ function initPage() {
 
 	$(window).trigger('resize');
 }
+
+
+
 
 function testPoller() {
 	var url = urlPath+'plugins/intropage/intropage.php?&action=autoreload';
