@@ -438,7 +438,7 @@ function extrem($panel, $user_id) {
 			substring(value,instr(value,':')+1) AS xvalue
 			FROM plugin_intropage_trends
 			WHERE name='poller'
-			AND cur_timestamp > date_sub(now(),interval 1 day)			
+			AND cur_timestamp > date_sub(now(),interval 1 day)
 			ORDER BY xvalue desc, cur_timestamp
 			LIMIT $lines");
 
@@ -473,10 +473,12 @@ function extrem($panel, $user_id) {
 		foreach ($data as $key => $row) {
 
 			if ($row['value'] > 0) {
-				$fin_data[$key]['down'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+				$color = 'red';
 			} else {
-				$fin_data[$key]['down'] = $row['date'] . ' ' . $row['value'];			
+				$color = 'green';
 			}
+
+			$fin_data[$key]['down'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_' . $color . '"></span>';
 		}
 	}
 
@@ -495,11 +497,13 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-				if ($row['value'] > 0) {			
-					$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
-				} else {			
-					$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_green"></span>';
+				if ($row['value'] > 0) {
+					$color = 'red';
+				} else {
+					$color = 'green';
 				}
+
+				$fin_data[$key]['thold'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_' . $color . '"></span>';
 			}
 		}
 	}
@@ -518,10 +522,13 @@ function extrem($panel, $user_id) {
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
 				if ($row['value'] > 0) {
-					$fin_data[$key]['pout'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+					$color = 'red';
 				} else {
-					$fin_data[$key]['pout'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_green"></span>';
+					$color = 'green';
 				}
+
+				$fin_data[$key]['pout'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_' . $color . '"></span>';
+
 			}
 		}
 	}
@@ -642,10 +649,12 @@ function extrem_detail() {
 		$i = 0;
 		foreach ($data as $row) {
 			if ($row['value'] > 0) {
-				$trows[$i][$j]  = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+				$color = 'red';
 			} else {
-				$trows[$i][$j]  = $row['date'] . ' ' . $row['value'];			
+				$color = 'green';
 			}
+
+			$trows[$i][$j]  = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
 
 			$i++;
 		}
@@ -669,11 +678,13 @@ function extrem_detail() {
 
 			$i = 0;
 			foreach ($data as $row) {
-				if ($row['value'] > 0) {			
-					$trows[$i][$j] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
-				} else {			
-					$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
+				if ($row['value'] > 0) {
+					$color = 'red';
+				} else {
+					$color = 'green';
 				}
+
+				$trows[$i][$j] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_' . $color . '"></span>';
 
 				$i++;
 			}
@@ -697,11 +708,12 @@ function extrem_detail() {
 			$i = 0;
 			foreach ($data as $row) {
 				if ($row['value'] > 0) {
-					$trows[$i][$j] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_red"></span>';
+					$color = 'red';
 				} else {
-					$trows[$i][$j] = $row['date'] . ' ' . $row['value'];
+					$color = 'green';
 				}
 
+				$trows[$i][$j] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_' . $color .'"></span>';
 				$i++;
 			}
 		}
