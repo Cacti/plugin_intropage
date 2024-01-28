@@ -188,7 +188,7 @@ function alert_host($panel, $user_id) {
 function alert_host_detail() {
 	global $config, $console_access;
 
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
         if ($important_period == -1) {
                 $important_period = time();
         }
