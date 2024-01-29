@@ -412,26 +412,32 @@ function graph_host_detail() {
 		'detail' => '',
 	);
 
+	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+
 	$h_all = db_fetch_cell("SELECT COUNT(id) FROM host");
 
 	$h_up = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE status = 3
+		WHERE id in (" . $allowed_devices . ")
+		AND status = 3
 		AND disabled = ''");
 
 	$h_down = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE status = 1
+		WHERE id in (" . $allowed_devices . ")
+		AND status = 1
 		AND disabled = ''");
 
 	$h_reco = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE status = 2
+		WHERE id in (" . $allowed_devices . ")
+		AND status = 2
 		AND disabled = ''");
 
 	$h_disa = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE disabled = 'on'");
+		WHERE id in (" . $allowed_devices . ")
+		AND disabled = 'on'");
 
 	$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
 
@@ -489,7 +495,8 @@ function graph_host_detail() {
 		if (($s['status'] == 1 || $s['status'] == 2) && $s['value'] > 0) {
 			$h = db_fetch_assoc("SELECT id, description, status_fail_date
 				FROM host
-				WHERE status = " . $s['status'] .
+				WHERE id in (" . $allowed_devices . ")
+				AND status = " . $s['status'] .
 				" AND disabled = ''");
 
 			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
@@ -501,6 +508,20 @@ function graph_host_detail() {
 			$panel['detail'] .= '</td></tr>';
 		}
 	}
+
+	// disabled
+	$h = db_fetch_assoc("SELECT id, description, status_fail_date
+		FROM host
+		WHERE id in (" . $allowed_devices . ") " .
+		" AND disabled = 'on'");
+
+	$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
+
+	foreach ($h as $r) {
+		$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
+	}
+
+	$panel['detail'] .= '</td></tr>';
 
 	$panel['detail'] .= '</table>';
 
@@ -573,6 +594,7 @@ function host_collect() {
 	$users = get_user_list();
 
 	foreach ($users as $user) {
+
 		$allowed_devices = intropage_get_allowed_devices($user['id']);
 
 		if ($allowed_devices !== false) {
@@ -603,11 +625,6 @@ function host_collect() {
 				AND disabled='on'",
 				array($user['id']));
 		} else {
-			db_execute_prepared("REPLACE INTO plugin_intropage_trends
-				(name,value,user_id)
-				VALUES ('host_down', 0, ?)",
-				array($user['id']));
-
 			db_execute_prepared("REPLACE INTO plugin_intropage_trends
 				(name,value,user_id)
 				VALUES ('host_down', 0, ?)",
