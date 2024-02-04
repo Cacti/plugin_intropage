@@ -110,15 +110,27 @@ function top5_ping($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
 
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY cur_time desc
 			LIMIT " . $lines);
 
@@ -180,15 +192,27 @@ function top5_availability($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
 
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
 			FROM host
-			WHERE host.id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY availability
 			LIMIT " . $lines);
 
@@ -248,15 +272,27 @@ function top5_polltime($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
 
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY polling_time desc
 			LIMIT " . $lines);
 
@@ -316,16 +352,28 @@ function top5_pollratio($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
 
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls,
 			total_polls, CAST(failed_polls/total_polls AS DECIMAL(5,4)) AS ratio
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY ratio DESC
 			LIMIT " . $lines);
 
@@ -391,13 +439,25 @@ function top5_ping_detail() {
 		'detail' => '',
 	);
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY cur_time desc
 			LIMIT 40");
 	} else {
@@ -445,7 +505,7 @@ function top5_ping_detail() {
 
 		$panel['detail'] .= '</table>';
 	} else {
-		$panel['detail'] = __('Waiting for data', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
 	return $panel;
@@ -461,11 +521,31 @@ function top5_availability_detail() {
 		'detail' => '',
 	);
 
-	$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
-		FROM host
-		WHERE disabled != 'on'
-		ORDER BY availability
-		LIMIT 40");
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+
+		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			ORDER BY availability
+			LIMIT 40");
+	} else {
+		$sql_worst_host = array();
+	}
 
 	if (cacti_sizeof($sql_worst_host)) {
 		$color = read_config_option('intropage_alert_worst_availability');
@@ -506,7 +586,7 @@ function top5_availability_detail() {
 
 		$panel['detail'] .= '</table>';
 	} else {
-		$panel['detail'] = __('Waiting for data', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
 	return $panel;
@@ -522,13 +602,25 @@ function top5_polltime_detail() {
 		'detail' => '',
 	);
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY polling_time DESC
 			LIMIT 40");
 	} else {
@@ -574,7 +666,7 @@ function top5_polltime_detail() {
 
 		$panel['detail'] .= '</table>';
 	} else {
-		$panel['detail'] = __('Waiting for data', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
 	return $panel;
@@ -590,12 +682,32 @@ function top5_pollratio_detail() {
 		'detail' => '',
 	);
 
-	$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls,
-		total_polls, CAST(failed_polls/total_polls AS DECIMAL(5,4)) AS ratio
-		FROM host
-		WHERE disabled != 'on'
-		ORDER BY ratio DESC
-		LIMIT 40");
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+
+		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls,
+			total_polls, CAST(failed_polls/total_polls AS DECIMAL(5,4)) AS ratio
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			ORDER BY ratio DESC
+			LIMIT 40");
+	} else {
+		$sql_worst_host = array();
+	}
 
 	if (cacti_sizeof($sql_worst_host)) {
 		$color = read_config_option('intropage_alert_worst_polling_ratio');
@@ -640,7 +752,7 @@ function top5_pollratio_detail() {
 
 		$panel['detail'] . '</table>';
 	} else {	// no data
-		$panel['detail'] = __('Waiting for data', 'intropage');
+		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
 
 	return $panel;

@@ -87,10 +87,22 @@ function thold_event($panel, $user_id) {
 		$panel['data']  = __('Plugin Thold isn\'t installed or started', 'intropage');
 		$panel['detail'] = FALSE;
 	} else {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$simple_perms = get_simple_device_perms($user_id);
 
-		if ($allowed_devices !== false) {
-			$data = db_fetch_assoc('SELECT tl.description AS description,tl.time AS time,
+		if (!$simple_perms) {
+			$allowed_devices = intropage_get_allowed_devices($user_id);
+			$host_cond = 'IN (' . $allowed_devices . ')';
+		} else {
+			$allowed_devices = false;
+			$q_host_cond = '';
+		}
+
+		if (!$simple_perms) {
+			$q_host_cond = 'WHERE td.host_id ' . $host_cond;
+		}
+
+		if ($allowed_devices !== false || $simple_perms) {
+			$data = db_fetch_assoc("SELECT tl.description AS description,tl.time AS time,
 				tl.status AS status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 				FROM plugin_thold_log AS tl
 				INNER JOIN thold_data AS td
@@ -109,10 +121,10 @@ function thold_event($panel, $user_id) {
 				ON (gl.host_id=uap1.item_id AND uap1.type=3)
 				LEFT JOIN user_auth_perms AS uap2
 				ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-				WHERE td.host_id IN (' . $allowed_devices . ')
+				$q_host_cond
 				HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 				ORDER BY `time` DESC
-				LIMIT ' . $lines);
+				LIMIT " . $lines);
 		} else {
 			$data = array();
 		}
@@ -136,17 +148,17 @@ function thold_event($panel, $user_id) {
 					}
 				}
 
-                                if ($panel['alarm'] == 'grey' && $color == 'green') {
-                                        $panel['alarm'] = 'green';
-                                }
+				if ($panel['alarm'] == 'grey' && $color == 'green') {
+					$panel['alarm'] = 'green';
+				}
 
-                                if ($panel['alarm'] == 'green' && $color == 'yellow') {
-                                        $panel['alarm'] = 'yellow';
-                                }
+				if ($panel['alarm'] == 'green' && $color == 'yellow') {
+					$panel['alarm'] = 'yellow';
+				}
 
-                                if ($panel['alarm'] == 'yellow' && $color == 'red') {
-                                        $panel['alarm'] = 'red';
-                                }
+				if ($panel['alarm'] == 'yellow' && $color == 'red') {
+					$panel['alarm'] = 'red';
+				}
 
 				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>';
 
@@ -429,9 +441,22 @@ function thold_event_detail() {
 		$panel['alarm']  = 'yellow';
 		$panel['detail'] = __('Plugin Thold isn\'t installed or started', 'intropage');
 	} else {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
 
-		$data = db_fetch_assoc('SELECT tl.description as description,tl.time as time,
+		$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+		if (!$simple_perms) {
+			$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+			$host_cond = 'IN (' . $allowed_devices . ')';
+		} else {
+			$allowed_devices = false;
+			$q_host_cond = '';
+		}
+
+		if (!$simple_perms) {
+			$q_host_cond = 'td.host_id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 			FROM plugin_thold_log AS tl
 			INNER JOIN thold_data AS td
@@ -450,10 +475,10 @@ function thold_event_detail() {
 			ON (gl.host_id=uap1.item_id AND uap1.type=3)
 			LEFT JOIN user_auth_perms AS uap2
 			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-			WHERE td.host_id in (' . $allowed_devices . ')
+			WHERE $q_host_cond
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 			ORDER BY `time` DESC
-			LIMIT 30');
+			LIMIT 30");
 
 		if (cacti_sizeof($data)) {
 			$panel['detail'] .= '<table class="cactiTable">';
@@ -499,9 +524,21 @@ function thold_collect() {
 		$t_trig = 0;
 		$t_disa = 0;
 
-		$allowed_devices = intropage_get_allowed_devices($user['id']);
+		$simple_perms = get_simple_device_perms($user['id']);
 
-		if ($allowed_devices !== false) {
+		if (!$simple_perms) {
+			$allowed_devices = intropage_get_allowed_devices($user['id']);
+			$host_cond = 'IN (' . $allowed_devices . ')';
+		} else {
+			$allowed_devices = false;
+			$q_host_cond = '';
+		}
+
+		if (!$simple_perms) {
+			$q_host_cond = 'td.host_id ' . $host_cond;
+		}
+
+		if ($allowed_devices !== false || $simple_perms) {
 
 			$x      = '';
 			$sql_where = '';

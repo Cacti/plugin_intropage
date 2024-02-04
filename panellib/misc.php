@@ -177,9 +177,22 @@ function maint($panel, $user_id) {
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
 	if (api_plugin_is_enabled('maint') && $maint_days_before >= 0) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
 
-		if ($allowed_devices !== false) {
+		$simple_perms = get_simple_device_perms($user_id);
+
+		if (!$simple_perms) {
+			$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+			$host_cond = 'IN (' . $allowed_devices . ')';
+		} else {
+			$allowed_devices = false;
+			$q_host_cond = '';
+		}
+
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+
+		if ($allowed_devices !== false || $simple_perms) {
 			$schedules = db_fetch_assoc("SELECT *
 				FROM plugin_maint_schedules
 				WHERE enabled = 'on'");
@@ -191,10 +204,11 @@ function maint($panel, $user_id) {
 					switch ($sc['mtype']) {
 					case 1:
 						if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-							$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+							$hosts = db_fetch_assoc_prepared("SELECT description FROM host
 								INNER JOIN plugin_maint_hosts
 								ON host.id=plugin_maint_hosts.host
-								WHERE host.id in (' . $allowed_devices . ') AND schedule = ?',
+								WHERE schedule = ?
+								$q_host_cond",
 								array($sc['id']));
 
 							if (cacti_sizeof($hosts)) {
@@ -217,10 +231,11 @@ function maint($panel, $user_id) {
 						}
 
 						if ($t > ($sc['stime'] - $maint_days_before) && $t < $sc['etime']) {
-							$hosts = db_fetch_assoc_prepared('SELECT description FROM host
+							$hosts = db_fetch_assoc_prepared("SELECT description FROM host
 								INNER JOIN plugin_maint_hosts
 								ON host.id=plugin_maint_hosts.host
-								WHERE host.id in (' . $allowed_devices . ') AND schedule = ?',
+								WHERE schedule = ?
+								$q_host_cond",
 								array($sc['id']));
 
 							if (cacti_sizeof($hosts)) {
@@ -254,10 +269,10 @@ function webseer($panel, $user_id) {
 	$panel['alarm'] = 'green';
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
-        if ($important_period == -1) {
-                $important_period = time();
-        }
+	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+	if ($important_period == -1) {
+		$important_period = time();
+	}
 
 	if (!api_plugin_is_enabled('webseer')) {
 		$panel['alarm']  = 'yellow';
