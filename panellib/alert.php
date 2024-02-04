@@ -66,22 +66,31 @@ function alert_host($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'AND host.id IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$host_cond = '';
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
 
 		$sql_host_reco = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Recovering' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status_event_count > 0 AND status = 2 AND status_rec_date > DATE_SUB(now(), INTERVAL 10 DAY)
-			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
 			LIMIT " . $lines);
 
 		$sql_host_up = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Up' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status_event_count = 0 AND status = 3 AND status_rec_date > DATE_SUB(now(), INTERVAL 10 DAY)
 			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
@@ -89,20 +98,19 @@ function alert_host($panel, $user_id) {
 
 		$sql_host_fall = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Falling' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status = 3 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
-			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
 
 		$sql_host_down = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Down' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status = 1 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
-			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
-
 
 		$result = $sql_host_reco + $sql_host_up + $sql_host_fall + $sql_host_down;
 		
@@ -201,41 +209,49 @@ function alert_host_detail() {
 
 	$lines = 20;
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'AND host.id IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$host_cond = '';
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 
 		$console_access = get_console_access($_SESSION['sess_user_id']);
 
 		$sql_host_reco = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Recovering' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status_event_count > 0 AND status = 2 AND status_rec_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
-			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
 			LIMIT " . $lines);
 
 		$sql_host_up = db_fetch_assoc("SELECT id, description, status_rec_date as chdate, UNIX_TIMESTAMP(status_rec_date) AS secs, 'Up' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status_event_count = 0 AND status = 3 AND status_rec_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
-			AND disabled != 'on'
 			ORDER BY status_rec_date DESC
 			LIMIT " . $lines);
 
 		$sql_host_fall = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Falling' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status = 3 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
-			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
 
 		$sql_host_down = db_fetch_assoc("SELECT id, description, status_fail_date as chdate, UNIX_TIMESTAMP(status_fail_date) AS secs, 'Down' AS state
 			FROM host
-			WHERE host.id in (" . $allowed_devices . ")
+			WHERE disabled != 'on'
+			$host_cond
 			AND status = 1 AND status_fail_date > DATE_SUB(now(), INTERVAL " . $important_period . " SECOND)
-			AND disabled != 'on'
 			ORDER BY status_fail_date DESC
 			LIMIT " . $lines);
 

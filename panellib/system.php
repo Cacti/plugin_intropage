@@ -400,12 +400,25 @@ function extrem_trend() {
 
 	foreach ($users as $user) {
 		if (is_panel_allowed('extrem', $user['id'])) {
-			$allowed_devices = intropage_get_allowed_devices($user['id']);
+		
+			$simple_perms = get_simple_device_perms($user['id']);
 
-			if ($allowed_devices !== false) {
-				$count = db_fetch_cell('SELECT SUM(failed_polls)
+			if (!$simple_perms) {
+				$allowed_devices = intropage_get_allowed_devices($user['id']);
+				$host_cond = 'IN (' . $allowed_devices . ')';
+			} else {
+				$allowed_devices = false;
+				$q_host_cond = '';
+			}
+
+			if (!$simple_perms) {
+				$q_host_cond = 'WHERE id ' . $host_cond;
+			}
+
+			if ($allowed_devices !== false || $simple_perms) {
+				$count = db_fetch_cell("SELECT SUM(failed_polls)
 					FROM host
-					WHERE id IN (' . $allowed_devices . ')');
+					$q_host_cond");
 
 				db_execute_prepared('REPLACE INTO plugin_intropage_trends
 					(name, value, user_id)

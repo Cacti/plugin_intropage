@@ -90,9 +90,17 @@ function register_graphs() {
 function graph_data_source($panel, $user_id) {
 	global $config, $input_types, $run_from_poller;
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices !== false) {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$graph = array (
 			'pie' => array(
 				'title' => __('Datasources: ', 'intropage'),
@@ -101,7 +109,11 @@ function graph_data_source($panel, $user_id) {
 			),
 		);
 
-		$sql_ds = db_fetch_assoc('SELECT data_input.type_id, COUNT(data_input.type_id) AS total
+		if (!$simple_perms) {
+			$q_host_cond = 'AND data_local.host_id ' . $host_cond;
+		}
+
+		$sql_ds = db_fetch_assoc("SELECT data_input.type_id, COUNT(data_input.type_id) AS total
 			FROM data_local
 			INNER JOIN data_template_data
 			ON (data_local.id = data_template_data.local_data_id)
@@ -109,8 +121,9 @@ function graph_data_source($panel, $user_id) {
 			ON (data_input.id=data_template_data.data_input_id)
 			LEFT JOIN data_template
 			ON (data_local.data_template_id=data_template.id)
-			WHERE local_data_id<>0 AND data_local.host_id in (' . $allowed_devices . ' )
-			GROUP BY type_id LIMIT 6');
+			WHERE local_data_id <> 0 
+			$q_host_cond
+			GROUP BY type_id LIMIT 6");
 
 		if (cacti_sizeof($sql_ds)) {
 			foreach ($sql_ds as $item) {
@@ -138,7 +151,15 @@ function graph_data_source($panel, $user_id) {
 function graph_host_template($panel, $user_id) {
 	global $config;
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	if (defined('CACTI_VERSION')) {
 		$cv = CACTI_VERSION;
@@ -146,7 +167,13 @@ function graph_host_template($panel, $user_id) {
 		$cv = get_cacti_version();
 	}
 
-	if ($allowed_devices !== false) {
+	if ($allowed_devices !== false || $simple_perms) {
+
+		if (!$simple_perms) {
+			$q_host_cond = 'WHERE host.id ' . $host_cond;
+		}
+
+		// 1.2.24+ has billboard.js with treemap
 		if (cacti_version_compare($cv, '1.2.24', '>=')) {
 			$graph = array(
 				'treemap' => array(
@@ -161,7 +188,7 @@ function graph_host_template($panel, $user_id) {
 				FROM host_template
 				LEFT JOIN host
 				ON host_template.id = host.host_template_id
-				WHERE host.id IN ( " . $allowed_devices . ")
+				$q_host_cond
 				GROUP BY host_template_id
 				ORDER BY total DESC
 				LIMIT 20");
@@ -188,7 +215,7 @@ function graph_host_template($panel, $user_id) {
 				FROM host_template
 				LEFT JOIN host
 				ON host_template.id = host.host_template_id
-				WHERE host.id IN ( " . $allowed_devices . ")
+				$q_host_cond
 				GROUP BY host_template_id
 				ORDER BY total DESC
 				LIMIT 6");
@@ -217,11 +244,19 @@ function graph_host_template($panel, $user_id) {
 function graph_host($panel, $user_id, $timespan = 0) {
 	global $config;
 
-        $panel['alarm'] = 'green';
+	$panel['alarm'] = 'green';
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-        if ($allowed_devices !== false) {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$graph = array (
                 	'line' => array(
 				'title'  => __('Devices: ', 'intropage'),
@@ -257,6 +292,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			FROM plugin_intropage_trends
 			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
 			AND name = 'host_down'
+			AND user_id = $user_id
 			ORDER BY cur_timestamp ASC",
 			array($timespan));
 
@@ -288,6 +324,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			FROM plugin_intropage_trends
 			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
 			AND name = 'host_reco'
+			AND user_id = $user_id
 			ORDER BY cur_timestamp ASC",
 			array($timespan));
 
@@ -316,6 +353,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			FROM plugin_intropage_trends
 			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
 			AND name = 'host_disa'
+			AND user_id = $user_id
 			ORDER BY cur_timestamp ASC",
 			array($timespan));
 
@@ -357,7 +395,21 @@ function graph_data_source_detail() {
 		'detail' => ''
 	);
 
-	$sql_ds = db_fetch_assoc('SELECT di.type_id, COUNT(di.type_id) AS total
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND dl.host_id ' . $host_cond;
+	}
+
+	$sql_ds = db_fetch_assoc("SELECT di.type_id, COUNT(di.type_id) AS total
 		FROM data_local AS dl
 		INNER JOIN data_template_data AS dtd
 		ON dl.id = dtd.local_data_id
@@ -366,7 +418,8 @@ function graph_data_source_detail() {
 		LEFT JOIN data_template AS dt
 		ON dl.data_template_id = dt.id
 		WHERE dtd.local_data_id != 0
-		GROUP BY type_id');
+		$q_host_cond
+		GROUP BY type_id");
 
 	$total = 0;
 
@@ -412,32 +465,44 @@ function graph_host_detail() {
 		'detail' => '',
 	);
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
-	$h_all = db_fetch_cell("SELECT COUNT(id) FROM host");
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'AND id ' . $host_cond;
+	}
+
+	$h_all = db_fetch_cell("SELECT COUNT(id) FROM host WHERE $q_host_cond");
 
 	$h_up = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE id in (" . $allowed_devices . ")
-		AND status = 3
+		WHERE status = 3
+		$q_host_cond
 		AND disabled = ''");
 
 	$h_down = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE id in (" . $allowed_devices . ")
-		AND status = 1
+		WHERE status = 1
+		$q_host_cond
 		AND disabled = ''");
 
 	$h_reco = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE id in (" . $allowed_devices . ")
-		AND status = 2
+		WHERE status = 2
+		$q_host_cond
 		AND disabled = ''");
 
 	$h_disa = db_fetch_cell("SELECT COUNT(id)
 		FROM host
-		WHERE id in (" . $allowed_devices . ")
-		AND disabled = 'on'");
+		WHERE disabled = 'on'
+		$q_host_cond");
 
 	$count = $h_all + $h_up + $h_down + $h_reco + $h_disa;
 
@@ -495,9 +560,10 @@ function graph_host_detail() {
 		if (($s['status'] == 1 || $s['status'] == 2) && $s['value'] > 0) {
 			$h = db_fetch_assoc("SELECT id, description, status_fail_date
 				FROM host
-				WHERE id in (" . $allowed_devices . ")
-				AND status = " . $s['status'] .
-				" AND disabled = ''");
+				WHERE disabled = ''
+				$q_host_cond
+				AND status = " . $s['status'] . " 
+				");
 
 			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
@@ -512,8 +578,8 @@ function graph_host_detail() {
 	// disabled
 	$h = db_fetch_assoc("SELECT id, description, status_fail_date
 		FROM host
-		WHERE id in (" . $allowed_devices . ") " .
-		" AND disabled = 'on'");
+		WHERE $q_host cond
+		AND disabled = 'on'");
 
 	$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
@@ -546,10 +612,25 @@ function graph_host_template_detail() {
 		'detail' => '',
 	);
 
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if (!$simple_perms) {
+		$q_host_cond = 'WHERE host.id ' . $host_cond;
+	}
+
 	$rows = db_fetch_assoc("SELECT host_template.id as id, name, COUNT(host.host_template_id) AS total
 		FROM host_template
 		LEFT JOIN host
 		ON (host_template.id = host.host_template_id)
+		$q_host_cond
 		GROUP by host_template_id
 		ORDER BY total desc");
 
@@ -595,16 +676,29 @@ function host_collect() {
 
 	foreach ($users as $user) {
 
-		$allowed_devices = intropage_get_allowed_devices($user['id']);
+		$simple_perms = get_simple_device_perms($user['id']);
 
-		if ($allowed_devices !== false) {
+		if (!$simple_perms) {
+			$allowed_devices = intropage_get_allowed_devices($user['id']);
+			$host_cond = 'IN (' . $allowed_devices . ')';
+		} else {
+			$allowed_devices = false;
+			$q_host_cond = '';
+		}
+
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
+		}
+
+
+		if ($allowed_devices !== false || $simple_perms) {
 
 			db_execute_prepared("REPLACE INTO plugin_intropage_trends
 				(name,value,user_id)
 				SELECT 'host_down', COUNT(*),?
 				FROM host
-				WHERE id in (" . $allowed_devices . ")
-				AND status='1'
+				WHERE status='1'
+				$q_host_cond
 				AND disabled=''",
 				array($user['id']));
 
@@ -612,8 +706,8 @@ function host_collect() {
 				(name,value,user_id)
 				SELECT 'host_reco', COUNT(*),?
 				FROM host
-				WHERE id in (" . $allowed_devices . ")
-				AND status='2'
+				WHERE status='2'
+				$q_host_cond
 				AND disabled=''",
 				array($user['id']));
 
@@ -621,8 +715,8 @@ function host_collect() {
 				(name,value,user_id)
 				SELECT 'host_disa', COUNT(*),?
 				FROM host
-				WHERE id in (" . $allowed_devices . ")
-				AND disabled='on'",
+				WHERE disabled='on'
+				$q_host_cond",
 				array($user['id']));
 		} else {
 			db_execute_prepared("REPLACE INTO plugin_intropage_trends

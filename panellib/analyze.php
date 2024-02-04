@@ -529,13 +529,25 @@ function analyse_tree_host_graph($panel, $user_id) {
 	$total_errors = 0;
 	$data         = array();
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = ' IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+
 		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			GROUP BY hostname,snmp_port
 			HAVING NoDups > 1");
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
@@ -555,14 +567,18 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+		
 		// need only devices with any snmp data
 		$count = db_fetch_cell("SELECT count(host.id)
 			FROM host
 			LEFT OUTER JOIN data_local
 			ON host.id = data_local.host_id
-			WHERE host.id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			AND availability_method > 0
 			AND snmp_version != 0
 			AND bulk_walk_size < 1
@@ -584,11 +600,15 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+
 		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			GROUP BY description
 			HAVING NoDups > 1");
 
@@ -609,7 +629,11 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
 		$data = db_fetch_assoc("SELECT
     		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
     		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
@@ -628,8 +652,8 @@ function analyse_tree_host_graph($panel, $user_id) {
 		INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id
 		WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%'))
           	)) AS dtr ON dl.id = dtr.local_data_id
-		WHERE dl.host_id IN (" . $allowed_devices . ") AND
-		((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
+		WHERE ((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
+		$q_host_cond
 		ORDER BY `name_cache` ASC");
 	} else {
 		$data = array();
@@ -649,18 +673,21 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 
 		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<br/>';
-
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
 		$data = db_fetch_assoc('SELECT dtd.local_data_id,dtd.name_cache
 			FROM data_local AS dl
 			INNER JOIN data_template_data AS dtd
 			ON dl.id=dtd.local_data_id
 			INNER JOIN data_template AS dt ON dt.id=dl.data_template_id
 			INNER JOIN host AS h ON h.id = dl.host_id
-			WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0)
-			AND dl.host_id in (' . $allowed_devices . ')');
+			WHERE (dl.snmp_index = "" AND dl.snmp_query_id > 0) ' .
+			$q_host_cond);
 	} else {
 		$data = array();
 	}
@@ -685,9 +712,12 @@ function analyse_tree_host_graph($panel, $user_id) {
 	// I don't use thold get_allowed_thold because of join plugin_thold_threshold_contact
 
 	if (api_plugin_is_enabled('thold')) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
 
-		if ($allowed_devices != '') {
+		if ($allowed_devices !== false || $simple_perms) {
+			if (!$simple_perms) {
+				$q_host_cond = 'AND gl.host_id ' . $host_cond;
+			}
+
 			$data = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
 				uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 				FROM thold_data AS td
@@ -708,7 +738,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					(td.notify_extra ='' or td.notify_extra is NULL) AND
 					(td.notify_warning_extra='' or td.notify_warning_extra is NULL)
 					AND con.contact_id IS NULL
-					AND gl.host_id IN (" . $allowed_devices . ")
+					$q_host_cond
 					HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
 		} else {
 			$data = array();
@@ -731,14 +761,18 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	if ($allowed_devices != '') {
-		$data = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'WHERE host_id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT host.id, host.description, COUNT(*) AS `count`
 			FROM host
 			INNER JOIN graph_tree_items
 			ON (host.id = graph_tree_items.host_id)
-			WHERE host.id IN (' . $allowed_devices . ')
+			$q_host_cond
 			GROUP BY description
-			HAVING `count` > 1');
+			HAVING `count` > 1");
 
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
@@ -755,11 +789,15 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
+		}
+
 		$data = db_fetch_assoc("SELECT id, description
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			AND id NOT IN (
 				SELECT DISTINCT host_id
 				FROM graph_local
@@ -777,15 +815,19 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts without graphs: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices without graphs: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
+		}
+
 		$data = db_fetch_assoc("SELECT id, description
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			AND id NOT IN (
 				SELECT DISTINCT host_id
 				FROM graph_tree_items
@@ -802,15 +844,19 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts without tree: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices without tree: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
+		}
+
 		$data = db_fetch_assoc("SELECT id, description
 			FROM host
-			WHERE id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			AND (snmp_community ='public' OR snmp_community='private')
 			AND snmp_version IN (1,2)
 			ORDER BY description");
@@ -826,16 +872,20 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Hosts with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
 		}
 	}
 
 	if (api_plugin_is_enabled('monitor')) {
-		if ($allowed_devices != '') {
+		if ($allowed_devices !== false || $simple_perms) {
+			if (!$simple_perms) {
+				$q_host_cond = 'AND id ' . $host_cond;
+			}
+
 			$data = db_fetch_assoc("SELECT id, description, hostname
 				FROM host
-				WHERE id IN (" . $allowed_devices . ")
-				AND monitor != 'on'");
+				WHERE monitor != 'on'
+				$q_host_cond");
 
 			$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
@@ -1243,10 +1293,24 @@ function analyse_tree_host_graph_detail() {
 	global $config, $console_access;
 
 	if (isset($_SESSION['sess_user_id'])) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+		if (!$simple_perms) {
+			$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+			$host_cond = ' IN (' . $allowed_devices . ')';
+		} else {
+			$allowed_devices = false;
+			$q_host_cond = '';
+		}
 	} else {
-		$admin_user      = read_config_option('admin_user');
-		$allowed_devices = intropage_get_allowed_devices($admin_user);
+		$admin_user = read_config_option('admin_user');
+		$simple_perms = get_simple_device_perms($admin_user);
+		if (!$simple_perms) {
+			$allowed_devices = intropage_get_allowed_devices($admin_user);
+			$host_cond = ' IN (' . $allowed_devices . ')';
+		} else {
+			$allowed_devices = false;
+			$q_host_cond = '';
+		}
 	}
 
 	$panel = array(
@@ -1257,48 +1321,58 @@ function analyse_tree_host_graph_detail() {
 
 	$total_errors = 0;
 
-	$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname, snmp_port
-		FROM host
-		WHERE disabled != 'on'
-		GROUP BY hostname,snmp_port
-		HAVING NoDups > 1");
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_same_ip');
-
-	$panel['detail'] .= '<h4>' . __('Devices with the same IP and port - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		$total_errors += $sql_count;
-
-		if ($color == 'red')    {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
 		}
 
-		foreach ($data as $row) {
-			$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
-				FROM host
-				WHERE hostname = " . db_qstr($row['hostname']) . " AND snmp_port=" . $row['snmp_port']);
+		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, hostname, snmp_port
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			GROUP BY hostname,snmp_port
+			HAVING NoDups > 1");
 
-			if (cacti_sizeof($sql_hosts)) {
-				foreach ($sql_hosts as $row2) {
-					$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row2['description']), html_escape($row2['hostname']), $row2['id']);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		$color = read_config_option('intropage_alert_same_ip');
+
+		$panel['detail'] .= '<h4>' . __('Devices with the same IP and port - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+		if (cacti_sizeof($data)) {
+			$total_errors += $sql_count;
+
+			if ($color == 'red')    {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			foreach ($data as $row) {
+				$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
+					FROM host
+					WHERE hostname = " . db_qstr($row['hostname']) . " AND snmp_port=" . $row['snmp_port']);
+
+				if (cacti_sizeof($sql_hosts)) {
+					foreach ($sql_hosts as $row2) {
+						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row2['description']), html_escape($row2['hostname']), $row2['id']);
+					}
 				}
 			}
 		}
 	}
 
-	if ($allowed_devices != '') {
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
 
 		$data = db_fetch_assoc("SELECT host.id as `id`, description, bulk_walk_size
 			FROM host
 			LEFT OUTER JOIN data_local
 			ON host.id = data_local.host_id
-			WHERE host.id IN (" . $allowed_devices . ")
-			AND disabled != 'on'
+			WHERE disabled != 'on'
+			$q_host_cond
 			AND availability_method > 0
 			AND snmp_version != 0
 			AND bulk_walk_size < 1
@@ -1330,147 +1404,83 @@ function analyse_tree_host_graph_detail() {
 
 	}
 
-	$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, description
-		FROM host
-		WHERE disabled != 'on'
-		GROUP BY description
-		HAVING NoDups > 1");
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_same_description');
-
-	$panel['detail'] .= '<h4>' . __('Devices with the same description - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		$total_errors += $sql_count;
-
-		if ($color == 'red')    {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
 		}
 
-		foreach ($data as $row) {
-			$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
-				FROM host
-				WHERE description = " . db_qstr($row['description']));
+		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, description
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			GROUP BY description
+			HAVING NoDups > 1");
 
-			if (cacti_sizeof($sql_hosts)) {
-				foreach ($sql_hosts as $row2) {
-					$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row2['id'], html_escape($row2['description']), $row2['id']);
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		$color = read_config_option('intropage_alert_same_description');
+
+		$panel['detail'] .= '<h4>' . __('Devices with the same description - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+		if (cacti_sizeof($data)) {
+			$total_errors += $sql_count;
+
+			if ($color == 'red')    {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			foreach ($data as $row) {
+				$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
+					FROM host
+					WHERE description = " . db_qstr($row['description']));
+
+				if (cacti_sizeof($sql_hosts)) {
+					foreach ($sql_hosts as $row2) {
+						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row2['id'], html_escape($row2['description']), $row2['id']);
+					}
 				}
 			}
 		}
 	}
 
-	$data = db_fetch_assoc("SELECT
-    		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
-    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
-		FROM data_local AS dl
-    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
-    		INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
-    		LEFT JOIN host AS h ON h.id = dl.host_id
-		INNER JOIN (
-    		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti
-        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
-        	LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
-        	LEFT JOIN host AS h ON h.id = gl.host_id
-		WHERE graph_type_id IN (4,5,6,7,8,20) AND
-          	task_item_id IS NULL AND cdef_id NOT IN (
-              	SELECT c.id FROM cdef AS c
-		INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id
-		WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%'))
-		)) AS dtr ON dl.id = dtr.local_data_id
-		WHERE dl.host_id IN (" . $allowed_devices . ") AND
-		((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
-		ORDER BY `name_cache` ASC");
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_orphaned_ds');
-
-	$panel['detail'] .= '<h4>' . __('Orphaned Data Sources - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		$total_errors += $sql_count;
-
-		if ($color == 'red') {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
 		}
 
-		foreach ($data as $row) {
-			$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
-			html_escape($row['name_cache']) . '</a><br/>';
-		}
-	}
-
-	// DS - bad indexes
-	$data = db_fetch_assoc('SELECT dtd.local_data_id,dtd.name_cache
-		FROM data_local AS dl
-		INNER JOIN data_template_data AS dtd
-		ON dl.id=dtd.local_data_id
-		INNER JOIN data_template AS dt
-		ON dt.id=dl.data_template_id
-		INNER  JOIN host AS h
-		ON h.id = dl.host_id
-		WHERE dl.snmp_index = "" AND dl.snmp_query_id > 0');
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_bad_indexes');
-
-	$panel['detail'] .= '<h4>' . __('Datasources with bad indexes - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		if ($color == 'red')    {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
-		}
-
-		foreach ($data as $row) {
-			$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
-			html_escape($row['name_cache']) . '</a><br/>';
-
-		}
-
-		$total_errors += $sql_count;
-	}
-
-	// thold plugin - logonly alert and warning thold
-	if (api_plugin_is_enabled('thold')) {
-		$data = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
-			uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
-			FROM thold_data AS td
-			INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
-			LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id
-			LEFT JOIN host AS h ON h.id=gl.host_id
-			LEFT JOIN thold_template AS tt ON tt.id=td.thold_template_id
-			LEFT JOIN data_template_data AS dtd ON dtd.local_data_id=td.local_data_id
-			LEFT JOIN data_template_rrd AS dtr ON dtr.id=td.data_template_rrd_id
-			LEFT JOIN user_auth_perms AS uap0 ON (gl.id=uap0.item_id AND uap0.type=1)
-			LEFT JOIN user_auth_perms AS uap1 ON (gl.host_id=uap1.item_id AND uap1.type=3)
-			LEFT JOIN user_auth_perms AS uap2 ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-			LEFT JOIN plugin_thold_threshold_contact as con ON (td.id = con.thold_id)
-			WHERE
-				td.thold_enabled = 'on' AND
-				(td.notify_warning is NULL or td.notify_warning=0) AND
-				(td.notify_alert is NULL or td.notify_alert =0) AND
-				(td.notify_extra ='' or td.notify_extra is NULL) AND
-				(td.notify_warning_extra='' or td.notify_warning_extra is NULL)
-				AND con.contact_id IS NULL
-			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
+		$data = db_fetch_assoc("SELECT
+    			dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
+	    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
+			FROM data_local AS dl
+	    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
+    			INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
+	    		LEFT JOIN host AS h ON h.id = dl.host_id
+			INNER JOIN (
+	    		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti
+	        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
+        		LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
+        		LEFT JOIN host AS h ON h.id = gl.host_id
+			WHERE graph_type_id IN (4,5,6,7,8,20) AND
+        	  	task_item_id IS NULL AND cdef_id NOT IN (
+              		SELECT c.id FROM cdef AS c
+			INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id
+			WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%'))
+			)) AS dtr ON dl.id = dtr.local_data_id
+			WHERE ((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
+			$q_host_cond
+			ORDER BY `name_cache` ASC");
 
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
-		$color = read_config_option('intropage_alert_thold_logonly');
+		$color = read_config_option('intropage_alert_orphaned_ds');
 
-		$panel['detail'] .= '<h4>' . __('Thold logonly alert/warning - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+		$panel['detail'] .= '<h4>' . __('Orphaned Data Sources - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 		if (cacti_sizeof($data)) {
+			$total_errors += $sql_count;
+
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
 			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
@@ -1478,150 +1488,35 @@ function analyse_tree_host_graph_detail() {
 			}
 
 			foreach ($data as $row) {
-				$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id']) . '">' .
-				html_escape($row['td_name']) . '</a><br/>';
-			}
-
-			$total_errors += $sql_count;
-		}
-	}
-
-	$data = db_fetch_assoc('SELECT host.id, host.description, COUNT(*) AS `count`
-		FROM host
-		INNER JOIN graph_tree_items
-		ON host.id = graph_tree_items.host_id
-		GROUP BY description
-		HAVING `count` > 1');
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_more_trees');
-
-	$panel['detail'] .= '<h4>' . __('Devices in more than one tree - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		if ($color == 'red') {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
-		}
-
-		foreach ($data as $row) {
-			$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description,
-				graph_tree_items.title, graph_tree_items.parent, graph_tree.name
-				FROM host
-				INNER JOIN graph_tree_items
-				ON (host.id = graph_tree_items.host_id)
-				INNER JOIN graph_tree
-				ON (graph_tree_items.graph_tree_id = graph_tree.id)
-				WHERE host.id = ?',
-				array($row['id']));
-
-			if (cacti_sizeof($sql_hosts)) {
-				foreach ($sql_hosts as $host) {
-					$parent = $host['parent'];
-					$tree   = $host['name'] . ' / ';
-					while ($parent != 0) {
-						$sql_parent = db_fetch_row('SELECT parent, title FROM graph_tree_items WHERE id = ' . $parent);
-						$parent     = $sql_parent['parent'];
-						$tree .= $sql_parent['title'] . ' / ';
-					}
-
-					$panel['detail'] .= sprintf('<a class="linkEditMain" href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', html_escape($config['url_path']), $host['gtid'], html_escape($host['description']), $tree);
-				}
+				$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
+				html_escape($row['name_cache']) . '</a><br/>';
 			}
 		}
 	}
 
-	$data = db_fetch_assoc("SELECT id, description
-		FROM host
-		WHERE disabled != 'on'
-		AND id NOT IN (
-			SELECT DISTINCT host_id
-			FROM graph_local
-		)
-		AND snmp_version != 0");
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_without_graph');
-
-	$panel['detail'] .= '<h4>' . __('Devices without Graphs - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		if ($color == 'red') {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND h.id ' . $host_cond;
 		}
 
-		foreach ($data as $row) {
-			$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
-		}
-	}
-
-	$data = db_fetch_assoc("SELECT id, description
-		FROM host
-		WHERE disabled != 'on'
-		AND id NOT IN (
-			SELECT DISTINCT host_id
-			FROM graph_tree_items
-		)");
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_without_tree');
-
-	$panel['detail'] .= '<h4>' . __('Devices without tree - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		if ($color == 'red')    {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
-		}
-
-		foreach ($data as $row) {
-			$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
-		}
-	}
-
-	$data = db_fetch_assoc("SELECT id, description
-		FROM host
-		WHERE disabled != 'on'
-		AND (snmp_community ='public' OR snmp_community='private')
-		AND snmp_version IN (1,2)
-		ORDER BY description");
-
-	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
-
-	$color = read_config_option('intropage_alert_default_community');
-
-	$panel['detail'] .= '<h4>' . __('Hosts with default public/private community - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-	if (cacti_sizeof($data)) {
-		if ($color == 'red')    {
-			$panel['alarm'] = 'red';
-		} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-			$panel['alarm'] = 'yellow';
-		}
-
-		foreach ($data as $row) {
-			$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
-		}
-	}
-
-	// plugin monitor - host without monitoring
-	if (api_plugin_is_enabled('monitor')) {
-		$data = db_fetch_assoc("SELECT id, description, hostname
-			FROM host
-			WHERE monitor != 'on'");
+		// DS - bad indexes
+		$data = db_fetch_assoc("SELECT dtd.local_data_id,dtd.name_cache
+			FROM data_local AS dl
+			INNER JOIN data_template_data AS dtd
+			ON dl.id=dtd.local_data_id
+			INNER JOIN data_template AS dt
+			ON dt.id=dl.data_template_id
+			INNER  JOIN host AS h
+			ON h.id = dl.host_id
+			WHERE dl.snmp_index = ''
+			$q_host_cond
+			AND dl.snmp_query_id > 0");
 
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
-		$color = read_config_option('intropage_alert_without_monitoring');
+		$color = read_config_option('intropage_alert_bad_indexes');
 
-		$panel['detail'] .= '<h4>' . __('Plugin Monitor - Unmonitored hosts - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+		$panel['detail'] .= '<h4>' . __('Datasources with bad indexes - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 		if (cacti_sizeof($data)) {
 			if ($color == 'red')    {
@@ -1631,7 +1526,250 @@ function analyse_tree_host_graph_detail() {
 			}
 
 			foreach ($data as $row) {
-				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), html_escape($row['hostname']), $row['id']);
+				$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'data_sources.php?action=ds_edit&id=' . $row['local_data_id']) . '">' .
+				html_escape($row['name_cache']) . '</a><br/>';
+			}
+
+			$total_errors += $sql_count;
+		}
+	}
+
+	// thold plugin - logonly alert and warning thold
+
+	if (api_plugin_is_enabled('thold')) {
+		if ($allowed_devices !== false || $simple_perms) {
+			if (!$simple_perms) {
+				$q_host_cond = 'AND h.id ' . $host_cond;
+			}
+
+			$data = db_fetch_assoc("SELECT td.id AS td_id, concat(h.description,'-',tt.name) AS td_name,
+				uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
+				FROM thold_data AS td
+				INNER JOIN graph_local AS gl ON gl.id=td.local_graph_id
+				LEFT JOIN graph_templates AS gt ON gt.id=gl.graph_template_id
+				LEFT JOIN host AS h ON h.id=gl.host_id
+				LEFT JOIN thold_template AS tt ON tt.id=td.thold_template_id
+				LEFT JOIN data_template_data AS dtd ON dtd.local_data_id=td.local_data_id
+				LEFT JOIN data_template_rrd AS dtr ON dtr.id=td.data_template_rrd_id
+				LEFT JOIN user_auth_perms AS uap0 ON (gl.id=uap0.item_id AND uap0.type=1)
+				LEFT JOIN user_auth_perms AS uap1 ON (gl.host_id=uap1.item_id AND uap1.type=3)
+				LEFT JOIN user_auth_perms AS uap2 ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+				LEFT JOIN plugin_thold_threshold_contact as con ON (td.id = con.thold_id)
+				WHERE
+					td.thold_enabled = 'on'
+					$q_host_cond
+					AND (td.notify_warning is NULL or td.notify_warning=0)
+					AND (td.notify_alert is NULL or td.notify_alert =0)
+					AND (td.notify_extra ='' or td.notify_extra is NULL)
+					AND (td.notify_warning_extra='' or td.notify_warning_extra is NULL)
+					AND con.contact_id IS NULL
+				HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))");
+
+			$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+			$color = read_config_option('intropage_alert_thold_logonly');
+
+			$panel['detail'] .= '<h4>' . __('Thold logonly alert/warning - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+			if (cacti_sizeof($data)) {
+				if ($color == 'red') {
+					$panel['alarm'] = 'red';
+				} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+					$panel['alarm'] = 'yellow';
+				}
+
+				foreach ($data as $row) {
+					$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path'] . 'plugins/thold/thold.php?action=edit&id=' . $row['td_id']) . '">' .
+					html_escape($row['td_name']) . '</a><br/>';
+				}
+
+				$total_errors += $sql_count;
+			}
+		}
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'WHERE host.id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT host.id, host.description, COUNT(*) AS `count`
+			FROM host
+			INNER JOIN graph_tree_items
+			ON host.id = graph_tree_items.host_id
+			$q_host_cond
+			GROUP BY description
+			HAVING `count` > 1");
+
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		$color = read_config_option('intropage_alert_more_trees');
+
+		$panel['detail'] .= '<h4>' . __('Devices in more than one tree - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+		if (cacti_sizeof($data)) {
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			foreach ($data as $row) {
+				$sql_hosts = db_fetch_assoc_prepared('SELECT graph_tree.id as gtid, host.description,
+					graph_tree_items.title, graph_tree_items.parent, graph_tree.name
+					FROM host
+					INNER JOIN graph_tree_items
+					ON (host.id = graph_tree_items.host_id)
+					INNER JOIN graph_tree
+					ON (graph_tree_items.graph_tree_id = graph_tree.id)
+					WHERE host.id = ?',
+					array($row['id']));
+
+				if (cacti_sizeof($sql_hosts)) {
+					foreach ($sql_hosts as $host) {
+						$parent = $host['parent'];
+						$tree   = $host['name'] . ' / ';
+						while ($parent != 0) {
+							$sql_parent = db_fetch_row('SELECT parent, title FROM graph_tree_items WHERE id = ' . $parent);
+							$parent     = $sql_parent['parent'];
+							$tree .= $sql_parent['title'] . ' / ';
+						}
+
+						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', html_escape($config['url_path']), $host['gtid'], html_escape($host['description']), $tree);
+					}
+				}
+			}
+		}
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT id, description
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			AND id NOT IN (
+				SELECT DISTINCT host_id
+				FROM graph_local
+			)
+			AND snmp_version != 0");
+
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		$color = read_config_option('intropage_alert_without_graph');
+
+		$panel['detail'] .= '<h4>' . __('Devices without Graphs - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+		if (cacti_sizeof($data)) {
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			foreach ($data as $row) {
+				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
+			}
+		}
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT id, description
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			AND id NOT IN (
+				SELECT DISTINCT host_id
+				FROM graph_tree_items
+			)");
+
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		$color = read_config_option('intropage_alert_without_tree');
+
+		$panel['detail'] .= '<h4>' . __('Devices without tree - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+		if (cacti_sizeof($data)) {
+			if ($color == 'red')    {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			foreach ($data as $row) {
+				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
+			}
+		}
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT id, description
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			AND (snmp_community ='public' OR snmp_community='private')
+			AND snmp_version IN (1,2)
+			ORDER BY description");
+
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		$color = read_config_option('intropage_alert_default_community');
+
+		$panel['detail'] .= '<h4>' . __('Devices with default public/private community - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+		if (cacti_sizeof($data)) {
+			if ($color == 'red')    {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			foreach ($data as $row) {
+				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id']);
+			}
+		}
+	}
+
+	// plugin monitor - host without monitoring
+	if (api_plugin_is_enabled('monitor')) {
+		if ($allowed_devices !== false || $simple_perms) {
+			if (!$simple_perms) {
+				$q_host_cond = 'AND host.id ' . $host_cond;
+			}
+
+			$data = db_fetch_assoc("SELECT id, description, hostname
+				FROM host
+				WHERE monitor != 'on'
+				$q_host_cond
+				");
+
+			$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+			$color = read_config_option('intropage_alert_without_monitoring');
+
+			$panel['detail'] .= '<h4>' . __('Plugin Monitor - Unmonitored hosts - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+			if (cacti_sizeof($data)) {
+				if ($color == 'red')    {
+					$panel['alarm'] = 'red';
+				} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+					$panel['alarm'] = 'yellow';
+				}
+
+				foreach ($data as $row) {
+					$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s %s (ID: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), html_escape($row['hostname']), $row['id']);
+				}
 			}
 		}
 	}

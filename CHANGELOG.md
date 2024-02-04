@@ -23,6 +23,8 @@
 
 * feature: add check for Device Bulk walk size
 
+* feature: Simple permission - optimalization for large installations
+
 * New event highlighting system
 
 --- 4.0.3 ---

@@ -173,27 +173,39 @@ function busiest_cpu($panel, $user_id) {
 		save_panel_result($panel, $user_id);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash = 'f6e7d21c19434666bbdac00ccef9932f'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.average IS NOT NULL AND
-			dtd.data_template_id = ' . $ds['id'] . '
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dsh.average IS NOT NULL
+			AND dtd.data_template_id = " . $ds['id'] . "
 			ORDER BY dsh.average DESC
-			LIMIT ' . $lines;
+			LIMIT " . $lines;
 
 		$avg = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -280,27 +292,39 @@ function busiest_load($panel, $user_id) {
 		save_panel_result($panel, $user_id);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms)&& cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.average IS NOT NULL AND
-			dtd.data_template_id = ' . $ds['id'] . '
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dsh.average IS NOT NULL
+			AND dtd.data_template_id = " . $ds['id'] . "
 			ORDER BY dsh.average DESC
-			LIMIT ' . $lines;
+			LIMIT " . $lines;
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -378,44 +402,55 @@ function busiest_hdd($panel, $user_id) {
 		save_panel_result($panel, $user_id);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-	if ($allowed_devices != '' && $ds) {
+	if (($allowed_devices !== false || $simple_perms) && $ds) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.rrd_name = \'hdd_used\' AND
-			dtd.data_template_id = ' . $ds['id'] . '
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dsh.rrd_name = 'hdd_used'
+			AND dtd.data_template_id = " . $ds['id'] . "
 			ORDER BY xvalue DESC
-			LIMIT ' . $lines;
+			LIMIT " . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		// avg
 		$columns = " dtd.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
 
-		$query = ' FROM data_template_data AS dtd
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.rrd_name = \'hdd_used\' AND
-			dtd.data_template_id = ' . $ds['id'] . '
-			AND dsh.rrd_name = \'hdd_used\'';
+			WHERE dsh.rrd_name = 'hdd_used'
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'];
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
 		$avg = 0;
@@ -498,15 +533,28 @@ function busiest_uptime($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$columns = " id, description, snmp_sysUpTimeInstance";
-		$query = ' FROM host
-			WHERE id IN (' . $allowed_devices . ') AND
-			disabled != "on"
+
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
+		}
+
+		$query = " FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY snmp_sysUpTimeInstance DESC
-			LIMIT ' . $lines;
+			LIMIT " . $lines;
 
 		$avg    = db_fetch_cell('SELECT AVG(snmp_sysUpTimeInstance)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -573,29 +621,41 @@ function busiest_traffic($panel, $user_id) {
 		save_panel_result($panel, $user_id);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dtd.data_template_id = ' . $ds['id'] . ' AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			rrd_name =\'traffic_out\'
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND rrd_name = 'traffic_out'
 			ORDER BY xvalue DESC
-			LIMIT ' . $lines;
+			LIMIT " . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -695,27 +755,39 @@ function busiest_interface_error($panel, $user_id) {
 		save_panel_result($panel, $user_id);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dtd.data_template_id = ' . $ds['id'] . ' AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.average IS NOT NULL
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
-			LIMIT ' . $lines;
+			LIMIT " . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -802,14 +874,26 @@ function busiest_interface_util($panel, $user_id) {
 		save_panel_result($panel, $user_id);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($user_id);
+	$simple_perms = get_simple_device_perms($user_id);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($user_id);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$perc = array();
+
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
 
 		$result = db_fetch_assoc("SELECT dsh.local_data_id, rrd_name, value,
 			dl.host_id AS `host_id`, dl.snmp_query_id AS `snmp_query_id`, dl.snmp_index AS `snmp_index`
@@ -819,11 +903,11 @@ function busiest_interface_util($panel, $user_id) {
 			LEFT JOIN data_template_data AS dtd
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != 'on' AND
-			dl.host_id IN (" . $allowed_devices . ") AND
-			dtd.data_template_id = " . $ds['id'] . " AND
-			value > 0 AND
-			time > DATE_SUB(NOW(), INTERVAL 5 MINUTE)
+			WHERE h.disabled != 'on' 
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND value > 0
+			AND time > DATE_SUB(NOW(), INTERVAL 5 MINUTE)
 			ORDER BY value DESC");
 
 		foreach ($result as $row) {
@@ -919,27 +1003,39 @@ function busiest_cpu_detail() {
 		save_panel_result($panel, $_SESSION['sess_user_id']);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.average IS NOT NULL AND
-			dtd.data_template_id = ' . $ds['id'] . '
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dsh.average IS NOT NULL
+			AND dtd.data_template_id = " . $ds['id'] . "
 			ORDER BY dsh.average DESC
-			LIMIT 30';
+			LIMIT 30";
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -1023,27 +1119,40 @@ function busiest_load_detail() {
 		save_panel_result($panel, $_SESSION['sess_user_id']);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
 
 	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.average IS NOT NULL AND
-			dtd.data_template_id = ' . $ds['id'] . '
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dsh.average IS NOT NULL
+			AND dtd.data_template_id = " . $ds['id'] . "
 			ORDER BY dsh.average DESC
-			LIMIT 30';
+			LIMIT 30";
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -1128,42 +1237,55 @@ function busiest_hdd_detail() {
 		save_panel_result($panel, $_SESSION['sess_user_id']);
 	}
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.rrd_name = \'hdd_used\' AND
-			dtd.data_template_id = ' . $ds['id'] . '
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dsh.rrd_name = 'hdd_used'
+			AND dtd.data_template_id = " . $ds['id'] . "
 			ORDER BY xvalue DESC
-			LIMIT 30';
+			LIMIT 30";
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		// avg
 		$columns = " dtd.local_data_id AS ldid,100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue ";
 
-		$query = ' FROM data_template_data AS dtd
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
-			LEFT JOIN data_local AS dl on dl.id=dtd.local_data_id
-			WHERE dl.host_id IN (' . $allowed_devices . ')
-			AND dsh.rrd_name = \'hdd_used\'
-			AND dtd.data_template_id = ' . $ds['id'];
+			LEFT JOIN data_local AS dl
+			ON dl.id=dtd.local_data_id
+			WHERE dsh.rrd_name = 'hdd_used'
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'];
 
 		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
 		$avg = 0;
@@ -1243,16 +1365,28 @@ function busiest_uptime_detail() {
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
-	if ($allowed_devices != '') {
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
+
+	if ($allowed_devices !== false || $simple_perms) {
 		$columns = " id, description, snmp_sysUpTimeInstance";
 
-		$query = ' FROM host
-			WHERE disabled != "on" AND
-			id IN (' . $allowed_devices . ')
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
+		}
+
+		$query = " FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
 			ORDER BY snmp_sysUpTimeInstance DESC
-			LIMIT 30';
+			LIMIT 30";
 
 		$avg = db_fetch_cell('SELECT AVG(snmp_sysUpTimeInstance)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -1306,29 +1440,41 @@ function busiest_traffic_detail() {
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), $_SESSION['sess_user_id']);
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id = dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dtd.data_template_id = ' . $ds['id'] . ' AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			rrd_name = \'traffic_out\'
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND rrd_name = 'traffic_out'
 			ORDER BY xvalue DESC
-			LIMIT 30';
+			LIMIT 30";
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -1422,27 +1568,39 @@ function busiest_interface_error_detail() {
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
-		$query = ' FROM data_template_data AS dtd
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
+
+		$query = " FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN data_local AS dl
 			ON dl.id=dtd.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != "on" AND
-			dtd.data_template_id = ' . $ds['id'] . ' AND
-			dl.host_id IN (' . $allowed_devices . ') AND
-			dsh.average IS NOT NULL
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
-			LIMIT 30';
+			LIMIT 30";
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -1521,14 +1679,26 @@ function busiest_interface_util_detail() {
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
-	$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+
+	if (!$simple_perms) {
+		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+		$host_cond = 'IN (' . $allowed_devices . ')';
+	} else {
+		$allowed_devices = false;
+		$q_host_cond = '';
+	}
 
 	$ds = db_fetch_row("SELECT id,name
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if ($allowed_devices != '' && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$perc = array();
+
+		if (!$simple_perms) {
+			$q_host_cond = 'AND dl.host_id ' . $host_cond;
+		}
 
 		$result = db_fetch_assoc("SELECT dsh.local_data_id, rrd_name, value,
 			dl.host_id AS `host_id`, dl.snmp_query_id AS `snmp_query_id`, dl.snmp_index AS `snmp_index`
@@ -1538,11 +1708,11 @@ function busiest_interface_util_detail() {
 			LEFT JOIN data_template_data AS dtd
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != 'on' AND
-			dl.host_id IN (" . $allowed_devices . ") AND
-			dtd.data_template_id = " . $ds['id'] . " AND
-			value > 0 AND
-			time > date_sub(now(), INTERVAL 5 MINUTE)
+			WHERE h.disabled != 'on'
+			$q_host_cond
+			AND dtd.data_template_id = " . $ds['id'] . "
+			AND value > 0
+			AND time > date_sub(now(), INTERVAL 5 MINUTE)
 			ORDER BY value DESC");
 
 		foreach ($result as $row) {
