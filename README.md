@@ -98,4 +98,4 @@ https://forums.cacti.net/viewtopic.php?f=5&t=51920
 Tomas Macek, Peter Michael Calum, Trevor Leadley, Earendil
 
 -----------------------------------------------
-Copyright (c) 2004-2023 - The Cacti Group, Inc.
+Copyright (c) 2004-2024 - The Cacti Group, Inc.
