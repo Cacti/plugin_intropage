@@ -406,7 +406,7 @@ function analyse_db($panel, $user_id) {
 	$memtables = 0;
 
 	$panel['alarm'] = 'green';
-	$panel['data']  = '';
+	$panel['data']  = '<table class="cactiTable">';
 
 	db_execute_prepared('UPDATE plugin_intropage_panel_data
 		SET last_update = NOW()
@@ -420,45 +420,63 @@ function analyse_db($panel, $user_id) {
 
 	if ($size > 1073741824) {
 		$panel['alarm'] = 'grey';
-		$panel['data']  = __('Skipping DB check. Database too large');
-		save_panel_result($panel, $user_id);
-		return '';
-	}
+		$panel['data']  = '<tr><td>' . __('Skipping DB tables checks. Database too large') . '</td></tr>';
+	} else {
 
-	$db_check_level = read_config_option('intropage_analyse_db_level');
+		$db_check_level = read_config_option('intropage_analyse_db_level');
 
-	$tables = db_fetch_assoc('SHOW TABLES');
+		$tables = db_fetch_assoc('SHOW TABLES');
 
-	foreach ($tables as $key => $val) {
-		$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
+		foreach ($tables as $key => $val) {
+			$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
 
-		if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
-			$memtables++;
-		} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
-			$damaged++;
-			$panel['data'] .= '<tr><td>' . __('Table %s status %s', $row['Table'], $row['Msg_text'], 'intropage') . '</td></tr>';
+			if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
+				$memtables++;
+			} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
+				$damaged++;
+				$panel['data'] .= '<tr><td>' . __('Table %s status %s', $row['Table'], $row['Msg_text'], 'intropage') . '</td></tr>';
+			}
+		}
+
+		if ($damaged > 0) {
+			$panel['alarm'] = 'red';
+			$panel['data'] .= '<tr>
+					<td><span class="txt_big">' . __('DB: Problems', 'intropage') . '</span></td>
+				</tr>
+				<tr><td><hr></td></tr>
+				<tr>
+					<td></td>
+				</tr>' . $panel['data'];
+		} else {
+			$panel['data'] .= '<table class="cactiTable">
+				<tr>
+					<td><span class="txt_big">' . __('DB: OK', 'intropage') . '</span></td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>' . $panel['data'];
 		}
 	}
 
-	if ($damaged > 0) {
-		$panel['alarm'] = 'red';
-		$panel['data']  = '<table class="cactiTable">
-			<tr>
-				<td><span class="txt_big">' . __('DB: Problems', 'intropage') . '</span></td>
-			</tr>
-			<tr><td><hr></td></tr>
-			<tr>
-				<td></td>
-			</tr>' . $panel['data'];
-	} else {
-		$panel['data'] = '<table class="cactiTable">
-			<tr>
-				<td><span class="txt_big">' . __('DB: OK', 'intropage') . '</span></td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>' . $panel['data'];
+	// used/max connections
+	$con_max  = db_fetch_row("SHOW VARIABLES LIKE 'max_connections'");
+	$con_used = db_fetch_row("SHOW GLOBAL STATUS LIKE 'max_used_connections'");
+
+	foreach ($con_max as $key => $value) {
+		$con_max = $value;
 	}
+
+	foreach ($con_used as $key => $value) {
+		$con_used = $value;
+	}
+
+	if ($con_used >= $con_max) {
+		$panel['alarm'] = 'red';
+	}
+
+	$panel['data'] .= '<tr><td>' . __('Max connection reached: %s / %s', $con_used, $con_max, 'intropage') . '<span class="inpa_sq color_' . $panel['alarm'] . '"></span>';
+	$panel['data'] .= display_tooltip(__('You can increase Max connection via command line tools or permanently in config file', 'intropage'));
+	$panel['data'] .= '</td></tr>';
 
 	// connection errors
 	$cerrors = 0;
