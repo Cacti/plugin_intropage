@@ -27,6 +27,8 @@
 
 * New event highlighting system
 
+* feature: DB check for used/max connections
+
 --- 4.0.3 ---
 
 * feature#226: Panel Devices - add what devices are down and fail date
