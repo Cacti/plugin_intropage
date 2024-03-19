@@ -406,7 +406,7 @@ function analyse_db($panel, $user_id) {
 	$memtables = 0;
 
 	$panel['alarm'] = 'green';
-	$panel['data']  = '';
+	$panel['data']  = '<table class="cactiTable">';
 
 	db_execute_prepared('UPDATE plugin_intropage_panel_data
 		SET last_update = NOW()
@@ -420,45 +420,63 @@ function analyse_db($panel, $user_id) {
 
 	if ($size > 1073741824) {
 		$panel['alarm'] = 'grey';
-		$panel['data']  = __('Skipping DB check. Database too large');
-		save_panel_result($panel, $user_id);
-		return '';
-	}
+		$panel['data']  = '<tr><td>' . __('Skipping DB tables checks. Database too large') . '</td></tr>';
+	} else {
 
-	$db_check_level = read_config_option('intropage_analyse_db_level');
+		$db_check_level = read_config_option('intropage_analyse_db_level');
 
-	$tables = db_fetch_assoc('SHOW TABLES');
+		$tables = db_fetch_assoc('SHOW TABLES');
 
-	foreach ($tables as $key => $val) {
-		$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
+		foreach ($tables as $key => $val) {
+			$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
 
-		if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
-			$memtables++;
-		} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
-			$damaged++;
-			$panel['data'] .= '<tr><td>' . __('Table %s status %s', $row['Table'], $row['Msg_text'], 'intropage') . '</td></tr>';
+			if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
+				$memtables++;
+			} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
+				$damaged++;
+				$panel['data'] .= '<tr><td>' . __('Table %s status %s', $row['Table'], $row['Msg_text'], 'intropage') . '</td></tr>';
+			}
+		}
+
+		if ($damaged > 0) {
+			$panel['alarm'] = 'red';
+			$panel['data'] .= '<tr>
+					<td><span class="txt_big">' . __('DB: Problems', 'intropage') . '</span></td>
+				</tr>
+				<tr><td><hr></td></tr>
+				<tr>
+					<td></td>
+				</tr>' . $panel['data'];
+		} else {
+			$panel['data'] .= '<table class="cactiTable">
+				<tr>
+					<td><span class="txt_big">' . __('DB: OK', 'intropage') . '</span></td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>' . $panel['data'];
 		}
 	}
 
-	if ($damaged > 0) {
-		$panel['alarm'] = 'red';
-		$panel['data']  = '<table class="cactiTable">
-			<tr>
-				<td><span class="txt_big">' . __('DB: Problems', 'intropage') . '</span></td>
-			</tr>
-			<tr><td><hr></td></tr>
-			<tr>
-				<td></td>
-			</tr>' . $panel['data'];
-	} else {
-		$panel['data'] = '<table class="cactiTable">
-			<tr>
-				<td><span class="txt_big">' . __('DB: OK', 'intropage') . '</span></td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>' . $panel['data'];
+	// used/max connections
+	$con_max  = db_fetch_row("SHOW VARIABLES LIKE 'max_connections'");
+	$con_used = db_fetch_row("SHOW GLOBAL STATUS LIKE 'max_used_connections'");
+
+	foreach ($con_max as $key => $value) {
+		$con_max = $value;
 	}
+
+	foreach ($con_used as $key => $value) {
+		$con_used = $value;
+	}
+
+	if ($con_used >= $con_max) {
+		$panel['alarm'] = 'red';
+	}
+
+	$panel['data'] .= '<tr><td>' . __('Max connection reached: %s / %s', $con_used, $con_max, 'intropage') . '<span class="inpa_sq color_' . $panel['alarm'] . '"></span>';
+	$panel['data'] .= display_tooltip(__('You can increase Max connection via command line tools or permanently in config file', 'intropage'));
+	$panel['data'] .= '</td></tr>';
 
 	// connection errors
 	$cerrors = 0;
@@ -600,34 +618,35 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	if ($allowed_devices !== false || $simple_perms) {
-		if (!$simple_perms) {
-			$q_host_cond = 'AND host.id ' . $host_cond;
-		}
+	// last run of reindex, rrdchecker, ...
+	$last_runs = array (
+		'reindex_last_run_time'    => __('Reindex last run'),
+		'rrdcheck_last_run_time'   => __('RRD Checker last run'),
+		'rrdcleaner_last_run_time' => __('RRD Cleaner last run')
+	);
 
-		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
-			FROM host
-			WHERE disabled != 'on'
-			$q_host_cond
-			GROUP BY description
-			HAVING NoDups > 1");
+	$date_fmt = date_time_format();
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+	foreach ($last_runs as $key => $value) {
+		$color = 'green';
 
-		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
+		if (config_value_exists($key)) {
+			$last = read_config_option($key);
 
-			$color = read_config_option('intropage_alert_same_description');
-
-			if ($color == 'red') {
-				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-				$panel['alarm'] = 'yellow';
+			if ($last < (time() - 86400*7)) {
+				$color = 'yellow';
+				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('%s: %s', $value, date($date_fmt, $last), 'intropage');
+				$panel['data'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '<br/>';
+				unset($last);
 			}
-
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
+		} else {
+			$color = 'red';
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('%s: not run yet', $value, 'intropage');
+			$panel['data'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '<br/>';
 		}
 	}
+
+
 
 	if ($allowed_devices !== false || $simple_perms) {
 		if (!$simple_perms) {
@@ -760,6 +779,36 @@ function analyse_tree_host_graph($panel, $user_id) {
 			$total_errors += $sql_count;
 		}
 	}
+
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND host.id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, description
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			GROUP BY description
+			HAVING NoDups > 1");
+
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		if (cacti_sizeof($data)) {
+			$total_errors += $sql_count;
+
+			$color = read_config_option('intropage_alert_same_description');
+
+			if ($color == 'red') {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
+		}
+	}
+
 
 	if ($allowed_devices !== false || $simple_perms) {
 		if (!$simple_perms) {
@@ -1382,7 +1431,13 @@ function analyse_tree_host_graph_detail() {
 
 		$color = read_config_option('intropage_bulk_walk_size');
 
-		$panel['detail'] .= '<h4>' . __('Not optimized Bulk Walk Size devices - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+		$panel['detail'] .= '<h4>' . __('Not optimized Bulk Walk Size devices - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span>';
+
+		if ($sql_count > 0) {
+			$panel['detail'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
+		}
+
+		$panel['detail'] .= '</h4>';
 
 		if (cacti_sizeof($data)) {
 			$total_errors += $sql_count;
@@ -1398,52 +1453,36 @@ function analyse_tree_host_graph_detail() {
 			}
 		}
 
-		if ($sql_count > 0) {
-			$panel['detail'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
-		}
-
 	}
 
-	if ($allowed_devices !== false || $simple_perms) {
-		if (!$simple_perms) {
-			$q_host_cond = 'AND id ' . $host_cond;
-		}
+	// last run of reindex, rrdchecker, ...
+	$last_runs = array (
+		'reindex_last_run_time'    => __('Reindex last run'),
+		'rrdcheck_last_run_time'   => __('RRD Checker last run'),
+		'rrdcleaner_last_run_time' => __('RRD Cleaner last run')
+	);
 
-		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, description
-			FROM host
-			WHERE disabled != 'on'
-			$q_host_cond
-			GROUP BY description
-			HAVING NoDups > 1");
+	$date_fmt = date_time_format();
 
-		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+	foreach ($last_runs as $key => $value) {
+		$color = 'green';
 
-		$color = read_config_option('intropage_alert_same_description');
+		if (config_value_exists($key)) {
+			$last = read_config_option($key);
 
-		$panel['detail'] .= '<h4>' . __('Devices with the same description - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
-
-		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
-
-			if ($color == 'red')    {
-				$panel['alarm'] = 'red';
-			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
-				$panel['alarm'] = 'yellow';
+			if ($last < (time() - 86400*7)) {
+				$color = 'yellow';
+				$panel['detail'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('%s: %s', $value, date($date_fmt, $last), 'intropage');
+				$panel['detail'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '<br/>';
+				unset($last);
 			}
-
-			foreach ($data as $row) {
-				$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
-					FROM host
-					WHERE description = " . db_qstr($row['description']));
-
-				if (cacti_sizeof($sql_hosts)) {
-					foreach ($sql_hosts as $row2) {
-						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row2['id'], html_escape($row2['description']), $row2['id']);
-					}
-				}
-			}
+		} else {
+			$color = 'red';
+			$panel['detail'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('%s: not run yet', $value, 'intropage');
+			$panel['detail'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '<br/>';
 		}
 	}
+
 
 	if ($allowed_devices !== false || $simple_perms) {
 		if (!$simple_perms) {
@@ -1587,6 +1626,50 @@ function analyse_tree_host_graph_detail() {
 			}
 		}
 	}
+
+
+
+	if ($allowed_devices !== false || $simple_perms) {
+		if (!$simple_perms) {
+			$q_host_cond = 'AND id ' . $host_cond;
+		}
+
+		$data = db_fetch_assoc("SELECT COUNT(*) AS NoDups, id, description
+			FROM host
+			WHERE disabled != 'on'
+			$q_host_cond
+			GROUP BY description
+			HAVING NoDups > 1");
+
+		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+		$color = read_config_option('intropage_alert_same_description');
+
+		$panel['detail'] .= '<h4>' . __('Devices with the same description - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
+
+		if (cacti_sizeof($data)) {
+			$total_errors += $sql_count;
+
+			if ($color == 'red')    {
+				$panel['alarm'] = 'red';
+			} elseif ($panel['alarm'] == 'green' && $color == 'yellow') {
+				$panel['alarm'] = 'yellow';
+			}
+
+			foreach ($data as $row) {
+				$sql_hosts = db_fetch_assoc("SELECT id, description, hostname
+					FROM host
+					WHERE description = " . db_qstr($row['description']));
+
+				if (cacti_sizeof($sql_hosts)) {
+					foreach ($sql_hosts as $row2) {
+						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d)</a><br/>', html_escape($config['url_path']), $row2['id'], html_escape($row2['description']), $row2['id']);
+					}
+				}
+			}
+		}
+	}
+
 
 	if ($allowed_devices !== false || $simple_perms) {
 		if (!$simple_perms) {
