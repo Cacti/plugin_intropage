@@ -1086,7 +1086,49 @@ function intropage_prepare_graph($dispdata, $user_id) {
 	if (isset($dispdata['line'])) {
 		$xid = 'x' . substr(md5($dispdata['line']['title1']), 0, 7);
 
-		// Start chart attributes
+		$columns   = array();
+		$axes      = array();
+		$axis      = array();
+		$color_def = array();
+
+		// Add the X Axis first
+		$columns[] = array_merge(array('x'), $dispdata['line']['label1']);
+
+		// Add upto 5 Lines
+		for ($i = 1; $i < 6; $i++) {
+			if (isset($dispdata['line']["data$i"]) && cacti_sizeof($dispdata['line']["data$i"])) {
+				// set correct color for down/triggered, ...
+				if (preg_match('/(DOWN|TRIG)/', strtoupper($dispdata['line']["title$i"]))) {
+					$color_def[$dispdata['line']["title$i"]] = '#ff0000';
+				} elseif (preg_match('/(RECO|BREA)/', strtoupper($dispdata['line']["title$i"]))) {
+					$color_def[$dispdata['line']["title$i"]] = '#dddd00';
+				} elseif (preg_match('/(UP|OK)/', strtoupper($dispdata['line']["title$i"]))) {
+					$color_def[$dispdata['line']["title$i"]] = '#00ff00';
+				} elseif (preg_match('/(DISA)/', strtoupper($dispdata['line']["title$i"]))) {
+					$color_def[$dispdata['line']["title$i"]] = '#cccccc';
+				}
+
+				$columns[] = array_merge(array($dispdata['line']["title$i"]), $dispdata['line']["data$i"]);
+
+				if (isset($dispdata['line']['unit2']['series'])) {
+					if (in_array("data$i", $dispdata['line']['unit2']['series'], true)) {
+						$axes[$dispdata['line']["title$i"]] = 'y2';
+					} else {
+						$axes[$dispdata['line']["title$i"]] = 'y';
+					}
+				} else {
+					$axes[$dispdata['line']["title$i"]] = 'y';
+				}
+			}
+		}
+
+		if (cacti_sizeof($color_def)) {
+			$colors = '';
+			foreach ($color_def as $key => $value) {
+				$colors .=  $key . "':'" . $value . "',";
+			}
+		}
+
 		$chart = array(
 			'bindto' => "#line_$xid",
 			'size' => array(
@@ -1103,33 +1145,10 @@ function intropage_prepare_graph($dispdata, $user_id) {
 			'data' => array(
 				'type'   => 'line',
 				'x'      => 'x',
-				'Format' => '%Y-%m-%d %H:%M:%S'
+				'Format' => '%Y-%m-%d %H:%M:%S',
+				'colors' => $color_def,
 			)
 		);
-
-		$columns   = array();
-		$axes      = array();
-		$axis      = array();
-
-		// Add the X Axis first
-		$columns[] = array_merge(array('x'), $dispdata['line']['label1']);
-
-		// Add upto 5 Lines
-		for ($i = 1; $i < 6; $i++) {
-			if (isset($dispdata['line']["data$i"]) && cacti_sizeof($dispdata['line']["data$i"])) {
-				$columns[] = array_merge(array($dispdata['line']["title$i"]), $dispdata['line']["data$i"]);
-
-				if (isset($dispdata['line']['unit2']['series'])) {
-					if (in_array("data$i", $dispdata['line']['unit2']['series'], true)) {
-						$axes[$dispdata['line']["title$i"]] = 'y2';
-					} else {
-						$axes[$dispdata['line']["title$i"]] = 'y';
-					}
-				} else {
-					$axes[$dispdata['line']["title$i"]] = 'y';
-				}
-			}
-		}
 
 		// Setup Axes support
 		if (isset($dispdata['line']['unit2']['series'])) {

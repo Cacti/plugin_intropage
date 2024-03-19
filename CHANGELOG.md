@@ -29,6 +29,8 @@
 
 * feature: DB check for used/max connections
 
+* feature: Check last run date for reindex, rrdchecker, ...
+
 --- 4.0.3 ---
 
 * feature#226: Panel Devices - add what devices are down and fail date
