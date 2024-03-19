@@ -31,6 +31,8 @@
 
 * feature: Check last run date for reindex, rrdchecker, ...
 
+* feature: Unification of the colour scheme in graphs
+
 --- 4.0.3 ---
 
 * feature#226: Panel Devices - add what devices are down and fail date
