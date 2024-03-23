@@ -33,6 +33,9 @@
 
 * feature: Unification of the colour scheme in graphs
 
+* issue294: Fix maint - summer time
+
+
 --- 4.0.3 ---
 
 * feature#226: Panel Devices - add what devices are down and fail date
