@@ -340,15 +340,15 @@ function graph_thold_detail() {
 		$sql_where = '';
 		$x = get_allowed_thresholds($sql_where, 'null', 1, $t_all, $_SESSION['sess_user_id']);
 
-		$sql_where = "( h.status = 3 AND ((td.thold_enabled = 'on' AND td.thold_per_enabled = 'on') AND (td.thold_alert != 0 OR td.bl_alert > 0)))";
+		$sql_where = "( h.status = 3 AND ((td.thold_enabled = 'on' AND td.thold_enabled = 'on') AND (td.thold_alert != 0 OR td.bl_alert > 0)))";
 		$t_brea_result = get_allowed_thresholds($sql_where, 'null', '', $t_brea, $_SESSION['sess_user_id']);
 
-		$sql_where = " h.status = 3 AND (td.thold_enabled = 'on' AND td.thold_per_enabled = 'on') 
+		$sql_where = " h.status = 3 AND (td.thold_enabled = 'on' AND td.thold_enabled = 'on') 
 			AND ((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger) 
 			OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger))";
 		$t_trig_result = get_allowed_thresholds($sql_where, 'null', '', $t_trig, $_SESSION['sess_user_id']);
 
-		$sql_where = " h.status = 3 AND (td.thold_per_enabled = '' OR td.thold_enabled = 'off')";
+		$sql_where = " h.status = 3 AND (td.thold_enabled = '' OR td.thold_enabled = 'off')";
 		$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $_SESSION['sess_user_id']);
 
 		$count = $t_all + $t_brea + $t_trig + $t_disa;
@@ -541,13 +541,13 @@ function thold_collect() {
 
 			$x = '';
 			$sql_where = '';
-			$sql_where = "( h.status = 3 AND ((td.thold_enabled = 'on' AND td.thold_per_enabled = 'on') AND (td.thold_alert != 0 OR td.bl_alert > 0)))";
+			$sql_where = "( h.status = 3 AND ((td.thold_enabled = 'on' AND td.thold_enabled = 'on') AND (td.thold_alert != 0 OR td.bl_alert > 0)))";
 			$x = get_allowed_thresholds($sql_where, 'null', 1, $t_brea, $user['id']);
 
-			$sql_where = " h.status = 3 AND (td.thold_per_enabled = '' OR td.thold_enabled = 'off')";
+			$sql_where = " h.status = 3 AND (td.thold_enabled = '' OR td.thold_enabled = 'off')";
 			$x = get_allowed_thresholds($sql_where, 'null', 1, $t_disa, $user['id']);
 
-			$sql_where = " h.status = 3 AND (td.thold_enabled = 'on' AND td.thold_per_enabled = 'on') 
+			$sql_where = " h.status = 3 AND (td.thold_enabled = 'on' AND td.thold_enabled = 'on') 
 				AND ((td.thold_alert != 0 AND td.thold_fail_count >= td.thold_fail_trigger) 
 				OR (td.bl_alert > 0 AND td.bl_fail_count >= td.bl_fail_trigger))";
 
