@@ -126,13 +126,9 @@ function ntp_dns($panel, $user_id) {
 			$timestamp = ntp_time($ntp_server);
 		}
 
-		//if ($timestamp != 'error') {
-		// MSS 20-Jun-2024
 		if (substr($timestamp, 1, 5) != 'error') {
 			$diff_time = date('U') - $timestamp;
 
-			// $panel['data'] .= '<tr><td><span class="txt_big">' . date('Y-m-d H:i:s')</span></td></tr>';
-			// MSS 20-Jun-2024
 			$panel['data'] .= '<tr><td><span class="txt_big">' . date('Y-m-d H:i:s') . ' (Time Diff: ' . $diff_time . ')</span></td></tr>';
 
 			if ($diff_time > 1400000000) {
@@ -154,7 +150,7 @@ function ntp_dns($panel, $user_id) {
 			$panel['alarm'] = 'red';
 			$panel['data']  .= '<tr><td>' . __('Unable to contact the NTP server indicated.', 'intropage') . '</td></tr>';
 			$panel['data']  .= '<tr><td>' . 'Server: ' . $ntp_server . '</td></tr>';
-			// MSS 20-Jun-2024
+
 			$panel['data']  .= '<tr><td>' . 'Timestamp: ' . $timestamp . '</td></tr>';
 			$panel['data']  .= '<tr><td>' . __('Please check your configuration.', 'intropage') . '</td></tr>';
 		}
