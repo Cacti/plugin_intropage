@@ -569,14 +569,7 @@ function graph_host_detail() {
 	}
 
 	// disabled
-	// MSS 2024-06-20
-	// there is a space between $q_host and cond, it should be $q_host_cond
-	// and it should be after the disabled = 'on'
-/*	$h = db_fetch_assoc("SELECT id, description, status_fail_date
-		FROM host
-		WHERE $q_host cond
-		AND disabled = 'on'");
-*/
+
 	$h = db_fetch_assoc("SELECT id, description, status_fail_date
 		FROM host
 		WHERE disabled = 'on'
