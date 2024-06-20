@@ -1519,40 +1519,7 @@ function intropage_addpanel_select($dashboard_id) {
 	print '</select>';
 	print '&nbsp; &nbsp;';
 }
-/*
-function ntp_time($host) {
-	$timestamp = -1;
-	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
-	$timeout = array('sec' => 1, 'usec' => 400000);
-	socket_set_option($sock, SOL_SOCKET, SO_RCVTIMEO, $timeout);
-	socket_clear_error();
-
-	socket_connect($sock, $host, 123);
-	if (socket_last_error() == 0) {
-		// Send request
-		$msg = "\010" . str_repeat("\0", 47);
-		socket_send($sock, $msg, strlen($msg), 0);
-		// Receive response and close socket
-
-		if (@socket_recv($sock, $recv, 48, MSG_WAITALL)) {
-			socket_close($sock);
-			// Interpret response
-			$data      = unpack('N12', $recv);
-			$timestamp = sprintf('%u', $data[9]);
-			// NTP is number of seconds since 0000 UT on 1 January 1900
-			// Unix time is seconds since 0000 UT on 1 January 1970
-			$timestamp -= 2208988800;
-		} else {
-		    $timestamp = 'error';
-		}
-	} else {
-	    $timestamp = 'error';
-	}
-
-	return ($timestamp);
-}
-*/
 function ntp_time($host) {
 	global $config;
 	
