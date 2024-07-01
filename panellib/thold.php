@@ -460,6 +460,8 @@ function thold_event_detail() {
 
 		if (!$simple_perms) {
 			$q_host_cond = 'td.host_id ' . $host_cond;
+		} else {
+			$q_host_cond = "td.host_id like '%' ";
 		}
 
 		$data = db_fetch_assoc("SELECT tl.description as description,tl.time as time,
