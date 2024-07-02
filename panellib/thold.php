@@ -461,7 +461,7 @@ function thold_event_detail() {
 		if (!$simple_perms) {
 			$q_host_cond = 'td.host_id ' . $host_cond;
 		} else {
-			$q_host_cond = "td.host_id like '%' ";
+			$q_host_cond = 'WHERE td.host_id ' . $host_cond;
 		}
 
 		$data = db_fetch_assoc("SELECT tl.description as description,tl.time as time,
@@ -483,7 +483,7 @@ function thold_event_detail() {
 			ON (gl.host_id=uap1.item_id AND uap1.type=3)
 			LEFT JOIN user_auth_perms AS uap2
 			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
-			WHERE $q_host_cond
+			$q_host_cond
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 			ORDER BY `time` DESC
 			LIMIT 30");
