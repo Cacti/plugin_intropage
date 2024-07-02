@@ -451,18 +451,13 @@ function thold_event_detail() {
 		$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
 		if (!$simple_perms) {
-			$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-			$host_cond = 'IN (' . $allowed_devices . ')';
-		} else {
-			$allowed_devices = false;
-			$q_host_cond = '';
-		}
-
-		if (!$simple_perms) {
-			$q_host_cond = 'td.host_id ' . $host_cond;
-		} else {
-			$q_host_cond = 'WHERE td.host_id ' . $host_cond;
-		}
+                       $allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
+                       $host_cond = 'IN (' . $allowed_devices . ')';
+                       $q_host_cond = 'WHERE td.host_id ' . $host_cond;
+                } else {
+                       $allowed_devices = false;
+                       $q_host_cond = '';
+                }
 
 		$data = db_fetch_assoc("SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
