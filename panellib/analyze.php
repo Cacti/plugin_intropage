@@ -589,7 +589,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 		if (!$simple_perms) {
 			$q_host_cond = 'AND host.id ' . $host_cond;
 		}
-		
+
 		// need only devices with any snmp data
 		$count = db_fetch_cell("SELECT count(id)
 			FROM host
@@ -643,31 +643,29 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-
-
 	if ($allowed_devices !== false || $simple_perms) {
 		if (!$simple_perms) {
 			$q_host_cond = 'AND dl.host_id ' . $host_cond;
 		}
 
 		$data = db_fetch_assoc("SELECT
-    		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
-    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
+		dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
+		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
 		FROM data_local AS dl
-    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
-    		INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
-    		LEFT JOIN host AS h ON h.id = dl.host_id
+		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
+		INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
+		LEFT JOIN host AS h ON h.id = dl.host_id
 		INNER JOIN (
 		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti
-        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
-        	LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
-        	LEFT JOIN host AS h ON h.id = gl.host_id
+		INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
+		LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
+		LEFT JOIN host AS h ON h.id = gl.host_id
 		WHERE graph_type_id IN (4,5,6,7,8,20) AND
-          	task_item_id IS NULL AND cdef_id NOT IN (
-              	SELECT c.id FROM cdef AS c
+		task_item_id IS NULL AND cdef_id NOT IN (
+		SELECT c.id FROM cdef AS c
 		INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id
 		WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%'))
-          	)) AS dtr ON dl.id = dtr.local_data_id
+		)) AS dtr ON dl.id = dtr.local_data_id
 		WHERE ((dl.snmp_index = '' AND dl.snmp_query_id > 0) OR dtr.local_graph_id IS NULL)
 		$q_host_cond
 		ORDER BY `name_cache` ASC");
