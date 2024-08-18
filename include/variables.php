@@ -230,7 +230,7 @@ $intropage_settings = array(
 		'description'   => __('If this event has occurred, trigger the selected Normal, Warning, or Alert status color.', 'intropage'),
 		'method'        => 'drop_array',
 		'array'         => $status_colors,
-		'default'       => 'yelow',
+		'default'       => 'yellow',
 	),
 	'intropage_alert_orphaned_ds' => array(
 		'friendly_name' => __('Alarm Orphaned Data Source', 'intropage'),
