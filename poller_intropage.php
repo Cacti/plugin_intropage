@@ -231,7 +231,7 @@ function intropage_gather_stats() {
 
 				if (is_string($data)) {
 					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (string) %s', $function, $data), false, 'INTROPAGE');
-				} elseif (is_int($data) && data != 0) {
+				} elseif (is_int($data) && $data != 0) {
 					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (int) %d', $function, $data), false, 'INTROPAGE');
 				}
 
