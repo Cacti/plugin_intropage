@@ -101,16 +101,22 @@ function setupHidden() {
 }
 
 function addPanel() {
-	$.post(intropage_page, {
+	var post = {
 		header: 'false',
 		dashboard_id: dashboard_id,
 		__csrf_magic: csrfMagicToken,
 		intropage_addpanel: $('#intropage_addpanel').val()
-	}).done(function(data) {
-		$('#main').html(data);
-		applySkin();
-		initPage();
-	});
+	};
+
+	if (typeof postUrl == 'function') {
+		postUrl({ url: intropage_page }, post);
+	} else {
+		$.post(intropage_page, post).done(function(data) {
+			$('#main').html(data);
+			applySkin();
+			initPage();
+		});
+	}
 }
 
 function actionPanel() {
@@ -121,16 +127,22 @@ function actionPanel() {
 	} else if (option == 'loginopt_console') {
 		document.location = urlPath + 'index.php?dashboard_id='+dashboard_id+'&intropage_action='+option;
 	} else {
-		$.post(intropage_page, {
+		var post = {
 			header: 'false',
 			dashboard_id: dashboard_id,
 			__csrf_magic: csrfMagicToken,
 			intropage_action: option
-		}).done(function(data) {
-			$('#main').html(data);
-			applySkin();
-			initPage();
-		});
+		};
+
+		if (typeof postUrl == 'function') {
+			postUrl({ url: intropage_page }, post);
+		} else {
+			$.post(intropage_page, post).done(function(data) {
+				$('#main').html(data);
+				applySkin();
+				initPage();
+			});
+		}
 	}
 }
 
