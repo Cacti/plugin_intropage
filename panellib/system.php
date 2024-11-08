@@ -176,12 +176,24 @@ function cpuload($panel, $user_id, $timespan = 0) {
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title1'] = __('Avg CPU', 'intropage');
 			$graph['line']['title2'] = __('Max CPU', 'intropage');
+			$graph['line']['title3'] = __('24h AVG', 'intropage');
+
 			$graph['line']['unit1']['title'] = '%';
+
+			if (!isset($avg)) {
+				$avg = db_fetch_cell("SELECT avg(value)
+					FROM plugin_intropage_trends
+					WHERE cur_timestamp > date_sub(NOW(), INTERVAL 24 HOUR)
+					AND name = 'cpuload'");
+
+				$avg = round($avg, 2);
+			}
 
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
 				$graph['line']['data1'][]  = round($row['average'], 2);
 				$graph['line']['data2'][]  = round($row['max'], 2);
+				$graph['line']['data3'][]  = $avg;
 			}
 
 			$panel['data'] = intropage_prepare_graph($graph, $user_id);

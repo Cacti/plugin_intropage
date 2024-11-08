@@ -146,8 +146,6 @@ function poller_info($panel, $user_id) {
 				$color = 'yellow';
 			}
 
-
-
 			$details .= '<tr>' .
 				'<td class="left">'  . $poller['id']                . '</td>' .
 				'<td class="left">'  . html_escape($poller['name']) . '</td>' .
@@ -249,9 +247,10 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 		ORDER BY avg_time DESC
 		LIMIT ' . $lines);
 
-	if (cacti_sizeof($pollers)) {
-		$new_index = 1;
+	$pcount = cacti_sizeof($pollers);
 
+	if ($pcount > 0) {
+		$new_index = 1;
 		foreach ($pollers as $xpoller) {
 	
 			$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, AVG(SUBSTRING_INDEX(value, ':', -1)) AS value
@@ -263,6 +262,15 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 				ORDER BY cur_timestamp ASC",
 				array($timespan, $xpoller['id'] . ':%'));
 
+			if ($pcount < 3) {
+				$avg = db_fetch_cell_prepared("SELECT (SUBSTRING_INDEX(value, ':', -1)) AS value
+					FROM plugin_intropage_trends
+					WHERE cur_timestamp > date_sub(NOW(), INTERVAL 24 HOUR) AND
+					name = 'poller' AND 
+					value LIKE ?",
+					array($xpoller['id'] . ':%'));
+			}
+
 			foreach ($rows as $row) {
 				if ($row['value'] > ($poller_interval - 10)) {
 					$panel['alarm'] = 'red';
@@ -273,9 +281,25 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 				$graph['line']['data'  . $new_index][] = round($row['value'], 2);
 				$graph['line']['title' . $new_index]   = __('ID: ', 'intropage') . $xpoller['id'];
 				$graph['line']['unit1']['title']       = __('Seconds', 'intropage');
+
+				if ($pcount < 3) {
+					$avg_label[] = $row['date'];
+					$avg_data[]  = $avg;
+				}
 			}
 
 			$new_index++;
+
+			// add 24 hours avg if we have enought lines
+			if ($pcount < 3) {
+
+				$graph['line']['label' . $new_index] = $avg_label;
+				$graph['line']['data'  . $new_index] = $avg_data;
+				$graph['line']['title' . $new_index] = __('24h avg ID: ', 'intropage') . $xpoller['id'];
+				$graph['line']['unit1']['title']     = __('Seconds', 'intropage');
+
+				$new_index++;
+			}
 		}
 
 		$panel['data'] = intropage_prepare_graph($graph, $user_id);
