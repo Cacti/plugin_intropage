@@ -1432,7 +1432,7 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 	print '<div class="panel_header color_grey">';
 	print '<div class="panel_name"></div>';
 
-	printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=$dashboard_id");
+	printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=$dashboard_id");
 
 	if (isset($panels[$k_id]['force']) && $panels[$k_id]['force'] === true) {
 		printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>");
@@ -1522,7 +1522,7 @@ function intropage_addpanel_select($dashboard_id) {
 
 function ntp_time($host) {
 	global $config;
-	
+
 	$timestamp = -1;
 	// create a UDP socket
 	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
@@ -1559,7 +1559,7 @@ function ntp_time($host) {
 			socket_close($sock);
 			return 'error: socket_recv failed: ' . $error ;
 		}
-	}	
+	}
 	// extract the timestamp from the received data
 	$data = unpack('N12', $recv);
 	$timestamp = sprintf('%u', $data[9]);
