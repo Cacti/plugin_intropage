@@ -290,7 +290,7 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 
 			$new_index++;
 
-			// add 24 hours avg if we have enought lines
+			// add 24 hours avg if we have enough lines
 			if ($pcount < 3) {
 
 				$graph['line']['label' . $new_index] = $avg_label;

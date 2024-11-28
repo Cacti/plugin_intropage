@@ -50,7 +50,7 @@ be the same for every user, and PANEL_USER will be customized for every user of
 the panel based upon their permissions.
 
 The interval is the default collection or update interval for the panel.  This
-can be overriden in a still to be implemented enhancement.
+can be overridden in a still to be implemented enhancement.
 
 The 'trends_func' is also yet to be implemented.
 

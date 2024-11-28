@@ -51,7 +51,7 @@ function register_thold() {
 		),
 		'graph_thold' => array(
 			'name'         => __('Threshold', 'intropage'),
-			'description'  => __('Threshold Plugin Graph (all, trigerred, ...)', 'intropage'),
+			'description'  => __('Threshold Plugin Graph (all, triggered, ...)', 'intropage'),
 			'class'        => 'thold',
 			'level'        => PANEL_USER,
 			'refresh'      => 300,
@@ -235,7 +235,7 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 
 		if (cacti_sizeof($rows)) {
 
-			$graph['line']['title1'] = __('Trigerred', 'intropage');
+			$graph['line']['title1'] = __('Triggered', 'intropage');
 			$graph['line']['unit1']['title'] = 'Triggered';
 
 			foreach ($rows as $row) {
