@@ -81,6 +81,23 @@ function register_system() {
 			'details_func' => false,
 			'trends_func'  => false
 		),
+		'boost_history' => array(
+			'name'         => __('Boost History', 'intropage'),
+			'description'  => __('Information about boost process history.', 'intropage'),
+			'class'        => 'system',
+			'level'        => PANEL_SYSTEM,
+			'refresh'      => 300,
+			'trefresh'     => read_config_option('poller_interval'),
+			'force'        => true,
+			'width'        => 'quarter-panel',
+			'priority'     => 48,
+			'alarm'        => 'grey',
+			'requires'     => false,
+			'update_func'  => 'boost_history',
+			'details_func' => false,
+			'trends_func'  => 'boost_history_trend'
+		),
+
 		'extrem' => array(
 			'name'         => __('24 Hour Extremes', 'intropage'),
 			'description'  => __('Table with 24 hours of Polling Extremes (longest poller run, down hosts)', 'intropage'),
@@ -263,6 +280,122 @@ function admin_alert($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
+
+function boost_history_trend() {
+
+	$data_length = db_fetch_cell("SELECT data_length
+		FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
+		AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
+
+	db_execute_prepared('INSERT INTO plugin_intropage_trends
+		(name, value, user_id)
+		VALUES ("boost_mem_size", ?, 0)',
+		array($data_length));
+
+	$boost_table_status = db_fetch_assoc("SELECT *
+		FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
+		AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
+
+	$pending_records = 0;
+	$arch_records    = 0;
+
+	if (cacti_sizeof($boost_table_status)) {
+		foreach ($boost_table_status as $table) {
+			if ($table['TABLE_NAME'] == 'poller_output_boost') {
+				$pending_records += $table['TABLE_ROWS'];
+			} else {
+				$arch_records += $table['TABLE_ROWS'];
+			}
+		}
+	}
+
+	db_execute_prepared('INSERT INTO plugin_intropage_trends
+		(name, value, user_id)
+		VALUES ("boost_pending", ?, 0)',
+		array($pending_records));
+}
+
+
+function boost_history($panel, $user_id, $timespan = 0) {
+	global $config;
+
+	$panel['alarm'] = 'green';
+
+	$graph = array (
+		'line' => array(
+			'title'  => __('Boost history: ', 'intropage'),
+			'label1' => array(),
+			'data1'  => array(),
+			'label2' => array(),
+			'data2'  => array(),
+		),
+	);
+
+	if ($timespan == 0) {
+		if (isset($_SESSION['sess_user_id'])) {
+			$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+		} else {
+			$timespan = $panel['refresh'];
+		}
+	}
+
+	if (!isset($panel['refresh_interval'])) {
+		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
+			FROM plugin_intropage_panel_data
+			WHERE id = ?',
+			array($panel['id']));
+	} else {
+		$refresh = $panel['refresh'];
+	}
+
+	$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+		FROM plugin_intropage_trends
+		WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+		AND name = 'boost_mem_size'
+		ORDER BY cur_timestamp ASC",
+		array($timespan));
+
+	if (cacti_sizeof($rows)) {
+		$graph['line']['title1'] = __('Mem ', 'intropage');
+		$graph['line']['unit1']['title'] = 'Used mem [KB]';
+
+		foreach ($rows as $row) {
+			$graph['line']['label1'][] = $row['date'];
+			$graph['line']['data1'][]  = $row['value']/1024;
+		}
+
+		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
+			FROM plugin_intropage_trends
+			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
+			AND name = 'boost_pending'
+			ORDER BY cur_timestamp ASC",
+			array($timespan));
+
+		if (cacti_sizeof($rows)) {
+			$graph['line']['title2'] = __('Pending records ', 'intropage');
+			$graph['line']['unit2']['title'] = 'Records';
+
+			foreach ($rows as $row) {
+				$graph['line']['label2'][] = $row['date'];
+				$graph['line']['data2'][]  = $row['value'];
+			}
+		} else {
+			unset($graph['line']['label2']);
+			unset($graph['line']['data2']);
+			unset($graph['line']['title2']);
+			unset($graph['line']['unit2']);
+		}
+
+		$panel['data'] = intropage_prepare_graph($graph, $user_id);
+	} else {
+		unset($graph);
+		$panel['data'] = __('Waiting for data', 'intropage');
+	}
+
+	save_panel_result($panel, $user_id);
+}
+
+
 //--------------------------------boost--------------------------------
 function boost($panel, $user_id) {
 	global $config, $boost_refresh_interval, $boost_max_runtime;
@@ -290,6 +423,7 @@ function boost($panel, $user_id) {
 	$data_length     = 0;
 	$engine          = '';
 	$max_data_length = 0;
+	$total_records  = 0;
 
 	if (cacti_sizeof($boost_table_status)) {
 		foreach ($boost_table_status as $table) {
@@ -369,14 +503,12 @@ function boost($panel, $user_id) {
 
 	$panel['data'] .= '<tr><td>' . __('Approximate Next Start Time: %s', $next_run_time, 'intropage') . '</td></tr>';
 
-	if ($total_records) {
-		$panel['data'] .= '<tr><td>' . __('Pending/Archived Records: %s / %s', number_format_i18n($pending_records, -1), number_format_i18n($arch_records, -1), 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Pending/Archived Records: %s / %s', number_format_i18n($pending_records, -1), number_format_i18n($arch_records, -1), 'intropage') . '</td></tr>';
 
-		if ($total_records > ($max_records - ($max_records / 10)) && $panel['alarm'] == 'green') {
-			$panel['alarm'] = 'yellow';
-		} elseif ($total_records > ($max_records - ($max_records / 20)) && $panel['alarm'] == 'green') {
-			$panel['alarm'] = 'red';
-		}
+	if ($total_records > ($max_records - ($max_records / 10)) && $panel['alarm'] == 'green') {
+		$panel['alarm'] = 'yellow';
+	} elseif ($total_records > ($max_records - ($max_records / 20)) && $panel['alarm'] == 'green') {
+		$panel['alarm'] = 'red';
 	}
 
 	$data_length = db_fetch_cell("SELECT data_length
@@ -444,7 +576,7 @@ function extrem_trend() {
 //------------------------------------ extrem -----------------------------------------------------
 function extrem($panel, $user_id) {
 	global $config;
-	
+
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 	$poller_interval = read_config_option('poller_interval');
 
