@@ -6,6 +6,7 @@
 * issue316: Fix php error when db check skip huge db
 * issue: Fix support for Cacti 1.3+
 * feature: Add 24h averages for CPU and poller stats panel
+* feature: Add Boost graphs panels - memory usage, pending records
 
 --- 4.0.4 ---
 
