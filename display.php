@@ -236,8 +236,10 @@ function display_information() {
 	print '</div>';
 	print '<div class="float_right">';
 
+
 	// settings
 	print "<form method='post'>";
+	print  '<span title="' . __('You can change timespan in action menu', 'intropage') . ' ">' . $trend_timespans[$timespan] . '</span>&nbsp; &nbsp;';
 
 	print "<a href='#' class='pic' id='switch_square' title='" . __esc('Hide red/yellow/green square notifications', 'intropage') . "'><i class='intro_glyph fa fa-minus-square'></i></a>";
 	print '&nbsp; &nbsp; ';
