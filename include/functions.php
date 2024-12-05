@@ -895,7 +895,7 @@ function get_panel($panel_id, $user_id = 0) {
 		$trend_interval   = $panel['trend_interval'];
 		$next_update      = $last_update + $refresh_interval - time();
 
-		$panel['name']    = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
+		$panel['name']    = $definition['name'] . __(' [ Updates in %s/%s ]', intropage_readable_interval($next_update), intropage_readable_interval($refresh_interval), 'intropage');
 	} else {
 		$last_update      = time();
 		$refresh_interval = $definition['refresh'];
@@ -915,7 +915,7 @@ function get_panel($panel_id, $user_id = 0) {
 		$panel['trend_interval']   = $definition['trefresh'];
 
 		$panel['id']   = sql_save($panel, 'plugin_intropage_panel_data');
-		$panel['name'] = $definition['name'] . __(' [ Updates in %s ]', intropage_readable_interval($next_update), 'intropage');
+		$panel['name'] = $definition['name'] . __(' [ Updates in %s/%s ]', intropage_readable_interval($next_update), intropage_readable_interval($definition['refresh']), 'intropage');
 	}
 
 	return array(
