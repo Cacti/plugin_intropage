@@ -3,7 +3,8 @@
 --- develop ---
 
 * issue#318: Fix NTP time does not function in Windows environment
-* issue316: Fix php error when db check skip huge db
+* issue#316: Fix php error when db check skip huge db
+* issue#327: Move Timespan from action menu
 * issue: Fix support for Cacti 1.3+
 * feature: Add 24h averages for CPU and poller stats panel
 * feature: Add Boost graphs panels - memory usage, pending records
