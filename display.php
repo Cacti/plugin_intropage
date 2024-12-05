@@ -118,7 +118,7 @@ function display_information() {
 				$removed++;
 			}
 		}
-		
+
 		if ($removed > 0) {
 			raise_message('intropage_permissions', __('One or more panels was removed due to insufficient permissions. Contact administrator.', 'intropage'), MESSAGE_LEVEL_ERROR);
 			cacti_log('INTROPAGE WARNING: One or more panels was removed to user ' . $_SESSION['sess_user_id'] . ' due to insufficient permissions');
@@ -239,7 +239,6 @@ function display_information() {
 
 	// settings
 	print "<form method='post'>";
-	print  '<span title="' . __('You can change timespan in action menu', 'intropage') . ' ">' . $trend_timespans[$timespan] . '</span>&nbsp; &nbsp;';
 
 	print "<a href='#' class='pic' id='switch_square' title='" . __esc('Hide red/yellow/green square notifications', 'intropage') . "'><i class='intro_glyph fa fa-minus-square'></i></a>";
 	print '&nbsp; &nbsp; ';
@@ -256,7 +255,7 @@ function display_information() {
 
 	foreach($trend_timespans as $key => $value) {
 		if ($timespan == $key) {
-			print "<option value='timespan_$key' disabled='disabled'>" . $value . '</option>';
+			print "<option value='timespan_$key' selected='selected'>" . $value . '</option>';
 		} else {
 			print "<option value='timespan_$key'>" . $value . '</option>';
 		}
@@ -419,9 +418,9 @@ function display_information() {
 			print "<option value='unshare'>" . __('Cancel sharing', 'intropage') . '</option>';
 		} else {
 			if ($actual['panels'] > 0) {
-				print "<option value='share'>" . __('Share this dashboard', 'intropage') . '</option>';	
+				print "<option value='share'>" . __('Share this dashboard', 'intropage') . '</option>';
 			} else {
-				print "<option value=''>" . __('Share empty dashboard not allowed', 'intropage') . '</option>';	
+				print "<option value=''>" . __('Share empty dashboard not allowed', 'intropage') . '</option>';
 			}
 		}
 	} else {
@@ -437,12 +436,12 @@ function display_information() {
 	if (cacti_sizeof($shared_dashboards) > 0) {
 
 		foreach  ($shared_dashboards as $sd) {
-			$text = ' (' . get_username($sd['user_id']) . ' - ' . $sd['name'] . ')' ; 
-		
+			$text = ' (' . get_username($sd['user_id']) . ' - ' . $sd['name'] . ')' ;
+
 			if ($number_of_dashboards < 9) {
-				print "<option value='useshared_" .  $sd['dashboard_id'] . "_" . $sd['user_id'] . "'>" . __('Use shared dashboard', 'intropage') . $text . '</option>';	
+				print "<option value='useshared_" .  $sd['dashboard_id'] . "_" . $sd['user_id'] . "'>" . __('Use shared dashboard', 'intropage') . $text . '</option>';
 			} else {
-				print "<option value='useshared_" .  $sd['dashboard_id'] . "_" . $sd['user_id'] . "' disabled='disabled'>" . __('Cannot use shared dashboard - dashboard limit reached.', 'intropage') . $text . '</option>';	
+				print "<option value='useshared_" .  $sd['dashboard_id'] . "_" . $sd['user_id'] . "' disabled='disabled'>" . __('Cannot use shared dashboard - dashboard limit reached.', 'intropage') . $text . '</option>';
 			}
 		}
 	} else {
