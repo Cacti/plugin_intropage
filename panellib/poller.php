@@ -123,7 +123,7 @@ function poller_info($panel, $user_id) {
 			'</tr>';
 
 		foreach ($sql_pollers as $poller) {
-		
+
 			$color = 'green';
 
 			if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) {
@@ -152,13 +152,13 @@ function poller_info($panel, $user_id) {
 				'<td class="left"><span class="inpa_sq color_' . $color . '"></span>'  . $status . '</td>';
 
 			$color = 'green';
-			
+
 			if (($poller['total_time']/$poller_interval) > 0.9) {
 				$color = 'red';
 			} elseif (($poller['total_time']/$poller_interval) > 0.7) {
 				$color = 'yellow';
 			}
-				
+
 			$details .= '<td class="right"><span class="inpa_sq color_' . $color . '"></span>' . __('%s Secs', round($poller['total_time'], 2), 'intropage') . ' </td></tr>';
 		}
 
@@ -252,13 +252,14 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 	if ($pcount > 0) {
 		$new_index = 1;
 		foreach ($pollers as $xpoller) {
-	
+			$seconds = floor($timespan / 60);
+
 			$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, AVG(SUBSTRING_INDEX(value, ':', -1)) AS value
 				FROM plugin_intropage_trends
 				WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
 				AND name = 'poller'
 				AND value LIKE ?
-				GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+				GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $seconds
 				ORDER BY cur_timestamp ASC",
 				array($timespan, $xpoller['id'] . ':%'));
 
@@ -266,7 +267,7 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 				$avg = db_fetch_cell_prepared("SELECT (SUBSTRING_INDEX(value, ':', -1)) AS value
 					FROM plugin_intropage_trends
 					WHERE cur_timestamp > date_sub(NOW(), INTERVAL 24 HOUR) AND
-					name = 'poller' AND 
+					name = 'poller' AND
 					value LIKE ?",
 					array($xpoller['id'] . ':%'));
 			}
@@ -315,7 +316,7 @@ function poller_info_detail() {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $_SESSION['sess_user_id']);
-	$poller_interval = read_config_option('poller_interval');	
+	$poller_interval = read_config_option('poller_interval');
 
 	$panel = array(
 		'name'   => __('Poller Details', 'intropage'),
@@ -348,9 +349,8 @@ function poller_info_detail() {
 
 	if (cacti_sizeof($pollers)) {
 		foreach ($pollers as $poller) {
-		
 			$color = 'green';
-		
+
 			if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) {
 				$ok++;
 			}
@@ -446,11 +446,13 @@ function poller_output_items($panel, $user_id, $timespan = 0) {
 		$refresh = $panel['refresh_interval'];
 	}
 
+	$seconds = floor($timespan / 60);
+
 	$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
 		FROM plugin_intropage_trends
 		WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
 		AND name = 'poller_output'
-		GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+		GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $seconds
 		ORDER BY cur_timestamp ASC",
 		array($timespan));
 

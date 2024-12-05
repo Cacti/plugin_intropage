@@ -200,6 +200,8 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
+		$seconds = floor($timespan / 60);
+
 		// Get the syslog records
 		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`,
 			MAX(CASE WHEN name='syslog_total' THEN value ELSE NULL END) AS syslog_total,
@@ -208,7 +210,7 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 			FROM plugin_intropage_trends
 			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
 			AND name IN ('syslog_total', 'syslog_incoming', 'syslog_alert')
-			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $seconds
 			ORDER BY cur_timestamp ASC",
 			array($timespan));
 
@@ -321,6 +323,7 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
+		$seconds = floor($timespan / 60);
 
 		$rows = db_fetch_assoc_prepared("SELECT *
 			FROM plugin_intropage_trends
@@ -328,7 +331,7 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 			AND name = 'syslog_levels'
 			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV ?
 			ORDER BY cur_timestamp ASC",
-			array($timespan, $refresh));
+			array($timespan, $seconds));
 
 		if (cacti_sizeof($rows)) {
 
@@ -441,7 +444,7 @@ function plugin_syslog_devices_detail() {
 			FROM syslog AS s
 			LEFT JOIN syslog_hosts AS sh
 			ON s.host_id = sh.host_id
-			WHERE logtime > (DATE_SUB(NOW(),INTERVAL ? SECOND)) 
+			WHERE logtime > (DATE_SUB(NOW(),INTERVAL ? SECOND))
 			GROUP BY s.host_id
 			ORDER BY hcount desc
 			LIMIT 20',

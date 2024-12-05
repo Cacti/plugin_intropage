@@ -82,13 +82,14 @@ function intropage_config_arrays() {
 	auth_augment_roles(__('System Administration'), array('intropage_admin.php'));
 
 	$trend_timespans = array(
-		3600  => __('Timespan Last 1 Hour', 'intropage'),
-		7200  => __('Timespan Last %d Hours', 2, 'intropage'),
-		10800 => __('Timespan Last %d Hours', 3, 'intropage'),
-		14400 => __('Timespan Last %d Hours', 4, 'intropage'),
-		21600 => __('Timespan Last %d Hours', 6, 'intropage'),
-		43200 => __('Timespan Last %d Hours', 12, 'intropage'),
-		86400 => __('Timespan Last 1 Day', 'intropage')
+		3600   => __('Timespan Last 1 Hour', 'intropage'),
+		7200   => __('Timespan Last %d Hours', 2, 'intropage'),
+		10800  => __('Timespan Last %d Hours', 3, 'intropage'),
+		14400  => __('Timespan Last %d Hours', 4, 'intropage'),
+		21600  => __('Timespan Last %d Hours', 6, 'intropage'),
+		43200  => __('Timespan Last %d Hours', 12, 'intropage'),
+		86400  => __('Timespan Last 1 Day', 'intropage'),
+		172800 => __('Timespan Last 2 Days', 'intropage')
 	);
 
 	$poller_interval = read_config_option('poller_interval');

@@ -182,11 +182,13 @@ function cpuload($panel, $user_id, $timespan = 0) {
 		$panel['data'] = __('This function is not implemented on Windows platforms', 'intropage');
 		unset($graph);
 	} else {
+		$seconds = floor($timespan / 60);
+
 		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, AVG(value) AS average, MAX(value) AS max
 			FROM plugin_intropage_trends
 			WHERE cur_timestamp > date_sub(NOW(), INTERVAL ? SECOND)
 			AND name = 'cpuload'
-			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $refresh
+			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $seconds
 			ORDER BY cur_timestamp ASC",
 			array($timespan));
 
@@ -267,7 +269,7 @@ function info($panel, $user_id) {
 	$panel['data'] .= '<tr><td class="inpa_loglines" title="' . $xdata . '"><br/>' . __('Running on: ', 'intropage') . $xdata . '</td></tr>';
 
 	$panel['data'] .= '</table>';
-	
+
 	save_panel_result($panel, $user_id);
 }
 
@@ -544,7 +546,7 @@ function extrem_trend() {
 
 	foreach ($users as $user) {
 		if (is_panel_allowed('extrem', $user['id'])) {
-		
+
 			$simple_perms = get_simple_device_perms($user['id']);
 
 			if (!$simple_perms) {
@@ -608,7 +610,7 @@ function extrem($panel, $user_id) {
                         	} else {
                         		$color = 'green';
                         	}
-			
+
 				$fin_data[$key]['poller'] = $row['date'] . ' ' . $row['xvalue'] . 's <span class="inpa_sq color_' . $color . '"></span>';
 			}
 		}
@@ -745,7 +747,7 @@ function extrem_detail() {
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
 	$poller_interval = read_config_option('poller_interval');
-	
+
 	$panel = array(
 		'name'   => __('48 Hour Extreme Polling', 'intropage'),
 		'alarm'  => 'grey',
