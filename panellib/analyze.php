@@ -920,6 +920,39 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
+
+	$data = db_fetch_assoc('SELECT
+		gt.id, gt.name, COUNT(DISTINCT graphs.local_graph_id) AS graphs,
+		graphs.items AS graph_items, templates.items AS template_items
+		FROM graph_templates AS gt
+		INNER JOIN (SELECT
+			graph_template_id, COUNT(*) AS items
+			FROM graph_templates_item
+			WHERE
+			local_graph_id = 0
+			GROUP BY graph_template_id
+		) AS templates
+		ON gt.id=templates.graph_template_id
+		LEFT JOIN (SELECT
+			graph_template_id, local_graph_id, COUNT(*) AS items
+			FROM graph_templates_item AS gti
+			WHERE local_graph_id > 0
+			GROUP BY graph_template_id, local_graph_id
+		) AS graphs
+		ON gt.id = graphs.graph_template_id
+		GROUP BY gt.id
+		HAVING templates.items != graphs.items');
+
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+	if (cacti_sizeof($data)) {
+
+		$panel['alarm'] = 'red';
+
+		$panel['data'] .= '<span class="inpa_sq color_red"></span>' . __('Graph items/template items issue: %s', $sql_count, 'intropage') . '<br/>';
+	}
+
+
 	if (api_plugin_is_enabled('monitor')) {
 		if ($allowed_devices !== false || $simple_perms) {
 			if (!$simple_perms) {
@@ -1149,22 +1182,22 @@ function analyse_log_detail() {
 			$panel['detail'] .= '<tr><td class="txt_med">' . $log_size_note . '<hr></td></tr>';
 		}
 
-	        $datechar = array(
-        	        GDC_HYPHEN => '-',
-                	GDC_SLASH  => '/',
-                	GDC_DOT    => '.'
-        	);
+		$datechar = array(
+			GDC_HYPHEN => '-',
+			GDC_SLASH  => '/',
+			GDC_DOT    => '.'
+		);
 
-        	$date_fmt        = read_config_option('default_date_format');
-        	$dateCharSetting = read_config_option('default_datechar');
+		$date_fmt        = read_config_option('default_date_format');
+		$dateCharSetting = read_config_option('default_datechar');
 
-        	if (!isset($datechar[$dateCharSetting])) {
-                	$dateCharSetting = GDC_SLASH;
-        	}
+		if (!isset($datechar[$dateCharSetting])) {
+			$dateCharSetting = GDC_SLASH;
+		}
 
-        	$datecharacter = $datechar[$dateCharSetting];
+		$datecharacter = $datechar[$dateCharSetting];
 
-        	switch ($date_fmt) {
+		switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
 			break;
@@ -1186,7 +1219,7 @@ function analyse_log_detail() {
 			default:
                         	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
 			break;
-        	}
+		}
 
 		$count = 0;
 
@@ -1206,13 +1239,13 @@ function analyse_log_detail() {
 				$timestamp = mktime ($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
 
 				if ($timestamp > (time()-($important_period))) {
-                                        if (preg_match('/( ERROR)/', $line)) {
-                                                $color = 'red';
-                                        } elseif (preg_match('/( WARNING)/', $line)) {
-                                                $color = 'yellow';
-                                        } else {
-                                        	$color = 'green';
-                                        }
+					if (preg_match('/( ERROR)/', $line)) {
+						$color = 'red';
+					} elseif (preg_match('/( WARNING)/', $line)) {
+						$color = 'yellow';
+					} else {
+						$color = 'green';
+					}
 				}
 
 				$panel['detail'] .= '<tr><td class="inpa_loglines"><span class="inpa_sq color_' . $color . '"></span>' . $line . '</td></tr>';
@@ -1302,7 +1335,6 @@ function analyse_login_detail() {
 				'<td class="left">%s </td>' .
 				'<td class="left"><span class="inpa_sq color_' . $color . '"></span>%s</td>' .
 			'</tr>', $row['time'], $row['ip'], $row['username'], $status);
-
 		}
 
 		$panel['detail'] .= '</table>';
@@ -1444,7 +1476,6 @@ function analyse_tree_host_graph_detail() {
 				$panel['detail'] .= sprintf('<a class="linkEditMain" href="%shost.php?action=edit&amp;id=%d">%s (ID: %d, Bulk walk size: %d)</a><br/>', html_escape($config['url_path']), $row['id'], html_escape($row['description']), $row['id'], $row['bulk_walk_size']);
 			}
 		}
-
 	}
 
 	// last run of reindex, rrdchecker, ...
@@ -1489,20 +1520,20 @@ function analyse_tree_host_graph_detail() {
 		}
 
 		$data = db_fetch_assoc("SELECT
-    			dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
-	    		dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
+			dtr.local_graph_id, dtd.local_data_id, dtd.name_cache, dtd.active, dtd.rrd_step,
+			dt.name AS data_template_name, dl.host_id, dtd.data_source_profile_id
 			FROM data_local AS dl
-	    		INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
-    			INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
-	    		LEFT JOIN host AS h ON h.id = dl.host_id
+			INNER JOIN data_template_data AS dtd ON dl.id = dtd.local_data_id
+			INNER JOIN data_template AS dt ON dt.id = dl.data_template_id
+			LEFT JOIN host AS h ON h.id = dl.host_id
 			INNER JOIN (
-	    		SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti
-	        	INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
-        		LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
-        		LEFT JOIN host AS h ON h.id = gl.host_id
+			SELECT DISTINCT dtr.local_data_id, task_item_id, local_graph_id FROM graph_templates_item AS gti
+			INNER JOIN graph_local AS gl ON gl.id = gti.local_graph_id
+			LEFT JOIN data_template_rrd AS dtr ON dtr.id = gti.task_item_id
+			LEFT JOIN host AS h ON h.id = gl.host_id
 			WHERE graph_type_id IN (4,5,6,7,8,20) AND
-        	  	task_item_id IS NULL AND cdef_id NOT IN (
-              		SELECT c.id FROM cdef AS c
+			task_item_id IS NULL AND cdef_id NOT IN (
+			SELECT c.id FROM cdef AS c
 			INNER JOIN cdef_items AS ci ON c.id = ci.cdef_id
 			WHERE (ci.type = 4 OR (ci.type = 6 AND value LIKE '%DATA_SOURCE%'))
 			)) AS dtr ON dl.id = dtr.local_data_id
@@ -1822,6 +1853,59 @@ function analyse_tree_host_graph_detail() {
 			}
 		}
 	}
+
+	$data = db_fetch_assoc('SELECT
+		gt.id, gt.name, COUNT(DISTINCT graphs.local_graph_id) AS graphs,
+		graphs.items AS graph_items, templates.items AS template_items
+		FROM graph_templates AS gt
+		INNER JOIN (SELECT
+			graph_template_id, COUNT(*) AS items
+			FROM graph_templates_item
+			WHERE
+			local_graph_id = 0
+			GROUP BY graph_template_id
+		) AS templates
+		ON gt.id=templates.graph_template_id
+		LEFT JOIN (SELECT
+			graph_template_id, local_graph_id, COUNT(*) AS items
+			FROM graph_templates_item AS gti
+			WHERE local_graph_id > 0
+			GROUP BY graph_template_id, local_graph_id
+		) AS graphs
+		ON gt.id = graphs.graph_template_id
+		GROUP BY gt.id
+		HAVING templates.items != graphs.items');
+
+	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
+
+	$panel['detail'] .= '<h4>' . __('Graph items/template items issue - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_red"></span></h4>';
+
+	if (cacti_sizeof($data)) {
+
+		$panel['alarm'] = 'red';
+
+		$panel['detail'] .= '<table class="w60">';
+		$panel['detail'] .= '<tr><th>' . __('Graph template', 'intropage') . '</th>';
+		$panel['detail'] .= '<th class="right">' . __('Graphs', 'intropage') . '</th>';
+		$panel['detail'] .= '<th class="right">' . __('Graph items', 'intropage') . '</th>';
+		$panel['detail'] .= '<th class="right">' . __('Template items', 'intropage') . '</th></tr>';
+
+		foreach ($data as $row) {
+			$panel['detail'] .= '<tr><td>';
+			if ($console_access) {
+				$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path']) .
+					'graph_templates.php?action=template_edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
+			} else {
+				$panel['detail'] .= $row['name'] . '</td>';
+			}
+			$panel['detail'] .= '<td class="right">' . $row['graphs'] . '</td>';
+			$panel['detail'] .= '<td class="right">' . $row['graph_items'] . '</td>';
+			$panel['detail'] .= '<td class="right">' . $row['template_items'] . '</td></tr>';
+		}
+
+		$panel['detail'] .= '</table>';
+	}
+
 
 	// plugin monitor - host without monitoring
 	if (api_plugin_is_enabled('monitor')) {
