@@ -1277,6 +1277,86 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$content .= '</script>';
 	} // line graph end
 
+	// bar graph - up to 8 values
+	if (isset($dispdata['bar'])) {
+
+		$xid = 'x' . substr(md5($dispdata['bar']['title1']), 0, 7);
+		$columns   = array();
+		$axes      = array();
+		$axis      = array();
+		$color_def = array();
+		$group     = array();
+
+		// Add the X Axis first
+		$columns[] = array_merge(array('x'), $dispdata['bar']['label1']);
+
+		for ($i = 0; $i < 8; $i++) {
+			if (isset($dispdata['bar']["data$i"]) && cacti_sizeof($dispdata['bar']["data$i"])) {
+
+				$columns[] = array_merge(array($dispdata['bar']["title$i"]), $dispdata['bar']["data$i"]);
+
+				$axes[$dispdata['bar']["title$i"]] = 'y';
+				array_push($group, $dispdata['bar']["title$i"]);
+			}
+		}
+
+		$groups = array($group);
+
+		$chart = array(
+			'bindto' => "#bar_$xid",
+			'size' => array(
+				'height' => 100,
+				'width'  => 150
+			),
+			'zoom' => array(
+				'enabled' => 'true',
+				'type'    => 'drag'
+			),
+			'data' => array(
+				'type'   => 'bar',
+				'x'      => 'x',
+				'Format' => '%Y-%m-%d %H:%M:%S',
+			),
+			'bar' => array(
+				'width' => 7,
+			)
+		);
+		// Setup the Axis
+		$axis['x'] = array(
+			'type' => 'timeseries',
+			'tick' => array(
+				'format'  => '%H:%M',
+				'culling' => array('max' => 6),
+			)
+		);
+
+		if (isset($dispdata['bar']['unit1'])) {
+			$axis['y'] = array(
+				'tick' => array(
+					'culling' => array('max' => 8)
+				),
+				'label' => array(
+					'text' => $dispdata['bar']['unit1']['title'],
+				),
+				'show' => true
+			);
+		}
+
+		$chart['data']['columns'] = $columns;
+		$chart['data']['groups'] = $groups;
+
+		$chart['data']['axes']    = $axes;
+		$chart['axis']            = $axis;
+
+		$chart_data = json_encode($chart);
+		$content .= '<div style="height: ' . $graph_height . 'px;" class="chart_wrapper center" id="bar_' . $xid. '"></div>';
+		$content .= '<script type="text/javascript">';
+		$content .= 'panels.bar_' . $xid . ' = bb.generate(' . $chart_data . ');';
+		$content .= '</script>';
+	} // bar graph end
+
+
+
 	if (isset($dispdata['pie'])) {
 		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
 
@@ -1858,4 +1938,5 @@ function human_readable ($bytes, $decimal = true, $precision = 2) {
 
 	return round(empty($d)?0:($bytes / pow($factor, $i)), $precision).' '.$size;
 }
+
 
