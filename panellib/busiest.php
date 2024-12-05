@@ -255,7 +255,7 @@ function busiest_cpu($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -365,7 +365,7 @@ function busiest_load($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -508,7 +508,7 @@ function busiest_hdd($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -582,7 +582,7 @@ function busiest_uptime($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed hosts') . '</td><td>' . get_daysfromtime($avg/100) . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg/100) . '</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -719,7 +719,7 @@ function busiest_traffic($panel, $user_id) {
 				$avg *= 8;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg, false,1) . $units . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg, false,1) . $units . '</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -837,7 +837,7 @@ function busiest_interface_error($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -906,7 +906,7 @@ function busiest_interface_util($panel, $user_id) {
 			LEFT JOIN data_template_data AS dtd
 			ON dtd.local_data_id = dsh.local_data_id
 			LEFT JOIN host as h on h.id = dl.host_id
-			WHERE h.disabled != 'on' 
+			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dtd.data_template_id = " . $ds['id'] . "
 			AND value > 0
@@ -1082,7 +1082,7 @@ function busiest_cpu_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
 
@@ -1198,7 +1198,7 @@ function busiest_load_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
 
@@ -1339,7 +1339,7 @@ function busiest_hdd_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
 
@@ -1387,6 +1387,7 @@ function busiest_uptime_detail() {
 		$query = " FROM host
 			WHERE disabled != 'on'
 			$q_host_cond
+			AND snmp_version >= 1
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 30";
 
@@ -1414,7 +1415,7 @@ function busiest_uptime_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed hosts') . '</td><td>' . get_daysfromtime($avg/100) . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg/100) . '</td></tr>';
 			$panel['detail'] .= '</table>';
 
 		} else {
@@ -1556,7 +1557,7 @@ function busiest_traffic_detail() {
 				$avg *= 8;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
 			$panel['detail'] .= '</table>';
 
 		} else {
@@ -1678,7 +1679,7 @@ function busiest_interface_error_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
 			$panel['detail'] .= '</table>';
 
 		} else {
