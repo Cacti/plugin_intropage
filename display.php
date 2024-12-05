@@ -252,6 +252,19 @@ function display_information() {
 
 	intropage_addpanel_select($dashboard_id);
 
+	print "<select id='intropage_action_timespan'>";
+
+	foreach($trend_timespans as $key => $value) {
+		if ($timespan == $key) {
+			print "<option value='timespan_$key' disabled='disabled'>" . $value . '</option>';
+		} else {
+			print "<option value='timespan_$key'>" . $value . '</option>';
+		}
+	}
+
+	print "</select>";
+	print '&nbsp; &nbsp; ';
+
 	print "<select id='intropage_action'>";
 	print '<option value="0">' . __('Actions ...', 'intropage') . '</option>';
 
@@ -351,15 +364,6 @@ function display_information() {
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';
 
-	foreach($trend_timespans as $key => $value) {
-		if ($timespan == $key) {
-			print "<option value='timespan_$key' disabled='disabled'>" . $value . '</option>';
-		} else {
-			print "<option value='timespan_$key'>" . $value . '</option>';
-		}
-	}
-
-	print '<option value="" disabled="disabled">─────────────────────────</option>';
 
 	if ($display_important_first == 'on') {
 		print "<option value='important_first' disabled='disabled'>" . __('Sort by Severity', 'intropage') . '</option>';
@@ -491,13 +495,8 @@ function display_information() {
 		print '<li>' . __('You can create up to 9 dashboards. Every dashboard can be named, use icon') . '<i class="intro_glyph fa fa-cog"></i></li>';
 		print '<li>' . __('Intopage can be displayed in console or in separated tab. You can change it in Action menu') . '</li>';
 		print '<li>' . __('If you want to copy text from panel, you have to disable drag and drop function, use icon') . '<i class="intro_glyph fa fa-clone"></i></li>';
-
-
-
 		print '</ul><br/>';
 		print '</td></tr>';
-
-
 
 		html_end_box();
 	}

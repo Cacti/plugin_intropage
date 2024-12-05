@@ -240,7 +240,6 @@ function busiest_cpu($panel, $user_id) {
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
-
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
@@ -256,7 +255,7 @@ function busiest_cpu($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td colspan="2">' . __('Average of all allowed DS') . '</td><td>' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -360,14 +359,13 @@ function busiest_load($panel, $user_id) {
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
-
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . '<span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . '</td></tr>';
 
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td colspan="2">' . __('Average of all allowed DS') . '</td><td>' . round($avg, 2) . '</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . '</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -495,7 +493,6 @@ function busiest_hdd($panel, $user_id) {
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
-
 				$panel['data'] .= '<td class="right">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
@@ -511,7 +508,7 @@ function busiest_hdd($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr><td colspan="2">' . __('Average of all allowed DS') . '</td><td>' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr><td>' . __('Average of all allowed DS') . '</td><td colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 
 		} else {
@@ -580,7 +577,7 @@ function busiest_uptime($panel, $user_id) {
 					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left inpa_loglines">' . html_escape($row['description']) . '</td>';
 				}
 
-				$panel['data'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance']/100) . '</td>';
+				$panel['data'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance']/100) . '</td></tr>';
 
 				$i++;
 			}
@@ -961,7 +958,7 @@ function busiest_interface_util($panel, $user_id) {
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $gdata['name_cache'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
 				$panel['data'] .= html_escape($gdata['name_cache']) . '</td>';
 				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
-				$panel['data'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></span></td>';
+				$panel['data'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></span></td></tr>';
 
 				$i++;
 
@@ -1412,12 +1409,12 @@ function busiest_uptime_detail() {
 					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['description']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance']/100) . '</td>';
+				$panel['detail'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance']/100) . '</td></tr>';
 
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr><td>' . __('Average of all allowed hosts') . '</td><td colspan="2">' . get_daysfromtime($avg/100) . '</td></tr>';
+			$panel['detail'] .= '<tr><td>' . __('Average of all allowed hosts') . '</td><td>' . get_daysfromtime($avg/100) . '</td></tr>';
 			$panel['detail'] .= '</table>';
 
 		} else {

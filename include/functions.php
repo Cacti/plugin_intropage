@@ -69,6 +69,8 @@ function process_page_request_variables() {
 		intropage_action_settings();
 	} elseif (isset_request_var('intropage_action')) {
 		intropage_actions();
+	} elseif (isset_request_var('intropage_action_timespan')) {
+		intropage_actions_timespan();
 	} elseif (get_request_var('action') != '') {
 		switch(get_request_var('action')) {
 			case 'configure':
@@ -505,6 +507,56 @@ function intropage_actions() {
 		break;
 	}
 }
+
+function intropage_actions_timespan() {
+	global $login_opts, $config;
+
+	$actionvar = get_filter_request_var('intropage_action_timespan', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')));
+
+	$values = explode('_', $actionvar);
+
+	// few parameters from input type select has format reset_all, refresh_180, ... first is action
+	$action = $values[0];
+
+	if (isset($values[1])) {
+		$value = trim($values[1]);
+	} else {
+		$value = '';
+	}
+
+	switch ($action) {
+	case 'timespan':
+		$timespan = $value;
+
+		if (filter_var($value, FILTER_VALIDATE_INT)) {
+			set_user_setting('intropage_timespan', $value);
+		}
+
+		$panels = db_fetch_assoc_prepared('SELECT DISTINCT ipd.panel_id
+			FROM plugin_intropage_panel_dashboard AS ipda
+			INNER JOIN plugin_intropage_panel_data AS ipd
+			ON ipda.panel_id = ipd.id
+			WHERE ipda.user_id = ?',
+			array($_SESSION['sess_user_id']));
+
+		foreach($panels as $panel) {
+			$qpanel = get_panel($panel['panel_id'], $_SESSION['sess_user_id']);
+
+			if (isset($qpanel['definition']['trends_func']) && $qpanel['definition']['trends_func'] != '') {
+				if (function_exists($qpanel['definition']['update_func'])) {
+					if ($qpanel['definition']['level'] == 0) {
+						$qpanel['definition']['update_func']($qpanel, 0, $timespan);
+					} else {
+						$qpanel['definition']['update_func']($qpanel, $_SESSION['sess_user_id'], $timespan);
+					}
+				}
+			}
+		}
+
+		break;
+	}
+}
+
 
 function is_panel_enabled($panel_id) {
 	$panels = initialize_panel_library();
