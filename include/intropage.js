@@ -190,7 +190,7 @@ function reload_page() {
 }
 
 function setPageRefresh() {
-	clearTimeout(refresh);
+	clearAllTimeouts();
 
 	if (intropage_autorefresh > 0) {
 		refresh = setInterval(reload_page, intropage_autorefresh*1000);
