@@ -1769,7 +1769,7 @@ function intropage_configure_panel() {
 
 	print '<div>';
 
-	form_start($callbackPage);
+	form_start($redirectPage);
 
 	html_start_box(__('Dashboard Names', 'intropage'), '100%', '', '3', 'center', '');
 
@@ -1936,7 +1936,7 @@ function intropage_configure_panel() {
 
 	form_hidden_box('save_settings', 0, 1);
 
-	form_save_button($callbackPage, 'save');
+	form_save_button($redirectPage, 'save');
 
 	form_end();
 

@@ -110,9 +110,9 @@ function addPanel() {
 	};
 
 	if (typeof postUrl == 'function') {
-		postUrl({ url: callbackPage }, post);
+		postUrl({ url: redirectPage }, post);
 	} else {
-		$.post(callbackPage, post).done(function(data) {
+		$.post(redirectPage, post).done(function(data) {
 			$('#main').html(data);
 			applySkin();
 			initPage();
@@ -136,9 +136,9 @@ function actionPanel() {
 		};
 
 		if (typeof postUrl == 'function') {
-			postUrl({ url: callbackPage }, post);
+			postUrl({ url: redirectPage }, post);
 		} else {
-			$.post(callbackPage, post).done(function(data) {
+			$.post(redirectPage, post).done(function(data) {
 				$('#main').html(data);
 				applySkin();
 				initPage();
@@ -163,9 +163,9 @@ function timeSpan() {
 		};
 
 		if (typeof postUrl == 'function') {
-			postUrl({ url: callbackPage }, post);
+			postUrl({ url: redirectPage }, post);
 		} else {
-			$.post(callbackPage, post).done(function(data) {
+			$.post(redirectPage, post).done(function(data) {
 				$('#main').html(data);
 				applySkin();
 				initPage();
@@ -283,7 +283,7 @@ function initPage() {
 				__csrf_magic: csrfMagicToken
 			}
 
-			$.post(callbackPage, post);
+			$.post(redirectPage, post);
 		}
 	});
 

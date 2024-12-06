@@ -124,6 +124,12 @@ function display_information() {
 		}
 	}
 
+	if ($display_important_first == 'on') {
+		$sql_order = 'ORDER BY FIND_IN_SET(alarm, "red,yellow,green,grey"), user_priority DESC';
+	} else {
+		$sql_order = 'ORDER BY user_priority DESC';
+	}
+
 	// User allowed panels
 	$panels = db_fetch_assoc_prepared("SELECT pd.*, pda.priority AS user_priority
 		FROM plugin_intropage_panel_data AS pd
@@ -141,7 +147,7 @@ function display_information() {
 		AND t4.dashboard_id = ?
 		AND t3.panel_id = 'favourite_graph'
 		AND t3.fav_graph_id IS NOT NULL
-		ORDER BY user_priority DESC",
+		$sql_order",
 		array(
 			$_SESSION['sess_user_id'],
 			$dashboard_id,
@@ -231,7 +237,6 @@ function display_information() {
 	print "</ul></nav></div>";
 	print '</div>';
 	print '<div class="float_right">';
-
 
 	// settings
 	print "<form method='post'>";
@@ -527,41 +532,8 @@ function display_information() {
 	}
 	// end of admin panel
 
-	if ($display_important_first == 'on') {  // important first
-		foreach ($panels as $xkey => $xvalue) {
-			if ($xvalue['alarm'] == 'red') {
-				intropage_display_panel($xvalue['id'], $dashboard_id);
-				$panels[$xkey]['displayed'] = true;
-			}
-		}
-
-		// yellow (errors and warnings)
-		foreach ($panels as $xkey => $xvalue) {
-			if ($xvalue['alarm'] == 'yellow') {
-				intropage_display_panel($xvalue['id'], $dashboard_id);
-				$panels[$xkey]['displayed'] = true;
-			}
-		}
-
-		// green (all)
-		foreach ($panels as $xkey => $xvalue) {
-			if ($xvalue['alarm'] == 'green') {
-				intropage_display_panel($xvalue['id'], $dashboard_id);
-				$panels[$xkey]['displayed'] = true;
-			}
-		}
-
-		// grey and without color
-		foreach ($panels as $xkey => $xvalue) {
-			if (!isset($xvalue['displayed'])) {
-				intropage_display_panel($xvalue['id'], $dashboard_id);
-				$panels[$xkey]['displayed'] = true;
-			}
-		}
-	} else {	// display only errors/errors and warnings/all - order by priority
-		foreach ($panels as $xkey => $xvalue) {
-			intropage_display_panel($xvalue['id'], $dashboard_id);
-		}
+	foreach ($panels as $xkey => $xvalue) {
+		intropage_display_panel($xvalue['id'], $dashboard_id);
 	}
 
 	print '</ul>';
