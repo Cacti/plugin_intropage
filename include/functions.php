@@ -713,6 +713,11 @@ function intropage_reload_panel() {
 	session_write_close();
 
 	if (cacti_sizeof($panel)) {
+		// Force update for chart data always
+		if (strpos($panel['data'], '<script') !== false) {
+			$forced_update = true;
+		}
+
 		// Source panel (not favgraph)
 		if (isset($panels[$panel['panel_id']])) {
 			$spanel = $panels[$panel['panel_id']];
