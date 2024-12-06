@@ -174,11 +174,26 @@ function timeSpan() {
 	}
 }
 
+function reload_page() {
+	if (fullPage) {
+		var url = redirectPage+'?dashboard_id='+dashboard_id;
+
+		if (typeof loadUrl === 'function') {
+			loadUrl({ url: url });
+		} else {
+			url += '&header=false';
+			loadPageNoHeader(url);
+		}
+	} else {
+		reload_all();
+	}
+}
+
 function setPageRefresh() {
-	clearAllTimeouts();
+	clearTimeout(refresh);
 
 	if (intropage_autorefresh > 0) {
-		refresh = setInterval(reload_all, intropage_autorefresh*1000);
+		refresh = setInterval(reload_page, intropage_autorefresh*1000);
 	} else if (intropage_autorefresh == -1) {
 		pollerRefresh = setTimeout(function() {
 			refresh = setInterval(testPoller, 10000);

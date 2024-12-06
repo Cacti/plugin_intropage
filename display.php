@@ -550,6 +550,7 @@ function display_information() {
 	var intropage_square = true;
 	var callbackPage = '';
 	var redirectPage = '';
+	var fullPage = <?php print $display_important_first == 'on' ? 'true':'false';?>;
 	var dashboard_id = <?php print $dashboard_id;?>;
 	var intropage_text_panel_details = '<?php print __('Panel Details', 'intropage');?>';
 	var intropage_text_panel_disable = '<?php print __esc('Disable panel move/Enable copy text from panel', 'intropage');?>';
