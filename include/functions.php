@@ -199,6 +199,7 @@ function intropage_actions() {
 	} else {
 		$value = '';
 	}
+
 	if (isset($values[2])) {
 		$value_ext = trim($values[2]);
 	}
@@ -334,10 +335,19 @@ function intropage_actions() {
 						AND id = ?',
 						array ($priority, $_SESSION['sess_user_id'], $b));
 
+					db_execute_prepared('UPDATE plugin_intropage_panel_dashboard
+						SET priority = ?
+						WHERE user_id = ?
+						AND panel_id = ?
+						AND dashboard_id = ?',
+						array ($priority, $_SESSION['sess_user_id'], $b, get_request_var('dashboard_id')));
+
   					$priority--;
 				}
 			}
 		}
+
+		exit;
 
 		break;
 	case 'refresh':
@@ -464,7 +474,6 @@ function intropage_actions() {
 					array($value, $value_ext));
 
 				foreach ($ids_panels as $id_panel) {
-
 					$result = db_execute_prepared('INSERT INTO plugin_intropage_panel_data
 						(panel_id,user_id,data,priority,refresh_interval,trend_interval,fav_graph_id,fav_graph_timespan)
 						SELECT panel_id, ? ,data,priority,refresh_interval,trend_interval,fav_graph_id,fav_graph_timespan
@@ -487,11 +496,11 @@ function intropage_actions() {
 				header('Location: ' . html_escape("$redirectPage?header=false&dashboard_id=$new_dashboard_id"));
 
 				exit;
-
 			} else {
 				raise_message('share_panel_error', __('Error - trying share non-shared dashboard', 'intropage'), MESSAGE_LEVEL_INFO);
 			}
 		}
+
 		break;
 	}
 }

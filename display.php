@@ -97,7 +97,6 @@ function display_information() {
 		array($_SESSION['sess_user_id'], $dashboard_id));
 
 	if (cacti_sizeof($panels)) {
-
 		$removed = 0;
 
 		foreach ($panels as $one) {
@@ -126,7 +125,7 @@ function display_information() {
 	}
 
 	// User allowed panels
-	$panels = db_fetch_assoc_prepared("SELECT pd.*
+	$panels = db_fetch_assoc_prepared("SELECT pd.*, pda.priority AS user_priority
 		FROM plugin_intropage_panel_data AS pd
 		INNER JOIN plugin_intropage_panel_dashboard AS pda
 		ON pd.id = pda.panel_id
@@ -134,7 +133,7 @@ function display_information() {
 		AND pda.dashboard_id = ?
 		AND pd.panel_id != 'favourite_graph'
 		UNION
-		SELECT t3.*
+		SELECT t3.*, t4.priority AS user_priority
 		FROM plugin_intropage_panel_data as t3
 		INNER JOIN plugin_intropage_panel_dashboard AS t4
 		ON t3.id = t4.panel_id
@@ -142,7 +141,7 @@ function display_information() {
 		AND t4.dashboard_id = ?
 		AND t3.panel_id = 'favourite_graph'
 		AND t3.fav_graph_id IS NOT NULL
-		ORDER BY priority DESC",
+		ORDER BY user_priority DESC",
 		array(
 			$_SESSION['sess_user_id'],
 			$dashboard_id,
@@ -577,7 +576,8 @@ function display_information() {
 	var intropage_autorefresh = <?php print $autorefresh;?>;
 	var intropage_drag = true;
 	var intropage_square = true;
-	var intropage_page = '';
+	var callbackPage = '';
+	var redirectPage = '';
 	var dashboard_id = <?php print $dashboard_id;?>;
 	var intropage_text_panel_details = '<?php print __('Panel Details', 'intropage');?>';
 	var intropage_text_panel_disable = '<?php print __esc('Disable panel move/Enable copy text from panel', 'intropage');?>';

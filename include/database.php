@@ -87,6 +87,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
 	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
+	$data['columns'][] = array('name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => 0);
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'panel_id`, `user_id`, `dashboard_id';
 	$data['comment']   = 'panel x dashboard dependency';

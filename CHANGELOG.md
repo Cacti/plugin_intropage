@@ -6,6 +6,7 @@
 * issue#316: Fix php error when db check skip huge db
 * issue#327: Move Timespan from action menu
 * issue: Fix support for Cacti 1.3+
+* issue: Intropage was not remembering the users desired panel order
 * feature: Add 24h averages for CPU and poller stats panel
 * feature: Add Boost graphs panels - memory usage, pending records
 * feature: Add Syslog graphs panels - levels, number of messages 

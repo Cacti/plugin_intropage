@@ -276,7 +276,14 @@ function initPage() {
 				xdata.push($(this).attr('id'));
 			});
 
-			$.get(callbackPage, { xdata:xdata, intropage_action:'order' });
+			var post = {
+				'intropage_action': 'order',
+				'dashboard_id': dashboard_id,
+				'xdata': xdata,
+				__csrf_magic: csrfMagicToken
+			}
+
+			$.post(callbackPage, post);
 		}
 	});
 
