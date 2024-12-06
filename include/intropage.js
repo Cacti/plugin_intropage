@@ -35,10 +35,11 @@ $(function() {
 		resizeCharts();
 	}).trigger('orientationchange');
 
+	callbackPage = urlPath + 'plugins/intropage/intropage.php';
 	if (pageName == 'index.php') {
-		intropage_page = urlPath + pageName;
+		redirectPage = urlPath + pageName;
 	} else {
-		intropage_page = urlPath + 'plugins/intropage/intropage.php';
+		redirectPage = urlPath + 'plugins/intropage/intropage.php';
 	}
 
 	initPage();
@@ -109,9 +110,9 @@ function addPanel() {
 	};
 
 	if (typeof postUrl == 'function') {
-		postUrl({ url: intropage_page }, post);
+		postUrl({ url: callbackPage }, post);
 	} else {
-		$.post(intropage_page, post).done(function(data) {
+		$.post(callbackPage, post).done(function(data) {
 			$('#main').html(data);
 			applySkin();
 			initPage();
@@ -135,9 +136,9 @@ function actionPanel() {
 		};
 
 		if (typeof postUrl == 'function') {
-			postUrl({ url: intropage_page }, post);
+			postUrl({ url: callbackPage }, post);
 		} else {
-			$.post(intropage_page, post).done(function(data) {
+			$.post(callbackPage, post).done(function(data) {
 				$('#main').html(data);
 				applySkin();
 				initPage();
@@ -162,9 +163,9 @@ function timeSpan() {
 		};
 
 		if (typeof postUrl == 'function') {
-			postUrl({ url: intropage_page }, post);
+			postUrl({ url: callbackPage }, post);
 		} else {
-			$.post(intropage_page, post).done(function(data) {
+			$.post(callbackPage, post).done(function(data) {
 				$('#main').html(data);
 				applySkin();
 				initPage();
@@ -275,7 +276,7 @@ function initPage() {
 				xdata.push($(this).attr('id'));
 			});
 
-			$.get(intropage_page, { xdata:xdata, intropage_action:'order' });
+			$.get(callbackPage, { xdata:xdata, intropage_action:'order' });
 		}
 	});
 

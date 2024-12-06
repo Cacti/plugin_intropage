@@ -25,7 +25,7 @@
 */
 
 function display_information() {
-	global $config, $sql_where, $login_opts, $panels, $registry, $trend_timespans;
+	global $config, $sql_where, $callbackPage, $redirectPage, $panels, $registry, $trend_timespans;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
@@ -225,10 +225,7 @@ function display_information() {
 	if (cacti_sizeof($dashboards)) {
 		foreach ($dashboards as $dbid => $db_name) {
 			print "<li><a class='tab pic" . ($dbid == $dashboard_id ? " selected'" : "'") .
-				" href='" . html_escape($config['url_path'] .
-				($login_opts == 4 ? 'plugins/intropage/intropage.php?':'index.php?') .
-				'dashboard_id=' . $dbid . '&header=false') .
-				"'>" . html_escape($db_name) . '</a></li>';
+				" href='" . html_escape("$redirectPage?dashboard_id=$dbid&header=false") . "'>" . html_escape($db_name) . '</a></li>';
 		}
 	}
 
@@ -246,7 +243,7 @@ function display_information() {
 	print "<a href='#' class='pic' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='intro_glyph fa fa-clone'></i></a>";
 	print '&nbsp; &nbsp; ';
 
-	print '<a class="pic" href="' . html_escape($config['url_path'] . ($login_opts == 4 ? 'plugins/intropage/intropage.php?':'index.php?') . 'action=configure') . '"><i class="intro_glyph fa fa-cog"></i></a>';
+	print '<a class="pic" href="' . html_escape("$redirectPage?action=configure") . '"><i class="intro_glyph fa fa-cog"></i></a>';
 	print '&nbsp; &nbsp; ';
 
 	intropage_addpanel_select($dashboard_id);

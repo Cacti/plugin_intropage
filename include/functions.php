@@ -185,7 +185,7 @@ function intropage_action_settings() {
 }
 
 function intropage_actions() {
-	global $login_opts, $config;
+	global $callbackPage, $redirectPage, $config;
 
 	$actionvar = get_filter_request_var('intropage_action', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')));
 
@@ -243,11 +243,7 @@ function intropage_actions() {
 
 			raise_message('dashboard_removed', __('Dashboard has been removed', 'intropage'), MESSAGE_LEVEL_INFO);
 
-			if ($login_opts == 4) {
-				header('Location: ' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?header=false&dashboard_id=' . $dashboard_id);
-			} else {
-				header('Location: ' . html_escape($config['url_path']) . 'index.php?header=false&dashboard_id=' . $dashboard_id);
-			}
+			header('Location: ' . html_escape("$redirectPage?header=false&dashboard_id=$dashboard_id"));
 
 			exit;
 		}
@@ -267,11 +263,7 @@ function intropage_actions() {
 
 			raise_message('dashboard_added', __('Dashboard has been added', 'intropage'), MESSAGE_LEVEL_INFO);
 
-			if ($login_opts == 4) {
-				header('Location: ' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?header=false&dashboard_id=' . $dashboard_id);
-			} else {
-				header('Location: ' . html_escape($config['url_path']) . 'index.php?header=false&dashboard_id=' . $dashboard_id);
-			}
+			header('Location: ' . html_escape("$recirectPage?header=false&dashboard_id=$dashboard_id"));
 
 			exit;
 		}
@@ -492,11 +484,7 @@ function intropage_actions() {
 
 				raise_message('dashboard_added', __('Dashboard has been added, please wait few poller cycle for data', 'intropage'), MESSAGE_LEVEL_INFO);
 
-				if ($login_opts == 4) {
-					header('Location: ' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?header=false&dashboard_id=' . $new_dashboard_id);
-				} else {
-					header('Location: ' . html_escape($config['url_path']) . 'index.php?header=false&dashboard_id=' . $new_dashboard_id);
-				}
+				header('Location: ' . html_escape("$redirectPage?header=false&dashboard_id=$new_dashboard_id"));
 
 				exit;
 
@@ -509,7 +497,7 @@ function intropage_actions() {
 }
 
 function intropage_actions_timespan() {
-	global $login_opts, $config;
+	global $config;
 
 	$actionvar = get_filter_request_var('intropage_action_timespan', FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^([a-z0-9_-]+)$/')));
 
@@ -1706,7 +1694,7 @@ function ntp_time($host) {
 	return ($timestamp);
 }
 function intropage_graph_button($data) {
-	global $config, $login_opts;
+	global $config, $callbackPage, $redirectPage;
 
 	if (is_panel_allowed('favourite_graph')) {
 		$local_graph_id = $data[1]['local_graph_id'];
@@ -1732,11 +1720,7 @@ function intropage_graph_button($data) {
 			}
 		}
 
-		if ($login_opts == 4) {
-			print '<a class="iconLink" href="' . html_escape($config['url_path']) . 'plugins/intropage/intropage.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
-		} else {
-			print '<a class="iconLink" href="' . html_escape($config['url_path']) . 'index.php?intropage_action=favgraph&graph_id=' . $local_graph_id . '">' . $fav . '</a><br/>';
-		}
+		print '<a class="iconLink" href="' . html_escape("$redirectPage?intropage_action=favgraph&graph_id=$local_graph_id") . '">' . $fav . '</a><br/>';
 	}
 }
 
@@ -1763,7 +1747,7 @@ function get_login_opts($refresh = false) {
 }
 
 function intropage_configure_panel() {
-	global $config, $login_opts, $trend_timespans, $intropage_intervals;
+	global $config, $callbackPage, $redirectPage, $trend_timespans, $intropage_intervals;
 
 	$dashboards = array_rekey(
 		db_fetch_assoc_prepared('SELECT dashboard_id, name
@@ -1776,13 +1760,7 @@ function intropage_configure_panel() {
 
 	print '<div>';
 
-	if ($login_opts == 4) {
-		$pageName = $config['url_path'] . 'plugins/intropage/intropage.php';
-	} else {
-		$pageName = 'index.php';
-	}
-
-	form_start($pageName);
+	form_start($callbackPage);
 
 	html_start_box(__('Dashboard Names', 'intropage'), '100%', '', '3', 'center', '');
 
@@ -1949,7 +1927,7 @@ function intropage_configure_panel() {
 
 	form_hidden_box('save_settings', 0, 1);
 
-	form_save_button($pageName, 'save');
+	form_save_button($callbackPage, 'save');
 
 	form_end();
 
