@@ -186,7 +186,6 @@ function intropage_upgrade_database() {
 	$oldv    = db_fetch_cell('SELECT version FROM plugin_config WHERE directory = "intropage"');
 
 	if (!cacti_version_compare($oldv, $current, '=')) {
-
 		if (cacti_version_compare($oldv, '3.0.0', '<=')) {
 			include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
@@ -329,7 +328,11 @@ function intropage_upgrade_database() {
 			)
 		);
 
-	        $panels = initialize_panel_library();
+		if (!db_column_exists('plugin_intropage_panel_dashboard', 'priority')) {
+			db_execute("ALTER TABLE plugin_intropage_panel_dashboard ADD COLUMN priority int(11) DEFAULT '0'");
+		}
+
+		$panels = initialize_panel_library();
 		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', 1);
 	}
 }
