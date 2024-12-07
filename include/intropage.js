@@ -175,6 +175,8 @@ function timeSpan() {
 }
 
 function reload_page() {
+	clearAllTimeouts();
+
 	if (fullPage) {
 		var url = redirectPage+'?dashboard_id='+dashboard_id;
 
@@ -190,8 +192,6 @@ function reload_page() {
 }
 
 function setPageRefresh() {
-	clearAllTimeouts();
-
 	if (intropage_autorefresh > 0) {
 		refresh = setInterval(reload_page, intropage_autorefresh*1000);
 	} else if (intropage_autorefresh == -1) {
@@ -287,6 +287,7 @@ function initPage() {
 		update: function(event, ui) {
 			// change order
 			var xdata = new Array();
+
 			$('#obal li').each(function() {
 				xdata.push($(this).attr('id'));
 			});
@@ -304,6 +305,7 @@ function initPage() {
 
 	$('.droppanel').click(function(event) {
 		event.preventDefault();
+
 		var panel_div_id = $(this).attr('data-panel');
 		var page = $(this).attr('href');
 
@@ -334,6 +336,7 @@ function initPage() {
 	// detail to the new window
 	$('.maxim').click(function(event) {
 		event.preventDefault();
+
 		var panel_id = $(this).attr('detail-panel');
 		var url = urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id;
 
@@ -429,9 +432,8 @@ function initPage() {
 	$('body').on('click','.bus_graph', function() {
 		event.preventDefault();
 
-		var id = $(this).attr('bus_id');
-
-		data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />';
+		var id   = $(this).attr('bus_id');
+		var data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />';
 
 		$('#overlay').dialog({
 			modal: true,
@@ -473,6 +475,7 @@ function testPoller() {
 		if (data == 1) {
 			$('#obal li').each(function() {
 				var panel_id = $(this).attr('id').split('_').pop();
+
 				reload_panel(panel_id, false, false);
 				Pace.stop();
 		    });
@@ -498,7 +501,8 @@ function reload_panel(panel_id, forced_update, refresh) {
 		checkForRedirects(data, url);
 
 		if ($('#panel_'+panel_id).find('.chart_wrapper').length) {
-			chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
+			var chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
+
 			if (panels[chart_id] != undefined) {
 				panels[chart_id].destroy();
 			}
@@ -523,11 +527,13 @@ function reload_all() {
 	if ($('#overlay').dialog('instance') === undefined) {
 		$('#obal li.flexchild').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
+
 			reload_panel(panel_id, false, true);
 		});
 	} else if (!$('#overlay').dialog('isOpen')) {
 		$('#obal li.flexchild').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
+
 			reload_panel(panel_id, false, true);
 		});
 	}
