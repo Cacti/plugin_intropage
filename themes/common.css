@@ -66,6 +66,7 @@
 
 .panel_header {
 	padding: 4px;
+	margin: 0px;
 	font-weight: bold;
 	height: 16px;
 	width: 100%;
