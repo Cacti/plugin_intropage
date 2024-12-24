@@ -812,8 +812,10 @@ function intropage_detail_panel() {
 			$data['detail'] = __('Details Function does not exist.', 'intropage');
 		}
 
+		print '<div class="cactiTableTitleRow">';
 		print '<div class="cactiTableTitle">'  . $data['name']  . '</div>';
 		print '<div class="cactiTableButton"><i class="fas fa-circle color_' . $data['alarm'] . '_bubble"></i></div>';
+		print '</div>';
 		print $data['detail'];
 	} else {
 		print __('Panel Not Found');

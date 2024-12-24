@@ -215,7 +215,7 @@ function intropage_user_admin_run_action($current_tab){
 
 	form_start('user_admin.php?action=user_edit&tab=intropage_settings_edit&id=' . get_request_var('id'));
 
-	print '<div>';
+	print '<div class="cactiTableTitleRow">';
 	print "<div class='cactiTableTitle'><span style='padding:3px;'>" . __('You can Allow/Disallow Panels for User','intropage') . ' ' . $header_label . '</span></div>';
 	print "<div class='cactiTableButton'><span style='padding:3px;'><input class='checkbox' type='checkbox' id='all' name='all' title='Select All' onClick='selectAllPerms(this.checked)'></a><label class='formCheckboxLabel' title='Select All' for='all'></label></span></div>";
 	print '</div>';
@@ -347,7 +347,7 @@ function intropage_user_group_admin_run_action($current_tab){
 
 	form_start('user_group_admin.php?action=edit&tab=intropage_group_settings_edit&id=' . get_request_var('id'));
 
-	print '<div>';
+	print '<div class="cactiTableTitleRow">';
 	print "<div class='cactiTableTitle'><span style='padding:3px;'>" . __('You can Allow/Disallow Panels for Group','intropage') . ' ' . $header_label . '</span></div>';
 	print "<div class='cactiTableButton'><span style='padding:3px;'><input class='checkbox' type='checkbox' id='all' name='all' title='Select All' onClick='selectAllPerms(this.checked)'></a><label class='formCheckboxLabel' title='Select All' for='all'></label></span></div>";
 	print '</div>';
