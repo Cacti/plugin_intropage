@@ -9,6 +9,7 @@
 * issue: Intropage was not remembering the users desired panel order
 * issue: When 'Important First' is set, do a full refresh
 * issue: Trend Charts should always be recalculated
+* issue: Bulk Walk warning should only be for SNMP devices with Data Queries
 * feature: Add 24h averages for CPU and poller stats panel
 * feature: Add Boost graphs panels - memory usage, pending records
 * feature: Add Syslog graphs panels - levels, number of messages 
