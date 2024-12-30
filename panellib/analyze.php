@@ -591,8 +591,10 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 
 		// need only devices with any snmp data
-		$count = db_fetch_cell("SELECT COUNT(id)
+		$count = db_fetch_cell("SELECT COUNT(DISTINCT host.id)
 			FROM host
+			INNER JOIN host_snmp_query
+			ON host.id = host_snmp_query.host_id
 			WHERE disabled != 'on'
 			$q_host_cond
 			AND availability_method IN (1,2,4,5,6)
