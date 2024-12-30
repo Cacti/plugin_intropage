@@ -123,10 +123,11 @@ function analyse_login($panel, $user_id) {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
-        if ($important_period == -1) {
-                $important_period = time();
-        }
+	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+
+	if ($important_period == -1) {
+		$important_period = time();
+	}
 
 	$flog = db_fetch_cell('SELECT COUNT(*)
 		FROM user_log
@@ -318,64 +319,62 @@ function analyse_log($panel, $user_id) {
 
 		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 3));
 
-	        $datechar = array(
-        	        GDC_HYPHEN => '-',
-                	GDC_SLASH  => '/',
-                	GDC_DOT    => '.'
-        	);
+		$datechar = array(
+			GDC_HYPHEN => '-',
+			GDC_SLASH  => '/',
+			GDC_DOT    => '.'
+		);
 
-        	$date_fmt        = read_config_option('default_date_format');
-        	$dateCharSetting = read_config_option('default_datechar');
+		$date_fmt        = read_config_option('default_date_format');
+		$dateCharSetting = read_config_option('default_datechar');
 
-        	if (!isset($datechar[$dateCharSetting])) {
-                	$dateCharSetting = GDC_SLASH;
-        	}
+		if (!isset($datechar[$dateCharSetting])) {
+			$dateCharSetting = GDC_SLASH;
+		}
 
-        	$datecharacter = $datechar[$dateCharSetting];
+		$datecharacter = $datechar[$dateCharSetting];
 
-        	switch ($date_fmt) {
+		switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_MN_D_Y:
 				$format = 'M' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_D_MO_Y:
-                        	$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
-			break;
+				$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
+				break;
 			case GD_D_MN_Y:
-                        	$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
-			break;
+				$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
+				break;
 			case GD_Y_MO_D:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				break;
 			case GD_Y_MN_D:
-                        	$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
+				break;
 			default:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
-        	}
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				break;
+		}
 
 		foreach ($log['lines'] as $line) {
-
 			$color = 'grey';
 
 			if (strlen($line) > 3) {
-
 				$date = explode(' - ', $line);
 
 				$d_p = date_parse_from_format($format, $date[0]);
 				$timestamp = mktime ($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
 
 				if ($timestamp > (time()-($important_period))) {
-                                        if (preg_match('/( ERROR|FATAL)/', $line)) {
-                                                $color = 'red';
-                                        } elseif (preg_match('/( WARNING)/', $line)) {
-                                                $color = 'yellow';
-                                        } else {
-                                        	$color = 'green';
-                                        }
+					if (preg_match('/( ERROR|FATAL)/', $line)) {
+						$color = 'red';
+					} elseif (preg_match('/( WARNING)/', $line)) {
+						$color = 'yellow';
+					} else {
+						$color = 'green';
+					}
 				}
 
 				$panel['data'] .= '<tr><td class="inpa_loglines" colspan="3" title="' . $line . '"><span class="inpa_sq color_' . $color . '"></span>';
@@ -1203,25 +1202,25 @@ function analyse_log_detail() {
 		switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_MN_D_Y:
 				$format = 'M' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_D_MO_Y:
-                        	$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
-			break;
+				$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
+				break;
 			case GD_D_MN_Y:
-                        	$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
-			break;
+				$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
+				break;
 			case GD_Y_MO_D:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				break;
 			case GD_Y_MN_D:
-                        	$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
+				break;
 			default:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				break;
 		}
 
 		$count = 0;
