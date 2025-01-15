@@ -1202,7 +1202,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
 	if ($lines == 5) {
-		$graph_height = 150;
+		$graph_height = 180;
 	} elseif ($lines == 10) {
 		$graph_height = 200;
 	} else {
@@ -1399,7 +1399,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		}
 
 		$chart['data']['columns'] = $columns;
-		$chart['data']['groups'] = $groups;
+		$chart['data']['groups']  = $groups;
 
 		$chart['data']['axes']    = $axes;
 		$chart['axis']            = $axis;
