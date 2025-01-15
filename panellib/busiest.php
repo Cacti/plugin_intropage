@@ -42,6 +42,7 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'double',
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -156,7 +157,8 @@ function busiest_cpu($panel, $user_id) {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-
+//!!pm
+$lines = 20;
 	$panel['alarm'] = 'grey';
 
 	$console_access = get_console_access($user_id);

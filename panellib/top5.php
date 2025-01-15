@@ -74,6 +74,7 @@ function register_top5() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'triple',
 			'priority'     => 62,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -269,7 +270,8 @@ function top5_polltime($panel, $user_id) {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-
+//!!pm
+$lines = 40;
 	$panel['alarm'] = 'green';
 
 	$simple_perms = get_simple_device_perms($user_id);

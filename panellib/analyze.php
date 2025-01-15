@@ -58,6 +58,7 @@ function register_analyze() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'half-panel',
+			'height'       => 'normal',
 			'priority'     => 50,
 			'alarm'        => 'green',
 			'requires'     => false,

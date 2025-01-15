@@ -362,12 +362,6 @@ function intropage_actions() {
 		}
 
 		break;
-	case 'lines':
-		if (filter_var($value, FILTER_VALIDATE_INT)) {
-			set_user_setting('intropage_number_of_lines', $value);
-		}
-
-		break;
 	case 'timespan':
 		$timespan = $value;
 
@@ -1409,8 +1403,6 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$content .= '</script>';
 	} // bar graph end
 
-
-
 	if (isset($dispdata['pie'])) {
 		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
 
@@ -1558,9 +1550,32 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 		$width = 'quarter-panel';
 	} else {
 		$width = $panels[$k_id]['width'];
+		$height = isset($panels[$k_id]['height']) ? $panels[$k_id]['height'] : 'normal';
 	}
 
-	print '<li id="panel_' . $panel_id . '" class="' . $width . ' flexchild">';
+	if ($width == 'quarter-panel') {
+		if ($height == 'normal') {
+			$class = 'panel_1_1';
+		} elseif ($height == 'double') {
+			$class = 'panel_2_1';
+		} elseif ($height == 'triple') {
+			$class = 'panel_3_1';
+		}
+	} else {	// double width
+		if ($height == 'normal') {
+			$class = 'panel_1_2';
+		} elseif ($height == 'double') {
+			$class = 'panel_2_2';
+		} elseif ($height == 'triple') {
+			$class = 'panel_3_2';
+		}
+	}
+//!! resit prevod starych nazvu
+//!! prejmenovat flexchild a obal a megaobal
+
+//	print '<li id="panel_' . $panel_id . '" class="' . $width . ' flexchild">';
+	
+	print '<li id="panel_' . $panel_id . '" class="' . $class . ' flexchild">';
 	print '<div class="panel_wrapper">';
 
 	print '<div class="panel_header color_grey">';

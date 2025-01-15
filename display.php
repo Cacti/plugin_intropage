@@ -181,8 +181,8 @@ function display_information() {
 
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on') {
-	    print '<table class="cactiTable"><tr><td class="textAreaNotes">' . __('You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
-	    print '<a class="pic" href="' . $config['url_path'] . 'settings.php"><i class="intro_glyph fas fa-link"></i></a></td></tr></table></br>';
+		print '<table class="cactiTable"><tr><td class="textAreaNotes">' . __('You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
+		print '<a class="pic" href="' . $config['url_path'] . 'settings.php"><i class="intro_glyph fas fa-link"></i></a></td></tr></table></br>';
 	}
 
 	$dashboards = array_rekey(
@@ -241,7 +241,7 @@ function display_information() {
 	// settings
 	print "<form method='post'>";
 
-	print "<a href='#' class='pic' id='switch_square' title='" . __esc('Hide red/yellow/green square notifications', 'intropage') . "'><i class='intro_glyph fa fa-minus-square'></i></a>";
+	print "<a href='#' class='pic' id='switch_square' title='" . __esc('Hide or display red/yellow/green square notifications', 'intropage') . "'><i class='intro_glyph fa fa-minus-square'></i></a>";
 	print '&nbsp; &nbsp; ';
 
 	print "<a href='#' class='pic' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='intro_glyph fa fa-clone'></i></a>";
@@ -274,26 +274,6 @@ function display_information() {
 
 	if ($dashboard_id > 1) {
 		print '<option value="removepage_' . $dashboard_id . '">' . __('Remove current dashboard', 'intropage') . '</option>';
-	}
-
-	print '<option value="" disabled="disabled">─────────────────────────</option>';
-
-	if ($number_of_lines == 5) {
-		print "<option value='lines_5' disabled='disabled'>" . __('Number of lines - %d', 5, 'intropage') . '</option>';
-	} else {
-		print "<option value='lines_5'>" . __('Number of lines - %d', 5, 'intropage') . '</option>';
-	}
-
-	if ($number_of_lines == 10) {
-		print "<option value='lines_10' disabled='disabled'>" . __('Number of lines - %d', 10, 'intropage') . '</option>';
-	} else {
-		print "<option value='lines_10'>" . __('Number of lines - %d', 10, 'intropage') . '</option>';
-	}
-
-	if ($number_of_lines == 15) {
-		print "<option value='lines_15' disabled='disabled'>" . __('Number of lines - %d', 15, 'intropage') . '</option>';
-	} else {
-		print "<option value='lines_15'>" . __('Number of lines - %d', 15, 'intropage') . '</option>';
 	}
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';
@@ -458,7 +438,12 @@ function display_information() {
 	print '</div>';
 
 	print '<div id="megaobal">';
-	print '<ul id="obal">';
+
+	if ($display_wide == 'on') {
+		print '<ul id="obal" class="container_col_4">';
+	} else {
+		print '<ul id="obal" class="container_col_3">';
+	}
 
 	if (cacti_sizeof($panels) == 0) {
 		print '<table class="cactiTable">';
