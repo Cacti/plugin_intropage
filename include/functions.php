@@ -714,7 +714,7 @@ function intropage_reload_panel() {
 
 	if (cacti_sizeof($panel)) {
 		// Force update for chart data always
-		if (strpos($panel['data'], '<script') !== false) {
+		if ($panel['data'] != '' && strpos($panel['data'], '<script') !== false) {
 			$forced_update = true;
 		}
 
