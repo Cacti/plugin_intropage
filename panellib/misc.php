@@ -135,7 +135,7 @@ function ntp_dns($panel, $user_id) {
 			}
 		}
 
-		if (substr($timestamp, 1, 5) != 'error') {
+		if (isset($timestamp) && is_numeric($timestamp)) {
 			$diff_time = date('U') - $timestamp;
 
 			$panel['data'] .= '<tr><td><span class="txt_big">' . date('Y-m-d H:i:s') . ' (Time Diff: ' . $diff_time . ')</span></td></tr>';
