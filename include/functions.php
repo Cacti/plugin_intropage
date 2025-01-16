@@ -286,7 +286,7 @@ function intropage_actions() {
 					WHERE user_id = ?
 					AND fav_graph_id = ?
 					AND fav_graph_timespan = ?',
-					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
+					array($_SESSION['sess_user_id'], get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
 			}
 
 			if ($_SESSION['sess_current_timespan'] == 0) {
@@ -304,9 +304,10 @@ function intropage_actions() {
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
 				(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
 				VALUES (?, "favourite_graph", ?, ?, ?)',
-				array($_SESSION['sess_user_id'],get_request_var('graph_id'), $span, $prio));
+				array($_SESSION['sess_user_id'], get_request_var('graph_id'), $span, $prio));
 
 			$id = db_fetch_insert_id();
+
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
 				(panel_id, user_id, dashboard_id) VALUES ( ?, ?, ?)',
 				array($id, $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
@@ -340,7 +341,7 @@ function intropage_actions() {
 						WHERE user_id = ?
 						AND panel_id = ?
 						AND dashboard_id = ?',
-						array ($priority, $_SESSION['sess_user_id'], $b, get_request_var('dashboard_id')));
+						array ($priority, $_SESSION['sess_user_id'], $b, get_filter_request_var('dashboard_id')));
 
   					$priority--;
 				}
