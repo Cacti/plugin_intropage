@@ -42,6 +42,7 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 30,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -58,6 +59,7 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 98,
 			'alarm'        => 'red',
 			'requires'     => 'maint',
@@ -74,6 +76,7 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 36,
 			'alarm'        => 'green',
 			'requires'     => 'webseer',
@@ -90,13 +93,14 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 36,
 			'alarm'        => 'green',
 			'requires'     => 'servcheck',
 			'update_func'  => 'servcheck',
 			'details_func' => 'servcheck_detail',
 			'trends_func'  => false
-		)
+		),
 	);
 
 	return $panels;

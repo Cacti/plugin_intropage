@@ -42,6 +42,7 @@ function register_alert() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 90,
 			'alarm'        => 'green',
 			'requires'     => false,

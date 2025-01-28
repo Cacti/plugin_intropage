@@ -1573,9 +1573,7 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 //!! resit prevod starych nazvu
 //!! prejmenovat flexchild a obal a megaobal
 
-//	print '<li id="panel_' . $panel_id . '" class="' . $width . ' flexchild">';
-	
-	print '<li id="panel_' . $panel_id . '" class="' . $class . ' flexchild">';
+	print '<li id="panel_' . $panel_id . '" class="' . $class . ' grid_item">';
 	print '<div class="panel_wrapper">';
 
 	print '<div class="panel_header color_grey">';

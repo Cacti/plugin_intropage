@@ -431,18 +431,17 @@ function display_information() {
 
 	print '</select>';
 	print '</form>';
-	// end of settings
 
 	print '</div>';
 	print '<br style="clear: both" />';
 	print '</div>';
 
-	print '<div id="megaobal">';
+	print '<div id="main_container">';
 
 	if ($display_wide == 'on') {
-		print '<ul id="obal" class="container_col_4">';
+		print '<ul id="panel_container" class="container_col_4">';
 	} else {
-		print '<ul id="obal" class="container_col_3">';
+		print '<ul id="panel_container" class="container_col_3">';
 	}
 
 	if (cacti_sizeof($panels) == 0) {
@@ -499,7 +498,7 @@ function display_information() {
 			AND user_id = ?",
 			array($_SESSION['sess_user_id']));
 
-		if ($row && strlen($row['data']) > 20 && $dashboard_id == $first_db) {
+		if (isset($row) && $row['data'] != null && $dashboard_id == $first_db) {
 			intropage_display_panel($row['id'], $dashboard_id);
 		}
 	}
@@ -523,7 +522,7 @@ function display_information() {
 
 	print '</ul>';
 	print '<ul class="cloned-slides"></ul>';
-	print '</div>'; // end of megaobal
+	print '</div>';
 
 	?>
 	<script type='text/javascript'>

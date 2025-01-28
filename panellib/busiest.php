@@ -59,6 +59,7 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -75,6 +76,7 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -91,6 +93,7 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -107,6 +110,7 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -123,6 +127,7 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -139,6 +144,7 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 68,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -146,7 +152,6 @@ function register_busiest() {
 			'details_func' => 'busiest_interface_util_detail',
 			'trends_func'  => false
 		),
-
 	);
 
 	return $panels;

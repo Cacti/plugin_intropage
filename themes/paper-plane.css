@@ -21,7 +21,7 @@
  +-------------------------------------------------------------------------+
 */
 
-.flexchild {
+.grid_item {
 	background-color: #202020 !important;
 }
 
@@ -52,7 +52,7 @@
 	color: white;
 }
 
-#megaobal, #obal {
+#main_container, #panel_container {
 	padding: 3px;
 	color: lightgrey !important;
 }

@@ -42,6 +42,7 @@ function register_poller() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 74,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -58,6 +59,7 @@ function register_poller() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 73,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -74,6 +76,7 @@ function register_poller() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
 			'priority'     => 83,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -81,7 +84,6 @@ function register_poller() {
 			'details_func' => false,
 			'trends_func'  => 'poller_output_items_trend'
 		),
-
 	);
 
 	return $panels;

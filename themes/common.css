@@ -21,16 +21,17 @@
  +-------------------------------------------------------------------------+
 */
 
-#obal {
+#panel_container {
 	list-style-type: none; /* remove bullets */
 	display: grid;
-	gap: 2px;  /* tohle mozna potom vyhodit */
+	gap: 2px;  /* !! tohle mozna potom vyhodit */
 
-/* teroteicky muzu smazat */
+/* teroteicky muzu smazat //!! */
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
 	overflow: auto;
+
 }
 
 .container_col_3 {
@@ -65,7 +66,7 @@
 	grid-area: span 3/span 2;
 }
 
-.flexchild {
+.grid_item {
 	padding: 0;
 	/* asi jen overflow */
 	margin-right: 5px;
