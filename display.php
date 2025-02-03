@@ -278,6 +278,26 @@ function display_information() {
 
 	print '<option value="" disabled="disabled">─────────────────────────</option>';
 
+	if ($number_of_lines == 5) {
+		print "<option value='lines_5' disabled='disabled'>" . __('Number of lines - %d', 5, 'intropage') . '</option>';
+	} else {
+		print "<option value='lines_5'>" . __('Number of lines - %d', 5, 'intropage') . '</option>';
+	}
+
+	if ($number_of_lines == 10) {
+		print "<option value='lines_10' disabled='disabled'>" . __('Number of lines - %d', 10, 'intropage') . '</option>';
+	} else {
+		print "<option value='lines_10'>" . __('Number of lines - %d', 10, 'intropage') . '</option>';
+	}
+
+	if ($number_of_lines == 15) {
+		print "<option value='lines_15' disabled='disabled'>" . __('Number of lines - %d', 15, 'intropage') . '</option>';
+	} else {
+		print "<option value='lines_15'>" . __('Number of lines - %d', 15, 'intropage') . '</option>';
+	}
+
+	print '<option value="" disabled="disabled">─────────────────────────</option>';
+
 	print "<option value=''>" . __('Refresh Now', 'intropage') . '</option>';
 
 	if ($autorefresh > 0 || $autorefresh == -1) {

@@ -43,6 +43,7 @@ function register_top5() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 60,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -60,6 +61,7 @@ function register_top5() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 61,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -76,7 +78,8 @@ function register_top5() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
-			'height'       => 'triple',
+			'height'       => 'double',
+			'height_fixed' => false,
 			'priority'     => 62,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -94,6 +97,7 @@ function register_top5() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 63,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -273,8 +277,15 @@ function top5_polltime($panel, $user_id) {
 	global $config;
 
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-//!!pm
-$lines = 40;
+//!!pm - jen zkousim
+//$lines = 40;
+
+/*	if ($panel['height'] == 'double') {
+		$lines *= 2;
+	} elseif ($panel['height'] == 'double') {
+		$lines *= 3;
+	}
+*/	
 	$panel['alarm'] = 'green';
 
 	$simple_perms = get_simple_device_perms($user_id);

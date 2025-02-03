@@ -43,6 +43,7 @@ function register_alert() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 90,
 			'alarm'        => 'green',
 			'requires'     => false,
