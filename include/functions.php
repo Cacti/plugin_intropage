@@ -1570,8 +1570,6 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 			$class = 'panel_3_2';
 		}
 	}
-//!! resit prevod starych nazvu
-//!! prejmenovat flexchild a obal a megaobal
 
 	print '<li id="panel_' . $panel_id . '" class="' . $class . ' grid_item">';
 	print '<div class="panel_wrapper">';
@@ -1588,11 +1586,11 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 	printf("<a href='#' class='header_link maxim' detail-panel='%s' title='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id, __esc('Show Details', 'intropage'));
 
 	if ($height == 'normal' && !$panels[$k_id]['height_fixed']) {
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a></div>", __esc('Less rows', 'intropage'));
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a></div>", __esc('More rows', 'intropage'));
+		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>", __esc('Less rows', 'intropage'));
+		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a>", __esc('More rows', 'intropage'));
 	} else {
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a></div>",__esc('Panel does not support changing the height', 'intropage'));
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a></div>", __esc('Panel does not support changing the height', 'intropage'));
+		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>",__esc('Panel does not support changing the height', 'intropage'));
+		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a>", __esc('Panel does not support changing the height', 'intropage'));
 	}
 
 	print '</div>';
