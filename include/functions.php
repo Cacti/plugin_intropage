@@ -1664,20 +1664,7 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>", __esc('Panel has minimal height', 'intropage'));
 		printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
 	}
-/*
-	elseif ($height == 'triple') {
-		printf("<a href='%s' data-panel='panel_$panel_id' class='header_link height_less' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=heightless&panel_id=$panel_id");
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a>", __esc('Panel has maximal height', 'intropage'));
-	}
-	elseif ($height == 'double') {
-		printf("<a href='%s' data-panel='panel_$panel_id' class='header_link height_less' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=heightless&panel_id=$panel_id");
-		printf("<a href='%s' data-panel='panel_$panel_id' class='header_link height_more' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=heightmore&panel_id=$panel_id");
-	}
-	elseif ($height == 'normal') {
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>", __esc('Panel has minimal height', 'intropage'));
-		printf("<a href='%s' data-panel='panel_$panel_id' class='header_link height_more' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=heightmore&panel_id=$panel_id");
-	}
-*/
+
 	print '</div>';
 	print ' </div>';
 	print "	<table class='cactiTable'>";
@@ -2087,4 +2074,18 @@ function human_readable ($bytes, $decimal = true, $precision = 2) {
 	return round(empty($d)?0:($bytes / pow($factor, $i)), $precision).' '.$size;
 }
 
+function get_panel_lines_count ($height, $user_id) {
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
+	if (!is_numeric($lines)) {
+		$lines = 5;
+	}
+	elseif ($height == 'double') {
+		$lines *= 2;
+	} elseif ($height == 'triple') {
+		$lines *= 3;
+	}
+
+	return $lines;
+}

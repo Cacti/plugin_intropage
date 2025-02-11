@@ -241,7 +241,7 @@ function initPage() {
 			);
 
 			ui.helper.width(minWidth);
-			$('#panel_container .grid_item').css({'width': minWidth, 'flex-grow': '0'});
+			$('#panel_container .grid_item').css({'width': minWidth});
 
 			ui.helper.addClass('exclude-me');
 			ui.helper.data('clone').hide();
@@ -270,7 +270,7 @@ function initPage() {
 
 			$('#panel_container .grid_item').css('visibility', 'visible');
 			$('.cloned-slides .grid_item').css('visibility', 'hidden');
-			$('#panel_container .grid_item').css({'width': '', 'flex-grow': '1'});
+			$('#panel_container .grid_item').css({'width': ''});
 
 			resizeGraphsPanel();
 			resizeCharts();
@@ -428,6 +428,7 @@ function initPage() {
 
 	// change panel height and reload
 	$('.heightless').off('click').on('click', function(event) {
+
 		var panel_id = $(this).attr('id').split('_').pop();
 
 		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightless&panel_id=' + panel_id;

@@ -590,7 +590,8 @@ function extrem_trend() {
 function extrem($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'grey';
@@ -756,7 +757,6 @@ function extrem($panel, $user_id) {
 function extrem_detail() {
 	global $config, $console_access;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel = array(

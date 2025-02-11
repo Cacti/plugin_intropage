@@ -100,7 +100,8 @@ function poller_info_trend() {
 function poller_info($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'green';
@@ -201,7 +202,8 @@ function poller_stat_trend() {
 function poller_stat($panel, $user_id, $timespan = 0) {
 	global $config, $run_from_poller;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'green';
@@ -320,7 +322,6 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 function poller_info_detail() {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $_SESSION['sess_user_id']);
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel = array(
@@ -346,7 +347,7 @@ function poller_info_detail() {
 		WHERE p.disabled = ""
 		GROUP BY p.id
 		ORDER BY p.id
-		LIMIT ' . $lines);
+		LIMIT 20');
 
 	$count    = $pollers === false ? __('N/A', 'intropage') : cacti_count($pollers);
 	$ok       = 0;

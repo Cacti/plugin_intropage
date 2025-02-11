@@ -61,7 +61,7 @@ function register_syslog() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
-			'height_fixed' => true,
+			'height_fixed' => false,
 			'priority'     => 27,
 			'alarm'        => 'grey',
 			'requires'     => 'syslog',
@@ -79,6 +79,7 @@ function register_syslog() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 28,
 			'alarm'        => 'grey',
 			'requires'     => 'syslog',
@@ -93,7 +94,6 @@ function register_syslog() {
 
 function plugin_syslog_trend() {
 	global $config;
-
 
 	if (api_plugin_is_enabled('syslog')) {
 
@@ -387,7 +387,7 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 
 		include_once($config['base_path'] . '/plugins/syslog/database.php');
 
-		$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+		$lines = get_panel_lines_count($panel['height'], $user_id);
 
 		$devices = syslog_db_fetch_assoc_prepared('SELECT sh.host AS ip ,count(*) AS hcount
 			FROM syslog AS s

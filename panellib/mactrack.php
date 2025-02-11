@@ -129,7 +129,7 @@ function mactrack($panel, $user_id) {
 function mactrack_sites($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'green';
 

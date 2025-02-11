@@ -132,11 +132,12 @@ function register_analyze() {
 function analyse_login($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
-        if ($important_period == -1) {
-                $important_period = time();
-        }
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
+	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+	if ($important_period == -1) {
+		$important_period = time();
+	}
 
 	$flog = db_fetch_cell('SELECT COUNT(*)
 		FROM user_log
@@ -219,9 +220,7 @@ function analyse_login($panel, $user_id) {
 	}
 
 	$panel['data'] .= '</table><br/>';
-
 	$panel['data'] .= '<table class="cactiTable inpa_fixed">';
-
 	$panel['data'] .= '<tr><td>' . __('Total Failed Logins: %s', number_format_i18n($flog), 'intropage') . '</td></tr>';
 
 	$data = db_fetch_assoc('SELECT DISTINCT username
@@ -245,7 +244,7 @@ function analyse_login($panel, $user_id) {
 function analyse_log($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	if (isset($_SESSION['sess_user_id'])) {
 		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
@@ -328,22 +327,22 @@ function analyse_log($panel, $user_id) {
 
 		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 3));
 
-	        $datechar = array(
-        	        GDC_HYPHEN => '-',
-                	GDC_SLASH  => '/',
-                	GDC_DOT    => '.'
-        	);
+		$datechar = array(
+			GDC_HYPHEN => '-',
+			GDC_SLASH  => '/',
+			GDC_DOT    => '.'
+		);
 
-        	$date_fmt        = read_config_option('default_date_format');
-        	$dateCharSetting = read_config_option('default_datechar');
+		$date_fmt        = read_config_option('default_date_format');
+		$dateCharSetting = read_config_option('default_datechar');
 
-        	if (!isset($datechar[$dateCharSetting])) {
-                	$dateCharSetting = GDC_SLASH;
-        	}
+		if (!isset($datechar[$dateCharSetting])) {
+			$dateCharSetting = GDC_SLASH;
+		}
 
-        	$datecharacter = $datechar[$dateCharSetting];
+		$datecharacter = $datechar[$dateCharSetting];
 
-        	switch ($date_fmt) {
+		switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
 			break;
@@ -365,7 +364,7 @@ function analyse_log($panel, $user_id) {
 			default:
                         	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
 			break;
-        	}
+		}
 
 		foreach ($log['lines'] as $line) {
 
