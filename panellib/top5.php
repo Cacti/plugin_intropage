@@ -280,12 +280,13 @@ function top5_polltime($panel, $user_id) {
 //!!pm - jen zkousim
 //$lines = 40;
 
-/*	if ($panel['height'] == 'double') {
+	if ($panel['height'] == 'double') {
 		$lines *= 2;
-	} elseif ($panel['height'] == 'double') {
+	} elseif ($panel['height'] == 'triple') {
 		$lines *= 3;
 	}
-*/	
+
+
 	$panel['alarm'] = 'green';
 
 	$simple_perms = get_simple_device_perms($user_id);

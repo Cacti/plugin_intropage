@@ -426,6 +426,35 @@ function initPage() {
 		Pace.stop();
 	});
 
+	// change panel height and reload
+	$('.heightless').off('click').on('click', function(event) {
+		var panel_id = $(this).attr('id').split('_').pop();
+
+		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightless&panel_id=' + panel_id;
+
+		$.get(url)
+		.done(function(data) {
+			reload_panel(panel_id, true, false);
+		})
+		.fail(function(data) {
+			getPresentHTTPErrorOrRedirect(data, href);
+		});
+	});
+
+	$('.heightmore').off('click').on('click', function(event) {
+		var panel_id = $(this).attr('id').split('_').pop();
+
+		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightmore&panel_id=' + panel_id;
+
+		$.get(url)
+		.done(function(data) {
+			reload_panel(panel_id, true, false);
+		})
+		.fail(function(data) {
+			getPresentHTTPErrorOrRedirect(data, href);
+		});
+	});
+
 	$('body').on('click','.bus_graph', function() {
 		event.preventDefault();
 

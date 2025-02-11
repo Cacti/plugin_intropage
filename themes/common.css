@@ -25,10 +25,11 @@
 	list-style-type: none; /* remove bullets */
 	display: grid;
 	gap: 2px;
+	padding: 0px;
 
 /* teroteicky muzu smazat //!! */
 /* 	margin: 0px; */
-/*	padding: 0px; */
+/*	 */
 
 /*	width: 100%;*/
 /* 	overflow: auto; */
@@ -122,8 +123,8 @@
 
 .header_link {
 	float: right;
-	padding-left: 2px !important;
-	padding-right: 2px !important;
+	padding-left: 1px !important;
+	padding-right: 1px !important;
 }
 
 #overlay {
