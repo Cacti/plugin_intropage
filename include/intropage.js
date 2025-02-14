@@ -318,6 +318,7 @@ function initPage() {
 
 					$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
 					$('#intropage_addpanel').selectmenu().unbind().change(function() {
+
 						addPanel();
 					});
 
@@ -332,7 +333,8 @@ function initPage() {
 	});
 
 	// detail to the new window
-	$('.maxim').click(function(event) {
+	$('body').on('click', '.maxim', function(event){
+
 		event.preventDefault();
 		var panel_id = $(this).attr('detail-panel');
 		var url = urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id;
@@ -409,10 +411,13 @@ function initPage() {
 	});
 
 	// Get the dropdowns the correct height
-	$('#intropage_addpanel-menu, #intropage_action-menu').css('max-height', '250px');
+//!!pm - spatne nazvy?
+	$('#intropage_addpanel-menu, #intropage_action-menu').css('max-height', '350px');
 
 	// reload single panel function
-	$('.reload_panel_now').off('click').on('click', function(event) {
+
+	$('body').on('click', '.reload_panel_now', function(event){
+
 		if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
 			event.stopPropagation();
 			return false;
@@ -427,7 +432,7 @@ function initPage() {
 	});
 
 	// change panel height and reload
-	$('.heightless').off('click').on('click', function(event) {
+	$('body').off('click', '.heightless').on('click', '.heightless', function(event){
 
 		var panel_id = $(this).attr('id').split('_').pop();
 
@@ -442,14 +447,14 @@ function initPage() {
 		});
 	});
 
-	$('.heightmore').off('click').on('click', function(event) {
+	$('body').off('click', '.heightmore').on('click', '.heightmore', function(event){
 		var panel_id = $(this).attr('id').split('_').pop();
 
 		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightmore&panel_id=' + panel_id;
 
 		$.get(url)
 		.done(function(data) {
-			reload_panel(panel_id, true, false);
+			reload_panel(panel_id, true, false); 
 		})
 		.fail(function(data) {
 			getPresentHTTPErrorOrRedirect(data, href);
@@ -519,6 +524,9 @@ function reload_panel(panel_id, forced_update, refresh) {
 	if (!refresh) {
 		$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
 		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
+// po novu bude wrapper
+//		$('#panel_'+panel_id).find('.panel_wrapper').css('opacity',0);
+//		$('#panel_'+panel_id).find('.panel_wrapper').fadeIn('slow');
 	}
 
 	var url = urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id;
@@ -534,10 +542,15 @@ function reload_panel(panel_id, forced_update, refresh) {
 			}
 		}
 
-		$('#panel_'+panel_id).find('.panel_data').empty().html(data);
+
+// tady pak bude panel_wrapper
+//		$('#panel_'+panel_id).find('.panel_data').empty().html(data);
+		$('#panel_'+panel_id).find('.panel_wrapper').empty().html(data);
 
 		if (!refresh) {
+// po novu bude wrapper
 			$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
+//			$('#panel_'+panel_id).find('.panel_wrapper').css('opacity', 1);
 		}
 
 		resizeGraphsPanel();
@@ -565,3 +578,5 @@ function reload_all() {
 	Pace.stop();
 	setPageRefresh();
 }
+
+

@@ -60,9 +60,9 @@ function display_information() {
 	$selectedTheme = get_selected_theme();
 
 	if (get_filter_request_var('dashboard_id') > 0) {
-	    $_SESSION['dashboard_id'] = get_filter_request_var('dashboard_id');
+		$_SESSION['dashboard_id'] = get_filter_request_var('dashboard_id');
 	} elseif (empty($_SESSION['dashboard_id'])) {
-	    $_SESSION['dashboard_id'] = 1;
+		$_SESSION['dashboard_id'] = 1;
 		set_request_var('dashboard_id', 1);
 	} else {
 		set_request_var('dashboard_id', $_SESSION['dashboard_id']);
@@ -223,7 +223,7 @@ function display_information() {
 	print '<div id="overlay"><div id="overlay_detail"></div></div>';
 
 	// switch dahsboards and form
-	print '<div>';
+	print '<div id="intropage_main">';
 	print '<div class="float_left">';
 	print "<div class='tabs'><nav><ul>";
 
@@ -519,7 +519,7 @@ function display_information() {
 			array($_SESSION['sess_user_id']));
 
 		if (isset($row) && $row['data'] != null && $dashboard_id == $first_db) {
-			intropage_display_panel($row['id'], $dashboard_id);
+			intropage_create_panel($row['id'], $dashboard_id);
 		}
 	}
 	// end of extra maint plugin panel
@@ -531,13 +531,13 @@ function display_information() {
 			WHERE panel_id='admin_alert'");
 
 		if ($id && $dashboard_id == $first_db) {
-			intropage_display_panel($id, $dashboard_id);
+			intropage_create_panel($id, $dashboard_id);
 		}
 	}
 	// end of admin panel
 
 	foreach ($panels as $xkey => $xvalue) {
-		intropage_display_panel($xvalue['id'], $dashboard_id);
+		intropage_create_panel($xvalue['id'], $dashboard_id);
 	}
 
 	print '</ul>';

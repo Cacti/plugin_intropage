@@ -353,3 +353,9 @@
 .w60 {
 	width: 60%;
 }
+
+.href_disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}

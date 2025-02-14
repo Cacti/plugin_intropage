@@ -215,7 +215,7 @@ function intropage_actions() {
 				WHERE user_id = ?
 				AND id = ?',
 				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
-	
+
 			if ($actual_height == 'double') {
 				db_execute_prepared('UPDATE plugin_intropage_panel_data
 				SET height = "normal"
@@ -744,7 +744,7 @@ function get_allowed_panels($user_id = 0) {
 }
 
 function intropage_reload_panel() {
-	global $panels;
+	global $panels, $config;
 
 	$panel_id = get_filter_request_var('panel_id');
 
@@ -755,6 +755,8 @@ function intropage_reload_panel() {
 		WHERE id = ?
 		AND user_id IN (0, ?)',
 		array($panel_id, $_SESSION['sess_user_id']));
+
+	$height = isset($panel['height']) ? $panel['height'] : 'normal';
 
 	// Close the session to allow other tabs to operate
 	session_write_close();
@@ -785,7 +787,7 @@ function intropage_reload_panel() {
 				}
 
 				// Return the data for display
-				$data = display_panel_results($qpanel['panel_id'], $user_id);
+				$data = get_panel_data($qpanel['panel_id'], $user_id);
 			} else {
 				$data = __('The Panel includes a render function but it does not exist.', 'intropage');
 			}
@@ -793,39 +795,69 @@ function intropage_reload_panel() {
 			$data = __('The Panel does not have a render function.', 'intropage');
 		}
 
-		intropage_display_data($panel_id, $data);
-
-		$css  = isset($data['alarm']) && $data['alarm'] !== '' ? $data['alarm'] : 'grey';
 		$name = isset($data['name'])  ? html_escape($data['name']):__esc('Not Found', 'intropage');
+		$height = isset($panel['height']) ? $panel['height'] : 'normal';
+		$alarm  = isset($data['alarm']) && $data['alarm'] !== '' ? $data['alarm'] : 'grey';
 
-		?>
-		<script type='text/javascript'>
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_name').html('<?php print $name;?>');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_green');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_yellow');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_red');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_grey');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').addClass('color_<?php print $css;?>');
-		<?php
+		print '<div class="panel_header color_' . $alarm . '">';
+		print '<div class="panel_name">' . $name . '</div>';
+
+		printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id']);
+
+		if (isset($panels[$panel['panel_id']]['force']) && $panels[$panel['panel_id']]['force'] === true) {
+			printf("<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>", $panel_id, __esc('Reload Panel', 'intropage'));
+		}
 
 		if (!empty($spanel['details_func'])) {
-			print "$('#panel_'+" . get_request_var('panel_id') . ").find('.maxim').show();";
-		} else {
-			print "$('#panel_'+" . get_request_var('panel_id') . ").find('.maxim').hide();";
+			printf("<a href='#' class='header_link maxim' detail-panel='%s' title='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id, __esc('Show Details', 'intropage'));
 		}
-		?>
-		</script>
-		<?php
-	} elseif ($panel_id == 998) {	// exception for admin alert panel
-		print nl2br(read_config_option('intropage_admin_alert'));
-	} elseif ($panel_id == 997) {	// exception for maint panel
-		if (function_exists('intropage_maint')) {
-			print intropage_maint();
+
+		if ($height == 'triple' && !$panels[$panel['panel_id']]['height_fixed']) {
+			printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
+			printf("<a href='#' title='%s' class='header_link href_disabled'><i class='fa fa-arrow-down'></i></a>", __esc('Max height reached', 'intropage'));
+		}
+		elseif ($height == 'double' && !$panels[$panel['panel_id']]['height_fixed']) {
+			printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
+			printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
+		}
+		elseif ($height == 'normal' && !$panels[$panel['panel_id']]['height_fixed']) {
+			printf("<a href='#' title='%s' class='header_link href_disabled'><i class='fa fa-arrow-up'></i></a>", __esc('Min height reached', 'intropage'));
+			printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
+		}
+
+		print '</div>'; // end of panel_actions
+		print ' </div>'; // end of panel_header
+
+		print "<div class='panel_data'>";
+
+		if (isset($data['data']) && trim((string) $data['data']) != '') {
+			print $data['data'];
+		} else {
+			print __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage');
 		}
 	} else {
-		print __('Panel not found');
+		print '<div class="panel_header color_grey">';
+		print '<div class="panel_name">' . $name . '</div>';
+
+		printf("<div class='panel_actions'>!!!</div>");
+		print '</div>'; // end of header
+		print "<div class='panel_data'>";
+
+//!!pm tothle jeste nejde - jaktoze se mi tam zobrazuji normalni data????
+		if ($panel_id == 998) {	// exception for admin alert panel
+print 'ahoj';
+//			print nl2br(read_config_option('intropage_admin_alert'));
+		} elseif ($panel_id == 997) {	// exception for maint panel
+			if (function_exists('intropage_maint')) {
+//				print intropage_maint();
+print 'nazdar';
+			}
+		} else {
+			print __('Panel not found');
+		}
 	}
 
+	print '</div>'; // end of panel_data
 	exit;
 }
 
@@ -1043,10 +1075,10 @@ function save_panel_result($panel, $user_id = 0) {
 		array($panel['data'], $panel['alarm'], $user_id, $panel['id']));
 }
 
-function display_panel_results($panel_id, $user_id = 0) {
+function get_panel_data($panel_id, $user_id = 0) {
 	$panel = get_panel($panel_id, $user_id);
 
-	$data = db_fetch_row_prepared("SELECT id, data, alarm, last_update,
+	$data = db_fetch_row_prepared("SELECT id, data, alarm, last_update, height,
 		concat(floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 		MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 		TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im')) AS recheck
@@ -1595,7 +1627,7 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
-function intropage_display_panel($panel_id, $dashboard_id) {
+function intropage_create_panel($panel_id, $dashboard_id) {
 	global $config;
 
 	$panels = initialize_panel_library();
@@ -1637,6 +1669,8 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 	print '<li id="panel_' . $panel_id . '" class="' . $class . ' grid_item">';
 	print '<div class="panel_wrapper">';
 
+/*
+//!!pm - mozna tady nemusim generovat nic vic
 	print '<div class="panel_header color_grey">';
 	print '<div class="panel_name"></div>';
 
@@ -1648,43 +1682,23 @@ function intropage_display_panel($panel_id, $dashboard_id) {
 
 	printf("<a href='#' class='header_link maxim' detail-panel='%s' title='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id, __esc('Show Details', 'intropage'));
 
-	if ($panels[$panel_type]['height_fixed']) {
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>",__esc('Panel does not support changing the height', 'intropage'));
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a>", __esc('Panel does not support changing the height', 'intropage'));
-	}
-	elseif ($height == 'triple') {
-		printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a>", __esc('Panel has maximal height', 'intropage'));
-	}
-	elseif ($height == 'double') {
-		printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
-		printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
-	}
-	elseif ($height == 'normal') {
-		printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>", __esc('Panel has minimal height', 'intropage'));
-		printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
-	}
+	printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>",__esc('Less rows', 'intropage'));
+	printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a>", __esc('More rows', 'intropage'));
 
-	print '</div>';
-	print ' </div>';
-	print "	<table class='cactiTable'>";
-	print "	    <tr><td>";
+	print '</div>'; // end of panel_actions
+
+	print ' </div>'; // end of panel_header
 
 	print "<div class='panel_data'>";
 	print __('Loading data ...', 'intropage');
-	print '</div>';	// end of panel_data
-	print '</td></tr>';
-	html_end_box(false);
+	print '</div>'; // end of panel_data
+*/
+	print '</div>'; // end of wrapper
 	print '</li>';
 }
 
-function intropage_display_data($panel_id, $data) {
-	if (isset($data['data']) && trim((string) $data['data']) != '') {
-		print $data['data'];
-	} else {
-		print '<table class="cactiTable"><tr><td>' . __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage') . '</td></tr></table>';
-	}
-}
+
+
 
 function intropage_addpanel_select($dashboard_id) {
 
