@@ -843,14 +843,9 @@ function intropage_reload_panel() {
 		print '</div>'; // end of header
 		print "<div class='panel_data'>";
 
-//!!pm tothle jeste nejde - jaktoze se mi tam zobrazuji normalni data????
-		if ($panel_id == 998) {	// exception for admin alert panel
-print 'ahoj';
-//			print nl2br(read_config_option('intropage_admin_alert'));
-		} elseif ($panel_id == 997) {	// exception for maint panel
+		if ($panel_id == 997) {	// exception for maint panel
 			if (function_exists('intropage_maint')) {
-//				print intropage_maint();
-print 'nazdar';
+				print intropage_maint();
 			}
 		} else {
 			print __('Panel not found');

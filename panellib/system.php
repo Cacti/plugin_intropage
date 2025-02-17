@@ -288,7 +288,7 @@ function info($panel, $user_id) {
 function admin_alert($panel, $user_id) {
 	global $config;
 
-	$panel['data'] .= '<span class="inpa_sq color_red"></span><div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
+	$panel['data'] .= '<div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
 
 	save_panel_result($panel, $user_id);
 }
