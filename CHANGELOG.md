@@ -12,6 +12,7 @@
 * feature: Add 24h averages for CPU and poller stats panel
 * feature: Add Boost graphs panels - memory usage, pending records
 * feature: Add Syslog graphs panels - levels, number of messages 
+* feature#331: Add variable panel height
 
 --- 4.0.4 ---
 
