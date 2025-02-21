@@ -43,7 +43,7 @@ function register_analyze() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
-			'height_fixed' => false,
+			'height_fixed' => true,
 			'priority'     => 51,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -61,7 +61,7 @@ function register_analyze() {
 			'force'        => true,
 			'width'        => 'half-panel',
 			'height'       => 'normal',
-			'height_fixed' => false,
+			'height_fixed' => true,
 			'priority'     => 50,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -132,7 +132,7 @@ function register_analyze() {
 function analyse_login($panel, $user_id) {
 	global $config;
 
-	$lines = get_panel_lines_count($panel['height'], $user_id);
+	$lines = read_config_option('intropage_number_of_lines');
 
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
 	if ($important_period == -1) {
@@ -350,19 +350,19 @@ function analyse_log($panel, $user_id) {
 				$format = 'M' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
 			break;
 			case GD_D_MO_Y:
-                        	$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
+				$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
 			break;
 			case GD_D_MN_Y:
-                        	$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
+				$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
 			break;
 			case GD_Y_MO_D:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
 			break;
 			case GD_Y_MN_D:
-                        	$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
+				$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
 			break;
 			default:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
 			break;
 		}
 
@@ -378,13 +378,13 @@ function analyse_log($panel, $user_id) {
 				$timestamp = mktime ($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
 
 				if ($timestamp > (time()-($important_period))) {
-                                        if (preg_match('/( ERROR|FATAL)/', $line)) {
-                                                $color = 'red';
-                                        } elseif (preg_match('/( WARNING)/', $line)) {
-                                                $color = 'yellow';
-                                        } else {
-                                        	$color = 'green';
-                                        }
+					if (preg_match('/( ERROR|FATAL)/', $line)) {
+						$color = 'red';
+					} elseif (preg_match('/( WARNING)/', $line)) {
+						$color = 'yellow';
+					} else {
+						$color = 'green';
+					}
 				}
 
 				$panel['data'] .= '<tr><td class="inpa_loglines" colspan="3" title="' . $line . '"><span class="inpa_sq color_' . $color . '"></span>';

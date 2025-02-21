@@ -411,11 +411,9 @@ function initPage() {
 	});
 
 	// Get the dropdowns the correct height
-//!!pm - spatne nazvy?
 	$('#intropage_addpanel-menu, #intropage_action-menu').css('max-height', '350px');
 
 	// reload single panel function
-
 	$('body').on('click', '.reload_panel_now', function(event){
 
 		if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
@@ -522,11 +520,8 @@ function testPoller() {
 
 function reload_panel(panel_id, forced_update, refresh) {
 	if (!refresh) {
-		$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
-		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
-// po novu bude wrapper
-//		$('#panel_'+panel_id).find('.panel_wrapper').css('opacity',0);
-//		$('#panel_'+panel_id).find('.panel_wrapper').fadeIn('slow');
+		$('#panel_'+panel_id).find('.panel_wrapper').css('opacity',0);
+		$('#panel_'+panel_id).find('.panel_wrapper').fadeIn('slow');
 	}
 
 	var url = urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id;
@@ -542,15 +537,10 @@ function reload_panel(panel_id, forced_update, refresh) {
 			}
 		}
 
-
-// tady pak bude panel_wrapper
-//		$('#panel_'+panel_id).find('.panel_data').empty().html(data);
 		$('#panel_'+panel_id).find('.panel_wrapper').empty().html(data);
 
 		if (!refresh) {
-// po novu bude wrapper
-			$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
-//			$('#panel_'+panel_id).find('.panel_wrapper').css('opacity', 1);
+			$('#panel_'+panel_id).find('.panel_wrapper').css('opacity', 1);
 		}
 
 		resizeGraphsPanel();

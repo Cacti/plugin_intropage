@@ -61,7 +61,7 @@ function register_misc() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
-			'height_fixed' => true,
+			'height_fixed' => false,
 			'priority'     => 98,
 			'alarm'        => 'red',
 			'requires'     => 'maint',
@@ -208,6 +208,7 @@ function maint($panel, $user_id) {
 	global $config;
 
 	$panel['alarm'] = 'green';
+	$panel['data'] = '';
 
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 

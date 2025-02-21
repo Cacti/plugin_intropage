@@ -26,14 +26,6 @@
 	display: grid;
 	gap: 2px;
 	padding: 0px;
-
-/* teroteicky muzu smazat //!! */
-/* 	margin: 0px; */
-/*	 */
-
-/*	width: 100%;*/
-/* 	overflow: auto; */
-
 }
 
 .container_col_3 {
@@ -70,10 +62,8 @@
 
 .grid_item {
 	padding: 0;
-	/* asi jen overflow */
 	margin-right: 5px;
 	margin-bottom: 5px;
-/* pm tmp vypnout	border: 0px; */
 	display: block;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -358,4 +348,8 @@
   pointer-events: none;
   cursor: default;
   opacity: 0.6;
+}
+
+.bus_graph {
+	cursor: pointer;
 }

@@ -52,8 +52,8 @@ $panels = array(
 ```
 
 The panel level can be either PANEL_SYSTEM, or PANEL_USER.  A system panel will
-be the same for every user, and PANEL_USER will be customized for every user of
-the panel based upon their permissions.
+be the same for every user (include height and height_fixed parameter), 
+PANEL_USER will be customized for every user of the panel based upon their permissions.
 
 The interval is the default collection or update interval for the panel.  This
 can be overridden in a still to be implemented enhancement.

@@ -290,14 +290,14 @@ function intropage_actions() {
 				AND dashboard_id = ?',
 				array($_SESSION['sess_user_id'], $value));
 
-			$dashboard_id = db_fetch_cell_prepared('SELECT MIN(dashboard_id)
+			$_SESSION['dashboard_id'] = db_fetch_cell_prepared('SELECT MIN(dashboard_id)
 				FROM plugin_intropage_dashboard
 				WHERE user_id = ?',
 				array($_SESSION['sess_user_id']));
 
 			raise_message('dashboard_removed', __('Dashboard has been removed', 'intropage'), MESSAGE_LEVEL_INFO);
 
-			header('Location: ' . html_escape("$redirectPage?header=false&dashboard_id=$dashboard_id"));
+			header('Location: ' . html_escape("$redirectPage?header=false"));
 
 			exit;
 		}
@@ -310,6 +310,8 @@ function intropage_actions() {
 				WHERE user_id = ?',
 				array($_SESSION['sess_user_id']));
 
+			$_SESSION['dashboard_id'] = $dashboard_id;
+
 			db_execute_prepared('INSERT INTO plugin_intropage_dashboard
 				(user_id, dashboard_id, name)
 				VALUES (?, ?, ?)',
@@ -317,7 +319,7 @@ function intropage_actions() {
 
 			raise_message('dashboard_added', __('Dashboard has been added', 'intropage'), MESSAGE_LEVEL_INFO);
 
-			header('Location: ' . html_escape("$recirectPage?header=false&dashboard_id=$dashboard_id"));
+			header('Location: ' . html_escape("$recirectPage?header=false"));
 
 			exit;
 		}
@@ -756,8 +758,6 @@ function intropage_reload_panel() {
 		AND user_id IN (0, ?)',
 		array($panel_id, $_SESSION['sess_user_id']));
 
-	$height = isset($panel['height']) ? $panel['height'] : 'normal';
-
 	// Close the session to allow other tabs to operate
 	session_write_close();
 
@@ -839,13 +839,13 @@ function intropage_reload_panel() {
 		print '<div class="panel_header color_grey">';
 		print '<div class="panel_name">' . $name . '</div>';
 
-		printf("<div class='panel_actions'>!!!</div>");
+		printf("<div class='panel_actions'></div>");
 		print '</div>'; // end of header
 		print "<div class='panel_data'>";
 
 		if ($panel_id == 997) {	// exception for maint panel
-			if (function_exists('intropage_maint')) {
-				print intropage_maint();
+			if (function_exists('maint')) {
+				print maint();
 			}
 		} else {
 			print __('Panel not found');
@@ -1626,13 +1626,14 @@ function intropage_create_panel($panel_id, $dashboard_id) {
 	global $config;
 
 	$panels = initialize_panel_library();
+	$class = 'panel_1_1';
 
 	$act_param = db_fetch_row_prepared('SELECT panel_id, height
 		FROM plugin_intropage_panel_data
 		WHERE id = ?',
 		array($panel_id));
 
-	$panel_type = $act_param['panel_id']; // small variable name colission
+	$panel_type = $act_param['panel_id'];
 	$act_height = $act_param['height'];
 
 	if ($panel_type == 'favourite_graph') {
@@ -1664,30 +1665,6 @@ function intropage_create_panel($panel_id, $dashboard_id) {
 	print '<li id="panel_' . $panel_id . '" class="' . $class . ' grid_item">';
 	print '<div class="panel_wrapper">';
 
-/*
-//!!pm - mozna tady nemusim generovat nic vic
-	print '<div class="panel_header color_grey">';
-	print '<div class="panel_name"></div>';
-
-	printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=$dashboard_id");
-
-	if (isset($panels[$panel_type]['force']) && $panels[$panel_type]['force'] === true) {
-		printf("<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>", $panel_id, __esc('Reload Panel', 'intropage'));
-	}
-
-	printf("<a href='#' class='header_link maxim' detail-panel='%s' title='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id, __esc('Show Details', 'intropage'));
-
-	printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-up'></i></a>",__esc('Less rows', 'intropage'));
-	printf("<a href='#' title='%s' class='header_link'><i class='fa fa-arrow-down'></i></a>", __esc('More rows', 'intropage'));
-
-	print '</div>'; // end of panel_actions
-
-	print ' </div>'; // end of panel_header
-
-	print "<div class='panel_data'>";
-	print __('Loading data ...', 'intropage');
-	print '</div>'; // end of panel_data
-*/
 	print '</div>'; // end of wrapper
 	print '</li>';
 }
@@ -1725,7 +1702,8 @@ function intropage_addpanel_select($dashboard_id) {
 				AND panel_id = ?',
 				array($_SESSION['sess_user_id'],$panel['panel_id']));
 
-			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert') {
+//			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert') {
+			if ($panel['panel_id'] != 'admin_alert') {
 				$allowed = is_panel_allowed($panel['panel_id']);
 
 				$enabled = is_panel_enabled($panel['panel_id']);

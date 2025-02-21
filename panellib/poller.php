@@ -43,7 +43,7 @@ function register_poller() {
 			'force'        => true,
 			'width'        => 'quarter-panel',
 			'height'       => 'normal',
-			'height_fixed' => false,
+			'height_fixed' => true,
 			'priority'     => 74,
 			'alarm'        => 'green',
 			'requires'     => false,
