@@ -42,6 +42,8 @@ function register_system() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 5,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -58,6 +60,8 @@ function register_system() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 99,
 			'alarm'        => 'red',
 			'requires'     => false,
@@ -74,6 +78,8 @@ function register_system() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 47,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -90,6 +96,8 @@ function register_system() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 48,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -97,7 +105,6 @@ function register_system() {
 			'details_func' => false,
 			'trends_func'  => 'boost_history_trend'
 		),
-
 		'extrem' => array(
 			'name'         => __('24 Hour Extremes', 'intropage'),
 			'description'  => __('Table with 24 hours of Polling Extremes (longest poller run, down hosts)', 'intropage'),
@@ -107,6 +114,8 @@ function register_system() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 78,
 			'alarm'        => 'grey',
 			'requires'     => 'thold',
@@ -123,6 +132,8 @@ function register_system() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 59,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -277,7 +288,7 @@ function info($panel, $user_id) {
 function admin_alert($panel, $user_id) {
 	global $config;
 
-	$panel['data'] .= '<span class="inpa_sq color_red"></span><div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
+	$panel['data'] .= '<div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
 
 	save_panel_result($panel, $user_id);
 }
@@ -579,7 +590,8 @@ function extrem_trend() {
 function extrem($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel['alarm'] = 'grey';
@@ -745,7 +757,6 @@ function extrem($panel, $user_id) {
 function extrem_detail() {
 	global $config, $console_access;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
 	$poller_interval = read_config_option('poller_interval');
 
 	$panel = array(

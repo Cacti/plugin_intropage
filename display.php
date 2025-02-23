@@ -60,9 +60,9 @@ function display_information() {
 	$selectedTheme = get_selected_theme();
 
 	if (get_filter_request_var('dashboard_id') > 0) {
-	    $_SESSION['dashboard_id'] = get_filter_request_var('dashboard_id');
+		$_SESSION['dashboard_id'] = get_filter_request_var('dashboard_id');
 	} elseif (empty($_SESSION['dashboard_id'])) {
-	    $_SESSION['dashboard_id'] = 1;
+		$_SESSION['dashboard_id'] = 1;
 		set_request_var('dashboard_id', 1);
 	} else {
 		set_request_var('dashboard_id', $_SESSION['dashboard_id']);
@@ -181,8 +181,8 @@ function display_information() {
 
 	// Notice about disable cacti dashboard
 	if (read_config_option('hide_console') != 'on') {
-	    print '<table class="cactiTable"><tr><td class="textAreaNotes">' . __('You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
-	    print '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=general&filter=hide"><i class="intro_glyph fas fa-link"></i></a></td></tr></table></br>';
+		print '<table class="cactiTable"><tr><td class="textAreaNotes">' . __('You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage ', 'intropage');
+    print '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=general&filter=hide"><i class="intro_glyph fas fa-link"></i></a></td></tr></table></br>';
 	}
 
 	$dashboards = array_rekey(
@@ -223,7 +223,7 @@ function display_information() {
 	print '<div id="overlay"><div id="overlay_detail"></div></div>';
 
 	// switch dahsboards and form
-	print '<div>';
+	print '<div id="intropage_main">';
 	print '<div class="float_left">';
 	print "<div class='tabs'><nav><ul>";
 
@@ -241,7 +241,7 @@ function display_information() {
 	// settings
 	print "<form method='post'>";
 
-	print "<a href='#' class='pic' id='switch_square' title='" . __esc('Hide red/yellow/green square notifications', 'intropage') . "'><i class='intro_glyph fa fa-minus-square'></i></a>";
+	print "<a href='#' class='pic' id='switch_square' title='" . __esc('Hide or display red/yellow/green square notifications', 'intropage') . "'><i class='intro_glyph fa fa-minus-square'></i></a>";
 	print '&nbsp; &nbsp; ';
 
 	print "<a href='#' class='pic' id='switch_copytext' title='" . __esc('Disable panel move/enable copy text from panel', 'intropage') . "'><i class='intro_glyph fa fa-clone'></i></a>";
@@ -451,14 +451,18 @@ function display_information() {
 
 	print '</select>';
 	print '</form>';
-	// end of settings
 
 	print '</div>';
 	print '<br style="clear: both" />';
 	print '</div>';
 
-	print '<div id="megaobal">';
-	print '<ul id="obal">';
+	print '<div id="main_container">';
+
+	if ($display_wide == 'on') {
+		print '<ul id="panel_container" class="container_col_4">';
+	} else {
+		print '<ul id="panel_container" class="container_col_3">';
+	}
 
 	if (cacti_sizeof($panels) == 0) {
 		print '<table class="cactiTable">';
@@ -508,14 +512,15 @@ function display_information() {
 
 	// extra maint plugin panel - always first
 	if (api_plugin_is_enabled('maint') && (read_config_option('intropage_maint_plugin_days_before') >= 0)) {
+
 		$row = db_fetch_row_prepared("SELECT id, data
 			FROM plugin_intropage_panel_data
 			WHERE panel_id = 'maint'
 			AND user_id = ?",
 			array($_SESSION['sess_user_id']));
 
-		if ($row && strlen($row['data']) > 20 && $dashboard_id == $first_db) {
-			intropage_display_panel($row['id'], $dashboard_id);
+		if (isset($row['data']) && $row['data'] != null && $dashboard_id == $first_db) {
+			intropage_create_panel($row['id'], $dashboard_id);
 		}
 	}
 	// end of extra maint plugin panel
@@ -527,18 +532,18 @@ function display_information() {
 			WHERE panel_id='admin_alert'");
 
 		if ($id && $dashboard_id == $first_db) {
-			intropage_display_panel($id, $dashboard_id);
+			intropage_create_panel($id, $dashboard_id);
 		}
 	}
 	// end of admin panel
 
 	foreach ($panels as $xkey => $xvalue) {
-		intropage_display_panel($xvalue['id'], $dashboard_id);
+		intropage_create_panel($xvalue['id'], $dashboard_id);
 	}
 
 	print '</ul>';
 	print '<ul class="cloned-slides"></ul>';
-	print '</div>'; // end of megaobal
+	print '</div>';
 
 	?>
 	<script type='text/javascript'>

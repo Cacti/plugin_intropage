@@ -42,6 +42,8 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 30,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -58,6 +60,8 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 98,
 			'alarm'        => 'red',
 			'requires'     => 'maint',
@@ -74,6 +78,8 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 36,
 			'alarm'        => 'green',
 			'requires'     => 'webseer',
@@ -90,13 +96,15 @@ function register_misc() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 36,
 			'alarm'        => 'green',
 			'requires'     => 'servcheck',
 			'update_func'  => 'servcheck',
 			'details_func' => 'servcheck_detail',
 			'trends_func'  => false
-		)
+		),
 	);
 
 	return $panels;
@@ -200,6 +208,7 @@ function maint($panel, $user_id) {
 	global $config;
 
 	$panel['alarm'] = 'green';
+	$panel['data'] = '';
 
 	$maint_days_before = read_config_option('intropage_maint_plugin_days_before');
 
@@ -307,7 +316,7 @@ function webseer($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
 	if ($important_period == -1) {
 		$important_period = time();
@@ -461,7 +470,8 @@ function servcheck($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
 	if ($important_period == -1) {
 		$important_period = time();

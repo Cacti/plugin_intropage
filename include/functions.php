@@ -205,6 +205,59 @@ function intropage_actions() {
 	}
 
 	switch ($action) {
+
+	case 'heightless':
+
+		if (get_filter_request_var('panel_id')) {
+
+			$actual_height = db_fetch_cell_prepared('SELECT height
+				FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+
+			if ($actual_height == 'double') {
+				db_execute_prepared('UPDATE plugin_intropage_panel_data
+				SET height = "normal"
+				WHERE user_id = ?
+				AND id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+			}
+			elseif ($actual_height == 'triple') {
+				db_execute_prepared('UPDATE plugin_intropage_panel_data
+				SET height = "double"
+				WHERE user_id = ?
+				AND id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+			}
+		}
+		break;
+
+	case 'heightmore':
+		if (get_filter_request_var('panel_id')) {
+			$actual_height = db_fetch_cell_prepared('SELECT height
+				FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+
+			if ($actual_height == 'double') {
+				db_execute_prepared('UPDATE plugin_intropage_panel_data
+				SET height = "triple"
+				WHERE user_id = ?
+				AND id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+			}
+			elseif ($actual_height == 'normal') {
+				db_execute_prepared('UPDATE plugin_intropage_panel_data
+				SET height = "double"
+				WHERE user_id = ?
+				AND id = ?',
+				array($_SESSION['sess_user_id'], get_request_var('panel_id')));
+			}
+		}
+		break;
+
 	case 'addpanelselect':
 		intropage_addpanel_select(get_filter_request_var('dashboard_id'));
 		exit;
@@ -237,14 +290,14 @@ function intropage_actions() {
 				AND dashboard_id = ?',
 				array($_SESSION['sess_user_id'], $value));
 
-			$dashboard_id = db_fetch_cell_prepared('SELECT MIN(dashboard_id)
+			$_SESSION['dashboard_id'] = db_fetch_cell_prepared('SELECT MIN(dashboard_id)
 				FROM plugin_intropage_dashboard
 				WHERE user_id = ?',
 				array($_SESSION['sess_user_id']));
 
 			raise_message('dashboard_removed', __('Dashboard has been removed', 'intropage'), MESSAGE_LEVEL_INFO);
 
-			header('Location: ' . html_escape("$redirectPage?header=false&dashboard_id=$dashboard_id"));
+			header('Location: ' . html_escape("$redirectPage?header=false"));
 
 			exit;
 		}
@@ -257,6 +310,8 @@ function intropage_actions() {
 				WHERE user_id = ?',
 				array($_SESSION['sess_user_id']));
 
+			$_SESSION['dashboard_id'] = $dashboard_id;
+
 			db_execute_prepared('INSERT INTO plugin_intropage_dashboard
 				(user_id, dashboard_id, name)
 				VALUES (?, ?, ?)',
@@ -264,7 +319,7 @@ function intropage_actions() {
 
 			raise_message('dashboard_added', __('Dashboard has been added', 'intropage'), MESSAGE_LEVEL_INFO);
 
-			header('Location: ' . html_escape("$recirectPage?header=false&dashboard_id=$dashboard_id"));
+			header('Location: ' . html_escape("$recirectPage?header=false"));
 
 			exit;
 		}
@@ -360,12 +415,6 @@ function intropage_actions() {
 	case 'period':
 		if (filter_var($value, FILTER_VALIDATE_INT)) {
 			set_user_setting('intropage_important_period', $value);
-		}
-
-		break;
-	case 'lines':
-		if (filter_var($value, FILTER_VALIDATE_INT)) {
-			set_user_setting('intropage_number_of_lines', $value);
 		}
 
 		break;
@@ -698,7 +747,7 @@ function get_allowed_panels($user_id = 0) {
 }
 
 function intropage_reload_panel() {
-	global $panels;
+	global $panels, $config;
 
 	$panel_id = get_filter_request_var('panel_id');
 
@@ -715,7 +764,8 @@ function intropage_reload_panel() {
 
 	if (cacti_sizeof($panel)) {
 		// Force update for chart data always
-		if ($panel['data'] != '' && strpos($panel['data'], '<script') !== false) {
+
+		if (!is_null($panel['data']) && strpos($panel['data'], '<script') !== false) {
 			$forced_update = true;
 		}
 
@@ -739,7 +789,7 @@ function intropage_reload_panel() {
 				}
 
 				// Return the data for display
-				$data = display_panel_results($qpanel['panel_id'], $user_id);
+				$data = get_panel_data($qpanel['panel_id'], $user_id);
 			} else {
 				$data = __('The Panel includes a render function but it does not exist.', 'intropage');
 			}
@@ -747,39 +797,64 @@ function intropage_reload_panel() {
 			$data = __('The Panel does not have a render function.', 'intropage');
 		}
 
-		intropage_display_data($panel_id, $data);
-
-		$css  = isset($data['alarm']) && $data['alarm'] !== '' ? $data['alarm'] : 'grey';
 		$name = isset($data['name'])  ? html_escape($data['name']):__esc('Not Found', 'intropage');
+		$height = isset($panel['height']) ? $panel['height'] : 'normal';
+		$alarm  = isset($data['alarm']) && $data['alarm'] !== '' ? $data['alarm'] : 'grey';
 
-		?>
-		<script type='text/javascript'>
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_name').html('<?php print $name;?>');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_green');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_yellow');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_red');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').removeClass('color_grey');
-			$('#panel_'+<?php print get_request_var('panel_id');?>).find('.panel_header').addClass('color_<?php print $css;?>');
-		<?php
+		print '<div class="panel_header color_' . $alarm . '">';
+		print '<div class="panel_name">' . $name . '</div>';
+
+		printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id']);
+
+		if (isset($panels[$panel['panel_id']]['force']) && $panels[$panel['panel_id']]['force'] === true) {
+			printf("<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>", $panel_id, __esc('Reload Panel', 'intropage'));
+		}
 
 		if (!empty($spanel['details_func'])) {
-			print "$('#panel_'+" . get_request_var('panel_id') . ").find('.maxim').show();";
-		} else {
-			print "$('#panel_'+" . get_request_var('panel_id') . ").find('.maxim').hide();";
+			printf("<a href='#' class='header_link maxim' detail-panel='%s' title='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id, __esc('Show Details', 'intropage'));
 		}
-		?>
-		</script>
-		<?php
-	} elseif ($panel_id == 998) {	// exception for admin alert panel
-		print nl2br(read_config_option('intropage_admin_alert'));
-	} elseif ($panel_id == 997) {	// exception for maint panel
-		if (function_exists('intropage_maint')) {
-			print intropage_maint();
+
+		if ($height == 'triple' && !$panels[$panel['panel_id']]['height_fixed']) {
+			printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
+			printf("<a href='#' title='%s' class='header_link href_disabled'><i class='fa fa-arrow-down'></i></a>", __esc('Max height reached', 'intropage'));
+		}
+		elseif ($height == 'double' && !$panels[$panel['panel_id']]['height_fixed']) {
+			printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
+			printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
+		}
+		elseif ($height == 'normal' && !$panels[$panel['panel_id']]['height_fixed']) {
+			printf("<a href='#' title='%s' class='header_link href_disabled'><i class='fa fa-arrow-up'></i></a>", __esc('Min height reached', 'intropage'));
+			printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
+		}
+
+		print '</div>'; // end of panel_actions
+		print ' </div>'; // end of panel_header
+
+		print "<div class='panel_data'>";
+
+		if (isset($data['data']) && trim((string) $data['data']) != '') {
+			print $data['data'];
+		} else {
+			print __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage');
 		}
 	} else {
-		print __('Panel not found');
+		print '<div class="panel_header color_grey">';
+		print '<div class="panel_name">' . $name . '</div>';
+
+		printf("<div class='panel_actions'></div>");
+		print '</div>'; // end of header
+		print "<div class='panel_data'>";
+
+		if ($panel_id == 997) {	// exception for maint panel
+			if (function_exists('maint')) {
+				print maint();
+			}
+		} else {
+			print __('Panel not found');
+		}
 	}
 
+	print '</div>'; // end of panel_data
 	exit;
 }
 
@@ -892,6 +967,7 @@ function get_panel($panel_id, $user_id = 0) {
 		$definition['level']	= $_SESSION['sess_user_id'];
 		$definition['priority']	= 99;
 		$definition['alarm']	= 'grey';
+		$definition['height']	= 'normal';
 	}
 
 	if (cacti_sizeof($panel)) {
@@ -899,8 +975,9 @@ function get_panel($panel_id, $user_id = 0) {
 		$refresh_interval = $panel['refresh_interval'];
 		$trend_interval   = $panel['trend_interval'];
 		$next_update      = $last_update + $refresh_interval - time();
+		$height           = $panel['height'];
 
-		$panel['name']    = $definition['name'] . __(' [ Updates in %s/%s ]', intropage_readable_interval($next_update), intropage_readable_interval($refresh_interval), 'intropage');
+		$panel['name']    = $definition['name'] . __(' [Upd. in %s/%s]', intropage_readable_interval($next_update), intropage_readable_interval($refresh_interval), 'intropage');
 	} else {
 		$last_update      = time();
 		$refresh_interval = $definition['refresh'];
@@ -918,9 +995,10 @@ function get_panel($panel_id, $user_id = 0) {
 		$panel['alarm']            = $definition['alarm'];
 		$panel['refresh_interval'] = $definition['refresh'];
 		$panel['trend_interval']   = $definition['trefresh'];
+		$panel['height']           = $definition['height'];
 
 		$panel['id']   = sql_save($panel, 'plugin_intropage_panel_data');
-		$panel['name'] = $definition['name'] . __(' [ Updates in %s/%s ]', intropage_readable_interval($next_update), intropage_readable_interval($definition['refresh']), 'intropage');
+		$panel['name'] = $definition['name'] . __(' [Upd. in %s/%s]', intropage_readable_interval($next_update), intropage_readable_interval($definition['refresh']), 'intropage');
 	}
 
 	return array(
@@ -934,7 +1012,8 @@ function get_panel($panel_id, $user_id = 0) {
 		'refresh'    => $refresh_interval,
 		'trefresh'   => $trend_interval,
 		'panel'      => $panel,
-		'definition' => $definition
+		'definition' => $definition,
+		'height'     => $panel['height']
 	);
 }
 
@@ -995,10 +1074,10 @@ function save_panel_result($panel, $user_id = 0) {
 		array($panel['data'], $panel['alarm'], $user_id, $panel['id']));
 }
 
-function display_panel_results($panel_id, $user_id = 0) {
+function get_panel_data($panel_id, $user_id = 0) {
 	$panel = get_panel($panel_id, $user_id);
 
-	$data = db_fetch_row_prepared("SELECT id, data, alarm, last_update,
+	$data = db_fetch_row_prepared("SELECT id, data, alarm, last_update, height,
 		concat(floor(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H') / 24), 'd ',
 		MOD(TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%H'), 24), 'h:',
 		TIME_FORMAT(SEC_TO_TIME(refresh_interval), '%im')) AS recheck
@@ -1108,7 +1187,7 @@ function initialize_panel_library() {
 
 function update_registered_panels($panels) {
 	$prefix = 'INSERT INTO plugin_intropage_panel_definition
-		(panel_id, name, level, class, priority, alarm, requires, update_func, details_func, trends_func, refresh, trefresh, description) VALUES';
+		(panel_id, name, level, class, priority, alarm, requires, update_func, details_func, trends_func, refresh, trefresh, description, height) VALUES';
 
 	$suffix = 'ON DUPLICATE KEY UPDATE
 		name=VALUES(name),
@@ -1122,7 +1201,8 @@ function update_registered_panels($panels) {
 		trends_func=VALUES(trends_func),
 		refresh=VALUES(refresh),
 		trefresh=VALUES(trefresh),
-		description=VALUES(description)';
+		description=VALUES(description),
+		height=VALUES(height)';
 
 	$sql = array();
 
@@ -1141,7 +1221,8 @@ function update_registered_panels($panels) {
 				db_qstr($panel['trends_func'])  . ', ' .
 				db_qstr($panel['refresh'])      . ', ' .
 				db_qstr($panel['trefresh'])     . ', ' .
-				db_qstr($panel['description'])  .
+				db_qstr($panel['description'])  . ', ' .
+				db_qstr($panel['height'])       .
 			')';
 		}
 
@@ -1412,8 +1493,6 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$content .= '</script>';
 	} // bar graph end
 
-
-
 	if (isset($dispdata['pie'])) {
 		$xid = 'x'. substr(md5($dispdata['pie']['title']), 0, 7);
 
@@ -1547,55 +1626,55 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
-function intropage_display_panel($panel_id, $dashboard_id) {
+function intropage_create_panel($panel_id, $dashboard_id) {
 	global $config;
 
 	$panels = initialize_panel_library();
+	$class = 'panel_1_1';
 
-	$k_id = db_fetch_cell_prepared('SELECT panel_id
+	$act_param = db_fetch_row_prepared('SELECT panel_id, height
 		FROM plugin_intropage_panel_data
 		WHERE id = ?',
 		array($panel_id));
 
-	if ($k_id == 'favourite_graph') {
+	$panel_type = $act_param['panel_id'];
+	$act_height = $act_param['height'];
+
+	if ($panel_type == 'favourite_graph') {
 		$width = 'quarter-panel';
 	} else {
-		$width = $panels[$k_id]['width'];
+		$width = $panels[$panel_type]['width'];
+		// we need actual height from db not from panel definition
+		$height = isset($act_height) ? $act_height : 'normal';
 	}
 
-	print '<li id="panel_' . $panel_id . '" class="' . $width . ' flexchild">';
+	if ($width == 'quarter-panel') {
+		if ($height == 'normal') {
+			$class = 'panel_1_1';
+		} elseif ($height == 'double') {
+			$class = 'panel_2_1';
+		} elseif ($height == 'triple') {
+			$class = 'panel_3_1';
+		}
+	} else {	// double width
+		if ($height == 'normal') {
+			$class = 'panel_1_2';
+		} elseif ($height == 'double') {
+			$class = 'panel_2_2';
+		} elseif ($height == 'triple') {
+			$class = 'panel_3_2';
+		}
+	}
+
+	print '<li id="panel_' . $panel_id . '" class="' . $class . ' grid_item">';
 	print '<div class="panel_wrapper">';
 
-	print '<div class="panel_header color_grey">';
-	print '<div class="panel_name"></div>';
-
-	printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=$dashboard_id");
-
-	if (isset($panels[$k_id]['force']) && $panels[$k_id]['force'] === true) {
-		printf("<a href='#' id='reloadid_" . $panel_id . "' title='" . __esc('Reload Panel', 'intropage') . "' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>");
-	}
-
-	printf("<a href='#' title='" . __esc('Show Details', 'intropage') . "' class='header_link maxim' detail-panel='%s'><i class='fa fa-window-maximize'></i></a></div>", $panel_id);
-
-	print ' </div>';
-	print "	<table class='cactiTable'>";
-	print "	    <tr><td>";
-
-	print "<div class='panel_data'>";
-	print __('Loading data ...', 'intropage');
-	print '</div>';	// end of panel_data
-	print '</td></tr>';
-	html_end_box(false);
+	print '</div>'; // end of wrapper
 	print '</li>';
 }
 
-function intropage_display_data($panel_id, $data) {
-	if (isset($data['data']) && trim((string) $data['data']) != '') {
-		print $data['data'];
-	} else {
-		print '<table class="cactiTable"><tr><td>' . __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage') . '</td></tr></table>';
-	}
-}
+
+
 
 function intropage_addpanel_select($dashboard_id) {
 
@@ -1620,7 +1699,6 @@ function intropage_addpanel_select($dashboard_id) {
 
 	if (cacti_sizeof($add_panels)) {
 
-
 		foreach ($add_panels as $panel) {
 			$uniqid = db_fetch_cell_prepared('SELECT id
 				FROM plugin_intropage_panel_data
@@ -1628,7 +1706,8 @@ function intropage_addpanel_select($dashboard_id) {
 				AND panel_id = ?',
 				array($_SESSION['sess_user_id'],$panel['panel_id']));
 
-			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert') {
+//			if ($panel['panel_id'] != 'maint' && $panel['panel_id'] != 'admin_alert') {
+			if ($panel['panel_id'] != 'admin_alert') {
 				$allowed = is_panel_allowed($panel['panel_id']);
 
 				$enabled = is_panel_enabled($panel['panel_id']);
@@ -1818,12 +1897,12 @@ function intropage_configure_panel() {
 		ORDER BY level, name',
 		array($_SESSION['sess_user_id']));
 
-	if (cacti_sizeof($panels))	{
+	if (cacti_sizeof($panels)) {
 		html_start_box(__('User Level Panel Update Frequencies', 'intropage'), '100%', '', '3', 'center', '');
 
 		$class = 'odd';
 
-		foreach ($panels as $panel)	{
+		foreach ($panels as $panel) {
 			$class = ($class == 'odd' ? 'even':'odd');
 
 			// Don't show admin pages to normal users
@@ -1867,12 +1946,12 @@ function intropage_configure_panel() {
 			AND pda.fav_graph_id IS NULL
 			ORDER BY level, name');
 
-		if (cacti_sizeof($panels))	{
+		if (cacti_sizeof($panels)) {
 			html_start_box(__('System Panel Update Frequencies (All Authorized Users)', 'intropage'), '100%', '', '3', 'center', '');
 
 			$class = 'odd';
 
-			foreach ($panels as $panel)	{
+			foreach ($panels as $panel) {
 				$class = ($class == 'odd' ? 'even':'odd');
 
 				// Don't show admin pages to normal users
@@ -1916,12 +1995,12 @@ function intropage_configure_panel() {
 			ORDER BY level, name',
 			array($_SESSION['sess_user_id']));
 
-		if (cacti_sizeof($panels))	{
+		if (cacti_sizeof($panels)) {
 			html_start_box(__('Trend Update Frequencies', 'intropage'), '100%', '', '3', 'center', '');
 
 			$class = 'odd';
 
-			foreach ($panels as $panel)	{
+			foreach ($panels as $panel) {
 				$class = ($class == 'odd' ? 'even':'odd');
 
 				print '<div id="row_crefresh_' . $panel['id'] . '" class="formRow ' . $class . '">
@@ -1993,4 +2072,18 @@ function human_readable ($bytes, $decimal = true, $precision = 2) {
 	return round(empty($d)?0:($bytes / pow($factor, $i)), $precision).' '.$size;
 }
 
+function get_panel_lines_count ($height, $user_id) {
 
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
+	if (!is_numeric($lines)) {
+		$lines = 5;
+	}
+	elseif ($height == 'double') {
+		$lines *= 2;
+	} elseif ($height == 'triple') {
+		$lines *= 3;
+	}
+
+	return $lines;
+}

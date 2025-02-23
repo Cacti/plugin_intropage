@@ -21,23 +21,49 @@
  +-------------------------------------------------------------------------+
 */
 
-#obal {
+#panel_container {
 	list-style-type: none; /* remove bullets */
-	display: flex; /* flexbox */
-	flex-wrap: wrap; /* multiple lines */
-	align-items: stretch;
-	margin: 0px;
+	display: grid;
+	gap: 2px;
 	padding: 0px;
-	width: 100%;
-	overflow: auto;
 }
 
-.flexchild {
+.container_col_3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.container_col_4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.panel_1_1 { /* normal */
+	grid-area: span 1/span 1;
+}
+
+.panel_1_2 { /* double width */
+	grid-area: span 1/span 2;
+}
+
+.panel_2_1 { /* double height */
+	grid-area: span 2/span 1;
+}
+
+.panel_3_1 { /* triple height */
+	grid-area: span 3/span 1;
+}
+
+.panel_2_2 { /* double width and double height */
+	grid-area: span 2/span 2;
+}
+
+.panel_3_2 { /* triple height and doubhle height */
+	grid-area: span 3/span 2;
+}
+
+.grid_item {
 	padding: 0;
 	margin-right: 5px;
 	margin-bottom: 5px;
-	flex-grow: 1; /* stretch box width */
-	border: 0px;
 	display: block;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -88,8 +114,8 @@
 
 .header_link {
 	float: right;
-	padding-left: 2px !important;
-	padding-right: 2px !important;
+	padding-left: 1px !important;
+	padding-right: 1px !important;
 }
 
 #overlay {
@@ -317,4 +343,14 @@
 
 .w60 {
 	width: 60%;
+}
+
+.href_disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
+
+.bus_graph {
+	cursor: pointer;
 }

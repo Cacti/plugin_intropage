@@ -23,7 +23,7 @@
 
 // display/hide detail
 $(function() {
-	$('.flexchild').css('background-color', $('body').css('background-color'));
+	$('.grid_item').css('background-color', $('body').css('background-color'));
 
 	$(window).resize(function() {
 		resizeGraphsPanel();
@@ -62,7 +62,7 @@ function resizeCharts() {
 function resizeGraphsPanel() {
 	$('img.intrograph').each(function() {
 		var graphWidth = $(this).width();
-		var panel      = $(this).closest('.flexchild');
+		var panel      = $(this).closest('.grid_item');
 		var panelWidth = panel.width();
 		var quarter    = parseInt(($('#main').width() / 4) - 10);
 		var third      = parseInt(($('#main').width() / 3) - 10);
@@ -91,7 +91,7 @@ function resizeGraphsPanel() {
 }
 
 function setupHidden() {
-	$('.flexchild').each(function(i) {
+	$('.grid_item').each(function(i) {
 		var item = $(this);
 		var item_clone = item.clone();
 		item.data('clone', item_clone);
@@ -222,11 +222,11 @@ function initPage() {
 	$('.third-panel').css('width', intropage_panel_third_width);
 	$('.half-panel').css('width', intropage_panel_half_width);
 
-	$('#obal').sortable({
+	$('#panel_container').sortable({
 		tolerance: 'pointer',
 		forcePlaceholderSize: true,
 		forceHelperSize: false,
-		placeholder: '.flexchild',
+		placeholder: '.grid_item',
 		handle: '.panel_header',
 		helpler: 'clone',
 		delay: 500,
@@ -235,20 +235,20 @@ function initPage() {
 		dropOnEmpty: false,
 		start: function(e, ui){
 			var minWidth = Math.min.apply(null,
-				$('.flexchild').map(function() {
+				$('.grid_item').map(function() {
 					return $(this).width();
 				}).get()
 			);
 
 			ui.helper.width(minWidth);
-			$('#obal .flexchild').css({'width': minWidth, 'flex-grow': '0'});
+			$('#panel_container .grid_item').css({'width': minWidth});
 
 			ui.helper.addClass('exclude-me');
 			ui.helper.data('clone').hide();
-			$('.cloned-slides .flexchild').css('visibility', 'visible');
+			$('.cloned-slides .grid_item').css('visibility', 'visible');
 		},
 		stop: function(event, ui) {
-			$('#obal .flexchild.exclude-me').each(function() {
+			$('#panel_container .grid_item.exclude-me').each(function() {
 				var item = $(this);
 				var clone = item.data('clone');
 				var position = item.position();
@@ -258,25 +258,25 @@ function initPage() {
 				clone.show();
 
 				item.removeClass('exclude-me');
-				$('.flexchild').css('width', '');
+				$('.grid_item').css('width', '');
 			});
 
-			$('#obal .flexchild').each(function() {
+			$('#panel_container .grid_item').each(function() {
 				var item = $(this);
 				var clone = item.data('clone');
 
 				clone.attr('data-pos', item.index());
 			});
 
-			$('#obal .flexchild').css('visibility', 'visible');
-			$('.cloned-slides .flexchild').css('visibility', 'hidden');
-			$('#obal .flexchild').css({'width': '', 'flex-grow': '1'});
+			$('#panel_container .grid_item').css('visibility', 'visible');
+			$('.cloned-slides .grid_item').css('visibility', 'hidden');
+			$('#panel_container .grid_item').css({'width': ''});
 
 			resizeGraphsPanel();
 			resizeCharts();
 		},
 		change: function(event, ui) {
-			$('#obal li:not(.exclude-me, .ui-sortable-placeholder)').each(function() {
+			$('#panel_container li:not(.exclude-me, .ui-sortable-placeholder)').each(function() {
 				var item = $(this);
 				var clone = item.data('clone');
 				clone.stop(true, false);
@@ -288,7 +288,7 @@ function initPage() {
 			// change order
 			var xdata = new Array();
 
-			$('#obal li').each(function() {
+      $('#panel_container li').each(function() {
 				xdata.push($(this).attr('id'));
 			});
 
@@ -320,6 +320,7 @@ function initPage() {
 
 					$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
 					$('#intropage_addpanel').selectmenu().unbind().change(function() {
+
 						addPanel();
 					});
 
@@ -334,7 +335,8 @@ function initPage() {
 	});
 
 	// detail to the new window
-	$('.maxim').click(function(event) {
+	$('body').on('click', '.maxim', function(event){
+
 		event.preventDefault();
 
 		var panel_id = $(this).attr('detail-panel');
@@ -386,14 +388,14 @@ function initPage() {
 	// enable/disable move panel/copy text
 	$('#switch_copytext').off('click').on('click', function() {
 		if (!intropage_drag) {
-			$('#obal').sortable('enable');
+			$('#panel_container').sortable('enable');
 			$('#switch_copytext').attr('title', intropage_text_panel_disable);
-			$('.flexchild').css('cursor','move');
+			$('.grid_item').css('cursor','move');
 			intropage_drag = true;
 		} else {
-			$('#obal').sortable('disable');
+			$('#panel_container').sortable('disable');
 			$('#switch_copytext').attr('title', intropage_text_panel_enable);
-			$('.flexchild').css('cursor','default');
+			$('.grid_item').css('cursor','default');
 			intropage_drag = false;
 		}
 	});
@@ -412,10 +414,11 @@ function initPage() {
 	});
 
 	// Get the dropdowns the correct height
-	$('#intropage_addpanel-menu, #intropage_action-menu').css('max-height', '250px');
+	$('#intropage_addpanel-menu, #intropage_action-menu').css('max-height', '350px');
 
 	// reload single panel function
-	$('.reload_panel_now').off('click').on('click', function(event) {
+	$('body').on('click', '.reload_panel_now', function(event){
+
 		if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
 			event.stopPropagation();
 			return false;
@@ -427,6 +430,36 @@ function initPage() {
 
 		reload_panel(panel_id, true, false);
 		Pace.stop();
+	});
+
+	// change panel height and reload
+	$('body').off('click', '.heightless').on('click', '.heightless', function(event){
+
+		var panel_id = $(this).attr('id').split('_').pop();
+
+		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightless&panel_id=' + panel_id;
+
+		$.get(url)
+		.done(function(data) {
+			reload_panel(panel_id, true, false);
+		})
+		.fail(function(data) {
+			getPresentHTTPErrorOrRedirect(data, href);
+		});
+	});
+
+	$('body').off('click', '.heightmore').on('click', '.heightmore', function(event){
+		var panel_id = $(this).attr('id').split('_').pop();
+
+		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightmore&panel_id=' + panel_id;
+
+		$.get(url)
+		.done(function(data) {
+			reload_panel(panel_id, true, false); 
+		})
+		.fail(function(data) {
+			getPresentHTTPErrorOrRedirect(data, href);
+		});
 	});
 
 	$('body').on('click','.bus_graph', function() {
@@ -473,7 +506,7 @@ function testPoller() {
 		checkForRedirects(data, url);
 
 		if (data == 1) {
-			$('#obal li').each(function() {
+			$('#panel_container li').each(function() {
 				var panel_id = $(this).attr('id').split('_').pop();
 
 				reload_panel(panel_id, false, false);
@@ -490,8 +523,8 @@ function testPoller() {
 
 function reload_panel(panel_id, forced_update, refresh) {
 	if (!refresh) {
-		$('#panel_'+panel_id).find('.panel_data').css('opacity',0);
-		$('#panel_'+panel_id).find('.panel_data').fadeIn('slow');
+		$('#panel_'+panel_id).find('.panel_wrapper').css('opacity',0);
+		$('#panel_'+panel_id).find('.panel_wrapper').fadeIn('slow');
 	}
 
 	var url = urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id;
@@ -508,10 +541,10 @@ function reload_panel(panel_id, forced_update, refresh) {
 			}
 		}
 
-		$('#panel_'+panel_id).find('.panel_data').empty().html(data);
+		$('#panel_'+panel_id).find('.panel_wrapper').empty().html(data);
 
 		if (!refresh) {
-			$('#panel_'+panel_id).find('.panel_data').css('opacity', 1);
+			$('#panel_'+panel_id).find('.panel_wrapper').css('opacity', 1);
 		}
 
 		resizeGraphsPanel();
@@ -525,13 +558,13 @@ function reload_panel(panel_id, forced_update, refresh) {
 
 function reload_all() {
 	if ($('#overlay').dialog('instance') === undefined) {
-		$('#obal li.flexchild').each(function() {
+		$('#panel_container li.grid_item').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
 
 			reload_panel(panel_id, false, true);
 		});
 	} else if (!$('#overlay').dialog('isOpen')) {
-		$('#obal li.flexchild').each(function() {
+		$('#panel_container li.grid_item').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
 
 			reload_panel(panel_id, false, true);
@@ -541,3 +574,5 @@ function reload_all() {
 	Pace.stop();
 	setPageRefresh();
 }
+
+

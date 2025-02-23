@@ -35,13 +35,15 @@ function register_alert() {
 	$panels = array(
 		'alert_host' => array(
 			'name'         => __('Host alerts', 'intropage'),
-			'description'  => __('Host alerts (up/down/recovering) in last 30 minutes', 'intropage'),
+			'description'  => __('Host alerts (up/down/recovering) recently', 'intropage'),
 			'class'        => 'alert',
 			'level'        => PANEL_USER,
 			'refresh'      => 300,
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 90,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -58,11 +60,12 @@ function register_alert() {
 function alert_host($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
-        $important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
-        if ($important_period == -1) {
-                $important_period = time();
-        }
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
+	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
+	if ($important_period == -1) {
+		$important_period = time();
+	}
 
 	$panel['alarm'] = 'green';
 

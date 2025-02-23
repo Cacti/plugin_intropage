@@ -42,6 +42,8 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -58,6 +60,8 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -74,6 +78,8 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -90,6 +96,8 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -106,6 +114,8 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -122,6 +132,8 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 69,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -138,6 +150,8 @@ function register_busiest() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 68,
 			'alarm'        => 'grey',
 			'requires'     => false,
@@ -145,7 +159,6 @@ function register_busiest() {
 			'details_func' => 'busiest_interface_util_detail',
 			'trends_func'  => false
 		),
-
 	);
 
 	return $panels;
@@ -155,7 +168,7 @@ function register_busiest() {
 function busiest_cpu($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'grey';
 
@@ -257,7 +270,6 @@ function busiest_cpu($panel, $user_id) {
 
 			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
-
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
@@ -274,7 +286,7 @@ function busiest_cpu($panel, $user_id) {
 function busiest_load($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'grey';
 
@@ -384,7 +396,7 @@ function busiest_load($panel, $user_id) {
 function busiest_hdd($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'grey';
 
@@ -527,7 +539,7 @@ function busiest_hdd($panel, $user_id) {
 function busiest_uptime($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'grey';
 
@@ -601,7 +613,7 @@ function busiest_uptime($panel, $user_id) {
 function busiest_traffic($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'grey';
 
@@ -738,7 +750,7 @@ function busiest_traffic($panel, $user_id) {
 function busiest_interface_error($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'grey';
 
@@ -856,7 +868,7 @@ function busiest_interface_error($panel, $user_id) {
 function busiest_interface_util($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	include_once($config['base_path'] . '/lib/api_data_source.php');
 

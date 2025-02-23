@@ -42,6 +42,8 @@ function register_thold() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'half-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 77,
 			'alarm'        => 'green',
 			'requires'     => 'thold',
@@ -58,6 +60,8 @@ function register_thold() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 18,
 			'alarm'        => 'green',
 			'requires'     => 'thold',
@@ -74,7 +78,8 @@ function register_thold() {
 function thold_event($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
+
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
 	if ($important_period == -1) {
 		$important_period = time();

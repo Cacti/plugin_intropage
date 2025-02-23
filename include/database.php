@@ -77,6 +77,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'refresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600');
 	$data['columns'][] = array('name' => 'trefresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600');
 	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(200)', 'default' => '', 'NULL' => true);
+	$data['columns'][] = array('name' => 'height', 'type' => "enum('normal','double','triple')", 'default' => 'normal', 'NULL' => false);
 
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'panel_id';
@@ -106,6 +107,7 @@ function intropage_initialize_database() {
 	$data['columns'][] = array('name' => 'trend_interval', 'type' => 'int(9)', 'default' => '300', 'NULL' => false);
 	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true);
 	$data['columns'][] = array('name' => 'fav_graph_timespan', 'type' => 'int(2)', 'default' => '1', 'NULL' => false);
+	$data['columns'][] = array('name' => 'height', 'type' => "enum('normal','double','triple')", 'default' => 'normal', 'NULL' => false);
 
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'id';
@@ -299,7 +301,6 @@ function intropage_upgrade_database() {
 			db_execute("DELETE FROM plugin_intropage_panel_data WHERE panel_id = 'trend'");
 		}
 
-
 		if (cacti_version_compare($oldv, '4.0.4', '<=')) {
 
 			$data              = array();
@@ -315,6 +316,13 @@ function intropage_upgrade_database() {
 			api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'includes/settings.php', '1');
 			api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php', '1');
 			api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php', '1');
+		}
+
+		if (cacti_version_compare($oldv, '4.0.5', '<=')) {
+			db_execute('ALTER TABLE plugin_intropage_panel_definition
+				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
+			db_execute('ALTER TABLE plugin_intropage_panel_data
+				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
 		}
 
 		// Set the new version

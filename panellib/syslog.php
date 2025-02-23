@@ -42,6 +42,8 @@ function register_syslog() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'half-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 26,
 			'alarm'        => 'grey',
 			'requires'     => 'syslog',
@@ -58,6 +60,8 @@ function register_syslog() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => false,
 			'priority'     => 27,
 			'alarm'        => 'grey',
 			'requires'     => 'syslog',
@@ -74,6 +78,8 @@ function register_syslog() {
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 28,
 			'alarm'        => 'grey',
 			'requires'     => 'syslog',
@@ -89,9 +95,10 @@ function register_syslog() {
 function plugin_syslog_trend() {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/syslog/database.php');
-
 	if (api_plugin_is_enabled('syslog')) {
+
+		include_once($config['base_path'] . '/plugins/syslog/database.php');
+
 		// Grab row counts from the information schema, it's faster
 		$i_rows = syslog_db_fetch_cell("SELECT TABLE_ROWS
 			FROM information_schema.TABLES
@@ -126,9 +133,9 @@ function plugin_syslog_trend() {
 function plugin_syslog_levels_trend() {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/syslog/database.php');
-
 	if (api_plugin_is_enabled('syslog')) {
+
+		include_once($config['base_path'] . '/plugins/syslog/database.php');
 
 		$data = array(
 			0 => 0,
@@ -366,8 +373,6 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/syslog/database.php');
-
 	$panel['alarm'] = 'grey';
 
 	if ($timespan == 0) {
@@ -380,7 +385,9 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 
 	if (api_plugin_is_enabled('syslog')) {
 
-		$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+		include_once($config['base_path'] . '/plugins/syslog/database.php');
+
+		$lines = get_panel_lines_count($panel['height'], $user_id);
 
 		$devices = syslog_db_fetch_assoc_prepared('SELECT sh.host AS ip ,count(*) AS hcount
 			FROM syslog AS s
@@ -436,9 +443,9 @@ function plugin_syslog_devices_detail() {
 		$timespan = $panel['refresh'];
 	}
 
-	include_once($config['base_path'] . '/plugins/syslog/database.php');
-
 	if (api_plugin_is_enabled('syslog')) {
+
+		include_once($config['base_path'] . '/plugins/syslog/database.php');
 
 		$devices = syslog_db_fetch_assoc_prepared('SELECT sh.host AS ip ,count(*) AS hcount
 			FROM syslog AS s

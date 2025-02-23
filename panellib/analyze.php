@@ -42,6 +42,8 @@ function register_analyze() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 51,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -58,6 +60,8 @@ function register_analyze() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'half-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 50,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -74,6 +78,8 @@ function register_analyze() {
 			'trefresh'     => false,
 			'force'        => false,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 7,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -90,6 +96,8 @@ function register_analyze() {
 			'trefresh'     => false,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'double',
+			'height_fixed' => true,
 			'priority'     => 33,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -106,6 +114,8 @@ function register_analyze() {
 			'trefresh'     => true,
 			'force'        => true,
 			'width'        => 'quarter-panel',
+			'height'       => 'normal',
+			'height_fixed' => true,
 			'priority'     => 44,
 			'alarm'        => 'green',
 			'requires'     => false,
@@ -125,7 +135,7 @@ function analyse_login($panel, $user_id) {
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
 
-	if ($important_period == -1) {
+  if ($important_period == -1) {
 		$important_period = time();
 	}
 
@@ -210,9 +220,7 @@ function analyse_login($panel, $user_id) {
 	}
 
 	$panel['data'] .= '</table><br/>';
-
 	$panel['data'] .= '<table class="cactiTable inpa_fixed">';
-
 	$panel['data'] .= '<tr><td>' . __('Total Failed Logins: %s', number_format_i18n($flog), 'intropage') . '</td></tr>';
 
 	$data = db_fetch_assoc('SELECT DISTINCT username
@@ -236,7 +244,7 @@ function analyse_login($panel, $user_id) {
 function analyse_log($panel, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	if (isset($_SESSION['sess_user_id'])) {
 		$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
