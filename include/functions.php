@@ -341,7 +341,7 @@ function intropage_actions() {
 					WHERE user_id = ?
 					AND fav_graph_id = ?
 					AND fav_graph_timespan = ?',
-					array($_SESSION['sess_user_id'],get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
+					array($_SESSION['sess_user_id'], get_request_var('graph_id'),$_SESSION['sess_current_timespan']));
 			}
 
 			if ($_SESSION['sess_current_timespan'] == 0) {
@@ -359,9 +359,10 @@ function intropage_actions() {
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
 				(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
 				VALUES (?, "favourite_graph", ?, ?, ?)',
-				array($_SESSION['sess_user_id'],get_request_var('graph_id'), $span, $prio));
+				array($_SESSION['sess_user_id'], get_request_var('graph_id'), $span, $prio));
 
 			$id = db_fetch_insert_id();
+
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_dashboard
 				(panel_id, user_id, dashboard_id) VALUES ( ?, ?, ?)',
 				array($id, $_SESSION['sess_user_id'], $_SESSION['dashboard_id']));
@@ -395,7 +396,7 @@ function intropage_actions() {
 						WHERE user_id = ?
 						AND panel_id = ?
 						AND dashboard_id = ?',
-						array ($priority, $_SESSION['sess_user_id'], $b, get_request_var('dashboard_id')));
+						array ($priority, $_SESSION['sess_user_id'], $b, get_filter_request_var('dashboard_id')));
 
   					$priority--;
 				}
@@ -763,6 +764,7 @@ function intropage_reload_panel() {
 
 	if (cacti_sizeof($panel)) {
 		// Force update for chart data always
+
 		if (!is_null($panel['data']) && strpos($panel['data'], '<script') !== false) {
 			$forced_update = true;
 		}
@@ -886,8 +888,10 @@ function intropage_detail_panel() {
 			$data['detail'] = __('Details Function does not exist.', 'intropage');
 		}
 
+		print '<div class="cactiTableTitleRow">';
 		print '<div class="cactiTableTitle">'  . $data['name']  . '</div>';
 		print '<div class="cactiTableButton"><i class="fas fa-circle color_' . $data['alarm'] . '_bubble"></i></div>';
+		print '</div>';
 		print $data['detail'];
 	} else {
 		print __('Panel Not Found');
@@ -1280,7 +1284,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
 	if ($lines == 5) {
-		$graph_height = 150;
+		$graph_height = 180;
 	} elseif ($lines == 10) {
 		$graph_height = 200;
 	} else {
@@ -1477,7 +1481,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		}
 
 		$chart['data']['columns'] = $columns;
-		$chart['data']['groups'] = $groups;
+		$chart['data']['groups']  = $groups;
 
 		$chart['data']['axes']    = $axes;
 		$chart['axis']            = $axis;
@@ -1788,6 +1792,13 @@ function ntp_time($host) {
 function intropage_graph_button($data) {
 	global $config, $callbackPage, $redirectPage;
 
+	$login_opts = get_login_opts();
+	if ($login_opts == 4) {
+		$redirectPage = $config['url_path'] . 'plugins/intropage/intropage.php';
+	} else {
+		$redirectPage = 'index.php';
+	}
+
 	if (is_panel_allowed('favourite_graph')) {
 		$local_graph_id = $data[1]['local_graph_id'];
 
@@ -1795,7 +1806,7 @@ function intropage_graph_button($data) {
 			$_SESSION['sess_current_timespan'] = read_user_setting('default_timespan');
 		}
 
-		if ($_SESSION['sess_current_timespan'] == 0)	{	// zoom or custom timespan
+		if ($_SESSION['sess_current_timespan'] == 0) { // zoom or custom timespan
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Cannot add to Dashboard. Custom timespan.', 'intropage') . '"></i>';
 		} else {
 			$present = db_fetch_cell_prepared('SELECT COUNT(*)

@@ -51,7 +51,7 @@ function resizeCharts() {
 		var windWidth  = $(window).width() - 34;
 		var panelWidth = $(this).closest('.panel_wrapper').width() - 34;
 		var width = Math.min(windWidth, panelWidth);
-		var height     = $(this).closest('.panel_wrapper').height() - 54;
+		var height     = $(this).closest('.panel_wrapper').height() - 30;
 
 		if (panels[chart] != undefined) {
 			panels[chart].resize({ width: width, height:height });
@@ -175,6 +175,8 @@ function timeSpan() {
 }
 
 function reload_page() {
+	clearAllTimeouts();
+
 	if (fullPage) {
 		var url = redirectPage+'?dashboard_id='+dashboard_id;
 
@@ -190,8 +192,6 @@ function reload_page() {
 }
 
 function setPageRefresh() {
-	clearAllTimeouts();
-
 	if (intropage_autorefresh > 0) {
 		refresh = setInterval(reload_page, intropage_autorefresh*1000);
 	} else if (intropage_autorefresh == -1) {
@@ -287,7 +287,8 @@ function initPage() {
 		update: function(event, ui) {
 			// change order
 			var xdata = new Array();
-			$('#panel_container li').each(function() {
+
+      $('#panel_container li').each(function() {
 				xdata.push($(this).attr('id'));
 			});
 
@@ -304,6 +305,7 @@ function initPage() {
 
 	$('.droppanel').click(function(event) {
 		event.preventDefault();
+
 		var panel_div_id = $(this).attr('data-panel');
 		var page = $(this).attr('href');
 
@@ -336,6 +338,7 @@ function initPage() {
 	$('body').on('click', '.maxim', function(event){
 
 		event.preventDefault();
+
 		var panel_id = $(this).attr('detail-panel');
 		var url = urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id;
 
@@ -462,9 +465,8 @@ function initPage() {
 	$('body').on('click','.bus_graph', function() {
 		event.preventDefault();
 
-		var id = $(this).attr('bus_id');
-
-		data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />';
+		var id   = $(this).attr('bus_id');
+		var data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />';
 
 		$('#overlay').dialog({
 			modal: true,
@@ -506,6 +508,7 @@ function testPoller() {
 		if (data == 1) {
 			$('#panel_container li').each(function() {
 				var panel_id = $(this).attr('id').split('_').pop();
+
 				reload_panel(panel_id, false, false);
 				Pace.stop();
 		    });
@@ -531,7 +534,8 @@ function reload_panel(panel_id, forced_update, refresh) {
 		checkForRedirects(data, url);
 
 		if ($('#panel_'+panel_id).find('.chart_wrapper').length) {
-			chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
+			var chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
+
 			if (panels[chart_id] != undefined) {
 				panels[chart_id].destroy();
 			}
@@ -556,11 +560,13 @@ function reload_all() {
 	if ($('#overlay').dialog('instance') === undefined) {
 		$('#panel_container li.grid_item').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
+
 			reload_panel(panel_id, false, true);
 		});
 	} else if (!$('#overlay').dialog('isOpen')) {
 		$('#panel_container li.grid_item').each(function() {
 			var panel_id = $(this).attr('id').split('_').pop();
+
 			reload_panel(panel_id, false, true);
 		});
 	}

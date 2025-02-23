@@ -132,10 +132,10 @@ function register_analyze() {
 function analyse_login($panel, $user_id) {
 	global $config;
 
-	$lines = read_config_option('intropage_number_of_lines');
-
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
-	if ($important_period == -1) {
+
+  if ($important_period == -1) {
 		$important_period = time();
 	}
 
@@ -345,33 +345,31 @@ function analyse_log($panel, $user_id) {
 		switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_MN_D_Y:
 				$format = 'M' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_D_MO_Y:
 				$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_D_MN_Y:
 				$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_Y_MO_D:
 				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
+				break;
 			case GD_Y_MN_D:
 				$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
-			break;
+				break;
 			default:
 				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
+				break;
 		}
 
 		foreach ($log['lines'] as $line) {
-
 			$color = 'grey';
 
 			if (strlen($line) > 3) {
-
 				$date = explode(' - ', $line);
 
 				$d_p = date_parse_from_format($format, $date[0]);
@@ -600,11 +598,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 
 		// need only devices with any snmp data
-		$count = db_fetch_cell("SELECT count(id)
+		$count = db_fetch_cell("SELECT COUNT(DISTINCT host.id)
 			FROM host
+			INNER JOIN host_snmp_query
+			ON host.id = host_snmp_query.host_id
 			WHERE disabled != 'on'
 			$q_host_cond
-			AND availability_method > 0
+			AND availability_method IN (1,2,4,5,6)
+			AND deleted != 'on'
 			AND snmp_version != 0
 			AND bulk_walk_size < 1");
 
@@ -1209,25 +1210,25 @@ function analyse_log_detail() {
 		switch ($date_fmt) {
 			case GD_MO_D_Y:
 				$format = 'm' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_MN_D_Y:
 				$format = 'M' . $datecharacter . 'd' . $datecharacter . 'Y H:i:s';
-			break;
+				break;
 			case GD_D_MO_Y:
-                        	$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
-			break;
+				$format = 'd' . $datecharacter . 'm' . $datecharacter . 'Y H:i:s';
+				break;
 			case GD_D_MN_Y:
-                        	$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
-			break;
+				$format = 'd' . $datecharacter . 'M' . $datecharacter . 'Y H:i:s';
+				break;
 			case GD_Y_MO_D:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				break;
 			case GD_Y_MN_D:
-                        	$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'M' . $datecharacter . 'd H:i:s';
+				break;
 			default:
-                        	$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
-			break;
+				$format = 'Y' . $datecharacter . 'm' . $datecharacter . 'd H:i:s';
+				break;
 		}
 
 		$count = 0;
