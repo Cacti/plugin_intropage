@@ -975,7 +975,7 @@ function get_panel($panel_id, $user_id = 0) {
 		$refresh_interval = $panel['refresh_interval'];
 		$trend_interval   = $panel['trend_interval'];
 		$next_update      = $last_update + $refresh_interval - time();
-		$height           = isset ($panel['height']) ? $panel['height'] : 'normal';
+		$panel['height']  = isset ($panel['height']) ? $panel['height'] : 'normal';
 
 		$panel['name']    = $definition['name'] . __(' [Upd. in %s/%s]', intropage_readable_interval($next_update), intropage_readable_interval($refresh_interval), 'intropage');
 	} else {
