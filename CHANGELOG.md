@@ -15,6 +15,7 @@
 * feature: Add Boost graphs panels - memory usage, pending records
 * feature: Add Syslog graphs panels - levels, number of messages 
 * feature#331: Add variable panel height
+* feature#335: Add CPU cores/processes information
 
 --- 4.0.4 ---
 
