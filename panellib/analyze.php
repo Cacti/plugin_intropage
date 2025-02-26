@@ -930,7 +930,6 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-
 	$data = db_fetch_assoc('SELECT
 		gt.id, gt.name, COUNT(DISTINCT graphs.local_graph_id) AS graphs,
 		graphs.items AS graph_items, templates.items AS template_items
@@ -962,7 +961,6 @@ function analyse_tree_host_graph($panel, $user_id) {
 		$panel['data'] .= '<span class="inpa_sq color_red"></span>' . __('Graph items/template items issue: %s', $sql_count, 'intropage') . '<br/>';
 	}
 
-
 	if (api_plugin_is_enabled('monitor')) {
 		if ($allowed_devices !== false || $simple_perms) {
 			if (!$simple_perms) {
@@ -989,6 +987,56 @@ function analyse_tree_host_graph($panel, $user_id) {
 			}
 		}
 	}
+
+	$cpu_cores = 0;
+	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		$output = shell_exec('wmic cpu get NumberOfCores');
+		if (!is_null($output) && $output !== false) {
+			$lines = preg_split('/\r\n|\r|\n/', $output);
+			$cpu_cores = $lines[1];
+		}
+	} elseif (substr_count(strtolower(PHP_OS), 'darwin')) {
+		$cpu_cores = shell_exec('sysctl -n hw.ncpu');
+	} else {
+		if (file_exists('/usr/bin/nproc')) {
+			$cpu_cores = shell_exec('/usr/bin/nproc');
+		} elseif (file_exists('/bin/nproc')) {
+			$cpu_cores = shell_exec('/bin/nproc');
+		} else {
+			$output = shell_exec('nproc');
+			if (!is_null($output) && $output !== false) {
+				$cpu_cores = $output;
+			}
+		}
+	}
+	$cpu_cores = trim($cpu_cores);
+
+	$sett = db_fetch_row('SELECT processes, threads FROM poller WHERE id = 1');
+	$color = 'green';
+	$text = __('OK');
+
+	if ($cpu_cores == 0) {
+		if ($sett['processes'] == 1 || $sett['threads'] == 1) {
+			$color = 'yellow';
+			$text = 'Cannot determine number of CPU cores. You have set only 1 process or thread for poller. You may have performance problems.';
+		}
+	} elseif ($cpu_cores == 1 && ($sett['processes'] == 1 || $sett['threads'] == 1)) {
+			$color = 'yellow';
+			$text = 'You have set only 1 process or thread for poller. You may have performance problems. Try to increase poller processes or threads.';
+			$total_errors++;
+	} elseif ($cpu_cores > 1) {
+		if ($sett['processes'] == 1 || $sett['threads'] == 1) {
+			$color = 'red';
+			$text = 'You have set only 1 process or thread for poller. You may have performance problems. Try to increase poller processes or threads.';
+			$total_errors++;
+		} elseif ($sett['processes']/$cpu_cores < 0.4 || $sett['threads']/$cpu_cores < 0.4) {
+			$color = 'yellow';
+			$text = 'You are using less than half of CPU cores. For better performance, consider increasing poller processes or threads. ';
+		}
+	}
+
+	$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Server CPU cores / processes / threads: %s / %s / %s', $cpu_cores, $sett['processes'], $sett['threads'], 'intropage');
+	$panel['data'] .= display_tooltip($text) . '<br/>';
 
 	if ($total_errors > 0) {
 		$panel['data'] = '<table class="cactiTable">
@@ -1949,6 +1997,57 @@ function analyse_tree_host_graph_detail() {
 			}
 		}
 	}
+
+	$cpu_cores = 0;
+	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+		$output = shell_exec('wmic cpu get NumberOfCores');
+		if (!is_null($output) && $output !== false) {
+			$lines = preg_split('/\r\n|\r|\n/', $output);
+			$cpu_cores = $lines[1];
+		}
+	} elseif (substr_count(strtolower(PHP_OS), 'darwin')) {
+		$cpu_cores = shell_exec('sysctl -n hw.ncpu');
+	} else {
+		if (file_exists('/usr/bin/nproc')) {
+			$cpu_cores = shell_exec('/usr/bin/nproc');
+		} elseif (file_exists('/bin/nproc')) {
+			$cpu_cores = shell_exec('/bin/nproc');
+		} else {
+			$output = shell_exec('nproc');
+			if (!is_null($output) && $output !== false) {
+				$cpu_cores = $output;
+			}
+		}
+	}
+	$cpu_cores = trim($cpu_cores);
+
+	$sett = db_fetch_row('SELECT processes, threads FROM poller WHERE id = 1');
+	$color = 'green';
+	$text = __('OK');
+
+	if ($cpu_cores == 0) {
+		if ($sett['processes'] == 1 || $sett['threads'] == 1) {
+			$color = 'yellow';
+			$text = 'Cannot determine number of CPU cores. You have set only 1 process or thread for poller. You may have performance problems.';
+		}
+	} elseif ($cpu_cores == 1 && ($sett['processes'] == 1 || $sett['threads'] == 1)) {
+			$color = 'yellow';
+			$text = 'You have set only 1 process or thread for poller. You may have performance problems. Try to increase poller processes or threads.';
+			$total_errors++;
+	} elseif ($cpu_cores > 1) {
+		if ($sett['processes'] == 1 || $sett['threads'] == 1) {
+			$color = 'red';
+			$text = 'You have set only 1 process or thread for poller. You may have performance problems. Try to increase poller processes or threads.';
+			$total_errors++;
+		} elseif ($sett['processes']/$cpu_cores < 0.4 || $sett['threads']/$cpu_cores < 0.4) {
+			$color = 'yellow';
+			$text = 'You are using less than half of CPU cores. For better performance, consider increasing poller processes or threads. ';
+		}
+	}
+
+	$panel['detail'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Server CPU cores / processes / threads: %s / %s / %s', $cpu_cores, $sett['processes'], $sett['threads'], 'intropage');
+	$panel['detail'] .= display_tooltip($text) . '<br/>';
+
 
 	if ($total_errors > 0) {
 		$panel['detail'] = '<span class="txt_big">' . __('Found %s problems', $total_errors, 'intropage') . '</span><br/>' . $panel['detail'];
