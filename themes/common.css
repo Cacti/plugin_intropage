@@ -94,7 +94,7 @@
 	padding: 4px;
 	margin: 0px;
 	font-weight: bold;
-	height: 16px;
+	height: 22px;
 	width: 100%;
 	cursor: move;
 	display: inline-block;
@@ -261,7 +261,9 @@
 }
 
 .float_right {
+	width: 80%;
 	float: right;
+	text-align: right;
 }
 
 .quarter-panel {
