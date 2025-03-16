@@ -990,10 +990,22 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 	$cpu_cores = 0;
 	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-		$output = shell_exec('wmic cpu get NumberOfCores');
+		$output = shell_exec('wmic computersystem get numberofprocessors');
 		if (!is_null($output) && $output !== false) {
+			
 			$lines = preg_split('/\r\n|\r|\n/', $output);
 			$cpu_cores = $lines[1];
+		}
+
+		$output = shell_exec('wmic cpu get NumberOfCores');
+		if (!is_null($output) && $output !== false) {
+			
+			$lines = preg_split('/\r\n|\r|\n/', $output);
+			$cpu_cores *= $lines[1];
+		}
+
+		if ($cpu_cores > 0) {
+			$cpu_cores = 0;
 		}
 	} elseif (substr_count(strtolower(PHP_OS), 'darwin')) {
 		$cpu_cores = shell_exec('sysctl -n hw.ncpu');
