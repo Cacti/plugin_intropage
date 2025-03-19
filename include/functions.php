@@ -357,8 +357,8 @@ function intropage_actions() {
 				array($_SESSION['sess_user_id']));
 
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
-				(user_id, panel_id, fav_graph_id, fav_graph_timespan, priority)
-				VALUES (?, "favourite_graph", ?, ?, ?)',
+				(user_id, panel_id, height, fav_graph_id, fav_graph_timespan, priority)
+				VALUES (?, "favourite_graph", "normal", ?, ?, ?)',
 				array($_SESSION['sess_user_id'], get_request_var('graph_id'), $span, $prio));
 
 			$id = db_fetch_insert_id();
@@ -776,6 +776,7 @@ function intropage_reload_panel() {
 
 		if ($panel['fav_graph_id'] > 0) {
 			$data = intropage_favourite_graph($panel['fav_graph_id'], $panel['fav_graph_timespan']);
+			$panels[$panel['panel_id']]['height_fixed'] = true;
 		} elseif (isset($spanel) && cacti_sizeof($spanel) > 0) {
 			$function = $spanel['update_func'];
 			$user_id  = ($spanel['level'] == PANEL_SYSTEM ? 0 : $_SESSION['sess_user_id']);
@@ -1245,9 +1246,9 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 
 	if (isset($fav_graph_id)) {
 		$result = array(
-			'name' => '', // we don't need name here
-			'alarm' => 'grey',
-			'data' => '',
+			'name'   => '', // we don't need name here
+			'alarm'  => 'grey',
+			'data'   => '',
 		);
 
 		include_once($config['base_path'] . '/lib/time.php');
@@ -1642,6 +1643,7 @@ function intropage_create_panel($panel_id, $dashboard_id) {
 
 	if ($panel_type == 'favourite_graph') {
 		$width = 'quarter-panel';
+		$height = 'normal';
 	} else {
 		$width = $panels[$panel_type]['width'];
 		// we need actual height from db not from panel definition
@@ -1672,8 +1674,6 @@ function intropage_create_panel($panel_id, $dashboard_id) {
 	print '</div>'; // end of wrapper
 	print '</li>';
 }
-
-
 
 
 function intropage_addpanel_select($dashboard_id) {
