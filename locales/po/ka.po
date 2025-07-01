@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-07-01 18:29+0000\n"
+"Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
+"intropage/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: display.php:40
 msgid "Intropage - Permission Denied"
@@ -31,7 +34,7 @@ msgstr ""
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
 msgid "Default"
-msgstr ""
+msgstr "ნაგულისხმევი"
 
 #: display.php:242 display.php:588
 msgid "Hide red/yellow/green square notifications"
@@ -201,7 +204,7 @@ msgstr ""
 
 #: display.php:487
 msgid "Customization:"
-msgstr ""
+msgstr "მორგებული:"
 
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
@@ -237,7 +240,7 @@ msgstr ""
 
 #: display.php:592
 msgid "Close"
-msgstr ""
+msgstr "დახურვა"
 
 #: include/functions.php:242
 msgid "Dashboard has been removed"
@@ -403,7 +406,7 @@ msgstr ""
 
 #: include/settings.php:32 include/settings.php:93
 msgid "Intropage"
-msgstr ""
+msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
@@ -488,7 +491,7 @@ msgstr ""
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
-msgstr ""
+msgstr "არასდროს"
 
 #: include/variables.php:63
 msgid "Every Minute"
@@ -517,7 +520,7 @@ msgstr ""
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr ""
+msgstr "გათიშულია"
 
 #: include/variables.php:75
 msgid "15 minutes"
@@ -623,23 +626,23 @@ msgstr ""
 
 #: include/variables.php:141
 msgid "Quick"
-msgstr ""
+msgstr "სწრაფი"
 
 #: include/variables.php:142
 msgid "Fast"
-msgstr ""
+msgstr "სწრაფი"
 
 #: include/variables.php:143
 msgid "Changed"
-msgstr ""
+msgstr "შეიცვალა"
 
 #: include/variables.php:144
 msgid "Medium"
-msgstr ""
+msgstr "საშუალო"
 
 #: include/variables.php:145
 msgid "Extended"
-msgstr ""
+msgstr "გაფართოებული"
 
 #: include/variables.php:150
 msgid "NTP Time Check - IP or DNS name of NTP server"
@@ -709,11 +712,11 @@ msgstr ""
 
 #: include/variables.php:212
 msgid "Bytes"
-msgstr ""
+msgstr "ბაიტები"
 
 #: include/variables.php:213
 msgid "Bits"
-msgstr ""
+msgstr "ბიტები"
 
 #: include/variables.php:218
 msgid "Alarm Settings"
@@ -856,7 +859,7 @@ msgstr ""
 
 #: panellib/alert.php:31 panellib/syslog.php:172
 msgid "Alerts"
-msgstr ""
+msgstr "განგაშები"
 
 #: panellib/alert.php:32
 msgid "Panels that provide alerting."
@@ -874,19 +877,19 @@ msgstr ""
 #: panellib/analyze.php:1270 panellib/misc.php:336 panellib/misc.php:407
 #: panellib/misc.php:499 panellib/misc.php:571 panellib/thold.php:485
 msgid "Date"
-msgstr ""
+msgstr "თარიღი"
 
 #: panellib/alert.php:120 panellib/alert.php:265 panellib/busiest.php:569
 #: panellib/busiest.php:1402 panellib/top5.php:143 panellib/top5.php:305
 #: panellib/top5.php:386 panellib/top5.php:473 panellib/top5.php:556
 #: panellib/top5.php:636 panellib/top5.php:718
 msgid "Host"
-msgstr ""
+msgstr "ჰოსტი"
 
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr ""
+msgstr "შტატი"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -958,7 +961,7 @@ msgstr ""
 
 #: panellib/analyze.php:155
 msgid "Username"
-msgstr ""
+msgstr "მომხმარებლის სახელი"
 
 #: panellib/analyze.php:156 panellib/analyze.php:1271
 msgid "IP Address"
@@ -966,13 +969,13 @@ msgstr ""
 
 #: panellib/analyze.php:157 panellib/graphs.php:503 panellib/thold.php:357
 msgid "Status"
-msgstr ""
+msgstr "სტატუსი"
 
 #: panellib/analyze.php:167 panellib/analyze.php:1280 panellib/misc.php:353
 #: panellib/misc.php:430 panellib/misc.php:517 panellib/misc.php:596
 #: panellib/system.php:551 panellib/top5.php:387 panellib/top5.php:719
 msgid "Failed"
-msgstr ""
+msgstr "ჩავარდა"
 
 #: panellib/analyze.php:174 panellib/analyze.php:1287
 msgid "Success - Login"
@@ -989,7 +992,7 @@ msgstr ""
 
 #: panellib/analyze.php:224
 msgid "None"
-msgstr ""
+msgstr "არცერთი"
 
 #: panellib/analyze.php:227
 msgid "Active Users in Last Hour: "
@@ -1006,11 +1009,11 @@ msgstr ""
 
 #: panellib/analyze.php:286
 msgid "Errors: "
-msgstr ""
+msgstr "შეცდომები: "
 
 #: panellib/analyze.php:291
 msgid "Warnings: "
-msgstr ""
+msgstr "გაფრთხილებები: "
 
 #: panellib/analyze.php:298
 msgid "Log Size: Larger than 2GB"
@@ -1107,7 +1110,7 @@ msgstr ""
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1230,11 +1233,11 @@ msgstr ""
 
 #: panellib/analyze.php:1127
 msgid "Errors"
-msgstr ""
+msgstr "შეცდომები"
 
 #: panellib/analyze.php:1132
 msgid "Warnings"
-msgstr ""
+msgstr "გაფრთხილებები"
 
 #: panellib/analyze.php:1137
 msgid "WARNING: File is Larger than 2GB"
@@ -1250,12 +1253,12 @@ msgstr ""
 
 #: panellib/analyze.php:1272
 msgid "User"
-msgstr ""
+msgstr "მომხმარებელი"
 
 #: panellib/analyze.php:1273 panellib/misc.php:409 panellib/misc.php:502
 #: panellib/misc.php:574
 msgid "Result"
-msgstr ""
+msgstr "შედეგი"
 
 #: panellib/analyze.php:1314
 msgid "Active Users in Last 2 Hours:"
@@ -1418,14 +1421,14 @@ msgstr ""
 #: panellib/busiest.php:1523 panellib/busiest.php:1649 panellib/top5.php:144
 #: panellib/top5.php:474
 msgid "Average"
-msgstr ""
+msgstr "საშუალო"
 
 #: panellib/busiest.php:219 panellib/busiest.php:339 panellib/busiest.php:474
 #: panellib/busiest.php:690 panellib/busiest.php:812 panellib/busiest.php:1054
 #: panellib/busiest.php:1170 panellib/busiest.php:1311
 #: panellib/busiest.php:1524 panellib/busiest.php:1650
 msgid "Peak"
-msgstr ""
+msgstr "პიკი"
 
 #: panellib/busiest.php:259 panellib/busiest.php:370 panellib/busiest.php:514
 #: panellib/busiest.php:725 panellib/busiest.php:843 panellib/busiest.php:1088
@@ -1452,7 +1455,7 @@ msgstr ""
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
-msgstr ""
+msgstr "გაშვებულობის დრო"
 
 #: panellib/busiest.php:588 panellib/busiest.php:1420
 msgid "Average of all allowed hosts"
@@ -1464,7 +1467,7 @@ msgstr ""
 
 #: panellib/busiest.php:933 panellib/busiest.php:1773
 msgid "Direction"
-msgstr ""
+msgstr "მიმართულება"
 
 #: panellib/busiest.php:973 panellib/busiest.php:1812
 msgid "Time interval last 5 minutes"
@@ -1529,7 +1532,7 @@ msgstr ""
 
 #: panellib/graphs.php:106
 msgid "Datasources: "
-msgstr ""
+msgstr "მონაცემთა წყაროები: "
 
 #: panellib/graphs.php:180 panellib/graphs.php:207
 msgid "Device Templates: "
@@ -1537,16 +1540,16 @@ msgstr ""
 
 #: panellib/graphs.php:262
 msgid "Devices: "
-msgstr ""
+msgstr "მოწყობილობები: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
-msgstr ""
+msgstr "გამორთ"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
 msgid "Recovering"
-msgstr ""
+msgstr "მიმდინარეობს აღდგენა"
 
 #: panellib/graphs.php:423
 msgid "Data Type"
@@ -1555,7 +1558,7 @@ msgstr ""
 #: panellib/graphs.php:441 panellib/graphs.php:650 panellib/top5.php:388
 #: panellib/top5.php:720
 msgid "Total"
-msgstr ""
+msgstr "სულ"
 
 #: panellib/graphs.php:445
 msgid "No untemplated datasources found"
@@ -1563,7 +1566,7 @@ msgstr ""
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
-msgstr ""
+msgstr "მოწყობილობები"
 
 #: panellib/graphs.php:503
 msgid "Device Count"
@@ -1571,11 +1574,11 @@ msgstr ""
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
-msgstr ""
+msgstr "ყველა"
 
 #: panellib/graphs.php:515 panellib/mactrack.php:107
 msgid "Up"
-msgstr ""
+msgstr "ჩართ"
 
 #: panellib/graphs.php:635
 msgid "Template Name"
@@ -1649,15 +1652,15 @@ msgstr ""
 
 #: panellib/mactrack.php:105
 msgid "MacTrack"
-msgstr ""
+msgstr "MacTrack"
 
 #: panellib/mactrack.php:109 panellib/misc.php:411 panellib/misc.php:575
 msgid "Error"
-msgstr ""
+msgstr "შეცდომა"
 
 #: panellib/mactrack.php:110
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #: panellib/mactrack.php:118 panellib/mactrack.php:173 panellib/thold.php:312
 msgid "You don't have plugin permission"
@@ -1665,15 +1668,15 @@ msgstr ""
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
-msgstr ""
+msgstr "საიტი"
 
 #: panellib/mactrack.php:140 panellib/mactrack.php:193
 msgid "IPs"
-msgstr ""
+msgstr "IP-ები"
 
 #: panellib/mactrack.php:141 panellib/mactrack.php:194
 msgid "Ports"
-msgstr ""
+msgstr "პორტები"
 
 #: panellib/mactrack.php:142 panellib/mactrack.php:195
 msgid "Ports up"
@@ -1681,7 +1684,7 @@ msgstr ""
 
 #: panellib/mactrack.php:143 panellib/mactrack.php:196
 msgid "MACs"
-msgstr ""
+msgstr "MAC-ები"
 
 #: panellib/mactrack.php:144 panellib/mactrack.php:197
 msgid "Device Errors"
@@ -1816,7 +1819,7 @@ msgstr ""
 
 #: panellib/misc.php:337 panellib/misc.php:408
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: panellib/misc.php:338 panellib/misc.php:410
 msgid "HTTP code"
@@ -1825,7 +1828,7 @@ msgstr ""
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr ""
+msgstr "დიახ"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1845,11 +1848,11 @@ msgstr ""
 
 #: panellib/misc.php:500 panellib/misc.php:572
 msgid "Test"
-msgstr ""
+msgstr "ტესტი"
 
 #: panellib/misc.php:501 panellib/misc.php:573
 msgid "Type"
-msgstr ""
+msgstr "ტიპი"
 
 #: panellib/misc.php:555
 msgid "Servcheck Plugin - Details"
@@ -1885,11 +1888,11 @@ msgstr ""
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: panellib/poller.php:120 panellib/poller.php:305
 msgid "Name"
-msgstr ""
+msgstr "სახელი"
 
 #: panellib/poller.php:122 panellib/poller.php:307
 msgid "Total Time"
@@ -1897,19 +1900,19 @@ msgstr ""
 
 #: panellib/poller.php:134 panellib/poller.php:340
 msgid "New/Idle"
-msgstr ""
+msgstr "ახალი/უქმე"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
-msgstr ""
+msgstr "გაშვებულია"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
-msgstr ""
+msgstr "უქმე"
 
 #: panellib/poller.php:140 panellib/poller.php:346
 msgid "Unkn/down"
-msgstr ""
+msgstr "უცნ/გათ"
 
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
@@ -1918,19 +1921,19 @@ msgstr ""
 
 #: panellib/poller.php:171 panellib/poller.php:367
 msgid "(ok)"
-msgstr ""
+msgstr "(დიახ)"
 
 #: panellib/poller.php:172 panellib/poller.php:367
 msgid "(all)"
-msgstr ""
+msgstr "(ყველა)"
 
 #: panellib/poller.php:274
 msgid "ID: "
-msgstr ""
+msgstr "ID: "
 
 #: panellib/poller.php:275
 msgid "Seconds"
-msgstr ""
+msgstr "წამი"
 
 #: panellib/poller.php:297
 msgid "Poller Details"
@@ -1950,7 +1953,7 @@ msgstr ""
 
 #: panellib/poller.php:447
 msgid "Items"
-msgstr ""
+msgstr "ელემენტები"
 
 #: panellib/syslog.php:31
 msgid "Syslog Panels"
@@ -1970,15 +1973,15 @@ msgstr ""
 
 #: panellib/syslog.php:171
 msgid "Incoming"
-msgstr ""
+msgstr "შემომავალი"
 
 #: panellib/syslog.php:173
 msgid "Stored"
-msgstr ""
+msgstr "დამახსოვრებულია"
 
 #: panellib/syslog.php:175
 msgid "Messages"
-msgstr ""
+msgstr "შეტყობინებები"
 
 #: panellib/syslog.php:197
 msgid "Syslog plugin not installed/running"
@@ -1994,7 +1997,7 @@ msgstr ""
 
 #: panellib/system.php:37
 msgid "Information"
-msgstr ""
+msgstr "ინფორმაცია"
 
 #: panellib/system.php:38
 msgid "Various system information about the Cacti system itself."
@@ -2042,7 +2045,7 @@ msgstr ""
 
 #: panellib/system.php:177
 msgid "Avg CPU"
-msgstr ""
+msgstr "საშ. CPU"
 
 #: panellib/system.php:178
 msgid "Max CPU"
@@ -2058,7 +2061,7 @@ msgstr ""
 
 #: panellib/system.php:219
 msgid "Spine"
-msgstr ""
+msgstr "ხერხემალი"
 
 #: panellib/system.php:221
 msgid "Spine version: "
@@ -2086,7 +2089,7 @@ msgstr ""
 
 #: panellib/system.php:322
 msgid "Other"
-msgstr ""
+msgstr "სხვა"
 
 #: panellib/system.php:325
 msgid "Never Run"
@@ -2142,7 +2145,7 @@ msgstr ""
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr ""
+msgstr "დატრიგერებულია"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
@@ -2190,7 +2193,7 @@ msgstr ""
 
 #: panellib/thold.php:53
 msgid "Threshold"
-msgstr ""
+msgstr "ზღვარი"
 
 #: panellib/thold.php:54
 msgid "Threshold Plugin Graph (all, trigerred, ...)"
@@ -2206,7 +2209,7 @@ msgstr ""
 
 #: panellib/thold.php:196
 msgid "Thresholds: "
-msgstr ""
+msgstr "ზღვრები: "
 
 #: panellib/thold.php:208 panellib/thold.php:332
 msgid "Thold plugin not installed/running"
@@ -2214,11 +2217,11 @@ msgstr ""
 
 #: panellib/thold.php:238
 msgid "Trigerred"
-msgstr ""
+msgstr "დატრიგერებულია"
 
 #: panellib/thold.php:266 panellib/thold.php:369 panellib/thold.php:385
 msgid "Breached"
-msgstr ""
+msgstr "დარღვეულია"
 
 #: panellib/thold.php:325
 msgid "Threshold Details"
@@ -2226,15 +2229,15 @@ msgstr ""
 
 #: panellib/thold.php:357
 msgid "Thresholds"
-msgstr ""
+msgstr "ზღვრები"
 
 #: panellib/thold.php:402
 msgid "Breached: "
-msgstr ""
+msgstr "დარღვეულია: "
 
 #: panellib/thold.php:413
 msgid "Triggered: "
-msgstr ""
+msgstr "დატრიგერებულია: "
 
 #: panellib/thold.php:421
 msgid "You don't have permission to Thresholds"
@@ -2242,7 +2245,7 @@ msgstr ""
 
 #: panellib/thold.php:484
 msgid "Description"
-msgstr ""
+msgstr "აღწერა"
 
 #: panellib/top5.php:31
 msgid "Top/Bottom 5 Panels"
@@ -2286,15 +2289,15 @@ msgstr ""
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
-msgstr ""
+msgstr "მიმდინარე"
 
 #: panellib/top5.php:225
 msgid "Hostname"
-msgstr ""
+msgstr "ჰოსტის სახელი"
 
 #: panellib/top5.php:226
 msgid "Availability/Reachability"
-msgstr ""
+msgstr "ხელმისაწვდომობა"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
@@ -2302,7 +2305,7 @@ msgstr ""
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
-msgstr ""
+msgstr "ფარდობა"
 
 #: panellib/top5.php:437
 msgid "Top 20 Hosts with Worst Ping"
@@ -2314,7 +2317,7 @@ msgstr ""
 
 #: panellib/top5.php:557
 msgid "Availability"
-msgstr ""
+msgstr "წვდომადობა"
 
 #: panellib/top5.php:600
 msgid "Top 20 Hosts Worst Polling Time"
