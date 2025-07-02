@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-07-01 18:29+0000\n"
+"PO-Revision-Date: 2025-07-02 19:26+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
@@ -64,11 +64,11 @@ msgstr ""
 
 #: display.php:286
 msgid "Refresh Now"
-msgstr ""
+msgstr "განახლება ახლავე"
 
 #: display.php:289 display.php:291
 msgid "Refresh Disabled"
-msgstr ""
+msgstr "განახლება გამორთულია"
 
 #: display.php:295 display.php:297
 msgid "Refresh by Poller"
@@ -144,7 +144,7 @@ msgstr ""
 
 #: display.php:413
 msgid "Cancel sharing"
-msgstr ""
+msgstr "დაყოფის გაუქმება"
 
 #: display.php:416
 msgid "Share this dashboard"
@@ -220,7 +220,7 @@ msgstr ""
 
 #: display.php:585
 msgid "Panel Details"
-msgstr ""
+msgstr "პანელის დეტალები"
 
 #: display.php:586
 msgid "Disable panel move/Enable copy text from panel"
@@ -248,7 +248,7 @@ msgstr ""
 
 #: include/functions.php:264
 msgid "New Dashboard"
-msgstr ""
+msgstr "ახალი სამუშაო დაფა"
 
 #: include/functions.php:266
 msgid "Dashboard has been added"
@@ -302,27 +302,27 @@ msgstr ""
 #: include/functions.php:819
 #, php-format
 msgid "%s Sec"
-msgstr ""
+msgstr "%s წმ"
 
 #: include/functions.php:819
 #, php-format
 msgid "%s Seconds"
-msgstr ""
+msgstr "%s წამი"
 
 #: include/functions.php:826
 #, php-format
 msgid "%s Min"
-msgstr ""
+msgstr "%s წთ"
 
 #: include/functions.php:826
 #, php-format
 msgid "%s Minutes"
-msgstr ""
+msgstr "%s წუთი"
 
 #: include/functions.php:833
 #, php-format
 msgid "%s Hours"
-msgstr ""
+msgstr "%s საათი"
 
 #: include/functions.php:833
 #, php-format
@@ -332,7 +332,7 @@ msgstr ""
 #: include/functions.php:837
 #, php-format
 msgid "%s Days"
-msgstr ""
+msgstr "%s დღე"
 
 #: include/functions.php:883
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
@@ -344,15 +344,15 @@ msgstr ""
 
 #: include/functions.php:1363
 msgid "Disable panel"
-msgstr ""
+msgstr "პანელის გათიშვა"
 
 #: include/functions.php:1366
 msgid "Reload Panel"
-msgstr ""
+msgstr "პანელის თავიდან ჩატვირთვა"
 
 #: include/functions.php:1369
 msgid "Show Details"
-msgstr ""
+msgstr "დეტალების ჩვენება"
 
 #: include/functions.php:1376
 msgid "Loading data ..."
@@ -410,12 +410,12 @@ msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
-msgstr ""
+msgstr "ნორმალური მომხმარებელი"
 
 #: include/settings.php:146
 #, php-format
 msgid "[edit: %s]"
-msgstr ""
+msgstr "[ჩასწორება: %s]"
 
 #: include/settings.php:155
 msgid "System Level Panels"
@@ -439,7 +439,7 @@ msgstr ""
 
 #: include/variables.php:28
 msgid "Red Status"
-msgstr ""
+msgstr "წითელი სტატუსი"
 
 #: include/variables.php:29
 msgid "Yellow Status"
@@ -447,11 +447,11 @@ msgstr ""
 
 #: include/variables.php:30
 msgid "Green Status"
-msgstr ""
+msgstr "მწვანე სტატუსი"
 
 #: include/variables.php:35
 msgid "Display Settings"
-msgstr ""
+msgstr "ჩვენების მორგება"
 
 #: include/variables.php:39
 msgid "Important things will be at the top"
@@ -495,7 +495,7 @@ msgstr "არასდროს"
 
 #: include/variables.php:63
 msgid "Every Minute"
-msgstr ""
+msgstr "ყოველ წუთს"
 
 #: include/variables.php:64 include/variables.php:161 include/variables.php:179
 #, php-format
@@ -505,7 +505,7 @@ msgstr ""
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
 msgid "Every Hour"
-msgstr ""
+msgstr "ყოველ საათში"
 
 #: include/variables.php:70
 msgid "Important period"
@@ -524,7 +524,7 @@ msgstr "გათიშულია"
 
 #: include/variables.php:75
 msgid "15 minutes"
-msgstr ""
+msgstr "15 წუთი"
 
 #: include/variables.php:76
 msgid "1 hour"
@@ -532,11 +532,11 @@ msgstr ""
 
 #: include/variables.php:77
 msgid "4 hours"
-msgstr ""
+msgstr "4 საათი"
 
 #: include/variables.php:78
 msgid "1 day"
-msgstr ""
+msgstr "1 დღე"
 
 #: include/variables.php:83
 msgid "Number of panel lines"
@@ -549,11 +549,11 @@ msgstr ""
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr ""
+msgstr "%d ხაზი"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
-msgstr ""
+msgstr "ტრენდის ხანგრძლივობა"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
@@ -561,7 +561,7 @@ msgstr ""
 
 #: include/variables.php:101
 msgid "Poller Timeout"
-msgstr ""
+msgstr "მომთხოვის მოლოდინის ვადა"
 
 #: include/variables.php:102
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
@@ -570,7 +570,7 @@ msgstr ""
 #: include/variables.php:106 setup.php:99
 #, php-format
 msgid "%d Minute"
-msgstr ""
+msgstr "%d წუთი"
 
 #: include/variables.php:107 include/variables.php:108
 #: include/variables.php:109 include/variables.php:110
@@ -579,12 +579,12 @@ msgstr ""
 #: setup.php:106 setup.php:107
 #, php-format
 msgid "%d Minutes"
-msgstr ""
+msgstr "%d წუთი"
 
 #: include/variables.php:113 setup.php:108
 #, php-format
 msgid "%d Hour"
-msgstr ""
+msgstr "%d საათი"
 
 #: include/variables.php:117
 msgid "Analyze Log - number of lines"
@@ -606,15 +606,15 @@ msgstr ""
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
 msgid "Every Day"
-msgstr ""
+msgstr "ყოველდღე"
 
 #: include/variables.php:131
 msgid "Every Week"
-msgstr ""
+msgstr "ყოველკვირა"
 
 #: include/variables.php:132
 msgid "Every Month"
-msgstr ""
+msgstr "ყოველთვე"
 
 #: include/variables.php:137
 msgid "Analyze DB - Level of db check"
@@ -720,7 +720,7 @@ msgstr "ბიტები"
 
 #: include/variables.php:218
 msgid "Alarm Settings"
-msgstr ""
+msgstr "განგაშის პარამეტრები"
 
 #: include/variables.php:222
 msgid "Alarm DB check Aborted Clients"
@@ -921,7 +921,7 @@ msgstr ""
 
 #: panellib/analyze.php:37
 msgid "Analyze Logins"
-msgstr ""
+msgstr "შესვლების ანალიზი"
 
 #: panellib/analyze.php:38
 msgid "Analyze the last several Cacti logins for trends and errors."
@@ -965,7 +965,7 @@ msgstr "მომხმარებლის სახელი"
 
 #: panellib/analyze.php:156 panellib/analyze.php:1271
 msgid "IP Address"
-msgstr ""
+msgstr "IP მისამართი"
 
 #: panellib/analyze.php:157 panellib/graphs.php:503 panellib/thold.php:357
 msgid "Status"
@@ -1209,7 +1209,7 @@ msgstr ""
 
 #: panellib/analyze.php:977
 msgid "DS stats: "
-msgstr ""
+msgstr "DS სტატისტიკა: "
 
 #: panellib/analyze.php:1003 panellib/busiest.php:165 panellib/busiest.php:285
 #: panellib/busiest.php:396 panellib/busiest.php:616 panellib/busiest.php:751
@@ -1288,7 +1288,7 @@ msgstr ""
 
 #: panellib/analyze.php:1484
 msgid "Data maintenance"
-msgstr ""
+msgstr "მონაცემების რემონტი"
 
 #: panellib/analyze.php:1519
 #, php-format
@@ -1345,7 +1345,7 @@ msgstr ""
 
 #: panellib/busiest.php:37
 msgid "Busiest CPU"
-msgstr ""
+msgstr "ყველაზე დაკავებული CPU"
 
 #: panellib/busiest.php:38
 msgid "Devices with the busiest CPU (Host MIB)"
@@ -1508,7 +1508,7 @@ msgstr ""
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
-msgstr ""
+msgstr "მონაცემთა წყაროები"
 
 #: panellib/graphs.php:38
 msgid "Graph of Data Sources"
@@ -1536,7 +1536,7 @@ msgstr "მონაცემთა წყაროები: "
 
 #: panellib/graphs.php:180 panellib/graphs.php:207
 msgid "Device Templates: "
-msgstr ""
+msgstr "მოწყობილობის შაბლონები: "
 
 #: panellib/graphs.php:262
 msgid "Devices: "
@@ -1570,7 +1570,7 @@ msgstr "მოწყობილობები"
 
 #: panellib/graphs.php:503
 msgid "Device Count"
-msgstr ""
+msgstr "მოწყობილობების რაოდენობა"
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
@@ -1586,7 +1586,7 @@ msgstr ""
 
 #: panellib/graphs.php:636
 msgid "Total Devices"
-msgstr ""
+msgstr "სულ მოწყობილობები"
 
 #: panellib/graphs.php:656
 msgid "No device templates found"
@@ -1594,7 +1594,7 @@ msgstr ""
 
 #: panellib/mactrack.php:31
 msgid "MacTrack Panels"
-msgstr ""
+msgstr "MacTrack-ის პანელები"
 
 #: panellib/mactrack.php:32
 msgid "Panels that provide information about Cacti's MacTrack plugins."
@@ -1602,7 +1602,7 @@ msgstr ""
 
 #: panellib/mactrack.php:37
 msgid "MacTrack Plugin"
-msgstr ""
+msgstr "MacTrack -ის დამატება"
 
 #: panellib/mactrack.php:38
 msgid "Various MacTrack collection and site statistics."
@@ -1610,7 +1610,7 @@ msgstr ""
 
 #: panellib/mactrack.php:53 panellib/mactrack.php:184
 msgid "MacTrack Sites"
-msgstr ""
+msgstr "MacTrack-ის საიტები"
 
 #: panellib/mactrack.php:54
 msgid "Various MacTrack Site statistics."
@@ -1623,7 +1623,7 @@ msgstr ""
 #: panellib/mactrack.php:97
 #, php-format
 msgid "All: %s"
-msgstr ""
+msgstr "ყველა: %s"
 
 #: panellib/mactrack.php:98
 #, php-format
@@ -1633,7 +1633,7 @@ msgstr ""
 #: panellib/mactrack.php:99
 #, php-format
 msgid "Down: %s"
-msgstr ""
+msgstr "გამორთულია: %s"
 
 #: panellib/mactrack.php:100
 #, php-format
@@ -1643,12 +1643,12 @@ msgstr ""
 #: panellib/mactrack.php:101
 #, php-format
 msgid "Unknown: %s"
-msgstr ""
+msgstr "უცნობი: %s"
 
 #: panellib/mactrack.php:102
 #, php-format
 msgid "Disabled: %s"
-msgstr ""
+msgstr "გათიშულია: %s"
 
 #: panellib/mactrack.php:105
 msgid "MacTrack"
@@ -1688,7 +1688,7 @@ msgstr "MAC-ები"
 
 #: panellib/mactrack.php:144 panellib/mactrack.php:197
 msgid "Device Errors"
-msgstr ""
+msgstr "მოწყობილობის შეცდომები"
 
 #: panellib/mactrack.php:170 panellib/mactrack.php:225
 msgid "No mactrack sites found"
@@ -1696,7 +1696,7 @@ msgstr ""
 
 #: panellib/misc.php:31
 msgid "Miscellaneous Panels"
-msgstr ""
+msgstr "სხვადასხვა პანელები"
 
 #: panellib/misc.php:32
 msgid "Panels that general non-categorized data about Cacti's."
@@ -1720,7 +1720,7 @@ msgstr ""
 
 #: panellib/misc.php:69
 msgid "Webseer Details"
-msgstr ""
+msgstr "Webseer-ის დეტალები"
 
 #: panellib/misc.php:70
 msgid "Plugin webseer URL Service Check Details"
@@ -1823,7 +1823,7 @@ msgstr "URL"
 
 #: panellib/misc.php:338 panellib/misc.php:410
 msgid "HTTP code"
-msgstr ""
+msgstr "HTTP კოდი"
 
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
@@ -1868,7 +1868,7 @@ msgstr ""
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr ""
+msgstr "გამომთხოვის ინფორმაცია"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
@@ -1876,7 +1876,7 @@ msgstr ""
 
 #: panellib/poller.php:53
 msgid "Poller Statistics"
-msgstr ""
+msgstr "გამომთხოვის სტატისტიკა"
 
 #: panellib/poller.php:54 panellib/poller.php:70
 msgid "Various Cacti poller statistics."
@@ -1896,7 +1896,7 @@ msgstr "სახელი"
 
 #: panellib/poller.php:122 panellib/poller.php:307
 msgid "Total Time"
-msgstr ""
+msgstr "სულ დრო"
 
 #: panellib/poller.php:134 panellib/poller.php:340
 msgid "New/Idle"
@@ -1937,7 +1937,7 @@ msgstr "წამი"
 
 #: panellib/poller.php:297
 msgid "Poller Details"
-msgstr ""
+msgstr "გამომთხოვის დეტალები"
 
 #: panellib/poller.php:308
 msgid "Average Time"
@@ -1965,7 +1965,7 @@ msgstr ""
 
 #: panellib/syslog.php:37
 msgid "Syslog Details"
-msgstr ""
+msgstr "Syslog-ის დეტალები"
 
 #: panellib/syslog.php:38
 msgid "Various Syslog Plugin statistics."
@@ -1989,7 +1989,7 @@ msgstr ""
 
 #: panellib/system.php:31
 msgid "System Panels"
-msgstr ""
+msgstr "სისტემური პანელები"
 
 #: panellib/system.php:32
 msgid "Panels that provide information about Cacti system performance."
@@ -2005,7 +2005,7 @@ msgstr ""
 
 #: panellib/system.php:53
 msgid "Administrative Alerts"
-msgstr ""
+msgstr "ადმინისტრაციული განგაშები"
 
 #: panellib/system.php:54
 msgid "Extra admin notify panel for all users"
@@ -2013,7 +2013,7 @@ msgstr ""
 
 #: panellib/system.php:69
 msgid "Boost Statistics"
-msgstr ""
+msgstr "სტატისტიკის გაძლიერება"
 
 #: panellib/system.php:70
 msgid "Information about Cacti's performance boost process."
@@ -2037,7 +2037,7 @@ msgstr ""
 
 #: panellib/system.php:141
 msgid "CPU Load: "
-msgstr ""
+msgstr "CPU-ის დატვირთვა: "
 
 #: panellib/system.php:165
 msgid "This function is not implemented on Windows platforms"
@@ -2057,7 +2057,7 @@ msgstr ""
 
 #: panellib/system.php:219
 msgid "Poller Type:"
-msgstr ""
+msgstr "გამომთხოვის ტიპი:"
 
 #: panellib/system.php:219
 msgid "Spine"
@@ -2077,15 +2077,15 @@ msgstr ""
 
 #: panellib/system.php:238
 msgid "Running on: "
-msgstr ""
+msgstr "გაშვებულია რაზე: "
 
 #: panellib/system.php:316
 msgid "Overrun Warning"
-msgstr ""
+msgstr "გადაცილების გაფრთხილება"
 
 #: panellib/system.php:319
 msgid "Timed Out"
-msgstr ""
+msgstr "მოლოდინის ვადა ამოიწურა"
 
 #: panellib/system.php:322
 msgid "Other"
@@ -2093,7 +2093,7 @@ msgstr "სხვა"
 
 #: panellib/system.php:325
 msgid "Never Run"
-msgstr ""
+msgstr "არ გაუშვა"
 
 #: panellib/system.php:346
 #, php-format
@@ -2257,7 +2257,7 @@ msgstr ""
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
-msgstr ""
+msgstr "ქვედა პინგი"
 
 #: panellib/top5.php:38
 msgid "Devices with the worst ping response"
@@ -2265,7 +2265,7 @@ msgstr ""
 
 #: panellib/top5.php:53
 msgid "Bottom Availability"
-msgstr ""
+msgstr "ქვედა ხელმისაწვდომობა"
 
 #: panellib/top5.php:54
 msgid "Devices with the worst availability/reachability"
@@ -2301,7 +2301,7 @@ msgstr "ხელმისაწვდომობა"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
-msgstr ""
+msgstr "გამოთხოვის დრო"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
@@ -2333,11 +2333,11 @@ msgstr ""
 
 #: setup.php:62
 msgid "Intropage Administration"
-msgstr ""
+msgstr "Intropage-ის ადმინისტრირება"
 
 #: setup.php:80
 msgid "System Administration"
-msgstr ""
+msgstr "სისტემის ადმინისტრაცია"
 
 #: setup.php:83
 msgid "Timespan Last 1 Hour"
@@ -2360,9 +2360,9 @@ msgstr ""
 #: setup.php:109 setup.php:110 setup.php:111 setup.php:112
 #, php-format
 msgid "%d Hours"
-msgstr ""
+msgstr "%d საათი"
 
 #: setup.php:113
 #, php-format
 msgid "%d Day"
-msgstr ""
+msgstr "%d დღე"
