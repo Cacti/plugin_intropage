@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-07-04 04:26+0000\n"
+"PO-Revision-Date: 2025-07-04 18:03+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
@@ -528,7 +528,7 @@ msgstr "15 წუთი"
 
 #: include/variables.php:76
 msgid "1 hour"
-msgstr ""
+msgstr "1 საათი"
 
 #: include/variables.php:77
 msgid "4 hours"
@@ -929,7 +929,7 @@ msgstr ""
 
 #: panellib/analyze.php:53
 msgid "Analyze Logs"
-msgstr ""
+msgstr "ჟურნალის ანალიზი"
 
 #: panellib/analyze.php:54
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
@@ -1516,7 +1516,7 @@ msgstr ""
 
 #: panellib/graphs.php:53 panellib/graphs.php:603
 msgid "Device Templates"
-msgstr ""
+msgstr "მოწყობილობის შაბლონები"
 
 #: panellib/graphs.php:54
 msgid "Graph of Device Templates"
@@ -1582,7 +1582,7 @@ msgstr "ჩართ"
 
 #: panellib/graphs.php:635
 msgid "Template Name"
-msgstr ""
+msgstr "საბლონის სახელი"
 
 #: panellib/graphs.php:636
 msgid "Total Devices"
@@ -1957,7 +1957,7 @@ msgstr "ელემენტები"
 
 #: panellib/syslog.php:31
 msgid "Syslog Panels"
-msgstr ""
+msgstr "სისტემური ჟურნალის პანელები"
 
 #: panellib/syslog.php:32
 msgid "Panels that provide information about Cacti's Syslog message processing."
@@ -2177,7 +2177,7 @@ msgstr "ჩავარდნილი გამოთხოვები"
 
 #: panellib/thold.php:31
 msgid "Threshold Panels"
-msgstr ""
+msgstr "ზღვრის პანელები"
 
 #: panellib/thold.php:32
 msgid "Panels that provide information about Cacti Thresholding Plugin."
