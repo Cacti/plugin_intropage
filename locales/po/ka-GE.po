@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-07-04 18:03+0000\n"
+"PO-Revision-Date: 2025-07-06 03:26+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
-"Language: ka\n"
+"Language: ka-GE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,7 +54,7 @@ msgstr ""
 
 #: display.php:261
 msgid "Remove current dashboard"
-msgstr ""
+msgstr "მიმდინარე სამუშაო დაფის წაშლა"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
@@ -84,7 +84,7 @@ msgstr ""
 
 #: display.php:313 display.php:315
 msgid "Refresh Every Hour"
-msgstr ""
+msgstr "განახლება საათში ერთხელ"
 
 #: display.php:321 display.php:323
 msgid "Important period - disabled"
@@ -108,7 +108,7 @@ msgstr ""
 
 #: display.php:363 display.php:366
 msgid "Sort by Severity"
-msgstr ""
+msgstr "დალაგება სიმძიმის მიხედვით"
 
 #: display.php:364 display.php:367
 msgid "Sort by User Preference"
@@ -280,7 +280,7 @@ msgstr ""
 
 #: include/functions.php:626
 msgid "Not Found"
-msgstr ""
+msgstr "აღმოჩენილი არაა"
 
 #: include/functions.php:653
 msgid "Panel not found"
@@ -356,7 +356,7 @@ msgstr "დეტალების ჩვენება"
 
 #: include/functions.php:1376
 msgid "Loading data ..."
-msgstr ""
+msgstr "მონაცემების ჩატვირთვა..."
 
 #: include/functions.php:1387
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
@@ -364,7 +364,7 @@ msgstr ""
 
 #: include/functions.php:1410
 msgid "Panels ..."
-msgstr ""
+msgstr "პანელები ..."
 
 #: include/functions.php:1433 include/functions.php:1441
 #, php-format
@@ -402,7 +402,7 @@ msgstr ""
 
 #: include/functions.php:1694
 msgid "Trend Update Frequencies"
-msgstr ""
+msgstr "განახლების სიხშირე"
 
 #: include/settings.php:32 include/settings.php:93
 msgid "Intropage"
@@ -419,7 +419,7 @@ msgstr "[ჩასწორება: %s]"
 
 #: include/settings.php:155
 msgid "System Level Panels"
-msgstr ""
+msgstr "სისტემის დონის პაელები"
 
 #: include/settings.php:156
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
@@ -427,7 +427,7 @@ msgstr ""
 
 #: include/settings.php:159
 msgid "User Level Panels"
-msgstr ""
+msgstr "მომხმარებლის დონის პანელები"
 
 #: include/settings.php:160
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
@@ -467,7 +467,7 @@ msgstr ""
 
 #: include/variables.php:46
 msgid "For wide screen"
-msgstr ""
+msgstr "ფართო ეკრანისთვის"
 
 #: include/variables.php:51
 msgid "Automatically Uninstall Panels"
@@ -479,7 +479,7 @@ msgstr ""
 
 #: include/variables.php:57
 msgid "Automatic Page Refresh"
-msgstr ""
+msgstr "გვერდის ავტომატური განახლება"
 
 #: include/variables.php:58
 msgid "How often"
@@ -500,7 +500,7 @@ msgstr "ყოველ წუთს"
 #: include/variables.php:64 include/variables.php:161 include/variables.php:179
 #, php-format
 msgid "Every %d Minutes"
-msgstr ""
+msgstr "ყოველ %d წუთში"
 
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
@@ -686,7 +686,7 @@ msgstr ""
 
 #: include/variables.php:199
 msgid "Never warn"
-msgstr ""
+msgstr "არასდროს გამაფრთხილო"
 
 #: include/variables.php:200
 msgid "When maintenance starts"
@@ -695,7 +695,7 @@ msgstr ""
 #: include/variables.php:201
 #, php-format
 msgid "%d Day Before"
-msgstr ""
+msgstr "%d დღის წინ"
 
 #: include/variables.php:202 include/variables.php:203
 #, php-format
@@ -708,7 +708,7 @@ msgstr ""
 
 #: include/variables.php:209
 msgid "bytes or bits"
-msgstr ""
+msgstr "ბაიტი ან ბიტი"
 
 #: include/variables.php:212
 msgid "Bytes"
@@ -855,7 +855,7 @@ msgstr ""
 #: include/variables.php:351 include/variables.php:352
 #: include/variables.php:353
 msgid "Yellow / Red"
-msgstr ""
+msgstr "ყვითელი / წითელი"
 
 #: panellib/alert.php:31 panellib/syslog.php:172
 msgid "Alerts"
@@ -1033,7 +1033,7 @@ msgstr "ჟურნალის ზომა: "
 
 #: panellib/analyze.php:316
 msgid "Last log lines:"
-msgstr ""
+msgstr "ჟურნალის ბოლო ხაზები:"
 
 #: panellib/analyze.php:423
 msgid "Skipping DB tables checks. Database too large"
@@ -1083,7 +1083,7 @@ msgstr ""
 #: panellib/analyze.php:524
 #, php-format
 msgid "Damaged tables: %s"
-msgstr ""
+msgstr "დაზიანებული ცხრილები: %s"
 
 #: panellib/analyze.php:527
 msgid "You should run check and repair table commands"
@@ -1097,7 +1097,7 @@ msgstr ""
 #: panellib/analyze.php:532
 #, php-format
 msgid "All tables: %s"
-msgstr ""
+msgstr "ყველა ცხრილი: %s"
 
 #: panellib/analyze.php:571 panellib/analyze.php:678 panellib/analyze.php:711
 #: panellib/analyze.php:763 panellib/analyze.php:792 panellib/analyze.php:823
@@ -1128,7 +1128,7 @@ msgstr ""
 
 #: panellib/analyze.php:620 panellib/analyze.php:1454
 msgid "Reindex last run"
-msgstr ""
+msgstr "ბოლო გაშვების თავიდან დაინდექსება"
 
 #: panellib/analyze.php:621 panellib/analyze.php:1455
 msgid "RRD Checker last run"
@@ -1225,7 +1225,7 @@ msgstr ""
 
 #: panellib/analyze.php:1031
 msgid "DS null records "
-msgstr ""
+msgstr "DS ნულოვანი ჩანაწერები "
 
 #: panellib/analyze.php:1090
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
@@ -1369,7 +1369,7 @@ msgstr ""
 
 #: panellib/busiest.php:85 panellib/busiest.php:1366
 msgid "Busiest uptime"
-msgstr ""
+msgstr "ყველაზე დაკავებული ჩართულობის დრო"
 
 #: panellib/busiest.php:86
 msgid "Devices with the highest uptime"
@@ -1524,7 +1524,7 @@ msgstr ""
 
 #: panellib/graphs.php:69
 msgid "Devices by Status"
-msgstr ""
+msgstr "მოწყობილობები სტატუსის მიხედვით"
 
 #: panellib/graphs.php:70
 msgid "Graph of Devices by Status (up,down,...)"
@@ -1628,7 +1628,7 @@ msgstr "ყველა: %s"
 #: panellib/mactrack.php:98
 #, php-format
 msgid "Up: %s"
-msgstr ""
+msgstr "ჩართ: %s"
 
 #: panellib/mactrack.php:99
 #, php-format
@@ -1815,7 +1815,7 @@ msgstr "სტატუსი (ჩართ/გამორთ): "
 
 #: panellib/misc.php:335
 msgid "Last log messages"
-msgstr ""
+msgstr "ბოლო ჟურნალის შეტყობინებები"
 
 #: panellib/misc.php:337 panellib/misc.php:408
 msgid "URL"
@@ -1840,11 +1840,11 @@ msgstr ""
 
 #: panellib/misc.php:487
 msgid "Status (ok/error): "
-msgstr ""
+msgstr "სტატუსი (კარგადაა/შეცდომა): "
 
 #: panellib/misc.php:498
 msgid "Last log records"
-msgstr ""
+msgstr "ბოლო ჟურნალის ჩანაწერები"
 
 #: panellib/misc.php:500 panellib/misc.php:572
 msgid "Test"
@@ -2029,7 +2029,7 @@ msgstr ""
 
 #: panellib/system.php:101
 msgid "CPU Utilization"
-msgstr ""
+msgstr "CPU-ის გამოყენება"
 
 #: panellib/system.php:102
 msgid "CPU utilization Graph (only Linux)."
@@ -2065,7 +2065,7 @@ msgstr "ხერხემალი"
 
 #: panellib/system.php:221
 msgid "Spine version: "
-msgstr ""
+msgstr "Spine-ის ვერსია: "
 
 #: panellib/system.php:224
 msgid "You are using incorrect spine version!"
@@ -2128,7 +2128,7 @@ msgstr ""
 #: panellib/system.php:380
 #, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr ""
+msgstr "საშ ბაიტი/ჩანაწერი: %s"
 
 #: panellib/system.php:390
 #, php-format
@@ -2149,7 +2149,7 @@ msgstr "დატრიგერებულია"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
-msgstr ""
+msgstr "გამომთხოვის გამავალი ელემენტები"
 
 #: panellib/system.php:606
 msgid "48 Hour Extreme Polling"
@@ -2165,7 +2165,7 @@ msgstr ""
 
 #: panellib/system.php:690
 msgid "Max Thold Triggered"
-msgstr ""
+msgstr "მაქს. ზღვარი დატრიგერებულია"
 
 #: panellib/system.php:719
 msgid "Poller Output Item"
@@ -2225,7 +2225,7 @@ msgstr "დარღვეულია"
 
 #: panellib/thold.php:325
 msgid "Threshold Details"
-msgstr ""
+msgstr "ზღვრის დეტალები"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
@@ -2273,7 +2273,7 @@ msgstr ""
 
 #: panellib/top5.php:69
 msgid "Bottom Polling Time"
-msgstr ""
+msgstr "ქვედა გამოთხოვის დრო"
 
 #: panellib/top5.php:70
 msgid "Devices with the worst polling time"
@@ -2281,7 +2281,7 @@ msgstr ""
 
 #: panellib/top5.php:85
 msgid "Bottom Polling Ratio"
-msgstr ""
+msgstr "ქვედა გამოთხოვის ფარდობა"
 
 #: panellib/top5.php:86
 msgid "Devices with the worst polling ratio"
