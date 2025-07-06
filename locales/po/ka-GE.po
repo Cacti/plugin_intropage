@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-07-06 03:26+0000\n"
+"PO-Revision-Date: 2025-07-07 04:26+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
@@ -164,11 +164,11 @@ msgstr ""
 
 #: display.php:443
 msgid "No shared dashboards"
-msgstr ""
+msgstr "გაზიარებული სამუშაო დაფების გარეშე"
 
 #: display.php:460
 msgid "Welcome to Intropage!"
-msgstr ""
+msgstr "მოგესალმებათ შესავლის გვერდი!"
 
 #: display.php:464
 msgid "You can Add Dashboard Panels in more ways:"
@@ -381,7 +381,7 @@ msgstr ""
 
 #: include/functions.php:1507
 msgid "Add to Dashboard"
-msgstr ""
+msgstr "დამატება სამუშაო დაფაზე"
 
 #: include/functions.php:1563
 msgid "Dashboard Names"
@@ -487,7 +487,7 @@ msgstr "რამდენად ხშირად"
 
 #: include/variables.php:61
 msgid "Automatically by poller"
-msgstr ""
+msgstr "ავტომატურად გამომთხოვის მიერ"
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
@@ -700,11 +700,11 @@ msgstr "%d დღის წინ"
 #: include/variables.php:202 include/variables.php:203
 #, php-format
 msgid "%d Days Before"
-msgstr ""
+msgstr "%d დღით ადრე"
 
 #: include/variables.php:208
 msgid "Network stats in"
-msgstr ""
+msgstr "ქსელის სტატისტიკა სად"
 
 #: include/variables.php:209
 msgid "bytes or bits"
@@ -901,7 +901,7 @@ msgstr ""
 #: panellib/top5.php:178 panellib/top5.php:258 panellib/top5.php:338
 #: panellib/top5.php:423
 msgid "Waiting for data"
-msgstr ""
+msgstr "მონაცემების მოლოდინი"
 
 #: panellib/alert.php:188 panellib/alert.php:329 panellib/busiest.php:596
 #: panellib/busiest.php:1428 panellib/graphs.php:144 panellib/graphs.php:237
@@ -945,7 +945,7 @@ msgstr ""
 
 #: panellib/analyze.php:85
 msgid "Analyze Cacti Objects"
-msgstr ""
+msgstr "Cacti-ის ობიექტების ანალიზი"
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
@@ -983,7 +983,7 @@ msgstr ""
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
 msgid "Success - Token"
-msgstr ""
+msgstr "წარმატება - ტოკენი"
 
 #: panellib/analyze.php:215
 #, php-format
@@ -1069,7 +1069,7 @@ msgstr ""
 #: panellib/analyze.php:518
 #, php-format
 msgid "Aborted clients/connects: %s"
-msgstr ""
+msgstr "უარყოფილი კლიენტები/დაკავშირებები: %s"
 
 #: panellib/analyze.php:519
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
@@ -1078,7 +1078,7 @@ msgstr ""
 #: panellib/analyze.php:523
 #, php-format
 msgid "Connection errors: %s"
-msgstr ""
+msgstr "კავშირის შეცდომები: %s"
 
 #: panellib/analyze.php:524
 #, php-format
@@ -1092,7 +1092,7 @@ msgstr ""
 #: panellib/analyze.php:531
 #, php-format
 msgid "Memory tables: %s"
-msgstr ""
+msgstr "მეხსიერების ცხრილები: %s"
 
 #: panellib/analyze.php:532
 #, php-format
@@ -1201,7 +1201,7 @@ msgstr ""
 #: panellib/analyze.php:955 panellib/analyze.php:1862
 #, php-format
 msgid "Found %s problems"
-msgstr ""
+msgstr "აღმოჩენილია %s პრობლემა"
 
 #: panellib/analyze.php:961 panellib/analyze.php:1864
 msgid "Everything OK"
@@ -1249,7 +1249,7 @@ msgstr "ჟურნალის ზომა"
 
 #: panellib/analyze.php:1254
 msgid "Analyze Logins Detail"
-msgstr ""
+msgstr "შესვლის დეტალების ანალიზი"
 
 #: panellib/analyze.php:1272
 msgid "User"
@@ -1266,7 +1266,7 @@ msgstr ""
 
 #: panellib/analyze.php:1325
 msgid "No Active Users"
-msgstr ""
+msgstr "აქტიური მომხმარებლების გარეშე"
 
 #: panellib/analyze.php:1331
 msgid "View Full User Log"
@@ -1393,7 +1393,7 @@ msgstr ""
 
 #: panellib/busiest.php:133
 msgid "Busiest Interface utilization"
-msgstr ""
+msgstr "ყველაზე დაკავებული ინტერფეისი"
 
 #: panellib/busiest.php:134
 msgid "Ports with the highest interface utilization"
@@ -1492,11 +1492,11 @@ msgstr ""
 
 #: panellib/busiest.php:1440 panellib/busiest.php:1582
 msgid "Busiest traffic (in+out)"
-msgstr ""
+msgstr "ყველაზე დაკავებული (შემომ+გამავ)"
 
 #: panellib/busiest.php:1703
 msgid "Busiest interface utilization"
-msgstr ""
+msgstr "ყველაზე დაკავებული ინტერფეისი"
 
 #: panellib/graphs.php:31
 msgid "Graphical Panels"
@@ -1712,7 +1712,7 @@ msgstr ""
 
 #: panellib/misc.php:53
 msgid "Maint Plugin Details"
-msgstr ""
+msgstr "დამატების Maint დეტალები"
 
 #: panellib/misc.php:54
 msgid "Maint Plugin details on upcoming schedules"
@@ -1728,11 +1728,11 @@ msgstr ""
 
 #: panellib/misc.php:85
 msgid "Servcheck plugin Details"
-msgstr ""
+msgstr "სერვისის შემოწმების დამატების დეტალები"
 
 #: panellib/misc.php:86
 msgid "Plugin ServCheck Details"
-msgstr ""
+msgstr "სერვისის შემოწმების დამატების დეტალები"
 
 #: panellib/misc.php:117
 msgid "No NTP server configured"
@@ -1884,7 +1884,7 @@ msgstr ""
 
 #: panellib/poller.php:69
 msgid "Poller Output Items"
-msgstr ""
+msgstr "გამომთხოვის გამოტანილი ელემენტები"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -1949,7 +1949,7 @@ msgstr "მაქს დრო"
 
 #: panellib/poller.php:446
 msgid "Poller output items "
-msgstr ""
+msgstr "გამომთხოვის გამოტანილი ელემენტები "
 
 #: panellib/poller.php:447
 msgid "Items"
@@ -2169,7 +2169,7 @@ msgstr "მაქს. ზღვარი დატრიგერებული
 
 #: panellib/system.php:719
 msgid "Poller Output Item"
-msgstr ""
+msgstr "გამომთხოვის გამოტანის ელემენტი"
 
 #: panellib/system.php:747
 msgid "Failed Polls"
@@ -2185,7 +2185,7 @@ msgstr ""
 
 #: panellib/thold.php:37 panellib/thold.php:434
 msgid "Last Threshold Events"
-msgstr ""
+msgstr "ბოლო ზღვრის მოვლენები"
 
 #: panellib/thold.php:38
 msgid "Threshold Plugin Latest Events"
@@ -2205,7 +2205,7 @@ msgstr ""
 
 #: panellib/thold.php:179 panellib/thold.php:506
 msgid "Without events yet"
-msgstr ""
+msgstr "ჯერ მოვლენები არაა"
 
 #: panellib/thold.php:196
 msgid "Thresholds: "
@@ -2249,7 +2249,7 @@ msgstr "აღწერა"
 
 #: panellib/top5.php:31
 msgid "Top/Bottom 5 Panels"
-msgstr ""
+msgstr "ზედა/ქვედა 5 პანელი"
 
 #: panellib/top5.php:32
 msgid "Panels that provide information trending information about Cacti data collection."
