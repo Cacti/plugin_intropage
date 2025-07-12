@@ -1031,12 +1031,30 @@ function analyse_tree_host_graph($panel, $user_id) {
 			$total_errors++;
 		} elseif ($sett['processes']/$cpu_cores < 0.4 || $sett['threads']/$cpu_cores < 0.4) {
 			$color = 'yellow';
-			$text = 'You are using less than half of CPU cores. For better performance, consider increasing poller processes or threads. ';
+			$text = 'You are using less than half of CPU cores. For better performance, consider increasing poller processes or threads.';
 		}
 	}
 
 	$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Server CPU cores / processes / threads: %s / %s / %s', $cpu_cores, $sett['processes'], $sett['threads'], 'intropage');
 	$panel['data'] .= display_tooltip($text) . '<br/>';
+
+	$notify = db_fetch_cell ("SELECT COUNT(*) FROM settings WHERE name = 'notify_admin' AND value='on'");
+	$admin_email = db_fetch_cell("SELECT email_address FROM user_auth WHERE username = 'admin' LIMIT 1");
+	$text = 'Administrator can be notified by email about problems. It is therefore necessary to set the admin account email address and at the same time enable notifications in Settings - Mail/Reporting/DNS';
+
+	if (!$notify && $admin_email == '') {
+		$panel['data'] .= '<span class="inpa_sq color_red"></span>' . __('Notify admin is disabled and admin email is not set', 'intropage');
+		$panel['data'] .= display_tooltip($text) . '<br/>';
+		$total_errors++;
+		$panel['alarm'] = 'red';
+	} elseif ($notify || $admin_email == '') {
+		$panel['data'] .= '<span class="inpa_sq color_yellow"></span>' . __('Notify admin is disabled or admin email is not set', 'intropage');
+		$panel['data'] .= display_tooltip($text) . '<br/>';
+		$total_errors++;
+		if ($panel['alarm'] == 'green') {
+			$panel['alarm'] = 'yellow';
+		}
+	}
 
 	if ($total_errors > 0) {
 		$panel['data'] = '<table class="cactiTable">
@@ -2048,6 +2066,23 @@ function analyse_tree_host_graph_detail() {
 	$panel['detail'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Server CPU cores / processes / threads: %s / %s / %s', $cpu_cores, $sett['processes'], $sett['threads'], 'intropage');
 	$panel['detail'] .= display_tooltip($text) . '<br/>';
 
+	$notify = db_fetch_cell ("SELECT COUNT(*) FROM settings WHERE name = 'notify_admin' AND value='on'");
+	$admin_email = db_fetch_cell("SELECT email_address FROM user_auth WHERE username = 'admin' LIMIT 1");
+	$text = 'Administrator can be notified by email about problems. It is therefore necessary to set the admin account email address and at the same time enable notifications in Settings - Mail/Reporting/DNS';
+
+	if (!$notify && $admin_email == '') {
+		$panel['detail'] .= '<span class="inpa_sq color_red"></span>' . __('Notify admin is disabled and admin email is not set', 'intropage');
+		$panel['detail'] .= display_tooltip($text) . '<br/>';
+		$total_errors++;
+		$panel['alarm'] = 'red';
+	} elseif ($notify || $admin_email == '') {
+		$panel['detail'] .= '<span class="inpa_sq color_yellow"></span>' . __('Notify admin is disabled or admin email is not set', 'intropage');
+		$panel['detail'] .= display_tooltip($text) . '<br/>';
+		$total_errors++;
+		if ($panel['alarm'] == 'green') {
+			$panel['alarm'] = 'yellow';
+		}
+	}
 
 	if ($total_errors > 0) {
 		$panel['detail'] = '<span class="txt_big">' . __('Found %s problems', $total_errors, 'intropage') . '</span><br/>' . $panel['detail'];
