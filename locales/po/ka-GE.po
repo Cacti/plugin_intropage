@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-07-07 12:51+0000\n"
+"PO-Revision-Date: 2025-08-19 17:26+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
@@ -50,7 +50,7 @@ msgstr "ქმედებები ..."
 
 #: display.php:257
 msgid "Add New Dashboard"
-msgstr ""
+msgstr "ახალი სამუშაო დაფის დამატება"
 
 #: display.php:261
 msgid "Remove current dashboard"
@@ -284,7 +284,7 @@ msgstr "აღმოჩენილი არაა"
 
 #: include/functions.php:653
 msgid "Panel not found"
-msgstr ""
+msgstr "პანელი აღმოჩენილი არაა"
 
 #: include/functions.php:686
 msgid "Details Function does not exist."
@@ -292,7 +292,7 @@ msgstr ""
 
 #: include/functions.php:693
 msgid "Panel Not Found"
-msgstr ""
+msgstr "პანელი აღმოჩენილი არაა"
 
 #: include/functions.php:774 include/functions.php:794
 #, php-format
@@ -826,7 +826,7 @@ msgstr ""
 
 #: include/variables.php:335
 msgid "Alarm Red/Yellow Ping"
-msgstr ""
+msgstr "განგაშის წითელი/ყვითელი პინგი"
 
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
@@ -953,7 +953,7 @@ msgstr ""
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
-msgstr ""
+msgstr "DS-ის სტატისტიკის ანალიზი"
 
 #: panellib/analyze.php:102
 msgid "Analyze data source stats"
