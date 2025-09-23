@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-08-19 17:26+0000\n"
+"PO-Revision-Date: 2025-09-23 05:09+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
@@ -690,7 +690,7 @@ msgstr "არასდროს გამაფრთხილო"
 
 #: include/variables.php:200
 msgid "When maintenance starts"
-msgstr ""
+msgstr "როდის იწყება რემონტი"
 
 #: include/variables.php:201
 #, php-format
@@ -1021,7 +1021,7 @@ msgstr ""
 
 #: panellib/analyze.php:302 panellib/analyze.php:1141
 msgid "Log Size: OK"
-msgstr ""
+msgstr "ჟურნალის ზომა: OK"
 
 #: panellib/analyze.php:306 panellib/analyze.php:1145
 msgid "Log Size: Quite Large"
@@ -2157,7 +2157,7 @@ msgstr ""
 
 #: panellib/system.php:629
 msgid "Long Running Poller"
-msgstr ""
+msgstr "დიდხანს გაშვებული გამომთხოვი"
 
 #: panellib/system.php:660
 msgid "Max Device Down"
