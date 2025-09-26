@@ -196,6 +196,10 @@ function intropage_actions() {
 
 	if (isset($values[1])) {
 		$value = trim($values[1]);
+		if (is_numeric($value)) {
+			// 0 causes issue
+			$value = (int)$value;
+		}
 	} else {
 		$value = '';
 	}
@@ -319,7 +323,7 @@ function intropage_actions() {
 
 			raise_message('dashboard_added', __('Dashboard has been added', 'intropage'), MESSAGE_LEVEL_INFO);
 
-			header('Location: ' . html_escape("$recirectPage?header=false"));
+			header('Location: ' . html_escape("$redirectPage?header=false"));
 
 			exit;
 		}
@@ -398,7 +402,7 @@ function intropage_actions() {
 						AND dashboard_id = ?',
 						array ($priority, $_SESSION['sess_user_id'], $b, get_filter_request_var('dashboard_id')));
 
-  					$priority--;
+					$priority--;
 				}
 			}
 		}
@@ -407,8 +411,13 @@ function intropage_actions() {
 
 		break;
 	case 'refresh':
-		if (filter_var($value, FILTER_VALIDATE_INT)) {
+		if (is_int($value)) {
 			set_user_setting('intropage_autorefresh', $value);
+		}
+
+	case 'lines':
+		if (is_int($value)) {
+			set_user_setting('intropage_number_of_lines', $value);
 		}
 
 		break;
@@ -749,6 +758,13 @@ function get_allowed_panels($user_id = 0) {
 function intropage_reload_panel() {
 	global $panels, $config;
 
+	$login_opts = get_login_opts();
+	if ($login_opts == 4) {
+		$redirectPage = $config['url_path'] . 'plugins/intropage/intropage.php';
+	} else {
+		$redirectPage = 'index.php';
+	}
+
 	$panel_id = get_filter_request_var('panel_id');
 
 	$forced_update = get_nfilter_request_var('force') == 'true' ? true:false;
@@ -805,7 +821,7 @@ function intropage_reload_panel() {
 		print '<div class="panel_header color_' . $alarm . '">';
 		print '<div class="panel_name">' . $name . '</div>';
 
-		printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", $config['url_path'] . "plugins/intropage/intropage.php?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id']);
+		printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "$redirectPage/?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id']);
 
 		if (isset($panels[$panel['panel_id']]['force']) && $panels[$panel['panel_id']]['force'] === true) {
 			printf("<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>", $panel_id, __esc('Reload Panel', 'intropage'));
