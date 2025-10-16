@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-09-18 16:07+0000\n"
+"PO-Revision-Date: 2025-10-16 18:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -537,7 +537,7 @@ msgstr "Från nu till dåtid. Påverkar radfärgning, äldre händelser kommer i
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "Inaktiverad"
+msgstr "Inaktiverat"
 
 #: include/variables.php:75
 msgid "15 minutes"
@@ -1145,7 +1145,7 @@ msgstr "Alla tabeller: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "N/A"
+msgstr "Inte tillgänglig"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -2382,7 +2382,7 @@ msgstr "Intropage Administration"
 
 #: setup.php:80
 msgid "System Administration"
-msgstr "Systemadministratör"
+msgstr "Systemadministration"
 
 #: setup.php:83
 msgid "Timespan Last 1 Hour"
