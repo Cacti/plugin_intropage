@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-10-20 20:28+0000\n"
+"PO-Revision-Date: 2025-10-22 13:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -1587,7 +1587,7 @@ msgstr "Nere"
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
 msgid "Recovering"
-msgstr "Påväg upp"
+msgstr "Återhämtar"
 
 #: panellib/graphs.php:423
 msgid "Data Type"
@@ -1910,7 +1910,7 @@ msgstr "Paneler som ger information om Cactis röstningsprocess."
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "Poller Information"
+msgstr "Pollarerinformation"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
@@ -2093,7 +2093,7 @@ msgstr "Genomsnittlig CPU"
 
 #: panellib/system.php:178
 msgid "Max CPU"
-msgstr "Maximalt antal processorer"
+msgstr "Max CPU"
 
 #: panellib/system.php:208
 msgid "Cacti Version: "
@@ -2181,7 +2181,7 @@ msgstr "Senaste körningens varaktighet/uppdateringar: %s / %s"
 
 #: panellib/system.php:448
 msgid "Poller Run"
-msgstr "Poller Run"
+msgstr "Pollare kör"
 
 #: panellib/system.php:474
 msgid "Down Hosts"
@@ -2261,7 +2261,7 @@ msgstr "Thold-tillägget är inte installerat och körs inte"
 
 #: panellib/thold.php:238
 msgid "Trigerred"
-msgstr "Trigerred"
+msgstr "Utlöst"
 
 #: panellib/thold.php:266 panellib/thold.php:369 panellib/thold.php:385
 msgid "Breached"
@@ -2374,7 +2374,7 @@ msgstr "Topp 20 värdar med sämst opinionssiffror"
 
 #: setup.php:61
 msgid "Intropage Viewer"
-msgstr "Intropage Viewer"
+msgstr "Visare för introsida"
 
 #: setup.php:62
 msgid "Intropage Administration"
