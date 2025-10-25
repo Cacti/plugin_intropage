@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-10-22 13:18+0000\n"
+"PO-Revision-Date: 2025-10-25 06:04+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -30,8 +30,8 @@ msgstr "En eller flera paneler togs bort på grund av otillräcklig behörighet.
 #: display.php:179
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
-"Du kan inaktivera raderna ovan i <b>Konfigurera &gt; Inställningar &gt; "
-"Allmänt &gt; Dölj Cacti Dashboard</b> och använda hela sidan för Intropage "
+"Du kan inaktivera raderna ovan i <b>Konfigurera > Inställningar > Allmänt > "
+"Dölj Cacti-kontrollpanel</b> och använda hela sidan för Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -44,7 +44,7 @@ msgstr "Dölj röda/gula/gröna fyrkantiga aviseringar"
 
 #: display.php:245
 msgid "Disable panel move/enable copy text from panel"
-msgstr "Inaktivera panelrörelse/Inaktivera kopiering av text från panel"
+msgstr "Inaktivera panelens flytta/aktivera kopiering av text från panel"
 
 #: display.php:254
 msgid "Actions ..."
@@ -52,11 +52,11 @@ msgstr "Åtgärder ..."
 
 #: display.php:257
 msgid "Add New Dashboard"
-msgstr "Lägg till ny instrumentpanel"
+msgstr "Lägg till ny kontrollpanel"
 
 #: display.php:261
 msgid "Remove current dashboard"
-msgstr "Ta bort nuvarande instrumentpanel"
+msgstr "Ta bort aktuell kontrollpanel"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
@@ -70,15 +70,15 @@ msgstr "Uppdatera nu"
 
 #: display.php:289 display.php:291
 msgid "Refresh Disabled"
-msgstr "Uppdatering avaktiverad"
+msgstr "Uppdatering inaktiverad"
 
 #: display.php:295 display.php:297
 msgid "Refresh by Poller"
-msgstr "Uppdatering av Poller"
+msgstr "Uppdatering av pollare"
 
 #: display.php:301 display.php:303
 msgid "Refresh Every 1 Minute"
-msgstr "Uppdatering var 1:a minut"
+msgstr "Uppdatera varje minut"
 
 #: display.php:307 display.php:309
 msgid "Refresh Every 5 Minutes"
@@ -106,7 +106,7 @@ msgstr "Viktig period - 4 timmar"
 
 #: display.php:345 display.php:347
 msgid "Important period - 1 day"
-msgstr "Viktig mens - 1 dag"
+msgstr "Viktig period - 1 dygn"
 
 #: display.php:363 display.php:366
 msgid "Sort by Severity"
@@ -118,15 +118,15 @@ msgstr "Sortera efter användarens preferenser"
 
 #: display.php:373
 msgid "Reload Panel Definitions"
-msgstr "Definitioner för omladdningspanel"
+msgstr "Uppdatera paneldefinitioner"
 
 #: display.php:379
 msgid "Set Intropage as Default Login Page"
-msgstr "Ange Intropage som standardinloggningssida"
+msgstr "Ställ in Intropage som standardinloggningssida"
 
 #: display.php:381
 msgid "Set graph as Default Login Page"
-msgstr "Ange graf som standardinloggningssida"
+msgstr "Ställ in diagram som standardinloggningssida"
 
 #: display.php:387
 msgid "Display Intropage in Console"
@@ -138,11 +138,11 @@ msgstr "Visa Intropage i fliken som standardsida"
 
 #: display.php:396 display.php:399
 msgid "Less panels on a line"
-msgstr "Färre paneler på en linje"
+msgstr "Färre paneler på en rad"
 
 #: display.php:397 display.php:400
 msgid "More panels on a line"
-msgstr "Fler paneler på en linje"
+msgstr "Fler paneler på en rad"
 
 #: display.php:413
 msgid "Cancel sharing"
@@ -150,23 +150,25 @@ msgstr "Avbryt delning"
 
 #: display.php:416
 msgid "Share this dashboard"
-msgstr "Dela denna instrumentpanel"
+msgstr "Dela denna kontrollpanel"
 
 #: display.php:418
 msgid "Share empty dashboard not allowed"
-msgstr "Dela tom instrumentpanel tillåts inte"
+msgstr "Delning av tom kontrollpanel tillåts inte"
 
 #: display.php:437
 msgid "Use shared dashboard"
-msgstr "Använd gemensam instrumentpanel"
+msgstr "Använd delad kontrollpanel"
 
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
-msgstr "Det går inte att använda delad instrumentpanel – gränsen för instrumentpanelen har nåtts."
+msgstr ""
+"Det går inte att använda delad kontrollpanel – gränsen för kontrollpanelen "
+"har nåtts."
 
 #: display.php:443
 msgid "No shared dashboards"
-msgstr "Inga gemensamma instrumentpaneler"
+msgstr "Inga delade kontrollpaneler"
 
 #: display.php:460
 msgid "Welcome to Intropage!"
@@ -174,7 +176,7 @@ msgstr "Välkommen till Intropage!"
 
 #: display.php:464
 msgid "You can Add Dashboard Panels in more ways:"
-msgstr "Du kan lägga till Dashboard Panels på flera olika sätt:"
+msgstr "Du kan lägga till kontrollpaneler på flera olika sätt:"
 
 #: display.php:466
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
@@ -182,7 +184,7 @@ msgstr "Välj förberedda paneler från menyn \"Paneler\". Panelen kan vara nedt
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
-msgstr "Lägg till valfri kaktusgraf, använd ikonen"
+msgstr "Lägg till valfritt Cacti-diagram, använd ikonen"
 
 #: display.php:468
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
@@ -190,19 +192,23 @@ msgstr "Du kan skapa egna paneler. Mer information finns i filen <cacti_install_
 
 #: display.php:473
 msgid "You can share dashboards to other users:"
-msgstr "Du kan dela instrumentpaneler med andra användare:"
+msgstr "Du kan dela kontrollpaneler med andra användare:"
 
 #: display.php:475
 msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
-msgstr "använd alternativet \"Dela den här instrumentpanelen\" i menyn Åtgärder – Alla användare kan använda den som mall."
+msgstr ""
+"använd alternativet \"Dela denna kontrollpanel\" i menyn Åtgärder – Alla "
+"användare kan använda den som mall."
 
 #: display.php:480
 msgid "You can use shared dashboard using the Actions menu:"
-msgstr "Du kan använda delad instrumentpanel med hjälp av menyn Åtgärder:"
+msgstr "Du kan använda delad kontrollpanel med hjälp av menyn Åtgärder:"
 
 #: display.php:482
 msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
-msgstr "Använd \"Använd delad instrumentpanel (användar-/instrumentpanelsnamn) – Den förbereder samma instrumentpanel som delad men med dina behörigheter."
+msgstr ""
+"Använd \"Använd delad kontrollpanel (användare/kontrollpanelsnamn) – Den "
+"förbereder samma instrumentpanel som delad men med dina behörigheter."
 
 #: display.php:487
 msgid "Customization:"
@@ -226,7 +232,7 @@ msgstr "Detaljer om panelen"
 
 #: display.php:586
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "Inaktivera panelrörelse/Inaktivera kopiering av text från panel"
+msgstr "Inaktivera panelens flytta/aktivera kopiering av text från panel"
 
 #: display.php:587
 msgid "Enable panel move/Disable copy text from panel"
@@ -342,7 +348,7 @@ msgstr "%s dygn"
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
 msgstr ""
 "Inga data närvarande.  Antingen tvinga fram uppdatering eller vänta på nästa "
-"Cacti Polling-cykel."
+"Cacti-pollningscykel."
 
 #: include/functions.php:885
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
