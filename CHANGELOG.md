@@ -18,6 +18,7 @@
 * feature#331: Add variable panel height
 * feature#335: Add CPU cores/processes information
 * feature#341: Add info about disabled notify admin 
+* feature#350: Add poller host errors (Cacti 1.3+)
 
 --- 4.0.4 ---
 
