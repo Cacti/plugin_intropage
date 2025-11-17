@@ -113,7 +113,7 @@ function register_system() {
 			'refresh'      => 900,
 			'trefresh'     => read_config_option('poller_interval'),
 			'force'        => true,
-			'width'        => 'quarter-panel',
+			'width'        => 'half-panel',
 			'height'       => 'normal',
 			'height_fixed' => false,
 			'priority'     => 78,
@@ -157,6 +157,7 @@ function cpuload_trend() {
 			array($load[0]));
 	}
 }
+
 
 //------------------------------------ cpuload -----------------------------------------------------
 function cpuload($panel, $user_id, $timespan = 0) {
@@ -582,6 +583,17 @@ function extrem_trend() {
 					VALUES (?, ?, ?)',
 					array('failed_polls', $count, $user['id']));
 			}
+
+			if (db_table_exists('host_errors')) {
+				$count = db_fetch_cell("SELECT SUM(errors)
+					FROM host_errors
+					$q_host_cond");
+
+				db_execute_prepared('INSERT INTO plugin_intropage_trends
+					(name, value, user_id)
+					VALUES (?, ?, ?)',
+					array('host_errors', $count, $user['id']));
+			}
 		}
 	}
 }
@@ -615,13 +627,13 @@ function extrem($panel, $user_id) {
 
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
-	                        if (($row['xvalue']/$poller_interval) > 0.9) {
-        	                        $color = 'red';
-                	        } elseif (($row['xvalue']/$poller_interval) > 0.7) {
-                        	        $color = 'yellow';
-                        	} else {
-                        		$color = 'green';
-                        	}
+				if (($row['xvalue']/$poller_interval) > 0.9) {
+					$color = 'red';
+				} elseif (($row['xvalue']/$poller_interval) > 0.7) {
+					$color = 'yellow';
+				} else {
+					$color = 'green';
+				}
 
 				$fin_data[$key]['poller'] = $row['date'] . ' ' . $row['xvalue'] . 's <span class="inpa_sq color_' . $color . '"></span>';
 			}
@@ -718,6 +730,32 @@ function extrem($panel, $user_id) {
 		if (cacti_sizeof($data)) {
 			foreach ($data as $key => $row) {
 				$fin_data[$key]['failed'] = $row['date'] . ' ' . $row['value'];
+			}
+		}
+	}
+
+	// host poller errros
+	if (db_table_exists('host_errors')) {
+		if ($console_access) {
+			$columns['herrors'] = __('Host errors', 'intropage');
+
+			$data = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+				FROM plugin_intropage_trends
+				WHERE name = 'host_errors'
+				AND cur_timestamp > date_sub(now(), interval 1 day)
+				ORDER BY value desc, cur_timestamp
+				LIMIT $lines");
+
+			if (cacti_sizeof($data)) {
+				foreach ($data as $key => $row) {
+					if ($row['value'] > 0) {
+						$color = 'red';
+					} else {
+						$color = 'green';
+					}
+
+					$fin_data[$key]['herrors'] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_' . $color . '"></span>';
+				}
 			}
 		}
 	}
