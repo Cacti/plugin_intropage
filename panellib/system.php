@@ -947,6 +947,35 @@ function extrem_detail() {
 				$i++;
 			}
 		}
+		
+		// host poller errros
+		if (db_table_exists('host_errors')) {
+
+			$data = db_fetch_assoc("SELECT date_format(time(cur_timestamp),'%H:%i') AS `date`, value
+				FROM plugin_intropage_trends
+				WHERE name = 'host_errors'
+				AND cur_timestamp > date_sub(now(), interval 1 day)
+				ORDER BY value desc, cur_timestamp
+				LIMIT $lines");
+
+			if (cacti_sizeof($data)) {
+				$f++;
+
+				$header[] = __('Host errors', 'intropage');
+
+				$i = 0;
+				foreach ($data as $row) {
+					if ($row['value'] > 0) {
+						$color = 'red';
+					} else {
+						$color = 'green';
+					}
+
+					$trows[$i][$j] = $row['date'] . ' ' . $row['value'] . ' <span class="inpa_sq color_' . $color .'"></span>';
+					$i++;
+				}
+			}
+		}
 	}
 
 	foreach($header as $h) {
