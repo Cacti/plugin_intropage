@@ -486,16 +486,15 @@ function servcheck($panel, $user_id) {
 		$all  = db_fetch_cell('SELECT COUNT(*) FROM plugin_servcheck_test');
 		$disa = db_fetch_cell("SELECT COUNT(*) FROM plugin_servcheck_test WHERE enabled != 'on'");
 
-		$column = db_fetch_cell("SELECT COLUMN_NAME FROM information_schema.columns
+		$dncolumn = db_fetch_cell("SELECT COLUMN_NAME FROM information_schema.columns
 			WHERE TABLE_NAME = 'plugin_servcheck_test' AND COLUMN_NAME = 'display_name'");
 
 		// servcheck < 0.3 uses another name
-		if ($column) {
-			$tests = db_fetch_assoc('SELECT display_name as name, type, id, lastcheck FROM plugin_servcheck_test');
-		} else {
-			$tests = db_fetch_assoc('SELECT name, type, id, lastcheck FROM plugin_servcheck_test');
+		if (!$dncolumn) {
+			$dncolumn = 'name';
 		}
-			
+		$tests = db_fetch_assoc('SELECT ' . $dncolumn . ' as name, type, id, lastcheck FROM plugin_servcheck_test');
+
 		foreach ($tests as $test) {
 			$state = db_fetch_cell_prepared('SELECT result FROM plugin_servcheck_log
 				WHERE test_id = ? ORDER BY lastcheck DESC LIMIT 1',
@@ -515,21 +514,12 @@ function servcheck($panel, $user_id) {
 		$panel['data'] .= __('Number of checks (all/disabled): ', 'intropage') . $all . ' / ' . $disa . '<br/>';
 		$panel['data'] .= __('Status (ok/error): ', 'intropage') . $ok . ' / ' . $ko . '<br/><br/>';
 
-		if ($column) {
-			$logs = db_fetch_assoc ('SELECT psl.lastcheck as `lastcheck`, result, error, display_name as name, type,
-				UNIX_TIMESTAMP(psl.lastcheck) AS secs
-				FROM plugin_servcheck_log AS psl
-				LEFT JOIN plugin_servcheck_test AS pst
-				ON psl.test_id = pst.id 
-				LIMIT ' . ($lines - 4));
-		} else {
-			$logs = db_fetch_assoc ('SELECT psl.lastcheck as `lastcheck`, result, error, name, type,
-				UNIX_TIMESTAMP(psl.lastcheck) AS secs
-				FROM plugin_servcheck_log AS psl
-				LEFT JOIN plugin_servcheck_test AS pst
-				ON psl.test_id = pst.id 
-				LIMIT ' . ($lines - 4));
-		}
+		$logs = db_fetch_assoc ('SELECT psl.lastcheck as `lastcheck`, result, error, '. $dncolumn . ' as name, type,
+			UNIX_TIMESTAMP(psl.lastcheck) AS secs
+			FROM plugin_servcheck_log AS psl
+			LEFT JOIN plugin_servcheck_test AS pst
+			ON psl.test_id = pst.id 
+			LIMIT ' . ($lines - 4));
 
 		if (cacti_sizeof($logs) > 0) {
 
@@ -596,7 +586,14 @@ function servcheck_detail() {
 		'detail' => '',
 	);
 
-	$logs = db_fetch_assoc ('SELECT psl.lastcheck as `lastcheck`, result, error, display_name, type,
+	$dncolumn = db_fetch_cell("SELECT COLUMN_NAME FROM information_schema.columns
+	WHERE TABLE_NAME = 'plugin_servcheck_test' AND COLUMN_NAME = 'display_name'");
+	// servcheck < 0.3 uses another name
+	if (!$dncolumn) {
+		$dncolumn = 'name';
+	}
+
+	$logs = db_fetch_assoc ('SELECT psl.lastcheck as `lastcheck`, result, error, ' . $dncolumn . ', type,
 		UNIX_TIMESTAMP(psl.lastcheck) AS secs
 		FROM plugin_servcheck_log AS psl
 		LEFT JOIN plugin_servcheck_test AS pst
@@ -619,7 +616,7 @@ function servcheck_detail() {
 
 		$panel['detail'] .= '<tr>';
 		$panel['detail'] .= '<td class="left">' . $log['lastcheck'] . '</td>';
-		$panel['detail'] .= '<td class="left">' . $log['display_name'] . '</td>';
+		$panel['detail'] .= '<td class="left">' . $log[$dncolumn] . '</td>';
 		$panel['detail'] .= '<td class="left">' . $log['type'] . '</td>';
 
 		if ($log['result'] == 'ok') {
