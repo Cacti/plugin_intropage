@@ -277,6 +277,8 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 					name = 'poller' AND
 					value LIKE ?",
 					array($xpoller['id'] . ':%'));
+				$avg_label = [];
+				$avg_data  = [];
 			}
 
 			foreach ($rows as $row) {
