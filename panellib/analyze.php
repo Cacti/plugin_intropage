@@ -588,7 +588,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same IP and port: %s', $sql_count, 'intropage') . '</td></tr>';
 		}
 	}
 
@@ -620,8 +620,8 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage');
-			$panel['data'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage');
+			$panel['data'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '</td></tr>';
 		}
 	}
 
@@ -642,14 +642,14 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 			if ($last < (time() - 86400*7)) {
 				$color = 'yellow';
-				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('%s: %s', $value, date($date_fmt, $last), 'intropage');
-				$panel['data'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '<br/>';
+				$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('%s: %s', $value, date($date_fmt, $last), 'intropage');
+				$panel['data'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '</td></tr>';
 				unset($last);
 			}
 		} else {
 			$color = 'red';
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('%s: not run yet', $value, 'intropage');
-			$panel['data'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('%s: not run yet', $value, 'intropage');
+			$panel['data'] .= display_tooltip(__('It is recommended to run this tool at least occasionally', 'intropage')) . '</td></tr>';
 		}
 	}
 
@@ -696,7 +696,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 			$panel['alarm'] = 'yellow';
 		}
 
-		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '<br/>';
+		$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Orphaned Data Sources: %s', $sql_count, 'intropage') . '</td></tr>';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
@@ -727,7 +727,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 			$panel['alarm'] = 'yellow';
 		}
 
-		$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '<br/>';
+		$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '</td></tr>';
 
 		$total_errors += $sql_count;
 	}
@@ -779,7 +779,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '</td></tr>';
 
 			$total_errors += $sql_count;
 		}
@@ -810,7 +810,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Devices with the same description: %s', $sql_count, 'intropage') . '</td></tr>';
 		}
 	}
 
@@ -839,7 +839,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices in more than one tree: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Devices in more than one tree: %s', $sql_count, 'intropage') . '</td></tr>';
 		}
 	}
 
@@ -869,7 +869,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices without graphs: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Devices without graphs: %s', $sql_count, 'intropage') . '</td></tr>';
 		}
 	}
 
@@ -898,7 +898,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices without tree: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Devices without tree: %s', $sql_count, 'intropage') . '</td></tr>';
 		}
 	}
 
@@ -926,7 +926,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 				$panel['alarm'] = 'yellow';
 			}
 
-			$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Devices with default public/private community: %s', $sql_count, 'intropage') . '<br/>';
+			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Devices with default public/private community: %s', $sql_count, 'intropage') . '</td></tr>';
 		}
 	}
 
@@ -958,7 +958,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 		$panel['alarm'] = 'red';
 
-		$panel['data'] .= '<span class="inpa_sq color_red"></span>' . __('Graph items/template items issue: %s', $sql_count, 'intropage') . '<br/>';
+		$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_red"></span>' . __('Graph items/template items issue: %s', $sql_count, 'intropage') . '</td></tr>';
 	}
 
 	if (api_plugin_is_enabled('monitor')) {
@@ -983,7 +983,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 					$panel['alarm'] = 'yellow';
 				}
 
-				$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '<br/>';
+				$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Plugin Monitor - Unmonitored hosts: %s', $sql_count, 'intropage') . '</td></tr>';
 			}
 		}
 	}
@@ -1035,21 +1035,21 @@ function analyse_tree_host_graph($panel, $user_id) {
 		}
 	}
 
-	$panel['data'] .= '<span class="inpa_sq color_' . $color . '"></span>' . __('Server CPU cores / processes / threads: %s / %s / %s', $cpu_cores, $sett['processes'], $sett['threads'], 'intropage');
-	$panel['data'] .= display_tooltip($text) . '<br/>';
+	$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Server CPU cores / processes / threads: %s / %s / %s', $cpu_cores, $sett['processes'], $sett['threads'], 'intropage');
+	$panel['data'] .= display_tooltip($text) . '</td></tr>';
 
 	$notify = db_fetch_cell ("SELECT COUNT(*) FROM settings WHERE name = 'notify_admin' AND value='on'");
 	$admin_email = db_fetch_cell("SELECT email_address FROM user_auth WHERE username = 'admin' LIMIT 1");
 	$text = 'Administrator can be notified by email about problems. It is therefore necessary to set the admin account email address and at the same time enable notifications in Settings - Mail/Reporting/DNS';
 
 	if (!$notify && $admin_email == '') {
-		$panel['data'] .= '<span class="inpa_sq color_red"></span>' . __('Notify admin is disabled and admin email is not set', 'intropage');
-		$panel['data'] .= display_tooltip($text) . '<br/>';
+		$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_red"></span>' . __('Notify admin is disabled and admin email is not set', 'intropage');
+		$panel['data'] .= display_tooltip($text) . '</td></tr>';
 		$total_errors++;
 		$panel['alarm'] = 'red';
 	} elseif ($notify || $admin_email == '') {
-		$panel['data'] .= '<span class="inpa_sq color_yellow"></span>' . __('Notify admin is disabled or admin email is not set', 'intropage');
-		$panel['data'] .= display_tooltip($text) . '<br/>';
+		$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_yellow"></span>' . __('Notify admin is disabled or admin email is not set', 'intropage');
+		$panel['data'] .= display_tooltip($text) . '</td></tr>';
 		$total_errors++;
 		if ($panel['alarm'] == 'green') {
 			$panel['alarm'] = 'yellow';
@@ -1058,15 +1058,13 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 	if ($total_errors > 0) {
 		$panel['data'] = '<table class="cactiTable">
-			<tr>
-				<td><span class="txt_med">' . __('Found %s problems', $total_errors, 'intropage') . '</span><br/><br/>' . $panel['data'] . '</td>
-			</tr>
+			<tr><td><span class="txt_med">' . __('Found %s problems', $total_errors, 'intropage') . '</span></td></tr>
+			' . $panel['data'] . '
 		</table>';
 	} else {
 		$panel['data'] = '<table class="cactiTable">
-			<tr>
-				<td><span class="txt_med">' . __('Everything OK', 'intropage') . '</span><br/>' . $panel['data'] . '</td>
-			</tr>
+			<tr><td><span class="txt_med">' . __('Everything OK', 'intropage') . '</span></td></tr>
+			' . $panel['data'] . '
 		</table>';;
 	}
 
