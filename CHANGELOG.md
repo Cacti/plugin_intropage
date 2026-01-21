@@ -19,6 +19,7 @@
 * feature#335: Add CPU cores/processes information
 * feature#341: Add info about disabled notify admin 
 * feature#350: Add poller host errors (Cacti 1.3+)
+* Add CI workflow and Custom Agents
 
 --- 4.0.4 ---
 
