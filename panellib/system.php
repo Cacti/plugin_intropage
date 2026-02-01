@@ -825,13 +825,13 @@ function extrem_detail() {
 
 			$i = 0;
 			foreach ($data as $row) {
-	                        if (($row['xvalue']/$poller_interval) > 0.9) {
-        	                        $color = 'red';
-                	        } elseif (($row['xvalue']/$poller_interval) > 0.7) {
-                        	        $color = 'yellow';
-                        	} else {
-                        		$color = 'green';
-                        	}
+				if (($row['xvalue']/$poller_interval) > 0.9) {
+					$color = 'red';
+				} elseif (($row['xvalue']/$poller_interval) > 0.7) {
+					$color = 'yellow';
+				} else {
+					$color = 'green';
+				}
 
 				$trows[$i][$j] = $row['date'] . ' ' . $row['xvalue'] . 's <span class="inpa_sq color_' . $color . '"></span>';
 				$i++;
