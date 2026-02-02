@@ -184,7 +184,7 @@ jobs:
     - name: Run intropage poller
       run: |
         cd ${{ github.workspace }}/cacti
-        sudo php cli/poller_intropage.php
+        sudo php plugins/intropage/poller_intropage.php
         
     
     - name: View Cacti Logs
