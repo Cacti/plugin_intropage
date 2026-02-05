@@ -42,8 +42,8 @@ jobs:
         os: [ubuntu-latest]
     
     services:
-      mysql:
-        image: mariadb:11.8
+      mariadb:
+        image: mariadb:10.6
         env:
           MYSQL_ROOT_PASSWORD: cactiroot
           MYSQL_DATABASE: cacti
