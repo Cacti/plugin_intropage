@@ -182,6 +182,9 @@ jobs:
       run: sed '/plugins/d' -i .phpstan.neon
       working-directory: ${{ github.workspace }}/cacti
 
+    - name: Mark composer scripts executable
+      run: sudo chmod +x ${{ github.workspace }}/cacti/include/vendor/bin/*
+
     - name: Run Linter on base code
       run: composer run-script lint ${{ github.workspace }}/cacti/plugins/intropage
       working-directory: ${{ github.workspace }}/cacti
