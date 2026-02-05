@@ -27,13 +27,13 @@
 function register_syslog() {
 	global $registry;
 
-	$registry['syslog'] = array(
+	$registry['syslog'] = [
 		'name'        => __('Syslog Panels', 'intropage'),
 		'description' => __('Panels that provide information about Cacti\'s Syslog message processing.', 'intropage')
-	);
+	];
 
-	$panels = array(
-		'plugin_syslog' => array(
+	$panels = [
+		'plugin_syslog' => [
 			'name'         => __('Syslog Details', 'intropage'),
 			'description'  => __('Various Syslog Plugin statistics.', 'intropage'),
 			'class'        => 'syslog',
@@ -50,8 +50,8 @@ function register_syslog() {
 			'update_func'  => 'plugin_syslog',
 			'details_func' => false,
 			'trends_func'  => 'plugin_syslog_trend'
-		),
-		'plugin_syslog_devices' => array(
+		],
+		'plugin_syslog_devices' => [
 			'name'         => __('Syslog Top Devices', 'intropage'),
 			'description'  => __('Devices with the most messages', 'intropage'),
 			'class'        => 'syslog',
@@ -68,8 +68,8 @@ function register_syslog() {
 			'update_func'  => 'plugin_syslog_devices',
 			'details_func' => 'plugin_syslog_devices_detail',
 			'trends_func'  => false
-		),
-		'plugin_syslog_levels' => array(
+		],
+		'plugin_syslog_levels' => [
 			'name'         => __('Syslog Message levels', 'intropage'),
 			'description'  => __('Messages by level.', 'intropage'),
 			'class'        => 'syslog',
@@ -86,8 +86,8 @@ function register_syslog() {
 			'update_func'  => 'plugin_syslog_levels',
 			'details_func' => false,
 			'trends_func'  => 'plugin_syslog_levels_trend'
-		),
-	);
+		],
+	];
 
 	return $panels;
 }
@@ -96,7 +96,6 @@ function plugin_syslog_trend() {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-
 		include_once($config['base_path'] . '/plugins/syslog/database.php');
 
 		// Grab row counts from the information schema, it's faster
@@ -111,22 +110,22 @@ function plugin_syslog_trend() {
 		$alert_rows = syslog_db_fetch_cell_prepared('SELECT IFNULL(SUM(count),0)
 			FROM syslog_logs WHERE
 			logtime > DATE_SUB(NOW(), INTERVAL ? SECOND)',
-			array(read_config_option('poller_interval')));
+			[read_config_option('poller_interval')]);
 
 		db_execute_prepared('INSERT INTO plugin_intropage_trends
 			(name, value, user_id)
 			VALUES ("syslog_incoming", ?, 0)',
-			array($i_rows));
+			[$i_rows]);
 
 		db_execute_prepared('INSERT INTO plugin_intropage_trends
 			(name, value, user_id)
 			VALUES ("syslog_total", ?, 0)',
-			array ($total_rows));
+			[$total_rows]);
 
 		db_execute_prepared('INSERT INTO plugin_intropage_trends
 			(name, value, user_id)
 			VALUES ("syslog_alert", ?, 0)',
-			array ($alert_rows));
+			[$alert_rows]);
 	}
 }
 
@@ -134,10 +133,9 @@ function plugin_syslog_levels_trend() {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-
 		include_once($config['base_path'] . '/plugins/syslog/database.php');
 
-		$data = array(
+		$data = [
 			0 => 0,
 			1 => 0,
 			2 => 0,
@@ -146,7 +144,7 @@ function plugin_syslog_levels_trend() {
 			5 => 0,
 			6 => 0,
 			7 => 0,
-		);
+		];
 
 		$pi = read_config_option('poller_interval');
 
@@ -155,10 +153,10 @@ function plugin_syslog_levels_trend() {
 			FROM syslog
 			WHERE logtime BETWEEN (DATE_SUB(NOW(),INTERVAL ? SECOND)) AND (DATE_SUB(NOW(),INTERVAL ? SECOND))
 			GROUP BY priority_id',
-			array(2*$pi, $pi));
+			[2 * $pi, $pi]);
 
 		foreach ($levels as $level) {
-			$l = (int) $level['priority_id'];
+			$l        = (int) $level['priority_id'];
 			$data[$l] = $level['mcount'];
 		}
 
@@ -167,27 +165,27 @@ function plugin_syslog_levels_trend() {
 		db_execute_prepared('INSERT INTO plugin_intropage_trends
 			(name, value, user_id)
 			VALUES ("syslog_levels", ?, 0)',
-			array($insert));
+			[$insert]);
 	}
 }
 
 function plugin_syslog($panel, $user_id, $timespan = 0) {
 	$panel['alarm'] = 'green';
 
-	$graph = array (
-		'line' => array(
+	$graph =  [
+		'line' => [
 			'title'  => $panel['name'],
 			'title1' => '',
-			'label1' => array(),
-			'data1'  => array(),
+			'label1' => [],
+			'data1'  => [],
 			'title2' => '',
-			'label2' => array(),
-			'data2'  => array(),
+			'label2' => [],
+			'data2'  => [],
 			'title3' => '',
-			'label3' => array(),
-			'data3'  => array(),
-		),
-	);
+			'label3' => [],
+			'data3'  => [],
+		],
+	];
 
 	if ($timespan == 0) {
 		if (isset($_SESSION['sess_user_id'])) {
@@ -201,7 +199,7 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
 			FROM plugin_intropage_panel_data
 			WHERE id = ?',
-			array($panel['id']));
+			[$panel['id']]);
 	} else {
 		$refresh = $panel['refresh'];
 	}
@@ -219,14 +217,14 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 			AND name IN ('syslog_total', 'syslog_incoming', 'syslog_alert')
 			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV $seconds
 			ORDER BY cur_timestamp ASC",
-			array($timespan));
+			[$timespan]);
 
 		if (cacti_sizeof($rows)) {
 			// Converted syslog_total to total new rows;
-			$nrows      = array();
+			$nrows      = [];
 			$last_total = 0;
 
-			foreach($rows as $index => $row) {
+			foreach ($rows as $index => $row) {
 				$total  = $row['syslog_total'];
 				$totali = $row['syslog_incoming'];
 
@@ -254,9 +252,9 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 			$graph['line']['title3'] = __('Stored', 'intropage');
 
 			$graph['line']['unit1']['title']  = __('Messages', 'intropage');
-			$graph['line']['unit1']['series'] = array('data1', 'data2', 'data3');
+			$graph['line']['unit1']['series'] = ['data1', 'data2', 'data3'];
 
-			foreach($nrows as $row) {
+			foreach ($nrows as $row) {
 				$graph['line']['label1'][] = $row['date'];
 				$graph['line']['data1'][]  = $row['syslog_incoming'];
 				$graph['line']['data2'][]  = $row['syslog_alert'];
@@ -282,35 +280,35 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 	$panel['alarm'] = 'green';
 
-	$graph = array (
-		'bar' => array(
+	$graph =  [
+		'bar' => [
 			'title'  => $panel['name'],
 			'title1' => 'Emergency',
-			'label1' => array(),
-			'data1'  => array(),
+			'label1' => [],
+			'data1'  => [],
 			'title2' => 'Alert',
-			'label2' => array(),
-			'data2'  => array(),
+			'label2' => [],
+			'data2'  => [],
 			'title3' => 'Critical',
-			'label3' => array(),
-			'data3'  => array(),
+			'label3' => [],
+			'data3'  => [],
 			'title4' => 'Error',
-			'label4' => array(),
-			'data4'  => array(),
+			'label4' => [],
+			'data4'  => [],
 			'title5' => 'Warning',
-			'label5' => array(),
-			'data5'  => array(),
+			'label5' => [],
+			'data5'  => [],
 			'title6' => 'Notice',
-			'label6' => array(),
-			'data6'  => array(),
+			'label6' => [],
+			'data6'  => [],
 			'title7' => 'Info',
-			'label7' => array(),
-			'data7'  => array(),
+			'label7' => [],
+			'data7'  => [],
 			'title8' => 'Debug',
-			'label8' => array(),
-			'data8'  => array(),
-		),
-	);
+			'label8' => [],
+			'data8'  => [],
+		],
+	];
 
 	if ($timespan == 0) {
 		if (isset($_SESSION['sess_user_id'])) {
@@ -324,7 +322,7 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 		$refresh = db_fetch_cell_prepared('SELECT refresh_interval
 			FROM plugin_intropage_panel_data
 			WHERE id = ?',
-			array($panel['id']));
+			[$panel['id']]);
 	} else {
 		$refresh = $panel['refresh'];
 	}
@@ -338,24 +336,23 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 			AND name = 'syslog_levels'
 			GROUP BY UNIX_TIMESTAMP(cur_timestamp) DIV ?
 			ORDER BY cur_timestamp ASC",
-			array($timespan, $seconds));
+			[$timespan, $seconds]);
 
 		if (cacti_sizeof($rows)) {
-
-			foreach($rows as $row) {
+			foreach ($rows as $row) {
 				$all = explode('&', $row['value']);
 
 				$graph['bar']['label1'][] = $row['cur_timestamp'];
 
 				foreach ($all as $item) {
-					list($lev, $count) = explode('=', $item);
+					[$lev, $count] = explode('=', $item);
 					$lev++;
 					$graph['bar']["data$lev"][]  = $count;
 				}
 			}
 
 			$graph['bar']['unit1']['title']  = __('Messages', 'intropage');
-			$graph['bar']['unit1']['series'] = array('data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data8');
+			$graph['bar']['unit1']['series'] = ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data8'];
 
 			$panel['data'] = intropage_prepare_graph($graph, $user_id);
 		} else {
@@ -368,7 +365,6 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 
 	save_panel_result($panel, $user_id);
 }
-
 
 function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	global $config;
@@ -384,7 +380,6 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-
 		include_once($config['base_path'] . '/plugins/syslog/database.php');
 
 		$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -397,20 +392,19 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 			GROUP BY s.host_id
 			ORDER BY hcount DESC
 			LIMIT ' . $lines,
-			array($timespan));
+			[$timespan]);
 
 		if (cacti_sizeof($devices)) {
-
 			$panel['data'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . __('Device', 'intropage')    . '</th>' .
+					'<th class="left">' . __('Device', 'intropage') . '</th>' .
 					'<th class="right">' . __('Messages', read_config_option('poller_interval'), 'intropage') . '</th>' .
 				'</tr>';
 
 			$i = 0;
-			foreach ($devices as $device) {
 
-				$row = '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape(substr($device['ip'],0,37)) . '</td>';
+			foreach ($devices as $device) {
+				$row = '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left">' . html_escape(substr($device['ip'],0,37)) . '</td>';
 				$row .= "<td class='right'>" . $device['hcount'] . '</td>';
 
 				$panel['data'] .= $row;
@@ -427,15 +421,14 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
-
 function plugin_syslog_devices_detail() {
 	global $config, $console_access;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Top 20 Hosts with the most messages', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	if (isset($_SESSION['sess_user_id'])) {
 		$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
@@ -444,7 +437,6 @@ function plugin_syslog_devices_detail() {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-
 		include_once($config['base_path'] . '/plugins/syslog/database.php');
 
 		$devices = syslog_db_fetch_assoc_prepared('SELECT sh.host AS ip ,count(*) AS hcount
@@ -455,21 +447,20 @@ function plugin_syslog_devices_detail() {
 			GROUP BY s.host_id
 			ORDER BY hcount desc
 			LIMIT 20',
-			array($timespan));
+			[$timespan]);
 
 		if (cacti_sizeof($devices)) {
-
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<td class="left">'  . __('Device', 'intropage')    . '</td>' .
+					'<td class="left">' . __('Device', 'intropage') . '</td>' .
 					'<td class="right">' . __('Messages', 'intropage') . '</td>' .
 				'</tr>';
 
 			$i = 0;
-			foreach ($devices as $device) {
 
-				$row = '<tr class="' . ($i % 2 == 0 ? 'odd':'even') . '"><td class="rleft">' . html_escape($device['ip']) . '</td>';
-				$row .= '<td class="right">' . $device['hcount']. '</td></tr>';
+			foreach ($devices as $device) {
+				$row = '<tr class="' . ($i % 2 == 0 ? 'odd' : 'even') . '"><td class="rleft">' . html_escape($device['ip']) . '</td>';
+				$row .= '<td class="right">' . $device['hcount'] . '</td></tr>';
 
 				$panel['detail'] .= $row;
 				$i++;
@@ -480,8 +471,8 @@ function plugin_syslog_devices_detail() {
 			$panel['detail'] = __('No messages', 'intropage');
 		}
 	} else {
-			$panel['detail'] = __('Syslog plugin is not enabled', 'intropage');
+		$panel['detail'] = __('Syslog plugin is not enabled', 'intropage');
 	}
+
 	return $panel;
 }
-

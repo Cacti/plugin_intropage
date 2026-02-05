@@ -51,11 +51,11 @@ function intropage_initialize_database() {
 		$user_id = $_SESSION['sess_user_id'];
 	}
 
-	$data              = array();
-	$data['columns'][] = array('name' => 'cur_timestamp', 'type' => 'timestamp');
-	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'value', 'type' => 'varchar(250)', 'NULL' => true, 'default' => null);
+	$data              = [];
+	$data['columns'][] = ['name' => 'cur_timestamp', 'type' => 'timestamp'];
+	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(50)', 'NULL' => false, 'default' => '0'];
+	$data['columns'][] = ['name' => 'user_id', 'type' => 'int(11)', 'NULL' => false, 'default' => '0'];
+	$data['columns'][] = ['name' => 'value', 'type' => 'varchar(250)', 'NULL' => true, 'default' => null];
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'Intropage trends';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_trends', $data);
@@ -63,51 +63,51 @@ function intropage_initialize_database() {
 	db_execute('ALTER TABLE plugin_intropage_trends
 		MODIFY COLUMN cur_timestamp TIMESTAMP default current_timestamp ON UPDATE current_timestamp');
 
-	$data              = array();
-	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'level', 'type' => 'tinyint', 'unsigned' => true, 'default' => 0);
-	$data['columns'][] = array('name' => 'class', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'priority', 'type' => 'tinyint', 'unsigned' => true, 'default' => 0);
-	$data['columns'][] = array('name' => 'alarm', 'type' => 'varchar(10)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'requires', 'type' => 'varchar(128)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'update_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'details_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'trends_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => '');
-	$data['columns'][] = array('name' => 'refresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600');
-	$data['columns'][] = array('name' => 'trefresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600');
-	$data['columns'][] = array('name' => 'description', 'type' => 'varchar(200)', 'default' => '', 'NULL' => true);
-	$data['columns'][] = array('name' => 'height', 'type' => "enum('normal','double','triple')", 'default' => 'normal', 'NULL' => false);
+	$data              = [];
+	$data['columns'][] = ['name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'level', 'type' => 'tinyint', 'unsigned' => true, 'default' => 0];
+	$data['columns'][] = ['name' => 'class', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'priority', 'type' => 'tinyint', 'unsigned' => true, 'default' => 0];
+	$data['columns'][] = ['name' => 'alarm', 'type' => 'varchar(10)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'requires', 'type' => 'varchar(128)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'update_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'details_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'trends_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'refresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600'];
+	$data['columns'][] = ['name' => 'trefresh', 'type' => 'int(10)', 'unsigned' => true, 'default' => '3600'];
+	$data['columns'][] = ['name' => 'description', 'type' => 'varchar(200)', 'default' => '', 'NULL' => true];
+	$data['columns'][] = ['name' => 'height', 'type' => "enum('normal','double','triple')", 'default' => 'normal', 'NULL' => false];
 
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'panel_id';
 	$data['comment']   = 'Panels Definitions of panels in panel library';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_definition', $data);
 
-	$data              = array();
-	$data['columns'][] = array('name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => 0);
+	$data              = [];
+	$data['columns'][] = ['name' => 'panel_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'user_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'priority', 'type' => 'int(11)', 'NULL' => false, 'default' => 0];
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'panel_id`, `user_id`, `dashboard_id';
 	$data['comment']   = 'panel x dashboard dependency';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_dashboard', $data);
 
-	$data              = array();
-	$data['columns'][] = array('name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true);
-	$data['columns'][] = array('name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false);
-	$data['columns'][] = array('name' => 'last_trend_update', 'type' => 'timestamp', 'NULL' => false);
-	$data['columns'][] = array('name' => 'data', 'type' => 'text', 'NULL' => true);
-	$data['columns'][] = array('name' => 'priority', 'type' => 'int(3)', 'default' => '30', 'NULL' => false);
-	$data['columns'][] = array('name' => 'alarm', 'type' => "enum('red','green','yellow','grey')", 'default' => 'green', 'NULL' => false);
-	$data['columns'][] = array('name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false);
-	$data['columns'][] = array('name' => 'trend_interval', 'type' => 'int(9)', 'default' => '300', 'NULL' => false);
-	$data['columns'][] = array('name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'fav_graph_timespan', 'type' => 'int(2)', 'default' => '1', 'NULL' => false);
-	$data['columns'][] = array('name' => 'height', 'type' => "enum('normal','double','triple')", 'default' => 'normal', 'NULL' => false);
+	$data              = [];
+	$data['columns'][] = ['name' => 'id', 'type' => 'int(11)', 'NULL' => false, 'auto_increment' => true];
+	$data['columns'][] = ['name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'user_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'last_update', 'type' => 'timestamp', 'default' => 'CURRENT_TIMESTAMP', 'NULL' => false];
+	$data['columns'][] = ['name' => 'last_trend_update', 'type' => 'timestamp', 'NULL' => false];
+	$data['columns'][] = ['name' => 'data', 'type' => 'text', 'NULL' => true];
+	$data['columns'][] = ['name' => 'priority', 'type' => 'int(3)', 'default' => '30', 'NULL' => false];
+	$data['columns'][] = ['name' => 'alarm', 'type' => "enum('red','green','yellow','grey')", 'default' => 'green', 'NULL' => false];
+	$data['columns'][] = ['name' => 'refresh_interval', 'type' => 'int(9)', 'default' => '3600', 'NULL' => false];
+	$data['columns'][] = ['name' => 'trend_interval', 'type' => 'int(9)', 'default' => '300', 'NULL' => false];
+	$data['columns'][] = ['name' => 'fav_graph_id', 'type' => 'int(11)', 'NULL' => true];
+	$data['columns'][] = ['name' => 'fav_graph_timespan', 'type' => 'int(2)', 'default' => '1', 'NULL' => false];
+	$data['columns'][] = ['name' => 'height', 'type' => "enum('normal','double','triple')", 'default' => 'normal', 'NULL' => false];
 
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'id';
@@ -118,40 +118,41 @@ function intropage_initialize_database() {
 
 	update_registered_panels($panels);
 
-	foreach($panels as $panel_id => $panel) {
+	foreach ($panels as $panel_id => $panel) {
 		if ($panel['level'] == 0) {
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
 				(panel_id, user_id, priority, alarm, refresh_interval, trend_interval)
 				VALUES(?, "0", ?, ?, ?, ?)',
-				array($panel_id, $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']));
+				[$panel_id, $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']]);
 		} else {
 			db_execute_prepared('INSERT INTO plugin_intropage_panel_data
 				(panel_id, user_id, priority, alarm, refresh_interval, trend_interval)
 				VALUES(?, ?, ?, ?, ?, ?)',
-				array($panel_id, $user_id, $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']));
+				[$panel_id, $user_id, $panel['priority'], $panel['alarm'], $panel['refresh'], $panel['trefresh']]);
 		}
 	}
 
-	$data              = array();
-	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'permissions', 'type' => 'blob', 'NULL' => false, 'default' => '');
+	$data              = [];
+	$data['columns'][] = ['name' => 'user_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'];
+	$data['columns'][] = ['name' => 'permissions', 'type' => 'blob', 'NULL' => false, 'default' => ''];
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'user_id';
 	$data['comment']   = 'authorization';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_user_auth', $data);
 
-	$data              = array();
-	$data['columns'][] = array('name' => 'user_group_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
-	$data['columns'][] = array('name' => 'permissions', 'type' => 'blob', 'NULL' => false, 'default' => '');
+	$data              = [];
+	$data['columns'][] = ['name' => 'user_group_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'];
+	$data['columns'][] = ['name' => 'permissions', 'type' => 'blob', 'NULL' => false, 'default' => ''];
 	$data['type']      = 'InnoDB';
 	$data['primary']   = 'user_group_id';
 	$data['comment']   = 'authorization';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_user_group_auth', $data);
 
-	$permissions = array();
-	foreach($panels as $panel_id => $panel) {
+	$permissions = [];
+
+	foreach ($panels as $panel_id => $panel) {
 		$permissions[$panel_id] = 'on';
 	}
 
@@ -160,19 +161,18 @@ function intropage_initialize_database() {
 	db_execute_prepared('INSERT INTO plugin_intropage_user_auth
 		(user_id, permissions)
 		VALUES (?, ?)',
-		array($user_id, json_encode($permissions)));
+		[$user_id, json_encode($permissions)]);
 
-	$data              = array();
-	$data['columns'][] = array('name' => 'user_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false);
-	$data['columns'][] = array('name' => 'name', 'type' => 'varchar(30)', 'NULL' => true);
-	$data['columns'][] = array('name' => 'shared', 'type' => 'int(1)', 'NULL' => false, 'default' => 0);
+	$data              = [];
+	$data['columns'][] = ['name' => 'user_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'dashboard_id', 'type' => 'int(11)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(30)', 'NULL' => true];
+	$data['columns'][] = ['name' => 'shared', 'type' => 'int(1)', 'NULL' => false, 'default' => 0];
 	$data['type']      = 'InnoDB';
 	$data['comment']   = 'panel x dashboard name';
 	api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
 
 	db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
-
 }
 
 function intropage_upgrade_database() {
@@ -216,7 +216,7 @@ function intropage_upgrade_database() {
 				$permissions['favourite_graph'] = 'on';
 
 				if (cacti_sizeof($permissions)) {
-					foreach($permissions as $p) {
+					foreach ($permissions as $p) {
 						$user = $p['user_id'];
 						$opts = $p['login_opts'];
 
@@ -224,7 +224,7 @@ function intropage_upgrade_database() {
 						unset($p['login_opts']);
 
 						// Remove panels that are no longer published
-						foreach($p as $panel_id => $data) {
+						foreach ($p as $panel_id => $data) {
 							if (!isset($panels[$panel_id])) {
 								unset($p[$panel_id]);
 							}
@@ -235,13 +235,13 @@ function intropage_upgrade_database() {
 						db_execute_prepared('UPDATE plugin_intropage_user_auth
 							SET permissions = ?
 							WHERE user_id = ?',
-							array($perms, $user));
+							[$perms, $user]);
 					}
 				}
 
 				$columns = db_fetch_assoc('SHOW COLUMNS FROM plugin_intropage_user_auth');
 
-				foreach($columns as $c) {
+				foreach ($columns as $c) {
 					switch($c['Field']) {
 						case 'user_id':
 						case 'login_opts':
@@ -249,6 +249,7 @@ function intropage_upgrade_database() {
 							break;
 						default:
 							db_execute('ALTER TABLE plugin_intropage_user_auth DROP COLUMN ' . $c['Field']);
+
 							break;
 					}
 				}
@@ -302,11 +303,10 @@ function intropage_upgrade_database() {
 		}
 
 		if (cacti_version_compare($oldv, '4.0.4', '<=')) {
-
-			$data              = array();
-			$data['columns'][] = array('name' => 'user_group_id', 'type' => 'int(11)', 'NULL' => false);
-			$data['columns'][] = array('name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0');
-			$data['columns'][] = array('name' => 'permissions', 'type' => 'blob', 'NULL' => false, 'default' => '');
+			$data              = [];
+			$data['columns'][] = ['name' => 'user_group_id', 'type' => 'int(11)', 'NULL' => false];
+			$data['columns'][] = ['name' => 'login_opts', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => '0'];
+			$data['columns'][] = ['name' => 'permissions', 'type' => 'blob', 'NULL' => false, 'default' => ''];
 			$data['type']      = 'InnoDB';
 			$data['primary']   = 'user_group_id';
 			$data['comment']   = 'authorization';
@@ -329,11 +329,11 @@ function intropage_upgrade_database() {
 		db_execute_prepared("UPDATE plugin_config
 			SET version = ?, author = ?, webpage = ?
 			WHERE directory = 'intropage'",
-			array(
+			[
 				$info['version'],
 				$info['author'],
 				$info['homepage']
-			)
+			]
 		);
 
 		if (!db_column_exists('plugin_intropage_panel_dashboard', 'priority')) {
@@ -344,4 +344,3 @@ function intropage_upgrade_database() {
 		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', 1);
 	}
 }
-

@@ -24,19 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
-$dir = dirname(__FILE__);
+$dir = __DIR__;
 chdir($dir);
 
 include('../../include/cli_check.php');
 include_once($config['base_path'] . '/lib/reports.php');
 include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
-/* let PHP run just as long as it has to */
+// let PHP run just as long as it has to
 ini_set('max_execution_time', '0');
 
 error_reporting(E_ALL);
 
-/* record the start time */
+// record the start time
 $poller_start = microtime(true);
 $start_date   = date('Y-m-d H:i:s');
 $force        = false;
@@ -47,53 +47,53 @@ global $config, $database_default, $purged_r, $purged_n;
 
 $run_from_poller = true;
 
-/* process calling arguments */
+// process calling arguments
 $parms = $_SERVER['argv'];
 array_shift($parms);
 
 if (cacti_sizeof($parms)) {
 	$shortopts = 'VvHh';
 
-	$longopts = array(
+	$longopts = [
 		'force',
 		'debug',
 		'version',
 		'help'
-	);
+	];
 
 	$options = getopt($shortopts, $longopts);
 
-	foreach($options as $arg => $value) {
+	foreach ($options as $arg => $value) {
 		switch($arg) {
-		case 'force':
-			$force = true;
+			case 'force':
+				$force = true;
 
-			break;
-		case 'debug':
-			$debug = true;
+				break;
+			case 'debug':
+				$debug = true;
 
-			break;
-		case 'version':
-		case 'V':
-		case 'v':
-			display_version();
-			exit(0);
-		case 'help':
-		case 'H':
-		case 'h':
-			display_help();
-			exit(0);
-		default:
-			print "ERROR: Invalid Argument: ($arg)" . PHP_EOL . PHP_EOL;
-			display_help();
-			exit(1);
+				break;
+			case 'version':
+			case 'V':
+			case 'v':
+				display_version();
+				exit(0);
+			case 'help':
+			case 'H':
+			case 'h':
+				display_help();
+				exit(0);
+			default:
+				print "ERROR: Invalid Argument: ($arg)" . PHP_EOL . PHP_EOL;
+				display_help();
+				exit(1);
 		}
 	}
 }
 
 intropage_debug('Intropage Starting Checks');
 
-/* silently end if the registered process is still running, or process table missing */
+// silently end if the registered process is still running, or process table missing
 if (function_exists('register_process_start')) {
 	if (!register_process_start('intropage', 'master', $config['poller_id'], read_config_option('intropage_timeout'))) {
 		intropage_debug('Another Intropage Process Still Running');
@@ -108,7 +108,7 @@ $stats = intropage_gather_stats();
 
 $poller_end = microtime(true);
 
-$pstats = 'Time:' . round($poller_end-$poller_start, 2) . ', Checks:' . $stats['checks'] . ', Panels:' . $stats['panels'] . ', Trends:' . $stats['trends'];
+$pstats = 'Time:' . round($poller_end - $poller_start, 2) . ', Checks:' . $stats['checks'] . ', Panels:' . $stats['panels'] . ', Trends:' . $stats['trends'];
 
 cacti_log('INTROPAGE STATS: ' . $pstats, false, 'SYSTEM');
 set_config_option('stats_intropage', $pstats);
@@ -136,7 +136,7 @@ function intropage_gather_stats() {
 
 	$logging = read_config_option('log_verbosity', true);
 	$trends  = 0;
-	$pdata = 0;
+	$pdata   = 0;
 	$checks  = 0;
 
 	$panels = initialize_panel_library();
@@ -159,13 +159,12 @@ function intropage_gather_stats() {
 		OR (last_update IS NULL AND level = 0)');
 
 	if (cacti_sizeof($tpanels)) {
+		$done_trends = [];
 
-		$done_trends = array();
+		foreach ($tpanels as $panel) {
+			$start = microtime(true);
 
-		foreach($tpanels as $panel) {
-		$start = microtime(true);
-
-			/* Get trends next */
+			// Get trends next
 			if (isset($panel['trends_func']) && $panel['trends_func'] != '' && is_panel_enabled($panel['panel_id'])) {
 				$function = $panel['trends_func'];
 
@@ -173,9 +172,9 @@ function intropage_gather_stats() {
 					db_execute_prepared('UPDATE plugin_intropage_panel_data
 						SET last_trend_update = NOW()
 						WHERE id = ?',
-						array($panel['id']));
+						[$panel['id']]);
 
-					/* we need run it only once. Example - graph host panel gathers data for all users */
+					// we need run it only once. Example - graph host panel gathers data for all users
 					if (!array_key_exists($panel['panel_id'], $done_trends)) {
 						$function();
 						$trends++;
@@ -188,7 +187,6 @@ function intropage_gather_stats() {
 					}
 
 					intropage_debug(sprintf('gathering trend function:%s, duration:%4.3f', $function, microtime(true) - $start));
-
 				} else {
 					cacti_log('WARNING: Unable to find update function ' . $function . ' for panel ' . $panel['name'], false, 'INTROPAGE');
 				}
@@ -215,7 +213,7 @@ function intropage_gather_stats() {
 			db_execute_prepared('UPDATE plugin_intropage_panel_data
 				SET refresh_interval = ?
 				WHERE id = ?',
-				array($panel['refresh'], $upanel['id']));
+				[$panel['refresh'], $upanel['id']]);
 
 			$upanel['refresh_interval'] = $panel['refresh'];
 		}
@@ -272,7 +270,7 @@ function intropage_gather_stats() {
 		SET cur_timestamp = now()
 		WHERE name = 'ar_poller_finish'");
 
-	return array('checks' => $checks, 'panels' => $pdata, 'trends' => $trends);
+	return ['checks' => $checks, 'panels' => $pdata, 'trends' => $trends];
 }
 
 function intropage_debug($message) {
@@ -306,4 +304,3 @@ function display_help() {
 	print '  --force       - force execution, e.g. for testing' . PHP_EOL;
 	print '  --debug       - debug execution, e.g. for testing' . PHP_EOL . PHP_EOL;
 }
-

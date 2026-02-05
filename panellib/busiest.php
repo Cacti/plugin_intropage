@@ -27,13 +27,13 @@
 function register_busiest() {
 	global $registry;
 
-	$registry['busiest'] = array(
+	$registry['busiest'] = [
 		'name'        => __('The busiest', 'intropage'),
 		'description' => __('Panels that finds the busiest hosts.', 'intropage')
-	);
+	];
 
-	$panels = array(
-		'busiest_cpu' => array(
+	$panels = [
+		'busiest_cpu' => [
 			'name'         => __('Busiest CPU', 'intropage'),
 			'description'  => __('Devices with the busiest CPU (Host MIB)', 'intropage'),
 			'class'        => 'busiest',
@@ -50,8 +50,8 @@ function register_busiest() {
 			'update_func'  => 'busiest_cpu',
 			'details_func' => 'busiest_cpu_detail',
 			'trends_func'  => false
-		),
-		'busiest_load' => array(
+		],
+		'busiest_load' => [
 			'name'         => __('Busiest ucd/net - Load', 'intropage'),
 			'description'  => __('Devices with the highest Load (ucd/net)', 'intropage'),
 			'class'        => 'busiest',
@@ -68,8 +68,8 @@ function register_busiest() {
 			'update_func'  => 'busiest_load',
 			'details_func' => 'busiest_load_detail',
 			'trends_func'  => false
-		),
-		'busiest_hdd' => array(
+		],
+		'busiest_hdd' => [
 			'name'         => __('Busiest Hard Drive Space', 'intropage'),
 			'description'  => __('Devices with the highest Hard Drive Space used (Host MIB)', 'intropage'),
 			'class'        => 'busiest',
@@ -86,8 +86,8 @@ function register_busiest() {
 			'update_func'  => 'busiest_hdd',
 			'details_func' => 'busiest_hdd_detail',
 			'trends_func'  => false
-		),
-		'busiest_uptime' => array(
+		],
+		'busiest_uptime' => [
 			'name'         => __('Busiest uptime', 'intropage'),
 			'description'  => __('Devices with the highest uptime', 'intropage'),
 			'class'        => 'busiest',
@@ -104,8 +104,8 @@ function register_busiest() {
 			'update_func'  => 'busiest_uptime',
 			'details_func' => 'busiest_uptime_detail',
 			'trends_func'  => false
-		),
-		'busiest_traffic' => array(
+		],
+		'busiest_traffic' => [
 			'name'         => __('Busiest Interface in/out traffic', 'intropage'),
 			'description'  => __('Devices with the highest in/out traffic (Interface)', 'intropage'),
 			'class'        => 'busiest',
@@ -122,8 +122,8 @@ function register_busiest() {
 			'update_func'  => 'busiest_traffic',
 			'details_func' => 'busiest_traffic_detail',
 			'trends_func'  => false
-		),
-		'busiest_interface_error' => array(
+		],
+		'busiest_interface_error' => [
 			'name'         => __('Busiest Interface error', 'intropage'),
 			'description'  => __('Devices with the highest errors/discards (Interface)', 'intropage'),
 			'class'        => 'busiest',
@@ -140,8 +140,8 @@ function register_busiest() {
 			'update_func'  => 'busiest_interface_error',
 			'details_func' => 'busiest_interface_error_detail',
 			'trends_func'  => false
-		),
-		'busiest_interface_utilization' => array(
+		],
+		'busiest_interface_utilization' => [
 			'name'         => __('Busiest Interface utilization', 'intropage'),
 			'description'  => __('Ports with the highest interface utilization', 'intropage'),
 			'class'        => 'busiest',
@@ -158,13 +158,13 @@ function register_busiest() {
 			'update_func'  => 'busiest_interface_util',
 			'details_func' => 'busiest_interface_util_detail',
 			'trends_func'  => false
-		),
-	);
+		],
+	];
 
 	return $panels;
 }
 
-//------------------------------------ busiest cpu -----------------------------------------------------
+// ------------------------------------ busiest cpu -----------------------------------------------------
 function busiest_cpu($panel, $user_id) {
 	global $config;
 
@@ -178,12 +178,13 @@ function busiest_cpu($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['data'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		save_panel_result($panel, $user_id);
+
 		return true;
 	}
 
@@ -191,10 +192,10 @@ function busiest_cpu($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -217,17 +218,17 @@ function busiest_cpu($panel, $user_id) {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			ORDER BY dsh.average DESC
-			LIMIT " . $lines;
+			LIMIT ' . $lines;
 
-		$avg = db_fetch_cell('SELECT AVG(average)' . $query);
+		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -241,7 +242,7 @@ function busiest_cpu($panel, $user_id) {
 					ON gti.task_item_id = dtr.id
 					WHERE dtr.local_data_id = ?
 					LIMIT 1',
-					array($row['ldid']));
+					[$row['ldid']]);
 
 				$color = 'green';
 
@@ -251,7 +252,7 @@ function busiest_cpu($panel, $user_id) {
 					$color = 'yellow';
 				}
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xpeak'], 2) . ' %</td></tr>';
@@ -260,7 +261,7 @@ function busiest_cpu($panel, $user_id) {
 					$host_id = db_fetch_cell_prepared('SELECT host_id
 						FROM data_local
 						WHERE id = ?',
-						array($row['ldid']));
+						[$row['ldid']]);
 
 					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}].  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
 				}
@@ -273,7 +274,6 @@ function busiest_cpu($panel, $user_id) {
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -281,8 +281,7 @@ function busiest_cpu($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ busiest load -----------------------------------------------------
+// ------------------------------------ busiest load -----------------------------------------------------
 function busiest_load($panel, $user_id) {
 	global $config;
 
@@ -296,12 +295,13 @@ function busiest_load($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['data'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		save_panel_result($panel, $user_id);
+
 		return true;
 	}
 
@@ -309,17 +309,17 @@ function busiest_load($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-	if (($allowed_devices !== false || $simple_perms)&& cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		if (!$simple_perms) {
@@ -335,9 +335,9 @@ function busiest_load($panel, $user_id) {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			ORDER BY dsh.average DESC
-			LIMIT " . $lines;
+			LIMIT ' . $lines;
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -345,7 +345,7 @@ function busiest_load($panel, $user_id) {
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -359,7 +359,7 @@ function busiest_load($panel, $user_id) {
 					ON gti.task_item_id = dtr.id
 					WHERE dtr.local_data_id = ?
 					LIMIT 1',
-					array($row['ldid']));
+					[$row['ldid']]);
 
 				$color = 'green';
 
@@ -369,7 +369,7 @@ function busiest_load($panel, $user_id) {
 					$color = 'yellow';
 				}
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . '<span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . '</td></tr>';
@@ -379,11 +379,9 @@ function busiest_load($panel, $user_id) {
 
 			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
 			$panel['data'] .= '</table>';
-
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -391,8 +389,7 @@ function busiest_load($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ busiest_hdd  -----------------------------------------------------
+// ------------------------------------ busiest_hdd  -----------------------------------------------------
 function busiest_hdd($panel, $user_id) {
 	global $config;
 
@@ -406,12 +403,13 @@ function busiest_hdd($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['data'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		save_panel_result($panel, $user_id);
+
 		return true;
 	}
 
@@ -419,10 +417,10 @@ function busiest_hdd($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -447,9 +445,9 @@ function busiest_hdd($panel, $user_id) {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.rrd_name = 'hdd_used'
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			ORDER BY xvalue DESC
-			LIMIT " . $lines;
+			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -465,21 +463,21 @@ function busiest_hdd($panel, $user_id) {
 			$q_host_cond
 			AND dtd.data_template_id = " . $ds['id'];
 
-		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-		$avg = 0;
+		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
+		$avg  = 0;
 
 		if ($xavg) {
 			foreach ($xavg as $row) {
-				$avg+=$row['xvalue'];
+				$avg += $row['xvalue'];
 			}
 
-			$avg = $avg/count($xavg);
+			$avg = $avg / count($xavg);
 		}
 
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -493,7 +491,7 @@ function busiest_hdd($panel, $user_id) {
 					ON gti.task_item_id = dtr.id
 					WHERE dtr.local_data_id = ?
 					LIMIT 1',
-					array($row['ldid']));
+					[$row['ldid']]);
 
 				$color = 'green';
 
@@ -503,7 +501,7 @@ function busiest_hdd($panel, $user_id) {
 					$color = 'yellow';
 				}
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 				$panel['data'] .= '<td class="right">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right">' . round($row['xpeak'], 2) . ' %</td></tr>';
@@ -512,7 +510,7 @@ function busiest_hdd($panel, $user_id) {
 					$host_id = db_fetch_cell_prepared('SELECT host_id
 						FROM data_local
 						WHERE id = ?',
-						array($row['ldid']));
+						[$row['ldid']]);
 
 					cacti_log("WARNING: Problem with DSSTAT data for Device[$host_id] and DS[{$row['ldid']}].  Please investigate or clear DSSTAT data.", false, 'INTROPAGE');
 				}
@@ -522,11 +520,9 @@ function busiest_hdd($panel, $user_id) {
 
 			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
-
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -534,8 +530,7 @@ function busiest_hdd($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ busiest uptime -----------------------------------------------------
+// ------------------------------------ busiest uptime -----------------------------------------------------
 function busiest_uptime($panel, $user_id) {
 	global $config;
 
@@ -549,14 +544,14 @@ function busiest_uptime($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
-		$columns = " id, description, snmp_sysUpTimeInstance";
+		$columns = ' id, description, snmp_sysUpTimeInstance';
 
 		if (!$simple_perms) {
 			$q_host_cond = 'AND id ' . $host_cond;
@@ -572,35 +567,31 @@ function busiest_uptime($panel, $user_id) {
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
-
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">'  . __('Host', 'intropage') . '</th>' .
+					'<th class="left inpa_first">' . __('Host', 'intropage') . '</th>' .
 					'<th class="right">' . __('Uptime', 'intropage') . '</th>' .
 				'</tr>';
 
 			$i = 0;
 
 			foreach ($result as $row) {
-
 				if ($console_access) {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left inpa_loglines"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
+					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left inpa_loglines"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
 				} else {
-					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left inpa_loglines">' . html_escape($row['description']) . '</td>';
+					$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left inpa_loglines">' . html_escape($row['description']) . '</td>';
 				}
 
-				$panel['data'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance']/100) . '</td></tr>';
+				$panel['data'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance'] / 100) . '</td></tr>';
 
 				$i++;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg/100) . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg / 100) . '</td></tr>';
 			$panel['data'] .= '</table>';
-
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device', 'intropage');
 		}
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -608,8 +599,7 @@ function busiest_uptime($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ busiest_traffic  -----------------------------------------------------
+// ------------------------------------ busiest_traffic  -----------------------------------------------------
 function busiest_traffic($panel, $user_id) {
 	global $config;
 
@@ -625,12 +615,13 @@ function busiest_traffic($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['data'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		save_panel_result($panel, $user_id);
+
 		return true;
 	}
 
@@ -638,10 +629,10 @@ function busiest_traffic($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -680,21 +671,21 @@ function busiest_traffic($panel, $user_id) {
 			WHERE dtd.data_template_id = ' . $ds['id'] . '
 			AND rrd_name=\'traffic_out\' ';
 
-		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-		$avg = 0;
+		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
+		$avg  = 0;
 
 		if ($xavg) {
 			foreach ($xavg as $row) {
-				$avg+=$row['xvalue'];
+				$avg += $row['xvalue'];
 			}
 
-			$avg = $avg/count($xavg);
+			$avg = $avg / count($xavg);
 		}
 
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -708,9 +699,9 @@ function busiest_traffic($panel, $user_id) {
 					ON gti.task_item_id = dtr.id
 					WHERE dtr.local_data_id = ?
 					LIMIT 1',
-					array($row['ldid']));
+					[$row['ldid']]);
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				if ($intropage_mb == 'b') {
@@ -722,7 +713,7 @@ function busiest_traffic($panel, $user_id) {
 				}
 
 				$panel['data'] .= "<td class='right'>" . human_readable($row['xvalue'], false,1) . $units . '</td>';
-				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak'], false,1) . $units .'</td></tr>';
+				$panel['data'] .= "<td class='right'>" . human_readable($row['xpeak'], false,1) . $units . '</td></tr>';
 
 				$i++;
 			}
@@ -733,11 +724,9 @@ function busiest_traffic($panel, $user_id) {
 
 			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg, false,1) . $units . '</td></tr>';
 			$panel['data'] .= '</table>';
-
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -745,8 +734,7 @@ function busiest_traffic($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ busiest_traffic_error  -----------------------------------------------------
+// ------------------------------------ busiest_traffic_error  -----------------------------------------------------
 function busiest_interface_error($panel, $user_id) {
 	global $config;
 
@@ -760,12 +748,13 @@ function busiest_interface_error($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['data'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		save_panel_result($panel, $user_id);
+
 		return true;
 	}
 
@@ -773,10 +762,10 @@ function busiest_interface_error($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -798,10 +787,10 @@ function busiest_interface_error($panel, $user_id) {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			AND dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
-			LIMIT " . $lines;
+			LIMIT ' . $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -816,7 +805,7 @@ function busiest_interface_error($panel, $user_id) {
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -830,7 +819,7 @@ function busiest_interface_error($panel, $user_id) {
 					ON gti.task_item_id = dtr.id
 					WHERE dtr.local_data_id = ?
 					LIMIT 1',
-					array($row['ldid']));
+					[$row['ldid']]);
 
 				$color = 'green';
 
@@ -840,7 +829,7 @@ function busiest_interface_error($panel, $user_id) {
 					$color = 'yellow';
 				}
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				$panel['data'] .= '<td class="right">' . human_readable($row['xvalue']) . ' <span class="inpa_sq color_' . $color . '"></span></td>';
@@ -851,11 +840,9 @@ function busiest_interface_error($panel, $user_id) {
 
 			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
 			$panel['data'] .= '</table>';
-
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -863,8 +850,7 @@ function busiest_interface_error($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ busiest_traffic_utilization -----------------------------------------------------
+// ------------------------------------ busiest_traffic_utilization -----------------------------------------------------
 function busiest_interface_util($panel, $user_id) {
 	global $config;
 
@@ -880,12 +866,13 @@ function busiest_interface_util($panel, $user_id) {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['data'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['data'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['data'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['data'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		save_panel_result($panel, $user_id);
+
 		return true;
 	}
 
@@ -893,10 +880,10 @@ function busiest_interface_util($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -904,7 +891,7 @@ function busiest_interface_util($panel, $user_id) {
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
 	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
-		$perc = array();
+		$perc = [];
 
 		if (!$simple_perms) {
 			$q_host_cond = 'AND dl.host_id ' . $host_cond;
@@ -920,16 +907,15 @@ function busiest_interface_util($panel, $user_id) {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			AND value > 0
 			AND time > DATE_SUB(NOW(), INTERVAL 5 MINUTE)
-			ORDER BY value DESC");
+			ORDER BY value DESC');
 
 		foreach ($result as $row) {
+			$speed = api_data_source_get_interface_speed($row) / 8;
 
-			$speed = api_data_source_get_interface_speed ($row)/8;
-
-			$key = $row['local_data_id'] . '-' . $row['rrd_name'];
+			$key        = $row['local_data_id'] . '-' . $row['rrd_name'];
 			$perc[$key] = round(100 * $row['value'] / $speed, 2);
 		}
 
@@ -938,7 +924,7 @@ function busiest_interface_util($panel, $user_id) {
 
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">'  . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Direction', 'intropage') . '</th>' .
 					'<th class="right">%</th>' .
 				'</tr>';
@@ -946,9 +932,9 @@ function busiest_interface_util($panel, $user_id) {
 			$i = 0;
 
 			foreach ($perc as $key=>$value) {
-				list($real_key,$direction) = explode ('-', $key);
+				[$real_key,$direction] = explode('-', $key);
 
-				$gdata = db_fetch_row_prepared ('SELECT DISTINCT(gti.local_graph_id) AS graph_id, name_cache
+				$gdata = db_fetch_row_prepared('SELECT DISTINCT(gti.local_graph_id) AS graph_id, name_cache
 					FROM graph_templates_item AS gti
 					LEFT JOIN data_template_rrd AS dtr
 					ON gti.task_item_id = dtr.id
@@ -956,7 +942,7 @@ function busiest_interface_util($panel, $user_id) {
 					ON dtr.local_data_id = dtd.local_data_id
 					WHERE dtd.local_data_id = ?
 					LIMIT 1',
-					array($real_key));
+					[$real_key]);
 
 				$color = 'green';
 
@@ -966,10 +952,10 @@ function busiest_interface_util($panel, $user_id) {
 					$color = 'yellow';
 				}
 
-				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '">';
+				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
 				$panel['data'] .= '<td class="left inpa_loglines" title="' . $gdata['name_cache'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
 				$panel['data'] .= html_escape($gdata['name_cache']) . '</td>';
-				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
+				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In' : 'Out') . '</td>';
 				$panel['data'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></span></td></tr>';
 
 				$i++;
@@ -981,11 +967,9 @@ function busiest_interface_util($panel, $user_id) {
 
 			$panel['data'] .= '<tr><td colspan="2">' . __('Time interval last 5 minutes') . '</td></tr>';
 			$panel['data'] .= '</table>';
-
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -993,16 +977,15 @@ function busiest_interface_util($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ busiest_cpu_detail  -----------------------------------------------------
+// ------------------------------------ busiest_cpu_detail  -----------------------------------------------------
 function busiest_cpu_detail() {
 	global $config;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Busiest 30 Host MIB CPU utilization (last hour)', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
@@ -1010,9 +993,9 @@ function busiest_cpu_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		return ($panel);
@@ -1022,10 +1005,10 @@ function busiest_cpu_detail() {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -1048,9 +1031,9 @@ function busiest_cpu_detail() {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			ORDER BY dsh.average DESC
-			LIMIT 30";
+			LIMIT 30';
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -1058,7 +1041,7 @@ function busiest_cpu_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1073,11 +1056,11 @@ function busiest_cpu_detail() {
 						ON gti.task_item_id = dtr.id
 						WHERE dtr.local_data_id = ?
 						LIMIT 1',
-						array($row['ldid']));
+						[$row['ldid']]);
 
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain bus_graph" bus_id="' . $graph_id . '" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><a class="linkEditMain bus_graph" bus_id="' . $graph_id . '" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
 				$color = 'green';
@@ -1097,11 +1080,9 @@ function busiest_cpu_detail() {
 			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
-
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -1109,16 +1090,15 @@ function busiest_cpu_detail() {
 	return $panel;
 }
 
-
-//------------------------------------ busiest_load_detail  -----------------------------------------------------
+// ------------------------------------ busiest_load_detail  -----------------------------------------------------
 function busiest_load_detail() {
 	global $config;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Busiest 30 ucd/net Load (last hour)', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
@@ -1126,9 +1106,9 @@ function busiest_load_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		return ($panel);
@@ -1138,10 +1118,10 @@ function busiest_load_detail() {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -1164,9 +1144,9 @@ function busiest_load_detail() {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			ORDER BY dsh.average DESC
-			LIMIT 30";
+			LIMIT 30';
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -1174,7 +1154,7 @@ function busiest_load_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1189,11 +1169,11 @@ function busiest_load_detail() {
 						ON gti.task_item_id = dtr.id
 						WHERE dtr.local_data_id = ?
 						LIMIT 1',
-						array($row['ldid']));
+						[$row['ldid']]);
 
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
 				$color = 'green';
@@ -1213,11 +1193,9 @@ function busiest_load_detail() {
 			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
-
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -1225,17 +1203,15 @@ function busiest_load_detail() {
 	return $panel;
 }
 
-
-
-//------------------------------------ busiest hdd detail  -----------------------------------------------------
+// ------------------------------------ busiest hdd detail  -----------------------------------------------------
 function busiest_hdd_detail() {
 	global $config;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Busiest 30 Host MIB Hard Drive space (last hour)', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
@@ -1243,9 +1219,9 @@ function busiest_hdd_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		return ($panel);
@@ -1255,10 +1231,10 @@ function busiest_hdd_detail() {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -1283,9 +1259,9 @@ function busiest_hdd_detail() {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.rrd_name = 'hdd_used'
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			ORDER BY xvalue DESC
-			LIMIT 30";
+			LIMIT 30';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -1301,21 +1277,21 @@ function busiest_hdd_detail() {
 			$q_host_cond
 			AND dtd.data_template_id = " . $ds['id'];
 
-		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-		$avg = 0;
+		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
+		$avg  = 0;
 
 		if ($xavg) {
 			foreach ($xavg as $row) {
-				$avg+=$row['xvalue'];
+				$avg += $row['xvalue'];
 			}
 
-			$avg = $avg/count($xavg);
+			$avg = $avg / count($xavg);
 		}
 
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1330,11 +1306,11 @@ function busiest_hdd_detail() {
 						ON gti.task_item_id = dtr.id
 						WHERE dtr.local_data_id = ?
 						LIMIT 1',
-						array($row['ldid']));
+						[$row['ldid']]);
 
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a style="white-space: overflow" class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><a style="white-space: overflow" class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
 				$color = 'green';
@@ -1354,11 +1330,9 @@ function busiest_hdd_detail() {
 			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
 			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
-
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -1366,16 +1340,15 @@ function busiest_hdd_detail() {
 	return $panel;
 }
 
-
-//------------------------------------ busiest uptime detail -----------------------------------------------------
+// ------------------------------------ busiest uptime detail -----------------------------------------------------
 function busiest_uptime_detail() {
 	global $config;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Busiest uptime', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
@@ -1383,14 +1356,14 @@ function busiest_uptime_detail() {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
-		$columns = " id, description, snmp_sysUpTimeInstance";
+		$columns = ' id, description, snmp_sysUpTimeInstance';
 
 		if (!$simple_perms) {
 			$q_host_cond = 'AND id ' . $host_cond;
@@ -1403,13 +1376,13 @@ function busiest_uptime_detail() {
 			ORDER BY snmp_sysUpTimeInstance DESC
 			LIMIT 30";
 
-		$avg = db_fetch_cell('SELECT AVG(snmp_sysUpTimeInstance)' . $query);
+		$avg    = db_fetch_cell('SELECT AVG(snmp_sysUpTimeInstance)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . __('Host', 'intropage') . '</th>' .
+					'<th class="left">' . __('Host', 'intropage') . '</th>' .
 					'<th class="right">' . __('Uptime', 'intropage') . '</th>' .
 				'</tr>';
 
@@ -1417,23 +1390,21 @@ function busiest_uptime_detail() {
 
 			foreach ($result as $row) {
 				if ($console_access) {
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'host.php?action=edit&id=' . $row['id']) . '">' . html_escape($row['description']) . '</a></td>';
 				} else {
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['description']) . '</td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left">' . html_escape($row['description']) . '</td>';
 				}
 
-				$panel['detail'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance']/100) . '</td></tr>';
+				$panel['detail'] .= "<td class='right'>" . get_daysfromtime($row['snmp_sysUpTimeInstance'] / 100) . '</td></tr>';
 
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg/100) . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg / 100) . '</td></tr>';
 			$panel['detail'] .= '</table>';
-
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device', 'intropage');
 		}
-
 	} else {
 		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -1441,16 +1412,15 @@ function busiest_uptime_detail() {
 	return ($panel);
 }
 
-
-//------------------------------------ busiest_traffic_detail  -----------------------------------------------------
+// ------------------------------------ busiest_traffic_detail  -----------------------------------------------------
 function busiest_traffic_detail() {
 	global $config;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Busiest traffic (in+out)', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
@@ -1458,9 +1428,9 @@ function busiest_traffic_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		return ($panel);
@@ -1472,10 +1442,10 @@ function busiest_traffic_detail() {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -1515,21 +1485,21 @@ function busiest_traffic_detail() {
 			WHERE dtd.data_template_id = ' . $ds['id'] . '
 			AND rrd_name = \'traffic_out\' ';
 
-		$xavg = db_fetch_assoc ('SELECT ' . $columns . ' ' . $query);
-		$avg = 0;
+		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
+		$avg  = 0;
 
 		if ($xavg) {
 			foreach ($xavg as $row) {
-				$avg+=$row['xvalue'];
+				$avg += $row['xvalue'];
 			}
 
-			$avg = $avg/count($xavg);
+			$avg = $avg / count($xavg);
 		}
 
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1544,11 +1514,11 @@ function busiest_traffic_detail() {
 						ON gti.task_item_id = dtr.id
 						WHERE dtr.local_data_id = ?
 						LIMIT 1',
-						array($row['ldid']));
+						[$row['ldid']]);
 
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
 				if ($intropage_mb == 'b') {
@@ -1571,11 +1541,9 @@ function busiest_traffic_detail() {
 
 			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
 			$panel['detail'] .= '</table>';
-
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -1583,16 +1551,15 @@ function busiest_traffic_detail() {
 	return ($panel);
 }
 
-
-//------------------------------------ busiest_traffic_error_detail  -----------------------------------------------------
+// ------------------------------------ busiest_traffic_error_detail  -----------------------------------------------------
 function busiest_interface_error_detail() {
 	global $config;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Busiest traffic (in+out)', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
@@ -1600,9 +1567,9 @@ function busiest_interface_error_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		return ($panel);
@@ -1612,10 +1579,10 @@ function busiest_interface_error_detail() {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -1637,10 +1604,10 @@ function busiest_interface_error_detail() {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			AND dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
-			LIMIT 30";
+			LIMIT 30';
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -1655,7 +1622,7 @@ function busiest_interface_error_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1670,11 +1637,11 @@ function busiest_interface_error_detail() {
 						ON gti.task_item_id = dtr.id
 						WHERE dtr.local_data_id = ?
 						LIMIT 1',
-						array($row['ldid']));
+						[$row['ldid']]);
 
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><a class="linkEditMain" href="' . html_escape($config['url_path'] . 'graphs.php?action=graph_edit&id=' . $graph_id) . '">' . html_escape($row['name']) . '</a></td>';
 				} else {
-					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
+					$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left">' . html_escape($row['name']) . '</td>';
 				}
 
 				$color = 'green';
@@ -1693,11 +1660,9 @@ function busiest_interface_error_detail() {
 
 			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
 			$panel['detail'] .= '</table>';
-
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
@@ -1705,15 +1670,15 @@ function busiest_interface_error_detail() {
 	return ($panel);
 }
 
-//------------------------------------ busiest_traffic_utilization_detail-----------------------------------------------
+// ------------------------------------ busiest_traffic_utilization_detail-----------------------------------------------
 function busiest_interface_util_detail() {
 	global $config;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Busiest interface utilization', 'intropage'),
 		'alarm'  => 'grey',
 		'detail' => '',
-	);
+	];
 
 	include_once($config['base_path'] . '/lib/api_data_source.php');
 
@@ -1723,9 +1688,9 @@ function busiest_interface_util_detail() {
 		$panel['detail'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
 
 		if ($console_access) {
-			$panel['detail'] .=  '<a class="pic" href="' . $config['url_path'] .'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= '<a class="pic" href="' . $config['url_path'] . 'settings.php?tab=data">' . __('Please enable and configure DS stats', 'intropage') . '</a>';
 		} else {
-			$panel['detail'] .=  __('Ask admin to enable DS stats', 'intropage') . '</a>';
+			$panel['detail'] .= __('Ask admin to enable DS stats', 'intropage') . '</a>';
 		}
 
 		return ($panel);
@@ -1735,10 +1700,10 @@ function busiest_interface_util_detail() {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -1746,7 +1711,7 @@ function busiest_interface_util_detail() {
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
 	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
-		$perc = array();
+		$perc = [];
 
 		if (!$simple_perms) {
 			$q_host_cond = 'AND dl.host_id ' . $host_cond;
@@ -1762,15 +1727,15 @@ function busiest_interface_util_detail() {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . $ds['id'] . '
 			AND value > 0
 			AND time > date_sub(now(), INTERVAL 5 MINUTE)
-			ORDER BY value DESC");
+			ORDER BY value DESC');
 
 		foreach ($result as $row) {
-			$speed = api_data_source_get_interface_speed ($row)/8;
+			$speed = api_data_source_get_interface_speed($row) / 8;
 
-			$key = $row['local_data_id'] . '-' . $row['rrd_name'];
+			$key        = $row['local_data_id'] . '-' . $row['rrd_name'];
 			$perc[$key] = round(100 * $row['value'] / $speed,2);
 		}
 
@@ -1779,7 +1744,7 @@ function busiest_interface_util_detail() {
 
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">'  . $ds['name'] . '</th>' .
+					'<th class="left">' . $ds['name'] . '</th>' .
 					'<th class="right">' . __('Direction', 'intropage') . '</th>' .
 					'<th class="right">%</th>' .
 				'</tr>';
@@ -1787,7 +1752,7 @@ function busiest_interface_util_detail() {
 			$i = 0;
 
 			foreach ($perc as $key => $value) {
-				list($real_key,$direction) = explode ('-', $key);
+				[$real_key,$direction] = explode('-', $key);
 
 				$gdata = db_fetch_row_prepared('SELECT DISTINCT(gti.local_graph_id) AS graph_id, name_cache
 					FROM graph_templates_item AS gti
@@ -1797,7 +1762,7 @@ function busiest_interface_util_detail() {
 					ON dtr.local_data_id = dtd.local_data_id
 					WHERE dtd.local_data_id = ?
 					LIMIT 1',
-					array($real_key));
+					[$real_key]);
 
 				$color = 'green';
 
@@ -1807,9 +1772,9 @@ function busiest_interface_util_detail() {
 					$color = 'yellow';
 				}
 
-				$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even':'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
+				$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
 				$panel['detail'] .= html_escape($gdata['name_cache']) . '</td>';
-				$panel['detail'] .= '<td>' . ($direction == 'traffic_in' ? 'In':'Out') . '</td>';
+				$panel['detail'] .= '<td>' . ($direction == 'traffic_in' ? 'In' : 'Out') . '</td>';
 				$panel['detail'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></td>';
 
 				$i++;
@@ -1821,14 +1786,12 @@ function busiest_interface_util_detail() {
 
 			$panel['detail'] .= '<tr><td colspan="2">' . __('Time interval last 5 minutes', 'intropage') . '</td></tr>';
 			$panel['detail'] .= '</table>';
-
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
-
 	} else {
 		$panel['detail'] = __('You don\'t have permissions to any hosts or there isn\'t any host with this template', 'intropage');
 	}
 
-	return($panel);
+	return ($panel);
 }

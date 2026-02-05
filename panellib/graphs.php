@@ -27,13 +27,13 @@
 function register_graphs() {
 	global $registry;
 
-	$registry['graphs'] = array(
+	$registry['graphs'] = [
 		'name'        => __('Graphical Panels', 'intropage'),
 		'description' => __('Panels that provide information about Cacti and it\'s plugins in a Graphical way.', 'intropage')
-	);
+	];
 
-	$panels = array(
-		'graph_data_source' => array(
+	$panels = [
+		'graph_data_source' => [
 			'name'         => __('Data Sources', 'intropage'),
 			'description'  => __('Graph of Data Sources', 'intropage'),
 			'class'        => 'graphs',
@@ -50,8 +50,8 @@ function register_graphs() {
 			'update_func'  => 'graph_data_source',
 			'details_func' => 'graph_data_source_detail',
 			'trends_func'  => false
-		),
-		'graph_host_template' => array(
+		],
+		'graph_host_template' => [
 			'name'         => __('Device Templates', 'intropage'),
 			'description'  => __('Graph of Device Templates', 'intropage'),
 			'class'        => 'graphs',
@@ -68,8 +68,8 @@ function register_graphs() {
 			'update_func'  => 'graph_host_template',
 			'details_func' => 'graph_host_template_detail',
 			'trends_func'  => false
-		),
-		'graph_host' => array(
+		],
+		'graph_host' => [
 			'name'         => __('Devices by Status', 'intropage'),
 			'description'  => __('Graph of Devices by Status (up,down,...)', 'intropage'),
 			'class'        => 'graphs',
@@ -86,8 +86,8 @@ function register_graphs() {
 			'update_func'  => 'graph_host',
 			'details_func' => 'graph_host_detail',
 			'trends_func'  => 'host_collect'
-		),
-	);
+		],
+	];
 
 	return $panels;
 }
@@ -100,20 +100,20 @@ function graph_data_source($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
-		$graph = array (
-			'pie' => array(
+		$graph =  [
+			'pie' => [
 				'title' => __('Datasources: ', 'intropage'),
-				'label' => array(),
-				'data'  => array(),
-			),
-		);
+				'label' => [],
+				'data'  => [],
+			],
+		];
 
 		if (!$simple_perms) {
 			$q_host_cond = 'AND data_local.host_id ' . $host_cond;
@@ -161,10 +161,10 @@ function graph_host_template($panel, $user_id) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if (defined('CACTI_VERSION')) {
@@ -174,20 +174,19 @@ function graph_host_template($panel, $user_id) {
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
-
 		if (!$simple_perms) {
 			$q_host_cond = 'WHERE host.id ' . $host_cond;
 		}
 
 		// 1.2.24+ has billboard.js with treemap
 		if (cacti_version_compare($cv, '1.2.24', '>=')) {
-			$graph = array(
-				'treemap' => array(
+			$graph = [
+				'treemap' => [
 					'title' => __('Device Templates: ', 'intropage'),
-					'label' => array(),
-					'data'  => array(),
-				),
-			);
+					'label' => [],
+					'data'  => [],
+				],
+			];
 
 			$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name,
 				COUNT(host.host_template_id) AS total
@@ -204,17 +203,15 @@ function graph_host_template($panel, $user_id) {
 					array_push($graph['treemap']['label'], substr($item['name'],0,20));
 					array_push($graph['treemap']['data'], $item['total']);
 				}
-
 			}
 		} else {
-
-			$graph = array(
-				'pie' => array(
+			$graph = [
+				'pie' => [
 					'title' => __('Device Templates: ', 'intropage'),
-					'label' => array(),
-					'data'  => array(),
-				),
-			);
+					'label' => [],
+					'data'  => [],
+				],
+			];
 
 			$sql_ht = db_fetch_assoc("SELECT host_template.id as id, name,
 				COUNT(host.host_template_id) AS total
@@ -237,8 +234,6 @@ function graph_host_template($panel, $user_id) {
 		$panel['data'] = intropage_prepare_graph($graph, $user_id);
 
 		unset($graph);
-
-
 	} else {
 		$panel['data'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}
@@ -246,7 +241,7 @@ function graph_host_template($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-//--------------------------------------- graph host-----------------------------
+// --------------------------------------- graph host-----------------------------
 function graph_host($panel, $user_id, $timespan = 0) {
 	global $config;
 
@@ -256,27 +251,27 @@ function graph_host($panel, $user_id, $timespan = 0) {
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
-		$graph = array (
-                	'line' => array(
+		$graph =  [
+					'line' => [
 				'title'  => __('Devices: ', 'intropage'),
-				'label1' => array(),
-				'data1'  => array(),
-				'label2' => array(),
-				'data2'  => array(),
-				'label3' => array(),
-				'data3'  => array(),
-                       ),
-		);
+				'label1' => [],
+				'data1'  => [],
+				'label2' => [],
+				'data2'  => [],
+				'label3' => [],
+				'data3'  => [],
+					   ],
+		];
 
 		if ($timespan == 0) {
-                	if (isset($_SESSION['sess_user_id'])) {
+			if (isset($_SESSION['sess_user_id'])) {
 				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
 			} else {
 				$timespan = $panel['refresh'];
@@ -287,7 +282,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			$refresh = db_fetch_cell_prepared('SELECT refresh_interval
 				FROM plugin_intropage_panel_data
 				WHERE id = ?',
-				array($panel['id']));
+				[$panel['id']]);
 		} else {
 			$refresh = $panel['refresh'];
 		}
@@ -298,27 +293,24 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			AND name = 'host_down'
 			AND user_id = $user_id
 			ORDER BY cur_timestamp ASC",
-			array($timespan));
+			[$timespan]);
 
 		if (cacti_sizeof($rows)) {
-
-			$graph['line']['title1'] = __('Down', 'intropage');
+			$graph['line']['title1']         = __('Down', 'intropage');
 			$graph['line']['unit1']['title'] = 'Down';
 
 			foreach ($rows as $row) {
-
 				$graph['line']['label1'][] = $row['date'];
 				$graph['line']['data1'][]  = $row['value'];
-				$last = $row['value'];
+				$last                      = $row['value'];
 			}
 
 			if ($last > 0) {
 				$panel['alarm'] = 'red';
 			}
-
 		} else {
-                        unset($graph['line']['label1']);
-                        unset($graph['line']['data1']);
+			unset($graph['line']['label1']);
+			unset($graph['line']['data1']);
 		}
 
 		$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, value
@@ -327,23 +319,21 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			AND name = 'host_reco'
 			AND user_id = $user_id
 			ORDER BY cur_timestamp ASC",
-			array($timespan));
+			[$timespan]);
 
 		if (cacti_sizeof($rows)) {
-
-			$graph['line']['title2'] = __('Recovering', 'intropage');
+			$graph['line']['title2']         = __('Recovering', 'intropage');
 			$graph['line']['unit2']['title'] = 'Recovering';
 
 			foreach ($rows as $row) {
 				$graph['line']['label2'][] = $row['date'];
 				$graph['line']['data2'][]  = $row['value'];
-				$last = $row['value'];
+				$last                      = $row['value'];
 			}
 
 			if ($last > 0 && $panel['alarm'] == 'green') {
 				$panel['alarm'] = 'yellow';
 			}
-
 		} else {
 			unset($graph['line']['label2']);
 			unset($graph['line']['data2']);
@@ -355,10 +345,10 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			AND name = 'host_disa'
 			AND user_id = $user_id
 			ORDER BY cur_timestamp ASC",
-			array($timespan));
+			[$timespan]);
 
 		if (cacti_sizeof($rows)) {
-			$graph['line']['title3'] = __('Disabled', 'intropage');
+			$graph['line']['title3']         = __('Disabled', 'intropage');
 			$graph['line']['unit3']['title'] = 'Disabled';
 
 			foreach ($rows as $row) {
@@ -383,25 +373,24 @@ function graph_host($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
-
-//------------------------------------ graph_datasource -----------------------------------------------------
+// ------------------------------------ graph_datasource -----------------------------------------------------
 function graph_data_source_detail() {
 	global $config, $input_types;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Data Sources', 'intropage'),
 		'alarm'  => 'green',
 		'detail' => ''
-	);
+	];
 
 	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if (!$simple_perms) {
@@ -426,14 +415,15 @@ function graph_data_source_detail() {
 
 	if (cacti_sizeof($sql_ds)) {
 		$panel['detail'] .= '<tr class="tableHeader">
-			<th class="left">'  . __('Data Type', 'intropage') . '</th>
-			<th class="right">' . __('Data Sources')           . '</th>
+			<th class="left">' . __('Data Type', 'intropage') . '</th>
+			<th class="right">' . __('Data Sources') . '</th>
 		</tr>';
 
 		$i = 0;
+
 		foreach ($sql_ds as $item) {
 			if (!is_null($item['type_id'])) {
-				$class = ($i % 2 == 0 ? 'odd':'even');
+				$class = ($i % 2 == 0 ? 'odd' : 'even');
 				$panel['detail'] .= '<tr class="' . $class . '"><td class="left">' . preg_replace('/script server/', 'SS', $input_types[$item['type_id']]) . '</td>';
 				$panel['detail'] .= '<td class="right">' . number_format_i18n($item['total'], -1) . '</td></tr>';
 
@@ -442,7 +432,7 @@ function graph_data_source_detail() {
 			}
 		}
 
-		$class = ($i % 2 == 0 ? 'odd':'even');
+		$class = ($i % 2 == 0 ? 'odd' : 'even');
 
 		$panel['detail'] .= '<tr class="' . $class . '" rowspan="2"><td class="left">' . __('Total', 'intropage') . '</td><td class="right">' . number_format_i18n($total, -1) . '</td></tr>';
 
@@ -454,24 +444,24 @@ function graph_data_source_detail() {
 	return $panel;
 }
 
-//------------------------------------ graph_host -----------------------------------------------------
+// ------------------------------------ graph_host -----------------------------------------------------
 function graph_host_detail() {
 	global $config, $console_access;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('Devices', 'intropage'),
 		'alarm'  => 'green',
 		'detail' => '',
-	);
+	];
 
 	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if (!$simple_perms) {
@@ -508,40 +498,40 @@ function graph_host_detail() {
 	$panel['detail']  = '<table class="cactiTable">';
 	$panel['detail'] .= '<tr class="tableHeader"><th class="left">' . __esc('Status', 'intropage') . '</th><th class="right">' . __esc('Device Count', 'intropage') . '</th></tr>';
 
-	$status = array(
-		array(
+	$status = [
+		[
 			'class'  => 'odd',
 			'status' => '-1',
 			'text'   => __esc('All', 'intropage'),
 			'value'  => $h_all
-		),
-		array(
+		],
+		[
 			'class'  => 'even',
 			'status' => '3',
 			'text'   => __esc('Up', 'intropage'),
 			'value'  => $h_up
-		),
-		array(
+		],
+		[
 			'class'  => 'odd',
 			'status' => '1',
 			'text'   => __esc('Down', 'intropage'),
 			'value'  => $h_down
-		),
-		array(
+		],
+		[
 			'class'  => 'even',
 			'status' => '2',
 			'text'   => __esc('Recovering', 'intropage'),
 			'value'  => $h_reco
-		),
-		array(
+		],
+		[
 			'class'  => 'even',
 			'status' => '-2',
 			'text'   => __esc('Disabled', 'intropage'),
 			'value'  => $h_disa
-		)
-	);
+		]
+	];
 
-	foreach($status as $s) {
+	foreach ($status as $s) {
 		if (api_plugin_user_realm_auth('host.php')) {
 			$panel['detail'] .= '<tr class="' . $s['class'] . '">';
 			$panel['detail'] .= '<td class="left">';
@@ -561,8 +551,8 @@ function graph_host_detail() {
 				FROM host
 				WHERE disabled = ''
 				$q_host_cond
-				AND status = " . $s['status'] . " 
-				");
+				AND status = " . $s['status'] . ' 
+				');
 
 			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
@@ -602,24 +592,24 @@ function graph_host_detail() {
 	return $panel;
 }
 
-//------------------------------------ graph host_template -----------------------------------------------------
+// ------------------------------------ graph host_template -----------------------------------------------------
 function graph_host_template_detail() {
 	global $config;
 
-	$panel = array(
-		'name' => __('Device Templates', 'intropage'),
-		'alarm' => 'green',
+	$panel = [
+		'name'   => __('Device Templates', 'intropage'),
+		'alarm'  => 'green',
 		'detail' => '',
-	);
+	];
 
 	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
 	if (!$simple_perms) {
 		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond = 'IN (' . $allowed_devices . ')';
+		$host_cond       = 'IN (' . $allowed_devices . ')';
 	} else {
 		$allowed_devices = false;
-		$q_host_cond = '';
+		$q_host_cond     = '';
 	}
 
 	if (!$simple_perms) {
@@ -639,22 +629,23 @@ function graph_host_template_detail() {
 	if (cacti_sizeof($rows)) {
 		$panel['detail'] .= '<table class="cactiTable">
 			<tr class="tableHeader">
-				<th class="left">'  . __('Template Name', 'intropage') . '</th>
+				<th class="left">' . __('Template Name', 'intropage') . '</th>
 				<th class="right">' . __('Total Devices', 'intropage') . '</th>
 			</tr>';
 
 		$i = 0;
+
 		foreach ($rows as $item) {
-			$class = ($i % 2 == 0 ? 'odd':'even');
+			$class = ($i % 2 == 0 ? 'odd' : 'even');
 			$panel['detail'] .= '<tr class="' . $class . '"><td class="left">' . html_escape($item['name']) . '</td>';
-			$panel['detail'] .= '<td class="right">'   . number_format_i18n($item['total'], -1)             . '</td></tr>';
+			$panel['detail'] .= '<td class="right">' . number_format_i18n($item['total'], -1) . '</td></tr>';
 			$total += $item['total'];
 			$i++;
 		}
 
-		$class = ($i % 2 == 0 ? 'odd':'even');
+		$class = ($i % 2 == 0 ? 'odd' : 'even');
 		$panel['detail'] .= '<tr class="' . $class . '">
-			<td class="left">'  . __('Total', 'intropage')       . '</td>
+			<td class="left">' . __('Total', 'intropage') . '</td>
 			<td class="right">' . number_format_i18n($total, -1) . '</td>
 		</tr>';
 
@@ -666,8 +657,7 @@ function graph_host_template_detail() {
 	return $panel;
 }
 
-
-//------------------------------------ host collect -----------------------------------------------------
+// ------------------------------------ host collect -----------------------------------------------------
 function host_collect() {
 	global $config;
 
@@ -675,15 +665,14 @@ function host_collect() {
 	$users = get_user_list();
 
 	foreach ($users as $user) {
-
 		$simple_perms = get_simple_device_perms($user['id']);
 
 		if (!$simple_perms) {
 			$allowed_devices = intropage_get_allowed_devices($user['id']);
-			$host_cond = 'IN (' . $allowed_devices . ')';
+			$host_cond       = 'IN (' . $allowed_devices . ')';
 		} else {
 			$allowed_devices = false;
-			$q_host_cond = '';
+			$q_host_cond     = '';
 		}
 
 		if (!$simple_perms) {
@@ -691,7 +680,6 @@ function host_collect() {
 		}
 
 		if ($allowed_devices !== false || $simple_perms) {
-
 			db_execute_prepared("INSERT INTO plugin_intropage_trends
 				(name,value,user_id)
 				SELECT 'host_down', COUNT(*),?
@@ -699,7 +687,7 @@ function host_collect() {
 				WHERE status='1'
 				$q_host_cond
 				AND disabled=''",
-				array($user['id']));
+				[$user['id']]);
 
 			db_execute_prepared("INSERT INTO plugin_intropage_trends
 				(name,value,user_id)
@@ -708,7 +696,7 @@ function host_collect() {
 				WHERE status='2'
 				$q_host_cond
 				AND disabled=''",
-				array($user['id']));
+				[$user['id']]);
 
 			db_execute_prepared("INSERT INTO plugin_intropage_trends
 				(name,value,user_id)
@@ -716,22 +704,22 @@ function host_collect() {
 				FROM host
 				WHERE disabled='on'
 				$q_host_cond",
-				array($user['id']));
+				[$user['id']]);
 		} else {
 			db_execute_prepared("INSERT INTO plugin_intropage_trends
 				(name,value,user_id)
 				VALUES ('host_down', 0, ?)",
-				array($user['id']));
+				[$user['id']]);
 
 			db_execute_prepared("INSERT INTO plugin_intropage_trends
 				(name,value,user_id)
 				VALUES ('host_reco', 0, ?)",
-				array($user['id']));
+				[$user['id']]);
 
 			db_execute_prepared("INSERT INTO plugin_intropage_trends
 				(name,value,user_id)
 				VALUES ('host_disa', 0, ?)",
-				array($user['id']));
+				[$user['id']]);
 		}
 	}
 }

@@ -27,13 +27,13 @@
 function register_mactrack() {
 	global $registry;
 
-	$registry['mactrack'] = array(
+	$registry['mactrack'] = [
 		'name'        => __('MacTrack Panels', 'intropage'),
 		'description' => __('Panels that provide information about Cacti\'s MacTrack plugins.', 'intropage')
-	);
+	];
 
-	$panels = array(
-		'mactrack' => array(
+	$panels = [
+		'mactrack' => [
 			'name'         => __('MacTrack Plugin', 'intropage'),
 			'description'  => __('Various MacTrack collection and site statistics.', 'intropage'),
 			'class'        => 'mactrack',
@@ -50,8 +50,8 @@ function register_mactrack() {
 			'update_func'  => 'mactrack',
 			'details_func' => false,
 			'trends_func'  => false
-		),
-		'mactrack_sites' => array(
+		],
+		'mactrack_sites' => [
 			'name'         => __('MacTrack Sites', 'intropage'),
 			'description'  => __('Various MacTrack Site statistics.', 'intropage'),
 			'class'        => 'mactrack',
@@ -68,13 +68,13 @@ function register_mactrack() {
 			'update_func'  => 'mactrack_sites',
 			'details_func' => 'mactrack_sites_detail',
 			'trends_func'  => false
-		),
-	);
+		],
+	];
 
 	return $panels;
 }
 
-//------------------------------------ mactrack -----------------------------------------------------
+// ------------------------------------ mactrack -----------------------------------------------------
 function mactrack($panel, $user_id) {
 	global $config;
 
@@ -98,24 +98,24 @@ function mactrack($panel, $user_id) {
 			$panel['alarm'] = 'yellow';
 		}
 
-		$panel['data']  = __('All: %s', $m_all, 'intropage')       . ' | ';
-		$panel['data'] .= __('Up: %s', $m_up, 'intropage')         . ' | ';
-		$panel['data'] .= __('Down: %s', $m_down, 'intropage')     . ' | ';
-		$panel['data'] .= __('Error: %s', $m_err, 'intropage')     . ' | ';
-		$panel['data'] .= __('Unknown: %s', $m_unkn, 'intropage')  . ' | ';
+		$panel['data']  = __('All: %s', $m_all, 'intropage') . ' | ';
+		$panel['data'] .= __('Up: %s', $m_up, 'intropage') . ' | ';
+		$panel['data'] .= __('Down: %s', $m_down, 'intropage') . ' | ';
+		$panel['data'] .= __('Error: %s', $m_err, 'intropage') . ' | ';
+		$panel['data'] .= __('Unknown: %s', $m_unkn, 'intropage') . ' | ';
 		$panel['data'] .= __('Disabled: %s', $m_disa, 'intropage') . ' | ';
 
-		$graph = array ('pie' => array(
+		$graph =  ['pie' => [
 			'title' => __('MacTrack', 'intropage'),
-			'label' => array(
+			'label' => [
 				__('Up', 'intropage'),
 				__('Down', 'intropage'),
 				__('Error', 'intropage'),
 				__('Unknown', 'intropage'),
 				__('Disabled', 'intropage'),
-			),
-			'data' => array($m_up, $m_down, $m_err, $m_unkn, $m_disa))
-		);
+			],
+			'data' => [$m_up, $m_down, $m_err, $m_unkn, $m_disa]]
+		];
 
 		$panel['data'] = intropage_prepare_graph($graph, $user_id);
 	} else {
@@ -125,7 +125,7 @@ function mactrack($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-//------------------------------------ mactrack sites -----------------------------------------------------
+// ------------------------------------ mactrack sites -----------------------------------------------------
 function mactrack_sites($panel, $user_id) {
 	global $config;
 
@@ -139,12 +139,12 @@ function mactrack_sites($panel, $user_id) {
 	} elseif (api_plugin_user_realm_auth('mactrack_view_sites.php') || api_plugin_user_realm_auth('mactrack_devices.php')) {
 		$panel['data'] = '<table class="cactiTable">' .
 			'<tr class="tableHeader">' .
-				'<td class="left">'  . __('Site', 'intropage')          . '</td>' .
-				'<td class="right">' . __('Devices', 'intropage')       . '</td>' .
-				'<td class="right">' . __('IPs', 'intropage')           . '</td>' .
-				'<td class="right">' . __('Ports', 'intropage')         . '</td>' .
-				'<td class="right">' . __('Ports up', 'intropage')      . '</td>' .
-				'<td class="right">' . __('MACs', 'intropage')          . '</td>' .
+				'<td class="left">' . __('Site', 'intropage') . '</td>' .
+				'<td class="right">' . __('Devices', 'intropage') . '</td>' .
+				'<td class="right">' . __('IPs', 'intropage') . '</td>' .
+				'<td class="right">' . __('Ports', 'intropage') . '</td>' .
+				'<td class="right">' . __('Ports up', 'intropage') . '</td>' .
+				'<td class="right">' . __('MACs', 'intropage') . '</td>' .
 				'<td class="right">' . __('Device Errors', 'intropage') . '</td>' .
 			'</tr>';
 
@@ -157,13 +157,13 @@ function mactrack_sites($panel, $user_id) {
 		if (cacti_sizeof($data)) {
 			foreach ($data as $site) {
 				$row = '<tr>' .
-					'<td class="left">'  . html_escape($site['site_name']) . '</td>' .
-					'<td class="right">' . $site['total_devices']          . '</td>' .
-					'<td class="right">' . $site['total_ips']              . '</td>' .
-					'<td class="right">' . $site['total_user_ports']       . '</td>' .
-					'<td class="right">' . $site['total_oper_ports']       . '</td>' .
-					'<td class="right">' . $site['total_macs']             . '</td>' .
-					'<td class="right">' . $site['total_device_errors']    . '<span class="inpa_sq color_red"></span></td>' .
+					'<td class="left">' . html_escape($site['site_name']) . '</td>' .
+					'<td class="right">' . $site['total_devices'] . '</td>' .
+					'<td class="right">' . $site['total_ips'] . '</td>' .
+					'<td class="right">' . $site['total_user_ports'] . '</td>' .
+					'<td class="right">' . $site['total_oper_ports'] . '</td>' .
+					'<td class="right">' . $site['total_macs'] . '</td>' .
+					'<td class="right">' . $site['total_device_errors'] . '<span class="inpa_sq color_red"></span></td>' .
 				'</tr>';
 
 				$panel['data'] .= $row;
@@ -180,24 +180,24 @@ function mactrack_sites($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-//------------------------------------ mactrack sites -----------------------------------------------------
+// ------------------------------------ mactrack sites -----------------------------------------------------
 function mactrack_sites_detail() {
 	global $config, $console_access;
 
-	$panel = array(
+	$panel = [
 		'name'   => __('MacTrack Sites', 'intropage'),
 		'alarm'  => 'green',
 		'detail' => '',
-	);
+	];
 
 	$panel['detail'] = '<table class="cactiTable">' .
 		'<tr class="tableHeader">' .
-		'<th class="left">'  . __('Site', 'intropage')          . '</td>' .
-		'<th class="right">' . __('Devices', 'intropage')       . '</td>' .
-		'<th class="right">' . __('IPs', 'intropage')           . '</td>' .
-		'<th class="right">' . __('Ports', 'intropage')         . '</td>' .
-		'<th class="right">' . __('Ports up', 'intropage')      . '</td>' .
-		'<th class="right">' . __('MACs', 'intropage')          . '</td>' .
+		'<th class="left">' . __('Site', 'intropage') . '</td>' .
+		'<th class="right">' . __('Devices', 'intropage') . '</td>' .
+		'<th class="right">' . __('IPs', 'intropage') . '</td>' .
+		'<th class="right">' . __('Ports', 'intropage') . '</td>' .
+		'<th class="right">' . __('Ports up', 'intropage') . '</td>' .
+		'<th class="right">' . __('MACs', 'intropage') . '</td>' .
 		'<th class="right">' . __('Device Errors', 'intropage') . '</td>' .
 	'</tr>';
 
@@ -208,13 +208,13 @@ function mactrack_sites_detail() {
 	if (cacti_sizeof($data)) {
 		foreach ($data as $site) {
 			$row = '<tr>' .
-				'<td class="left">'  . html_escape($site['site_name']) . '</td>' .
-				'<td class="right">' . $site['total_devices']          . '</td>' .
-				'<td class="right">' . $site['total_ips']              . '</td>' .
-				'<td class="right">' . $site['total_user_ports']       . '</td>' .
-				'<td class="right">' . $site['total_oper_ports']       . '</td>' .
-				'<td class="right">' . $site['total_macs']             . '</td>' .
-				'<td class="right">' . $site['total_device_errors']    . '<span class="inpa_sq color_red"></span></td>' .
+				'<td class="left">' . html_escape($site['site_name']) . '</td>' .
+				'<td class="right">' . $site['total_devices'] . '</td>' .
+				'<td class="right">' . $site['total_ips'] . '</td>' .
+				'<td class="right">' . $site['total_user_ports'] . '</td>' .
+				'<td class="right">' . $site['total_oper_ports'] . '</td>' .
+				'<td class="right">' . $site['total_macs'] . '</td>' .
+				'<td class="right">' . $site['total_device_errors'] . '<span class="inpa_sq color_red"></span></td>' .
 			'</tr>';
 
 			if ($site['total_device_errors'] > 0) {
@@ -226,7 +226,7 @@ function mactrack_sites_detail() {
 
 		$panel['detail'] .= '</table>';
 	} else {
-	    $panel['detail'] = __('No mactrack sites found', 'intropage');
+		$panel['detail'] = __('No mactrack sites found', 'intropage');
 	}
 
 	return $panel;
