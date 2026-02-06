@@ -850,7 +850,7 @@ function intropage_reload_panel() {
 		}
 	} else {
 		print '<div class="panel_header color_grey">';
-		print '<div class="panel_name">' . $name . '</div>';
+		print '<div class="panel_name">' . __('Panel not found') . '</div>';
 
 		printf("<div class='panel_actions'></div>");
 		print '</div>'; // end of header
