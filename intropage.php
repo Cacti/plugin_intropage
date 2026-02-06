@@ -35,6 +35,7 @@ global $panels, $registry, $login_opts, $callbackPage, $redirectPage;
 $login_opts = get_login_opts(true);
 
 $callbackPage = $config['url_path'] . 'plugins/intropage/intropage.php';
+
 if ($login_opts == 4) {
 	$redirectPage = $config['url_path'] . 'plugins/intropage/intropage.php';
 } else {

@@ -59,10 +59,10 @@ function plugin_intropage_install() {
 	api_plugin_register_realm('intropage', 'intropage.php', 'Intropage Viewer', 1);
 	api_plugin_register_realm('intropage', 'intropage_admin.php', 'Intropage Administration', 1);
 
-	$realms = array(
+	$realms = [
 		__('Intropage Viewer', 'intropage'),
 		__('Intropage Administration', 'intropage')
-	);
+	];
 
 	intropage_setup_database();
 }
@@ -78,10 +78,10 @@ function plugin_intropage_uninstall() {
 function intropage_config_arrays() {
 	global $intropage_intervals, $trend_timespans, $panel_lines;
 
-	auth_augment_roles(__('Normal User'), array('intropage.php'));
-	auth_augment_roles(__('System Administration'), array('intropage_admin.php'));
+	auth_augment_roles(__('Normal User'), ['intropage.php']);
+	auth_augment_roles(__('System Administration'), ['intropage_admin.php']);
 
-	$trend_timespans = array(
+	$trend_timespans = [
 		3600   => __('Timespan Last 1 Hour', 'intropage'),
 		7200   => __('Timespan Last %d Hours', 2, 'intropage'),
 		10800  => __('Timespan Last %d Hours', 3, 'intropage'),
@@ -90,11 +90,11 @@ function intropage_config_arrays() {
 		43200  => __('Timespan Last %d Hours', 12, 'intropage'),
 		86400  => __('Timespan Last 1 Day', 'intropage'),
 		172800 => __('Timespan Last 2 Days', 'intropage')
-	);
+	];
 
 	$poller_interval = read_config_option('poller_interval');
 
-	$intropage_intervals = array(
+	$intropage_intervals = [
 		'10'    => __('%d Seconds', 10, 'intropage'),
 		'15'    => __('%d Seconds', 15, 'intropage'),
 		'20'    => __('%d Seconds', 20, 'intropage'),
@@ -114,9 +114,9 @@ function intropage_config_arrays() {
 		'28800' => __('%d Hours', 8, 'intropage'),
 		'43200' => __('%d Hours', 12, 'intropage'),
 		'86400' => __('%d Day', 1, 'intropage')
-	);
+	];
 
-	foreach($intropage_intervals as $key => $name) {
+	foreach ($intropage_intervals as $key => $name) {
 		if ($key < $poller_interval) {
 			unset($intropage_intervals[$key]);
 		}
@@ -199,12 +199,12 @@ function intropage_poller_bottom() {
 // refresh_interval - in second, min is 60
 // priority - for displaying
 // description - small description, it is visible in user auth settings
-function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority=20, $description='') {
+function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority = 20, $description = '') {
 	if (db_execute_prepared('REPLACE INTO plugin_intropage_panel_definition
 		(panel_id,file,has_detail,refresh_interval, priority, description)
-		VALUES (?,?,?,?,?,?)', array($panel_id,$file,$has_detail,$refresh_interval,$priority,$description)) == 1) {
+		VALUES (?,?,?,?,?,?)', [$panel_id, $file, $has_detail, $refresh_interval, $priority, $description]) == 1) {
+		api_plugin_db_add_column('intropage', 'plugin_intropage_user_auth', ['name' => $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on']);
 
- 		api_plugin_db_add_column('intropage', 'plugin_intropage_user_auth', array('name' => $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on'));
 		return ('1');
 	} else {
 		return db_error();
@@ -213,21 +213,20 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
 
 // remove third party panel
 function intropage_remove_panel($panel_id) {
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id = ?', array($panel_id));
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id = ?', array($panel_id));
-	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',array($panel_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id = ?', [$panel_id]);
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id = ?', [$panel_id]);
+	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',[$panel_id]);
 
 	return ('1');
 }
 
 function intropage_user_remove($user_id) {
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', array($user_id));
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id = ?', array($user_id));
-	db_execute_prepared('DELETE FROM settings_user WHERE user_id = ?', array($user_id));
-	db_execute_prepared('DELETE FROM plugin_intropage_user_auth WHERE user_id = ?', array($user_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', [$user_id]);
+	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id = ?', [$user_id]);
+	db_execute_prepared('DELETE FROM settings_user WHERE user_id = ?', [$user_id]);
+	db_execute_prepared('DELETE FROM plugin_intropage_user_auth WHERE user_id = ?', [$user_id]);
 }
 
 function intropage_user_group_remove($group_id) {
-	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE id = ?', array($group_id));
+	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE id = ?', [$group_id]);
 }
-
