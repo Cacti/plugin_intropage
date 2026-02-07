@@ -488,18 +488,27 @@ function servcheck($panel, $user_id) {
 		$all  = db_fetch_cell('SELECT COUNT(*) FROM plugin_servcheck_test');
 		$disa = db_fetch_cell("SELECT COUNT(*) FROM plugin_servcheck_test WHERE enabled != 'on'");
 
+		// servcheck < 0.3 uses another name
 		$dncolumn = db_fetch_cell("SELECT COLUMN_NAME FROM information_schema.columns
 			WHERE TABLE_NAME = 'plugin_servcheck_test' AND COLUMN_NAME = 'display_name'");
 
-		// servcheck < 0.3 uses another name
 		if (!$dncolumn) {
 			$dncolumn = 'name';
 		}
-		$tests = db_fetch_assoc('SELECT ' . $dncolumn . ' as name, type, id, lastcheck FROM plugin_servcheck_test');
+
+		// servcheck < 0.4 uses another name
+		$lchcolumn = db_fetch_cell("SELECT COLUMN_NAME FROM information_schema.columns
+			WHERE TABLE_NAME = 'plugin_servcheck_test' AND COLUMN_NAME = 'last_check'");
+
+		if (!$lchcolumn) {
+			$lchcolumn = 'lastcheck';
+		}
+
+		$tests = db_fetch_assoc('SELECT ' . $dncolumn . ' as name, type, id, ' . $lchcolumn . ' FROM plugin_servcheck_test');
 
 		foreach ($tests as $test) {
 			$state = db_fetch_cell_prepared('SELECT result FROM plugin_servcheck_log
-				WHERE test_id = ? ORDER BY lastcheck DESC LIMIT 1',
+				WHERE test_id = ? ORDER BY id DESC LIMIT 1',
 				[$test['id']]);
 
 			if ($state == 'ok') {
@@ -516,11 +525,12 @@ function servcheck($panel, $user_id) {
 		$panel['data'] .= __('Number of checks (all/disabled): ', 'intropage') . $all . ' / ' . $disa . '<br/>';
 		$panel['data'] .= __('Status (ok/error): ', 'intropage') . $ok . ' / ' . $ko . '<br/><br/>';
 
-		$logs = db_fetch_assoc('SELECT psl.lastcheck as `lastcheck`, result, error, ' . $dncolumn . ' as name, type,
-			UNIX_TIMESTAMP(psl.lastcheck) AS secs
+		$logs = db_fetch_assoc('SELECT psl.' . $lchcolumn . ' as `lastcheck`, result, error, ' . $dncolumn . ' as name, type,
+			UNIX_TIMESTAMP(psl.' . $lchcolumn . ') AS secs
 			FROM plugin_servcheck_log AS psl
 			LEFT JOIN plugin_servcheck_test AS pst
-			ON psl.test_id = pst.id 
+			ON psl.test_id = pst.id
+			ORDER BY psl.id DESC
 			LIMIT ' . ($lines - 4));
 
 		if (cacti_sizeof($logs) > 0) {
@@ -588,20 +598,28 @@ function servcheck_detail() {
 		'detail' => '',
 	];
 
+	// servcheck < 0.3 uses another name
 	$dncolumn = db_fetch_cell("SELECT COLUMN_NAME FROM information_schema.columns
 	WHERE TABLE_NAME = 'plugin_servcheck_test' AND COLUMN_NAME = 'display_name'");
 
-	// servcheck < 0.3 uses another name
 	if (!$dncolumn) {
 		$dncolumn = 'name';
 	}
 
-	$logs = db_fetch_assoc('SELECT psl.lastcheck as `lastcheck`, result, error, ' . $dncolumn . ', type,
-		UNIX_TIMESTAMP(psl.lastcheck) AS secs
+	// servcheck < 0.4 uses another name
+	$lchcolumn = db_fetch_cell("SELECT COLUMN_NAME FROM information_schema.columns
+		WHERE TABLE_NAME = 'plugin_servcheck_test' AND COLUMN_NAME = 'last_check'");
+
+	if (!$lchcolumn) {
+		$lchcolumn = 'lastcheck';
+	}
+
+	$logs = db_fetch_assoc('SELECT psl.' . $lchcolumn . '  as `lastcheck`, result, result_search, error, ' . $dncolumn . ', type,
+		UNIX_TIMESTAMP(psl.' . $lchcolumn. ') AS secs
 		FROM plugin_servcheck_log AS psl
 		LEFT JOIN plugin_servcheck_test AS pst
 		ON psl.test_id = pst.id
-		ORDER BY psl.lastcheck DESC
+		ORDER BY psl.' . $lchcolumn . ' DESC
 		LIMIT 40');
 
 	$panel['detail'] = '<table class="cactiTable"><tr class="tableHeader">';
@@ -611,6 +629,7 @@ function servcheck_detail() {
 		'<th class="left">' . __('Test', 'intropage') . '</th>' .
 		'<th class="left">' . __('Type', 'intropage') . '</th>' .
 		'<th class="right">' . __('Result', 'intropage') . '</th>' .
+		'<th class="right">' . __('Search result', 'intropage') . '</th>' .
 		'<th class="right">' . __('Error', 'intropage') . '</th>' .
 	'</tr>';
 
@@ -635,7 +654,7 @@ function servcheck_detail() {
 			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed') . '</td>';
 		}
 
-		$panel['detail'] .= '<td class="right">' . $log['result'] . '</td>';
+		$panel['detail'] .= '<td class="right">' . $log['result_search'] . '</td>';
 		$panel['detail'] .= '<td class="right">' . $log['error'] . '</td></tr>';
 
 		if ($color == 'red') {
