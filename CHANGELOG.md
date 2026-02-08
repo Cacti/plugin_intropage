@@ -20,6 +20,7 @@
 * feature#341: Add info about disabled notify admin 
 * feature#350: Add poller host errors (Cacti 1.3+)
 * Add CI workflow and Custom Agents
+* issue: Fix servcheck plugin panel 
 
 --- 4.0.4 ---
 
