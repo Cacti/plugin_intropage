@@ -615,7 +615,7 @@ function servcheck_detail() {
 	}
 
 	$logs = db_fetch_assoc('SELECT psl.' . $lchcolumn . '  as `lastcheck`, result, result_search, error, ' . $dncolumn . ', type,
-		UNIX_TIMESTAMP(psl.' . $lchcolumn. ') AS secs
+		UNIX_TIMESTAMP(psl.' . $lchcolumn . ') AS secs
 		FROM plugin_servcheck_log AS psl
 		LEFT JOIN plugin_servcheck_test AS pst
 		ON psl.test_id = pst.id
