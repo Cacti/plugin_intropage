@@ -1,7 +1,7 @@
 <?php
 /* vim: ts=4
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2025 The Cacti Group, Inc.                           |
+ | Copyright (C) 2004-2026 The Cacti Group, Inc.                           |
  | Copyright (C) 2004-2025 Petr Macek                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
