@@ -132,7 +132,7 @@ function register_analyze() {
 function analyse_login($panel, $user_id) {
 	global $config;
 
-	$lines            = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines            = intropage_get_lines($user_id);
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
 
 	if ($important_period == -1) {
