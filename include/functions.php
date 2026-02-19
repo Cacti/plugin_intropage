@@ -2096,7 +2096,6 @@ function human_readable($bytes, $decimal = true, $precision = 2) {
 }
 
 function get_panel_lines_count($height, $user_id) {
-
 	$lines = intropage_get_lines($user_id);
 
 	if (!is_numeric($lines)) {
@@ -2111,7 +2110,6 @@ function get_panel_lines_count($height, $user_id) {
 }
 
 function intropage_get_lines($user_id) {
-
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
 	if (!is_numeric($lines) || $lines <= 0) {
