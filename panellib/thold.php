@@ -214,7 +214,7 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 	} elseif (api_plugin_user_realm_auth('thold_graph.php')) {
 		if ($timespan == 0) {
 			if (isset($_SESSION['sess_user_id'])) {
-				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), false, $_SESSION['sess_user_id']);
 			} else {
 				$timespan = $panel['refresh'];
 			}

@@ -272,7 +272,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
 
 		if ($timespan == 0) {
 			if (isset($_SESSION['sess_user_id'])) {
-				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), $_SESSION['sess_user_id']);
+				$timespan = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'), false, $_SESSION['sess_user_id']);
 			} else {
 				$timespan = $panel['refresh'];
 			}

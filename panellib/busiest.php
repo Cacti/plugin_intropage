@@ -609,7 +609,7 @@ function busiest_traffic($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), $_SESSION['sess_user_id']);
+	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), false, $_SESSION['sess_user_id']);
 
 	if (read_config_option('dsstats_enable') != 'on') {
 		$panel['data'] = __('Panel needs DS stats enabled.', 'intropage') . '<br/>';
@@ -1436,7 +1436,7 @@ function busiest_traffic_detail() {
 		return ($panel);
 	}
 
-	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), $_SESSION['sess_user_id']);
+	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), false, $_SESSION['sess_user_id']);
 
 	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
 
