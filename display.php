@@ -76,7 +76,7 @@ function display_information() {
 	$autorefresh             = read_user_setting('intropage_autorefresh', read_config_option('intropage_autorefresh'));
 	$important_period        = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'));
 	$timespan                = read_user_setting('intropage_timespan', read_config_option('intropage_timespan'));
-	$number_of_lines         = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'));
+	$number_of_lines         = intropage_get_lines($_SESSION['sess_user_id']);
 
 	// number of dashboards
 	$number_of_dashboards = db_fetch_cell_prepared('SELECT COUNT(*)

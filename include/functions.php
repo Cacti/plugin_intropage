@@ -1250,7 +1250,7 @@ function update_registered_panels($panels) {
 function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 	global $config, $graph_timeshifts;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $_SESSION['sess_user_id']);
+	$lines = intropage_get_lines($_SESSION['sess_user_id']);
 
 	if ($lines == 5) {
 		$graph_height = 100;
@@ -1298,7 +1298,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 function intropage_prepare_graph($dispdata, $user_id) {
 	global $config;
 
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = intropage_get_lines($user_id);
 
 	if ($lines == 5) {
 		$graph_height = 180;
@@ -2096,7 +2096,7 @@ function human_readable($bytes, $decimal = true, $precision = 2) {
 }
 
 function get_panel_lines_count($height, $user_id) {
-	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+	$lines = intropage_get_lines($user_id);
 
 	if (!is_numeric($lines)) {
 		$lines = 5;
@@ -2104,6 +2104,16 @@ function get_panel_lines_count($height, $user_id) {
 		$lines *= 2;
 	} elseif ($height == 'triple') {
 		$lines *= 3;
+	}
+
+	return $lines;
+}
+
+function intropage_get_lines($user_id) {
+	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
+
+	if (!is_numeric($lines) || $lines <= 0) {
+		$lines = 5;
 	}
 
 	return $lines;
