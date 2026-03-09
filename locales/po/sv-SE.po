@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-10-25 08:48+0000\n"
+"PO-Revision-Date: 2026-03-10 07:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -31,7 +31,7 @@ msgstr "En eller flera paneler togs bort på grund av otillräcklig behörighet.
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 "Du kan inaktivera raderna ovan i <b>Konfigurera > Inställningar > Allmänt > "
-"Dölj Cacti-kontrollpanel</b> och använda hela sidan för Introsida "
+"Dölj Cacti Dashboard</b> och använd hela sidan för Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -163,8 +163,9 @@ msgstr "Använd delad kontrollpanel"
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr ""
-"Det går inte att använda delad kontrollpanel – gränsen för kontrollpanelen "
-"har nåtts."
+"Kan inte använda delad instrumentpanel - instrumentpanelens gräns nådd.Det "
+"går inte att använda delad kontrollpanel – gränsen för kontrollpanelen har "
+"nåtts."
 
 #: display.php:443
 msgid "No shared dashboards"
@@ -197,8 +198,8 @@ msgstr "Du kan dela kontrollpaneler med andra användare:"
 #: display.php:475
 msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
 msgstr ""
-"använd alternativet \"Dela denna kontrollpanel\" i menyn Åtgärder – Alla "
-"användare kan använda den som mall."
+"använd \\använd alternativet \"Dela denna kontrollpanel\" i menyn Åtgärder – "
+"Alla användare kan använda den som mall."
 
 #: display.php:480
 msgid "You can use shared dashboard using the Actions menu:"
@@ -207,8 +208,8 @@ msgstr "Du kan använda delad kontrollpanel med hjälp av menyn Åtgärder:"
 #: display.php:482
 msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
 msgstr ""
-"Använd \"Använd delad kontrollpanel (användare/kontrollpanelsnamn) – Den "
-"förbereder samma kontrollpanel som delad men med dina behörigheter."
+"Använd \\Använd \"Använd delad kontrollpanel (användare/kontrollpanelsnamn) –"
+" Den förbereder samma kontrollpanel som delad men med dina behörigheter."
 
 #: display.php:487
 msgid "Customization:"
@@ -217,8 +218,9 @@ msgstr "Anpassning:"
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
 msgstr ""
-"Du kan skapa upp till 9 kontrollpaneler. Varje kontrollpanel kan namnges, "
-"använd ikonen"
+"Du kan skapa upp till 9 dashboards. Varje instrumentpanel kan namnges, "
+"använd ikonDu kan skapa upp till 9 kontrollpaneler. Varje kontrollpanel kan "
+"namnges, använd ikonen"
 
 #: display.php:490
 msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
@@ -267,8 +269,10 @@ msgstr "Kontrollpanelen har lagts till"
 #: include/functions.php:298
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
 msgstr ""
-"Det går inte att lägga till zoomat eller anpassat diagram med tidsintervall, "
-"ändra tidsintervall till Senaste halvtimmen"
+"Det går inte att lägga till zoomad eller anpassad graf med tidsintervall, "
+"ändra tidsintervall till Senaste halvtimmenDet går inte att lägga till "
+"zoomat eller anpassat diagram med tidsintervall, ändra tidsintervall till "
+"Senaste halvtimmen"
 
 #: include/functions.php:419
 msgid "Intropage Panel Library Refreshed from Panel Library"
@@ -349,14 +353,17 @@ msgstr "%s dygn"
 #: include/functions.php:883
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
 msgstr ""
-"Inga data hittades.  Antingen tvinga uppdatering eller vänta på nästa Cacti-"
-"pollningscykel."
+"Inga data närvarande.  Antingen tvinga fram uppdatering eller vänta på nästa "
+"Cacti Polling-cykel.Inga data hittades.  Antingen tvinga uppdatering eller "
+"vänta på nästa Cacti-pollningscykel."
 
 #: include/functions.php:885
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
 msgstr ""
-"Inga data hittades.  Den här panelen tillåter inte tvingade uppdateringar.  "
-"Du måste vänta tills Cactis pollare utför kontrollen."
+"Inga data närvarande.  Den här panelen tillåter inte forcerade "
+"uppdateringar.  Du måste vänta tills Cacti's pollare utför kontrollen.Inga "
+"data hittades.  Den här panelen tillåter inte tvingade uppdateringar.  Du "
+"måste vänta tills Cactis pollare utför kontrollen."
 
 #: include/functions.php:1363
 msgid "Disable panel"
@@ -377,8 +384,10 @@ msgstr "Läser in data ..."
 #: include/functions.php:1387
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
 msgstr ""
-"Ingen data hittades.  Vänta antingen på nästa kontroll, <br/>eller använd "
-"Tvinga uppdatering om det finns tillgängligt."
+"Inga data hittades.  Antingen väntar du på nästa kontroll eller så använder "
+"du Force Reload om det finns tillgängligt.Ingen data hittades.  Vänta "
+"antingen på nästa kontroll, <br/>eller använd Tvinga uppdatering om det "
+"finns tillgängligt."
 
 #: include/functions.php:1410
 msgid "Panels ..."
@@ -444,7 +453,10 @@ msgid "Panels that are appropriate for administrative or power users to access a
 msgstr ""
 "Paneler som är lämpliga för administratörer eller avancerade användare och "
 "som vanligtvis inte är tillämpliga för vanliga användare.  Panelerna handlar "
-"i allmänhet om övergripande systemanvändning."
+"i allmänhet om övergripande systemanvändning.Paneler som är lämpliga för "
+"administratörer eller avancerade användare och som vanligtvis inte är "
+"tillämpliga för vanliga användare.  Panelerna handlar i allmänhet om "
+"övergripande systemanvändning."
 
 #: include/settings.php:159
 msgid "User Level Panels"
@@ -454,7 +466,9 @@ msgstr "Paneler på användarnivå"
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
 msgstr ""
 "Paneler som är lämpliga för allmänna användare att komma åt.  Behörigheterna "
-"är begränsade till vad den aktuella användaren kan visa."
+"är begränsade till vad den aktuella användaren kan visa.Paneler som är "
+"lämpliga för allmänna användare att komma åt.  Behörigheterna är begränsade "
+"till vad den aktuella användaren kan visa."
 
 #: include/settings.php:203
 msgid "You can Allow/Disallow Panels for User"
@@ -483,8 +497,8 @@ msgstr "Viktiga saker kommer att vara högst upp"
 #: include/variables.php:40
 msgid "If checked Intropage displays important (errors, warnings) information first"
 msgstr ""
-"Om markerad kommer Introsida att visa viktig information (fel, varningar) "
-"först"
+"Om markerad Intropage visar viktig information (fel, varningar) förstOm "
+"markerad kommer Introsida att visa viktig information (fel, varningar) först"
 
 #: include/variables.php:45
 msgid "Display more panels on a line"
@@ -501,8 +515,9 @@ msgstr "Avinstallera paneler automatiskt"
 #: include/variables.php:52
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
 msgstr ""
-"Om en panel är installerad och det tillägget som krävs tas bort, "
-"avinstalleras panelen också automatiskt"
+"Om en panel är installerad och det plugin som krävs tas bort, avinstalleras "
+"panelen också automatisktOm en panel är installerad och det tillägget som "
+"krävs tas bort, avinstalleras panelen också automatiskt"
 
 #: include/variables.php:57
 msgid "Automatic Page Refresh"
@@ -593,8 +608,9 @@ msgstr "Tidsgräns för pollare"
 #: include/variables.php:102
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
-"Den tid, i minuter, som Introsidans bakgrundspollare kan köras innan den "
-"avbryts och dödas av Cacti."
+"Den tid, i minuter, som Intropages bakgrundspolering kan köras innan den "
+"avbryts och dödas av Cacti.Den tid, i minuter, som Introsidans "
+"bakgrundspollare kan köras innan den avbryts och dödas av Cacti."
 
 #: include/variables.php:106 setup.php:99
 #, php-format
@@ -623,7 +639,9 @@ msgstr "Analysera logg - antal rader"
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr ""
 "Hur många rader av loggen som ska analyseras. Rader = i panelen, 2x rader = "
-"i detalj. Stort antal kan orsaka långsam sidladdning"
+"i detalj. Stort antal kan orsaka långsam sidladdningHur många rader av "
+"loggen som ska analyseras. Rader = i panelen, 2x rader = i detalj. Stort "
+"antal kan orsaka långsam sidladdning"
 
 #: include/variables.php:124
 msgid "How often analyze DB"
@@ -707,13 +725,15 @@ msgstr "Hur ofta kontrollera DNS"
 #: include/variables.php:186
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
 msgstr ""
-"Admin Informationspanel om underhållsuppgifter, enheter som är nere, ..."
+"Admin Informationspanel om underhållsuppgifter, nedmonterade enheter, "
+"...Admin Informationspanel om underhållsuppgifter, enheter som är nere, ..."
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr ""
 "Om den inte är tom kommer Panel att visas överst. Du kan använda html-taggar "
-"(b, i, ...)."
+"(b, i, ...).Om den inte är tom kommer Panel att visas överst. Du kan använda "
+"html-taggar (b, i, ...)."
 
 #: include/variables.php:195
 msgid "Upcoming Maint Schedule warning days"
@@ -774,8 +794,9 @@ msgstr "Avbrutna klienter för larm-DB-kontroll"
 #: include/variables.php:307
 msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
 msgstr ""
-"Om den här händelsen har inträffat utlöses den valda statusfärgen Normal, "
-"Varning eller Larm."
+"Om denna händelse har inträffat utlöses den valda statusfärgen Normal, "
+"Varning eller Alert.Om den här händelsen har inträffat utlöses den valda "
+"statusfärgen Normal, Varning eller Larm."
 
 #: include/variables.php:229
 msgid "Alarm Host with the same Description"
@@ -832,8 +853,9 @@ msgstr "Larm Röd/Gul pollningstid"
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
 msgstr ""
-"Pollningstider över dessa tröskelvärden utlöser en varnings- eller "
-"larmstatusfärg."
+"Pollningstider över dessa tröskelvärden kommer att utlösa en statusfärg för "
+"Varning eller Alarm.Pollningstider över dessa tröskelvärden utlöser en "
+"varnings- eller larmstatusfärg."
 
 #: include/variables.php:318
 msgid "5s  / 10s Yellow / Red"
@@ -855,6 +877,8 @@ msgstr "Larm Röd/Gul Misslyckades/Alla-förhållande"
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr ""
 "Förhållandet mellan misslyckade tillgänglighetskontroller och lyckade "
+"kontroller för att statusfärgen ska utlösas som Varning eller "
+"Alert.Förhållandet mellan misslyckade tillgänglighetskontroller och lyckade "
 "kontroller som ska utlösas som varnings- eller larmstatusfärg."
 
 #: include/variables.php:329
@@ -876,7 +900,9 @@ msgstr "Larm Röd/gul Ping"
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
 msgstr ""
-"Ping-latens över dessa nivåer utlöser en varnings- eller larmstatusfärg."
+"Ping-latenstider över dessa nivåer utlöser en statusfärg för Varning eller "
+"Alert.Ping-latens över dessa nivåer utlöser en varnings- eller "
+"larmstatusfärg."
 
 #: include/variables.php:340
 msgid "10ms  / 20ms Yellow / Red"
@@ -964,7 +990,9 @@ msgstr "Analyspaneler"
 #: panellib/analyze.php:32
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
 msgstr ""
-"Paneler som analyserar det aktuella beteendet hos Cacti och dess tillägg."
+"Paneler som analyserar det aktuella beteendet hos Cacti och dess "
+"plugins.Paneler som analyserar det aktuella beteendet hos Cacti och dess "
+"tillägg."
 
 #: panellib/analyze.php:37
 msgid "Analyze Logins"
@@ -981,7 +1009,9 @@ msgstr "Analysera loggar"
 #: panellib/analyze.php:54
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
 msgstr ""
-"Leta efter vanliga fel i Cactis loggfil som bör vara en anledning till oro."
+"Leta efter vanliga fel i Cactis loggfil som bör vara en anledning till "
+"oro.Leta efter vanliga fel i Cactis loggfil som bör vara en anledning till "
+"oro."
 
 #: panellib/analyze.php:69
 msgid "Database Checks"
@@ -991,7 +1021,9 @@ msgstr "Databaskontroller"
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
 msgstr ""
 "Analysera MySQL/MariaDB-databasen för vanliga fel.  Observera att den här "
-"processen kan ta lång tid på mycket stora system."
+"processen kan ta lång tid på mycket stora system.Analysera MySQL/MariaDB-"
+"databasen för vanliga fel.  Observera att den här processen kan ta lång tid "
+"på mycket stora system."
 
 #: panellib/analyze.php:85
 msgid "Analyze Cacti Objects"
@@ -1115,7 +1147,7 @@ msgstr "Du kan öka den maximala anslutningen via kommandoradsverktyg eller perm
 #, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr ""
-"Fel i anslutningen: %s - försök att starta om SQL-tjänsten, kontrollera SQL-"
+"Anslutningsfel: %s - försök att starta om SQL-tjänsten, kontrollera SQL-"
 "loggen, ..."
 
 #: panellib/analyze.php:518
@@ -1177,8 +1209,8 @@ msgstr "Inte optimerade enheter för Bulk Walk-storlek: %s"
 #: panellib/analyze.php:614 panellib/analyze.php:1431
 msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
 msgstr ""
-"Ta en titt på enhetsparametern \"Bulk Walk Maximala repetitioner\". Du kan "
-"förbättra din pollningsprestanda"
+"Vänligen ta en titt på enhetsparametern \\Ta en titt på enhetsparametern "
+"\"Bulk Walk Maximala repetitioner\". Du kan förbättra din pollningsprestanda"
 
 #: panellib/analyze.php:620 panellib/analyze.php:1454
 msgid "Reindex last run"
@@ -1507,7 +1539,8 @@ msgstr "Väntar på data eller så har du inte behörighet för någon enhet med
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
 msgstr ""
 "Du har inte behörighet till några värdar eller så finns det ingen värd med "
-"den här mallen"
+"den här mallenDu har inte behörighet till några värdar eller så finns det "
+"ingen värd med den här mallen"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
@@ -1561,7 +1594,9 @@ msgstr "Grafiska paneler"
 #: panellib/graphs.php:32
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
 msgstr ""
-"Paneler som ger information om Cacti och dess tillägg på ett grafiskt sätt."
+"Paneler som ger information om Cacti och dess plugins på ett grafiskt "
+"sätt.Paneler som ger information om Cacti och dess tillägg på ett grafiskt "
+"sätt."
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
@@ -1766,8 +1801,9 @@ msgstr "NTP/DNS-status"
 #: panellib/misc.php:38
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
 msgstr ""
-"Kontrollerar Cacti-systemklockan för avvikelse från en känd baslinje och "
-"kontroll av DNS-upplösning"
+"Kontroll av Cacti-systemklockan för drift från en känd baslinje och kontroll "
+"av DNS-upplösningKontrollerar Cacti-systemklockan för avvikelse från en känd "
+"baslinje och kontroll av DNS-upplösning"
 
 #: panellib/misc.php:53
 msgid "Maint Plugin Details"
@@ -1863,7 +1899,8 @@ msgstr "Tillägget Webseer är inte installerat eller startat"
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
 msgstr ""
-"Webseer-tillägget stöds inte längre, använd tillägget servcheck istället"
+"Webseer plugin stöds inte längre, använd plugin servcheck iställetWebseer-"
+"tillägget stöds inte längre, använd tillägget servcheck istället"
 
 #: panellib/misc.php:320 panellib/misc.php:486
 msgid "Number of checks (all/disabled): "
@@ -2086,8 +2123,9 @@ msgstr "24 timmars extremiteter"
 #: panellib/system.php:86
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
 msgstr ""
-"Tabell med 24 timmars extremvärden för pollning (längsta pollningskörning, "
-"värdar som är nere)"
+"Tabell med 24 timmars extremvärden för polling (längsta pollingkörning, "
+"lägsta värd)Tabell med 24 timmars extremvärden för pollning (längsta "
+"pollningskörning, värdar som är nere)"
 
 #: panellib/system.php:101
 msgid "CPU Utilization"
@@ -2316,7 +2354,9 @@ msgstr "Övre/nedre 5 paneler"
 #: panellib/top5.php:32
 msgid "Panels that provide information trending information about Cacti data collection."
 msgstr ""
-"Paneler som ger information om trendinformation om datainsamling för Cacti."
+"Paneler som ger information om trendinformation om datainsamling om "
+"kaktusar.Paneler som ger information om trendinformation om datainsamling "
+"för Cacti."
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
