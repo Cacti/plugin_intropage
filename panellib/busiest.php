@@ -218,9 +218,9 @@ function busiest_cpu($panel, $user_id) {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			ORDER BY dsh.average DESC
-			LIMIT ' . $lines;
+			LIMIT ' . (int) $lines;
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -335,9 +335,9 @@ function busiest_load($panel, $user_id) {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			ORDER BY dsh.average DESC
-			LIMIT ' . $lines;
+			LIMIT ' . (int) $lines;
 
 		$avg    = db_fetch_cell('SELECT AVG(average)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -445,9 +445,9 @@ function busiest_hdd($panel, $user_id) {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.rrd_name = 'hdd_used'
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			ORDER BY xvalue DESC
-			LIMIT ' . $lines;
+			LIMIT ' . (int) $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -461,7 +461,7 @@ function busiest_hdd($panel, $user_id) {
 			ON dl.id = dtd.local_data_id
 			WHERE dsh.rrd_name = 'hdd_used'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'];
+			AND dtd.data_template_id = " . (int) $ds['id'];
 
 		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
 		$avg  = 0;
@@ -561,7 +561,7 @@ function busiest_uptime($panel, $user_id) {
 			WHERE disabled != 'on'
 			$q_host_cond
 			ORDER BY snmp_sysUpTimeInstance DESC
-			LIMIT " . $lines;
+			LIMIT " . (int) $lines;
 
 		$avg    = db_fetch_cell('SELECT AVG(snmp_sysUpTimeInstance)' . $query);
 		$result = db_fetch_assoc("SELECT $columns $query");
@@ -656,10 +656,10 @@ function busiest_traffic($panel, $user_id) {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . (int) $ds['id'] . "
 			AND rrd_name = 'traffic_out'
 			ORDER BY xvalue DESC
-			LIMIT " . $lines;
+			LIMIT " . (int) $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
@@ -668,7 +668,7 @@ function busiest_traffic($panel, $user_id) {
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
 
 		$query = ' FROM data_template_data AS dtd LEFT JOIN data_source_stats_hourly AS dsh ON dtd.local_data_id = dsh.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			WHERE dtd.data_template_id = ' . (int) $ds['id'] . '
 			AND rrd_name=\'traffic_out\' ';
 
 		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
@@ -787,17 +787,17 @@ function busiest_interface_error($panel, $user_id) {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			AND dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
-			LIMIT ' . $lines;
+			LIMIT ' . (int) $lines;
 
 		$result = db_fetch_assoc("SELECT $columns $query");
 
 		$query = ' FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			WHERE dtd.data_template_id = ' . (int) $ds['id'] . '
 			AND dsh.average IS NOT NULL';
 
 		$avg = db_fetch_cell('SELECT AVG(average)' . $query);
@@ -907,7 +907,7 @@ function busiest_interface_util($panel, $user_id) {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			AND value > 0
 			AND time > DATE_SUB(NOW(), INTERVAL 5 MINUTE)
 			ORDER BY value DESC');
@@ -1031,7 +1031,7 @@ function busiest_cpu_detail() {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			ORDER BY dsh.average DESC
 			LIMIT 30';
 
@@ -1144,7 +1144,7 @@ function busiest_load_detail() {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.average IS NOT NULL
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			ORDER BY dsh.average DESC
 			LIMIT 30';
 
@@ -1259,7 +1259,7 @@ function busiest_hdd_detail() {
 			WHERE h.disabled != 'on'
 			$q_host_cond
 			AND dsh.rrd_name = 'hdd_used'
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			ORDER BY xvalue DESC
 			LIMIT 30';
 
@@ -1275,7 +1275,7 @@ function busiest_hdd_detail() {
 			ON dl.id=dtd.local_data_id
 			WHERE dsh.rrd_name = 'hdd_used'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'];
+			AND dtd.data_template_id = " . (int) $ds['id'];
 
 		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
 		$avg  = 0;
@@ -1469,7 +1469,7 @@ function busiest_traffic_detail() {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . "
+			AND dtd.data_template_id = " . (int) $ds['id'] . "
 			AND rrd_name = 'traffic_out'
 			ORDER BY xvalue DESC
 			LIMIT 30";
@@ -1482,7 +1482,7 @@ function busiest_traffic_detail() {
 		$query = ' FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			WHERE dtd.data_template_id = ' . (int) $ds['id'] . '
 			AND rrd_name = \'traffic_out\' ';
 
 		$xavg = db_fetch_assoc('SELECT ' . $columns . ' ' . $query);
@@ -1604,7 +1604,7 @@ function busiest_interface_error_detail() {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			AND dsh.average IS NOT NULL
 			ORDER BY dsh.average DESC
 			LIMIT 30';
@@ -1614,7 +1614,7 @@ function busiest_interface_error_detail() {
 		$query = ' FROM data_template_data AS dtd
 			LEFT JOIN data_source_stats_hourly AS dsh
 			ON dtd.local_data_id = dsh.local_data_id
-			WHERE dtd.data_template_id = ' . $ds['id'] . '
+			WHERE dtd.data_template_id = ' . (int) $ds['id'] . '
 			AND dsh.average IS NOT NULL';
 
 		$avg = db_fetch_cell('SELECT AVG(average)' . $query);
@@ -1727,7 +1727,7 @@ function busiest_interface_util_detail() {
 			LEFT JOIN host as h on h.id = dl.host_id
 			WHERE h.disabled != 'on'
 			$q_host_cond
-			AND dtd.data_template_id = " . $ds['id'] . '
+			AND dtd.data_template_id = " . (int) $ds['id'] . '
 			AND value > 0
 			AND time > date_sub(now(), INTERVAL 5 MINUTE)
 			ORDER BY value DESC');

@@ -222,7 +222,7 @@ function intropage_user_admin_run_action($current_tab) {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_intropage_user_edit, (isset($user) ? $user : []))
+			'fields' => inject_form_variables($fields_intropage_user_edit, ($user ?? []))
 		]
 	);
 
@@ -354,7 +354,7 @@ function intropage_user_group_admin_run_action($current_tab) {
 	draw_edit_form(
 		[
 			'config' => ['no_form_tag' => true],
-			'fields' => inject_form_variables($fields_intropage_group_edit, (isset($group) ? $group : []))
+			'fields' => inject_form_variables($fields_intropage_group_edit, ($group ?? []))
 		]
 	);
 
@@ -434,9 +434,9 @@ function intropage_user_admin_user_save($save) {
 
 					$save['last_update']      = '0000-00-00';
 					$save['data']             = '';
-					$save['priority']         = (isset($panel['priority']) ? $panel['priority'] : 99);
-					$save['alarm']            = (isset($panel['alarm']) ? $panel['alarm'] : 'green');
-					$save['refresh_interval'] = (isset($panel['refresh']) ? $panel['refresh'] : 300);
+					$save['priority']         = ($panel['priority'] ?? 99);
+					$save['alarm']            = ($panel['alarm'] ?? 'green');
+					$save['refresh_interval'] = ($panel['refresh'] ?? 300);
 
 					$id = sql_save($save, 'plugin_intropage_panel_data');
 				}
