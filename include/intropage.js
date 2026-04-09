@@ -25,7 +25,7 @@
 $(function() {
 	$('.grid_item').css('background-color', $('body').css('background-color'));
 
-	$(window).resize(function() {
+	$(window).on('resize', function() {
 		resizeGraphsPanel();
 		resizeCharts();
 	});
@@ -202,15 +202,15 @@ function setPageRefresh() {
 }
 
 function initPage() {
-	$('#intropage_addpanel').unbind().change(function() {
+	$('#intropage_addpanel').off().on('change', function() {
 		addPanel();
 	});
 
-	$('#intropage_action').unbind().change(function() {
+	$('#intropage_action').off().on('change', function() {
 		actionPanel();
 	});
 
-	$('#intropage_action_timespan').unbind().change(function() {
+	$('#intropage_action_timespan').off().on('change', function() {
 		timeSpan();
 	});
 
@@ -303,7 +303,7 @@ function initPage() {
 		}
 	});
 
-	$('.droppanel').click(function(event) {
+	$('.droppanel').on('click', function(event) {
 		event.preventDefault();
 
 		var panel_div_id = $(this).attr('data-panel');
@@ -319,7 +319,7 @@ function initPage() {
 					checkForRedirects(data, url);
 
 					$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
-					$('#intropage_addpanel').selectmenu().unbind().change(function() {
+					$('#intropage_addpanel').selectmenu().off().on('change', function() {
 
 						addPanel();
 					});
@@ -376,7 +376,7 @@ function initPage() {
 				title: intropage_text_panel_details,
 			});
 
-			$('#block').click(function() {
+			$('#block').on('click', function() {
 				$('#overlay').dialog('close');
 			});
 		})
