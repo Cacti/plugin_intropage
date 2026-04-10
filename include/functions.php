@@ -1341,7 +1341,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 				$columns[] = array_merge([$dispdata['line']["title$i"]], $dispdata['line']["data$i"]);
 
 				if (isset($dispdata['line']['unit2']['series'])) {
-					if (in_["data$i", $dispdata['line']['unit2']['series'], true]) {
+					if (in_array("data$i", $dispdata['line')['unit2']['series'], true]) {
 						$axes[$dispdata['line']["title$i"]] = 'y2';
 					} else {
 						$axes[$dispdata['line']["title$i"]] = 'y';
