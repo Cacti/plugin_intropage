@@ -313,7 +313,7 @@ function intropage_upgrade_database() {
 			api_plugin_db_table_create('intropage', 'plugin_intropage_user_group_auth', $data);
 
 			api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php', '1');
-			api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'includes/settings.php', '1');
+			api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php', '1');
 			api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php', '1');
 			api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php', '1');
 		}
@@ -323,7 +323,9 @@ function intropage_upgrade_database() {
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
 			db_execute('ALTER TABLE plugin_intropage_panel_data
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
+			db_execute("UPDATE plugin_hooks SET file='include/settings.php' WHERE name='intropage' AND file='includes/settings.php'");
 		}
+
 
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config

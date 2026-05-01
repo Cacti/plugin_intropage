@@ -43,18 +43,18 @@ function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 
 	// user and user group hooks
-	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
 	api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php');
 
 	// default permission for new user
-	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'includes/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
 
 	api_plugin_register_realm('intropage', 'intropage.php', 'Intropage Viewer', 1);
 	api_plugin_register_realm('intropage', 'intropage_admin.php', 'Intropage Administration', 1);
