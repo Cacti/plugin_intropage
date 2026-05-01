@@ -7,6 +7,7 @@
 * issue#327: Move Timespan from action menu
 * issue#330: Fix cannot add favourite graph to dashboard
 * issue#344: Fix navigation
+* issue#369: Fix invalid paths in plugin_hooks
 * issue: Fix support for Cacti 1.3+
 * issue: Intropage was not remembering the users desired panel order
 * issue: When 'Important First' is set, do a full refresh
