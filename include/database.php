@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /* vim: ts=4
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group, Inc.                           |
@@ -327,7 +327,6 @@ function intropage_upgrade_database() {
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
 			db_execute("UPDATE plugin_hooks SET file='include/settings.php' WHERE name='intropage' AND file='includes/settings.php'");
 		}
-
 
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config
