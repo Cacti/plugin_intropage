@@ -12,43 +12,45 @@
  * can be loaded in isolation without the full Cacti application.
  */
 
-$GLOBALS['__test_db_calls'] = array();
+$GLOBALS['__test_db_calls'] = [];
 
 if (!function_exists('db_execute')) {
 	function db_execute($sql) {
-		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute', 'sql' => $sql, 'params' => array());
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_execute', 'sql' => $sql, 'params' => []];
+
 		return true;
 	}
 }
 
 if (!function_exists('db_execute_prepared')) {
-	function db_execute_prepared($sql, $params = array()) {
-		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params);
+	function db_execute_prepared($sql, $params = []) {
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_execute_prepared', 'sql' => $sql, 'params' => $params];
+
 		return true;
 	}
 }
 
 if (!function_exists('db_fetch_assoc')) {
 	function db_fetch_assoc($sql) {
-		return array();
+		return [];
 	}
 }
 
 if (!function_exists('db_fetch_assoc_prepared')) {
-	function db_fetch_assoc_prepared($sql, $params = array()) {
-		return array();
+	function db_fetch_assoc_prepared($sql, $params = []) {
+		return [];
 	}
 }
 
 if (!function_exists('db_fetch_row')) {
 	function db_fetch_row($sql) {
-		return array();
+		return [];
 	}
 }
 
 if (!function_exists('db_fetch_row_prepared')) {
-	function db_fetch_row_prepared($sql, $params = array()) {
-		return array();
+	function db_fetch_row_prepared($sql, $params = []) {
+		return [];
 	}
 }
 
@@ -59,7 +61,7 @@ if (!function_exists('db_fetch_cell')) {
 }
 
 if (!function_exists('db_fetch_cell_prepared')) {
-	function db_fetch_cell_prepared($sql, $params = array()) {
+	function db_fetch_cell_prepared($sql, $params = []) {
 		return '';
 	}
 }

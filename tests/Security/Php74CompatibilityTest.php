@@ -13,13 +13,13 @@
  */
 
 describe('PHP 7.4 compatibility in intropage', function () {
-	$files = array(
+	$files = [
 		'display.php',
 		'include/database.php',
 		'include/functions.php',
 		'intropage.php',
 		'setup.php',
-	);
+	];
 
 	it('does not use str_contains (PHP 8.0)', function () use ($files) {
 		foreach ($files as $relativeFile) {
