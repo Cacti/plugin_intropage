@@ -1494,7 +1494,7 @@ function analyse_tree_host_graph_detail() {
 			foreach ($data as $row) {
 				$sql_hosts = db_fetch_assoc('SELECT id, description, hostname
 					FROM host
-					WHERE hostname = ' . db_qstr($row['hostname']) . ' AND snmp_port=' . $row['snmp_port']);
+					WHERE hostname = ' . db_qstr($row['hostname']) . ' AND snmp_port=' . (int) $row['snmp_port']);
 
 				if (cacti_sizeof($sql_hosts)) {
 					foreach ($sql_hosts as $row2) {
@@ -1805,7 +1805,7 @@ function analyse_tree_host_graph_detail() {
 						$tree   = $host['name'] . ' / ';
 
 						while ($parent != 0) {
-							$sql_parent = db_fetch_row('SELECT parent, title FROM graph_tree_items WHERE id = ' . $parent);
+							$sql_parent = db_fetch_row_prepared('SELECT parent, title FROM graph_tree_items WHERE id = ?', [(int) $parent]);
 							$parent     = $sql_parent['parent'];
 							$tree .= $sql_parent['title'] . ' / ';
 						}

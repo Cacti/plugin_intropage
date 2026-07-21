@@ -95,7 +95,7 @@ intropage_debug('Intropage Starting Checks');
 
 // silently end if the registered process is still running, or process table missing
 if (function_exists('register_process_start')) {
-	if (!register_process_start('intropage', 'master', $config['poller_id'], read_config_option('intropage_timeout'))) {
+	if (!register_process_start('intropage', 'master', $config['poller_id'], (int) read_config_option('intropage_timeout'))) {
 		intropage_debug('Another Intropage Process Still Running');
 		exit(0);
 	}

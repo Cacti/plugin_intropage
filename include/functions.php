@@ -811,7 +811,7 @@ function intropage_reload_panel() {
 		}
 
 		$name   = isset($data['name']) ? html_escape($data['name']) : __esc('Not Found', 'intropage');
-		$height = isset($panel['height']) ? $panel['height'] : 'normal';
+		$height = $panel['height'] ?? 'normal';
 		$alarm  = isset($data['alarm']) && $data['alarm'] !== '' ? $data['alarm'] : 'grey';
 
 		print '<div class="panel_header color_' . $alarm . '">';
@@ -986,7 +986,7 @@ function get_panel($panel_id, $user_id = 0) {
 		$refresh_interval = $panel['refresh_interval'];
 		$trend_interval   = $panel['trend_interval'];
 		$next_update      = $last_update + $refresh_interval - time();
-		$panel['height']  = isset($panel['height']) ? $panel['height'] : 'normal';
+		$panel['height']  = $panel['height'] ?? 'normal';
 
 		$panel['name']    = $definition['name'] . __(' [Upd. in %s/%s]', intropage_readable_interval($next_update), intropage_readable_interval($refresh_interval), 'intropage');
 	} else {
@@ -1665,7 +1665,7 @@ function intropage_create_panel($panel_id, $dashboard_id) {
 	} else {
 		$width = $panels[$panel_type]['width'];
 		// we need actual height from db not from panel definition
-		$height = isset($act_height) ? $act_height : 'normal';
+		$height = $act_height ?? 'normal';
 	}
 
 	if ($width == 'quarter-panel') {
@@ -1824,9 +1824,7 @@ function intropage_graph_button($data) {
 	if (is_panel_allowed('favourite_graph')) {
 		$local_graph_id = $data[1]['local_graph_id'];
 
-		if (!isset($_SESSION['sess_current_timespan'])) {
-			$_SESSION['sess_current_timespan'] = read_user_setting('default_timespan');
-		}
+		$_SESSION['sess_current_timespan'] ??= read_user_setting('default_timespan');
 
 		if ($_SESSION['sess_current_timespan'] == 0) { // zoom or custom timespan
 			$fav = '<i class="fa fa-eye-slash" title="' . __esc('Cannot add to Dashboard. Custom timespan.', 'intropage') . '"></i>';
