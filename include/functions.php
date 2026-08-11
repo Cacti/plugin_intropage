@@ -52,14 +52,6 @@ function intropage_get_allowed_devices($user_id) {
 	}
 }
 
-if (!function_exists('array_column')) {
-	function array_column($array,$column_name) {
-		return array_map(function ($element) use ($column_name) {
-			return $element[$column_name];
-		}, $array);
-	}
-}
-
 function process_page_request_variables() {
 	set_default_action();
 
