@@ -473,7 +473,7 @@ function boost($panel, $user_id) {
 			$boost_status_text = __('Timed Out', 'intropage');
 			$panel['alarm']    = 'red';
 		} else {
-			$boost_status_text = __('Other');
+			$boost_status_text = __('Other', 'intropage');
 		}
 	} else {
 		$boost_status_text = __('Never Run', 'intropage');
@@ -501,7 +501,7 @@ function boost($panel, $user_id) {
 
 	$panel['data'] .= '<tr><td><hr></td></tr>';
 
-	$panel['data'] .= '<tr><td>' . __('Processes/Frequency: %s / %s', number_format_i18n($parallel, -1), $rrd_updates == '' ? __('N/A') : $boost_refresh_interval[$update_int], 'intropage') . '</td></tr>';
+	$panel['data'] .= '<tr><td>' . __('Processes/Frequency: %s / %s', number_format_i18n($parallel, -1), $rrd_updates == '' ? __('N/A', 'intropage') : $boost_refresh_interval[$update_int], 'intropage') . '</td></tr>';
 
 	$panel['data'] .= '<tr><td>' . __('Pending Records Threshold: %s', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
 
@@ -534,7 +534,7 @@ function boost($panel, $user_id) {
 	if (is_numeric($boost_last_run_duration)) {
 		$lastduration = $boost_last_run_duration . ' s';
 	} else {
-		$lastduration = __('N/A');
+		$lastduration = __('N/A', 'intropage');
 	}
 
 	$panel['data'] .= '<tr><td><hr></td></tr>';

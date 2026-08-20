@@ -416,7 +416,7 @@ function graph_data_source_detail() {
 	if (cacti_sizeof($sql_ds)) {
 		$panel['detail'] .= '<tr class="tableHeader">
 			<th class="left">' . __('Data Type', 'intropage') . '</th>
-			<th class="right">' . __('Data Sources') . '</th>
+			<th class="right">' . __('Data Sources', 'intropage') . '</th>
 		</tr>';
 
 		$i = 0;
@@ -438,7 +438,7 @@ function graph_data_source_detail() {
 
 		$panel['detail'] .= '</table>';
 	} else {
-		$panel['detail'] = __('No untemplated datasources found');
+		$panel['detail'] = __('No untemplated datasources found', 'intropage');
 	}
 
 	return $panel;

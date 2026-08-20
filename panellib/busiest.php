@@ -269,7 +269,7 @@ function busiest_cpu($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -377,7 +377,7 @@ function busiest_load($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -518,7 +518,7 @@ function busiest_hdd($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -587,7 +587,7 @@ function busiest_uptime($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg / 100) . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts', 'intropage') . '</td><td class="right">' . get_daysfromtime($avg / 100) . '</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device', 'intropage');
@@ -722,7 +722,7 @@ function busiest_traffic($panel, $user_id) {
 				$avg *= 8;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg, false,1) . $units . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg, false,1) . $units . '</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -838,7 +838,7 @@ function busiest_interface_error($panel, $user_id) {
 				$i++;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -965,7 +965,7 @@ function busiest_interface_util($panel, $user_id) {
 				}
 			}
 
-			$panel['data'] .= '<tr><td colspan="2">' . __('Time interval last 5 minutes') . '</td></tr>';
+			$panel['data'] .= '<tr><td colspan="2">' . __('Time interval last 5 minutes', 'intropage') . '</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -1077,9 +1077,9 @@ function busiest_cpu_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
-			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
+			$panel['detail'] .= __('Install TopX plugin for more DS statistics', 'intropage');
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
@@ -1190,9 +1190,9 @@ function busiest_load_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . round($avg, 2) . '</td></tr>';
 			$panel['detail'] .= '</table><br/>';
-			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
+			$panel['detail'] .= __('Install TopX plugin for more DS statistics', 'intropage');
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
@@ -1327,9 +1327,9 @@ function busiest_hdd_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . round($avg, 2) . ' %</td></tr>';
 			$panel['detail'] .= '</table><br/>';
-			$panel['detail'] .= __('Install TopX plugin for more DS statistics');
+			$panel['detail'] .= __('Install TopX plugin for more DS statistics', 'intropage');
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
 		}
@@ -1400,7 +1400,7 @@ function busiest_uptime_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts') . '</td><td class="right">' . get_daysfromtime($avg / 100) . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed hosts', 'intropage') . '</td><td class="right">' . get_daysfromtime($avg / 100) . '</td></tr>';
 			$panel['detail'] .= '</table>';
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device', 'intropage');
@@ -1539,7 +1539,7 @@ function busiest_traffic_detail() {
 				$avg *= 8;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
 			$panel['detail'] .= '</table>';
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -1658,7 +1658,7 @@ function busiest_interface_error_detail() {
 				$i++;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg) . ' Err/Discard</td></tr>';
 			$panel['detail'] .= '</table>';
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');

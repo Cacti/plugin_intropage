@@ -365,12 +365,12 @@ function webseer($panel, $user_id) {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'green';
 					}
-					$text = __('OK');
+					$text = __('OK', 'intropage');
 				} else {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'red';
 					}
-					$text = __('Failed');
+					$text = __('Failed', 'intropage');
 				}
 
 				if ($panel['alarm'] == 'grey' && $color == 'green') {
@@ -443,12 +443,12 @@ function webseer_detail() {
 			if ($log['secs'] > (time() - ($important_period))) {
 				$color = 'green';
 			}
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK', 'intropage') . '</td>';
 		} else {
 			if ($log['secs'] > (time() - ($important_period))) {
 				$color = 'red';
 			}
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed', 'intropage') . '</td>';
 		}
 
 		$panel['detail'] .= '<td class="right">' . $log['http_code'] . '</td>';
@@ -549,12 +549,12 @@ function servcheck($panel, $user_id) {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'green';
 					}
-					$text = __('OK');
+					$text = __('OK', 'intropage');
 				} else {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'red';
 					}
-					$text = __('Failed');
+					$text = __('Failed', 'intropage');
 				}
 
 				if ($panel['alarm'] == 'grey' && $color == 'green') {
@@ -646,12 +646,12 @@ function servcheck_detail() {
 				$color = 'green';
 			}
 
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK', 'intropage') . '</td>';
 		} else {
 			if ($log['secs'] > (time() - ($important_period))) {
 				$color = 'red';
 			}
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed', 'intropage') . '</td>';
 		}
 
 		$panel['detail'] .= '<td class="right">' . $log['result_search'] . '</td>';
