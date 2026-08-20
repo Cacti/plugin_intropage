@@ -126,7 +126,7 @@ function intropage_action_add_panel() {
 
 function intropage_action_settings() {
 	foreach ($_POST as $var => $value) {
-		if (strpos($var, 'name_') !== false) {
+		if (str_contains($var, 'name_')) {
 			$dashboard_id = str_replace('name_', '', $var);
 
 			db_execute_prepared('REPLACE INTO plugin_intropage_dashboard
@@ -769,7 +769,7 @@ function intropage_reload_panel() {
 	if (cacti_sizeof($panel)) {
 		// Force update for chart data always
 
-		if (!is_null($panel['data']) && strpos($panel['data'], '<script') !== false) {
+		if (!is_null($panel['data']) && str_contains($panel['data'], '<script')) {
 			$forced_update = true;
 		}
 

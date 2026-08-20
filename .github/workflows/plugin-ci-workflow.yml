@@ -32,6 +32,41 @@ on:
       - develop
 
 jobs:
+  php80-floor:
+    name: PHP 8.0 syntax floor
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    # INFO declares compat = 1.2.17. Cacti 1.2 ships include/vendor/composer/
+    # platform_check.php, which autoload_real.php requires and which throws on
+    # PHP_VERSION_ID < 80000, so 1.2 cannot boot below 8.0. The integration
+    # matrix starts at 8.1, where 8.1-only syntax lints clean, so nothing else
+    # can catch an enum or a readonly property reaching a 1.2 host.
+    steps:
+    - name: Checkout Plugin
+      uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+
+    - name: Setup PHP 8.0
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+        coverage: none
+
+    - name: Lint runtime files
+      run: |
+        set -euo pipefail
+        status=0
+        while IFS= read -r file; do
+          if ! php -l "$file" > /dev/null 2>&1; then
+            echo "PHP 8.0 syntax error: $file"
+            php -l "$file" || true
+            status=1
+          fi
+        done < <(find . -name '*.php' -not -path './tests/*' -not -path './vendor/*')
+        exit "$status"
+
   integration-test:
     runs-on: ${{ matrix.os }}
     
