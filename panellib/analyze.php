@@ -436,6 +436,12 @@ function analyse_db($panel, $user_id) {
 	} else {
 		$db_check_level = read_config_option('intropage_analyse_db_level');
 
+		// The setting is a drop_array, but it reaches SQL as text; keep the
+		// allowed list authoritative here too. See include/variables.php.
+		if (!in_array($db_check_level, ['QUICK', 'FAST', 'CHANGED', 'MEDIUM', 'EXTENDED'], true)) {
+			$db_check_level = 'CHANGED';
+		}
+
 		foreach ($tables as $key => $val) {
 			$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
 

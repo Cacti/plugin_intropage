@@ -129,6 +129,10 @@ function intropage_action_settings() {
 		if (strpos($var, 'name_') !== false) {
 			$dashboard_id = str_replace('name_', '', $var);
 
+			if (!is_numeric($dashboard_id)) {
+				continue;
+			}
+
 			db_execute_prepared('REPLACE INTO plugin_intropage_dashboard
 				(user_id, dashboard_id, name)
 				VALUES (?, ?, ?)',
