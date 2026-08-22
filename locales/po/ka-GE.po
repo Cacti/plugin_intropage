@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2025-12-11 07:18+0000\n"
+"PO-Revision-Date: 2026-08-04 05:18+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
@@ -377,7 +377,7 @@ msgstr ""
 
 #: include/functions.php:1505
 msgid "Remove from Dashboard"
-msgstr ""
+msgstr "წაშლა სამუშაო დაფიდან"
 
 #: include/functions.php:1507
 msgid "Add to Dashboard"
@@ -2021,7 +2021,7 @@ msgstr ""
 
 #: panellib/system.php:85
 msgid "24 Hour Extremes"
-msgstr ""
+msgstr "24 საათი დღეში"
 
 #: panellib/system.php:86
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
