@@ -326,6 +326,7 @@ function intropage_upgrade_database() {
 			db_execute("UPDATE plugin_hooks SET file='include/settings.php' WHERE name='intropage' AND file='includes/settings.php'");
 		}
 
+
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config
 			SET version = ?, author = ?, webpage = ?
