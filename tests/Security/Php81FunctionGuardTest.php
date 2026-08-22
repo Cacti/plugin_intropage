@@ -42,7 +42,7 @@ describe('post-8.0 functions stay out of intropage runtime code', function () {
 		$source = file_get_contents($path);
 
 		if ($source === false) {
-			return [];
+			throw new RuntimeException("Unable to read runtime PHP file: {$path}");
 		}
 
 		$tokens = token_get_all($source);
