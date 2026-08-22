@@ -124,12 +124,27 @@ function intropage_action_add_panel() {
 	}
 }
 
+function intropage_parse_dashboard_id($value) {
+	if (!is_string($value) || preg_match('/\A(?:0|[1-9][0-9]*)\z/D', $value) !== 1) {
+		return null;
+	}
+
+	$id = filter_var($value, FILTER_VALIDATE_INT, [
+		'options' => [
+			'min_range' => 0,
+			'max_range' => 2147483647,
+		],
+	]);
+
+	return $id === false ? null : $id;
+}
+
 function intropage_action_settings() {
 	foreach ($_POST as $var => $value) {
 		if (strpos($var, 'name_') !== false) {
-			$dashboard_id = str_replace('name_', '', $var);
+			$dashboard_id = intropage_parse_dashboard_id(str_replace('name_', '', $var));
 
-			if (!is_numeric($dashboard_id)) {
+			if ($dashboard_id === null) {
 				continue;
 			}
 
