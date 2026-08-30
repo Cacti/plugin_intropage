@@ -40,8 +40,9 @@ jobs:
     # INFO declares compat = 1.2.17. Cacti 1.2 ships include/vendor/composer/
     # platform_check.php, which autoload_real.php requires and which throws on
     # PHP_VERSION_ID < 80000, so 1.2 cannot boot below 8.0. The integration
-    # matrix starts at 8.1, where 8.1-only syntax lints clean, so nothing else
-    # can catch an enum or a readonly property reaching a 1.2 host.
+    # matrix starts at 8.2 because the Cacti core it checks out now requires
+    # PHP 8.2 to boot (its composer platform check aborts install below 8.2);
+    # the 8.0 syntax-floor job above still guards 1.2's real language floor.
     steps:
     - name: Checkout Plugin
       uses: actions/checkout@v7
@@ -73,7 +74,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.1', '8.2', '8.3', '8.4']
+        php: ['8.2', '8.3', '8.4']
         os: [ubuntu-latest]
     
     services:
