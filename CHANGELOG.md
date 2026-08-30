@@ -2,6 +2,9 @@
 
 --- develop ---
 
+* security: Escape panel output (device, data-source, service-check, webseer, maint, host-description and admin-alert values, and the shared-dashboard name) that was rendered without html_escape
+* issue: Fix correctness bugs in the extrem, alert, top5, thold and syslog panels and the settings action handler
+
 * issue#318: Fix NTP time does not function in Windows environment
 * issue#316: Fix php error when db check skip huge db
 * issue#327: Move Timespan from action menu
