@@ -116,7 +116,7 @@ function alert_host($panel, $user_id) {
 			ORDER BY status_fail_date DESC
 			LIMIT ' . $lines);
 
-		$result = $sql_host_reco + $sql_host_up + $sql_host_fall + $sql_host_down;
+		$result = array_merge($sql_host_reco, $sql_host_up, $sql_host_fall, $sql_host_down);
 
 		$panel['data'] = '<table class="cactiTable">' .
 			'<tr class="tableHeader">' .
@@ -257,7 +257,7 @@ function alert_host_detail() {
 			ORDER BY status_fail_date DESC
 			LIMIT ' . $lines);
 
-		$result = $sql_host_reco + $sql_host_up + $sql_host_fall + $sql_host_down;
+		$result = array_merge($sql_host_reco, $sql_host_up, $sql_host_fall, $sql_host_down);
 
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .

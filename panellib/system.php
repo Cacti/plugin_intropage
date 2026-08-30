@@ -262,7 +262,7 @@ function info($panel, $user_id) {
 
 		$panel['data'] .= '<tr><td>' . __('Spine version: ', 'intropage') . $spine_version . '<br/></td></tr>';
 
-		if (!strpos($spine_version, CACTI_VERSION, 0)) {
+		if (strpos($spine_version, CACTI_VERSION) === false) {
 			$panel['data'] .= '<tr><td>' . __('You are using incorrect spine version!', 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 			$panel['alarm'] = 'red';
 		}
@@ -951,10 +951,10 @@ function extrem_detail() {
 				WHERE name = 'host_errors'
 				AND cur_timestamp > date_sub(now(), interval 1 day)
 				ORDER BY value desc, cur_timestamp
-				LIMIT $lines");
+				LIMIT 25");
 
 			if (cacti_sizeof($data)) {
-				$f++;
+				$j++;
 
 				$header[] = __('Host errors', 'intropage');
 

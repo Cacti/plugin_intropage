@@ -403,6 +403,7 @@ function intropage_actions() {
 				set_user_setting('intropage_autorefresh', $value);
 			}
 
+			break;
 		case 'lines':
 			if (is_int($value)) {
 				set_user_setting('intropage_number_of_lines', $value);
@@ -1139,7 +1140,7 @@ function initialize_panel_library() {
 					// Check to see if the panel should be activated
 					foreach ($base_panels as $panel_id => $p) {
 						if (isset($p['requires']) && $p['requires'] !== false) {
-							$plugins = explode(' ', $p['requires']);
+							$plugins = explode(',', $p['requires']);
 
 							foreach ($plugins as $plugin) {
 								$status = db_fetch_cell_prepared('SELECT `status`

@@ -398,7 +398,7 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 			$panel['data'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">' . __('Device', 'intropage') . '</th>' .
-					'<th class="right">' . __('Messages', read_config_option('poller_interval'), 'intropage') . '</th>' .
+					'<th class="right">' . __('Messages', 'intropage') . '</th>' .
 				'</tr>';
 
 			$i = 0;

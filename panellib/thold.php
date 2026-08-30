@@ -175,7 +175,7 @@ function thold_event($panel, $user_id) {
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
 					$panel['alarm'] = 'red';
 				} elseif ($panel['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
-					$panel['alarm'] == 'yellow';
+					$panel['alarm'] = 'yellow';
 				}
 			}
 
@@ -496,7 +496,7 @@ function thold_event_detail() {
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
 					$panel['alarm'] = 'red';
 				} elseif ($panel['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
-					$panel['alarm'] == 'yellow';
+					$panel['alarm'] = 'yellow';
 				}
 
 				$i++;
