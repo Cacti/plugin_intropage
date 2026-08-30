@@ -27,7 +27,9 @@ if (!function_exists('db_execute_prepared')) {
 
 if (!function_exists('db_fetch_assoc')) {
 	function db_fetch_assoc($sql) {
-		return [];
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_fetch_assoc', 'sql' => $sql, 'params' => []];
+
+		return $GLOBALS['__test_fetch_assoc'] ?? [];
 	}
 }
 
@@ -39,7 +41,7 @@ if (!function_exists('db_fetch_assoc_prepared')) {
 
 if (!function_exists('db_fetch_row')) {
 	function db_fetch_row($sql) {
-		return [];
+		return $GLOBALS['__test_fetch_row'] ?? [];
 	}
 }
 
@@ -87,7 +89,7 @@ if (!function_exists('api_plugin_db_table_create')) {
 
 if (!function_exists('read_config_option')) {
 	function read_config_option($n, $f = false) {
-		return '';
+		return $GLOBALS['__test_config'][$n] ?? $f;
 	}
 }
 

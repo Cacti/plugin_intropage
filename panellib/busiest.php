@@ -188,14 +188,13 @@ function busiest_cpu($panel, $user_id) {
 		return true;
 	}
 
-	$simple_perms = get_simple_device_perms($user_id);
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -305,14 +304,13 @@ function busiest_load($panel, $user_id) {
 		return true;
 	}
 
-	$simple_perms = get_simple_device_perms($user_id);
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -413,14 +411,13 @@ function busiest_hdd($panel, $user_id) {
 		return true;
 	}
 
-	$simple_perms = get_simple_device_perms($user_id);
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -540,14 +537,13 @@ function busiest_uptime($panel, $user_id) {
 
 	$console_access = get_console_access($user_id);
 
-	$simple_perms = get_simple_device_perms($user_id);
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
@@ -625,14 +621,13 @@ function busiest_traffic($panel, $user_id) {
 		return true;
 	}
 
-	$simple_perms = get_simple_device_perms($user_id);
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -758,14 +753,13 @@ function busiest_interface_error($panel, $user_id) {
 		return true;
 	}
 
-	$simple_perms = get_simple_device_perms($user_id);
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -876,14 +870,13 @@ function busiest_interface_util($panel, $user_id) {
 		return true;
 	}
 
-	$simple_perms = get_simple_device_perms($user_id);
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -1001,14 +994,13 @@ function busiest_cpu_detail() {
 		return ($panel);
 	}
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -1114,14 +1106,13 @@ function busiest_load_detail() {
 		return ($panel);
 	}
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -1227,14 +1218,13 @@ function busiest_hdd_detail() {
 		return ($panel);
 	}
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
@@ -1352,14 +1342,13 @@ function busiest_uptime_detail() {
 
 	$console_access = get_console_access($_SESSION['sess_user_id']);
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
@@ -1438,14 +1427,13 @@ function busiest_traffic_detail() {
 
 	$intropage_mb = read_user_setting('intropage_mb', read_config_option('intropage_mb'), false, $_SESSION['sess_user_id']);
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -1575,14 +1563,13 @@ function busiest_interface_error_detail() {
 		return ($panel);
 	}
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id, name
@@ -1696,14 +1683,13 @@ function busiest_interface_util_detail() {
 		return ($panel);
 	}
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$q_host_cond     = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = 'IN (' . $allowed_devices . ')';
 	}
 
 	$ds = db_fetch_row("SELECT id,name
