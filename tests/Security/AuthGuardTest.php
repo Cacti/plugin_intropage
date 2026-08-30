@@ -9,11 +9,10 @@
 
 describe('auth guard presence in intropage', function () {
 	it('includes auth.php or global.php in all UI entry points', function () {
+		// intropage.php is the only web entry point; the include/ and panellib/
+		// files are libraries it pulls in after auth.php has run.
 		$uiFiles = [
-		'include/functions.php',
-		'include/settings.php',
-		'panellib/analyze.php',
-		'panellib/busiest.php',
+		'intropage.php',
 		];
 
 		foreach ($uiFiles as $relativeFile) {

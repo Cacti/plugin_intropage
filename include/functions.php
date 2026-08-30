@@ -904,9 +904,10 @@ function intropage_detail_panel() {
 }
 
 function intropage_autoreload() {
-	$last_poller = db_fetch_cell("SELECT unix_timestamp(cur_timestamp)
+	$last_poller = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
 		FROM plugin_intropage_trends
-		WHERE name='ar_poller_finish'");
+		WHERE name = ?',
+		['ar_poller_finish']);
 
 	$last_disp = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
 		FROM plugin_intropage_trends
@@ -1064,11 +1065,12 @@ function get_user_list() {
 			]
 		];
 	} else { // poller wants all
-		$users = db_fetch_assoc("SELECT t1.id AS id
+		$users = db_fetch_assoc_prepared('SELECT t1.id AS id
 			FROM user_auth AS t1
 			JOIN plugin_intropage_user_auth AS t2
 			ON t1.id = t2.user_id
-			WHERE t1.enabled = 'on'");
+			WHERE t1.enabled = ?',
+			['on']);
 	}
 
 	return $users;
@@ -1213,29 +1215,21 @@ function update_registered_panels($panels) {
 		description=VALUES(description),
 		height=VALUES(height)';
 
-	$sql = [];
+	$sql    = [];
+	$params = [];
 
 	if (cacti_sizeof($panels)) {
 		foreach ($panels as $panel_id => $panel) {
-			$sql[] = '(' .
-				db_qstr($panel_id) . ', ' .
-				db_qstr($panel['name']) . ', ' .
-				db_qstr($panel['level']) . ', ' .
-				db_qstr($panel['class']) . ', ' .
-				db_qstr($panel['priority']) . ', ' .
-				db_qstr($panel['alarm']) . ', ' .
-				db_qstr($panel['requires']) . ', ' .
-				db_qstr($panel['update_func']) . ', ' .
-				db_qstr($panel['details_func']) . ', ' .
-				db_qstr($panel['trends_func']) . ', ' .
-				db_qstr($panel['refresh']) . ', ' .
-				db_qstr($panel['trefresh']) . ', ' .
-				db_qstr($panel['description']) . ', ' .
-				db_qstr($panel['height']) .
-			')';
+			$sql[]  = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+			$params = array_merge($params, [
+				$panel_id, $panel['name'], $panel['level'], $panel['class'],
+				$panel['priority'], $panel['alarm'], $panel['requires'],
+				$panel['update_func'], $panel['details_func'], $panel['trends_func'],
+				$panel['refresh'], $panel['trefresh'], $panel['description'], $panel['height'],
+			]);
 		}
 
-		db_execute($prefix . implode(', ', $sql) . $suffix);
+		db_execute_prepared($prefix . implode(', ', $sql) . $suffix, $params);
 	}
 }
 

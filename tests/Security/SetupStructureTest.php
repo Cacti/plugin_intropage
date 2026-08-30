@@ -26,8 +26,8 @@ describe('intropage setup.php structure', function () {
 		expect($source)->toMatch('/[\'\""]name[\'\""]\s*=>/');
 	});
 
-	it('returns version array with version key', function () use ($source) {
-		expect($source)->toMatch('/[\'\""]version[\'\""]\s*=>/');
+	it('exposes the plugin version from the INFO file', function () use ($source) {
+		expect($source)->toContain('/INFO');
 	});
 
 	it('registers hooks in install function', function () use ($source) {

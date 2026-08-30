@@ -56,8 +56,14 @@ function intropage_login_options_navigate() {
 
 	if ($login_opts == 4) {
 		header('Location: ' . $config['url_path'] . 'plugins/intropage/intropage.php');
-	} elseif ($login_opts == 3) {
+
+		exit;
+	}
+
+	if ($login_opts == 3) {
 		header('Location: ' . $config['url_path'] . 'graph_view.php' . ($newtheme ? '?newtheme=1' : ''));
+
+		exit;
 	}
 }
 
