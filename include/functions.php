@@ -52,6 +52,31 @@ function intropage_get_allowed_devices($user_id) {
 	}
 }
 
+/**
+ * Resolve a user's device-visibility scope for panel queries.
+ *
+ * Panels restrict their host queries to the devices a user may see. A user with
+ * simple device permissions can see every device, so no host filter is needed;
+ * otherwise the panel constrains its query to the allowed host ids. This wraps
+ * the two-call permission preamble the panels would otherwise repeat. The
+ * caller formats its own IN() clause from 'allowed', because the column and any
+ * "AND" prefix differ between panels.
+ *
+ * @param int|string $user_id Cacti user id whose permissions to resolve.
+ *
+ * @return array{simple: bool, allowed: string|false}
+ *                                                    simple  - true when the user sees every device (no filter needed).
+ *                                                    allowed - comma-separated allowed host ids, or false when the user is
+ *                                                    simple or has no visible devices.
+ */
+function intropage_device_scope($user_id): array {
+	if (get_simple_device_perms($user_id)) {
+		return ['simple' => true, 'allowed' => false];
+	}
+
+	return ['simple' => false, 'allowed' => intropage_get_allowed_devices($user_id)];
+}
+
 function process_page_request_variables() {
 	set_default_action();
 

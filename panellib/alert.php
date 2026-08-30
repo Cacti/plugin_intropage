@@ -70,15 +70,10 @@ function alert_host($panel, $user_id) {
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'AND host.id IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$host_cond       = '';
-	}
+	$scope           = intropage_device_scope($user_id);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$host_cond       = $simple_perms ? '' : 'AND host.id IN (' . $allowed_devices . ')';
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -212,15 +207,10 @@ function alert_host_detail() {
 
 	$lines = 20;
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'AND host.id IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$host_cond       = '';
-	}
+	$scope           = intropage_device_scope($_SESSION['sess_user_id']);
+	$simple_perms    = $scope['simple'];
+	$allowed_devices = $scope['allowed'];
+	$host_cond       = $simple_perms ? '' : 'AND host.id IN (' . $allowed_devices . ')';
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($_SESSION['sess_user_id']);
