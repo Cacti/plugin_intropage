@@ -557,7 +557,7 @@ function graph_host_detail() {
 			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
 			foreach ($h as $r) {
-				$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
+				$panel['detail'] .= ' - ' . html_escape($r['description']) . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
 			}
 
 			$panel['detail'] .= '</td></tr>';
@@ -574,7 +574,7 @@ function graph_host_detail() {
 	$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
 	foreach ($h as $r) {
-		$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
+		$panel['detail'] .= ' - ' . html_escape($r['description']) . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
 	}
 
 	$panel['detail'] .= '</td></tr>';

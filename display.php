@@ -435,7 +435,7 @@ function display_information() {
 
 	if (cacti_sizeof($shared_dashboards) > 0) {
 		foreach ($shared_dashboards as $sd) {
-			$text = ' (' . get_username($sd['user_id']) . ' - ' . $sd['name'] . ')';
+			$text = ' (' . html_escape(get_username($sd['user_id'])) . ' - ' . html_escape($sd['name']) . ')';
 
 			if ($number_of_dashboards < 9) {
 				print "<option value='useshared_" . $sd['dashboard_id'] . '_' . $sd['user_id'] . "'>" . __('Use shared dashboard', 'intropage') . $text . '</option>';

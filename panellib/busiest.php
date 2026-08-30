@@ -228,7 +228,7 @@ function busiest_cpu($panel, $user_id) {
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -253,7 +253,7 @@ function busiest_cpu($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
-				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
+				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($row['name']) . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
@@ -345,7 +345,7 @@ function busiest_load($panel, $user_id) {
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -370,7 +370,7 @@ function busiest_load($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
-				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
+				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($row['name']) . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xvalue'], 2) . '<span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= "<td class='right'>" . round($row['xpeak'], 2) . '</td></tr>';
 
@@ -477,7 +477,7 @@ function busiest_hdd($panel, $user_id) {
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -502,7 +502,7 @@ function busiest_hdd($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
-				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
+				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($row['name']) . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 				$panel['data'] .= '<td class="right">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
@@ -685,7 +685,7 @@ function busiest_traffic($panel, $user_id) {
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -702,7 +702,7 @@ function busiest_traffic($panel, $user_id) {
 					[$row['ldid']]);
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
-				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
+				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($row['name']) . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				if ($intropage_mb == 'b') {
 					$row['xvalue'] *= 8;
@@ -805,7 +805,7 @@ function busiest_interface_error($panel, $user_id) {
 		if (cacti_sizeof($result)) {
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -830,7 +830,7 @@ function busiest_interface_error($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
-				$panel['data'] .= '<td class="left inpa_loglines" title="' . $row['name'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
+				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($row['name']) . '"><i class="fas fa-chart-area bus_graph" bus_id="' . $graph_id . '"></i>' . html_escape($row['name']) . '</td>';
 
 				$panel['data'] .= '<td class="right">' . human_readable($row['xvalue']) . ' <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right">' . human_readable($row['xpeak']) . '</td></tr>';
@@ -924,7 +924,7 @@ function busiest_interface_util($panel, $user_id) {
 
 			$panel['data'] = '<table class="cactiTable inpa_fixed">' .
 				'<tr class="tableHeader">' .
-					'<th class="left inpa_first">' . $ds['name'] . '</th>' .
+					'<th class="left inpa_first">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Direction', 'intropage') . '</th>' .
 					'<th class="right">%</th>' .
 				'</tr>';
@@ -953,7 +953,7 @@ function busiest_interface_util($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
-				$panel['data'] .= '<td class="left inpa_loglines" title="' . $gdata['name_cache'] . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
+				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($gdata['name_cache']) . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
 				$panel['data'] .= html_escape($gdata['name_cache']) . '</td>';
 				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In' : 'Out') . '</td>';
 				$panel['data'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></span></td></tr>';
@@ -1041,7 +1041,7 @@ function busiest_cpu_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">' . $ds['name'] . '</th>' .
+					'<th class="left">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1154,7 +1154,7 @@ function busiest_load_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">' . $ds['name'] . '</th>' .
+					'<th class="left">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1291,7 +1291,7 @@ function busiest_hdd_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">' . $ds['name'] . '</th>' .
+					'<th class="left">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1499,7 +1499,7 @@ function busiest_traffic_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">' . $ds['name'] . '</th>' .
+					'<th class="left">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1622,7 +1622,7 @@ function busiest_interface_error_detail() {
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">' . $ds['name'] . '</th>' .
+					'<th class="left">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Average', 'intropage') . '</th>' .
 					'<th class="right">' . __('Peak', 'intropage') . '</th>' .
 				'</tr>';
@@ -1744,7 +1744,7 @@ function busiest_interface_util_detail() {
 
 			$panel['detail'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
-					'<th class="left">' . $ds['name'] . '</th>' .
+					'<th class="left">' . html_escape($ds['name']) . '</th>' .
 					'<th class="right">' . __('Direction', 'intropage') . '</th>' .
 					'<th class="right">%</th>' .
 				'</tr>';
