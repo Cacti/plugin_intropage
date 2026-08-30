@@ -210,7 +210,7 @@ function analyse_login($panel, $user_id) {
 				'<td class="left">%s</td>' .
 				'<td class="left">%s</td>' .
 				'<td><span class="inpa_sq color_' . $color . '"></span>%s</td>' .
-			'</tr>', $i % 2 == 0 ? 'even' : 'odd', substr($row['time'], 5), $row['username'], $row['ip'], $status);
+			'</tr>', $i % 2 == 0 ? 'even' : 'odd', substr($row['time'], 5), html_escape($row['username']), html_escape($row['ip']), $status);
 
 			$i++;
 		}
@@ -225,7 +225,7 @@ function analyse_login($panel, $user_id) {
 		WHERE time > adddate(now(), INTERVAL -1 HOUR)');
 
 	if (cacti_sizeof($data)) {
-		$text = implode(', ', array_column($data,'username'));
+		$text = implode(', ', array_map('html_escape', array_column($data, 'username')));
 	} else {
 		$text = __('None', 'intropage');
 	}
@@ -389,9 +389,9 @@ function analyse_log($panel, $user_id) {
 					}
 				}
 
-				$panel['data'] .= '<tr><td class="inpa_loglines" colspan="3" title="' . $line . '"><span class="inpa_sq color_' . $color . '"></span>';
+				$panel['data'] .= '<tr><td class="inpa_loglines" colspan="3" title="' . html_escape($line) . '"><span class="inpa_sq color_' . $color . '"></span>';
 
-				$panel['data'] .= $line;
+				$panel['data'] .= html_escape($line);
 				$panel['data'] .= '</td></tr>';
 			}
 		}
@@ -1399,7 +1399,7 @@ function analyse_login_detail() {
 				'<td class="left">%s </td>' .
 				'<td class="left">%s </td>' .
 				'<td class="left"><span class="inpa_sq color_' . $color . '"></span>%s</td>' .
-			'</tr>', $row['time'], $row['ip'], $row['username'], $status);
+			'</tr>', $row['time'], html_escape($row['ip']), html_escape($row['username']), $status);
 		}
 
 		$panel['detail'] .= '</table>';
@@ -1802,12 +1802,12 @@ function analyse_tree_host_graph_detail() {
 				if (cacti_sizeof($sql_hosts)) {
 					foreach ($sql_hosts as $host) {
 						$parent = $host['parent'];
-						$tree   = $host['name'] . ' / ';
+						$tree   = html_escape($host['name']) . ' / ';
 
 						while ($parent != 0) {
 							$sql_parent = db_fetch_row_prepared('SELECT parent, title FROM graph_tree_items WHERE id = ?', [(int) $parent]);
 							$parent     = $sql_parent['parent'];
-							$tree .= $sql_parent['title'] . ' / ';
+							$tree .= html_escape($sql_parent['title']) . ' / ';
 						}
 
 						$panel['detail'] .= sprintf('<a class="linkEditMain" href="%stree.php?action=edit&id=%d">Node: %s | Tree: %s</a><br/>', html_escape($config['url_path']), $host['gtid'], html_escape($host['description']), $tree);
@@ -1956,9 +1956,9 @@ function analyse_tree_host_graph_detail() {
 
 			if ($console_access) {
 				$panel['detail'] .= '<a class="linkEditMain" href="' . html_escape($config['url_path']) .
-					'graph_templates.php?action=template_edit&id=' . $row['id'] . '">' . $row['name'] . '</a></td>';
+					'graph_templates.php?action=template_edit&id=' . $row['id'] . '">' . html_escape($row['name']) . '</a></td>';
 			} else {
-				$panel['detail'] .= $row['name'] . '</td>';
+				$panel['detail'] .= html_escape($row['name']) . '</td>';
 			}
 			$panel['detail'] .= '<td class="right">' . $row['graphs'] . '</td>';
 			$panel['detail'] .= '<td class="right">' . $row['graph_items'] . '</td>';
