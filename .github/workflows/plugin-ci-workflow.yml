@@ -38,6 +38,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # This job installs Cacti from the default branch, whose composer.json
+        # requires php ^8.2 and leaves platform-check on, so 8.1 aborts in
+        # "Install Cacti via CLI".  The plugin's own floor is lower and is
+        # linted separately; it is not what this matrix measures.
         php: ['8.2', '8.3', '8.4']
         os: [ubuntu-latest]
     
@@ -82,9 +86,7 @@ jobs:
       run: php -v
     
     - name: Run apt-get update
-      run: |
-        sudo add-apt-repository -y ppa:ondrej/php
-        sudo apt-get update
+      run: sudo apt-get update
     
     - name: Install System Dependencies
       run: sudo apt-get install -y apache2 snmp snmpd rrdtool fping
