@@ -260,7 +260,7 @@ function info($panel, $user_id) {
 
 		$panel['data'] .= '<tr><td>' . __('Poller Type:', 'intropage') . ' <a class="linkEditMain" href="' . html_escape($config['url_path'] . 'settings.php?tab=poller') . '">' . __('Spine', 'intropage') . '</a></td></tr>';
 
-		$panel['data'] .= '<tr><td>' . __('Spine version: ', 'intropage') . $spine_version . '<br/></td></tr>';
+		$panel['data'] .= '<tr><td>' . __('Spine version: ', 'intropage') . html_escape($spine_version) . '<br/></td></tr>';
 
 		if (strpos($spine_version, CACTI_VERSION) === false) {
 			$panel['data'] .= '<tr><td>' . __('You are using incorrect spine version!', 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
