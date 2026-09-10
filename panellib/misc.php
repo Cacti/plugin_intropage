@@ -251,9 +251,9 @@ function maint($panel, $user_id) {
 								if (cacti_sizeof($hosts)) {
 									$panel['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) .
 										' - ' . date('d. m . Y  H:i', $sc['etime']) .
-										' - ' . $sc['name'] . ' (One time)<br/>';
+										' - ' . html_escape($sc['name']) . ' (One time)<br/>';
 
-									$text = 'Affected hosts:</b> ' . implode(', ', array_column($hosts,'description'));
+									$text = 'Affected hosts:</b> ' . implode(', ', array_map('html_escape', array_column($hosts, 'description')));
 
 									$panel['data'] .= '<div class="inpa_loglines" title="' . $text . '">' . $text . '</div><br/><br/>';
 								}
@@ -290,9 +290,9 @@ function maint($panel, $user_id) {
 								if (cacti_sizeof($hosts)) {
 									$panel['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) .
 										' - ' . date('d. m . Y  H:i', $sc['etime']) .
-										' - ' . $sc['name'] . ' (Reoccurring)<br/>';
+										' - ' . html_escape($sc['name']) . ' (Reoccurring)<br/>';
 
-									$text = 'Affected hosts:</b> ' . implode(', ', array_column($hosts,'description'));
+									$text = 'Affected hosts:</b> ' . implode(', ', array_map('html_escape', array_column($hosts, 'description')));
 
 									$panel['data'] .= '<div class="inpa_loglines" title="' . $text . '">' . $text . '</div><br/><br/>';
 								}
@@ -386,8 +386,8 @@ function webseer($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<td class="rpad">' . $row['lastcheck'] . '</td>' .
-					'<td class="rpad">' . $row['url'] . '</td>' .
-					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . $row['http_code'] . ' (' . $text . ')</td></tr>';
+					'<td class="rpad">' . html_escape($row['url']) . '</td>' .
+					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . html_escape($row['http_code']) . ' (' . $text . ')</td></tr>';
 			}
 
 			$panel['data'] .= '</table>';
@@ -437,7 +437,7 @@ function webseer_detail() {
 
 		$panel['detail'] .= '<tr>';
 		$panel['detail'] .= '<td class="left">' . $log['lastcheck'] . '</td>';
-		$panel['detail'] .= '<td class="left">' . $log['url'] . '</td>';
+		$panel['detail'] .= '<td class="left">' . html_escape($log['url']) . '</td>';
 
 		if ($log['result'] == 1) {
 			if ($log['secs'] > (time() - ($important_period))) {
@@ -451,8 +451,8 @@ function webseer_detail() {
 			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed', 'intropage') . '</td>';
 		}
 
-		$panel['detail'] .= '<td class="right">' . $log['http_code'] . '</td>';
-		$panel['detail'] .= '<td class="right">' . $log['error'] . '</td></tr>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['http_code']) . '</td>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['error']) . '</td></tr>';
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
@@ -570,9 +570,9 @@ function servcheck($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<td class="rpad">' . $row['lastcheck'] . '</td>' .
-					'<td class="rpad">' . $row['name'] . '</td>' .
-					'<td class="rpad">' . $row['type'] . '</td>' .
-					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . $row['result'] . '</td></tr>';
+					'<td class="rpad">' . html_escape($row['name']) . '</td>' .
+					'<td class="rpad">' . html_escape($row['type']) . '</td>' .
+					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . html_escape($row['result']) . '</td></tr>';
 			}
 
 			$panel['data'] .= '</table>';
@@ -638,8 +638,8 @@ function servcheck_detail() {
 
 		$panel['detail'] .= '<tr>';
 		$panel['detail'] .= '<td class="left">' . $log['lastcheck'] . '</td>';
-		$panel['detail'] .= '<td class="left">' . $log[$dncolumn] . '</td>';
-		$panel['detail'] .= '<td class="left">' . $log['type'] . '</td>';
+		$panel['detail'] .= '<td class="left">' . html_escape($log[$dncolumn]) . '</td>';
+		$panel['detail'] .= '<td class="left">' . html_escape($log['type']) . '</td>';
 
 		if ($log['result'] == 'ok') {
 			if ($log['secs'] > (time() - ($important_period))) {
@@ -654,8 +654,8 @@ function servcheck_detail() {
 			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed', 'intropage') . '</td>';
 		}
 
-		$panel['detail'] .= '<td class="right">' . $log['result_search'] . '</td>';
-		$panel['detail'] .= '<td class="right">' . $log['error'] . '</td></tr>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['result_search']) . '</td>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['error']) . '</td></tr>';
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';

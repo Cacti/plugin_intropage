@@ -260,9 +260,9 @@ function info($panel, $user_id) {
 
 		$panel['data'] .= '<tr><td>' . __('Poller Type:', 'intropage') . ' <a class="linkEditMain" href="' . html_escape($config['url_path'] . 'settings.php?tab=poller') . '">' . __('Spine', 'intropage') . '</a></td></tr>';
 
-		$panel['data'] .= '<tr><td>' . __('Spine version: ', 'intropage') . $spine_version . '<br/></td></tr>';
+		$panel['data'] .= '<tr><td>' . __('Spine version: ', 'intropage') . html_escape($spine_version) . '<br/></td></tr>';
 
-		if (!strpos($spine_version, CACTI_VERSION, 0)) {
+		if (strpos($spine_version, CACTI_VERSION) === false) {
 			$panel['data'] .= '<tr><td>' . __('You are using incorrect spine version!', 'intropage') . '<span class="inpa_sq color_red"></span></td></tr>';
 			$panel['alarm'] = 'red';
 		}
@@ -287,7 +287,7 @@ function info($panel, $user_id) {
 function admin_alert($panel, $user_id) {
 	global $config;
 
-	$panel['data'] .= '<div title="' . read_config_option('intropage_admin_alert') . '">' . read_config_option('intropage_admin_alert') . '</div>';
+	$panel['data'] .= '<div title="' . html_escape(read_config_option('intropage_admin_alert')) . '">' . html_escape(read_config_option('intropage_admin_alert')) . '</div>';
 
 	save_panel_result($panel, $user_id);
 }
@@ -951,10 +951,10 @@ function extrem_detail() {
 				WHERE name = 'host_errors'
 				AND cur_timestamp > date_sub(now(), interval 1 day)
 				ORDER BY value desc, cur_timestamp
-				LIMIT $lines");
+				LIMIT 25");
 
 			if (cacti_sizeof($data)) {
-				$f++;
+				$j++;
 
 				$header[] = __('Host errors', 'intropage');
 

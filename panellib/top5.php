@@ -764,7 +764,7 @@ function top5_pollratio_detail() {
 			$i++;
 		}
 
-		$panel['detail'] . '</table>';
+		$panel['detail'] .= '</table>';
 	} else {	// no data
 		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}

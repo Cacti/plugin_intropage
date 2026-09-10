@@ -248,7 +248,16 @@ function intropage_upgrade_database() {
 						case 'permissions':
 							break;
 						default:
-							db_execute('ALTER TABLE plugin_intropage_user_auth DROP COLUMN ' . $c['Field']);
+							// db_is_safe_identifier() postdates the 1.2.17 baseline in INFO.
+							$safe = function_exists('db_is_safe_identifier')
+								? db_is_safe_identifier($c['Field'])
+								: preg_match('/^[A-Za-z0-9_]+$/', (string) $c['Field']) === 1;
+
+							if ($safe) {
+								db_execute('ALTER TABLE plugin_intropage_user_auth DROP COLUMN `' . $c['Field'] . '`');
+							} else {
+								cacti_log('WARNING: intropage refused to drop column with an unexpected name', false, 'INTROPAGE');
+							}
 
 							break;
 					}

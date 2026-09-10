@@ -149,10 +149,29 @@ function intropage_action_add_panel() {
 	}
 }
 
+function intropage_parse_dashboard_id($value) {
+	if (!is_string($value) || preg_match('/\A(?:0|[1-9][0-9]*)\z/D', $value) !== 1) {
+		return null;
+	}
+
+	$id = filter_var($value, FILTER_VALIDATE_INT, [
+		'options' => [
+			'min_range' => 0,
+			'max_range' => 2147483647,
+		],
+	]);
+
+	return $id === false ? null : $id;
+}
+
 function intropage_action_settings() {
 	foreach ($_POST as $var => $value) {
-		if (str_contains($var, 'name_')) {
-			$dashboard_id = str_replace('name_', '', $var);
+		if (strpos($var, 'name_') !== false) {
+			$dashboard_id = intropage_parse_dashboard_id(str_replace('name_', '', $var));
+
+			if ($dashboard_id === null) {
+				continue;
+			}
 
 			db_execute_prepared('REPLACE INTO plugin_intropage_dashboard
 				(user_id, dashboard_id, name)
@@ -428,6 +447,7 @@ function intropage_actions() {
 				set_user_setting('intropage_autorefresh', $value);
 			}
 
+			break;
 		case 'lines':
 			if (is_int($value)) {
 				set_user_setting('intropage_number_of_lines', $value);
@@ -1166,7 +1186,7 @@ function initialize_panel_library() {
 					// Check to see if the panel should be activated
 					foreach ($base_panels as $panel_id => $p) {
 						if (isset($p['requires']) && $p['requires'] !== false) {
-							$plugins = explode(' ', $p['requires']);
+							$plugins = explode(',', $p['requires']);
 
 							foreach ($plugins as $plugin) {
 								$status = db_fetch_cell_prepared('SELECT `status`
