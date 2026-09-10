@@ -471,32 +471,32 @@ function display_information() {
 		print '<tr class="tableRow">';
 		print '<td class="textAreaNotes top left">' . __('You can Add Dashboard Panels in more ways:', 'intropage');
 		print '<ul>';
-		print '<li>' . __('Select prepared panels from the "Panels menu". Panel can be grayed out. It is due to permissions, ask administrator') . '</li>';
+		print '<li>' . __('Select prepared panels from the "Panels menu". Panel can be grayed out. It is due to permissions, ask administrator', 'intropage') . '</li>';
 		print '<li>' . __('Add any Cacti Graph, use icon', 'intropage') . '<i class="fa fa-eye"></i></li>';
-		print '<li>' . __('You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md') . '</li>';
+		print '<li>' . __('You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md', 'intropage') . '</li>';
 		print '</ul><br/>';
 		print '</td></tr>';
 
 		print '<tr class="tableRow">';
 		print '<td class="textAreaNotes top left">' . __('You can share dashboards to other users:', 'intropage');
 		print '<ul>';
-		print '<li>' . __('use "Share this dashboard" option in Actions menu - Every user can use it as template.') . '</li>';
+		print '<li>' . __('use "Share this dashboard" option in Actions menu - Every user can use it as template.', 'intropage') . '</li>';
 		print '</ul><br/>';
 		print '</td></tr>';
 
 		print '<tr class="tableRow">';
 		print '<td class="textAreaNotes top left">' . __('You can use shared dashboard using the Actions menu:', 'intropage');
 		print '<ul>';
-		print '<li>' . __('Use "Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions.') . '</li>';
+		print '<li>' . __('Use "Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions.', 'intropage') . '</li>';
 		print '</ul><br/>';
 		print '</td></tr>';
 
 		print '<tr class="tableRow">';
 		print '<td class="textAreaNotes top left">' . __('Customization:', 'intropage');
 		print '<ul>';
-		print '<li>' . __('You can create up to 9 dashboards. Every dashboard can be named, use icon') . '<i class="intro_glyph fa fa-cog"></i></li>';
-		print '<li>' . __('Intopage can be displayed in console or in separated tab. You can change it in Action menu') . '</li>';
-		print '<li>' . __('If you want to copy text from panel, you have to disable drag and drop function, use icon') . '<i class="intro_glyph fa fa-clone"></i></li>';
+		print '<li>' . __('You can create up to 9 dashboards. Every dashboard can be named, use icon', 'intropage') . '<i class="intro_glyph fa fa-cog"></i></li>';
+		print '<li>' . __('Intopage can be displayed in console or in separated tab. You can change it in Action menu', 'intropage') . '</li>';
+		print '<li>' . __('If you want to copy text from panel, you have to disable drag and drop function, use icon', 'intropage') . '<i class="intro_glyph fa fa-clone"></i></li>';
 		print '</ul><br/>';
 		print '</td></tr>';
 

@@ -78,6 +78,10 @@ function plugin_intropage_uninstall() {
 function intropage_config_arrays() {
 	global $intropage_intervals, $trend_timespans, $panel_lines;
 
+	// Core builds $user_auth_roles with __('Normal User') in the core domain
+	// (include/global_arrays.php), and auth_augment_roles() indexes by that
+	// exact string. Adding the intropage domain here would key a new role on
+	// translated installs and silently drop the realm.
 	auth_augment_roles(__('Normal User'), ['intropage.php']);
 	auth_augment_roles(__('System Administration'), ['intropage_admin.php']);
 

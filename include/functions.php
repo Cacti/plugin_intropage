@@ -337,7 +337,7 @@ function intropage_actions() {
 				}
 
 				if ($_SESSION['sess_current_timespan'] == 0) {
-					raise_message('custom_error',__('Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour'));
+					raise_message('custom_error',__('Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour', 'intropage'));
 					$span = 1;
 				} else {
 					$span = $_SESSION['sess_current_timespan'];
@@ -842,7 +842,7 @@ function intropage_reload_panel() {
 		}
 	} else {
 		print '<div class="panel_header color_grey">';
-		print '<div class="panel_name">' . __('Panel not found') . '</div>';
+		print '<div class="panel_name">' . __('Panel not found', 'intropage') . '</div>';
 
 		printf("<div class='panel_actions'></div>");
 		print '</div>'; // end of header
@@ -853,7 +853,7 @@ function intropage_reload_panel() {
 				print maint();
 			}
 		} else {
-			print __('Panel not found');
+			print __('Panel not found', 'intropage');
 		}
 	}
 
@@ -897,7 +897,7 @@ function intropage_detail_panel() {
 		print '</div>';
 		print $data['detail'];
 	} else {
-		print __('Panel Not Found');
+		print __('Panel Not Found', 'intropage');
 	}
 
 	exit;
