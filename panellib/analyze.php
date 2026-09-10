@@ -432,7 +432,7 @@ function analyse_db($panel, $user_id) {
 
 	if ($size > 1073741824) {
 		$panel['alarm'] = 'grey';
-		$panel['data']  = '<tr><td>' . __('Skipping DB tables checks. Database too large') . '</td></tr>';
+		$panel['data']  = '<tr><td>' . __('Skipping DB tables checks. Database too large', 'intropage') . '</td></tr>';
 	} else {
 		$db_check_level = read_config_option('intropage_analyse_db_level');
 
@@ -537,7 +537,7 @@ function analyse_db($panel, $user_id) {
 	$panel['data'] .= '<tr><td>' . __('Damaged tables: %s', $damaged, 'intropage');
 
 	if ($damaged > 0) {
-		$panel['data'] .= display_tooltip(__('You should run check and repair table commands'));
+		$panel['data'] .= display_tooltip(__('You should run check and repair table commands', 'intropage'));
 	}
 
 	$panel['data'] .= '</td></tr>' .
@@ -625,15 +625,15 @@ function analyse_tree_host_graph($panel, $user_id) {
 			}
 
 			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Not optimized Bulk Walk Size devices: %s', $count, 'intropage');
-			$panel['data'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '</td></tr>';
+			$panel['data'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance', 'intropage')) . '</td></tr>';
 		}
 	}
 
 	// last run of reindex, rrdchecker, ...
 	$last_runs =  [
-		'reindex_last_run_time'    => __('Reindex last run'),
-		'rrdcheck_last_run_time'   => __('RRD Checker last run'),
-		'rrdcleaner_last_run_time' => __('RRD Cleaner last run')
+		'reindex_last_run_time'    => __('Reindex last run', 'intropage'),
+		'rrdcheck_last_run_time'   => __('RRD Checker last run', 'intropage'),
+		'rrdcleaner_last_run_time' => __('RRD Cleaner last run', 'intropage')
 	];
 
 	$date_fmt = date_time_format();
@@ -1017,7 +1017,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 	$sett  = db_fetch_row('SELECT processes, threads FROM poller WHERE id = 1');
 	$color = 'green';
-	$text  = __('OK');
+	$text  = __('OK', 'intropage');
 
 	if ($cpu_cores == 0) {
 		if ($sett['processes'] == 1 || $sett['threads'] == 1) {
@@ -1531,7 +1531,7 @@ function analyse_tree_host_graph_detail() {
 		$panel['detail'] .= '<h4>' . __('Not optimized Bulk Walk Size devices - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span>';
 
 		if ($sql_count > 0) {
-			$panel['detail'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance')) . '<br/>';
+			$panel['detail'] .= display_tooltip(__('Please have a look to device parameter "Bulk Walk Maximum Repetitions". You can improve your poller performance', 'intropage')) . '<br/>';
 		}
 
 		$panel['detail'] .= '</h4>';
@@ -1553,9 +1553,9 @@ function analyse_tree_host_graph_detail() {
 
 	// last run of reindex, rrdchecker, ...
 	$last_runs =  [
-		'reindex_last_run_time'    => __('Reindex last run'),
-		'rrdcheck_last_run_time'   => __('RRD Checker last run'),
-		'rrdcleaner_last_run_time' => __('RRD Cleaner last run')
+		'reindex_last_run_time'    => __('Reindex last run', 'intropage'),
+		'rrdcheck_last_run_time'   => __('RRD Checker last run', 'intropage'),
+		'rrdcleaner_last_run_time' => __('RRD Cleaner last run', 'intropage')
 	];
 
 	$date_fmt = date_time_format();
@@ -2035,7 +2035,7 @@ function analyse_tree_host_graph_detail() {
 
 	$sett  = db_fetch_row('SELECT processes, threads FROM poller WHERE id = 1');
 	$color = 'green';
-	$text  = __('OK');
+	$text  = __('OK', 'intropage');
 
 	if ($cpu_cores == 0) {
 		if ($sett['processes'] == 1 || $sett['threads'] == 1) {

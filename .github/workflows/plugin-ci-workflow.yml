@@ -32,6 +32,42 @@ on:
       - develop
 
 jobs:
+  php80-floor:
+    name: PHP 8.0 syntax floor
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    # INFO declares compat = 1.2.17. Cacti 1.2 ships include/vendor/composer/
+    # platform_check.php, which autoload_real.php requires and which throws on
+    # PHP_VERSION_ID < 80000, so 1.2 cannot boot below 8.0. The integration
+    # matrix starts at 8.2 because the Cacti core it checks out now requires
+    # PHP 8.2 to boot (its composer platform check aborts install below 8.2);
+    # the 8.0 syntax-floor job above still guards 1.2's real language floor.
+    steps:
+    - name: Checkout Plugin
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      with:
+        persist-credentials: false
+
+    - name: Setup PHP 8.0
+      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+      with:
+        php-version: '8.0'
+        coverage: none
+
+    - name: Lint runtime files
+      run: |
+        set -euo pipefail
+        status=0
+        while IFS= read -r file; do
+          if ! php -l "$file" > /dev/null 2>&1; then
+            echo "PHP 8.0 syntax error: $file"
+            php -l "$file" || true
+            status=1
+          fi
+        done < <(find . -name '*.php' -not -path './tests/*' -not -path './vendor/*')
+        exit "$status"
+
   integration-test:
     runs-on: ${{ matrix.os }}
     
@@ -65,18 +101,18 @@ jobs:
     
     steps:
     - name: Checkout Cacti
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         repository: Cacti/cacti
         path: cacti
     
     - name: Checkout intropage Plugin
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       with:
         path: cacti/plugins/intropage
     
     - name: Install PHP ${{ matrix.php }}
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
       with:
         php-version: ${{ matrix.php }}
         extensions: intl, mysql, gd, ldap, gmp, xml, curl, json, mbstring

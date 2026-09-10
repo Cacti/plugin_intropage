@@ -29,18 +29,18 @@ describe('auth guard presence in intropage', function () {
 			}
 
 			// Files that include setup.php or are library files don't need direct auth
-			if (strpos($relativeFile, 'include/') === 0 || strpos($relativeFile, 'lib/') === 0) {
+			if (str_starts_with($relativeFile, 'include/') || str_starts_with($relativeFile, 'lib/')) {
 				continue;
 			}
 
-			if (strpos($relativeFile, 'poller_') === 0) {
+			if (str_starts_with($relativeFile, 'poller_')) {
 				continue;
 			}
 
 			$hasAuth = (
-				strpos($contents, 'auth.php') !== false ||
-				strpos($contents, 'global.php') !== false ||
-				strpos($contents, 'global_arrays.php') !== false
+				str_contains($contents, 'auth.php') ||
+				str_contains($contents, 'global.php') ||
+				str_contains($contents, 'global_arrays.php')
 			);
 
 			expect($hasAuth)->toBeTrue(
@@ -73,9 +73,9 @@ describe('auth guard presence in intropage', function () {
 			if (preg_match('/get_request_var\s*\(\s*[\'"]id[\'"]/', $contents)) {
 				// Should use get_filter_request_var for 'id' params
 				$hasFilter = (
-					strpos($contents, 'get_filter_request_var') !== false ||
-					strpos($contents, 'input_validate_input_number') !== false ||
-					strpos($contents, 'form_input_validate') !== false
+					str_contains($contents, 'get_filter_request_var') ||
+					str_contains($contents, 'input_validate_input_number') ||
+					str_contains($contents, 'form_input_validate')
 				);
 
 				expect($hasFilter)->toBeTrue(
