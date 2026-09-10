@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+	bootstrap="tests/bootstrap.php"
+	colors="true"
+	cacheDirectory=".phpunit.cache">
+	<testsuites>
+		<testsuite name="intropage">
+			<directory>tests</directory>
+		</testsuite>
+	</testsuites>
+	<source>
+		<include>
+			<directory suffix=".php">include</directory>
+			<directory suffix=".php">panellib</directory>
+			<file>display.php</file>
+			<file>setup.php</file>
+			<file>poller_intropage.php</file>
+		</include>
+	</source>
+</phpunit>

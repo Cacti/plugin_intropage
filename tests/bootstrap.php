@@ -27,7 +27,9 @@ if (!function_exists('db_execute_prepared')) {
 
 if (!function_exists('db_fetch_assoc')) {
 	function db_fetch_assoc($sql) {
-		return [];
+		$GLOBALS['__test_db_calls'][] = ['fn' => 'db_fetch_assoc', 'sql' => $sql, 'params' => []];
+
+		return $GLOBALS['__test_fetch_assoc'] ?? [];
 	}
 }
 
@@ -39,7 +41,7 @@ if (!function_exists('db_fetch_assoc_prepared')) {
 
 if (!function_exists('db_fetch_row')) {
 	function db_fetch_row($sql) {
-		return [];
+		return $GLOBALS['__test_fetch_row'] ?? [];
 	}
 }
 
@@ -87,7 +89,7 @@ if (!function_exists('api_plugin_db_table_create')) {
 
 if (!function_exists('read_config_option')) {
 	function read_config_option($n, $f = false) {
-		return '';
+		return $GLOBALS['__test_config'][$n] ?? $f;
 	}
 }
 
@@ -194,4 +196,36 @@ if (!defined('POLLER_VERBOSITY_NONE')) {
 
 if (!defined('MESSAGE_LEVEL_ERROR')) {
 	define('MESSAGE_LEVEL_ERROR', 1);
+}
+
+// Test-controllable stubs for the device-permission chain used by
+// intropage_device_scope() / intropage_get_allowed_devices().
+if (!function_exists('get_simple_device_perms')) {
+	function get_simple_device_perms($user_id) {
+		return $GLOBALS['__test_simple_perms'] ?? false;
+	}
+}
+
+if (!function_exists('read_user_setting')) {
+	function read_user_setting($name, $default = false, $force = false, $user_id = 0) {
+		return $default;
+	}
+}
+
+if (!function_exists('set_user_setting')) {
+	function set_user_setting($name, $value, $user_id = 0) {
+		return true;
+	}
+}
+
+if (!function_exists('get_allowed_devices')) {
+	function get_allowed_devices($sql_where, $order, $limit, &$total, $user_id) {
+		return $GLOBALS['__test_allowed_devices'] ?? [];
+	}
+}
+
+if (!function_exists('cacti_count')) {
+	function cacti_count($a) {
+		return is_array($a) ? count($a) : 0;
+	}
 }

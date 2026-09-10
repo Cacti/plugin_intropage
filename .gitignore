@@ -21,3 +21,6 @@
 
 
 locales/po/*.mo
+
+.phpunit.cache/
+.php-cs-fixer.cache
