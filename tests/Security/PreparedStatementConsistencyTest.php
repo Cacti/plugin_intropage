@@ -37,7 +37,7 @@ describe('prepared statement consistency in intropage', function () {
 			foreach ($lines as $line) {
 				$trimmed = ltrim($line);
 
-				if (strpos($trimmed, '//') === 0 || strpos($trimmed, '*') === 0 || strpos($trimmed, '#') === 0) {
+				if (str_starts_with($trimmed, '//') || str_starts_with($trimmed, '*') || str_starts_with($trimmed, '#')) {
 					continue;
 				}
 
@@ -76,7 +76,7 @@ describe('prepared statement consistency in intropage', function () {
 			foreach ($lines as $num => $line) {
 				$trimmed = ltrim($line);
 
-				if (strpos($trimmed, '//') === 0 || strpos($trimmed, '*') === 0) {
+				if (str_starts_with($trimmed, '//') || str_starts_with($trimmed, '*')) {
 					continue;
 				}
 
