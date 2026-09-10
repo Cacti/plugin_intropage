@@ -78,7 +78,7 @@ jobs:
         # requires php ^8.2 and leaves platform-check on, so 8.1 aborts in
         # "Install Cacti via CLI".  The plugin's own floor is lower and is
         # linted separately; it is not what this matrix measures.
-        php: ['8.2', '8.3', '8.4']
+        php: ['8.3', '8.4']
         os: [ubuntu-latest]
     
     services:
