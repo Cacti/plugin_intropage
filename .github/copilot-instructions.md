@@ -97,7 +97,7 @@ Schema setup/teardown lives in `include/database.php`; keep new tables under the
 
 ## Internationalization
 
-ALL user-facing strings MUST use `__()`/`__esc()` with the `'intropage'` text domain (the third parameter is required):
+ALL user-facing strings MUST use `__()`/`__esc()` with the `'intropage'` text domain; for plain strings it is the second argument, and with format arguments it is the final argument:
 
 ```php
 __('Text to translate', 'intropage');
