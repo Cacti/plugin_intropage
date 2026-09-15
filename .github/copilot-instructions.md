@@ -120,7 +120,8 @@ Every panel library file (`panellib/*.php`) MUST define a `register_<basename>()
 ### Plugin Hooks
 Register hooks in `setup.php`: `config_settings`, `top_header_tabs`, `console_after`, `page_head`, `graph_buttons`, `poller_bottom`, `user_admin_tab`, plus the user/group admin lifecycle hooks (`user_remove`, `user_group_admin_tab`, `user_group_remove`, `copy_user`).
 
-Data-collection (`update_func`) functions receive `($panel, $user_id)`, update/save the panel via `save_panel_result($panel, $user_id)`, and apply `intropage_get_allowed_devices($user_id)` only to device-scoped queries.
+Data-collection (`update_func`) functions receive `($panel, $user_id)`, update/save the panel via `save_panel_result($panel, $user_id)`, and apply `intropage_get_allowed_devices($user_id)` only to device-scoped queries.
+
 Data-collection (`update_func`) functions receive `($panel, $user_id)` and must return a result array with `name`, `alarm`, and `data` keys, filtering by `intropage_get_allowed_devices($user_id)` before querying.
 
 ## Best Practices
@@ -142,8 +143,18 @@ print __('Access denied', 'intropage');
 // WRONG - missing user_id filter shows all data instead of authorized devices
 $rows = db_fetch_assoc('SELECT * FROM host');
 
-// CORRECT
-$allowed = intropage_get_allowed_devices($user_id);
+$scope = intropage_device_scope($user_id);
+if ($scope['simple']) {
+	$rows = db_fetch_assoc_prepared('SELECT * FROM host');
+} elseif ($scope['allowed'] === false) {
+	$rows = [];
+} else {
+	$ids  = explode(',', $scope['allowed']);
+	$rows = db_fetch_assoc_prepared(
+		'SELECT * FROM host WHERE id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')',
+		$ids
+	);
+}
 $rows = db_fetch_assoc("SELECT * FROM host WHERE id IN($allowed)");
 ```
 
