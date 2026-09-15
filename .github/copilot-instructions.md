@@ -97,7 +97,8 @@ Schema setup/teardown lives in `include/database.php`; keep new tables under the
 
 ## Internationalization
 
-ALL user-facing strings MUST use `__()`/`__esc()` with the `'intropage'` text domain; for plain strings it is the second argument, and with format arguments it is the final argument:
+ALL user-facing strings MUST use `__()`/`__esc()` with the `'intropage'` text domain; for plain strings it is the second argument, and with format arguments it is the final argument:
+
 
 ```php
 __('Text to translate', 'intropage');
@@ -119,7 +120,7 @@ Every panel library file (`panellib/*.php`) MUST define a `register_<basename>()
 ### Plugin Hooks
 Register hooks in `setup.php`: `config_settings`, `top_header_tabs`, `console_after`, `page_head`, `graph_buttons`, `poller_bottom`, `user_admin_tab`, plus the user/group admin lifecycle hooks (`user_remove`, `user_group_admin_tab`, `user_group_remove`, `copy_user`).
 
-### Update Functions
+Data-collection (`update_func`) functions receive `($panel, $user_id)`, update/save the panel via `save_panel_result($panel, $user_id)`, and apply `intropage_get_allowed_devices($user_id)` only to device-scoped queries.
 Data-collection (`update_func`) functions receive `($panel, $user_id)` and must return a result array with `name`, `alarm`, and `data` keys, filtering by `intropage_get_allowed_devices($user_id)` before querying.
 
 ## Best Practices
