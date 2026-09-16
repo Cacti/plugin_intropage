@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-	bootstrap="tests/bootstrap.php"
+	xsi:noNamespaceSchemaLocation="../../include/vendor/phpunit/phpunit/phpunit.xsd"
+	bootstrap="tests/bootstrap-unit.php"
+	cacheDirectory=".phpunit.cache"
 	colors="true"
-	cacheDirectory=".phpunit.cache">
+	failOnWarning="true"
+	failOnNotice="true"
+	failOnDeprecation="true"
+	beStrictAboutOutputDuringTests="false">
+	<php>
+		<ini name="error_reporting" value="-1"/>
+		<env name="CACTI_TEST_BOOTSTRAP" value="1"/>
+	</php>
 	<testsuites>
 		<testsuite name="intropage">
-			<directory>tests</directory>
+			<directory>tests/Security</directory>
+			<directory>tests/Unit</directory>
 		</testsuite>
 	</testsuites>
+
+	<!--
+		Pest reads this PHPUnit-compatible configuration through Cacti's own
+		Composer-managed vendor tree, checked out alongside this plugin by
+		the CI workflow (see .github/workflows/plugin-ci-workflow.yml).
+	-->
 	<source>
 		<include>
 			<directory suffix=".php">include</directory>

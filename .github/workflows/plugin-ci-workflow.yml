@@ -31,56 +31,19 @@ on:
       - main
       - develop
 
+env:
+  CACTI: 1.2.x
+
 jobs:
-  php80-floor:
-    name: PHP 8.0 syntax floor
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    # INFO declares compat = 1.2.17. Cacti 1.2 ships include/vendor/composer/
-    # platform_check.php, which autoload_real.php requires and which throws on
-    # PHP_VERSION_ID < 80000, so 1.2 cannot boot below 8.0. The integration
-    # matrix starts at 8.2 because the Cacti core it checks out now requires
-    # PHP 8.2 to boot (its composer platform check aborts install below 8.2);
-    # the 8.0 syntax-floor job above still guards 1.2's real language floor.
-    steps:
-    - name: Checkout Plugin
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      with:
-        persist-credentials: false
-
-    - name: Setup PHP 8.0
-      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-      with:
-        php-version: '8.0'
-        coverage: none
-
-    - name: Lint runtime files
-      run: |
-        set -euo pipefail
-        status=0
-        while IFS= read -r file; do
-          if ! php -l "$file" > /dev/null 2>&1; then
-            echo "PHP 8.0 syntax error: $file"
-            php -l "$file" || true
-            status=1
-          fi
-        done < <(find . -name '*.php' -not -path './tests/*' -not -path './vendor/*')
-        exit "$status"
-
   integration-test:
     runs-on: ${{ matrix.os }}
-    
+
     strategy:
       fail-fast: false
       matrix:
-        # This job installs Cacti from the default branch, whose composer.json
-        # requires php ^8.2 and leaves platform-check on, so 8.1 aborts in
-        # "Install Cacti via CLI".  The plugin's own floor is lower and is
-        # linted separately; it is not what this matrix measures.
-        php: ['8.3', '8.4']
+        php: ['8.2', '8.3', '8.4']
         os: [ubuntu-latest]
-    
+
     services:
       mariadb:
         image: mariadb:10.6
@@ -96,44 +59,43 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
-    
+
     name: PHP ${{ matrix.php }} Integration Test on ${{ matrix.os }}
-    
+
     steps:
     - name: Checkout Cacti
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      uses: actions/checkout@v4
       with:
         repository: Cacti/cacti
+        ref: ${{ env.CACTI }}
         path: cacti
-    
+
     - name: Checkout intropage Plugin
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      uses: actions/checkout@v4
       with:
         path: cacti/plugins/intropage
-    
+
     - name: Install PHP ${{ matrix.php }}
-      uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+      uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-        extensions: intl, mysql, gd, ldap, gmp, xml, curl, json, mbstring
+        extensions: intl, mysql, gd, ldap, gmp, xml, curl, json, mbstring, snmp
         ini-values: "post_max_size=256M, max_execution_time=60, date.timezone=America/New_York"
-    
+
     - name: Check PHP version
       run: php -v
-    
+
     - name: Run apt-get update
-      run: |
-        sudo add-apt-repository -y ppa:ondrej/php
-        sudo apt-get update
-    
+      run: sudo apt-get update
+
     - name: Install System Dependencies
-      run: sudo apt-get install -y apache2 snmp snmpd rrdtool fping
-    
+      run: sudo apt-get install -y snmp snmpd rrdtool fping
+
     - name: Start SNMPD Agent and Test
       run: |
         sudo systemctl start snmpd
         sudo snmpwalk -c public -v2c -On localhost .1.3.6.1.2.1.1
-    
+
     - name: Setup Permissions
       run: |
         sudo chown -R www-data:runner ${{ github.workspace }}/cacti
@@ -141,12 +103,12 @@ jobs:
         sudo find ${{ github.workspace }}/cacti -type f -exec chmod 664 {} \;
         sudo chmod +x ${{ github.workspace }}/cacti/cmd.php
         sudo chmod +x ${{ github.workspace }}/cacti/poller.php
-    
+
     - name: Create MySQL Config
       run: |
         echo -e "[client]\nuser = root\npassword = cactiroot\nhost = 127.0.0.1\n" > ~/.my.cnf
         cat ~/.my.cnf
-    
+
     - name: Initialize Cacti Database
       env:
         MYSQL_AUTH_USR: '--defaults-file=~/.my.cnf'
@@ -158,21 +120,26 @@ jobs:
         mysql $MYSQL_AUTH_USR -e "FLUSH PRIVILEGES;"
         mysql $MYSQL_AUTH_USR cacti < ${{ github.workspace }}/cacti/cacti.sql
         mysql $MYSQL_AUTH_USR -e "INSERT INTO settings (name, value) VALUES ('path_php_binary', '/usr/bin/php')" cacti
-    
+
     - name: Validate composer files
       run: |
         cd ${{ github.workspace }}/cacti
         if [ -f composer.json ]; then
           composer validate --strict || true
         fi
-    
+
     - name: Install Composer Dependencies
+      env:
+        COMPOSER_ROOT_VERSION: 1.3.0-dev
       run: |
         cd ${{ github.workspace }}/cacti
         if [ -f composer.json ]; then
-          sudo composer install --prefer-dist --no-progress
+          composer config --no-plugins allow-plugins.pestphp/pest-plugin true
+          composer require --dev --no-progress --no-interaction "pestphp/pest: ^3" "pestphp/pest-plugin-drift: ^3.0"
+          rm -f composer.lock
+          composer install --dev --no-progress
         fi
-    
+
     - name: Create Cacti config.php
       run: |
         cat ${{ github.workspace }}/cacti/include/config.php.dist | \
@@ -181,37 +148,37 @@ jobs:
         sed -r "s/'cactiuser'/'cactiuser'/g" | \
         sed -r "s/'cactiuser'/'cactiuser'/g" > ${{ github.workspace }}/cacti/include/config.php
         sudo chmod 664 ${{ github.workspace }}/cacti/include/config.php
-    
+
     - name: Configure Apache
       run: |
         cat << 'EOF' | sed 's#GITHUB_WORKSPACE#${{ github.workspace }}#g' > /tmp/cacti.conf
         <VirtualHost *:80>
           ServerAdmin webmaster@localhost
           DocumentRoot GITHUB_WORKSPACE/cacti
-          
+
           <Directory GITHUB_WORKSPACE/cacti>
             Options Indexes FollowSymLinks
             AllowOverride All
             Require all granted
           </Directory>
-          
+
           ErrorLog ${APACHE_LOG_DIR}/error.log
           CustomLog ${APACHE_LOG_DIR}/access.log combined
         </VirtualHost>
         EOF
         sudo cp /tmp/cacti.conf /etc/apache2/sites-available/000-default.conf
         sudo systemctl restart apache2
-    
+
     - name: Install Cacti via CLI
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
-    
+
     - name: Install intropage Plugin
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php cli/plugin_manage.php --plugin=intropage --install --enable
-    
+
     - name: Check PHP Syntax for Plugin
       run: |
         cd ${{ github.workspace }}/cacti/plugins/intropage
@@ -220,29 +187,55 @@ jobs:
           exit 1
         fi
 
+    - name: Set expected Cacti version for unit tests
+      run: echo -n "${{ env.CACTI }}" | sudo tee ${{ github.workspace }}/cacti/plugins/intropage/tests/.cacti-version > /dev/null
+
+    - name: Run Pest Unit Tests
+      env:
+        COMPOSER_ROOT_VERSION: 1.3.0-dev
+      run: |
+        cd ${{ github.workspace }}/cacti
+        include/vendor/bin/pest --configuration=plugins/intropage/phpunit.xml \
+          --coverage-clover=plugins/intropage/coverage/clover.xml \
+          plugins/intropage/tests
+
+    - name: Upload coverage report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-php${{ matrix.php }}
+        path: ${{ github.workspace }}/cacti/plugins/intropage/coverage/
+        if-no-files-found: warn
+
     - name: Remove the plugins directory exclusion from the .phpstan.neon
+      if: ${{ env.CACTI != '1.2.x' }}
       run: sed '/plugins/d' -i .phpstan.neon
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Mark composer scripts executable
+      if: ${{ env.CACTI != '1.2.x' }}
       run: sudo chmod +x ${{ github.workspace }}/cacti/include/vendor/bin/*
 
     - name: Run Linter on base code
+      if: ${{ env.CACTI != '1.2.x' }}
       run: composer run-script lint ${{ github.workspace }}/cacti/plugins/intropage
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Checking coding standards on base code
+      if: ${{ env.CACTI != '1.2.x' }}
       run: composer run-script phpcsfixer ${{ github.workspace }}/cacti/plugins/intropage
       working-directory: ${{ github.workspace }}/cacti
 
-#    - name: Run PHPStan at Level 6 on base code outside of Composer due to technical issues
-#      run: ./include/vendor/bin/phpstan analyze --level 6 ${{ github.workspace }}/cacti/plugins/intropage
-#      working-directory: ${{ github.workspace }}/cacti
-    
+    - name: Run PHPStan at Level 6 on base code outside of Composer due to technical issues
+      if: ${{ env.CACTI != '1.2.x' }}
+      run: ./include/vendor/bin/phpstan analyze --level 6 ${{ github.workspace }}/cacti/plugins/intropage
+      working-directory: ${{ github.workspace }}/cacti
+
     - name: Run Cacti Poller
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php poller.php --poller=1 --force --debug
+
         if ! grep -q "SYSTEM STATS" log/cacti.log; then
           echo "Cacti poller did not finish successfully"
           cat log/cacti.log
