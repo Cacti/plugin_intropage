@@ -262,8 +262,11 @@ jobs:
       if: always()
       run: |
         if [ -f ${{ github.workspace }}/cacti/log/cacti.log ]; then
-          if grep -E "FATAL:|ERROR:|WARNING:" ${{ github.workspace }}/cacti/log/cacti.log; then
+          if sudo grep -E "FATAL:|ERROR:|WARNING:" "${{ github.workspace }}/cacti/log/cacti.log"; then
             echo "Found FATAL/ERROR/WARNING entries in Cacti log"
+            exit 1
+          elif [ "$?" -gt 1 ]; then
+            echo "Unable to read Cacti log"
             exit 1
           fi
         fi
