@@ -173,9 +173,36 @@ if (!function_exists('cacti_sizeof')) {
 		return is_array($a) ? count($a) : 0;
 	}
 }
+if (!function_exists('cacti_count')) {
+	function cacti_count($a) {
+		return is_array($a) || $a instanceof Countable ? count($a) : 0;
+	}
+}
 if (!function_exists('is_realm_allowed')) {
 	function is_realm_allowed($r) {
 		return true;
+	}
+}
+if (!function_exists('get_simple_device_perms')) {
+	function get_simple_device_perms($user_id) {
+		return $GLOBALS['__test_simple_perms'] ?? true;
+	}
+}
+if (!function_exists('get_allowed_devices')) {
+	function get_allowed_devices($sql_where, $sql_order, $sql_limit, &$total_rows, $user_id = 0, ...$rest) {
+		$rows       = $GLOBALS['__test_allowed_devices'] ?? array();
+		$total_rows = count($rows);
+
+		return $rows;
+	}
+}
+if (!function_exists('read_user_setting')) {
+	function read_user_setting($n, $f = false, $force = false, $user_id = 0) {
+		return $f;
+	}
+}
+if (!function_exists('set_user_setting')) {
+	function set_user_setting($n, $v, $user_id = 0) {
 	}
 }
 if (!function_exists('raise_message')) {
