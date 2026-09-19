@@ -265,7 +265,6 @@ jobs:
           cat log/cacti.log
           exit 1
         fi
-        sudo -u www-data php plugins/intropage/poller_intropage.php
 
     - name: View Cacti Logs
       if: always()
