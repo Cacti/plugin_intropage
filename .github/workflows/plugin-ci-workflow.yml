@@ -33,6 +33,7 @@ on:
 
 env:
   CACTI: 1.2.x
+  COMPOSER_ALLOW_SUPERUSER: 1
 
 jobs:
   integration-test:
