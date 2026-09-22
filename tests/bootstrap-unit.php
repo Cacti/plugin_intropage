@@ -111,7 +111,7 @@ if (!function_exists('db_fetch_row_prepared')) {
 }
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql) {
-		return '';
+		return $GLOBALS['__test_fetch_cell'] ?? '';
 	}
 }
 if (!function_exists('db_fetch_cell_prepared')) {
@@ -137,6 +137,62 @@ if (!function_exists('api_plugin_db_add_column')) {
 if (!function_exists('api_plugin_db_table_create')) {
 	function api_plugin_db_table_create($p, $t, $d) {
 		return true;
+	}
+}
+
+$GLOBALS['__test_registered_hooks'] = array();
+
+if (!function_exists('api_plugin_register_hook')) {
+	function api_plugin_register_hook($plugin, $hook, $function, $file, $subtype = '') {
+		$GLOBALS['__test_registered_hooks'][] = array(
+			'name'     => $plugin,
+			'hook'     => $hook,
+			'function' => $function,
+			'file'     => $file,
+		);
+
+		return true;
+	}
+}
+
+$GLOBALS['__test_registered_realms'] = array();
+
+if (!function_exists('api_plugin_register_realm')) {
+	function api_plugin_register_realm($plugin, $file, $description, $enabled) {
+		$GLOBALS['__test_registered_realms'][] = array(
+			'name'        => $plugin,
+			'file'        => $file,
+			'description' => $description,
+			'enabled'     => $enabled,
+		);
+
+		return true;
+	}
+}
+
+if (!function_exists('cacti_version_compare')) {
+	function cacti_version_compare($a, $b, $op) {
+		return version_compare((string) $a, (string) $b, $op);
+	}
+}
+
+$GLOBALS['__test_augmented_roles'] = array();
+
+if (!function_exists('auth_augment_roles')) {
+	function auth_augment_roles($role, $files) {
+		$GLOBALS['__test_augmented_roles'][] = array('role' => $role, 'files' => $files);
+	}
+}
+
+if (!function_exists('get_selected_theme')) {
+	function get_selected_theme() {
+		return isset($GLOBALS['__test_theme']) ? $GLOBALS['__test_theme'] : 'modern';
+	}
+}
+
+if (!function_exists('db_error')) {
+	function db_error() {
+		return '';
 	}
 }
 if (!function_exists('read_config_option')) {
