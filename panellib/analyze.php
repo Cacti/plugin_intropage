@@ -24,6 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'analyze' panel category and its 'Analyze Logins',
+ * 'Analyze Logs', 'Database Checks', 'Analyze Cacti Objects', and
+ * 'Analyze DS stats' panels with the panel library. Called from
+ * initialize_panel_library() while building the full set of available
+ * dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'analyze'
+ *                         category metadata.
+ */
 function register_analyze() {
 	global $registry;
 
@@ -129,6 +142,18 @@ function register_analyze() {
 }
 
 // ------------------------------------ analyse_login -----------------------------------------------------
+/**
+ * Data-update function for the 'analyse_login' panel: analyzes the
+ * most recent Cacti login attempts for failure trends/errors. Called
+ * from intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function analyse_login($panel, $user_id) {
 	global $config;
 
@@ -238,6 +263,18 @@ function analyse_login($panel, $user_id) {
 }
 
 // ------------------------------------ analyse_log -----------------------------------------------------
+/**
+ * Data-update function for the 'analyse_log' panel: scans Cacti's log
+ * file for common error patterns that warrant attention, summarizing
+ * the findings. Called from intropage_gather_stats()/get_panel() via
+ * the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function analyse_log($panel, $user_id) {
 	global $config;
 
@@ -409,6 +446,20 @@ function analyse_log($panel, $user_id) {
 }
 
 // -------------------------------------analyse db-------------------------------------------
+/**
+ * Data-update function for the 'analyse_db' panel: runs a set of
+ * MySQL/MariaDB database health checks (e.g. table integrity,
+ * orphaned rows) and summarizes any problems found; may take a long
+ * time on very large systems. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function analyse_db($panel, $user_id) {
 	global $config, $database_default;
 
@@ -548,6 +599,19 @@ function analyse_db($panel, $user_id) {
 }
 
 // --------------------------------analyse_tree_host_graph
+/**
+ * Data-update function for the 'analyse_tree_host_graph' panel:
+ * analyzes Cacti's trees, hosts, and graphs for common configuration
+ * problems (e.g. orphaned graphs, empty trees), summarizing the
+ * findings. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function analyse_tree_host_graph($panel, $user_id) {
 	global $config;
 
@@ -1069,6 +1133,23 @@ function analyse_tree_host_graph($panel, $user_id) {
 }
 
 // ------------------------------------ analyse_ds_stats -----------------------------------------------------
+/**
+ * Data-update function for the 'analyse_ds_stat' panel: renders a
+ * summary/graph of data source statistics (e.g. null/all counts) over
+ * the panel's configured timespan. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
 function analyse_ds_stats($panel, $user_id, $timespan = 0) {
 	global $config;
 
@@ -1154,6 +1235,14 @@ function analyse_ds_stats($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
+/**
+ * Trend-collection function for the 'analyse_ds_stat' panel: records a
+ * snapshot of data source statistics (e.g. all/null counts) into
+ * plugin_intropage_trends. Called from intropage_gather_stats() via
+ * the panel definition's 'trends_func'.
+ *
+ * @return void
+ */
 function ds_stats_trend() {
 	$count = db_fetch_cell('SELECT COUNT(*) FROM data_source_stats_hourly_last');
 
@@ -1171,6 +1260,14 @@ function ds_stats_trend() {
 }
 
 // ------------------------------------ analyse_log -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'analyse_log' panel, showing an
+ * expanded list of the detected log error matches. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return void
+ */
 function analyse_log_detail() {
 	global $log;
 
@@ -1338,6 +1435,14 @@ function analyse_log_detail() {
 }
 
 // ------------------------------------ analyse_login -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'analyse_login' panel, showing an
+ * expanded list of recent login attempts and their analysis. Called
+ * via the panel definition's 'details_func' when the user opens the
+ * panel's detail view.
+ *
+ * @return void
+ */
 function analyse_login_detail() {
 	global $config;
 
@@ -1436,6 +1541,14 @@ function analyse_login_detail() {
 }
 
 // ------------------------------------ analyse_tree_host_graph  -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'analyse_tree_host_graph' panel, showing
+ * an expanded breakdown of detected tree/host/graph configuration
+ * issues. Called via the panel definition's 'details_func' when the
+ * user opens the panel's detail view.
+ *
+ * @return void
+ */
 function analyse_tree_host_graph_detail() {
 	global $config, $console_access;
 

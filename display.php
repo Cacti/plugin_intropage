@@ -24,6 +24,35 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Main entry point rendering the Intropage dashboard: applies pending
+ * schema upgrades, initializes the panel library, enforces page
+ * permissions, tracks per-user panel authorization, and renders the
+ * selected theme's panel layout. Called from intropage.php when the
+ * plugin's main page is requested.
+ *
+ * @return void
+ *
+ * @global array  $config           Cacti global configuration array;
+ *                                  used to include required libraries.
+ * @global string $sql_where        Reserved/declared for use by
+ *                                  included panel-rendering code; not
+ *                                  set directly here.
+ * @global mixed  $callbackPage     Reserved/declared for use by
+ *                                  included panel-rendering code; not
+ *                                  set directly here.
+ * @global mixed  $redirectPage     Reserved/declared for use by
+ *                                  included panel-rendering code; not
+ *                                  set directly here.
+ * @global array  $panels           Populated here with the initialized
+ *                                  panel library definitions.
+ * @global mixed  $registry         Reserved/declared for use by
+ *                                  included panel-rendering code; not
+ *                                  set directly here.
+ * @global array  $trend_timespans  Reserved/declared for use by
+ *                                  included panel-rendering code; not
+ *                                  set directly here.
+ */
 function display_information() {
 	global $config, $sql_where, $callbackPage, $redirectPage, $panels, $registry, $trend_timespans;
 

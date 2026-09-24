@@ -24,6 +24,18 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'alert' panel category and its 'Host alerts' panel
+ * (recent host up/down/recovering events) with the panel library.
+ * Called from initialize_panel_library() while building the full set
+ * of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'alert'
+ *                         category metadata.
+ */
 function register_alert() {
 	global $registry;
 
@@ -57,6 +69,26 @@ function register_alert() {
 }
 
 // ------------------------------------ alert host -----------------------------------------------------
+/**
+ * Data-update function for the 'alert_host' panel: gathers recently
+ * recovering, up, and down/failing hosts (within the user's device
+ * scope) and builds the panel's display rows, coloring the panel's
+ * alarm state based on the presence of down hosts within the
+ * configured 'important period'. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and
+ *                       settings.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other panel
+ *                       functions in this file; not used directly
+ *                       here.
+ */
 function alert_host($panel, $user_id) {
 	global $config;
 
@@ -190,6 +222,13 @@ function alert_host($panel, $user_id) {
 }
 
 // ------------------------------------ alert host detail -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'alert_host' panel, showing an expanded
+ * view of recent host alert events. Called via the panel definition's
+ * 'details_func' when the user opens the panel's detail view.
+ *
+ * @return void
+ */
 function alert_host_detail() {
 	global $config, $console_access;
 

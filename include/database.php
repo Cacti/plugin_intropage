@@ -24,6 +24,13 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Reverts plugin-related user login-option restrictions, removes this
+ * plugin's stored settings, and drops all of its database tables.
+ * Called from setup.php's uninstall hook.
+ *
+ * @return void
+ */
 function intropage_drop_database() {
 	db_execute('UPDATE user_auth SET login_opts = 1 WHERE login_opts > 3');
 	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
@@ -36,6 +43,17 @@ function intropage_drop_database() {
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_group_auth');
 }
 
+/**
+ * Creates (if not already present) all of this plugin's database
+ * tables (trends, panel definitions/data/dashboard associations, user
+ * and user-group authorization, dashboard). Called from setup.php's
+ * install hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include required libraries.
+ */
 function intropage_initialize_database() {
 	global $config;
 
@@ -175,6 +193,18 @@ function intropage_initialize_database() {
 	db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
 }
 
+/**
+ * Checks whether the plugin's recorded database version differs from
+ * its actual (INFO file) version and, if so, applies the sequence of
+ * incremental schema migrations needed to bring older installations up
+ * to date. Called from display_information() on every page load.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the plugin's INFO file and include
+ *                       required libraries.
+ */
 function intropage_upgrade_database() {
 	global $config;
 

@@ -31,6 +31,19 @@ if (isset($run_from_poller)) {
 	$_SESSION['sess_user_id'] = 0;
 }
 
+/**
+ * Returns a comma-separated list of device ids the given user is
+ * permitted to see, temporarily disabling their 'hide_disabled' user
+ * setting so disabled devices aren't excluded from the scope
+ * calculation. Called from intropage_device_scope() to resolve a
+ * non-simple-permission user's allowed device set.
+ *
+ * @param int|string $user_id The Cacti user id to resolve allowed
+ *                            devices for.
+ *
+ * @return string|false Comma-separated allowed device ids, or false if
+ *                      the user has no visible devices.
+ */
 function intropage_get_allowed_devices($user_id) {
 	$x  = 0;
 	$us = read_user_setting('hide_disabled', false, false, $user_id);
@@ -77,6 +90,17 @@ function intropage_device_scope($user_id): array {
 	return ['simple' => false, 'allowed' => intropage_get_allowed_devices($user_id)];
 }
 
+/**
+ * Top-level request dispatcher for this page: sets the default action,
+ * then routes to the appropriate handler based on which request
+ * variables are present (adding a panel, saving dashboard/settings,
+ * running a panel action, changing a panel's timespan, or one of the
+ * AJAX actions: configure/autoreload/reload/details), exiting after AJAX
+ * actions. Called from display_information() before rendering the
+ * dashboard.
+ *
+ * @return void
+ */
 function process_page_request_variables() {
 	set_default_action();
 
@@ -112,6 +136,15 @@ function process_page_request_variables() {
 	}
 }
 
+/**
+ * Handles adding a panel to the current dashboard: creates a new
+ * plugin_intropage_panel_data row for the panel if one doesn't already
+ * exist (by panel_id), then associates it with the target dashboard.
+ * Called from process_page_request_variables() when the
+ * 'intropage_addpanel' request variable is present.
+ *
+ * @return void
+ */
 function intropage_action_add_panel() {
 	$dashboard_id = get_filter_request_var('dashboard_id');
 
@@ -149,6 +182,17 @@ function intropage_action_add_panel() {
 	}
 }
 
+/**
+ * Validates and normalizes a raw dashboard id value (must be a
+ * non-negative integer string with no leading zeros) into an integer.
+ * Called from intropage_action_settings() to safely parse dashboard
+ * ids embedded in dynamic POST field names.
+ *
+ * @param mixed $value The raw value to validate/parse.
+ *
+ * @return int|null The parsed dashboard id, or null if $value is not a
+ *                  valid non-negative integer string.
+ */
 function intropage_parse_dashboard_id($value) {
 	if (!is_string($value) || preg_match('/\A(?:0|[1-9][0-9]*)\z/D', $value) !== 1) {
 		return null;
@@ -164,6 +208,14 @@ function intropage_parse_dashboard_id($value) {
 	return $id === false ? null : $id;
 }
 
+/**
+ * Handles saving the dashboard settings form: persists each submitted
+ * dashboard's custom name (from dynamically named 'name_{id}' POST
+ * fields). Called from process_page_request_variables() when the
+ * dashboard settings form is submitted.
+ *
+ * @return void
+ */
 function intropage_action_settings() {
 	foreach ($_POST as $var => $value) {
 		if (strpos($var, 'name_') !== false) {
@@ -220,6 +272,27 @@ function intropage_action_settings() {
 	raise_message(1);
 }
 
+/**
+ * Handles all per-panel/dashboard user actions encoded in the
+ * 'intropage_action' request variable (e.g. 'heightless'/'heightmore'
+ * to resize a panel, refresh interval changes, enabling/disabling
+ * panels, moving panels between dashboards, removing panels, resetting
+ * layout), parsing the action name and its numeric argument(s) from the
+ * value's underscore-separated segments. Called from
+ * process_page_request_variables() when the 'intropage_action' request
+ * variable is present.
+ *
+ * @return void
+ *
+ * @global mixed $callbackPage Reserved/declared for use by included
+ *                             panel-rendering code; not set directly
+ *                             here.
+ * @global mixed $redirectPage Reserved/declared for use by included
+ *                             panel-rendering code; not set directly
+ *                             here.
+ * @global array $config       Cacti global configuration array; used to
+ *                             build redirect URLs.
+ */
 function intropage_actions() {
 	global $callbackPage, $redirectPage, $config;
 
@@ -598,6 +671,21 @@ function intropage_actions() {
 	}
 }
 
+/**
+ * Handles timespan-change actions encoded in the
+ * 'intropage_action_timespan' request variable: stores the user's new
+ * timespan preference and immediately re-runs the data-update function
+ * for every trend-capable panel currently on the user's dashboards
+ * using the new timespan. Called from
+ * process_page_request_variables() when the
+ * 'intropage_action_timespan' request variable is present.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other
+ *                       functions in this file; not used directly
+ *                       here.
+ */
 function intropage_actions_timespan() {
 	global $config;
 
@@ -647,6 +735,18 @@ function intropage_actions_timespan() {
 	}
 }
 
+/**
+ * Determines whether a panel is currently usable: it must exist in the
+ * (already availability-pruned) panel library, and if it declares
+ * required plugin dependencies, all of those plugins must be enabled.
+ * Called throughout this plugin (e.g. panel update functions,
+ * intropage_actions_timespan()) before running a panel's logic.
+ *
+ * @param string $panel_id The panel id to check.
+ *
+ * @return bool True if the panel exists and its required plugins (if
+ *             any) are all enabled, false otherwise.
+ */
 function is_panel_enabled($panel_id) {
 	$panels = initialize_panel_library();
 
@@ -675,6 +775,20 @@ function is_panel_enabled($panel_id) {
 	return true;
 }
 
+/**
+ * Determines whether a user is permitted to view a given panel, based
+ * on the union of their own JSON-encoded panel permissions and those of
+ * any user groups they belong to, caching the resolved permission set
+ * per user for the duration of the request. Called from
+ * get_allowed_panels() and other panel-visibility checks.
+ *
+ * @param string $panel_id The panel id to check permission for.
+ * @param int    $user_id  The user id to check; 0 uses the current
+ *                        session user.
+ *
+ * @return bool True if the user (directly or via a group) is permitted
+ *             to view the panel, false otherwise.
+ */
 function is_panel_allowed($panel_id, $user_id = 0) {
 	static $permissions = [];
 
@@ -735,6 +849,19 @@ function is_panel_allowed($panel_id, $user_id = 0) {
 	return false;
 }
 
+/**
+ * Returns the full set of panel ids a user is permitted to view, based
+ * on the union of their own JSON-encoded panel permissions and those of
+ * any user groups they belong to. Called from hmib_config_arrays()-
+ * style setup code and from display.php to determine a user's panel
+ * count.
+ *
+ * @param int $user_id The user id to resolve; 0 uses the current
+ *                     session user.
+ *
+ * @return array|false A map of panel_id => 'on' for allowed panels, or
+ *                     false if the user has no stored permissions.
+ */
 function get_allowed_panels($user_id = 0) {
 	if ($user_id == 0) {
 		$user_id = $_SESSION['sess_user_id'];
@@ -787,6 +914,24 @@ function get_allowed_panels($user_id = 0) {
 	return (cacti_sizeof($permissions) ? $permissions : false);
 }
 
+/**
+ * AJAX endpoint that reloads and renders a single dashboard panel's
+ * header and body markup: forces an update when the panel's stored
+ * data contains a &lt;script&gt; tag or the client explicitly requested a
+ * forced reload, otherwise updates only when the panel's refresh
+ * interval has elapsed, then prints the panel's header controls
+ * (reload/detail/resize/remove links) and its rendered data. Called
+ * from process_page_request_variables() when action=reload.
+ *
+ * @return void This function prints its output directly and calls
+ *             exit().
+ *
+ * @global array $panels Populated by initialize_panel_library(); used
+ *                       to resolve the panel's definition and render
+ *                       options.
+ * @global array $config Cacti global configuration array; used to
+ *                       build the disable-panel redirect URL.
+ */
 function intropage_reload_panel() {
 	global $panels, $config;
 
@@ -906,6 +1051,19 @@ function intropage_reload_panel() {
 	exit;
 }
 
+/**
+ * AJAX endpoint that renders a panel's detail view: invokes the panel
+ * definition's 'details_func' and prints the resulting title/alarm/
+ * detail markup. Called from process_page_request_variables() when
+ * action=details.
+ *
+ * @return void This function prints its output directly and calls
+ *             exit().
+ *
+ * @global array $panels Populated by initialize_panel_library();
+ *                       reserved/declared for parity with other
+ *                       functions in this file; not used directly here.
+ */
 function intropage_detail_panel() {
 	global $panels;
 
@@ -948,6 +1106,16 @@ function intropage_detail_panel() {
 	exit;
 }
 
+/**
+ * AJAX endpoint polled by the dashboard's auto-refresh JS: compares the
+ * timestamp of the last completed poller cycle against the last time
+ * this user's dashboard was refreshed, printing '1' (and recording a
+ * new displayed-timestamp) if a refresh is warranted, or '0' otherwise.
+ * Called from process_page_request_variables() when action=autoreload.
+ *
+ * @return void This function prints its output directly and calls
+ *             exit().
+ */
 function intropage_autoreload() {
 	$last_poller = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
 		FROM plugin_intropage_trends
@@ -981,6 +1149,24 @@ function intropage_autoreload() {
 	exit;
 }
 
+/**
+ * Resolves a panel's current stored data row (by numeric row id or by
+ * panel_id) together with its static definition, creating a default
+ * data row on first access if none exists yet (e.g. for a favorite
+ * graph or a panel not yet added to the user's dashboard), and
+ * decorates the result with a human-readable 'next update in' suffix
+ * on its name. Called throughout this plugin (intropage_reload_panel(),
+ * panel update functions, intropage_actions_timespan(), etc.) to fetch
+ * a panel's combined data+definition.
+ *
+ * @param int|string $panel_id The panel's numeric row id, or its
+ *                            string panel_id.
+ * @param int        $user_id  The user id to scope the panel data to;
+ *                            0 for system-level panels.
+ *
+ * @return array The combined panel data (id, panel_id, name, and other
+ *              stored/derived fields) plus its 'definition' sub-array.
+ */
 function get_panel($panel_id, $user_id = 0) {
 	// Either fetch by row id or panel_id
 	if (is_numeric($panel_id)) {
@@ -1066,6 +1252,21 @@ function get_panel($panel_id, $user_id = 0) {
 	];
 }
 
+/**
+ * Formats a duration in seconds as a human-readable interval string
+ * (seconds/minutes/hours/days), choosing the largest applicable unit
+ * and an optional abbreviated form. Called from get_panel() to build
+ * each panel's 'next update in' display text.
+ *
+ * @param float $value The duration in seconds to format.
+ * @param int   $round The number of decimal places to round the
+ *                     displayed value to.
+ * @param bool  $short Whether to use abbreviated unit labels (e.g.
+ *                     'Sec'/'Min'/'Hrs') instead of full words.
+ *
+ * @return string The formatted interval string, or '-' if $value is
+ *               not positive.
+ */
 function intropage_readable_interval($value, $round = 0, $short = true) {
 	if ($value <= 0) {
 		return '-';
@@ -1099,6 +1300,18 @@ function intropage_readable_interval($value, $round = 0, $short = true) {
 	}
 }
 
+/**
+ * Returns the list of users whose panel data should be processed: just
+ * the current session user when running interactively in a web
+ * request, or every enabled user with an Intropage auth row when
+ * running from the poller. Called from the poller/collection flow to
+ * determine which users' panels to update.
+ *
+ * @return array A list of rows each containing at least an 'id' key.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       determine whether this is a web request.
+ */
 function get_user_list() {
 	global $config;
 
@@ -1121,6 +1334,18 @@ function get_user_list() {
 	return $users;
 }
 
+/**
+ * Persists a panel's freshly computed data/alarm state back to its
+ * plugin_intropage_panel_data row and updates its last-update
+ * timestamp. Called at the end of every panel's data-update function.
+ *
+ * @param array $panel   The panel's data row, including 'id', 'data',
+ *                       and 'alarm'.
+ * @param int   $user_id The user id to scope the update to; 0 for
+ *                       system-level panels.
+ *
+ * @return void
+ */
 function save_panel_result($panel, $user_id = 0) {
 	db_execute_prepared('UPDATE plugin_intropage_panel_data
 		SET data = ?, alarm = ?, user_id = ?, last_update = NOW()
@@ -1128,6 +1353,21 @@ function save_panel_result($panel, $user_id = 0) {
 		[$panel['data'], $panel['alarm'], $user_id, $panel['id']]);
 }
 
+/**
+ * Fetches a panel's stored rendered data/alarm/last-update/height
+ * fields (plus a formatted recheck interval), substituting a
+ * placeholder message when no data has been collected yet. Called from
+ * intropage_reload_panel() and display-rendering code to obtain a
+ * panel's current display content.
+ *
+ * @param int|string $panel_id The panel's numeric row id or string
+ *                            panel_id.
+ * @param int        $user_id  The user id to scope the panel data to;
+ *                            0 for system-level panels.
+ *
+ * @return array The panel's data row (id, data, alarm, last_update,
+ *              height, recheck) plus its resolved 'name'.
+ */
 function get_panel_data($panel_id, $user_id = 0) {
 	$panel = get_panel($panel_id, $user_id);
 
@@ -1153,6 +1393,16 @@ function get_panel_data($panel_id, $user_id = 0) {
 	return $data;
 }
 
+/**
+ * Checks whether a user has been granted Cacti's console-access realm
+ * (realm id 8). Called from include/tab.php and intropage_console_after()
+ * to decide whether a user has full console access alongside Intropage.
+ *
+ * @param int $user_id The user id to check.
+ *
+ * @return bool True if the user has console-access realm permission,
+ *             false otherwise.
+ */
 function get_console_access($user_id) {
 	return (db_fetch_assoc_prepared('SELECT realm_id
 		FROM user_auth_realm
@@ -1161,6 +1411,24 @@ function get_console_access($user_id) {
 		[$user_id])) ? true : false;
 }
 
+/**
+ * Builds (and request-caches in a static/session variable) the full
+ * panel library by including every file in panellib/ and calling its
+ * 'register_*' function, pruning any panel whose required plugin(s)
+ * aren't installed/enabled and optionally auto-unregistering their
+ * stored data when 'intropage_unregister' is enabled. Called
+ * throughout this plugin (display_information(), panel action
+ * handlers, is_panel_enabled(), etc.) wherever the set of available
+ * panels is needed.
+ *
+ * @return array The available panel definitions, keyed by panel id.
+ *
+ * @global array $config   Cacti global configuration array; used to
+ *                         locate the panellib directory.
+ * @global array $registry Populated here with each panellib file's
+ *                         category metadata (via its 'register_*'
+ *                         function).
+ */
 function initialize_panel_library() {
 	global $config, $registry;
 
@@ -1241,6 +1509,22 @@ function initialize_panel_library() {
 	return $panel_library;
 }
 
+/**
+ * Bulk-upserts a set of panel definitions into
+ * plugin_intropage_panel_definition, used to (re-)synchronize the
+ * database with the panel library's in-code definitions. Intended to
+ * be called after modifying registered panel definitions (e.g. by a
+ * third-party plugin via intropage_add_panel()) to persist them.
+ *
+ * @param array $panels The panel definitions to upsert, keyed by
+ *                      panel id, each with the full set of definition
+ *                      fields (name, level, class, priority, alarm,
+ *                      requires, update_func, details_func,
+ *                      trends_func, refresh, trefresh, description,
+ *                      height).
+ *
+ * @return void
+ */
 function update_registered_panels($panels) {
 	$prefix = 'INSERT INTO plugin_intropage_panel_definition
 		(panel_id, name, level, class, priority, alarm, requires, update_func, details_func, trends_func, refresh, trefresh, description, height) VALUES';
@@ -1278,6 +1562,27 @@ function update_registered_panels($panels) {
 	}
 }
 
+/**
+ * Renders a user's chosen favorite graph as an embedded graph image for
+ * a given timespan, sized according to the user's configured panel
+ * line count. Called from intropage_reload_panel() when rendering a
+ * panel backed by a favorite graph rather than a registered panel
+ * definition.
+ *
+ * @param int $fav_graph_id       The local_graph_id of the favorite
+ *                                graph to render.
+ * @param int $fav_graph_timespan A graph_timeshifts key selecting the
+ *                                graph's display timespan.
+ *
+ * @return array|null The rendered panel result ('name', 'alarm',
+ *                    'data'), or null if $fav_graph_id is not set.
+ *
+ * @global array $config           Cacti global configuration array;
+ *                                 used to build the graph image URL and
+ *                                 include the time library.
+ * @global array $graph_timeshifts Map of timespan key => display label,
+ *                                 used to build the graph's title.
+ */
 function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 	global $config, $graph_timeshifts;
 
@@ -1326,6 +1631,23 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 	}
 }
 
+/**
+ * Renders one of this plugin's panel chart types (line, pie, or other
+ * supported chart shape described by $dispdata) as embedded HTML/JS
+ * (e.g. a C3/D3-based chart), sizing the chart according to the user's
+ * configured panel line count. Called from nearly every panellib
+ * data-update function to turn its gathered data into displayable
+ * panel content.
+ *
+ * @param array $dispdata The chart data/config, keyed by chart type
+ *                        (e.g. 'line', 'pie') with that type's
+ *                        expected sub-structure (titles, labels, data
+ *                        series).
+ * @param int   $user_id  The id of the user the chart is being
+ *                        rendered for, used to size the chart.
+ *
+ * @return string The rendered HTML/JS markup for the chart.
+ */
 function intropage_prepare_graph($dispdata, $user_id) {
 	global $config;
 
@@ -1616,6 +1938,22 @@ function intropage_prepare_graph($dispdata, $user_id) {
 	return ($content);
 }
 
+/**
+ * Efficiently reads the last N lines of a (potentially large) log file
+ * by seeking and reading backwards in chunks, avoiding loading the
+ * entire file into memory. Called from analyse_log()/analyse_log_detail()
+ * to scan the Cacti log for recent error patterns.
+ *
+ * @param string $log_file  Path to the log file to read.
+ * @param int    $nbr_lines The number of trailing lines to return.
+ * @param bool   $adaptive  Whether to scale the internal read buffer
+ *                         size based on $nbr_lines (more efficient for
+ *                         small requests) instead of always using a
+ *                         4096-byte buffer.
+ *
+ * @return array|false An array of the last $nbr_lines lines, or false
+ *                    if the file doesn't exist/isn't readable.
+ */
 function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 	if (!(file_exists($log_file) && is_readable($log_file))) {
 		return false;
@@ -1669,6 +2007,16 @@ function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 	return explode("\n", $output);
 }
 
+/**
+ * Formats a byte count as a human-readable size string with the
+ * appropriate binary unit suffix (B/kB/MB/GB/etc). Called when
+ * rendering file/database sizes in panel displays.
+ *
+ * @param int|string $bytes    The size in bytes to format.
+ * @param int        $decimals The number of decimal places to include.
+ *
+ * @return string The formatted size string with unit suffix.
+ */
 function human_filesize($bytes, $decimals = 2) {
 	$size   = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 	$factor = floor((strlen($bytes) - 1) / 3);
@@ -1676,6 +2024,23 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
+/**
+ * Prints an empty placeholder &lt;li&gt; grid item for a panel, sized
+ * according to its width/height class, which the dashboard's client-
+ * side JS then populates via an async reload call. Called while
+ * rendering the dashboard's panel grid for each panel a user has
+ * enabled.
+ *
+ * @param int $panel_id     The panel's plugin_intropage_panel_data row
+ *                          id.
+ * @param int $dashboard_id The dashboard this panel item belongs to.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other
+ *                       functions in this file; not used directly
+ *                       here.
+ */
 function intropage_create_panel($panel_id, $dashboard_id) {
 	global $config;
 
@@ -1724,6 +2089,16 @@ function intropage_create_panel($panel_id, $dashboard_id) {
 	print '</li>';
 }
 
+/**
+ * Renders the 'add panel' dropdown for a dashboard, listing panels not
+ * already present on it, disabling entries the user isn't permitted to
+ * view and omitting ones whose required plugin isn't enabled. Called
+ * while rendering the dashboard toolbar.
+ *
+ * @param int $dashboard_id The dashboard to list addable panels for.
+ *
+ * @return void
+ */
 function intropage_addpanel_select($dashboard_id) {
 	$add_panels = db_fetch_assoc_prepared('SELECT DISTINCT pd.panel_id, pd.name
 		FROM plugin_intropage_panel_definition AS pd
@@ -1782,6 +2157,21 @@ function intropage_addpanel_select($dashboard_id) {
 	print '&nbsp; &nbsp;';
 }
 
+/**
+ * Queries a remote NTP server via a raw UDP NTP request and returns the
+ * server's reported Unix timestamp, used to detect local clock drift.
+ * Called from ntp_dns() (panellib/misc.php) for the 'NTP/DNS Status'
+ * panel.
+ *
+ * @param string $host The NTP server hostname/IP to query.
+ *
+ * @return int|string The remote Unix timestamp, or an 'error: ...'
+ *                    string describing a socket failure.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       select the correct socket receive mode on
+ *                       Windows vs. other platforms.
+ */
 function ntp_time($host) {
 	global $config;
 
@@ -1841,6 +2231,25 @@ function ntp_time($host) {
 
 	return ($timestamp);
 }
+/**
+ * Graph_buttons/graph_buttons_thumbnails hook: adds an 'Add to
+ * Favorites/Intropage' button to Cacti's graph view toolbar, letting
+ * the user pin the current graph as a favorite-graph panel on their
+ * dashboard. Called by Cacti's graph rendering via the
+ * 'graph_buttons'/'graph_buttons_thumbnails' hooks.
+ *
+ * @param array $data The graph button context data supplied by Cacti
+ *                    (e.g. the current graph's local_graph_id).
+ *
+ * @return void
+ *
+ * @global array $config       Cacti global configuration array; used
+ *                             to build URLs.
+ * @global mixed $callbackPage Reserved/declared for use by included
+ *                             code; not set directly here.
+ * @global mixed $redirectPage Populated here with the page to redirect
+ *                             to based on the user's login options.
+ */
 function intropage_graph_button($data) {
 	global $config, $callbackPage, $redirectPage;
 
@@ -1878,6 +2287,19 @@ function intropage_graph_button($data) {
 	}
 }
 
+/**
+ * Resolves (and caches in the session) the current user's effective
+ * login-options value, handling explicit 'loginopt_console'/
+ * 'loginopt_tab'/'loginopt_graph' action requests as session overrides,
+ * otherwise reading the user's stored login_opts from the database.
+ * Called from intropage_login_options_navigate(), include/tab.php, and
+ * display_information() to decide navigation/rendering behavior.
+ *
+ * @param bool $refresh Whether to force re-reading the value from the
+ *                      database even if already cached in the session.
+ *
+ * @return int The resolved login_opts value.
+ */
 function get_login_opts($refresh = false) {
 	if (isset_request_var('intropage_action') &&
 		get_nfilter_request_var('intropage_action') == 'loginopt_console') {
@@ -1900,6 +2322,31 @@ function get_login_opts($refresh = false) {
 	return $_SESSION['intropage_login_opts'];
 }
 
+/**
+ * AJAX/form endpoint rendering the panel configuration dialog: lets the
+ * user rename their dashboards and override each panel's (and, for
+ * admins, each system panel's and trend collector's) refresh interval
+ * away from its default. Called from process_page_request_variables()
+ * when action=configure.
+ *
+ * @return void
+ *
+ * @global array $config              Reserved/declared for parity with
+ *                                    other functions in this file; not
+ *                                    used directly here.
+ * @global mixed $callbackPage        Reserved/declared for use by
+ *                                    included code; not set directly
+ *                                    here.
+ * @global mixed $redirectPage        The form's target action URL,
+ *                                    expected to already be set by the
+ *                                    caller.
+ * @global array $trend_timespans     Reserved/declared for parity with
+ *                                    other functions in this file; not
+ *                                    used directly here.
+ * @global array $intropage_intervals The refresh-interval option list
+ *                                    used to populate each panel's
+ *                                    interval dropdown.
+ */
 function intropage_configure_panel() {
 	global $config, $callbackPage, $redirectPage, $trend_timespans, $intropage_intervals;
 
@@ -2088,6 +2535,22 @@ function intropage_configure_panel() {
 	print '</div>';
 }
 
+/**
+ * Formats a numeric value (bytes or otherwise) as a human-readable
+ * string with a metric (decimal, factor 1000) or binary (factor 1024)
+ * unit suffix, supporting both large (K/M/G/T/P) and small
+ * (m/µ/n/p) magnitudes. Called throughout panel rendering wherever a
+ * general numeric metric needs unit-scaled display.
+ *
+ * @param float $bytes     The value to format.
+ * @param bool  $decimal   Whether to scale by powers of 1000 (true) or
+ *                        1024 (false).
+ * @param int   $precision The number of decimal places to round the
+ *                        displayed value to.
+ *
+ * @return string The formatted value with its unit suffix, or 0 if
+ *               $bytes is 0.
+ */
 function human_readable($bytes, $decimal = true, $precision = 2) {
 	if ($decimal) {
 		$factor = 1000;
@@ -2124,6 +2587,19 @@ function human_readable($bytes, $decimal = true, $precision = 2) {
 	return round(empty($d) ? 0 : ($bytes / pow($factor, $i)), $precision) . ' ' . $size;
 }
 
+/**
+ * Computes the number of table rows a panel should display, scaling
+ * the user's configured base line count by the panel's height class
+ * (normal/double/triple). Called from list-rendering panel update
+ * functions to determine their SQL LIMIT.
+ *
+ * @param string $height  The panel's height class ('normal', 'double',
+ *                       or 'triple').
+ * @param int    $user_id The user id to resolve the base line count
+ *                       for.
+ *
+ * @return int The number of rows to display.
+ */
 function get_panel_lines_count($height, $user_id) {
 	$lines = intropage_get_lines($user_id);
 
@@ -2138,6 +2614,16 @@ function get_panel_lines_count($height, $user_id) {
 	return $lines;
 }
 
+/**
+ * Reads a user's configured base panel line count (falling back to the
+ * system default, then to 5 if unset/invalid). Called from
+ * get_panel_lines_count() and intropage_favourite_graph() to determine
+ * how many rows/what size to render.
+ *
+ * @param int $user_id The user id to resolve the setting for.
+ *
+ * @return int The resolved line count (at least 1, defaulting to 5).
+ */
 function intropage_get_lines($user_id) {
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 

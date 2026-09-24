@@ -24,6 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'system' panel category and its 'Information',
+ * 'Administrative Alerts', 'Boost Statistics', 'Boost History', '24
+ * Hour Extremes', and 'CPU Utilization' panels with the panel library.
+ * Called from initialize_panel_library() while building the full set
+ * of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'system'
+ *                         category metadata.
+ */
 function register_system() {
 	global $registry;
 
@@ -146,6 +159,14 @@ function register_system() {
 	return $panels;
 }
 
+/**
+ * Trend-collection function for the 'cpuload' panel: records a
+ * snapshot of the server's current CPU load average (Linux only) into
+ * plugin_intropage_trends. Called from intropage_gather_stats() via
+ * the panel definition's 'trends_func'.
+ *
+ * @return void
+ */
 function cpuload_trend() {
 	if (!stristr(PHP_OS, 'win')) {
 		$load    = sys_getloadavg();
@@ -159,6 +180,23 @@ function cpuload_trend() {
 }
 
 // ------------------------------------ cpuload -----------------------------------------------------
+/**
+ * Data-update function for the 'cpuload' panel: renders a time-series
+ * graph of the server's CPU load average over the panel's configured
+ * timespan (Linux only). Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
 function cpuload($panel, $user_id, $timespan = 0) {
 	global $config;
 
@@ -238,6 +276,18 @@ function cpuload($panel, $user_id, $timespan = 0) {
 }
 
 // ------------------------- info-------------------------
+/**
+ * Data-update function for the 'info' panel: displays static system
+ * information about the Cacti installation (e.g. version, PHP/database
+ * versions, OS). Called from intropage_gather_stats()/get_panel() via
+ * the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function info($panel, $user_id) {
 	global $config, $poller_options;
 
@@ -284,6 +334,18 @@ function info($panel, $user_id) {
 }
 
 // ---------------------------admin alert--------------------
+/**
+ * Data-update function for the 'admin_alert' panel: displays a
+ * configured administrative notification message to all users. Called
+ * from intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function admin_alert($panel, $user_id) {
 	global $config;
 
@@ -292,6 +354,14 @@ function admin_alert($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
+/**
+ * Trend-collection function for the 'boost_history' panel: records a
+ * snapshot of Boost plugin processing statistics (e.g. pending item
+ * count) into plugin_intropage_trends. Called from
+ * intropage_gather_stats() via the panel definition's 'trends_func'.
+ *
+ * @return void
+ */
 function boost_history_trend() {
 	$data_length = db_fetch_cell("SELECT data_length
 		FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
@@ -325,6 +395,23 @@ function boost_history_trend() {
 		[$pending_records]);
 }
 
+/**
+ * Data-update function for the 'boost_history' panel: renders a
+ * time-series graph of Boost processing history over the panel's
+ * configured timespan from the recorded trend snapshots. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
 function boost_history($panel, $user_id, $timespan = 0) {
 	global $config;
 
@@ -405,6 +492,18 @@ function boost_history($panel, $user_id, $timespan = 0) {
 }
 
 // --------------------------------boost--------------------------------
+/**
+ * Data-update function for the 'boost' panel: summarizes the current
+ * Boost plugin queue/processing state (e.g. items pending, memory
+ * usage). Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function boost($panel, $user_id) {
 	global $config, $boost_refresh_interval, $boost_max_runtime;
 
@@ -546,6 +645,14 @@ function boost($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
+/**
+ * Trend-collection function for the 'extrem' panel: records a snapshot
+ * of 24-hour polling extremes (e.g. longest poller run time, down host
+ * counts) into plugin_intropage_trends. Called from
+ * intropage_gather_stats() via the panel definition's 'trends_func'.
+ *
+ * @return void
+ */
 function extrem_trend() {
 	// update in poller
 	$users = get_user_list();
@@ -592,6 +699,20 @@ function extrem_trend() {
 }
 
 // ------------------------------------ extrem -----------------------------------------------------
+/**
+ * Data-update function for the 'extrem' panel: renders a table of the
+ * last 24 hours' polling extremes (longest poller runs, down host
+ * events) from the recorded trend snapshots. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to determine the row limit and save
+ *                       the result.
+ *
+ * @return void
+ */
 function extrem($panel, $user_id) {
 	global $config;
 
@@ -784,6 +905,14 @@ function extrem($panel, $user_id) {
 }
 
 // ------------------------------------ extrem -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'extrem' panel, showing an expanded
+ * view of the 24-hour polling extremes. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function extrem_detail() {
 	global $config, $console_access;
 

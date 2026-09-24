@@ -24,6 +24,18 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'misc' panel category and its 'NTP/DNS Status', 'Maint
+ * Plugin Details', 'Webseer Details', and 'Servcheck plugin Details'
+ * panels with the panel library. Called from initialize_panel_library()
+ * while building the full set of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'misc'
+ *                         category metadata.
+ */
 function register_misc() {
 	global $registry;
 
@@ -111,6 +123,23 @@ function register_misc() {
 }
 
 // -------------------------------------ntp_dns-------------------------------------------
+/**
+ * Data-update function for the 'ntp_dns' panel: checks the Cacti
+ * server's system clock drift against a configured NTP server and
+ * verifies DNS resolution of a configured hostname, reporting the
+ * results. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other panel
+ *                       functions in this file; not used directly
+ *                       here.
+ */
 function ntp_dns($panel, $user_id) {
 	global $config;
 
@@ -206,6 +235,20 @@ function ntp_dns($panel, $user_id) {
 }
 
 // ---------------------------maint plugin--------------------
+/**
+ * Data-update function for the 'maint' panel: lists upcoming
+ * maintenance windows from the Maint plugin, or reports that the Maint
+ * plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to determine the row limit and save
+ *                       the result.
+ *
+ * @return void
+ */
 function maint($panel, $user_id) {
 	global $config;
 
@@ -311,6 +354,19 @@ function maint($panel, $user_id) {
 }
 
 // -------------------------------------plugin webseer-------------------------------------------
+/**
+ * Data-update function for the 'webseer' panel: summarizes Webseer
+ * plugin URL service-check results (e.g. failures/warnings), or
+ * reports that the Webseer plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function webseer($panel, $user_id) {
 	global $config;
 
@@ -398,6 +454,14 @@ function webseer($panel, $user_id) {
 }
 
 // ------------------------------------ webseer_plugin -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'webseer' panel, showing an expanded
+ * view of Webseer URL service-check results. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function webseer_detail() {
 	global $config, $log;
 
@@ -465,6 +529,19 @@ function webseer_detail() {
 }
 
 // -------------------------------------plugin servcheck-------------------------------------------
+/**
+ * Data-update function for the 'servcheck' panel: summarizes ServCheck
+ * plugin service-check results (e.g. failures/warnings), or reports
+ * that the ServCheck plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
 function servcheck($panel, $user_id) {
 	global $config;
 
@@ -583,6 +660,14 @@ function servcheck($panel, $user_id) {
 }
 
 // ------------------------------------ servcheck_plugin_detail-------------------------------------------------
+/**
+ * Detail-view renderer for the 'servcheck' panel, showing an expanded
+ * view of ServCheck service-check results. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function servcheck_detail() {
 	global $config, $log;
 

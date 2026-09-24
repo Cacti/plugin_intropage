@@ -24,6 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'busiest' panel category and its seven 'busiest
+ * device/interface' panels (CPU, ucd/net load, hard drive space,
+ * uptime, interface traffic, interface errors, interface utilization)
+ * with the panel library. Called from initialize_panel_library() while
+ * building the full set of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'busiest'
+ *                         category metadata.
+ */
 function register_busiest() {
 	global $registry;
 
@@ -165,6 +178,19 @@ function register_busiest() {
 }
 
 // ------------------------------------ busiest cpu -----------------------------------------------------
+/**
+ * Data-update function for the 'busiest_cpu' panel: lists the devices
+ * within the user's device scope with the busiest CPU (via the Host
+ * MIB data). Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function busiest_cpu($panel, $user_id) {
 	global $config;
 
@@ -281,6 +307,19 @@ function busiest_cpu($panel, $user_id) {
 }
 
 // ------------------------------------ busiest load -----------------------------------------------------
+/**
+ * Data-update function for the 'busiest_load' panel: lists the devices
+ * within the user's device scope with the highest system load (via
+ * ucd/net data). Called from intropage_gather_stats()/get_panel() via
+ * the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function busiest_load($panel, $user_id) {
 	global $config;
 
@@ -388,6 +427,20 @@ function busiest_load($panel, $user_id) {
 }
 
 // ------------------------------------ busiest_hdd  -----------------------------------------------------
+/**
+ * Data-update function for the 'busiest_hdd' panel: lists the devices
+ * within the user's device scope with the highest hard drive space
+ * used (via the Host MIB data). Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function busiest_hdd($panel, $user_id) {
 	global $config;
 
@@ -528,6 +581,19 @@ function busiest_hdd($panel, $user_id) {
 }
 
 // ------------------------------------ busiest uptime -----------------------------------------------------
+/**
+ * Data-update function for the 'busiest_uptime' panel: lists the
+ * devices within the user's device scope with the highest reported
+ * uptime. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function busiest_uptime($panel, $user_id) {
 	global $config;
 
@@ -596,6 +662,19 @@ function busiest_uptime($panel, $user_id) {
 }
 
 // ------------------------------------ busiest_traffic  -----------------------------------------------------
+/**
+ * Data-update function for the 'busiest_traffic' panel: lists the
+ * interfaces within the user's device scope with the highest inbound/
+ * outbound traffic. Called from intropage_gather_stats()/get_panel()
+ * via the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function busiest_traffic($panel, $user_id) {
 	global $config;
 
@@ -730,6 +809,20 @@ function busiest_traffic($panel, $user_id) {
 }
 
 // ------------------------------------ busiest_traffic_error  -----------------------------------------------------
+/**
+ * Data-update function for the 'busiest_interface_error' panel: lists
+ * the interfaces within the user's device scope with the highest
+ * error/discard counts. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function busiest_interface_error($panel, $user_id) {
 	global $config;
 
@@ -845,6 +938,20 @@ function busiest_interface_error($panel, $user_id) {
 }
 
 // ------------------------------------ busiest_traffic_utilization -----------------------------------------------------
+/**
+ * Data-update function for the 'busiest_interface_utilization' panel:
+ * lists the ports within the user's device scope with the highest
+ * interface utilization. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function busiest_interface_util($panel, $user_id) {
 	global $config;
 
@@ -971,6 +1078,14 @@ function busiest_interface_util($panel, $user_id) {
 }
 
 // ------------------------------------ busiest_cpu_detail  -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'busiest_cpu' panel, showing an
+ * expanded list of devices by CPU utilization. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function busiest_cpu_detail() {
 	global $config;
 
@@ -1083,6 +1198,14 @@ function busiest_cpu_detail() {
 }
 
 // ------------------------------------ busiest_load_detail  -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'busiest_load' panel, showing an
+ * expanded list of devices by system load. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function busiest_load_detail() {
 	global $config;
 
@@ -1195,6 +1318,14 @@ function busiest_load_detail() {
 }
 
 // ------------------------------------ busiest hdd detail  -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'busiest_hdd' panel, showing an
+ * expanded list of devices by hard drive space used. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return void
+ */
 function busiest_hdd_detail() {
 	global $config;
 
@@ -1331,6 +1462,14 @@ function busiest_hdd_detail() {
 }
 
 // ------------------------------------ busiest uptime detail -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'busiest_uptime' panel, showing an
+ * expanded list of devices by uptime. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function busiest_uptime_detail() {
 	global $config;
 
@@ -1402,6 +1541,14 @@ function busiest_uptime_detail() {
 }
 
 // ------------------------------------ busiest_traffic_detail  -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'busiest_traffic' panel, showing an
+ * expanded list of interfaces by in/out traffic. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function busiest_traffic_detail() {
 	global $config;
 
@@ -1540,6 +1687,14 @@ function busiest_traffic_detail() {
 }
 
 // ------------------------------------ busiest_traffic_error_detail  -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'busiest_interface_error' panel, showing
+ * an expanded list of interfaces by error/discard count. Called via
+ * the panel definition's 'details_func' when the user opens the
+ * panel's detail view.
+ *
+ * @return void
+ */
 function busiest_interface_error_detail() {
 	global $config;
 
@@ -1658,6 +1813,14 @@ function busiest_interface_error_detail() {
 }
 
 // ------------------------------------ busiest_traffic_utilization_detail-----------------------------------------------
+/**
+ * Detail-view renderer for the 'busiest_interface_utilization' panel,
+ * showing an expanded list of ports by interface utilization. Called
+ * via the panel definition's 'details_func' when the user opens the
+ * panel's detail view.
+ *
+ * @return void
+ */
 function busiest_interface_util_detail() {
 	global $config;
 

@@ -24,6 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'top5' panel category and its 'Bottom Ping', 'Bottom
+ * Availability', 'Bottom Polling Time', and 'Bottom Polling Ratio'
+ * panels with the panel library. Called from
+ * initialize_panel_library() while building the full set of available
+ * dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'top5'
+ *                         category metadata.
+ */
 function register_top5() {
 	global $registry;
 
@@ -111,6 +124,19 @@ function register_top5() {
 }
 
 // ------------------------------------ top5_worst_ping -----------------------------------------------------
+/**
+ * Data-update function for the 'top5_ping' panel: lists the devices
+ * within the user's device scope with the worst (highest) ping
+ * response times. Called from intropage_gather_stats()/get_panel() via
+ * the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function top5_ping($panel, $user_id) {
 	global $config;
 
@@ -194,6 +220,20 @@ function top5_ping($panel, $user_id) {
 }
 
 // ------------------------------------ top5_availability -----------------------------------------------------
+/**
+ * Data-update function for the 'top5_availability' panel: lists the
+ * devices within the user's device scope with the worst
+ * availability/reachability. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function top5_availability($panel, $user_id) {
 	global $config;
 
@@ -275,6 +315,19 @@ function top5_availability($panel, $user_id) {
 }
 
 // ------------------------------------ top5_worst_polltime -----------------------------------------------------
+/**
+ * Data-update function for the 'top5_polltime' panel: lists the devices
+ * within the user's device scope with the worst (slowest) individual
+ * polling time. Called from intropage_gather_stats()/get_panel() via
+ * the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function top5_polltime($panel, $user_id) {
 	global $config;
 
@@ -356,6 +409,20 @@ function top5_polltime($panel, $user_id) {
 }
 
 // ------------------------------------ top5_worst_pollratio -----------------------------------------------------
+/**
+ * Data-update function for the 'top5_pollratio' panel: lists the
+ * devices within the user's device scope with the worst polling ratio
+ * (e.g. successful vs. expected polls). Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
 function top5_pollratio($panel, $user_id) {
 	global $config;
 
@@ -442,6 +509,14 @@ function top5_pollratio($panel, $user_id) {
 }
 
 // ------------------------------------ top5_worst_ping -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'top5_ping' panel, showing an expanded
+ * list of devices by worst ping response time. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function top5_ping_detail() {
 	global $config, $console_access;
 
@@ -525,6 +600,14 @@ function top5_ping_detail() {
 }
 
 // ------------------------------------ top5_availability -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'top5_availability' panel, showing an
+ * expanded list of devices by worst availability. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function top5_availability_detail() {
 	global $config, $console_access;
 
@@ -606,6 +689,14 @@ function top5_availability_detail() {
 }
 
 // ------------------------------------ top5_polltime -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'top5_polltime' panel, showing an
+ * expanded list of devices by worst polling time. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return void
+ */
 function top5_polltime_detail() {
 	global $config, $console_access;
 
@@ -687,6 +778,14 @@ function top5_polltime_detail() {
 }
 
 // ------------------------------------ top5_pollratio -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'top5_pollratio' panel, showing an
+ * expanded list of devices by worst polling ratio. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return void
+ */
 function top5_pollratio_detail() {
 	global $config, $console_access;
 

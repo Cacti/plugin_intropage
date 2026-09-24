@@ -24,6 +24,18 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'graphs' panel category and its 'Data Sources', 'Device
+ * Templates', and 'Devices by Status' panels with the panel library.
+ * Called from initialize_panel_library() while building the full set
+ * of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'graphs'
+ *                         category metadata.
+ */
 function register_graphs() {
 	global $registry;
 
@@ -93,6 +105,19 @@ function register_graphs() {
 }
 
 // ------------------------- graph data source---------------------
+/**
+ * Data-update function for the 'graph_data_source' panel: renders a
+ * pie/summary chart of graphs grouped by data source/template. Called
+ * from intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to scope the query and save the
+ *                       result.
+ *
+ * @return void
+ */
 function graph_data_source($panel, $user_id) {
 	global $config, $input_types, $run_from_poller;
 
@@ -154,6 +179,19 @@ function graph_data_source($panel, $user_id) {
 }
 
 // -----------------------graph_host template--------------------
+/**
+ * Data-update function for the 'graph_host_template' panel: renders a
+ * pie/summary chart of devices grouped by device (host) template.
+ * Called from intropage_gather_stats()/get_panel() via the panel
+ * definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to scope the query and save the
+ *                       result.
+ *
+ * @return void
+ */
 function graph_host_template($panel, $user_id) {
 	global $config;
 
@@ -242,6 +280,25 @@ function graph_host_template($panel, $user_id) {
 }
 
 // --------------------------------------- graph host-----------------------------
+/**
+ * Data-update function for the 'graph_host' panel: renders a
+ * time-series/pie chart of device counts by status (up/down/
+ * recovering/disabled) over the panel's configured timespan from the
+ * recorded trend snapshots. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting, scope the query, and save the
+ *                        result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
 function graph_host($panel, $user_id, $timespan = 0) {
 	global $config;
 
@@ -374,6 +431,14 @@ function graph_host($panel, $user_id, $timespan = 0) {
 }
 
 // ------------------------------------ graph_datasource -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'graph_data_source' panel, showing an
+ * expanded breakdown of graphs by data source/template. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return void
+ */
 function graph_data_source_detail() {
 	global $config, $input_types;
 
@@ -445,6 +510,13 @@ function graph_data_source_detail() {
 }
 
 // ------------------------------------ graph_host -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'graph_host' panel, showing an expanded
+ * breakdown of devices by status. Called via the panel definition's
+ * 'details_func' when the user opens the panel's detail view.
+ *
+ * @return void
+ */
 function graph_host_detail() {
 	global $config, $console_access;
 
@@ -593,6 +665,14 @@ function graph_host_detail() {
 }
 
 // ------------------------------------ graph host_template -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'graph_host_template' panel, showing an
+ * expanded breakdown of devices by device template. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return void
+ */
 function graph_host_template_detail() {
 	global $config;
 
@@ -658,6 +738,14 @@ function graph_host_template_detail() {
 }
 
 // ------------------------------------ host collect -----------------------------------------------------
+/**
+ * Trend-collection function for the 'graph_host' panel: records a
+ * snapshot of device counts by status into plugin_intropage_trends.
+ * Called from intropage_gather_stats() via the panel definition's
+ * 'trends_func'.
+ *
+ * @return void
+ */
 function host_collect() {
 	global $config;
 

@@ -24,6 +24,18 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'syslog' panel category and its 'Syslog Details' (rate
+ * graph), 'Syslog Top Devices', and 'Syslog Message levels' panels with
+ * the panel library. Called from initialize_panel_library() while
+ * building the full set of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'syslog'
+ *                         category metadata.
+ */
 function register_syslog() {
 	global $registry;
 
@@ -92,6 +104,18 @@ function register_syslog() {
 	return $panels;
 }
 
+/**
+ * Trend-collection function for the 'plugin_syslog' panel: records
+ * point-in-time snapshots of the syslog_incoming/syslog table row
+ * counts and recent alert message count into plugin_intropage_trends,
+ * when the Syslog plugin is enabled. Called from
+ * intropage_gather_stats() via the panel definition's 'trends_func'.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the Syslog plugin's database library.
+ */
 function plugin_syslog_trend() {
 	global $config;
 
@@ -129,6 +153,18 @@ function plugin_syslog_trend() {
 	}
 }
 
+/**
+ * Trend-collection function for the 'plugin_syslog_levels' panel:
+ * records a snapshot of syslog message counts per priority level
+ * (0-7) over the last poller interval into plugin_intropage_trends,
+ * when the Syslog plugin is enabled. Called from
+ * intropage_gather_stats() via the panel definition's 'trends_func'.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the Syslog plugin's database library.
+ */
 function plugin_syslog_levels_trend() {
 	global $config;
 
@@ -169,6 +205,24 @@ function plugin_syslog_levels_trend() {
 	}
 }
 
+/**
+ * Data-update function for the 'plugin_syslog' panel: renders a
+ * time-series line graph of incoming/alert/stored syslog message
+ * counts over the panel's configured timespan from the recorded
+ * trend snapshots, or reports that the Syslog plugin isn't installed.
+ * Called from intropage_gather_stats()/get_panel() via the panel
+ * definition's 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
 function plugin_syslog($panel, $user_id, $timespan = 0) {
 	$panel['alarm'] = 'green';
 
@@ -277,6 +331,24 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
+/**
+ * Data-update function for the 'plugin_syslog_levels' panel: renders a
+ * graph/summary of syslog message counts broken down by priority level
+ * over the panel's configured timespan, or reports that the Syslog
+ * plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
 function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 	$panel['alarm'] = 'green';
 
@@ -366,6 +438,27 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
+/**
+ * Data-update function for the 'plugin_syslog_devices' panel: renders a
+ * table of the top devices by syslog message count over the panel's
+ * configured timespan, or reports that the Syslog plugin isn't
+ * enabled. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to determine the row
+ *                        limit, resolve the timespan setting, and save
+ *                        the result.
+ * @param int   $timespan Optional override for the query's time window
+ *                        in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the Syslog plugin's database library.
+ */
 function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	global $config;
 
@@ -421,6 +514,21 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
+/**
+ * Detail-view renderer for the 'plugin_syslog_devices' panel, showing
+ * an expanded top-20 table of devices by syslog message count. Called
+ * via the panel definition's 'details_func' when the user opens the
+ * panel's detail view.
+ *
+ * @return void
+ *
+ * @global array $config          Cacti global configuration array;
+ *                                used to locate the Syslog plugin's
+ *                                database library.
+ * @global bool  $console_access  Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ */
 function plugin_syslog_devices_detail() {
 	global $config, $console_access;
 
