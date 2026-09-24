@@ -24,6 +24,28 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Config_settings hook: registers this plugin's 'Intropage' settings
+ * tab and its configuration fields (loaded from include/variables.php),
+ * and grants the Intropage viewer realm to the Normal User role. Called
+ * by Cacti's settings framework via the 'config_settings' hook.
+ *
+ * @return void
+ *
+ * @global array $tabs                Cacti's settings tabs registry;
+ *                                    appended with this plugin's tab.
+ * @global array $settings            Cacti's settings fields registry;
+ *                                    appended with this plugin's
+ *                                    fields.
+ * @global array $config              Cacti global configuration array;
+ *                                    used to include required files.
+ * @global array $intropage_settings  The plugin's settings field
+ *                                    definitions, loaded from
+ *                                    include/variables.php.
+ * @global array $trend_timespans     Reserved/declared for parity with
+ *                                    other functions in this file; not
+ *                                    used directly here.
+ */
 function intropage_config_settings() {
 	global $tabs, $settings, $config, $intropage_settings, $trend_timespans;
 
@@ -38,6 +60,21 @@ function intropage_config_settings() {
 	}
 }
 
+/**
+ * Login_options_navigate hook: redirects the user straight to the
+ * Intropage dashboard or the standard graph view immediately after
+ * login, based on their configured login options, clearing a stale
+ * selected-theme session value if the user's theme setting changed.
+ * Called by Cacti's login flow via the 'login_options_navigate' hook.
+ *
+ * @return void
+ *
+ * @global array $config      Cacti global configuration array; used to
+ *                            build the redirect URL and include
+ *                            required files.
+ * @global int   $login_opts  Populated here with the user's resolved
+ *                            login options value.
+ */
 function intropage_login_options_navigate() {
 	global $config, $login_opts;
 
@@ -67,6 +104,25 @@ function intropage_login_options_navigate() {
 	}
 }
 
+/**
+ * Console_after hook: renders the Intropage dashboard directly below
+ * the standard Cacti console page when the user's login options call
+ * for it and the poller connection is online. Called by Cacti's
+ * console rendering via the 'console_after' hook.
+ *
+ * @return void
+ *
+ * @global array $config      Cacti global configuration array; used to
+ *                            check poller connection state and include
+ *                            required files.
+ * @global array $panels      Populated here with the initialized panel
+ *                            library definitions.
+ * @global int   $login_opts  Populated here with the user's resolved
+ *                            login options value.
+ * @global mixed $registry    Reserved/declared for use by included
+ *                            panel-rendering code; not set directly
+ *                            here.
+ */
 function intropage_console_after() {
 	global $config, $panels, $login_opts, $registry;
 
@@ -86,6 +142,16 @@ function intropage_console_after() {
 	}
 }
 
+/**
+ * User_admin_tab hook: prints this plugin's sub-tab link on the User
+ * Admin edit page, highlighted when currently selected. Called by
+ * Cacti's user admin via the 'user_admin_tab' hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the tab's URL.
+ */
 function intropage_user_admin_tab() {
 	global $config;
 
@@ -102,6 +168,17 @@ function intropage_user_admin_tab() {
 	print '</li>';
 }
 
+/**
+ * User_group_admin_tab hook: prints this plugin's sub-tab link on the
+ * User Group Admin edit page, highlighted when currently selected.
+ * Called by Cacti's user group admin via the 'user_group_admin_tab'
+ * hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the tab's URL.
+ */
 function intropage_user_group_admin_tab() {
 	global $config;
 
@@ -117,6 +194,27 @@ function intropage_user_group_admin_tab() {
 	print '</li>';
 }
 
+/**
+ * User_admin_run_action hook: when the Intropage user-settings sub-tab
+ * is active, renders a per-panel allow/disallow permissions form for
+ * the edited user (grouped by system/user level and panel category),
+ * creating a default plugin_intropage_user_auth row for the user if
+ * one doesn't already exist. Called by Cacti's user admin via the
+ * 'user_admin_run_action' hook.
+ *
+ * @param string $current_tab The currently active user-edit sub-tab
+ *                            name.
+ *
+ * @return string|false The unmodified $current_tab when it isn't this
+ *                      plugin's tab, otherwise false to indicate the
+ *                      form was fully rendered here.
+ *
+ * @global array $config   Cacti global configuration array; used to
+ *                         include required files and build URLs.
+ * @global array $registry Populated by initialize_panel_library();
+ *                         used here to resolve each panel category's
+ *                         display name/description.
+ */
 function intropage_user_admin_run_action($current_tab) {
 	global $config, $registry;
 
@@ -249,6 +347,26 @@ function intropage_user_admin_run_action($current_tab) {
 	return false;
 }
 
+/**
+ * User_group_admin_run_action hook: when the Intropage user-group
+ * settings sub-tab is active, renders a per-panel allow/disallow
+ * permissions form for the edited user group (grouped by system/user
+ * level and panel category). Called by Cacti's user group admin via
+ * the 'user_group_admin_run_action' hook.
+ *
+ * @param string $current_tab The currently active user-group-edit
+ *                            sub-tab name.
+ *
+ * @return string|false The unmodified $current_tab when it isn't this
+ *                      plugin's tab, otherwise false to indicate the
+ *                      form was fully rendered here.
+ *
+ * @global array $config   Cacti global configuration array; used to
+ *                         include required files and build URLs.
+ * @global array $registry Populated by initialize_panel_library();
+ *                         used here to resolve each panel category's
+ *                         display name/description.
+ */
 function intropage_user_group_admin_run_action($current_tab) {
 	global $config, $registry;
 
@@ -381,6 +499,23 @@ function intropage_user_group_admin_run_action($current_tab) {
 	return false;
 }
 
+/**
+ * User_admin_user_save hook: when saving the Intropage user-settings
+ * sub-tab, persists the submitted per-panel permission checkboxes
+ * (legacy per-column mode, or JSON 'permissions' column mode, creating
+ * corresponding default panel_data rows as needed), then redirects
+ * back to the tab. Called by Cacti's user admin via the
+ * 'user_admin_user_save' hook.
+ *
+ * @param mixed $save The save-hook chain value to pass through when
+ *                    this isn't the active tab.
+ *
+ * @return mixed The unmodified $save value (this function exits via
+ *              redirect when it handles the save itself).
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the redirect URL.
+ */
 function intropage_user_admin_user_save($save) {
 	global $config;
 
@@ -464,6 +599,22 @@ function intropage_user_admin_user_save($save) {
 	return ($save);
 }
 
+/**
+ * User_group_admin_save hook: when saving the Intropage user-group
+ * settings sub-tab, persists the submitted per-panel permission
+ * checkboxes as a JSON 'permissions' value on the group's auth row,
+ * then redirects back to the tab. Called by Cacti's user group admin
+ * via the 'user_group_admin_save' hook.
+ *
+ * @param mixed $save The save-hook chain value to pass through when
+ *                    this isn't the active tab.
+ *
+ * @return mixed The unmodified $save value (this function exits via
+ *              redirect when it handles the save itself).
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the redirect URL.
+ */
 function intropage_user_group_admin_save($save) {
 	global $config;
 
@@ -497,6 +648,18 @@ function intropage_user_group_admin_save($save) {
 	return ($save);
 }
 
+/**
+ * Ensures a user has a plugin_intropage_user_auth row and, if they have
+ * no stored panel permissions yet, grants them the default set of
+ * user-level panels plus the favorite-graph panel. Called from
+ * intropage_copy_user() and intropage_user_admin_setup_sql_save() for
+ * newly created/copied users.
+ *
+ * @param int $user_id The id of the user to initialize default
+ *                     permissions for.
+ *
+ * @return void
+ */
 function intropage_new_user_permission($user_id) {
 	$permissions = [];
 
@@ -533,12 +696,32 @@ function intropage_new_user_permission($user_id) {
 	}
 }
 
+/**
+ * Copy_user hook: grants a newly copied user the default set of
+ * Intropage panel permissions. Called by Cacti's user admin via the
+ * 'copy_user' hook.
+ *
+ * @param array $user The user copy details, including 'new_id' for the
+ *                    newly created user.
+ *
+ * @return array The unmodified $user array.
+ */
 function intropage_copy_user($user) {
 	intropage_new_user_permission($user['new_id']);
 
 	return ($user);
 }
 
+/**
+ * User_admin_setup_sql_save hook: grants a newly created user the
+ * default set of Intropage panel permissions. Called by Cacti's user
+ * admin via the 'user_admin_setup_sql_save' hook.
+ *
+ * @param array $save The user's save data, including 'id' for the
+ *                    newly created user.
+ *
+ * @return array The unmodified $save array.
+ */
 function intropage_user_admin_setup_sql_save($save) {
 	intropage_new_user_permission($save['id']);
 

@@ -24,6 +24,16 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Plugin install hook: registers all of this plugin's Cacti hooks
+ * (settings/arrays, login options, header tabs, console/page-head
+ * rendering, graph buttons, poller_bottom, and the full set of
+ * user/user-group admin lifecycle hooks), registers its two admin
+ * realms, and creates its database tables. Called by Cacti's plugin
+ * architecture when the plugin is installed.
+ *
+ * @return void
+ */
 function plugin_intropage_install() {
 	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'config_arrays', 'intropage_config_arrays', 'setup.php');
@@ -67,6 +77,16 @@ function plugin_intropage_install() {
 	intropage_setup_database();
 }
 
+/**
+ * Plugin uninstall hook: drops all of this plugin's database tables.
+ * Called by Cacti's plugin architecture when the plugin is
+ * uninstalled.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include the database library.
+ */
 function plugin_intropage_uninstall() {
 	global $config;
 
@@ -75,6 +95,28 @@ function plugin_intropage_uninstall() {
 	intropage_drop_database();
 }
 
+/**
+ * Config_arrays hook: augments Cacti's role system to grant the
+ * Intropage realms to the Normal User/System Administration roles, and
+ * initializes the trend-timespan and refresh-interval option lists
+ * (filtering out intervals shorter than the configured poller
+ * interval). Called by Cacti's plugin framework via the
+ * 'config_arrays' hook on every page load.
+ *
+ * @return void
+ *
+ * @global array $intropage_intervals Populated here with the map of
+ *                                    refresh interval (seconds) =>
+ *                                    display label, filtered to only
+ *                                    include intervals >= the poller
+ *                                    interval.
+ * @global array $trend_timespans     Populated here with the map of
+ *                                    trend timespan (seconds) =>
+ *                                    display label.
+ * @global array $panel_lines         Reserved/declared for parity with
+ *                                    other functions in this file; not
+ *                                    used directly here.
+ */
 function intropage_config_arrays() {
 	global $intropage_intervals, $trend_timespans, $panel_lines;
 
@@ -127,6 +169,17 @@ function intropage_config_arrays() {
 	}
 }
 
+/**
+ * Reads and returns this plugin's version/author/metadata info from its
+ * INFO file. Called wherever plugin metadata is needed (e.g.
+ * intropage_upgrade_database()).
+ *
+ * @return array The plugin's info array, as parsed from the INFO
+ *              file's '[info]' section.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the plugin's INFO file.
+ */
 function plugin_intropage_version() {
 	global $config;
 
@@ -135,6 +188,13 @@ function plugin_intropage_version() {
 	return $info['info'];
 }
 
+/**
+ * Plugin upgrade hook: brings the plugin's schema up to date by
+ * delegating to intropage_check_upgrade(). Called by Cacti's plugin
+ * architecture when the plugin is upgraded to a new version.
+ *
+ * @return bool Always false.
+ */
 function plugin_intropage_upgrade() {
 	// Here we will upgrade to the newest version
 	intropage_check_upgrade();
@@ -142,6 +202,13 @@ function plugin_intropage_upgrade() {
 	return false;
 }
 
+/**
+ * Plugin config-check hook: ensures the plugin's schema is up to date
+ * by delegating to intropage_check_upgrade(). Called by Cacti's plugin
+ * architecture on relevant page loads.
+ *
+ * @return bool Always true.
+ */
 function plugin_intropage_check_config() {
 	// Here we will check to ensure everything is configured
 	intropage_check_upgrade();
@@ -149,6 +216,16 @@ function plugin_intropage_check_config() {
 	return true;
 }
 
+/**
+ * Includes the database library and triggers a schema-version check/
+ * upgrade. Called from plugin_intropage_upgrade() and
+ * plugin_intropage_check_config().
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include the database library.
+ */
 function intropage_check_upgrade() {
 	global $config;
 
@@ -157,6 +234,18 @@ function intropage_check_upgrade() {
 	intropage_upgrade_database();
 }
 
+/**
+ * Page_head hook: emits the &lt;link&gt; tags for the plugin's common
+ * stylesheet and, if present, the currently selected theme's
+ * stylesheet. Called by Cacti's page rendering via the 'page_head'
+ * hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the stylesheet URLs and check for the
+ *                       theme file's existence.
+ */
 function intropage_page_head() {
 	global $config;
 
@@ -169,6 +258,15 @@ function intropage_page_head() {
 	}
 }
 
+/**
+ * Includes the database library and creates this plugin's database
+ * tables. Called from plugin_intropage_install().
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include the database library.
+ */
 function intropage_setup_database() {
 	global $config;
 
@@ -177,6 +275,18 @@ function intropage_setup_database() {
 	intropage_initialize_database();
 }
 
+/**
+ * Poller_bottom hook: launches this plugin's poller_intropage.php
+ * script as a background process at the end of each Cacti polling
+ * cycle, to collect poller performance data for its trend panels.
+ * Called by Cacti's poller via the 'poller_bottom' hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate this plugin's poller script and include
+ *                       the poller library.
+ */
 function intropage_poller_bottom() {
 	global $config;
 
@@ -203,6 +313,27 @@ function intropage_poller_bottom() {
 // refresh_interval - in second, min is 60
 // priority - for displaying
 // description - small description, it is visible in user auth settings
+/**
+ * Public extension API: registers a third-party dashboard panel by
+ * inserting its definition and adding a corresponding per-user
+ * visibility column to the user-auth table. Intended to be called by
+ * other plugins wishing to add their own Intropage panel.
+ *
+ * @param string $panel_id         A unique, lowercase, space-free
+ *                                identifier for the panel.
+ * @param string $file             Path to the file containing the
+ *                                panel's rendering function(s).
+ * @param string $has_detail       'yes' or 'no', whether the panel has
+ *                                a detail view.
+ * @param int    $refresh_interval The panel's refresh interval in
+ *                                seconds (minimum 60).
+ * @param int    $priority         The panel's display priority/order.
+ * @param string $description     A short description shown in user
+ *                                auth settings.
+ *
+ * @return string '1' on success, or the database error string on
+ *               failure.
+ */
 function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority = 20, $description = '') {
 	if (db_execute_prepared('REPLACE INTO plugin_intropage_panel_definition
 		(panel_id,file,has_detail,refresh_interval, priority, description)
@@ -216,6 +347,17 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
 }
 
 // remove third party panel
+/**
+ * Public extension API: unregisters a third-party dashboard panel,
+ * removing its stored data, definition, and per-user visibility column.
+ * Intended to be called by other plugins removing their own Intropage
+ * panel.
+ *
+ * @param string $panel_id The panel identifier previously registered
+ *                        via intropage_add_panel().
+ *
+ * @return string Always '1'.
+ */
 function intropage_remove_panel($panel_id) {
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id = ?', [$panel_id]);
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id = ?', [$panel_id]);
@@ -224,6 +366,15 @@ function intropage_remove_panel($panel_id) {
 	return ('1');
 }
 
+/**
+ * User_remove hook: cleans up all of this plugin's per-user data
+ * (panel data/dashboard associations, settings, auth) for a deleted
+ * user. Called by Cacti's user admin via the 'user_remove' hook.
+ *
+ * @param int $user_id The id of the user being removed.
+ *
+ * @return void
+ */
 function intropage_user_remove($user_id) {
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', [$user_id]);
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id = ?', [$user_id]);
@@ -231,6 +382,15 @@ function intropage_user_remove($user_id) {
 	db_execute_prepared('DELETE FROM plugin_intropage_user_auth WHERE user_id = ?', [$user_id]);
 }
 
+/**
+ * User_group_remove hook: cleans up this plugin's stored
+ * authorization data for a deleted user group. Called by Cacti's user
+ * admin via the 'user_group_remove' hook.
+ *
+ * @param int $group_id The id of the user group being removed.
+ *
+ * @return void
+ */
 function intropage_user_group_remove($group_id) {
 	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE id = ?', [$group_id]);
 }

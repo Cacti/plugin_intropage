@@ -24,6 +24,20 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Header-tab hook: prints the Intropage tab icon/link in Cacti's page
+ * header when the current user is authorized for the plugin and (for
+ * console-access users) their login options restrict them to the
+ * Intropage view, using the 'down' (active) icon when currently viewing
+ * intropage.php. Called by Cacti's header rendering via the
+ * 'top_header_tabs'-style hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       check poller connection state and build the
+ *                       tab's URL/image paths.
+ */
 function intropage_show_tab() {
 	global $config;
 

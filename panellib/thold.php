@@ -24,6 +24,18 @@
  +-------------------------------------------------------------------------+
 */
 
+/**
+ * Registers the 'thold' panel category and its 'Last Threshold Events'
+ * and 'Threshold' (trend graph) panels with the panel library. Called
+ * from initialize_panel_library() while building the full set of
+ * available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *              panel id.
+ *
+ * @global array $registry Populated here with this file's 'thold'
+ *                         category metadata.
+ */
 function register_thold() {
 	global $registry;
 
@@ -75,6 +87,20 @@ function register_thold() {
 }
 
 // ------------------------------------ thold event -----------------------------------------------------
+/**
+ * Data-update function for the 'thold_event' panel: lists the most
+ * recent Threshold plugin trigger/clear events, or reports that the
+ * Thold plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to determine the row limit and save
+ *                       the result.
+ *
+ * @return void
+ */
 function thold_event($panel, $user_id) {
 	global $config;
 
@@ -189,6 +215,23 @@ function thold_event($panel, $user_id) {
 }
 
 // ------------------------------------ graph_thold -----------------------------------------------------
+/**
+ * Data-update function for the 'graph_thold' panel: renders a
+ * time-series graph of threshold counts (total/triggered/etc.) over
+ * the panel's configured timespan from the recorded trend snapshots.
+ * Called from intropage_gather_stats()/get_panel() via the panel
+ * definition's 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
 function graph_thold($panel, $user_id, $timespan = 0) {
 	global $config;
 
@@ -313,6 +356,15 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 }
 
 // ------------------------------------ graph_thold -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'graph_thold' panel, showing an
+ * expanded view of threshold trend data. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
 function graph_thold_detail() {
 	global $config, $sql_where;
 
@@ -429,6 +481,15 @@ function graph_thold_detail() {
 }
 
 // ------------------------------------ thold_events -----------------------------------------------------
+/**
+ * Detail-view renderer for the 'thold_event' panel, showing an
+ * expanded list of recent Threshold plugin events. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
 function thold_event_detail() {
 	global $config;
 
@@ -511,6 +572,15 @@ function thold_event_detail() {
 	return $panel;
 }
 
+/**
+ * Trend-collection function for the 'graph_thold' panel: records a
+ * point-in-time snapshot of Threshold plugin counts (e.g. triggered/
+ * disabled) into plugin_intropage_trends, when the Thold plugin is
+ * enabled. Called from intropage_gather_stats() via the panel
+ * definition's 'trends_func'.
+ *
+ * @return void
+ */
 function thold_collect() {
 	global $config;
 

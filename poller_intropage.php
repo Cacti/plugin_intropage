@@ -119,6 +119,15 @@ if (function_exists('unregister_process')) {
 
 exit(0);
 
+/**
+ * Ensures the Intropage plugin's hook execution order is first among
+ * registered plugins, moving it up repeatedly until its plugin_config
+ * id is 1, so its stats reflect other plugins' completed poller
+ * activity. Called from this script's main flow before gathering
+ * stats.
+ *
+ * @return void
+ */
 function intropage_correct_load_order() {
 	while (true) {
 		$intro_order = db_fetch_cell('SELECT id FROM plugin_config WHERE directory="intropage"');
@@ -131,6 +140,31 @@ function intropage_correct_load_order() {
 	}
 }
 
+/**
+ * Runs each due panel's trend-collection and data-update functions
+ * (per-panel refresh/trend intervals), impersonating the owning user
+ * via a faked session variable where needed, then purges old trend
+ * records and refreshes the auto-refresh threshold timestamp. Called
+ * from this script's main flow as the core poller collection step.
+ *
+ * @return array Summary counts: 'checks' (panels processed),
+ *              'panels' (data-update functions run), and 'trends'
+ *              (trend functions run).
+ *
+ * @global array $config           Cacti global configuration array
+ *                                 (declared but not directly used
+ *                                 here).
+ * @global bool  $force            Reserved/declared for parity with
+ *                                 this script's other functions; not
+ *                                 used directly here.
+ * @global int   $checks           Reset to 0 here, then incremented for
+ *                                 each panel processed; the final
+ *                                 count is included in the returned
+ *                                 summary.
+ * @global bool  $run_from_poller  Reserved/declared for parity with
+ *                                 this script's other functions; not
+ *                                 used directly here.
+ */
 function intropage_gather_stats() {
 	global $config, $force, $checks, $run_from_poller;
 
@@ -273,6 +307,17 @@ function intropage_gather_stats() {
 	return ['checks' => $checks, 'panels' => $pdata, 'trends' => $trends];
 }
 
+/**
+ * Prints a debug message to stdout when CLI debug output is enabled.
+ * Called throughout this script to report collection progress.
+ *
+ * @param string $message The debug message to print.
+ *
+ * @return void
+ *
+ * @global bool $debug Whether debug output ('--debug' CLI flag) is
+ *                     enabled; when false, this function is a no-op.
+ */
 function intropage_debug($message) {
 	global $debug;
 
@@ -281,6 +326,16 @@ function intropage_debug($message) {
 	}
 }
 
+/**
+ * Prints this poller script's version and copyright banner, loading the
+ * plugin's version info from setup.php if not already available. Called
+ * from display_help() and when invoked with '--version'/'-v'/'-V'.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate and include setup.php.
+ */
 function display_version() {
 	global $config;
 
@@ -295,6 +350,13 @@ function display_version() {
 /*
  * display_help
  * displays the usage of the function
+ */
+/**
+ * Prints the version banner followed by this script's command-line
+ * usage summary. Called when invoked with '--help'/'-h'/'-H' or with
+ * an invalid argument.
+ *
+ * @return void
  */
 function display_help() {
 	display_version();
