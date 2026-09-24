@@ -515,7 +515,8 @@ function top5_pollratio($panel, $user_id) {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function top5_ping_detail() {
 	global $config, $console_access;
@@ -606,7 +607,8 @@ function top5_ping_detail() {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function top5_availability_detail() {
 	global $config, $console_access;
@@ -695,7 +697,8 @@ function top5_availability_detail() {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function top5_polltime_detail() {
 	global $config, $console_access;
@@ -784,7 +787,8 @@ function top5_polltime_detail() {
  * panel definition's 'details_func' when the user opens the panel's
  * detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function top5_pollratio_detail() {
 	global $config, $console_access;

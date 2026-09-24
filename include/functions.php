@@ -2548,8 +2548,8 @@ function intropage_configure_panel() {
  * @param int   $precision The number of decimal places to round the
  *                        displayed value to.
  *
- * @return string The formatted value with its unit suffix, or 0 if
- *               $bytes is 0.
+ * @return string|int The formatted value with its unit suffix, or the
+ *                    integer 0 if $bytes is 0.
  */
 function human_readable($bytes, $decimal = true, $precision = 2) {
 	if ($decimal) {

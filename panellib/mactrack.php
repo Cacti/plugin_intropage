@@ -236,7 +236,8 @@ function mactrack_sites($panel, $user_id) {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  *
  * @global array $config          Reserved/declared for parity with
  *                                other panel functions in this file;

@@ -362,7 +362,8 @@ function graph_thold($panel, $user_id, $timespan = 0) {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function graph_thold_detail() {
 	global $config, $sql_where;
@@ -486,7 +487,8 @@ function graph_thold_detail() {
  * panel definition's 'details_func' when the user opens the panel's
  * detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function thold_event_detail() {
 	global $config;

@@ -189,7 +189,9 @@ function register_busiest() {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return void
+ * @return bool|null True when DS stats are disabled (after saving the
+ *                   'please enable DS stats' message); otherwise no
+ *                   explicit value is returned.
  */
 function busiest_cpu($panel, $user_id) {
 	global $config;
@@ -318,7 +320,9 @@ function busiest_cpu($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return void
+ * @return bool|null True when DS stats are disabled (after saving the
+ *                   'please enable DS stats' message); otherwise no
+ *                   explicit value is returned.
  */
 function busiest_load($panel, $user_id) {
 	global $config;
@@ -439,7 +443,9 @@ function busiest_load($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return void
+ * @return bool|null True when DS stats are disabled (after saving the
+ *                   'please enable DS stats' message); otherwise no
+ *                   explicit value is returned.
  */
 function busiest_hdd($panel, $user_id) {
 	global $config;
@@ -673,7 +679,9 @@ function busiest_uptime($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return void
+ * @return bool|null True when DS stats are disabled (after saving the
+ *                   'please enable DS stats' message); otherwise no
+ *                   explicit value is returned.
  */
 function busiest_traffic($panel, $user_id) {
 	global $config;
@@ -821,7 +829,9 @@ function busiest_traffic($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return void
+ * @return bool|null True when DS stats are disabled (after saving the
+ *                   'please enable DS stats' message); otherwise no
+ *                   explicit value is returned.
  */
 function busiest_interface_error($panel, $user_id) {
 	global $config;
@@ -950,7 +960,9 @@ function busiest_interface_error($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return void
+ * @return bool|null True when DS stats are disabled (after saving the
+ *                   'please enable DS stats' message); otherwise no
+ *                   explicit value is returned.
  */
 function busiest_interface_util($panel, $user_id) {
 	global $config;
@@ -1084,7 +1096,8 @@ function busiest_interface_util($panel, $user_id) {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function busiest_cpu_detail() {
 	global $config;
@@ -1204,7 +1217,8 @@ function busiest_cpu_detail() {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function busiest_load_detail() {
 	global $config;
@@ -1324,7 +1338,8 @@ function busiest_load_detail() {
  * panel definition's 'details_func' when the user opens the panel's
  * detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function busiest_hdd_detail() {
 	global $config;
@@ -1468,7 +1483,8 @@ function busiest_hdd_detail() {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function busiest_uptime_detail() {
 	global $config;
@@ -1547,7 +1563,8 @@ function busiest_uptime_detail() {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function busiest_traffic_detail() {
 	global $config;
@@ -1693,7 +1710,8 @@ function busiest_traffic_detail() {
  * the panel definition's 'details_func' when the user opens the
  * panel's detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function busiest_interface_error_detail() {
 	global $config;
@@ -1819,7 +1837,8 @@ function busiest_interface_error_detail() {
  * via the panel definition's 'details_func' when the user opens the
  * panel's detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function busiest_interface_util_detail() {
 	global $config;

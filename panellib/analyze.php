@@ -1266,7 +1266,8 @@ function ds_stats_trend() {
  * panel definition's 'details_func' when the user opens the panel's
  * detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function analyse_log_detail() {
 	global $log;
@@ -1441,7 +1442,8 @@ function analyse_log_detail() {
  * via the panel definition's 'details_func' when the user opens the
  * panel's detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function analyse_login_detail() {
 	global $config;
@@ -1547,7 +1549,8 @@ function analyse_login_detail() {
  * issues. Called via the panel definition's 'details_func' when the
  * user opens the panel's detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function analyse_tree_host_graph_detail() {
 	global $config, $console_access;

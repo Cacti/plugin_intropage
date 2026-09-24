@@ -907,11 +907,12 @@ function extrem($panel, $user_id) {
 // ------------------------------------ extrem -----------------------------------------------------
 /**
  * Detail-view renderer for the 'extrem' panel, showing an expanded
- * view of the 24-hour polling extremes. Called via the panel
+ * view of the 48-hour polling extremes. Called via the panel
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function extrem_detail() {
 	global $config, $console_access;

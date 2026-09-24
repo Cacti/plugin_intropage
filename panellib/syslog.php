@@ -520,7 +520,8 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
  * via the panel definition's 'details_func' when the user opens the
  * panel's detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  *
  * @global array $config          Cacti global configuration array;
  *                                used to locate the Syslog plugin's

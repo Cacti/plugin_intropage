@@ -31,7 +31,7 @@
  * selected theme's panel layout. Called from intropage.php when the
  * plugin's main page is requested.
  *
- * @return void
+ * @return bool Always returns true after rendering the page.
  *
  * @global array  $config           Cacti global configuration array;
  *                                  used to include required libraries.

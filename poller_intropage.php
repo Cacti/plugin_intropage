@@ -157,9 +157,10 @@ function intropage_correct_load_order() {
  * @global bool  $force            Reserved/declared for parity with
  *                                 this script's other functions; not
  *                                 used directly here.
- * @global int   $checks           Reserved/declared for parity with
- *                                 this script's other functions; not
- *                                 used directly here.
+ * @global int   $checks           Reset to 0 here, then incremented for
+ *                                 each panel processed; the final
+ *                                 count is included in the returned
+ *                                 summary.
  * @global bool  $run_from_poller  Reserved/declared for parity with
  *                                 this script's other functions; not
  *                                 used directly here.

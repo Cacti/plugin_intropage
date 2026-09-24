@@ -437,7 +437,8 @@ function graph_host($panel, $user_id, $timespan = 0) {
  * panel definition's 'details_func' when the user opens the panel's
  * detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function graph_data_source_detail() {
 	global $config, $input_types;
@@ -515,7 +516,8 @@ function graph_data_source_detail() {
  * breakdown of devices by status. Called via the panel definition's
  * 'details_func' when the user opens the panel's detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function graph_host_detail() {
 	global $config, $console_access;
@@ -671,7 +673,8 @@ function graph_host_detail() {
  * panel definition's 'details_func' when the user opens the panel's
  * detail view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function graph_host_template_detail() {
 	global $config;

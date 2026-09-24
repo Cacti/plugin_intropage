@@ -460,7 +460,8 @@ function webseer($panel, $user_id) {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function webseer_detail() {
 	global $config, $log;
@@ -666,7 +667,8 @@ function servcheck($panel, $user_id) {
  * definition's 'details_func' when the user opens the panel's detail
  * view.
  *
- * @return void
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
  */
 function servcheck_detail() {
 	global $config, $log;
