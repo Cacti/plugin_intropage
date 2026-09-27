@@ -331,7 +331,7 @@ function intropage_user_admin_run_action($current_tab) {
 	);
 
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_intropage_csp_nonce(); ?>>
 	function selectAllPerms(checked) {
 		if (checked) {
 			$('input[type="checkbox"]').prop('checked', true);
@@ -483,7 +483,7 @@ function intropage_user_group_admin_run_action($current_tab) {
 	);
 
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_intropage_csp_nonce(); ?>>
 	function selectAllPerms(checked) {
 		if (checked) {
 			$('input[type="checkbox"]').prop('checked', true);

@@ -1781,7 +1781,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 
 		$chart_data = json_encode($chart);
 		$content .= '<div style="height: ' . $graph_height . 'px;" class="chart_wrapper center" id="line_' . $xid . '"></div>';
-		$content .= '<script type="text/javascript">';
+		$content .= '<script type="text/javascript" ' . plugin_intropage_csp_nonce() . '>';
 		$content .= 'panels.line_' . $xid . ' = bb.generate(' . $chart_data . ');';
 		$content .= '</script>';
 	} // line graph end
@@ -1857,7 +1857,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 
 		$chart_data = json_encode($chart);
 		$content .= '<div style="height: ' . $graph_height . 'px;" class="chart_wrapper center" id="bar_' . $xid . '"></div>';
-		$content .= '<script type="text/javascript">';
+		$content .= '<script type="text/javascript" ' . plugin_intropage_csp_nonce() . '>';
 		$content .= 'panels.bar_' . $xid . ' = bb.generate(' . $chart_data . ');';
 		$content .= '</script>';
 	} // bar graph end
@@ -1866,7 +1866,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$xid = 'x' . substr(md5($dispdata['pie']['title']), 0, 7);
 
 		$content .= "<div class='chart_wrapper center' id=\"pie_$xid\"></div>";
-		$content .= '<script type="text/javascript">';
+		$content .= '<script type="text/javascript" ' . plugin_intropage_csp_nonce() . '>';
 		$content .= 'panels.pie_' . $xid . ' = bb.generate({';
 		$content .= " bindto: \"#pie_$xid\",";
 
@@ -1903,7 +1903,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		$xid = 'x' . substr(md5($dispdata['treemap']['title']), 0, 7);
 
 		$content .= "<div class='chart_wrapper center' id=\"treemap_$xid\"></div>";
-		$content .= '<script type="text/javascript">';
+		$content .= '<script type="text/javascript" ' . plugin_intropage_csp_nonce() . '>';
 		$content .= 'panels.treemap_' . $xid . ' = bb.generate({';
 		$content .= " bindto: \"#treemap_$xid\",";
 
