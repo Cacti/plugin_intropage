@@ -1678,27 +1678,26 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		// Add upto 5 Lines
 		for ($i = 1; $i < 6; $i++) {
 			if (isset($dispdata['line']["data$i"]) && cacti_sizeof($dispdata['line']["data$i"])) {
+
+				$current_title = $dispdata['line']["title$i"];
+
 				// set correct color for down/triggered, ...
-				if (preg_match('/(DOWN|TRIG)/', strtoupper($dispdata['line']["title$i"]))) {
+				if (preg_match('/\b(DOWN|TRIG)\b/', strtoupper($dispdata['line']["title$i"]))) {
 					$color_def[$dispdata['line']["title$i"]] = '#ff0000';
-				} elseif (preg_match('/(RECO|BREA)/', strtoupper($dispdata['line']["title$i"]))) {
+				} elseif (preg_match('/\b(RECO|BREA)\b/', strtoupper($dispdata['line']["title$i"]))) {
 					$color_def[$dispdata['line']["title$i"]] = '#dddd00';
-				} elseif (preg_match('/(UP|OK)/', strtoupper($dispdata['line']["title$i"]))) {
+				} elseif (preg_match('/\b(UP|OK)\b/', strtoupper($dispdata['line']["title$i"]))) {
 					$color_def[$dispdata['line']["title$i"]] = '#00ff00';
-				} elseif (preg_match('/(DISA)/', strtoupper($dispdata['line']["title$i"]))) {
+				} elseif (preg_match('/\b(DISA)\b/', strtoupper($dispdata['line']["title$i"]))) {
 					$color_def[$dispdata['line']["title$i"]] = '#cccccc';
 				}
 
 				$columns[] = array_merge([$dispdata['line']["title$i"]], $dispdata['line']["data$i"]);
 
-				if (isset($dispdata['line']['unit2']['series'])) {
-					if (in_array("data$i", $dispdata['line']['unit2']['series'], true)) {
-						$axes[$dispdata['line']["title$i"]] = 'y2';
-					} else {
-						$axes[$dispdata['line']["title$i"]] = 'y';
-					}
+				if ($i == 2) {
+					$axes[$current_title] = 'y2';
 				} else {
-					$axes[$dispdata['line']["title$i"]] = 'y';
+					$axes[$current_title] = 'y';
 				}
 			}
 		}
@@ -1732,16 +1731,6 @@ function intropage_prepare_graph($dispdata, $user_id) {
 			]
 		];
 
-		// Setup Axes support
-		if (isset($dispdata['line']['unit2']['series'])) {
-			$axes = [];
-
-			foreach ($dispdata['line']['unit2']['series'] as $series) {
-				$number                                  = str_replace('data', '', $series);
-				$axes[$dispdata['line']["title$number"]] = 'y2';
-			}
-		}
-
 		// Setup the Axis
 		$axis['x'] = [
 			'type' => 'timeseries',
@@ -1771,7 +1760,7 @@ function intropage_prepare_graph($dispdata, $user_id) {
 				'label' => [
 					'text' => $dispdata['line']['unit2']['title'],
 				],
-				'show' => true
+				'show' => true,
 			];
 		}
 
