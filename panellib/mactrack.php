@@ -31,12 +31,12 @@
  * while building the full set of available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'mactrack'
  *                         category metadata.
  */
-function register_mactrack() {
+function register_mactrack(): array {
 	global $registry;
 
 	$registry['mactrack'] = [
@@ -106,7 +106,7 @@ function register_mactrack() {
  *                       functions in this file; not used directly
  *                       here.
  */
-function mactrack($panel, $user_id) {
+function mactrack($panel, $user_id): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
@@ -175,7 +175,7 @@ function mactrack($panel, $user_id) {
  *                       functions in this file; not used directly
  *                       here.
  */
-function mactrack_sites($panel, $user_id) {
+function mactrack_sites($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -246,7 +246,7 @@ function mactrack_sites($panel, $user_id) {
  *                                other panel functions in this file;
  *                                not used directly here.
  */
-function mactrack_sites_detail() {
+function mactrack_sites_detail(): array {
 	global $config, $console_access;
 
 	$panel = [

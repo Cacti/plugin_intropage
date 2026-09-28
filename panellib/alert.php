@@ -31,12 +31,12 @@
  * of available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'alert'
  *                         category metadata.
  */
-function register_alert() {
+function register_alert(): array {
 	global $registry;
 
 	$registry['alert'] = [
@@ -89,7 +89,7 @@ function register_alert() {
  *                       functions in this file; not used directly
  *                       here.
  */
-function alert_host($panel, $user_id) {
+function alert_host($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -100,7 +100,7 @@ function alert_host($panel, $user_id) {
 		$important_period = time();
 	}
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	$scope           = intropage_device_scope($user_id);
 	$simple_perms    = $scope['simple'];
@@ -230,7 +230,7 @@ function alert_host($panel, $user_id) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function alert_host_detail() {
+function alert_host_detail(): array {
 	global $config, $console_access;
 
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
@@ -241,7 +241,7 @@ function alert_host_detail() {
 
 	$panel = [
 		'name'   => __('Host alerts', 'intropage'),
-		'alarm'  => 'green',
+		'alarm'  => 'grey',
 		'detail' => '',
 	];
 

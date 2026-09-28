@@ -31,12 +31,12 @@
  * available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'thold'
  *                         category metadata.
  */
-function register_thold() {
+function register_thold(): array {
 	global $registry;
 
 	$registry['thold'] = [
@@ -101,7 +101,7 @@ function register_thold() {
  *
  * @return void
  */
-function thold_event($panel, $user_id) {
+function thold_event($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -112,7 +112,7 @@ function thold_event($panel, $user_id) {
 		$important_period = time();
 	}
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	if (!api_plugin_is_enabled('thold')) {
 		$panel['alarm']  = 'yellow';
@@ -232,7 +232,7 @@ function thold_event($panel, $user_id) {
  *
  * @return void
  */
-function graph_thold($panel, $user_id, $timespan = 0) {
+function graph_thold($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
@@ -283,6 +283,8 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 			$graph['line']['title1']         = __('Triggered', 'intropage');
 			$graph['line']['unit1']['title'] = 'Triggered';
 
+			$last = 0;
+
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
 				$graph['line']['data1'][]  = $row['value'];
@@ -307,6 +309,8 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title2']         = __('Breached', 'intropage');
 			$graph['line']['unit2']['title'] = 'Breached';
+
+			$last = 0;
 
 			foreach ($rows as $row) {
 				$graph['line']['label2'][] = $row['date'];
@@ -365,7 +369,7 @@ function graph_thold($panel, $user_id, $timespan = 0) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function graph_thold_detail() {
+function graph_thold_detail(): array {
 	global $config, $sql_where;
 
 	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
@@ -379,7 +383,6 @@ function graph_thold_detail() {
 	if (!api_plugin_is_enabled('thold')) {
 		$panel['alarm']   = 'grey';
 		$panel['detail']  = __('Thold plugin not installed/running', 'intropage');
-		unset($panel['pie']);
 	} elseif (api_plugin_user_realm_auth('thold_graph.php')) {
 		$t_all  = 0;
 		$t_brea = 0;
@@ -490,7 +493,7 @@ function graph_thold_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function thold_event_detail() {
+function thold_event_detail(): array {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
@@ -581,7 +584,7 @@ function thold_event_detail() {
  *
  * @return void
  */
-function thold_collect() {
+function thold_collect(): void {
 	global $config;
 
 	// update in poller

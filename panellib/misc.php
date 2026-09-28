@@ -31,12 +31,12 @@
  * while building the full set of available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'misc'
  *                         category metadata.
  */
-function register_misc() {
+function register_misc(): array {
 	global $registry;
 
 	$registry['misc'] = [
@@ -140,7 +140,7 @@ function register_misc() {
  *                       functions in this file; not used directly
  *                       here.
  */
-function ntp_dns($panel, $user_id) {
+function ntp_dns($panel, $user_id): void {
 	global $config;
 
 	$ntp_server = read_config_option('intropage_ntp_server');
@@ -174,7 +174,7 @@ function ntp_dns($panel, $user_id) {
 			}
 		}
 
-		if (isset($timestamp) && is_numeric($timestamp)) {
+		if (is_numeric($timestamp)) {
 			$diff_time = date('U') - $timestamp;
 
 			$panel['data'] .= '<tr><td><span class="txt_big">' . date('Y-m-d H:i:s') . ' (Time Diff: ' . $diff_time . ')</span></td></tr>';
@@ -249,7 +249,7 @@ function ntp_dns($panel, $user_id) {
  *
  * @return void
  */
-function maint($panel, $user_id) {
+function maint($panel, $user_id): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
@@ -367,10 +367,10 @@ function maint($panel, $user_id) {
  *
  * @return void
  */
-function webseer($panel, $user_id) {
+function webseer($panel, $user_id): void {
 	global $config;
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	$lines            = get_panel_lines_count($panel['height'], $user_id);
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
@@ -433,14 +433,6 @@ function webseer($panel, $user_id) {
 					$panel['alarm'] = 'green';
 				}
 
-				if ($panel['alarm'] == 'green' && $color == 'yellow') {
-					$panel['alarm'] = 'yellow';
-				}
-
-				if ($panel['alarm'] == 'yellow' && $color == 'red') {
-					$panel['alarm'] = 'red';
-				}
-
 				$panel['data'] .= '<td class="rpad">' . $row['lastcheck'] . '</td>' .
 					'<td class="rpad">' . html_escape($row['url']) . '</td>' .
 					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . html_escape($row['http_code']) . ' (' . $text . ')</td></tr>';
@@ -463,7 +455,7 @@ function webseer($panel, $user_id) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function webseer_detail() {
+function webseer_detail(): array {
 	global $config, $log;
 
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
@@ -543,10 +535,10 @@ function webseer_detail() {
  *
  * @return void
  */
-function servcheck($panel, $user_id) {
+function servcheck($panel, $user_id): void {
 	global $config;
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
 
@@ -639,14 +631,6 @@ function servcheck($panel, $user_id) {
 					$panel['alarm'] = 'green';
 				}
 
-				if ($panel['alarm'] == 'green' && $color == 'yellow') {
-					$panel['alarm'] = 'yellow';
-				}
-
-				if ($panel['alarm'] == 'yellow' && $color == 'red') {
-					$panel['alarm'] = 'red';
-				}
-
 				$panel['data'] .= '<td class="rpad">' . $row['lastcheck'] . '</td>' .
 					'<td class="rpad">' . html_escape($row['name']) . '</td>' .
 					'<td class="rpad">' . html_escape($row['type']) . '</td>' .
@@ -670,7 +654,7 @@ function servcheck($panel, $user_id) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function servcheck_detail() {
+function servcheck_detail(): array {
 	global $config, $log;
 
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);

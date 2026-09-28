@@ -31,7 +31,7 @@
  *
  * @return void
  */
-function intropage_drop_database() {
+function intropage_drop_database(): void {
 	db_execute('UPDATE user_auth SET login_opts = 1 WHERE login_opts > 3');
 	db_execute("DELETE FROM settings WHERE name LIKE 'intropage_%'");
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_definition');
@@ -54,7 +54,7 @@ function intropage_drop_database() {
  * @global array $config Cacti global configuration array; used to
  *                       include required libraries.
  */
-function intropage_initialize_database() {
+function intropage_initialize_database(): void {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
@@ -205,13 +205,18 @@ function intropage_initialize_database() {
  *                       locate the plugin's INFO file and include
  *                       required libraries.
  */
-function intropage_upgrade_database() {
+function intropage_upgrade_database(): void {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
 
 	// If action need to be done for upgrade, add it.
 	$info = parse_ini_file($config['base_path'] . '/plugins/intropage/INFO', true);
+
+	if (!is_array($info) || !isset($info['info']) || !is_array($info['info'])) {
+		return;
+	}
+
 	$info = $info['info'];
 
 	$current = $info['version'];
@@ -351,10 +356,10 @@ function intropage_upgrade_database() {
 			$data['comment']   = 'authorization';
 			api_plugin_db_table_create('intropage', 'plugin_intropage_user_group_auth', $data);
 
-			api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php', '1');
-			api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php', '1');
-			api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php', '1');
-			api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php', '1');
+			api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php', true);
+			api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php', true);
+			api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php', true);
+			api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php', true);
 		}
 
 		if (cacti_version_compare($oldv, '4.0.5', '<=')) {
@@ -381,6 +386,6 @@ function intropage_upgrade_database() {
 		}
 
 		$panels = initialize_panel_library();
-		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', 1);
+		api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php', true);
 	}
 }

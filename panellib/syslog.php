@@ -31,12 +31,12 @@
  * building the full set of available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'syslog'
  *                         category metadata.
  */
-function register_syslog() {
+function register_syslog(): array {
 	global $registry;
 
 	$registry['syslog'] = [
@@ -116,7 +116,7 @@ function register_syslog() {
  * @global array $config Cacti global configuration array; used to
  *                       locate the Syslog plugin's database library.
  */
-function plugin_syslog_trend() {
+function plugin_syslog_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
@@ -165,7 +165,7 @@ function plugin_syslog_trend() {
  * @global array $config Cacti global configuration array; used to
  *                       locate the Syslog plugin's database library.
  */
-function plugin_syslog_levels_trend() {
+function plugin_syslog_levels_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
@@ -223,7 +223,7 @@ function plugin_syslog_levels_trend() {
  *
  * @return void
  */
-function plugin_syslog($panel, $user_id, $timespan = 0) {
+function plugin_syslog($panel, $user_id, $timespan = 0): void {
 	$panel['alarm'] = 'green';
 
 	$graph =  [
@@ -275,8 +275,9 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 
 		if (cacti_sizeof($rows)) {
 			// Converted syslog_total to total new rows;
-			$nrows      = [];
-			$last_total = 0;
+			$nrows       = [];
+			$last_total  = 0;
+			$last_totali = 0;
 
 			foreach ($rows as $index => $row) {
 				$total  = $row['syslog_total'];
@@ -349,7 +350,7 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
  *
  * @return void
  */
-function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
+function plugin_syslog_levels($panel, $user_id, $timespan = 0): void {
 	$panel['alarm'] = 'green';
 
 	$graph =  [
@@ -459,7 +460,7 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
  * @global array $config Cacti global configuration array; used to
  *                       locate the Syslog plugin's database library.
  */
-function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
+function plugin_syslog_devices($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'grey';
@@ -530,13 +531,14 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
  *                                other panel functions in this file;
  *                                not used directly here.
  */
-function plugin_syslog_devices_detail() {
+function plugin_syslog_devices_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
-		'name'   => __('Top 20 Hosts with the most messages', 'intropage'),
-		'alarm'  => 'grey',
-		'detail' => '',
+		'name'    => __('Top 20 Hosts with the most messages', 'intropage'),
+		'alarm'   => 'grey',
+		'detail'  => '',
+		'refresh' => 300,
 	];
 
 	if (isset($_SESSION['sess_user_id'])) {

@@ -53,7 +53,7 @@
  *                                  included panel-rendering code; not
  *                                  set directly here.
  */
-function display_information() {
+function display_information(): bool {
 	global $config, $sql_where, $callbackPage, $redirectPage, $panels, $registry, $trend_timespans;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
@@ -442,7 +442,7 @@ function display_information() {
 		WHERE user_id = ? AND dashboard_id = ?',
 		[$_SESSION['sess_user_id'], $_SESSION['sess_user_id'], $_SESSION['dashboard_id']]);
 
-	if (!empty($actual)) {
+	if (is_array($actual)) {
 		if ($actual['shared']) {
 			print "<option value='unshare'>" . __('Cancel sharing', 'intropage') . '</option>';
 		} else {

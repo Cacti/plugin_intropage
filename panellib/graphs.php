@@ -31,12 +31,12 @@
  * of available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'graphs'
  *                         category metadata.
  */
-function register_graphs() {
+function register_graphs(): array {
 	global $registry;
 
 	$registry['graphs'] = [
@@ -118,7 +118,7 @@ function register_graphs() {
  *
  * @return void
  */
-function graph_data_source($panel, $user_id) {
+function graph_data_source($panel, $user_id): void {
 	global $config, $input_types, $run_from_poller;
 
 	$simple_perms = get_simple_device_perms($user_id);
@@ -192,7 +192,7 @@ function graph_data_source($panel, $user_id) {
  *
  * @return void
  */
-function graph_host_template($panel, $user_id) {
+function graph_host_template($panel, $user_id): void {
 	global $config;
 
 	$simple_perms = get_simple_device_perms($user_id);
@@ -299,7 +299,7 @@ function graph_host_template($panel, $user_id) {
  *
  * @return void
  */
-function graph_host($panel, $user_id, $timespan = 0) {
+function graph_host($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
@@ -356,6 +356,8 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			$graph['line']['title1']         = __('Down', 'intropage');
 			$graph['line']['unit1']['title'] = 'Down';
 
+			$last = 0;
+
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
 				$graph['line']['data1'][]  = $row['value'];
@@ -381,6 +383,8 @@ function graph_host($panel, $user_id, $timespan = 0) {
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title2']         = __('Recovering', 'intropage');
 			$graph['line']['unit2']['title'] = 'Recovering';
+
+			$last = 0;
 
 			foreach ($rows as $row) {
 				$graph['line']['label2'][] = $row['date'];
@@ -440,7 +444,7 @@ function graph_host($panel, $user_id, $timespan = 0) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function graph_data_source_detail() {
+function graph_data_source_detail(): array {
 	global $config, $input_types;
 
 	$panel = [
@@ -519,7 +523,7 @@ function graph_data_source_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function graph_host_detail() {
+function graph_host_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -676,7 +680,7 @@ function graph_host_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function graph_host_template_detail() {
+function graph_host_template_detail(): array {
 	global $config;
 
 	$panel = [
@@ -749,7 +753,7 @@ function graph_host_template_detail() {
  *
  * @return void
  */
-function host_collect() {
+function host_collect(): void {
 	global $config;
 
 	// update in poller

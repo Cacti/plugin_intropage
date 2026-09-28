@@ -32,12 +32,12 @@
  * building the full set of available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'busiest'
  *                         category metadata.
  */
-function register_busiest() {
+function register_busiest(): array {
 	global $registry;
 
 	$registry['busiest'] = [
@@ -189,11 +189,10 @@ function register_busiest() {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return bool|null True when DS stats are disabled (after saving the
- *                   'please enable DS stats' message); otherwise no
- *                   explicit value is returned.
+ * @return void The 'please enable DS stats' notice or the panel data is
+ *              saved via save_panel_result(); the function returns no value.
  */
-function busiest_cpu($panel, $user_id) {
+function busiest_cpu($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -213,7 +212,7 @@ function busiest_cpu($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 
-		return true;
+		return;
 	}
 
 	$scope           = intropage_device_scope($user_id);
@@ -229,7 +228,7 @@ function busiest_cpu($panel, $user_id) {
 		FROM data_template
 		WHERE hash = 'f6e7d21c19434666bbdac00ccef9932f'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		if (!$simple_perms) {
@@ -320,11 +319,10 @@ function busiest_cpu($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return bool|null True when DS stats are disabled (after saving the
- *                   'please enable DS stats' message); otherwise no
- *                   explicit value is returned.
+ * @return void The 'please enable DS stats' notice or the panel data is
+ *              saved via save_panel_result(); the function returns no value.
  */
-function busiest_load($panel, $user_id) {
+function busiest_load($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -344,7 +342,7 @@ function busiest_load($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 
-		return true;
+		return;
 	}
 
 	$scope           = intropage_device_scope($user_id);
@@ -360,7 +358,7 @@ function busiest_load($panel, $user_id) {
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		if (!$simple_perms) {
@@ -443,11 +441,10 @@ function busiest_load($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return bool|null True when DS stats are disabled (after saving the
- *                   'please enable DS stats' message); otherwise no
- *                   explicit value is returned.
+ * @return void The 'please enable DS stats' notice or the panel data is
+ *              saved via save_panel_result(); the function returns no value.
  */
-function busiest_hdd($panel, $user_id) {
+function busiest_hdd($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -467,7 +464,7 @@ function busiest_hdd($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 
-		return true;
+		return;
 	}
 
 	$scope           = intropage_device_scope($user_id);
@@ -483,7 +480,7 @@ function busiest_hdd($panel, $user_id) {
 		FROM data_template
 		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-	if (($allowed_devices !== false || $simple_perms) && $ds) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
@@ -600,7 +597,7 @@ function busiest_hdd($panel, $user_id) {
  *
  * @return void
  */
-function busiest_uptime($panel, $user_id) {
+function busiest_uptime($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -679,11 +676,10 @@ function busiest_uptime($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return bool|null True when DS stats are disabled (after saving the
- *                   'please enable DS stats' message); otherwise no
- *                   explicit value is returned.
+ * @return void The 'please enable DS stats' notice or the panel data is
+ *              saved via save_panel_result(); the function returns no value.
  */
-function busiest_traffic($panel, $user_id) {
+function busiest_traffic($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -705,7 +701,7 @@ function busiest_traffic($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 
-		return true;
+		return;
 	}
 
 	$scope           = intropage_device_scope($user_id);
@@ -721,7 +717,7 @@ function busiest_traffic($panel, $user_id) {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
@@ -804,7 +800,7 @@ function busiest_traffic($panel, $user_id) {
 				$avg *= 8;
 			}
 
-			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg, false,1) . $units . '</td></tr>';
+			$panel['data'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg, false,1) . ($units ?? '') . '</td></tr>';
 			$panel['data'] .= '</table>';
 		} else {
 			$panel['data'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -829,11 +825,10 @@ function busiest_traffic($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return bool|null True when DS stats are disabled (after saving the
- *                   'please enable DS stats' message); otherwise no
- *                   explicit value is returned.
+ * @return void The 'please enable DS stats' notice or the panel data is
+ *              saved via save_panel_result(); the function returns no value.
  */
-function busiest_interface_error($panel, $user_id) {
+function busiest_interface_error($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -853,7 +848,7 @@ function busiest_interface_error($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 
-		return true;
+		return;
 	}
 
 	$scope           = intropage_device_scope($user_id);
@@ -869,7 +864,7 @@ function busiest_interface_error($panel, $user_id) {
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		if (!$simple_perms) {
@@ -960,11 +955,10 @@ function busiest_interface_error($panel, $user_id) {
  *                       for, used to resolve device scope and save the
  *                       result.
  *
- * @return bool|null True when DS stats are disabled (after saving the
- *                   'please enable DS stats' message); otherwise no
- *                   explicit value is returned.
+ * @return void The 'please enable DS stats' notice or the panel data is
+ *              saved via save_panel_result(); the function returns no value.
  */
-function busiest_interface_util($panel, $user_id) {
+function busiest_interface_util($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -986,7 +980,7 @@ function busiest_interface_util($panel, $user_id) {
 
 		save_panel_result($panel, $user_id);
 
-		return true;
+		return;
 	}
 
 	$scope           = intropage_device_scope($user_id);
@@ -1002,7 +996,7 @@ function busiest_interface_util($panel, $user_id) {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$perc = [];
 
 		if (!$simple_perms) {
@@ -1065,8 +1059,8 @@ function busiest_interface_util($panel, $user_id) {
 				}
 
 				$panel['data'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '">';
-				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($gdata['name_cache']) . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id']) . '"></i>';
-				$panel['data'] .= html_escape($gdata['name_cache']) . '</td>';
+				$panel['data'] .= '<td class="left inpa_loglines" title="' . html_escape($gdata['name_cache'] ?? '') . '"><i class="fas fa-chart-area bus_graph" bus_id="' . html_escape($gdata['graph_id'] ?? '') . '"></i>';
+				$panel['data'] .= html_escape($gdata['name_cache'] ?? '') . '</td>';
 				$panel['data'] .= '<td>' . ($direction == 'traffic_in' ? 'In' : 'Out') . '</td>';
 				$panel['data'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></span></td></tr>';
 
@@ -1099,7 +1093,7 @@ function busiest_interface_util($panel, $user_id) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function busiest_cpu_detail() {
+function busiest_cpu_detail(): array {
 	global $config;
 
 	$panel = [
@@ -1135,7 +1129,7 @@ function busiest_cpu_detail() {
 		FROM data_template
 		WHERE hash='f6e7d21c19434666bbdac00ccef9932f'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, CONCAT(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		if (!$simple_perms) {
@@ -1220,7 +1214,7 @@ function busiest_cpu_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function busiest_load_detail() {
+function busiest_load_detail(): array {
 	global $config;
 
 	$panel = [
@@ -1256,7 +1250,7 @@ function busiest_load_detail() {
 		FROM data_template
 		WHERE hash='9b82d44eb563027659683765f92c9757'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		if (!$simple_perms) {
@@ -1341,7 +1335,7 @@ function busiest_load_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function busiest_hdd_detail() {
+function busiest_hdd_detail(): array {
 	global $config;
 
 	$panel = [
@@ -1377,7 +1371,7 @@ function busiest_hdd_detail() {
 		FROM data_template
 		WHERE hash='d814fa3b79bd0f8933b6e0834d3f16d0'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			100*average/(SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total' ) AS xvalue,
 			100*peak/(SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='hdd_total') AS xpeak ";
@@ -1486,7 +1480,7 @@ function busiest_hdd_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function busiest_uptime_detail() {
+function busiest_uptime_detail(): array {
 	global $config;
 
 	$panel = [
@@ -1566,7 +1560,7 @@ function busiest_uptime_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function busiest_traffic_detail() {
+function busiest_traffic_detail(): array {
 	global $config;
 
 	$panel = [
@@ -1604,7 +1598,7 @@ function busiest_traffic_detail() {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " name_cache AS name, dsh.local_data_id AS ldid,
 			average + (SELECT average FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in' ) AS xvalue,
 			peak + (SELECT peak FROM data_source_stats_hourly WHERE local_data_id = ldid AND rrd_name='traffic_in') AS xpeak ";
@@ -1691,7 +1685,7 @@ function busiest_traffic_detail() {
 				$avg *= 8;
 			}
 
-			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg, false) . $units . '</td></tr>';
+			$panel['detail'] .= '<tr class="odd"><td>' . __('Average of all allowed DS', 'intropage') . '</td><td class="right" colspan="2">' . human_readable($avg, false) . ($units ?? '') . '</td></tr>';
 			$panel['detail'] .= '</table>';
 		} else {
 			$panel['detail'] = __('Waiting for data or you don\'t have permission for any device with this template.', 'intropage');
@@ -1713,7 +1707,7 @@ function busiest_traffic_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function busiest_interface_error_detail() {
+function busiest_interface_error_detail(): array {
 	global $config;
 
 	$panel = [
@@ -1749,7 +1743,7 @@ function busiest_interface_error_detail() {
 		FROM data_template
 		WHERE hash='36335cd98633963a575b70639cd2fdad'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$columns = " dtd.local_data_id AS ldid, concat(dtd.name_cache,' - ', dsh.rrd_name) AS name, dsh.average AS xvalue, dsh.peak AS xpeak ";
 
 		if (!$simple_perms) {
@@ -1840,7 +1834,7 @@ function busiest_interface_error_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function busiest_interface_util_detail() {
+function busiest_interface_util_detail(): array {
 	global $config;
 
 	$panel = [
@@ -1878,7 +1872,7 @@ function busiest_interface_util_detail() {
 		FROM data_template
 		WHERE hash='6632e1e0b58a565c135d7ff90440c335'");
 
-	if (($allowed_devices !== false || $simple_perms) && cacti_sizeof($ds)) {
+	if (($allowed_devices !== false || $simple_perms) && is_array($ds) && cacti_sizeof($ds)) {
 		$perc = [];
 
 		if (!$simple_perms) {
@@ -1940,8 +1934,8 @@ function busiest_interface_util_detail() {
 					$color = 'yellow';
 				}
 
-				$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . $gdata['graph_id'] . '"></i>';
-				$panel['detail'] .= html_escape($gdata['name_cache']) . '</td>';
+				$panel['detail'] .= '<tr class="' . ($i % 2 == 0 ? 'even' : 'odd') . '"><td class="left"><i class="fas fa-chart-area bus_graph" bus_id="' . ($gdata['graph_id'] ?? '') . '"></i>';
+				$panel['detail'] .= html_escape($gdata['name_cache'] ?? '') . '</td>';
 				$panel['detail'] .= '<td>' . ($direction == 'traffic_in' ? 'In' : 'Out') . '</td>';
 				$panel['detail'] .= '<td class="right">' . $value . '<span class="inpa_sq color_' . $color . '"></td>';
 

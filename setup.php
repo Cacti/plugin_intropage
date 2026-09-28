@@ -50,7 +50,7 @@ function plugin_intropage_csp_nonce(): string {
  *
  * @return void
  */
-function plugin_intropage_install() {
+function plugin_intropage_install(): void {
 	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
 	api_plugin_register_hook('intropage', 'config_arrays', 'intropage_config_arrays', 'setup.php');
 
@@ -103,7 +103,7 @@ function plugin_intropage_install() {
  * @global array $config Cacti global configuration array; used to
  *                       include the database library.
  */
-function plugin_intropage_uninstall() {
+function plugin_intropage_uninstall(): void {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
@@ -133,7 +133,7 @@ function plugin_intropage_uninstall() {
  *                                    other functions in this file; not
  *                                    used directly here.
  */
-function intropage_config_arrays() {
+function intropage_config_arrays(): void {
 	global $intropage_intervals, $trend_timespans, $panel_lines;
 
 	// Core builds $user_auth_roles with __('Normal User') in the core domain
@@ -191,15 +191,19 @@ function intropage_config_arrays() {
  * intropage_upgrade_database()).
  *
  * @return array The plugin's info array, as parsed from the INFO
- *              file's '[info]' section.
+ *               file's '[info]' section.
  *
  * @global array $config Cacti global configuration array; used to
  *                       locate the plugin's INFO file.
  */
-function plugin_intropage_version() {
+function plugin_intropage_version(): array {
 	global $config;
 
 	$info = parse_ini_file($config['base_path'] . '/plugins/intropage/INFO', true);
+
+	if (!is_array($info) || !isset($info['info']) || !is_array($info['info'])) {
+		return [];
+	}
 
 	return $info['info'];
 }
@@ -211,7 +215,7 @@ function plugin_intropage_version() {
  *
  * @return bool Always false.
  */
-function plugin_intropage_upgrade() {
+function plugin_intropage_upgrade(): bool {
 	// Here we will upgrade to the newest version
 	intropage_check_upgrade();
 
@@ -225,7 +229,7 @@ function plugin_intropage_upgrade() {
  *
  * @return bool Always true.
  */
-function plugin_intropage_check_config() {
+function plugin_intropage_check_config(): bool {
 	// Here we will check to ensure everything is configured
 	intropage_check_upgrade();
 
@@ -242,7 +246,7 @@ function plugin_intropage_check_config() {
  * @global array $config Cacti global configuration array; used to
  *                       include the database library.
  */
-function intropage_check_upgrade() {
+function intropage_check_upgrade(): void {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
@@ -262,7 +266,7 @@ function intropage_check_upgrade() {
  *                       build the stylesheet URLs and check for the
  *                       theme file's existence.
  */
-function intropage_page_head() {
+function intropage_page_head(): void {
 	global $config;
 
 	$selectedTheme = get_selected_theme();
@@ -283,7 +287,7 @@ function intropage_page_head() {
  * @global array $config Cacti global configuration array; used to
  *                       include the database library.
  */
-function intropage_setup_database() {
+function intropage_setup_database(): void {
 	global $config;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
@@ -303,7 +307,7 @@ function intropage_setup_database() {
  *                       locate this plugin's poller script and include
  *                       the poller library.
  */
-function intropage_poller_bottom() {
+function intropage_poller_bottom(): void {
 	global $config;
 
 	include_once($config['library_path'] . '/poller.php');
@@ -336,21 +340,21 @@ function intropage_poller_bottom() {
  * other plugins wishing to add their own Intropage panel.
  *
  * @param string $panel_id         A unique, lowercase, space-free
- *                                identifier for the panel.
+ *                                 identifier for the panel.
  * @param string $file             Path to the file containing the
- *                                panel's rendering function(s).
+ *                                 panel's rendering function(s).
  * @param string $has_detail       'yes' or 'no', whether the panel has
- *                                a detail view.
+ *                                 a detail view.
  * @param int    $refresh_interval The panel's refresh interval in
- *                                seconds (minimum 60).
+ *                                 seconds (minimum 60).
  * @param int    $priority         The panel's display priority/order.
- * @param string $description     A short description shown in user
- *                                auth settings.
+ * @param string $description      A short description shown in user
+ *                                 auth settings.
  *
  * @return string '1' on success, or the database error string on
- *               failure.
+ *                failure.
  */
-function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority = 20, $description = '') {
+function intropage_add_panel(string $panel_id, string $file, string $has_detail, int $refresh_interval, int $priority = 20, string $description = ''): string {
 	if (db_execute_prepared('REPLACE INTO plugin_intropage_panel_definition
 		(panel_id,file,has_detail,refresh_interval, priority, description)
 		VALUES (?,?,?,?,?,?)', [$panel_id, $file, $has_detail, $refresh_interval, $priority, $description]) == 1) {
@@ -370,11 +374,11 @@ function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $
  * panel.
  *
  * @param string $panel_id The panel identifier previously registered
- *                        via intropage_add_panel().
+ *                         via intropage_add_panel().
  *
  * @return string Always '1'.
  */
-function intropage_remove_panel($panel_id) {
+function intropage_remove_panel(string $panel_id): string {
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id = ?', [$panel_id]);
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id = ?', [$panel_id]);
 	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',[$panel_id]);
@@ -391,7 +395,7 @@ function intropage_remove_panel($panel_id) {
  *
  * @return void
  */
-function intropage_user_remove($user_id) {
+function intropage_user_remove($user_id): void {
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', [$user_id]);
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id = ?', [$user_id]);
 	db_execute_prepared('DELETE FROM settings_user WHERE user_id = ?', [$user_id]);
@@ -407,6 +411,6 @@ function intropage_user_remove($user_id) {
  *
  * @return void
  */
-function intropage_user_group_remove($group_id) {
+function intropage_user_group_remove($group_id): void {
 	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE id = ?', [$group_id]);
 }

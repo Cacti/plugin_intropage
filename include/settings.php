@@ -46,7 +46,7 @@
  *                                    other functions in this file; not
  *                                    used directly here.
  */
-function intropage_config_settings() {
+function intropage_config_settings(): void {
 	global $tabs, $settings, $config, $intropage_settings, $trend_timespans;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
@@ -75,7 +75,7 @@ function intropage_config_settings() {
  * @global int   $login_opts  Populated here with the user's resolved
  *                            login options value.
  */
-function intropage_login_options_navigate() {
+function intropage_login_options_navigate(): void {
 	global $config, $login_opts;
 
 	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
@@ -123,7 +123,7 @@ function intropage_login_options_navigate() {
  *                            panel-rendering code; not set directly
  *                            here.
  */
-function intropage_console_after() {
+function intropage_console_after(): void {
 	global $config, $panels, $login_opts, $registry;
 
 	include_once($config['base_path'] . '/plugins/intropage/display.php');
@@ -152,7 +152,7 @@ function intropage_console_after() {
  * @global array $config Cacti global configuration array; used to
  *                       build the tab's URL.
  */
-function intropage_user_admin_tab() {
+function intropage_user_admin_tab(): void {
 	global $config;
 
 	print '<li class="subTab">';
@@ -179,7 +179,7 @@ function intropage_user_admin_tab() {
  * @global array $config Cacti global configuration array; used to
  *                       build the tab's URL.
  */
-function intropage_user_group_admin_tab() {
+function intropage_user_group_admin_tab(): void {
 	global $config;
 
 	print '<li class="subTab">';
@@ -267,6 +267,7 @@ function intropage_user_admin_run_action($current_tab) {
 	$prev_level = -1;
 	$prev_class = -1;
 	$i          = 0;
+	$name       = '';
 
 	foreach ($fields as $field) {
 		if ($prev_level != $field['level']) {
@@ -342,7 +343,7 @@ function intropage_user_admin_run_action($current_tab) {
 	</script>
 	<?php
 
-	form_save_button(html_escape($config['url_path'] . 'user_admin.php?action=user_edit&tab=general&id=' . get_request_var('id'), 'save'));
+	form_save_button(html_escape($config['url_path'] . 'user_admin.php?action=user_edit&tab=general&id=' . get_request_var('id')), 'save');
 
 	return false;
 }
@@ -419,6 +420,7 @@ function intropage_user_group_admin_run_action($current_tab) {
 	$prev_level = -1;
 	$prev_class = -1;
 	$i          = 0;
+	$name       = '';
 
 	foreach ($fields as $field) {
 		if ($prev_level != $field['level']) {
@@ -494,7 +496,7 @@ function intropage_user_group_admin_run_action($current_tab) {
 	</script>
 	<?php
 
-	form_save_button(html_escape($config['url_path'] . 'user_group_admin.php?action=edit&tab=general&id=' . get_request_var('id'), 'save'));
+	form_save_button(html_escape($config['url_path'] . 'user_group_admin.php?action=edit&tab=general&id=' . get_request_var('id')), 'save');
 
 	return false;
 }
@@ -511,7 +513,7 @@ function intropage_user_group_admin_run_action($current_tab) {
  *                    this isn't the active tab.
  *
  * @return mixed The unmodified $save value (this function exits via
- *              redirect when it handles the save itself).
+ *               redirect when it handles the save itself).
  *
  * @global array $config Cacti global configuration array; used to
  *                       build the redirect URL.
@@ -610,7 +612,7 @@ function intropage_user_admin_user_save($save) {
  *                    this isn't the active tab.
  *
  * @return mixed The unmodified $save value (this function exits via
- *              redirect when it handles the save itself).
+ *               redirect when it handles the save itself).
  *
  * @global array $config Cacti global configuration array; used to
  *                       build the redirect URL.
@@ -660,7 +662,7 @@ function intropage_user_group_admin_save($save) {
  *
  * @return void
  */
-function intropage_new_user_permission($user_id) {
+function intropage_new_user_permission(int $user_id): void {
 	$permissions = [];
 
 	$exists = db_fetch_cell_prepared('SELECT COUNT(*)
@@ -680,7 +682,11 @@ function intropage_new_user_permission($user_id) {
 		WHERE user_id = ?',
 		[$user_id]);
 
-	if ($user['permissions'] == '') {
+	if (!is_array($user)) {
+		$user = [];
+	}
+
+	if (($user['permissions'] ?? '') == '') {
 		$panels = db_fetch_assoc('SELECT panel_id FROM plugin_intropage_panel_definition WHERE level = 1');
 
 		foreach ($panels as $panel) {
@@ -706,7 +712,7 @@ function intropage_new_user_permission($user_id) {
  *
  * @return array The unmodified $user array.
  */
-function intropage_copy_user($user) {
+function intropage_copy_user($user): array {
 	intropage_new_user_permission($user['new_id']);
 
 	return ($user);
@@ -722,7 +728,7 @@ function intropage_copy_user($user) {
  *
  * @return array The unmodified $save array.
  */
-function intropage_user_admin_setup_sql_save($save) {
+function intropage_user_admin_setup_sql_save($save): array {
 	intropage_new_user_permission($save['id']);
 
 	return ($save);
