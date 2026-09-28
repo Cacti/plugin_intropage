@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-27 11:28-0400\n"
+"POT-Creation-Date: 2026-09-28 09:20-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -29,8 +29,8 @@ msgstr ""
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 
-#: display.php:228 include/functions.php:2425 include/functions.php:2474
-#: include/functions.php:2518
+#: display.php:228 include/functions.php:2433 include/functions.php:2482
+#: include/functions.php:2526
 msgid "Default"
 msgstr ""
 
@@ -376,45 +376,45 @@ msgstr ""
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
 msgstr ""
 
-#: include/functions.php:2120
+#: include/functions.php:2128
 msgid "Panels ..."
 msgstr ""
 
-#: include/functions.php:2142 include/functions.php:2150
+#: include/functions.php:2150 include/functions.php:2158
 #, php-format
 msgid "%s (no permission)"
 msgstr ""
 
-#: include/functions.php:2270
+#: include/functions.php:2278
 msgid "Cannot add to Dashboard. Custom timespan."
 msgstr ""
 
-#: include/functions.php:2280
+#: include/functions.php:2288
 msgid "Remove from Dashboard"
 msgstr ""
 
-#: include/functions.php:2282
+#: include/functions.php:2290
 msgid "Add to Dashboard"
 msgstr ""
 
-#: include/functions.php:2366
+#: include/functions.php:2374
 msgid "Dashboard Names"
 msgstr ""
 
-#: include/functions.php:2375
+#: include/functions.php:2383
 #, php-format
 msgid "Dashboard %s"
 msgstr ""
 
-#: include/functions.php:2399
+#: include/functions.php:2407
 msgid "User Level Panel Update Frequencies"
 msgstr ""
 
-#: include/functions.php:2448
+#: include/functions.php:2456
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr ""
 
-#: include/functions.php:2497
+#: include/functions.php:2505
 msgid "Trend Update Frequencies"
 msgstr ""
 
