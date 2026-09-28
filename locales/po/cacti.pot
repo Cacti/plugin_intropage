@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-24 09:37-0400\n"
+"POT-Creation-Date: 2026-09-28 09:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -29,8 +29,8 @@ msgstr ""
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 
-#: display.php:228 include/functions.php:2425 include/functions.php:2474
-#: include/functions.php:2518
+#: display.php:228 include/functions.php:2422 include/functions.php:2471
+#: include/functions.php:2515
 msgid "Default"
 msgstr ""
 
@@ -376,45 +376,45 @@ msgstr ""
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
 msgstr ""
 
-#: include/functions.php:2120
+#: include/functions.php:2117
 msgid "Panels ..."
 msgstr ""
 
-#: include/functions.php:2142 include/functions.php:2150
+#: include/functions.php:2139 include/functions.php:2147
 #, php-format
 msgid "%s (no permission)"
 msgstr ""
 
-#: include/functions.php:2270
+#: include/functions.php:2267
 msgid "Cannot add to Dashboard. Custom timespan."
 msgstr ""
 
-#: include/functions.php:2280
+#: include/functions.php:2277
 msgid "Remove from Dashboard"
 msgstr ""
 
-#: include/functions.php:2282
+#: include/functions.php:2279
 msgid "Add to Dashboard"
 msgstr ""
 
-#: include/functions.php:2366
+#: include/functions.php:2363
 msgid "Dashboard Names"
 msgstr ""
 
-#: include/functions.php:2375
+#: include/functions.php:2372
 #, php-format
 msgid "Dashboard %s"
 msgstr ""
 
-#: include/functions.php:2399
+#: include/functions.php:2396
 msgid "User Level Panel Update Frequencies"
 msgstr ""
 
-#: include/functions.php:2448
+#: include/functions.php:2445
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr ""
 
-#: include/functions.php:2497
+#: include/functions.php:2494
 msgid "Trend Update Frequencies"
 msgstr ""
 
@@ -422,7 +422,7 @@ msgstr ""
 msgid "Intropage"
 msgstr ""
 
-#: include/settings.php:59 setup.php:127
+#: include/settings.php:59 setup.php:143
 msgid "Normal User"
 msgstr ""
 
@@ -585,21 +585,21 @@ msgstr ""
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
 
-#: include/variables.php:106 setup.php:148
+#: include/variables.php:106 setup.php:164
 #, php-format
 msgid "%d Minute"
 msgstr ""
 
 #: include/variables.php:107 include/variables.php:108
 #: include/variables.php:109 include/variables.php:110
-#: include/variables.php:111 include/variables.php:112 setup.php:149
-#: setup.php:150 setup.php:151 setup.php:152 setup.php:153 setup.php:154
-#: setup.php:155 setup.php:156
+#: include/variables.php:111 include/variables.php:112 setup.php:165
+#: setup.php:166 setup.php:167 setup.php:168 setup.php:169 setup.php:170
+#: setup.php:171 setup.php:172
 #, php-format
 msgid "%d Minutes"
 msgstr ""
 
-#: include/variables.php:113 setup.php:157
+#: include/variables.php:113 setup.php:173
 #, php-format
 msgid "%d Hour"
 msgstr ""
@@ -2457,46 +2457,46 @@ msgstr ""
 msgid "Top 20 Hosts with the Worst Polling Ratio"
 msgstr ""
 
-#: setup.php:73
+#: setup.php:89
 msgid "Intropage Viewer"
 msgstr ""
 
-#: setup.php:74
+#: setup.php:90
 msgid "Intropage Administration"
 msgstr ""
 
-#: setup.php:128
+#: setup.php:144
 msgid "System Administration"
 msgstr ""
 
-#: setup.php:131
+#: setup.php:147
 msgid "Timespan Last 1 Hour"
 msgstr ""
 
-#: setup.php:132 setup.php:133 setup.php:134 setup.php:135 setup.php:136
+#: setup.php:148 setup.php:149 setup.php:150 setup.php:151 setup.php:152
 #, php-format
 msgid "Timespan Last %d Hours"
 msgstr ""
 
-#: setup.php:137
+#: setup.php:153
 msgid "Timespan Last 1 Day"
 msgstr ""
 
-#: setup.php:138
+#: setup.php:154
 msgid "Timespan Last 2 Days"
 msgstr ""
 
-#: setup.php:144 setup.php:145 setup.php:146 setup.php:147
+#: setup.php:160 setup.php:161 setup.php:162 setup.php:163
 #, php-format
 msgid "%d Seconds"
 msgstr ""
 
-#: setup.php:158 setup.php:159 setup.php:160 setup.php:161
+#: setup.php:174 setup.php:175 setup.php:176 setup.php:177
 #, php-format
 msgid "%d Hours"
 msgstr ""
 
-#: setup.php:162
+#: setup.php:178
 #, php-format
 msgid "%d Day"
 msgstr ""

@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* security: Add a version-safe CSP nonce (`plugin_intropage_csp_nonce()`) to every inline `<script>` tag so pages stay compatible with Cacti's Content-Security-Policy nonce enforcement, while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
 * security: Escape panel output (device, data-source, service-check, webseer, maint, host-description and admin-alert values, and the shared-dashboard name) that was rendered without html_escape
 * issue: Fix correctness bugs in the extrem, alert, top5, thold and syslog panels and the settings action handler
 

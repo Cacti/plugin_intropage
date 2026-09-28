@@ -572,7 +572,7 @@ function display_information() {
 	print '</div>';
 
 	?>
-	<script type='text/javascript'>
+	<script type='text/javascript' <?php print plugin_intropage_csp_nonce(); ?>>
 
 	var refresh;
 	var pollerRefresh;

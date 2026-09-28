@@ -25,6 +25,22 @@
 */
 
 /**
+ * Return the CSP nonce attribute for inline <script> tags, safely across
+ * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
+ * requires a per-request nonce on parser-inserted scripts; older releases lack
+ * the CactiSecureHeaders class, so this returns an empty string there.
+ *
+ * @return string The nonce attribute when supported, otherwise empty string.
+ */
+function plugin_intropage_csp_nonce(): string {
+	if (class_exists('CactiSecureHeaders')) {
+		return CactiSecureHeaders::getNonceAttribute();
+	}
+
+	return '';
+}
+
+/**
  * Plugin install hook: registers all of this plugin's Cacti hooks
  * (settings/arrays, login options, header tabs, console/page-head
  * rendering, graph buttons, poller_bottom, and the full set of
@@ -251,10 +267,10 @@ function intropage_page_head() {
 
 	$selectedTheme = get_selected_theme();
 
-	print "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
+	print get_md5_include_css('plugins/intropage/themes/common.css');
 
 	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
-		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/intropage/themes/' . $selectedTheme . ".css' rel='stylesheet'>";
+		print get_md5_include_css('plugins/intropage/themes/' . $selectedTheme . '.css');
 	}
 }
 
