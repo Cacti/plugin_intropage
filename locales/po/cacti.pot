@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 09:26-0400\n"
+"POT-Creation-Date: 2026-09-28 16:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -17,2486 +17,2406 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: display.php:69
+#: display.php
 msgid "Intropage - Permission Denied"
 msgstr ""
 
-#: display.php:151
+#: display.php
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
 msgstr ""
 
-#: display.php:213
+#: display.php
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 
-#: display.php:228 include/functions.php:2422 include/functions.php:2471
-#: include/functions.php:2515
+#: display.php include/functions.php
 msgid "Default"
 msgstr ""
 
-#: display.php:273
+#: display.php
 msgid "Hide or display red/yellow/green square notifications"
 msgstr ""
 
-#: display.php:276
+#: display.php
 msgid "Disable panel move/enable copy text from panel"
 msgstr ""
 
-#: display.php:298
+#: display.php
 msgid "Actions ..."
 msgstr ""
 
-#: display.php:301
+#: display.php
 msgid "Add New Dashboard"
 msgstr ""
 
-#: display.php:305
+#: display.php
 msgid "Remove current dashboard"
 msgstr ""
 
-#: display.php:311 display.php:313 display.php:317 display.php:319
-#: display.php:323 display.php:325
+#: display.php
 #, php-format
 msgid "Number of lines - %d"
 msgstr ""
 
-#: display.php:330
+#: display.php
 msgid "Refresh Now"
 msgstr ""
 
-#: display.php:333 display.php:335
+#: display.php
 msgid "Refresh Disabled"
 msgstr ""
 
-#: display.php:339 display.php:341
+#: display.php
 msgid "Refresh by Poller"
 msgstr ""
 
-#: display.php:345 display.php:347
+#: display.php
 msgid "Refresh Every 1 Minute"
 msgstr ""
 
-#: display.php:351 display.php:353
+#: display.php
 msgid "Refresh Every 5 Minutes"
 msgstr ""
 
-#: display.php:357 display.php:359
+#: display.php
 msgid "Refresh Every Hour"
 msgstr ""
 
-#: display.php:365 display.php:367
+#: display.php
 msgid "Important period - disabled"
 msgstr ""
 
-#: display.php:371 display.php:373
+#: display.php
 msgid "Important period - 15 minutes"
 msgstr ""
 
-#: display.php:377 display.php:379
+#: display.php
 msgid "Important period - 1 hour"
 msgstr ""
 
-#: display.php:383 display.php:385
+#: display.php
 msgid "Important period - 4 hours"
 msgstr ""
 
-#: display.php:389 display.php:391
+#: display.php
 msgid "Important period - 1 day"
 msgstr ""
 
-#: display.php:397 display.php:400
+#: display.php
 msgid "Sort by Severity"
 msgstr ""
 
-#: display.php:398 display.php:401
+#: display.php
 msgid "Sort by User Preference"
 msgstr ""
 
-#: display.php:407
+#: display.php
 msgid "Reload Panel Definitions"
 msgstr ""
 
-#: display.php:413
+#: display.php
 msgid "Set Intropage as Default Login Page"
 msgstr ""
 
-#: display.php:415
+#: display.php
 msgid "Set graph as Default Login Page"
 msgstr ""
 
-#: display.php:421
+#: display.php
 msgid "Display Intropage in Console"
 msgstr ""
 
-#: display.php:423
+#: display.php
 msgid "Display Intropage in Tab as Default Page"
 msgstr ""
 
-#: display.php:430 display.php:433
+#: display.php
 msgid "Less panels on a line"
 msgstr ""
 
-#: display.php:431 display.php:434
+#: display.php
 msgid "More panels on a line"
 msgstr ""
 
-#: display.php:447
+#: display.php
 msgid "Cancel sharing"
 msgstr ""
 
-#: display.php:450
+#: display.php
 msgid "Share this dashboard"
 msgstr ""
 
-#: display.php:452
+#: display.php
 msgid "Share empty dashboard not allowed"
 msgstr ""
 
-#: display.php:470
+#: display.php
 msgid "Use shared dashboard"
 msgstr ""
 
-#: display.php:472
+#: display.php
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr ""
 
-#: display.php:476
+#: display.php
 msgid "No shared dashboards"
 msgstr ""
 
-#: display.php:497
+#: display.php
 msgid "Welcome to Intropage!"
 msgstr ""
 
-#: display.php:501
+#: display.php
 msgid "You can Add Dashboard Panels in more ways:"
 msgstr ""
 
-#: display.php:503
+#: display.php
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
 msgstr ""
 
-#: display.php:504
+#: display.php
 msgid "Add any Cacti Graph, use icon"
 msgstr ""
 
-#: display.php:505
+#: display.php
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
 msgstr ""
 
-#: display.php:510
+#: display.php
 msgid "You can share dashboards to other users:"
 msgstr ""
 
-#: display.php:512
+#: display.php
 msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
 msgstr ""
 
-#: display.php:517
+#: display.php
 msgid "You can use shared dashboard using the Actions menu:"
 msgstr ""
 
-#: display.php:519
+#: display.php
 msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
 msgstr ""
 
-#: display.php:524
+#: display.php
 msgid "Customization:"
 msgstr ""
 
-#: display.php:526
+#: display.php
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
 msgstr ""
 
-#: display.php:527
+#: display.php
 msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
 msgstr ""
 
-#: display.php:528
+#: display.php
 msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
 msgstr ""
 
-#: display.php:586
+#: display.php
 msgid "Panel Details"
 msgstr ""
 
-#: display.php:587
+#: display.php
 msgid "Disable panel move/Enable copy text from panel"
 msgstr ""
 
-#: display.php:588
+#: display.php
 msgid "Enable panel move/Disable copy text from panel"
 msgstr ""
 
-#: display.php:589
+#: display.php
 msgid "Hide red/yellow/green square notifications"
 msgstr ""
 
-#: display.php:590
+#: display.php
 msgid "Show red/yellow/green square notifications"
 msgstr ""
 
-#: display.php:592
+#: display.php
 msgid "Error reading new data"
 msgstr ""
 
-#: display.php:593
+#: display.php
 msgid "Close"
 msgstr ""
 
-#: include/functions.php:407
+#: include/functions.php
 msgid "Dashboard has been removed"
 msgstr ""
 
-#: include/functions.php:427
+#: include/functions.php
 msgid "New Dashboard"
 msgstr ""
 
-#: include/functions.php:429
+#: include/functions.php
 msgid "Dashboard has been added"
 msgstr ""
 
-#: include/functions.php:457
+#: include/functions.php
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
 msgstr ""
 
-#: include/functions.php:588
+#: include/functions.php
 msgid "Intropage Panel Library Refreshed from Panel Library"
 msgstr ""
 
-#: include/functions.php:660
+#: include/functions.php
 msgid "Dashboard has been added, please wait few poller cycle for data"
 msgstr ""
 
-#: include/functions.php:666
+#: include/functions.php
 msgid "Error - trying share non-shared dashboard"
 msgstr ""
 
-#: include/functions.php:989
+#: include/functions.php
 msgid "The Panel includes a render function but it does not exist."
 msgstr ""
 
-#: include/functions.php:992
+#: include/functions.php
 msgid "The Panel does not have a render function."
 msgstr ""
 
-#: include/functions.php:995
+#: include/functions.php
 msgid "Not Found"
 msgstr ""
 
-#: include/functions.php:1002
+#: include/functions.php
 msgid "Disable panel"
 msgstr ""
 
-#: include/functions.php:1005
+#: include/functions.php
 msgid "Reload Panel"
 msgstr ""
 
-#: include/functions.php:1009
+#: include/functions.php
 msgid "Show Details"
 msgstr ""
 
-#: include/functions.php:1013 include/functions.php:1016
+#: include/functions.php
 msgid "Less rows"
 msgstr ""
 
-#: include/functions.php:1014
+#: include/functions.php
 msgid "Max height reached"
 msgstr ""
 
-#: include/functions.php:1017 include/functions.php:1020
+#: include/functions.php
 msgid "More rows"
 msgstr ""
 
-#: include/functions.php:1019
+#: include/functions.php
 msgid "Min height reached"
 msgstr ""
 
-#: include/functions.php:1031
+#: include/functions.php
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
 msgstr ""
 
-#: include/functions.php:1035 include/functions.php:1046
+#: include/functions.php
 msgid "Panel not found"
 msgstr ""
 
-#: include/functions.php:1094
+#: include/functions.php
 msgid "Details Function does not exist."
 msgstr ""
 
-#: include/functions.php:1103
+#: include/functions.php
 msgid "Panel Not Found"
 msgstr ""
 
-#: include/functions.php:1215 include/functions.php:1236
+#: include/functions.php
 #, php-format
 msgid " [Upd. in %s/%s]"
 msgstr ""
 
-#: include/functions.php:1278
+#: include/functions.php
 #, php-format
 msgid "%s Sec"
 msgstr ""
 
-#: include/functions.php:1278
+#: include/functions.php
 #, php-format
 msgid "%s Seconds"
 msgstr ""
 
-#: include/functions.php:1286
+#: include/functions.php
 #, php-format
 msgid "%s Min"
 msgstr ""
 
-#: include/functions.php:1286
+#: include/functions.php
 #, php-format
 msgid "%s Minutes"
 msgstr ""
 
-#: include/functions.php:1294
+#: include/functions.php
 #, php-format
 msgid "%s Hours"
 msgstr ""
 
-#: include/functions.php:1294
+#: include/functions.php
 #, php-format
 msgid "%s Hrs"
 msgstr ""
 
-#: include/functions.php:1299
+#: include/functions.php
 #, php-format
 msgid "%s Days"
 msgstr ""
 
-#: include/functions.php:1385
+#: include/functions.php
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
 msgstr ""
 
-#: include/functions.php:1387
+#: include/functions.php
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
 msgstr ""
 
-#: include/functions.php:2117
+#: include/functions.php
 msgid "Panels ..."
 msgstr ""
 
-#: include/functions.php:2139 include/functions.php:2147
+#: include/functions.php
 #, php-format
 msgid "%s (no permission)"
 msgstr ""
 
-#: include/functions.php:2267
+#: include/functions.php
 msgid "Cannot add to Dashboard. Custom timespan."
 msgstr ""
 
-#: include/functions.php:2277
+#: include/functions.php
 msgid "Remove from Dashboard"
 msgstr ""
 
-#: include/functions.php:2279
+#: include/functions.php
 msgid "Add to Dashboard"
 msgstr ""
 
-#: include/functions.php:2363
+#: include/functions.php
 msgid "Dashboard Names"
 msgstr ""
 
-#: include/functions.php:2372
+#: include/functions.php
 #, php-format
 msgid "Dashboard %s"
 msgstr ""
 
-#: include/functions.php:2396
+#: include/functions.php
 msgid "User Level Panel Update Frequencies"
 msgstr ""
 
-#: include/functions.php:2445
+#: include/functions.php
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr ""
 
-#: include/functions.php:2494
+#: include/functions.php
 msgid "Trend Update Frequencies"
 msgstr ""
 
-#: include/settings.php:54 include/settings.php:166 include/settings.php:193
+#: include/settings.php
 msgid "Intropage"
 msgstr ""
 
-#: include/settings.php:59 setup.php:143
+#: include/settings.php setup.php
 msgid "Normal User"
 msgstr ""
 
-#: include/settings.php:265 include/settings.php:417
+#: include/settings.php
 #, php-format
 msgid "[edit: %s]"
 msgstr ""
 
-#: include/settings.php:274 include/settings.php:426
+#: include/settings.php
 msgid "System Level Panels"
 msgstr ""
 
-#: include/settings.php:275 include/settings.php:427
+#: include/settings.php
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
 msgstr ""
 
-#: include/settings.php:278 include/settings.php:430
+#: include/settings.php
 msgid "User Level Panels"
 msgstr ""
 
-#: include/settings.php:279 include/settings.php:431
+#: include/settings.php
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
 msgstr ""
 
-#: include/settings.php:322
+#: include/settings.php
 msgid "You can Allow/Disallow Panels for User"
 msgstr ""
 
-#: include/settings.php:474
+#: include/settings.php
 msgid "You can Allow/Disallow Panels for Group"
 msgstr ""
 
-#: include/variables.php:28
+#: include/variables.php
 msgid "Red Status"
 msgstr ""
 
-#: include/variables.php:29
+#: include/variables.php
 msgid "Yellow Status"
 msgstr ""
 
-#: include/variables.php:30
+#: include/variables.php
 msgid "Green Status"
 msgstr ""
 
-#: include/variables.php:35
+#: include/variables.php
 msgid "Display Settings"
 msgstr ""
 
-#: include/variables.php:39
+#: include/variables.php
 msgid "Important things will be at the top"
 msgstr ""
 
-#: include/variables.php:40
+#: include/variables.php
 msgid "If checked Intropage displays important (errors, warnings) information first"
 msgstr ""
 
-#: include/variables.php:45
+#: include/variables.php
 msgid "Display more panels on a line"
 msgstr ""
 
-#: include/variables.php:46
+#: include/variables.php
 msgid "For wide screen"
 msgstr ""
 
-#: include/variables.php:51
+#: include/variables.php
 msgid "Automatically Uninstall Panels"
 msgstr ""
 
-#: include/variables.php:52
+#: include/variables.php
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
 msgstr ""
 
-#: include/variables.php:57
+#: include/variables.php
 msgid "Automatic Page Refresh"
 msgstr ""
 
-#: include/variables.php:58
+#: include/variables.php
 msgid "How often"
 msgstr ""
 
-#: include/variables.php:61
+#: include/variables.php
 msgid "Automatically by poller"
 msgstr ""
 
-#: include/variables.php:62 include/variables.php:128
+#: include/variables.php
 msgid "Never"
 msgstr ""
 
-#: include/variables.php:63
+#: include/variables.php
 msgid "Every Minute"
 msgstr ""
 
-#: include/variables.php:64 include/variables.php:161 include/variables.php:179
+#: include/variables.php
 #, php-format
 msgid "Every %d Minutes"
 msgstr ""
 
-#: include/variables.php:65 include/variables.php:129 include/variables.php:162
-#: include/variables.php:180
+#: include/variables.php
 msgid "Every Hour"
 msgstr ""
 
-#: include/variables.php:70
+#: include/variables.php
 msgid "Important period"
 msgstr ""
 
-#: include/variables.php:71
+#: include/variables.php
 msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
 msgstr ""
 
-#: include/variables.php:74 panellib/graphs.php:408 panellib/graphs.php:603
-#: panellib/mactrack.php:146 panellib/poller.php:180 panellib/poller.php:460
-#: panellib/system.php:599 panellib/thold.php:333 panellib/thold.php:433
-#: panellib/thold.php:449
+#: include/variables.php panellib/graphs.php panellib/mactrack.php
+#: panellib/poller.php panellib/system.php panellib/thold.php
 msgid "Disabled"
 msgstr ""
 
-#: include/variables.php:75
+#: include/variables.php
 msgid "15 minutes"
 msgstr ""
 
-#: include/variables.php:76
+#: include/variables.php
 msgid "1 hour"
 msgstr ""
 
-#: include/variables.php:77
+#: include/variables.php
 msgid "4 hours"
 msgstr ""
 
-#: include/variables.php:78
+#: include/variables.php
 msgid "1 day"
 msgstr ""
 
-#: include/variables.php:83
+#: include/variables.php
 msgid "Number of panel lines"
 msgstr ""
 
-#: include/variables.php:84
+#: include/variables.php
 msgid "How many lines in panel"
 msgstr ""
 
-#: include/variables.php:87 include/variables.php:88 include/variables.php:89
+#: include/variables.php
 #, php-format
 msgid "%d lines"
 msgstr ""
 
-#: include/variables.php:94
+#: include/variables.php
 msgid "Trend Timespan"
 msgstr ""
 
-#: include/variables.php:95
+#: include/variables.php
 msgid "For Trend charts, what should be the default timespan for those charts."
 msgstr ""
 
-#: include/variables.php:101
+#: include/variables.php
 msgid "Poller Timeout"
 msgstr ""
 
-#: include/variables.php:102
+#: include/variables.php
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
 
-#: include/variables.php:106 setup.php:164
+#: include/variables.php setup.php
 #, php-format
 msgid "%d Minute"
 msgstr ""
 
-#: include/variables.php:107 include/variables.php:108
-#: include/variables.php:109 include/variables.php:110
-#: include/variables.php:111 include/variables.php:112 setup.php:165
-#: setup.php:166 setup.php:167 setup.php:168 setup.php:169 setup.php:170
-#: setup.php:171 setup.php:172
+#: include/variables.php setup.php
 #, php-format
 msgid "%d Minutes"
 msgstr ""
 
-#: include/variables.php:113 setup.php:173
+#: include/variables.php setup.php
 #, php-format
 msgid "%d Hour"
 msgstr ""
 
-#: include/variables.php:117
+#: include/variables.php
 msgid "Analyze Log - number of lines"
 msgstr ""
 
-#: include/variables.php:118
+#: include/variables.php
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr ""
 
-#: include/variables.php:124
+#: include/variables.php
 msgid "How often analyze DB"
 msgstr ""
 
-#: include/variables.php:125 include/variables.php:158
-#: include/variables.php:176
+#: include/variables.php
 msgid "Poller runs this task. It could cause long poller run."
 msgstr ""
 
-#: include/variables.php:130 include/variables.php:163
-#: include/variables.php:181
+#: include/variables.php
 msgid "Every Day"
 msgstr ""
 
-#: include/variables.php:131
+#: include/variables.php
 msgid "Every Week"
 msgstr ""
 
-#: include/variables.php:132
+#: include/variables.php
 msgid "Every Month"
 msgstr ""
 
-#: include/variables.php:137
+#: include/variables.php
 msgid "Analyze DB - Level of db check"
 msgstr ""
 
-#: include/variables.php:138
+#: include/variables.php
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
 msgstr ""
 
-#: include/variables.php:141
+#: include/variables.php
 msgid "Quick"
 msgstr ""
 
-#: include/variables.php:142
+#: include/variables.php
 msgid "Fast"
 msgstr ""
 
-#: include/variables.php:143
+#: include/variables.php
 msgid "Changed"
 msgstr ""
 
-#: include/variables.php:144
+#: include/variables.php
 msgid "Medium"
 msgstr ""
 
-#: include/variables.php:145
+#: include/variables.php
 msgid "Extended"
 msgstr ""
 
-#: include/variables.php:150
+#: include/variables.php
 msgid "NTP Time Check - IP or DNS name of NTP server"
 msgstr ""
 
-#: include/variables.php:151
+#: include/variables.php
 msgid "Insert IP or DNS name of NTP server"
 msgstr ""
 
-#: include/variables.php:157
+#: include/variables.php
 msgid "How often check NTP"
 msgstr ""
 
-#: include/variables.php:168
+#: include/variables.php
 msgid "DNS Check - Any DNS name"
 msgstr ""
 
-#: include/variables.php:169
+#: include/variables.php
 msgid "Insert DNS name for test"
 msgstr ""
 
-#: include/variables.php:175
+#: include/variables.php
 msgid "How often check DNS"
 msgstr ""
 
-#: include/variables.php:186
+#: include/variables.php
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
 msgstr ""
 
-#: include/variables.php:187
+#: include/variables.php
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr ""
 
-#: include/variables.php:195
+#: include/variables.php
 msgid "Upcoming Maint Schedule warning days"
 msgstr ""
 
-#: include/variables.php:196
+#: include/variables.php
 msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
 msgstr ""
 
-#: include/variables.php:199
+#: include/variables.php
 msgid "Never warn"
 msgstr ""
 
-#: include/variables.php:200
+#: include/variables.php
 msgid "When maintenance starts"
 msgstr ""
 
-#: include/variables.php:201
+#: include/variables.php
 #, php-format
 msgid "%d Day Before"
 msgstr ""
 
-#: include/variables.php:202 include/variables.php:203
+#: include/variables.php
 #, php-format
 msgid "%d Days Before"
 msgstr ""
 
-#: include/variables.php:208
+#: include/variables.php
 msgid "Network stats in"
 msgstr ""
 
-#: include/variables.php:209
+#: include/variables.php
 msgid "bytes or bits"
 msgstr ""
 
-#: include/variables.php:212
+#: include/variables.php
 msgid "Bytes"
 msgstr ""
 
-#: include/variables.php:213
+#: include/variables.php
 msgid "Bits"
 msgstr ""
 
-#: include/variables.php:218
+#: include/variables.php
 msgid "Alarm Settings"
 msgstr ""
 
-#: include/variables.php:222
+#: include/variables.php
 msgid "Alarm DB check Aborted Clients"
 msgstr ""
 
-#: include/variables.php:223 include/variables.php:230
-#: include/variables.php:237 include/variables.php:244
-#: include/variables.php:251 include/variables.php:258
-#: include/variables.php:265 include/variables.php:272
-#: include/variables.php:279 include/variables.php:286
-#: include/variables.php:293 include/variables.php:300
-#: include/variables.php:307
+#: include/variables.php
 msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
 msgstr ""
 
-#: include/variables.php:229
+#: include/variables.php
 msgid "Alarm Host with the same Description"
 msgstr ""
 
-#: include/variables.php:236
+#: include/variables.php
 msgid "Alarm Orphaned Data Source"
 msgstr ""
 
-#: include/variables.php:243
+#: include/variables.php
 msgid "Alarm non-empty Poller Output"
 msgstr ""
 
-#: include/variables.php:250
+#: include/variables.php
 msgid "Alarm Bad indexes Data Source"
 msgstr ""
 
-#: include/variables.php:257
+#: include/variables.php
 msgid "Alarm Threshold logonly action"
 msgstr ""
 
-#: include/variables.php:264
+#: include/variables.php
 msgid "Alarm when device bulk_walk_size is not optimized"
 msgstr ""
 
-#: include/variables.php:271
+#: include/variables.php
 msgid "Alarm Devices with the same IP/port"
 msgstr ""
 
-#: include/variables.php:278
+#: include/variables.php
 msgid "Alarm Device in more than one Tree"
 msgstr ""
 
-#: include/variables.php:285
+#: include/variables.php
 msgid "Alarm Device without a Tree"
 msgstr ""
 
-#: include/variables.php:292
+#: include/variables.php
 msgid "Alarm Device with Default public/private SNMP Community"
 msgstr ""
 
-#: include/variables.php:299
+#: include/variables.php
 msgid "Alarm Device without Monitoring"
 msgstr ""
 
-#: include/variables.php:306
+#: include/variables.php
 msgid "Alarm Device without Graph"
 msgstr ""
 
-#: include/variables.php:313
+#: include/variables.php
 msgid "Alarm Red/Yellow Polling Time"
 msgstr ""
 
-#: include/variables.php:314
+#: include/variables.php
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
 msgstr ""
 
-#: include/variables.php:318
+#: include/variables.php
 msgid "5s  / 10s Yellow / Red"
 msgstr ""
 
-#: include/variables.php:319
+#: include/variables.php
 msgid "10s / 20s Yellow / Red"
 msgstr ""
 
-#: include/variables.php:320
+#: include/variables.php
 msgid "20s / 40s Yellow / Red"
 msgstr ""
 
-#: include/variables.php:324
+#: include/variables.php
 msgid "Alarm Red/Yellow Failed/All Ratio"
 msgstr ""
 
-#: include/variables.php:325
+#: include/variables.php
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr ""
 
-#: include/variables.php:329
+#: include/variables.php
 msgid "0.1 / 0.2 Yellow / Red"
 msgstr ""
 
-#: include/variables.php:330
+#: include/variables.php
 msgid "0.2 / 0.4 Yellow / Red"
 msgstr ""
 
-#: include/variables.php:331
+#: include/variables.php
 msgid "0.5 / 0.5++ Yellow / Red"
 msgstr ""
 
-#: include/variables.php:335
+#: include/variables.php
 msgid "Alarm Red/Yellow Ping"
 msgstr ""
 
-#: include/variables.php:336
+#: include/variables.php
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
 msgstr ""
 
-#: include/variables.php:340
+#: include/variables.php
 msgid "10ms  / 20ms Yellow / Red"
 msgstr ""
 
-#: include/variables.php:341
+#: include/variables.php
 msgid "20ms  / 50ms Yellow / Red"
 msgstr ""
 
-#: include/variables.php:342
+#: include/variables.php
 msgid "100ms / 200+ms Yellow / Red"
 msgstr ""
 
-#: include/variables.php:346
+#: include/variables.php
 msgid "Alarm Red/Yellow Worst Availability"
 msgstr ""
 
-#: include/variables.php:347
+#: include/variables.php
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
 msgstr ""
 
-#: include/variables.php:351 include/variables.php:352
-#: include/variables.php:353
+#: include/variables.php
 msgid "Yellow / Red"
 msgstr ""
 
-#: panellib/alert.php:43 panellib/syslog.php:305
+#: panellib/alert.php panellib/syslog.php
 msgid "Alerts"
 msgstr ""
 
-#: panellib/alert.php:44
+#: panellib/alert.php
 msgid "Panels that provide alerting."
 msgstr ""
 
-#: panellib/alert.php:49 panellib/alert.php:243
+#: panellib/alert.php
 msgid "Host alerts"
 msgstr ""
 
-#: panellib/alert.php:50
+#: panellib/alert.php
 msgid "Host alerts (up/down/recovering) recently"
 msgstr ""
 
-#: panellib/alert.php:150 panellib/alert.php:295 panellib/analyze.php:190
-#: panellib/analyze.php:1481 panellib/misc.php:412 panellib/misc.php:493
-#: panellib/misc.php:617 panellib/misc.php:715 panellib/thold.php:546
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
 msgid "Date"
 msgstr ""
 
-#: panellib/alert.php:151 panellib/alert.php:296 panellib/busiest.php:640
-#: panellib/busiest.php:1529 panellib/top5.php:177 panellib/top5.php:368
-#: panellib/top5.php:464 panellib/top5.php:561 panellib/top5.php:653
-#: panellib/top5.php:743 panellib/top5.php:834
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
 msgid "Host"
 msgstr ""
 
-#: panellib/alert.php:152 panellib/alert.php:297 panellib/poller.php:159
-#: panellib/poller.php:419
+#: panellib/alert.php panellib/poller.php
 msgid "State"
 msgstr ""
 
-#: panellib/alert.php:207 panellib/alert.php:351
+#: panellib/alert.php
 msgid "More records, use detail window"
 msgstr ""
 
-#: panellib/alert.php:215 panellib/alert.php:359 panellib/analyze.php:1231
-#: panellib/graphs.php:424 panellib/poller.php:383 panellib/poller.php:598
-#: panellib/syslog.php:509 panellib/system.php:271 panellib/system.php:488
-#: panellib/system.php:901 panellib/thold.php:349 panellib/top5.php:213
-#: panellib/top5.php:308 panellib/top5.php:402 panellib/top5.php:502
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
 msgid "Waiting for data"
 msgstr ""
 
-#: panellib/alert.php:218 panellib/alert.php:362 panellib/busiest.php:664
-#: panellib/busiest.php:1553 panellib/graphs.php:175 panellib/graphs.php:276
-#: panellib/graphs.php:427 panellib/top5.php:216 panellib/top5.php:311
-#: panellib/top5.php:405 panellib/top5.php:505 panellib/top5.php:597
-#: panellib/top5.php:687 panellib/top5.php:777 panellib/top5.php:872
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
 msgid "You don't have permissions to any hosts"
 msgstr ""
 
-#: panellib/analyze.php:44
+#: panellib/analyze.php
 msgid "Analysis Panels"
 msgstr ""
 
-#: panellib/analyze.php:45
+#: panellib/analyze.php
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
 msgstr ""
 
-#: panellib/analyze.php:50
+#: panellib/analyze.php
 msgid "Analyze Logins"
 msgstr ""
 
-#: panellib/analyze.php:51
+#: panellib/analyze.php
 msgid "Analyze the last several Cacti logins for trends and errors."
 msgstr ""
 
-#: panellib/analyze.php:68
+#: panellib/analyze.php
 msgid "Analyze Logs"
 msgstr ""
 
-#: panellib/analyze.php:69
+#: panellib/analyze.php
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
 msgstr ""
 
-#: panellib/analyze.php:86
+#: panellib/analyze.php
 msgid "Database Checks"
 msgstr ""
 
-#: panellib/analyze.php:87
+#: panellib/analyze.php
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
 msgstr ""
 
-#: panellib/analyze.php:104
+#: panellib/analyze.php
 msgid "Analyze Cacti Objects"
 msgstr ""
 
-#: panellib/analyze.php:105
+#: panellib/analyze.php
 msgid "Analyze Trees, Graphs, Hosts, ..."
 msgstr ""
 
-#: panellib/analyze.php:122
+#: panellib/analyze.php
 msgid "Analyze DS stats"
 msgstr ""
 
-#: panellib/analyze.php:123
+#: panellib/analyze.php
 msgid "Analyze data source stats"
 msgstr ""
 
-#: panellib/analyze.php:191
+#: panellib/analyze.php
 msgid "Username"
 msgstr ""
 
-#: panellib/analyze.php:192 panellib/analyze.php:1482
+#: panellib/analyze.php
 msgid "IP Address"
 msgstr ""
 
-#: panellib/analyze.php:193 panellib/graphs.php:573 panellib/thold.php:413
+#: panellib/analyze.php panellib/graphs.php panellib/thold.php
 msgid "Status"
 msgstr ""
 
-#: panellib/analyze.php:202 panellib/analyze.php:1491 panellib/misc.php:429
-#: panellib/misc.php:516 panellib/misc.php:635 panellib/misc.php:741
-#: panellib/system.php:833 panellib/top5.php:465 panellib/top5.php:835
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
 msgid "Failed"
 msgstr ""
 
-#: panellib/analyze.php:208 panellib/analyze.php:1497
+#: panellib/analyze.php
 msgid "Success - Login"
 msgstr ""
 
-#: panellib/analyze.php:214 panellib/analyze.php:1503
+#: panellib/analyze.php
 msgid "Success - Token"
 msgstr ""
 
-#: panellib/analyze.php:246
+#: panellib/analyze.php
 #, php-format
 msgid "Total Failed Logins: %s"
 msgstr ""
 
-#: panellib/analyze.php:255
+#: panellib/analyze.php
 msgid "None"
 msgstr ""
 
-#: panellib/analyze.php:258
+#: panellib/analyze.php
 msgid "Active Users in Last Hour: "
 msgstr ""
 
-#: panellib/analyze.php:307 panellib/analyze.php:1304
+#: panellib/analyze.php
 msgid "Log file not accessible or empty"
 msgstr ""
 
-#: panellib/analyze.php:327
+#: panellib/analyze.php
 #, php-format
 msgid "Analyze last %s log lines:"
 msgstr ""
 
-#: panellib/analyze.php:329
+#: panellib/analyze.php
 msgid "Errors: "
 msgstr ""
 
-#: panellib/analyze.php:334
+#: panellib/analyze.php
 msgid "Warnings: "
 msgstr ""
 
-#: panellib/analyze.php:341
+#: panellib/analyze.php
 msgid "Log Size: Larger than 2GB"
 msgstr ""
 
-#: panellib/analyze.php:345 panellib/analyze.php:1338
+#: panellib/analyze.php
 msgid "Log Size: OK"
 msgstr ""
 
-#: panellib/analyze.php:349 panellib/analyze.php:1342
+#: panellib/analyze.php
 msgid "Log Size: Quite Large"
 msgstr ""
 
-#: panellib/analyze.php:352
+#: panellib/analyze.php
 msgid "Log Size: "
 msgstr ""
 
-#: panellib/analyze.php:359
+#: panellib/analyze.php
 msgid "Last log lines:"
 msgstr ""
 
-#: panellib/analyze.php:486
+#: panellib/analyze.php
 msgid "Skipping DB tables checks. Database too large"
 msgstr ""
 
-#: panellib/analyze.php:503
+#: panellib/analyze.php
 #, php-format
 msgid "Table %s status %s"
 msgstr ""
 
-#: panellib/analyze.php:510
+#: panellib/analyze.php
 msgid "DB: Problems"
 msgstr ""
 
-#: panellib/analyze.php:519
+#: panellib/analyze.php
 msgid "DB: OK"
 msgstr ""
 
-#: panellib/analyze.php:543
+#: panellib/analyze.php
 #, php-format
 msgid "Max connection reached: %s / %s"
 msgstr ""
 
-#: panellib/analyze.php:544
+#: panellib/analyze.php
 msgid "You can increase Max connection via command line tools or permanently in config file"
 msgstr ""
 
-#: panellib/analyze.php:564
+#: panellib/analyze.php
 #, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr ""
 
-#: panellib/analyze.php:582
+#: panellib/analyze.php
 #, php-format
 msgid "Aborted clients/connects: %s"
 msgstr ""
 
-#: panellib/analyze.php:583
+#: panellib/analyze.php
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
 msgstr ""
 
-#: panellib/analyze.php:587
+#: panellib/analyze.php
 #, php-format
 msgid "Connection errors: %s"
 msgstr ""
 
-#: panellib/analyze.php:588
+#: panellib/analyze.php
 #, php-format
 msgid "Damaged tables: %s"
 msgstr ""
 
-#: panellib/analyze.php:591
+#: panellib/analyze.php
 msgid "You should run check and repair table commands"
 msgstr ""
 
-#: panellib/analyze.php:595
+#: panellib/analyze.php
 #, php-format
 msgid "Memory tables: %s"
 msgstr ""
 
-#: panellib/analyze.php:596
+#: panellib/analyze.php
 #, php-format
 msgid "All tables: %s"
 msgstr ""
 
-#: panellib/analyze.php:646 panellib/analyze.php:754 panellib/analyze.php:787
-#: panellib/analyze.php:838 panellib/analyze.php:867 panellib/analyze.php:897
-#: panellib/analyze.php:927 panellib/analyze.php:956 panellib/analyze.php:984
-#: panellib/analyze.php:1021 panellib/analyze.php:1040
-#: panellib/analyze.php:1601 panellib/analyze.php:1643
-#: panellib/analyze.php:1730 panellib/analyze.php:1770
-#: panellib/analyze.php:1823 panellib/analyze.php:1858
-#: panellib/analyze.php:1900 panellib/analyze.php:1957
-#: panellib/analyze.php:1990 panellib/analyze.php:2022
-#: panellib/analyze.php:2063 panellib/analyze.php:2106 panellib/poller.php:150
-#: panellib/poller.php:434 panellib/system.php:603 panellib/system.php:636
-#: panellib/system.php:1117
+#: panellib/analyze.php panellib/poller.php panellib/system.php
 msgid "N/A"
 msgstr ""
 
-#: panellib/analyze.php:659
+#: panellib/analyze.php
 #, php-format
 msgid "Devices with the same IP and port: %s"
 msgstr ""
 
-#: panellib/analyze.php:691
+#: panellib/analyze.php
 #, php-format
 msgid "Not optimized Bulk Walk Size devices: %s"
 msgstr ""
 
-#: panellib/analyze.php:692 panellib/analyze.php:1650
+#: panellib/analyze.php
 msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
 msgstr ""
 
-#: panellib/analyze.php:698 panellib/analyze.php:1672
+#: panellib/analyze.php
 msgid "Reindex last run"
 msgstr ""
 
-#: panellib/analyze.php:699 panellib/analyze.php:1673
+#: panellib/analyze.php
 msgid "RRD Checker last run"
 msgstr ""
 
-#: panellib/analyze.php:700 panellib/analyze.php:1674
+#: panellib/analyze.php
 msgid "RRD Cleaner last run"
 msgstr ""
 
-#: panellib/analyze.php:713 panellib/analyze.php:1689
+#: panellib/analyze.php
 #, php-format
 msgid "%s: %s"
 msgstr ""
 
-#: panellib/analyze.php:714 panellib/analyze.php:720 panellib/analyze.php:1690
-#: panellib/analyze.php:1696
+#: panellib/analyze.php
 msgid "It is recommended to run this tool at least occasionally"
 msgstr ""
 
-#: panellib/analyze.php:719 panellib/analyze.php:1695
+#: panellib/analyze.php
 #, php-format
 msgid "%s: not run yet"
 msgstr ""
 
-#: panellib/analyze.php:767
+#: panellib/analyze.php
 #, php-format
 msgid "Orphaned Data Sources: %s"
 msgstr ""
 
-#: panellib/analyze.php:798
+#: panellib/analyze.php
 #, php-format
 msgid "Datasource - bad indexes: %s"
 msgstr ""
 
-#: panellib/analyze.php:849
+#: panellib/analyze.php
 #, php-format
 msgid "Thold logonly alert/warning: %s"
 msgstr ""
 
-#: panellib/analyze.php:880
+#: panellib/analyze.php
 #, php-format
 msgid "Devices with the same description: %s"
 msgstr ""
 
-#: panellib/analyze.php:908
+#: panellib/analyze.php
 #, php-format
 msgid "Devices in more than one tree: %s"
 msgstr ""
 
-#: panellib/analyze.php:938
+#: panellib/analyze.php
 #, php-format
 msgid "Devices without graphs: %s"
 msgstr ""
 
-#: panellib/analyze.php:967
+#: panellib/analyze.php
 #, php-format
 msgid "Devices without tree: %s"
 msgstr ""
 
-#: panellib/analyze.php:995
+#: panellib/analyze.php
 #, php-format
 msgid "Devices with default public/private community: %s"
 msgstr ""
 
-#: panellib/analyze.php:1026
+#: panellib/analyze.php
 #, php-format
 msgid "Graph items/template items issue: %s"
 msgstr ""
 
-#: panellib/analyze.php:1051
+#: panellib/analyze.php
 #, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
 msgstr ""
 
-#: panellib/analyze.php:1084 panellib/analyze.php:2154 panellib/misc.php:424
-#: panellib/misc.php:511 panellib/misc.php:630 panellib/misc.php:736
+#: panellib/analyze.php panellib/misc.php
 msgid "OK"
 msgstr ""
 
-#: panellib/analyze.php:1106
+#: panellib/analyze.php
 #, php-format
 msgid "Server CPU (cores / processes / threads): %s / %s / %s"
 msgstr ""
 
-#: panellib/analyze.php:1114 panellib/analyze.php:2184
+#: panellib/analyze.php
 msgid "Notify admin is disabled and admin email is not set"
 msgstr ""
 
-#: panellib/analyze.php:1122 panellib/analyze.php:2199
+#: panellib/analyze.php
 #, php-format
 msgid "Found %s problems"
 msgstr ""
 
-#: panellib/analyze.php:1127 panellib/analyze.php:2201
+#: panellib/analyze.php
 msgid "Everything OK"
 msgstr ""
 
-#: panellib/analyze.php:1160
+#: panellib/analyze.php
 msgid "DS stats: "
 msgstr ""
 
-#: panellib/analyze.php:1186 panellib/busiest.php:206 panellib/busiest.php:337
-#: panellib/busiest.php:460 panellib/busiest.php:698 panellib/busiest.php:846
-#: panellib/busiest.php:979 panellib/busiest.php:1114 panellib/busiest.php:1235
-#: panellib/busiest.php:1356 panellib/busiest.php:1581
-#: panellib/busiest.php:1728 panellib/busiest.php:1857
+#: panellib/analyze.php panellib/busiest.php
 msgid "Panel needs DS stats enabled."
 msgstr ""
 
-#: panellib/analyze.php:1198
+#: panellib/analyze.php
 msgid "DS all records "
 msgstr ""
 
-#: panellib/analyze.php:1214
+#: panellib/analyze.php
 msgid "DS null records "
 msgstr ""
 
-#: panellib/analyze.php:1287
+#: panellib/analyze.php
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
 msgstr ""
 
-#: panellib/analyze.php:1324
+#: panellib/analyze.php
 msgid "Errors"
 msgstr ""
 
-#: panellib/analyze.php:1329
+#: panellib/analyze.php
 msgid "Warnings"
 msgstr ""
 
-#: panellib/analyze.php:1334
+#: panellib/analyze.php
 msgid "WARNING: File is Larger than 2GB"
 msgstr ""
 
-#: panellib/analyze.php:1345
+#: panellib/analyze.php
 msgid "Log Size"
 msgstr ""
 
-#: panellib/analyze.php:1465
+#: panellib/analyze.php
 msgid "Analyze Logins Detail"
 msgstr ""
 
-#: panellib/analyze.php:1483
+#: panellib/analyze.php
 msgid "User"
 msgstr ""
 
-#: panellib/analyze.php:1484 panellib/misc.php:495 panellib/misc.php:620
-#: panellib/misc.php:718
+#: panellib/analyze.php panellib/misc.php
 msgid "Result"
 msgstr ""
 
-#: panellib/analyze.php:1522
+#: panellib/analyze.php
 msgid "Active Users in Last 2 Hours:"
 msgstr ""
 
-#: panellib/analyze.php:1533
+#: panellib/analyze.php
 msgid "No Active Users"
 msgstr ""
 
-#: panellib/analyze.php:1539
+#: panellib/analyze.php
 msgid "View Full User Log"
 msgstr ""
 
-#: panellib/analyze.php:1582
+#: panellib/analyze.php
 msgid "Analyze Tree, Graphs, Hosts"
 msgstr ""
 
-#: panellib/analyze.php:1605
+#: panellib/analyze.php
 #, php-format
 msgid "Devices with the same IP and port - %s"
 msgstr ""
 
-#: panellib/analyze.php:1647
+#: panellib/analyze.php
 #, php-format
 msgid "Not optimized Bulk Walk Size devices - %s"
 msgstr ""
 
-#: panellib/analyze.php:1700
+#: panellib/analyze.php
 msgid "Data maintenance"
 msgstr ""
 
-#: panellib/analyze.php:1734
+#: panellib/analyze.php
 #, php-format
 msgid "Orphaned Data Sources - %s"
 msgstr ""
 
-#: panellib/analyze.php:1774
+#: panellib/analyze.php
 #, php-format
 msgid "Datasources with bad indexes - %s"
 msgstr ""
 
-#: panellib/analyze.php:1827
+#: panellib/analyze.php
 #, php-format
 msgid "Thold logonly alert/warning - %s"
 msgstr ""
 
-#: panellib/analyze.php:1862
+#: panellib/analyze.php
 #, php-format
 msgid "Devices with the same description - %s"
 msgstr ""
 
-#: panellib/analyze.php:1904
+#: panellib/analyze.php
 #, php-format
 msgid "Devices in more than one tree - %s"
 msgstr ""
 
-#: panellib/analyze.php:1961
+#: panellib/analyze.php
 #, php-format
 msgid "Devices without Graphs - %s"
 msgstr ""
 
-#: panellib/analyze.php:1994
+#: panellib/analyze.php
 #, php-format
 msgid "Devices without tree - %s"
 msgstr ""
 
-#: panellib/analyze.php:2026
+#: panellib/analyze.php
 #, php-format
 msgid "Devices with default public/private community - %s"
 msgstr ""
 
-#: panellib/analyze.php:2065
+#: panellib/analyze.php
 #, php-format
 msgid "Graph items/template items issue - %s"
 msgstr ""
 
-#: panellib/analyze.php:2071
+#: panellib/analyze.php
 msgid "Graph template"
 msgstr ""
 
-#: panellib/analyze.php:2072
+#: panellib/analyze.php
 msgid "Graphs"
 msgstr ""
 
-#: panellib/analyze.php:2073
+#: panellib/analyze.php
 msgid "Graph items"
 msgstr ""
 
-#: panellib/analyze.php:2074
+#: panellib/analyze.php
 msgid "Template items"
 msgstr ""
 
-#: panellib/analyze.php:2110
+#: panellib/analyze.php
 #, php-format
 msgid "Plugin Monitor - Unmonitored hosts - %s"
 msgstr ""
 
-#: panellib/analyze.php:2176
+#: panellib/analyze.php
 #, php-format
 msgid "Server CPU cores / processes / threads: %s / %s / %s"
 msgstr ""
 
-#: panellib/analyze.php:2189
+#: panellib/analyze.php
 msgid "Notify admin is disabled or admin email is not set"
 msgstr ""
 
-#: panellib/busiest.php:44
+#: panellib/busiest.php
 msgid "The busiest"
 msgstr ""
 
-#: panellib/busiest.php:45
+#: panellib/busiest.php
 msgid "Panels that finds the busiest hosts."
 msgstr ""
 
-#: panellib/busiest.php:50
+#: panellib/busiest.php
 msgid "Busiest CPU"
 msgstr ""
 
-#: panellib/busiest.php:51
+#: panellib/busiest.php
 msgid "Devices with the busiest CPU (Host MIB)"
 msgstr ""
 
-#: panellib/busiest.php:68
+#: panellib/busiest.php
 msgid "Busiest ucd/net - Load"
 msgstr ""
 
-#: panellib/busiest.php:69
+#: panellib/busiest.php
 msgid "Devices with the highest Load (ucd/net)"
 msgstr ""
 
-#: panellib/busiest.php:86
+#: panellib/busiest.php
 msgid "Busiest Hard Drive Space"
 msgstr ""
 
-#: panellib/busiest.php:87
+#: panellib/busiest.php
 msgid "Devices with the highest Hard Drive Space used (Host MIB)"
 msgstr ""
 
-#: panellib/busiest.php:104 panellib/busiest.php:1493
+#: panellib/busiest.php
 msgid "Busiest uptime"
 msgstr ""
 
-#: panellib/busiest.php:105
+#: panellib/busiest.php
 msgid "Devices with the highest uptime"
 msgstr ""
 
-#: panellib/busiest.php:122
+#: panellib/busiest.php
 msgid "Busiest Interface in/out traffic"
 msgstr ""
 
-#: panellib/busiest.php:123
+#: panellib/busiest.php
 msgid "Devices with the highest in/out traffic (Interface)"
 msgstr ""
 
-#: panellib/busiest.php:140
+#: panellib/busiest.php
 msgid "Busiest Interface error"
 msgstr ""
 
-#: panellib/busiest.php:141
+#: panellib/busiest.php
 msgid "Devices with the highest errors/discards (Interface)"
 msgstr ""
 
-#: panellib/busiest.php:158
+#: panellib/busiest.php
 msgid "Busiest Interface utilization"
 msgstr ""
 
-#: panellib/busiest.php:159
+#: panellib/busiest.php
 msgid "Ports with the highest interface utilization"
 msgstr ""
 
-#: panellib/busiest.php:209 panellib/busiest.php:340 panellib/busiest.php:463
-#: panellib/busiest.php:701 panellib/busiest.php:849 panellib/busiest.php:982
-#: panellib/busiest.php:1117 panellib/busiest.php:1238
-#: panellib/busiest.php:1359 panellib/busiest.php:1584
-#: panellib/busiest.php:1731 panellib/busiest.php:1860
+#: panellib/busiest.php
 msgid "Please enable and configure DS stats"
 msgstr ""
 
-#: panellib/busiest.php:211 panellib/busiest.php:342 panellib/busiest.php:465
-#: panellib/busiest.php:703 panellib/busiest.php:851 panellib/busiest.php:984
-#: panellib/busiest.php:1119 panellib/busiest.php:1240
-#: panellib/busiest.php:1361 panellib/busiest.php:1586
-#: panellib/busiest.php:1733 panellib/busiest.php:1862
+#: panellib/busiest.php
 msgid "Ask admin to enable DS stats"
 msgstr ""
 
-#: panellib/busiest.php:259 panellib/busiest.php:390 panellib/busiest.php:537
-#: panellib/busiest.php:771 panellib/busiest.php:906 panellib/busiest.php:1165
-#: panellib/busiest.php:1286 panellib/busiest.php:1431
-#: panellib/busiest.php:1655 panellib/busiest.php:1786 panellib/top5.php:178
-#: panellib/top5.php:562
+#: panellib/busiest.php panellib/top5.php
 msgid "Average"
 msgstr ""
 
-#: panellib/busiest.php:260 panellib/busiest.php:391 panellib/busiest.php:538
-#: panellib/busiest.php:772 panellib/busiest.php:907 panellib/busiest.php:1166
-#: panellib/busiest.php:1287 panellib/busiest.php:1432
-#: panellib/busiest.php:1656 panellib/busiest.php:1787
+#: panellib/busiest.php
 msgid "Peak"
 msgstr ""
 
-#: panellib/busiest.php:299 panellib/busiest.php:421 panellib/busiest.php:577
-#: panellib/busiest.php:807 panellib/busiest.php:938 panellib/busiest.php:1200
-#: panellib/busiest.php:1321 panellib/busiest.php:1466
-#: panellib/busiest.php:1694 panellib/busiest.php:1821
+#: panellib/busiest.php
 msgid "Average of all allowed DS"
 msgstr ""
 
-#: panellib/busiest.php:302 panellib/busiest.php:424 panellib/busiest.php:580
-#: panellib/busiest.php:810 panellib/busiest.php:941 panellib/busiest.php:1083
-#: panellib/busiest.php:1204 panellib/busiest.php:1325
-#: panellib/busiest.php:1470 panellib/busiest.php:1697
-#: panellib/busiest.php:1824 panellib/busiest.php:1958
+#: panellib/busiest.php
 msgid "Waiting for data or you don't have permission for any device with this template."
 msgstr ""
 
-#: panellib/busiest.php:305 panellib/busiest.php:427 panellib/busiest.php:583
-#: panellib/busiest.php:813 panellib/busiest.php:944 panellib/busiest.php:1086
-#: panellib/busiest.php:1207 panellib/busiest.php:1328
-#: panellib/busiest.php:1473 panellib/busiest.php:1700
-#: panellib/busiest.php:1827 panellib/busiest.php:1961
+#: panellib/busiest.php
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
 msgstr ""
 
-#: panellib/busiest.php:641 panellib/busiest.php:1530
+#: panellib/busiest.php
 msgid "Uptime"
 msgstr ""
 
-#: panellib/busiest.php:658 panellib/busiest.php:1547
+#: panellib/busiest.php
 msgid "Average of all allowed hosts"
 msgstr ""
 
-#: panellib/busiest.php:661 panellib/busiest.php:1550
+#: panellib/busiest.php
 msgid "Waiting for data or you don't have permission for any device"
 msgstr ""
 
-#: panellib/busiest.php:1040 panellib/busiest.php:1916
+#: panellib/busiest.php
 msgid "Direction"
 msgstr ""
 
-#: panellib/busiest.php:1080 panellib/busiest.php:1955
+#: panellib/busiest.php
 msgid "Time interval last 5 minutes"
 msgstr ""
 
-#: panellib/busiest.php:1106
+#: panellib/busiest.php
 msgid "Busiest 30 Host MIB CPU utilization (last hour)"
 msgstr ""
 
-#: panellib/busiest.php:1202 panellib/busiest.php:1323
-#: panellib/busiest.php:1468
+#: panellib/busiest.php
 msgid "Install TopX plugin for more DS statistics"
 msgstr ""
 
-#: panellib/busiest.php:1227
+#: panellib/busiest.php
 msgid "Busiest 30 ucd/net Load (last hour)"
 msgstr ""
 
-#: panellib/busiest.php:1348
+#: panellib/busiest.php
 msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
 msgstr ""
 
-#: panellib/busiest.php:1573 panellib/busiest.php:1720
+#: panellib/busiest.php
 msgid "Busiest traffic (in+out)"
 msgstr ""
 
-#: panellib/busiest.php:1847
+#: panellib/busiest.php
 msgid "Busiest interface utilization"
 msgstr ""
 
-#: panellib/graphs.php:43
+#: panellib/graphs.php
 msgid "Graphical Panels"
 msgstr ""
 
-#: panellib/graphs.php:44
+#: panellib/graphs.php
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
 msgstr ""
 
-#: panellib/graphs.php:49 panellib/graphs.php:447 panellib/graphs.php:485
+#: panellib/graphs.php
 msgid "Data Sources"
 msgstr ""
 
-#: panellib/graphs.php:50
+#: panellib/graphs.php
 msgid "Graph of Data Sources"
 msgstr ""
 
-#: panellib/graphs.php:67 panellib/graphs.php:683
+#: panellib/graphs.php
 msgid "Device Templates"
 msgstr ""
 
-#: panellib/graphs.php:68
+#: panellib/graphs.php
 msgid "Graph of Device Templates"
 msgstr ""
 
-#: panellib/graphs.php:85
+#: panellib/graphs.php
 msgid "Devices by Status"
 msgstr ""
 
-#: panellib/graphs.php:86
+#: panellib/graphs.php
 msgid "Graph of Devices by Status (up,down,...)"
 msgstr ""
 
-#: panellib/graphs.php:137
+#: panellib/graphs.php
 msgid "Datasources: "
 msgstr ""
 
-#: panellib/graphs.php:223 panellib/graphs.php:248
+#: panellib/graphs.php
 msgid "Device Templates: "
 msgstr ""
 
-#: panellib/graphs.php:320
+#: panellib/graphs.php
 msgid "Devices: "
 msgstr ""
 
-#: panellib/graphs.php:356 panellib/graphs.php:591 panellib/mactrack.php:143
+#: panellib/graphs.php panellib/mactrack.php
 msgid "Down"
 msgstr ""
 
-#: panellib/graphs.php:382 panellib/graphs.php:597 panellib/poller.php:182
-#: panellib/poller.php:462
+#: panellib/graphs.php panellib/poller.php
 msgid "Recovering"
 msgstr ""
 
-#: panellib/graphs.php:484
+#: panellib/graphs.php
 msgid "Data Type"
 msgstr ""
 
-#: panellib/graphs.php:503 panellib/graphs.php:731 panellib/top5.php:466
-#: panellib/top5.php:836
+#: panellib/graphs.php panellib/top5.php
 msgid "Total"
 msgstr ""
 
-#: panellib/graphs.php:507
+#: panellib/graphs.php
 msgid "No untemplated datasources found"
 msgstr ""
 
-#: panellib/graphs.php:526 panellib/mactrack.php:192 panellib/mactrack.php:261
+#: panellib/graphs.php panellib/mactrack.php
 msgid "Devices"
 msgstr ""
 
-#: panellib/graphs.php:573
+#: panellib/graphs.php
 msgid "Device Count"
 msgstr ""
 
-#: panellib/graphs.php:579 panellib/thold.php:421 panellib/thold.php:437
+#: panellib/graphs.php panellib/thold.php
 msgid "All"
 msgstr ""
 
-#: panellib/graphs.php:585 panellib/mactrack.php:142
+#: panellib/graphs.php panellib/mactrack.php
 msgid "Up"
 msgstr ""
 
-#: panellib/graphs.php:715
+#: panellib/graphs.php
 msgid "Template Name"
 msgstr ""
 
-#: panellib/graphs.php:716
+#: panellib/graphs.php
 msgid "Total Devices"
 msgstr ""
 
-#: panellib/graphs.php:737
+#: panellib/graphs.php
 msgid "No device templates found"
 msgstr ""
 
-#: panellib/mactrack.php:43
+#: panellib/mactrack.php
 msgid "MacTrack Panels"
 msgstr ""
 
-#: panellib/mactrack.php:44
+#: panellib/mactrack.php
 msgid "Panels that provide information about Cacti's MacTrack plugins."
 msgstr ""
 
-#: panellib/mactrack.php:49
+#: panellib/mactrack.php
 msgid "MacTrack Plugin"
 msgstr ""
 
-#: panellib/mactrack.php:50
+#: panellib/mactrack.php
 msgid "Various MacTrack collection and site statistics."
 msgstr ""
 
-#: panellib/mactrack.php:67 panellib/mactrack.php:253
+#: panellib/mactrack.php
 msgid "MacTrack Sites"
 msgstr ""
 
-#: panellib/mactrack.php:68
+#: panellib/mactrack.php
 msgid "Various MacTrack Site statistics."
 msgstr ""
 
-#: panellib/mactrack.php:116 panellib/mactrack.php:187
+#: panellib/mactrack.php
 msgid "MacTrack Plugin not Installed/Running"
 msgstr ""
 
-#: panellib/mactrack.php:132
+#: panellib/mactrack.php
 #, php-format
 msgid "All: %s"
 msgstr ""
 
-#: panellib/mactrack.php:133
+#: panellib/mactrack.php
 #, php-format
 msgid "Up: %s"
 msgstr ""
 
-#: panellib/mactrack.php:134
+#: panellib/mactrack.php
 #, php-format
 msgid "Down: %s"
 msgstr ""
 
-#: panellib/mactrack.php:135
+#: panellib/mactrack.php
 #, php-format
 msgid "Error: %s"
 msgstr ""
 
-#: panellib/mactrack.php:136
+#: panellib/mactrack.php
 #, php-format
 msgid "Unknown: %s"
 msgstr ""
 
-#: panellib/mactrack.php:137
+#: panellib/mactrack.php
 #, php-format
 msgid "Disabled: %s"
 msgstr ""
 
-#: panellib/mactrack.php:140
+#: panellib/mactrack.php
 msgid "MacTrack"
 msgstr ""
 
-#: panellib/mactrack.php:144 panellib/misc.php:497 panellib/misc.php:720
+#: panellib/mactrack.php panellib/misc.php
 msgid "Error"
 msgstr ""
 
-#: panellib/mactrack.php:145
+#: panellib/mactrack.php
 msgid "Unknown"
 msgstr ""
 
-#: panellib/mactrack.php:153 panellib/mactrack.php:226 panellib/thold.php:352
+#: panellib/mactrack.php panellib/thold.php
 msgid "You don't have plugin permission"
 msgstr ""
 
-#: panellib/mactrack.php:191 panellib/mactrack.php:260
+#: panellib/mactrack.php
 msgid "Site"
 msgstr ""
 
-#: panellib/mactrack.php:193 panellib/mactrack.php:262
+#: panellib/mactrack.php
 msgid "IPs"
 msgstr ""
 
-#: panellib/mactrack.php:194 panellib/mactrack.php:263
+#: panellib/mactrack.php
 msgid "Ports"
 msgstr ""
 
-#: panellib/mactrack.php:195 panellib/mactrack.php:264
+#: panellib/mactrack.php
 msgid "Ports up"
 msgstr ""
 
-#: panellib/mactrack.php:196 panellib/mactrack.php:265
+#: panellib/mactrack.php
 msgid "MACs"
 msgstr ""
 
-#: panellib/mactrack.php:197 panellib/mactrack.php:266
+#: panellib/mactrack.php
 msgid "Device Errors"
 msgstr ""
 
-#: panellib/mactrack.php:223 panellib/mactrack.php:294
+#: panellib/mactrack.php
 msgid "No mactrack sites found"
 msgstr ""
 
-#: panellib/misc.php:43
+#: panellib/misc.php
 msgid "Miscellaneous Panels"
 msgstr ""
 
-#: panellib/misc.php:44
+#: panellib/misc.php
 msgid "Panels that general non-categorized data about Cacti's."
 msgstr ""
 
-#: panellib/misc.php:49
+#: panellib/misc.php
 msgid "NTP/DNS Status"
 msgstr ""
 
-#: panellib/misc.php:50
+#: panellib/misc.php
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
 msgstr ""
 
-#: panellib/misc.php:67
+#: panellib/misc.php
 msgid "Maint Plugin Details"
 msgstr ""
 
-#: panellib/misc.php:68
+#: panellib/misc.php
 msgid "Maint Plugin details on upcoming schedules"
 msgstr ""
 
-#: panellib/misc.php:85
+#: panellib/misc.php
 msgid "Webseer Details"
 msgstr ""
 
-#: panellib/misc.php:86
+#: panellib/misc.php
 msgid "Plugin webseer URL Service Check Details"
 msgstr ""
 
-#: panellib/misc.php:103
+#: panellib/misc.php
 msgid "Servcheck plugin Details"
 msgstr ""
 
-#: panellib/misc.php:104
+#: panellib/misc.php
 msgid "Plugin ServCheck Details"
 msgstr ""
 
-#: panellib/misc.php:154
+#: panellib/misc.php
 msgid "No NTP server configured"
 msgstr ""
 
-#: panellib/misc.php:157
+#: panellib/misc.php
 #, php-format
 msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
 msgstr ""
 
-#: panellib/misc.php:184
+#: panellib/misc.php
 #, php-format
 msgid "Failed to get NTP time from %s"
 msgstr ""
 
-#: panellib/misc.php:192
+#: panellib/misc.php
 msgid "Please check time as it is off by more"
 msgstr ""
 
-#: panellib/misc.php:193
+#: panellib/misc.php
 #, php-format
 msgid "than %s seconds from NTP server %s."
 msgstr ""
 
-#: panellib/misc.php:195
+#: panellib/misc.php
 msgid "Localtime is equal to NTP server"
 msgstr ""
 
-#: panellib/misc.php:199
+#: panellib/misc.php
 msgid "Unable to contact the NTP server indicated."
 msgstr ""
 
-#: panellib/misc.php:203 panellib/misc.php:228
+#: panellib/misc.php
 msgid "Please check your configuration."
 msgstr ""
 
-#: panellib/misc.php:211
+#: panellib/misc.php
 msgid "No DNS hostname configured"
 msgstr ""
 
-#: panellib/misc.php:214
+#: panellib/misc.php
 #, php-format
 msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
 msgstr ""
 
-#: panellib/misc.php:223
+#: panellib/misc.php
 #, php-format
 msgid "DNS hostname (%s) resolving ok."
 msgstr ""
 
-#: panellib/misc.php:224
+#: panellib/misc.php
 #, php-format
 msgid "DNS resolv time: %s ms"
 msgstr ""
 
-#: panellib/misc.php:227
+#: panellib/misc.php
 #, php-format
 msgid "DNS hostname (%s) resolving failed."
 msgstr ""
 
-#: panellib/misc.php:350
+#: panellib/misc.php
 msgid "Maint plugin is not installed/enabled"
 msgstr ""
 
-#: panellib/misc.php:384
+#: panellib/misc.php
 msgid "Plugin Webseer isn't installed or started"
 msgstr ""
 
-#: panellib/misc.php:396
+#: panellib/misc.php
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
 msgstr ""
 
-#: panellib/misc.php:397 panellib/misc.php:603
+#: panellib/misc.php
 msgid "Number of checks (all/disabled): "
 msgstr ""
 
-#: panellib/misc.php:398
+#: panellib/misc.php
 msgid "Status (up/down): "
 msgstr ""
 
-#: panellib/misc.php:411
+#: panellib/misc.php
 msgid "Last log messages"
 msgstr ""
 
-#: panellib/misc.php:413 panellib/misc.php:494
+#: panellib/misc.php
 msgid "URL"
 msgstr ""
 
-#: panellib/misc.php:414 panellib/misc.php:496
+#: panellib/misc.php
 msgid "HTTP code"
 msgstr ""
 
-#: panellib/misc.php:476
+#: panellib/misc.php
 msgid "Webseer Plugin - Details"
 msgstr ""
 
-#: panellib/misc.php:561
+#: panellib/misc.php
 msgid "Plugin Servcheck isn't installed or started"
 msgstr ""
 
-#: panellib/misc.php:604
+#: panellib/misc.php
 msgid "Status (ok/error): "
 msgstr ""
 
-#: panellib/misc.php:616
+#: panellib/misc.php
 msgid "Last log records"
 msgstr ""
 
-#: panellib/misc.php:618 panellib/misc.php:716
+#: panellib/misc.php
 msgid "Test"
 msgstr ""
 
-#: panellib/misc.php:619 panellib/misc.php:717
+#: panellib/misc.php
 msgid "Type"
 msgstr ""
 
-#: panellib/misc.php:683
+#: panellib/misc.php
 msgid "Servcheck Plugin - Details"
 msgstr ""
 
-#: panellib/misc.php:719
+#: panellib/misc.php
 msgid "Search result"
 msgstr ""
 
-#: panellib/poller.php:43
+#: panellib/poller.php
 msgid "Poller Panels"
 msgstr ""
 
-#: panellib/poller.php:44
+#: panellib/poller.php
 msgid "Panels that provide information about Cacti's polling process."
 msgstr ""
 
-#: panellib/poller.php:49
+#: panellib/poller.php
 msgid "Poller Information"
 msgstr ""
 
-#: panellib/poller.php:50
+#: panellib/poller.php
 msgid "Various information about your Cacti poller."
 msgstr ""
 
-#: panellib/poller.php:67
+#: panellib/poller.php
 msgid "Poller Statistics"
 msgstr ""
 
-#: panellib/poller.php:68 panellib/poller.php:86
+#: panellib/poller.php
 msgid "Various Cacti poller statistics."
 msgstr ""
 
-#: panellib/poller.php:85
+#: panellib/poller.php
 msgid "Poller Output Items"
 msgstr ""
 
-#: panellib/poller.php:157 panellib/poller.php:417
+#: panellib/poller.php
 msgid "ID"
 msgstr ""
 
-#: panellib/poller.php:158 panellib/poller.php:418
+#: panellib/poller.php
 msgid "Name"
 msgstr ""
 
-#: panellib/poller.php:160 panellib/poller.php:420
+#: panellib/poller.php
 msgid "Total Time"
 msgstr ""
 
-#: panellib/poller.php:171 panellib/poller.php:452
+#: panellib/poller.php
 msgid "New/Idle"
 msgstr ""
 
-#: panellib/poller.php:173 panellib/poller.php:454 panellib/system.php:567
+#: panellib/poller.php panellib/system.php
 msgid "Running"
 msgstr ""
 
-#: panellib/poller.php:175 panellib/poller.php:456 panellib/system.php:565
+#: panellib/poller.php panellib/system.php
 msgid "Idle"
 msgstr ""
 
-#: panellib/poller.php:177 panellib/poller.php:458
+#: panellib/poller.php
 msgid "Unkn/down"
 msgstr ""
 
-#: panellib/poller.php:199 panellib/top5.php:393 panellib/top5.php:768
+#: panellib/poller.php panellib/top5.php
 #, php-format
 msgid "%s Secs"
 msgstr ""
 
-#: panellib/poller.php:206 panellib/poller.php:479
+#: panellib/poller.php
 msgid "(ok)"
 msgstr ""
 
-#: panellib/poller.php:207 panellib/poller.php:479
+#: panellib/poller.php
 msgid "(all)"
 msgstr ""
 
-#: panellib/poller.php:359
+#: panellib/poller.php
 msgid "ID: "
 msgstr ""
 
-#: panellib/poller.php:360 panellib/poller.php:375
+#: panellib/poller.php
 msgid "Seconds"
 msgstr ""
 
-#: panellib/poller.php:374
+#: panellib/poller.php
 msgid "24h avg ID: "
 msgstr ""
 
-#: panellib/poller.php:410
+#: panellib/poller.php
 msgid "Poller Details"
 msgstr ""
 
-#: panellib/poller.php:421
+#: panellib/poller.php
 msgid "Average Time"
 msgstr ""
 
-#: panellib/poller.php:422
+#: panellib/poller.php
 msgid "Max Time"
 msgstr ""
 
-#: panellib/poller.php:592
+#: panellib/poller.php
 msgid "Poller output items "
 msgstr ""
 
-#: panellib/poller.php:593
+#: panellib/poller.php
 msgid "Items"
 msgstr ""
 
-#: panellib/syslog.php:43
+#: panellib/syslog.php
 msgid "Syslog Panels"
 msgstr ""
 
-#: panellib/syslog.php:44
+#: panellib/syslog.php
 msgid "Panels that provide information about Cacti's Syslog message processing."
 msgstr ""
 
-#: panellib/syslog.php:49
+#: panellib/syslog.php
 msgid "Syslog Details"
 msgstr ""
 
-#: panellib/syslog.php:50
+#: panellib/syslog.php
 msgid "Various Syslog Plugin statistics."
 msgstr ""
 
-#: panellib/syslog.php:67
+#: panellib/syslog.php
 msgid "Syslog Top Devices"
 msgstr ""
 
-#: panellib/syslog.php:68
+#: panellib/syslog.php
 msgid "Devices with the most messages"
 msgstr ""
 
-#: panellib/syslog.php:85
+#: panellib/syslog.php
 msgid "Syslog Message levels"
 msgstr ""
 
-#: panellib/syslog.php:86
+#: panellib/syslog.php
 msgid "Messages by level."
 msgstr ""
 
-#: panellib/syslog.php:304
+#: panellib/syslog.php
 msgid "Incoming"
 msgstr ""
 
-#: panellib/syslog.php:306
+#: panellib/syslog.php
 msgid "Stored"
 msgstr ""
 
-#: panellib/syslog.php:308 panellib/syslog.php:426 panellib/syslog.php:494
-#: panellib/syslog.php:565
+#: panellib/syslog.php
 msgid "Messages"
 msgstr ""
 
-#: panellib/syslog.php:327 panellib/syslog.php:434
+#: panellib/syslog.php
 msgid "Syslog plugin not installed/running"
 msgstr ""
 
-#: panellib/syslog.php:493 panellib/syslog.php:564
+#: panellib/syslog.php
 msgid "Device"
 msgstr ""
 
-#: panellib/syslog.php:512 panellib/syslog.php:583
+#: panellib/syslog.php
 msgid "Syslog plugin is not enabled"
 msgstr ""
 
-#: panellib/syslog.php:537
+#: panellib/syslog.php
 msgid "Top 20 Hosts with the most messages"
 msgstr ""
 
-#: panellib/syslog.php:580
+#: panellib/syslog.php
 msgid "No messages"
 msgstr ""
 
-#: panellib/system.php:44
+#: panellib/system.php
 msgid "System Panels"
 msgstr ""
 
-#: panellib/system.php:45
+#: panellib/system.php
 msgid "Panels that provide information about Cacti system performance."
 msgstr ""
 
-#: panellib/system.php:50
+#: panellib/system.php
 msgid "Information"
 msgstr ""
 
-#: panellib/system.php:51
+#: panellib/system.php
 msgid "Various system information about the Cacti system itself."
 msgstr ""
 
-#: panellib/system.php:68
+#: panellib/system.php
 msgid "Administrative Alerts"
 msgstr ""
 
-#: panellib/system.php:69
+#: panellib/system.php
 msgid "Extra admin notify panel for all users"
 msgstr ""
 
-#: panellib/system.php:86
+#: panellib/system.php
 msgid "Boost Statistics"
 msgstr ""
 
-#: panellib/system.php:87
+#: panellib/system.php
 msgid "Information about Cacti's performance boost process."
 msgstr ""
 
-#: panellib/system.php:104
+#: panellib/system.php
 msgid "Boost History"
 msgstr ""
 
-#: panellib/system.php:105
+#: panellib/system.php
 msgid "Information about boost process history."
 msgstr ""
 
-#: panellib/system.php:122
+#: panellib/system.php
 msgid "24 Hour Extremes"
 msgstr ""
 
-#: panellib/system.php:123
+#: panellib/system.php
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
 msgstr ""
 
-#: panellib/system.php:140
+#: panellib/system.php
 msgid "CPU Utilization"
 msgstr ""
 
-#: panellib/system.php:141
+#: panellib/system.php
 msgid "CPU utilization Graph (only Linux)."
 msgstr ""
 
-#: panellib/system.php:207
+#: panellib/system.php
 msgid "CPU Load: "
 msgstr ""
 
-#: panellib/system.php:231
+#: panellib/system.php
 msgid "This function is not implemented on Windows platforms"
 msgstr ""
 
-#: panellib/system.php:245
+#: panellib/system.php
 msgid "Avg CPU"
 msgstr ""
 
-#: panellib/system.php:246
+#: panellib/system.php
 msgid "Max CPU"
 msgstr ""
 
-#: panellib/system.php:247
+#: panellib/system.php
 msgid "24h AVG"
 msgstr ""
 
-#: panellib/system.php:300
+#: panellib/system.php
 msgid "Cacti Version: "
 msgstr ""
 
-#: panellib/system.php:311
+#: panellib/system.php
 msgid "Poller Type:"
 msgstr ""
 
-#: panellib/system.php:311
+#: panellib/system.php
 msgid "Spine"
 msgstr ""
 
-#: panellib/system.php:313
+#: panellib/system.php
 msgid "Spine version: "
 msgstr ""
 
-#: panellib/system.php:316
+#: panellib/system.php
 msgid "You are using incorrect spine version!"
 msgstr ""
 
-#: panellib/system.php:320
+#: panellib/system.php
 msgid "Poller Type: "
 msgstr ""
 
-#: panellib/system.php:329
+#: panellib/system.php
 msgid "Running on: "
 msgstr ""
 
-#: panellib/system.php:422
+#: panellib/system.php
 msgid "Boost history: "
 msgstr ""
 
-#: panellib/system.php:455
+#: panellib/system.php
 msgid "Mem "
 msgstr ""
 
-#: panellib/system.php:471
+#: panellib/system.php
 msgid "Pending records "
 msgstr ""
 
-#: panellib/system.php:569
+#: panellib/system.php
 msgid "Overrun Warning"
 msgstr ""
 
-#: panellib/system.php:572
+#: panellib/system.php
 msgid "Timed Out"
 msgstr ""
 
-#: panellib/system.php:575
+#: panellib/system.php
 msgid "Other"
 msgstr ""
 
-#: panellib/system.php:578
+#: panellib/system.php
 msgid "Never Run"
 msgstr ""
 
-#: panellib/system.php:599
+#: panellib/system.php
 #, php-format
 msgid "Boost Status is: %s"
 msgstr ""
 
-#: panellib/system.php:603
+#: panellib/system.php
 #, php-format
 msgid "Processes/Frequency: %s / %s"
 msgstr ""
 
-#: panellib/system.php:605
+#: panellib/system.php
 #, php-format
 msgid "Pending Records Threshold: %s"
 msgstr ""
 
-#: panellib/system.php:611
+#: panellib/system.php
 #, php-format
 msgid "Approximate Next Start Time: %s"
 msgstr ""
 
-#: panellib/system.php:613
+#: panellib/system.php
 #, php-format
 msgid "Pending/Archived Records: %s / %s"
 msgstr ""
 
-#: panellib/system.php:628
+#: panellib/system.php
 #, php-format
 msgid "Current Boost Table(s) Size: %s"
 msgstr ""
 
-#: panellib/system.php:631
+#: panellib/system.php
 #, php-format
 msgid "Avg Bytes/Record: %s"
 msgstr ""
 
-#: panellib/system.php:641
+#: panellib/system.php
 #, php-format
 msgid "Last run duration/updates: %s / %s"
 msgstr ""
 
-#: panellib/system.php:732
+#: panellib/system.php
 msgid "Poller Run"
 msgstr ""
 
-#: panellib/system.php:758
+#: panellib/system.php
 msgid "Down Hosts"
 msgstr ""
 
-#: panellib/system.php:783 panellib/thold.php:283 panellib/thold.php:429
-#: panellib/thold.php:445
+#: panellib/system.php panellib/thold.php
 msgid "Triggered"
 msgstr ""
 
-#: panellib/system.php:809
+#: panellib/system.php
 msgid "Poller out. itms"
 msgstr ""
 
-#: panellib/system.php:852 panellib/system.php:1089
+#: panellib/system.php
 msgid "Host errors"
 msgstr ""
 
-#: panellib/system.php:923
+#: panellib/system.php
 msgid "48 Hour Extreme Polling"
 msgstr ""
 
-#: panellib/system.php:946
+#: panellib/system.php
 msgid "Long Running Poller"
 msgstr ""
 
-#: panellib/system.php:978
+#: panellib/system.php
 msgid "Max Device Down"
 msgstr ""
 
-#: panellib/system.php:1008
+#: panellib/system.php
 msgid "Max Thold Triggered"
 msgstr ""
 
-#: panellib/system.php:1038
+#: panellib/system.php
 msgid "Poller Output Item"
 msgstr ""
 
-#: panellib/system.php:1067
+#: panellib/system.php
 msgid "Failed Polls"
 msgstr ""
 
-#: panellib/thold.php:43
+#: panellib/thold.php
 msgid "Threshold Panels"
 msgstr ""
 
-#: panellib/thold.php:44
+#: panellib/thold.php
 msgid "Panels that provide information about Cacti Thresholding Plugin."
 msgstr ""
 
-#: panellib/thold.php:49 panellib/thold.php:499
+#: panellib/thold.php
 msgid "Last Threshold Events"
 msgstr ""
 
-#: panellib/thold.php:50
+#: panellib/thold.php
 msgid "Threshold Plugin Latest Events"
 msgstr ""
 
-#: panellib/thold.php:67
+#: panellib/thold.php
 msgid "Threshold"
 msgstr ""
 
-#: panellib/thold.php:68
+#: panellib/thold.php
 msgid "Threshold Plugin Graph (all, triggered, ...)"
 msgstr ""
 
-#: panellib/thold.php:119 panellib/thold.php:506
+#: panellib/thold.php
 msgid "Plugin Thold isn't installed or started"
 msgstr ""
 
-#: panellib/thold.php:210 panellib/thold.php:568
+#: panellib/thold.php
 msgid "Without events yet"
 msgstr ""
 
-#: panellib/thold.php:244
+#: panellib/thold.php
 msgid "Thresholds: "
 msgstr ""
 
-#: panellib/thold.php:256 panellib/thold.php:381
+#: panellib/thold.php
 msgid "Thold plugin not installed/running"
 msgstr ""
 
-#: panellib/thold.php:308 panellib/thold.php:425 panellib/thold.php:441
+#: panellib/thold.php
 msgid "Breached"
 msgstr ""
 
-#: panellib/thold.php:374
+#: panellib/thold.php
 msgid "Threshold Details"
 msgstr ""
 
-#: panellib/thold.php:413
+#: panellib/thold.php
 msgid "Thresholds"
 msgstr ""
 
-#: panellib/thold.php:458
+#: panellib/thold.php
 msgid "Breached: "
 msgstr ""
 
-#: panellib/thold.php:469
+#: panellib/thold.php
 msgid "Triggered: "
 msgstr ""
 
-#: panellib/thold.php:477
+#: panellib/thold.php
 msgid "You don't have permission to Thresholds"
 msgstr ""
 
-#: panellib/thold.php:545
+#: panellib/thold.php
 msgid "Description"
 msgstr ""
 
-#: panellib/top5.php:44
+#: panellib/top5.php
 msgid "Top/Bottom 5 Panels"
 msgstr ""
 
-#: panellib/top5.php:45
+#: panellib/top5.php
 msgid "Panels that provide information trending information about Cacti data collection."
 msgstr ""
 
-#: panellib/top5.php:50
+#: panellib/top5.php
 msgid "Bottom Ping"
 msgstr ""
 
-#: panellib/top5.php:51
+#: panellib/top5.php
 msgid "Devices with the worst ping response"
 msgstr ""
 
-#: panellib/top5.php:68
+#: panellib/top5.php
 msgid "Bottom Availability"
 msgstr ""
 
-#: panellib/top5.php:69
+#: panellib/top5.php
 msgid "Devices with the worst availability/reachability"
 msgstr ""
 
-#: panellib/top5.php:86
+#: panellib/top5.php
 msgid "Bottom Polling Time"
 msgstr ""
 
-#: panellib/top5.php:87
+#: panellib/top5.php
 msgid "Devices with the worst polling time"
 msgstr ""
 
-#: panellib/top5.php:104
+#: panellib/top5.php
 msgid "Bottom Polling Ratio"
 msgstr ""
 
-#: panellib/top5.php:105
+#: panellib/top5.php
 msgid "Devices with the worst polling ratio"
 msgstr ""
 
-#: panellib/top5.php:179 panellib/top5.php:563
+#: panellib/top5.php
 msgid "Current"
 msgstr ""
 
-#: panellib/top5.php:274
+#: panellib/top5.php
 msgid "Hostname"
 msgstr ""
 
-#: panellib/top5.php:275
+#: panellib/top5.php
 msgid "Availability/Reachability"
 msgstr ""
 
-#: panellib/top5.php:369 panellib/top5.php:744
+#: panellib/top5.php
 msgid "Polling Time"
 msgstr ""
 
-#: panellib/top5.php:467 panellib/top5.php:837
+#: panellib/top5.php
 msgid "Ratio"
 msgstr ""
 
-#: panellib/top5.php:525
+#: panellib/top5.php
 msgid "Top 20 Hosts with Worst Ping"
 msgstr ""
 
-#: panellib/top5.php:617
+#: panellib/top5.php
 msgid "Top 20 Hosts with the Worst Availability"
 msgstr ""
 
-#: panellib/top5.php:654
+#: panellib/top5.php
 msgid "Availability"
 msgstr ""
 
-#: panellib/top5.php:707
+#: panellib/top5.php
 msgid "Top 20 Hosts Worst Polling Time"
 msgstr ""
 
-#: panellib/top5.php:797
+#: panellib/top5.php
 msgid "Top 20 Hosts with the Worst Polling Ratio"
 msgstr ""
 
-#: setup.php:89
+#: setup.php
 msgid "Intropage Viewer"
 msgstr ""
 
-#: setup.php:90
+#: setup.php
 msgid "Intropage Administration"
 msgstr ""
 
-#: setup.php:144
+#: setup.php
 msgid "System Administration"
 msgstr ""
 
-#: setup.php:147
+#: setup.php
 msgid "Timespan Last 1 Hour"
 msgstr ""
 
-#: setup.php:148 setup.php:149 setup.php:150 setup.php:151 setup.php:152
+#: setup.php
 #, php-format
 msgid "Timespan Last %d Hours"
 msgstr ""
 
-#: setup.php:153
+#: setup.php
 msgid "Timespan Last 1 Day"
 msgstr ""
 
-#: setup.php:154
+#: setup.php
 msgid "Timespan Last 2 Days"
 msgstr ""
 
-#: setup.php:160 setup.php:161 setup.php:162 setup.php:163
+#: setup.php
 #, php-format
 msgid "%d Seconds"
 msgstr ""
 
-#: setup.php:174 setup.php:175 setup.php:176 setup.php:177
+#: setup.php
 #, php-format
 msgid "%d Hours"
 msgstr ""
 
-#: setup.php:178
+#: setup.php
 #, php-format
 msgid "%d Day"
 msgstr ""
