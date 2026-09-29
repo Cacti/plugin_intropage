@@ -25,3 +25,4 @@ locales/LC_MESSAGES/*.mo
 
 .phpunit.cache/
 .php-cs-fixer.cache
+locales/po/*.po
