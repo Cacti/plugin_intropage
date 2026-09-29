@@ -112,7 +112,9 @@ function thold_event($panel, $user_id): void {
 		$important_period = time();
 	}
 
-	$panel['alarm'] = 'grey';
+	// Start green so the stepwise escalation ladder below (green -> yellow -> red)
+	// can reach yellow for a log that only contains warning/breach events.
+	$panel['alarm'] = 'green';
 
 	if (!api_plugin_is_enabled('thold')) {
 		$panel['alarm']  = 'yellow';

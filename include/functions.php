@@ -1052,7 +1052,9 @@ function intropage_reload_panel(): void {
 					maint($maint_panel, $_SESSION['sess_user_id']);
 				}
 
-				$maint_data = get_panel_data($panel_id, $_SESSION['sess_user_id']);
+				// get_panel() resolves the numeric row id to the 'maint' panel_id; the
+				// data lookup must use that resolved id, not the numeric row id.
+				$maint_data = get_panel_data($maint_panel['panel_id'], $_SESSION['sess_user_id']);
 
 				if (is_array($maint_data) && trim((string) ($maint_data['data'] ?? '')) != '') {
 					print $maint_data['data'];
