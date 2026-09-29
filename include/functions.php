@@ -52,7 +52,7 @@ function intropage_get_allowed_devices($user_id) {
 		set_user_setting('hide_disabled', '', $user_id);
 	}
 
-	$allowed = get_allowed_devices('', 'null', -1, $x, $user_id);
+	$allowed = get_allowed_devices('', 'null', '-1', $x, (int) $user_id);
 
 	if ($us == 'on') {
 		set_user_setting('hide_disabled', 'on', $user_id);
@@ -83,7 +83,7 @@ function intropage_get_allowed_devices($user_id) {
  *                                                    simple or has no visible devices.
  */
 function intropage_device_scope($user_id): array {
-	if (get_simple_device_perms($user_id)) {
+	if (get_simple_device_perms((int) $user_id)) {
 		return ['simple' => true, 'allowed' => false];
 	}
 
@@ -101,7 +101,7 @@ function intropage_device_scope($user_id): array {
  *
  * @return void
  */
-function process_page_request_variables() {
+function process_page_request_variables(): void {
 	set_default_action();
 
 	if (isset_request_var('intropage_addpanel')) {
@@ -145,7 +145,7 @@ function process_page_request_variables() {
  *
  * @return void
  */
-function intropage_action_add_panel() {
+function intropage_action_add_panel(): void {
 	$dashboard_id = get_filter_request_var('dashboard_id');
 
 	if (is_numeric(get_nfilter_request_var('intropage_addpanel'))) {
@@ -157,6 +157,10 @@ function intropage_action_add_panel() {
 			FROM plugin_intropage_panel_definition
 			WHERE panel_id = ?',
 			[$panel_id]);
+
+		if (!is_array($panel)) {
+			return;
+		}
 
 		$save = [];
 
@@ -216,7 +220,7 @@ function intropage_parse_dashboard_id($value) {
  *
  * @return void
  */
-function intropage_action_settings() {
+function intropage_action_settings(): void {
 	foreach ($_POST as $var => $value) {
 		if (strpos($var, 'name_') !== false) {
 			$dashboard_id = intropage_parse_dashboard_id(str_replace('name_', '', $var));
@@ -293,7 +297,7 @@ function intropage_action_settings() {
  * @global array $config       Cacti global configuration array; used to
  *                             build redirect URLs.
  */
-function intropage_actions() {
+function intropage_actions(): void {
 	global $callbackPage, $redirectPage, $config;
 
 	$actionvar = get_filter_request_var('intropage_action', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^([a-z0-9_-]+)$/']]);
@@ -316,6 +320,8 @@ function intropage_actions() {
 
 	if (isset($values[2])) {
 		$value_ext = trim($values[2]);
+	} else {
+		$value_ext = '';
 	}
 
 	switch ($action) {
@@ -370,8 +376,6 @@ function intropage_actions() {
 		case 'addpanelselect':
 			intropage_addpanel_select(get_filter_request_var('dashboard_id'));
 			exit;
-
-			break;
 		case 'droppanel':
 			if (get_filter_request_var('panel_id')) {
 				db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
@@ -513,8 +517,6 @@ function intropage_actions() {
 			}
 
 			exit;
-
-			break;
 		case 'refresh':
 			if (is_int($value)) {
 				set_user_setting('intropage_autorefresh', $value);
@@ -624,6 +626,10 @@ function intropage_actions() {
 					WHERE dashboard_id = ? AND user_id = ?',
 						[$value, $value_ext]);
 
+					if (!is_array($dashboard)) {
+						$dashboard = ['name' => ''];
+					}
+
 					$new_dashboard_id = db_fetch_cell_prepared('SELECT MAX(dashboard_id)+1
 					FROM plugin_intropage_dashboard
 					WHERE user_id = ?',
@@ -686,7 +692,7 @@ function intropage_actions() {
  *                       functions in this file; not used directly
  *                       here.
  */
-function intropage_actions_timespan() {
+function intropage_actions_timespan(): void {
 	global $config;
 
 	$actionvar = get_filter_request_var('intropage_action_timespan', FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^([a-z0-9_-]+)$/']]);
@@ -745,9 +751,9 @@ function intropage_actions_timespan() {
  * @param string $panel_id The panel id to check.
  *
  * @return bool True if the panel exists and its required plugins (if
- *             any) are all enabled, false otherwise.
+ *              any) are all enabled, false otherwise.
  */
-function is_panel_enabled($panel_id) {
+function is_panel_enabled(string $panel_id): bool {
 	$panels = initialize_panel_library();
 
 	// Panel library prunes unavailable panels
@@ -784,12 +790,12 @@ function is_panel_enabled($panel_id) {
  *
  * @param string $panel_id The panel id to check permission for.
  * @param int    $user_id  The user id to check; 0 uses the current
- *                        session user.
+ *                         session user.
  *
  * @return bool True if the user (directly or via a group) is permitted
- *             to view the panel, false otherwise.
+ *              to view the panel, false otherwise.
  */
-function is_panel_allowed($panel_id, $user_id = 0) {
+function is_panel_allowed(string $panel_id, int $user_id = 0): bool {
 	static $permissions = [];
 
 	if ($user_id == 0) {
@@ -862,7 +868,7 @@ function is_panel_allowed($panel_id, $user_id = 0) {
  * @return array|false A map of panel_id => 'on' for allowed panels, or
  *                     false if the user has no stored permissions.
  */
-function get_allowed_panels($user_id = 0) {
+function get_allowed_panels(int $user_id = 0) {
 	if ($user_id == 0) {
 		$user_id = $_SESSION['sess_user_id'];
 	}
@@ -924,7 +930,7 @@ function get_allowed_panels($user_id = 0) {
  * from process_page_request_variables() when action=reload.
  *
  * @return void This function prints its output directly and calls
- *             exit().
+ *              exit().
  *
  * @global array $panels Populated by initialize_panel_library(); used
  *                       to resolve the panel's definition and render
@@ -932,7 +938,7 @@ function get_allowed_panels($user_id = 0) {
  * @global array $config Cacti global configuration array; used to
  *                       build the disable-panel redirect URL.
  */
-function intropage_reload_panel() {
+function intropage_reload_panel(): void {
 	global $panels, $config;
 
 	$login_opts = get_login_opts();
@@ -956,7 +962,7 @@ function intropage_reload_panel() {
 	// Close the session to allow other tabs to operate
 	session_write_close();
 
-	if (cacti_sizeof($panel)) {
+	if (is_array($panel) && cacti_sizeof($panel)) {
 		// Force update for chart data always
 
 		if (!is_null($panel['data']) && str_contains($panel['data'], '<script')) {
@@ -1040,7 +1046,21 @@ function intropage_reload_panel() {
 
 		if ($panel_id == 997) {	// exception for maint panel
 			if (function_exists('maint')) {
-				print maint();
+				$maint_panel = get_panel($panel_id, $_SESSION['sess_user_id']);
+
+				if (is_array($maint_panel)) {
+					maint($maint_panel, $_SESSION['sess_user_id']);
+				}
+
+				// get_panel() resolves the numeric row id to the 'maint' panel_id; the
+				// data lookup must use that resolved id, not the numeric row id.
+				$maint_data = get_panel_data($maint_panel['panel_id'], $_SESSION['sess_user_id']);
+
+				if (is_array($maint_data) && trim((string) ($maint_data['data'] ?? '')) != '') {
+					print $maint_data['data'];
+				} else {
+					print __('No Data Found.  Either wait for next check, <br/>or use the Force Reload if available.', 'intropage');
+				}
 			}
 		} else {
 			print __('Panel not found', 'intropage');
@@ -1058,13 +1078,13 @@ function intropage_reload_panel() {
  * action=details.
  *
  * @return void This function prints its output directly and calls
- *             exit().
+ *              exit().
  *
  * @global array $panels Populated by initialize_panel_library();
  *                       reserved/declared for parity with other
  *                       functions in this file; not used directly here.
  */
-function intropage_detail_panel() {
+function intropage_detail_panel(): void {
 	global $panels;
 
 	$panel_id = get_filter_request_var('panel_id');
@@ -1114,9 +1134,9 @@ function intropage_detail_panel() {
  * Called from process_page_request_variables() when action=autoreload.
  *
  * @return void This function prints its output directly and calls
- *             exit().
+ *              exit().
  */
-function intropage_autoreload() {
+function intropage_autoreload(): void {
 	$last_poller = db_fetch_cell_prepared('SELECT unix_timestamp(cur_timestamp)
 		FROM plugin_intropage_trends
 		WHERE name = ?',
@@ -1160,14 +1180,14 @@ function intropage_autoreload() {
  * a panel's combined data+definition.
  *
  * @param int|string $panel_id The panel's numeric row id, or its
- *                            string panel_id.
+ *                             string panel_id.
  * @param int        $user_id  The user id to scope the panel data to;
- *                            0 for system-level panels.
+ *                             0 for system-level panels.
  *
  * @return array The combined panel data (id, panel_id, name, and other
- *              stored/derived fields) plus its 'definition' sub-array.
+ *               stored/derived fields) plus its 'definition' sub-array.
  */
-function get_panel($panel_id, $user_id = 0) {
+function get_panel($panel_id, int $user_id = 0): array {
 	// Either fetch by row id or panel_id
 	if (is_numeric($panel_id)) {
 		$panel = db_fetch_row_prepared('SELECT *, UNIX_TIMESTAMP(last_update) AS ts
@@ -1177,7 +1197,9 @@ function get_panel($panel_id, $user_id = 0) {
 			LIMIT 1',
 			[$panel_id, $user_id]);
 
-		$panel_id = $panel['panel_id'];
+		if (is_array($panel)) {
+			$panel_id = $panel['panel_id'];
+		}
 	} else {
 		$panel = db_fetch_row_prepared('SELECT *, UNIX_TIMESTAMP(last_update) AS ts
 			FROM plugin_intropage_panel_data
@@ -1193,7 +1215,7 @@ function get_panel($panel_id, $user_id = 0) {
 		[$panel_id]);
 
 	// favourite graph exception
-	if (!cacti_sizeof($definition)) {
+	if (!is_array($definition) || !cacti_sizeof($definition)) {
 		$definition =  [];
 
 		$definition['name']	     = '';
@@ -1205,7 +1227,7 @@ function get_panel($panel_id, $user_id = 0) {
 		$definition['height']	   = 'normal';
 	}
 
-	if (cacti_sizeof($panel)) {
+	if (is_array($panel) && cacti_sizeof($panel)) {
 		$last_update      = $panel['ts'];
 		$refresh_interval = $panel['refresh_interval'];
 		$trend_interval   = $panel['trend_interval'];
@@ -1265,9 +1287,9 @@ function get_panel($panel_id, $user_id = 0) {
  *                     'Sec'/'Min'/'Hrs') instead of full words.
  *
  * @return string The formatted interval string, or '-' if $value is
- *               not positive.
+ *                not positive.
  */
-function intropage_readable_interval($value, $round = 0, $short = true) {
+function intropage_readable_interval(float $value, int $round = 0, bool $short = true): string {
 	if ($value <= 0) {
 		return '-';
 	}
@@ -1312,7 +1334,7 @@ function intropage_readable_interval($value, $round = 0, $short = true) {
  * @global array $config Cacti global configuration array; used to
  *                       determine whether this is a web request.
  */
-function get_user_list() {
+function get_user_list(): array {
 	global $config;
 
 	if ($config['is_web'] && $_SESSION['sess_user_id'] > 0) {
@@ -1346,7 +1368,7 @@ function get_user_list() {
  *
  * @return void
  */
-function save_panel_result($panel, $user_id = 0) {
+function save_panel_result(array $panel, int $user_id = 0): void {
 	db_execute_prepared('UPDATE plugin_intropage_panel_data
 		SET data = ?, alarm = ?, user_id = ?, last_update = NOW()
 		WHERE id = ?',
@@ -1361,14 +1383,14 @@ function save_panel_result($panel, $user_id = 0) {
  * panel's current display content.
  *
  * @param int|string $panel_id The panel's numeric row id or string
- *                            panel_id.
+ *                             panel_id.
  * @param int        $user_id  The user id to scope the panel data to;
- *                            0 for system-level panels.
+ *                             0 for system-level panels.
  *
  * @return array The panel's data row (id, data, alarm, last_update,
- *              height, recheck) plus its resolved 'name'.
+ *               height, recheck) plus its resolved 'name'.
  */
-function get_panel_data($panel_id, $user_id = 0) {
+function get_panel_data($panel_id, int $user_id = 0): array {
 	$panel = get_panel($panel_id, $user_id);
 
 	$data = db_fetch_row_prepared("SELECT id, data, alarm, last_update, height,
@@ -1380,8 +1402,12 @@ function get_panel_data($panel_id, $user_id = 0) {
 		AND user_id IN (0, ?)",
 		[$panel_id, $user_id]);
 
-	if (cacti_sizeof($data) && trim((string) $data['data']) == '') {
-		if (!empty($panel['force']) && $panel['force']) {
+	if (!is_array($data)) {
+		$data = [];
+	}
+
+	if (cacti_sizeof($data) && trim((string) ($data['data'] ?? '')) == '') {
+		if (!empty($panel['force'])) {
 			$data['data'] = __('No Data Present.  Either Force Update, or wait for next Cacti Polling cycle.', 'intropage');
 		} else {
 			$data['data'] = __('No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti\'s Poller to perform the check.', 'intropage');
@@ -1394,7 +1420,7 @@ function get_panel_data($panel_id, $user_id = 0) {
 	 * a placeholder; substitute this request's live CSP nonce at render time so
 	 * the inline chart scripts are authorized under the page's current nonce. */
 	if (is_array($data) && isset($data['data'])) {
-		$nonce = function_exists('plugin_intropage_csp_nonce') ? plugin_intropage_csp_nonce() : '';
+		$nonce        = function_exists('plugin_intropage_csp_nonce') ? plugin_intropage_csp_nonce() : '';
 		$data['data'] = str_replace('###INTROPAGE_CSP_NONCE###', $nonce, (string) $data['data']);
 	}
 
@@ -1409,9 +1435,9 @@ function get_panel_data($panel_id, $user_id = 0) {
  * @param int $user_id The user id to check.
  *
  * @return bool True if the user has console-access realm permission,
- *             false otherwise.
+ *              false otherwise.
  */
-function get_console_access($user_id) {
+function get_console_access(int $user_id): bool {
 	return (db_fetch_assoc_prepared('SELECT realm_id
 		FROM user_auth_realm
 		WHERE user_id = ?
@@ -1437,7 +1463,7 @@ function get_console_access($user_id) {
  *                         category metadata (via its 'register_*'
  *                         function).
  */
-function initialize_panel_library() {
+function initialize_panel_library(): array {
 	global $config, $registry;
 
 	static $panel_library = [];
@@ -1446,7 +1472,7 @@ function initialize_panel_library() {
 		$panels    = [];
 		$uninstall = [];
 
-		$files  = glob($config['base_path'] . '/plugins/intropage/panellib/*.php');
+		$files  = glob($config['base_path'] . '/plugins/intropage/panellib/*.php') ?: [];
 
 		if (cacti_sizeof($files)) {
 			foreach ($files as $file) {
@@ -1533,7 +1559,7 @@ function initialize_panel_library() {
  *
  * @return void
  */
-function update_registered_panels($panels) {
+function update_registered_panels(array $panels): void {
 	$prefix = 'INSERT INTO plugin_intropage_panel_definition
 		(panel_id, name, level, class, priority, alarm, requires, update_func, details_func, trends_func, refresh, trefresh, description, height) VALUES';
 
@@ -1591,7 +1617,7 @@ function update_registered_panels($panels) {
  * @global array $graph_timeshifts Map of timespan key => display label,
  *                                 used to build the graph's title.
  */
-function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
+function intropage_favourite_graph(int $fav_graph_id, int $fav_graph_timespan) {
 	global $config, $graph_timeshifts;
 
 	$lines = intropage_get_lines($_SESSION['sess_user_id']);
@@ -1604,7 +1630,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 		$graph_height = 250;
 	}
 
-	if (isset($fav_graph_id)) {
+	if (!empty($fav_graph_id)) {
 		$result = [
 			'name'   => '', // we don't need name here
 			'alarm'  => 'grey',
@@ -1637,6 +1663,8 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
 
 		return $result;
 	}
+
+	return null;
 }
 
 /**
@@ -1656,7 +1684,7 @@ function intropage_favourite_graph($fav_graph_id, $fav_graph_timespan) {
  *
  * @return string The rendered HTML/JS markup for the chart.
  */
-function intropage_prepare_graph($dispdata, $user_id) {
+function intropage_prepare_graph(array $dispdata, int $user_id): string {
 	global $config;
 
 	$lines = intropage_get_lines($user_id);
@@ -1686,7 +1714,6 @@ function intropage_prepare_graph($dispdata, $user_id) {
 		// Add upto 5 Lines
 		for ($i = 1; $i < 6; $i++) {
 			if (isset($dispdata['line']["data$i"]) && cacti_sizeof($dispdata['line']["data$i"])) {
-
 				$current_title = $dispdata['line']["title$i"];
 
 				// set correct color for down/triggered, ...
@@ -1944,14 +1971,14 @@ function intropage_prepare_graph($dispdata, $user_id) {
  * @param string $log_file  Path to the log file to read.
  * @param int    $nbr_lines The number of trailing lines to return.
  * @param bool   $adaptive  Whether to scale the internal read buffer
- *                         size based on $nbr_lines (more efficient for
- *                         small requests) instead of always using a
- *                         4096-byte buffer.
+ *                          size based on $nbr_lines (more efficient for
+ *                          small requests) instead of always using a
+ *                          4096-byte buffer.
  *
  * @return array|false An array of the last $nbr_lines lines, or false
- *                    if the file doesn't exist/isn't readable.
+ *                     if the file doesn't exist/isn't readable.
  */
-function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
+function tail_log(string $log_file, int $nbr_lines = 1000, bool $adaptive = true) {
 	if (!(file_exists($log_file) && is_readable($log_file))) {
 		return false;
 	}
@@ -1987,9 +2014,9 @@ function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
 		// Read a chunk and prepend it to our output
 		$output = ($chunk = fread($f_handle, $seek)) . $output;
 		// Jump back to where we started reading
-		fseek($f_handle, -mb_strlen($chunk, '8bit'), SEEK_CUR);
+		fseek($f_handle, -mb_strlen((string) $chunk, '8bit'), SEEK_CUR);
 		// Decrease our line counter
-		$nbr_lines -= substr_count($chunk, "\n");
+		$nbr_lines -= substr_count((string) $chunk, "\n");
 	}
 
 	// While we have too many lines (Because of buffer size we might have read too many)
@@ -2014,11 +2041,11 @@ function tail_log($log_file, $nbr_lines = 1000, $adaptive = true) {
  *
  * @return string The formatted size string with unit suffix.
  */
-function human_filesize($bytes, $decimals = 2) {
+function human_filesize($bytes, int $decimals = 2): string {
 	$size   = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-	$factor = floor((strlen($bytes) - 1) / 3);
+	$factor = (int) floor((strlen((string) $bytes) - 1) / 3);
 
-	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
+	return sprintf("%.{$decimals}f", (float) $bytes / pow(1024, $factor)) . @$size[$factor];
 }
 
 /**
@@ -2038,7 +2065,7 @@ function human_filesize($bytes, $decimals = 2) {
  *                       functions in this file; not used directly
  *                       here.
  */
-function intropage_create_panel($panel_id, $dashboard_id) {
+function intropage_create_panel(int $panel_id, int $dashboard_id): void {
 	global $config;
 
 	$panels = initialize_panel_library();
@@ -2048,6 +2075,10 @@ function intropage_create_panel($panel_id, $dashboard_id) {
 		FROM plugin_intropage_panel_data
 		WHERE id = ?',
 		[$panel_id]);
+
+	if (!is_array($act_param)) {
+		$act_param = ['panel_id' => '', 'height' => 'normal'];
+	}
 
 	$panel_type = $act_param['panel_id'];
 	$act_height = $act_param['height'];
@@ -2096,7 +2127,7 @@ function intropage_create_panel($panel_id, $dashboard_id) {
  *
  * @return void
  */
-function intropage_addpanel_select($dashboard_id) {
+function intropage_addpanel_select(int $dashboard_id): void {
 	$add_panels = db_fetch_assoc_prepared('SELECT DISTINCT pd.panel_id, pd.name
 		FROM plugin_intropage_panel_definition AS pd
 		LEFT JOIN plugin_intropage_panel_data AS ppd
@@ -2169,7 +2200,7 @@ function intropage_addpanel_select($dashboard_id) {
  *                       select the correct socket receive mode on
  *                       Windows vs. other platforms.
  */
-function ntp_time($host) {
+function ntp_time(string $host) {
 	global $config;
 
 	$timestamp = -1;
@@ -2177,7 +2208,7 @@ function ntp_time($host) {
 	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
 	if (!$sock) {
-		return 'error: socket_create failed:' . socket_strerror(socket_last_error($sock));
+		return 'error: socket_create failed:' . socket_strerror(socket_last_error());
 	}
 
 	// set a timeout of 5 second
@@ -2216,7 +2247,14 @@ function ntp_time($host) {
 		}
 	}
 	// extract the timestamp from the received data
-	$data      = unpack('N12', $recv);
+	$data = unpack('N12', $recv);
+
+	if (!is_array($data)) {
+		socket_close($sock);
+
+		return 'error: unpack failed';
+	}
+
 	$timestamp = sprintf('%u', $data[9]);
 
 	// close the socket
@@ -2226,7 +2264,7 @@ function ntp_time($host) {
 	// Unix time is seconds since 0000 UT on 1 January 1970
 	$timestamp -= 2208988800;
 
-	return ($timestamp);
+	return (int) $timestamp;
 }
 /**
  * Graph_buttons/graph_buttons_thumbnails hook: adds an 'Add to
@@ -2247,7 +2285,7 @@ function ntp_time($host) {
  * @global mixed $redirectPage Populated here with the page to redirect
  *                             to based on the user's login options.
  */
-function intropage_graph_button($data) {
+function intropage_graph_button($data): void {
 	global $config, $callbackPage, $redirectPage;
 
 	$login_opts = get_login_opts();
@@ -2297,7 +2335,7 @@ function intropage_graph_button($data) {
  *
  * @return int The resolved login_opts value.
  */
-function get_login_opts($refresh = false) {
+function get_login_opts(bool $refresh = false): int {
 	if (isset_request_var('intropage_action') &&
 		get_nfilter_request_var('intropage_action') == 'loginopt_console') {
 		$_SESSION['intropage_login_opts'] = 1;
@@ -2344,7 +2382,7 @@ function get_login_opts($refresh = false) {
  *                                    used to populate each panel's
  *                                    interval dropdown.
  */
-function intropage_configure_panel() {
+function intropage_configure_panel(): void {
 	global $config, $callbackPage, $redirectPage, $trend_timespans, $intropage_intervals;
 
 	$dashboards = array_rekey(
@@ -2360,7 +2398,7 @@ function intropage_configure_panel() {
 
 	form_start($redirectPage);
 
-	html_start_box(__('Dashboard Names', 'intropage'), '100%', '', '3', 'center', '');
+	html_start_box(__('Dashboard Names', 'intropage'), '100%', false, 3, 'center', '');
 
 	$class = 'odd';
 
@@ -2393,7 +2431,7 @@ function intropage_configure_panel() {
 		[$_SESSION['sess_user_id']]);
 
 	if (cacti_sizeof($panels)) {
-		html_start_box(__('User Level Panel Update Frequencies', 'intropage'), '100%', '', '3', 'center', '');
+		html_start_box(__('User Level Panel Update Frequencies', 'intropage'), '100%', false, 3, 'center', '');
 
 		$class = 'odd';
 
@@ -2442,7 +2480,7 @@ function intropage_configure_panel() {
 			ORDER BY level, name');
 
 		if (cacti_sizeof($panels)) {
-			html_start_box(__('System Panel Update Frequencies (All Authorized Users)', 'intropage'), '100%', '', '3', 'center', '');
+			html_start_box(__('System Panel Update Frequencies (All Authorized Users)', 'intropage'), '100%', false, 3, 'center', '');
 
 			$class = 'odd';
 
@@ -2491,7 +2529,7 @@ function intropage_configure_panel() {
 			[$_SESSION['sess_user_id']]);
 
 		if (cacti_sizeof($panels)) {
-			html_start_box(__('Trend Update Frequencies', 'intropage'), '100%', '', '3', 'center', '');
+			html_start_box(__('Trend Update Frequencies', 'intropage'), '100%', false, 3, 'center', '');
 
 			$class = 'odd';
 
@@ -2541,14 +2579,14 @@ function intropage_configure_panel() {
  *
  * @param float $bytes     The value to format.
  * @param bool  $decimal   Whether to scale by powers of 1000 (true) or
- *                        1024 (false).
+ *                         1024 (false).
  * @param int   $precision The number of decimal places to round the
- *                        displayed value to.
+ *                         displayed value to.
  *
  * @return string|int The formatted value with its unit suffix, or the
  *                    integer 0 if $bytes is 0.
  */
-function human_readable($bytes, $decimal = true, $precision = 2) {
+function human_readable(float $bytes, bool $decimal = true, int $precision = 2) {
 	if ($decimal) {
 		$factor = 1000;
 	} else {
@@ -2591,13 +2629,13 @@ function human_readable($bytes, $decimal = true, $precision = 2) {
  * functions to determine their SQL LIMIT.
  *
  * @param string $height  The panel's height class ('normal', 'double',
- *                       or 'triple').
+ *                        or 'triple').
  * @param int    $user_id The user id to resolve the base line count
- *                       for.
+ *                        for.
  *
  * @return int The number of rows to display.
  */
-function get_panel_lines_count($height, $user_id) {
+function get_panel_lines_count(string $height, int $user_id): int {
 	$lines = intropage_get_lines($user_id);
 
 	if (!is_numeric($lines)) {
@@ -2621,12 +2659,12 @@ function get_panel_lines_count($height, $user_id) {
  *
  * @return int The resolved line count (at least 1, defaulting to 5).
  */
-function intropage_get_lines($user_id) {
+function intropage_get_lines(int $user_id): int {
 	$lines = read_user_setting('intropage_number_of_lines', read_config_option('intropage_number_of_lines'), false, $user_id);
 
 	if (!is_numeric($lines) || $lines <= 0) {
 		$lines = 5;
 	}
 
-	return $lines;
+	return (int) $lines;
 }

@@ -6,6 +6,7 @@
 * security: Add a version-safe CSP nonce (`plugin_intropage_csp_nonce()`) to every inline `<script>` tag so pages stay compatible with Cacti's Content-Security-Policy nonce enforcement, while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
 * security: Escape panel output (device, data-source, service-check, webseer, maint, host-description and admin-alert values, and the shared-dashboard name) that was rendered without html_escape
 * issue: Fix correctness bugs in the extrem, alert, top5, thold and syslog panels and the settings action handler
+* quality: Bring every PHP file to PHPStan level 8 with zero errors and add native parameter/return type declarations, fixing several latent bugs uncovered in the process (a fatal maintenance-panel render that called a two-argument function with none, undefined column counters that misaligned the 48-hour extremes table, a misplaced parenthesis in the per-user/group save button, un-narrowed database-row accesses, and a log-size threshold that only detected 2GB overflow on 32-bit builds)
 
 * issue#318: Fix NTP time does not function in Windows environment
 * issue#316: Fix php error when db check skip huge db

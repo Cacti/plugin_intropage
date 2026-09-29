@@ -32,12 +32,12 @@
  * of available dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'system'
  *                         category metadata.
  */
-function register_system() {
+function register_system(): array {
 	global $registry;
 
 	$registry['system'] = [
@@ -167,15 +167,18 @@ function register_system() {
  *
  * @return void
  */
-function cpuload_trend() {
+function cpuload_trend(): void {
 	if (!stristr(PHP_OS, 'win')) {
-		$load    = sys_getloadavg();
-		$load[0] = round($load[0], 2);
+		$load = sys_getloadavg();
 
-		db_execute_prepared("REPLACE INTO plugin_intropage_trends
-			(name, value, user_id)
-			VALUES ('cpuload', ?, 0)",
-			[$load[0]]);
+		if ($load !== false) {
+			$load[0] = round($load[0], 2);
+
+			db_execute_prepared("REPLACE INTO plugin_intropage_trends
+				(name, value, user_id)
+				VALUES ('cpuload', ?, 0)",
+				[$load[0]]);
+		}
 	}
 }
 
@@ -197,11 +200,12 @@ function cpuload_trend() {
  *
  * @return void
  */
-function cpuload($panel, $user_id, $timespan = 0) {
+function cpuload($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
 
+	/** @var array{line: array<string, mixed>} $graph */
 	$graph =  [
 		'line' => [
 			'title'  => __('CPU Load: ', 'intropage'),
@@ -248,14 +252,12 @@ function cpuload($panel, $user_id, $timespan = 0) {
 
 			$graph['line']['unit1']['title'] = '%';
 
-			if (!isset($avg)) {
-				$avg = db_fetch_cell("SELECT avg(value)
-					FROM plugin_intropage_trends
-					WHERE cur_timestamp > date_sub(NOW(), INTERVAL 24 HOUR)
-					AND name = 'cpuload'");
+			$avg = db_fetch_cell("SELECT avg(value)
+				FROM plugin_intropage_trends
+				WHERE cur_timestamp > date_sub(NOW(), INTERVAL 24 HOUR)
+				AND name = 'cpuload'");
 
-				$avg = round($avg, 2);
-			}
+			$avg = round($avg, 2);
 
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
@@ -288,7 +290,7 @@ function cpuload($panel, $user_id, $timespan = 0) {
  *
  * @return void
  */
-function info($panel, $user_id) {
+function info($panel, $user_id): void {
 	global $config, $poller_options;
 
 	$xdata = '';
@@ -346,7 +348,7 @@ function info($panel, $user_id) {
  *
  * @return void
  */
-function admin_alert($panel, $user_id) {
+function admin_alert($panel, $user_id): void {
 	global $config;
 
 	$panel['data'] .= '<div title="' . html_escape(read_config_option('intropage_admin_alert')) . '">' . html_escape(read_config_option('intropage_admin_alert')) . '</div>';
@@ -362,7 +364,7 @@ function admin_alert($panel, $user_id) {
  *
  * @return void
  */
-function boost_history_trend() {
+function boost_history_trend(): void {
 	$data_length = db_fetch_cell("SELECT data_length
 		FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=SCHEMA()
 		AND (table_name LIKE 'poller_output_boost_arch_%' OR table_name LIKE 'poller_output_boost')");
@@ -412,11 +414,12 @@ function boost_history_trend() {
  *
  * @return void
  */
-function boost_history($panel, $user_id, $timespan = 0) {
+function boost_history($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
 
+	/** @var array{line: array<string, mixed>} $graph */
 	$graph =  [
 		'line' => [
 			'title'  => __('Boost history: ', 'intropage'),
@@ -504,7 +507,7 @@ function boost_history($panel, $user_id, $timespan = 0) {
  *
  * @return void
  */
-function boost($panel, $user_id) {
+function boost($panel, $user_id): void {
 	global $config, $boost_refresh_interval, $boost_max_runtime;
 
 	$panel['alarm'] = 'green';
@@ -605,7 +608,7 @@ function boost($panel, $user_id) {
 	$panel['data'] .= '<tr><td>' . __('Pending Records Threshold: %s', number_format_i18n($max_records, -1), 'intropage') . '</td></tr>';
 
 	if (is_numeric($next_run_time)) {
-		$next_run_time = date('Y-m-d H-i:s', $next_run_time);
+		$next_run_time = date('Y-m-d H-i:s', (int) $next_run_time);
 	}
 
 	$panel['data'] .= '<tr><td>' . __('Approximate Next Start Time: %s', $next_run_time, 'intropage') . '</td></tr>';
@@ -653,7 +656,7 @@ function boost($panel, $user_id) {
  *
  * @return void
  */
-function extrem_trend() {
+function extrem_trend(): void {
 	// update in poller
 	$users = get_user_list();
 
@@ -713,7 +716,7 @@ function extrem_trend() {
  *
  * @return void
  */
-function extrem($panel, $user_id) {
+function extrem($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -914,7 +917,7 @@ function extrem($panel, $user_id) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function extrem_detail() {
+function extrem_detail(): array {
 	global $config, $console_access;
 
 	$poller_interval = read_config_option('poller_interval');
@@ -927,6 +930,8 @@ function extrem_detail() {
 
 	$trows   = [];
 	$header  = [];
+	$i       = 0;
+	$j       = -1;
 
 	$panel['detail'] .= '<table class="cactiTable">' .
 		'<tr class="tableHeader">';

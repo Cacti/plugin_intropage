@@ -24,6 +24,8 @@
  +-------------------------------------------------------------------------+
 */
 
+global $trend_timespans;
+
 $status_colors = [
 	'red'    => __('Red Status', 'intropage'),
 	'yellow' => __('Yellow Status', 'intropage'),

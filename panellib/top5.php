@@ -32,12 +32,12 @@
  * dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'top5'
  *                         category metadata.
  */
-function register_top5() {
+function register_top5(): array {
 	global $registry;
 
 	$registry['top5'] = [
@@ -137,7 +137,7 @@ function register_top5() {
  *
  * @return void
  */
-function top5_ping($panel, $user_id) {
+function top5_ping($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -234,7 +234,7 @@ function top5_ping($panel, $user_id) {
  *
  * @return void
  */
-function top5_availability($panel, $user_id) {
+function top5_availability($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -328,7 +328,7 @@ function top5_availability($panel, $user_id) {
  *
  * @return void
  */
-function top5_polltime($panel, $user_id) {
+function top5_polltime($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -423,7 +423,7 @@ function top5_polltime($panel, $user_id) {
  *
  * @return void
  */
-function top5_pollratio($panel, $user_id) {
+function top5_pollratio($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -518,7 +518,7 @@ function top5_pollratio($panel, $user_id) {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function top5_ping_detail() {
+function top5_ping_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -610,7 +610,7 @@ function top5_ping_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function top5_availability_detail() {
+function top5_availability_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -700,7 +700,7 @@ function top5_availability_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function top5_polltime_detail() {
+function top5_polltime_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -790,12 +790,12 @@ function top5_polltime_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function top5_pollratio_detail() {
+function top5_pollratio_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
 		'name'   => __('Top 20 Hosts with the Worst Polling Ratio', 'intropage'),
-		'alarm'  => 'grey',
+		'alarm'  => 'green',
 		'detail' => '',
 	];
 

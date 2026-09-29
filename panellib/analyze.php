@@ -32,12 +32,12 @@
  * dashboard panels.
  *
  * @return array The panel definitions provided by this file, keyed by
- *              panel id.
+ *               panel id.
  *
  * @global array $registry Populated here with this file's 'analyze'
  *                         category metadata.
  */
-function register_analyze() {
+function register_analyze(): array {
 	global $registry;
 
 	$registry['analyze'] = [
@@ -154,7 +154,7 @@ function register_analyze() {
  *
  * @return void
  */
-function analyse_login($panel, $user_id) {
+function analyse_login($panel, $user_id): void {
 	global $config;
 
 	$lines            = intropage_get_lines($user_id);
@@ -168,7 +168,7 @@ function analyse_login($panel, $user_id) {
 		FROM user_log
 		WHERE result = 0');
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	if ($flog > 0) {
 		$panel['alarm'] = 'red';
@@ -222,14 +222,6 @@ function analyse_login($panel, $user_id) {
 				$panel['alarm'] = 'green';
 			}
 
-			if ($panel['alarm'] == 'green' && $color == 'yellow') {
-				$panel['alarm'] = 'yellow';
-			}
-
-			if ($panel['alarm'] == 'yellow' && $color == 'red') {
-				$panel['alarm'] = 'red';
-			}
-
 			$panel['data'] .= sprintf('<tr class="%s">' .
 				'<td class="left">%s</td>' .
 				'<td class="left">%s</td>' .
@@ -275,7 +267,7 @@ function analyse_login($panel, $user_id) {
  *
  * @return void
  */
-function analyse_log($panel, $user_id) {
+function analyse_log($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -336,7 +328,7 @@ function analyse_log($panel, $user_id) {
 				'<i class="fa fa-external-link"></i>' .
 			'</a></td>';
 
-		if ($log['size'] < 0) {
+		if ($log['size'] >= 2147483648) {
 			$panel['alarm']  = 'red';
 			$log_size_text   = __('Log Size: Larger than 2GB', 'intropage');
 			$log_size_note   = '';
@@ -359,7 +351,7 @@ function analyse_log($panel, $user_id) {
 		$panel['data'] .= __('Last log lines:', read_config_option('intropage_analyse_log_rows'), 'intropage') . '<br/>';
 		$panel['data'] .= '</td></tr>';
 
-		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 3));
+		$log['lines'] = array_reverse(tail_log($log['file'], $lines - 3) ?: []);
 
 		$datechar = [
 			GDC_HYPHEN => '-',
@@ -368,7 +360,7 @@ function analyse_log($panel, $user_id) {
 		];
 
 		$date_fmt        = read_config_option('default_date_format');
-		$dateCharSetting = read_config_option('default_datechar');
+		$dateCharSetting = (int) read_config_option('default_datechar');
 
 		if (!isset($datechar[$dateCharSetting])) {
 			$dateCharSetting = GDC_SLASH;
@@ -414,7 +406,7 @@ function analyse_log($panel, $user_id) {
 				$date = explode(' - ', $line);
 
 				$d_p       = date_parse_from_format($format, $date[0]);
-				$timestamp = mktime($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
+				$timestamp = mktime((int) $d_p['hour'], (int) $d_p['minute'], (int) $d_p['second'], (int) $d_p['month'], (int) $d_p['day'], (int) $d_p['year']);
 
 				if ($timestamp > (time() - ($important_period))) {
 					if (preg_match('/( ERROR|FATAL)/', $line)) {
@@ -460,7 +452,7 @@ function analyse_log($panel, $user_id) {
  *
  * @return void
  */
-function analyse_db($panel, $user_id) {
+function analyse_db($panel, $user_id): void {
 	global $config, $database_default;
 
 	$damaged   = 0;
@@ -496,6 +488,10 @@ function analyse_db($panel, $user_id) {
 		foreach ($tables as $key => $val) {
 			$row = db_fetch_row('check table ' . current($val) . ' ' . $db_check_level);
 
+			if (!is_array($row)) {
+				continue;
+			}
+
 			if (preg_match('/^note$/i', $row['Msg_type']) && preg_match('/doesn\'t support/i', $row['Msg_text'])) {
 				$memtables++;
 			} elseif (!preg_match('/OK/i', $row['Msg_text']) && !preg_match('/Table is already up to date/i', $row['Msg_text'])) {
@@ -527,6 +523,14 @@ function analyse_db($panel, $user_id) {
 	// used/max connections
 	$con_max  = db_fetch_row("SHOW VARIABLES LIKE 'max_connections'");
 	$con_used = db_fetch_row("SHOW GLOBAL STATUS LIKE 'max_used_connections'");
+
+	if (!is_array($con_max)) {
+		$con_max = [];
+	}
+
+	if (!is_array($con_used)) {
+		$con_used = [];
+	}
 
 	foreach ($con_max as $key => $value) {
 		$con_max = $value;
@@ -612,7 +616,7 @@ function analyse_db($panel, $user_id) {
  *
  * @return void
  */
-function analyse_tree_host_graph($panel, $user_id) {
+function analyse_tree_host_graph($panel, $user_id): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
@@ -648,7 +652,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 		$color = read_config_option('intropage_alert_same_ip');
 
 		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
@@ -754,7 +758,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 	$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 	if (cacti_sizeof($data)) {
-		$total_errors += $sql_count;
+		$total_errors += (int) $sql_count;
 
 		$color = read_config_option('intropage_alert_orphaned_ds');
 
@@ -797,7 +801,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 		$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Datasource - bad indexes: %s', $sql_count, 'intropage') . '</td></tr>';
 
-		$total_errors += $sql_count;
+		$total_errors += (int) $sql_count;
 	}
 
 	// thold plugin - logonly alert and warning thold
@@ -848,7 +852,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 
 			$panel['data'] .= '<tr><td class="block"><span class="inpa_sq color_' . $color . '"></span>' . __('Thold logonly alert/warning: %s', $sql_count, 'intropage') . '</td></tr>';
 
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 		}
 	}
 
@@ -867,7 +871,7 @@ function analyse_tree_host_graph($panel, $user_id) {
 		$sql_count  = ($data === false) ? __('N/A', 'intropage') : cacti_count($data);
 
 		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 
 			$color = read_config_option('intropage_alert_same_description');
 
@@ -1077,9 +1081,13 @@ function analyse_tree_host_graph($panel, $user_id) {
 			}
 		}
 	}
-	$cpu_cores = trim($cpu_cores);
+	$cpu_cores = trim((string) $cpu_cores);
 
 	$sett  = db_fetch_row('SELECT processes, threads FROM poller WHERE id = 1');
+
+	if (!is_array($sett)) {
+		$sett = ['processes' => 0, 'threads' => 0];
+	}
 	$color = 'green';
 	$text  = __('OK', 'intropage');
 
@@ -1150,11 +1158,12 @@ function analyse_tree_host_graph($panel, $user_id) {
  *
  * @return void
  */
-function analyse_ds_stats($panel, $user_id, $timespan = 0) {
+function analyse_ds_stats($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
 
+	/** @var array{line: array<string, mixed>} $graph */
 	$graph =  [
 		'line' => [
 			'title'  => __('DS stats: ', 'intropage'),
@@ -1243,7 +1252,7 @@ function analyse_ds_stats($panel, $user_id, $timespan = 0) {
  *
  * @return void
  */
-function ds_stats_trend() {
+function ds_stats_trend(): void {
 	$count = db_fetch_cell('SELECT COUNT(*) FROM data_source_stats_hourly_last');
 
 	db_execute_prepared('REPLACE INTO plugin_intropage_trends
@@ -1269,7 +1278,7 @@ function ds_stats_trend() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function analyse_log_detail() {
+function analyse_log_detail(): array {
 	global $log;
 
 	if (isset($_SESSION['sess_user_id'])) {
@@ -1329,7 +1338,7 @@ function analyse_log_detail() {
 				__('Warnings', 'intropage') . ': ' . $warn . '<i class="fas fa-link"></i>' .
 			'</a></td></tr>';
 
-		if ($log['size'] < 0) {
+		if ($log['size'] >= 2147483648) {
 			$panel['alarm']  = 'red';
 			$log_size_text   = __('WARNING: File is Larger than 2GB', 'intropage');
 			$log_size_note   = '';
@@ -1355,7 +1364,7 @@ function analyse_log_detail() {
 		];
 
 		$date_fmt        = read_config_option('default_date_format');
-		$dateCharSetting = read_config_option('default_datechar');
+		$dateCharSetting = (int) read_config_option('default_datechar');
 
 		if (!isset($datechar[$dateCharSetting])) {
 			$dateCharSetting = GDC_SLASH;
@@ -1407,7 +1416,7 @@ function analyse_log_detail() {
 				$date = explode(' - ', $line);
 
 				$d_p       = date_parse_from_format($format, $date[0]);
-				$timestamp = mktime($d_p['hour'], $d_p['minute'], $d_p['second'], $d_p['month'], $d_p['day'], $d_p['year']);
+				$timestamp = mktime((int) $d_p['hour'], (int) $d_p['minute'], (int) $d_p['second'], (int) $d_p['month'], (int) $d_p['day'], (int) $d_p['year']);
 
 				if ($timestamp > (time() - ($important_period))) {
 					if (preg_match('/( ERROR)/', $line)) {
@@ -1445,7 +1454,7 @@ function analyse_log_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function analyse_login_detail() {
+function analyse_login_detail(): array {
 	global $config;
 
 	if (isset($_SESSION['sess_user_id'])) {
@@ -1552,7 +1561,7 @@ function analyse_login_detail() {
  * @return array The populated $panel array, including the rendered
  *               'detail' HTML.
  */
-function analyse_tree_host_graph_detail() {
+function analyse_tree_host_graph_detail(): array {
 	global $config, $console_access;
 
 	if (isset($_SESSION['sess_user_id'])) {
@@ -1605,7 +1614,7 @@ function analyse_tree_host_graph_detail() {
 		$panel['detail'] .= '<h4>' . __('Devices with the same IP and port - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
@@ -1653,7 +1662,7 @@ function analyse_tree_host_graph_detail() {
 		$panel['detail'] .= '</h4>';
 
 		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
@@ -1734,7 +1743,7 @@ function analyse_tree_host_graph_detail() {
 		$panel['detail'] .= '<h4>' . __('Orphaned Data Sources - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
@@ -1785,7 +1794,7 @@ function analyse_tree_host_graph_detail() {
 				html_escape($row['name_cache']) . '</a><br/>';
 			}
 
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 		}
 	}
 
@@ -1838,7 +1847,7 @@ function analyse_tree_host_graph_detail() {
 					html_escape($row['td_name']) . '</a><br/>';
 				}
 
-				$total_errors += $sql_count;
+				$total_errors += (int) $sql_count;
 			}
 		}
 	}
@@ -1862,7 +1871,7 @@ function analyse_tree_host_graph_detail() {
 		$panel['detail'] .= '<h4>' . __('Devices with the same description - %s', $sql_count, 'intropage') . '<span class="inpa_sq color_' . $color . '"></span></h4>';
 
 		if (cacti_sizeof($data)) {
-			$total_errors += $sql_count;
+			$total_errors += (int) $sql_count;
 
 			if ($color == 'red') {
 				$panel['alarm'] = 'red';
@@ -1928,7 +1937,12 @@ function analyse_tree_host_graph_detail() {
 
 						while ($parent != 0) {
 							$sql_parent = db_fetch_row_prepared('SELECT parent, title FROM graph_tree_items WHERE id = ?', [(int) $parent]);
-							$parent     = $sql_parent['parent'];
+
+							if (!is_array($sql_parent)) {
+								break;
+							}
+
+							$parent = $sql_parent['parent'];
 							$tree .= html_escape($sql_parent['title']) . ' / ';
 						}
 
@@ -2147,9 +2161,13 @@ function analyse_tree_host_graph_detail() {
 			}
 		}
 	}
-	$cpu_cores = trim($cpu_cores);
+	$cpu_cores = trim((string) $cpu_cores);
 
 	$sett  = db_fetch_row('SELECT processes, threads FROM poller WHERE id = 1');
+
+	if (!is_array($sett)) {
+		$sett = ['processes' => 0, 'threads' => 0];
+	}
 	$color = 'green';
 	$text  = __('OK', 'intropage');
 

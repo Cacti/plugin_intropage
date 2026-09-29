@@ -38,7 +38,7 @@
  *                       check poller connection state and build the
  *                       tab's URL/image paths.
  */
-function intropage_show_tab() {
+function intropage_show_tab(): void {
 	global $config;
 
 	$console_access = api_plugin_user_realm_auth('index.php');
