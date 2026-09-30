@@ -7,7 +7,7 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once __DIR__ . '/../../include/functions.php';
+require_once __DIR__ . '/../../includes/functions.php';
 
 describe('dashboard identifier validation', function () {
 	it('returns canonical database integers', function () {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-09-28 21:36-0400\n"
+"POT-Creation-Date: 2026-09-30 11:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 
-#: display.php include/functions.php
+#: display.php includes/functions.php
 msgid "Default"
 msgstr ""
 
@@ -242,618 +242,618 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Dashboard has been removed"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "New Dashboard"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Dashboard has been added"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Intropage Panel Library Refreshed from Panel Library"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Dashboard has been added, please wait few poller cycle for data"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Error - trying share non-shared dashboard"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "The Panel includes a render function but it does not exist."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "The Panel does not have a render function."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Not Found"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Disable panel"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Reload Panel"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Show Details"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Less rows"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Max height reached"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "More rows"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Min height reached"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Panel not found"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Details Function does not exist."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Panel Not Found"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid " [Upd. in %s/%s]"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s Sec"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s Seconds"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s Min"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s Minutes"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s Hours"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s Hrs"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s Days"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Panels ..."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "%s (no permission)"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Cannot add to Dashboard. Custom timespan."
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Remove from Dashboard"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Add to Dashboard"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Dashboard Names"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 #, php-format
 msgid "Dashboard %s"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "User Level Panel Update Frequencies"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr ""
 
-#: include/functions.php
+#: includes/functions.php
 msgid "Trend Update Frequencies"
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 msgid "Intropage"
 msgstr ""
 
-#: include/settings.php setup.php
+#: includes/settings.php setup.php
 msgid "Normal User"
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 #, php-format
 msgid "[edit: %s]"
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 msgid "System Level Panels"
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 msgid "User Level Panels"
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 msgid "You can Allow/Disallow Panels for User"
 msgstr ""
 
-#: include/settings.php
+#: includes/settings.php
 msgid "You can Allow/Disallow Panels for Group"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Red Status"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Yellow Status"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Green Status"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Display Settings"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Important things will be at the top"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "If checked Intropage displays important (errors, warnings) information first"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Display more panels on a line"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "For wide screen"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Automatically Uninstall Panels"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Automatic Page Refresh"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "How often"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Automatically by poller"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Never"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Every Minute"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 #, php-format
 msgid "Every %d Minutes"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Every Hour"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Important period"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
 msgstr ""
 
-#: include/variables.php panellib/graphs.php panellib/mactrack.php
+#: includes/variables.php panellib/graphs.php panellib/mactrack.php
 #: panellib/poller.php panellib/system.php panellib/thold.php
 msgid "Disabled"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "15 minutes"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "1 hour"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "4 hours"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "1 day"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Number of panel lines"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "How many lines in panel"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 #, php-format
 msgid "%d lines"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Trend Timespan"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "For Trend charts, what should be the default timespan for those charts."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Poller Timeout"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
 
-#: include/variables.php setup.php
+#: includes/variables.php setup.php
 #, php-format
 msgid "%d Minute"
 msgstr ""
 
-#: include/variables.php setup.php
+#: includes/variables.php setup.php
 #, php-format
 msgid "%d Minutes"
 msgstr ""
 
-#: include/variables.php setup.php
+#: includes/variables.php setup.php
 #, php-format
 msgid "%d Hour"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Analyze Log - number of lines"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "How often analyze DB"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Poller runs this task. It could cause long poller run."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Every Day"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Every Week"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Every Month"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Analyze DB - Level of db check"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Quick"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Fast"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Changed"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Medium"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Extended"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "NTP Time Check - IP or DNS name of NTP server"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Insert IP or DNS name of NTP server"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "How often check NTP"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "DNS Check - Any DNS name"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Insert DNS name for test"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "How often check DNS"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Upcoming Maint Schedule warning days"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Never warn"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "When maintenance starts"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 #, php-format
 msgid "%d Day Before"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 #, php-format
 msgid "%d Days Before"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Network stats in"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "bytes or bits"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Bytes"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Bits"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Settings"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm DB check Aborted Clients"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Host with the same Description"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Orphaned Data Source"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm non-empty Poller Output"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Bad indexes Data Source"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Threshold logonly action"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm when device bulk_walk_size is not optimized"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Devices with the same IP/port"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Device in more than one Tree"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Device without a Tree"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Device with Default public/private SNMP Community"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Device without Monitoring"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Device without Graph"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Red/Yellow Polling Time"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "5s  / 10s Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "10s / 20s Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "20s / 40s Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Red/Yellow Failed/All Ratio"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "0.1 / 0.2 Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "0.2 / 0.4 Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "0.5 / 0.5++ Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Red/Yellow Ping"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "10ms  / 20ms Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "20ms  / 50ms Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "100ms / 200+ms Yellow / Red"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Alarm Red/Yellow Worst Availability"
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
 msgstr ""
 
-#: include/variables.php
+#: includes/variables.php
 msgid "Yellow / Red"
 msgstr ""
 

@@ -7,7 +7,7 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once __DIR__ . '/../../include/functions.php';
+require_once __DIR__ . '/../../includes/functions.php';
 
 describe('intropage_device_scope', function () {
 	afterEach(function () {

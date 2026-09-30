@@ -10,8 +10,8 @@
 describe('output escaping in intropage', function () {
 	it('does not interpolate raw variables into HTML attributes', function () {
 		$uiFiles = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		'panellib/analyze.php',
 		'panellib/busiest.php',
 		];
@@ -59,8 +59,8 @@ describe('output escaping in intropage', function () {
 
 	it('uses html_escape or __esc for user-controlled output', function () {
 		$uiFiles = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		'panellib/analyze.php',
 		'panellib/busiest.php',
 		];

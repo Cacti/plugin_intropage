@@ -56,8 +56,8 @@
 function display_information(): bool {
 	global $config, $sql_where, $callbackPage, $redirectPage, $panels, $registry, $trend_timespans;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_upgrade_database();
 
@@ -601,7 +601,7 @@ function display_information(): bool {
 	</script>
 
 	<?php
-	print get_md5_include_js($config['base_path'] . '/plugins/intropage/include/intropage.js');
+	print get_md5_include_js($config['base_path'] . '/plugins/intropage/includes/intropage.js');
 
 	return true;
 }

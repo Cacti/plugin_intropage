@@ -26,7 +26,7 @@ When generating code for this repository:
 
 ```
 intropage/                # Repository root (install to plugins/intropage/ in Cacti)
-├── include/
+├── includes/
 │   ├── functions.php        # Core utilities, panel management
 │   ├── database.php          # Schema setup/teardown
 │   ├── settings.php           # Admin UI configuration
@@ -101,7 +101,7 @@ Realm permissions: `api_user_realm_auth('intropage.php')` gates access. Panel pe
 
 ## Database Operations
 
-Schema setup/teardown lives in `include/database.php`; keep new tables under the `plugin_intropage_` prefix.
+Schema setup/teardown lives in `includes/database.php`; keep new tables under the `plugin_intropage_` prefix.
 
 ## Internationalization
 

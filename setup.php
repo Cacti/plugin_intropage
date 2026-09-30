@@ -51,36 +51,36 @@ function plugin_intropage_csp_nonce(): string {
  * @return void
  */
 function plugin_intropage_install(): void {
-	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'config_arrays', 'intropage_config_arrays', 'setup.php');
 
-	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'includes/settings.php');
 
-	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'include/tab.php');
-	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
+	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'includes/tab.php');
+	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'includes/tab.php');
 
-	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
 
-	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
-	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
+	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'includes/functions.php');
+	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'includes/functions.php');
 
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 
 	// user and user group hooks
-	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php');
 
 	// default permission for new user
-	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'includes/settings.php');
 
 	api_plugin_register_realm('intropage', 'intropage.php', 'Intropage Viewer', 1);
 	api_plugin_register_realm('intropage', 'intropage_admin.php', 'Intropage Administration', 1);
@@ -106,7 +106,7 @@ function plugin_intropage_install(): void {
 function plugin_intropage_uninstall(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_drop_database();
 }
@@ -249,7 +249,7 @@ function plugin_intropage_check_config(): bool {
 function intropage_check_upgrade(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_upgrade_database();
 }
@@ -290,7 +290,7 @@ function intropage_page_head(): void {
 function intropage_setup_database(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_initialize_database();
 }

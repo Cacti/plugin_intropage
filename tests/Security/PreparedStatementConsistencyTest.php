@@ -15,8 +15,8 @@ describe('prepared statement consistency in intropage', function () {
 		// covered by the interpolation test below and by manual review. This
 		// prepared-everywhere policy applies to the core data-access files.
 		$targetFiles = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		];
 
 		$rawPattern      = '/\bdb_(?:execute|fetch_row|fetch_assoc|fetch_cell)\s*\(/';
@@ -63,8 +63,8 @@ describe('prepared statement consistency in intropage', function () {
 
 	it('uses parameterized placeholders not string interpolation in SQL', function () {
 		$targetFiles = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		'panellib/analyze.php',
 		'panellib/busiest.php',
 		];

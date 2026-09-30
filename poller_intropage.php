@@ -32,7 +32,7 @@ include('../../include/cli_check.php');
 global $config;
 
 include_once($config['base_path'] . '/lib/reports.php');
-include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 // let PHP run just as long as it has to
 ini_set('max_execution_time', '0');

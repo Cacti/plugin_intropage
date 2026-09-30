@@ -28,7 +28,7 @@ describe('auth guard presence in intropage', function () {
 			}
 
 			// Files that include setup.php or are library files don't need direct auth
-			if (str_starts_with($relativeFile, 'include/') || str_starts_with($relativeFile, 'lib/')) {
+			if (str_starts_with($relativeFile, 'includes/') || str_starts_with($relativeFile, 'lib/')) {
 				continue;
 			}
 
@@ -50,8 +50,8 @@ describe('auth guard presence in intropage', function () {
 
 	it('validates numeric IDs from request variables before DB queries', function () {
 		$uiFiles = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		'panellib/analyze.php',
 		'panellib/busiest.php',
 		];

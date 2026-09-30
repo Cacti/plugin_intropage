@@ -10,8 +10,8 @@
 describe('redirect safety in intropage', function () {
 	it('calls exit or die after header Location redirects', function () {
 		$files = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		'panellib/analyze.php',
 		'panellib/busiest.php',
 		];
