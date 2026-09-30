@@ -49,7 +49,7 @@
 function intropage_config_settings(): void {
 	global $tabs, $settings, $config, $intropage_settings, $trend_timespans;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/variables.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/variables.php');
 
 	$tabs['intropage'] = __('Intropage', 'intropage');
 
@@ -78,7 +78,7 @@ function intropage_config_settings(): void {
 function intropage_login_options_navigate(): void {
 	global $config, $login_opts;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 	$console_access = api_plugin_user_realm_auth('index.php');
 
@@ -127,7 +127,7 @@ function intropage_console_after(): void {
 	global $config, $panels, $login_opts, $registry;
 
 	include_once($config['base_path'] . '/plugins/intropage/display.php');
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 	$login_opts = get_login_opts(true);
 
@@ -222,7 +222,7 @@ function intropage_user_admin_run_action($current_tab) {
 		return $current_tab;
 	}
 
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 	get_filter_request_var('id');
 
@@ -375,7 +375,7 @@ function intropage_user_group_admin_run_action($current_tab) {
 		return $current_tab;
 	}
 
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 	get_filter_request_var('id');
 

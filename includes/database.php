@@ -57,7 +57,7 @@ function intropage_drop_database(): void {
 function intropage_initialize_database(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 	if (!isset($_SESSION['sess_user_id'])) {
 		$user_id = read_config_option('admin_user');
@@ -208,7 +208,7 @@ function intropage_initialize_database(): void {
 function intropage_upgrade_database(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 	// If action need to be done for upgrade, add it.
 	$info = parse_ini_file($config['base_path'] . '/plugins/intropage/INFO', true);
@@ -224,7 +224,7 @@ function intropage_upgrade_database(): void {
 
 	if (!cacti_version_compare($oldv, $current, '=')) {
 		if (cacti_version_compare($oldv, '3.0.0', '<=')) {
-			include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+			include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 			if (db_column_exists('plugin_intropage_panel_definition', 'file')) {
 				db_execute('ALTER TABLE plugin_intropage_panel_definition
@@ -356,9 +356,9 @@ function intropage_upgrade_database(): void {
 			$data['comment']   = 'authorization';
 			api_plugin_db_table_create('intropage', 'plugin_intropage_user_group_auth', $data);
 
-			api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php', true);
-			api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php', true);
-			api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php', true);
+			api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'includes/settings.php', true);
+			api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'includes/settings.php', true);
+			api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'includes/settings.php', true);
 			api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php', true);
 		}
 
@@ -367,8 +367,15 @@ function intropage_upgrade_database(): void {
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
 			db_execute('ALTER TABLE plugin_intropage_panel_data
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
-			db_execute("UPDATE plugin_hooks SET file='include/settings.php' WHERE name='intropage' AND file='includes/settings.php'");
 		}
+
+		// The plugin's library directory moved from include/ to includes/; repoint
+		// any hook still registered against the old path so existing installs load
+		// them from the new location after upgrade.
+		db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
+
+		// Remove files/directories a previous version left behind (per manifest.json).
+		plugin_intropage_prune_files();
 
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config

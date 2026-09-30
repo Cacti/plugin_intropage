@@ -51,36 +51,36 @@ function plugin_intropage_csp_nonce(): string {
  * @return void
  */
 function plugin_intropage_install(): void {
-	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'config_arrays', 'intropage_config_arrays', 'setup.php');
 
-	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'includes/settings.php');
 
-	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'include/tab.php');
-	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
+	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'includes/tab.php');
+	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'includes/tab.php');
 
-	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
 
-	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
-	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
+	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'includes/functions.php');
+	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'includes/functions.php');
 
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 
 	// user and user group hooks
-	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php');
 
 	// default permission for new user
-	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'includes/settings.php');
 
 	api_plugin_register_realm('intropage', 'intropage.php', 'Intropage Viewer', 1);
 	api_plugin_register_realm('intropage', 'intropage_admin.php', 'Intropage Administration', 1);
@@ -106,7 +106,7 @@ function plugin_intropage_install(): void {
 function plugin_intropage_uninstall(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_drop_database();
 }
@@ -249,9 +249,166 @@ function plugin_intropage_check_config(): bool {
 function intropage_check_upgrade(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_upgrade_database();
+}
+
+/**
+ * Removes files and directories that a previous version of this plugin
+ * shipped but that have since moved or been deleted, using the tombstone
+ * and whitelist lists in manifest.json. Whitelisted (user-data) paths and
+ * any VCS metadata (.git*) are never touched; the dev-only tests/ tree is
+ * removed. Any path that resolves outside the plugin directory (a tampered
+ * manifest.json) is refused, and any file/directory that cannot be removed
+ * (e.g. read-only) is reported to the Cacti log. Any top-level entry that is
+ * neither expected nor a tombstone nor whitelisted is logged to the Cacti
+ * log and left in place. Called from intropage_upgrade_database() on a
+ * version change.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to resolve
+ *                       the plugin directory.
+ */
+function plugin_intropage_prune_files(): void {
+	global $config;
+
+	$plugin_dir    = $config['base_path'] . '/plugins/intropage';
+	$manifest_path = $plugin_dir . '/manifest.json';
+
+	if (!is_readable($manifest_path)) {
+		return;
+	}
+
+	$manifest = json_decode((string) file_get_contents($manifest_path), true);
+
+	if (!is_array($manifest)) {
+		cacti_log('WARNING: intropage manifest.json could not be parsed; skipping file prune', false, 'INTROPAGE');
+
+		return;
+	}
+
+	$tombstones = isset($manifest['tombstones']) && is_array($manifest['tombstones']) ? $manifest['tombstones'] : [];
+	$expected   = isset($manifest['expected'])   && is_array($manifest['expected'])   ? $manifest['expected']   : [];
+	$whitelist  = isset($manifest['whitelist'])  && is_array($manifest['whitelist'])  ? $manifest['whitelist']  : [];
+
+	$protected = function (string $rel) use ($whitelist): bool {
+		if (strncmp($rel, '.git', 4) === 0) {
+			return true;
+		}
+
+		foreach ($whitelist as $entry) {
+			$entry = trim((string) $entry, '/');
+
+			if ($entry !== '' && ($rel === $entry || strncmp($rel, $entry . '/', strlen($entry) + 1) === 0)) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	// Security: resolve the plugin directory so a tampered manifest.json
+	// cannot steer the prune outside of it.
+	$plugin_real = realpath($plugin_dir);
+
+	// Remove tombstoned (moved/deleted) paths plus the dev-only tests/ tree.
+	$remove   = $tombstones;
+	$remove[] = 'tests/';
+
+	foreach ($remove as $rel) {
+		$rel = trim((string) $rel, '/');
+
+		if ($rel === '' || $protected($rel)) {
+			continue;
+		}
+
+		$path = $plugin_dir . '/' . $rel;
+
+		if (!is_link($path) && !file_exists($path)) {
+			continue;
+		}
+
+		// Refuse any path that, after resolving symlinks and ../ segments,
+		// escapes the plugin directory (protects user data from a tampered
+		// manifest.json).
+		$anchor = is_link($path) ? dirname($path) : $path;
+		$real   = realpath($anchor);
+
+		if ($real === false || ($real !== $plugin_real && strncmp($real, $plugin_real . DIRECTORY_SEPARATOR, strlen((string) $plugin_real) + 1) !== 0)) {
+			cacti_log(sprintf('WARNING: intropage prune refused to remove %s: path resolves outside the plugin directory (tampered manifest.json?)', $rel), false, 'INTROPAGE');
+
+			continue;
+		}
+
+		if (is_dir($path) && !is_link($path)) {
+			$removed = plugin_intropage_rmtree($path);
+		} else {
+			$removed = @unlink($path);
+		}
+
+		if (!$removed) {
+			cacti_log(sprintf('WARNING: intropage upgrade could not remove %s (check file/directory permissions)', $rel), false, 'INTROPAGE');
+		}
+	}
+
+	// Surface any top-level entry the manifest does not account for.
+	$known = [];
+
+	foreach (array_merge($expected, $tombstones) as $entry) {
+		$top = explode('/', trim((string) $entry, '/'))[0];
+
+		if ($top !== '') {
+			$known[$top] = true;
+		}
+	}
+
+	$entries = scandir($plugin_dir);
+
+	foreach (($entries !== false ? $entries : []) as $entry) {
+		if ($entry === '.' || $entry === '..' || $entry === 'tests' || $protected($entry) || isset($known[$entry])) {
+			continue;
+		}
+
+		cacti_log(sprintf('WARNING: intropage upgrade found a file/directory not described in manifest.json: %s (left in place)', $entry), false, 'INTROPAGE');
+	}
+}
+
+/**
+ * Recursively deletes a directory and its contents. Symlinks are removed
+ * without being followed. Helper for plugin_intropage_prune_files().
+ *
+ * @param string $dir Absolute path to the directory to remove.
+ *
+ * @return bool True if the directory and everything under it was removed;
+ *              false if any entry could not be deleted.
+ */
+function plugin_intropage_rmtree(string $dir): bool {
+	$entries = scandir($dir);
+	$ok      = true;
+
+	foreach (($entries !== false ? $entries : []) as $entry) {
+		if ($entry === '.' || $entry === '..') {
+			continue;
+		}
+
+		$path = $dir . '/' . $entry;
+
+		if (is_dir($path) && !is_link($path)) {
+			if (!plugin_intropage_rmtree($path)) {
+				$ok = false;
+			}
+		} elseif (!@unlink($path)) {
+			$ok = false;
+		}
+	}
+
+	if (!@rmdir($dir)) {
+		$ok = false;
+	}
+
+	return $ok;
 }
 
 /**
@@ -271,10 +428,10 @@ function intropage_page_head(): void {
 
 	$selectedTheme = get_selected_theme();
 
-	print get_md5_include_css('plugins/intropage/themes/common.css');
+	print get_md5_include_css('plugins/intropage/css/common.css');
 
-	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
-		print get_md5_include_css('plugins/intropage/themes/' . $selectedTheme . '.css');
+	if (file_exists($config['base_path'] . '/plugins/intropage/css/' . $selectedTheme . '.css')) {
+		print get_md5_include_css('plugins/intropage/css/' . $selectedTheme . '.css');
 	}
 }
 
@@ -290,7 +447,7 @@ function intropage_page_head(): void {
 function intropage_setup_database(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_initialize_database();
 }

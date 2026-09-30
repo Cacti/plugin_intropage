@@ -160,6 +160,14 @@ foreach ($clover->xpath('//file') as $file) {
  * Empty by default; add entries per repository as the need arises.
  */
 $unmeasured_allowlist = [
+	// Web entry point (chdir + include auth.php, top-level execution); changed
+	// here only to repoint its includes/ library path after the directory rename.
+	'intropage.php',
+	// Render and poller entry points whose only changes are the includes/ library
+	// path repoint; they perform runtime rendering/polling not reachable from the
+	// isolated unit process.
+	'display.php',
+	'poller_intropage.php',
 ];
 $unmeasured            = array_values(array_diff(array_keys($changed), array_keys($measured)));
 $unexpected_unmeasured = array_values(array_diff($unmeasured, $unmeasured_allowlist));

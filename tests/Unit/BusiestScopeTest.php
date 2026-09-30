@@ -7,7 +7,7 @@
  +-------------------------------------------------------------------------+
 */
 
-require_once __DIR__ . '/../../include/functions.php';
+require_once __DIR__ . '/../../includes/functions.php';
 require_once __DIR__ . '/../../panellib/busiest.php';
 
 describe('busiest_cpu device scope', function () {

@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* dev: Rename the plugin's stylesheet directory from `themes/` to `css/`; the old directory is tombstoned in `manifest.json` and removed on upgrade
+* dev: Move the plugin's library directory from `include/` to `includes/` and re-register the affected hooks on upgrade (a `plugin_hooks` file repoint in `intropage_upgrade_database()`) so existing installations load them from the new path
 * dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
 * dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
 * issue: Rename `tests/Security/Php81FunctionGuardTest.php` to `tests/Security/PhpCompatibilityTest.php` to match the naming convention used across the Cacti plugin fleet; the test content (guarding post-8.0 function usage for this plugin's PHP 8.0 floor) is unchanged
