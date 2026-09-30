@@ -34,7 +34,7 @@ intropage/                # Repository root (install to plugins/intropage/ in Ca
 ├── panellib/                       # Panel libraries (modular; one file per category)
 │   ├── system.php / poller.php / graphs.php / thold.php / mactrack.php
 ├── locales/                          # Translation files (gettext)
-├── themes/                             # CSS for different Cacti themes
+├── css/                                # Stylesheets, one per Cacti theme (was themes/)
 ├── tests/                                # Test suite
 ├── display.php                             # Renders panels on console or dedicated tab (AJAX updates)
 ├── intropage.php                             # Main entry point (standalone tab mode)
@@ -151,18 +151,30 @@ print __('Access denied', 'intropage');
 // WRONG - missing user_id filter shows all data instead of authorized devices
 $rows = db_fetch_assoc('SELECT * FROM host');
 
-$scope = intropage_device_scope($user_id);
-if ($scope['simple']) {
-	$rows = db_fetch_assoc_prepared('SELECT * FROM host');
-} elseif ($scope['allowed'] === false) {
-	$rows = [];
-} else {
-	$ids  = explode(',', $scope['allowed']);
-	$rows = db_fetch_assoc_prepared(
-		'SELECT * FROM host WHERE id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')',
-		$ids
-	);
-}
+$scope = intropage_device_scope($user_id);
+
+if ($scope['simple']) {
+
+	$rows = db_fetch_assoc_prepared('SELECT * FROM host');
+
+} elseif ($scope['allowed'] === false) {
+
+	$rows = [];
+
+} else {
+
+	$ids  = explode(',', $scope['allowed']);
+
+	$rows = db_fetch_assoc_prepared(
+
+		'SELECT * FROM host WHERE id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')',
+
+		$ids
+
+	);
+
+}
+
 $rows = db_fetch_assoc("SELECT * FROM host WHERE id IN($allowed)");
 ```
 
@@ -213,3 +225,17 @@ existing code or adding new code, not just in dedicated cleanup passes:
   line, `@param` lines, a blank comment line, then `@return`. Infer parameter/return types from
   actual usage; don't change the function's real type-hints in the same pass (let static analysis
   flag mismatches separately). Skip vendored third-party library files.
+- **File manifest & upgrade pruning.** The plugin ships a root `manifest.json` with three arrays:
+  `tombstones` (files/directories a prior version shipped that have since moved or been deleted,
+  e.g. `include/`), `expected` (the top-level files and directories that ship today, directories
+  written with a trailing `/`), and `whitelist` (paths holding user data that must never be
+  touched). Keep `expected` current: CI runs `tests/bin/validate-manifest.php`, which fails on any
+  drift between `expected` and the real top-level tree (it ignores `tests/`, `.git*`, and
+  whitelisted paths). Custom customer CSS/theme files belong in `expected`. On upgrade,
+  `plugin_intropage_prune_files()` — called from the version-change block of
+  `intropage_upgrade_database()` — deletes the tombstoned paths and the dev-only `tests/` tree,
+  leaves `whitelist` and `.git*` alone, and logs (without removing) any top-level entry the
+  manifest does not account for. As a safety measure it refuses any tombstone that resolves
+  outside the plugin directory (a tampered `manifest.json`) and logs a warning for any file or
+  directory it cannot remove. When you move or delete a shipped file, add its old path to
+  `tombstones` and update `expected` in the same change.

@@ -22,7 +22,7 @@ it('always includes the common stylesheet', function () {
 	intropage_page_head();
 	$output = ob_get_clean();
 
-	expect($output)->toContain('plugins/intropage/themes/common.css');
+	expect($output)->toContain('plugins/intropage/css/common.css');
 });
 
 it('does not link a theme stylesheet that does not exist on disk', function () {

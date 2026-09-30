@@ -233,6 +233,7 @@ if (!function_exists('__esc')) {
 }
 if (!function_exists('cacti_log')) {
 	function cacti_log($m, $p = false, $t = '', $l = 0) {
+		$GLOBALS['__test_cacti_log'][] = (string) $m;
 	}
 }
 if (!function_exists('cacti_sizeof')) {

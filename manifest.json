@@ -1,0 +1,25 @@
+{
+    "tombstones": [
+        "include/",
+        "themes/"
+    ],
+    "expected": [
+        "CHANGELOG.md",
+        "INFO",
+        "LICENSE",
+        "README.md",
+        "css/",
+        "display.php",
+        "images/",
+        "includes/",
+        "index.php",
+        "intropage.php",
+        "locales/",
+        "manifest.json",
+        "panellib/",
+        "phpunit.xml",
+        "poller_intropage.php",
+        "setup.php"
+    ],
+    "whitelist": []
+}

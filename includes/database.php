@@ -374,6 +374,9 @@ function intropage_upgrade_database(): void {
 		// them from the new location after upgrade.
 		db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
 
+		// Remove files/directories a previous version left behind (per manifest.json).
+		plugin_intropage_prune_files();
+
 		// Set the new version
 		db_execute_prepared("UPDATE plugin_config
 			SET version = ?, author = ?, webpage = ?
