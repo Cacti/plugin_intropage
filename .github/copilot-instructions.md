@@ -25,23 +25,23 @@ When generating code for this repository:
 ## Project Structure
 
 ```
-intropage/                # Repository root (install to plugins/intropage/ in Cacti)
+intropage/               # Repository root (install to plugins/intropage/ in Cacti)
 ├── includes/
-│   ├── functions.php        # Core utilities, panel management
-│   ├── database.php          # Schema setup/teardown
-│   ├── settings.php           # Admin UI configuration
-│   └── tab.php                 # Tab integration hooks
-├── panellib/                       # Panel libraries (modular; one file per category)
+│   ├── functions.php    # Core utilities, panel management
+│   ├── database.php     # Schema setup/teardown
+│   ├── settings.php     # Admin UI configuration
+│   └── tab.php          # Tab integration hooks
+├── panellib/            # Panel libraries (modular; one file per category)
 │   ├── system.php / poller.php / graphs.php / thold.php / mactrack.php
-├── locales/                          # Translation files (gettext)
-├── css/                                # Stylesheets, one per Cacti theme (was themes/)
-├── tests/                                # Test suite
-├── display.php                             # Renders panels on console or dedicated tab (AJAX updates)
-├── intropage.php                             # Main entry point (standalone tab mode)
-├── poller_intropage.php                        # Background data collection (CLI)
-├── INFO                                          # Plugin metadata (name, version, compat)
+├── locales/             # Translation files (gettext)
+├── css/                 # Stylesheets, one per Cacti theme (was themes/)
+├── tests/               # Test suite
+├── display.php          # Renders panels on console or dedicated tab (AJAX updates)
+├── intropage.php        # Main entry point (standalone tab mode)
+├── poller_intropage.php # Background data collection (CLI)
+├── INFO                 # Plugin metadata (name, version, compat)
 ├── README.md
-└── setup.php                                       # Plugin install/uninstall/upgrade hooks
+└── setup.php            # Plugin install/uninstall/upgrade hooks
 ```
 
 ## Naming Conventions
