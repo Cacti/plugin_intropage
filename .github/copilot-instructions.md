@@ -232,7 +232,7 @@ existing code or adding new code, not just in dedicated cleanup passes:
   touched). Keep `expected` current: CI runs `tests/bin/validate-manifest.php`, which fails on any
   drift between `expected` and the real top-level tree (it ignores `tests/`, `phpunit.xml`,
   `.git*`, `.md*`, and whitelisted paths). Custom customer CSS/theme files belong in `expected`.
-  On upgrade, `plugin_intropage_prune_files()` — called from the version-change block of
+  On upgrade, `intropage_prune_files()` — called from the version-change block of
   `intropage_upgrade_database()` — deletes the tombstoned paths, the dev-only `tests/` tree, and
   the `phpunit.xml` test config, leaves `whitelist`, `.git*`, and `.md*` alone, and logs (without
   removing) any top-level entry the
