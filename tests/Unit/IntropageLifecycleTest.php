@@ -3,6 +3,8 @@
  +-------------------------------------------------------------------------+
  | Copyright (C) 2004-2026 The Cacti Group                                 |
  +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
 */
 
 /*
@@ -45,8 +47,17 @@ it('reports that no upgrade is pending', function () {
 	expect(plugin_intropage_upgrade())->toBeFalse();
 });
 
-it('does nothing when the stored version already matches the plugin version', function () {
+it('repoints stale include/ hooks even when the stored version already matches', function () {
 	plugin_intropage_check_config();
 
-	expect($GLOBALS['__test_db_calls'])->toBeEmpty();
+	// On an up-to-date install the only work is the idempotent include/ ->
+	// includes/ plugin_hooks repoint; no schema migration or version write runs.
+	expect($GLOBALS['__test_db_calls'])->toHaveCount(1);
+
+	$call = $GLOBALS['__test_db_calls'][0];
+
+	expect($call['fn'])->toBe('db_execute')
+		->and($call['sql'])->toContain('UPDATE plugin_hooks')
+		->and($call['sql'])->toContain("REPLACE(file, 'include/', 'includes/')")
+		->and($call['sql'])->toContain("file LIKE 'include/%'");
 });
