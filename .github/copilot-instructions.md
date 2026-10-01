@@ -25,23 +25,23 @@ When generating code for this repository:
 ## Project Structure
 
 ```
-intropage/                # Repository root (install to plugins/intropage/ in Cacti)
+intropage/               # Repository root (install to plugins/intropage/ in Cacti)
 ├── includes/
-│   ├── functions.php        # Core utilities, panel management
-│   ├── database.php          # Schema setup/teardown
-│   ├── settings.php           # Admin UI configuration
-│   └── tab.php                 # Tab integration hooks
-├── panellib/                       # Panel libraries (modular; one file per category)
+│   ├── functions.php    # Core utilities, panel management
+│   ├── database.php     # Schema setup/teardown
+│   ├── settings.php     # Admin UI configuration
+│   └── tab.php          # Tab integration hooks
+├── panellib/            # Panel libraries (modular; one file per category)
 │   ├── system.php / poller.php / graphs.php / thold.php / mactrack.php
-├── locales/                          # Translation files (gettext)
-├── css/                                # Stylesheets, one per Cacti theme (was themes/)
-├── tests/                                # Test suite
-├── display.php                             # Renders panels on console or dedicated tab (AJAX updates)
-├── intropage.php                             # Main entry point (standalone tab mode)
-├── poller_intropage.php                        # Background data collection (CLI)
-├── INFO                                          # Plugin metadata (name, version, compat)
+├── locales/             # Translation files (gettext)
+├── css/                 # Stylesheets, one per Cacti theme (was themes/)
+├── tests/               # Test suite
+├── display.php          # Renders panels on console or dedicated tab (AJAX updates)
+├── intropage.php        # Main entry point (standalone tab mode)
+├── poller_intropage.php # Background data collection (CLI)
+├── INFO                 # Plugin metadata (name, version, compat)
 ├── README.md
-└── setup.php                                       # Plugin install/uninstall/upgrade hooks
+└── setup.php            # Plugin install/uninstall/upgrade hooks
 ```
 
 ## Naming Conventions
@@ -230,11 +230,12 @@ existing code or adding new code, not just in dedicated cleanup passes:
   e.g. `include/`), `expected` (the top-level files and directories that ship today, directories
   written with a trailing `/`), and `whitelist` (paths holding user data that must never be
   touched). Keep `expected` current: CI runs `tests/bin/validate-manifest.php`, which fails on any
-  drift between `expected` and the real top-level tree (it ignores `tests/`, `.git*`, and
-  whitelisted paths). Custom customer CSS/theme files belong in `expected`. On upgrade,
-  `plugin_intropage_prune_files()` — called from the version-change block of
-  `intropage_upgrade_database()` — deletes the tombstoned paths and the dev-only `tests/` tree,
-  leaves `whitelist` and `.git*` alone, and logs (without removing) any top-level entry the
+  drift between `expected` and the real top-level tree (it ignores `tests/`, `phpunit.xml`,
+  `.git*`, `.md*`, and whitelisted paths). Custom customer CSS/theme files belong in `expected`.
+  On upgrade, `plugin_intropage_prune_files()` — called from the version-change block of
+  `intropage_upgrade_database()` — deletes the tombstoned paths, the dev-only `tests/` tree, and
+  the `phpunit.xml` test config, leaves `whitelist`, `.git*`, and `.md*` alone, and logs (without
+  removing) any top-level entry the
   manifest does not account for. As a safety measure it refuses any tombstone that resolves
   outside the plugin directory (a tampered `manifest.json`) and logs a warning for any file or
   directory it cannot remove. When you move or delete a shipped file, add its old path to

@@ -294,14 +294,16 @@ function plugin_intropage_prune_files(): void {
 	$whitelist  = isset($manifest['whitelist'])  && is_array($manifest['whitelist'])  ? $manifest['whitelist']  : [];
 
 	$protected = function (string $rel) use ($whitelist): bool {
-		if (strncmp($rel, '.git', 4) === 0) {
+		if (strncmp($rel, '.git', 4) === 0 || strncmp($rel, '.md', 3) === 0) {
 			return true;
 		}
 
 		foreach ($whitelist as $entry) {
 			$entry = trim((string) $entry, '/');
 
-			if ($entry !== '' && ($rel === $entry || strncmp($rel, $entry . '/', strlen($entry) + 1) === 0)) {
+			if ($entry !== '' && ($rel === $entry
+				|| strncmp($rel, $entry . '/', strlen($entry) + 1) === 0
+				|| strncmp($entry, $rel . '/', strlen($rel) + 1) === 0)) {
 				return true;
 			}
 		}
@@ -313,14 +315,26 @@ function plugin_intropage_prune_files(): void {
 	// cannot steer the prune outside of it.
 	$plugin_real = realpath($plugin_dir);
 
-	// Remove tombstoned (moved/deleted) paths plus the dev-only tests/ tree.
+	// Remove tombstoned (moved/deleted) paths plus the dev-only tests/
+	// tree and the phpunit.xml test configuration.
 	$remove   = $tombstones;
 	$remove[] = 'tests/';
+	$remove[] = 'phpunit.xml';
 
 	foreach ($remove as $rel) {
 		$rel = trim((string) $rel, '/');
 
 		if ($rel === '' || $protected($rel)) {
+			continue;
+		}
+
+		// A tombstone must never contain '.'/'..' segments; a tampered manifest
+		// could use them to escape the plugin directory or target its root.
+		$segments = explode('/', $rel);
+
+		if (in_array('.', $segments, true) || in_array('..', $segments, true)) {
+			cacti_log(sprintf('WARNING: intropage prune refused to remove %s: path contains a traversal segment (tampered manifest.json?)', $rel), false, 'INTROPAGE');
+
 			continue;
 		}
 
@@ -367,7 +381,7 @@ function plugin_intropage_prune_files(): void {
 	$entries = scandir($plugin_dir);
 
 	foreach (($entries !== false ? $entries : []) as $entry) {
-		if ($entry === '.' || $entry === '..' || $entry === 'tests' || $protected($entry) || isset($known[$entry])) {
+		if ($entry === '.' || $entry === '..' || $entry === 'tests' || $entry === 'phpunit.xml' || $protected($entry) || isset($known[$entry])) {
 			continue;
 		}
 

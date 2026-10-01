@@ -17,7 +17,6 @@
         "locales/",
         "manifest.json",
         "panellib/",
-        "phpunit.xml",
         "poller_intropage.php",
         "setup.php"
     ],
