@@ -230,11 +230,12 @@ existing code or adding new code, not just in dedicated cleanup passes:
   e.g. `include/`), `expected` (the top-level files and directories that ship today, directories
   written with a trailing `/`), and `whitelist` (paths holding user data that must never be
   touched). Keep `expected` current: CI runs `tests/bin/validate-manifest.php`, which fails on any
-  drift between `expected` and the real top-level tree (it ignores `tests/`, `.git*`, and
-  whitelisted paths). Custom customer CSS/theme files belong in `expected`. On upgrade,
-  `plugin_intropage_prune_files()` — called from the version-change block of
-  `intropage_upgrade_database()` — deletes the tombstoned paths and the dev-only `tests/` tree,
-  leaves `whitelist` and `.git*` alone, and logs (without removing) any top-level entry the
+  drift between `expected` and the real top-level tree (it ignores `tests/`, `phpunit.xml`,
+  `.git*`, `.md*`, and whitelisted paths). Custom customer CSS/theme files belong in `expected`.
+  On upgrade, `plugin_intropage_prune_files()` — called from the version-change block of
+  `intropage_upgrade_database()` — deletes the tombstoned paths, the dev-only `tests/` tree, and
+  the `phpunit.xml` test config, leaves `whitelist`, `.git*`, and `.md*` alone, and logs (without
+  removing) any top-level entry the
   manifest does not account for. As a safety measure it refuses any tombstone that resolves
   outside the plugin directory (a tampered `manifest.json`) and logs a warning for any file or
   directory it cannot remove. When you move or delete a shipped file, add its old path to
