@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Load Thold's relocated function library from `includes/functions.php` (with a legacy `thold_functions.php` fallback) and skip the threshold poller when Thold's API is unavailable, so intropage no longer fatals after Thold moved its functions out of the plugin root
 * dev: Rename the plugin's stylesheet directory from `themes/` to `css/`; the old directory is tombstoned in `manifest.json` and removed on upgrade
 * dev: Move the plugin's library directory from `include/` to `includes/` and re-register the affected hooks on upgrade (a `plugin_hooks` file repoint in `intropage_upgrade_database()`) so existing installations load them from the new path
 * dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
