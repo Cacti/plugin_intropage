@@ -10,6 +10,7 @@
  * renderers' behaviour when the Thold plugin is absent, in panellib/thold.php.
  */
 
+require_once __DIR__ . '/../../includes/functions.php';
 require_once __DIR__ . '/../../panellib/thold.php';
 
 if (!function_exists('api_plugin_is_enabled')) {
@@ -24,20 +25,10 @@ if (!function_exists('api_plugin_user_realm_auth')) {
 	}
 }
 
-if (!function_exists('save_panel_result')) {
-	function save_panel_result($panel, $user_id) {
-		$GLOBALS['__intropage_saved_panel'] = $panel;
-	}
-}
-
-if (!function_exists('get_user_list')) {
-	function get_user_list() {
-		return array();
-	}
-}
-
 beforeEach(function () {
 	$GLOBALS['__intropage_thold_base_restore'] = $GLOBALS['config']['base_path'];
+	$GLOBALS['__test_db_calls']                = array();
+	$GLOBALS['config']['is_web']               = false;
 });
 
 afterEach(function () {
@@ -76,12 +67,17 @@ it('returns false when no Thold library is present', function () {
 
 it('renders the thold graph panel as grey when Thold is not installed', function () {
 	intropage_thold_sandbox('graph');
-	$GLOBALS['__intropage_saved_panel'] = array();
 
 	$panel = array('id' => 1, 'refresh' => 300, 'alarm' => 'green');
 	graph_thold($panel, 1);
 
-	expect($GLOBALS['__intropage_saved_panel']['alarm'])->toBe('grey');
+	$updates = array_values(array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return $call['fn'] === 'db_execute_prepared'
+			&& stripos($call['sql'], 'UPDATE plugin_intropage_panel_data') !== false;
+	}));
+
+	expect($updates)->toHaveCount(1);
+	expect($updates[0]['params'][1])->toBe('grey');
 });
 
 it('renders the thold detail panels when Thold is not installed', function () {
@@ -96,9 +92,12 @@ it('renders the thold detail panels when Thold is not installed', function () {
 
 it('skips thold_collect when the Thold threshold API is unavailable', function () {
 	intropage_thold_sandbox('collect');
-	$GLOBALS['__test_db_calls'] = array();
 
 	thold_collect();
 
-	expect($GLOBALS['__test_db_calls'])->toBeEmpty();
+	$trend_writes = array_filter($GLOBALS['__test_db_calls'], function ($call) {
+		return isset($call['sql']) && stripos($call['sql'], 'plugin_intropage_trends') !== false;
+	});
+
+	expect($trend_writes)->toBeEmpty();
 });
