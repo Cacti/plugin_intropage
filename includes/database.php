@@ -222,6 +222,15 @@ function intropage_upgrade_database(): void {
 	$current = $info['version'];
 	$oldv    = db_fetch_cell('SELECT version FROM plugin_config WHERE directory = "intropage"');
 
+	// The plugin's library directory moved from include/ to includes/. Repoint
+	// any plugin_hooks row still bound to the old path on every check - not only
+	// during a version-change upgrade - because an install whose version was
+	// already bumped without its hooks being repointed would otherwise keep
+	// loading the stale include/<file> path (or, once include/ is deleted, fail
+	// Cacti's plugin file-inclusion security check for it) on every page. The
+	// LIKE filter makes this a no-op on healthy installs.
+	db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
+
 	if (!cacti_version_compare($oldv, $current, '=')) {
 		if (cacti_version_compare($oldv, '3.0.0', '<=')) {
 			include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
@@ -368,11 +377,6 @@ function intropage_upgrade_database(): void {
 			db_execute('ALTER TABLE plugin_intropage_panel_data
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
 		}
-
-		// The plugin's library directory moved from include/ to includes/; repoint
-		// any hook still registered against the old path so existing installs load
-		// them from the new location after upgrade.
-		db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
 
 		// Remove files/directories a previous version left behind (per manifest.json).
 		plugin_intropage_prune_files();
