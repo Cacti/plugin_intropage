@@ -25,6 +25,36 @@
 */
 
 /**
+ * Loads the Thold plugin's function library. Thold relocated its helpers
+ * from the legacy plugins/thold/thold_functions.php to
+ * plugins/thold/includes/functions.php, so prefer the new path and fall
+ * back to the old one for older Thold installs.
+ *
+ * @return bool True when a Thold function library was found and loaded.
+ *
+ * @global array $config Cacti global configuration array; used to resolve
+ *                        the plugin base path.
+ */
+function intropage_load_thold_functions(): bool {
+	global $config;
+
+	$candidates = [
+		$config['base_path'] . '/plugins/thold/includes/functions.php',
+		$config['base_path'] . '/plugins/thold/thold_functions.php',
+	];
+
+	foreach ($candidates as $file) {
+		if (file_exists($file)) {
+			include_once($file);
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * Registers the 'thold' panel category and its 'Last Threshold Events'
  * and 'Threshold' (trend graph) panels with the panel library. Called
  * from initialize_panel_library() while building the full set of
@@ -239,7 +269,7 @@ function graph_thold($panel, $user_id, $timespan = 0): void {
 
 	$panel['alarm'] = 'green';
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	intropage_load_thold_functions();
 
 	$graph =  [
 			'line' => [
@@ -374,7 +404,7 @@ function graph_thold($panel, $user_id, $timespan = 0): void {
 function graph_thold_detail(): array {
 	global $config, $sql_where;
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	intropage_load_thold_functions();
 
 	$panel = [
 		'name'   => __('Threshold Details', 'intropage'),
@@ -498,7 +528,7 @@ function graph_thold_detail(): array {
 function thold_event_detail(): array {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	intropage_load_thold_functions();
 
 	$panel = [
 		'name'   => __('Last Threshold Events', 'intropage'),
@@ -592,7 +622,11 @@ function thold_collect(): void {
 	// update in poller
 	$users = get_user_list();
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	// Skip quietly when Thold is absent or does not expose its threshold API,
+	// rather than fataling the intropage poller.
+	if (!intropage_load_thold_functions() || !function_exists('get_allowed_thresholds')) {
+		return;
+	}
 
 	foreach ($users as $user) {
 		$t_brea = 0;
