@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-09-12 08:18+0000\n"
+"PO-Revision-Date: 2026-10-06 08:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -934,7 +934,7 @@ msgstr "Värd"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "Län"
+msgstr "Status"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -1014,7 +1014,7 @@ msgstr "Användarnamn"
 
 #: panellib/analyze.php:156 panellib/analyze.php:1271
 msgid "IP Address"
-msgstr "IP adress"
+msgstr "IP-adress"
 
 #: panellib/analyze.php:157 panellib/graphs.php:503 panellib/thold.php:357
 msgid "Status"
@@ -1041,7 +1041,7 @@ msgstr "Totalt antal misslyckade inloggningar: %s"
 
 #: panellib/analyze.php:224
 msgid "None"
-msgstr "inget"
+msgstr "Ingen"
 
 #: panellib/analyze.php:227
 msgid "Active Users in Last Hour: "
@@ -1161,7 +1161,7 @@ msgstr "Alla tabeller: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "N/A"
+msgstr "Ej tillämpligt"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -2152,7 +2152,7 @@ msgstr "Tiden har löpt ut"
 
 #: panellib/system.php:322
 msgid "Other"
-msgstr "Annat"
+msgstr "Övrigt"
 
 #: panellib/system.php:325
 msgid "Never Run"
@@ -2353,7 +2353,7 @@ msgstr "Enheter med sämst polling ratio"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
-msgstr "Nuvarande"
+msgstr "Aktuell"
 
 #: panellib/top5.php:225
 msgid "Hostname"
