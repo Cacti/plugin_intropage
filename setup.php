@@ -112,6 +112,49 @@ function plugin_intropage_uninstall(): void {
 }
 
 /**
+ * Repoints any stale plugin_hooks row still bound to the old include/
+ * library path to includes/ and removes the leftover include/ directory
+ * from disk. The plugin's library directory moved from include/ to
+ * includes/; on an upgraded install the old directory (and the hook rows
+ * that reference it) can linger, so Cacti loads include/functions.php via
+ * a stale hook and then includes/functions.php via the plugin's own code,
+ * fatally redeclaring every function the two files share. This runs from
+ * intropage_config_arrays() - the earliest per-page hook, always loaded
+ * from setup.php - so it executes before any stale graph_buttons/
+ * console_after hook can load the old library.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to resolve
+ *                       the plugin directory.
+ */
+function intropage_cleanup_legacy_include(): void {
+	global $config;
+
+	// Repoint stale hook rows first - unconditionally, before any filesystem
+	// check - because the rows can outlive the include/ directory (e.g. a prior
+	// partial cleanup removed the files but never committed the repoint), and
+	// while they remain Cacti keeps failing its file-inclusion check for the
+	// missing path on every request. The LIKE filter makes this a no-op on
+	// healthy installs.
+	db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
+
+	$legacy_dir = $config['base_path'] . '/plugins/intropage/include';
+
+	// Nothing left to remove once the stale directory is gone.
+	if (!is_dir($legacy_dir)) {
+		return;
+	}
+
+	// Physically remove the stale directory so no stale hook row cached for
+	// the current request can load a second copy of the library and redeclare
+	// its functions.
+	if (!plugin_intropage_rmtree($legacy_dir)) {
+		cacti_log('WARNING: intropage could not remove the legacy include/ directory (check file/directory permissions)', false, 'INTROPAGE');
+	}
+}
+
+/**
  * Config_arrays hook: augments Cacti's role system to grant the
  * Intropage realms to the Normal User/System Administration roles, and
  * initializes the trend-timespan and refresh-interval option lists
@@ -135,6 +178,10 @@ function plugin_intropage_uninstall(): void {
  */
 function intropage_config_arrays(): void {
 	global $intropage_intervals, $trend_timespans, $panel_lines;
+
+	// Runs before any stale include/ hook can load the old library and
+	// redeclare functions already defined by includes/.
+	intropage_cleanup_legacy_include();
 
 	// Core builds $user_auth_roles with __('Normal User') in the core domain
 	// (include/global_arrays.php), and auth_augment_roles() indexes by that

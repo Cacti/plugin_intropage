@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Fix a fatal `Cannot redeclare intropage_get_allowed_devices()` that disabled the plugin on installs upgraded from the old `include/` layout; `intropage_config_arrays()` now repoints any stale `plugin_hooks` row and removes the leftover `include/` directory on the earliest per-page hook, before a stale hook can load a second copy of the library
 * issue: Load Thold's relocated function library from `includes/functions.php` (with a legacy `thold_functions.php` fallback) and skip the threshold poller when Thold's API is unavailable, so intropage no longer fatals after Thold moved its functions out of the plugin root
 * dev: Rename the plugin's stylesheet directory from `themes/` to `css/`; the old directory is tombstoned in `manifest.json` and removed on upgrade
 * dev: Move the plugin's library directory from `include/` to `includes/` and re-register the affected hooks on upgrade (a `plugin_hooks` file repoint in `intropage_upgrade_database()`) so existing installations load them from the new path
