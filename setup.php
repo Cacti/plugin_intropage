@@ -121,8 +121,7 @@ function plugin_intropage_uninstall(): void {
  * fatally redeclaring every function the two files share. This runs from
  * intropage_config_arrays() - the earliest per-page hook, always loaded
  * from setup.php - so it executes before any stale graph_buttons/
- * console_after hook can load the old library, and is a cheap no-op on
- * healthy installs where include/ no longer exists.
+ * console_after hook can load the old library.
  *
  * @return void
  *
@@ -132,16 +131,20 @@ function plugin_intropage_uninstall(): void {
 function intropage_cleanup_legacy_include(): void {
 	global $config;
 
+	// Repoint stale hook rows first - unconditionally, before any filesystem
+	// check - because the rows can outlive the include/ directory (e.g. a prior
+	// partial cleanup removed the files but never committed the repoint), and
+	// while they remain Cacti keeps failing its file-inclusion check for the
+	// missing path on every request. The LIKE filter makes this a no-op on
+	// healthy installs.
+	db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
+
 	$legacy_dir = $config['base_path'] . '/plugins/intropage/include';
 
-	// Fast path: nothing to do once the stale directory is gone.
+	// Nothing left to remove once the stale directory is gone.
 	if (!is_dir($legacy_dir)) {
 		return;
 	}
-
-	// Repoint stale hook rows so future requests load the library from
-	// includes/ instead of the removed include/ path.
-	db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
 
 	// Physically remove the stale directory so no stale hook row cached for
 	// the current request can load a second copy of the library and redeclare

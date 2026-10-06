@@ -18,7 +18,7 @@ beforeEach(function () {
 	$GLOBALS['__test_cacti_log'] = [];
 });
 
-it('is a no-op when no legacy include/ directory exists', function () {
+it('repoints stale hooks even when no legacy include/ directory exists', function () {
 	$base = sys_get_temp_dir() . '/intropage-legacy-none-' . uniqid();
 	mkdir($base . '/plugins/intropage', 0777, true);
 
@@ -31,7 +31,10 @@ it('is a no-op when no legacy include/ directory exists', function () {
 		$GLOBALS['config']['base_path'] = $restore;
 	}
 
-	expect($GLOBALS['__test_db_calls'])->toBe([]);
+	// The hook-row repoint must run even with no directory to remove, so stale
+	// rows left behind by an earlier partial cleanup still get healed.
+	$sql = implode("\n", array_column($GLOBALS['__test_db_calls'], 'sql'));
+	expect($sql)->toContain("REPLACE(file, 'include/', 'includes/')");
 	expect($GLOBALS['__test_cacti_log'])->toBe([]);
 });
 
