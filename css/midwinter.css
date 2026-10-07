@@ -38,22 +38,6 @@
 	padding-right: 2px;
 }
 
-.bb-axis-x text, .bb-axis-y text, .bb-axis-y2 text, .bb-legend-item text {
-	fill: #7e818f;
-}
-
-.bb .bb-axis path, .bb .bb-axis line {
-	stroke: #7e818f;
-}
-
-.bb-chart-arc text {
-	fill: white;
-}
-
-.bb-chart-arc path {
-	stroke: #7e818f;
-}
-
 circle {
 	stroke: #7e818f;
 	stroke-width: 1px;
