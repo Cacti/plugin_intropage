@@ -132,14 +132,25 @@ exit(0);
  * @return void
  */
 function intropage_correct_load_order(): void {
-	while (true) {
-		$intro_order = db_fetch_cell('SELECT id FROM plugin_config WHERE directory="intropage"');
+	$previous_id = null;
 
-		if ($intro_order > 1) {
-			api_plugin_moveup('intropage');
-		} else {
-			break;
+	while (true) {
+		$id = db_fetch_cell('SELECT id FROM plugin_config WHERE directory = "intropage"');
+
+		// Plugin no longer exists, or the query failed.
+		if (!is_numeric($id)) {
+			return;
 		}
+
+		$id = (int) $id;
+
+		// Stop if the previous move made no progress.
+		if ($previous_id !== null && $id >= $previous_id) {
+			return;
+		}
+
+		$previous_id = $id;
+		api_plugin_moveup('intropage');
 	}
 }
 
