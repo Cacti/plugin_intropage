@@ -22,9 +22,22 @@
 */
 
 .grid_item {
-    background-color: #202020 !important;
+	background-color: var(--dp-panel) !important;
 }
 
 .panel_data {
-    background-color: #202020;
+	background-color: var(--dp-panel);
+}
+
+.color_green {
+	background: var(--dp-accent-soft) !important;
+}
+
+.color_green_bubble {
+	color: var(--dp-accent);
+}
+
+.color_green,
+.color_green i {
+	color: var(--dp-text) !important;
 }
