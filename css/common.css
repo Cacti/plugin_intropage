@@ -91,29 +91,33 @@
 }
 
 .panel_header {
-	padding: 4px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 25px;
+	padding: 0 5px;
 	margin: 0px;
 	font-weight: bold;
-	height: 22px;
 	width: 100%;
 	cursor: move;
-	display: inline-block;
 	white-space: nowrap;
 }
 
 .panel_name {
-	float:left;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .panel_actions {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
 	white-space: nowrap;
-	float: right;
-	text-align: right;
-	margin-right: 5px;
 }
 
 .header_link {
-	float: right;
 	padding-left: 1px !important;
 	padding-right: 1px !important;
 }
@@ -158,58 +162,35 @@
 }
 
 .color_red {
-	background: rgba(255,255,255,1) !important;
-	background: -moz-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(221,20,20,1)), color-stop(100%, rgba(221,20,20,1))) !important;
-	background: -webkit-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
-	background: -o-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
-	background: -ms-linear-gradient(top, rgba(221,20,20,1) 0%, rgba(221,20,20,1) 100%) !important;
+	background: #cc0000 !important;
 }
 
 .color_red_bubble {
-	color: rgba(221,20,20,1);
+	color: #cc0000;
 }
 
 .color_yellow {
-	background-color: #dddd00;
-	background: rgba(255,255,255,1);
-	background: -moz-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,200,0,1) 100%) !important;
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(230,230,0,1)), color-stop(100%, rgba(230,230,0,1))) !important;
-	background: -webkit-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,230,0,1) 100%) !important;
-	background: -o-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,230,0,1) 100%) !important;
-	background: -ms-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,230,0,1) 100%) !important;
+	background: #ff8f1e !important;
 }
 
 .color_yellow_bubble {
-	color: rgba(230,230,0,1);
+	color: #ff8f1e;
 }
 
 .color_green {
-	background-color: #457915;
-	background: rgba(255,255,255,1);
-	background: -moz-linear-gradient(top, rgba(69,121,0,1) 0%, rgba(69,121,21,1) 100%) !important;
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(69,121,21,1)), color-stop(100%, rgba(69,121,21,1))) !important;
-	background: -webkit-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
-	background: -o-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
-	background: -ms-linear-gradient(top, rgba(69,121,21,1) 0%, rgba(69,121,21,1) 100%) !important;
+	background: rgba(148,179,107,1) !important;
 }
 
 .color_green_bubble {
-	color: rgba(69,121,0,1);
+	color: rgba(148,179,107,1);
 }
 
 .color_grey {
-	background-color: #9c9c9c;
-	background: rgba(255,255,255,1);
-	background: -moz-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(156,156,156,1)), color-stop(100%, rgba(156,156,156,1))) !important;
-	background: -webkit-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
-	background: -o-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
-	background: -ms-linear-gradient(top, rgba(156,156,156,1) 0%, rgba(156,156,156,1) 100%) !important;
+	background: #a1a1a1 !important;
 }
 
 .color_grey_bubble {
-	color: rgba(156,156,156,1);
+	color: #a1a1a1;
 }
 
 .color_grey, .color_grey i {
@@ -225,7 +206,7 @@
 }
 
 .color_green, .color_green i {
-	color: snow !important;
+	color: black !important;
 }
 
 .rpad {
