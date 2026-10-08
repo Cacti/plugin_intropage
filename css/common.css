@@ -91,29 +91,33 @@
 }
 
 .panel_header {
-	padding: 4px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 25px;
+	padding: 0 5px;
 	margin: 0px;
 	font-weight: bold;
-	height: 22px;
 	width: 100%;
 	cursor: move;
-	display: inline-block;
 	white-space: nowrap;
 }
 
 .panel_name {
-	float:left;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .panel_actions {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
 	white-space: nowrap;
-	float: right;
-	text-align: right;
-	margin-right: 5px;
 }
 
 .header_link {
-	float: right;
 	padding-left: 1px !important;
 	padding-right: 1px !important;
 }

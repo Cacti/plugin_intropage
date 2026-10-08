@@ -41,3 +41,7 @@
 .color_green i {
 	color: var(--dp-text) !important;
 }
+
+.panel_header {
+	height: 28px;
+}

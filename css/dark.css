@@ -28,3 +28,7 @@
 .panel_data {
     background-color: #202020;
 }
+
+.panel_header {
+    height: 22px;
+}

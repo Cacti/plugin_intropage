@@ -55,3 +55,7 @@ circle {
 .txt_huge {
 	font-size: var(--fs-king);
 }
+
+.panel_header {
+	height: 2.5rem;
+}
