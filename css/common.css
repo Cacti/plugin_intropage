@@ -162,25 +162,19 @@
 }
 
 .color_red {
-	background: #ff0000 !important;
+	background: #cc0000 !important;
 }
 
 .color_red_bubble {
-	color: #ff0000;
+	color: #cc0000;
 }
 
 .color_yellow {
-	background-color: #dddd00;
-	background: rgba(255,255,255,1);
-	background: -moz-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,200,0,1) 100%) !important;
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(230,230,0,1)), color-stop(100%, rgba(230,230,0,1))) !important;
-	background: -webkit-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,230,0,1) 100%) !important;
-	background: -o-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,230,0,1) 100%) !important;
-	background: -ms-linear-gradient(top, rgba(230,230,0,1) 0%, rgba(230,230,0,1) 100%) !important;
+	background: #ff8f1e !important;
 }
 
 .color_yellow_bubble {
-	color: rgba(230,230,0,1);
+	color: #ff8f1e;
 }
 
 .color_green {

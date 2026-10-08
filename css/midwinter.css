@@ -71,3 +71,39 @@ circle {
 .color_green, .color_green i {
 	color: white !important;
 }
+
+.color_red {
+	background: #cc0000 !important;
+}
+
+.color_red_bubble {
+	color: #cc0000;
+}
+
+.color_red, .color_red i {
+	color: white !important;
+}
+
+.color_yellow {
+	background: yellow !important;
+}
+
+.color_yellow_bubble {
+	color: #d9b800;
+}
+
+.color_yellow, .color_yellow i {
+	color: black !important;
+}
+
+.color_grey {
+	background: #a1a1a1 !important;
+}
+
+.color_grey_bubble {
+	color: #a1a1a1;
+}
+
+.color_grey, .color_grey i {
+	color: black !important;
+}

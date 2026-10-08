@@ -24,3 +24,51 @@
 .panel_header {
 	height: 22px;
 }
+
+.color_green {
+	background: rgba(148,179,107,1) !important;
+}
+
+.color_green_bubble {
+	color: rgba(148,179,107,1);
+}
+
+.color_green, .color_green i {
+	color: black !important;
+}
+
+.color_red {
+	background: #cc0000 !important;
+}
+
+.color_red_bubble {
+	color: #cc0000;
+}
+
+.color_red, .color_red i {
+	color: white !important;
+}
+
+.color_yellow {
+	background: #ff8f1e !important;
+}
+
+.color_yellow_bubble {
+	color: #ff8f1e;
+}
+
+.color_yellow, .color_yellow i {
+	color: black !important;
+}
+
+.color_grey {
+	background: #a1a1a1 !important;
+}
+
+.color_grey_bubble {
+	color: #a1a1a1;
+}
+
+.color_grey, .color_grey i {
+	color: black !important;
+}
