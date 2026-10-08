@@ -45,3 +45,39 @@
 .panel_header {
 	height: 28px;
 }
+
+/* billboard.js charts: repaint onto the Deepness palette (in-plugin for now; to migrate into the base theme) */
+.bb path,
+.bb line {
+	fill: none;
+	stroke: var(--dp-text-muted);
+}
+
+.bb text,
+.bb-axis text,
+.bb-legend text {
+	fill: var(--dp-text);
+}
+
+.bb-grid line {
+	stroke: var(--dp-grid);
+}
+
+.bb-grid text {
+	fill: var(--dp-text-muted);
+}
+
+.bb-chart-arc path,
+.bb-chart-arc rect {
+	stroke: var(--dp-panel);
+}
+
+.bb-chart-arc text,
+.bb-chart-arcs .bb-needle {
+	fill: var(--dp-text);
+}
+
+.bb-tooltip {
+	background-color: var(--dp-panel-alt);
+	color: var(--dp-text);
+}
