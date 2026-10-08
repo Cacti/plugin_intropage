@@ -21,23 +21,6 @@
  +-------------------------------------------------------------------------+
 */
 
-.grid_item {
-    background-color: #f5f5f5 !important;
-}
-
-.panel_data {
-    padding: 0px;
-}
-
-.header_link {
-	padding-left: 2px;
-	padding-right: 2px;
-}
-
-.color_green {
-	background: rgba(40,180,40,1) !important;
-}
-
-.color_green_bubble {
-	color: rgba(40,180,40,1);
+.panel_header {
+	height: 24px;
 }

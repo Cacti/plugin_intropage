@@ -28,3 +28,11 @@
 .panel_data {
 	padding: 0px;
 }
+
+.color_green {
+	background: rgba(40,180,40,1) !important;
+}
+
+.color_green_bubble {
+	color: rgba(40,180,40,1);
+}

@@ -59,3 +59,15 @@ circle {
 .panel_header {
 	height: 2.5rem;
 }
+
+.color_green {
+	background: #009d00 !important;
+}
+
+.color_green_bubble {
+	color: #009d00;
+}
+
+.color_green, .color_green i {
+	color: white !important;
+}

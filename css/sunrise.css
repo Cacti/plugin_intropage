@@ -35,3 +35,15 @@
 #generated {
 	color: white;
 }
+
+.color_green {
+	background: #3C8A3C !important;
+}
+
+.color_green_bubble {
+	color: #3C8A3C;
+}
+
+.color_green, .color_green i {
+	color: white !important;
+}
