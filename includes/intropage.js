@@ -204,9 +204,11 @@ function setPageRefresh() {
 // Shift an open select2 dropdown left so it stays within the viewport. Cacti
 // core enables dropdownAutoWidth, so a narrow right-aligned control can open a
 // wider dropdown that overflows the right edge; select2 never flips it
-// horizontally, so correct it here.
+// horizontally, so correct it here. The body-attached dropdown wrapper carries
+// 'select2-container--open' but has the control's 'select2' class removed, so
+// ':not(.select2)' avoids measuring the narrow on-screen control by mistake.
 function intropage_reposition_dropdown() {
-	var $dropdown = $('.select2-container--open');
+	var $dropdown = $('.select2-container--open:not(.select2)');
 
 	if ($dropdown.length === 0) {
 		return;
