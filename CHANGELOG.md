@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Keep the toolbar `Actions`/`Timespan`/`Panels` select2 menus on-screen by shifting the open dropdown left when it would overflow the right edge of the viewport (select2 only flips vertically, and Cacti core's `dropdownAutoWidth` widens the dropdown past the narrow control)
 * issue: Align the panel titlebar height with Cacti's `html_start_box` per theme and vertically center the panel action icons within the titlebar
 * issue: Add intropage stylesheets for the remaining Cacti themes (cacti, carrot, hollyberry, raspberry) and align the panel titlebar severity colors (green good, red bad, grey unknown) with each parent theme's device-status palette
 * issue: Give each theme a self-contained severity palette (warning now follows `deviceRecovering`, red deepened for legible contrast) with a light-theme fallback kept in common.css
