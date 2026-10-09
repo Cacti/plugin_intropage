@@ -41,7 +41,7 @@
 }
 
 .color_green_bubble {
-	color: #3C8A3C;
+	color: #5fb85f;
 }
 
 .color_green, .color_green i {
@@ -49,11 +49,11 @@
 }
 
 .color_red {
-	background: #cc0000 !important;
+	background: #b3261e !important;
 }
 
 .color_red_bubble {
-	color: #cc0000;
+	color: #ff6b6b;
 }
 
 .color_red, .color_red i {
@@ -61,11 +61,11 @@
 }
 
 .color_yellow {
-	background: yellow !important;
+	background: #e0a81e !important;
 }
 
 .color_yellow_bubble {
-	color: #d9b800;
+	color: #ffcf4d;
 }
 
 .color_yellow, .color_yellow i {

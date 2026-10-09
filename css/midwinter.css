@@ -61,11 +61,11 @@ circle {
 }
 
 .color_green {
-	background: #009d00 !important;
+	background: #2e8b45 !important;
 }
 
 .color_green_bubble {
-	color: #009d00;
+	color: #4caf79;
 }
 
 .color_green, .color_green i {
@@ -73,11 +73,11 @@ circle {
 }
 
 .color_red {
-	background: #cc0000 !important;
+	background: #b3261e !important;
 }
 
 .color_red_bubble {
-	color: #cc0000;
+	color: #ff6b6b;
 }
 
 .color_red, .color_red i {
@@ -85,11 +85,11 @@ circle {
 }
 
 .color_yellow {
-	background: yellow !important;
+	background: #e0a81e !important;
 }
 
 .color_yellow_bubble {
-	color: #d9b800;
+	color: #ffcf4d;
 }
 
 .color_yellow, .color_yellow i {

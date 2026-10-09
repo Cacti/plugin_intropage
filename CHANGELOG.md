@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Tune the panel titlebar severity palette per theme so green (good), orange (warning) and red (bad) read as those colors but with theme-appropriate tone and legible text on every theme (replaces the garish/olive green, pure `yellow` and black-on-mid-green text that were copied across all themes); deepness already had this treatment and is unchanged
 * issue: Keep the toolbar `Actions`/`Timespan`/`Panels` select2 menus on-screen by shifting the open dropdown left when it would overflow the right edge of the viewport (select2 only flips vertically, and Cacti core's `dropdownAutoWidth` widens the dropdown past the narrow control)
 * issue: Align the panel titlebar height with Cacti's `html_start_box` per theme and vertically center the panel action icons within the titlebar
 * issue: Add intropage stylesheets for the remaining Cacti themes (cacti, carrot, hollyberry, raspberry) and align the panel titlebar severity colors (green good, red bad, grey unknown) with each parent theme's device-status palette

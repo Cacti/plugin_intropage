@@ -34,23 +34,23 @@
 }
 
 .color_green {
-    background: rgba(148,179,107,1) !important;
+    background: #2e8b45 !important;
 }
 
 .color_green_bubble {
-    color: rgba(148,179,107,1);
+    color: #4caf79;
 }
 
 .color_green, .color_green i {
-    color: black !important;
+    color: white !important;
 }
 
 .color_red {
-    background: #cc0000 !important;
+    background: #b3261e !important;
 }
 
 .color_red_bubble {
-    color: #cc0000;
+    color: #ff6b6b;
 }
 
 .color_red, .color_red i {
@@ -58,11 +58,11 @@
 }
 
 .color_yellow {
-    background: #ff8f1e !important;
+    background: #d9871a !important;
 }
 
 .color_yellow_bubble {
-    color: #ff8f1e;
+    color: #ff9e3d;
 }
 
 .color_yellow, .color_yellow i {
