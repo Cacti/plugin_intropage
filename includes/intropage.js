@@ -457,6 +457,9 @@ function initPage() {
 
 		$(this).data('lastClick', new Date().getTime());
 
+		// Spin the glyph while the panel reloads; reload_panel() replaces the header.
+		$(this).find('i').addClass('fa-spin');
+
 		var panel_id = $(this).attr('id').split('_').pop();
 
 		reload_panel(panel_id, true, false);

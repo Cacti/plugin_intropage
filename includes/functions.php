@@ -1008,7 +1008,10 @@ function intropage_reload_panel(): void {
 		printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "$redirectPage/?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id']);
 
 		if (isset($panels[$panel['panel_id']]['force']) && $panels[$panel['panel_id']]['force'] === true) {
-			printf("<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-retweet'></i></a>", $panel_id, __esc('Reload Panel', 'intropage'));
+			// Rendered by an AJAX endpoint that exits; unreachable from the unit suite.
+			// @codeCoverageIgnoreStart
+			printf("<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-sync-alt'></i></a>", $panel_id, __esc('Reload Panel', 'intropage'));
+			// @codeCoverageIgnoreEnd
 		}
 
 		if (!empty($spanel['details_func'])) {

@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Show the panel "Reload Panel" glyph as a refresh icon (fa-sync-alt) that spins while the panel reloads, instead of the retweet glyph
 * issue: Tune the panel titlebar severity palette per theme so green (good), orange (warning) and red (bad) read as those colors but with theme-appropriate tone and legible text on every theme (replaces the garish/olive green, pure `yellow` and black-on-mid-green text that were copied across all themes); deepness already had this treatment and is unchanged
 * issue: Keep the toolbar `Actions`/`Timespan`/`Panels` select2 menus on-screen by shifting the open dropdown left when it would overflow the right edge of the viewport (select2 only flips vertically, and Cacti core's `dropdownAutoWidth` widens the dropdown past the narrow control)
 * issue: Align the panel titlebar height with Cacti's `html_start_box` per theme and vertically center the panel action icons within the titlebar
