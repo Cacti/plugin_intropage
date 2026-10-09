@@ -921,6 +921,24 @@ function get_allowed_panels(int $user_id = 0) {
 }
 
 /**
+ * Builds the force-reload control shown in a force-enabled panel's
+ * header. Clicking it invokes reload_panel() (see includes/intropage.js),
+ * which spins the fa-sync-alt glyph while the panel reloads.
+ *
+ * @param int|string $panel_id The id of the panel the control reloads.
+ *
+ * @return string The reload anchor markup, including the fa-sync-alt
+ *                glyph.
+ */
+function intropage_panel_reload_button($panel_id): string {
+	return sprintf(
+		"<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-sync-alt'></i></a>",
+		$panel_id,
+		__esc('Reload Panel', 'intropage')
+	);
+}
+
+/**
  * AJAX endpoint that reloads and renders a single dashboard panel's
  * header and body markup: forces an update when the panel's stored
  * data contains a &lt;script&gt; tag or the client explicitly requested a
@@ -1008,9 +1026,10 @@ function intropage_reload_panel(): void {
 		printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "$redirectPage/?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id']);
 
 		if (isset($panels[$panel['panel_id']]['force']) && $panels[$panel['panel_id']]['force'] === true) {
-			// Rendered by an AJAX endpoint that exits; unreachable from the unit suite.
+			// View glue: button markup is unit-tested via intropage_panel_reload_button();
+			// this endpoint prints then exit()s, so the call is unreachable from the unit suite.
 			// @codeCoverageIgnoreStart
-			printf("<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-sync-alt'></i></a>", $panel_id, __esc('Reload Panel', 'intropage'));
+			print intropage_panel_reload_button($panel_id);
 			// @codeCoverageIgnoreEnd
 		}
 
