@@ -201,6 +201,25 @@ function setPageRefresh() {
 	}
 }
 
+// Shift an open select2 dropdown left so it stays within the viewport. Cacti
+// core enables dropdownAutoWidth, so a narrow right-aligned control can open a
+// wider dropdown that overflows the right edge; select2 never flips it
+// horizontally, so correct it here.
+function intropage_reposition_dropdown() {
+	var $dropdown = $('.select2-container--open');
+
+	if ($dropdown.length === 0) {
+		return;
+	}
+
+	var overflow = $dropdown[0].getBoundingClientRect().right - document.documentElement.clientWidth;
+
+	if (overflow > 0) {
+		var left = parseFloat($dropdown.css('left')) || 0;
+		$dropdown.css('left', Math.max(0, left - overflow - 8) + 'px');
+	}
+}
+
 function initPage() {
 	$('#intropage_addpanel').off().on('change', function() {
 		addPanel();
@@ -213,6 +232,16 @@ function initPage() {
 	$('#intropage_action_timespan').off().on('change', function() {
 		timeSpan();
 	});
+
+	// select2 only repositions its dropdown vertically, so a right-aligned
+	// toolbar menu can render off the right edge of the viewport. Nudge it
+	// back on-screen whenever one of the intropage menus opens.
+	$(document).off('select2:open.intropage').on('select2:open.intropage',
+		'#intropage_addpanel, #intropage_action, #intropage_action_timespan',
+		function() {
+			setTimeout(intropage_reposition_dropdown, 0);
+		}
+	);
 
 	setPageRefresh();
 
