@@ -457,6 +457,9 @@ function initPage() {
 
 		$(this).data('lastClick', new Date().getTime());
 
+		// Spin the glyph while the panel reloads; reload_panel() replaces the header.
+		$(this).find('i').addClass('fa-spin');
+
 		var panel_id = $(this).attr('id').split('_').pop();
 
 		reload_panel(panel_id, true, false);
@@ -583,6 +586,8 @@ function reload_panel(panel_id, forced_update, refresh) {
 		ajaxAnchors();
 	})
 	.fail(function(data) {
+		// Reload failed: the header (and its spinning glyph) is not replaced, so clear the spin here.
+		$('#reloadid_'+panel_id+' i').removeClass('fa-spin');
 		$('#panel_'+panel_id).find('.panel_data').html(intropage_text_data_error);
 	});
 }
