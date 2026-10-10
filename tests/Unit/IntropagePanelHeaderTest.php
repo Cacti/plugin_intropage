@@ -37,8 +37,8 @@ it('shows the reload tool only when force is enabled', function () {
 	$with    = intropage_panel_header(7, 'P', 'grey', 'normal', '/d', false, true, false);
 	$without = intropage_panel_header(7, 'P', 'grey', 'normal', '/d', false, false, false);
 
-	expect($with)->toContain('data-tool="refresh"');
-	expect($without)->not->toContain('data-tool="refresh"');
+	expect($with)->toContain("data-tool='refresh'");
+	expect($without)->not->toContain("data-tool='refresh'");
 });
 
 it('offers grow at normal height and shrink at triple height', function () {

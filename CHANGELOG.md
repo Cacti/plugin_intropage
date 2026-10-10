@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip
 * issue: Show the panel "Reload Panel" glyph as a refresh icon (fa-sync-alt) that spins while the panel reloads, instead of the retweet glyph
 * issue: Tune the panel titlebar severity palette per theme so green (good), orange (warning) and red (bad) read as those colors but with theme-appropriate tone and legible text on every theme (replaces the garish/olive green, pure `yellow` and black-on-mid-green text that were copied across all themes); deepness already had this treatment and is unchanged
 * issue: Keep the toolbar `Actions`/`Timespan`/`Panels` select2 menus on-screen by shifting the open dropdown left when it would overflow the right edge of the viewport (select2 only flips vertically, and Cacti core's `dropdownAutoWidth` widens the dropdown past the narrow control)

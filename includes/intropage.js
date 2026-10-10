@@ -275,6 +275,13 @@ function initPage() {
 			},
 
 			onRefresh: function(id, card) {
+				// Throttle rapid reloads: each forces an update whose collector can be expensive.
+				var now = new Date().getTime();
+				if ($(card).data('ccLastReload') + 1000 > now) {
+					return;
+				}
+				$(card).data('ccLastReload', now);
+
 				var panel_id = String(id).split('_').pop();
 
 				$(card).find('.reload_panel_now i').addClass('fa-spin');
@@ -315,7 +322,11 @@ function initPage() {
 			onResize: function(id, dir, card) {
 				var panel_id = String(id).split('_').pop();
 
-				intropage_resize_card(card, dir);
+				var change = intropage_resize_card(card, dir);
+
+				if (!change) {
+					return;
+				}
 
 				var action = (dir === 'grow') ? 'heightmore' : 'heightless';
 				var url = urlPath + 'plugins/intropage/intropage.php?&intropage_action=' + action + '&panel_id=' + panel_id;
@@ -325,6 +336,14 @@ function initPage() {
 						reload_panel(panel_id, true, false);
 					})
 					.fail(function(data) {
+						// Roll back the optimistic resize, unless an overlapping resize already moved it on.
+						var $card = $(card);
+						if ($card.hasClass(change.to)) {
+							$card.removeClass(change.to).addClass(change.from);
+							$card.attr('data-height', change.from.split('_')[1]);
+							resizeGraphsPanel();
+							resizeCharts();
+						}
 						getPresentHTTPErrorOrRedirect(data, url);
 					});
 			},
@@ -435,7 +454,7 @@ function intropage_resize_card(card, dir) {
 	var parts = ($card.attr('class') || '').match(/panel_(\d)_(\d)/);
 
 	if (!parts) {
-		return;
+		return null;
 	}
 
 	var height = parseInt(parts[1], 10);
@@ -447,14 +466,19 @@ function intropage_resize_card(card, dir) {
 	} else if (dir === 'shrink' && height > 1) {
 		height--;
 	} else {
-		return;
+		return null;
 	}
 
-	$card.removeClass('panel_' + parts[1] + '_' + width).addClass('panel_' + height + '_' + width);
+	var from = 'panel_' + parts[1] + '_' + width;
+	var to   = 'panel_' + height + '_' + width;
+
+	$card.removeClass(from).addClass(to);
 	$card.attr('data-height', height);
 
 	resizeGraphsPanel();
 	resizeCharts();
+
+	return { from: from, to: to };
 }
 
 // Open a panel's details view in the shared modal dialog.
@@ -500,7 +524,7 @@ function intropage_open_details(panel_id) {
 		});
 	})
 	.fail(function(data) {
-		getPresentHTTPErrorOrRedirect(data, href);
+		getPresentHTTPErrorOrRedirect(data, url);
 	});
 }
 
