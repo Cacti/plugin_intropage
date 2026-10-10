@@ -601,6 +601,7 @@ function display_information(): bool {
 	</script>
 
 	<?php
+	print get_md5_include_js($config['base_path'] . '/plugins/intropage/includes/cards/cards.js');
 	print get_md5_include_js($config['base_path'] . '/plugins/intropage/includes/intropage.js');
 
 	return true;
