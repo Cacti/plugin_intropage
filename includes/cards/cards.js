@@ -153,43 +153,62 @@ window.CactiCards = window.CactiCards || (function() {
 		}
 	}
 
-	/* Wire a single card: its drag handle (mouse + touch + keyboard) and drag events. */
+	/* Wire a single card: its drag handle (mouse + touch + keyboard) and drag
+	 * events. Handle interactions are DELEGATED from the persistent card element
+	 * so they survive hosts that replace the header markup on refresh/reload. */
 	function bindCard(grid, adapter, card) {
-		var handle = card.querySelector('.ccDrag');
-
-		if (handle) {
-			// Arm HTML5 drag only from the handle, and disarm on release when no
-			// drag began so selecting content elsewhere can't drag the card.
-			var disarm = function() { card.draggable = false; };
-			handle.addEventListener('mousedown', function() {
-				card.draggable = true;
-				document.addEventListener('mouseup', disarm, { once: true });
-			});
-			handle.addEventListener('touchstart', function() {
-				card.draggable = true;
-				document.addEventListener('touchend', disarm, { once: true });
-				document.addEventListener('touchcancel', disarm, { once: true });
-			}, { passive: true });
-
-			// Keyboard-accessible reordering with the arrow keys.
-			handle.addEventListener('keydown', function(event) {
-				var back = event.key === 'ArrowLeft' || event.key === 'ArrowUp';
-				var fwd  = event.key === 'ArrowRight' || event.key === 'ArrowDown';
-				if (!back && !fwd) {
-					return;
-				}
-				event.preventDefault();
-				if (back && card.previousElementSibling) {
-					grid.insertBefore(card, card.previousElementSibling);
-				} else if (fwd && card.nextElementSibling) {
-					grid.insertBefore(card.nextElementSibling, card);
-				} else {
-					return;
-				}
-				handle.focus();
-				saveLayout(grid, adapter);
-			});
+		if (card.__ccBound) {
+			return;
 		}
+		card.__ccBound = true;
+
+		var onHandle = function(target) {
+			return target && target.closest && target.closest('.ccDrag');
+		};
+
+		// Arm HTML5 drag only from the handle, and disarm on release when no drag
+		// began so selecting content elsewhere can't drag the card.
+		var disarm = function() { card.draggable = false; };
+		card.addEventListener('mousedown', function(event) {
+			if (!onHandle(event.target)) {
+				return;
+			}
+			card.draggable = true;
+			document.addEventListener('mouseup', disarm, { once: true });
+		});
+		card.addEventListener('touchstart', function(event) {
+			if (!onHandle(event.target)) {
+				return;
+			}
+			card.draggable = true;
+			document.addEventListener('touchend', disarm, { once: true });
+			document.addEventListener('touchcancel', disarm, { once: true });
+		}, { passive: true });
+
+		// Keyboard-accessible reordering with the arrow keys.
+		card.addEventListener('keydown', function(event) {
+			if (!onHandle(event.target)) {
+				return;
+			}
+			var back = event.key === 'ArrowLeft' || event.key === 'ArrowUp';
+			var fwd  = event.key === 'ArrowRight' || event.key === 'ArrowDown';
+			if (!back && !fwd) {
+				return;
+			}
+			event.preventDefault();
+			if (back && card.previousElementSibling) {
+				grid.insertBefore(card, card.previousElementSibling);
+			} else if (fwd && card.nextElementSibling) {
+				grid.insertBefore(card.nextElementSibling, card);
+			} else {
+				return;
+			}
+			var handle = card.querySelector('.ccDrag');
+			if (handle) {
+				handle.focus();
+			}
+			saveLayout(grid, adapter);
+		});
 
 		card.addEventListener('dragstart', function() {
 			dragging = card;
