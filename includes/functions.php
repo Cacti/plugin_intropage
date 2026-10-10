@@ -927,15 +927,63 @@ function get_allowed_panels(int $user_id = 0) {
  *
  * @param int|string $panel_id The id of the panel the control reloads.
  *
- * @return string The reload anchor markup, including the fa-sync-alt
+ * @return string The reload button markup, including the fa-sync-alt
  *                glyph.
  */
 function intropage_panel_reload_button($panel_id): string {
 	return sprintf(
-		"<a href='#' id='reloadid_%s' title='%s' class='header_link reload_panel_now'><i class='fa fa-sync-alt'></i></a>",
+		"<button type='button' id='reloadid_%s' title='%s' class='ccTool reload_panel_now' data-tool='refresh'><i class='fa fa-sync-alt'></i></button>",
 		$panel_id,
 		__esc('Reload Panel', 'intropage')
 	);
+}
+
+/**
+ * Builds a dashboard panel's shared card-chrome header: the left-hand
+ * drag handle, the title and the per-card tools (shrink/grow height,
+ * maximize, reload, remove). The severity is conveyed with the plugin's
+ * existing per-theme color_<alarm> class so it follows the active theme.
+ *
+ * @param int|string $panel_id     The panel's data-row id.
+ * @param string     $name         The already-escaped panel title.
+ * @param string     $alarm        Severity class suffix (red/yellow/green/grey).
+ * @param string     $height       Current height step (normal/double/triple).
+ * @param string     $drop_url     The disable-panel (remove) href.
+ * @param bool       $has_details  Whether the panel exposes a details view.
+ * @param bool       $force        Whether the force-reload control is shown.
+ * @param bool       $height_fixed Whether the panel's height is locked.
+ *
+ * @return string The <header> markup for the card.
+ */
+function intropage_panel_header($panel_id, $name, $alarm, $height, $drop_url, $has_details, $force, $height_fixed): string {
+	$h  = '<header class="ccCardHeader color_' . $alarm . '">';
+	$h .= '<button type="button" class="ccDrag" aria-label="' . __esc('Reorder panel', 'intropage') . '" title="' . __esc('Drag to reorder', 'intropage') . '"><i class="fa fa-bars"></i></button>';
+	$h .= '<h2 class="ccTitle">' . $name . '</h2>';
+	$h .= '<span class="ccTools">';
+
+	if (!$height_fixed) {
+		if ($height == 'double' || $height == 'triple') {
+			$h .= sprintf('<button type="button" id="heightless_id_%s" data-panel="panel_%s" class="ccTool heightless" data-tool="shrink" title="%s"><i class="fa fa-arrow-up"></i></button>', $panel_id, $panel_id, __esc('Fewer rows', 'intropage'));
+		}
+
+		if ($height == 'normal' || $height == 'double') {
+			$h .= sprintf('<button type="button" id="heightmore_id_%s" data-panel="panel_%s" class="ccTool heightmore" data-tool="grow" title="%s"><i class="fa fa-arrow-down"></i></button>', $panel_id, $panel_id, __esc('More rows', 'intropage'));
+		}
+	}
+
+	if ($has_details) {
+		$h .= sprintf('<button type="button" class="ccTool maxim" data-tool="maximize" detail-panel="%s" title="%s"><i class="fa fa-window-maximize"></i></button>', $panel_id, __esc('Show Details', 'intropage'));
+	}
+
+	if ($force) {
+		$h .= intropage_panel_reload_button($panel_id);
+	}
+
+	$h .= sprintf('<a href="%s" data-panel="panel_%s" class="ccTool droppanel" data-tool="remove" title="%s"><i class="fa fa-times"></i></a>', html_escape($drop_url), $panel_id, __esc('Disable panel', 'intropage'));
+	$h .= '</span>';
+	$h .= '</header>';
+
+	return $h;
 }
 
 /**
@@ -1020,38 +1068,18 @@ function intropage_reload_panel(): void {
 		$height = $panel['height'] ?? 'normal';
 		$alarm  = isset($data['alarm']) && $data['alarm'] !== '' ? $data['alarm'] : 'grey';
 
-		print '<div class="panel_header color_' . $alarm . '">';
-		print '<div class="panel_name">' . $name . '</div>';
+		// View glue: header markup is unit-tested via intropage_panel_header();
+		// this endpoint prints then exit()s, so it is unreachable from the unit suite.
+		// @codeCoverageIgnoreStart
+		$drop_url     = "$redirectPage/?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id'];
+		$force        = isset($panels[$panel['panel_id']]['force']) && $panels[$panel['panel_id']]['force'] === true;
+		$has_details  = !empty($spanel['details_func']);
+		$height_fixed = !empty($panels[$panel['panel_id']]['height_fixed']);
 
-		printf("<div class='panel_actions'><a href='%s' data-panel='panel_$panel_id' class='header_link droppanel' title='" . __esc('Disable panel', 'intropage') . "'><i class='fa fa-times'></i></a>", "$redirectPage/?intropage_action=droppanel&panel_id=$panel_id&dashboard_id=" . $_SESSION['dashboard_id']);
+		print intropage_panel_header($panel_id, $name, $alarm, $height, $drop_url, $has_details, $force, $height_fixed);
 
-		if (isset($panels[$panel['panel_id']]['force']) && $panels[$panel['panel_id']]['force'] === true) {
-			// View glue: button markup is unit-tested via intropage_panel_reload_button();
-			// this endpoint prints then exit()s, so the call is unreachable from the unit suite.
-			// @codeCoverageIgnoreStart
-			print intropage_panel_reload_button($panel_id);
-			// @codeCoverageIgnoreEnd
-		}
-
-		if (!empty($spanel['details_func'])) {
-			printf("<a href='#' class='header_link maxim' detail-panel='%s' title='%s'><i class='fa fa-window-maximize'></i></a>", $panel_id, __esc('Show Details', 'intropage'));
-		}
-
-		if ($height == 'triple' && !$panels[$panel['panel_id']]['height_fixed']) {
-			printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
-			printf("<a href='#' title='%s' class='header_link href_disabled'><i class='fa fa-arrow-down'></i></a>", __esc('Max height reached', 'intropage'));
-		} elseif ($height == 'double' && !$panels[$panel['panel_id']]['height_fixed']) {
-			printf("<a href='#' id='heightless_id_%s' data-panel='panel_%s' class='header_link heightless' title='" . __esc('Less rows', 'intropage') . "'><i class='fa fa-arrow-up'></i></a>", $panel_id, $panel_id);
-			printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
-		} elseif ($height == 'normal' && !$panels[$panel['panel_id']]['height_fixed']) {
-			printf("<a href='#' title='%s' class='header_link href_disabled'><i class='fa fa-arrow-up'></i></a>", __esc('Min height reached', 'intropage'));
-			printf("<a href='#' id='heightmore_id_%s' data-panel='panel_%s' class='header_link heightmore' title='" . __esc('More rows', 'intropage') . "'><i class='fa fa-arrow-down'></i></a>", $panel_id, $panel_id);
-		}
-
-		print '</div>'; // end of panel_actions
-		print ' </div>'; // end of panel_header
-
-		print "<div class='panel_data'>";
+		print "<div class='panel_data ccCardBody'>";
+		// @codeCoverageIgnoreEnd
 
 		if (isset($data['data']) && trim((string) $data['data']) != '') {
 			print $data['data'];

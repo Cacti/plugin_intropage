@@ -489,6 +489,8 @@ function intropage_page_head(): void {
 
 	$selectedTheme = get_selected_theme();
 
+	// shared card chrome first so common.css / the theme can override its variables
+	print get_md5_include_css('plugins/intropage/includes/cards/cards.css');
 	print get_md5_include_css('plugins/intropage/css/common.css');
 
 	if (file_exists($config['base_path'] . '/plugins/intropage/css/' . $selectedTheme . '.css')) {

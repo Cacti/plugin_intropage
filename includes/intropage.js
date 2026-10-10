@@ -253,178 +253,116 @@ function initPage() {
 	$('.third-panel').css('width', intropage_panel_third_width);
 	$('.half-panel').css('width', intropage_panel_half_width);
 
-	$('#panel_container').sortable({
-		tolerance: 'pointer',
-		forcePlaceholderSize: true,
-		forceHelperSize: false,
-		placeholder: '.grid_item',
-		handle: '.panel_header',
-		helpler: 'clone',
-		delay: 500,
-		revert: 'invalid',
-		scroll: false,
-		dropOnEmpty: false,
-		start: function(e, ui){
-			var minWidth = Math.min.apply(null,
-				$('.grid_item').map(function() {
-					return $(this).width();
-				}).get()
-			);
+	// Shared card chrome (includes/cards/cards.js) drives reorder + per-card
+	// tools; the adapter maps those to intropage's existing endpoints.
+	var panelGrid = document.getElementById('panel_container');
 
-			ui.helper.width(minWidth);
-			$('#panel_container .grid_item').css({'width': minWidth});
+	if (panelGrid && window.CactiCards) {
+		CactiCards.init(panelGrid, {
+			cardSelector: '.grid_item',
+			idAttr: 'id',
 
-			ui.helper.addClass('exclude-me');
-			ui.helper.data('clone').hide();
-			$('.cloned-slides .grid_item').css('visibility', 'visible');
-		},
-		stop: function(event, ui) {
-			$('#panel_container .grid_item.exclude-me').each(function() {
-				var item = $(this);
-				var clone = item.data('clone');
-				var position = item.position();
-
-				clone.css('left', position.left);
-				clone.css('top', position.top);
-				clone.show();
-
-				item.removeClass('exclude-me');
-				$('.grid_item').css('width', '');
-			});
-
-			$('#panel_container .grid_item').each(function() {
-				var item = $(this);
-				var clone = item.data('clone');
-
-				clone.attr('data-pos', item.index());
-			});
-
-			$('#panel_container .grid_item').css('visibility', 'visible');
-			$('.cloned-slides .grid_item').css('visibility', 'hidden');
-			$('#panel_container .grid_item').css({'width': ''});
-
-			resizeGraphsPanel();
-			resizeCharts();
-		},
-		change: function(event, ui) {
-			$('#panel_container li:not(.exclude-me, .ui-sortable-placeholder)').each(function() {
-				var item = $(this);
-				var clone = item.data('clone');
-				clone.stop(true, false);
-				var position = item.position();
-				clone.animate({ left: position.left, top:position.top}, 500);
-			});
-		},
-		update: function(event, ui) {
-			// change order
-			var xdata = new Array();
-
-      $('#panel_container li').each(function() {
-				xdata.push($(this).attr('id'));
-			});
-
-			var post = {
-				'intropage_action': 'order',
-				'dashboard_id': dashboard_id,
-				'xdata': xdata,
-				__csrf_magic: csrfMagicToken
-			}
-
-			$.post(redirectPage, post);
-		}
-	});
-
-	$('.droppanel').on('click', function(event) {
-		event.preventDefault();
-
-		var panel_div_id = $(this).attr('data-panel');
-		var page = $(this).attr('href');
-
-		$('#'+panel_div_id).remove();
-
-		$.get(page, function() {
-			var url = page.replace('droppanel', 'addpanelselect&header=false');
-
-			$.get(url)
-				.done(function(data) {
-					checkForRedirects(data, url);
-
-					$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
-					$('#intropage_addpanel').selectmenu().off().on('change', function() {
-
-						addPanel();
-					});
-
-					applySkin();
-					resizeGraphsPanel();
-					resizeCharts();
-				})
-				.fail(function(data) {
-					getPresentHTTPErrorOrRedirect(data, url);
+			onLayoutChange: function(state) {
+				$.post(redirectPage, {
+					'intropage_action': 'order',
+					'dashboard_id': dashboard_id,
+					'xdata': state.order,
+					__csrf_magic: csrfMagicToken
 				});
-		});
-	});
 
-	// detail to the new window
-	$('body').on('click', '.maxim', function(event){
+				resizeGraphsPanel();
+				resizeCharts();
+			},
 
-		event.preventDefault();
+			onRefresh: function(id, card) {
+				// Throttle rapid reloads: each forces an update whose collector can be expensive.
+				var now = new Date().getTime();
+				if ($(card).data('ccLastReload') + 1000 > now) {
+					return;
+				}
+				$(card).data('ccLastReload', now);
 
-		var panel_id = $(this).attr('detail-panel');
-		var url = urlPath+'plugins/intropage/intropage.php?action=details&panel_id='+panel_id;
+				var panel_id = String(id).split('_').pop();
 
-		$.get(url)
-		.done(function(data) {
-			checkForRedirects(data, url);
+				$(card).find('.reload_panel_now i').addClass('fa-spin');
 
-			$('#overlay_detail').html(data);
+				reload_panel(panel_id, true, false);
 
-			var width = $('#overlay_detail').textWidth() + 150;
-			var windowWidth = $(window).width();
+				if (window.Pace) {
+					Pace.stop();
+				}
+			},
 
-			if (width > 1200) {
-				width = 1200;
+			onRemoveCard: function(id) {
+				var panel_id = String(id).split('_').pop();
+				var page = redirectPage + '?intropage_action=droppanel&panel_id=' + panel_id + '&dashboard_id=' + dashboard_id;
+
+				$.get(page, function() {
+					var url = page.replace('droppanel', 'addpanelselect&header=false');
+
+					$.get(url)
+						.done(function(data) {
+							checkForRedirects(data, url);
+
+							$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
+							$('#intropage_addpanel').selectmenu().off().on('change', function() {
+								addPanel();
+							});
+
+							applySkin();
+							resizeGraphsPanel();
+							resizeCharts();
+						})
+						.fail(function(data) {
+							getPresentHTTPErrorOrRedirect(data, url);
+						});
+				});
+			},
+
+			onResize: function(id, dir, card) {
+				var panel_id = String(id).split('_').pop();
+
+				var change = intropage_resize_card(card, dir);
+
+				if (!change) {
+					return;
+				}
+
+				var action = (dir === 'grow') ? 'heightmore' : 'heightless';
+				var url = urlPath + 'plugins/intropage/intropage.php?&intropage_action=' + action + '&panel_id=' + panel_id;
+
+				$.get(url)
+					.done(function() {
+						reload_panel(panel_id, true, false);
+					})
+					.fail(function(data) {
+						// Roll back the optimistic resize, unless an overlapping resize already moved it on.
+						var $card = $(card);
+						if ($card.hasClass(change.to)) {
+							$card.removeClass(change.to).addClass(change.from);
+							$card.attr('data-height', change.from.split('_')[1]);
+							resizeGraphsPanel();
+							resizeCharts();
+						}
+						getPresentHTTPErrorOrRedirect(data, url);
+					});
+			},
+
+			maximize: function(id) {
+				intropage_open_details(String(id).split('_').pop());
 			}
-
-			if (width > windowWidth) {
-				width = windowWidth - 50;
-			}
-
-			$('#overlay').dialog({
-				modal: true,
-				autoOpen: true,
-				buttons: [{
-					text: intropage_text_close,
-					click: function() {
-						$(this).dialog('destroy');
-						$('#overlay_detail').empty();
-					},
-					icon: 'ui-icon-heart'
-				}],
-				width: width,
-				maxHeight: 650,
-				resizable: true,
-				title: intropage_text_panel_details,
-			});
-
-			$('#block').on('click', function() {
-				$('#overlay').dialog('close');
-			});
-		})
-		.fail(function(data) {
-			getPresentHTTPErrorOrRedirect(data, href);
 		});
-	});
+	}
 
 	// enable/disable move panel/copy text
 	$('#switch_copytext').off('click').on('click', function() {
 		if (!intropage_drag) {
-			$('#panel_container').sortable('enable');
+			$('#panel_container').removeClass('ccNoDrag');
 			$('#switch_copytext').attr('title', intropage_text_panel_disable);
 			$('.grid_item').css('cursor','move');
 			intropage_drag = true;
 		} else {
-			$('#panel_container').sortable('disable');
+			$('#panel_container').addClass('ccNoDrag');
 			$('#switch_copytext').attr('title', intropage_text_panel_enable);
 			$('.grid_item').css('cursor','default');
 			intropage_drag = false;
@@ -447,54 +385,8 @@ function initPage() {
 	// Get the dropdowns the correct height
 	$('#intropage_addpanel-menu, #intropage_action-menu').css('max-height', '350px');
 
-	// reload single panel function
-	$('body').on('click', '.reload_panel_now', function(event){
-
-		if ($(this).data('lastClick') + 1000 > new Date().getTime()) {
-			event.stopPropagation();
-			return false;
-		}
-
-		$(this).data('lastClick', new Date().getTime());
-
-		// Spin the glyph while the panel reloads; reload_panel() replaces the header.
-		$(this).find('i').addClass('fa-spin');
-
-		var panel_id = $(this).attr('id').split('_').pop();
-
-		reload_panel(panel_id, true, false);
-		Pace.stop();
-	});
-
-	// change panel height and reload
-	$('body').off('click', '.heightless').on('click', '.heightless', function(event){
-
-		var panel_id = $(this).attr('id').split('_').pop();
-
-		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightless&panel_id=' + panel_id;
-
-		$.get(url)
-		.done(function(data) {
-			reload_panel(panel_id, true, false);
-		})
-		.fail(function(data) {
-			getPresentHTTPErrorOrRedirect(data, href);
-		});
-	});
-
-	$('body').off('click', '.heightmore').on('click', '.heightmore', function(event){
-		var panel_id = $(this).attr('id').split('_').pop();
-
-		var url = urlPath+'plugins/intropage/intropage.php?&intropage_action=heightmore&panel_id=' + panel_id;
-
-		$.get(url)
-		.done(function(data) {
-			reload_panel(panel_id, true, false); 
-		})
-		.fail(function(data) {
-			getPresentHTTPErrorOrRedirect(data, href);
-		});
-	});
+	// Reload, height (grow/shrink) and remove are driven by the shared card
+	// chrome's per-card tools (see the CactiCards.init adapter above).
 
 	$('body').on('click','.bus_graph', function() {
 		event.preventDefault();
@@ -552,6 +444,87 @@ function testPoller() {
 	})
 	.fail(function(data) {
 		getPresentHTTPErrorOrRedirect(data, href);
+	});
+}
+
+// Bump a card's grid-span height class and data-height one step so the panel
+// resizes immediately, before the server round-trip persists the new height.
+function intropage_resize_card(card, dir) {
+	var $card = $(card);
+	var parts = ($card.attr('class') || '').match(/panel_(\d)_(\d)/);
+
+	if (!parts) {
+		return null;
+	}
+
+	var height = parseInt(parts[1], 10);
+	var width  = parts[2];
+	var max    = parseInt($card.attr('data-height-max') || '3', 10);
+
+	if (dir === 'grow' && height < max) {
+		height++;
+	} else if (dir === 'shrink' && height > 1) {
+		height--;
+	} else {
+		return null;
+	}
+
+	var from = 'panel_' + parts[1] + '_' + width;
+	var to   = 'panel_' + height + '_' + width;
+
+	$card.removeClass(from).addClass(to);
+	$card.attr('data-height', height);
+
+	resizeGraphsPanel();
+	resizeCharts();
+
+	return { from: from, to: to };
+}
+
+// Open a panel's details view in the shared modal dialog.
+function intropage_open_details(panel_id) {
+	var url = urlPath + 'plugins/intropage/intropage.php?action=details&panel_id=' + panel_id;
+
+	$.get(url)
+	.done(function(data) {
+		checkForRedirects(data, url);
+
+		$('#overlay_detail').html(data);
+
+		var width = $('#overlay_detail').textWidth() + 150;
+		var windowWidth = $(window).width();
+
+		if (width > 1200) {
+			width = 1200;
+		}
+
+		if (width > windowWidth) {
+			width = windowWidth - 50;
+		}
+
+		$('#overlay').dialog({
+			modal: true,
+			autoOpen: true,
+			buttons: [{
+				text: intropage_text_close,
+				click: function() {
+					$(this).dialog('destroy');
+					$('#overlay_detail').empty();
+				},
+				icon: 'ui-icon-heart'
+			}],
+			width: width,
+			maxHeight: 650,
+			resizable: true,
+			title: intropage_text_panel_details,
+		});
+
+		$('#block').on('click', function() {
+			$('#overlay').dialog('close');
+		});
+	})
+	.fail(function(data) {
+		getPresentHTTPErrorOrRedirect(data, url);
 	});
 }
 
