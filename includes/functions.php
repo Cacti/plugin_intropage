@@ -1077,9 +1077,9 @@ function intropage_reload_panel(): void {
 		$height_fixed = !empty($panels[$panel['panel_id']]['height_fixed']);
 
 		print intropage_panel_header($panel_id, $name, $alarm, $height, $drop_url, $has_details, $force, $height_fixed);
-		// @codeCoverageIgnoreEnd
 
 		print "<div class='panel_data ccCardBody'>";
+		// @codeCoverageIgnoreEnd
 
 		if (isset($data['data']) && trim((string) $data['data']) != '') {
 			print $data['data'];
