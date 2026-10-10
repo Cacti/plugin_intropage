@@ -15,11 +15,12 @@
 
 require_once __DIR__ . '/../../includes/functions.php';
 
-it('renders the force-reload button with the fa-sync-alt glyph', function () {
+it('renders the force-reload tool with the fa-sync-alt glyph', function () {
 	$html = intropage_panel_reload_button(42);
 
 	expect($html)->toContain("id='reloadid_42'");
-	expect($html)->toContain("class='header_link reload_panel_now'");
+	expect($html)->toContain("class='ccTool reload_panel_now'");
+	expect($html)->toContain("data-tool='refresh'");
 	expect($html)->toContain('fa fa-sync-alt');
 });
 

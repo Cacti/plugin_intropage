@@ -115,10 +115,16 @@ window.CactiCards = window.CactiCards || (function() {
 	}
 
 	function refreshCard(grid, adapter, card) {
+		var id = cardId(card, adapter);
+		// Hosts that inject into an inner body (rather than replacing the whole
+		// card) provide onRefresh and keep ownership of the swap.
+		if (typeof adapter.onRefresh === 'function') {
+			adapter.onRefresh(id, card);
+			return;
+		}
 		if (typeof adapter.fetchCard !== 'function') {
 			return;
 		}
-		var id = cardId(card, adapter);
 		var state = {
 			expanded: card.classList.contains('ccCardExpanded'),
 			height:   parseInt(card.getAttribute('data-height') || '1', 10)
@@ -262,6 +268,8 @@ window.CactiCards = window.CactiCards || (function() {
 			if (!card) {
 				return;
 			}
+			// Tools may be rendered as anchors (e.g. remove); never navigate.
+			event.preventDefault();
 			switch (tool.getAttribute('data-tool')) {
 				case 'expand':
 					card.classList.add('ccCardExpanded');

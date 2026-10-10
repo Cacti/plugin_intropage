@@ -133,6 +133,11 @@
 	cursor: grabbing;
 }
 
+/* Host toggle to lock reordering (e.g. a "select text" mode): hide the handles. */
+.ccNoDrag .ccDrag {
+	display: none;
+}
+
 .ccTitle {
 	flex: 1 1 auto;
 	min-width: 0;
