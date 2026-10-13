@@ -1,6 +1,7 @@
 # Changelog
 
 --- develop ---
+* security: Pin CI fixtures and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 
 * issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip
 * issue: Show the panel "Reload Panel" glyph as a refresh icon (fa-sync-alt) that spins while the panel reloads, instead of the retweet glyph
