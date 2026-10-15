@@ -120,9 +120,9 @@ function plugin_syslog_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists(require_once($config['base_path'] . '/plugins/syslog/database.php'))) {
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists(require_once($config['base_path'] . '/plugins/syslog/includes/database.php'))) {
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
 		} else {
 			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
@@ -175,9 +175,9 @@ function plugin_syslog_levels_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists(require_once($config['base_path'] . '/plugins/syslog/database.php'))) {
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists(require_once($config['base_path'] . '/plugins/syslog/includes/database.php'))) {
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
 		} else {
 			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
@@ -486,9 +486,9 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0): void {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists(require_once($config['base_path'] . '/plugins/syslog/database.php'))) {
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists(require_once($config['base_path'] . '/plugins/syslog/includes/database.php'))) {
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
 		} else {
 			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
@@ -566,9 +566,9 @@ function plugin_syslog_devices_detail(): array {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists(require_once($config['base_path'] . '/plugins/syslog/database.php'))) {
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists(require_once($config['base_path'] . '/plugins/syslog/includes/database.php'))) {
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
 			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
 		} else {
 			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
