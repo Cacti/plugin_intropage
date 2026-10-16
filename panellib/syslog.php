@@ -120,7 +120,13 @@ function plugin_syslog_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		// Grab row counts from the information schema, it's faster
 		$i_rows = syslog_db_fetch_cell("SELECT TABLE_ROWS
@@ -169,7 +175,13 @@ function plugin_syslog_levels_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		$data = [
 			0 => 0,
@@ -474,7 +486,13 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0): void {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		$lines = get_panel_lines_count($panel['height'], $user_id);
 
@@ -548,7 +566,13 @@ function plugin_syslog_devices_detail(): array {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		$devices = syslog_db_fetch_assoc_prepared('SELECT sh.host AS ip ,count(*) AS hcount
 			FROM syslog AS s
