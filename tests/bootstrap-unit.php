@@ -241,6 +241,19 @@ if (!function_exists('cacti_sizeof')) {
 		return is_array($a) ? count($a) : 0;
 	}
 }
+
+/**
+ * Checks whether a test-configured plugin is enabled.
+ *
+ * @param string $plugin The plugin name to check.
+ *
+ * @return bool Whether the test enabled the plugin.
+ */
+if (!function_exists('api_plugin_is_enabled')) {
+	function api_plugin_is_enabled($plugin) {
+		return $GLOBALS['__test_enabled_plugins'][$plugin] ?? false;
+	}
+}
 if (!function_exists('cacti_count')) {
 	function cacti_count($a) {
 		return is_array($a) || $a instanceof Countable ? count($a) : 0;
