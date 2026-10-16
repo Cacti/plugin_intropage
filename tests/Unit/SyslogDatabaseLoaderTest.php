@@ -14,12 +14,16 @@ require_once __DIR__ . '/../../includes/functions.php';
 require_once __DIR__ . '/../../panellib/syslog.php';
 
 beforeEach(function () {
-	$GLOBALS['__intropage_syslog_base_restore'] = $GLOBALS['config']['base_path'];
+	$GLOBALS['__intropage_syslog_base_restore']    = $GLOBALS['config']['base_path'];
+	$GLOBALS['__intropage_syslog_enabled_restore'] = $GLOBALS['__test_enabled_plugins'] ?? array();
+	$GLOBALS['__intropage_syslog_log_restore']     = $GLOBALS['__test_cacti_log'] ?? array();
 });
 
 afterEach(function () {
-	$GLOBALS['config']['base_path'] = $GLOBALS['__intropage_syslog_base_restore'];
-	unset($GLOBALS['__intropage_syslog_base_restore']);
+	$GLOBALS['config']['base_path']          = $GLOBALS['__intropage_syslog_base_restore'];
+	$GLOBALS['__test_enabled_plugins']       = $GLOBALS['__intropage_syslog_enabled_restore'];
+	$GLOBALS['__test_cacti_log']             = $GLOBALS['__intropage_syslog_log_restore'];
+	unset($GLOBALS['__intropage_syslog_base_restore'], $GLOBALS['__intropage_syslog_enabled_restore'], $GLOBALS['__intropage_syslog_log_restore']);
 });
 
 /**
