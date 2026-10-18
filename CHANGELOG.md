@@ -1,7 +1,6 @@
 # Changelog
 
 --- develop ---
-* security: Pin CI fixtures and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 
 * issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip
 * issue: Show the panel "Reload Panel" glyph as a refresh icon (fa-sync-alt) that spins while the panel reloads, instead of the retweet glyph
@@ -17,6 +16,7 @@
 * dev: Move the plugin's library directory from `include/` to `includes/` and re-register the affected hooks on upgrade (a `plugin_hooks` file repoint in `intropage_upgrade_database()`) so existing installations load them from the new path
 * dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
 * dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
+* dev: Pin CI fixtures and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
 * issue: Rename `tests/Security/Php81FunctionGuardTest.php` to `tests/Security/PhpCompatibilityTest.php` to match the naming convention used across the Cacti plugin fleet; the test content (guarding post-8.0 function usage for this plugin's PHP 8.0 floor) is unchanged
 * security: Add a version-safe CSP nonce (`plugin_intropage_csp_nonce()`) to every inline `<script>` tag so pages stay compatible with Cacti's Content-Security-Policy nonce enforcement, while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
 * security: Escape panel output (device, data-source, service-check, webseer, maint, host-description and admin-alert values, and the shared-dashboard name) that was rendered without html_escape
