@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-10-06 08:18+0000\n"
+"PO-Revision-Date: 2026-10-20 08:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -66,7 +66,7 @@ msgstr "Antal rader - %d"
 
 #: display.php:286
 msgid "Refresh Now"
-msgstr "Uppdatera"
+msgstr "Uppdatera nu"
 
 #: display.php:289 display.php:291
 msgid "Refresh Disabled"
@@ -428,7 +428,7 @@ msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
-msgstr "Normal användare"
+msgstr "Vanlig användare"
 
 #: include/settings.php:146
 #, php-format
@@ -525,7 +525,7 @@ msgstr "Varje minut"
 #: include/variables.php:64 include/variables.php:161 include/variables.php:179
 #, php-format
 msgid "Every %d Minutes"
-msgstr "Var %d minut"
+msgstr "Var %d:e minut"
 
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
@@ -672,7 +672,7 @@ msgstr "Ändrad"
 
 #: include/variables.php:144
 msgid "Medium"
-msgstr "Medium"
+msgstr "Medel"
 
 #: include/variables.php:145
 msgid "Extended"
@@ -1161,7 +1161,7 @@ msgstr "Alla tabeller: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "Ej tillämpligt"
+msgstr "Inte tillämpligt"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1605,7 +1605,7 @@ msgstr "Nere"
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
 msgid "Recovering"
-msgstr "Påväg upp"
+msgstr "Återhämtar sig"
 
 #: panellib/graphs.php:423
 msgid "Data Type"
@@ -2112,7 +2112,7 @@ msgstr "Genomsnittlig CPU"
 
 #: panellib/system.php:178
 msgid "Max CPU"
-msgstr "Max CPU"
+msgstr "Högsta processoranvändning"
 
 #: panellib/system.php:208
 msgid "Cacti Version: "
@@ -2284,7 +2284,7 @@ msgstr "Utlöst"
 
 #: panellib/thold.php:266 panellib/thold.php:369 panellib/thold.php:385
 msgid "Breached"
-msgstr "Intrång"
+msgstr "Överskridet"
 
 #: panellib/thold.php:325
 msgid "Threshold Details"
@@ -2292,7 +2292,7 @@ msgstr "Detaljer om tröskeln"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
-msgstr "Tröskelvärden"
+msgstr "Trösklar"
 
 #: panellib/thold.php:402
 msgid "Breached: "
