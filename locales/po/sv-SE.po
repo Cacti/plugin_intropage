@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-10-20 08:18+0000\n"
+"PO-Revision-Date: 2026-10-20 16:05+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -1929,7 +1929,7 @@ msgstr "Paneler som ger information om Cactis röstningsprocess."
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "Poller Information"
+msgstr "Information om poller"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
@@ -2200,7 +2200,7 @@ msgstr "Senaste körningens varaktighet/uppdateringar: %s / %s"
 
 #: panellib/system.php:448
 msgid "Poller Run"
-msgstr "Poller Run"
+msgstr "Pollerkörning"
 
 #: panellib/system.php:474
 msgid "Down Hosts"
@@ -2397,7 +2397,7 @@ msgstr "Intropage-visare"
 
 #: setup.php:62
 msgid "Intropage Administration"
-msgstr "Intropage Administration"
+msgstr "Administration av Intropage"
 
 #: setup.php:80
 msgid "System Administration"
