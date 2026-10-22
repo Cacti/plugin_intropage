@@ -73,6 +73,13 @@
 	min-height: 180px;
 }
 
+/* Cards grow to fit their content, so the body never needs its own vertical
+   scroller. cards.css sets overflow-x: auto, which implicitly makes overflow-y
+   auto too; a few px of overflow then traps the mouse wheel inside the card. */
+#panel_container .ccCardBody {
+	overflow-y: hidden;
+}
+
 .chart_wrapper {
 	position: relative;
 	margin: auto;
@@ -125,6 +132,15 @@
 #overlay {
 	display: none;
 	scroll: auto;
+}
+
+/* Some themes (e.g. deepness) force .ui-dialog-content to overflow: visible,
+   which lets long details spill under the button pane with no scrollbar.
+   clear: both stops the now-BFC content from sitting beside the floated title
+   when it overhangs the fixed-height titlebar. */
+.ui-dialog #overlay.ui-dialog-content {
+	overflow: auto;
+	clear: both;
 }
 
 #overlay_detail {

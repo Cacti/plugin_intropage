@@ -2,6 +2,8 @@
 
 --- develop ---
 
+* issue: Fix the dashboard page not scrolling with the mouse wheel over chart panels: charts were sized from the whole card (header included) and overflowed the card body, turning it into a nested scroller that captured the wheel; charts now keep their server-sized height (which also stops pie/treemap charts growing on every window resize) and card bodies no longer scroll vertically
+* issue: Keep long Panel Details content inside the dialog and scrollable, instead of spilling under the Close button pane, on themes (e.g. deepness) that force `.ui-dialog-content` to `overflow: visible`; the dialog height is also capped to the viewport
 * issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip
 * issue: Show the panel "Reload Panel" glyph as a refresh icon (fa-sync-alt) that spins while the panel reloads, instead of the retweet glyph
 * issue: Tune the panel titlebar severity palette per theme so green (good), orange (warning) and red (bad) read as those colors but with theme-appropriate tone and legible text on every theme (replaces the garish/olive green, pure `yellow` and black-on-mid-green text that were copied across all themes); deepness already had this treatment and is unchanged

@@ -51,7 +51,12 @@ function resizeCharts() {
 		var windWidth  = $(window).width() - 34;
 		var panelWidth = $(this).closest('.panel_wrapper').width() - 34;
 		var width = Math.min(windWidth, panelWidth);
-		var height     = $(this).closest('.panel_wrapper').height() - 30;
+
+		// Keep the server-sized chart height. .panel_wrapper also holds the card
+		// header and body padding, so deriving the height from it oversizes the
+		// chart, overflows .ccCardBody and turns it into a nested scroller that
+		// swallows mouse-wheel scrolling of the page.
+		var height     = $(this).height();
 
 		if (panels[chart] != undefined) {
 			panels[chart].resize({ width: width, height:height });
@@ -514,7 +519,7 @@ function intropage_open_details(panel_id) {
 				icon: 'ui-icon-heart'
 			}],
 			width: width,
-			maxHeight: 650,
+			maxHeight: Math.min(650, $(window).height() - 40),
 			resizable: true,
 			title: intropage_text_panel_details,
 		});
