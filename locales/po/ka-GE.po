@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cacti\n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-08-04 05:18+0000\n"
+"PO-Revision-Date: 2026-10-24 02:18+0000\n"
 "Last-Translator: Ekaterine papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <https://translate.cacti.net/projects/cacti/"
 "intropage/ka/>\n"
@@ -889,7 +889,7 @@ msgstr "ჰოსტი"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "შტატი"
+msgstr "მდგომარეობა"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -1455,7 +1455,7 @@ msgstr ""
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
-msgstr "გაშვებულობის დრო"
+msgstr "ჩართულობის დრო"
 
 #: panellib/busiest.php:588 panellib/busiest.php:1420
 msgid "Average of all allowed hosts"
