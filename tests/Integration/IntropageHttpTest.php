@@ -85,7 +85,7 @@ final class IntropageE2eClient {
 	 * @return array{status: int, location: string, body: string}
 	 */
 	public function request(string $method, string $path, array $fields = []): array {
-		$header = '';
+		$header = "User-Agent: intropage-e2e\r\n";
 
 		foreach ($this->cookies as $name => $value) {
 			$header .= "Cookie: $name=$value\r\n";
@@ -210,6 +210,33 @@ function intropage_e2e_reset(): void {
 	intropage_e2e_exec('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', [$id]);
 	intropage_e2e_exec('DELETE FROM plugin_intropage_dashboard WHERE user_id = ?', [$id]);
 	intropage_e2e_exec('INSERT INTO plugin_intropage_dashboard (user_id, dashboard_id, name, shared) VALUES (?, 1, ?, 0)', [$id, 'Default']);
+}
+
+/**
+ * Returns the size of cacti.log, or null when it is missing or not writable
+ * by this process. The test that provokes a logged warning on purpose uses
+ * it to put the log back, because the CI job fails on any warning left in it.
+ */
+function intropage_e2e_log_size(): ?int {
+	$log = intropage_e2e_config()['cacti'] . '/log/cacti.log';
+
+	return (is_file($log) && is_writable($log)) ? (int) filesize($log) : null;
+}
+
+function intropage_e2e_log_since(int $size): string {
+	$log = intropage_e2e_config()['cacti'] . '/log/cacti.log';
+
+	return (string) file_get_contents($log, false, null, $size);
+}
+
+function intropage_e2e_log_restore(int $size): void {
+	$log    = intropage_e2e_config()['cacti'] . '/log/cacti.log';
+	$handle = fopen($log, 'r+');
+
+	if ($handle !== false) {
+		ftruncate($handle, $size);
+		fclose($handle);
+	}
 }
 
 function intropage_e2e_panel_row(string $panel_id, int $user_id): int {
@@ -376,10 +403,20 @@ it('removes panels from the dashboard when their permission is withdrawn', funct
 
 	intropage_e2e_set_permissions(['favourite_graph']);
 
+	$mark = intropage_e2e_log_size();
+
 	$client->request('GET', INTROPAGE_E2E_PATH);
 
 	expect(intropage_e2e_panel_row('alert_host', $user))->toBe(0);
 	expect((int) intropage_e2e_cell('SELECT COUNT(*) FROM plugin_intropage_panel_dashboard WHERE user_id = ?', [$user]))->toBe(0);
+
+	// The cleanup logs a warning for the user on purpose; check it, then put
+	// cacti.log back so the CI log scan does not trip over it.
+	if ($mark !== null) {
+		expect(intropage_e2e_log_since($mark))->toContain('One or more panels was removed');
+
+		intropage_e2e_log_restore($mark);
+	}
 });
 
 it('lets the poller create the data row of a system panel that has none', function () {
