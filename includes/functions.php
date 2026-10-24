@@ -1718,6 +1718,23 @@ function intropage_favourite_graph(int $fav_graph_id, int $fav_graph_timespan) {
 }
 
 /**
+ * Encodes one pie or treemap data column as a JavaScript array literal.
+ * Labels come from the database (for example device template names), so
+ * they are encoded as JSON with the characters that can end a string or a
+ * script element escaped, instead of being pasted into the script.
+ *
+ * @param mixed $label The column label.
+ * @param mixed $value The column value; non-numeric values become 0.
+ *
+ * @return string The column literal followed by a trailing comma.
+ */
+function intropage_chart_column($label, $value): string {
+	$flags = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_INVALID_UTF8_SUBSTITUTE;
+
+	return json_encode([(string) $label, is_numeric($value) ? $value + 0 : 0], $flags) . ',';
+}
+
+/**
  * Renders one of this plugin's panel chart types (line, pie, or other
  * supported chart shape described by $dispdata) as embedded HTML/JS
  * (e.g. a C3/D3-based chart), sizing the chart according to the user's
@@ -1952,7 +1969,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$content .= '  columns: [';
 
 		foreach ($dispdata['pie']['data'] as $key => $value) {
-			$content .= "['" . $dispdata['pie']['label'][$key] . "', " . $value . '],';
+			$content .= intropage_chart_column($dispdata['pie']['label'][$key], $value);
 		}
 
 		$content .= '  ],';
@@ -1989,7 +2006,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$content .= '  columns: [';
 
 		foreach ($dispdata['treemap']['data'] as $key => $value) {
-			$content .= "['" . $dispdata['treemap']['label'][$key] . "', " . $value . '],';
+			$content .= intropage_chart_column($dispdata['treemap']['label'][$key], $value);
 		}
 
 		$content .= '  ],';
