@@ -501,7 +501,7 @@ function intropage_actions(): void {
 					$span = $_SESSION['sess_current_timespan'];
 				}
 
-				$prio = db_fetch_cell_prepared('SELECT MAX(priority) + 1
+				$prio = db_fetch_cell_prepared('SELECT COALESCE(MAX(priority), 0) + 1
 				FROM plugin_intropage_panel_data
 				WHERE user_id = ?',
 					[$_SESSION['sess_user_id']]);
