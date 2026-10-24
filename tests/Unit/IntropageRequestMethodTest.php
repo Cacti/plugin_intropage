@@ -80,6 +80,44 @@ describe('process_page_request_variables', function () {
 		expect(intropage_method_writes())->toBe([]);
 	});
 
+	it('adds a panel sent as POST', function () {
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$GLOBALS['__test_request'] = ['intropage_addpanel' => '3', 'dashboard_id' => '1'];
+		$GLOBALS['__test_query']   = function ($kind, $sql, $params) {
+			if (strpos($sql, 'FROM plugin_intropage_user_auth') !== false) {
+				return json_encode(['alert_host' => 'on']);
+			}
+
+			if (strpos($sql, 'SELECT panel_id') !== false) {
+				return 'alert_host';
+			}
+
+			return $kind === 'assoc' ? [] : '';
+		};
+
+		process_page_request_variables();
+
+		$writes = intropage_method_writes();
+
+		expect($writes)->toHaveCount(1);
+		expect($writes[0]['sql'])->toContain('INSERT INTO plugin_intropage_panel_dashboard');
+	});
+
+	it('saves settings sent as POST', function () {
+		$_SERVER['REQUEST_METHOD'] = 'POST';
+		$_POST                     = ['name_2' => 'Edge'];
+		$GLOBALS['__test_request'] = ['action' => 'save', 'save_settings' => '1'];
+
+		process_page_request_variables();
+
+		$_POST = [];
+
+		$writes = intropage_method_writes();
+
+		expect($writes)->toHaveCount(1);
+		expect($writes[0]['params'])->toBe(['Edge', 201, 2]);
+	});
+
 	it('ignores saving settings sent as GET', function () {
 		$_SERVER['REQUEST_METHOD'] = 'GET';
 		$GLOBALS['__test_request'] = ['action' => 'save', 'save_settings' => '1'];
@@ -132,6 +170,8 @@ describe('intropage_graph_button', function () {
 	it('renders a non-navigating button and binds one POST handler per page', function () {
 		global $redirectPage;
 
+		// is_panel_allowed() caches per user, so this test uses its own user
+		$_SESSION['sess_user_id']          = 202;
 		$_SESSION['sess_current_timespan'] = 5;
 		$GLOBALS['__test_query'] = function ($kind, $sql, $params) {
 			if (strpos($sql, 'FROM plugin_intropage_user_auth') !== false) {
