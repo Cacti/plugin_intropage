@@ -632,5 +632,5 @@ function intropage_user_remove($user_id): void {
  * @return void
  */
 function intropage_user_group_remove($group_id): void {
-	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE id = ?', [$group_id]);
+	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE user_group_id = ?', [$group_id]);
 }

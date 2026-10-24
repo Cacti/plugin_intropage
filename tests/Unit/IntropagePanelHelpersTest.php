@@ -58,3 +58,10 @@ it('removes the group auth record on user_group_remove', function () {
 	expect($GLOBALS['__test_db_calls'][0]['sql'])->toContain('plugin_intropage_user_group_auth');
 	expect($GLOBALS['__test_db_calls'][0]['params'])->toBe(array(7));
 });
+
+it('deletes the group auth record by its user_group_id key', function () {
+	intropage_user_group_remove(7);
+
+	expect($GLOBALS['__test_db_calls'][0]['sql'])->toContain('WHERE user_group_id = ?');
+	expect($GLOBALS['__test_db_calls'][0]['sql'])->not->toContain('WHERE id = ?');
+});
