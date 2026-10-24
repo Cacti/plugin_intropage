@@ -1235,6 +1235,86 @@ describe('favourite graphs', function () {
 	});
 });
 
+/**
+ * Runs the graph_buttons hook through Cacti for a user and returns the output.
+ */
+function intropage_e2e_graph_hook(int $user, int $graph, ?int $timespan = null): string {
+	$config = intropage_e2e_config();
+	$php    = escapeshellarg(PHP_BINARY);
+	$env    = 'INTROPAGE_E2E_CACTI=' . escapeshellarg($config['cacti']) . ' INTROPAGE_E2E_HOOK_USER=' . $user . ' INTROPAGE_E2E_HOOK_GRAPH=' . $graph;
+
+	if ($timespan !== null) {
+		$env .= ' INTROPAGE_E2E_HOOK_TIMESPAN=' . $timespan;
+	}
+
+	if ($config['cov'] !== '') {
+		$env .= ' INTROPAGE_COVERAGE_DIR=' . escapeshellarg($config['cov']);
+		$php .= ' -d memory_limit=1G -d xdebug.mode=coverage -d auto_prepend_file=' . escapeshellarg(__DIR__ . '/coverage-prepend.php');
+	}
+
+	return (string) shell_exec($env . ' ' . $php . ' ' . escapeshellarg(__DIR__ . '/hook-runner.php') . ' 2>&1');
+}
+
+describe('graph button hook', function () {
+	afterEach(function () {
+		if (intropage_e2e_config() !== null) {
+			intropage_e2e_drop_graphs();
+		}
+	});
+
+	it('adds a button that posts, and its script only once', function () {
+		[, $graph] = intropage_e2e_seed_graph('e2e hook graph');
+
+		$output = intropage_e2e_graph_hook(intropage_e2e_user_id('e2e_viewer'), $graph, 5);
+		$calls  = explode('--- call 2', $output);
+
+		expect($calls[0])->toContain('class="iconLink intropage_favgraph"');
+		expect($calls[0])->toContain('data-graph="' . $graph . '"');
+		expect($calls[0])->toContain('title="Add to Dashboard"');
+		expect($calls[0])->not->toContain('intropage_action=favgraph');
+		expect(substr_count($calls[0], '<script'))->toBe(1);
+		expect($calls[1])->toContain('data-graph="' . $graph . '"');
+		expect($calls[1])->not->toContain('<script');
+	});
+
+	it('offers to remove a graph that is already a favourite', function () {
+		[, $graph] = intropage_e2e_seed_graph('e2e hook graph');
+
+		$user = intropage_e2e_user_id('e2e_viewer');
+
+		intropage_e2e_exec('INSERT INTO plugin_intropage_panel_data (panel_id, user_id, priority, alarm, refresh_interval, trend_interval, height, fav_graph_id, fav_graph_timespan, last_update, last_trend_update) VALUES (?, ?, 30, ?, 300, 300, ?, ?, 5, NOW(), NOW())', ['favourite_graph', $user, 'green', 'normal', $graph]);
+
+		expect(intropage_e2e_graph_hook($user, $graph, 5))->toContain('title="Remove from Dashboard"');
+	});
+
+	it('explains that a custom timespan cannot be added', function () {
+		[, $graph] = intropage_e2e_seed_graph('e2e hook graph');
+
+		$output = intropage_e2e_graph_hook(intropage_e2e_user_id('e2e_viewer'), $graph, 0);
+
+		expect($output)->toContain('Cannot add to Dashboard. Custom timespan.');
+	});
+
+	it('adds no button for a user without the favourite graph permission', function () {
+		[, $graph] = intropage_e2e_seed_graph('e2e hook graph');
+
+		intropage_e2e_set_permissions('e2e_viewer', ['alert_host']);
+
+		$output = intropage_e2e_graph_hook(intropage_e2e_user_id('e2e_viewer'), $graph, 5);
+
+		expect($output)->not->toContain('intropage_favgraph');
+		expect($output)->not->toContain('<script');
+	});
+
+	it('does nothing without a numeric graph id', function () {
+		$config = intropage_e2e_config();
+
+		$output = (string) shell_exec('INTROPAGE_E2E_CACTI=' . escapeshellarg($config['cacti']) . ' INTROPAGE_E2E_HOOK_USER=1 INTROPAGE_E2E_HOOK_GRAPH=abc ' . escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(__DIR__ . '/hook-runner.php') . ' 2>&1');
+
+		expect($output)->toBe('');
+	});
+});
+
 /* ------------------------------------------------------------------ */
 /* threshold events with several users                                 */
 /* ------------------------------------------------------------------ */

@@ -22,7 +22,7 @@ it('does nothing when the end-to-end test file is executed directly', function (
 	$output = [];
 	$status = 1;
 
-	exec('INTROPAGE_E2E_URL=http://127.0.0.1:9 INTROPAGE_E2E_DSN=sqlite::memory: ' . escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($file) . ' 2>&1', $output, $status);
+	exec('INTROPAGE_E2E_HOST=127.0.0.1:9 INTROPAGE_E2E_DB_NAME=none ' . escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg($file) . ' 2>&1', $output, $status);
 
 	expect($output)->toBe([]);
 	expect($status)->toBe(0);
@@ -109,6 +109,16 @@ it('does nothing when the upgrade runner is executed without the test environmen
 	$status = 1;
 
 	exec('env -u INTROPAGE_E2E_CACTI -u INTROPAGE_E2E_UPGRADE_BASE ' . escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(realpath(__DIR__ . '/../Integration/upgrade-runner.php')) . ' 2>&1', $output, $status);
+
+	expect($output)->toBe([]);
+	expect($status)->toBe(0);
+});
+
+it('does nothing when the hook runner is executed without the test environment', function () {
+	$output = [];
+	$status = 1;
+
+	exec('env -u INTROPAGE_E2E_CACTI -u INTROPAGE_E2E_HOOK_USER -u INTROPAGE_E2E_HOOK_GRAPH ' . escapeshellarg(PHP_BINARY) . ' ' . escapeshellarg(realpath(__DIR__ . '/../Integration/hook-runner.php')) . ' 2>&1', $output, $status);
 
 	expect($output)->toBe([]);
 	expect($status)->toBe(0);
