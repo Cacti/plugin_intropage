@@ -286,6 +286,10 @@ if (!function_exists('get_simple_device_perms')) {
 }
 if (!function_exists('get_allowed_devices')) {
 	function get_allowed_devices($sql_where, $sql_order, $sql_limit, &$total_rows, $user_id = 0, ...$rest) {
+		if (!empty($GLOBALS['__test_allowed_devices_throw'])) {
+			throw new RuntimeException('device lookup failed');
+		}
+
 		$rows       = $GLOBALS['__test_allowed_devices'] ?? array();
 		$total_rows = count($rows);
 
@@ -294,7 +298,7 @@ if (!function_exists('get_allowed_devices')) {
 }
 if (!function_exists('read_user_setting')) {
 	function read_user_setting($n, $f = false, $force = false, $user_id = 0) {
-		return $f;
+		return $GLOBALS['__test_user_setting'][$n] ?? $f;
 	}
 }
 if (!function_exists('set_user_setting')) {

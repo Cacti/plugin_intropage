@@ -52,10 +52,13 @@ function intropage_get_allowed_devices($user_id) {
 		set_user_setting('hide_disabled', '', $user_id);
 	}
 
-	$allowed = get_allowed_devices('', 'null', '-1', $x, (int) $user_id);
-
-	if ($us == 'on') {
-		set_user_setting('hide_disabled', 'on', $user_id);
+	try {
+		$allowed = get_allowed_devices('', 'null', '-1', $x, (int) $user_id);
+	} finally {
+		// Put the stored preference back even when the lookup throws
+		if ($us == 'on') {
+			set_user_setting('hide_disabled', 'on', $user_id);
+		}
 	}
 
 	if (cacti_count($allowed)) {
