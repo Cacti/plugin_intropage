@@ -198,4 +198,18 @@ describe('reload and detail endpoints', function () {
 
 		expect($output)->toBe('Panel Not Found');
 	});
+
+	it('does not create a panel row when the details of an unknown id are requested', function () {
+		$_SESSION['sess_user_id'] = 110;
+
+		intropage_access_fixture(['alert_host' => 'on'], []);
+		$GLOBALS['__test_request'] = ['panel_id' => '12345'];
+
+		ob_start();
+		intropage_detail_panel();
+		$output = ob_get_clean();
+
+		expect($output)->toBe('Panel Not Found');
+		expect($GLOBALS['__test_saves'])->toBe([]);
+	});
 });

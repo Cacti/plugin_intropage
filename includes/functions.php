@@ -1248,13 +1248,20 @@ function intropage_detail_panel(): void {
 		$forced_update = false;
 	}
 
-	$panel = get_panel($panel_id, $_SESSION['sess_user_id']);
+	// Look the row up before get_panel(), which would create a row for an id that does not exist
+	$panel_name = db_fetch_cell_prepared('SELECT panel_id
+		FROM plugin_intropage_panel_data
+		WHERE id = ?
+		AND user_id IN (0, ?)',
+		[$panel_id, $_SESSION['sess_user_id']]);
 
-	if (!intropage_panel_visible($panel['panel_id'])) {
+	if (!intropage_panel_visible($panel_name)) {
 		print __('Panel Not Found', 'intropage');
 
 		return;
 	}
+
+	$panel = get_panel($panel_id, $_SESSION['sess_user_id']);
 
 	// Close the session to allow other tabs to operate
 	session_write_close();
