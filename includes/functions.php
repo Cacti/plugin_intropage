@@ -257,14 +257,16 @@ function intropage_action_settings(): void {
 		if (strpos($var, 'name_') !== false) {
 			$dashboard_id = intropage_parse_dashboard_id(str_replace('name_', '', $var));
 
-			if ($dashboard_id === null) {
+			if ($dashboard_id === null || !is_string($value)) {
 				continue;
 			}
 
-			db_execute_prepared('REPLACE INTO plugin_intropage_dashboard
-				(user_id, dashboard_id, name)
-				VALUES (?, ?, ?)',
-				[$_SESSION['sess_user_id'], $dashboard_id, $value]);
+			// UPDATE keeps the shared flag, which REPLACE would reset
+			db_execute_prepared('UPDATE plugin_intropage_dashboard
+				SET name = ?
+				WHERE user_id = ?
+				AND dashboard_id = ?',
+				[$value, $_SESSION['sess_user_id'], $dashboard_id]);
 		}
 	}
 
