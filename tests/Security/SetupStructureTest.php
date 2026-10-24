@@ -22,8 +22,10 @@ describe('intropage setup.php structure', function () {
 		expect($source)->toContain('function plugin_intropage_uninstall');
 	});
 
-	it('returns version array with name key', function () use ($source) {
-		expect($source)->toMatch('/[\'\""]name[\'\""]\s*=>/');
+	it('returns version array with name key', function () {
+		require_once __DIR__ . '/../../setup.php';
+
+		expect(plugin_intropage_version())->toHaveKey('name', 'intropage');
 	});
 
 	it('exposes the plugin version from the INFO file', function () use ($source) {
