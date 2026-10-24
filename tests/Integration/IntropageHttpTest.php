@@ -423,7 +423,9 @@ function intropage_e2e_coverage_token(string $name): void {
 	$dir = intropage_e2e_config()['cov'];
 
 	if ($dir !== '' && is_dir($dir)) {
-		file_put_contents($dir . '/current', substr(trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($name)), '-'), -80));
+		$slug = trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower(str_replace('__pest_evaluable_', '', $name))), '-');
+
+		file_put_contents($dir . '/current', substr($slug, 0, 80));
 	}
 }
 
