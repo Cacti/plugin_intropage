@@ -377,7 +377,7 @@ it('writes device template names into the chart as JSON strings', function () {
 	$user   = intropage_e2e_user_id();
 	$name   = "e2e-label',0]];x();//";
 
-	intropage_e2e_exec('INSERT INTO host_template (hash, name) VALUES (?, ?)', [md5(uniqid('', true)), substr($name, 0, 20)]);
+	intropage_e2e_exec('INSERT INTO host_template (hash, name) VALUES (?, ?)', [bin2hex(random_bytes(16)), substr($name, 0, 20)]);
 
 	$client->post(INTROPAGE_E2E_PATH, ['intropage_addpanel' => 'graph_host_template', 'dashboard_id' => '1', 'header' => 'false']);
 
