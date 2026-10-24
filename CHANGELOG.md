@@ -13,6 +13,9 @@
 * issue: Delete a user's own panel data row when the panel is withdrawn from them
 * issue: Restore the hide_disabled user setting when the device lookup fails
 * issue: Join threshold event permissions for the viewing user only, so events are no longer repeated once per user holding a permission
+* issue: Look up the panel row before building the details view, so an unknown panel id no longer logs a warning or creates a row
+* dev: Add end-to-end tests that log in to a running Cacti and drive intropage.php, the poller, the graph_buttons hook and the upgrade, and run them in CI against the installed Cacti served by PHP's built-in server
+* dev: Add tests/bin/e2e-coverage-report.php, which lists the tests that execute each changed line from the end-to-end Xdebug dumps and the unit XML coverage
 * issue: Fix the dashboard page not scrolling with the mouse wheel over chart panels: charts were sized from the whole card (header included) and overflowed the card body, turning it into a nested scroller that captured the wheel; charts now keep their server-sized height (which also stops pie/treemap charts growing on every window resize) and card bodies no longer scroll vertically
 * issue: Keep long Panel Details content inside the dialog and scrollable, instead of spilling under the Close button pane, on themes (e.g. deepness) that force `.ui-dialog-content` to `overflow: visible`; the dialog height is also capped to the viewport
 * issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip

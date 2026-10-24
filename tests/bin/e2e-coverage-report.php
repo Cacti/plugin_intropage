@@ -37,6 +37,7 @@ if ($argc < 3) {
 	exit(2);
 }
 
+$plugin    = dirname(__DIR__, 2);
 $base      = $argv[1];
 $e2e_dir   = rtrim($argv[2], '/');
 $unit_dir  = isset($argv[3]) && $argv[3] !== '--lines' ? rtrim($argv[3], '/') : '';
@@ -176,11 +177,14 @@ print "| File | Changed executable lines | Unit | End-to-end | Neither |\n|---|-
 $detail = '';
 
 foreach ($changed as $file => $lines) {
-	$executable = array_values(array_filter(array_unique($lines), static function (int $line) use ($file, $e2e): bool {
-		return isset($e2e['lines'][$file][$line]);
+	$source = file($plugin . '/' . $file, FILE_IGNORE_NEW_LINES) ?: [];
+
+	// Only lines Xdebug lists as executable count. A bare closing brace is listed for the implicit
+	// return of a function and is not code of its own, so it is left out.
+	$executable = array_values(array_filter(array_unique($lines), static function (int $line) use ($file, $e2e, $source): bool {
+		return isset($e2e['lines'][$file][$line]) && trim($source[$line - 1] ?? '') !== '}';
 	}));
 
-	// Lines Xdebug never saw as executable (comments, braces, signatures) are not counted.
 	sort($executable);
 
 	$in_unit = 0;
@@ -223,7 +227,9 @@ foreach ($changed as $file => $lines) {
 	foreach ($e2e['branches'][$file] ?? [] as $function => $branches) {
 		foreach ($branches as $id => [$line, $hits]) {
 			if ($hits === 0 && isset($lookup[$line])) {
-				printf("- %s:%d in %s (branch %d)\n", $file, $line, $function, $id);
+				$text = trim((string) (file($plugin . '/' . $file, FILE_IGNORE_NEW_LINES)[$line - 1] ?? ''));
+
+				printf("- %s:%d in %s (branch %d): %s\n", $file, $line, $function, $id, substr($text, 0, 90));
 
 				$none = false;
 			}
