@@ -1471,6 +1471,25 @@ function get_user_list(): array {
 }
 
 /**
+ * Sets the session user a poller row runs as and returns it as an integer.
+ * Panel definitions that have no data row yet come back from the poller's
+ * LEFT JOIN with a NULL user_id; those are system panels and run as user 0,
+ * so they neither fail get_panel()'s int parameter nor inherit the user of
+ * the row processed before them.
+ *
+ * @param mixed $user_id The user_id column of the poller row, possibly null.
+ *
+ * @return int The user id now stored in the session.
+ */
+function intropage_poller_impersonate($user_id): int {
+	$user_id = (int) $user_id;
+
+	$_SESSION['sess_user_id'] = $user_id;
+
+	return $user_id;
+}
+
+/**
  * Persists a panel's freshly computed data/alarm state back to its
  * plugin_intropage_panel_data row and updates its last-update
  * timestamp. Called at the end of every panel's data-update function.
