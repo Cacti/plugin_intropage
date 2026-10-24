@@ -955,6 +955,46 @@ function get_allowed_panels(int $user_id = 0) {
 }
 
 /**
+ * Removes the panels of a dashboard that the user is no longer permitted to
+ * see: the dashboard link and the user's own panel data row.
+ *
+ * @param int $user_id      The user whose dashboard is cleaned up.
+ * @param int $dashboard_id The dashboard to clean up.
+ *
+ * @return int The number of panels removed.
+ */
+function intropage_remove_prohibited_panels(int $user_id, int $dashboard_id): int {
+	$panels = db_fetch_assoc_prepared('SELECT pd.panel_id AS panel_name, pd.id AS id
+		FROM plugin_intropage_panel_data AS pd
+		INNER JOIN plugin_intropage_panel_dashboard AS pda
+		ON pd.id = pda.panel_id
+		WHERE pda.user_id = ?
+		AND pda.dashboard_id = ?',
+		[$user_id, $dashboard_id]);
+
+	$removed = 0;
+
+	foreach ($panels as $one) {
+		if (!is_panel_allowed($one['panel_name'])) {
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+				WHERE user_id = ?
+				AND dashboard_id = ?
+				AND panel_id = ?',
+				[$user_id, $dashboard_id, $one['id']]);
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND id = ?',
+				[$user_id, $one['id']]);
+
+			$removed++;
+		}
+	}
+
+	return $removed;
+}
+
+/**
  * Determines whether the current user may view an existing panel row. The
  * admin alert and maintenance panels are rendered for every user and are not
  * listed on the permission forms, so they are always visible; every other
