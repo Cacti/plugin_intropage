@@ -76,6 +76,21 @@ $GLOBALS['config'] = array(
 
 $GLOBALS['__test_db_calls'] = array();
 
+/*
+ * Tests may script query results by setting $GLOBALS['__test_query'] to a
+ * callable(string $kind, string $sql, array $params) that returns the rows,
+ * row or cell for that call. Unscripted calls keep the defaults below.
+ */
+if (!function_exists('intropage_test_query')) {
+	function intropage_test_query($kind, $sql, $params, $default) {
+		if (isset($GLOBALS['__test_query'])) {
+			return $GLOBALS['__test_query']($kind, $sql, $params);
+		}
+
+		return $default;
+	}
+}
+
 if (!function_exists('get_md5_include_js')) {
 	function get_md5_include_js($path, $async = false) {
 		return "<script type='text/javascript' src='" . $path . "'></script>";
@@ -103,32 +118,32 @@ if (!function_exists('db_execute_prepared')) {
 if (!function_exists('db_fetch_assoc')) {
 	function db_fetch_assoc($sql) {
 		$GLOBALS['__test_db_calls'][] = array('fn' => 'db_fetch_assoc', 'sql' => $sql, 'params' => array());
-		return $GLOBALS['__test_fetch_assoc'] ?? array();
+		return intropage_test_query('assoc', $sql, array(), $GLOBALS['__test_fetch_assoc'] ?? array());
 	}
 }
 if (!function_exists('db_fetch_assoc_prepared')) {
 	function db_fetch_assoc_prepared($sql, $p = array()) {
-		return array();
+		return intropage_test_query('assoc', $sql, $p, array());
 	}
 }
 if (!function_exists('db_fetch_row')) {
 	function db_fetch_row($sql) {
-		return $GLOBALS['__test_fetch_row'] ?? array();
+		return intropage_test_query('row', $sql, array(), $GLOBALS['__test_fetch_row'] ?? array());
 	}
 }
 if (!function_exists('db_fetch_row_prepared')) {
 	function db_fetch_row_prepared($sql, $p = array()) {
-		return array();
+		return intropage_test_query('row', $sql, $p, array());
 	}
 }
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql) {
-		return $GLOBALS['__test_fetch_cell'] ?? '';
+		return intropage_test_query('cell', $sql, array(), $GLOBALS['__test_fetch_cell'] ?? '');
 	}
 }
 if (!function_exists('db_fetch_cell_prepared')) {
 	function db_fetch_cell_prepared($sql, $p = array()) {
-		return '';
+		return intropage_test_query('cell', $sql, $p, '');
 	}
 }
 if (!function_exists('db_index_exists')) {
@@ -292,17 +307,41 @@ if (!function_exists('raise_message')) {
 }
 if (!function_exists('get_request_var')) {
 	function get_request_var($n) {
-		return '';
+		return $GLOBALS['__test_request'][$n] ?? '';
 	}
 }
 if (!function_exists('get_nfilter_request_var')) {
 	function get_nfilter_request_var($n) {
-		return '';
+		return $GLOBALS['__test_request'][$n] ?? '';
 	}
 }
 if (!function_exists('get_filter_request_var')) {
 	function get_filter_request_var($n) {
-		return '';
+		return $GLOBALS['__test_request'][$n] ?? '';
+	}
+}
+if (!function_exists('isset_request_var')) {
+	function isset_request_var($n) {
+		return isset($GLOBALS['__test_request'][$n]);
+	}
+}
+if (!function_exists('set_default_action')) {
+	function set_default_action() {
+	}
+}
+if (!function_exists('api_user_realm_auth')) {
+	function api_user_realm_auth($r) {
+		return $GLOBALS['__test_realms'][$r] ?? false;
+	}
+}
+if (!function_exists('api_plugin_user_realm_auth')) {
+	function api_plugin_user_realm_auth($r) {
+		return $GLOBALS['__test_realms'][$r] ?? false;
+	}
+}
+if (!function_exists('db_fetch_insert_id')) {
+	function db_fetch_insert_id() {
+		return $GLOBALS['__test_insert_id'] ?? 1;
 	}
 }
 if (!function_exists('form_input_validate')) {
@@ -317,6 +356,8 @@ if (!function_exists('is_error_message')) {
 }
 if (!function_exists('sql_save')) {
 	function sql_save($a, $t, $k = 'id') {
+		$GLOBALS['__test_saves'][] = array('table' => $t, 'row' => $a);
+
 		return isset($a['id']) ? $a['id'] : 1;
 	}
 }

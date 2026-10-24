@@ -150,6 +150,16 @@ function intropage_action_add_panel(): void {
 
 	if (is_numeric(get_nfilter_request_var('intropage_addpanel'))) {
 		$addpanel = get_filter_request_var('intropage_addpanel');
+
+		$panel_name = db_fetch_cell_prepared('SELECT panel_id
+			FROM plugin_intropage_panel_data
+			WHERE id = ?
+			AND user_id IN (0, ?)',
+			[$addpanel, $_SESSION['sess_user_id']]);
+
+		if (!is_panel_allowed((string) $panel_name)) {
+			return;
+		}
 	} else {
 		$panel_id = get_nfilter_request_var('intropage_addpanel');
 
@@ -158,7 +168,7 @@ function intropage_action_add_panel(): void {
 			WHERE panel_id = ?',
 			[$panel_id]);
 
-		if (!is_array($panel)) {
+		if (!is_array($panel) || !is_panel_allowed($panel_id)) {
 			return;
 		}
 
@@ -921,6 +931,26 @@ function get_allowed_panels(int $user_id = 0) {
 }
 
 /**
+ * Determines whether the current user may view an existing panel row. The
+ * admin alert and maintenance panels are rendered for every user and are not
+ * listed on the permission forms, so they are always visible; every other
+ * panel needs the per-user or per-group permission.
+ *
+ * @param mixed $panel_id The panel_id (name) stored on the panel data row.
+ *
+ * @return bool True if the panel may be shown to the current user.
+ */
+function intropage_panel_visible($panel_id): bool {
+	$panel_id = (string) $panel_id;
+
+	if ($panel_id === 'admin_alert' || $panel_id === 'maint') {
+		return true;
+	}
+
+	return is_panel_allowed($panel_id);
+}
+
+/**
  * Builds the force-reload control shown in a force-enabled panel's
  * header. Clicking it invokes reload_panel() (see includes/intropage.js),
  * which spins the fa-sync-alt glyph while the panel reloads.
@@ -1024,6 +1054,12 @@ function intropage_reload_panel(): void {
 		WHERE id = ?
 		AND user_id IN (0, ?)',
 		[$panel_id, $_SESSION['sess_user_id']]);
+
+	if (is_array($panel) && cacti_sizeof($panel) && !intropage_panel_visible($panel['panel_id'])) {
+		print __('Panel not found', 'intropage');
+
+		return;
+	}
 
 	// Close the session to allow other tabs to operate
 	session_write_close();
@@ -1146,6 +1182,12 @@ function intropage_detail_panel(): void {
 	}
 
 	$panel = get_panel($panel_id, $_SESSION['sess_user_id']);
+
+	if (!intropage_panel_visible($panel['panel_id'])) {
+		print __('Panel Not Found', 'intropage');
+
+		return;
+	}
 
 	// Close the session to allow other tabs to operate
 	session_write_close();
