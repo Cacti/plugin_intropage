@@ -1542,6 +1542,56 @@ function intropage_poller_impersonate($user_id): int {
 }
 
 /**
+ * Selects the panel data rows the poller has to refresh: those whose
+ * refresh interval has passed and system panels that have no row yet. Rows
+ * of users that no longer exist are left out, so the poller does not run
+ * panel code for them (Cacti logs an authentication error for each).
+ *
+ * @return array The due rows.
+ */
+function intropage_poller_due_panels(): array {
+	return db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
+		pd.refresh, ud.refresh_interval, pd.update_func
+		FROM plugin_intropage_panel_definition AS pd
+		LEFT JOIN plugin_intropage_panel_data AS ud
+		ON pd.panel_id = ud.panel_id
+		LEFT JOIN user_auth AS ua
+		ON ua.id = ud.user_id
+		WHERE (UNIX_TIMESTAMP(last_update) < UNIX_TIMESTAMP() - refresh_interval
+		OR (last_update IS NULL AND level = 0))
+		AND (ud.user_id IS NULL OR ud.user_id = 0 OR ua.id IS NOT NULL)');
+}
+
+/**
+ * Deletes dashboard links and panel data rows of users that no longer
+ * exist, a bounded number per call. The user_remove hook does this when a
+ * user is deleted while the plugin is active; rows are left behind when it
+ * was not. System rows (user 0) are never touched, and nothing is deleted
+ * when the user table cannot be read or is empty.
+ *
+ * @param int $limit The most rows deleted from each table per call.
+ *
+ * @return void
+ */
+function intropage_purge_orphan_rows(int $limit = 500): void {
+	if ((int) db_fetch_cell('SELECT COUNT(*) FROM user_auth') === 0) {
+		return;
+	}
+
+	$limit = max(1, $limit);
+
+	db_execute('DELETE FROM plugin_intropage_panel_dashboard
+		WHERE user_id > 0
+		AND user_id NOT IN (SELECT id FROM user_auth)
+		LIMIT ' . $limit);
+
+	db_execute('DELETE FROM plugin_intropage_panel_data
+		WHERE user_id > 0
+		AND user_id NOT IN (SELECT id FROM user_auth)
+		LIMIT ' . $limit);
+}
+
+/**
  * Persists a panel's freshly computed data/alarm state back to its
  * plugin_intropage_panel_data row and updates its last-update
  * timestamp. Called at the end of every panel's data-update function.
