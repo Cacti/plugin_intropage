@@ -52,10 +52,13 @@ function intropage_get_allowed_devices($user_id) {
 		set_user_setting('hide_disabled', '', $user_id);
 	}
 
-	$allowed = get_allowed_devices('', 'null', '-1', $x, (int) $user_id);
-
-	if ($us == 'on') {
-		set_user_setting('hide_disabled', 'on', $user_id);
+	try {
+		$allowed = get_allowed_devices('', 'null', '-1', $x, (int) $user_id);
+	} finally {
+		// Put the stored preference back even when the lookup throws
+		if ($us == 'on') {
+			set_user_setting('hide_disabled', 'on', $user_id);
+		}
 	}
 
 	if (cacti_count($allowed)) {
@@ -104,14 +107,27 @@ function intropage_device_scope($user_id): array {
 function process_page_request_variables(): void {
 	set_default_action();
 
+	// Actions that change data are only honoured as POST requests, which
+	// Cacti protects with its CSRF token. Rendering the panel select is the
+	// one read-only intropage_action.
+	$posted = intropage_is_post_request();
+
 	if (isset_request_var('intropage_addpanel')) {
-		intropage_action_add_panel();
+		if ($posted) {
+			intropage_action_add_panel();
+		}
 	} elseif (isset_request_var('action') && isset_request_var('save_settings')) {
-		intropage_action_settings();
+		if ($posted) {
+			intropage_action_settings();
+		}
 	} elseif (isset_request_var('intropage_action')) {
-		intropage_actions();
+		if ($posted || get_nfilter_request_var('intropage_action') == 'addpanelselect') {
+			intropage_actions();
+		}
 	} elseif (isset_request_var('intropage_action_timespan')) {
-		intropage_actions_timespan();
+		if ($posted) {
+			intropage_actions_timespan();
+		}
 	} elseif (get_request_var('action') != '') {
 		switch(get_request_var('action')) {
 			case 'configure':
@@ -137,6 +153,15 @@ function process_page_request_variables(): void {
 }
 
 /**
+ * Tells whether the current request was made with the POST method.
+ *
+ * @return bool True for a POST request.
+ */
+function intropage_is_post_request(): bool {
+	return ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
+}
+
+/**
  * Handles adding a panel to the current dashboard: creates a new
  * plugin_intropage_panel_data row for the panel if one doesn't already
  * exist (by panel_id), then associates it with the target dashboard.
@@ -150,6 +175,16 @@ function intropage_action_add_panel(): void {
 
 	if (is_numeric(get_nfilter_request_var('intropage_addpanel'))) {
 		$addpanel = get_filter_request_var('intropage_addpanel');
+
+		$panel_name = db_fetch_cell_prepared('SELECT panel_id
+			FROM plugin_intropage_panel_data
+			WHERE id = ?
+			AND user_id IN (0, ?)',
+			[$addpanel, $_SESSION['sess_user_id']]);
+
+		if (!is_panel_allowed((string) $panel_name)) {
+			return;
+		}
 	} else {
 		$panel_id = get_nfilter_request_var('intropage_addpanel');
 
@@ -158,7 +193,7 @@ function intropage_action_add_panel(): void {
 			WHERE panel_id = ?',
 			[$panel_id]);
 
-		if (!is_array($panel)) {
+		if (!is_array($panel) || !is_panel_allowed($panel_id)) {
 			return;
 		}
 
@@ -225,14 +260,16 @@ function intropage_action_settings(): void {
 		if (strpos($var, 'name_') !== false) {
 			$dashboard_id = intropage_parse_dashboard_id(str_replace('name_', '', $var));
 
-			if ($dashboard_id === null) {
+			if ($dashboard_id === null || !is_string($value)) {
 				continue;
 			}
 
-			db_execute_prepared('REPLACE INTO plugin_intropage_dashboard
-				(user_id, dashboard_id, name)
-				VALUES (?, ?, ?)',
-				[$_SESSION['sess_user_id'], $dashboard_id, $value]);
+			// UPDATE keeps the shared flag, which REPLACE would reset
+			db_execute_prepared('UPDATE plugin_intropage_dashboard
+				SET name = ?
+				WHERE user_id = ?
+				AND dashboard_id = ?',
+				[$value, $_SESSION['sess_user_id'], $dashboard_id]);
 		}
 	}
 
@@ -921,6 +958,66 @@ function get_allowed_panels(int $user_id = 0) {
 }
 
 /**
+ * Removes the panels of a dashboard that the user is no longer permitted to
+ * see: the dashboard link and the user's own panel data row.
+ *
+ * @param int $user_id      The user whose dashboard is cleaned up.
+ * @param int $dashboard_id The dashboard to clean up.
+ *
+ * @return int The number of panels removed.
+ */
+function intropage_remove_prohibited_panels(int $user_id, int $dashboard_id): int {
+	$panels = db_fetch_assoc_prepared('SELECT pd.panel_id AS panel_name, pd.id AS id
+		FROM plugin_intropage_panel_data AS pd
+		INNER JOIN plugin_intropage_panel_dashboard AS pda
+		ON pd.id = pda.panel_id
+		WHERE pda.user_id = ?
+		AND pda.dashboard_id = ?',
+		[$user_id, $dashboard_id]);
+
+	$removed = 0;
+
+	foreach ($panels as $one) {
+		if (!is_panel_allowed($one['panel_name'])) {
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+				WHERE user_id = ?
+				AND dashboard_id = ?
+				AND panel_id = ?',
+				[$user_id, $dashboard_id, $one['id']]);
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND id = ?',
+				[$user_id, $one['id']]);
+
+			$removed++;
+		}
+	}
+
+	return $removed;
+}
+
+/**
+ * Determines whether the current user may view an existing panel row. The
+ * admin alert and maintenance panels are rendered for every user and are not
+ * listed on the permission forms, so they are always visible; every other
+ * panel needs the per-user or per-group permission.
+ *
+ * @param mixed $panel_id The panel_id (name) stored on the panel data row.
+ *
+ * @return bool True if the panel may be shown to the current user.
+ */
+function intropage_panel_visible($panel_id): bool {
+	$panel_id = (string) $panel_id;
+
+	if ($panel_id === 'admin_alert' || $panel_id === 'maint') {
+		return true;
+	}
+
+	return is_panel_allowed($panel_id);
+}
+
+/**
  * Builds the force-reload control shown in a force-enabled panel's
  * header. Clicking it invokes reload_panel() (see includes/intropage.js),
  * which spins the fa-sync-alt glyph while the panel reloads.
@@ -1024,6 +1121,12 @@ function intropage_reload_panel(): void {
 		WHERE id = ?
 		AND user_id IN (0, ?)',
 		[$panel_id, $_SESSION['sess_user_id']]);
+
+	if (is_array($panel) && cacti_sizeof($panel) && !intropage_panel_visible($panel['panel_id'])) {
+		print __('Panel not found', 'intropage');
+
+		return;
+	}
 
 	// Close the session to allow other tabs to operate
 	session_write_close();
@@ -1143,6 +1246,19 @@ function intropage_detail_panel(): void {
 		$forced_update = filter_var(get_nfilter_request_var('force'), FILTER_VALIDATE_BOOLEAN);
 	} else {
 		$forced_update = false;
+	}
+
+	// Look the row up before get_panel(), which would create a row for an id that does not exist
+	$panel_name = db_fetch_cell_prepared('SELECT panel_id
+		FROM plugin_intropage_panel_data
+		WHERE id = ?
+		AND user_id IN (0, ?)',
+		[$panel_id, $_SESSION['sess_user_id']]);
+
+	if (!intropage_panel_visible($panel_name)) {
+		print __('Panel Not Found', 'intropage');
+
+		return;
 	}
 
 	$panel = get_panel($panel_id, $_SESSION['sess_user_id']);
@@ -1404,6 +1520,25 @@ function get_user_list(): array {
 	}
 
 	return $users;
+}
+
+/**
+ * Sets the session user a poller row runs as and returns it as an integer.
+ * Panel definitions that have no data row yet come back from the poller's
+ * LEFT JOIN with a NULL user_id; those are system panels and run as user 0,
+ * so they neither fail get_panel()'s int parameter nor inherit the user of
+ * the row processed before them.
+ *
+ * @param mixed $user_id The user_id column of the poller row, possibly null.
+ *
+ * @return int The user id now stored in the session.
+ */
+function intropage_poller_impersonate($user_id): int {
+	$user_id = (int) $user_id;
+
+	$_SESSION['sess_user_id'] = $user_id;
+
+	return $user_id;
 }
 
 /**
@@ -1718,6 +1853,23 @@ function intropage_favourite_graph(int $fav_graph_id, int $fav_graph_timespan) {
 }
 
 /**
+ * Encodes one pie or treemap data column as a JavaScript array literal.
+ * Labels come from the database (for example device template names), so
+ * they are encoded as JSON with the characters that can end a string or a
+ * script element escaped, instead of being pasted into the script.
+ *
+ * @param mixed $label The column label.
+ * @param mixed $value The column value; non-numeric values become 0.
+ *
+ * @return string The column literal followed by a trailing comma.
+ */
+function intropage_chart_column($label, $value): string {
+	$flags = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_INVALID_UTF8_SUBSTITUTE;
+
+	return json_encode([(string) $label, is_numeric($value) ? $value + 0 : 0], $flags) . ',';
+}
+
+/**
  * Renders one of this plugin's panel chart types (line, pie, or other
  * supported chart shape described by $dispdata) as embedded HTML/JS
  * (e.g. a C3/D3-based chart), sizing the chart according to the user's
@@ -1952,7 +2104,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$content .= '  columns: [';
 
 		foreach ($dispdata['pie']['data'] as $key => $value) {
-			$content .= "['" . $dispdata['pie']['label'][$key] . "', " . $value . '],';
+			$content .= intropage_chart_column($dispdata['pie']['label'][$key], $value);
 		}
 
 		$content .= '  ],';
@@ -1989,7 +2141,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$content .= '  columns: [';
 
 		foreach ($dispdata['treemap']['data'] as $key => $value) {
-			$content .= "['" . $dispdata['treemap']['label'][$key] . "', " . $value . '],';
+			$content .= intropage_chart_column($dispdata['treemap']['label'][$key], $value);
 		}
 
 		$content .= '  ],';
@@ -2338,6 +2490,8 @@ function ntp_time(string $host) {
 function intropage_graph_button($data): void {
 	global $config, $callbackPage, $redirectPage;
 
+	static $script_printed = false;
+
 	$login_opts = get_login_opts();
 
 	if ($login_opts == 4) {
@@ -2368,8 +2522,38 @@ function intropage_graph_button($data): void {
 			}
 		}
 
-		print '<a class="iconLink" href="' . html_escape("$redirectPage?intropage_action=favgraph&graph_id=$local_graph_id") . '">' . $fav . '</a><br/>';
+		print '<a class="iconLink intropage_favgraph" href="#" data-action="' . html_escape($redirectPage) . '" data-graph="' . (int) $local_graph_id . '">' . $fav . '</a><br/>';
+
+		if (!$script_printed) {
+			$script_printed = true;
+
+			print intropage_favgraph_script();
+		}
 	}
+}
+
+/**
+ * Builds the script that turns a favorite-graph button click into a POST to
+ * the dashboard page. The button is rendered on Cacti's graph pages, outside
+ * the dashboard's own JavaScript, and a state change has to carry the CSRF
+ * token.
+ *
+ * @return string The script element, bound once per page.
+ */
+function intropage_favgraph_script(): string {
+	$nonce = function_exists('plugin_intropage_csp_nonce') ? plugin_intropage_csp_nonce() : '';
+
+	return '<script type="text/javascript" ' . $nonce . '>' .
+		'$(document).off("click.intropageFav").on("click.intropageFav", "a.intropage_favgraph", function(event) {' .
+		'event.preventDefault();' .
+		'var link = $(this);' .
+		'var form = $("<form method=\"post\"></form>").attr("action", link.attr("data-action"));' .
+		'var fields = { intropage_action: "favgraph", graph_id: link.attr("data-graph"), __csrf_magic: csrfMagicToken };' .
+		'$.each(fields, function(name, value) { $("<input type=\"hidden\"/>").attr("name", name).val(value).appendTo(form); });' .
+		'form.appendTo("body");' .
+		'form.get(0).submit();' .
+		'});' .
+		'</script>';
 }
 
 /**
@@ -2386,14 +2570,17 @@ function intropage_graph_button($data): void {
  * @return int The resolved login_opts value.
  */
 function get_login_opts(bool $refresh = false): int {
-	if (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_console') {
+	$requested = '';
+
+	if (isset_request_var('intropage_action') && intropage_is_post_request()) {
+		$requested = get_nfilter_request_var('intropage_action');
+	}
+
+	if ($requested == 'loginopt_console') {
 		$_SESSION['intropage_login_opts'] = 1;
-	} elseif (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_tab') {
+	} elseif ($requested == 'loginopt_tab') {
 		$_SESSION['intropage_login_opts'] = 4;
-	} elseif (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_graph') {
+	} elseif ($requested == 'loginopt_graph') {
 		$_SESSION['intropage_login_opts'] = 2;
 	} elseif (empty($_SESSION['intropage_login_opts']) || $refresh) {
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts

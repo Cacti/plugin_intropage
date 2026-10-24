@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-10-10 09:28-0400\n"
+"POT-Creation-Date: 2026-10-23 21:21-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -299,6 +299,10 @@ msgid "Disable panel"
 msgstr ""
 
 #: includes/functions.php
+msgid "Panel not found"
+msgstr ""
+
+#: includes/functions.php
 msgid "The Panel includes a render function but it does not exist."
 msgstr ""
 
@@ -315,15 +319,11 @@ msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload 
 msgstr ""
 
 #: includes/functions.php
-msgid "Panel not found"
+msgid "Panel Not Found"
 msgstr ""
 
 #: includes/functions.php
 msgid "Details Function does not exist."
-msgstr ""
-
-#: includes/functions.php
-msgid "Panel Not Found"
 msgstr ""
 
 #: includes/functions.php

@@ -246,10 +246,8 @@ function intropage_gather_stats(): array {
 	foreach ($upanels as $upanel) {
 		$start = microtime(true);
 
-		// Fake a session variable
-		if ($upanel['user_id'] > 0) {
-			$_SESSION['sess_user_id'] = $upanel['user_id'];
-		}
+		// Fake a session variable; system panels (no owner) run as user 0
+		$upanel['user_id'] = intropage_poller_impersonate($upanel['user_id']);
 
 		// Required plugin is not installed, but entry not purged
 		if (!isset($panels[$upanel['panel_id']])) {

@@ -36,6 +36,13 @@ permissions:
 
 env:
   CACTI: 1.2.x
+  # Where the end-to-end tests reach the Cacti web server and its database
+  INTROPAGE_E2E_SCHEME: http
+  INTROPAGE_E2E_HOST: 127.0.0.1:8080
+  INTROPAGE_E2E_DB_HOST: 127.0.0.1
+  INTROPAGE_E2E_DB_NAME: cacti
+  INTROPAGE_E2E_DB_USER: cactiuser
+  INTROPAGE_E2E_DB_PASS: cactiuser
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
@@ -197,7 +204,41 @@ jobs:
     - name: Set expected Cacti version for unit tests
       run: echo -n "${{ env.CACTI }}" | sudo tee ${{ github.workspace }}/cacti/plugins/intropage/tests/.cacti-version > /dev/null
 
+    # The installer runs as root and leaves cacti.log owned by root; the tests
+    # restore the log after provoking warnings, so the runner needs write access.
+    - name: Make the Cacti log writable for the tests
+      run: |
+        sudo chown -R www-data:runner ${{ github.workspace }}/cacti/log
+        sudo find ${{ github.workspace }}/cacti/log -type d -exec chmod 775 {} \;
+        sudo find ${{ github.workspace }}/cacti/log -type f -exec chmod 664 {} \;
+
+    # The end-to-end tests send real requests to intropage.php, so serve the
+    # installed Cacti with PHP's built-in server as the web user.
+    - name: Serve Cacti for the end-to-end tests
+      run: |
+        p="${{ github.workspace }}"
+        while [ "$p" != "/" ]; do
+          sudo chmod o+x "$p" || true
+          p=$(dirname "$p")
+        done
+
+        cd ${{ github.workspace }}/cacti
+        sudo sed -i "s#^\$url_path = .*#\$url_path = '/';#" include/config.php
+        sudo -u www-data nohup php -S "$INTROPAGE_E2E_HOST" -t ${{ github.workspace }}/cacti > "${{ runner.temp }}/cacti-web.log" 2>&1 &
+
+        for i in $(seq 1 30); do
+          if curl -s -o /dev/null --max-time 2 "$INTROPAGE_E2E_SCHEME://$INTROPAGE_E2E_HOST/index.php"; then
+            exit 0
+          fi
+          sleep 1
+        done
+
+        cat "${{ runner.temp }}/cacti-web.log"
+        exit 1
+
     - name: Run Pest Unit Tests
+      env:
+        INTROPAGE_E2E_CACTI: ${{ github.workspace }}/cacti
       run: |
         cd ${{ github.workspace }}/cacti
         "$CACTI_PEST_BIN" --configuration=plugins/intropage/phpunit.xml \

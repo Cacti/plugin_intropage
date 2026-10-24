@@ -257,8 +257,6 @@ function intropage_upgrade_database(): void {
 				$panels      = initialize_panel_library();
 				$permissions = db_fetch_assoc('SELECT * FROM plugin_intropage_user_auth');
 
-				$permissions['favourite_graph'] = 'on';
-
 				if (cacti_sizeof($permissions)) {
 					foreach ($permissions as $p) {
 						$user = $p['user_id'];
@@ -273,6 +271,8 @@ function intropage_upgrade_database(): void {
 								unset($p[$panel_id]);
 							}
 						}
+
+						$p['favourite_graph'] = 'on';
 
 						$perms = json_encode($p);
 
