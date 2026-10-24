@@ -18,9 +18,12 @@ contributions past, present and future.
 
 ## Screenshot
 
-![Screenshot](https://user-images.githubusercontent.com/26485719/41935583-78f73d32-798a-11e8-83f4-768d2e454a79.png)
+![Intropage dashboard with nine panels](images/intropage-dashboard.png)
 
-The screenshot dates from 2018 and shows an older version of the page.
+A dashboard with nine panels: host alerts, an analysis of the Cacti objects,
+devices by template and by status, poller information, and the five worst
+devices by ping, availability, polling time and polling ratio. The screenshot
+was taken on Cacti 1.2.32 with demo devices.
 
 ## Requirements
 
