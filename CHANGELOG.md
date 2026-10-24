@@ -2,6 +2,17 @@
 
 --- develop ---
 
+* security: Encode pie and treemap chart columns as JSON so device template names can no longer end the string in the inline chart script
+* security: Check the panel permission when a panel is added, reloaded or opened in the detail dialog, not only when the dashboard renders
+* security: Accept dashboard actions that change data (add, remove, resize, settings, sharing, login option) only as POST so they carry Cacti's CSRF token; the favorite-graph button and the panel tools now post
+* issue: Fix the poller stopping with a TypeError, and Cacti disabling the plugin, when a system panel definition has no data row yet; poller rows without an owner now run as user 0
+* issue: Fix the upgrade from 3.0.0 or older failing on PHP 8 while converting per-panel permissions
+* issue: Fix deleting a user group leaving its Intropage permission row behind
+* issue: Keep a dashboard's shared flag when dashboards are renamed in the settings form
+* issue: Apply the Intropage Viewer realm check on online remote pollers as well as on the main poller
+* issue: Delete a user's own panel data row when the panel is withdrawn from them
+* issue: Restore the hide_disabled user setting when the device lookup fails
+* issue: Join threshold event permissions for the viewing user only, so events are no longer repeated once per user holding a permission
 * issue: Fix the dashboard page not scrolling with the mouse wheel over chart panels: charts were sized from the whole card (header included) and overflowed the card body, turning it into a nested scroller that captured the wheel; charts now keep their server-sized height (which also stops pie/treemap charts growing on every window resize) and card bodies no longer scroll vertically
 * issue: Keep long Panel Details content inside the dialog and scrollable, instead of spilling under the Close button pane, on themes (e.g. deepness) that force `.ui-dialog-content` to `overflow: visible`; the dialog height is also capped to the viewport
 * issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip
