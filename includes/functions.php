@@ -104,14 +104,27 @@ function intropage_device_scope($user_id): array {
 function process_page_request_variables(): void {
 	set_default_action();
 
+	// Actions that change data are only honoured as POST requests, which
+	// Cacti protects with its CSRF token. Rendering the panel select is the
+	// one read-only intropage_action.
+	$posted = intropage_is_post_request();
+
 	if (isset_request_var('intropage_addpanel')) {
-		intropage_action_add_panel();
+		if ($posted) {
+			intropage_action_add_panel();
+		}
 	} elseif (isset_request_var('action') && isset_request_var('save_settings')) {
-		intropage_action_settings();
+		if ($posted) {
+			intropage_action_settings();
+		}
 	} elseif (isset_request_var('intropage_action')) {
-		intropage_actions();
+		if ($posted || get_nfilter_request_var('intropage_action') == 'addpanelselect') {
+			intropage_actions();
+		}
 	} elseif (isset_request_var('intropage_action_timespan')) {
-		intropage_actions_timespan();
+		if ($posted) {
+			intropage_actions_timespan();
+		}
 	} elseif (get_request_var('action') != '') {
 		switch(get_request_var('action')) {
 			case 'configure':
@@ -134,6 +147,15 @@ function process_page_request_variables(): void {
 
 		exit;
 	}
+}
+
+/**
+ * Tells whether the current request was made with the POST method.
+ *
+ * @return bool True for a POST request.
+ */
+function intropage_is_post_request(): bool {
+	return ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
 }
 
 /**
@@ -2397,6 +2419,8 @@ function ntp_time(string $host) {
 function intropage_graph_button($data): void {
 	global $config, $callbackPage, $redirectPage;
 
+	static $script_printed = false;
+
 	$login_opts = get_login_opts();
 
 	if ($login_opts == 4) {
@@ -2427,8 +2451,38 @@ function intropage_graph_button($data): void {
 			}
 		}
 
-		print '<a class="iconLink" href="' . html_escape("$redirectPage?intropage_action=favgraph&graph_id=$local_graph_id") . '">' . $fav . '</a><br/>';
+		print '<a class="iconLink intropage_favgraph" href="#" data-action="' . html_escape($redirectPage) . '" data-graph="' . (int) $local_graph_id . '">' . $fav . '</a><br/>';
+
+		if (!$script_printed) {
+			$script_printed = true;
+
+			print intropage_favgraph_script();
+		}
 	}
+}
+
+/**
+ * Builds the script that turns a favorite-graph button click into a POST to
+ * the dashboard page. The button is rendered on Cacti's graph pages, outside
+ * the dashboard's own JavaScript, and a state change has to carry the CSRF
+ * token.
+ *
+ * @return string The script element, bound once per page.
+ */
+function intropage_favgraph_script(): string {
+	$nonce = function_exists('plugin_intropage_csp_nonce') ? plugin_intropage_csp_nonce() : '';
+
+	return '<script type="text/javascript" ' . $nonce . '>' .
+		'$(document).off("click.intropageFav").on("click.intropageFav", "a.intropage_favgraph", function(event) {' .
+		'event.preventDefault();' .
+		'var link = $(this);' .
+		'var form = $("<form method=\"post\"></form>").attr("action", link.attr("data-action"));' .
+		'var fields = { intropage_action: "favgraph", graph_id: link.attr("data-graph"), __csrf_magic: csrfMagicToken };' .
+		'$.each(fields, function(name, value) { $("<input type=\"hidden\"/>").attr("name", name).val(value).appendTo(form); });' .
+		'form.appendTo("body");' .
+		'form.get(0).submit();' .
+		'});' .
+		'</script>';
 }
 
 /**
@@ -2445,14 +2499,17 @@ function intropage_graph_button($data): void {
  * @return int The resolved login_opts value.
  */
 function get_login_opts(bool $refresh = false): int {
-	if (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_console') {
+	$requested = '';
+
+	if (isset_request_var('intropage_action') && intropage_is_post_request()) {
+		$requested = get_nfilter_request_var('intropage_action');
+	}
+
+	if ($requested == 'loginopt_console') {
 		$_SESSION['intropage_login_opts'] = 1;
-	} elseif (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_tab') {
+	} elseif ($requested == 'loginopt_tab') {
 		$_SESSION['intropage_login_opts'] = 4;
-	} elseif (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_graph') {
+	} elseif ($requested == 'loginopt_graph') {
 		$_SESSION['intropage_login_opts'] = 2;
 	} elseif (empty($_SESSION['intropage_login_opts']) || $refresh) {
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts

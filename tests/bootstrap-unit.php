@@ -299,6 +299,7 @@ if (!function_exists('read_user_setting')) {
 }
 if (!function_exists('set_user_setting')) {
 	function set_user_setting($n, $v, $user_id = 0) {
+		$GLOBALS['__test_user_settings'][] = array($n, $v);
 	}
 }
 if (!function_exists('raise_message')) {
