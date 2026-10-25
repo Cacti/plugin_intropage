@@ -501,7 +501,7 @@ function intropage_actions(): void {
 					$span = $_SESSION['sess_current_timespan'];
 				}
 
-				$prio = db_fetch_cell_prepared('SELECT MAX(priority) + 1
+				$prio = db_fetch_cell_prepared('SELECT COALESCE(MAX(priority), 0) + 1
 				FROM plugin_intropage_panel_data
 				WHERE user_id = ?',
 					[$_SESSION['sess_user_id']]);
@@ -1542,6 +1542,56 @@ function intropage_poller_impersonate($user_id): int {
 }
 
 /**
+ * Selects the panel data rows the poller has to refresh: those whose
+ * refresh interval has passed and system panels that have no row yet. Rows
+ * of users that no longer exist are left out, so the poller does not run
+ * panel code for them (Cacti logs an authentication error for each).
+ *
+ * @return array The due rows.
+ */
+function intropage_poller_due_panels(): array {
+	return db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
+		pd.refresh, ud.refresh_interval, pd.update_func
+		FROM plugin_intropage_panel_definition AS pd
+		LEFT JOIN plugin_intropage_panel_data AS ud
+		ON pd.panel_id = ud.panel_id
+		LEFT JOIN user_auth AS ua
+		ON ua.id = ud.user_id
+		WHERE (UNIX_TIMESTAMP(last_update) < UNIX_TIMESTAMP() - refresh_interval
+		OR (last_update IS NULL AND level = 0))
+		AND (ud.user_id IS NULL OR ud.user_id = 0 OR ua.id IS NOT NULL)');
+}
+
+/**
+ * Deletes dashboard links and panel data rows of users that no longer
+ * exist, a bounded number per call. The user_remove hook does this when a
+ * user is deleted while the plugin is active; rows are left behind when it
+ * was not. System rows (user 0) are never touched, and nothing is deleted
+ * when the user table cannot be read or is empty.
+ *
+ * @param int $limit The most rows deleted from each table per call.
+ *
+ * @return void
+ */
+function intropage_purge_orphan_rows(int $limit = 500): void {
+	if ((int) db_fetch_cell('SELECT COUNT(*) FROM user_auth') === 0) {
+		return;
+	}
+
+	$limit = max(1, $limit);
+
+	db_execute('DELETE FROM plugin_intropage_panel_dashboard
+		WHERE user_id > 0
+		AND user_id NOT IN (SELECT id FROM user_auth)
+		LIMIT ' . $limit);
+
+	db_execute('DELETE FROM plugin_intropage_panel_data
+		WHERE user_id > 0
+		AND user_id NOT IN (SELECT id FROM user_auth)
+		LIMIT ' . $limit);
+}
+
+/**
  * Persists a panel's freshly computed data/alarm state back to its
  * plugin_intropage_panel_data row and updates its last-update
  * timestamp. Called at the end of every panel's data-update function.
@@ -2388,86 +2438,154 @@ function intropage_addpanel_select(int $dashboard_id): void {
 }
 
 /**
- * Queries a remote NTP server via a raw UDP NTP request and returns the
- * server's reported Unix timestamp, used to detect local clock drift.
- * Called from ntp_dns() (panellib/misc.php) for the 'NTP/DNS Status'
- * panel.
+ * Turns DNS records into the addresses they carry.
  *
- * @param string $host The NTP server hostname/IP to query.
+ * @param array $records Records as returned by dns_get_record(); AAAA
+ *                       records carry 'ipv6', A records carry 'ip'.
  *
- * @return int|string The remote Unix timestamp, or an 'error: ...'
- *                    string describing a socket failure.
- *
- * @global array $config Cacti global configuration array; used to
- *                       select the correct socket receive mode on
- *                       Windows vs. other platforms.
+ * @return string[] The valid addresses, in the order of the records.
  */
-function ntp_time(string $host) {
-	global $config;
+function intropage_ntp_record_addresses(array $records): array {
+	$addresses = [];
 
-	$timestamp = -1;
-	// create a UDP socket
-	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+	foreach ($records as $record) {
+		$address = $record['ipv6'] ?? $record['ip'] ?? '';
 
-	if (!$sock) {
-		return 'error: socket_create failed:' . socket_strerror(socket_last_error());
-	}
-
-	// set a timeout of 5 second
-	$timeout = ['sec' => 5, 'usec' => 0];
-	socket_set_option($sock, SOL_SOCKET, SO_RCVTIMEO, $timeout);
-
-	// clear any existing error
-	socket_clear_error();
-
-	// send an NTP request to the server
-	$request = "\x1b" . str_repeat("\x00", 47);
-
-	if (socket_sendto($sock, $request, strlen($request), 0, $host, 123) === false) {
-		$error = socket_strerror(socket_last_error($sock));
-		socket_close($sock);
-
-		return 'error: socket_sendto failed:' . $error;
-	}
-
-	// receive the NTP response from the server
-	$recv = '';
-
-	if ($config['cacti_server_os'] == 'win32') {
-		if (socket_recv($sock, $recv, 48, MSG_PEEK) === false) {
-			$error = socket_strerror(socket_last_error($sock));
-			socket_close($sock);
-
-			return 'error: socket_recv failed: ' . $error;
-		}
-	} else {
-		if (socket_recv($sock, $recv, 48, MSG_WAITALL) === false) {
-			$error = socket_strerror(socket_last_error($sock));
-			socket_close($sock);
-
-			return 'error: socket_recv failed: ' . $error;
+		if (filter_var($address, FILTER_VALIDATE_IP) !== false) {
+			$addresses[] = $address;
 		}
 	}
-	// extract the timestamp from the received data
+
+	return $addresses;
+}
+
+/**
+ * Resolves a host name to its IPv6 and IPv4 addresses, IPv6 first. The
+ * system resolver is asked as well, so names that only exist in the hosts
+ * file keep working.
+ *
+ * @param string $host The host name.
+ *
+ * @return string[] The addresses, empty when the name does not resolve.
+ */
+function intropage_ntp_lookup(string $host): array {
+	$aaaa  = @dns_get_record($host, DNS_AAAA);
+	$a     = @dns_get_record($host, DNS_A);
+	$local = gethostbyname($host);
+
+	return array_values(array_unique(array_merge(
+		intropage_ntp_record_addresses(is_array($aaaa) ? $aaaa : []),
+		intropage_ntp_record_addresses(is_array($a) ? $a : []),
+		filter_var($local, FILTER_VALIDATE_IP) !== false ? [$local] : []
+	)));
+}
+
+/**
+ * Picks the addresses to ask for the time. An IP address, with or without
+ * the brackets IPv6 literals are written with, is used as it is. A name
+ * gives its first IPv6 and its first IPv4 address, in that order, so a
+ * server that is only reachable over one family costs one timeout.
+ *
+ * @param string        $host   The NTP server setting.
+ * @param callable|null $lookup Resolver taking a name and returning
+ *                              addresses; defaults to intropage_ntp_lookup().
+ *
+ * @return string[] The addresses to try, empty when the name does not resolve.
+ */
+function intropage_ntp_addresses(string $host, ?callable $lookup = null): array {
+	$host = trim($host, " \t[]");
+
+	if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
+		return [$host];
+	}
+
+	$lookup ??= 'intropage_ntp_lookup';
+
+	$found = array_values($lookup($host));
+	$ipv6  = array_values(array_filter($found, static fn ($address) => strpos($address, ':') !== false));
+	$ipv4  = array_values(array_diff($found, $ipv6));
+
+	return array_merge(array_slice($ipv6, 0, 1), array_slice($ipv4, 0, 1));
+}
+
+/**
+ * Asks one address for the time with an NTP request over UDP.
+ *
+ * @param string $address IPv4 or IPv6 address, without brackets.
+ * @param int    $port    UDP port of the server.
+ * @param int    $timeout Seconds to wait for the answer.
+ *
+ * @return int|string The remote Unix timestamp, or an 'error: ...' string.
+ */
+function intropage_ntp_query(string $address, int $port = 123, int $timeout = 5) {
+	$target = filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false ? '[' . $address . ']' : $address;
+
+	// only an address is opened: a name here would be resolved by the socket call, without the IPv6 first order
+	$errstr = 'not an IP address';
+	$sock   = filter_var($address, FILTER_VALIDATE_IP) === false ? false : @stream_socket_client('udp://' . $target . ':' . $port, $errno, $errstr, $timeout);
+
+	if ($sock === false) {
+		return 'error: connect to ' . $address . ' failed: ' . $errstr;
+	}
+
+	stream_set_timeout($sock, $timeout);
+
+	// the client request: version 3, mode 3, the other 47 bytes are zero
+	fwrite($sock, "\x1b" . str_repeat("\x00", 47));
+
+	$recv = fread($sock, 48);
+	$meta = stream_get_meta_data($sock);
+
+	fclose($sock);
+
+	if ($meta['timed_out']) {
+		return 'error: no answer from ' . $address . ' within ' . $timeout . ' seconds';
+	}
+
+	if (!is_string($recv) || strlen($recv) < 48) {
+		return 'error: short answer from ' . $address;
+	}
+
 	$data = unpack('N12', $recv);
 
-	if (!is_array($data)) {
-		socket_close($sock);
+	// the transmit timestamp is the ninth 32 bit word; NTP counts seconds from 1900, Unix time from 1970
+	return (int) ($data[9] - 2208988800);
+}
 
-		return 'error: unpack failed';
+/**
+ * Queries an NTP server and returns the server's Unix timestamp, used to
+ * detect local clock drift. The server may be an IPv4 or IPv6 address, the
+ * latter also in brackets, or a name. Called from ntp_dns()
+ * (panellib/misc.php) for the 'NTP/DNS Status' panel.
+ *
+ * @param string        $host    The NTP server setting.
+ * @param int           $port    UDP port of the server.
+ * @param int           $timeout Seconds to wait for each address.
+ * @param callable|null $lookup  Name resolver, see intropage_ntp_addresses().
+ *
+ * @return int|string The remote Unix timestamp, or an 'error: ...' string
+ *                    describing the last failure.
+ */
+function ntp_time(string $host, int $port = 123, int $timeout = 5, ?callable $lookup = null) {
+	$addresses = intropage_ntp_addresses($host, $lookup);
+
+	if ($addresses === []) {
+		return 'error: unable to resolve ' . trim($host);
 	}
 
-	$timestamp = sprintf('%u', $data[9]);
+	$result = '';
 
-	// close the socket
-	socket_close($sock);
+	foreach ($addresses as $address) {
+		$result = intropage_ntp_query($address, $port, $timeout);
 
-	// NTP is number of seconds since 0000 UT on 1 January 1900
-	// Unix time is seconds since 0000 UT on 1 January 1970
-	$timestamp -= 2208988800;
+		if (is_int($result)) {
+			return $result;
+		}
+	}
 
-	return (int) $timestamp;
+	return $result;
 }
+
 /**
  * Graph_buttons/graph_buttons_thumbnails hook: adds an 'Add to
  * Favorites/Intropage' button to Cacti's graph view toolbar, letting

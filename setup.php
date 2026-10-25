@@ -543,67 +543,48 @@ function intropage_poller_bottom(): void {
 	exec_background($command_string, $extra_args);
 }
 
-// add third party panel:
-// 1) include this file
-// 2) call intropage_add_panel('my_panel','/plugins/your_plugin/file.php','yes',3600,20) {
-// panel_id - your name (lowercase, without spaces, unique)
-// file - path to your code. It must contain function my_panel() (and my_panel_detail() if your panel has detail)
-// example functions are in /plugin/intropage/include/data.php and data_detail.php
-// has_detail - yes or no
-// refresh_interval - in second, min is 60
-// priority - for displaying
-// description - small description, it is visible in user auth settings
+// Third party panels are not added through this file. Register them with a
+// register_<name>() function in a panellib file, see panellib/README.md.
+// The two functions below are kept so that a plugin that still calls them
+// gets a clear message in the Cacti log instead of a fatal error.
 /**
- * Public extension API: registers a third-party dashboard panel by
- * inserting its definition and adding a corresponding per-user
- * visibility column to the user-auth table. Intended to be called by
- * other plugins wishing to add their own Intropage panel.
+ * Deprecated. This registered a third-party panel in columns that
+ * plugin_intropage_panel_definition and plugin_intropage_user_auth no
+ * longer have, so it could not work. It logs a warning and does nothing.
  *
- * @param string $panel_id         A unique, lowercase, space-free
- *                                 identifier for the panel.
- * @param string $file             Path to the file containing the
- *                                 panel's rendering function(s).
- * @param string $has_detail       'yes' or 'no', whether the panel has
- *                                 a detail view.
- * @param int    $refresh_interval The panel's refresh interval in
- *                                 seconds (minimum 60).
- * @param int    $priority         The panel's display priority/order.
- * @param string $description      A short description shown in user
- *                                 auth settings.
+ * @deprecated Register panels with a register_<name>() function in a
+ *             panellib file, see panellib/README.md.
  *
- * @return string '1' on success, or the database error string on
- *                failure.
+ * @param string $panel_id         Ignored, named in the log message.
+ * @param string $file             Ignored.
+ * @param string $has_detail       Ignored.
+ * @param int    $refresh_interval Ignored.
+ * @param int    $priority         Ignored.
+ * @param string $description      Ignored.
+ *
+ * @return bool Always false.
  */
-function intropage_add_panel(string $panel_id, string $file, string $has_detail, int $refresh_interval, int $priority = 20, string $description = ''): string {
-	if (db_execute_prepared('REPLACE INTO plugin_intropage_panel_definition
-		(panel_id,file,has_detail,refresh_interval, priority, description)
-		VALUES (?,?,?,?,?,?)', [$panel_id, $file, $has_detail, $refresh_interval, $priority, $description]) == 1) {
-		api_plugin_db_add_column('intropage', 'plugin_intropage_user_auth', ['name' => $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on']);
+function intropage_add_panel(string $panel_id, string $file, string $has_detail, int $refresh_interval, int $priority = 20, string $description = ''): bool {
+	cacti_log('WARNING: intropage_add_panel() is deprecated and does nothing; panel ' . $panel_id . ' was not added. Register panels with a register_<name>() function in a panellib file, see plugins/intropage/panellib/README.md', false, 'INTROPAGE');
 
-		return ('1');
-	} else {
-		return db_error();
-	}
+	return false;
 }
 
-// remove third party panel
 /**
- * Public extension API: unregisters a third-party dashboard panel,
- * removing its stored data, definition, and per-user visibility column.
- * Intended to be called by other plugins removing their own Intropage
- * panel.
+ * Deprecated. This removed a third-party panel with SQL that could not
+ * run against the current schema. It logs a warning and does nothing.
  *
- * @param string $panel_id The panel identifier previously registered
- *                         via intropage_add_panel().
+ * @deprecated Panels come from the panellib files; remove the file or the
+ *             entry in its register_<name>() function.
  *
- * @return string Always '1'.
+ * @param string $panel_id Ignored, named in the log message.
+ *
+ * @return bool Always false.
  */
-function intropage_remove_panel(string $panel_id): string {
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id = ?', [$panel_id]);
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id = ?', [$panel_id]);
-	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',[$panel_id]);
+function intropage_remove_panel(string $panel_id): bool {
+	cacti_log('WARNING: intropage_remove_panel() is deprecated and does nothing; panel ' . $panel_id . ' was not removed. Remove it from the register_<name>() function of its panellib file', false, 'INTROPAGE');
 
-	return ('1');
+	return false;
 }
 
 /**

@@ -1111,18 +1111,23 @@ describe('poller', function () {
 		expect((int) intropage_e2e_cell('SELECT user_id FROM plugin_intropage_panel_data WHERE id = ?', [$row]))->toBe($user);
 	});
 
-	it('processes the panel row of a user that no longer exists without failing', function () {
+	it('skips and removes the rows of a user that no longer exists', function () {
 		intropage_e2e_exec('INSERT INTO plugin_intropage_panel_data (panel_id, user_id, priority, alarm, refresh_interval, trend_interval, height, last_update, last_trend_update) VALUES (?, ?, 30, ?, 300, 300, ?, ?, NOW())', ['alert_host', 987654, 'green', 'normal', '2000-01-01 00:00:00']);
 
-		// Cacti logs an authentication error for the missing user on each cycle
-		intropage_e2e_expect_log('Invalid Cacti User ID 987654');
+		$orphan = (int) intropage_e2e_cell('SELECT MAX(id) FROM plugin_intropage_panel_data WHERE user_id = ?', [987654]);
+		$kept   = intropage_e2e_seed_panel('e2e_viewer', 'alert_host');
 
+		intropage_e2e_exec('INSERT INTO plugin_intropage_panel_dashboard (panel_id, user_id, dashboard_id) VALUES (?, ?, 1)', [$orphan, 987654]);
+		intropage_e2e_exec('UPDATE plugin_intropage_panel_data SET last_update = ? WHERE id = ?', ['2000-01-01 00:00:00', $kept]);
+
+		// Cacti would log "Invalid Cacti User ID 987654" for each cycle if the row were processed; the log check in afterEach fails on it
 		$run = intropage_e2e_poller();
-
-		intropage_e2e_exec('DELETE FROM plugin_intropage_panel_data WHERE user_id = 987654');
 
 		expect($run['output'])->not->toContain('TypeError');
 		expect($run['status'])->toBe(0);
+		expect((int) intropage_e2e_cell('SELECT COUNT(*) FROM plugin_intropage_panel_data WHERE user_id = ?', [987654]))->toBe(0);
+		expect((int) intropage_e2e_cell('SELECT COUNT(*) FROM plugin_intropage_panel_dashboard WHERE user_id = ?', [987654]))->toBe(0);
+		expect(intropage_e2e_cell('SELECT last_update FROM plugin_intropage_panel_data WHERE id = ?', [$kept]))->not->toBe('2000-01-01 00:00:00');
 	});
 
 	it('does nothing for a panel that is not due', function () {
@@ -1198,9 +1203,7 @@ describe('favourite graphs', function () {
 		$client = intropage_e2e_client('e2e_viewer');
 		$user   = intropage_e2e_user_id('e2e_viewer');
 
-		// The priority of a new favourite is the highest existing one plus one, so the user needs a panel already
-		intropage_e2e_seed_panel('e2e_viewer', 'alert_host');
-
+		// The user has no panel rows: the first favourite gets priority 1
 		// Cacti's graph pages normally keep the timespan in the session; without it the plugin falls back to its default
 		intropage_e2e_expect_log('sess_current_timespan');
 
@@ -1220,7 +1223,6 @@ describe('favourite graphs', function () {
 	it('does not store a favourite graph for a user without the favourite graph permission', function () {
 		[, $graph] = intropage_e2e_seed_graph('e2e favourite graph');
 
-		intropage_e2e_seed_panel('e2e_viewer', 'alert_host');
 		intropage_e2e_set_permissions('e2e_viewer', ['alert_host']);
 		intropage_e2e_expect_log('sess_current_timespan');
 
