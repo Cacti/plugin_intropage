@@ -39,15 +39,18 @@ circle {
 	fill: transparent !important;
 }
 
-.txt_med {
+#intropage_main .txt_med,
+#overlay .txt_med {
 	font-size: var(--fs-semilarge);
 }
 
-.txt_big {
+#intropage_main .txt_big,
+#overlay .txt_big {
 	font-size: var(--fs-large);
 }
 
-.txt_huge {
+#intropage_main .txt_huge,
+#overlay .txt_huge {
 	font-size: var(--fs-king);
 }
 
