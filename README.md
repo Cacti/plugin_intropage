@@ -38,6 +38,11 @@ The Carrot fixture checks status markers on light rows and a contrasting
 details badge that works with existing coral titlebars. See
 [Carrot theme validation](docs/carrot-theme.md) for screenshots and tests.
 
+![Dark theme dashboard with seeded measurements and alerts](images/dark-theme-dashboard.png)
+
+The Dark fixture includes a visible red row marker for the failed device.
+See [Dark theme validation](docs/dark-theme.md) for screenshots and tests.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
