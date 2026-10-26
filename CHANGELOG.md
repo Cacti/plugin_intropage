@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#444: Brighten Dark theme red row markers while preserving panel header colors
 * issue#442: Keep Carrot theme status indicators legible on coral details titlebars and light table rows
 * issue#440: Give Cacti theme severity indicators contrasting colors for dark details titlebars and light table rows
 * issue: Fix the dashboard page not scrolling with the mouse wheel over chart panels: charts were sized from the whole card (header included) and overflowed the card body, turning it into a nested scroller that captured the wheel; charts now keep their server-sized height (which also stops pie/treemap charts growing on every window resize) and card bodies no longer scroll vertically
