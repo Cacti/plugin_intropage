@@ -28,6 +28,7 @@
 }
 
 .panel_data {
+	color: lightgrey;
 	background: rgba(0,0,0,0.1);
 	padding: 0px;
 }
