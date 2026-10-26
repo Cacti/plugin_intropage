@@ -25,38 +25,38 @@ devices by template and by status, poller information, and the five worst
 devices by ping, availability, polling time and polling ratio. The screenshot
 was taken on Cacti 1.2.32 with demo devices.
 
-![Cacti theme dashboard with seeded devices, measurements, and alerts](images/cacti-theme-dashboard.png)
+![Cacti theme dashboard with seeded devices, measurements, and alerts](tests/images/cacti-theme-dashboard.png)
 
 The Cacti theme browser E2E fixture uses synthetic device data to exercise
 severity indicators on light table rows and dark details titlebars. See
 [Cacti theme validation](docs/cacti-theme.md) for the details screenshot and
 reproduction commands.
 
-![Carrot theme dashboard with seeded device measurements and alerts](images/carrot-theme-dashboard.png)
+![Carrot theme dashboard with seeded device measurements and alerts](tests/images/carrot-theme-dashboard.png)
 
 The Carrot fixture checks status markers on light rows and a contrasting
 details badge that works with existing coral titlebars. See
 [Carrot theme validation](docs/carrot-theme.md) for screenshots and tests.
 
-![Dark theme dashboard with seeded measurements and alerts](images/dark-theme-dashboard.png)
+![Dark theme dashboard with seeded measurements and alerts](tests/images/dark-theme-dashboard.png)
 
 The Dark fixture includes a visible red row marker for the failed device.
 See [Dark theme validation](docs/dark-theme.md) for screenshots and tests.
 
-![Deepness dashboard with seeded measurements and alerts](images/deepness-theme-dashboard.png)
+![Deepness dashboard with seeded measurements and alerts](tests/images/deepness-theme-dashboard.png)
 
 The Deepness fixture checks contrasting green and red row markers on dark
 surfaces. See [Deepness theme validation](docs/deepness-theme.md) for screenshots
 and reproduction commands.
 
-![Hollyberry dashboard with seeded measurements and alerts](images/hollyberry-theme-dashboard.png)
+![Hollyberry dashboard with seeded measurements and alerts](tests/images/hollyberry-theme-dashboard.png)
 
 The Hollyberry fixture checks readable details dots and row markers. See
 [Hollyberry theme validation](docs/hollyberry-theme.md) for screenshots and tests.
 
-![Midwinter dark dashboard with seeded monitoring data](images/midwinter-dark-theme-dashboard.png)
+![Midwinter dark dashboard with seeded monitoring data](tests/images/midwinter-dark-theme-dashboard.png)
 
-![Midwinter light dashboard with seeded monitoring data](images/midwinter-light-theme-dashboard.png)
+![Midwinter light dashboard with seeded monitoring data](tests/images/midwinter-light-theme-dashboard.png)
 
 Midwinter's dark and light fixtures check panel text, row markers, and alert colors
 in real details dialogs. See [Midwinter theme validation](docs/midwinter-theme.md)

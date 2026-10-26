@@ -15,17 +15,17 @@ CSS imports, set its native palette/ready attributes, and wait for the body to
 become visible. Device names, measurements, poller totals, and alerts are synthetic.
 These are browser fixtures, not a live installation.
 
-![Midwinter dark dashboard with populated monitoring panels](../images/midwinter-dark-theme-dashboard.png)
+![Midwinter dark dashboard with populated monitoring panels](../tests/images/midwinter-dark-theme-dashboard.png)
 
-![Midwinter light dashboard with populated monitoring panels](../images/midwinter-light-theme-dashboard.png)
+![Midwinter light dashboard with populated monitoring panels](../tests/images/midwinter-light-theme-dashboard.png)
 
 The browser opens a real jQuery UI details dialog, checks the alert data and red
 error-dot color, and closes it. Indicator tests use panel backgrounds for row
 markers and native widget styling for details dots.
 
-![Midwinter dark details with synthetic warning and error rows](../images/midwinter-dark-theme-status.png)
+![Midwinter dark details with synthetic warning and error rows](../tests/images/midwinter-dark-theme-status.png)
 
-![Midwinter light details with synthetic warning and error rows](../images/midwinter-light-theme-status.png)
+![Midwinter light details with synthetic warning and error rows](../tests/images/midwinter-light-theme-status.png)
 
 ## Reproduce
 
@@ -38,7 +38,7 @@ NODE_PATH="$CACTI_ROOT/tests/e2e/node_modules" mise exec node@22 -- node \
   --config tests/e2e/playwright.config.cjs
 ```
 
-Set `UPDATE_THEME_SCREENSHOTS=1` to regenerate screenshots. Both palettes cover
+Set `UPDATE_THEME_SCREENSHOTS=1` to regenerate screenshots in `tests/images/`. Both palettes cover
 panel text and all four status colors on odd, even, and plain rows. Contrast checks
 include alpha composition and sampled sRGB gradient interiors; they do not prove
 contrast for arbitrary image backgrounds or every pixel.

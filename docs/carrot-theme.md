@@ -11,12 +11,12 @@ The screenshots reuse `tests/fixtures/Ui/cacti-theme.html` with Carrot's actual
 plugin and core stylesheets. They contain synthetic device names, ping times,
 poller totals, and warning/error messages rather than production data.
 
-![Carrot dashboard with populated monitoring panels](../images/carrot-theme-dashboard.png)
+![Carrot dashboard with populated monitoring panels](../tests/images/carrot-theme-dashboard.png)
 
 The E2E test opens and closes the real jQuery UI details dialog. The severity
 badge is scoped to `#overlay_detail`, so it does not restyle core titlebars.
 
-![Carrot details dialog with a contrasting severity badge](../images/carrot-theme-status.png)
+![Carrot details dialog with a contrasting severity badge](../tests/images/carrot-theme-status.png)
 
 ## Reproduce
 
