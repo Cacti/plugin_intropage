@@ -27,7 +27,7 @@ test('seeded dashboard displays measurements and opens alert details', async ({ 
 			});
 		});
 	});
-	await expect(page.getByRole('table', { name: 'Device response times' }).locator('tr')).toHaveCount(4);
+	await expect(page.getByRole('table', { name: 'Device response times' }).locator('tbody tr')).toHaveCount(4);
 	await expect(page.getByText('1.8 ms', { exact: true })).toBeVisible();
 	const capture = async name => {
 		const path = process.env.UPDATE_THEME_SCREENSHOTS === '1'
