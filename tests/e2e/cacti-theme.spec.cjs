@@ -11,10 +11,10 @@ async function installCss(page, file) {
 	await page.addStyleTag({ url: 'http://cacti-theme.test/' + path });
 }
 
-for (const theme of ['cacti', 'carrot']) {
+for (const theme of ['cacti', 'carrot', 'dark']) {
 	test(`${theme} seeded dashboard displays measurements and opens alert details`, async ({ page }, info) => {
 		await page.setViewportSize({ width: 1140, height: 520 });
-		await page.setContent(readFileSync(resolve(root, 'tests/fixtures/Ui/cacti-theme.html'), 'utf8').replaceAll('Cacti theme', `${theme === 'carrot' ? 'Carrot' : 'Cacti'} theme`));
+		await page.setContent(readFileSync(resolve(root, 'tests/fixtures/Ui/cacti-theme.html'), 'utf8').replaceAll('Cacti theme', `${theme[0].toUpperCase() + theme.slice(1)} theme`));
 		for (const file of [resolve(core, `include/themes/${theme}/jquery-ui.css`), resolve(core, `include/themes/${theme}/main.css`), resolve(core, 'include/fa/css/all.css'), resolve(root, 'includes/cards/cards.css'), resolve(root, 'css/common.css'), resolve(root, `css/${theme}.css`)]) {
 			await installCss(page, file);
 		}
@@ -65,7 +65,7 @@ test.afterEach(async ({ page }, info) => {
 	writeFileSync(info.outputPath('changed-coverage.json'), JSON.stringify(coverage));
 });
 
-for (const theme of ['cacti', 'carrot']) {
+for (const theme of ['cacti', 'carrot', 'dark']) {
 	for (const row of ['odd', 'even', '']) {
 		test(`${theme} severity indicators contrast with titlebars and ${row || 'white'} rows`, async ({ page }) => {
 			await page.setContent('<!DOCTYPE html><div id="overlay_detail">' + ['green', 'red', 'yellow', 'grey'].map(color =>
@@ -85,17 +85,26 @@ for (const theme of ['cacti', 'carrot']) {
 					v /= 255;
 					return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4;
 				}).reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
+				const over = (fg, bg) => bg.map((v, i) => fg[i] * fg[3] + v * (1 - fg[3]));
 				return elements.map(element => {
 					const square = element.id.startsWith('square-');
-					let bg = [255, 255, 255];
+					let surfaces = [[255, 255, 255]];
 					const ancestors = [];
 					for (let e = square ? element.parentElement : element; e; e = e.parentElement) ancestors.unshift(e);
 					for (const e of ancestors) {
 						const c = rgba(getComputedStyle(e).backgroundColor);
-						bg = bg.map((v, i) => c[i] * c[3] + v * (1 - c[3]));
+						surfaces = surfaces.map(bg => over(c, bg));
+						const image = getComputedStyle(e).backgroundImage;
+						if (image.startsWith('linear-gradient(')) {
+							const stops = (image.match(/rgba?\([^)]+\)/g) || []).map(rgba);
+							surfaces = surfaces.flatMap(bg => stops.map(stop => over(stop, bg)));
+						}
 					}
-					const style = getComputedStyle(element), foreground = lum(rgba(square ? style.backgroundColor : style.color)), surface = lum(bg);
-					return { id: element.id, ratio: (Math.max(foreground, surface) + .05) / (Math.min(foreground, surface) + .05) };
+					const style = getComputedStyle(element), color = rgba(square ? style.backgroundColor : style.color);
+					return { id: element.id, ratio: Math.min(...surfaces.map(bg => {
+						const foreground = lum(over(color, bg)), surface = lum(bg);
+						return (Math.max(foreground, surface) + .05) / (Math.min(foreground, surface) + .05);
+					})) };
 				});
 			});
 			expect(indicators).toHaveLength(8);

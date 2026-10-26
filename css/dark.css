@@ -80,3 +80,8 @@
 .color_grey, .color_grey i {
     color: black !important;
 }
+
+/* Row alerts need a brighter red than the header's white-text surface. */
+.inpa_sq.color_red {
+	background: #ff6b6b !important;
+}
