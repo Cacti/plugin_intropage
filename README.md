@@ -49,6 +49,11 @@ The Deepness fixture checks contrasting green and red row markers on dark
 surfaces. See [Deepness theme validation](docs/deepness-theme.md) for screenshots
 and reproduction commands.
 
+![Hollyberry dashboard with seeded measurements and alerts](images/hollyberry-theme-dashboard.png)
+
+The Hollyberry fixture checks readable details dots and row markers. See
+[Hollyberry theme validation](docs/hollyberry-theme.md) for screenshots and tests.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is

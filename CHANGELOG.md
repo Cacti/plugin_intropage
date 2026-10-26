@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#449: Contrast Hollyberry details dots against a neutral badge and darken amber and grey row markers
 * issue#447: Improve Deepness green and red row marker contrast on dark surfaces
 * issue#444: Brighten Dark theme red row markers while preserving panel header colors
 * issue#442: Keep Carrot theme status indicators legible on coral details titlebars and light table rows
