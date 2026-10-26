@@ -54,7 +54,7 @@
 }
 
 .color_yellow_bubble {
-	color: #e08a1e;
+	color: #9a5700;
 }
 
 .color_yellow, .color_yellow i {
@@ -66,9 +66,23 @@
 }
 
 .color_grey_bubble {
-	color: #a1a1a1;
+	color: #737373;
 }
 
 .color_grey, .color_grey i {
 	color: black !important;
+}
+
+/* Keep details indicators legible on both coral and darker titlebars. */
+#overlay_detail .cactiTableButton {
+	background: #fff;
+	border-radius: 11px;
+}
+
+.inpa_sq.color_yellow {
+	background: #a45d00 !important;
+}
+
+.inpa_sq.color_grey {
+	background: #737373 !important;
 }
