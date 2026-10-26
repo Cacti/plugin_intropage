@@ -11,7 +11,7 @@ async function installCss(page, file) {
 	await page.addStyleTag({ url: 'http://cacti-theme.test/' + path });
 }
 
-for (const theme of ['cacti', 'carrot', 'dark', 'deepness']) {
+for (const theme of ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry']) {
 	test(`${theme} seeded dashboard displays measurements and opens alert details`, async ({ page }, info) => {
 		await page.setViewportSize({ width: 1140, height: 520 });
 		await page.setContent(readFileSync(resolve(root, 'tests/fixtures/Ui/cacti-theme.html'), 'utf8').replaceAll('Cacti theme', `${theme[0].toUpperCase() + theme.slice(1)} theme`));
@@ -65,7 +65,7 @@ test.afterEach(async ({ page }, info) => {
 	writeFileSync(info.outputPath('changed-coverage.json'), JSON.stringify(coverage));
 });
 
-for (const theme of ['cacti', 'carrot', 'dark', 'deepness']) {
+for (const theme of ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry']) {
 	for (const row of ['odd', 'even', '']) {
 		test(`${theme} severity indicators contrast with titlebars and ${row || 'white'} rows`, async ({ page }) => {
 			await page.setContent('<!DOCTYPE html><div id="overlay_detail">' + ['green', 'red', 'yellow', 'grey'].map(color =>
@@ -97,7 +97,9 @@ for (const theme of ['cacti', 'carrot', 'dark', 'deepness']) {
 						const image = getComputedStyle(e).backgroundImage;
 						if (image.startsWith('linear-gradient(')) {
 							const stops = (image.match(/rgba?\([^)]+\)/g) || []).map(rgba);
-							surfaces = surfaces.flatMap(bg => stops.map(stop => over(stop, bg)));
+							const samples = stops.flatMap((stop, index) => index === 0 ? [stop] :
+								[.25, .5, .75, 1].map(t => stop.map((v, channel) => stops[index - 1][channel] * (1 - t) + v * t)));
+							surfaces = surfaces.flatMap(bg => samples.map(stop => over(stop, bg)));
 						}
 					}
 					const style = getComputedStyle(element), color = rgba(square ? style.backgroundColor : style.color);
