@@ -82,6 +82,12 @@ The Raspberry fixture checks contrasting details dots and row markers. See
 The Sunrise fixture checks readable panel headings on dark surfaces. See
 [Sunrise theme validation](docs/sunrise-theme.md) for screenshots and tests.
 
+![Paper Plane dashboard with seeded device measurements](images/paper-plane-theme-dashboard.png)
+
+The Paper Plane fixture checks panel text and failed-device markers on dark
+surfaces. See [Paper Plane theme validation](docs/paper-plane-theme.md) for
+screenshots and tests.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is

@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#461: Brighten Paper Plane failed-device row markers on dark panel cells
 * issue#459: Give Sunrise panel headings readable inherited text on dark backgrounds
 * issue#457: Contrast Raspberry details dots against a neutral badge and darken amber and grey row markers
 * issue#455: Darken Paw amber and grey row markers for contrast on light table rows
