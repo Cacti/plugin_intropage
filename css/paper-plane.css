@@ -109,3 +109,8 @@
 .color_grey, .color_grey i {
 	color: black !important;
 }
+
+/* Keep failed-device markers visible on the dark panel body. */
+.inpa_sq.color_red {
+	background: #ff6b6b !important;
+}
