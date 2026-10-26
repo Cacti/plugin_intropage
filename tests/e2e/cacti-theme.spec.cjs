@@ -9,7 +9,8 @@ const core = process.env.CACTI_ROOT || resolve(root, '../..');
 const themes = ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry'].map(theme => ({ theme }));
 themes.push({ theme: 'midwinter', palette: 'dark' }, { theme: 'midwinter', palette: 'light' });
 
-function textContrast(element) {
+function elementContrast(element) {
+	const square = element.classList.contains('inpa_sq');
 	const rgba = (value) => {
 		const parts = value.match(/[\d.]+/g).map(Number);
 		return [parts[0], parts[1], parts[2], parts[3] ?? 1];
@@ -17,7 +18,7 @@ function textContrast(element) {
 	const over = (fg, bg) => bg.map((v, i) => fg[i] * fg[3] + v * (1 - fg[3]));
 	let surfaces = [[255, 255, 255]];
 	const ancestors = [];
-	for (let e = element; e; e = e.parentElement) ancestors.unshift(e);
+	for (let e = square ? element.parentElement : element; e; e = e.parentElement) ancestors.unshift(e);
 	for (const e of ancestors) {
 		const c = rgba(getComputedStyle(e).backgroundColor);
 		surfaces = surfaces.map(bg => over(c, bg));
@@ -34,11 +35,12 @@ function textContrast(element) {
 		v /= 255;
 		return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4;
 	}).reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
-	const color = rgba(getComputedStyle(element).color);
-	return Math.min(...surfaces.map(bg => {
+	const style = getComputedStyle(element), foreground = square ? style.backgroundColor : style.color;
+	const color = rgba(foreground);
+	return { id: element.id, foreground, ratio: Math.min(...surfaces.map(bg => {
 		const fg = lum(over(color, bg)), surface = lum(bg);
 		return (Math.max(fg, surface) + .05) / (Math.min(fg, surface) + .05);
-	}));
+	})) };
 }
 
 async function preparePalette(page, palette) {
@@ -67,7 +69,7 @@ for (const { theme, palette } of themes) {
 		if (palette) await expect(page.locator('body')).toHaveCSS('opacity', '1');
 		if (palette) {
 			for (const text of await page.locator('.panel_data p, .panel_data h4').all()) {
-				expect.soft(await text.evaluate(textContrast), 'panel text').toBeGreaterThanOrEqual(4.5);
+				expect.soft((await text.evaluate(elementContrast)).ratio, 'panel text').toBeGreaterThanOrEqual(4.5);
 			}
 		}
 		await page.addScriptTag({ path: resolve(core, 'include/js/jquery.js') });
@@ -130,39 +132,10 @@ for (const { theme, palette } of themes) {
 			for (const file of [resolve(core, `include/themes/${theme}/main.css`), resolve(root, 'css/common.css'), resolve(root, `css/${theme}.css`)]) {
 				await installCss(page, file);
 			}
-			const indicators = await page.locator('[id^="bubble-"], [id^="square-"]').evaluateAll(elements => {
-				const rgba = value => {
-					const parts = value.match(/[\d.]+/g).map(Number);
-					return [parts[0], parts[1], parts[2], parts[3] ?? 1];
-				};
-				const lum = c => c.slice(0, 3).map(v => {
-					v /= 255;
-					return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4;
-				}).reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
-				const over = (fg, bg) => bg.map((v, i) => fg[i] * fg[3] + v * (1 - fg[3]));
-				return elements.map(element => {
-					const square = element.id.startsWith('square-');
-					let surfaces = [[255, 255, 255]];
-					const ancestors = [];
-					for (let e = square ? element.parentElement : element; e; e = e.parentElement) ancestors.unshift(e);
-					for (const e of ancestors) {
-						const c = rgba(getComputedStyle(e).backgroundColor);
-						surfaces = surfaces.map(bg => over(c, bg));
-						const image = getComputedStyle(e).backgroundImage;
-						if (image.startsWith('linear-gradient(')) {
-							const stops = (image.match(/rgba?\([^)]+\)/g) || []).map(rgba);
-							const samples = stops.flatMap((stop, index) => index === 0 ? [stop] :
-								[.25, .5, .75, 1].map(t => stop.map((v, channel) => stops[index - 1][channel] * (1 - t) + v * t)));
-							surfaces = surfaces.flatMap(bg => samples.map(stop => over(stop, bg)));
-						}
-					}
-					const style = getComputedStyle(element), color = rgba(square ? style.backgroundColor : style.color);
-					return { id: element.id, foreground: square ? style.backgroundColor : style.color, ratio: Math.min(...surfaces.map(bg => {
-						const foreground = lum(over(color, bg)), surface = lum(bg);
-						return (Math.max(foreground, surface) + .05) / (Math.min(foreground, surface) + .05);
-					})) };
-				});
-			});
+			const indicators = [];
+			for (const indicator of await page.locator('[id^="bubble-"], [id^="square-"]').all()) {
+				indicators.push(await indicator.evaluate(elementContrast));
+			}
 			expect(indicators).toHaveLength(8);
 			if (palette) expect(new Set(indicators.filter(item => item.id.startsWith('bubble-')).map(item => item.foreground)).size, 'distinct severity colors').toBe(4);
 			for (const indicator of indicators) expect(indicator.ratio, indicator.id).toBeGreaterThanOrEqual(3);
