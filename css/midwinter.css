@@ -26,6 +26,7 @@
 }
 
 .panel_data {
+	color: var(--text-color-light);
 	padding: 0px 4px;
 }
 
@@ -64,7 +65,8 @@ circle {
 	background: #2a8040 !important;
 }
 
-.color_green_bubble {
+.color_green_bubble,
+#overlay_detail .color_green_bubble {
 	color: #4caf79;
 }
 
@@ -76,7 +78,8 @@ circle {
 	background: #b3261e !important;
 }
 
-.color_red_bubble {
+.color_red_bubble,
+#overlay_detail .color_red_bubble {
 	color: #ff6b6b;
 }
 
@@ -88,7 +91,8 @@ circle {
 	background: #e0a81e !important;
 }
 
-.color_yellow_bubble {
+.color_yellow_bubble,
+#overlay_detail .color_yellow_bubble {
 	color: #ffcf4d;
 }
 
@@ -100,10 +104,48 @@ circle {
 	background: #a1a1a1 !important;
 }
 
-.color_grey_bubble {
+.color_grey_bubble,
+#overlay_detail .color_grey_bubble {
 	color: #a1a1a1;
 }
 
 .color_grey, .color_grey i {
 	color: black !important;
+}
+
+/* Panel surfaces and details titlebars need different indicator colors by palette. */
+[data-theme-color='dark'] .inpa_sq.color_green {
+	background: #4caf79 !important;
+}
+
+[data-theme-color='dark'] .inpa_sq.color_red {
+	background: #ff6b6b !important;
+}
+
+[data-theme-color='light'] .color_green_bubble,
+[data-theme-color='light'] #overlay_detail .color_green_bubble {
+	color: #1b5e20;
+}
+
+[data-theme-color='light'] .color_red_bubble,
+[data-theme-color='light'] #overlay_detail .color_red_bubble {
+	color: #b3261e;
+}
+
+[data-theme-color='light'] .color_yellow_bubble,
+[data-theme-color='light'] #overlay_detail .color_yellow_bubble {
+	color: #8b6500;
+}
+
+[data-theme-color='light'] .color_grey_bubble,
+[data-theme-color='light'] #overlay_detail .color_grey_bubble {
+	color: #666666;
+}
+
+[data-theme-color='light'] .inpa_sq.color_yellow {
+	background: #8b6500 !important;
+}
+
+[data-theme-color='light'] .inpa_sq.color_grey {
+	background: #737373 !important;
 }

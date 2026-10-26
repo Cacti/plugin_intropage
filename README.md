@@ -54,6 +54,14 @@ and reproduction commands.
 The Hollyberry fixture checks readable details dots and row markers. See
 [Hollyberry theme validation](docs/hollyberry-theme.md) for screenshots and tests.
 
+![Midwinter dark dashboard with seeded monitoring data](images/midwinter-dark-theme-dashboard.png)
+
+![Midwinter light dashboard with seeded monitoring data](images/midwinter-light-theme-dashboard.png)
+
+Midwinter's dark and light fixtures check panel text, row markers, and alert colors
+in real details dialogs. See [Midwinter theme validation](docs/midwinter-theme.md)
+for screenshots and reproduction commands.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is

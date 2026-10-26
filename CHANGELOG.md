@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#451: Improve Midwinter panel text and palette-specific indicators while preserving alert colors in details dialogs
 * issue#449: Contrast Hollyberry details dots against a neutral badge and darken amber and grey row markers
 * issue#447: Improve Deepness green and red row marker contrast on dark surfaces
 * issue#444: Brighten Dark theme red row markers while preserving panel header colors
