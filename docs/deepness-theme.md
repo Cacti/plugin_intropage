@@ -10,12 +10,12 @@ The screenshots use actual core and plugin Deepness stylesheets with synthetic
 devices, ping times, poller totals, and alerts. They are fixture screenshots,
 not a live installation or production monitoring output.
 
-![Deepness dashboard with device measurements and poller alerts](../images/deepness-theme-dashboard.png)
+![Deepness dashboard with device measurements and poller alerts](../tests/images/deepness-theme-dashboard.png)
 
 The browser test opens the real jQuery UI details dialog, checks its warning
 and error messages, and closes it.
 
-![Deepness details with populated warning and error rows](../images/deepness-theme-status.png)
+![Deepness details with populated warning and error rows](../tests/images/deepness-theme-status.png)
 
 ## Reproduce
 

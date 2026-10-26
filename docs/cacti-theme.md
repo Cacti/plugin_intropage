@@ -11,12 +11,12 @@ ping times, collected data-source counts, and poller alerts. They render the
 real plugin and core stylesheets with jQuery UI. They do not show a live Cacti
 installation or production data.
 
-![Seeded dashboard with response times, poller statistics, and an active alert](../images/cacti-theme-dashboard.png)
+![Seeded dashboard with response times, poller statistics, and an active alert](../tests/images/cacti-theme-dashboard.png)
 
 The fixture opens the details dialog, checks its alert data, and closes it
 through the Close button. The titlebar retains a visible red status dot.
 
-![Open details dialog with synthetic warning and error messages](../images/cacti-theme-status.png)
+![Open details dialog with synthetic warning and error messages](../tests/images/cacti-theme-status.png)
 
 ## Reproduce
 
