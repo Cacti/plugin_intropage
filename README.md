@@ -77,6 +77,11 @@ The Paw fixture checks darker amber and grey row markers on light tables. See
 The Raspberry fixture checks contrasting details dots and row markers. See
 [Raspberry theme validation](docs/raspberry-theme.md) for screenshots and tests.
 
+![Sunrise dashboard with seeded device measurements and alerts](images/sunrise-theme-dashboard.png)
+
+The Sunrise fixture checks readable panel headings on dark surfaces. See
+[Sunrise theme validation](docs/sunrise-theme.md) for screenshots and tests.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
