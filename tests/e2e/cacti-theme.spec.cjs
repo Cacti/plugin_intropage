@@ -11,7 +11,7 @@ async function installCss(page, file) {
 	await page.addStyleTag({ url: 'http://cacti-theme.test/' + path });
 }
 
-for (const theme of ['cacti', 'carrot', 'dark']) {
+for (const theme of ['cacti', 'carrot', 'dark', 'deepness']) {
 	test(`${theme} seeded dashboard displays measurements and opens alert details`, async ({ page }, info) => {
 		await page.setViewportSize({ width: 1140, height: 520 });
 		await page.setContent(readFileSync(resolve(root, 'tests/fixtures/Ui/cacti-theme.html'), 'utf8').replaceAll('Cacti theme', `${theme[0].toUpperCase() + theme.slice(1)} theme`));
@@ -65,7 +65,7 @@ test.afterEach(async ({ page }, info) => {
 	writeFileSync(info.outputPath('changed-coverage.json'), JSON.stringify(coverage));
 });
 
-for (const theme of ['cacti', 'carrot', 'dark']) {
+for (const theme of ['cacti', 'carrot', 'dark', 'deepness']) {
 	for (const row of ['odd', 'even', '']) {
 		test(`${theme} severity indicators contrast with titlebars and ${row || 'white'} rows`, async ({ page }) => {
 			await page.setContent('<!DOCTYPE html><div id="overlay_detail">' + ['green', 'red', 'yellow', 'grey'].map(color =>

@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#447: Improve Deepness green and red row marker contrast on dark surfaces
 * issue#444: Brighten Dark theme red row markers while preserving panel header colors
 * issue#442: Keep Carrot theme status indicators legible on coral details titlebars and light table rows
 * issue#440: Give Cacti theme severity indicators contrasting colors for dark details titlebars and light table rows
