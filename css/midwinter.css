@@ -33,11 +33,6 @@
 	background-color: var(--background) !important;
 }
 
-.header_link {
-	padding-left: 2px;
-	padding-right: 2px;
-}
-
 circle {
 	stroke: #7e818f;
 	stroke-width: 1px;
