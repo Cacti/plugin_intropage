@@ -32,6 +32,12 @@ severity indicators on light table rows and dark details titlebars. See
 [Cacti theme validation](docs/cacti-theme.md) for the details screenshot and
 reproduction commands.
 
+![Carrot theme dashboard with seeded device measurements and alerts](images/carrot-theme-dashboard.png)
+
+The Carrot fixture checks status markers on light rows and a contrasting
+details badge that works with existing coral titlebars. See
+[Carrot theme validation](docs/carrot-theme.md) for screenshots and tests.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
