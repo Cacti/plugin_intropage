@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-10-26 10:33+0000\n"
+"PO-Revision-Date: 2026-10-26 10:56+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -74,7 +74,7 @@ msgstr "Uppdatering avaktiverad"
 
 #: display.php:295 display.php:297
 msgid "Refresh by Poller"
-msgstr "Uppdatering av Poller"
+msgstr "Uppdatering via insamlingsprocessen"
 
 #: display.php:301 display.php:303
 msgid "Refresh Every 1 Minute"
@@ -118,7 +118,7 @@ msgstr "Sortera efter användarens preferenser"
 
 #: display.php:373
 msgid "Reload Panel Definitions"
-msgstr "Definitioner för omladdningspanel"
+msgstr "Läs in paneldefinitioner på nytt"
 
 #: display.php:379
 msgid "Set Intropage as Default Login Page"
@@ -276,7 +276,7 @@ msgstr "Panelbiblioteket för introsidan har uppdaterats från panelbiblioteket"
 
 #: include/functions.php:491
 msgid "Dashboard has been added, please wait few poller cycle for data"
-msgstr "Instrumentpanelen har lagts till, vänta några pollercykler för data"
+msgstr "Instrumentpanelen har lagts till. Vänta några insamlingscykler på data"
 
 #: include/functions.php:502
 msgid "Error - trying share non-shared dashboard"
@@ -300,7 +300,7 @@ msgstr "Panelen hittades inte"
 
 #: include/functions.php:686
 msgid "Details Function does not exist."
-msgstr "Detaljer Funktionen finns inte."
+msgstr "Detaljfunktionen finns inte."
 
 #: include/functions.php:693
 msgid "Panel Not Found"
@@ -349,14 +349,14 @@ msgstr "%s dagar"
 #: include/functions.php:883
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
 msgstr ""
-"Inga data närvarande.  Antingen tvinga fram uppdatering eller vänta på nästa "
-"Cacti Polling-cykel."
+"Inga data finns. Tvinga fram en uppdatering eller vänta på nästa "
+"insamlingscykel i Cacti."
 
 #: include/functions.php:885
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
 msgstr ""
-"Inga data närvarande.  Den här panelen tillåter inte forcerade "
-"uppdateringar.  Du måste vänta tills Cacti's Poller utför kontrollen."
+"Inga data finns. Den här panelen tillåter inte framtvingade uppdateringar. "
+"Vänta tills Cactis insamlingsprocess utför kontrollen."
 
 #: include/functions.php:1363
 msgid "Disable panel"
@@ -364,7 +364,7 @@ msgstr "Inaktivera panelen"
 
 #: include/functions.php:1366
 msgid "Reload Panel"
-msgstr "Panel för omladdning"
+msgstr "Läs in panelen på nytt"
 
 #: include/functions.php:1369
 msgid "Show Details"
@@ -377,8 +377,8 @@ msgstr "Laddar data ..."
 #: include/functions.php:1387
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
 msgstr ""
-"Ingen data hittades.  Vänta antingen på nästa kontroll, <br/>eller använd "
-"Force Reload om det finns tillgängligt."
+"Inga data hittades. Vänta på nästa kontroll <br/>eller tvinga en ny "
+"inläsning om det alternativet finns."
 
 #: include/functions.php:1410
 msgid "Panels ..."
@@ -391,7 +391,7 @@ msgstr "%s (ingen behörighet)"
 
 #: include/functions.php:1495
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr "Det går inte att lägga till i Dashboard. Anpassad tidsperiod."
+msgstr "Det går inte att lägga till på instrumentpanelen. Anpassad tidsperiod."
 
 #: include/functions.php:1505
 msgid "Remove from Dashboard"
@@ -512,7 +512,7 @@ msgstr "Hur ofta"
 
 #: include/variables.php:61
 msgid "Automatically by poller"
-msgstr "Automatiskt av poller"
+msgstr "Automatiskt via insamlingsprocessen"
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
@@ -586,13 +586,13 @@ msgstr "För trenddiagram, vad ska vara standardtidsintervallet för dessa diagr
 
 #: include/variables.php:101
 msgid "Poller Timeout"
-msgstr "Timeout för poller"
+msgstr "Tidsgräns för insamlingsprocessen"
 
 #: include/variables.php:102
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
-"Den tid, i minuter, som Intropages bakgrundspolering kan köras innan den "
-"avbryts och dödas av Cacti."
+"Den tid i minuter som Intropages insamlingsprocess får köras i bakgrunden "
+"innan Cacti avbryter den."
 
 #: include/variables.php:106 setup.php:99
 #, php-format
@@ -630,7 +630,9 @@ msgstr "Hur ofta analyserar DB"
 #: include/variables.php:125 include/variables.php:158
 #: include/variables.php:176
 msgid "Poller runs this task. It could cause long poller run."
-msgstr "Poller kör den här uppgiften. Det kan orsaka lång pollerkörning."
+msgstr ""
+"Insamlingsprocessen kör den här uppgiften. Det kan leda till en lång "
+"insamlingskörning."
 
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
@@ -785,7 +787,7 @@ msgstr "Alarm Föräldralösa datakällor"
 
 #: include/variables.php:243
 msgid "Alarm non-empty Poller Output"
-msgstr "Larm ej tömt Poller-utgång"
+msgstr "Larma om insamlingsprocessens utdata inte är tomma"
 
 #: include/variables.php:250
 msgid "Alarm Bad indexes Data Source"
@@ -825,13 +827,13 @@ msgstr "Larmenhet utan graf"
 
 #: include/variables.php:313
 msgid "Alarm Red/Yellow Polling Time"
-msgstr "Larm Röd/Gul Pollningstid"
+msgstr "Rött eller gult larm för insamlingstid"
 
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
 msgstr ""
-"Avsökningstider över dessa tröskelvärden utlöser en varnings- eller "
-"varningsstatusfärg."
+"Insamlingstider över dessa tröskelvärden ger statusfärgen för varning eller "
+"larm."
 
 #: include/variables.php:318
 msgid "5s  / 10s Yellow / Red"
@@ -843,7 +845,7 @@ msgstr "10s / 20s Gul / Röd"
 
 #: include/variables.php:320
 msgid "20s / 40s Yellow / Red"
-msgstr "20-tal / 40-tal Gul / Röd"
+msgstr "20 s / 40 s gul / röd"
 
 #: include/variables.php:324
 msgid "Alarm Red/Yellow Failed/All Ratio"
@@ -904,7 +906,7 @@ msgstr "Gul / Röd"
 
 #: panellib/alert.php:31 panellib/syslog.php:172
 msgid "Alerts"
-msgstr "Varningar"
+msgstr "Larm"
 
 #: panellib/alert.php:32
 msgid "Panels that provide alerting."
@@ -912,7 +914,7 @@ msgstr "Paneler som ger aviseringar."
 
 #: panellib/alert.php:37 panellib/alert.php:205
 msgid "Host alerts"
-msgstr "Värdvarningar"
+msgstr "Värdlarm"
 
 #: panellib/alert.php:38
 msgid "Host alerts (up/down/recovering) in last 30 minutes"
@@ -934,7 +936,7 @@ msgstr "Värd"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "Delstat eller region"
+msgstr "Tillstånd"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -1176,8 +1178,8 @@ msgstr "Inte optimerade enheter för bulkgångstorlek: %s"
 #: panellib/analyze.php:614 panellib/analyze.php:1431
 msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
 msgstr ""
-"Ta en titt på enhetsparametern \"Bulk Walk Maximum Repetitions\". Du kan "
-"förbättra din pollerprestanda"
+"Kontrollera enhetsparametern ”Bulk Walk Maximum Repetitions”. Du kan "
+"förbättra insamlingens prestanda"
 
 #: panellib/analyze.php:620 panellib/analyze.php:1454
 msgid "Reindex last run"
@@ -1219,7 +1221,7 @@ msgstr "Datakälla - dåliga index: %s"
 #: panellib/analyze.php:774
 #, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "Varning/varning för Thold logonly: %s"
+msgstr "Endast loggning av larm/varning i Thold: %s"
 
 #: panellib/analyze.php:805
 #, php-format
@@ -1244,7 +1246,7 @@ msgstr "Enheter utan träd: %s"
 #: panellib/analyze.php:921
 #, php-format
 msgid "Devices with default public/private community: %s"
-msgstr "Enheter med förvald offentlig/privat gemenskap: %s"
+msgstr "Enheter med standardvärdet public/private för SNMP-community: %s"
 
 #: panellib/analyze.php:947
 #, php-format
@@ -1337,7 +1339,7 @@ msgstr "Enheter med samma IP och port - %s"
 #: panellib/analyze.php:1428
 #, php-format
 msgid "Not optimized Bulk Walk Size devices - %s"
-msgstr "Inte optimerade enheter för bulkpromenadstorlek – %s"
+msgstr "Enheter med icke-optimerad Bulk Walk-storlek – %s"
 
 #: panellib/analyze.php:1484
 msgid "Data maintenance"
@@ -1356,7 +1358,7 @@ msgstr "Datakällor med dåliga index - %s"
 #: panellib/analyze.php:1612
 #, php-format
 msgid "Thold logonly alert/warning - %s"
-msgstr "Varning/varning för Thold logonly - %s"
+msgstr "Endast loggning av larm/varning i Thold – %s"
 
 #: panellib/analyze.php:1649
 #, php-format
@@ -1921,31 +1923,31 @@ msgstr "Servcheck-tillägget - Detaljer"
 
 #: panellib/poller.php:31
 msgid "Poller Panels"
-msgstr "Poller-paneler"
+msgstr "Insamlingspaneler"
 
 #: panellib/poller.php:32
 msgid "Panels that provide information about Cacti's polling process."
-msgstr "Paneler som ger information om Cactis röstningsprocess."
+msgstr "Paneler som ger information om Cactis insamlingsprocess."
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "Information om insamlaren"
+msgstr "Information om insamlingsprocessen"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
-msgstr "Diverse information om din Cacti-pollare."
+msgstr "Information om Cactis insamlingsprocess."
 
 #: panellib/poller.php:53
 msgid "Poller Statistics"
-msgstr "Poller Statistik"
+msgstr "Insamlingsstatistik"
 
 #: panellib/poller.php:54 panellib/poller.php:70
 msgid "Various Cacti poller statistics."
-msgstr "Diverse statistik över Cacti-poller."
+msgstr "Statistik om Cactis insamlingsprocess."
 
 #: panellib/poller.php:69
 msgid "Poller Output Items"
-msgstr "Poller utmatningsobjekt"
+msgstr "Utdataposter från insamlingsprocessen"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -1998,7 +2000,7 @@ msgstr "Sekunder"
 
 #: panellib/poller.php:297
 msgid "Poller Details"
-msgstr "Poller Detaljer"
+msgstr "Detaljer om insamlingsprocessen"
 
 #: panellib/poller.php:308
 msgid "Average Time"
@@ -2010,7 +2012,7 @@ msgstr "Maximal tid"
 
 #: panellib/poller.php:446
 msgid "Poller output items "
-msgstr "Poller-utdataposter "
+msgstr "Utdataposter från insamlingsprocessen "
 
 #: panellib/poller.php:447
 msgid "Items"
@@ -2087,8 +2089,8 @@ msgstr "24 timmars extremiteter"
 #: panellib/system.php:86
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
 msgstr ""
-"Tabell med 24 timmars extremvärden för polling (längsta pollingkörning, "
-"lägsta hosts)"
+"Tabell över insamlingens extremvärden under 24 timmar (längsta "
+"insamlingskörning, värdar som är nere)"
 
 #: panellib/system.php:101
 msgid "CPU Utilization"
@@ -2120,7 +2122,7 @@ msgstr "Cacti-version: "
 
 #: panellib/system.php:219
 msgid "Poller Type:"
-msgstr "Poller Typ:"
+msgstr "Typ av insamlingsprocess:"
 
 #: panellib/system.php:219
 msgid "Spine"
@@ -2136,7 +2138,7 @@ msgstr "Du använder fel version av ryggraden!"
 
 #: panellib/system.php:229
 msgid "Poller Type: "
-msgstr "Poller Typ: "
+msgstr "Typ av insamlingsprocess: "
 
 #: panellib/system.php:238
 msgid "Running on: "
@@ -2200,7 +2202,7 @@ msgstr "Senaste körningens varaktighet/uppdateringar: %s / %s"
 
 #: panellib/system.php:448
 msgid "Poller Run"
-msgstr "Pollerkörning"
+msgstr "Insamlingskörning"
 
 #: panellib/system.php:474
 msgid "Down Hosts"
@@ -2212,15 +2214,15 @@ msgstr "Utlöst"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
-msgstr "Poller ut. itms"
+msgstr "Insamlingens utdataposter"
 
 #: panellib/system.php:606
 msgid "48 Hour Extreme Polling"
-msgstr "48 timmars extrem röstning"
+msgstr "Insamlingens extremvärden under 48 timmar"
 
 #: panellib/system.php:629
 msgid "Long Running Poller"
-msgstr "Långvarig poller"
+msgstr "Långvarig insamlingskörning"
 
 #: panellib/system.php:660
 msgid "Max Device Down"
@@ -2232,7 +2234,7 @@ msgstr "Max tröskelvärde utlöst"
 
 #: panellib/system.php:719
 msgid "Poller Output Item"
-msgstr "Poller Utgångsobjekt"
+msgstr "Utdatapost från insamlingsprocessen"
 
 #: panellib/system.php:747
 msgid "Failed Polls"
@@ -2296,7 +2298,7 @@ msgstr "Tröskelvärden"
 
 #: panellib/thold.php:402
 msgid "Breached: "
-msgstr "Intrång: "
+msgstr "Överskridet: "
 
 #: panellib/thold.php:413
 msgid "Triggered: "
@@ -2312,16 +2314,15 @@ msgstr "Beskrivning"
 
 #: panellib/top5.php:31
 msgid "Top/Bottom 5 Panels"
-msgstr "Upptill/nedtill 5 paneler"
+msgstr "Paneler för de fem högsta och lägsta värdena"
 
 #: panellib/top5.php:32
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr ""
-"Paneler som ger information om trendinformation om datainsamling för Cacti."
+msgstr "Paneler som visar trender i Cactis datainsamling."
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
-msgstr "Nedre Ping"
+msgstr "Sämsta pingtider"
 
 #: panellib/top5.php:38
 msgid "Devices with the worst ping response"
@@ -2329,27 +2330,27 @@ msgstr "Enheter med sämst ping-svar"
 
 #: panellib/top5.php:53
 msgid "Bottom Availability"
-msgstr "Botten Tillgänglighet"
+msgstr "Lägsta tillgänglighet"
 
 #: panellib/top5.php:54
 msgid "Devices with the worst availability/reachability"
-msgstr "Enheter med sämst tillgänglighet/åtkomlighet"
+msgstr "Enheter med sämst tillgänglighet/nåbarhet"
 
 #: panellib/top5.php:69
 msgid "Bottom Polling Time"
-msgstr "Botten Polling Time"
+msgstr "Längst insamlingstid"
 
 #: panellib/top5.php:70
 msgid "Devices with the worst polling time"
-msgstr "Enheter med sämst pollningstid"
+msgstr "Enheter med längst insamlingstid"
 
 #: panellib/top5.php:85
 msgid "Bottom Polling Ratio"
-msgstr "Bottenplacerad Polling Ratio"
+msgstr "Störst andel misslyckade insamlingar"
 
 #: panellib/top5.php:86
 msgid "Devices with the worst polling ratio"
-msgstr "Enheter med sämst polling ratio"
+msgstr "Enheter med störst andel misslyckade insamlingar"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
@@ -2369,7 +2370,7 @@ msgstr "Insamlingstid"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
-msgstr "Förhållande"
+msgstr "Andel"
 
 #: panellib/top5.php:437
 msgid "Top 20 Hosts with Worst Ping"
@@ -2385,11 +2386,11 @@ msgstr "Tillgänglighet"
 
 #: panellib/top5.php:600
 msgid "Top 20 Hosts Worst Polling Time"
-msgstr "Topp 20 värdar Sämsta omröstningen Tid"
+msgstr "De 20 värdar som har längst insamlingstid"
 
 #: panellib/top5.php:680
 msgid "Top 20 Hosts with the Worst Polling Ratio"
-msgstr "Topp 20 värdar med sämst opinionssiffror"
+msgstr "De 20 värdar som har störst andel misslyckade insamlingar"
 
 #: setup.php:61
 msgid "Intropage Viewer"
@@ -2405,16 +2406,16 @@ msgstr "Systemadministration"
 
 #: setup.php:83
 msgid "Timespan Last 1 Hour"
-msgstr "Tidsintervall Senaste 1 timme"
+msgstr "Tidsintervall: senaste timmen"
 
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
 #, php-format
 msgid "Timespan Last %d Hours"
-msgstr "Tidsintervall Senaste %d timmar"
+msgstr "Tidsintervall: senaste %d timmarna"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
-msgstr "Tidsspann Senaste 1 dagen"
+msgstr "Tidsintervall: senaste 1 dagen"
 
 #: setup.php:95 setup.php:96 setup.php:97 setup.php:98
 #, php-format
