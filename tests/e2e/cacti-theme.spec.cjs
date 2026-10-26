@@ -6,7 +6,7 @@ const { dirname, relative, resolve } = require('node:path');
 const root = resolve(__dirname, '../..');
 const core = process.env.CACTI_ROOT || resolve(root, '../..');
 
-const themes = ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry', 'modern', 'paw'].map(theme => ({ theme }));
+const themes = ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry', 'modern', 'paw', 'raspberry'].map(theme => ({ theme }));
 themes.push({ theme: 'midwinter', palette: 'dark' }, { theme: 'midwinter', palette: 'light' });
 
 function elementContrast(element) {
