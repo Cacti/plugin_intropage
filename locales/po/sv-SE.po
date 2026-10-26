@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-10-26 10:56+0000\n"
+"PO-Revision-Date: 2026-10-26 11:51+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: display.php:40
 msgid "Intropage - Permission Denied"
-msgstr "Intropage - Tillstånd nekat"
+msgstr "Intropage – behörighet saknas"
 
 #: display.php:123
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
@@ -44,7 +44,8 @@ msgstr "Dölj röda/gula/gröna fyrkantiga aviseringar"
 
 #: display.php:245
 msgid "Disable panel move/enable copy text from panel"
-msgstr "Inaktivera panelrörelse/Inaktivera kopiering av text från panel"
+msgstr ""
+"Inaktivera flyttning av paneler och aktivera kopiering av text från paneler"
 
 #: display.php:254
 msgid "Actions ..."
@@ -234,7 +235,8 @@ msgstr "Detaljer om panelen"
 
 #: display.php:586
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "Inaktivera panelrörelse/Inaktivera kopiering av text från panel"
+msgstr ""
+"Inaktivera flyttning av paneler och aktivera kopiering av text från paneler"
 
 #: display.php:587
 msgid "Enable panel move/Disable copy text from panel"
