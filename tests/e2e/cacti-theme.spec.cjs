@@ -86,7 +86,7 @@ for (const { theme, palette } of themes) {
 		await expect(page.getByText('1.8 ms', { exact: true })).toBeVisible();
 		const capture = async name => {
 			const path = process.env.UPDATE_THEME_SCREENSHOTS === '1'
-				? resolve(root, `images/${name}.png`) : info.outputPath(`${name}.png`);
+				? resolve(root, `tests/images/${name}.png`) : info.outputPath(`${name}.png`);
 			mkdirSync(dirname(path), { recursive: true });
 			await page.screenshot({ path, fullPage: true });
 			await info.attach(name, { path, contentType: 'image/png' });
