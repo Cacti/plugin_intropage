@@ -25,6 +25,13 @@ devices by template and by status, poller information, and the five worst
 devices by ping, availability, polling time and polling ratio. The screenshot
 was taken on Cacti 1.2.32 with demo devices.
 
+![Cacti theme dashboard with seeded devices, measurements, and alerts](images/cacti-theme-dashboard.png)
+
+The Cacti theme browser E2E fixture uses synthetic device data to exercise
+severity indicators on light table rows and dark details titlebars. See
+[Cacti theme validation](docs/cacti-theme.md) for the details screenshot and
+reproduction commands.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is

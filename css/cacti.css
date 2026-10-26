@@ -30,7 +30,7 @@
 }
 
 .color_green_bubble {
-	color: #2e7d32;
+	color: #6bd66f;
 }
 
 .color_green, .color_green i {
@@ -42,7 +42,7 @@
 }
 
 .color_red_bubble {
-	color: #c62828;
+	color: #ff9a9a;
 }
 
 .color_red, .color_red i {
@@ -71,4 +71,13 @@
 
 .color_grey, .color_grey i {
 	color: black !important;
+}
+
+/* Row markers need darker colours than the details titlebar indicators. */
+.inpa_sq.color_yellow {
+	background: #a45d00 !important;
+}
+
+.inpa_sq.color_grey {
+	background: #737373 !important;
 }

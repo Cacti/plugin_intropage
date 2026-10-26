@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#440: Give Cacti theme severity indicators contrasting colors for dark details titlebars and light table rows
 * issue: Fix the dashboard page not scrolling with the mouse wheel over chart panels: charts were sized from the whole card (header included) and overflowed the card body, turning it into a nested scroller that captured the wheel; charts now keep their server-sized height (which also stops pie/treemap charts growing on every window resize) and card bodies no longer scroll vertically
 * issue: Keep long Panel Details content inside the dialog and scrollable, instead of spilling under the Close button pane, on themes (e.g. deepness) that force `.ui-dialog-content` to `overflow: visible`; the dialog height is also capped to the viewport
 * issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip
