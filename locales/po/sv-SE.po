@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-10-22 06:18+0000\n"
+"PO-Revision-Date: 2026-10-26 10:33+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -525,7 +525,7 @@ msgstr "Varje minut"
 #: include/variables.php:64 include/variables.php:161 include/variables.php:179
 #, php-format
 msgid "Every %d Minutes"
-msgstr "Var %d:e minut"
+msgstr "Med %d minuters mellanrum"
 
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
@@ -574,7 +574,7 @@ msgstr "Hur många rader i panelen"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d Linjer"
+msgstr "%d rader"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -934,7 +934,7 @@ msgstr "Värd"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "Status"
+msgstr "Delstat eller region"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -1032,7 +1032,7 @@ msgstr "Framgång - Logga in"
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
 msgid "Success - Token"
-msgstr "Framgång - Token"
+msgstr "Lyckades – token"
 
 #: panellib/analyze.php:215
 #, php-format
@@ -1290,7 +1290,7 @@ msgstr "Fel"
 
 #: panellib/analyze.php:1132
 msgid "Warnings"
-msgstr "Varning(ar)"
+msgstr "Varningar"
 
 #: panellib/analyze.php:1137
 msgid "WARNING: File is Larger than 2GB"
@@ -1724,7 +1724,7 @@ msgstr "Du har inte behörighet till tillägget"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
-msgstr "Webbplats"
+msgstr "Plats"
 
 #: panellib/mactrack.php:140 panellib/mactrack.php:193
 msgid "IPs"
@@ -1929,7 +1929,7 @@ msgstr "Paneler som ger information om Cactis röstningsprocess."
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "Information om poller"
+msgstr "Information om insamlaren"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
@@ -1961,15 +1961,15 @@ msgstr "Total tid"
 
 #: panellib/poller.php:134 panellib/poller.php:340
 msgid "New/Idle"
-msgstr "Ny / Idle"
+msgstr "Ny/inaktiv"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
-msgstr "Kör"
+msgstr "Pågår"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
-msgstr "Sysslolös"
+msgstr "Vilande"
 
 #: panellib/poller.php:140 panellib/poller.php:346
 msgid "Unkn/down"
@@ -2014,7 +2014,7 @@ msgstr "Poller-utdataposter "
 
 #: panellib/poller.php:447
 msgid "Items"
-msgstr "Artiklar"
+msgstr "Objekt"
 
 #: panellib/syslog.php:31
 msgid "Syslog Panels"
@@ -2124,7 +2124,7 @@ msgstr "Poller Typ:"
 
 #: panellib/system.php:219
 msgid "Spine"
-msgstr "Ryggrad"
+msgstr "Spine"
 
 #: panellib/system.php:221
 msgid "Spine version: "
@@ -2144,7 +2144,7 @@ msgstr "Kör på: "
 
 #: panellib/system.php:316
 msgid "Overrun Warning"
-msgstr "Överskridande varning"
+msgstr "Varning för tidsöverskridande"
 
 #: panellib/system.php:319
 msgid "Timed Out"
@@ -2156,7 +2156,7 @@ msgstr "Övrigt"
 
 #: panellib/system.php:325
 msgid "Never Run"
-msgstr "Kör aldrig"
+msgstr "Har aldrig körts"
 
 #: panellib/system.php:346
 #, php-format
@@ -2361,11 +2361,11 @@ msgstr "Värdnamn"
 
 #: panellib/top5.php:226
 msgid "Availability/Reachability"
-msgstr "Tillgänglighet / Nåbarhet"
+msgstr "Tillgänglighet/nåbarhet"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
-msgstr "Pollningstid"
+msgstr "Insamlingstid"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
@@ -2381,7 +2381,7 @@ msgstr "Topp 20 värdar med sämst tillgänglighet"
 
 #: panellib/top5.php:557
 msgid "Availability"
-msgstr "Åtkomstbarhet"
+msgstr "Tillgänglighet"
 
 #: panellib/top5.php:600
 msgid "Top 20 Hosts Worst Polling Time"
