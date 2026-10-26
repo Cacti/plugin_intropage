@@ -48,10 +48,6 @@
 	color: #bbf;
 }
 
-#generated {
-	color: white;
-}
-
 #main_container, #panel_container {
 	padding: 3px;
 	color: lightgrey !important;

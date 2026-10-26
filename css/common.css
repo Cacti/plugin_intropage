@@ -124,14 +124,8 @@
 	white-space: nowrap;
 }
 
-.header_link {
-	padding-left: 1px !important;
-	padding-right: 1px !important;
-}
-
 #overlay {
 	display: none;
-	scroll: auto;
 }
 
 /* Some themes (e.g. deepness) force .ui-dialog-content to overflow: visible,
@@ -148,11 +142,6 @@
 	overflow: auto;
 }
 
-#detail_in {
-    overflow: auto;
-    height: 100%;
-}
-
 .txt_med {
 	font-size: 1.3em;
 }
@@ -167,10 +156,6 @@
 
 .rpad {
 	padding-right: 1em !important;
-}
-
-.texalirig {
-	text-align: right;
 }
 
 .cactiTable .panel_data span {
@@ -225,36 +210,12 @@
 	color: black !important;
 }
 
-.rpad {
-	padding-right: 20px;
-}
-
-.red {
-	color: red;
-}
-
 .fa {
 	padding-right: 3px;
 }
 
 .block {
 	display:block ruby;
-}
-
-#block {
-    width: 14px;
-    height: 14px;
-    float: right;
-}
-
-.db_href {
-	padding: 3px 5px;
-	background-color: rgba(128,128,128,0.5);
-	margin-right: 5px;
-}
-
-.db_href_active {
-	font-weight: bold;
 }
 
 .float_left {
@@ -282,7 +243,7 @@
 	width: calc(50% - 1em);
 }
 
-// Tablets in Portrait mode
+/* Tablets in Portrait mode */
 @media screen and (max-width: 640px) {
 	.quarter-panel {
 		min-width: calc(50% - 1em);
@@ -301,8 +262,7 @@
 	}
 }
 
-// iPhone and other devices
-// in Portrait mode
+/* iPhone and other devices in Portrait mode */
 @media screen and (max-width: 420px) {
 	.quarter-panel {
 		min-width: calc(100% - 1em);
@@ -346,12 +306,6 @@
 
 .w60 {
 	width: 60%;
-}
-
-.href_disabled {
-  pointer-events: none;
-  cursor: default;
-  opacity: 0.6;
 }
 
 .bus_graph {
