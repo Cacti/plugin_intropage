@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Intropage Cacti theme regression fixture</title></head>
+<body>
+	<main style="padding:20px;max-width:1080px;margin:auto">
+		<h1>Intropage · Cacti theme</h1>
+		<p>Browser E2E fixture · Synthetic monitoring data · 26 October 2026, 09:30 UTC</p>
+		<ul id="panel_container" class="container_col_3">
+			<li class="grid_item panel_1_1"><div class="panel_wrapper"><header class="ccCardHeader color_green"><h2 class="ccTitle">Poller statistics</h2></header><div class="panel_data ccCardBody"><h4>Last poll: 09:30 UTC</h4><p>Duration: 18.2 seconds</p><p>Data sources collected: 1,248</p><p>Devices up: 42 / 44</p></div></div></li>
+			<li class="grid_item panel_1_1"><div class="panel_wrapper"><header class="ccCardHeader color_yellow"><h2 class="ccTitle">Device response times</h2></header><div class="panel_data ccCardBody"><table class="cactiTable" aria-label="Device response times"><tr class="odd"><td><span class="inpa_sq color_green"></span>edge-router-01</td><td>1.8 ms</td></tr><tr class="even"><td><span class="inpa_sq color_yellow"></span>distribution-switch-02</td><td>12.4 ms</td></tr><tr class="odd"><td><span class="inpa_sq color_red"></span>branch-firewall-03</td><td>Timeout</td></tr><tr class="even"><td><span class="inpa_sq color_grey"></span>lab-sensor-04</td><td>No sample</td></tr></table></div></div></li>
+			<li class="grid_item panel_1_1"><div class="panel_wrapper"><header class="ccCardHeader color_red"><h2 class="ccTitle">Active alerts</h2></header><div class="panel_data ccCardBody"><h4>branch-firewall-03</h4><p>SNMP timeout at 09:30 UTC</p><p>Last response: 09:25 UTC</p><p>Missed polls: 3</p></div></div></li>
+		</ul>
+		<button id="open-details" type="button">Open alert details</button>
+		<div id="overlay"><div id="overlay_detail"><div class="cactiTableTitleRow"><div class="cactiTableTitle">Analyze Cacti Log Details</div><div class="cactiTableButton"><i class="fas fa-circle color_red_bubble"></i></div></div><table class="cactiTable" aria-label="Alert details"><tr class="odd"><td>09:30</td><td>ERROR: branch-firewall-03 did not respond to SNMP.</td></tr><tr class="even"><td>09:29</td><td>WARNING: distribution-switch-02 recovered after 12.4 ms.</td></tr></table></div></div>
+		<p style="clear:both">Status legend: green = up; amber = warning; red = down; grey = unknown.</p>
+	</main>
+</body>
+</html>
