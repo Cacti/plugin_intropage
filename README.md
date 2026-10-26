@@ -67,6 +67,11 @@ for screenshots and reproduction commands.
 The Modern fixture checks contrasting details dots and row markers. See
 [Modern theme validation](docs/modern-theme.md) for screenshots and tests.
 
+![Paw dashboard with seeded device measurements and alerts](images/paw-theme-dashboard.png)
+
+The Paw fixture checks darker amber and grey row markers on light tables. See
+[Paw theme validation](docs/paw-theme.md) for screenshots and tests.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
