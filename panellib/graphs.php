@@ -121,15 +121,7 @@ function register_graphs(): array {
 function graph_data_source($panel, $user_id): void {
 	global $config, $input_types, $run_from_poller;
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND data_local.host_id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$graph =  [
@@ -139,10 +131,6 @@ function graph_data_source($panel, $user_id): void {
 				'data'  => [],
 			],
 		];
-
-		if (!$simple_perms) {
-			$q_host_cond = 'AND data_local.host_id ' . $host_cond;
-		}
 
 		$sql_ds = db_fetch_assoc("SELECT data_input.type_id, COUNT(data_input.type_id) AS total
 			FROM data_local
@@ -195,15 +183,7 @@ function graph_data_source($panel, $user_id): void {
 function graph_host_template($panel, $user_id): void {
 	global $config;
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'WHERE host.id');
 
 	if (defined('CACTI_VERSION')) {
 		$cv = CACTI_VERSION;
@@ -212,10 +192,6 @@ function graph_host_template($panel, $user_id): void {
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
-		if (!$simple_perms) {
-			$q_host_cond = 'WHERE host.id ' . $host_cond;
-		}
-
 		// 1.2.24+ has billboard.js with treemap
 		if (cacti_version_compare($cv, '1.2.24', '>=')) {
 			$graph = [
@@ -304,15 +280,7 @@ function graph_host($panel, $user_id, $timespan = 0): void {
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices] = intropage_device_scope($user_id);
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$graph =  [
@@ -453,19 +421,7 @@ function graph_data_source_detail(): array {
 		'detail' => ''
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND dl.host_id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND dl.host_id');
 
 	$sql_ds = db_fetch_assoc("SELECT di.type_id, COUNT(di.type_id) AS total
 		FROM data_local AS dl
@@ -532,19 +488,7 @@ function graph_host_detail(): array {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	$h_all = db_fetch_cell("SELECT COUNT(id) FROM host WHERE $q_host_cond");
 
@@ -689,19 +633,7 @@ function graph_host_template_detail(): array {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'WHERE host.id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'WHERE host.id');
 
 	$rows = db_fetch_assoc("SELECT host_template.id as id, name, COUNT(host.host_template_id) AS total
 		FROM host_template
@@ -760,19 +692,7 @@ function host_collect(): void {
 	$users = get_user_list();
 
 	foreach ($users as $user) {
-		$simple_perms = get_simple_device_perms($user['id']);
-
-		if (!$simple_perms) {
-			$allowed_devices = intropage_get_allowed_devices($user['id']);
-			$host_cond       = 'IN (' . $allowed_devices . ')';
-		} else {
-			$allowed_devices = false;
-			$q_host_cond     = '';
-		}
-
-		if (!$simple_perms) {
-			$q_host_cond = 'AND id ' . $host_cond;
-		}
+		['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user['id'], 'AND id');
 
 		if ($allowed_devices !== false || $simple_perms) {
 			db_execute_prepared("INSERT INTO plugin_intropage_trends

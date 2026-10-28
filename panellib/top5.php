@@ -144,19 +144,7 @@ function top5_ping($panel, $user_id): void {
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -241,19 +229,7 @@ function top5_availability($panel, $user_id): void {
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -335,19 +311,7 @@ function top5_polltime($panel, $user_id): void {
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -430,19 +394,7 @@ function top5_pollratio($panel, $user_id): void {
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -527,19 +479,7 @@ function top5_ping_detail(): array {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
@@ -619,19 +559,7 @@ function top5_availability_detail(): array {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
@@ -709,19 +637,7 @@ function top5_polltime_detail(): array {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
@@ -799,19 +715,7 @@ function top5_pollratio_detail(): array {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls,

@@ -94,6 +94,28 @@ function intropage_device_scope($user_id): array {
 }
 
 /**
+ * Resolve a user's device scope together with the host condition a panel
+ * appends to its queries.
+ *
+ * Builds on intropage_device_scope(). 'cond' is the "<column> IN (...)" text
+ * for a restricted user and an empty string when the user sees every device or
+ * has no visible devices (callers check 'allowed' before running the query).
+ *
+ * @param int|string $user_id Cacti user id whose permissions to resolve.
+ * @param string     $column  Column expression with any leading keyword,
+ *                            for example "AND host.id" or "WHERE id".
+ *
+ * @return array{simple: bool, allowed: string|false, cond: string}
+ */
+function intropage_device_filter($user_id, string $column): array {
+	$scope = intropage_device_scope($user_id);
+
+	$scope['cond'] = $scope['simple'] ? '' : $column . ' IN (' . $scope['allowed'] . ')';
+
+	return $scope;
+}
+
+/**
  * Top-level request dispatcher for this page: sets the default action,
  * then routes to the appropriate handler based on which request
  * variables are present (adding a panel, saving dashboard/settings,

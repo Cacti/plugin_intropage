@@ -626,14 +626,11 @@ function analyse_tree_host_graph($panel, $user_id): void {
 	$total_errors = 0;
 	$data         = [];
 
-	$simple_perms = get_simple_device_perms($user_id);
+	['simple' => $simple_perms, 'allowed' => $allowed_devices] = intropage_device_scope($user_id);
+	$q_host_cond = '';
 
 	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = ' IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
+		$host_cond = ' IN (' . $allowed_devices . ')';
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
@@ -1565,25 +1562,19 @@ function analyse_tree_host_graph_detail(): array {
 	global $config, $console_access;
 
 	if (isset($_SESSION['sess_user_id'])) {
-		$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
+		['simple' => $simple_perms, 'allowed' => $allowed_devices] = intropage_device_scope($_SESSION['sess_user_id']);
+		$q_host_cond = '';
 
 		if (!$simple_perms) {
-			$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-			$host_cond       = ' IN (' . $allowed_devices . ')';
-		} else {
-			$allowed_devices = false;
-			$q_host_cond     = '';
+			$host_cond = ' IN (' . $allowed_devices . ')';
 		}
 	} else {
-		$admin_user   = read_config_option('admin_user');
-		$simple_perms = get_simple_device_perms($admin_user);
+		$admin_user = read_config_option('admin_user');
+		['simple' => $simple_perms, 'allowed' => $allowed_devices] = intropage_device_scope($admin_user);
+		$q_host_cond = '';
 
 		if (!$simple_perms) {
-			$allowed_devices = intropage_get_allowed_devices($admin_user);
-			$host_cond       = ' IN (' . $allowed_devices . ')';
-		} else {
-			$allowed_devices = false;
-			$q_host_cond     = '';
+			$host_cond = ' IN (' . $allowed_devices . ')';
 		}
 	}
 

@@ -138,12 +138,18 @@ if (!function_exists('db_fetch_row_prepared')) {
 }
 if (!function_exists('db_fetch_cell')) {
 	function db_fetch_cell($sql) {
+		$GLOBALS['__test_cell_calls'][] = $sql;
 		return intropage_test_query('cell', $sql, array(), $GLOBALS['__test_fetch_cell'] ?? '');
 	}
 }
 if (!function_exists('db_fetch_cell_prepared')) {
 	function db_fetch_cell_prepared($sql, $p = array()) {
-		return intropage_test_query('cell', $sql, $p, '');
+		return intropage_test_query('cell', $sql, $p, $GLOBALS['__test_fetch_cell_prepared'] ?? '');
+	}
+}
+if (!function_exists('db_table_exists')) {
+	function db_table_exists($t) {
+		return false;
 	}
 }
 if (!function_exists('db_index_exists')) {

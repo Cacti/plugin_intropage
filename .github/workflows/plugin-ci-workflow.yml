@@ -49,6 +49,57 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  cacti-theme-browser:
+    name: Cacti theme browser regressions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - name: Checkout plugin
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+        path: plugin
+    - name: Checkout shared Cacti browser tooling
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        repository: Cacti/cacti
+        ref: 88a8ad040979edd943774a0e338469b764d46a23
+        persist-credentials: false
+        path: cacti
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+      with:
+        node-version: '22'
+    - name: Install locked browser tooling
+      working-directory: cacti/tests/e2e
+      run: |
+        npm ci --ignore-scripts
+        npx --no-install playwright install --with-deps chromium
+    - name: Test theme rendering and status contrast
+      working-directory: plugin
+      env:
+        CACTI_ROOT: ${{ github.workspace }}/cacti
+        NODE_PATH: ${{ github.workspace }}/cacti/tests/e2e/node_modules
+      run: ../cacti/tests/e2e/node_modules/.bin/playwright test --config tests/e2e/playwright.config.cjs
+    - name: Require complete changed CSS line coverage
+      if: github.event_name == 'pull_request'
+      working-directory: plugin
+      env:
+        BASE_COMMIT: ${{ github.event.pull_request.base.sha }}
+      run: |
+        if git rev-parse --verify --quiet 'HEAD^2' >/dev/null; then
+          BASE_COMMIT="$(git rev-parse 'HEAD^1')"
+        fi
+        python3 ../cacti/tests/tools/report_changed_coverage.py --base "$BASE_COMMIT" \
+          --language css --minimum 100 --browser-root tests/e2e/test-results
+    - name: Preserve browser evidence
+      if: always()
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+      with:
+        name: cacti-theme-browser
+        path: plugin/tests/e2e/test-results
+        if-no-files-found: warn
+
   integration-test:
     timeout-minutes: 45
     runs-on: ${{ matrix.os }}

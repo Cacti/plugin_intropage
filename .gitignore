@@ -26,3 +26,5 @@ locales/LC_MESSAGES/*.mo
 .phpunit.cache/
 .php-cs-fixer.cache
 locales/po/*.po
+# Browser regression artifacts are attached by CI, not shipped with the plugin.
+/tests/e2e/test-results/

@@ -157,7 +157,7 @@ function intropage_user_admin_tab(): void {
 
 	print '<li class="subTab">';
 
-	if (get_request_var_request('tab') == 'intropage_settings_edit') {
+	if (get_request_var('tab') == 'intropage_settings_edit') {
 		print '<a class="tab selected" ';
 	} else {
 		print '<a class="tab" ';
@@ -184,7 +184,7 @@ function intropage_user_group_admin_tab(): void {
 
 	print '<li class="subTab">';
 
-	if (get_request_var_request('tab') == 'intropage_group_settings_edit') {
+	if (get_request_var('tab') == 'intropage_group_settings_edit') {
 		print '<a class="tab selected" ';
 	} else {
 		print '<a class="tab" ';
