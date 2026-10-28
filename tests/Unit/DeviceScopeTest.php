@@ -43,3 +43,36 @@ describe('intropage_device_scope', function () {
 		expect($scope['allowed'])->toBeFalse();
 	});
 });
+
+describe('intropage_get_allowed_devices hide_disabled handling', function () {
+	beforeEach(function () {
+		$GLOBALS['__test_user_settings'] = [];
+		$GLOBALS['__test_user_setting']  = ['hide_disabled' => 'on'];
+	});
+
+	afterEach(function () {
+		unset($GLOBALS['__test_user_setting'], $GLOBALS['__test_allowed_devices_throw'], $GLOBALS['__test_allowed_devices']);
+	});
+
+	it('clears the preference for the lookup and puts it back', function () {
+		$GLOBALS['__test_allowed_devices'] = [['id' => 4]];
+
+		expect(intropage_get_allowed_devices(9))->toBe('4');
+		expect($GLOBALS['__test_user_settings'])->toBe([['hide_disabled', ''], ['hide_disabled', 'on']]);
+	});
+
+	it('puts the preference back when the lookup throws', function () {
+		$GLOBALS['__test_allowed_devices_throw'] = true;
+
+		expect(fn () => intropage_get_allowed_devices(9))->toThrow(RuntimeException::class);
+		expect($GLOBALS['__test_user_settings'])->toBe([['hide_disabled', ''], ['hide_disabled', 'on']]);
+	});
+
+	it('leaves the preference alone when it is not set', function () {
+		$GLOBALS['__test_user_setting'] = [];
+
+		intropage_get_allowed_devices(9);
+
+		expect($GLOBALS['__test_user_settings'])->toBe([]);
+	});
+});

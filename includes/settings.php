@@ -131,7 +131,7 @@ function intropage_console_after(): void {
 
 	$login_opts = get_login_opts(true);
 
-	if (api_user_realm_auth('intropage.php') && $config['poller_id'] == 1 || ($config['poller_id'] > 1 && $config['connection'] == 'online')) {
+	if (api_user_realm_auth('intropage.php') && ($config['poller_id'] == 1 || ($config['poller_id'] > 1 && $config['connection'] == 'online'))) {
 		if ($login_opts != 4) {
 			$panels = initialize_panel_library();
 

@@ -52,10 +52,13 @@ function intropage_get_allowed_devices($user_id) {
 		set_user_setting('hide_disabled', '', $user_id);
 	}
 
-	$allowed = get_allowed_devices('', 'null', '-1', $x, (int) $user_id);
-
-	if ($us == 'on') {
-		set_user_setting('hide_disabled', 'on', $user_id);
+	try {
+		$allowed = get_allowed_devices('', 'null', '-1', $x, (int) $user_id);
+	} finally {
+		// Put the stored preference back even when the lookup throws
+		if ($us == 'on') {
+			set_user_setting('hide_disabled', 'on', $user_id);
+		}
 	}
 
 	if (cacti_count($allowed)) {
@@ -126,14 +129,27 @@ function intropage_device_filter($user_id, string $column): array {
 function process_page_request_variables(): void {
 	set_default_action();
 
+	// Actions that change data are only honoured as POST requests, which
+	// Cacti protects with its CSRF token. Rendering the panel select is the
+	// one read-only intropage_action.
+	$posted = intropage_is_post_request();
+
 	if (isset_request_var('intropage_addpanel')) {
-		intropage_action_add_panel();
+		if ($posted) {
+			intropage_action_add_panel();
+		}
 	} elseif (isset_request_var('action') && isset_request_var('save_settings')) {
-		intropage_action_settings();
+		if ($posted) {
+			intropage_action_settings();
+		}
 	} elseif (isset_request_var('intropage_action')) {
-		intropage_actions();
+		if ($posted || get_nfilter_request_var('intropage_action') == 'addpanelselect') {
+			intropage_actions();
+		}
 	} elseif (isset_request_var('intropage_action_timespan')) {
-		intropage_actions_timespan();
+		if ($posted) {
+			intropage_actions_timespan();
+		}
 	} elseif (get_request_var('action') != '') {
 		switch(get_request_var('action')) {
 			case 'configure':
@@ -159,6 +175,15 @@ function process_page_request_variables(): void {
 }
 
 /**
+ * Tells whether the current request was made with the POST method.
+ *
+ * @return bool True for a POST request.
+ */
+function intropage_is_post_request(): bool {
+	return ($_SERVER['REQUEST_METHOD'] ?? '') === 'POST';
+}
+
+/**
  * Handles adding a panel to the current dashboard: creates a new
  * plugin_intropage_panel_data row for the panel if one doesn't already
  * exist (by panel_id), then associates it with the target dashboard.
@@ -172,6 +197,16 @@ function intropage_action_add_panel(): void {
 
 	if (is_numeric(get_nfilter_request_var('intropage_addpanel'))) {
 		$addpanel = get_filter_request_var('intropage_addpanel');
+
+		$panel_name = db_fetch_cell_prepared('SELECT panel_id
+			FROM plugin_intropage_panel_data
+			WHERE id = ?
+			AND user_id IN (0, ?)',
+			[$addpanel, $_SESSION['sess_user_id']]);
+
+		if (!is_panel_allowed((string) $panel_name)) {
+			return;
+		}
 	} else {
 		$panel_id = get_nfilter_request_var('intropage_addpanel');
 
@@ -180,7 +215,7 @@ function intropage_action_add_panel(): void {
 			WHERE panel_id = ?',
 			[$panel_id]);
 
-		if (!is_array($panel)) {
+		if (!is_array($panel) || !is_panel_allowed($panel_id)) {
 			return;
 		}
 
@@ -247,14 +282,16 @@ function intropage_action_settings(): void {
 		if (strpos($var, 'name_') !== false) {
 			$dashboard_id = intropage_parse_dashboard_id(str_replace('name_', '', $var));
 
-			if ($dashboard_id === null) {
+			if ($dashboard_id === null || !is_string($value)) {
 				continue;
 			}
 
-			db_execute_prepared('REPLACE INTO plugin_intropage_dashboard
-				(user_id, dashboard_id, name)
-				VALUES (?, ?, ?)',
-				[$_SESSION['sess_user_id'], $dashboard_id, $value]);
+			// UPDATE keeps the shared flag, which REPLACE would reset
+			db_execute_prepared('UPDATE plugin_intropage_dashboard
+				SET name = ?
+				WHERE user_id = ?
+				AND dashboard_id = ?',
+				[$value, $_SESSION['sess_user_id'], $dashboard_id]);
 		}
 	}
 
@@ -486,7 +523,7 @@ function intropage_actions(): void {
 					$span = $_SESSION['sess_current_timespan'];
 				}
 
-				$prio = db_fetch_cell_prepared('SELECT MAX(priority) + 1
+				$prio = db_fetch_cell_prepared('SELECT COALESCE(MAX(priority), 0) + 1
 				FROM plugin_intropage_panel_data
 				WHERE user_id = ?',
 					[$_SESSION['sess_user_id']]);
@@ -943,6 +980,66 @@ function get_allowed_panels(int $user_id = 0) {
 }
 
 /**
+ * Removes the panels of a dashboard that the user is no longer permitted to
+ * see: the dashboard link and the user's own panel data row.
+ *
+ * @param int $user_id      The user whose dashboard is cleaned up.
+ * @param int $dashboard_id The dashboard to clean up.
+ *
+ * @return int The number of panels removed.
+ */
+function intropage_remove_prohibited_panels(int $user_id, int $dashboard_id): int {
+	$panels = db_fetch_assoc_prepared('SELECT pd.panel_id AS panel_name, pd.id AS id
+		FROM plugin_intropage_panel_data AS pd
+		INNER JOIN plugin_intropage_panel_dashboard AS pda
+		ON pd.id = pda.panel_id
+		WHERE pda.user_id = ?
+		AND pda.dashboard_id = ?',
+		[$user_id, $dashboard_id]);
+
+	$removed = 0;
+
+	foreach ($panels as $one) {
+		if (!is_panel_allowed($one['panel_name'])) {
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+				WHERE user_id = ?
+				AND dashboard_id = ?
+				AND panel_id = ?',
+				[$user_id, $dashboard_id, $one['id']]);
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+				WHERE user_id = ?
+				AND id = ?',
+				[$user_id, $one['id']]);
+
+			$removed++;
+		}
+	}
+
+	return $removed;
+}
+
+/**
+ * Determines whether the current user may view an existing panel row. The
+ * admin alert and maintenance panels are rendered for every user and are not
+ * listed on the permission forms, so they are always visible; every other
+ * panel needs the per-user or per-group permission.
+ *
+ * @param mixed $panel_id The panel_id (name) stored on the panel data row.
+ *
+ * @return bool True if the panel may be shown to the current user.
+ */
+function intropage_panel_visible($panel_id): bool {
+	$panel_id = (string) $panel_id;
+
+	if ($panel_id === 'admin_alert' || $panel_id === 'maint') {
+		return true;
+	}
+
+	return is_panel_allowed($panel_id);
+}
+
+/**
  * Builds the force-reload control shown in a force-enabled panel's
  * header. Clicking it invokes reload_panel() (see includes/intropage.js),
  * which spins the fa-sync-alt glyph while the panel reloads.
@@ -1046,6 +1143,12 @@ function intropage_reload_panel(): void {
 		WHERE id = ?
 		AND user_id IN (0, ?)',
 		[$panel_id, $_SESSION['sess_user_id']]);
+
+	if (is_array($panel) && cacti_sizeof($panel) && !intropage_panel_visible($panel['panel_id'])) {
+		print __('Panel not found', 'intropage');
+
+		return;
+	}
 
 	// Close the session to allow other tabs to operate
 	session_write_close();
@@ -1165,6 +1268,19 @@ function intropage_detail_panel(): void {
 		$forced_update = filter_var(get_nfilter_request_var('force'), FILTER_VALIDATE_BOOLEAN);
 	} else {
 		$forced_update = false;
+	}
+
+	// Look the row up before get_panel(), which would create a row for an id that does not exist
+	$panel_name = db_fetch_cell_prepared('SELECT panel_id
+		FROM plugin_intropage_panel_data
+		WHERE id = ?
+		AND user_id IN (0, ?)',
+		[$panel_id, $_SESSION['sess_user_id']]);
+
+	if (!intropage_panel_visible($panel_name)) {
+		print __('Panel Not Found', 'intropage');
+
+		return;
 	}
 
 	$panel = get_panel($panel_id, $_SESSION['sess_user_id']);
@@ -1426,6 +1542,75 @@ function get_user_list(): array {
 	}
 
 	return $users;
+}
+
+/**
+ * Sets the session user a poller row runs as and returns it as an integer.
+ * Panel definitions that have no data row yet come back from the poller's
+ * LEFT JOIN with a NULL user_id; those are system panels and run as user 0,
+ * so they neither fail get_panel()'s int parameter nor inherit the user of
+ * the row processed before them.
+ *
+ * @param mixed $user_id The user_id column of the poller row, possibly null.
+ *
+ * @return int The user id now stored in the session.
+ */
+function intropage_poller_impersonate($user_id): int {
+	$user_id = (int) $user_id;
+
+	$_SESSION['sess_user_id'] = $user_id;
+
+	return $user_id;
+}
+
+/**
+ * Selects the panel data rows the poller has to refresh: those whose
+ * refresh interval has passed and system panels that have no row yet. Rows
+ * of users that no longer exist are left out, so the poller does not run
+ * panel code for them (Cacti logs an authentication error for each).
+ *
+ * @return array The due rows.
+ */
+function intropage_poller_due_panels(): array {
+	return db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
+		pd.refresh, ud.refresh_interval, pd.update_func
+		FROM plugin_intropage_panel_definition AS pd
+		LEFT JOIN plugin_intropage_panel_data AS ud
+		ON pd.panel_id = ud.panel_id
+		LEFT JOIN user_auth AS ua
+		ON ua.id = ud.user_id
+		WHERE (UNIX_TIMESTAMP(last_update) < UNIX_TIMESTAMP() - refresh_interval
+		OR (last_update IS NULL AND level = 0))
+		AND (ud.user_id IS NULL OR ud.user_id = 0 OR ua.id IS NOT NULL)');
+}
+
+/**
+ * Deletes dashboard links and panel data rows of users that no longer
+ * exist, a bounded number per call. The user_remove hook does this when a
+ * user is deleted while the plugin is active; rows are left behind when it
+ * was not. System rows (user 0) are never touched, and nothing is deleted
+ * when the user table cannot be read or is empty.
+ *
+ * @param int $limit The most rows deleted from each table per call.
+ *
+ * @return void
+ */
+function intropage_purge_orphan_rows(int $limit = 500): void {
+	if ((int) db_fetch_cell('SELECT COUNT(*) FROM user_auth') === 0) {
+		return;
+	}
+
+	$limit = max(1, $limit);
+
+	db_execute('DELETE FROM plugin_intropage_panel_dashboard
+		WHERE user_id > 0
+		AND user_id NOT IN (SELECT id FROM user_auth)
+		LIMIT ' . $limit);
+
+	db_execute('DELETE FROM plugin_intropage_panel_data
+		WHERE user_id > 0
+		AND user_id NOT IN (SELECT id FROM user_auth)
+		LIMIT ' . $limit);
 }
 
 /**
@@ -1740,6 +1925,23 @@ function intropage_favourite_graph(int $fav_graph_id, int $fav_graph_timespan) {
 }
 
 /**
+ * Encodes one pie or treemap data column as a JavaScript array literal.
+ * Labels come from the database (for example device template names), so
+ * they are encoded as JSON with the characters that can end a string or a
+ * script element escaped, instead of being pasted into the script.
+ *
+ * @param mixed $label The column label.
+ * @param mixed $value The column value; non-numeric values become 0.
+ *
+ * @return string The column literal followed by a trailing comma.
+ */
+function intropage_chart_column($label, $value): string {
+	$flags = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_INVALID_UTF8_SUBSTITUTE;
+
+	return json_encode([(string) $label, is_numeric($value) ? $value + 0 : 0], $flags) . ',';
+}
+
+/**
  * Renders one of this plugin's panel chart types (line, pie, or other
  * supported chart shape described by $dispdata) as embedded HTML/JS
  * (e.g. a C3/D3-based chart), sizing the chart according to the user's
@@ -1974,7 +2176,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$content .= '  columns: [';
 
 		foreach ($dispdata['pie']['data'] as $key => $value) {
-			$content .= "['" . $dispdata['pie']['label'][$key] . "', " . $value . '],';
+			$content .= intropage_chart_column($dispdata['pie']['label'][$key], $value);
 		}
 
 		$content .= '  ],';
@@ -2011,7 +2213,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$content .= '  columns: [';
 
 		foreach ($dispdata['treemap']['data'] as $key => $value) {
-			$content .= "['" . $dispdata['treemap']['label'][$key] . "', " . $value . '],';
+			$content .= intropage_chart_column($dispdata['treemap']['label'][$key], $value);
 		}
 
 		$content .= '  ],';
@@ -2258,86 +2460,154 @@ function intropage_addpanel_select(int $dashboard_id): void {
 }
 
 /**
- * Queries a remote NTP server via a raw UDP NTP request and returns the
- * server's reported Unix timestamp, used to detect local clock drift.
- * Called from ntp_dns() (panellib/misc.php) for the 'NTP/DNS Status'
- * panel.
+ * Turns DNS records into the addresses they carry.
  *
- * @param string $host The NTP server hostname/IP to query.
+ * @param array $records Records as returned by dns_get_record(); AAAA
+ *                       records carry 'ipv6', A records carry 'ip'.
  *
- * @return int|string The remote Unix timestamp, or an 'error: ...'
- *                    string describing a socket failure.
- *
- * @global array $config Cacti global configuration array; used to
- *                       select the correct socket receive mode on
- *                       Windows vs. other platforms.
+ * @return string[] The valid addresses, in the order of the records.
  */
-function ntp_time(string $host) {
-	global $config;
+function intropage_ntp_record_addresses(array $records): array {
+	$addresses = [];
 
-	$timestamp = -1;
-	// create a UDP socket
-	$sock      = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+	foreach ($records as $record) {
+		$address = $record['ipv6'] ?? $record['ip'] ?? '';
 
-	if (!$sock) {
-		return 'error: socket_create failed:' . socket_strerror(socket_last_error());
-	}
-
-	// set a timeout of 5 second
-	$timeout = ['sec' => 5, 'usec' => 0];
-	socket_set_option($sock, SOL_SOCKET, SO_RCVTIMEO, $timeout);
-
-	// clear any existing error
-	socket_clear_error();
-
-	// send an NTP request to the server
-	$request = "\x1b" . str_repeat("\x00", 47);
-
-	if (socket_sendto($sock, $request, strlen($request), 0, $host, 123) === false) {
-		$error = socket_strerror(socket_last_error($sock));
-		socket_close($sock);
-
-		return 'error: socket_sendto failed:' . $error;
-	}
-
-	// receive the NTP response from the server
-	$recv = '';
-
-	if ($config['cacti_server_os'] == 'win32') {
-		if (socket_recv($sock, $recv, 48, MSG_PEEK) === false) {
-			$error = socket_strerror(socket_last_error($sock));
-			socket_close($sock);
-
-			return 'error: socket_recv failed: ' . $error;
-		}
-	} else {
-		if (socket_recv($sock, $recv, 48, MSG_WAITALL) === false) {
-			$error = socket_strerror(socket_last_error($sock));
-			socket_close($sock);
-
-			return 'error: socket_recv failed: ' . $error;
+		if (filter_var($address, FILTER_VALIDATE_IP) !== false) {
+			$addresses[] = $address;
 		}
 	}
-	// extract the timestamp from the received data
+
+	return $addresses;
+}
+
+/**
+ * Resolves a host name to its IPv6 and IPv4 addresses, IPv6 first. The
+ * system resolver is asked as well, so names that only exist in the hosts
+ * file keep working.
+ *
+ * @param string $host The host name.
+ *
+ * @return string[] The addresses, empty when the name does not resolve.
+ */
+function intropage_ntp_lookup(string $host): array {
+	$aaaa  = @dns_get_record($host, DNS_AAAA);
+	$a     = @dns_get_record($host, DNS_A);
+	$local = gethostbyname($host);
+
+	return array_values(array_unique(array_merge(
+		intropage_ntp_record_addresses(is_array($aaaa) ? $aaaa : []),
+		intropage_ntp_record_addresses(is_array($a) ? $a : []),
+		filter_var($local, FILTER_VALIDATE_IP) !== false ? [$local] : []
+	)));
+}
+
+/**
+ * Picks the addresses to ask for the time. An IP address, with or without
+ * the brackets IPv6 literals are written with, is used as it is. A name
+ * gives its first IPv6 and its first IPv4 address, in that order, so a
+ * server that is only reachable over one family costs one timeout.
+ *
+ * @param string        $host   The NTP server setting.
+ * @param callable|null $lookup Resolver taking a name and returning
+ *                              addresses; defaults to intropage_ntp_lookup().
+ *
+ * @return string[] The addresses to try, empty when the name does not resolve.
+ */
+function intropage_ntp_addresses(string $host, ?callable $lookup = null): array {
+	$host = trim($host, " \t[]");
+
+	if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
+		return [$host];
+	}
+
+	$lookup ??= 'intropage_ntp_lookup';
+
+	$found = array_values($lookup($host));
+	$ipv6  = array_values(array_filter($found, static fn ($address) => strpos($address, ':') !== false));
+	$ipv4  = array_values(array_diff($found, $ipv6));
+
+	return array_merge(array_slice($ipv6, 0, 1), array_slice($ipv4, 0, 1));
+}
+
+/**
+ * Asks one address for the time with an NTP request over UDP.
+ *
+ * @param string $address IPv4 or IPv6 address, without brackets.
+ * @param int    $port    UDP port of the server.
+ * @param int    $timeout Seconds to wait for the answer.
+ *
+ * @return int|string The remote Unix timestamp, or an 'error: ...' string.
+ */
+function intropage_ntp_query(string $address, int $port = 123, int $timeout = 5) {
+	$target = filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false ? '[' . $address . ']' : $address;
+
+	// only an address is opened: a name here would be resolved by the socket call, without the IPv6 first order
+	$errstr = 'not an IP address';
+	$sock   = filter_var($address, FILTER_VALIDATE_IP) === false ? false : @stream_socket_client('udp://' . $target . ':' . $port, $errno, $errstr, $timeout);
+
+	if ($sock === false) {
+		return 'error: connect to ' . $address . ' failed: ' . $errstr;
+	}
+
+	stream_set_timeout($sock, $timeout);
+
+	// the client request: version 3, mode 3, the other 47 bytes are zero
+	fwrite($sock, "\x1b" . str_repeat("\x00", 47));
+
+	$recv = fread($sock, 48);
+	$meta = stream_get_meta_data($sock);
+
+	fclose($sock);
+
+	if ($meta['timed_out']) {
+		return 'error: no answer from ' . $address . ' within ' . $timeout . ' seconds';
+	}
+
+	if (!is_string($recv) || strlen($recv) < 48) {
+		return 'error: short answer from ' . $address;
+	}
+
 	$data = unpack('N12', $recv);
 
-	if (!is_array($data)) {
-		socket_close($sock);
+	// the transmit timestamp is the ninth 32 bit word; NTP counts seconds from 1900, Unix time from 1970
+	return (int) ($data[9] - 2208988800);
+}
 
-		return 'error: unpack failed';
+/**
+ * Queries an NTP server and returns the server's Unix timestamp, used to
+ * detect local clock drift. The server may be an IPv4 or IPv6 address, the
+ * latter also in brackets, or a name. Called from ntp_dns()
+ * (panellib/misc.php) for the 'NTP/DNS Status' panel.
+ *
+ * @param string        $host    The NTP server setting.
+ * @param int           $port    UDP port of the server.
+ * @param int           $timeout Seconds to wait for each address.
+ * @param callable|null $lookup  Name resolver, see intropage_ntp_addresses().
+ *
+ * @return int|string The remote Unix timestamp, or an 'error: ...' string
+ *                    describing the last failure.
+ */
+function ntp_time(string $host, int $port = 123, int $timeout = 5, ?callable $lookup = null) {
+	$addresses = intropage_ntp_addresses($host, $lookup);
+
+	if ($addresses === []) {
+		return 'error: unable to resolve ' . trim($host);
 	}
 
-	$timestamp = sprintf('%u', $data[9]);
+	$result = '';
 
-	// close the socket
-	socket_close($sock);
+	foreach ($addresses as $address) {
+		$result = intropage_ntp_query($address, $port, $timeout);
 
-	// NTP is number of seconds since 0000 UT on 1 January 1900
-	// Unix time is seconds since 0000 UT on 1 January 1970
-	$timestamp -= 2208988800;
+		if (is_int($result)) {
+			return $result;
+		}
+	}
 
-	return (int) $timestamp;
+	return $result;
 }
+
 /**
  * Graph_buttons/graph_buttons_thumbnails hook: adds an 'Add to
  * Favorites/Intropage' button to Cacti's graph view toolbar, letting
@@ -2359,6 +2629,8 @@ function ntp_time(string $host) {
  */
 function intropage_graph_button($data): void {
 	global $config, $callbackPage, $redirectPage;
+
+	static $script_printed = false;
 
 	$login_opts = get_login_opts();
 
@@ -2390,8 +2662,38 @@ function intropage_graph_button($data): void {
 			}
 		}
 
-		print '<a class="iconLink" href="' . html_escape("$redirectPage?intropage_action=favgraph&graph_id=$local_graph_id") . '">' . $fav . '</a><br/>';
+		print '<a class="iconLink intropage_favgraph" href="#" data-action="' . html_escape($redirectPage) . '" data-graph="' . (int) $local_graph_id . '">' . $fav . '</a><br/>';
+
+		if (!$script_printed) {
+			$script_printed = true;
+
+			print intropage_favgraph_script();
+		}
 	}
+}
+
+/**
+ * Builds the script that turns a favorite-graph button click into a POST to
+ * the dashboard page. The button is rendered on Cacti's graph pages, outside
+ * the dashboard's own JavaScript, and a state change has to carry the CSRF
+ * token.
+ *
+ * @return string The script element, bound once per page.
+ */
+function intropage_favgraph_script(): string {
+	$nonce = function_exists('plugin_intropage_csp_nonce') ? plugin_intropage_csp_nonce() : '';
+
+	return '<script type="text/javascript" ' . $nonce . '>' .
+		'$(document).off("click.intropageFav").on("click.intropageFav", "a.intropage_favgraph", function(event) {' .
+		'event.preventDefault();' .
+		'var link = $(this);' .
+		'var form = $("<form method=\"post\"></form>").attr("action", link.attr("data-action"));' .
+		'var fields = { intropage_action: "favgraph", graph_id: link.attr("data-graph"), __csrf_magic: csrfMagicToken };' .
+		'$.each(fields, function(name, value) { $("<input type=\"hidden\"/>").attr("name", name).val(value).appendTo(form); });' .
+		'form.appendTo("body");' .
+		'form.get(0).submit();' .
+		'});' .
+		'</script>';
 }
 
 /**
@@ -2408,14 +2710,17 @@ function intropage_graph_button($data): void {
  * @return int The resolved login_opts value.
  */
 function get_login_opts(bool $refresh = false): int {
-	if (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_console') {
+	$requested = '';
+
+	if (isset_request_var('intropage_action') && intropage_is_post_request()) {
+		$requested = get_nfilter_request_var('intropage_action');
+	}
+
+	if ($requested == 'loginopt_console') {
 		$_SESSION['intropage_login_opts'] = 1;
-	} elseif (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_tab') {
+	} elseif ($requested == 'loginopt_tab') {
 		$_SESSION['intropage_login_opts'] = 4;
-	} elseif (isset_request_var('intropage_action') &&
-		get_nfilter_request_var('intropage_action') == 'loginopt_graph') {
+	} elseif ($requested == 'loginopt_graph') {
 		$_SESSION['intropage_login_opts'] = 2;
 	} elseif (empty($_SESSION['intropage_login_opts']) || $refresh) {
 		$login_opts = db_fetch_cell_prepared('SELECT login_opts
