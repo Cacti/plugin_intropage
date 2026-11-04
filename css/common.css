@@ -142,19 +142,23 @@
 	overflow: auto;
 }
 
-.txt_med {
+#intropage_main .txt_med,
+#overlay .txt_med {
 	font-size: 1.3em;
 }
 
-.txt_big {
+#intropage_main .txt_big,
+#overlay .txt_big {
 	font-size: 1.7em;
 }
 
-.txt_huge {
+#intropage_main .txt_huge,
+#overlay .txt_huge {
 	font-size: 4.0em;
 }
 
-.rpad {
+#intropage_main .rpad,
+#overlay .rpad {
 	padding-right: 1em !important;
 }
 
@@ -210,19 +214,23 @@
 	color: black !important;
 }
 
-.fa {
+#intropage_main .fa,
+#overlay .fa {
 	padding-right: 3px;
 }
 
-.block {
+#intropage_main .block,
+#overlay .block {
 	display:block ruby;
 }
 
-.float_left {
+#intropage_main .float_left,
+#overlay .float_left {
 	float: left;
 }
 
-.float_right {
+#intropage_main .float_right,
+#overlay .float_right {
 	width: 80%;
 	float: right;
 	text-align: right;
@@ -304,7 +312,8 @@
 	margin: 0 3px;
 }
 
-.w60 {
+#intropage_main .w60,
+#overlay .w60 {
 	width: 60%;
 }
 
