@@ -2022,8 +2022,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$chart = [
 			'bindto' => "#line_$xid",
 			'size'   => [
-				'height' => 100,
-				'width'  => 150
+				'height' => $graph_height
 			],
 			'point' => [
 				'r' => 1.5
@@ -2110,8 +2109,7 @@ function intropage_prepare_graph(array $dispdata, int $user_id): string {
 		$chart = [
 			'bindto' => "#bar_$xid",
 			'size'   => [
-				'height' => 100,
-				'width'  => 150
+				'height' => $graph_height
 			],
 			'zoom' => [
 				'enabled' => 'true',

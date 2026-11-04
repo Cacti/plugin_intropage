@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue: Size line and bar panel charts from the server-rendered markup (configured height, container-fitted width) like pie and treemap, instead of a fixed 100x150 that only the browser's resizeCharts() corrected after load; because that resize is a no-op during a panel reload when the inline chart script runs asynchronously, the charts previously stayed mis-sized until an unrelated window resize snapped them back
 * security: Encode pie and treemap chart columns as JSON so device template names can no longer end the string in the inline chart script
 * security: Check the panel permission when a panel is added, reloaded or opened in the detail dialog, not only when the dashboard renders
 * security: Accept dashboard actions that change data (add, remove, resize, settings, sharing, login option) only as POST so they carry Cacti's CSRF token; the favorite-graph button and the panel tools now post
