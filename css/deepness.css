@@ -81,6 +81,15 @@
 	color: black !important;
 }
 
+/* Row markers need stronger colors than the panel header surfaces. */
+.inpa_sq.color_green {
+	background: var(--dp-accent) !important;
+}
+
+.inpa_sq.color_red {
+	background: #ff6b6b !important;
+}
+
 .panel_header {
 	height: 28px;
 }

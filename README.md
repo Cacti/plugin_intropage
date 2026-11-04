@@ -43,6 +43,12 @@ details badge that works with existing coral titlebars. See
 The Dark fixture includes a visible red row marker for the failed device.
 See [Dark theme validation](docs/dark-theme.md) for screenshots and tests.
 
+![Deepness dashboard with seeded measurements and alerts](images/deepness-theme-dashboard.png)
+
+The Deepness fixture checks contrasting green and red row markers on dark
+surfaces. See [Deepness theme validation](docs/deepness-theme.md) for screenshots
+and reproduction commands.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
