@@ -2,6 +2,24 @@
 
 --- develop ---
 
+* security: Encode pie and treemap chart columns as JSON so device template names can no longer end the string in the inline chart script
+* security: Check the panel permission when a panel is added, reloaded or opened in the detail dialog, not only when the dashboard renders
+* security: Accept dashboard actions that change data (add, remove, resize, settings, sharing, login option) only as POST so they carry Cacti's CSRF token; the favorite-graph button and the panel tools now post
+* issue: Fix the poller stopping with a TypeError, and Cacti disabling the plugin, when a system panel definition has no data row yet; poller rows without an owner now run as user 0
+* issue: Fix the upgrade from 3.0.0 or older failing on PHP 8 while converting per-panel permissions
+* issue: Fix deleting a user group leaving its Intropage permission row behind
+* issue: Keep a dashboard's shared flag when dashboards are renamed in the settings form
+* issue: Apply the Intropage Viewer realm check on online remote pollers as well as on the main poller
+* issue: Delete a user's own panel data row when the panel is withdrawn from them
+* issue: Restore the hide_disabled user setting when the device lookup fails
+* issue: Join threshold event permissions for the viewing user only, so events are no longer repeated once per user holding a permission
+* issue: Look up the panel row before building the details view, so an unknown panel id no longer logs a warning or creates a row
+* dev: Add end-to-end tests that log in to a running Cacti and drive intropage.php, the poller, the graph_buttons hook and the upgrade, and run them in CI against the installed Cacti served by PHP's built-in server
+* dev: Add tests/bin/e2e-coverage-report.php, which lists the tests that execute each changed line from the end-to-end Xdebug dumps and the unit XML coverage
+* issue: Query NTP servers over IPv6 as well as IPv4: an IPv6 address (also in brackets) is used as it is, a name is resolved to its first AAAA and A address and both are tried; the check no longer needs the PHP sockets extension
+* issue: Fix the first favourite graph of a user without panels not being stored (the priority came out as NULL)
+* issue: `intropage_add_panel()` and `intropage_remove_panel()` could not work against the current schema; they now log a deprecation warning and return false. Register panels with a register_<name>() function in a panellib file
+* issue: Stop the poller running panel code, and Cacti logging an authentication error each cycle, for panel rows of users that no longer exist; the rows and their dashboard links are deleted in bounded steps
 * issue#440: Give Cacti theme severity indicators contrasting colors for dark details titlebars and light table rows
 * issue: Fix the dashboard page not scrolling with the mouse wheel over chart panels: charts were sized from the whole card (header included) and overflowed the card body, turning it into a nested scroller that captured the wheel; charts now keep their server-sized height (which also stops pie/treemap charts growing on every window resize) and card bodies no longer scroll vertically
 * issue: Keep long Panel Details content inside the dialog and scrollable, instead of spilling under the Close button pane, on themes (e.g. deepness) that force `.ui-dialog-content` to `overflow: visible`; the dialog height is also capped to the viewport

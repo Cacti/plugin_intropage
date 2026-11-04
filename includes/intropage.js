@@ -125,13 +125,28 @@ function addPanel() {
 	}
 }
 
+// Navigate to a page with a POST so the request carries Cacti's CSRF token;
+// a plain link or document.location is a GET and cannot change settings.
+function intropage_post_navigate(url, fields) {
+	var form = $('<form method="post"></form>').attr('action', url);
+
+	fields.__csrf_magic = csrfMagicToken;
+
+	$.each(fields, function(name, value) {
+		$('<input type="hidden"/>').attr('name', name).val(value).appendTo(form);
+	});
+
+	form.appendTo('body');
+	form.get(0).submit();
+}
+
 function actionPanel() {
 	var option = $('#intropage_action').val();
 
 	if (option == 'loginopt_tab') {
-		document.location = urlPath + 'plugins/intropage/intropage.php?dashboard_id='+dashboard_id+'&intropage_action='+option;
+		intropage_post_navigate(urlPath + 'plugins/intropage/intropage.php', { dashboard_id: dashboard_id, intropage_action: option });
 	} else if (option == 'loginopt_console') {
-		document.location = urlPath + 'index.php?dashboard_id='+dashboard_id+'&intropage_action='+option;
+		intropage_post_navigate(urlPath + 'index.php', { dashboard_id: dashboard_id, intropage_action: option });
 	} else {
 		var post = {
 			header: 'false',
@@ -156,9 +171,9 @@ function timeSpan() {
 	var option = $('#intropage_action_timespan').val();
 
 	if (option == 'loginopt_tab') {
-		document.location = urlPath + 'plugins/intropage/intropage.php?dashboard_id='+dashboard_id+'&intropage_action_timespan='+option;
+		intropage_post_navigate(urlPath + 'plugins/intropage/intropage.php', { dashboard_id: dashboard_id, intropage_action_timespan: option });
 	} else if (option == 'loginopt_console') {
-		document.location = urlPath + 'index.php?dashboard_id='+dashboard_id+'&intropage_action_timespan='+option;
+		intropage_post_navigate(urlPath + 'index.php', { dashboard_id: dashboard_id, intropage_action_timespan: option });
 	} else {
 		var post = {
 			header: 'false',
@@ -301,8 +316,15 @@ function initPage() {
 			onRemoveCard: function(id) {
 				var panel_id = String(id).split('_').pop();
 				var page = redirectPage + '?intropage_action=droppanel&panel_id=' + panel_id + '&dashboard_id=' + dashboard_id;
+				var drop = {
+					header: 'false',
+					intropage_action: 'droppanel',
+					panel_id: panel_id,
+					dashboard_id: dashboard_id,
+					__csrf_magic: csrfMagicToken
+				};
 
-				$.get(page, function() {
+				$.post(redirectPage, drop, function() {
 					var url = page.replace('droppanel', 'addpanelselect&header=false');
 
 					$.get(url)
@@ -334,9 +356,15 @@ function initPage() {
 				}
 
 				var action = (dir === 'grow') ? 'heightmore' : 'heightless';
-				var url = urlPath + 'plugins/intropage/intropage.php?&intropage_action=' + action + '&panel_id=' + panel_id;
+				var url = urlPath + 'plugins/intropage/intropage.php';
+				var resize = {
+					header: 'false',
+					intropage_action: action,
+					panel_id: panel_id,
+					__csrf_magic: csrfMagicToken
+				};
 
-				$.get(url)
+				$.post(url, resize)
 					.done(function() {
 						reload_panel(panel_id, true, false);
 					})

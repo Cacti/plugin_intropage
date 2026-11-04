@@ -189,13 +189,9 @@ function intropage_gather_stats(): array {
 
 	$panels = initialize_panel_library();
 
-	$upanels = db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
-		pd.refresh, ud.refresh_interval, pd.update_func
-		FROM plugin_intropage_panel_definition AS pd
-		LEFT JOIN plugin_intropage_panel_data AS ud
-		ON pd.panel_id = ud.panel_id
-		WHERE UNIX_TIMESTAMP(last_update) < UNIX_TIMESTAMP() - refresh_interval
-		OR (last_update IS NULL AND level = 0)');
+	intropage_purge_orphan_rows();
+
+	$upanels = intropage_poller_due_panels();
 
 	$tpanels = db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
 		pd.refresh, ud.trend_interval, ud.refresh_interval, pd.trends_func
@@ -246,10 +242,8 @@ function intropage_gather_stats(): array {
 	foreach ($upanels as $upanel) {
 		$start = microtime(true);
 
-		// Fake a session variable
-		if ($upanel['user_id'] > 0) {
-			$_SESSION['sess_user_id'] = $upanel['user_id'];
-		}
+		// Fake a session variable; system panels (no owner) run as user 0
+		$upanel['user_id'] = intropage_poller_impersonate($upanel['user_id']);
 
 		// Required plugin is not installed, but entry not purged
 		if (!isset($panels[$upanel['panel_id']])) {

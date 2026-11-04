@@ -166,7 +166,7 @@ function thold_event($panel, $user_id): void {
 		}
 
 		if ($allowed_devices !== false || $simple_perms) {
-			$data = db_fetch_assoc("SELECT tl.description AS description,tl.time AS time,
+			$data = db_fetch_assoc_prepared("SELECT tl.description AS description,tl.time AS time,
 				tl.status AS status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 				FROM plugin_thold_log AS tl
 				INNER JOIN thold_data AS td
@@ -180,15 +180,16 @@ function thold_event($panel, $user_id): void {
 				LEFT JOIN host AS h
 				ON h.id=gl.host_id
 				LEFT JOIN user_auth_perms AS uap0
-				ON (gl.id=uap0.item_id AND uap0.type=1)
+				ON (gl.id=uap0.item_id AND uap0.type=1 AND uap0.user_id = ?)
 				LEFT JOIN user_auth_perms AS uap1
-				ON (gl.host_id=uap1.item_id AND uap1.type=3)
+				ON (gl.host_id=uap1.item_id AND uap1.type=3 AND uap1.user_id = ?)
 				LEFT JOIN user_auth_perms AS uap2
-				ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+				ON (gl.graph_template_id=uap2.item_id AND uap2.type=4 AND uap2.user_id = ?)
 				$q_host_cond
 				HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 				ORDER BY `time` DESC
-				LIMIT " . $lines);
+				LIMIT " . $lines,
+				[$user_id, $user_id, $user_id]);
 		} else {
 			$data = [];
 		}
@@ -551,7 +552,7 @@ function thold_event_detail(): array {
 			$q_host_cond     = '';
 		}
 
-		$data = db_fetch_assoc("SELECT tl.description as description,tl.time as time,
+		$data = db_fetch_assoc_prepared("SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 			FROM plugin_thold_log AS tl
 			INNER JOIN thold_data AS td
@@ -565,15 +566,16 @@ function thold_event_detail(): array {
 			LEFT JOIN host AS h
 			ON h.id=gl.host_id
 			LEFT JOIN user_auth_perms AS uap0
-			ON (gl.id=uap0.item_id AND uap0.type=1)
+			ON (gl.id=uap0.item_id AND uap0.type=1 AND uap0.user_id = ?)
 			LEFT JOIN user_auth_perms AS uap1
-			ON (gl.host_id=uap1.item_id AND uap1.type=3)
+			ON (gl.host_id=uap1.item_id AND uap1.type=3 AND uap1.user_id = ?)
 			LEFT JOIN user_auth_perms AS uap2
-			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4 AND uap2.user_id = ?)
 			$q_host_cond
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 			ORDER BY `time` DESC
-			LIMIT 30");
+			LIMIT 30",
+			[$_SESSION['sess_user_id'], $_SESSION['sess_user_id'], $_SESSION['sess_user_id']]);
 
 		if (cacti_sizeof($data)) {
 			$panel['detail'] .= '<table class="cactiTable">';

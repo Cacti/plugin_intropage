@@ -117,40 +117,11 @@ function display_information(): bool {
 	$console_access = api_plugin_user_realm_auth('index.php');
 
 	// remove admin prohibited panels
-	$panels = db_fetch_assoc_prepared('SELECT pd.panel_id AS panel_name, pd.id AS id
-		FROM plugin_intropage_panel_data AS pd
-		INNER JOIN plugin_intropage_panel_dashboard AS pda
-		ON pd.id = pda.panel_id
-		WHERE pda.user_id = ?
-		AND pda.dashboard_id = ?',
-		[$_SESSION['sess_user_id'], $dashboard_id]);
+	$removed = intropage_remove_prohibited_panels((int) $_SESSION['sess_user_id'], (int) $dashboard_id);
 
-	if (cacti_sizeof($panels)) {
-		$removed = 0;
-
-		foreach ($panels as $one) {
-			$allowed = is_panel_allowed($one['panel_name']);
-
-			if (!$allowed) {
-				db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
-					WHERE user_id = ?
-					AND dashboard_id = ?
-					AND panel_id = ?',
-					[$_SESSION['sess_user_id'], $dashboard_id, $one['id']]);
-
-				db_execute_prepared('DELETE FROM plugin_intropage_panel_data
-					WHERE user_id = ?
-					AND panel_id = ?',
-					[$_SESSION['sess_user_id'], $one['id']]);
-
-				$removed++;
-			}
-		}
-
-		if ($removed > 0) {
-			raise_message('intropage_permissions', __('One or more panels was removed due to insufficient permissions. Contact administrator.', 'intropage'), MESSAGE_LEVEL_ERROR);
-			cacti_log('INTROPAGE WARNING: One or more panels was removed to user ' . $_SESSION['sess_user_id'] . ' due to insufficient permissions');
-		}
+	if ($removed > 0) {
+		raise_message('intropage_permissions', __('One or more panels was removed due to insufficient permissions. Contact administrator.', 'intropage'), MESSAGE_LEVEL_ERROR);
+		cacti_log('INTROPAGE WARNING: One or more panels was removed to user ' . $_SESSION['sess_user_id'] . ' due to insufficient permissions');
 	}
 
 	if ($display_important_first == 'on') {
