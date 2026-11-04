@@ -20,6 +20,7 @@
 * issue: Fix the first favourite graph of a user without panels not being stored (the priority came out as NULL)
 * issue: `intropage_add_panel()` and `intropage_remove_panel()` could not work against the current schema; they now log a deprecation warning and return false. Register panels with a register_<name>() function in a panellib file
 * issue: Stop the poller running panel code, and Cacti logging an authentication error each cycle, for panel rows of users that no longer exist; the rows and their dashboard links are deleted in bounded steps
+* issue#451: Improve Midwinter panel text and palette-specific indicators while preserving alert colors in details dialogs
 * issue#449: Contrast Hollyberry details dots against a neutral badge and darken amber and grey row markers
 * issue#447: Improve Deepness green and red row marker contrast on dark surfaces
 * issue#444: Brighten Dark theme red row markers while preserving panel header colors

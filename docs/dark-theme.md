@@ -10,12 +10,12 @@ The screenshots render the actual plugin and core Dark stylesheets with
 synthetic devices, ping times, poller totals, and warning/error messages.
 They do not show a live Cacti installation or production monitoring data.
 
-![Dark dashboard with populated response times and alert panels](../images/dark-theme-dashboard.png)
+![Dark dashboard with populated response times and alert panels](../tests/images/dark-theme-dashboard.png)
 
 The E2E test opens and closes the real jQuery UI details dialog and checks
 that its alert data is visible.
 
-![Dark details dialog with synthetic warning and error messages](../images/dark-theme-status.png)
+![Dark details dialog with synthetic warning and error messages](../tests/images/dark-theme-status.png)
 
 ## Reproduce
 

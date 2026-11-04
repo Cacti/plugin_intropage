@@ -10,12 +10,12 @@ The screenshots use actual core and plugin Hollyberry stylesheets with synthetic
 devices, response times, poller totals, and warning/error messages. They show
 browser fixtures, not a live installation or production monitoring data.
 
-![Hollyberry dashboard with populated monitoring panels](../images/hollyberry-theme-dashboard.png)
+![Hollyberry dashboard with populated monitoring panels](../tests/images/hollyberry-theme-dashboard.png)
 
 The browser test opens the real jQuery UI details dialog, checks its alert data,
 and closes it.
 
-![Hollyberry details with synthetic warning and error rows](../images/hollyberry-theme-status.png)
+![Hollyberry details with synthetic warning and error rows](../tests/images/hollyberry-theme-status.png)
 
 ## Reproduce
 
