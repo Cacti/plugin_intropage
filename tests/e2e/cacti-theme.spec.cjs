@@ -6,7 +6,7 @@ const { dirname, relative, resolve } = require('node:path');
 const root = resolve(__dirname, '../..');
 const core = process.env.CACTI_ROOT || resolve(root, '../..');
 
-const themes = ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry', 'modern', 'paw', 'raspberry', 'sunrise'].map(theme => ({ theme }));
+const themes = ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry', 'modern', 'paw', 'raspberry', 'sunrise', 'paper-plane'].map(theme => ({ theme }));
 themes.push({ theme: 'midwinter', palette: 'dark' }, { theme: 'midwinter', palette: 'light' });
 
 function elementContrast(element) {
@@ -63,12 +63,12 @@ for (const { theme, palette } of themes) {
 		await page.setViewportSize({ width: 1140, height: 520 });
 		await page.setContent(readFileSync(resolve(root, 'tests/fixtures/Ui/cacti-theme.html'), 'utf8').replaceAll('Cacti theme', `${theme[0].toUpperCase() + theme.slice(1)} theme`));
 		await preparePalette(page, palette);
-		if (theme === 'sunrise') await page.locator('h1').evaluate(element => element.style.color = 'lightgrey');
+		if (['sunrise', 'paper-plane'].includes(theme)) await page.locator('h1').evaluate(element => element.style.color = 'lightgrey');
 		for (const file of [resolve(core, `include/themes/${theme}/jquery-ui.css`), resolve(core, `include/themes/${theme}/main.css`), resolve(core, 'include/fa/css/all.css'), resolve(root, 'includes/cards/cards.css'), resolve(root, 'css/common.css'), resolve(root, `css/${theme}.css`)]) {
 			await installCss(page, file);
 		}
 		if (palette) await expect(page.locator('body')).toHaveCSS('opacity', '1');
-		if (palette || theme === 'sunrise') {
+		if (palette || ['sunrise', 'paper-plane'].includes(theme)) {
 			for (const text of await page.locator('.panel_data p, .panel_data h4').all()) {
 				expect.soft((await text.evaluate(elementContrast)).ratio, 'panel text').toBeGreaterThanOrEqual(4.5);
 			}
@@ -128,7 +128,7 @@ for (const { theme, palette } of themes) {
 			await page.setContent(`<!DOCTYPE html><div id="overlay_detail" class="${palette ? 'ui-widget-content' : ''}">` + ['green', 'red', 'yellow', 'grey'].map(color =>
 				`<div class="cactiTableTitleRow"><div class="cactiTableTitle">Panel Details</div>` +
 				`<div class="cactiTableButton"><i id="bubble-${color}" class="color_${color}_bubble">●</i></div></div>` +
-				`<div${palette ? ' class="grid_item"' : ''}><table class="cactiTable"><tr class="${row}"><td><span id="square-${color}" class="inpa_sq color_${color}"></span>Device status</td></tr></table></div>`
+				`<div${palette ? ' class="grid_item"' : theme === 'paper-plane' ? ' class="panel_data"' : ''}><table class="cactiTable"><tr class="${row}"><td><span id="square-${color}" class="inpa_sq color_${color}"></span>Device status</td></tr></table></div>`
 			).join('') + '</div>');
 			await preparePalette(page, palette);
 			for (const file of [resolve(core, `include/themes/${theme}/main.css`), resolve(root, 'css/common.css'), resolve(root, `css/${theme}.css`)]) {
