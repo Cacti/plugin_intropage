@@ -76,3 +76,12 @@
 .color_grey, .color_grey i {
 	color: black !important;
 }
+
+/* Row markers need darker colors against light table rows. */
+.inpa_sq.color_yellow {
+	background: #a45d00 !important;
+}
+
+.inpa_sq.color_grey {
+	background: #737373 !important;
+}
