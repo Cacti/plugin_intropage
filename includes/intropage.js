@@ -561,6 +561,34 @@ function intropage_open_details(panel_id) {
 	});
 }
 
+/* A panel's chart is drawn by an inline bb.generate() script returned with the
+ * reloaded markup. A strict Content-Security-Policy can run that nonce'd inline
+ * script asynchronously, after reload_panel()'s resizeCharts() has already run;
+ * resizeCharts() is then a no-op (the SVG does not exist yet) and the chart
+ * keeps the size it was generated at until an unrelated window resize fires
+ * resizeCharts() again. Re-run the resize once the chart has actually rendered
+ * so the panel never waits for a window resize to be sized correctly. */
+function resizeChartWhenRendered(panel_id) {
+	var $wrapper = $('#panel_'+panel_id).find('.chart_wrapper');
+
+	if (!$wrapper.length) {
+		return;
+	}
+
+	var attempts = 0;
+
+	(function whenRendered() {
+		if ($wrapper.find('svg').length) {
+			resizeCharts();
+			return;
+		}
+
+		if (attempts++ < 20) {
+			requestAnimationFrame(whenRendered);
+		}
+	})();
+}
+
 function reload_panel(panel_id, forced_update, refresh) {
 	if (!refresh) {
 		$('#panel_'+panel_id).find('.panel_wrapper').css('opacity',0);
@@ -589,6 +617,7 @@ function reload_panel(panel_id, forced_update, refresh) {
 
 		resizeGraphsPanel();
 		resizeCharts();
+		resizeChartWhenRendered(panel_id);
 		ajaxAnchors();
 	})
 	.fail(function(data) {
