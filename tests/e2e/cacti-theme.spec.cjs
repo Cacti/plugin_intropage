@@ -6,7 +6,7 @@ const { dirname, relative, resolve } = require('node:path');
 const root = resolve(__dirname, '../..');
 const core = process.env.CACTI_ROOT || resolve(root, '../..');
 
-const themes = ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry'].map(theme => ({ theme }));
+const themes = ['cacti', 'carrot', 'dark', 'deepness', 'hollyberry', 'modern'].map(theme => ({ theme }));
 themes.push({ theme: 'midwinter', palette: 'dark' }, { theme: 'midwinter', palette: 'light' });
 
 function elementContrast(element) {
@@ -24,7 +24,7 @@ function elementContrast(element) {
 		surfaces = surfaces.map(bg => over(c, bg));
 		// Sample stops and intermediate sRGB colors; raster textures use their fallback color.
 		const image = getComputedStyle(e).backgroundImage;
-		if (image.startsWith('linear-gradient(')) {
+		if (image.startsWith('linear-gradient(') || image.startsWith('-webkit-linear-gradient(')) {
 			const stops = (image.match(/rgba?\([^)]+\)/g) || []).map(rgba);
 			const samples = stops.flatMap((stop, index) => index === 0 ? [stop] :
 				[.25, .5, .75, 1].map(t => stop.map((v, channel) => stops[index - 1][channel] * (1 - t) + v * t)));
@@ -94,6 +94,7 @@ for (const { theme, palette } of themes) {
 		await capture(`${theme}${palette ? '-' + palette : ''}-theme-dashboard`);
 		await page.getByRole('button', { name: 'Open alert details' }).click();
 		await expect(page.getByRole('dialog')).toBeVisible();
+		if (theme === 'modern') await expect(page.locator('#overlay_detail .color_red_bubble')).toHaveCSS('color', 'rgb(198, 40, 40)');
 		if (palette) await expect(page.locator('#overlay_detail .color_red_bubble')).toHaveCSS('color', palette === 'light' ? 'rgb(179, 38, 30)' : 'rgb(255, 107, 107)');
 		await expect(page.getByRole('table', { name: 'Alert details' }).getByText(/branch-firewall-03/)).toBeVisible();
 		await capture(`${theme}${palette ? '-' + palette : ''}-theme-status`);

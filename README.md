@@ -62,6 +62,11 @@ Midwinter's dark and light fixtures check panel text, row markers, and alert col
 in real details dialogs. See [Midwinter theme validation](docs/midwinter-theme.md)
 for screenshots and reproduction commands.
 
+![Modern dashboard with seeded device measurements and alerts](images/modern-theme-dashboard.png)
+
+The Modern fixture checks contrasting details dots and row markers. See
+[Modern theme validation](docs/modern-theme.md) for screenshots and tests.
+
 ## Requirements
 
 - Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
