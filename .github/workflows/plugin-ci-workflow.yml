@@ -30,6 +30,7 @@ on:
     branches:
       - main
       - develop
+      - 'fix/*-theme-*'
 
 permissions:
   contents: read
