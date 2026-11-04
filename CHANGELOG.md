@@ -20,6 +20,7 @@
 * issue: Fix the first favourite graph of a user without panels not being stored (the priority came out as NULL)
 * issue: `intropage_add_panel()` and `intropage_remove_panel()` could not work against the current schema; they now log a deprecation warning and return false. Register panels with a register_<name>() function in a panellib file
 * issue: Stop the poller running panel code, and Cacti logging an authentication error each cycle, for panel rows of users that no longer exist; the rows and their dashboard links are deleted in bounded steps
+* issue#459: Give Sunrise panel headings readable inherited text on dark backgrounds
 * issue#457: Contrast Raspberry details dots against a neutral badge and darken amber and grey row markers
 * issue#455: Darken Paw amber and grey row markers for contrast on light table rows
 * issue#453: Contrast Modern details dots against a neutral badge and darken amber and grey row markers
