@@ -47,21 +47,30 @@ $(function() {
 
 function resizeCharts() {
 	$('.chart_wrapper:has(svg)').each(function() {
-		var chart      = $(this).attr('id');
-		var windWidth  = $(window).width() - 34;
-		var panelWidth = $(this).closest('.panel_wrapper').width() - 34;
-		var width = Math.min(windWidth, panelWidth);
-
-		// Keep the server-sized chart height. .panel_wrapper also holds the card
-		// header and body padding, so deriving the height from it oversizes the
-		// chart, overflows .ccCardBody and turns it into a nested scroller that
-		// swallows mouse-wheel scrolling of the page.
-		var height     = $(this).height();
-
-		if (panels[chart] != undefined) {
-			panels[chart].resize({ width: width, height:height });
-		}
+		resizeChart($(this));
 	});
+}
+
+/* Resize a single rendered chart to its container. Scoped so a per-panel reload
+ * does not walk and redraw every chart on the dashboard. */
+function resizeChart($wrapper) {
+	var chart = $wrapper.attr('id');
+
+	if (panels[chart] == undefined || !$wrapper.find('svg').length) {
+		return;
+	}
+
+	var windWidth  = $(window).width() - 34;
+	var panelWidth = $wrapper.closest('.panel_wrapper').width() - 34;
+	var width = Math.min(windWidth, panelWidth);
+
+	// Keep the server-sized chart height. .panel_wrapper also holds the card
+	// header and body padding, so deriving the height from it oversizes the
+	// chart, overflows .ccCardBody and turns it into a nested scroller that
+	// swallows mouse-wheel scrolling of the page.
+	var height = $wrapper.height();
+
+	panels[chart].resize({ width: width, height: height });
 }
 
 function resizeGraphsPanel() {
@@ -566,8 +575,13 @@ function intropage_open_details(panel_id) {
  * script asynchronously, after reload_panel()'s resizeCharts() has already run;
  * resizeCharts() is then a no-op (the SVG does not exist yet) and the chart
  * keeps the size it was generated at until an unrelated window resize fires
- * resizeCharts() again. Re-run the resize once the chart has actually rendered
- * so the panel never waits for a window resize to be sized correctly. */
+ * resizeCharts() again. Watch the wrapper and resize the chart once it has
+ * actually rendered, so the panel never waits for a window resize.
+ *
+ * A fixed count of requestAnimationFrame callbacks is not a stable deadline:
+ * its wall-clock span shrinks with the display refresh rate (e.g. ~333ms at
+ * 60Hz but ~83ms at 240Hz) and can stop before a slow render. Use a one-shot
+ * MutationObserver plus a wall-clock timeout instead. */
 function resizeChartWhenRendered(panel_id) {
 	var $wrapper = $('#panel_'+panel_id).find('.chart_wrapper');
 
@@ -575,18 +589,48 @@ function resizeChartWhenRendered(panel_id) {
 		return;
 	}
 
-	var attempts = 0;
+	// Already rendered: resize this chart now.
+	if ($wrapper.find('svg').length) {
+		resizeChart($wrapper);
 
-	(function whenRendered() {
-		if ($wrapper.find('svg').length) {
-			resizeCharts();
+		return;
+	}
+
+	var settled  = false;
+	var observer = null;
+	var deadline = null;
+
+	function finish() {
+		if (settled) {
 			return;
 		}
 
-		if (attempts++ < 20) {
-			requestAnimationFrame(whenRendered);
+		settled = true;
+
+		if (observer != null) {
+			observer.disconnect();
 		}
-	})();
+
+		if (deadline != null) {
+			clearTimeout(deadline);
+		}
+
+		resizeChart($wrapper);
+	}
+
+	if (window.MutationObserver) {
+		observer = new MutationObserver(function() {
+			if ($wrapper.find('svg').length) {
+				finish();
+			}
+		});
+
+		observer.observe($wrapper.get(0), { childList: true, subtree: true });
+	}
+
+	// Stop waiting after a fixed wall-clock deadline (independent of the display
+	// refresh rate) whether or not the chart ever rendered.
+	deadline = setTimeout(finish, 3000);
 }
 
 function reload_panel(panel_id, forced_update, refresh) {
