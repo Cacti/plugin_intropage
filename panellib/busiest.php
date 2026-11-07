@@ -283,7 +283,10 @@ function busiest_cpu($panel, $user_id): void {
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right intropage_1">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
-				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
+				// Allow a small tolerance over 100%. DSSTATS stores averaged/summarized
+				// values, so used can legitimately land a fraction above total (e.g.
+				// 100.004%). Only warn on a meaningful overshoot that indicates broken data.
+				if ($row['xvalue'] > 110 || $row['xpeak'] > 110) {
 					$host_id = db_fetch_cell_prepared('SELECT host_id
 						FROM data_local
 						WHERE id = ?',
@@ -559,7 +562,10 @@ function busiest_hdd($panel, $user_id): void {
 				$panel['data'] .= '<td class="right">' . round($row['xvalue'], 2) . ' % <span class="inpa_sq color_' . $color . '"></span></td>';
 				$panel['data'] .= '<td class="right">' . round($row['xpeak'], 2) . ' %</td></tr>';
 
-				if ($row['xvalue'] > 100 || $row['xpeak'] > 100) {
+				// Allow a small tolerance over 100%. DSSTATS stores averaged/summarized
+				// values, so used can legitimately land a fraction above total (e.g.
+				// 100.004%). Only warn on a meaningful overshoot that indicates broken data.
+				if ($row['xvalue'] > 110 || $row['xpeak'] > 110) {
 					$host_id = db_fetch_cell_prepared('SELECT host_id
 						FROM data_local
 						WHERE id = ?',
