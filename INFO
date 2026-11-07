@@ -21,7 +21,7 @@
 
 [info]
 name = intropage
-version = 4.0.5
+version = 4.1.0
 longname = Intropage/Dashboard
 author = The Cacti Group, Petr Macek
 email = developers@cacti.net, petr.macek@kostax.cz

@@ -27,6 +27,9 @@
 define('PANEL_SYSTEM', 0);
 define('PANEL_USER',   1);
 
+// Third-party panel registration API (intropage_register_panel() et al.)
+include_once(__DIR__ . '/registration.php');
+
 if (isset($run_from_poller)) {
 	$_SESSION['sess_user_id'] = 0;
 }
@@ -1793,6 +1796,16 @@ function initialize_panel_library(): array {
 		}
 
 		$panel_library = $panels;
+
+		// Merge in panels published by third-party plugins via the
+		// registration API. These are kept in a separate table and
+		// contributed last so they can extend, but never silently clobber,
+		// the built-in panellib panels.
+		$registered = intropage_load_registered_panels();
+
+		if (cacti_sizeof($registered)) {
+			$panel_library += $registered;
+		}
 
 		$_SESSION['intropage_panel_library'] = $panel_library;
 	}

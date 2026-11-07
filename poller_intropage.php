@@ -107,6 +107,9 @@ if (function_exists('register_process_start')) {
 // Make intropage first to gather correct stats
 intropage_correct_load_order();
 
+// Drop panel registrations whose owning third-party plugin is gone
+intropage_prune_stale_registrations();
+
 $stats = intropage_gather_stats();
 
 $poller_end = microtime(true);

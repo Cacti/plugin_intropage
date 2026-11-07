@@ -61,6 +61,10 @@ function display_information(): bool {
 
 	intropage_upgrade_database();
 
+	// Remove panels whose owning third-party plugin has been uninstalled so
+	// they no longer appear on any dashboard.
+	intropage_prune_stale_registrations();
+
 	$panels = initialize_panel_library();
 
 	$login_opts = get_login_opts();

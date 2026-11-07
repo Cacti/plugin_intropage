@@ -41,6 +41,47 @@ function intropage_drop_database(): void {
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_auth');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_dashboard');
 	db_execute('DROP TABLE IF EXISTS plugin_intropage_user_group_auth');
+	db_execute('DROP TABLE IF EXISTS plugin_intropage_panel_registration');
+}
+
+/**
+ * Creates the plugin_intropage_panel_registration table used to store
+ * dashboard panels published by third-party plugins through the panel
+ * registration API (intropage_register_panel() et al.). Factored out so both
+ * the fresh install path and the upgrade path can create it identically.
+ *
+ * @return void
+ */
+function intropage_create_panel_registration_table(): void {
+	$data              = [];
+	$data['columns'][] = ['name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false];
+	$data['columns'][] = ['name' => 'plugin', 'type' => 'varchar(64)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'description', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'class', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'level', 'type' => 'tinyint', 'unsigned' => true, 'NULL' => false, 'default' => 1];
+	$data['columns'][] = ['name' => 'priority', 'type' => 'tinyint', 'unsigned' => true, 'NULL' => false, 'default' => 50];
+	$data['columns'][] = ['name' => 'alarm', 'type' => 'varchar(10)', 'NULL' => false, 'default' => 'grey'];
+	$data['columns'][] = ['name' => 'width', 'type' => 'varchar(20)', 'NULL' => false, 'default' => 'quarter-panel'];
+	$data['columns'][] = ['name' => 'height', 'type' => "enum('normal','double','triple')", 'NULL' => false, 'default' => 'normal'];
+	$data['columns'][] = ['name' => 'height_fixed', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => 0];
+	$data['columns'][] = ['name' => 'force', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => 1];
+	$data['columns'][] = ['name' => 'requires', 'type' => 'varchar(128)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'include_file', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'update_func', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'details_func', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'trends_func', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'refresh', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => 3600];
+	$data['columns'][] = ['name' => 'trefresh', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => 3600];
+	$data['columns'][] = ['name' => 'request_vars', 'type' => 'text', 'NULL' => true];
+	$data['columns'][] = ['name' => 'enabled', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => 1];
+	$data['columns'][] = ['name' => 'registered', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP'];
+	$data['columns'][] = ['name' => 'last_updated', 'type' => 'timestamp', 'NULL' => false, 'default' => 'CURRENT_TIMESTAMP'];
+	$data['type']      = 'InnoDB';
+	$data['primary']   = 'panel_id';
+	$data['keys'][]    = ['name' => 'plugin', 'columns' => 'plugin'];
+	$data['comment']   = 'Third-party plugin dashboard panel registrations';
+	api_plugin_db_table_create('intropage', 'plugin_intropage_panel_registration', $data);
 }
 
 /**
@@ -191,6 +232,8 @@ function intropage_initialize_database(): void {
 	api_plugin_db_table_create('intropage', 'plugin_intropage_dashboard', $data);
 
 	db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
+
+	intropage_create_panel_registration_table();
 }
 
 /**
@@ -376,6 +419,12 @@ function intropage_upgrade_database(): void {
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
 			db_execute('ALTER TABLE plugin_intropage_panel_data
 				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
+		}
+
+		if (cacti_version_compare($oldv, '4.1.0', '<')) {
+			if (!db_table_exists('plugin_intropage_panel_registration')) {
+				intropage_create_panel_registration_table();
+			}
 		}
 
 		// Remove files/directories a previous version left behind (per manifest.json).
