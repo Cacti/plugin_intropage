@@ -1788,7 +1788,7 @@ function initialize_panel_library(): array {
 						WHERE id = ?',
 						[$id]);
 
-					db_execute_prepared('DELETE FROM plugin_intropage_definition
+					db_execute_prepared('DELETE FROM plugin_intropage_panel_definition
 						WHERE panel_id = ?',
 						[$panel_id]);
 				}
