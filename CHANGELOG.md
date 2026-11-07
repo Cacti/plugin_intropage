@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* issue#466: Tolerate a small overshoot over 100% in the busiest Used Space panels so DSSTATS averaging artifacts (e.g. used reading 100.004% of total) no longer log a false "Problem with DSSTAT data" warning; only a meaningful overshoot (over 110%) now warns
 * issue: Size panel charts correctly on reload without waiting for a window resize. A panel's chart is drawn by an inline bb.generate() script that a strict Content-Security-Policy can run asynchronously, after reload_panel()'s resizeCharts() has already run; resizeCharts() was then a no-op and the chart kept its generated size until an unrelated window resize snapped it back. reload_panel() now watches the panel with a one-shot MutationObserver (and a wall-clock deadline) and resizes only that chart once it has actually rendered, and line/bar charts are sized from the server-rendered markup (configured height, container-fitted width) like pie and treemap instead of a fixed 100x150
 * security: Encode pie and treemap chart columns as JSON so device template names can no longer end the string in the inline chart script
 * security: Check the panel permission when a panel is added, reloaded or opened in the detail dialog, not only when the dashboard renders
