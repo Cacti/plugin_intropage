@@ -1771,46 +1771,76 @@ function initialize_panel_library(): array {
 			}
 		}
 
-		// Handle unregistered panels
-		if (cacti_sizeof($uninstall) && read_config_option('intropage_unregister') == 'on') {
-			foreach ($uninstall as $panel_id) {
-				$id = db_fetch_cell_prepared('SELECT id
-					FROM plugin_intropage_panel_data
-					WHERE panel_id = ?',
-					[$panel_id]);
-
-				if ($id > 0) {
-					db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
-						WHERE panel_id = ?',
-						[$id]);
-
-					db_execute_prepared('DELETE FROM plugin_intropage_panel_data
-						WHERE id = ?',
-						[$id]);
-
-					db_execute_prepared('DELETE FROM plugin_intropage_panel_definition
-						WHERE panel_id = ?',
-						[$panel_id]);
-				}
-			}
-		}
-
-		$panel_library = $panels;
+		// Handle panels whose required plugin is no longer installed.
+		intropage_unregister_missing_panels($uninstall);
 
 		// Merge in panels published by third-party plugins via the
 		// registration API. These are kept in a separate table and
 		// contributed last so they can extend, but never silently clobber,
 		// the built-in panellib panels.
-		$registered = intropage_load_registered_panels();
-
-		if (cacti_sizeof($registered)) {
-			$panel_library += $registered;
-		}
+		$panel_library = intropage_merge_registered_panels($panels);
 
 		$_SESSION['intropage_panel_library'] = $panel_library;
 	}
 
 	return $panel_library;
+}
+
+/**
+ * Removes the stored footprint (dashboard placements, data and definition
+ * rows) of panels whose required plugin is no longer installed, when the
+ * administrator has enabled automatic unregistering. Factored out of
+ * initialize_panel_library() so the cleanup is unit-testable in isolation.
+ *
+ * @param array $uninstall Panel ids whose required plugin is missing.
+ *
+ * @return void
+ */
+function intropage_unregister_missing_panels(array $uninstall): void {
+	if (!cacti_sizeof($uninstall) || read_config_option('intropage_unregister') != 'on') {
+		return;
+	}
+
+	foreach ($uninstall as $panel_id) {
+		$id = db_fetch_cell_prepared('SELECT id
+			FROM plugin_intropage_panel_data
+			WHERE panel_id = ?',
+			[$panel_id]);
+
+		if ($id > 0) {
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+				WHERE panel_id = ?',
+				[$id]);
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+				WHERE id = ?',
+				[$id]);
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_definition
+				WHERE panel_id = ?',
+				[$panel_id]);
+		}
+	}
+}
+
+/**
+ * Merges the panels published by third-party plugins through the registration
+ * API into a built-in panel library array. Registered panels are contributed
+ * last so they can extend, but never silently clobber, the built-in panellib
+ * panels. Factored out of initialize_panel_library() for unit-testability.
+ *
+ * @param array $library The built-in panel library, keyed by panel id.
+ *
+ * @return array The library with enabled registrations merged in.
+ */
+function intropage_merge_registered_panels(array $library): array {
+	$registered = intropage_load_registered_panels();
+
+	if (cacti_sizeof($registered)) {
+		$library += $registered;
+	}
+
+	return $library;
 }
 
 /**

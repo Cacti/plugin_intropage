@@ -149,7 +149,7 @@ if (!function_exists('db_fetch_cell_prepared')) {
 }
 if (!function_exists('db_table_exists')) {
 	function db_table_exists($t) {
-		return false;
+		return $GLOBALS['__test_tables'][$t] ?? false;
 	}
 }
 if (!function_exists('db_index_exists')) {
