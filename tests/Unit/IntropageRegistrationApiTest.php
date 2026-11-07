@@ -31,6 +31,12 @@ function intropage_reg_router(string $kind, string $sql, array $params) {
 		if ($has('FROM plugin_config') && $has('directory = ?')) {
 			return $r['plugin_present'] ? '1' : '0';
 		}
+		if ($has('SELECT plugin') && $has('plugin_intropage_panel_registration')) {
+			return $r['owner'];
+		}
+		if ($has('plugin_intropage_panel_definition') && $has('COUNT(*)')) {
+			return $r['builtin'];
+		}
 		if ($has('plugin_intropage_panel_registration') && $has('COUNT(*)')) {
 			return $r['exists'] ? '1' : '0';
 		}
@@ -127,13 +133,18 @@ beforeEach(function () {
 	$GLOBALS['__test_config']   = array();
 	$GLOBALS['__test_tables']   = array('plugin_intropage_panel_registration' => true);
 	$GLOBALS['__test_query']    = 'intropage_reg_router';
+	$GLOBALS['__test_config']['admin_user'] = 5;
 	$_SESSION['sess_user_id']   = 5;
 	$_REQUEST                   = array();
 	$GLOBALS['__test_request']  = array();
+	$GLOBALS['registry']        = array();
+	unset($GLOBALS['intropage_panel_library_stale']);
 
 	$GLOBALS['__reg'] = array(
 		'plugin_present'  => true,
 		'exists'          => true,
+		'owner'           => '',
+		'builtin'         => '0',
 		'row'             => intropage_reg_row(),
 		'all_rows'        => array(),
 		'rows_by_plugin'  => array(),
@@ -161,6 +172,44 @@ it('rejects an invalid plugin name', function () {
 	$errors = intropage_validate_panel_registration(intropage_reg_input(array('plugin' => 'bad plugin!')), false);
 
 	expect($errors)->toContain("The 'plugin' must be the plugin directory name (letters, digits or underscores).");
+});
+
+it('rejects a purely numeric panel id', function () {
+	expect(intropage_validate_panel_registration(intropage_reg_input(array('panel_id' => '123')), false))
+		->toContain("The 'panel_id' must not be purely numeric.");
+
+	expect(intropage_validate_panel_registration(intropage_reg_input(array('panel_id' => '1e3')), false))
+		->toContain("The 'panel_id' must not be purely numeric.");
+});
+
+it('rejects over-length attributes', function () {
+	$errors = intropage_validate_panel_registration(intropage_reg_input(array('name' => str_repeat('a', 31))), false);
+
+	expect($errors)->toContain("The 'name' must be 30 characters or fewer.");
+});
+
+it('detects built-in and cross-plugin id conflicts', function () {
+	$GLOBALS['__reg']['owner'] = 'other';
+	expect(intropage_registration_conflict('demo_panel', 'demo'))->toContain("already registered by plugin 'other'");
+
+	$GLOBALS['__reg']['owner'] = 'demo';
+	expect(intropage_registration_conflict('demo_panel', 'demo'))->toBe('');
+
+	$GLOBALS['__reg']['owner']   = '';
+	$GLOBALS['__reg']['builtin'] = '1';
+	expect(intropage_registration_conflict('info', 'demo'))->toContain('built-in');
+
+	$GLOBALS['__reg']['builtin'] = '0';
+	expect(intropage_registration_conflict('free_id', 'demo'))->toBe('');
+});
+
+it('refuses to register a panel id owned by another plugin', function () {
+	$GLOBALS['__reg']['owner'] = 'other';
+
+	$result = intropage_register_panel(intropage_reg_input());
+
+	expect($result)->toBeArray();
+	expect(intropage_reg_writes('INSERT INTO plugin_intropage_panel_registration'))->toBe(array());
 });
 
 it('detects whether a plugin is present', function () {
@@ -424,11 +473,64 @@ it('falls back to the default on an invalid integer request variable', function 
 	expect(intropage_validate_request_vars('demo_panel')['num'])->toBe(-1);
 });
 
-it('resolves the admin user from session, config and fallback', function () {
-	$_SESSION['sess_user_id'] = 9;
-	expect(intropage_registration_admin_user())->toBe(9);
+it('falls back to the default for an invalid boolean', function () {
+	$GLOBALS['__reg']['row'] = intropage_reg_row(array('request_vars' => json_encode(array(
+		array('name' => 'flag', 'type' => 'boolean', 'default' => true),
+	))));
 
-	$_SESSION['sess_user_id']          = 0;
+	$_REQUEST = array('flag' => 'notabool');
+	$GLOBALS['__test_request'] = $_REQUEST;
+
+	expect(intropage_validate_request_vars('demo_panel')['flag'])->toBeTrue();
+});
+
+it('rejects a non-scalar request variable value', function () {
+	$GLOBALS['__reg']['row'] = intropage_reg_row(array('request_vars' => json_encode(array(
+		array('name' => 'token', 'type' => 'string', 'default' => 'safe'),
+	))));
+
+	$_REQUEST = array('token' => array('x'));
+	$GLOBALS['__test_request'] = $_REQUEST;
+
+	expect(intropage_validate_request_vars('demo_panel')['token'])->toBe('safe');
+});
+
+it('registers a fallback category for loaded registrations', function () {
+	$GLOBALS['registry']           = array();
+	$GLOBALS['__reg']['load_rows'] = array(intropage_reg_row(array('panel_id' => 'demo_panel', 'class' => 'demo', 'plugin' => 'demo')));
+
+	intropage_load_registered_panels();
+
+	expect($GLOBALS['registry'])->toHaveKey('demo');
+	expect($GLOBALS['registry']['demo'])->toHaveKey('name');
+});
+
+it('does not overwrite an existing category', function () {
+	$GLOBALS['registry']           = array('demo' => array('name' => 'Built-in', 'description' => ''));
+	$GLOBALS['__reg']['load_rows'] = array(intropage_reg_row(array('class' => 'demo')));
+
+	intropage_load_registered_panels();
+
+	expect($GLOBALS['registry']['demo']['name'])->toBe('Built-in');
+});
+
+it('invalidates the static panel-library cache on reset', function () {
+	unset($GLOBALS['intropage_panel_library_stale']);
+	$_SESSION['intropage_panel_library'] = array('x' => 1);
+
+	intropage_registration_reset_cache();
+
+	expect($GLOBALS['intropage_panel_library_stale'])->toBeTrue();
+	expect(isset($_SESSION['intropage_panel_library']))->toBeFalse();
+
+	// initialize_panel_library() consumes the flag and rebuilds.
+	expect(initialize_panel_library())->toBeArray();
+	expect(empty($GLOBALS['intropage_panel_library_stale']))->toBeTrue();
+});
+
+it('resolves the admin user from config and fallback, ignoring the session', function () {
+	// The session user must never influence the admin resolution.
+	$_SESSION['sess_user_id']               = 9;
 	$GLOBALS['__test_config']['admin_user'] = 3;
 	expect(intropage_registration_admin_user())->toBe(3);
 
@@ -438,7 +540,7 @@ it('resolves the admin user from session, config and fallback', function () {
 });
 
 it('grants the admin permission only when missing', function () {
-	$_SESSION['sess_user_id']        = 5;
+	$GLOBALS['__test_config']['admin_user'] = 5;
 	$GLOBALS['__reg']['admin_perms'] = json_encode(array('demo_panel' => 'on'));
 
 	intropage_registration_grant_admin('demo_panel');
@@ -450,14 +552,13 @@ it('grants the admin permission only when missing', function () {
 });
 
 it('does not grant when there is no admin user or permission row', function () {
-	$_SESSION['sess_user_id']               = 0;
 	$GLOBALS['__test_config']['admin_user'] = '';
 	$GLOBALS['__reg']['fallback_uid']       = '0';
 
 	intropage_registration_grant_admin('demo_panel');
 	expect($GLOBALS['__test_db_calls'])->toBe(array());
 
-	$_SESSION['sess_user_id']        = 5;
+	$GLOBALS['__test_config']['admin_user'] = 5;
 	$GLOBALS['__reg']['admin_perms'] = false;
 	intropage_registration_grant_admin('demo_panel');
 	expect(intropage_reg_writes('UPDATE plugin_intropage_user_auth'))->toBe(array());

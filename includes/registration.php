@@ -119,8 +119,34 @@ function intropage_validate_panel_registration(array $panel, bool $partial = fal
 		$errors[] = "The 'panel_id' must be 1-50 characters of letters, digits or underscores.";
 	}
 
+	// get_panel() treats a numeric id as a panel-data row id, so a purely
+	// numeric panel_id (including forms like '1e3') would collide with another
+	// panel's data when polled or reloaded.
+	if (isset($panel['panel_id']) && is_numeric($panel['panel_id'])) {
+		$errors[] = "The 'panel_id' must not be purely numeric.";
+	}
+
 	if (isset($panel['plugin']) && !preg_match('/^[a-z0-9_]{1,64}$/i', (string) $panel['plugin'])) {
 		$errors[] = "The 'plugin' must be the plugin directory name (letters, digits or underscores).";
+	}
+
+	// Keep the registration within the live panel-definition column widths so a
+	// published registration never overflows or truncates on write.
+	$lengths = [
+		'name'         => 30,
+		'description'  => 200,
+		'class'        => 30,
+		'update_func'  => 30,
+		'details_func' => 30,
+		'trends_func'  => 30,
+		'requires'     => 128,
+		'width'        => 20,
+	];
+
+	foreach ($lengths as $attr => $max) {
+		if (isset($panel[$attr]) && strlen((string) $panel[$attr]) > $max) {
+			$errors[] = "The '$attr' must be $max characters or fewer.";
+		}
 	}
 
 	if (isset($panel['level']) && (int) $panel['level'] !== 0 && (int) $panel['level'] !== 1) {
@@ -288,6 +314,40 @@ function intropage_panel_registration_exists(string $panel_id): bool {
 }
 
 /**
+ * Detects an ownership or built-in collision for a panel id before a
+ * registration is written. A panel id may only be (re-)registered by the
+ * plugin that already owns its registration, and may never shadow a built-in
+ * panellib panel (a panel_definition row with no registration behind it).
+ *
+ * @param string $panel_id The panel id being registered.
+ * @param string $plugin   The plugin claiming ownership.
+ *
+ * @return string An error message describing the conflict, or '' when none.
+ */
+function intropage_registration_conflict(string $panel_id, string $plugin): string {
+	$owner = db_fetch_cell_prepared('SELECT plugin
+		FROM plugin_intropage_panel_registration
+		WHERE panel_id = ?',
+		[$panel_id]);
+
+	if (!empty($owner)) {
+		return ($owner === $plugin) ? '' : "Panel id '$panel_id' is already registered by plugin '$owner'.";
+	}
+
+	// No registration owns the id yet: reject it if a built-in panel does.
+	$builtin = db_fetch_cell_prepared('SELECT COUNT(*)
+		FROM plugin_intropage_panel_definition
+		WHERE panel_id = ?',
+		[$panel_id]);
+
+	if ($builtin > 0) {
+		return "Panel id '$panel_id' collides with a built-in Intropage panel.";
+	}
+
+	return '';
+}
+
+/**
  * Fetches a single registration row, decoding its request_vars JSON into an
  * array.
  *
@@ -373,6 +433,15 @@ function intropage_register_panel(array $panel) {
 	// explicit '' is honored as "no runtime dependency".
 	if (!array_key_exists('requires', $panel)) {
 		$values['requires'] = $values['plugin'];
+	}
+
+	// Never let a registration shadow a built-in panel or hijack a panel id
+	// another plugin already owns.
+	$conflict = intropage_registration_conflict($panel_id, $values['plugin']);
+
+	if ($conflict !== '') {
+		cacti_log('WARNING: intropage_register_panel() rejected panel "' . $panel_id . '": ' . $conflict, false, 'INTROPAGE');
+		return [$conflict];
 	}
 
 	$enabled = isset($panel['enabled']) ? (filter_var($panel['enabled'], FILTER_VALIDATE_BOOLEAN) ? 1 : 0) : 1;
@@ -598,6 +667,13 @@ function intropage_apply_panel_registration(string $panel_id): void {
 		return;
 	}
 
+	// This API can be reached from a foreign plugin's early hook, before the
+	// rest of the Intropage library is loaded; make sure the persistence helper
+	// is available.
+	if (!function_exists('update_registered_panels')) {
+		include_once(__DIR__ . '/functions.php'); // @codeCoverageIgnore
+	}
+
 	$definition = intropage_registration_to_definition($row);
 
 	update_registered_panels([$panel_id => $definition]);
@@ -690,6 +766,8 @@ function intropage_registration_to_definition(array $row): array {
  * @return array Library-shaped panel definitions keyed by panel id.
  */
 function intropage_load_registered_panels(): array {
+	global $registry;
+
 	$panels = [];
 
 	if (!db_table_exists('plugin_intropage_panel_registration')) {
@@ -711,7 +789,21 @@ function intropage_load_registered_panels(): array {
 
 		intropage_include_registration_file($row);
 
-		$panels[$row['panel_id']] = intropage_registration_to_definition($row);
+		$definition = intropage_registration_to_definition($row);
+
+		// The permission editors group panels by their category ('class') via
+		// the global $registry; register a fallback category for a registered
+		// panel so its heading is not blank, without overwriting a built-in one.
+		$class = $definition['class'];
+
+		if (!isset($registry[$class])) {
+			$registry[$class] = [
+				'name'        => $row['plugin'],
+				'description' => $row['description'],
+			];
+		}
+
+		$panels[$row['panel_id']] = $definition;
 	}
 
 	return $panels;
@@ -787,6 +879,13 @@ function intropage_validate_request_vars(string $panel_id): array {
 
 		$raw = get_nfilter_request_var($name);
 
+		// Declared request variables are scalar; reject array/object input
+		// (e.g. name[]=value) rather than coercing it to the string 'Array'.
+		if (!is_scalar($raw)) {
+			$result[$name] = $default;
+			continue;
+		}
+
 		switch ($type) {
 			case 'integer':
 				$value = filter_var($raw, FILTER_VALIDATE_INT);
@@ -797,10 +896,15 @@ function intropage_validate_request_vars(string $panel_id): array {
 				$result[$name] = ($value === false) ? $default : $value;
 				break;
 			case 'boolean':
-				$result[$name] = filter_var($raw, FILTER_VALIDATE_BOOLEAN);
+				// FILTER_VALIDATE_BOOLEAN returns false for both a valid false
+				// and invalid input; use FILTER_NULL_ON_FAILURE so an invalid
+				// value falls back to the declared default instead of false.
+				$value = filter_var($raw, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+				$result[$name] = ($value === null) ? $default : $value;
 				break;
 			case 'alphanumeric':
-				$result[$name] = preg_match('/^[A-Za-z0-9]+$/', (string) $raw) ? $raw : $default;
+				$string        = (string) $raw;
+				$result[$name] = preg_match('/^[A-Za-z0-9]+$/', $string) ? $string : $default;
 				break;
 			case 'string':
 			default:
@@ -815,17 +919,14 @@ function intropage_validate_request_vars(string $panel_id): array {
 
 /**
  * Returns the user id used to own system-level seed data and to receive panel
- * permissions, mirroring intropage_initialize_database(): the current session
- * user when present, otherwise the configured admin user, falling back to the
- * lowest user id.
+ * permissions, mirroring intropage_initialize_database(): the configured admin
+ * user, falling back to the lowest user id. It deliberately ignores the
+ * session user so a plugin registering during an ordinary user's page load
+ * cannot grant that user (or itself) panel permissions.
  *
  * @return int The admin user id (0 when no users exist).
  */
 function intropage_registration_admin_user(): int {
-	if (isset($_SESSION['sess_user_id']) && $_SESSION['sess_user_id'] > 0) {
-		return (int) $_SESSION['sess_user_id'];
-	}
-
 	$user_id = read_config_option('admin_user');
 
 	if (empty($user_id)) {
@@ -900,14 +1001,17 @@ function intropage_registration_remove_permissions(string $panel_id): void {
 }
 
 /**
- * Clears the per-request panel-library snapshot stored in the session so that a
- * registration change made in the same request is reflected by the next
- * dashboard view. The authoritative panel tables are always written directly,
- * so a stale snapshot never outlives the request.
+ * Invalidates the request-lifetime panel-library caches so a registration
+ * change made in the same request is reflected by the next
+ * initialize_panel_library() call: it both clears the session snapshot and
+ * raises a flag that initialize_panel_library() checks to discard its
+ * function-local static cache.
  *
  * @return void
  */
 function intropage_registration_reset_cache(): void {
+	$GLOBALS['intropage_panel_library_stale'] = true;
+
 	if (isset($_SESSION['intropage_panel_library'])) {
 		unset($_SESSION['intropage_panel_library']);
 	}

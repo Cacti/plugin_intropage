@@ -56,8 +56,8 @@ function intropage_create_panel_registration_table(): void {
 	$data              = [];
 	$data['columns'][] = ['name' => 'panel_id', 'type' => 'varchar(50)', 'NULL' => false];
 	$data['columns'][] = ['name' => 'plugin', 'type' => 'varchar(64)', 'NULL' => false, 'default' => ''];
-	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
-	$data['columns'][] = ['name' => 'description', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'name', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'description', 'type' => 'varchar(200)', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'class', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'level', 'type' => 'tinyint', 'unsigned' => true, 'NULL' => false, 'default' => 1];
 	$data['columns'][] = ['name' => 'priority', 'type' => 'tinyint', 'unsigned' => true, 'NULL' => false, 'default' => 50];
@@ -68,9 +68,9 @@ function intropage_create_panel_registration_table(): void {
 	$data['columns'][] = ['name' => 'force', 'type' => 'tinyint(1)', 'NULL' => false, 'default' => 1];
 	$data['columns'][] = ['name' => 'requires', 'type' => 'varchar(128)', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'include_file', 'type' => 'varchar(255)', 'NULL' => false, 'default' => ''];
-	$data['columns'][] = ['name' => 'update_func', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
-	$data['columns'][] = ['name' => 'details_func', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
-	$data['columns'][] = ['name' => 'trends_func', 'type' => 'varchar(60)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'update_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'details_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
+	$data['columns'][] = ['name' => 'trends_func', 'type' => 'varchar(30)', 'NULL' => false, 'default' => ''];
 	$data['columns'][] = ['name' => 'refresh', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => 3600];
 	$data['columns'][] = ['name' => 'trefresh', 'type' => 'int(10)', 'unsigned' => true, 'NULL' => false, 'default' => 3600];
 	$data['columns'][] = ['name' => 'request_vars', 'type' => 'text', 'NULL' => true];

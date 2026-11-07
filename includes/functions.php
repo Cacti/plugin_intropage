@@ -1178,13 +1178,22 @@ function intropage_reload_panel(): void {
 			$qpanel = get_panel($panel['panel_id'], $user_id);
 
 			if (function_exists($function)) {
-				if ($forced_update || time() > ($qpanel['last'] + $qpanel['refresh'])) {
-					// Reload the data
-					$function($qpanel, $user_id);
-				}
+				// @codeCoverageIgnoreStart
+				if (!is_panel_enabled($panel['panel_id'])) {
+					// A registered (or built-in) panel whose required plugin was
+					// disabled after it was added to a dashboard must not keep
+					// executing its callback.
+					$data = ['alarm' => 'grey', 'data' => __('This panel is unavailable because its required plugin is disabled.', 'intropage')];
+				} else {
+					if ($forced_update || time() > ($qpanel['last'] + $qpanel['refresh'])) {
+						// Reload the data
+						$function($qpanel, $user_id);
+					}
 
-				// Return the data for display
-				$data = get_panel_data($qpanel['panel_id'], $user_id);
+					// Return the data for display
+					$data = get_panel_data($qpanel['panel_id'], $user_id);
+				}
+				// @codeCoverageIgnoreEnd
 			} else {
 				$data = __('The Panel includes a render function but it does not exist.', 'intropage');
 			}
@@ -1299,11 +1308,15 @@ function intropage_detail_panel(): void {
 
 		$function = $spanel['details_func'];
 
-		if (function_exists($function)) {
+		// @codeCoverageIgnoreStart
+		if (!is_panel_enabled($panel_name)) {
+			$data['detail'] = __('This panel is unavailable because its required plugin is disabled.', 'intropage');
+		} elseif (function_exists($function)) {
 			$data = $function();
 		} else {
 			$data['detail'] = __('Details Function does not exist.', 'intropage');
 		}
+		// @codeCoverageIgnoreEnd
 
 		print '<div class="cactiTableTitleRow">';
 		print '<div class="cactiTableTitle">' . $data['name'] . '</div>';
@@ -1727,6 +1740,13 @@ function initialize_panel_library(): array {
 	global $config, $registry;
 
 	static $panel_library = [];
+
+	// A registration mutation in this request raises this flag to discard the
+	// cached library so the next build reflects the change.
+	if (!empty($GLOBALS['intropage_panel_library_stale'])) {
+		$panel_library = [];
+		$GLOBALS['intropage_panel_library_stale'] = false;
+	}
 
 	if (!sizeof($panel_library)) {
 		$panels    = [];

@@ -24,6 +24,13 @@
  +-------------------------------------------------------------------------+
 */
 
+/* Expose the third-party panel registration API (intropage_register_panel()
+ * et al.) as soon as this plugin's setup.php is loaded. Cacti includes every
+ * enabled plugin's setup.php during start-up, before plugin hooks such as
+ * config_arrays run, so a foreign plugin's function_exists('intropage_register_panel')
+ * guard succeeds no matter the hook order. */
+include_once(__DIR__ . '/includes/registration.php');
+
 /**
  * Return the CSP nonce attribute for inline <script> tags, safely across
  * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that

@@ -413,11 +413,25 @@ is absent:
     }
 
 The typical place to call it is your plugin's `*_config_arrays` (or install /
-enable) hook. Registration is idempotent, so re-registering on every page load
+enable) hook. Intropage defines the API in its `setup.php`, which Cacti loads
+for every enabled plugin during start-up (before plugin hooks such as
+`config_arrays` run), so the `function_exists()` guard succeeds regardless of
+plugin order. Registration is idempotent, so re-registering on every page load
 is safe and keeps the definition in sync with your code.
 
 Every registration is stored in the `plugin_intropage_panel_registration`
 table and merged into the live panel library by `initialize_panel_library()`.
+
+Registrations are also validated and protected on write:
+
+* a `panel_id` must not be purely numeric (Intropage treats numeric ids as
+  panel-data row ids) and must be unique;
+* a `panel_id` that already names a built-in Intropage panel, or one already
+  registered by a *different* plugin, is rejected — only the owning plugin may
+  re-register or withdraw its own panels;
+* string attributes are capped at the live panel-definition column widths
+  (`name`/callback names 30, `description` 200, `class` 30, `requires` 128,
+  `width` 20), so a registration can never overflow or truncate on write.
 
 ### Panel registration schema
 
@@ -427,9 +441,9 @@ attribute has the default shown below.
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `panel_id` | string | **yes** | — | Globally unique panel id, 1-50 chars of `[A-Za-z0-9_]`. Prefix it with your plugin name to avoid collisions (e.g. `myplugin_status`). This is the primary key of the registration. |
+| `panel_id` | string | **yes** | — | Globally unique panel id, 1-50 chars of `[A-Za-z0-9_]`, not purely numeric. Prefix it with your plugin name to avoid collisions (e.g. `myplugin_status`). This is the primary key of the registration. |
 | `plugin` | string | **yes** | — | The registering plugin's directory name (the `directory` value in `plugin_config`). Intropage uses it to detect when your plugin is uninstalled and to prune the panel. |
-| `name` | string | **yes** | — | Human-readable panel title shown on the dashboard. Wrap in `__( , 'yourplugin')` for translation. |
+| `name` | string | **yes** | — | Human-readable panel title (max 30 chars) shown on the dashboard. Wrap in `__( , 'yourplugin')` for translation. |
 | `update_func` | string | **yes** | — | Name of the function that collects/renders the panel's data. Called by the poller as `update_func($panel, $user_id)`; it should call `save_panel_result()`. Must be defined in `include_file` (or already loaded). |
 | `description` | string | no | `''` | Longer description shown in the panel picker. |
 | `class` | string | no | *plugin name* | Category/grouping key for the panel. |
