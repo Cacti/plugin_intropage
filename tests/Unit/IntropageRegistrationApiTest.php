@@ -157,6 +157,12 @@ function intropage_reg_writes(string $needle): array {
 	return array_values(array_filter($GLOBALS['__test_db_calls'], static fn ($c) => strpos($c['sql'], $needle) !== false));
 }
 
+it('rejects an invalid plugin name', function () {
+	$errors = intropage_validate_panel_registration(intropage_reg_input(array('plugin' => 'bad plugin!')), false);
+
+	expect($errors)->toContain("The 'plugin' must be the plugin directory name (letters, digits or underscores).");
+});
+
 it('detects whether a plugin is present', function () {
 	expect(intropage_plugin_is_present(''))->toBeFalse();
 
