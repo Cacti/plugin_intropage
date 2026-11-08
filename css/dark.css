@@ -1,0 +1,87 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2025 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+
+.grid_item {
+    background-color: #202020 !important;
+}
+
+.panel_data {
+    background-color: #202020;
+}
+
+.panel_header {
+    height: 22px;
+}
+
+.color_green {
+    background: #2a8040 !important;
+}
+
+.color_green_bubble {
+    color: #4caf79;
+}
+
+.color_green, .color_green i {
+    color: white !important;
+}
+
+.color_red {
+    background: #b3261e !important;
+}
+
+.color_red_bubble {
+    color: #ff6b6b;
+}
+
+.color_red, .color_red i {
+    color: white !important;
+}
+
+.color_yellow {
+    background: #d9871a !important;
+}
+
+.color_yellow_bubble {
+    color: #ff9e3d;
+}
+
+.color_yellow, .color_yellow i {
+    color: black !important;
+}
+
+.color_grey {
+    background: #a1a1a1 !important;
+}
+
+.color_grey_bubble {
+    color: #a1a1a1;
+}
+
+.color_grey, .color_grey i {
+    color: black !important;
+}
+
+/* Row alerts need a brighter red than the header's white-text surface. */
+.inpa_sq.color_red {
+	background: #ff6b6b !important;
+}

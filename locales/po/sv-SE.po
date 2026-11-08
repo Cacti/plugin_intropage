@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-03-10 07:18+0000\n"
+"PO-Revision-Date: 2026-10-27 12:18+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://translate.cacti.net/projects/cacti/intropage/"
 "sv/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: display.php:40
 msgid "Intropage - Permission Denied"
-msgstr "Introsida - Behörighet nekad"
+msgstr "Intropage – behörighet saknas"
 
 #: display.php:123
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
@@ -30,8 +30,8 @@ msgstr "En eller flera paneler togs bort på grund av otillräcklig behörighet.
 #: display.php:179
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
-"Du kan inaktivera raderna ovan i <b>Konfigurera > Inställningar > Allmänt > "
-"Dölj Cacti Dashboard</b> och använd hela sidan för Intropage "
+"Du kan inaktivera raderna ovan i <b>Konfigurera &gt; Inställningar &gt; "
+"Allmänt &gt; Dölj Cacti Dashboard</b> och använda hela sidan för Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -44,7 +44,8 @@ msgstr "Dölj röda/gula/gröna fyrkantiga aviseringar"
 
 #: display.php:245
 msgid "Disable panel move/enable copy text from panel"
-msgstr "Inaktivera panelens flytta/aktivera kopiering av text från panel"
+msgstr ""
+"Inaktivera flyttning av paneler och aktivera kopiering av text från paneler"
 
 #: display.php:254
 msgid "Actions ..."
@@ -52,17 +53,17 @@ msgstr "Åtgärder ..."
 
 #: display.php:257
 msgid "Add New Dashboard"
-msgstr "Lägg till ny kontrollpanel"
+msgstr "Lägg till ny instrumentpanel"
 
 #: display.php:261
 msgid "Remove current dashboard"
-msgstr "Ta bort aktuell kontrollpanel"
+msgstr "Ta bort nuvarande instrumentpanel"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
 #, php-format
 msgid "Number of lines - %d"
-msgstr "Antal rader - %d"
+msgstr "Antal rader – %d"
 
 #: display.php:286
 msgid "Refresh Now"
@@ -70,15 +71,15 @@ msgstr "Uppdatera nu"
 
 #: display.php:289 display.php:291
 msgid "Refresh Disabled"
-msgstr "Uppdatering inaktiverad"
+msgstr "Uppdatering avaktiverad"
 
 #: display.php:295 display.php:297
 msgid "Refresh by Poller"
-msgstr "Uppdatering av pollare"
+msgstr "Uppdatering via insamlingsprocessen"
 
 #: display.php:301 display.php:303
 msgid "Refresh Every 1 Minute"
-msgstr "Uppdatera varje minut"
+msgstr "Uppdatering var 1:a minut"
 
 #: display.php:307 display.php:309
 msgid "Refresh Every 5 Minutes"
@@ -114,27 +115,27 @@ msgstr "Sortera efter allvarlighetsgrad"
 
 #: display.php:364 display.php:367
 msgid "Sort by User Preference"
-msgstr "Sortera efter användarens inställning"
+msgstr "Sortera efter användarens preferenser"
 
 #: display.php:373
 msgid "Reload Panel Definitions"
-msgstr "Uppdatera paneldefinitioner"
+msgstr "Läs in paneldefinitioner på nytt"
 
 #: display.php:379
 msgid "Set Intropage as Default Login Page"
-msgstr "Ställ in Introsida som standardinloggningssida"
+msgstr "Ange Intropage som standardinloggningssida"
 
 #: display.php:381
 msgid "Set graph as Default Login Page"
-msgstr "Ställ in diagram som standardinloggningssida"
+msgstr "Ange graf som standardinloggningssida"
 
 #: display.php:387
 msgid "Display Intropage in Console"
-msgstr "Visa Introsida i konsolen"
+msgstr "Visa Intropage i konsolen"
 
 #: display.php:389
 msgid "Display Intropage in Tab as Default Page"
-msgstr "Visa Introsida i fliken som standardsida"
+msgstr "Visa Intropage i fliken som standardsida"
 
 #: display.php:396 display.php:399
 msgid "Less panels on a line"
@@ -150,42 +151,43 @@ msgstr "Avbryt delning"
 
 #: display.php:416
 msgid "Share this dashboard"
-msgstr "Dela denna kontrollpanel"
+msgstr "Dela denna instrumentpanel"
 
 #: display.php:418
 msgid "Share empty dashboard not allowed"
-msgstr "Delning av tom kontrollpanel tillåts inte"
+msgstr "Det går inte att dela en tom instrumentpanel"
 
 #: display.php:437
 msgid "Use shared dashboard"
-msgstr "Använd delad kontrollpanel"
+msgstr "Använd gemensam instrumentpanel"
 
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr ""
-"Kan inte använda delad instrumentpanel - instrumentpanelens gräns nådd.Det "
-"går inte att använda delad kontrollpanel – gränsen för kontrollpanelen har "
-"nåtts."
+"Det går inte att använda den delade instrumentpanelen eftersom gränsen för "
+"antalet instrumentpaneler har nåtts."
 
 #: display.php:443
 msgid "No shared dashboards"
-msgstr "Inga delade kontrollpaneler"
+msgstr "Inga gemensamma instrumentpaneler"
 
 #: display.php:460
 msgid "Welcome to Intropage!"
-msgstr "Välkommen till Introsida!"
+msgstr "Välkommen till Intropage!"
 
 #: display.php:464
 msgid "You can Add Dashboard Panels in more ways:"
-msgstr "Du kan lägga till kontrollpaneler på flera olika sätt:"
+msgstr "Du kan lägga till paneler på instrumentpanelen på flera sätt:"
 
 #: display.php:466
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
-msgstr "Välj förberedda paneler från menyn \"Paneler\". Panelen kan vara nedtonad. Det beror på behörigheter, fråga administratören"
+msgstr ""
+"Välj förberedda paneler från menyn ”Paneler”. Om en panel är nedtonad beror "
+"det på behörigheterna. Kontakta administratören."
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
-msgstr "Lägg till valfritt Cacti-diagram, använd ikonen"
+msgstr "Lägg till valfri Cacti-graf, använd ikonen"
 
 #: display.php:468
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
@@ -193,23 +195,23 @@ msgstr "Du kan skapa egna paneler. Mer information finns i filen <cacti_install_
 
 #: display.php:473
 msgid "You can share dashboards to other users:"
-msgstr "Du kan dela kontrollpaneler med andra användare:"
+msgstr "Du kan dela instrumentpaneler med andra användare:"
 
 #: display.php:475
 msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
 msgstr ""
-"använd \\använd alternativet \"Dela denna kontrollpanel\" i menyn Åtgärder – "
-"Alla användare kan använda den som mall."
+"Använd alternativet ”Dela den här instrumentpanelen” i menyn Åtgärder. Alla "
+"användare kan använda den som mall."
 
 #: display.php:480
 msgid "You can use shared dashboard using the Actions menu:"
-msgstr "Du kan använda delad kontrollpanel med hjälp av menyn Åtgärder:"
+msgstr "Du kan använda delad instrumentpanel med hjälp av menyn Åtgärder:"
 
 #: display.php:482
 msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
 msgstr ""
-"Använd \\Använd \"Använd delad kontrollpanel (användare/kontrollpanelsnamn) –"
-" Den förbereder samma kontrollpanel som delad men med dina behörigheter."
+"Välj ”Använd delad instrumentpanel” (användarens och instrumentpanelens namn)"
+". En kopia av den delade instrumentpanelen skapas med dina behörigheter."
 
 #: display.php:487
 msgid "Customization:"
@@ -218,13 +220,14 @@ msgstr "Anpassning:"
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
 msgstr ""
-"Du kan skapa upp till 9 dashboards. Varje instrumentpanel kan namnges, "
-"använd ikonDu kan skapa upp till 9 kontrollpaneler. Varje kontrollpanel kan "
-"namnges, använd ikonen"
+"Du kan skapa upp till nio instrumentpaneler. Använd ikonen för att ge varje "
+"instrumentpanel ett namn."
 
 #: display.php:490
 msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
-msgstr "Intopage kan visas i konsolen eller på en separat flik. Du kan ändra det i åtgärdsmenyn"
+msgstr ""
+"Intropage kan visas i konsolen eller på en separat flik. Du kan ändra det i "
+"menyn Åtgärder"
 
 #: display.php:491
 msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
@@ -232,19 +235,21 @@ msgstr "Om du vill kopiera text från panelen måste du inaktivera dra och släp
 
 #: display.php:585
 msgid "Panel Details"
-msgstr "Paneldetaljer"
+msgstr "Detaljer om panelen"
 
 #: display.php:586
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "Inaktivera panelens flytta/aktivera kopiering av text från panel"
+msgstr ""
+"Inaktivera flyttning av paneler och aktivera kopiering av text från paneler"
 
 #: display.php:587
 msgid "Enable panel move/Disable copy text from panel"
-msgstr "Aktivera flyttning av panel/Inaktivera kopiering av text från panel"
+msgstr ""
+"Aktivera flyttning av paneler och inaktivera kopiering av text från paneler"
 
 #: display.php:589
 msgid "Show red/yellow/green square notifications"
-msgstr "Visa aviseringar om röda/gula/gröna fyrkanter"
+msgstr "Visa röda/gula/gröna fyrkantiga aviseringar"
 
 #: display.php:591
 msgid "Error reading new data"
@@ -256,35 +261,35 @@ msgstr "Stäng"
 
 #: include/functions.php:242
 msgid "Dashboard has been removed"
-msgstr "Kontrollpanelen har tagits bort"
+msgstr "Instrumentpanelen har tagits bort"
 
 #: include/functions.php:264
 msgid "New Dashboard"
-msgstr "Ny kontrollpanel"
+msgstr "Ny instrumentpanel"
 
 #: include/functions.php:266
 msgid "Dashboard has been added"
-msgstr "Kontrollpanelen har lagts till"
+msgstr "Instrumentpanelen har lagts till"
 
 #: include/functions.php:298
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
 msgstr ""
-"Det går inte att lägga till zoomad eller anpassad graf med tidsintervall, "
-"ändra tidsintervall till Senaste halvtimmenDet går inte att lägga till "
-"zoomat eller anpassat diagram med tidsintervall, ändra tidsintervall till "
-"Senaste halvtimmen"
+"Det går inte att lägga till en inzoomad graf eller en graf med anpassat "
+"tidsintervall. Tidsintervallet ändras till den senaste halvtimmen"
 
 #: include/functions.php:419
 msgid "Intropage Panel Library Refreshed from Panel Library"
-msgstr "Panelbiblioteket för introsidan har uppdaterats från panelbiblioteket"
+msgstr "Intropages panelbibliotek har lästs in på nytt"
 
 #: include/functions.php:491
 msgid "Dashboard has been added, please wait few poller cycle for data"
-msgstr "Kontrollpanelen har lagts till, vänta några pollningscykler för data"
+msgstr ""
+"Instrumentpanelen har lagts till. Vänta några insamlingscykler tills data "
+"finns tillgängliga"
 
 #: include/functions.php:502
 msgid "Error - trying share non-shared dashboard"
-msgstr "Fel – försök att dela icke-delad kontrollpanel"
+msgstr "Fel – försök att dela icke-delad instrumentpanel"
 
 #: include/functions.php:617
 msgid "The Panel includes a render function but it does not exist."
@@ -318,7 +323,7 @@ msgstr " [ Uppdateringar i %s ]"
 #: include/functions.php:819
 #, php-format
 msgid "%s Sec"
-msgstr "%s s"
+msgstr "%s sekunder"
 
 #: include/functions.php:819
 #, php-format
@@ -328,7 +333,7 @@ msgstr "%s sekunder"
 #: include/functions.php:826
 #, php-format
 msgid "%s Min"
-msgstr "%s minuter"
+msgstr "%s min"
 
 #: include/functions.php:826
 #, php-format
@@ -348,30 +353,27 @@ msgstr "%s timmar"
 #: include/functions.php:837
 #, php-format
 msgid "%s Days"
-msgstr "%s dygn"
+msgstr "%s dagar"
 
 #: include/functions.php:883
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
 msgstr ""
-"Inga data närvarande.  Antingen tvinga fram uppdatering eller vänta på nästa "
-"Cacti Polling-cykel.Inga data hittades.  Antingen tvinga uppdatering eller "
-"vänta på nästa Cacti-pollningscykel."
+"Inga data finns. Tvinga fram en uppdatering eller vänta på nästa "
+"insamlingscykel i Cacti."
 
 #: include/functions.php:885
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
 msgstr ""
-"Inga data närvarande.  Den här panelen tillåter inte forcerade "
-"uppdateringar.  Du måste vänta tills Cacti's pollare utför kontrollen.Inga "
-"data hittades.  Den här panelen tillåter inte tvingade uppdateringar.  Du "
-"måste vänta tills Cactis pollare utför kontrollen."
+"Inga data finns. Den här panelen tillåter inte framtvingade uppdateringar. "
+"Vänta tills Cactis insamlingsprocess utför kontrollen."
 
 #: include/functions.php:1363
 msgid "Disable panel"
-msgstr "Inaktivera panel"
+msgstr "Inaktivera panelen"
 
 #: include/functions.php:1366
 msgid "Reload Panel"
-msgstr "Uppdatera panel"
+msgstr "Läs in panelen på nytt"
 
 #: include/functions.php:1369
 msgid "Show Details"
@@ -379,15 +381,13 @@ msgstr "Visa detaljer"
 
 #: include/functions.php:1376
 msgid "Loading data ..."
-msgstr "Läser in data ..."
+msgstr "Laddar data ..."
 
 #: include/functions.php:1387
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
 msgstr ""
-"Inga data hittades.  Antingen väntar du på nästa kontroll eller så använder "
-"du Force Reload om det finns tillgängligt.Ingen data hittades.  Vänta "
-"antingen på nästa kontroll, <br/>eller använd Tvinga uppdatering om det "
-"finns tillgängligt."
+"Inga data hittades. Vänta på nästa kontroll <br/>eller tvinga en ny "
+"inläsning om det alternativet finns."
 
 #: include/functions.php:1410
 msgid "Panels ..."
@@ -400,24 +400,24 @@ msgstr "%s (ingen behörighet)"
 
 #: include/functions.php:1495
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr "Det går inte att lägga till i kontrollpanel. Anpassad tidsperiod."
+msgstr "Det går inte att lägga till på instrumentpanelen. Anpassad tidsperiod."
 
 #: include/functions.php:1505
 msgid "Remove from Dashboard"
-msgstr "Ta bort från kontrollpanel"
+msgstr "Ta bort från instrumentpanelen"
 
 #: include/functions.php:1507
 msgid "Add to Dashboard"
-msgstr "Lägg till i kontrollpanel"
+msgstr "Lägg till i instrumentpanelen"
 
 #: include/functions.php:1563
 msgid "Dashboard Names"
-msgstr "Kontrollpanelsnamn"
+msgstr "Namn på instrumentpaneler"
 
 #: include/functions.php:1572
 #, php-format
 msgid "Dashboard %s"
-msgstr "Kontrollpanel %s"
+msgstr "Instrumentpanel %s"
 
 #: include/functions.php:1596
 msgid "User Level Panel Update Frequencies"
@@ -425,19 +425,19 @@ msgstr "Uppdateringsfrekvenser för panelen på användarnivå"
 
 #: include/functions.php:1645
 msgid "System Panel Update Frequencies (All Authorized Users)"
-msgstr "Uppdateringsfrekvenser för systempanel (alla behöriga användare)"
+msgstr "Uppdateringsfrekvenser för systempanelen (alla behöriga användare)"
 
 #: include/functions.php:1694
 msgid "Trend Update Frequencies"
-msgstr "Frekvenser för trenduppdatering"
+msgstr "Frekvenser för uppdatering av trender"
 
 #: include/settings.php:32 include/settings.php:93
 msgid "Intropage"
-msgstr "Introsida"
+msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
-msgstr "Normal användare"
+msgstr "Vanlig användare"
 
 #: include/settings.php:146
 #, php-format
@@ -451,12 +451,9 @@ msgstr "Paneler på systemnivå"
 #: include/settings.php:156
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
 msgstr ""
-"Paneler som är lämpliga för administratörer eller avancerade användare och "
-"som vanligtvis inte är tillämpliga för vanliga användare.  Panelerna handlar "
-"i allmänhet om övergripande systemanvändning.Paneler som är lämpliga för "
-"administratörer eller avancerade användare och som vanligtvis inte är "
-"tillämpliga för vanliga användare.  Panelerna handlar i allmänhet om "
-"övergripande systemanvändning."
+"Paneler som är avsedda för administratörer eller avancerade användare "
+"snarare än vanliga användare. Panelerna visar i allmänhet information om den "
+"övergripande systemanvändningen."
 
 #: include/settings.php:159
 msgid "User Level Panels"
@@ -465,10 +462,8 @@ msgstr "Paneler på användarnivå"
 #: include/settings.php:160
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
 msgstr ""
-"Paneler som är lämpliga för allmänna användare att komma åt.  Behörigheterna "
-"är begränsade till vad den aktuella användaren kan visa.Paneler som är "
-"lämpliga för allmänna användare att komma åt.  Behörigheterna är begränsade "
-"till vad den aktuella användaren kan visa."
+"Paneler som är avsedda för vanliga användare. Behörigheterna är begränsade "
+"till det som den aktuella användaren får visa."
 
 #: include/settings.php:203
 msgid "You can Allow/Disallow Panels for User"
@@ -497,8 +492,8 @@ msgstr "Viktiga saker kommer att vara högst upp"
 #: include/variables.php:40
 msgid "If checked Intropage displays important (errors, warnings) information first"
 msgstr ""
-"Om markerad Intropage visar viktig information (fel, varningar) förstOm "
-"markerad kommer Introsida att visa viktig information (fel, varningar) först"
+"Om alternativet är markerat visas viktig information (fel och varningar) "
+"först på Intropage"
 
 #: include/variables.php:45
 msgid "Display more panels on a line"
@@ -515,9 +510,8 @@ msgstr "Avinstallera paneler automatiskt"
 #: include/variables.php:52
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
 msgstr ""
-"Om en panel är installerad och det plugin som krävs tas bort, avinstalleras "
-"panelen också automatisktOm en panel är installerad och det tillägget som "
-"krävs tas bort, avinstalleras panelen också automatiskt"
+"Om en panel är installerad och tillägget som krävs tas bort, avinstalleras "
+"även panelen automatiskt"
 
 #: include/variables.php:57
 msgid "Automatic Page Refresh"
@@ -529,7 +523,7 @@ msgstr "Hur ofta"
 
 #: include/variables.php:61
 msgid "Automatically by poller"
-msgstr "Automatiskt av pollare"
+msgstr "Automatiskt via insamlingsprocessen"
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
@@ -542,7 +536,7 @@ msgstr "Varje minut"
 #: include/variables.php:64 include/variables.php:161 include/variables.php:179
 #, php-format
 msgid "Every %d Minutes"
-msgstr "Var %d minut"
+msgstr "Med %d minuters mellanrum"
 
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
@@ -555,7 +549,9 @@ msgstr "Viktig period"
 
 #: include/variables.php:71
 msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
-msgstr "Från nu till dåtid. Påverkar radfärgning, äldre händelser kommer inte att markeras, bara visas"
+msgstr ""
+"Tidsperioden bakåt från nu. Påverkar färgmarkeringen av rader: äldre "
+"händelser visas men markeras inte"
 
 #: include/variables.php:74 panellib/graphs.php:355 panellib/graphs.php:533
 #: panellib/mactrack.php:111 panellib/poller.php:143 panellib/poller.php:348
@@ -578,7 +574,7 @@ msgstr "4 timmar"
 
 #: include/variables.php:78
 msgid "1 day"
-msgstr "1 dygn"
+msgstr "1 dag"
 
 #: include/variables.php:83
 msgid "Number of panel lines"
@@ -595,22 +591,21 @@ msgstr "%d rader"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
-msgstr "Trend för tidsperiod"
+msgstr "Tidsintervall för trender"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
-msgstr "För trenddiagram, vad ska vara standardtidsintervallet för dessa diagram."
+msgstr "Standardtidsintervall för trenddiagram."
 
 #: include/variables.php:101
 msgid "Poller Timeout"
-msgstr "Tidsgräns för pollare"
+msgstr "Tidsgräns för insamlingsprocessen"
 
 #: include/variables.php:102
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
 msgstr ""
-"Den tid, i minuter, som Intropages bakgrundspolering kan köras innan den "
-"avbryts och dödas av Cacti.Den tid, i minuter, som Introsidans "
-"bakgrundspollare kan köras innan den avbryts och dödas av Cacti."
+"Den tid i minuter som Intropages insamlingsprocess får köras i bakgrunden "
+"innan Cacti avbryter den."
 
 #: include/variables.php:106 setup.php:99
 #, php-format
@@ -633,29 +628,29 @@ msgstr "%d timme"
 
 #: include/variables.php:117
 msgid "Analyze Log - number of lines"
-msgstr "Analysera logg - antal rader"
+msgstr "Analysera logg – antal rader"
 
 #: include/variables.php:118
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr ""
-"Hur många rader av loggen som ska analyseras. Rader = i panelen, 2x rader = "
-"i detalj. Stort antal kan orsaka långsam sidladdningHur många rader av "
-"loggen som ska analyseras. Rader = i panelen, 2x rader = i detalj. Stort "
-"antal kan orsaka långsam sidladdning"
+"Antal loggrader som ska analyseras. Antalet rader gäller panelen, dubbla "
+"antalet gäller detaljvyn. Ett stort antal kan göra sidan långsam att läsa in."
 
 #: include/variables.php:124
 msgid "How often analyze DB"
-msgstr "Hur ofta analyseras DB"
+msgstr "Hur ofta databasen analyseras"
 
 #: include/variables.php:125 include/variables.php:158
 #: include/variables.php:176
 msgid "Poller runs this task. It could cause long poller run."
-msgstr "Pollare kör den här uppgiften. Det kan orsaka lång pollarekörning."
+msgstr ""
+"Insamlingsprocessen kör den här uppgiften. Det kan leda till en lång "
+"insamlingskörning."
 
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
 msgid "Every Day"
-msgstr "Varje dygn"
+msgstr "Varje dag"
 
 #: include/variables.php:131
 msgid "Every Week"
@@ -667,16 +662,16 @@ msgstr "Varje månad"
 
 #: include/variables.php:137
 msgid "Analyze DB - Level of db check"
-msgstr "Analysera DB - Nivå av db-kontroll"
+msgstr "Analysera databas – nivå på databaskontrollen"
 
 #: include/variables.php:138
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
 msgstr ""
-"Snabbt - Ingen kontroll för rader för felaktiga länkar<br/>Snabb - "
-"kontrollera endast inte korrekt stängda tabeller<br/>Ändrad - kontrollera "
-"tabeller som ändrats från den senaste kontrollen<br/>Medel - med radsökning<"
-"br/>Utökad - fullständiga rader och nycklar<br/>Medel och utökad kan orsaka "
-"en långsam sidladdning!"
+"Snabbt – kontrollera inte om raderna innehåller felaktiga länkar<br/>Snabb – "
+"kontrollera endast tabeller som inte stängts korrekt<br/>Ändrad – "
+"kontrollera tabeller som ändrats sedan senaste kontrollen<br/>Medel – med "
+"genomsökning av rader<br/>Utökad – fullständig kontroll av rader och nycklar<"
+"br/>Medel och utökad kan göra att sidan läses in långsamt!"
 
 #: include/variables.php:141
 msgid "Quick"
@@ -700,11 +695,11 @@ msgstr "Utökad"
 
 #: include/variables.php:150
 msgid "NTP Time Check - IP or DNS name of NTP server"
-msgstr "NTP-tidskontroll - IP- eller DNS-namn för NTP-server"
+msgstr "NTP-tidskontroll – NTP-serverns IP-adress eller DNS-namn"
 
 #: include/variables.php:151
 msgid "Insert IP or DNS name of NTP server"
-msgstr "Ange IP- eller DNS-namn för NTP-servern"
+msgstr "Ange IP- eller DNS-namn på NTP-servern"
 
 #: include/variables.php:157
 msgid "How often check NTP"
@@ -720,20 +715,19 @@ msgstr "Ange DNS-namn för test"
 
 #: include/variables.php:175
 msgid "How often check DNS"
-msgstr "Hur ofta kontrollera DNS"
+msgstr "Hur ofta DNS ska kontrolleras"
 
 #: include/variables.php:186
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
 msgstr ""
-"Admin Informationspanel om underhållsuppgifter, nedmonterade enheter, "
-"...Admin Informationspanel om underhållsuppgifter, enheter som är nere, ..."
+"Informationspanel för administratörer om underhåll, enheter som är nere med "
+"mera"
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
 msgstr ""
-"Om den inte är tom kommer Panel att visas överst. Du kan använda html-taggar "
-"(b, i, ...).Om den inte är tom kommer Panel att visas överst. Du kan använda "
-"html-taggar (b, i, ...)."
+"Om fältet inte är tomt visas panelen överst. Du kan använda HTML-taggar (b, "
+"i med flera)."
 
 #: include/variables.php:195
 msgid "Upcoming Maint Schedule warning days"
@@ -741,7 +735,7 @@ msgstr "Kommande varningsdagar för underhållsschemat"
 
 #: include/variables.php:196
 msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
-msgstr "Hur många dagar före ett schemalagt underhållsschema ska en varning visas?"
+msgstr "Hur många dagar före ett schemalagt underhåll ska en varning visas?"
 
 #: include/variables.php:199
 msgid "Never warn"
@@ -779,11 +773,11 @@ msgstr "Bitar"
 
 #: include/variables.php:218
 msgid "Alarm Settings"
-msgstr "Larminställningar"
+msgstr "Inställningar för larm"
 
 #: include/variables.php:222
 msgid "Alarm DB check Aborted Clients"
-msgstr "Avbrutna klienter för larm-DB-kontroll"
+msgstr "Larma vid avbrutna klienter i databaskontrollen"
 
 #: include/variables.php:223 include/variables.php:230
 #: include/variables.php:237 include/variables.php:244
@@ -794,29 +788,28 @@ msgstr "Avbrutna klienter för larm-DB-kontroll"
 #: include/variables.php:307
 msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
 msgstr ""
-"Om denna händelse har inträffat utlöses den valda statusfärgen Normal, "
-"Varning eller Alert.Om den här händelsen har inträffat utlöses den valda "
-"statusfärgen Normal, Varning eller Larm."
+"Om händelsen har inträffat används den valda statusfärgen för normal, "
+"varning eller larm."
 
 #: include/variables.php:229
 msgid "Alarm Host with the same Description"
-msgstr "Larmvärd med samma beskrivning"
+msgstr "Larma om värdar har samma beskrivning"
 
 #: include/variables.php:236
 msgid "Alarm Orphaned Data Source"
-msgstr "Larm för föräldralös datakälla"
+msgstr "Larma om föräldralösa datakällor"
 
 #: include/variables.php:243
 msgid "Alarm non-empty Poller Output"
-msgstr "Larm för icke-tom Pollare-utmatning"
+msgstr "Larma om insamlingsprocessens utdata inte är tomma"
 
 #: include/variables.php:250
 msgid "Alarm Bad indexes Data Source"
-msgstr "Larm för felaktiga index för datakälla"
+msgstr "Larma om datakällor med felaktiga index"
 
 #: include/variables.php:257
 msgid "Alarm Threshold logonly action"
-msgstr "Larmtröskel för logonly-åtgärd"
+msgstr "Larma om tröskelvärdets åtgärd enbart är loggning"
 
 #: include/variables.php:264
 msgid "Alarm when device bulk_walk_size is not optimized"
@@ -824,101 +817,99 @@ msgstr "Larm när enhetens bulk_walk_size inte är optimerad"
 
 #: include/variables.php:271
 msgid "Alarm Devices with the same IP/port"
-msgstr "Larmenheter med samma IP/port"
+msgstr "Larma om enheter har samma IP-adress och port"
 
 #: include/variables.php:278
 msgid "Alarm Device in more than one Tree"
-msgstr "Larmenhet i fler än ett träd"
+msgstr "Larma om enheter finns i mer än ett träd"
 
 #: include/variables.php:285
 msgid "Alarm Device without a Tree"
-msgstr "Larmenhet utan ett träd"
+msgstr "Larma om enheter saknar träd"
 
 #: include/variables.php:292
 msgid "Alarm Device with Default public/private SNMP Community"
-msgstr "Larmenhet med standard publik/privat SNMP-grupp"
+msgstr ""
+"Larma om enheter använder standardvärdet public eller private för SNMP-"
+"community"
 
 #: include/variables.php:299
 msgid "Alarm Device without Monitoring"
-msgstr "Larmenhet utan övervakning"
+msgstr "Larma om enheter saknar övervakning"
 
 #: include/variables.php:306
 msgid "Alarm Device without Graph"
-msgstr "Larmenhet utan diagram"
+msgstr "Larma om enheter saknar grafer"
 
 #: include/variables.php:313
 msgid "Alarm Red/Yellow Polling Time"
-msgstr "Larm Röd/Gul pollningstid"
+msgstr "Rött eller gult larm för insamlingstid"
 
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
 msgstr ""
-"Pollningstider över dessa tröskelvärden kommer att utlösa en statusfärg för "
-"Varning eller Alarm.Pollningstider över dessa tröskelvärden utlöser en "
-"varnings- eller larmstatusfärg."
+"Insamlingstider över dessa tröskelvärden ger statusfärgen för varning eller "
+"larm."
 
 #: include/variables.php:318
 msgid "5s  / 10s Yellow / Red"
-msgstr "5s / 10s Gul / Röd"
+msgstr "5 s / 10 s gul / röd"
 
 #: include/variables.php:319
 msgid "10s / 20s Yellow / Red"
-msgstr "10s / 20s Gul / Röd"
+msgstr "10 s / 20 s gul / röd"
 
 #: include/variables.php:320
 msgid "20s / 40s Yellow / Red"
-msgstr "20s / 40s Gul / Röd"
+msgstr "20 s / 40 s gul / röd"
 
 #: include/variables.php:324
 msgid "Alarm Red/Yellow Failed/All Ratio"
-msgstr "Larm Röd/Gul Misslyckades/Alla-förhållande"
+msgstr "Larma med rött eller gult för andelen misslyckade kontroller"
 
 #: include/variables.php:325
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr ""
-"Förhållandet mellan misslyckade tillgänglighetskontroller och lyckade "
-"kontroller för att statusfärgen ska utlösas som Varning eller "
-"Alert.Förhållandet mellan misslyckade tillgänglighetskontroller och lyckade "
-"kontroller som ska utlösas som varnings- eller larmstatusfärg."
+"Förhållandet mellan misslyckade och lyckade tillgänglighetskontroller som "
+"utlöser statusfärgen för varning eller larm."
 
 #: include/variables.php:329
 msgid "0.1 / 0.2 Yellow / Red"
-msgstr "0.1 / 0,2 Gul / Röd"
+msgstr "0,1 / 0,2 gul / röd"
 
 #: include/variables.php:330
 msgid "0.2 / 0.4 Yellow / Red"
-msgstr "0.2 / 0.4 Gul / Röd"
+msgstr "0,2 / 0,4 gul / röd"
 
 #: include/variables.php:331
 msgid "0.5 / 0.5++ Yellow / Red"
-msgstr "0.5 / 0.5++ Gul / Röd"
+msgstr "0,5 / 0,5++ gul / röd"
 
 #: include/variables.php:335
 msgid "Alarm Red/Yellow Ping"
-msgstr "Larm Röd/gul Ping"
+msgstr "Larma med rött eller gult för pingtid"
 
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
 msgstr ""
-"Ping-latenstider över dessa nivåer utlöser en statusfärg för Varning eller "
-"Alert.Ping-latens över dessa nivåer utlöser en varnings- eller "
-"larmstatusfärg."
+"Ping-svarstider över dessa nivåer utlöser statusfärgen för varning eller "
+"larm."
 
 #: include/variables.php:340
 msgid "10ms  / 20ms Yellow / Red"
-msgstr "10ms / 20ms Gul / Röd"
+msgstr "10 ms / 20 ms gul / röd"
 
 #: include/variables.php:341
 msgid "20ms  / 50ms Yellow / Red"
-msgstr "20ms  / 50ms Gul / Röd"
+msgstr "20 ms / 50 ms gul / röd"
 
 #: include/variables.php:342
 msgid "100ms / 200+ms Yellow / Red"
-msgstr "100ms / 200+ms Gul / Röd"
+msgstr "100 ms / 200+ ms gul / röd"
 
 #: include/variables.php:346
 msgid "Alarm Red/Yellow Worst Availability"
-msgstr "Larm Röd/Gul Sämsta tillgänglighet"
+msgstr "Larma med rött eller gult för lägsta tillgänglighet"
 
 #: include/variables.php:347
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
@@ -935,7 +926,7 @@ msgstr "Larm"
 
 #: panellib/alert.php:32
 msgid "Panels that provide alerting."
-msgstr "Paneler som ger larm."
+msgstr "Paneler som visar larm."
 
 #: panellib/alert.php:37 panellib/alert.php:205
 msgid "Host alerts"
@@ -943,7 +934,7 @@ msgstr "Värdlarm"
 
 #: panellib/alert.php:38
 msgid "Host alerts (up/down/recovering) in last 30 minutes"
-msgstr "Värdlarm (uppe/nere/återhämtning) under de senaste 30 minuterna"
+msgstr "Värdaviseringar (upp/ned/återställning) under de senaste 30 minuterna"
 
 #: panellib/alert.php:119 panellib/alert.php:264 panellib/analyze.php:154
 #: panellib/analyze.php:1270 panellib/misc.php:336 panellib/misc.php:407
@@ -961,7 +952,7 @@ msgstr "Värd"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "Tillstånd"
+msgstr "Delstat/region"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -985,14 +976,12 @@ msgstr "Du har inte behörighet till några värdar"
 
 #: panellib/analyze.php:31
 msgid "Analysis Panels"
-msgstr "Analyspaneler"
+msgstr "Paneler för analys"
 
 #: panellib/analyze.php:32
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
 msgstr ""
-"Paneler som analyserar det aktuella beteendet hos Cacti och dess "
-"plugins.Paneler som analyserar det aktuella beteendet hos Cacti och dess "
-"tillägg."
+"Paneler som analyserar det aktuella beteendet hos Cacti och dess tillägg."
 
 #: panellib/analyze.php:37
 msgid "Analyze Logins"
@@ -1009,21 +998,17 @@ msgstr "Analysera loggar"
 #: panellib/analyze.php:54
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
 msgstr ""
-"Leta efter vanliga fel i Cactis loggfil som bör vara en anledning till "
-"oro.Leta efter vanliga fel i Cactis loggfil som bör vara en anledning till "
-"oro."
+"Leta efter vanliga fel i Cactis loggfil som bör vara en anledning till oro."
 
 #: panellib/analyze.php:69
 msgid "Database Checks"
-msgstr "Databaskontroller"
+msgstr "Kontroller av databaser"
 
 #: panellib/analyze.php:70
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
 msgstr ""
 "Analysera MySQL/MariaDB-databasen för vanliga fel.  Observera att den här "
-"processen kan ta lång tid på mycket stora system.Analysera MySQL/MariaDB-"
-"databasen för vanliga fel.  Observera att den här processen kan ta lång tid "
-"på mycket stora system."
+"processen kan ta lång tid på mycket stora system."
 
 #: panellib/analyze.php:85
 msgid "Analyze Cacti Objects"
@@ -1031,7 +1016,7 @@ msgstr "Analysera Cacti-objekt"
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "Analysera träd, diagram, värdar, ..."
+msgstr "Analysera träd, grafer, värdar, ..."
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
@@ -1057,15 +1042,15 @@ msgstr "Status"
 #: panellib/misc.php:430 panellib/misc.php:517 panellib/misc.php:596
 #: panellib/system.php:551 panellib/top5.php:387 panellib/top5.php:719
 msgid "Failed"
-msgstr "Misslyckades"
+msgstr "MISSLYCKADES"
 
 #: panellib/analyze.php:174 panellib/analyze.php:1287
 msgid "Success - Login"
-msgstr "Lyckades - Inloggning"
+msgstr "Lyckades – inloggning"
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
 msgid "Success - Token"
-msgstr "Lyckades - Token"
+msgstr "Lyckades – token"
 
 #: panellib/analyze.php:215
 #, php-format
@@ -1078,7 +1063,7 @@ msgstr "Ingen"
 
 #: panellib/analyze.php:227
 msgid "Active Users in Last Hour: "
-msgstr "Aktiva användare den senaste timmen: "
+msgstr "Aktiva användare under den senaste timmen: "
 
 #: panellib/analyze.php:264 panellib/analyze.php:1107
 msgid "Log file not accessible or empty"
@@ -1099,7 +1084,7 @@ msgstr "Varningar: "
 
 #: panellib/analyze.php:298
 msgid "Log Size: Larger than 2GB"
-msgstr "Loggstorlek: Större än 2 GB"
+msgstr "Loggens storlek: Större än 2 GB"
 
 #: panellib/analyze.php:302 panellib/analyze.php:1141
 msgid "Log Size: OK"
@@ -1107,7 +1092,7 @@ msgstr "Loggstorlek: OK"
 
 #: panellib/analyze.php:306 panellib/analyze.php:1145
 msgid "Log Size: Quite Large"
-msgstr "Loggstorlek: Ganska stor"
+msgstr "Loggens storlek: Ganska stor"
 
 #: panellib/analyze.php:309
 msgid "Log Size: "
@@ -1115,7 +1100,7 @@ msgstr "Loggstorlek: "
 
 #: panellib/analyze.php:316
 msgid "Last log lines:"
-msgstr "Sista loggraderna:"
+msgstr "Senaste loggraderna:"
 
 #: panellib/analyze.php:423
 msgid "Skipping DB tables checks. Database too large"
@@ -1132,22 +1117,24 @@ msgstr "DB: Problem"
 
 #: panellib/analyze.php:453
 msgid "DB: OK"
-msgstr "DB: OK"
+msgstr "DB: Okej"
 
 #: panellib/analyze.php:477
 #, php-format
 msgid "Max connection reached: %s / %s"
-msgstr "Max anslutning uppnåddes: %s / %s"
+msgstr "Högsta antal anslutningar har nåtts: %s / %s"
 
 #: panellib/analyze.php:478
 msgid "You can increase Max connection via command line tools or permanently in config file"
-msgstr "Du kan öka den maximala anslutningen via kommandoradsverktyg eller permanent i konfigurationsfilen"
+msgstr ""
+"Du kan öka det högsta antalet anslutningar med kommandoradsverktyg eller "
+"permanent i konfigurationsfilen"
 
 #: panellib/analyze.php:499
 #, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
 msgstr ""
-"Anslutningsfel: %s - försök att starta om SQL-tjänsten, kontrollera SQL-"
+"Fel i anslutningen: %s - försök att starta om SQL-tjänsten, kontrollera SQL-"
 "loggen, ..."
 
 #: panellib/analyze.php:518
@@ -1157,7 +1144,10 @@ msgstr "Avbrutna klienter/anslutningar: %s"
 
 #: panellib/analyze.php:519
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
-msgstr "Avbrutna klienter/anslutningar – Kör \"SET GLOBAL log_warnings = 1;\" eller \"log_error_verbosity = 1;\" (beror på din MySQL/MariaDB-version) från mysql CLI och ställ in server.cnf på tystnad."
+msgstr ""
+"Avbrutna klienter/anslutningar – Kör 'SET GLOBAL log_warnings = 1;' eller ' "
+"log_error_verbosity = 1;' i mysql-kommandoraden (beroende på versionen av "
+"MySQL/MariaDB) och ange inställningen i server.cnf för att tysta varningarna."
 
 #: panellib/analyze.php:523
 #, php-format
@@ -1194,7 +1184,7 @@ msgstr "Alla tabeller: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "Inte tillgänglig"
+msgstr "Inte tillämpligt"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1204,17 +1194,17 @@ msgstr "Enheter med samma IP och port: %s"
 #: panellib/analyze.php:613
 #, php-format
 msgid "Not optimized Bulk Walk Size devices: %s"
-msgstr "Inte optimerade enheter för Bulk Walk-storlek: %s"
+msgstr "Enheter med icke-optimerad Bulk Walk-storlek: %s"
 
 #: panellib/analyze.php:614 panellib/analyze.php:1431
 msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
 msgstr ""
-"Vänligen ta en titt på enhetsparametern \\Ta en titt på enhetsparametern "
-"\"Bulk Walk Maximala repetitioner\". Du kan förbättra din pollningsprestanda"
+"Kontrollera enhetsparametern ”Bulk Walk Maximum Repetitions”. Du kan "
+"förbättra insamlingens prestanda"
 
 #: panellib/analyze.php:620 panellib/analyze.php:1454
 msgid "Reindex last run"
-msgstr "Indexera om senaste körningen"
+msgstr "Senaste omindexering"
 
 #: panellib/analyze.php:621 panellib/analyze.php:1455
 msgid "RRD Checker last run"
@@ -1237,7 +1227,7 @@ msgstr "Det rekommenderas att köra det här verktyget åtminstone ibland"
 #: panellib/analyze.php:641 panellib/analyze.php:1479
 #, php-format
 msgid "%s: not run yet"
-msgstr "%s: körs inte än"
+msgstr "%s: har inte körts ännu"
 
 #: panellib/analyze.php:691
 #, php-format
@@ -1247,12 +1237,12 @@ msgstr "Föräldralösa datakällor: %s"
 #: panellib/analyze.php:722
 #, php-format
 msgid "Datasource - bad indexes: %s"
-msgstr "Datakälla - felaktiga index: %s"
+msgstr "Datakälla - dåliga index: %s"
 
 #: panellib/analyze.php:774
 #, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "Larm/varning för Thold logonly: %s"
+msgstr "Endast loggning av larm/varning i Thold: %s"
 
 #: panellib/analyze.php:805
 #, php-format
@@ -1262,12 +1252,12 @@ msgstr "Enheter med samma beskrivning: %s"
 #: panellib/analyze.php:834
 #, php-format
 msgid "Devices in more than one tree: %s"
-msgstr "Enheter i fler än ett träd: %s"
+msgstr "Enheter i mer än ett träd: %s"
 
 #: panellib/analyze.php:864
 #, php-format
 msgid "Devices without graphs: %s"
-msgstr "Enheter utan diagram: %s"
+msgstr "Enheter utan grafer: %s"
 
 #: panellib/analyze.php:893
 #, php-format
@@ -1277,12 +1267,12 @@ msgstr "Enheter utan träd: %s"
 #: panellib/analyze.php:921
 #, php-format
 msgid "Devices with default public/private community: %s"
-msgstr "Enheter med förvald publik/privat gemenskap: %s"
+msgstr "Enheter med standardvärdet public/private för SNMP-community: %s"
 
 #: panellib/analyze.php:947
 #, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "Tilläggsövervakning - Värdar som inte övervakas: %s"
+msgstr "Monitor-tillägget – värdar som inte övervakas: %s"
 
 #: panellib/analyze.php:955 panellib/analyze.php:1862
 #, php-format
@@ -1360,7 +1350,7 @@ msgstr "Visa fullständig användarlogg"
 
 #: panellib/analyze.php:1363
 msgid "Analyze Tree, Graphs, Hosts"
-msgstr "Analysera träd, diagram och värdar"
+msgstr "Analysera träd, grafer och värdar"
 
 #: panellib/analyze.php:1386
 #, php-format
@@ -1370,11 +1360,11 @@ msgstr "Enheter med samma IP och port - %s"
 #: panellib/analyze.php:1428
 #, php-format
 msgid "Not optimized Bulk Walk Size devices - %s"
-msgstr "Inte optimerade enheter för Bulk Walk-storlek – %s"
+msgstr "Enheter med icke-optimerad Bulk Walk-storlek – %s"
 
 #: panellib/analyze.php:1484
 msgid "Data maintenance"
-msgstr "Dataunderhåll"
+msgstr "Underhåll av data"
 
 #: panellib/analyze.php:1519
 #, php-format
@@ -1384,12 +1374,12 @@ msgstr "Föräldralösa datakällor - %s"
 #: panellib/analyze.php:1559
 #, php-format
 msgid "Datasources with bad indexes - %s"
-msgstr "Datakällor med felaktiga index - %s"
+msgstr "Datakällor med dåliga index - %s"
 
 #: panellib/analyze.php:1612
 #, php-format
 msgid "Thold logonly alert/warning - %s"
-msgstr "Larm/varning för Thold logonly - %s"
+msgstr "Endast loggning av larm/varning i Thold – %s"
 
 #: panellib/analyze.php:1649
 #, php-format
@@ -1399,12 +1389,12 @@ msgstr "Enheter med samma beskrivning - %s"
 #: panellib/analyze.php:1692
 #, php-format
 msgid "Devices in more than one tree - %s"
-msgstr "Enheter i fler än ett träd - %s"
+msgstr "Enheter i mer än ett träd - %s"
 
 #: panellib/analyze.php:1748
 #, php-format
 msgid "Devices without Graphs - %s"
-msgstr "Enheter utan diagram - %s"
+msgstr "Enheter utan grafer - %s"
 
 #: panellib/analyze.php:1781
 #, php-format
@@ -1414,32 +1404,32 @@ msgstr "Enheter utan träd - %s"
 #: panellib/analyze.php:1813
 #, php-format
 msgid "Devices with default public/private community - %s"
-msgstr "Enheter med förvald publik/privat gemenskap - %s"
+msgstr "Enheter med standardvärdet public/private för SNMP-community – %s"
 
 #: panellib/analyze.php:1845
 #, php-format
 msgid "Plugin Monitor - Unmonitored hosts - %s"
-msgstr "Tilläggsövervakning - Oövervakade värdar - %s"
+msgstr "Monitor-tillägget – värdar som inte övervakas – %s"
 
 #: panellib/busiest.php:31
 msgid "The busiest"
-msgstr "Mest upptagna"
+msgstr "Den mest trafikerade"
 
 #: panellib/busiest.php:32
 msgid "Panels that finds the busiest hosts."
-msgstr "Paneler som hittar de mest upptagna värdarna."
+msgstr "Paneler som hittar de mest trafikerade värdarna."
 
 #: panellib/busiest.php:37
 msgid "Busiest CPU"
-msgstr "Mest upptagna CPU"
+msgstr "Högst processoranvändning"
 
 #: panellib/busiest.php:38
 msgid "Devices with the busiest CPU (Host MIB)"
-msgstr "Enheter med den mest upptagna CPU:n (Host MIB)"
+msgstr "Enheter med högst processoranvändning (Host MIB)"
 
 #: panellib/busiest.php:53
 msgid "Busiest ucd/net - Load"
-msgstr "Mest upptagna ucd/net - Belastning"
+msgstr "Högst belastning enligt ucd/net"
 
 #: panellib/busiest.php:54
 msgid "Devices with the highest Load (ucd/net)"
@@ -1447,23 +1437,23 @@ msgstr "Enheter med högst belastning (ucd/net)"
 
 #: panellib/busiest.php:69
 msgid "Busiest Hard Drive Space"
-msgstr "Mest upptagna hårddiskutrymmet"
+msgstr "Mest använt hårddiskutrymme"
 
 #: panellib/busiest.php:70
 msgid "Devices with the highest Hard Drive Space used (Host MIB)"
-msgstr "Enheter med det högsta hårddiskutrymmet som används (värd-MIB)"
+msgstr "Enheter med mest använt hårddiskutrymme (Host MIB)"
 
 #: panellib/busiest.php:85 panellib/busiest.php:1366
 msgid "Busiest uptime"
-msgstr "Mest upptagna upptiden"
+msgstr "Längst drifttid"
 
 #: panellib/busiest.php:86
 msgid "Devices with the highest uptime"
-msgstr "Enheter med högsta upptiden"
+msgstr "Enheter med högsta drifttid"
 
 #: panellib/busiest.php:101
 msgid "Busiest Interface in/out traffic"
-msgstr "Mest upptagna gränssnitt in/ut-trafik"
+msgstr "Mest inkommande och utgående trafik på gränssnitt"
 
 #: panellib/busiest.php:102
 msgid "Devices with the highest in/out traffic (Interface)"
@@ -1471,15 +1461,15 @@ msgstr "Enheter med högst trafik in/ut (gränssnitt)"
 
 #: panellib/busiest.php:117
 msgid "Busiest Interface error"
-msgstr "Flesta gränssnittsfel"
+msgstr "Flest gränssnittsfel"
 
 #: panellib/busiest.php:118
 msgid "Devices with the highest errors/discards (Interface)"
-msgstr "Enheter med de högsta felen/förkastningar (gränssnitt)"
+msgstr "Enheter med flest fel eller kasserade paket (gränssnitt)"
 
 #: panellib/busiest.php:133
 msgid "Busiest Interface utilization"
-msgstr "Högsta gränssnittsanvändning"
+msgstr "Högst gränssnittsanvändning"
 
 #: panellib/busiest.php:134
 msgid "Ports with the highest interface utilization"
@@ -1507,7 +1497,7 @@ msgstr "Be administratören att aktivera DS-statistik"
 #: panellib/busiest.php:1523 panellib/busiest.php:1649 panellib/top5.php:144
 #: panellib/top5.php:474
 msgid "Average"
-msgstr "Genomsnitt"
+msgstr "Medel"
 
 #: panellib/busiest.php:219 panellib/busiest.php:339 panellib/busiest.php:474
 #: panellib/busiest.php:690 panellib/busiest.php:812 panellib/busiest.php:1054
@@ -1539,12 +1529,11 @@ msgstr "Väntar på data eller så har du inte behörighet för någon enhet med
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
 msgstr ""
 "Du har inte behörighet till några värdar eller så finns det ingen värd med "
-"den här mallenDu har inte behörighet till några värdar eller så finns det "
-"ingen värd med den här mallen"
+"den här mallen"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
-msgstr "Upptid"
+msgstr "Drifttid"
 
 #: panellib/busiest.php:588 panellib/busiest.php:1420
 msgid "Average of all allowed hosts"
@@ -1564,28 +1553,32 @@ msgstr "Tidsintervall senaste 5 minuter"
 
 #: panellib/busiest.php:993
 msgid "Busiest 30 Host MIB CPU utilization (last hour)"
-msgstr "Högsta 30 värd-MIB CPU-belastning (senaste timmen)"
+msgstr ""
+"De 30 enheterna med högst processoranvändning enligt Host MIB (senaste "
+"timmen)"
 
 #: panellib/busiest.php:1090 panellib/busiest.php:1206
 #: panellib/busiest.php:1347
 msgid "Install TopX plugin for more DS statistics"
-msgstr "Installera TopX-tillägget för mer DS-statistik"
+msgstr "Installera TopX-tillägg för mer DS-statistik"
 
 #: panellib/busiest.php:1109
 msgid "Busiest 30 ucd/net Load (last hour)"
-msgstr "Högsta 30 ucd/net-belastning (senaste timmen)"
+msgstr "De 30 enheterna med högst belastning enligt ucd/net (senaste timmen)"
 
 #: panellib/busiest.php:1226
 msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
-msgstr "Högsta 30 värd-MIB-hårddiskutrymmen (senaste timmen)"
+msgstr ""
+"De 30 enheterna med mest använt hårddiskutrymme enligt Host MIB (senaste "
+"timmen)"
 
 #: panellib/busiest.php:1440 panellib/busiest.php:1582
 msgid "Busiest traffic (in+out)"
-msgstr "Högsta trafiken (in+ut)"
+msgstr "Mest trafik (in och ut)"
 
 #: panellib/busiest.php:1703
 msgid "Busiest interface utilization"
-msgstr "Högsta gränssnittsanvändning"
+msgstr "Högst gränssnittsanvändning"
 
 #: panellib/graphs.php:31
 msgid "Graphical Panels"
@@ -1594,9 +1587,7 @@ msgstr "Grafiska paneler"
 #: panellib/graphs.php:32
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
 msgstr ""
-"Paneler som ger information om Cacti och dess plugins på ett grafiskt "
-"sätt.Paneler som ger information om Cacti och dess tillägg på ett grafiskt "
-"sätt."
+"Paneler som ger information om Cacti och dess tillägg på ett grafiskt sätt."
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
@@ -1612,7 +1603,7 @@ msgstr "Enhetsmallar"
 
 #: panellib/graphs.php:54
 msgid "Graph of Device Templates"
-msgstr "Diagram över enhetsmallar"
+msgstr "Graf över enhetsmallar"
 
 #: panellib/graphs.php:69
 msgid "Devices by Status"
@@ -1620,7 +1611,7 @@ msgstr "Enheter efter status"
 
 #: panellib/graphs.php:70
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr "Diagram över enheter efter status (uppe, nere, ...)"
+msgstr "Graf över enheter efter status (upp, ner, ...)"
 
 #: panellib/graphs.php:106
 msgid "Datasources: "
@@ -1641,7 +1632,7 @@ msgstr "Nere"
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
 msgid "Recovering"
-msgstr "Återhämtar"
+msgstr "Återhämtar sig"
 
 #: panellib/graphs.php:423
 msgid "Data Type"
@@ -1654,7 +1645,7 @@ msgstr "Totalt"
 
 #: panellib/graphs.php:445
 msgid "No untemplated datasources found"
-msgstr "Inga omallade datakällor hittades"
+msgstr "Inga datakällor utan mall hittades"
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
@@ -1662,7 +1653,7 @@ msgstr "Enheter"
 
 #: panellib/graphs.php:503
 msgid "Device Count"
-msgstr "Enhetsantal"
+msgstr "Antal enheter"
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
@@ -1698,7 +1689,7 @@ msgstr "MacTrack-tillägg"
 
 #: panellib/mactrack.php:38
 msgid "Various MacTrack collection and site statistics."
-msgstr "Diverse MacTrack-samlingar och platsstatistik."
+msgstr "Statistik om MacTracks datainsamling och platser."
 
 #: panellib/mactrack.php:53 panellib/mactrack.php:184
 msgid "MacTrack Sites"
@@ -1706,11 +1697,11 @@ msgstr "MacTrack-platser"
 
 #: panellib/mactrack.php:54
 msgid "Various MacTrack Site statistics."
-msgstr "Diverse platsstatistik från MacTrack."
+msgstr "Statistik om platser i MacTrack."
 
 #: panellib/mactrack.php:81 panellib/mactrack.php:134
 msgid "MacTrack Plugin not Installed/Running"
-msgstr "MacTrack-tillägget är inte installerat eller körs"
+msgstr "MacTrack-tillägget är inte installerat eller körs inte"
 
 #: panellib/mactrack.php:97
 #, php-format
@@ -1720,12 +1711,12 @@ msgstr "Alla: %s"
 #: panellib/mactrack.php:98
 #, php-format
 msgid "Up: %s"
-msgstr "Uppe: %s"
+msgstr "Upp: %s"
 
 #: panellib/mactrack.php:99
 #, php-format
 msgid "Down: %s"
-msgstr "Nere: %s"
+msgstr "Ner: %s"
 
 #: panellib/mactrack.php:100
 #, php-format
@@ -1764,7 +1755,7 @@ msgstr "Plats"
 
 #: panellib/mactrack.php:140 panellib/mactrack.php:193
 msgid "IPs"
-msgstr "IP"
+msgstr "IP-adresser"
 
 #: panellib/mactrack.php:141 panellib/mactrack.php:194
 msgid "Ports"
@@ -1772,11 +1763,11 @@ msgstr "Portar"
 
 #: panellib/mactrack.php:142 panellib/mactrack.php:195
 msgid "Ports up"
-msgstr "Portar uppe"
+msgstr "Portar upp"
 
 #: panellib/mactrack.php:143 panellib/mactrack.php:196
 msgid "MACs"
-msgstr "MACs"
+msgstr "MAC-adresser"
 
 #: panellib/mactrack.php:144 panellib/mactrack.php:197
 msgid "Device Errors"
@@ -1784,15 +1775,16 @@ msgstr "Enhetsfel"
 
 #: panellib/mactrack.php:170 panellib/mactrack.php:225
 msgid "No mactrack sites found"
-msgstr "Inga mactrack-platser hittades"
+msgstr "Inga MacTrack-platser hittades"
 
 #: panellib/misc.php:31
 msgid "Miscellaneous Panels"
-msgstr "Övriga paneler"
+msgstr "Diverse paneler"
 
 #: panellib/misc.php:32
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr "Paneler med allmän icke-kategoriserad data om Cacti."
+msgstr ""
+"Paneler med allmänna data om Cacti som inte tillhör någon annan kategori."
 
 #: panellib/misc.php:37
 msgid "NTP/DNS Status"
@@ -1801,9 +1793,8 @@ msgstr "NTP/DNS-status"
 #: panellib/misc.php:38
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
 msgstr ""
-"Kontroll av Cacti-systemklockan för drift från en känd baslinje och kontroll "
-"av DNS-upplösningKontrollerar Cacti-systemklockan för avvikelse från en känd "
-"baslinje och kontroll av DNS-upplösning"
+"Kontroll av Cactis systemklocka mot en känd referens och kontroll av DNS-"
+"uppslagning"
 
 #: panellib/misc.php:53
 msgid "Maint Plugin Details"
@@ -1811,15 +1802,15 @@ msgstr "Detaljer om underhållstillägg"
 
 #: panellib/misc.php:54
 msgid "Maint Plugin details on upcoming schedules"
-msgstr "Detaljer för underhållstillägget om kommande scheman"
+msgstr "Maint-tilläggsdetaljer om kommande scheman"
 
 #: panellib/misc.php:69
 msgid "Webseer Details"
-msgstr "Webseer-detaljer"
+msgstr "Detaljer om Webseer"
 
 #: panellib/misc.php:70
 msgid "Plugin webseer URL Service Check Details"
-msgstr "Tillägget webseer URL-tjänstkontroll"
+msgstr "Detaljer om webbadresskontroller i Webseer-tillägget"
 
 #: panellib/misc.php:85
 msgid "Servcheck plugin Details"
@@ -1836,7 +1827,8 @@ msgstr "Ingen NTP-server konfigurerad"
 #: panellib/misc.php:120
 #, php-format
 msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
-msgstr "Fel NTP-server konfigurerad - %s<br/>Åtgärda det i inställningarna"
+msgstr ""
+"Fel NTP-server konfigurerad - %s<br/>Vänligen åtgärda det i inställningarna"
 
 #: panellib/misc.php:136
 #, php-format
@@ -1845,16 +1837,16 @@ msgstr "Misslyckades med att hämta NTP-tid från %s"
 
 #: panellib/misc.php:144
 msgid "Please check time as it is off by more"
-msgstr "Kontrollera tiden eftersom den är förskjuten med mer"
+msgstr "Vänligen kontrollera tiden eftersom den är förskjuten med mer"
 
 #: panellib/misc.php:145
 #, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr "än %s sekunder från NTP-servern %s."
+msgstr "än %s sekunder från NTP-server %s."
 
 #: panellib/misc.php:147
 msgid "Localtime is equal to NTP server"
-msgstr "Lokal tid är lika med NTP-server"
+msgstr "Den lokala tiden stämmer med NTP-serverns tid"
 
 #: panellib/misc.php:151
 msgid "Unable to contact the NTP server indicated."
@@ -1871,26 +1863,27 @@ msgstr "Inget DNS-värdnamn konfigurerat"
 #: panellib/misc.php:164
 #, php-format
 msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
-msgstr "Fel DNS-värdnamn konfigurerat - %s<br/>Åtgärda det i inställningarna"
+msgstr ""
+"Fel DNS-värdnamn konfigurerat - %s<br/>Vänligen åtgärda det i inställningarna"
 
 #: panellib/misc.php:173
 #, php-format
 msgid "DNS hostname (%s) resolving ok."
-msgstr "DNS-värdnamn (%s) slår upp ok."
+msgstr "DNS-värdnamnet (%s) kunde slås upp."
 
 #: panellib/misc.php:174
 #, php-format
 msgid "DNS resolv time: %s ms"
-msgstr "DNS-uppslagstid: %s ms"
+msgstr "Tid för DNS-uppslagning: %s ms"
 
 #: panellib/misc.php:177
 #, php-format
 msgid "DNS hostname (%s) resolving failed."
-msgstr "Det gick inte att slå upp DNS-värdnamn (%s)."
+msgstr "Det gick inte att slå upp DNS-värdnamnet (%s)."
 
 #: panellib/misc.php:287
 msgid "Maint plugin is not installed/enabled"
-msgstr "Underhållstillägget är inte installerat/aktiverat"
+msgstr "Maint-tillägget är inte installerat/aktiverat"
 
 #: panellib/misc.php:307
 msgid "Plugin Webseer isn't installed or started"
@@ -1899,8 +1892,7 @@ msgstr "Tillägget Webseer är inte installerat eller startat"
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
 msgstr ""
-"Webseer plugin stöds inte längre, använd plugin servcheck iställetWebseer-"
-"tillägget stöds inte längre, använd tillägget servcheck istället"
+"Webseer-tillägget stöds inte längre. Använd tillägget servcheck i stället"
 
 #: panellib/misc.php:320 panellib/misc.php:486
 msgid "Number of checks (all/disabled): "
@@ -1908,7 +1900,7 @@ msgstr "Antal kontroller (alla/inaktiverade): "
 
 #: panellib/misc.php:321
 msgid "Status (up/down): "
-msgstr "Status (uppe/nere): "
+msgstr "Status (upp/ner): "
 
 #: panellib/misc.php:335
 msgid "Last log messages"
@@ -1957,31 +1949,31 @@ msgstr "Servcheck-tillägget - Detaljer"
 
 #: panellib/poller.php:31
 msgid "Poller Panels"
-msgstr "Pollarepaneler"
+msgstr "Insamlingspaneler"
 
 #: panellib/poller.php:32
 msgid "Panels that provide information about Cacti's polling process."
-msgstr "Paneler som ger information om Cactis pollningsprocess."
+msgstr "Paneler som ger information om Cactis insamlingsprocess."
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "Pollareinformation"
+msgstr "Information om datainsamlaren"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
-msgstr "Diverse information om din Cacti-pollare."
+msgstr "Information om Cactis insamlingsprocess."
 
 #: panellib/poller.php:53
 msgid "Poller Statistics"
-msgstr "Pollarestatistik"
+msgstr "Insamlingsstatistik"
 
 #: panellib/poller.php:54 panellib/poller.php:70
 msgid "Various Cacti poller statistics."
-msgstr "Diverse statistik över Cacti-pollare."
+msgstr "Statistik om Cactis insamlingsprocess."
 
 #: panellib/poller.php:69
 msgid "Poller Output Items"
-msgstr "Objekt för Pollare-utmatning"
+msgstr "Utdataposter från insamlingsprocessen"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -1997,19 +1989,19 @@ msgstr "Total tid"
 
 #: panellib/poller.php:134 panellib/poller.php:340
 msgid "New/Idle"
-msgstr "Ny/Overksam"
+msgstr "Ny/inaktiv"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
-msgstr "Kör"
+msgstr "Pågår"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
-msgstr "Overksam"
+msgstr "Vilande"
 
 #: panellib/poller.php:140 panellib/poller.php:346
 msgid "Unkn/down"
-msgstr "Okänd/nere"
+msgstr "Okänd/ned"
 
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
@@ -2034,7 +2026,7 @@ msgstr "Sekunder"
 
 #: panellib/poller.php:297
 msgid "Poller Details"
-msgstr "Pollaredetaljer"
+msgstr "Detaljer om insamlingsprocessen"
 
 #: panellib/poller.php:308
 msgid "Average Time"
@@ -2046,7 +2038,7 @@ msgstr "Maximal tid"
 
 #: panellib/poller.php:446
 msgid "Poller output items "
-msgstr "Pollare-utdataposter "
+msgstr "Utdataposter från insamlingsprocessen "
 
 #: panellib/poller.php:447
 msgid "Items"
@@ -2062,7 +2054,7 @@ msgstr "Paneler som ger information om Cactis behandling av Syslog-meddelanden."
 
 #: panellib/syslog.php:37
 msgid "Syslog Details"
-msgstr "Syslog-detaljer"
+msgstr "Detaljer om Syslog"
 
 #: panellib/syslog.php:38
 msgid "Various Syslog Plugin statistics."
@@ -2074,7 +2066,7 @@ msgstr "Inkommande"
 
 #: panellib/syslog.php:173
 msgid "Stored"
-msgstr "Lagrade"
+msgstr "Lagrat"
 
 #: panellib/syslog.php:175
 msgid "Messages"
@@ -2082,7 +2074,7 @@ msgstr "Meddelanden"
 
 #: panellib/syslog.php:197
 msgid "Syslog plugin not installed/running"
-msgstr "Syslog-tillägget är inte installerat eller körs"
+msgstr "Syslog-tillägget är inte installerat eller körs inte"
 
 #: panellib/system.php:31
 msgid "System Panels"
@@ -2102,7 +2094,7 @@ msgstr "Diverse systeminformation om själva Cacti-systemet."
 
 #: panellib/system.php:53
 msgid "Administrative Alerts"
-msgstr "Administrativa larm"
+msgstr "Administrativa varningar"
 
 #: panellib/system.php:54
 msgid "Extra admin notify panel for all users"
@@ -2118,22 +2110,21 @@ msgstr "Information om Cactis process för prestandaförbättring."
 
 #: panellib/system.php:85
 msgid "24 Hour Extremes"
-msgstr "24 timmars extremiteter"
+msgstr "Extremvärden under 24 timmar"
 
 #: panellib/system.php:86
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
 msgstr ""
-"Tabell med 24 timmars extremvärden för polling (längsta pollingkörning, "
-"lägsta värd)Tabell med 24 timmars extremvärden för pollning (längsta "
-"pollningskörning, värdar som är nere)"
+"Tabell över insamlingens extremvärden under 24 timmar (längsta "
+"insamlingskörning, värdar som är nere)"
 
 #: panellib/system.php:101
 msgid "CPU Utilization"
-msgstr "CPU-användning"
+msgstr "Processoranvändning"
 
 #: panellib/system.php:102
 msgid "CPU utilization Graph (only Linux)."
-msgstr "CPU-användningsdiagram (endast Linux)."
+msgstr "Graf över processoranvändning (endast Linux)."
 
 #: panellib/system.php:141
 msgid "CPU Load: "
@@ -2145,11 +2136,11 @@ msgstr "Denna funktion är inte implementerad på Windows-plattformar"
 
 #: panellib/system.php:177
 msgid "Avg CPU"
-msgstr "Genoms. CPU"
+msgstr "Genomsnittlig processoranvändning"
 
 #: panellib/system.php:178
 msgid "Max CPU"
-msgstr "Max CPU"
+msgstr "Högsta processoranvändning"
 
 #: panellib/system.php:208
 msgid "Cacti Version: "
@@ -2157,7 +2148,7 @@ msgstr "Cacti-version: "
 
 #: panellib/system.php:219
 msgid "Poller Type:"
-msgstr "Pollaretyp:"
+msgstr "Typ av insamlingsprocess:"
 
 #: panellib/system.php:219
 msgid "Spine"
@@ -2169,11 +2160,11 @@ msgstr "Spine-version: "
 
 #: panellib/system.php:224
 msgid "You are using incorrect spine version!"
-msgstr "Du använder fel version av spine!"
+msgstr "Du använder fel version av Spine!"
 
 #: panellib/system.php:229
 msgid "Poller Type: "
-msgstr "Pollaretyp: "
+msgstr "Typ av insamlingsprocess: "
 
 #: panellib/system.php:238
 msgid "Running on: "
@@ -2181,7 +2172,7 @@ msgstr "Kör på: "
 
 #: panellib/system.php:316
 msgid "Overrun Warning"
-msgstr "Varning för överkörning"
+msgstr "Varning för tidsöverskridande"
 
 #: panellib/system.php:319
 msgid "Timed Out"
@@ -2189,16 +2180,16 @@ msgstr "Tiden har löpt ut"
 
 #: panellib/system.php:322
 msgid "Other"
-msgstr "Annat"
+msgstr "Övrigt"
 
 #: panellib/system.php:325
 msgid "Never Run"
-msgstr "Kör aldrig"
+msgstr "Har aldrig körts"
 
 #: panellib/system.php:346
 #, php-format
 msgid "Boost Status is: %s"
-msgstr "Boost-status är: %s"
+msgstr "Boost-status: %s"
 
 #: panellib/system.php:350
 #, php-format
@@ -2228,7 +2219,7 @@ msgstr "Storlek på aktuell(a) Boost-tabell(er): %s"
 #: panellib/system.php:380
 #, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr "Genoms. antal byte/post: %s"
+msgstr "Genomsnittligt antal byte per post: %s"
 
 #: panellib/system.php:390
 #, php-format
@@ -2237,11 +2228,11 @@ msgstr "Senaste körningens varaktighet/uppdateringar: %s / %s"
 
 #: panellib/system.php:448
 msgid "Poller Run"
-msgstr "Pollare kör"
+msgstr "Insamlingskörning"
 
 #: panellib/system.php:474
 msgid "Down Hosts"
-msgstr "Värdar nere"
+msgstr "Värdar som är nere"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
@@ -2249,19 +2240,19 @@ msgstr "Utlöst"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
-msgstr "Pollare ut. itms"
+msgstr "Insamlingens utdataposter"
 
 #: panellib/system.php:606
 msgid "48 Hour Extreme Polling"
-msgstr "48 timmars extrem pollning"
+msgstr "Insamlingens extremvärden under 48 timmar"
 
 #: panellib/system.php:629
 msgid "Long Running Poller"
-msgstr "Långvarig pollare"
+msgstr "Långvarig insamlingskörning"
 
 #: panellib/system.php:660
 msgid "Max Device Down"
-msgstr "Max enhet nere"
+msgstr "Flest enheter nere"
 
 #: panellib/system.php:690
 msgid "Max Thold Triggered"
@@ -2269,15 +2260,15 @@ msgstr "Max tröskelvärde utlöst"
 
 #: panellib/system.php:719
 msgid "Poller Output Item"
-msgstr "Pollare utdataobjekt"
+msgstr "Utdatapost från insamlingsprocessen"
 
 #: panellib/system.php:747
 msgid "Failed Polls"
-msgstr "Misslyckade pollningar"
+msgstr "Misslyckade insamlingar"
 
 #: panellib/thold.php:31
 msgid "Threshold Panels"
-msgstr "Tröskelpaneler"
+msgstr "Paneler för tröskelvärden"
 
 #: panellib/thold.php:32
 msgid "Panels that provide information about Cacti Thresholding Plugin."
@@ -2285,11 +2276,11 @@ msgstr "Paneler som ger information om Cacti-tröskelvärdestillägg."
 
 #: panellib/thold.php:37 panellib/thold.php:434
 msgid "Last Threshold Events"
-msgstr "Händelser vid senaste tröskelvärdet"
+msgstr "Senaste tröskelvärdeshändelserna"
 
 #: panellib/thold.php:38
 msgid "Threshold Plugin Latest Events"
-msgstr "Tröskelvärdestillägget - Senaste händelser"
+msgstr "Senaste händelser i tröskelvärdestillägget"
 
 #: panellib/thold.php:53
 msgid "Threshold"
@@ -2297,7 +2288,7 @@ msgstr "Tröskelvärde"
 
 #: panellib/thold.php:54
 msgid "Threshold Plugin Graph (all, trigerred, ...)"
-msgstr "Diagram för tröskelvärdestillägget (alla, utlösta, ...)"
+msgstr "Graf för tröskelvärdestillägget (alla, utlösta, ...)"
 
 #: panellib/thold.php:87 panellib/thold.php:441
 msgid "Plugin Thold isn't installed or started"
@@ -2305,7 +2296,7 @@ msgstr "Tillägget Thold är inte installerat eller startat"
 
 #: panellib/thold.php:179 panellib/thold.php:506
 msgid "Without events yet"
-msgstr "Utan några händelser ännu"
+msgstr "Utan händelser ännu"
 
 #: panellib/thold.php:196
 msgid "Thresholds: "
@@ -2313,7 +2304,7 @@ msgstr "Tröskelvärden: "
 
 #: panellib/thold.php:208 panellib/thold.php:332
 msgid "Thold plugin not installed/running"
-msgstr "Thold-tillägget är inte installerat och körs inte"
+msgstr "Thold-tillägget är inte installerat eller körs inte"
 
 #: panellib/thold.php:238
 msgid "Trigerred"
@@ -2321,11 +2312,11 @@ msgstr "Utlöst"
 
 #: panellib/thold.php:266 panellib/thold.php:369 panellib/thold.php:385
 msgid "Breached"
-msgstr "Uppnåddes"
+msgstr "Överskridet"
 
 #: panellib/thold.php:325
 msgid "Threshold Details"
-msgstr "Detaljer om tröskeln"
+msgstr "Detaljer om tröskelvärdet"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
@@ -2333,7 +2324,7 @@ msgstr "Tröskelvärden"
 
 #: panellib/thold.php:402
 msgid "Breached: "
-msgstr "Uppnåddes: "
+msgstr "Överskridet: "
 
 #: panellib/thold.php:413
 msgid "Triggered: "
@@ -2341,7 +2332,7 @@ msgstr "Utlöst: "
 
 #: panellib/thold.php:421
 msgid "You don't have permission to Thresholds"
-msgstr "Du har inte behörighet till Tröskelvärden"
+msgstr "Du har inte behörighet till tröskelvärden"
 
 #: panellib/thold.php:484
 msgid "Description"
@@ -2349,50 +2340,47 @@ msgstr "Beskrivning"
 
 #: panellib/top5.php:31
 msgid "Top/Bottom 5 Panels"
-msgstr "Övre/nedre 5 paneler"
+msgstr "Paneler för de fem högsta och lägsta värdena"
 
 #: panellib/top5.php:32
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr ""
-"Paneler som ger information om trendinformation om datainsamling om "
-"kaktusar.Paneler som ger information om trendinformation om datainsamling "
-"för Cacti."
+msgstr "Paneler som visar trender i Cactis datainsamling."
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
-msgstr "Nedersta Ping"
+msgstr "Sämsta pingtider"
 
 #: panellib/top5.php:38
 msgid "Devices with the worst ping response"
-msgstr "Enheter med sämst ping-svar"
+msgstr "Enheter med sämst pingtid"
 
 #: panellib/top5.php:53
 msgid "Bottom Availability"
-msgstr "Nedersta tillgänglighet"
+msgstr "Lägsta tillgänglighet"
 
 #: panellib/top5.php:54
 msgid "Devices with the worst availability/reachability"
-msgstr "Enheter med sämst tillgänglighet/åtkomlighet"
+msgstr "Enheter med sämst tillgänglighet/nåbarhet"
 
 #: panellib/top5.php:69
 msgid "Bottom Polling Time"
-msgstr "Nedersta pollningstid"
+msgstr "Längst insamlingstid"
 
 #: panellib/top5.php:70
 msgid "Devices with the worst polling time"
-msgstr "Enheter med sämst pollningstid"
+msgstr "Enheter med längst insamlingstid"
 
 #: panellib/top5.php:85
 msgid "Bottom Polling Ratio"
-msgstr "Nedersta pollningsförhållande"
+msgstr "Störst andel misslyckade insamlingar"
 
 #: panellib/top5.php:86
 msgid "Devices with the worst polling ratio"
-msgstr "Enheter med sämsta pollningsförhållande"
+msgstr "Enheter med störst andel misslyckade insamlingar"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
-msgstr "Aktuellt"
+msgstr "Aktuell"
 
 #: panellib/top5.php:225
 msgid "Hostname"
@@ -2400,23 +2388,23 @@ msgstr "Värdnamn"
 
 #: panellib/top5.php:226
 msgid "Availability/Reachability"
-msgstr "Tillgänglighet/Nåbarhet"
+msgstr "Tillgänglighet/nåbarhet"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
-msgstr "Pollningstid"
+msgstr "Insamlingstid"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
-msgstr "Förhållande"
+msgstr "Andel"
 
 #: panellib/top5.php:437
 msgid "Top 20 Hosts with Worst Ping"
-msgstr "Topp 20-värdar med sämst ping"
+msgstr "De 20 värdarna med sämst pingtid"
 
 #: panellib/top5.php:519
 msgid "Top 20 Hosts with the Worst Availability"
-msgstr "Topp 20-värdar med sämst tillgänglighet"
+msgstr "De 20 värdarna med sämst tillgänglighet"
 
 #: panellib/top5.php:557
 msgid "Availability"
@@ -2424,19 +2412,19 @@ msgstr "Tillgänglighet"
 
 #: panellib/top5.php:600
 msgid "Top 20 Hosts Worst Polling Time"
-msgstr "Topp 20-värdar sämsta pollningstid"
+msgstr "De 20 värdar som har längst insamlingstid"
 
 #: panellib/top5.php:680
 msgid "Top 20 Hosts with the Worst Polling Ratio"
-msgstr "Topp 20-värdar med sämsta pollningsförhållandet"
+msgstr "De 20 värdar som har störst andel misslyckade insamlingar"
 
 #: setup.php:61
 msgid "Intropage Viewer"
-msgstr "Visare för introsida"
+msgstr "Intropage-visare"
 
 #: setup.php:62
 msgid "Intropage Administration"
-msgstr "Administration för introsida"
+msgstr "Administration av Intropage"
 
 #: setup.php:80
 msgid "System Administration"
@@ -2444,16 +2432,16 @@ msgstr "Systemadministration"
 
 #: setup.php:83
 msgid "Timespan Last 1 Hour"
-msgstr "Tidsintervall Senaste 1 timme"
+msgstr "Tidsintervall: senaste timmen"
 
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
 #, php-format
 msgid "Timespan Last %d Hours"
-msgstr "Tidsintervall Senaste %d timmar"
+msgstr "Tidsintervall: senaste %d timmarna"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
-msgstr "Tidsintervall Senaste 1 dygn"
+msgstr "Tidsintervall: senaste dygnet"
 
 #: setup.php:95 setup.php:96 setup.php:97 setup.php:98
 #, php-format
@@ -2468,7 +2456,7 @@ msgstr "%d timmar"
 #: setup.php:113
 #, php-format
 msgid "%d Day"
-msgstr "%d dygn"
+msgstr "%d dag"
 
 #, fuzzy
 #~ msgid "Sort by - red-yellow-green-grey"

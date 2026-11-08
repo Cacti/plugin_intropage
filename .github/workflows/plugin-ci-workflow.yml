@@ -30,20 +30,90 @@ on:
     branches:
       - main
       - develop
+      - 'fix/*-theme-*'
+
+permissions:
+  contents: read
+
+env:
+  CACTI: 1.2.x
+  # Where the end-to-end tests reach the Cacti web server and its database
+  INTROPAGE_E2E_SCHEME: http
+  INTROPAGE_E2E_HOST: 127.0.0.1:8080
+  INTROPAGE_E2E_DB_HOST: 127.0.0.1
+  INTROPAGE_E2E_DB_NAME: cacti
+  INTROPAGE_E2E_DB_USER: cactiuser
+  INTROPAGE_E2E_DB_PASS: cactiuser
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  cacti-theme-browser:
+    name: Cacti theme browser regressions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - name: Checkout plugin
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+        path: plugin
+    - name: Checkout shared Cacti browser tooling
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      with:
+        repository: Cacti/cacti
+        ref: 88a8ad040979edd943774a0e338469b764d46a23
+        persist-credentials: false
+        path: cacti
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+      with:
+        node-version: '22'
+    - name: Install locked browser tooling
+      working-directory: cacti/tests/e2e
+      run: |
+        npm ci --ignore-scripts
+        npx --no-install playwright install --with-deps chromium
+    - name: Test theme rendering and status contrast
+      working-directory: plugin
+      env:
+        CACTI_ROOT: ${{ github.workspace }}/cacti
+        NODE_PATH: ${{ github.workspace }}/cacti/tests/e2e/node_modules
+      run: ../cacti/tests/e2e/node_modules/.bin/playwright test --config tests/e2e/playwright.config.cjs
+    - name: Require complete changed CSS line coverage
+      if: github.event_name == 'pull_request'
+      working-directory: plugin
+      env:
+        BASE_COMMIT: ${{ github.event.pull_request.base.sha }}
+      run: |
+        if git rev-parse --verify --quiet 'HEAD^2' >/dev/null; then
+          BASE_COMMIT="$(git rev-parse 'HEAD^1')"
+        fi
+        python3 ../cacti/tests/tools/report_changed_coverage.py --base "$BASE_COMMIT" \
+          --language css --minimum 100 --browser-root tests/e2e/test-results
+    - name: Preserve browser evidence
+      if: always()
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+      with:
+        name: cacti-theme-browser
+        path: plugin/tests/e2e/test-results
+        if-no-files-found: warn
+
   integration-test:
+    timeout-minutes: 45
     runs-on: ${{ matrix.os }}
-    
+
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.1', '8.2', '8.3', '8.4']
+        php: ['8.2', '8.3', '8.4']
         os: [ubuntu-latest]
-    
+
     services:
       mariadb:
-        image: mariadb:10.6
+        image: mariadb:11.8@sha256:6422478cb8e159f080fb1d8ccf65101e26fe51385787fde7d16c3b165a331f15
         env:
           MYSQL_ROOT_PASSWORD: cactiroot
           MYSQL_DATABASE: cacti
@@ -52,85 +122,108 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping"
+          --health-cmd="mariadb-admin ping"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
-    
+
     name: PHP ${{ matrix.php }} Integration Test on ${{ matrix.os }}
-    
+
     steps:
     - name: Checkout Cacti
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
+        persist-credentials: false
         repository: Cacti/cacti
+        ref: ${{ env.CACTI }}
         path: cacti
-    
+
     - name: Checkout intropage Plugin
-      uses: actions/checkout@v7
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
+        persist-credentials: false
         path: cacti/plugins/intropage
-    
+        # patch-coverage.php diffs against the base branch below.
+        fetch-depth: 0
+
     - name: Install PHP ${{ matrix.php }}
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
       with:
         php-version: ${{ matrix.php }}
-        extensions: intl, mysql, gd, ldap, gmp, xml, curl, json, mbstring
+        tools: composer:2.10.3
+        extensions: intl, mysql, gd, ldap, gmp, xml, curl, json, mbstring, snmp
+        coverage: xdebug
         ini-values: "post_max_size=256M, max_execution_time=60, date.timezone=America/New_York"
-    
+
     - name: Check PHP version
       run: php -v
-    
+
+    - name: Validate plugin manifest (expected-file drift)
+      run: php cacti/plugins/intropage/tests/bin/validate-manifest.php
+
+
     - name: Run apt-get update
       run: sudo apt-get update
-    
+
     - name: Install System Dependencies
-      run: sudo apt-get install -y apache2 snmp snmpd rrdtool fping
-    
+      run: sudo apt-get install -y snmp snmpd rrdtool fping gettext
+
     - name: Start SNMPD Agent and Test
       run: |
         sudo systemctl start snmpd
         sudo snmpwalk -c public -v2c -On localhost .1.3.6.1.2.1.1
-    
+
     - name: Setup Permissions
       run: |
-        sudo chown -R www-data:runner ${{ github.workspace }}/cacti
+        # Composer runs as the runner user in a later step and calls touch()
+        # while generating the fixture autoloader. utime() only succeeds for the
+        # file owner, so the runner user must own the tree here; www-data keeps
+        # group access. Ownership is handed back to www-data before polling.
+        sudo chown -R runner:www-data ${{ github.workspace }}/cacti
         sudo find ${{ github.workspace }}/cacti -type d -exec chmod 775 {} \;
         sudo find ${{ github.workspace }}/cacti -type f -exec chmod 664 {} \;
         sudo chmod +x ${{ github.workspace }}/cacti/cmd.php
         sudo chmod +x ${{ github.workspace }}/cacti/poller.php
-    
+
     - name: Create MySQL Config
       run: |
+        echo "::add-mask::cactiroot"
         echo -e "[client]\nuser = root\npassword = cactiroot\nhost = 127.0.0.1\n" > ~/.my.cnf
-        cat ~/.my.cnf
-    
+        chmod 600 ~/.my.cnf
+
     - name: Initialize Cacti Database
-      env:
-        MYSQL_AUTH_USR: '--defaults-file=~/.my.cnf'
       run: |
-        mysql $MYSQL_AUTH_USR -e 'CREATE DATABASE IF NOT EXISTS cacti;'
-        mysql $MYSQL_AUTH_USR -e "CREATE USER IF NOT EXISTS 'cactiuser'@'localhost' IDENTIFIED BY 'cactiuser';"
-        mysql $MYSQL_AUTH_USR -e "GRANT ALL PRIVILEGES ON cacti.* TO 'cactiuser'@'localhost';"
-        mysql $MYSQL_AUTH_USR -e "GRANT SELECT ON mysql.time_zone_name TO 'cactiuser'@'localhost';"
-        mysql $MYSQL_AUTH_USR -e "FLUSH PRIVILEGES;"
-        mysql $MYSQL_AUTH_USR cacti < ${{ github.workspace }}/cacti/cacti.sql
-        mysql $MYSQL_AUTH_USR -e "INSERT INTO settings (name, value) VALUES ('path_php_binary', '/usr/bin/php')" cacti
-    
-    - name: Validate composer files
-      run: |
-        cd ${{ github.workspace }}/cacti
-        if [ -f composer.json ]; then
-          composer validate --strict || true
-        fi
-    
-    - name: Install Composer Dependencies
-      run: |
-        cd ${{ github.workspace }}/cacti
-        if [ -f composer.json ]; then
-          sudo composer install --prefer-dist --no-progress
-        fi
-    
+        MYSQL_AUTH_USR="--defaults-file=$HOME/.my.cnf"
+        mysql "$MYSQL_AUTH_USR" -e 'CREATE DATABASE IF NOT EXISTS cacti;'
+        mysql "$MYSQL_AUTH_USR" -e "CREATE USER IF NOT EXISTS 'cactiuser'@'localhost' IDENTIFIED BY 'cactiuser';"
+        mysql "$MYSQL_AUTH_USR" -e "CREATE USER IF NOT EXISTS 'cactiuser'@'127.0.0.1' IDENTIFIED BY 'cactiuser';"
+        mysql "$MYSQL_AUTH_USR" -e "GRANT ALL PRIVILEGES ON cacti.* TO 'cactiuser'@'localhost';"
+        mysql "$MYSQL_AUTH_USR" -e "GRANT ALL PRIVILEGES ON cacti.* TO 'cactiuser'@'127.0.0.1';"
+        mysql "$MYSQL_AUTH_USR" -e "GRANT SELECT ON mysql.time_zone_name TO 'cactiuser'@'localhost';"
+        mysql "$MYSQL_AUTH_USR" -e "GRANT SELECT ON mysql.time_zone_name TO 'cactiuser'@'127.0.0.1';"
+        mysql "$MYSQL_AUTH_USR" -e "FLUSH PRIVILEGES;"
+        mysql "$MYSQL_AUTH_USR" cacti < ${{ github.workspace }}/cacti/cacti.sql
+        mysql "$MYSQL_AUTH_USR" -e "INSERT INTO settings (name, value) VALUES ('path_php_binary', '/usr/bin/php')" cacti
+
+    # Core's release archives exclude .github and tests. Fetch these paths
+    # through Git at the immutable helper revision instead of an Action archive.
+    - name: Checkout shared CI tooling
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        repository: Cacti/cacti
+        ref: f3ff777992875740e4665fedfe2eff8335f5b894
+        persist-credentials: false
+        path: ci-tools
+        sparse-checkout: |
+          .github/actions/setup-plugin-dependencies
+          tests/tools/plugin-harness
+
+    - name: Install locked Cacti and plugin test dependencies
+      uses: ./ci-tools/.github/actions/setup-plugin-dependencies
+      with:
+        cacti-directory: cacti
+        install-core-dev: 'false'
+
     - name: Create Cacti config.php
       run: |
         cat ${{ github.workspace }}/cacti/include/config.php.dist | \
@@ -139,74 +232,145 @@ jobs:
         sed -r "s/'cactiuser'/'cactiuser'/g" | \
         sed -r "s/'cactiuser'/'cactiuser'/g" > ${{ github.workspace }}/cacti/include/config.php
         sudo chmod 664 ${{ github.workspace }}/cacti/include/config.php
-    
-    - name: Configure Apache
-      run: |
-        cat << 'EOF' | sed 's#GITHUB_WORKSPACE#${{ github.workspace }}#g' > /tmp/cacti.conf
-        <VirtualHost *:80>
-          ServerAdmin webmaster@localhost
-          DocumentRoot GITHUB_WORKSPACE/cacti
-          
-          <Directory GITHUB_WORKSPACE/cacti>
-            Options Indexes FollowSymLinks
-            AllowOverride All
-            Require all granted
-          </Directory>
-          
-          ErrorLog ${APACHE_LOG_DIR}/error.log
-          CustomLog ${APACHE_LOG_DIR}/access.log combined
-        </VirtualHost>
-        EOF
-        sudo cp /tmp/cacti.conf /etc/apache2/sites-available/000-default.conf
-        sudo systemctl restart apache2
-    
+
     - name: Install Cacti via CLI
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php cli/install_cacti.php --accept-eula --install --force
-    
+
     - name: Install intropage Plugin
       run: |
         cd ${{ github.workspace }}/cacti
         sudo php cli/plugin_manage.php --plugin=intropage --install --enable
-    
+
     - name: Check PHP Syntax for Plugin
       run: |
         cd ${{ github.workspace }}/cacti/plugins/intropage
-        if find . -name '*.php' -exec php -l {} 2>&1 \; | grep -iv 'no syntax errors detected'; then
-          echo "Syntax errors found!"
-          exit 1
-        fi
+        find . -path './vendor' -prune -o -type f -name '*.php' -print0 | xargs -0 -r -n1 php -l
+
+    - name: Verify translation template is up to date
+      if: github.event_name == 'pull_request'
+      env:
+        BASE_REF: ${{ github.event.pull_request.base.sha }}
+      run: |
+        cd ${{ github.workspace }}/cacti/plugins/intropage
+        git config --global --add safe.directory ${{ github.workspace }}/cacti/plugins/intropage
+        php tests/bin/check-i18n-pot.php "$BASE_REF"
+
+    - name: Set expected Cacti version for unit tests
+      run: echo -n "${{ env.CACTI }}" | sudo tee ${{ github.workspace }}/cacti/plugins/intropage/tests/.cacti-version > /dev/null
+
+    # The installer runs as root and leaves cacti.log owned by root; the tests
+    # restore the log after provoking warnings, so the runner needs write access.
+    - name: Make the Cacti log writable for the tests
+      run: |
+        sudo chown -R www-data:runner ${{ github.workspace }}/cacti/log
+        sudo find ${{ github.workspace }}/cacti/log -type d -exec chmod 775 {} \;
+        sudo find ${{ github.workspace }}/cacti/log -type f -exec chmod 664 {} \;
+
+    # The end-to-end tests send real requests to intropage.php, so serve the
+    # installed Cacti with PHP's built-in server as the web user.
+    - name: Serve Cacti for the end-to-end tests
+      run: |
+        p="${{ github.workspace }}"
+        while [ "$p" != "/" ]; do
+          sudo chmod o+x "$p" || true
+          p=$(dirname "$p")
+        done
+
+        cd ${{ github.workspace }}/cacti
+        sudo sed -i "s#^\$url_path = .*#\$url_path = '/';#" include/config.php
+        sudo -u www-data nohup php -S "$INTROPAGE_E2E_HOST" -t ${{ github.workspace }}/cacti > "${{ runner.temp }}/cacti-web.log" 2>&1 &
+
+        for i in $(seq 1 30); do
+          if curl -s -o /dev/null --max-time 2 "$INTROPAGE_E2E_SCHEME://$INTROPAGE_E2E_HOST/index.php"; then
+            exit 0
+          fi
+          sleep 1
+        done
+
+        cat "${{ runner.temp }}/cacti-web.log"
+        exit 1
+
+    - name: Run Pest Unit Tests
+      env:
+        INTROPAGE_E2E_CACTI: ${{ github.workspace }}/cacti
+      run: |
+        cd ${{ github.workspace }}/cacti
+        "$CACTI_PEST_BIN" --configuration=plugins/intropage/phpunit.xml \
+          --coverage-clover=plugins/intropage/coverage/clover.xml
+
+    # Whole-file coverage is meaningless here: most of the plugin only runs
+    # inside a live Cacti. What is enforceable is that a change covers the
+    # lines it adds.
+    - name: Enforce coverage of changed lines
+      if: github.event_name == 'pull_request'
+      env:
+        BASE_REF: ${{ github.event.pull_request.base.sha }}
+      run: |
+        cd ${{ github.workspace }}/cacti/plugins/intropage
+        git config --global --add safe.directory ${{ github.workspace }}/cacti/plugins/intropage
+        php tests/bin/patch-coverage.php coverage/clover.xml "$BASE_REF" 100
+
+    - name: Upload coverage report
+      if: always()
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      with:
+        name: coverage-php${{ matrix.php }}
+        path: ${{ github.workspace }}/cacti/plugins/intropage/coverage/
+        if-no-files-found: warn
 
     - name: Remove the plugins directory exclusion from the .phpstan.neon
+      if: ${{ env.CACTI != '1.2.x' }}
       run: sed '/plugins/d' -i .phpstan.neon
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Mark composer scripts executable
+      if: ${{ env.CACTI != '1.2.x' }}
       run: sudo chmod +x ${{ github.workspace }}/cacti/include/vendor/bin/*
 
     - name: Run Linter on base code
+      if: ${{ env.CACTI != '1.2.x' }}
       run: composer run-script lint ${{ github.workspace }}/cacti/plugins/intropage
       working-directory: ${{ github.workspace }}/cacti
 
     - name: Checking coding standards on base code
+      if: ${{ env.CACTI != '1.2.x' }}
       run: composer run-script phpcsfixer ${{ github.workspace }}/cacti/plugins/intropage
       working-directory: ${{ github.workspace }}/cacti
 
-#    - name: Run PHPStan at Level 6 on base code outside of Composer due to technical issues
-#      run: ./include/vendor/bin/phpstan analyze --level 6 ${{ github.workspace }}/cacti/plugins/intropage
-#      working-directory: ${{ github.workspace }}/cacti
-    
+    - name: Run PHPStan at Level 6 on base code outside of Composer due to technical issues
+      if: ${{ env.CACTI != '1.2.x' }}
+      run: ./include/vendor/bin/phpstan analyze --level 6 ${{ github.workspace }}/cacti/plugins/intropage
+      working-directory: ${{ github.workspace }}/cacti
+
+    - name: Re-apply web user ownership before polling
+      run: |
+        # Ancestor directories above the checkout (e.g. /home/runner, .../work)
+        # are typically 750 owned by the runner user, which blocks a non-root
+        # www-data process from traversing down to the checkout at all.
+        p="${{ github.workspace }}"
+        while [ "$p" != "/" ]; do
+          sudo chmod o+x "$p" || true
+          p=$(dirname "$p")
+        done
+
+        sudo chown -R www-data:runner ${{ github.workspace }}/cacti
+        sudo find ${{ github.workspace }}/cacti -type d -exec chmod 775 {} \;
+        sudo find ${{ github.workspace }}/cacti -type f -exec chmod 664 {} \;
+        sudo chmod +x ${{ github.workspace }}/cacti/cmd.php
+        sudo chmod +x ${{ github.workspace }}/cacti/poller.php
+
     - name: Run Cacti Poller
       run: |
         cd ${{ github.workspace }}/cacti
-        sudo php poller.php --poller=1 --force --debug
+        sudo -u www-data php poller.php --poller=1 --force --debug
+
         if ! grep -q "SYSTEM STATS" log/cacti.log; then
           echo "Cacti poller did not finish successfully"
           cat log/cacti.log
           exit 1
         fi
-        sudo php plugins/intropage/poller_intropage.php
 
     - name: View Cacti Logs
       if: always()
@@ -214,4 +378,17 @@ jobs:
         if [ -f ${{ github.workspace }}/cacti/log/cacti.log ]; then
           echo "=== Cacti Log ==="
           sudo cat ${{ github.workspace }}/cacti/log/cacti.log
+        fi
+
+    - name: Check Cacti Logs for Errors
+      if: always()
+      run: |
+        if [ -f ${{ github.workspace }}/cacti/log/cacti.log ]; then
+          if sudo grep -E "FATAL:|ERROR:|WARNING:" "${{ github.workspace }}/cacti/log/cacti.log"; then
+            echo "Found FATAL/ERROR/WARNING entries in Cacti log"
+            exit 1
+          elif [ "$?" -gt 1 ]; then
+            echo "Unable to read Cacti log"
+            exit 1
+          fi
         fi

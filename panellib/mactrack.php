@@ -24,7 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_mactrack() {
+/**
+ * Registers the 'mactrack' panel category and its 'MacTrack Plugin'
+ * (device status summary) and 'MacTrack Sites' (per-site statistics)
+ * panels with the panel library. Called from initialize_panel_library()
+ * while building the full set of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'mactrack'
+ *                         category metadata.
+ */
+function register_mactrack(): array {
 	global $registry;
 
 	$registry['mactrack'] = [
@@ -75,7 +87,26 @@ function register_mactrack() {
 }
 
 // ------------------------------------ mactrack -----------------------------------------------------
-function mactrack($panel, $user_id) {
+/**
+ * Data-update function for the 'mactrack' panel: summarizes MacTrack
+ * device status counts (up/down/error/unknown/disabled) as a pie chart,
+ * setting the panel's alarm color based on problem device counts, or
+ * reports that the MacTrack plugin isn't installed/the user lacks
+ * permission. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to check permissions and save the
+ *                       result.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other panel
+ *                       functions in this file; not used directly
+ *                       here.
+ */
+function mactrack($panel, $user_id): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
@@ -126,7 +157,25 @@ function mactrack($panel, $user_id) {
 }
 
 // ------------------------------------ mactrack sites -----------------------------------------------------
-function mactrack_sites($panel, $user_id) {
+/**
+ * Data-update function for the 'mactrack_sites' panel: renders a table
+ * of MacTrack sites with their device/IP/port/MAC/error counts, or
+ * reports that the MacTrack plugin isn't installed/the user lacks
+ * permission. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to determine the row limit and save
+ *                       the result.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other panel
+ *                       functions in this file; not used directly
+ *                       here.
+ */
+function mactrack_sites($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -181,7 +230,23 @@ function mactrack_sites($panel, $user_id) {
 }
 
 // ------------------------------------ mactrack sites -----------------------------------------------------
-function mactrack_sites_detail() {
+/**
+ * Detail-view renderer for the 'mactrack_sites' panel, showing an
+ * expanded view of MacTrack site statistics. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ *
+ * @global array $config          Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ * @global bool  $console_access  Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ */
+function mactrack_sites_detail(): array {
 	global $config, $console_access;
 
 	$panel = [

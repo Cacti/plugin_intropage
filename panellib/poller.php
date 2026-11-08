@@ -24,7 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_poller() {
+/**
+ * Registers the 'poller' panel category and its 'Poller Information',
+ * 'Poller Statistics', and 'Poller Output Items' panels with the panel
+ * library. Called from initialize_panel_library() while building the
+ * full set of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'poller'
+ *                         category metadata.
+ */
+function register_poller(): array {
 	global $registry;
 
 	$registry['poller'] = [
@@ -92,12 +104,32 @@ function register_poller() {
 	return $panels;
 }
 
-function poller_info_trend() {
+/**
+ * Trend-collection function for the 'poller_info' panel. Currently a
+ * no-op placeholder. Called from intropage_gather_stats() via the
+ * panel definition's 'trends_func'.
+ *
+ * @return void
+ */
+function poller_info_trend(): void {
 	// Not yet implemented
 }
 
 // ------------------------------------ poller info -----------------------------------------------------
-function poller_info($panel, $user_id) {
+/**
+ * Data-update function for the 'poller_info' panel: summarizes current
+ * Cacti poller configuration/status information (e.g. poller type,
+ * interval, last run stats). Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
+function poller_info($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -118,6 +150,7 @@ function poller_info($panel, $user_id) {
 	$count    = $sql_pollers === false ? __('N/A', 'intropage') : count($sql_pollers);
 	$ok       = 0;
 	$running  = 0;
+	$details  = '';
 
 	if (cacti_sizeof($sql_pollers)) {
 		$details = '<table class="cactiTable">' .
@@ -129,7 +162,8 @@ function poller_info($panel, $user_id) {
 			'</tr>';
 
 		foreach ($sql_pollers as $poller) {
-			$color = 'green';
+			$color  = 'green';
+			$status = '';
 
 			if ($poller['status'] == 0 || $poller['status'] == 1 || $poller['status'] == 2 || $poller['status'] == 5) {
 				$ok++;
@@ -184,7 +218,15 @@ function poller_info($panel, $user_id) {
 	save_panel_result($panel, $user_id);
 }
 
-function poller_stat_trend() {
+/**
+ * Trend-collection function for the 'poller_stat' panel: records a
+ * snapshot of each poller's total collection time into
+ * plugin_intropage_trends. Called from intropage_gather_stats() via
+ * the panel definition's 'trends_func'.
+ *
+ * @return void
+ */
+function poller_stat_trend(): void {
 	$stats = db_fetch_assoc('SELECT id, total_time, DATE_SUB(last_update, INTERVAL ROUND(total_time) SECOND) AS start
 		FROM poller
 		ORDER BY avg_time DESC');
@@ -198,7 +240,34 @@ function poller_stat_trend() {
 }
 
 // ------------------------------------ poller stat -----------------------------------------------------
-function poller_stat($panel, $user_id, $timespan = 0) {
+/**
+ * Data-update function for the 'poller_stat' panel: renders a
+ * time-series line graph of each active poller's collection time over
+ * the panel's configured timespan (plus a 24-hour average line when
+ * few pollers exist), flagging the panel red if any poller's time
+ * approaches the poller interval. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to determine the row
+ *                        limit, resolve the timespan setting, and save
+ *                        the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ *
+ * @global array $config          Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ * @global bool  $run_from_poller Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ */
+function poller_stat($panel, $user_id, $timespan = 0): void {
 	global $config, $run_from_poller;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -207,6 +276,7 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 
 	$panel['alarm'] = 'green';
 
+	/** @var array{line: array<string, mixed>} $graph */
 	$graph =  [
 		'line' => [
 			'title1' => '',
@@ -260,6 +330,9 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 
 		foreach ($pollers as $xpoller) {
 			$seconds = floor($timespan / 60);
+
+			$avg_label = [];
+			$avg_data  = [];
 
 			$rows = db_fetch_assoc_prepared("SELECT cur_timestamp AS `date`, AVG(SUBSTRING_INDEX(value, ':', -1)) AS value
 				FROM plugin_intropage_trends
@@ -320,7 +393,21 @@ function poller_stat($panel, $user_id, $timespan = 0) {
 }
 
 // ------------------------------------ poller_info -----------------------------------------------------
-function poller_info_detail() {
+/**
+ * Detail-view renderer for the 'poller_info' panel, showing an
+ * expanded table of each active poller's id, name, status, and timing
+ * statistics, flagging pollers whose total time is close to the poller
+ * interval. Called via the panel definition's 'details_func' when the
+ * user opens the panel's detail view.
+ *
+ * @return array The panel's detail data (name/alarm/detail html), for
+ *               display in the panel's detail view.
+ *
+ * @global array $config Reserved/declared for parity with other panel
+ *                       functions in this file; not used directly
+ *                       here.
+ */
+function poller_info_detail(): array {
 	global $config;
 
 	$poller_interval = read_config_option('poller_interval');
@@ -410,7 +497,15 @@ function poller_info_detail() {
 
 // ------------------------------------ poller_output_items -----------------------------------------------------
 
-function poller_output_items_trend() {
+/**
+ * Trend-collection function for the 'poller_output_items' panel:
+ * records a snapshot of the current poller_output table row count into
+ * plugin_intropage_trends. Called from intropage_gather_stats() via
+ * the panel definition's 'trends_func'.
+ *
+ * @return void
+ */
+function poller_output_items_trend(): void {
 	$count = db_fetch_cell('SELECT COUNT(local_data_id) FROM poller_output');
 
 	db_execute_prepared('REPLACE INTO plugin_intropage_trends
@@ -419,7 +514,32 @@ function poller_output_items_trend() {
 		['poller_output', $count]);
 }
 
-function poller_output_items($panel, $user_id, $timespan = 0) {
+/**
+ * Data-update function for the 'poller_output_items' panel: renders a
+ * time-series/summary view of pending poller_output table row counts
+ * over the panel's configured timespan, flagging the panel based on
+ * the configured alert threshold. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ *
+ * @global array $config          Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ * @global bool  $run_from_poller Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ */
+function poller_output_items($panel, $user_id, $timespan = 0): void {
 	global $config, $run_from_poller;
 
 	$poller_interval = read_config_option('poller_interval');

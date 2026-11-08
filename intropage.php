@@ -26,8 +26,11 @@
 
 chdir('../../');
 include_once('./include/auth.php');
-include_once($config['base_path'] . '/plugins/intropage/include/settings.php');
-include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+
+global $config;
+
+include_once($config['base_path'] . '/plugins/intropage/includes/settings.php');
+include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 include_once($config['base_path'] . '/plugins/intropage/display.php');
 
 global $panels, $registry, $login_opts, $callbackPage, $redirectPage;

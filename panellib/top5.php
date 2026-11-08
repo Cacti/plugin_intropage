@@ -24,7 +24,20 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_top5() {
+/**
+ * Registers the 'top5' panel category and its 'Bottom Ping', 'Bottom
+ * Availability', 'Bottom Polling Time', and 'Bottom Polling Ratio'
+ * panels with the panel library. Called from
+ * initialize_panel_library() while building the full set of available
+ * dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'top5'
+ *                         category metadata.
+ */
+function register_top5(): array {
 	global $registry;
 
 	$registry['top5'] = [
@@ -111,26 +124,27 @@ function register_top5() {
 }
 
 // ------------------------------------ top5_worst_ping -----------------------------------------------------
-function top5_ping($panel, $user_id) {
+/**
+ * Data-update function for the 'top5_ping' panel: lists the devices
+ * within the user's device scope with the worst (highest) ping
+ * response times. Called from intropage_gather_stats()/get_panel() via
+ * the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
+function top5_ping($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -194,26 +208,28 @@ function top5_ping($panel, $user_id) {
 }
 
 // ------------------------------------ top5_availability -----------------------------------------------------
-function top5_availability($panel, $user_id) {
+/**
+ * Data-update function for the 'top5_availability' panel: lists the
+ * devices within the user's device scope with the worst
+ * availability/reachability. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
+function top5_availability($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -275,26 +291,27 @@ function top5_availability($panel, $user_id) {
 }
 
 // ------------------------------------ top5_worst_polltime -----------------------------------------------------
-function top5_polltime($panel, $user_id) {
+/**
+ * Data-update function for the 'top5_polltime' panel: lists the devices
+ * within the user's device scope with the worst (slowest) individual
+ * polling time. Called from intropage_gather_stats()/get_panel() via
+ * the panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
+function top5_polltime($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -356,26 +373,28 @@ function top5_polltime($panel, $user_id) {
 }
 
 // ------------------------------------ top5_worst_pollratio -----------------------------------------------------
-function top5_pollratio($panel, $user_id) {
+/**
+ * Data-update function for the 'top5_pollratio' panel: lists the
+ * devices within the user's device scope with the worst polling ratio
+ * (e.g. successful vs. expected polls). Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and save the
+ *                       result.
+ *
+ * @return void
+ */
+function top5_pollratio($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$console_access = get_console_access($user_id);
@@ -442,7 +461,16 @@ function top5_pollratio($panel, $user_id) {
 }
 
 // ------------------------------------ top5_worst_ping -----------------------------------------------------
-function top5_ping_detail() {
+/**
+ * Detail-view renderer for the 'top5_ping' panel, showing an expanded
+ * list of devices by worst ping response time. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function top5_ping_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -451,19 +479,7 @@ function top5_ping_detail() {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, avg_time, cur_time
@@ -525,7 +541,16 @@ function top5_ping_detail() {
 }
 
 // ------------------------------------ top5_availability -----------------------------------------------------
-function top5_availability_detail() {
+/**
+ * Detail-view renderer for the 'top5_availability' panel, showing an
+ * expanded list of devices by worst availability. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function top5_availability_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -534,19 +559,7 @@ function top5_availability_detail() {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT description, id, availability
@@ -606,7 +619,16 @@ function top5_availability_detail() {
 }
 
 // ------------------------------------ top5_polltime -----------------------------------------------------
-function top5_polltime_detail() {
+/**
+ * Detail-view renderer for the 'top5_polltime' panel, showing an
+ * expanded list of devices by worst polling time. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function top5_polltime_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -615,19 +637,7 @@ function top5_polltime_detail() {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, polling_time
@@ -687,28 +697,25 @@ function top5_polltime_detail() {
 }
 
 // ------------------------------------ top5_pollratio -----------------------------------------------------
-function top5_pollratio_detail() {
+/**
+ * Detail-view renderer for the 'top5_pollratio' panel, showing an
+ * expanded list of devices by worst polling ratio. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function top5_pollratio_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
 		'name'   => __('Top 20 Hosts with the Worst Polling Ratio', 'intropage'),
-		'alarm'  => 'grey',
+		'alarm'  => 'green',
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$sql_worst_host = db_fetch_assoc("SELECT id, description, failed_polls,
@@ -764,7 +771,7 @@ function top5_pollratio_detail() {
 			$i++;
 		}
 
-		$panel['detail'] . '</table>';
+		$panel['detail'] .= '</table>';
 	} else {	// no data
 		$panel['detail'] = __('You don\'t have permissions to any hosts', 'intropage');
 	}

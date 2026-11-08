@@ -1,0 +1,322 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2025 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+
+#panel_container {
+	list-style-type: none; /* remove bullets */
+	display: grid;
+	gap: 2px;
+	padding: 0px;
+}
+
+.container_col_3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.container_col_4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.panel_1_1 { /* normal */
+	grid-area: span 1/span 1;
+}
+
+.panel_1_2 { /* double width */
+	grid-area: span 1/span 2;
+}
+
+.panel_2_1 { /* double height */
+	grid-area: span 2/span 1;
+}
+
+.panel_3_1 { /* triple height */
+	grid-area: span 3/span 1;
+}
+
+.panel_2_2 { /* double width and double height */
+	grid-area: span 2/span 2;
+}
+
+.panel_3_2 { /* triple height and doubhle height */
+	grid-area: span 3/span 2;
+}
+
+.grid_item {
+	padding: 0;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	display: block;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.panel_data {
+	min-height: 180px;
+}
+
+/* Cards grow to fit their content, so the body never needs its own vertical
+   scroller. cards.css sets overflow-x: auto, which implicitly makes overflow-y
+   auto too; a few px of overflow then traps the mouse wheel inside the card. */
+#panel_container .ccCardBody {
+	overflow-y: hidden;
+}
+
+.chart_wrapper {
+	position: relative;
+	margin: auto;
+}
+
+.chart_wrapper canvas {
+	display: table-cell !important;
+	vertical-align: middle;
+}
+
+.panel_wrapper {
+	float: left;
+	text-align: left;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.panel_header {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 25px;
+	padding: 0 5px;
+	margin: 0px;
+	font-weight: bold;
+	width: 100%;
+	cursor: move;
+	white-space: nowrap;
+}
+
+.panel_name {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.panel_actions {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	white-space: nowrap;
+}
+
+#overlay {
+	display: none;
+}
+
+/* Some themes (e.g. deepness) force .ui-dialog-content to overflow: visible,
+   which lets long details spill under the button pane with no scrollbar.
+   clear: both stops the now-BFC content from sitting beside the floated title
+   when it overhangs the fixed-height titlebar. */
+.ui-dialog #overlay.ui-dialog-content {
+	overflow: auto;
+	clear: both;
+}
+
+#overlay_detail {
+	text-align: left;
+	overflow: auto;
+}
+
+#intropage_main .txt_med,
+#overlay .txt_med {
+	font-size: 1.3em;
+}
+
+#intropage_main .txt_big,
+#overlay .txt_big {
+	font-size: 1.7em;
+}
+
+#intropage_main .txt_huge,
+#overlay .txt_huge {
+	font-size: 4.0em;
+}
+
+#intropage_main .rpad,
+#overlay .rpad {
+	padding-right: 1em !important;
+}
+
+.cactiTable .panel_data span {
+	line-height: initial;
+}
+
+.color_red {
+	background: #cc0000 !important;
+}
+
+.color_red_bubble {
+	color: #cc0000;
+}
+
+.color_yellow {
+	background: #ff8f1e !important;
+}
+
+.color_yellow_bubble {
+	color: #ff8f1e;
+}
+
+.color_green {
+	background: rgba(148,179,107,1) !important;
+}
+
+.color_green_bubble {
+	color: rgba(148,179,107,1);
+}
+
+.color_grey {
+	background: #a1a1a1 !important;
+}
+
+.color_grey_bubble {
+	color: #a1a1a1;
+}
+
+.color_grey, .color_grey i {
+	color: black !important;
+}
+
+.color_yellow, .color_yellow i {
+	color: black !important;
+}
+
+.color_red, .color_red i {
+	color: white !important;
+}
+
+.color_green, .color_green i {
+	color: black !important;
+}
+
+#intropage_main .fa,
+#overlay .fa {
+	padding-right: 3px;
+}
+
+#intropage_main .block,
+#overlay .block {
+	display:block ruby;
+}
+
+#intropage_main .float_left,
+#overlay .float_left {
+	float: left;
+}
+
+#intropage_main .float_right,
+#overlay .float_right {
+	width: 80%;
+	float: right;
+	text-align: right;
+}
+
+.quarter-panel {
+	min-width: 340px;
+	width: calc(25% - 1em);
+}
+
+.third-panel {
+	min-width: 460px;
+	width: calc(33% - 1em);
+}
+
+.half-panel {
+	min-width: 580px;
+	width: calc(50% - 1em);
+}
+
+/* Tablets in Portrait mode */
+@media screen and (max-width: 640px) {
+	.quarter-panel {
+		min-width: calc(50% - 1em);
+		width: calc(50% - 1em);
+	}
+
+	.third-panel {
+		min-width: calc(75% - 1em);
+		width: calc(75% - 1em);
+	}
+
+	.half-panel {
+		min-width: calc(100% - 1em);
+		width: calc(100% - 1em);
+		overflow-x: auto;
+	}
+}
+
+/* iPhone and other devices in Portrait mode */
+@media screen and (max-width: 420px) {
+	.quarter-panel {
+		min-width: calc(100% - 1em);
+		width: calc(100% - 1em);
+	}
+
+	.third-panel {
+		min-width: calc(100% - 1em);
+		width: calc(100% - 1em);
+	}
+
+	.half-panel {
+		min-width: calc(100% - 1em);
+		width: calc(100% - 1em);
+	}
+}
+
+.panel_data h4 {
+	margin: 2px 0px;
+}
+
+.inpa_loglines {
+	overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+
+.inpa_fixed {
+	table-layout: fixed;
+}
+
+
+.inpa_first {
+	width: 70%;
+}
+
+.inpa_sq {
+	aspect-ratio: 1/1;
+	width: 1em;
+	display: inline-block;
+	margin: 0 3px;
+}
+
+#intropage_main .w60,
+#overlay .w60 {
+	width: 60%;
+}
+
+.bus_graph {
+	cursor: pointer;
+}

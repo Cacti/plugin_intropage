@@ -10,8 +10,8 @@
 describe('output escaping in intropage', function () {
 	it('does not interpolate raw variables into HTML attributes', function () {
 		$uiFiles = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		'panellib/analyze.php',
 		'panellib/busiest.php',
 		];
@@ -34,7 +34,7 @@ describe('output escaping in intropage', function () {
 			foreach ($lines as $line) {
 				$trimmed = ltrim($line);
 
-				if (strpos($trimmed, '//') === 0 || strpos($trimmed, '*') === 0) {
+				if (str_starts_with($trimmed, '//') || str_starts_with($trimmed, '*')) {
 					continue;
 				}
 
@@ -45,7 +45,7 @@ describe('output escaping in intropage', function () {
 
 				// title="<?php print $something without escaping
 				if (preg_match('/(?:title|alt|placeholder)\s*=.*print\s+\$(?!_|config)/', $line)) {
-					if (strpos($line, 'html_escape') === false && strpos($line, '__esc') === false && strpos($line, 'htmlspecialchars') === false) {
+					if (!str_contains($line, 'html_escape') && !str_contains($line, '__esc') && !str_contains($line, 'htmlspecialchars')) {
 						$dangerous++;
 					}
 				}
@@ -59,8 +59,8 @@ describe('output escaping in intropage', function () {
 
 	it('uses html_escape or __esc for user-controlled output', function () {
 		$uiFiles = [
-		'include/functions.php',
-		'include/settings.php',
+		'includes/functions.php',
+		'includes/settings.php',
 		'panellib/analyze.php',
 		'panellib/busiest.php',
 		];

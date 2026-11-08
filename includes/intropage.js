@@ -1,0 +1,693 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2025 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+
+// display/hide detail
+$(function() {
+	$('.grid_item').css('background-color', $('body').css('background-color'));
+
+	$(window).on('resize', function() {
+		resizeGraphsPanel();
+		resizeCharts();
+	});
+
+	$(window).on('orientationchange', function() {
+		resizeGraphsPanel();
+		resizeCharts();
+	}).trigger('orientationchange');
+
+	callbackPage = urlPath + 'plugins/intropage/intropage.php';
+	if (pageName == 'index.php') {
+		redirectPage = urlPath + pageName;
+	} else {
+		redirectPage = urlPath + 'plugins/intropage/intropage.php';
+	}
+
+	initPage();
+});
+
+function resizeCharts() {
+	$('.chart_wrapper:has(svg)').each(function() {
+		resizeChart($(this));
+	});
+}
+
+/* Resize a single rendered chart to its container. Scoped so a per-panel reload
+ * does not walk and redraw every chart on the dashboard. */
+function resizeChart($wrapper) {
+	var chart = $wrapper.attr('id');
+
+	if (panels[chart] == undefined || !$wrapper.find('svg').length) {
+		return;
+	}
+
+	var windWidth  = $(window).width() - 34;
+	var panelWidth = $wrapper.closest('.panel_wrapper').width() - 34;
+	var width = Math.min(windWidth, panelWidth);
+
+	// Keep the server-sized chart height. .panel_wrapper also holds the card
+	// header and body padding, so deriving the height from it oversizes the
+	// chart, overflows .ccCardBody and turns it into a nested scroller that
+	// swallows mouse-wheel scrolling of the page.
+	var height = $wrapper.height();
+
+	panels[chart].resize({ width: width, height: height });
+}
+
+function resizeGraphsPanel() {
+	$('img.intrograph').each(function() {
+		var graphWidth = $(this).width();
+		var panel      = $(this).closest('.grid_item');
+		var panelWidth = panel.width();
+		var quarter    = parseInt(($('#main').width() / 4) - 10);
+		var third      = parseInt(($('#main').width() / 3) - 10);
+
+		//console.log('Graph:'+graphWidth+', Panel:'+panelWidth+', Quarter:'+quarter+', Third:'+third);
+		if (graphWidth > panelWidth) {
+			if (panel.hasClass('quarter-panel')) {
+				panel.removeClass('quarter-panel').addClass('third-panel');
+			} else if (panel.hasClass('third-panel')) {
+				panel.removeClass('third-panel').addClass('half-panel');
+			}
+		} else if (panel.hasClass('half-panel')) {
+			if (graphWidth < third) {
+				panel.removeClass('half-width').addClass('third-width');
+			}
+
+			if (graphWidth < quarter) {
+				panel.removeClass('third-width').addClass('quarter-width');
+			}
+		} else if (panel.hasClass('third-panel')) {
+			if (graphWidth < quarter) {
+				panel.removeClass('third-width').addClass('quarter-width');
+			}
+		}
+	});
+}
+
+function setupHidden() {
+	$('.grid_item').each(function(i) {
+		var item = $(this);
+		var item_clone = item.clone();
+		item.data('clone', item_clone);
+		var position = item.position();
+		item_clone.css({ left: position.left, top: position.top, visibility: 'hidden' }).attr('data-pos', i+1);
+		$('#cloned-slides').append(item_clone);
+	});
+}
+
+function addPanel() {
+	var post = {
+		header: 'false',
+		dashboard_id: dashboard_id,
+		__csrf_magic: csrfMagicToken,
+		intropage_addpanel: $('#intropage_addpanel').val()
+	};
+
+	if (typeof postUrl == 'function') {
+		postUrl({ url: redirectPage }, post);
+	} else {
+		$.post(redirectPage, post).done(function(data) {
+			$('#main').html(data);
+			applySkin();
+			initPage();
+		});
+	}
+}
+
+// Navigate to a page with a POST so the request carries Cacti's CSRF token;
+// a plain link or document.location is a GET and cannot change settings.
+function intropage_post_navigate(url, fields) {
+	var form = $('<form method="post"></form>').attr('action', url);
+
+	fields.__csrf_magic = csrfMagicToken;
+
+	$.each(fields, function(name, value) {
+		$('<input type="hidden"/>').attr('name', name).val(value).appendTo(form);
+	});
+
+	form.appendTo('body');
+	form.get(0).submit();
+}
+
+function actionPanel() {
+	var option = $('#intropage_action').val();
+
+	if (option == 'loginopt_tab') {
+		intropage_post_navigate(urlPath + 'plugins/intropage/intropage.php', { dashboard_id: dashboard_id, intropage_action: option });
+	} else if (option == 'loginopt_console') {
+		intropage_post_navigate(urlPath + 'index.php', { dashboard_id: dashboard_id, intropage_action: option });
+	} else {
+		var post = {
+			header: 'false',
+			dashboard_id: dashboard_id,
+			__csrf_magic: csrfMagicToken,
+			intropage_action: option
+		};
+
+		if (typeof postUrl == 'function') {
+			postUrl({ url: redirectPage }, post);
+		} else {
+			$.post(redirectPage, post).done(function(data) {
+				$('#main').html(data);
+				applySkin();
+				initPage();
+			});
+		}
+	}
+}
+
+function timeSpan() {
+	var option = $('#intropage_action_timespan').val();
+
+	if (option == 'loginopt_tab') {
+		intropage_post_navigate(urlPath + 'plugins/intropage/intropage.php', { dashboard_id: dashboard_id, intropage_action_timespan: option });
+	} else if (option == 'loginopt_console') {
+		intropage_post_navigate(urlPath + 'index.php', { dashboard_id: dashboard_id, intropage_action_timespan: option });
+	} else {
+		var post = {
+			header: 'false',
+			dashboard_id: dashboard_id,
+			__csrf_magic: csrfMagicToken,
+			intropage_action_timespan: option
+		};
+
+		if (typeof postUrl == 'function') {
+			postUrl({ url: redirectPage }, post);
+		} else {
+			$.post(redirectPage, post).done(function(data) {
+				$('#main').html(data);
+				applySkin();
+				initPage();
+			});
+		}
+	}
+}
+
+function reload_page() {
+	clearAllTimeouts();
+
+	if (fullPage) {
+		var url = redirectPage+'?dashboard_id='+dashboard_id;
+
+		if (typeof loadUrl === 'function') {
+			loadUrl({ url: url });
+		} else {
+			url += '&header=false';
+			loadPageNoHeader(url);
+		}
+	} else {
+		reload_all();
+	}
+}
+
+function setPageRefresh() {
+	if (intropage_autorefresh > 0) {
+		refresh = setInterval(reload_page, intropage_autorefresh*1000);
+	} else if (intropage_autorefresh == -1) {
+		pollerRefresh = setTimeout(function() {
+			refresh = setInterval(testPoller, 10000);
+		}, 30000);
+	}
+}
+
+// Shift an open select2 dropdown left so it stays within the viewport. Cacti
+// core enables dropdownAutoWidth, so a narrow right-aligned control can open a
+// wider dropdown that overflows the right edge; select2 never flips it
+// horizontally, so correct it here. The body-attached dropdown wrapper carries
+// 'select2-container--open' but has the control's 'select2' class removed, so
+// ':not(.select2)' avoids measuring the narrow on-screen control by mistake.
+function intropage_reposition_dropdown() {
+	var $dropdown = $('.select2-container--open:not(.select2)');
+
+	if ($dropdown.length === 0) {
+		return;
+	}
+
+	var overflow = $dropdown[0].getBoundingClientRect().right - document.documentElement.clientWidth;
+
+	if (overflow > 0) {
+		var left = parseFloat($dropdown.css('left')) || 0;
+		$dropdown.css('left', Math.max(0, left - overflow - 8) + 'px');
+	}
+}
+
+function initPage() {
+	$('#intropage_addpanel').off().on('change', function() {
+		addPanel();
+	});
+
+	$('#intropage_action').off().on('change', function() {
+		actionPanel();
+	});
+
+	$('#intropage_action_timespan').off().on('change', function() {
+		timeSpan();
+	});
+
+	// select2 only repositions its dropdown vertically, so a right-aligned
+	// toolbar menu can render off the right edge of the viewport. Nudge it
+	// back on-screen whenever one of the intropage menus opens.
+	$(document).off('select2:open.intropage').on('select2:open.intropage',
+		'#intropage_addpanel, #intropage_action, #intropage_action_timespan',
+		function() {
+			setTimeout(intropage_reposition_dropdown, 0);
+		}
+	);
+
+	setPageRefresh();
+
+	$('.article').hide();
+
+	$('.quarter-panel').css('width', intropage_panel_quarter_width);
+	$('.third-panel').css('width', intropage_panel_third_width);
+	$('.half-panel').css('width', intropage_panel_half_width);
+
+	// Shared card chrome (includes/cards/cards.js) drives reorder + per-card
+	// tools; the adapter maps those to intropage's existing endpoints.
+	var panelGrid = document.getElementById('panel_container');
+
+	if (panelGrid && window.CactiCards) {
+		CactiCards.init(panelGrid, {
+			cardSelector: '.grid_item',
+			idAttr: 'id',
+
+			onLayoutChange: function(state) {
+				$.post(redirectPage, {
+					'intropage_action': 'order',
+					'dashboard_id': dashboard_id,
+					'xdata': state.order,
+					__csrf_magic: csrfMagicToken
+				});
+
+				resizeGraphsPanel();
+				resizeCharts();
+			},
+
+			onRefresh: function(id, card) {
+				// Throttle rapid reloads: each forces an update whose collector can be expensive.
+				var now = new Date().getTime();
+				if ($(card).data('ccLastReload') + 1000 > now) {
+					return;
+				}
+				$(card).data('ccLastReload', now);
+
+				var panel_id = String(id).split('_').pop();
+
+				$(card).find('.reload_panel_now i').addClass('fa-spin');
+
+				reload_panel(panel_id, true, false);
+
+				if (window.Pace) {
+					Pace.stop();
+				}
+			},
+
+			onRemoveCard: function(id) {
+				var panel_id = String(id).split('_').pop();
+				var page = redirectPage + '?intropage_action=droppanel&panel_id=' + panel_id + '&dashboard_id=' + dashboard_id;
+				var drop = {
+					header: 'false',
+					intropage_action: 'droppanel',
+					panel_id: panel_id,
+					dashboard_id: dashboard_id,
+					__csrf_magic: csrfMagicToken
+				};
+
+				$.post(redirectPage, drop, function() {
+					var url = page.replace('droppanel', 'addpanelselect&header=false');
+
+					$.get(url)
+						.done(function(data) {
+							checkForRedirects(data, url);
+
+							$('#intropage_addpanel').selectmenu('destroy').replaceWith(data);
+							$('#intropage_addpanel').selectmenu().off().on('change', function() {
+								addPanel();
+							});
+
+							applySkin();
+							resizeGraphsPanel();
+							resizeCharts();
+						})
+						.fail(function(data) {
+							getPresentHTTPErrorOrRedirect(data, url);
+						});
+				});
+			},
+
+			onResize: function(id, dir, card) {
+				var panel_id = String(id).split('_').pop();
+
+				var change = intropage_resize_card(card, dir);
+
+				if (!change) {
+					return;
+				}
+
+				var action = (dir === 'grow') ? 'heightmore' : 'heightless';
+				var url = urlPath + 'plugins/intropage/intropage.php';
+				var resize = {
+					header: 'false',
+					intropage_action: action,
+					panel_id: panel_id,
+					__csrf_magic: csrfMagicToken
+				};
+
+				$.post(url, resize)
+					.done(function() {
+						reload_panel(panel_id, true, false);
+					})
+					.fail(function(data) {
+						// Roll back the optimistic resize, unless an overlapping resize already moved it on.
+						var $card = $(card);
+						if ($card.hasClass(change.to)) {
+							$card.removeClass(change.to).addClass(change.from);
+							$card.attr('data-height', change.from.split('_')[1]);
+							resizeGraphsPanel();
+							resizeCharts();
+						}
+						getPresentHTTPErrorOrRedirect(data, url);
+					});
+			},
+
+			maximize: function(id) {
+				intropage_open_details(String(id).split('_').pop());
+			}
+		});
+	}
+
+	// enable/disable move panel/copy text
+	$('#switch_copytext').off('click').on('click', function() {
+		if (!intropage_drag) {
+			$('#panel_container').removeClass('ccNoDrag');
+			$('#switch_copytext').attr('title', intropage_text_panel_disable);
+			$('.grid_item').css('cursor','move');
+			intropage_drag = true;
+		} else {
+			$('#panel_container').addClass('ccNoDrag');
+			$('#switch_copytext').attr('title', intropage_text_panel_enable);
+			$('.grid_item').css('cursor','default');
+			intropage_drag = false;
+		}
+	});
+
+	// display/hide red/yellow/green square notifications
+	$('#switch_square').off('click').on('click', function() {
+		if (intropage_square) {
+			intropage_square = false;
+			$('.inpa_sq').css('display','none');
+			$('#switch_square').attr('title', intropage_text_square_disable);
+		} else {
+			intropage_square = true;
+			$('.inpa_sq').css('display','inline-block');
+			$('#switch_square').attr('title', intropage_text_square_enable);
+		}
+	});
+
+	// Get the dropdowns the correct height
+	$('#intropage_addpanel-menu, #intropage_action-menu').css('max-height', '350px');
+
+	// Reload, height (grow/shrink) and remove are driven by the shared card
+	// chrome's per-card tools (see the CactiCards.init adapter above).
+
+	$('body').on('click','.bus_graph', function() {
+		event.preventDefault();
+
+		var id   = $(this).attr('bus_id');
+		var data = '<img src="' + urlPath + 'graph_image.php?disable_cache=true&graph_width=450&local_graph_id=' + id + '" />';
+
+		$('#overlay').dialog({
+			modal: true,
+			autoOpen: true,
+			buttons: [{
+				text: intropage_text_close,
+				click: function() {
+					$(this).dialog('destroy');
+					$('#overlay_detail').empty();
+				},
+				icon: 'ui-icon-heart'
+			}],
+			width: 750,
+			height: 550,
+			maxHeight: 850,
+			resizable: true,
+			title: 'Bussiest graph',
+		});
+
+		$('#overlay_detail').html(data);
+	});
+
+	reload_all();
+	setupHidden();
+	resizeGraphsPanel();
+	resizeCharts();
+	applySkin();
+
+	$(window).trigger('resize');
+}
+
+function testPoller() {
+	var url = urlPath+'plugins/intropage/intropage.php?&action=autoreload';
+
+	$.get(url)
+	.done(function(data) {
+		checkForRedirects(data, url);
+
+		if (data == 1) {
+			$('#panel_container li').each(function() {
+				var panel_id = $(this).attr('id').split('_').pop();
+
+				reload_panel(panel_id, false, false);
+				Pace.stop();
+		    });
+
+			setPageRefresh();
+		}
+	})
+	.fail(function(data) {
+		getPresentHTTPErrorOrRedirect(data, href);
+	});
+}
+
+// Bump a card's grid-span height class and data-height one step so the panel
+// resizes immediately, before the server round-trip persists the new height.
+function intropage_resize_card(card, dir) {
+	var $card = $(card);
+	var parts = ($card.attr('class') || '').match(/panel_(\d)_(\d)/);
+
+	if (!parts) {
+		return null;
+	}
+
+	var height = parseInt(parts[1], 10);
+	var width  = parts[2];
+	var max    = parseInt($card.attr('data-height-max') || '3', 10);
+
+	if (dir === 'grow' && height < max) {
+		height++;
+	} else if (dir === 'shrink' && height > 1) {
+		height--;
+	} else {
+		return null;
+	}
+
+	var from = 'panel_' + parts[1] + '_' + width;
+	var to   = 'panel_' + height + '_' + width;
+
+	$card.removeClass(from).addClass(to);
+	$card.attr('data-height', height);
+
+	resizeGraphsPanel();
+	resizeCharts();
+
+	return { from: from, to: to };
+}
+
+// Open a panel's details view in the shared modal dialog.
+function intropage_open_details(panel_id) {
+	var url = urlPath + 'plugins/intropage/intropage.php?action=details&panel_id=' + panel_id;
+
+	$.get(url)
+	.done(function(data) {
+		checkForRedirects(data, url);
+
+		$('#overlay_detail').html(data);
+
+		var width = $('#overlay_detail').textWidth() + 150;
+		var windowWidth = $(window).width();
+
+		if (width > 1200) {
+			width = 1200;
+		}
+
+		if (width > windowWidth) {
+			width = windowWidth - 50;
+		}
+
+		$('#overlay').dialog({
+			modal: true,
+			autoOpen: true,
+			buttons: [{
+				text: intropage_text_close,
+				click: function() {
+					$(this).dialog('destroy');
+					$('#overlay_detail').empty();
+				},
+				icon: 'ui-icon-heart'
+			}],
+			width: width,
+			maxHeight: Math.min(650, $(window).height() - 40),
+			resizable: true,
+			title: intropage_text_panel_details,
+		});
+
+		$('#block').on('click', function() {
+			$('#overlay').dialog('close');
+		});
+	})
+	.fail(function(data) {
+		getPresentHTTPErrorOrRedirect(data, url);
+	});
+}
+
+/* A panel's chart is drawn by an inline bb.generate() script returned with the
+ * reloaded markup. A strict Content-Security-Policy can run that nonce'd inline
+ * script asynchronously, after reload_panel()'s resizeCharts() has already run;
+ * resizeCharts() is then a no-op (the SVG does not exist yet) and the chart
+ * keeps the size it was generated at until an unrelated window resize fires
+ * resizeCharts() again. Watch the wrapper and resize the chart once it has
+ * actually rendered, so the panel never waits for a window resize.
+ *
+ * A fixed count of requestAnimationFrame callbacks is not a stable deadline:
+ * its wall-clock span shrinks with the display refresh rate (e.g. ~333ms at
+ * 60Hz but ~83ms at 240Hz) and can stop before a slow render. Use a one-shot
+ * MutationObserver plus a wall-clock timeout instead. */
+function resizeChartWhenRendered(panel_id) {
+	var $wrapper = $('#panel_'+panel_id).find('.chart_wrapper');
+
+	if (!$wrapper.length) {
+		return;
+	}
+
+	// Already rendered: resize this chart now.
+	if ($wrapper.find('svg').length) {
+		resizeChart($wrapper);
+
+		return;
+	}
+
+	var settled  = false;
+	var observer = null;
+	var deadline = null;
+
+	function finish() {
+		if (settled) {
+			return;
+		}
+
+		settled = true;
+
+		if (observer != null) {
+			observer.disconnect();
+		}
+
+		if (deadline != null) {
+			clearTimeout(deadline);
+		}
+
+		resizeChart($wrapper);
+	}
+
+	if (window.MutationObserver) {
+		observer = new MutationObserver(function() {
+			if ($wrapper.find('svg').length) {
+				finish();
+			}
+		});
+
+		observer.observe($wrapper.get(0), { childList: true, subtree: true });
+	}
+
+	// Stop waiting after a fixed wall-clock deadline (independent of the display
+	// refresh rate) whether or not the chart ever rendered.
+	deadline = setTimeout(finish, 3000);
+}
+
+function reload_panel(panel_id, forced_update, refresh) {
+	if (!refresh) {
+		$('#panel_'+panel_id).find('.panel_wrapper').css('opacity',0);
+		$('#panel_'+panel_id).find('.panel_wrapper').fadeIn('slow');
+	}
+
+	var url = urlPath+'plugins/intropage/intropage.php?action=reload&force='+forced_update+'&panel_id='+panel_id;
+
+	$.get(url)
+	.done(function(data) {
+		checkForRedirects(data, url);
+
+		if ($('#panel_'+panel_id).find('.chart_wrapper').length) {
+			var chart_id = $('#panel_'+panel_id).find('.chart_wrapper').attr('id');
+
+			if (panels[chart_id] != undefined) {
+				panels[chart_id].destroy();
+			}
+		}
+
+		$('#panel_'+panel_id).find('.panel_wrapper').empty().html(data);
+
+		if (!refresh) {
+			$('#panel_'+panel_id).find('.panel_wrapper').css('opacity', 1);
+		}
+
+		resizeGraphsPanel();
+		resizeCharts();
+		resizeChartWhenRendered(panel_id);
+		ajaxAnchors();
+	})
+	.fail(function(data) {
+		// Reload failed: the header (and its spinning glyph) is not replaced, so clear the spin here.
+		$('#reloadid_'+panel_id+' i').removeClass('fa-spin');
+		$('#panel_'+panel_id).find('.panel_data').html(intropage_text_data_error);
+	});
+}
+
+function reload_all() {
+	if ($('#overlay').dialog('instance') === undefined) {
+		$('#panel_container li.grid_item').each(function() {
+			var panel_id = $(this).attr('id').split('_').pop();
+
+			reload_panel(panel_id, false, true);
+		});
+	} else if (!$('#overlay').dialog('isOpen')) {
+		$('#panel_container li.grid_item').each(function() {
+			var panel_id = $(this).attr('id').split('_').pop();
+
+			reload_panel(panel_id, false, true);
+		});
+	}
+
+	Pace.stop();
+	setPageRefresh();
+}
+
+

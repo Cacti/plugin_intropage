@@ -24,37 +24,63 @@
  +-------------------------------------------------------------------------+
 */
 
-function plugin_intropage_install() {
-	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'include/settings.php');
+/**
+ * Return the CSP nonce attribute for inline <script> tags, safely across
+ * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
+ * requires a per-request nonce on parser-inserted scripts; older releases lack
+ * the CactiSecureHeaders class, so this returns an empty string there.
+ *
+ * @return string The nonce attribute when supported, otherwise empty string.
+ */
+function plugin_intropage_csp_nonce(): string {
+	if (class_exists('CactiSecureHeaders')) {
+		return CactiSecureHeaders::getNonceAttribute();
+	}
+
+	return '';
+}
+
+/**
+ * Plugin install hook: registers all of this plugin's Cacti hooks
+ * (settings/arrays, login options, header tabs, console/page-head
+ * rendering, graph buttons, poller_bottom, and the full set of
+ * user/user-group admin lifecycle hooks), registers its two admin
+ * realms, and creates its database tables. Called by Cacti's plugin
+ * architecture when the plugin is installed.
+ *
+ * @return void
+ */
+function plugin_intropage_install(): void {
+	api_plugin_register_hook('intropage', 'config_settings', 'intropage_config_settings', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'config_arrays', 'intropage_config_arrays', 'setup.php');
 
-	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'login_options_navigate', 'intropage_login_options_navigate', 'includes/settings.php');
 
-	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'include/tab.php');
-	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'include/tab.php');
+	api_plugin_register_hook('intropage', 'top_header_tabs', 'intropage_show_tab', 'includes/tab.php');
+	api_plugin_register_hook('intropage', 'top_graph_header_tabs', 'intropage_show_tab', 'includes/tab.php');
 
-	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
 
-	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'include/functions.php');
-	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'include/functions.php');
+	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'includes/functions.php');
+	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'includes/functions.php');
 
 	// need for collecting poller time
 	api_plugin_register_hook('intropage', 'poller_bottom', 'intropage_poller_bottom', 'setup.php');
 
 	// user and user group hooks
-	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_tab', 'intropage_user_admin_tab', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_run_action', 'intropage_user_admin_run_action', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_user_save', 'intropage_user_admin_user_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_remove', 'intropage_user_remove', 'setup.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_tab', 'intropage_user_group_admin_tab', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_run_action', 'intropage_user_group_admin_run_action', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_group_admin_save', 'intropage_user_group_admin_save', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'user_group_remove', 'intropage_user_group_remove', 'setup.php');
 
 	// default permission for new user
-	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'include/settings.php');
-	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'include/settings.php');
+	api_plugin_register_hook('intropage', 'copy_user', 'intropage_copy_user', 'includes/settings.php');
+	api_plugin_register_hook('intropage', 'user_admin_setup_sql_save', 'intropage_user_admin_setup_sql_save', 'includes/settings.php');
 
 	api_plugin_register_realm('intropage', 'intropage.php', 'Intropage Viewer', 1);
 	api_plugin_register_realm('intropage', 'intropage_admin.php', 'Intropage Administration', 1);
@@ -67,17 +93,100 @@ function plugin_intropage_install() {
 	intropage_setup_database();
 }
 
-function plugin_intropage_uninstall() {
+/**
+ * Plugin uninstall hook: drops all of this plugin's database tables.
+ * Called by Cacti's plugin architecture when the plugin is
+ * uninstalled.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include the database library.
+ */
+function plugin_intropage_uninstall(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_drop_database();
 }
 
-function intropage_config_arrays() {
+/**
+ * Repoints any stale plugin_hooks row still bound to the old include/
+ * library path to includes/ and removes the leftover include/ directory
+ * from disk. The plugin's library directory moved from include/ to
+ * includes/; on an upgraded install the old directory (and the hook rows
+ * that reference it) can linger, so Cacti loads include/functions.php via
+ * a stale hook and then includes/functions.php via the plugin's own code,
+ * fatally redeclaring every function the two files share. This runs from
+ * intropage_config_arrays() - the earliest per-page hook, always loaded
+ * from setup.php - so it executes before any stale graph_buttons/
+ * console_after hook can load the old library.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to resolve
+ *                       the plugin directory.
+ */
+function intropage_cleanup_legacy_include(): void {
+	global $config;
+
+	// Repoint stale hook rows first - unconditionally, before any filesystem
+	// check - because the rows can outlive the include/ directory (e.g. a prior
+	// partial cleanup removed the files but never committed the repoint), and
+	// while they remain Cacti keeps failing its file-inclusion check for the
+	// missing path on every request. The LIKE filter makes this a no-op on
+	// healthy installs.
+	db_execute("UPDATE plugin_hooks SET file = REPLACE(file, 'include/', 'includes/') WHERE name = 'intropage' AND file LIKE 'include/%'");
+
+	$legacy_dir = $config['base_path'] . '/plugins/intropage/include';
+
+	// Nothing left to remove once the stale directory is gone.
+	if (!is_dir($legacy_dir)) {
+		return;
+	}
+
+	// Physically remove the stale directory so no stale hook row cached for
+	// the current request can load a second copy of the library and redeclare
+	// its functions.
+	if (!plugin_intropage_rmtree($legacy_dir)) {
+		cacti_log('WARNING: intropage could not remove the legacy include/ directory (check file/directory permissions)', false, 'INTROPAGE');
+	}
+}
+
+/**
+ * Config_arrays hook: augments Cacti's role system to grant the
+ * Intropage realms to the Normal User/System Administration roles, and
+ * initializes the trend-timespan and refresh-interval option lists
+ * (filtering out intervals shorter than the configured poller
+ * interval). Called by Cacti's plugin framework via the
+ * 'config_arrays' hook on every page load.
+ *
+ * @return void
+ *
+ * @global array $intropage_intervals Populated here with the map of
+ *                                    refresh interval (seconds) =>
+ *                                    display label, filtered to only
+ *                                    include intervals >= the poller
+ *                                    interval.
+ * @global array $trend_timespans     Populated here with the map of
+ *                                    trend timespan (seconds) =>
+ *                                    display label.
+ * @global array $panel_lines         Reserved/declared for parity with
+ *                                    other functions in this file; not
+ *                                    used directly here.
+ */
+function intropage_config_arrays(): void {
 	global $intropage_intervals, $trend_timespans, $panel_lines;
 
+	// Runs before any stale include/ hook can load the old library and
+	// redeclare functions already defined by includes/.
+	intropage_cleanup_legacy_include();
+
+	// Core builds $user_auth_roles with __('Normal User') in the core domain
+	// (include/global_arrays.php), and auth_augment_roles() indexes by that
+	// exact string. Adding the intropage domain here would key a new role on
+	// translated installs and silently drop the realm.
 	auth_augment_roles(__('Normal User'), ['intropage.php']);
 	auth_augment_roles(__('System Administration'), ['intropage_admin.php']);
 
@@ -123,57 +232,302 @@ function intropage_config_arrays() {
 	}
 }
 
-function plugin_intropage_version() {
+/**
+ * Reads and returns this plugin's version/author/metadata info from its
+ * INFO file. Called wherever plugin metadata is needed (e.g.
+ * intropage_upgrade_database()).
+ *
+ * @return array The plugin's info array, as parsed from the INFO
+ *               file's '[info]' section.
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the plugin's INFO file.
+ */
+function plugin_intropage_version(): array {
 	global $config;
 
 	$info = parse_ini_file($config['base_path'] . '/plugins/intropage/INFO', true);
 
+	if (!is_array($info) || !isset($info['info']) || !is_array($info['info'])) {
+		return [];
+	}
+
 	return $info['info'];
 }
 
-function plugin_intropage_upgrade() {
+/**
+ * Plugin upgrade hook: brings the plugin's schema up to date by
+ * delegating to intropage_check_upgrade(). Called by Cacti's plugin
+ * architecture when the plugin is upgraded to a new version.
+ *
+ * @return bool Always false.
+ */
+function plugin_intropage_upgrade(): bool {
 	// Here we will upgrade to the newest version
 	intropage_check_upgrade();
 
 	return false;
 }
 
-function plugin_intropage_check_config() {
+/**
+ * Plugin config-check hook: ensures the plugin's schema is up to date
+ * by delegating to intropage_check_upgrade(). Called by Cacti's plugin
+ * architecture on relevant page loads.
+ *
+ * @return bool Always true.
+ */
+function plugin_intropage_check_config(): bool {
 	// Here we will check to ensure everything is configured
 	intropage_check_upgrade();
 
 	return true;
 }
 
-function intropage_check_upgrade() {
+/**
+ * Includes the database library and triggers a schema-version check/
+ * upgrade. Called from plugin_intropage_upgrade() and
+ * plugin_intropage_check_config().
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include the database library.
+ */
+function intropage_check_upgrade(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_upgrade_database();
 }
 
-function intropage_page_head() {
+/**
+ * Removes files and directories that a previous version of this plugin
+ * shipped but that have since moved or been deleted, using the tombstone
+ * and whitelist lists in manifest.json. Whitelisted (user-data) paths and
+ * any VCS metadata (.git*) are never touched; the dev-only tests/ tree is
+ * removed. Any path that resolves outside the plugin directory (a tampered
+ * manifest.json) is refused, and any file/directory that cannot be removed
+ * (e.g. read-only) is reported to the Cacti log. Any top-level entry that is
+ * neither expected nor a tombstone nor whitelisted is logged to the Cacti
+ * log and left in place. Called from intropage_upgrade_database() on a
+ * version change.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to resolve
+ *                       the plugin directory.
+ */
+function plugin_intropage_prune_files(): void {
+	global $config;
+
+	$plugin_dir    = $config['base_path'] . '/plugins/intropage';
+	$manifest_path = $plugin_dir . '/manifest.json';
+
+	if (!is_readable($manifest_path)) {
+		return;
+	}
+
+	$manifest = json_decode((string) file_get_contents($manifest_path), true);
+
+	if (!is_array($manifest)) {
+		cacti_log('WARNING: intropage manifest.json could not be parsed; skipping file prune', false, 'INTROPAGE');
+
+		return;
+	}
+
+	$tombstones = isset($manifest['tombstones']) && is_array($manifest['tombstones']) ? $manifest['tombstones'] : [];
+	$expected   = isset($manifest['expected'])   && is_array($manifest['expected'])   ? $manifest['expected']   : [];
+	$whitelist  = isset($manifest['whitelist'])  && is_array($manifest['whitelist'])  ? $manifest['whitelist']  : [];
+
+	$protected = function (string $rel) use ($whitelist): bool {
+		if (strncmp($rel, '.git', 4) === 0 || strncmp($rel, '.md', 3) === 0) {
+			return true;
+		}
+
+		foreach ($whitelist as $entry) {
+			$entry = trim((string) $entry, '/');
+
+			if ($entry !== '' && ($rel === $entry
+				|| strncmp($rel, $entry . '/', strlen($entry) + 1) === 0
+				|| strncmp($entry, $rel . '/', strlen($rel) + 1) === 0)) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	// Security: resolve the plugin directory so a tampered manifest.json
+	// cannot steer the prune outside of it.
+	$plugin_real = realpath($plugin_dir);
+
+	// Remove tombstoned (moved/deleted) paths plus the dev-only tests/
+	// tree and the phpunit.xml test configuration.
+	$remove   = $tombstones;
+	$remove[] = 'tests/';
+	$remove[] = 'phpunit.xml';
+
+	foreach ($remove as $rel) {
+		$rel = trim((string) $rel, '/');
+
+		if ($rel === '' || $protected($rel)) {
+			continue;
+		}
+
+		// A tombstone must never contain '.'/'..' segments; a tampered manifest
+		// could use them to escape the plugin directory or target its root.
+		$segments = explode('/', $rel);
+
+		if (in_array('.', $segments, true) || in_array('..', $segments, true)) {
+			cacti_log(sprintf('WARNING: intropage prune refused to remove %s: path contains a traversal segment (tampered manifest.json?)', $rel), false, 'INTROPAGE');
+
+			continue;
+		}
+
+		$path = $plugin_dir . '/' . $rel;
+
+		if (!is_link($path) && !file_exists($path)) {
+			continue;
+		}
+
+		// Refuse any path that, after resolving symlinks and ../ segments,
+		// escapes the plugin directory (protects user data from a tampered
+		// manifest.json).
+		$anchor = is_link($path) ? dirname($path) : $path;
+		$real   = realpath($anchor);
+
+		if ($real === false || ($real !== $plugin_real && strncmp($real, $plugin_real . DIRECTORY_SEPARATOR, strlen((string) $plugin_real) + 1) !== 0)) {
+			cacti_log(sprintf('WARNING: intropage prune refused to remove %s: path resolves outside the plugin directory (tampered manifest.json?)', $rel), false, 'INTROPAGE');
+
+			continue;
+		}
+
+		if (is_dir($path) && !is_link($path)) {
+			$removed = plugin_intropage_rmtree($path);
+		} else {
+			$removed = @unlink($path);
+		}
+
+		if (!$removed) {
+			cacti_log(sprintf('WARNING: intropage upgrade could not remove %s (check file/directory permissions)', $rel), false, 'INTROPAGE');
+		}
+	}
+
+	// Surface any top-level entry the manifest does not account for.
+	$known = [];
+
+	foreach (array_merge($expected, $tombstones) as $entry) {
+		$top = explode('/', trim((string) $entry, '/'))[0];
+
+		if ($top !== '') {
+			$known[$top] = true;
+		}
+	}
+
+	$entries = scandir($plugin_dir);
+
+	foreach (($entries !== false ? $entries : []) as $entry) {
+		if ($entry === '.' || $entry === '..' || $entry === 'tests' || $entry === 'phpunit.xml' || $protected($entry) || isset($known[$entry])) {
+			continue;
+		}
+
+		cacti_log(sprintf('WARNING: intropage upgrade found a file/directory not described in manifest.json: %s (left in place)', $entry), false, 'INTROPAGE');
+	}
+}
+
+/**
+ * Recursively deletes a directory and its contents. Symlinks are removed
+ * without being followed. Helper for plugin_intropage_prune_files().
+ *
+ * @param string $dir Absolute path to the directory to remove.
+ *
+ * @return bool True if the directory and everything under it was removed;
+ *              false if any entry could not be deleted.
+ */
+function plugin_intropage_rmtree(string $dir): bool {
+	$entries = scandir($dir);
+	$ok      = true;
+
+	foreach (($entries !== false ? $entries : []) as $entry) {
+		if ($entry === '.' || $entry === '..') {
+			continue;
+		}
+
+		$path = $dir . '/' . $entry;
+
+		if (is_dir($path) && !is_link($path)) {
+			if (!plugin_intropage_rmtree($path)) {
+				$ok = false;
+			}
+		} elseif (!@unlink($path)) {
+			$ok = false;
+		}
+	}
+
+	if (!@rmdir($dir)) {
+		$ok = false;
+	}
+
+	return $ok;
+}
+
+/**
+ * Page_head hook: emits the &lt;link&gt; tags for the plugin's common
+ * stylesheet and, if present, the currently selected theme's
+ * stylesheet. Called by Cacti's page rendering via the 'page_head'
+ * hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       build the stylesheet URLs and check for the
+ *                       theme file's existence.
+ */
+function intropage_page_head(): void {
 	global $config;
 
 	$selectedTheme = get_selected_theme();
 
-	print "<link type='text/css' href='" . $config['url_path'] . "plugins/intropage/themes/common.css' rel='stylesheet'>";
+	// shared card chrome first so common.css / the theme can override its variables
+	print get_md5_include_css('plugins/intropage/includes/cards/cards.css');
+	print get_md5_include_css('plugins/intropage/css/common.css');
 
-	if (file_exists($config['base_path'] . '/plugins/intropage/themes/' . $selectedTheme . '.css')) {
-		print "<link type='text/css' href='" . $config['url_path'] . 'plugins/intropage/themes/' . $selectedTheme . ".css' rel='stylesheet'>";
+	if (file_exists($config['base_path'] . '/plugins/intropage/css/' . $selectedTheme . '.css')) {
+		print get_md5_include_css('plugins/intropage/css/' . $selectedTheme . '.css');
 	}
 }
 
-function intropage_setup_database() {
+/**
+ * Includes the database library and creates this plugin's database
+ * tables. Called from plugin_intropage_install().
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       include the database library.
+ */
+function intropage_setup_database(): void {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/intropage/include/database.php');
+	include_once($config['base_path'] . '/plugins/intropage/includes/database.php');
 
 	intropage_initialize_database();
 }
 
-function intropage_poller_bottom() {
+/**
+ * Poller_bottom hook: launches this plugin's poller_intropage.php
+ * script as a background process at the end of each Cacti polling
+ * cycle, to collect poller performance data for its trend panels.
+ * Called by Cacti's poller via the 'poller_bottom' hook.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate this plugin's poller script and include
+ *                       the poller library.
+ */
+function intropage_poller_bottom(): void {
 	global $config;
 
 	include_once($config['library_path'] . '/poller.php');
@@ -189,44 +543,75 @@ function intropage_poller_bottom() {
 	exec_background($command_string, $extra_args);
 }
 
-// add third party panel:
-// 1) include this file
-// 2) call intropage_add_panel('my_panel','/plugins/your_plugin/file.php','yes',3600,20) {
-// panel_id - your name (lowercase, without spaces, unique)
-// file - path to your code. It must contain function my_panel() (and my_panel_detail() if your panel has detail)
-// example functions are in /plugin/intropage/include/data.php and data_detail.php
-// has_detail - yes or no
-// refresh_interval - in second, min is 60
-// priority - for displaying
-// description - small description, it is visible in user auth settings
-function intropage_add_panel($panel_id, $file, $has_detail, $refresh_interval, $priority = 20, $description = '') {
-	if (db_execute_prepared('REPLACE INTO plugin_intropage_panel_definition
-		(panel_id,file,has_detail,refresh_interval, priority, description)
-		VALUES (?,?,?,?,?,?)', [$panel_id, $file, $has_detail, $refresh_interval, $priority, $description]) == 1) {
-		api_plugin_db_add_column('intropage', 'plugin_intropage_user_auth', ['name' => $panel_id, 'type' => 'char(2)', 'NULL' => false, 'default' => 'on']);
+// Third party panels are not added through this file. Register them with a
+// register_<name>() function in a panellib file, see panellib/README.md.
+// The two functions below are kept so that a plugin that still calls them
+// gets a clear message in the Cacti log instead of a fatal error.
+/**
+ * Deprecated. This registered a third-party panel in columns that
+ * plugin_intropage_panel_definition and plugin_intropage_user_auth no
+ * longer have, so it could not work. It logs a warning and does nothing.
+ *
+ * @deprecated Register panels with a register_<name>() function in a
+ *             panellib file, see panellib/README.md.
+ *
+ * @param string $panel_id         Ignored, named in the log message.
+ * @param string $file             Ignored.
+ * @param string $has_detail       Ignored.
+ * @param int    $refresh_interval Ignored.
+ * @param int    $priority         Ignored.
+ * @param string $description      Ignored.
+ *
+ * @return bool Always false.
+ */
+function intropage_add_panel(string $panel_id, string $file, string $has_detail, int $refresh_interval, int $priority = 20, string $description = ''): bool {
+	cacti_log('WARNING: intropage_add_panel() is deprecated and does nothing; panel ' . $panel_id . ' was not added. Register panels with a register_<name>() function in a panellib file, see plugins/intropage/panellib/README.md', false, 'INTROPAGE');
 
-		return ('1');
-	} else {
-		return db_error();
-	}
+	return false;
 }
 
-// remove third party panel
-function intropage_remove_panel($panel_id) {
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE panel_id = ?', [$panel_id]);
-	db_execute_prepared('DELETE FROM plugin_intropage_panel_definition WHERE panel_id = ?', [$panel_id]);
-	db_execute_prepared('ALTER TABLE plugin_intropage_user_auth DROP ?',[$panel_id]);
+/**
+ * Deprecated. This removed a third-party panel with SQL that could not
+ * run against the current schema. It logs a warning and does nothing.
+ *
+ * @deprecated Panels come from the panellib files; remove the file or the
+ *             entry in its register_<name>() function.
+ *
+ * @param string $panel_id Ignored, named in the log message.
+ *
+ * @return bool Always false.
+ */
+function intropage_remove_panel(string $panel_id): bool {
+	cacti_log('WARNING: intropage_remove_panel() is deprecated and does nothing; panel ' . $panel_id . ' was not removed. Remove it from the register_<name>() function of its panellib file', false, 'INTROPAGE');
 
-	return ('1');
+	return false;
 }
 
-function intropage_user_remove($user_id) {
+/**
+ * User_remove hook: cleans up all of this plugin's per-user data
+ * (panel data/dashboard associations, settings, auth) for a deleted
+ * user. Called by Cacti's user admin via the 'user_remove' hook.
+ *
+ * @param int $user_id The id of the user being removed.
+ *
+ * @return void
+ */
+function intropage_user_remove($user_id): void {
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_data WHERE user_id = ?', [$user_id]);
 	db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard WHERE user_id = ?', [$user_id]);
 	db_execute_prepared('DELETE FROM settings_user WHERE user_id = ?', [$user_id]);
 	db_execute_prepared('DELETE FROM plugin_intropage_user_auth WHERE user_id = ?', [$user_id]);
 }
 
-function intropage_user_group_remove($group_id) {
-	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE id = ?', [$group_id]);
+/**
+ * User_group_remove hook: cleans up this plugin's stored
+ * authorization data for a deleted user group. Called by Cacti's user
+ * admin via the 'user_group_remove' hook.
+ *
+ * @param int $group_id The id of the user group being removed.
+ *
+ * @return void
+ */
+function intropage_user_group_remove($group_id): void {
+	db_execute_prepared('DELETE FROM plugin_intropage_user_group_auth WHERE user_group_id = ?', [$group_id]);
 }

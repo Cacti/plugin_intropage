@@ -28,8 +28,11 @@ $dir = __DIR__;
 chdir($dir);
 
 include('../../include/cli_check.php');
+
+global $config;
+
 include_once($config['base_path'] . '/lib/reports.php');
-include_once($config['base_path'] . '/plugins/intropage/include/functions.php');
+include_once($config['base_path'] . '/plugins/intropage/includes/functions.php');
 
 // let PHP run just as long as it has to
 ini_set('max_execution_time', '0');
@@ -119,19 +122,64 @@ if (function_exists('unregister_process')) {
 
 exit(0);
 
-function intropage_correct_load_order() {
-	while (true) {
-		$intro_order = db_fetch_cell('SELECT id FROM plugin_config WHERE directory="intropage"');
+/**
+ * Ensures the Intropage plugin's hook execution order is first among
+ * registered plugins, moving it up repeatedly until its plugin_config
+ * id is 1, so its stats reflect other plugins' completed poller
+ * activity. Called from this script's main flow before gathering
+ * stats.
+ *
+ * @return void
+ */
+function intropage_correct_load_order(): void {
+	$previous_id = null;
 
-		if ($intro_order > 1) {
-			api_plugin_moveup('intropage');
-		} else {
-			break;
+	while (true) {
+		$id = db_fetch_cell('SELECT id FROM plugin_config WHERE directory = "intropage"');
+
+		// Plugin no longer exists, or the query failed.
+		if (!is_numeric($id)) {
+			return;
 		}
+
+		$id = (int) $id;
+
+		// Stop if the previous move made no progress.
+		if ($previous_id !== null && $id >= $previous_id) {
+			return;
+		}
+
+		$previous_id = $id;
+		api_plugin_moveup('intropage');
 	}
 }
 
-function intropage_gather_stats() {
+/**
+ * Runs each due panel's trend-collection and data-update functions
+ * (per-panel refresh/trend intervals), impersonating the owning user
+ * via a faked session variable where needed, then purges old trend
+ * records and refreshes the auto-refresh threshold timestamp. Called
+ * from this script's main flow as the core poller collection step.
+ *
+ * @return array Summary counts: 'checks' (panels processed),
+ *               'panels' (data-update functions run), and 'trends'
+ *               (trend functions run).
+ *
+ * @global array $config           Cacti global configuration array
+ *                                 (declared but not directly used
+ *                                 here).
+ * @global bool  $force            Reserved/declared for parity with
+ *                                 this script's other functions; not
+ *                                 used directly here.
+ * @global int   $checks           Reset to 0 here, then incremented for
+ *                                 each panel processed; the final
+ *                                 count is included in the returned
+ *                                 summary.
+ * @global bool  $run_from_poller  Reserved/declared for parity with
+ *                                 this script's other functions; not
+ *                                 used directly here.
+ */
+function intropage_gather_stats(): array {
 	global $config, $force, $checks, $run_from_poller;
 
 	$logging = read_config_option('log_verbosity', true);
@@ -141,13 +189,9 @@ function intropage_gather_stats() {
 
 	$panels = initialize_panel_library();
 
-	$upanels = db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
-		pd.refresh, ud.refresh_interval, pd.update_func
-		FROM plugin_intropage_panel_definition AS pd
-		LEFT JOIN plugin_intropage_panel_data AS ud
-		ON pd.panel_id = ud.panel_id
-		WHERE UNIX_TIMESTAMP(last_update) < UNIX_TIMESTAMP() - refresh_interval
-		OR (last_update IS NULL AND level = 0)');
+	intropage_purge_orphan_rows();
+
+	$upanels = intropage_poller_due_panels();
 
 	$tpanels = db_fetch_assoc('SELECT pd.panel_id, pd.name, ud.id, ud.user_id, level,
 		pd.refresh, ud.trend_interval, ud.refresh_interval, pd.trends_func
@@ -166,7 +210,8 @@ function intropage_gather_stats() {
 
 			// Get trends next
 			if (isset($panel['trends_func']) && $panel['trends_func'] != '' && is_panel_enabled($panel['panel_id'])) {
-				$function = $panel['trends_func'];
+				$function      = $panel['trends_func'];
+				$function_name = (string) $function;
 
 				if (function_exists($function)) {
 					db_execute_prepared('UPDATE plugin_intropage_panel_data
@@ -183,10 +228,10 @@ function intropage_gather_stats() {
 					$done_trends[$panel['panel_id']] = 1;
 
 					if ($logging >= 5) {
-						cacti_log(sprintf('DEBUG: gathering trend function:%s, duration:%4.3f', $function,  microtime(true) - $start), false, 'INTROPAGE');
+						cacti_log(sprintf('DEBUG: gathering trend function:%s, duration:%4.3f', $function_name,  microtime(true) - $start), false, 'INTROPAGE');
 					}
 
-					intropage_debug(sprintf('gathering trend function:%s, duration:%4.3f', $function, microtime(true) - $start));
+					intropage_debug(sprintf('gathering trend function:%s, duration:%4.3f', $function_name, microtime(true) - $start));
 				} else {
 					cacti_log('WARNING: Unable to find update function ' . $function . ' for panel ' . $panel['name'], false, 'INTROPAGE');
 				}
@@ -197,10 +242,8 @@ function intropage_gather_stats() {
 	foreach ($upanels as $upanel) {
 		$start = microtime(true);
 
-		// Fake a session variable
-		if ($upanel['user_id'] > 0) {
-			$_SESSION['sess_user_id'] = $upanel['user_id'];
-		}
+		// Fake a session variable; system panels (no owner) run as user 0
+		$upanel['user_id'] = intropage_poller_impersonate($upanel['user_id']);
 
 		// Required plugin is not installed, but entry not purged
 		if (!isset($panels[$upanel['panel_id']])) {
@@ -222,22 +265,23 @@ function intropage_gather_stats() {
 		if (isset($panel['update_func']) && $panel['update_func'] != '' && is_panel_enabled($upanel['panel_id'])) {
 			$qpanel = get_panel($upanel['panel_id'], $upanel['user_id']);
 
-			$function = $panel['update_func'];
+			$function      = $panel['update_func'];
+			$function_name = (string) $function;
 
 			if (function_exists($function)) {
 				$data = $function($qpanel, $upanel['user_id']);
 
 				if (is_string($data)) {
-					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (string) %s', $function, $data), false, 'INTROPAGE');
+					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (string) %s', $function_name, $data), false, 'INTROPAGE');
 				} elseif (is_int($data) && $data != 0) {
-					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (int) %d', $function, $data), false, 'INTROPAGE');
+					cacti_log(sprintf('WARNING: Problem with data gathering, function %s, returned (int) %d', $function_name, $data), false, 'INTROPAGE');
 				}
 
 				if ($logging >= 5) {
-					cacti_log(sprintf('DEBUG: gathering data function:%s, duration:%4.3f', $function,  microtime(true) - $start), false, 'INTROPAGE');
+					cacti_log(sprintf('DEBUG: gathering data function:%s, duration:%4.3f', $function_name,  microtime(true) - $start), false, 'INTROPAGE');
 				}
 
-				intropage_debug(sprintf('gathering data function:%s, duration:%4.3f', $function, microtime(true) - $start));
+				intropage_debug(sprintf('gathering data function:%s, duration:%4.3f', $function_name, microtime(true) - $start));
 			} else {
 				cacti_log('WARNING: Unable to find update function ' . $function . ' for panel ' . $panel['name'], false, 'INTROPAGE');
 			}
@@ -273,7 +317,18 @@ function intropage_gather_stats() {
 	return ['checks' => $checks, 'panels' => $pdata, 'trends' => $trends];
 }
 
-function intropage_debug($message) {
+/**
+ * Prints a debug message to stdout when CLI debug output is enabled.
+ * Called throughout this script to report collection progress.
+ *
+ * @param string $message The debug message to print.
+ *
+ * @return void
+ *
+ * @global bool $debug Whether debug output ('--debug' CLI flag) is
+ *                     enabled; when false, this function is a no-op.
+ */
+function intropage_debug(string $message): void {
 	global $debug;
 
 	if ($debug) {
@@ -281,7 +336,17 @@ function intropage_debug($message) {
 	}
 }
 
-function display_version() {
+/**
+ * Prints this poller script's version and copyright banner, loading the
+ * plugin's version info from setup.php if not already available. Called
+ * from display_help() and when invoked with '--version'/'-v'/'-V'.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate and include setup.php.
+ */
+function display_version(): void {
 	global $config;
 
 	if (!function_exists('plugin_intropage_version')) {
@@ -296,7 +361,14 @@ function display_version() {
  * display_help
  * displays the usage of the function
  */
-function display_help() {
+/**
+ * Prints the version banner followed by this script's command-line
+ * usage summary. Called when invoked with '--help'/'-h'/'-H' or with
+ * an invalid argument.
+ *
+ * @return void
+ */
+function display_help(): void {
 	display_version();
 
 	print PHP_EOL;

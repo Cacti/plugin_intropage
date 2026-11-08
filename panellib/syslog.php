@@ -24,7 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_syslog() {
+/**
+ * Registers the 'syslog' panel category and its 'Syslog Details' (rate
+ * graph), 'Syslog Top Devices', and 'Syslog Message levels' panels with
+ * the panel library. Called from initialize_panel_library() while
+ * building the full set of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'syslog'
+ *                         category metadata.
+ */
+function register_syslog(): array {
 	global $registry;
 
 	$registry['syslog'] = [
@@ -92,11 +104,29 @@ function register_syslog() {
 	return $panels;
 }
 
-function plugin_syslog_trend() {
+/**
+ * Trend-collection function for the 'plugin_syslog' panel: records
+ * point-in-time snapshots of the syslog_incoming/syslog table row
+ * counts and recent alert message count into plugin_intropage_trends,
+ * when the Syslog plugin is enabled. Called from
+ * intropage_gather_stats() via the panel definition's 'trends_func'.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the Syslog plugin's database library.
+ */
+function plugin_syslog_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		// Grab row counts from the information schema, it's faster
 		$i_rows = syslog_db_fetch_cell("SELECT TABLE_ROWS
@@ -129,11 +159,29 @@ function plugin_syslog_trend() {
 	}
 }
 
-function plugin_syslog_levels_trend() {
+/**
+ * Trend-collection function for the 'plugin_syslog_levels' panel:
+ * records a snapshot of syslog message counts per priority level
+ * (0-7) over the last poller interval into plugin_intropage_trends,
+ * when the Syslog plugin is enabled. Called from
+ * intropage_gather_stats() via the panel definition's 'trends_func'.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the Syslog plugin's database library.
+ */
+function plugin_syslog_levels_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		$data = [
 			0 => 0,
@@ -169,7 +217,25 @@ function plugin_syslog_levels_trend() {
 	}
 }
 
-function plugin_syslog($panel, $user_id, $timespan = 0) {
+/**
+ * Data-update function for the 'plugin_syslog' panel: renders a
+ * time-series line graph of incoming/alert/stored syslog message
+ * counts over the panel's configured timespan from the recorded
+ * trend snapshots, or reports that the Syslog plugin isn't installed.
+ * Called from intropage_gather_stats()/get_panel() via the panel
+ * definition's 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
+function plugin_syslog($panel, $user_id, $timespan = 0): void {
 	$panel['alarm'] = 'green';
 
 	$graph =  [
@@ -221,8 +287,9 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 
 		if (cacti_sizeof($rows)) {
 			// Converted syslog_total to total new rows;
-			$nrows      = [];
-			$last_total = 0;
+			$nrows       = [];
+			$last_total  = 0;
+			$last_totali = 0;
 
 			foreach ($rows as $index => $row) {
 				$total  = $row['syslog_total'];
@@ -277,7 +344,25 @@ function plugin_syslog($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
-function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
+/**
+ * Data-update function for the 'plugin_syslog_levels' panel: renders a
+ * graph/summary of syslog message counts broken down by priority level
+ * over the panel's configured timespan, or reports that the Syslog
+ * plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
+function plugin_syslog_levels($panel, $user_id, $timespan = 0): void {
 	$panel['alarm'] = 'green';
 
 	$graph =  [
@@ -366,7 +451,28 @@ function plugin_syslog_levels($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
-function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
+/**
+ * Data-update function for the 'plugin_syslog_devices' panel: renders a
+ * table of the top devices by syslog message count over the panel's
+ * configured timespan, or reports that the Syslog plugin isn't
+ * enabled. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to determine the row
+ *                        limit, resolve the timespan setting, and save
+ *                        the result.
+ * @param int   $timespan Optional override for the query's time window
+ *                        in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ *
+ * @global array $config Cacti global configuration array; used to
+ *                       locate the Syslog plugin's database library.
+ */
+function plugin_syslog_devices($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'grey';
@@ -380,7 +486,13 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		$lines = get_panel_lines_count($panel['height'], $user_id);
 
@@ -398,7 +510,7 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 			$panel['data'] = '<table class="cactiTable">' .
 				'<tr class="tableHeader">' .
 					'<th class="left">' . __('Device', 'intropage') . '</th>' .
-					'<th class="right">' . __('Messages', read_config_option('poller_interval'), 'intropage') . '</th>' .
+					'<th class="right">' . __('Messages', 'intropage') . '</th>' .
 				'</tr>';
 
 			$i = 0;
@@ -421,13 +533,30 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0) {
 	save_panel_result($panel, $user_id);
 }
 
-function plugin_syslog_devices_detail() {
+/**
+ * Detail-view renderer for the 'plugin_syslog_devices' panel, showing
+ * an expanded top-20 table of devices by syslog message count. Called
+ * via the panel definition's 'details_func' when the user opens the
+ * panel's detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ *
+ * @global array $config          Cacti global configuration array;
+ *                                used to locate the Syslog plugin's
+ *                                database library.
+ * @global bool  $console_access  Reserved/declared for parity with
+ *                                other panel functions in this file;
+ *                                not used directly here.
+ */
+function plugin_syslog_devices_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
-		'name'   => __('Top 20 Hosts with the most messages', 'intropage'),
-		'alarm'  => 'grey',
-		'detail' => '',
+		'name'    => __('Top 20 Hosts with the most messages', 'intropage'),
+		'alarm'   => 'grey',
+		'detail'  => '',
+		'refresh' => 300,
 	];
 
 	if (isset($_SESSION['sess_user_id'])) {
@@ -437,7 +566,13 @@ function plugin_syslog_devices_detail() {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		include_once($config['base_path'] . '/plugins/syslog/database.php');
+		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/database.php');
+		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
+			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
+		} else {
+			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		}
 
 		$devices = syslog_db_fetch_assoc_prepared('SELECT sh.host AS ip ,count(*) AS hcount
 			FROM syslog AS s

@@ -24,7 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_misc() {
+/**
+ * Registers the 'misc' panel category and its 'NTP/DNS Status', 'Maint
+ * Plugin Details', 'Webseer Details', and 'Servcheck plugin Details'
+ * panels with the panel library. Called from initialize_panel_library()
+ * while building the full set of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'misc'
+ *                         category metadata.
+ */
+function register_misc(): array {
 	global $registry;
 
 	$registry['misc'] = [
@@ -111,7 +123,24 @@ function register_misc() {
 }
 
 // -------------------------------------ntp_dns-------------------------------------------
-function ntp_dns($panel, $user_id) {
+/**
+ * Data-update function for the 'ntp_dns' panel: checks the Cacti
+ * server's system clock drift against a configured NTP server and
+ * verifies DNS resolution of a configured hostname, reporting the
+ * results. Called from intropage_gather_stats()/get_panel() via the
+ * panel definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other panel
+ *                       functions in this file; not used directly
+ *                       here.
+ */
+function ntp_dns($panel, $user_id): void {
 	global $config;
 
 	$ntp_server = read_config_option('intropage_ntp_server');
@@ -145,7 +174,7 @@ function ntp_dns($panel, $user_id) {
 			}
 		}
 
-		if (isset($timestamp) && is_numeric($timestamp)) {
+		if (is_numeric($timestamp)) {
 			$diff_time = date('U') - $timestamp;
 
 			$panel['data'] .= '<tr><td><span class="txt_big">' . date('Y-m-d H:i:s') . ' (Time Diff: ' . $diff_time . ')</span></td></tr>';
@@ -206,7 +235,21 @@ function ntp_dns($panel, $user_id) {
 }
 
 // ---------------------------maint plugin--------------------
-function maint($panel, $user_id) {
+/**
+ * Data-update function for the 'maint' panel: lists upcoming
+ * maintenance windows from the Maint plugin, or reports that the Maint
+ * plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to determine the row limit and save
+ *                       the result.
+ *
+ * @return void
+ */
+function maint($panel, $user_id): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
@@ -251,9 +294,9 @@ function maint($panel, $user_id) {
 								if (cacti_sizeof($hosts)) {
 									$panel['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) .
 										' - ' . date('d. m . Y  H:i', $sc['etime']) .
-										' - ' . $sc['name'] . ' (One time)<br/>';
+										' - ' . html_escape($sc['name']) . ' (One time)<br/>';
 
-									$text = 'Affected hosts:</b> ' . implode(', ', array_column($hosts,'description'));
+									$text = 'Affected hosts:</b> ' . implode(', ', array_map('html_escape', array_column($hosts, 'description')));
 
 									$panel['data'] .= '<div class="inpa_loglines" title="' . $text . '">' . $text . '</div><br/><br/>';
 								}
@@ -290,9 +333,9 @@ function maint($panel, $user_id) {
 								if (cacti_sizeof($hosts)) {
 									$panel['data'] .= '<b>' . date('d. m . Y  H:i', $sc['stime']) .
 										' - ' . date('d. m . Y  H:i', $sc['etime']) .
-										' - ' . $sc['name'] . ' (Reoccurring)<br/>';
+										' - ' . html_escape($sc['name']) . ' (Reoccurring)<br/>';
 
-									$text = 'Affected hosts:</b> ' . implode(', ', array_column($hosts,'description'));
+									$text = 'Affected hosts:</b> ' . implode(', ', array_map('html_escape', array_column($hosts, 'description')));
 
 									$panel['data'] .= '<div class="inpa_loglines" title="' . $text . '">' . $text . '</div><br/><br/>';
 								}
@@ -311,10 +354,23 @@ function maint($panel, $user_id) {
 }
 
 // -------------------------------------plugin webseer-------------------------------------------
-function webseer($panel, $user_id) {
+/**
+ * Data-update function for the 'webseer' panel: summarizes Webseer
+ * plugin URL service-check results (e.g. failures/warnings), or
+ * reports that the Webseer plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
+function webseer($panel, $user_id): void {
 	global $config;
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	$lines            = get_panel_lines_count($panel['height'], $user_id);
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $user_id);
@@ -365,29 +421,21 @@ function webseer($panel, $user_id) {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'green';
 					}
-					$text = __('OK');
+					$text = __('OK', 'intropage');
 				} else {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'red';
 					}
-					$text = __('Failed');
+					$text = __('Failed', 'intropage');
 				}
 
 				if ($panel['alarm'] == 'grey' && $color == 'green') {
 					$panel['alarm'] = 'green';
 				}
 
-				if ($panel['alarm'] == 'green' && $color == 'yellow') {
-					$panel['alarm'] = 'yellow';
-				}
-
-				if ($panel['alarm'] == 'yellow' && $color == 'red') {
-					$panel['alarm'] = 'red';
-				}
-
 				$panel['data'] .= '<td class="rpad">' . $row['lastcheck'] . '</td>' .
-					'<td class="rpad">' . $row['url'] . '</td>' .
-					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . $row['http_code'] . ' (' . $text . ')</td></tr>';
+					'<td class="rpad">' . html_escape($row['url']) . '</td>' .
+					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . html_escape($row['http_code']) . ' (' . $text . ')</td></tr>';
 			}
 
 			$panel['data'] .= '</table>';
@@ -398,7 +446,16 @@ function webseer($panel, $user_id) {
 }
 
 // ------------------------------------ webseer_plugin -----------------------------------------------------
-function webseer_detail() {
+/**
+ * Detail-view renderer for the 'webseer' panel, showing an expanded
+ * view of Webseer URL service-check results. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function webseer_detail(): array {
 	global $config, $log;
 
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
@@ -437,22 +494,22 @@ function webseer_detail() {
 
 		$panel['detail'] .= '<tr>';
 		$panel['detail'] .= '<td class="left">' . $log['lastcheck'] . '</td>';
-		$panel['detail'] .= '<td class="left">' . $log['url'] . '</td>';
+		$panel['detail'] .= '<td class="left">' . html_escape($log['url']) . '</td>';
 
 		if ($log['result'] == 1) {
 			if ($log['secs'] > (time() - ($important_period))) {
 				$color = 'green';
 			}
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK', 'intropage') . '</td>';
 		} else {
 			if ($log['secs'] > (time() - ($important_period))) {
 				$color = 'red';
 			}
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed', 'intropage') . '</td>';
 		}
 
-		$panel['detail'] .= '<td class="right">' . $log['http_code'] . '</td>';
-		$panel['detail'] .= '<td class="right">' . $log['error'] . '</td></tr>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['http_code']) . '</td>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['error']) . '</td></tr>';
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';
@@ -465,10 +522,23 @@ function webseer_detail() {
 }
 
 // -------------------------------------plugin servcheck-------------------------------------------
-function servcheck($panel, $user_id) {
+/**
+ * Data-update function for the 'servcheck' panel: summarizes ServCheck
+ * plugin service-check results (e.g. failures/warnings), or reports
+ * that the ServCheck plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to save the result.
+ *
+ * @return void
+ */
+function servcheck($panel, $user_id): void {
 	global $config;
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
 
@@ -549,30 +619,22 @@ function servcheck($panel, $user_id) {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'green';
 					}
-					$text = __('OK');
+					$text = __('OK', 'intropage');
 				} else {
 					if ($row['secs'] > (time() - ($important_period))) {
 						$color = 'red';
 					}
-					$text = __('Failed');
+					$text = __('Failed', 'intropage');
 				}
 
 				if ($panel['alarm'] == 'grey' && $color == 'green') {
 					$panel['alarm'] = 'green';
 				}
 
-				if ($panel['alarm'] == 'green' && $color == 'yellow') {
-					$panel['alarm'] = 'yellow';
-				}
-
-				if ($panel['alarm'] == 'yellow' && $color == 'red') {
-					$panel['alarm'] = 'red';
-				}
-
 				$panel['data'] .= '<td class="rpad">' . $row['lastcheck'] . '</td>' .
-					'<td class="rpad">' . $row['name'] . '</td>' .
-					'<td class="rpad">' . $row['type'] . '</td>' .
-					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . $row['result'] . '</td></tr>';
+					'<td class="rpad">' . html_escape($row['name']) . '</td>' .
+					'<td class="rpad">' . html_escape($row['type']) . '</td>' .
+					'<td class="rpad"><span class="inpa_sq color_' . $color . '"></span>' . html_escape($row['result']) . '</td></tr>';
 			}
 
 			$panel['data'] .= '</table>';
@@ -583,7 +645,16 @@ function servcheck($panel, $user_id) {
 }
 
 // ------------------------------------ servcheck_plugin_detail-------------------------------------------------
-function servcheck_detail() {
+/**
+ * Detail-view renderer for the 'servcheck' panel, showing an expanded
+ * view of ServCheck service-check results. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function servcheck_detail(): array {
 	global $config, $log;
 
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
@@ -638,24 +709,24 @@ function servcheck_detail() {
 
 		$panel['detail'] .= '<tr>';
 		$panel['detail'] .= '<td class="left">' . $log['lastcheck'] . '</td>';
-		$panel['detail'] .= '<td class="left">' . $log[$dncolumn] . '</td>';
-		$panel['detail'] .= '<td class="left">' . $log['type'] . '</td>';
+		$panel['detail'] .= '<td class="left">' . html_escape($log[$dncolumn]) . '</td>';
+		$panel['detail'] .= '<td class="left">' . html_escape($log['type']) . '</td>';
 
 		if ($log['result'] == 'ok') {
 			if ($log['secs'] > (time() - ($important_period))) {
 				$color = 'green';
 			}
 
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('OK', 'intropage') . '</td>';
 		} else {
 			if ($log['secs'] > (time() - ($important_period))) {
 				$color = 'red';
 			}
-			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed') . '</td>';
+			$panel['detail'] .= '<td class="left"><span class="inpa_sq color_' . $color . '"></span>' . __('Failed', 'intropage') . '</td>';
 		}
 
-		$panel['detail'] .= '<td class="right">' . $log['result_search'] . '</td>';
-		$panel['detail'] .= '<td class="right">' . $log['error'] . '</td></tr>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['result_search']) . '</td>';
+		$panel['detail'] .= '<td class="right">' . html_escape($log['error']) . '</td></tr>';
 
 		if ($color == 'red') {
 			$panel['alarm'] = 'red';

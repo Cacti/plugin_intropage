@@ -1,0 +1,131 @@
+/*
+ +-------------------------------------------------------------------------+
+ | Copyright (C) 2004-2025 The Cacti Group                                 |
+ |                                                                         |
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDtool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | This code is designed, written, and maintained by the Cacti Group. See  |
+ | about.php and/or the AUTHORS file for specific developer information.   |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+
+.grid_item {
+	background-color: var(--dp-panel) !important;
+}
+
+.panel_data {
+	background-color: var(--dp-panel);
+}
+
+.color_green {
+	background: var(--dp-accent-soft) !important;
+}
+
+.color_green_bubble {
+	color: var(--dp-accent);
+}
+
+.color_green,
+.color_green i {
+	color: var(--dp-text) !important;
+}
+
+.color_red {
+	background: #b3261e !important;
+}
+
+.color_red_bubble {
+	color: #ff6b6b;
+}
+
+.color_red,
+.color_red i {
+	color: var(--dp-text) !important;
+}
+
+.color_yellow {
+	background: #ff8f1e !important;
+}
+
+.color_yellow_bubble {
+	color: #ff8f1e;
+}
+
+.color_yellow,
+.color_yellow i {
+	color: black !important;
+}
+
+.color_grey {
+	background: #a1a1a1 !important;
+}
+
+.color_grey_bubble {
+	color: #a1a1a1;
+}
+
+.color_grey,
+.color_grey i {
+	color: black !important;
+}
+
+/* Row markers need stronger colors than the panel header surfaces. */
+.inpa_sq.color_green {
+	background: var(--dp-accent) !important;
+}
+
+.inpa_sq.color_red {
+	background: #ff6b6b !important;
+}
+
+.panel_header {
+	height: 28px;
+}
+
+/* billboard.js charts: repaint onto the Deepness palette (in-plugin for now; to migrate into the base theme) */
+.bb path,
+.bb line {
+	fill: none;
+	stroke: var(--dp-text-muted);
+}
+
+.bb text,
+.bb-axis text,
+.bb-legend text {
+	fill: var(--dp-text);
+}
+
+.bb-grid line {
+	stroke: var(--dp-grid);
+}
+
+.bb-grid text {
+	fill: var(--dp-text-muted);
+}
+
+.bb-chart-arc path,
+.bb-chart-arc rect {
+	stroke: var(--dp-panel);
+}
+
+.bb-chart-arc text,
+.bb-chart-arcs .bb-needle {
+	fill: var(--dp-text);
+}
+
+.bb-tooltip {
+	background-color: var(--dp-panel-alt);
+	color: var(--dp-text);
+}

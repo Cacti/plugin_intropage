@@ -24,7 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_graphs() {
+/**
+ * Registers the 'graphs' panel category and its 'Data Sources', 'Device
+ * Templates', and 'Devices by Status' panels with the panel library.
+ * Called from initialize_panel_library() while building the full set
+ * of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'graphs'
+ *                         category metadata.
+ */
+function register_graphs(): array {
 	global $registry;
 
 	$registry['graphs'] = [
@@ -93,18 +105,23 @@ function register_graphs() {
 }
 
 // ------------------------- graph data source---------------------
-function graph_data_source($panel, $user_id) {
+/**
+ * Data-update function for the 'graph_data_source' panel: renders a
+ * pie/summary chart of graphs grouped by data source/template. Called
+ * from intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to scope the query and save the
+ *                       result.
+ *
+ * @return void
+ */
+function graph_data_source($panel, $user_id): void {
 	global $config, $input_types, $run_from_poller;
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'AND data_local.host_id');
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$graph =  [
@@ -114,10 +131,6 @@ function graph_data_source($panel, $user_id) {
 				'data'  => [],
 			],
 		];
-
-		if (!$simple_perms) {
-			$q_host_cond = 'AND data_local.host_id ' . $host_cond;
-		}
 
 		$sql_ds = db_fetch_assoc("SELECT data_input.type_id, COUNT(data_input.type_id) AS total
 			FROM data_local
@@ -154,18 +167,23 @@ function graph_data_source($panel, $user_id) {
 }
 
 // -----------------------graph_host template--------------------
-function graph_host_template($panel, $user_id) {
+/**
+ * Data-update function for the 'graph_host_template' panel: renders a
+ * pie/summary chart of devices grouped by device (host) template.
+ * Called from intropage_gather_stats()/get_panel() via the panel
+ * definition's 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to scope the query and save the
+ *                       result.
+ *
+ * @return void
+ */
+function graph_host_template($panel, $user_id): void {
 	global $config;
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user_id, 'WHERE host.id');
 
 	if (defined('CACTI_VERSION')) {
 		$cv = CACTI_VERSION;
@@ -174,10 +192,6 @@ function graph_host_template($panel, $user_id) {
 	}
 
 	if ($allowed_devices !== false || $simple_perms) {
-		if (!$simple_perms) {
-			$q_host_cond = 'WHERE host.id ' . $host_cond;
-		}
-
 		// 1.2.24+ has billboard.js with treemap
 		if (cacti_version_compare($cv, '1.2.24', '>=')) {
 			$graph = [
@@ -242,20 +256,31 @@ function graph_host_template($panel, $user_id) {
 }
 
 // --------------------------------------- graph host-----------------------------
-function graph_host($panel, $user_id, $timespan = 0) {
+/**
+ * Data-update function for the 'graph_host' panel: renders a
+ * time-series/pie chart of device counts by status (up/down/
+ * recovering/disabled) over the panel's configured timespan from the
+ * recorded trend snapshots. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting, scope the query, and save the
+ *                        result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
+function graph_host($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
 
-	$simple_perms = get_simple_device_perms($user_id);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($user_id);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices] = intropage_device_scope($user_id);
 
 	if ($allowed_devices !== false || $simple_perms) {
 		$graph =  [
@@ -299,6 +324,8 @@ function graph_host($panel, $user_id, $timespan = 0) {
 			$graph['line']['title1']         = __('Down', 'intropage');
 			$graph['line']['unit1']['title'] = 'Down';
 
+			$last = 0;
+
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
 				$graph['line']['data1'][]  = $row['value'];
@@ -324,6 +351,8 @@ function graph_host($panel, $user_id, $timespan = 0) {
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title2']         = __('Recovering', 'intropage');
 			$graph['line']['unit2']['title'] = 'Recovering';
+
+			$last = 0;
 
 			foreach ($rows as $row) {
 				$graph['line']['label2'][] = $row['date'];
@@ -374,7 +403,16 @@ function graph_host($panel, $user_id, $timespan = 0) {
 }
 
 // ------------------------------------ graph_datasource -----------------------------------------------------
-function graph_data_source_detail() {
+/**
+ * Detail-view renderer for the 'graph_data_source' panel, showing an
+ * expanded breakdown of graphs by data source/template. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function graph_data_source_detail(): array {
 	global $config, $input_types;
 
 	$panel = [
@@ -383,19 +421,7 @@ function graph_data_source_detail() {
 		'detail' => ''
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND dl.host_id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND dl.host_id');
 
 	$sql_ds = db_fetch_assoc("SELECT di.type_id, COUNT(di.type_id) AS total
 		FROM data_local AS dl
@@ -416,7 +442,7 @@ function graph_data_source_detail() {
 	if (cacti_sizeof($sql_ds)) {
 		$panel['detail'] .= '<tr class="tableHeader">
 			<th class="left">' . __('Data Type', 'intropage') . '</th>
-			<th class="right">' . __('Data Sources') . '</th>
+			<th class="right">' . __('Data Sources', 'intropage') . '</th>
 		</tr>';
 
 		$i = 0;
@@ -438,14 +464,22 @@ function graph_data_source_detail() {
 
 		$panel['detail'] .= '</table>';
 	} else {
-		$panel['detail'] = __('No untemplated datasources found');
+		$panel['detail'] = __('No untemplated datasources found', 'intropage');
 	}
 
 	return $panel;
 }
 
 // ------------------------------------ graph_host -----------------------------------------------------
-function graph_host_detail() {
+/**
+ * Detail-view renderer for the 'graph_host' panel, showing an expanded
+ * breakdown of devices by status. Called via the panel definition's
+ * 'details_func' when the user opens the panel's detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function graph_host_detail(): array {
 	global $config, $console_access;
 
 	$panel = [
@@ -454,19 +488,7 @@ function graph_host_detail() {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'AND id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'AND id');
 
 	$h_all = db_fetch_cell("SELECT COUNT(id) FROM host WHERE $q_host_cond");
 
@@ -557,7 +579,7 @@ function graph_host_detail() {
 			$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
 			foreach ($h as $r) {
-				$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
+				$panel['detail'] .= ' - ' . html_escape($r['description']) . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
 			}
 
 			$panel['detail'] .= '</td></tr>';
@@ -574,7 +596,7 @@ function graph_host_detail() {
 	$panel['detail'] .= '<tr class="' . $s['class'] . '"><td class="left" colspan="2">';
 
 	foreach ($h as $r) {
-		$panel['detail'] .= ' - ' . $r['description'] . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
+		$panel['detail'] .= ' - ' . html_escape($r['description']) . ' (ID: ' . $r['id'] . ', Device Failed on: ' . $r['status_fail_date'] . ')<br/>';
 	}
 
 	$panel['detail'] .= '</td></tr>';
@@ -593,7 +615,16 @@ function graph_host_detail() {
 }
 
 // ------------------------------------ graph host_template -----------------------------------------------------
-function graph_host_template_detail() {
+/**
+ * Detail-view renderer for the 'graph_host_template' panel, showing an
+ * expanded breakdown of devices by device template. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function graph_host_template_detail(): array {
 	global $config;
 
 	$panel = [
@@ -602,19 +633,7 @@ function graph_host_template_detail() {
 		'detail' => '',
 	];
 
-	$simple_perms = get_simple_device_perms($_SESSION['sess_user_id']);
-
-	if (!$simple_perms) {
-		$allowed_devices = intropage_get_allowed_devices($_SESSION['sess_user_id']);
-		$host_cond       = 'IN (' . $allowed_devices . ')';
-	} else {
-		$allowed_devices = false;
-		$q_host_cond     = '';
-	}
-
-	if (!$simple_perms) {
-		$q_host_cond = 'WHERE host.id ' . $host_cond;
-	}
+	['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($_SESSION['sess_user_id'], 'WHERE host.id');
 
 	$rows = db_fetch_assoc("SELECT host_template.id as id, name, COUNT(host.host_template_id) AS total
 		FROM host_template
@@ -658,26 +677,22 @@ function graph_host_template_detail() {
 }
 
 // ------------------------------------ host collect -----------------------------------------------------
-function host_collect() {
+/**
+ * Trend-collection function for the 'graph_host' panel: records a
+ * snapshot of device counts by status into plugin_intropage_trends.
+ * Called from intropage_gather_stats() via the panel definition's
+ * 'trends_func'.
+ *
+ * @return void
+ */
+function host_collect(): void {
 	global $config;
 
 	// update in poller
 	$users = get_user_list();
 
 	foreach ($users as $user) {
-		$simple_perms = get_simple_device_perms($user['id']);
-
-		if (!$simple_perms) {
-			$allowed_devices = intropage_get_allowed_devices($user['id']);
-			$host_cond       = 'IN (' . $allowed_devices . ')';
-		} else {
-			$allowed_devices = false;
-			$q_host_cond     = '';
-		}
-
-		if (!$simple_perms) {
-			$q_host_cond = 'AND id ' . $host_cond;
-		}
+		['simple' => $simple_perms, 'allowed' => $allowed_devices, 'cond' => $q_host_cond] = intropage_device_filter($user['id'], 'AND id');
 
 		if ($allowed_devices !== false || $simple_perms) {
 			db_execute_prepared("INSERT INTO plugin_intropage_trends

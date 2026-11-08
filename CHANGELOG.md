@@ -2,6 +2,60 @@
 
 --- develop ---
 
+* issue#466: Tolerate a small overshoot over 100% in the busiest Used Space panels so DSSTATS averaging artifacts (e.g. used reading 100.004% of total) no longer log a false "Problem with DSSTAT data" warning; only a meaningful overshoot (over 110%) now warns
+* issue: Size panel charts correctly on reload without waiting for a window resize. A panel's chart is drawn by an inline bb.generate() script that a strict Content-Security-Policy can run asynchronously, after reload_panel()'s resizeCharts() has already run; resizeCharts() was then a no-op and the chart kept its generated size until an unrelated window resize snapped it back. reload_panel() now watches the panel with a one-shot MutationObserver (and a wall-clock deadline) and resizes only that chart once it has actually rendered, and line/bar charts are sized from the server-rendered markup (configured height, container-fitted width) like pie and treemap instead of a fixed 100x150
+* security: Encode pie and treemap chart columns as JSON so device template names can no longer end the string in the inline chart script
+* security: Check the panel permission when a panel is added, reloaded or opened in the detail dialog, not only when the dashboard renders
+* security: Accept dashboard actions that change data (add, remove, resize, settings, sharing, login option) only as POST so they carry Cacti's CSRF token; the favorite-graph button and the panel tools now post
+* issue: Fix the poller stopping with a TypeError, and Cacti disabling the plugin, when a system panel definition has no data row yet; poller rows without an owner now run as user 0
+* issue: Fix the upgrade from 3.0.0 or older failing on PHP 8 while converting per-panel permissions
+* issue: Fix deleting a user group leaving its Intropage permission row behind
+* issue: Keep a dashboard's shared flag when dashboards are renamed in the settings form
+* issue: Apply the Intropage Viewer realm check on online remote pollers as well as on the main poller
+* issue: Delete a user's own panel data row when the panel is withdrawn from them
+* issue: Restore the hide_disabled user setting when the device lookup fails
+* issue: Join threshold event permissions for the viewing user only, so events are no longer repeated once per user holding a permission
+* issue: Look up the panel row before building the details view, so an unknown panel id no longer logs a warning or creates a row
+* dev: Add end-to-end tests that log in to a running Cacti and drive intropage.php, the poller, the graph_buttons hook and the upgrade, and run them in CI against the installed Cacti served by PHP's built-in server
+* dev: Add tests/bin/e2e-coverage-report.php, which lists the tests that execute each changed line from the end-to-end Xdebug dumps and the unit XML coverage
+* issue: Query NTP servers over IPv6 as well as IPv4: an IPv6 address (also in brackets) is used as it is, a name is resolved to its first AAAA and A address and both are tried; the check no longer needs the PHP sockets extension
+* issue: Fix the first favourite graph of a user without panels not being stored (the priority came out as NULL)
+* issue: `intropage_add_panel()` and `intropage_remove_panel()` could not work against the current schema; they now log a deprecation warning and return false. Register panels with a register_<name>() function in a panellib file
+* issue: Stop the poller running panel code, and Cacti logging an authentication error each cycle, for panel rows of users that no longer exist; the rows and their dashboard links are deleted in bounded steps
+* issue#461: Brighten Paper Plane failed-device row markers on dark panel cells
+* issue#459: Give Sunrise panel headings readable inherited text on dark backgrounds
+* issue#457: Contrast Raspberry details dots against a neutral badge and darken amber and grey row markers
+* issue#455: Darken Paw amber and grey row markers for contrast on light table rows
+* issue#453: Contrast Modern details dots against a neutral badge and darken amber and grey row markers
+* issue#451: Improve Midwinter panel text and palette-specific indicators while preserving alert colors in details dialogs
+* issue#449: Contrast Hollyberry details dots against a neutral badge and darken amber and grey row markers
+* issue#447: Improve Deepness green and red row marker contrast on dark surfaces
+* issue#444: Brighten Dark theme red row markers while preserving panel header colors
+* issue#442: Keep Carrot theme status indicators legible on coral details titlebars and light table rows
+* issue#440: Give Cacti theme severity indicators contrasting colors for dark details titlebars and light table rows
+* issue: Fix the dashboard page not scrolling with the mouse wheel over chart panels: charts were sized from the whole card (header included) and overflowed the card body, turning it into a nested scroller that captured the wheel; charts now keep their server-sized height (which also stops pie/treemap charts growing on every window resize) and card bodies no longer scroll vertically
+* issue: Keep long Panel Details content inside the dialog and scrollable, instead of spilling under the Close button pane, on themes (e.g. deepness) that force `.ui-dialog-content` to `overflow: visible`; the dialog height is also capped to the viewport
+* issue: Render dashboard panels with a shared, self-contained card chrome (bundled `includes/cards/cards.css` + `cards.js`, no cross-plugin dependency): a left-hand drag handle and unified per-card tools (grow/shrink height, maximize, reload, remove), replacing jQuery UI Sortable with a keyboard-accessible drag; growing/shrinking a panel now resizes it immediately before the persist+reload round-trip
+* issue: Show the panel "Reload Panel" glyph as a refresh icon (fa-sync-alt) that spins while the panel reloads, instead of the retweet glyph
+* issue: Tune the panel titlebar severity palette per theme so green (good), orange (warning) and red (bad) read as those colors but with theme-appropriate tone and legible text on every theme (replaces the garish/olive green, pure `yellow` and black-on-mid-green text that were copied across all themes); deepness already had this treatment and is unchanged
+* issue: Keep the toolbar `Actions`/`Timespan`/`Panels` select2 menus on-screen by shifting the open dropdown left when it would overflow the right edge of the viewport (select2 only flips vertically, and Cacti core's `dropdownAutoWidth` widens the dropdown past the narrow control)
+* issue: Align the panel titlebar height with Cacti's `html_start_box` per theme and vertically center the panel action icons within the titlebar
+* issue: Add intropage stylesheets for the remaining Cacti themes (cacti, carrot, hollyberry, raspberry) and align the panel titlebar severity colors (green good, red bad, grey unknown) with each parent theme's device-status palette
+* issue: Give each theme a self-contained severity palette (warning now follows `deviceRecovering`, red deepened for legible contrast) with a light-theme fallback kept in common.css
+* issue: Repaint the intropage billboard.js panel charts onto the Deepness theme palette so axis, grid, legend and tooltip elements are legible on the dark theme
+* issue: Fix a fatal `Cannot redeclare intropage_get_allowed_devices()` that disabled the plugin on installs upgraded from the old `include/` layout; `intropage_config_arrays()` now repoints any stale `plugin_hooks` row and removes the leftover `include/` directory on the earliest per-page hook, before a stale hook can load a second copy of the library
+* issue: Load Thold's relocated function library from `includes/functions.php` (with a legacy `thold_functions.php` fallback) and skip the threshold poller when Thold's API is unavailable, so intropage no longer fatals after Thold moved its functions out of the plugin root
+* dev: Rename the plugin's stylesheet directory from `themes/` to `css/`; the old directory is tombstoned in `manifest.json` and removed on upgrade
+* dev: Move the plugin's library directory from `include/` to `includes/` and re-register the affected hooks on upgrade (a `plugin_hooks` file repoint in `intropage_upgrade_database()`) so existing installations load them from the new path
+* dev: Measure CI coverage with xdebug instead of pcov so the plugin's own sources are instrumented (pcov auto-scopes to the Composer root and skipped cacti/plugins/, leaving the patch-coverage gate with nothing to measure)
+* dev: Enforce patch coverage of changed lines in CI and remove the inert COMPOSER_ROOT_VERSION env from the Pest step
+* dev: Pin the CI database image and shared test dependencies, disable persisted checkout credentials, and limit workflow permissions and runtime
+* issue: Rename `tests/Security/Php81FunctionGuardTest.php` to `tests/Security/PhpCompatibilityTest.php` to match the naming convention used across the Cacti plugin fleet; the test content (guarding post-8.0 function usage for this plugin's PHP 8.0 floor) is unchanged
+* security: Add a version-safe CSP nonce (`plugin_intropage_csp_nonce()`) to every inline `<script>` tag so pages stay compatible with Cacti's Content-Security-Policy nonce enforcement, while falling back cleanly on older Cacti releases that lack the `CactiSecureHeaders` class
+* security: Escape panel output (device, data-source, service-check, webseer, maint, host-description and admin-alert values, and the shared-dashboard name) that was rendered without html_escape
+* issue: Fix correctness bugs in the extrem, alert, top5, thold and syslog panels and the settings action handler
+* quality: Bring every PHP file to PHPStan level 8 with zero errors and add native parameter/return type declarations, fixing several latent bugs uncovered in the process (a fatal maintenance-panel render that called a two-argument function with none, undefined column counters that misaligned the 48-hour extremes table, a misplaced parenthesis in the per-user/group save button, un-narrowed database-row accesses, and a log-size threshold that only detected 2GB overflow on 32-bit builds)
+
 * issue#318: Fix NTP time does not function in Windows environment
 * issue#316: Fix php error when db check skip huge db
 * issue#327: Move Timespan from action menu

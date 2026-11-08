@@ -24,7 +24,49 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_thold() {
+/**
+ * Loads the Thold plugin's function library. Thold relocated its helpers
+ * from the legacy plugins/thold/thold_functions.php to
+ * plugins/thold/includes/functions.php, so prefer the new path and fall
+ * back to the old one for older Thold installs.
+ *
+ * @return bool True when a Thold function library was found and loaded.
+ *
+ * @global array $config Cacti global configuration array; used to resolve
+ *                        the plugin base path.
+ */
+function intropage_load_thold_functions(): bool {
+	global $config;
+
+	$candidates = [
+		$config['base_path'] . '/plugins/thold/includes/functions.php',
+		$config['base_path'] . '/plugins/thold/thold_functions.php',
+	];
+
+	foreach ($candidates as $file) {
+		if (file_exists($file)) {
+			include_once($file);
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Registers the 'thold' panel category and its 'Last Threshold Events'
+ * and 'Threshold' (trend graph) panels with the panel library. Called
+ * from initialize_panel_library() while building the full set of
+ * available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'thold'
+ *                         category metadata.
+ */
+function register_thold(): array {
 	global $registry;
 
 	$registry['thold'] = [
@@ -75,7 +117,21 @@ function register_thold() {
 }
 
 // ------------------------------------ thold event -----------------------------------------------------
-function thold_event($panel, $user_id) {
+/**
+ * Data-update function for the 'thold_event' panel: lists the most
+ * recent Threshold plugin trigger/clear events, or reports that the
+ * Thold plugin isn't installed. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to determine the row limit and save
+ *                       the result.
+ *
+ * @return void
+ */
+function thold_event($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -86,6 +142,8 @@ function thold_event($panel, $user_id) {
 		$important_period = time();
 	}
 
+	// Start green so the stepwise escalation ladder below (green -> yellow -> red)
+	// can reach yellow for a log that only contains warning/breach events.
 	$panel['alarm'] = 'green';
 
 	if (!api_plugin_is_enabled('thold')) {
@@ -108,7 +166,7 @@ function thold_event($panel, $user_id) {
 		}
 
 		if ($allowed_devices !== false || $simple_perms) {
-			$data = db_fetch_assoc("SELECT tl.description AS description,tl.time AS time,
+			$data = db_fetch_assoc_prepared("SELECT tl.description AS description,tl.time AS time,
 				tl.status AS status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 				FROM plugin_thold_log AS tl
 				INNER JOIN thold_data AS td
@@ -122,15 +180,16 @@ function thold_event($panel, $user_id) {
 				LEFT JOIN host AS h
 				ON h.id=gl.host_id
 				LEFT JOIN user_auth_perms AS uap0
-				ON (gl.id=uap0.item_id AND uap0.type=1)
+				ON (gl.id=uap0.item_id AND uap0.type=1 AND uap0.user_id = ?)
 				LEFT JOIN user_auth_perms AS uap1
-				ON (gl.host_id=uap1.item_id AND uap1.type=3)
+				ON (gl.host_id=uap1.item_id AND uap1.type=3 AND uap1.user_id = ?)
 				LEFT JOIN user_auth_perms AS uap2
-				ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+				ON (gl.graph_template_id=uap2.item_id AND uap2.type=4 AND uap2.user_id = ?)
 				$q_host_cond
 				HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 				ORDER BY `time` DESC
-				LIMIT " . $lines);
+				LIMIT " . $lines,
+				[$user_id, $user_id, $user_id]);
 		} else {
 			$data = [];
 		}
@@ -175,7 +234,7 @@ function thold_event($panel, $user_id) {
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
 					$panel['alarm'] = 'red';
 				} elseif ($panel['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
-					$panel['alarm'] == 'yellow';
+					$panel['alarm'] = 'yellow';
 				}
 			}
 
@@ -189,12 +248,29 @@ function thold_event($panel, $user_id) {
 }
 
 // ------------------------------------ graph_thold -----------------------------------------------------
-function graph_thold($panel, $user_id, $timespan = 0) {
+/**
+ * Data-update function for the 'graph_thold' panel: renders a
+ * time-series graph of threshold counts (total/triggered/etc.) over
+ * the panel's configured timespan from the recorded trend snapshots.
+ * Called from intropage_gather_stats()/get_panel() via the panel
+ * definition's 'update_func'.
+ *
+ * @param array $panel    The panel's current definition/data row.
+ * @param int   $user_id  The id of the user the panel is being
+ *                        rendered for, used to resolve the timespan
+ *                        setting and save the result.
+ * @param int   $timespan Optional override for the graph's time
+ *                        window in seconds; 0 uses the user's/panel's
+ *                        configured timespan.
+ *
+ * @return void
+ */
+function graph_thold($panel, $user_id, $timespan = 0): void {
 	global $config;
 
 	$panel['alarm'] = 'green';
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	intropage_load_thold_functions();
 
 	$graph =  [
 			'line' => [
@@ -240,6 +316,8 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 			$graph['line']['title1']         = __('Triggered', 'intropage');
 			$graph['line']['unit1']['title'] = 'Triggered';
 
+			$last = 0;
+
 			foreach ($rows as $row) {
 				$graph['line']['label1'][] = $row['date'];
 				$graph['line']['data1'][]  = $row['value'];
@@ -264,6 +342,8 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 		if (cacti_sizeof($rows)) {
 			$graph['line']['title2']         = __('Breached', 'intropage');
 			$graph['line']['unit2']['title'] = 'Breached';
+
+			$last = 0;
 
 			foreach ($rows as $row) {
 				$graph['line']['label2'][] = $row['date'];
@@ -313,10 +393,19 @@ function graph_thold($panel, $user_id, $timespan = 0) {
 }
 
 // ------------------------------------ graph_thold -----------------------------------------------------
-function graph_thold_detail() {
+/**
+ * Detail-view renderer for the 'graph_thold' panel, showing an
+ * expanded view of threshold trend data. Called via the panel
+ * definition's 'details_func' when the user opens the panel's detail
+ * view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function graph_thold_detail(): array {
 	global $config, $sql_where;
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	intropage_load_thold_functions();
 
 	$panel = [
 		'name'   => __('Threshold Details', 'intropage'),
@@ -327,7 +416,6 @@ function graph_thold_detail() {
 	if (!api_plugin_is_enabled('thold')) {
 		$panel['alarm']   = 'grey';
 		$panel['detail']  = __('Thold plugin not installed/running', 'intropage');
-		unset($panel['pie']);
 	} elseif (api_plugin_user_realm_auth('thold_graph.php')) {
 		$t_all  = 0;
 		$t_brea = 0;
@@ -429,10 +517,19 @@ function graph_thold_detail() {
 }
 
 // ------------------------------------ thold_events -----------------------------------------------------
-function thold_event_detail() {
+/**
+ * Detail-view renderer for the 'thold_event' panel, showing an
+ * expanded list of recent Threshold plugin events. Called via the
+ * panel definition's 'details_func' when the user opens the panel's
+ * detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function thold_event_detail(): array {
 	global $config;
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	intropage_load_thold_functions();
 
 	$panel = [
 		'name'   => __('Last Threshold Events', 'intropage'),
@@ -455,7 +552,7 @@ function thold_event_detail() {
 			$q_host_cond     = '';
 		}
 
-		$data = db_fetch_assoc("SELECT tl.description as description,tl.time as time,
+		$data = db_fetch_assoc_prepared("SELECT tl.description as description,tl.time as time,
 			tl.status as status, uap0.user_id AS user0, uap1.user_id AS user1, uap2.user_id AS user2
 			FROM plugin_thold_log AS tl
 			INNER JOIN thold_data AS td
@@ -469,15 +566,16 @@ function thold_event_detail() {
 			LEFT JOIN host AS h
 			ON h.id=gl.host_id
 			LEFT JOIN user_auth_perms AS uap0
-			ON (gl.id=uap0.item_id AND uap0.type=1)
+			ON (gl.id=uap0.item_id AND uap0.type=1 AND uap0.user_id = ?)
 			LEFT JOIN user_auth_perms AS uap1
-			ON (gl.host_id=uap1.item_id AND uap1.type=3)
+			ON (gl.host_id=uap1.item_id AND uap1.type=3 AND uap1.user_id = ?)
 			LEFT JOIN user_auth_perms AS uap2
-			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4)
+			ON (gl.graph_template_id=uap2.item_id AND uap2.type=4 AND uap2.user_id = ?)
 			$q_host_cond
 			HAVING (user0 IS NULL OR (user1 IS NULL OR user2 IS NULL))
 			ORDER BY `time` DESC
-			LIMIT 30");
+			LIMIT 30",
+			[$_SESSION['sess_user_id'], $_SESSION['sess_user_id'], $_SESSION['sess_user_id']]);
 
 		if (cacti_sizeof($data)) {
 			$panel['detail'] .= '<table class="cactiTable">';
@@ -496,7 +594,7 @@ function thold_event_detail() {
 				if ($row['status'] == 1 || $row['status'] == 4 || $row['status'] == 7) {
 					$panel['alarm'] = 'red';
 				} elseif ($panel['alarm'] == 'green' && ($row['status'] == 2 || $row['status'] == 3)) {
-					$panel['alarm'] == 'yellow';
+					$panel['alarm'] = 'yellow';
 				}
 
 				$i++;
@@ -511,13 +609,26 @@ function thold_event_detail() {
 	return $panel;
 }
 
-function thold_collect() {
+/**
+ * Trend-collection function for the 'graph_thold' panel: records a
+ * point-in-time snapshot of Threshold plugin counts (e.g. triggered/
+ * disabled) into plugin_intropage_trends, when the Thold plugin is
+ * enabled. Called from intropage_gather_stats() via the panel
+ * definition's 'trends_func'.
+ *
+ * @return void
+ */
+function thold_collect(): void {
 	global $config;
 
 	// update in poller
 	$users = get_user_list();
 
-	include_once($config['base_path'] . '/plugins/thold/thold_functions.php');
+	// Skip quietly when Thold is absent or does not expose its threshold API,
+	// rather than fataling the intropage poller.
+	if (!intropage_load_thold_functions() || !function_exists('get_allowed_thresholds')) {
+		return;
+	}
 
 	foreach ($users as $user) {
 		$t_brea = 0;

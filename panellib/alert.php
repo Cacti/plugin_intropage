@@ -24,7 +24,19 @@
  +-------------------------------------------------------------------------+
 */
 
-function register_alert() {
+/**
+ * Registers the 'alert' panel category and its 'Host alerts' panel
+ * (recent host up/down/recovering events) with the panel library.
+ * Called from initialize_panel_library() while building the full set
+ * of available dashboard panels.
+ *
+ * @return array The panel definitions provided by this file, keyed by
+ *               panel id.
+ *
+ * @global array $registry Populated here with this file's 'alert'
+ *                         category metadata.
+ */
+function register_alert(): array {
 	global $registry;
 
 	$registry['alert'] = [
@@ -57,7 +69,27 @@ function register_alert() {
 }
 
 // ------------------------------------ alert host -----------------------------------------------------
-function alert_host($panel, $user_id) {
+/**
+ * Data-update function for the 'alert_host' panel: gathers recently
+ * recovering, up, and down/failing hosts (within the user's device
+ * scope) and builds the panel's display rows, coloring the panel's
+ * alarm state based on the presence of down hosts within the
+ * configured 'important period'. Called from
+ * intropage_gather_stats()/get_panel() via the panel definition's
+ * 'update_func'.
+ *
+ * @param array $panel   The panel's current definition/data row.
+ * @param int   $user_id The id of the user the panel is being rendered
+ *                       for, used to resolve device scope and
+ *                       settings.
+ *
+ * @return void
+ *
+ * @global array $config Reserved/declared for parity with other panel
+ *                       functions in this file; not used directly
+ *                       here.
+ */
+function alert_host($panel, $user_id): void {
 	global $config;
 
 	$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -68,7 +100,7 @@ function alert_host($panel, $user_id) {
 		$important_period = time();
 	}
 
-	$panel['alarm'] = 'green';
+	$panel['alarm'] = 'grey';
 
 	$scope           = intropage_device_scope($user_id);
 	$simple_perms    = $scope['simple'];
@@ -111,7 +143,7 @@ function alert_host($panel, $user_id) {
 			ORDER BY status_fail_date DESC
 			LIMIT ' . $lines);
 
-		$result = $sql_host_reco + $sql_host_up + $sql_host_fall + $sql_host_down;
+		$result = array_merge($sql_host_reco, $sql_host_up, $sql_host_fall, $sql_host_down);
 
 		$panel['data'] = '<table class="cactiTable">' .
 			'<tr class="tableHeader">' .
@@ -190,7 +222,15 @@ function alert_host($panel, $user_id) {
 }
 
 // ------------------------------------ alert host detail -----------------------------------------------------
-function alert_host_detail() {
+/**
+ * Detail-view renderer for the 'alert_host' panel, showing an expanded
+ * view of recent host alert events. Called via the panel definition's
+ * 'details_func' when the user opens the panel's detail view.
+ *
+ * @return array The populated $panel array, including the rendered
+ *               'detail' HTML.
+ */
+function alert_host_detail(): array {
 	global $config, $console_access;
 
 	$important_period = read_user_setting('intropage_important_period', read_config_option('intropage_important_period'), false, $_SESSION['sess_user_id']);
@@ -201,7 +241,7 @@ function alert_host_detail() {
 
 	$panel = [
 		'name'   => __('Host alerts', 'intropage'),
-		'alarm'  => 'green',
+		'alarm'  => 'grey',
 		'detail' => '',
 	];
 
@@ -247,7 +287,7 @@ function alert_host_detail() {
 			ORDER BY status_fail_date DESC
 			LIMIT ' . $lines);
 
-		$result = $sql_host_reco + $sql_host_up + $sql_host_fall + $sql_host_down;
+		$result = array_merge($sql_host_reco, $sql_host_up, $sql_host_fall, $sql_host_down);
 
 		if (cacti_sizeof($result)) {
 			$panel['detail'] = '<table class="cactiTable">' .
