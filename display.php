@@ -573,7 +573,7 @@ function display_information(): bool {
 
 	<?php
 	print get_md5_include_js($config['base_path'] . '/plugins/intropage/js/cards.js');
-	print get_md5_include_js($config['base_path'] . '/plugins/intropage/includes/intropage.js');
+	print get_md5_include_js($config['base_path'] . '/plugins/intropage/js/intropage.js');
 
 	return true;
 }

@@ -1041,7 +1041,7 @@ function intropage_panel_visible($panel_id): bool {
 
 /**
  * Builds the force-reload control shown in a force-enabled panel's
- * header. Clicking it invokes reload_panel() (see includes/intropage.js),
+ * header. Clicking it invokes reload_panel() (see js/intropage.js),
  * which spins the fa-sync-alt glyph while the panel reloads.
  *
  * @param int|string $panel_id The id of the panel the control reloads.
