@@ -572,7 +572,11 @@ function display_information(): bool {
 	</script>
 
 	<?php
-	print get_md5_include_js($config['base_path'] . '/plugins/intropage/js/cards.js');
+	if (cacti_version_compare(CACTI_VERSION, '1.2.32', '<')) {
+		// Cacti 1.2.32+ ships the shared card chrome in core (include/js/cards.js);
+		// only bundle it on older cores.
+		print get_md5_include_js($config['base_path'] . '/plugins/intropage/js/cards.js');
+	}
 	print get_md5_include_js($config['base_path'] . '/plugins/intropage/js/intropage.js');
 
 	return true;
