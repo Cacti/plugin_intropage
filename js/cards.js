@@ -10,7 +10,7 @@
  * cacti-cards vX.Y - shared "card chrome" controller (interaction layer).
  *
  * Bundled per-plugin with no cross-plugin or core dependency and kept
- * byte-identical between the plugins that use it. It wires the DOM behaviour
+ * byte-identical between the plugins that use it. It wires the DOM behaviou
  * for a .ccGrid of .ccCard elements (see cards.css for the HTML contract):
  * keyboard-accessible drag/drop reordering, the per-card tool buttons
  * (expand/collapse, grow/shrink, maximize, refresh, remove), an optional
@@ -59,7 +59,7 @@ window.CactiCards = window.CactiCards || (function() {
 			order.push(id);
 			cards[id] = {
 				expanded: card.classList.contains('ccCardExpanded'),
-				height:   parseInt(card.getAttribute('data-height') || '1', 10)
+				height:   Number.parseInt(card.getAttribute('data-height') || '1', 10)
 			};
 		});
 
@@ -127,13 +127,13 @@ window.CactiCards = window.CactiCards || (function() {
 		}
 		var state = {
 			expanded: card.classList.contains('ccCardExpanded'),
-			height:   parseInt(card.getAttribute('data-height') || '1', 10)
+			height:   Number.parseInt(card.getAttribute('data-height') || '1', 10)
 		};
 		Promise.resolve(adapter.fetchCard(id, state)).then(function(html) {
 			if (html != null) {
 				replaceCard(grid, adapter, card, html);
 			}
-		});
+		}).catch(function() { /* fire-and-forget: the host surfaces adapter errors */ });
 	}
 
 	function removeCard(grid, adapter, card) {
@@ -153,7 +153,7 @@ window.CactiCards = window.CactiCards || (function() {
 					replaceCard(grid, adapter, card, html);
 				}
 				saveLayout(grid, adapter);
-			});
+			}).catch(function() { /* fire-and-forget: the host surfaces adapter errors */ });
 		} else {
 			saveLayout(grid, adapter);
 		}
@@ -318,7 +318,7 @@ window.CactiCards = window.CactiCards || (function() {
 							}
 							saveLayout(grid, adapter);
 						}
-					});
+					}).catch(function() { /* fire-and-forget: the host surfaces adapter errors */ });
 				}
 			});
 		}
