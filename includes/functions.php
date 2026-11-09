@@ -2261,6 +2261,14 @@ function tail_log(string $log_file, int $nbr_lines = 1000, bool $adaptive = true
 		return false;
 	}
 
+	$stat = fstat($f_handle);
+
+	if ($stat !== false && $stat['size'] === 0) {
+		fclose($f_handle);
+
+		return array();
+	}
+
 	if (!$adaptive) {
 		$buffer = 4096;
 	} else {
@@ -2295,6 +2303,11 @@ function tail_log(string $log_file, int $nbr_lines = 1000, bool $adaptive = true
 	while ($nbr_lines++ < 0) {
 		// Find first newline and remove all text before that
 		$output = substr($output, strpos($output, "\n") + 1);
+	}
+
+	// A final newline terminates the last record; it is not an extra log row.
+	if (substr($output, -1) === "\n") {
+		$output = substr($output, 0, -1);
 	}
 
 	// Close file
