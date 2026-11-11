@@ -107,6 +107,15 @@ if (function_exists('register_process_start')) {
 // Make intropage first to gather correct stats
 intropage_correct_load_order();
 
+// Keep the panel registration catalog in sync with the panellib/ directory:
+// re-register built-in panels whenever a panel file's mtime changes, so the
+// Panel Library and management page read from the table instead of rebuilding
+// from disk on every request.
+intropage_sync_core_registrations();
+
+// Drop panel registrations whose owning third-party plugin is gone
+intropage_prune_stale_registrations();
+
 $stats = intropage_gather_stats();
 
 $poller_end = microtime(true);

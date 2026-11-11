@@ -17,6 +17,7 @@
         "includes/",
         "index.php",
         "intropage.php",
+        "intropage_panels.php",
         "js/",
         "locales/",
         "manifest.json",

@@ -36,7 +36,7 @@ it('drops every table it owns on uninstall', function () {
 		return $call['fn'] === 'db_execute' && stripos($call['sql'], 'DROP TABLE') !== false;
 	});
 
-	expect(count($drops))->toBe(7);
+	expect(count($drops))->toBe(8);
 });
 
 it('reports the config as always valid', function () {
