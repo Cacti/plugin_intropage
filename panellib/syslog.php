@@ -115,7 +115,9 @@ function register_syslog(): array {
  * database. Including setup.php makes syslog_connect() and the syslog_db_*()
  * helpers available in the Intropage poller context; syslog_connect() is the
  * entry point every Syslog consumer uses and is guarded to run its one-time
- * schema check only once per process.
+ * schema check only once per process. Its boolean result is honored: it can
+ * return false (for example when that schema check fails) while leaving
+ * $syslog_cnn populated, so a false return means the database is not ready.
  *
  * @return bool True when the Syslog database connection is ready.
  */
@@ -140,11 +142,13 @@ function intropage_syslog_connect(): bool {
 		}
 	}
 
+	$connected = false;
+
 	if (function_exists('syslog_connect')) {
-		syslog_connect();
+		$connected = (bool) syslog_connect();
 	}
 
-	if (empty($syslog_cnn)) {
+	if (!$connected || empty($syslog_cnn)) {
 		cacti_log('ERROR: Intropage could not open the Syslog database connection', false, 'INTROPAGE');
 
 		return false;
@@ -244,7 +248,11 @@ function plugin_syslog_levels_trend(): void {
 			GROUP BY priority_id',
 			[2 * $pi, $pi]);
 
-		foreach ((array) $levels as $level) {
+		if (!is_array($levels)) {
+			$levels = [];
+		}
+
+		foreach ($levels as $level) {
 			$l        = (int) $level['priority_id'];
 			$data[$l] = $level['mcount'];
 		}

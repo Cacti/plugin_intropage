@@ -15,23 +15,21 @@ require_once __DIR__ . '/../../panellib/syslog.php';
 
 /*
  * Flag-driven Syslog connection stub. syslog_connect() can only be declared
- * once per process, so its behaviour is controlled through a global flag that
- * each test sets. It mirrors the real helper: it opens the global $syslog_cnn
- * connection when the flag is set and leaves it closed otherwise.
+ * once per process, so its behaviour is controlled through globals that each
+ * test sets. It mirrors the real helper: the connection object can open even
+ * when the schema-readiness check fails, so $syslog_cnn may be populated while
+ * the function still returns false. __test_syslog_connect_ok drives the bool
+ * result; __test_syslog_cnn_open forces a populated connection regardless.
  */
 if (!function_exists('syslog_connect')) {
 	function syslog_connect(): bool {
 		global $syslog_cnn;
 
-		if (!empty($GLOBALS['__test_syslog_connect_ok'])) {
-			$syslog_cnn = new stdClass();
+		$ready = !empty($GLOBALS['__test_syslog_connect_ok']);
 
-			return true;
-		}
+		$syslog_cnn = ($ready || !empty($GLOBALS['__test_syslog_cnn_open'])) ? new stdClass() : null;
 
-		$syslog_cnn = null;
-
-		return false;
+		return $ready;
 	}
 }
 
@@ -49,6 +47,10 @@ if (!function_exists('syslog_db_fetch_cell_prepared')) {
 
 if (!function_exists('syslog_db_fetch_assoc_prepared')) {
 	function syslog_db_fetch_assoc_prepared($sql, $params = array()) {
+		if (!empty($GLOBALS['__test_syslog_query_false'])) {
+			return false;
+		}
+
 		return array();
 	}
 }
@@ -65,7 +67,7 @@ afterEach(function () {
 	$GLOBALS['__test_enabled_plugins'] = $GLOBALS['__intropage_syslog_enabled_restore'];
 	$GLOBALS['__test_cacti_log']       = $GLOBALS['__intropage_syslog_log_restore'];
 	$GLOBALS['syslog_cnn']             = null;
-	unset($GLOBALS['__test_syslog_connect_ok'], $GLOBALS['__intropage_syslog_enabled_restore'], $GLOBALS['__intropage_syslog_log_restore']);
+	unset($GLOBALS['__test_syslog_connect_ok'], $GLOBALS['__test_syslog_cnn_open'], $GLOBALS['__test_syslog_query_false'], $GLOBALS['__intropage_syslog_enabled_restore'], $GLOBALS['__intropage_syslog_log_restore']);
 });
 
 it('reports the syslog database ready when the connection opens', function () {
@@ -80,6 +82,15 @@ it('logs and reports failure when the syslog database cannot be opened', functio
 	$GLOBALS['__test_syslog_connect_ok'] = false;
 
 	expect(intropage_syslog_connect())->toBeFalse()
+		->and(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('could not open the Syslog database connection');
+});
+
+it('reports failure when the connection is populated but syslog_connect() returns false', function () {
+	$GLOBALS['__test_syslog_connect_ok'] = false;
+	$GLOBALS['__test_syslog_cnn_open']   = true;
+
+	expect(intropage_syslog_connect())->toBeFalse()
+		->and($GLOBALS['syslog_cnn'])->not->toBeNull()
 		->and(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('could not open the Syslog database connection');
 });
 
@@ -98,4 +109,25 @@ it('runs a syslog panel update without errors when the database is available', f
 	plugin_syslog_devices($panel, 1, 60);
 
 	expect($GLOBALS['__test_cacti_log'])->toBeEmpty();
+});
+
+it('tolerates a false levels query without warnings or corrupting the priority-0 count', function () {
+	$GLOBALS['__test_syslog_connect_ok']  = true;
+	$GLOBALS['__test_syslog_query_false'] = true;
+
+	$errors = array();
+	set_error_handler(function ($severity, $message) use (&$errors) {
+		$errors[] = $message;
+
+		return true;
+	});
+
+	try {
+		plugin_syslog_levels_trend();
+	} finally {
+		restore_error_handler();
+	}
+
+	expect($errors)->toBeEmpty()
+		->and($GLOBALS['__test_cacti_log'])->toBeEmpty();
 });
