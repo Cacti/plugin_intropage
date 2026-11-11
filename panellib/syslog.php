@@ -105,6 +105,55 @@ function register_syslog(): array {
 }
 
 /**
+ * Load the Syslog plugin's database library and open its database
+ * connection for the Intropage panels in this file.
+ *
+ * Syslog's tables may live in a database separate from Cacti's, reached
+ * through the global $syslog_cnn connection that syslog_connect() opens.
+ * Without that call the syslog_db_*() helpers fall back to the Cacti
+ * connection and fail with "Table 'cacti.syslog' doesn't exist" on a split
+ * database. Including setup.php makes syslog_connect() and the syslog_db_*()
+ * helpers available in the Intropage poller context; syslog_connect() is the
+ * entry point every Syslog consumer uses and is guarded to run its one-time
+ * schema check only once per process.
+ *
+ * @return bool True when the Syslog database connection is ready.
+ */
+function intropage_syslog_connect(): bool {
+	global $config, $syslog_cnn;
+
+	if (!function_exists('syslog_connect')) {
+		$setup = $config['base_path'] . '/plugins/syslog/setup.php';
+
+		if (file_exists($setup)) {
+			include_once($setup);
+		}
+	}
+
+	if (!function_exists('syslog_db_fetch_assoc_prepared')) {
+		foreach (['/plugins/syslog/database.php', '/plugins/syslog/includes/database.php'] as $lib) {
+			if (file_exists($config['base_path'] . $lib)) {
+				require_once($config['base_path'] . $lib);
+
+				break;
+			}
+		}
+	}
+
+	if (function_exists('syslog_connect')) {
+		syslog_connect();
+	}
+
+	if (empty($syslog_cnn)) {
+		cacti_log('ERROR: Intropage could not open the Syslog database connection', false, 'INTROPAGE');
+
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Trend-collection function for the 'plugin_syslog' panel: records
  * point-in-time snapshots of the syslog_incoming/syslog table row
  * counts and recent alert message count into plugin_intropage_trends,
@@ -120,12 +169,8 @@ function plugin_syslog_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
-		} else {
-			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		if (!intropage_syslog_connect()) {
+			return;
 		}
 
 		// Grab row counts from the information schema, it's faster
@@ -175,12 +220,8 @@ function plugin_syslog_levels_trend(): void {
 	global $config;
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
-		} else {
-			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		if (!intropage_syslog_connect()) {
+			return;
 		}
 
 		$data = [
@@ -203,7 +244,7 @@ function plugin_syslog_levels_trend(): void {
 			GROUP BY priority_id',
 			[2 * $pi, $pi]);
 
-		foreach ($levels as $level) {
+		foreach ((array) $levels as $level) {
 			$l        = (int) $level['priority_id'];
 			$data[$l] = $level['mcount'];
 		}
@@ -486,12 +527,11 @@ function plugin_syslog_devices($panel, $user_id, $timespan = 0): void {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
-		} else {
-			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		if (!intropage_syslog_connect()) {
+			$panel['data'] = __('Waiting for data', 'intropage');
+			save_panel_result($panel, $user_id);
+
+			return;
 		}
 
 		$lines = get_panel_lines_count($panel['height'], $user_id);
@@ -566,12 +606,8 @@ function plugin_syslog_devices_detail(): array {
 	}
 
 	if (api_plugin_is_enabled('syslog')) {
-		if (file_exists($config['base_path'] . '/plugins/syslog/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/database.php');
-		} else if (file_exists($config['base_path'] . '/plugins/syslog/includes/database.php')) {
-			require_once($config['base_path'] . '/plugins/syslog/includes/database.php');
-		} else {
-			cacti_log('ERROR: cannot include maint functions', false, 'INTROPAGE');
+		if (!intropage_syslog_connect()) {
+			return $panel;
 		}
 
 		$devices = syslog_db_fetch_assoc_prepared('SELECT sh.host AS ip ,count(*) AS hcount

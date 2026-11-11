@@ -2,6 +2,7 @@
 
 --- develop ---
 
+* bug: Open the Syslog plugin's own database connection before the Syslog panels query it, so a Syslog database that is separate from Cacti's no longer fails with "Table 'cacti.syslog' doesn't exist"; the panels now skip cleanly when that connection cannot be opened
 * issue#471: Do not return a phantom empty row when tailing newline-terminated log files; return no rows for empty files
 * dev: Run the CI poller with the shared runner group so RRD files and structured directories pass permission verification
 * issue#466: Tolerate a small overshoot over 100% in the busiest Used Space panels so DSSTATS averaging artifacts (e.g. used reading 100.004% of total) no longer log a false "Problem with DSSTAT data" warning; only a meaningful overshoot (over 110%) now warns
