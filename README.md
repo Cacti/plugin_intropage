@@ -90,7 +90,7 @@ screenshots and tests.
 
 ## Requirements
 
-- Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
+- Cacti 1.2.29 or later (the `compat` value in the `INFO` file). The plugin is
   tested in CI against the 1.2.x branch of Cacti, and it installs, enables and
   runs its poller script on the Cacti development branch (1.3).
 - PHP 8.0 or later for the plugin code. The Cacti release you run decides

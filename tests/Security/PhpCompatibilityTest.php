@@ -8,7 +8,7 @@
 */
 
 /*
- * INFO declares compat = 1.2.17. Cacti 1.2 ships
+ * INFO declares compat = 1.2.29. Cacti 1.2 ships
  * include/vendor/composer/platform_check.php, required from autoload_real.php
  * and reached from global.php at boot, and it throws when PHP_VERSION_ID is
  * below 80000. So 1.2 cannot run under PHP 8.0 and the plugin floor is

@@ -340,7 +340,7 @@ function intropage_upgrade_database(): void {
 						case 'permissions':
 							break;
 						default:
-							// db_is_safe_identifier() postdates the 1.2.17 baseline in INFO.
+							// db_is_safe_identifier() postdates the 1.2.29 baseline in INFO.
 							$safe = function_exists('db_is_safe_identifier')
 								? db_is_safe_identifier($c['Field'])
 								: preg_match('/^[A-Za-z0-9_]+$/', (string) $c['Field']) === 1;

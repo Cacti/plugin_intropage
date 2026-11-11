@@ -4,7 +4,7 @@
 
 When generating code for this repository:
 
-1. **Version Compatibility**: This is a Cacti plugin (`intropage`, "Intropage/Dashboard", version 4.0.5) targeting Cacti 1.2.17+
+1. **Version Compatibility**: This is a Cacti plugin (`intropage`, "Intropage/Dashboard", version 4.0.5) targeting Cacti 1.2.29+
 2. **Context Files**: Prioritize patterns and standards defined in this file (`.github/copilot-instructions.md`)
 3. **Codebase Patterns**: When context files don't provide specific guidance, scan the codebase for established patterns
 4. **Architectural Consistency**: Maintain plugin-based architecture extending Cacti core
