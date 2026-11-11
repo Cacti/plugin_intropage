@@ -357,11 +357,11 @@ function intropage_panels_filter(): void {
 			<form id='form_intropage_panels' action='intropage_panels.php'>
 			<table role='presentation' class='filterTable'>
 				<tr>
-					<td><?php print __('Search', 'intropage'); ?></td>
+					<td><label for='filter'><?php print __('Search', 'intropage'); ?></label></td>
 					<td>
 						<input type='text' class='ui-state-default ui-corner-all' id='filter' size='25' value='<?php print html_escape(get_request_var('filter')); ?>'>
 					</td>
-					<td><?php print __('Source', 'intropage'); ?></td>
+					<td><label for='plugin'><?php print __('Source', 'intropage'); ?></label></td>
 					<td>
 						<select id='plugin' onChange='applyFilter()'>
 							<option value='0'<?php print (get_request_var('plugin') == '0' ? ' selected' : ''); ?>><?php print __('Any', 'intropage'); ?></option>
@@ -375,7 +375,7 @@ function intropage_panels_filter(): void {
 							?>
 						</select>
 					</td>
-					<td><?php print __('Panels', 'intropage'); ?></td>
+					<td><label for='rows'><?php print __('Panels', 'intropage'); ?></label></td>
 					<td>
 						<select id='rows' onChange='applyFilter()'>
 							<option value='-1'<?php print (get_request_var('rows') == '-1' ? ' selected' : ''); ?>><?php print __('Default', 'intropage'); ?></option>
