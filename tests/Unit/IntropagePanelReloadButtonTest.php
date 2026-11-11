@@ -10,7 +10,7 @@
 /*
  * Unit coverage for intropage_panel_reload_button() in includes/functions.php:
  * a force-enabled panel header must render the fa-sync-alt reload glyph, which
- * includes/intropage.js spins while a reload is in flight.
+ * js/intropage.js spins while a reload is in flight.
  */
 
 require_once __DIR__ . '/../../includes/functions.php';

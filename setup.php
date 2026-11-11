@@ -489,8 +489,12 @@ function intropage_page_head(): void {
 
 	$selectedTheme = get_selected_theme();
 
-	// shared card chrome first so common.css / the theme can override its variables
-	print get_md5_include_css('plugins/intropage/includes/cards/cards.css');
+	// shared card chrome first so common.css / the theme can override its variables;
+	// Cacti 1.2.32+ ships it in core (include/css/cards.css), so bundle the plugin's
+	// own copy only when core does not provide it
+	if (!file_exists($config['base_path'] . '/include/css/cards.css')) {
+		print get_md5_include_css('plugins/intropage/css/cards.css');
+	}
 	print get_md5_include_css('plugins/intropage/css/common.css');
 
 	if (file_exists($config['base_path'] . '/plugins/intropage/css/' . $selectedTheme . '.css')) {

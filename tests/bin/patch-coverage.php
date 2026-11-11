@@ -168,6 +168,10 @@ $unmeasured_allowlist = [
 	// isolated unit process.
 	'display.php',
 	'poller_intropage.php',
+	// Directory-index redirect stub (header('Location:...') + top-level
+	// execution); added with the new js/ asset directory and not reachable from
+	// the isolated unit process. Matches the other per-directory index.php stubs.
+	'js/index.php',
 ];
 $unmeasured            = array_values(array_diff(array_keys($changed), array_keys($measured)));
 $unexpected_unmeasured = array_values(array_diff($unmeasured, $unmeasured_allowlist));
