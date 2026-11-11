@@ -854,3 +854,34 @@ it('withdraws core panels sourced from a deleted panellib file', function () {
 	expect($removed)->toBeGreaterThanOrEqual(1);
 	expect(intropage_reg_writes('DELETE FROM plugin_intropage_panel_registration'))->toHaveCount(1);
 });
+
+it('withdraws a core panel a panellib file no longer declares', function () {
+	$dir = sys_get_temp_dir() . '/introsync-' . bin2hex(random_bytes(5));
+	mkdir($dir, 0777, true);
+	file_put_contents($dir . '/synctest.php', "<?php function register_synctest() { return array('kept_panel' => array('name' => 'Kept', 'update_func' => 'u')); }\n");
+
+	$GLOBALS['__reg']['exists']         = true;
+	$GLOBALS['__reg']['core_file_rows'] = array(array('panel_id' => 'old_panel'), array('panel_id' => 'kept_panel'));
+
+	intropage_sync_core_file($dir . '/synctest.php');
+
+	// kept_panel is upserted; old_panel (no longer declared) is withdrawn.
+	expect(intropage_reg_writes('INSERT INTO plugin_intropage_panel_registration'))->toHaveCount(1);
+	expect(intropage_reg_writes('DELETE FROM plugin_intropage_panel_registration'))->toHaveCount(1);
+
+	@unlink($dir . '/synctest.php');
+	@rmdir($dir);
+});
+
+it('returns early for a panellib file without a register function', function () {
+	$dir = sys_get_temp_dir() . '/introsync2-' . bin2hex(random_bytes(5));
+	mkdir($dir, 0777, true);
+	file_put_contents($dir . '/noreg.php', "<?php // no register function here\n");
+
+	intropage_sync_core_file($dir . '/noreg.php');
+
+	expect(intropage_reg_writes('INSERT INTO plugin_intropage_panel_registration'))->toBe(array());
+
+	@unlink($dir . '/noreg.php');
+	@rmdir($dir);
+});
