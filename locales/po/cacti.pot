@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cacti \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
-"POT-Creation-Date: 2026-11-11 14:05-0500\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Cacti Developers <developers@cacti.net>>\n"
 "Language-Team: Cacti Developers <developers@cacti.net>\n"
@@ -16,8 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: display.php
+#: display.php intropage_panels.php
 msgid "Intropage - Permission Denied"
 msgstr ""
 
@@ -29,7 +30,7 @@ msgstr ""
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
 
-#: display.php includes/functions.php
+#: display.php includes/functions.php intropage_panels.php
 msgid "Default"
 msgstr ""
 
@@ -303,6 +304,10 @@ msgid "Panel not found"
 msgstr ""
 
 #: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr ""
+
+#: includes/functions.php
 msgid "The Panel includes a render function but it does not exist."
 msgstr ""
 
@@ -416,7 +421,11 @@ msgstr ""
 msgid "Trend Update Frequencies"
 msgstr ""
 
-#: includes/settings.php
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr ""
+
+#: includes/settings.php setup.php
 msgid "Intropage"
 msgstr ""
 
@@ -530,8 +539,9 @@ msgstr ""
 msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
 msgstr ""
 
-#: includes/variables.php panellib/graphs.php panellib/mactrack.php
-#: panellib/poller.php panellib/system.php panellib/thold.php
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
 msgid "Disabled"
 msgstr ""
 
@@ -857,6 +867,159 @@ msgstr ""
 msgid "Yellow / Red"
 msgstr ""
 
+#: intropage_panels.php
+msgid "Enable"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] ""
+msgstr[1] ""
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] ""
+msgstr[1] ""
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr ""
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr ""
+
+#: intropage_panels.php
+msgid "Source"
+msgstr ""
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr ""
+
+#: intropage_panels.php
+msgid "Category"
+msgstr ""
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr ""
+
+#: intropage_panels.php
+msgid "Level"
+msgstr ""
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr ""
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr ""
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr ""
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr ""
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr ""
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr ""
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr ""
+
+#: intropage_panels.php
+msgid "System"
+msgstr ""
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr ""
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr ""
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr ""
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Search"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Any"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Go"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr ""
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr ""
+
 #: panellib/alert.php panellib/syslog.php
 msgid "Alerts"
 msgstr ""
@@ -956,10 +1119,6 @@ msgstr ""
 msgid "IP Address"
 msgstr ""
 
-#: panellib/analyze.php panellib/graphs.php panellib/thold.php
-msgid "Status"
-msgstr ""
-
 #: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
 msgid "Failed"
 msgstr ""
@@ -975,10 +1134,6 @@ msgstr ""
 #: panellib/analyze.php
 #, php-format
 msgid "Total Failed Logins: %s"
-msgstr ""
-
-#: panellib/analyze.php
-msgid "None"
 msgstr ""
 
 #: panellib/analyze.php
@@ -1240,10 +1395,6 @@ msgstr ""
 
 #: panellib/analyze.php
 msgid "Analyze Logins Detail"
-msgstr ""
-
-#: panellib/analyze.php
-msgid "User"
 msgstr ""
 
 #: panellib/analyze.php panellib/misc.php
@@ -2386,6 +2537,14 @@ msgid "Intropage Administration"
 msgstr ""
 
 #: setup.php
+msgid "Management"
+msgstr ""
+
+#: setup.php
+msgid "Panel Library"
+msgstr ""
+
+#: setup.php
 msgid "System Administration"
 msgstr ""
 
@@ -2419,4 +2578,8 @@ msgstr ""
 #: setup.php
 #, php-format
 msgid "%d Day"
+msgstr ""
+
+#: setup.php
+msgid "Actions"
 msgstr ""

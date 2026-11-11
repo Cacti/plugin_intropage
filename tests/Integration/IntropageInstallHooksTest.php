@@ -30,7 +30,7 @@ it('registers every hook intropage depends on, both realms, and provisions its s
 		$hooks[$registered['hook']] = $registered;
 	}
 
-	foreach (array('config_settings', 'config_arrays', 'login_options_navigate', 'top_header_tabs', 'top_graph_header_tabs', 'console_after', 'page_head', 'graph_buttons', 'poller_bottom', 'user_remove', 'user_group_remove') as $expected) {
+	foreach (array('config_settings', 'config_arrays', 'login_options_navigate', 'top_header_tabs', 'top_graph_header_tabs', 'console_after', 'page_head', 'draw_navigation_text', 'graph_buttons', 'poller_bottom', 'user_remove', 'user_group_remove') as $expected) {
 		expect($hooks)->toHaveKey($expected);
 		expect($hooks[$expected]['name'])->toBe('intropage');
 	}
@@ -39,4 +39,5 @@ it('registers every hook intropage depends on, both realms, and provisions its s
 
 	expect($realms)->toContain('intropage.php');
 	expect($realms)->toContain('intropage_admin.php');
+	expect($realms)->toContain('intropage_panels.php');
 });

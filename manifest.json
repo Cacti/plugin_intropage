@@ -1,7 +1,9 @@
 {
     "tombstones": [
         "include/",
-        "themes/"
+        "themes/",
+        "includes/cards/",
+        "includes/intropage.js"
     ],
     "expected": [
         "CHANGELOG.md",
@@ -15,6 +17,8 @@
         "includes/",
         "index.php",
         "intropage.php",
+        "intropage_panels.php",
+        "js/",
         "locales/",
         "manifest.json",
         "panellib/",

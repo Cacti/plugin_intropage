@@ -24,6 +24,13 @@
  +-------------------------------------------------------------------------+
 */
 
+/* Expose the third-party panel registration API (intropage_register_panel()
+ * et al.) as soon as this plugin's setup.php is loaded. Cacti includes every
+ * enabled plugin's setup.php during start-up, before plugin hooks such as
+ * config_arrays run, so a foreign plugin's function_exists('intropage_register_panel')
+ * guard succeeds no matter the hook order. */
+include_once(__DIR__ . '/includes/registration.php');
+
 /**
  * Return the CSP nonce attribute for inline <script> tags, safely across
  * Cacti versions. Newer Cacti releases enforce a Content-Security-Policy that
@@ -62,6 +69,8 @@ function plugin_intropage_install(): void {
 	api_plugin_register_hook('intropage', 'console_after', 'intropage_console_after', 'includes/settings.php');
 	api_plugin_register_hook('intropage', 'page_head', 'intropage_page_head', 'setup.php');
 
+	api_plugin_register_hook('intropage', 'draw_navigation_text', 'intropage_draw_navigation_text', 'setup.php');
+
 	api_plugin_register_hook('intropage', 'graph_buttons', 'intropage_graph_button', 'includes/functions.php');
 	api_plugin_register_hook('intropage', 'graph_buttons_thumbnails', 'intropage_graph_button', 'includes/functions.php');
 
@@ -84,10 +93,12 @@ function plugin_intropage_install(): void {
 
 	api_plugin_register_realm('intropage', 'intropage.php', 'Intropage Viewer', 1);
 	api_plugin_register_realm('intropage', 'intropage_admin.php', 'Intropage Administration', 1);
+	api_plugin_register_realm('intropage', 'intropage_panels.php', 'Intropage Panel Library', 1);
 
 	$realms = [
 		__('Intropage Viewer', 'intropage'),
-		__('Intropage Administration', 'intropage')
+		__('Intropage Administration', 'intropage'),
+		__('Intropage Panel Library', 'intropage')
 	];
 
 	intropage_setup_database();
@@ -177,11 +188,36 @@ function intropage_cleanup_legacy_include(): void {
  *                                    used directly here.
  */
 function intropage_config_arrays(): void {
-	global $intropage_intervals, $trend_timespans, $panel_lines;
+	global $intropage_intervals, $trend_timespans, $panel_lines, $menu, $menu_glyphs;
 
 	// Runs before any stale include/ hook can load the old library and
 	// redeclare functions already defined by includes/.
 	intropage_cleanup_legacy_include();
+
+	// Add the Panel Library management page to the Console menu, after the
+	// Management section, for users with the administration realm.
+	if (is_array($menu) && api_plugin_user_realm_auth('intropage_panels.php')) {
+		$menu2 = [];
+
+		foreach ($menu as $section => $items) {
+			$menu2[$section] = $items;
+
+			if ($section == __('Management')) {
+				$menu2[__('Intropage', 'intropage')]['plugins/intropage/intropage_panels.php'] = __('Panel Library', 'intropage');
+			}
+		}
+
+		// If there was no Management section to anchor to, append our own.
+		if (!isset($menu2[__('Intropage', 'intropage')])) {
+			$menu2[__('Intropage', 'intropage')]['plugins/intropage/intropage_panels.php'] = __('Panel Library', 'intropage');
+		}
+
+		$menu = $menu2;
+
+		if (is_array($menu_glyphs)) {
+			$menu_glyphs[__('Intropage', 'intropage')] = 'fa fa-th-large';
+		}
+	}
 
 	// Core builds $user_auth_roles with __('Normal User') in the core domain
 	// (include/global_arrays.php), and auth_augment_roles() indexes by that
@@ -230,6 +266,32 @@ function intropage_config_arrays(): void {
 			unset($intropage_intervals[$key]);
 		}
 	}
+}
+
+/**
+ * Adds the Panel Library management page to the Cacti navigation
+ * (breadcrumb) registry. Registered as the 'draw_navigation_text' hook.
+ *
+ * @param array $nav The navigation array provided by Cacti.
+ *
+ * @return array The navigation array with the Panel Library pages added.
+ */
+function intropage_draw_navigation_text($nav) {
+	$nav['intropage_panels.php:'] = [
+		'title'   => __('Intropage Panel Library', 'intropage'),
+		'mapping' => 'index.php:',
+		'url'     => 'intropage_panels.php',
+		'level'   => '1'
+	];
+
+	$nav['intropage_panels.php:actions'] = [
+		'title'   => __('Actions', 'intropage'),
+		'mapping' => 'index.php:,intropage_panels.php:',
+		'url'     => 'intropage_panels.php',
+		'level'   => '2'
+	];
+
+	return $nav;
 }
 
 /**
@@ -489,8 +551,12 @@ function intropage_page_head(): void {
 
 	$selectedTheme = get_selected_theme();
 
-	// shared card chrome first so common.css / the theme can override its variables
-	print get_md5_include_css('plugins/intropage/includes/cards/cards.css');
+	// shared card chrome first so common.css / the theme can override its variables;
+	// Cacti 1.2.32+ ships it in core (include/css/cards.css), so bundle the plugin's
+	// own copy only when core does not provide it
+	if (!file_exists($config['base_path'] . '/include/css/cards.css')) {
+		print get_md5_include_css('plugins/intropage/css/cards.css');
+	}
 	print get_md5_include_css('plugins/intropage/css/common.css');
 
 	if (file_exists($config['base_path'] . '/plugins/intropage/css/' . $selectedTheme . '.css')) {

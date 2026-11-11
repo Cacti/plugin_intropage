@@ -61,6 +61,10 @@ function display_information(): bool {
 
 	intropage_upgrade_database();
 
+	// Remove panels whose owning third-party plugin has been uninstalled so
+	// they no longer appear on any dashboard.
+	intropage_prune_stale_registrations();
+
 	$panels = initialize_panel_library();
 
 	$login_opts = get_login_opts();
@@ -534,7 +538,15 @@ function display_information(): bool {
 	}
 	// end of admin panel
 
+	$disabled_panels = intropage_disabled_panel_ids();
+
 	foreach ($panels as $xkey => $xvalue) {
+		// Skip panels an administrator has disabled on the Panel Library
+		// management page; their data is retained but they are not rendered.
+		if (in_array($xvalue['panel_id'], $disabled_panels, true)) {
+			continue;
+		}
+
 		intropage_create_panel($xvalue['id'], $dashboard_id);
 	}
 
@@ -572,8 +584,12 @@ function display_information(): bool {
 	</script>
 
 	<?php
-	print get_md5_include_js($config['base_path'] . '/plugins/intropage/includes/cards/cards.js');
-	print get_md5_include_js($config['base_path'] . '/plugins/intropage/includes/intropage.js');
+	// Cacti 1.2.32+ ships the shared card chrome in core (include/js/cards.js);
+	// bundle the plugin's own copy only when core does not provide it.
+	if (!file_exists($config['base_path'] . '/include/js/cards.js')) {
+		print get_md5_include_js($config['base_path'] . '/plugins/intropage/js/cards.js');
+	}
+	print get_md5_include_js($config['base_path'] . '/plugins/intropage/js/intropage.js');
 
 	return true;
 }

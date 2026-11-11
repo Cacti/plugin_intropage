@@ -16,6 +16,13 @@ about the panels of the file.  Every '.php' file in this directory is loaded;
 a plugin cannot register a panel from a file in its own directory, the file has
 to be placed here.
 
+Third-party plugins that want to contribute panels from their own directory,
+without copying a file into this directory, should instead use the panel
+registration API (`intropage_register_panel()` and friends). That API, the full
+panel attribute schema and the `plugin_intropage_panel_registration` table are
+documented under "Registering panels from another plugin" in the top-level
+`README.md`.
+
 The registration function also names the group (the 'class') of its panels in
 the global $registry. The name and description are used on the permission pages
 of users and groups.

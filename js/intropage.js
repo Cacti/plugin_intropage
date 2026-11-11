@@ -282,7 +282,7 @@ function initPage() {
 	$('.third-panel').css('width', intropage_panel_third_width);
 	$('.half-panel').css('width', intropage_panel_half_width);
 
-	// Shared card chrome (includes/cards/cards.js) drives reorder + per-card
+	// Shared card chrome (js/cards.js) drives reorder + per-card
 	// tools; the adapter maps those to intropage's existing endpoints.
 	var panelGrid = document.getElementById('panel_container');
 

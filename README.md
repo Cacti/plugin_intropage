@@ -90,7 +90,7 @@ screenshots and tests.
 
 ## Requirements
 
-- Cacti 1.2.17 or later (the `compat` value in the `INFO` file). The plugin is
+- Cacti 1.2.29 or later (the `compat` value in the `INFO` file). The plugin is
   tested in CI against the 1.2.x branch of Cacti, and it installs, enables and
   runs its poller script on the Cacti development branch (1.3).
 - PHP 8.0 or later for the plugin code. The Cacti release you run decides
@@ -330,7 +330,10 @@ limited to what the user is allowed to see in Cacti.
 The installation creates these tables: `plugin_intropage_panel_definition`,
 `plugin_intropage_panel_data`, `plugin_intropage_panel_dashboard`,
 `plugin_intropage_dashboard`, `plugin_intropage_user_auth`,
-`plugin_intropage_user_group_auth` and `plugin_intropage_trends`.
+`plugin_intropage_user_group_auth`, `plugin_intropage_panel_registration` and
+`plugin_intropage_trends`. `plugin_intropage_panel_registration` holds panels
+published by other plugins through the
+[registration API](#registering-panels-from-another-plugin).
 
 ## How to add new Panel Libraries and Panels?
 
@@ -388,9 +391,237 @@ added to a dashboard. The keys are described in `panellib/README.md`.
 
 `intropage_add_panel()` and `intropage_remove_panel()` in `setup.php` do not
 work with the current tables and are not a way to add a panel. A panel library
-file in `panellib` is the only way, and a plugin cannot supply its own file
-from its own directory: the file has to be copied into the `panellib`
-directory of Intropage.
+file in `panellib` is the only way to ship panels *inside* Intropage. Another
+plugin that wants to contribute panels *from its own directory*, without
+copying a file into `panellib`, uses the
+[registration API](#registering-panels-from-another-plugin) described below.
+
+## Registering panels from another plugin
+
+Any Cacti plugin can publish its own Intropage dashboard panels at runtime
+through a small, stable API. The panels behave exactly like the built-in
+`panellib` panels once registered: Intropage polls them, users can be granted
+them and add them to dashboards, and they are automatically removed from every
+dashboard when the owning plugin is uninstalled.
+
+Because the API only exists while Intropage is installed, always guard each
+call with `function_exists()` so your plugin degrades gracefully when Intropage
+is absent:
+
+    if (function_exists('intropage_register_panel')) {
+        intropage_register_panel($panel);
+    }
+
+The typical place to call it is your plugin's `*_config_arrays` (or install /
+enable) hook. Intropage defines the API in its `setup.php`, which Cacti loads
+for every enabled plugin during start-up (before plugin hooks such as
+`config_arrays` run), so the `function_exists()` guard succeeds regardless of
+plugin order. Registration is idempotent, so re-registering on every page load
+is safe and keeps the definition in sync with your code.
+
+Every registration is stored in the `plugin_intropage_panel_registration`
+table and merged into the live panel library by `initialize_panel_library()`.
+
+Registrations are also validated and protected on write:
+
+* a `panel_id` must not be purely numeric (Intropage treats numeric ids as
+  panel-data row ids) and must be unique;
+* a `panel_id` that already names a built-in Intropage panel, or one already
+  registered by a *different* plugin, is rejected — only the owning plugin may
+  re-register or withdraw its own panels;
+* string attributes are capped at the live panel-definition column widths
+  (`name`/callback names 30, `description` 200, `class` 30, `requires` 128,
+  `width` 20), so a registration can never overflow or truncate on write.
+
+### Panel registration schema
+
+A registration is an associative array passed to `intropage_register_panel()`.
+Only `panel_id`, `plugin`, `name` and `update_func` are mandatory; every other
+attribute has the default shown below.
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `panel_id` | string | **yes** | — | Globally unique panel id, 1-50 chars of `[A-Za-z0-9_]`, not purely numeric. Prefix it with your plugin name to avoid collisions (e.g. `myplugin_status`). This is the primary key of the registration. |
+| `plugin` | string | **yes** | — | The registering plugin's directory name (the `directory` value in `plugin_config`). Intropage uses it to detect when your plugin is uninstalled and to prune the panel. |
+| `name` | string | **yes** | — | Human-readable panel title (max 30 chars) shown on the dashboard. Wrap in `__( , 'yourplugin')` for translation. |
+| `update_func` | string | **yes** | — | Name of the function that collects/renders the panel's data. Called by the poller as `update_func($panel, $user_id)`; it should call `save_panel_result()`. Must be defined in `include_file` (or already loaded). |
+| `description` | string | no | `''` | Longer description shown in the panel picker. |
+| `class` | string | no | *plugin name* | Category/grouping key for the panel. |
+| `level` | int | no | `PANEL_USER` (1) | `PANEL_SYSTEM` (0) = one shared panel for every user; `PANEL_USER` (1) = a per-user panel honoring per-user permissions. |
+| `priority` | int | no | `50` | Sort priority on the dashboard (higher sorts first). 0-255. |
+| `alarm` | string | no | `grey` | Initial severity bubble color: `red`, `yellow`, `green` or `grey`. |
+| `width` | string | no | `quarter-panel` | Panel width class (e.g. `quarter-panel`, `half-panel`, `full-panel`). |
+| `height` | string | no | `normal` | Panel height: `normal`, `double` or `triple`. |
+| `height_fixed` | bool | no | `false` | When true the user cannot grow/shrink the panel height. |
+| `force` | bool | no | `true` | Whether the user may trigger a forced (immediate) update instead of waiting for the poller. |
+| `requires` | string | no | *plugin name* | Comma-separated list of plugin directory names that must be **enabled** for the panel to render. Defaults to the owning plugin. Set to `''` for no runtime dependency. |
+| `include_file` | string | no | `''` | Path (relative to the Cacti base path) of the PHP file that defines your `update_func`/`details_func`/`trends_func`, e.g. `plugins/myplugin/intropage_panels.php`. Must live under `plugins/` and end in `.php`; Intropage includes it before calling your functions. Omit it only if the functions are already loaded on every request. |
+| `details_func` | string | no | `''` | Name of the function rendering the panel's "details" dialog. Empty = no details link. |
+| `trends_func` | string | no | `''` | Name of the function collecting long-term trend data. Empty = none. |
+| `refresh` | int | no | `3600` | Data collection interval in seconds. |
+| `trefresh` | int | no | `3600` | Trend collection interval in seconds. |
+| `request_vars` | array | no | `[]` | Declares the request variables the details function consumes and their types (see below). |
+| `enabled` | bool | no | `true` | Whether the registration is active immediately. A disabled registration is stored but not published. |
+
+### Request variable schema (`request_vars`)
+
+`request_vars` is a list of associative arrays, one per request variable your
+details function reads. Intropage stores them and can sanitize the incoming
+request for you via `intropage_validate_request_vars($panel_id)`.
+
+| Key | Type | Required | Description |
+|-----|------|----------|-------------|
+| `name` | string | **yes** | Request variable name, `[A-Za-z0-9_]`. |
+| `type` | string | **yes** | One of `integer`, `numeric`, `boolean`, `alphanumeric`, `string` (see table below). |
+| `required` | bool | no | When true, a missing value is logged as a warning. |
+| `default` | mixed | no | Value returned when the variable is absent or fails validation. |
+
+Supported request variable types:
+
+| `type` | Validation |
+|--------|------------|
+| `integer` | Signed integer (`FILTER_VALIDATE_INT`). |
+| `numeric` | Float or integer (`FILTER_VALIDATE_FLOAT`). |
+| `boolean` | `1/0`, `true/false`, `on/off`, `yes/no`. |
+| `alphanumeric` | ASCII letters and digits only (`^[A-Za-z0-9]+$`). |
+| `string` | Free text with HTML tags and control characters stripped. |
+
+### API calls
+
+All functions live in `includes/registration.php` and are available once
+Intropage's `includes/functions.php` is loaded (it is on every Intropage and
+poller request).
+
+- **Register / replace** — `intropage_register_panel(array $panel)`
+  Validates and stores the panel, then (when enabled and the owning plugin is
+  installed) immediately publishes it: upserts the panel definition, seeds a
+  data row and grants the admin user permission so it is pollable and grantable
+  at once. Re-registering an existing `panel_id` fully replaces it. Returns
+  `true` on success, or an **array of validation error strings** on failure.
+
+- **Update selected attributes** — `intropage_update_panel_registration(string $panel_id, array $fields)`
+  Changes only the attributes present in `$fields` (e.g. just `priority`,
+  `alarm`, `refresh` or `request_vars`) and leaves the rest untouched. Returns
+  `true`, or an array of error strings (including when `panel_id` is unknown).
+
+- **Enable** — `intropage_enable_panel_registration(string $panel_id)`
+  Marks a disabled registration active and republishes it. Returns `bool`.
+
+- **Disable** — `intropage_disable_panel_registration(string $panel_id)`
+  Deactivates the panel: removes it from the live library, from every
+  dashboard and from the definition/data tables, but keeps the registration
+  row so it can be re-enabled later. Returns `bool`.
+
+- **Delete** — `intropage_unregister_panel(string $panel_id)`
+  Permanently removes the registration and its entire footprint (definition,
+  data, dashboard placements and per-user/group permissions). Call this from
+  your plugin's uninstall hook. Returns `bool`.
+  `intropage_unregister_plugin_panels(string $plugin)` removes every panel a
+  plugin registered in one call and returns the count.
+
+- **Introspect** — `intropage_get_panel_registration(string $panel_id)` returns
+  one registration (with `request_vars` decoded), and
+  `intropage_get_panel_registrations(string $plugin = '')` returns all of them
+  (optionally limited to one plugin).
+
+- **Read request variables** — `intropage_validate_request_vars(string $panel_id)`
+  returns the panel's declared request variables read from the current request
+  and sanitized by their declared types, each falling back to its `default`.
+
+### Automatic cleanup
+
+On every poller cycle and every dashboard view Intropage calls
+`intropage_prune_stale_registrations()`, which deletes any registration whose
+owning plugin is no longer present in `plugin_config` and strips the panel from
+all dashboards, data, definitions and permissions. A plugin that is merely
+*disabled* (still installed) keeps its registration; its panels simply stop
+rendering until the plugin — listed in `requires` — is enabled again.
+
+### The registration table is the single panel catalog
+
+The `plugin_intropage_panel_registration` table holds **every** panel — the
+built-in `panellib/` panels as well as third-party ones. Built-in panels are
+owned by the reserved `intropage` plugin name and are kept in sync
+automatically: on each poller cycle `intropage_sync_core_registrations()`
+compares every `panellib/*.php` file's modification time against the last sync
+and, when a file has changed (or is new or removed), re-runs that file's
+`register_<basename>()` function and upserts its panels into the table. This
+means the panel catalog is read from the table instead of being rebuilt from
+disk on every web request; editing a panellib file is picked up on the next
+poller run without any manual "Reload Panel Definitions".
+
+### Panel source prefixes
+
+Panel titles are prefixed by their source wherever they are shown (dashboard
+cards and the detail dialog): Intropage's own panels are prefixed `Core - `,
+and panels registered by another plugin are prefixed with the plugin's name in
+title case, e.g. `Mactrack - `. The prefix is derived from the owning plugin
+recorded in the registration table.
+
+### Panel Library management page
+
+**Console > Intropage > Panel Library** (`intropage_panels.php`, guarded by the
+*Intropage Panel Library* realm) lists every registered panel in a filterable,
+sortable table with a free-text search, a **Source** dropdown (filter by the
+providing plugin, with Intropage shown as *Core*) and **Enable**/**Disable**
+bulk actions. Disabling a panel is non-destructive: it is hidden from
+dashboards and skipped by the poller, but its stored data and dashboard
+placements are retained, so re-enabling restores it unchanged. The columns are
+Panel Name, Source, Category, Level (System/User), Requires, Refresh, Update
+Function and Status.
+
+### Example
+
+A file `plugins/myplugin/intropage_panels.php` shipped by a plugin named
+`myplugin`:
+
+    <?php
+    function myplugin_register_intropage_panels(): void {
+        if (!function_exists('intropage_register_panel')) {
+            return;
+        }
+
+        intropage_register_panel([
+            'panel_id'     => 'myplugin_status',
+            'plugin'       => 'myplugin',
+            'name'         => __('My Plugin Status', 'myplugin'),
+            'description'  => __('Current status reported by My Plugin.', 'myplugin'),
+            'class'        => 'myplugin',
+            'level'        => PANEL_SYSTEM,
+            'priority'     => 60,
+            'alarm'        => 'green',
+            'width'        => 'quarter-panel',
+            'height'       => 'normal',
+            'refresh'      => 300,
+            'include_file' => 'plugins/myplugin/intropage_panels.php',
+            'update_func'  => 'myplugin_intropage_update',
+            'details_func' => 'myplugin_intropage_details',
+            'request_vars' => [
+                ['name' => 'device_id', 'type' => 'integer', 'required' => true, 'default' => 0],
+            ],
+        ]);
+    }
+
+    function myplugin_intropage_update($panel, $user_id): void {
+        $panel['alarm'] = 'green';
+        $panel['data']  = __('All systems nominal', 'myplugin');
+
+        save_panel_result($panel, $user_id);
+    }
+
+    function myplugin_intropage_details() {
+        $vars = intropage_validate_request_vars('myplugin_status');
+
+        return [
+            'name'   => __('My Plugin Status', 'myplugin'),
+            'alarm'  => 'green',
+            'detail' => __('Details for device %d', $vars['device_id'], 'myplugin'),
+        ];
+    }
+
+Call `myplugin_register_intropage_panels()` from your plugin's
+`config_arrays` or install hook, and call
+`intropage_unregister_plugin_panels('myplugin')` from your uninstall hook.
 
 ## Translations
 

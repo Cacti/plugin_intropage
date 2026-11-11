@@ -27,6 +27,9 @@
 define('PANEL_SYSTEM', 0);
 define('PANEL_USER',   1);
 
+// Third-party panel registration API (intropage_register_panel() et al.)
+include_once(__DIR__ . '/registration.php');
+
 if (isset($run_from_poller)) {
 	$_SESSION['sess_user_id'] = 0;
 }
@@ -1041,7 +1044,7 @@ function intropage_panel_visible($panel_id): bool {
 
 /**
  * Builds the force-reload control shown in a force-enabled panel's
- * header. Clicking it invokes reload_panel() (see includes/intropage.js),
+ * header. Clicking it invokes reload_panel() (see js/intropage.js),
  * which spins the fa-sync-alt glyph while the panel reloads.
  *
  * @param int|string $panel_id The id of the panel the control reloads.
@@ -1175,13 +1178,22 @@ function intropage_reload_panel(): void {
 			$qpanel = get_panel($panel['panel_id'], $user_id);
 
 			if (function_exists($function)) {
-				if ($forced_update || time() > ($qpanel['last'] + $qpanel['refresh'])) {
-					// Reload the data
-					$function($qpanel, $user_id);
-				}
+				// @codeCoverageIgnoreStart
+				if (!is_panel_enabled($panel['panel_id'])) {
+					// A registered (or built-in) panel whose required plugin was
+					// disabled after it was added to a dashboard must not keep
+					// executing its callback.
+					$data = ['alarm' => 'grey', 'data' => __('This panel is unavailable because its required plugin is disabled.', 'intropage')];
+				} else {
+					if ($forced_update || time() > ($qpanel['last'] + $qpanel['refresh'])) {
+						// Reload the data
+						$function($qpanel, $user_id);
+					}
 
-				// Return the data for display
-				$data = get_panel_data($qpanel['panel_id'], $user_id);
+					// Return the data for display
+					$data = get_panel_data($qpanel['panel_id'], $user_id);
+				}
+				// @codeCoverageIgnoreEnd
 			} else {
 				$data = __('The Panel includes a render function but it does not exist.', 'intropage');
 			}
@@ -1296,11 +1308,15 @@ function intropage_detail_panel(): void {
 
 		$function = $spanel['details_func'];
 
-		if (function_exists($function)) {
+		// @codeCoverageIgnoreStart
+		if (!is_panel_enabled($panel_name)) {
+			$data['detail'] = __('This panel is unavailable because its required plugin is disabled.', 'intropage');
+		} elseif (function_exists($function)) {
 			$data = $function();
 		} else {
 			$data['detail'] = __('Details Function does not exist.', 'intropage');
 		}
+		// @codeCoverageIgnoreEnd
 
 		print '<div class="cactiTableTitleRow">';
 		print '<div class="cactiTableTitle">' . $data['name'] . '</div>';
@@ -1414,6 +1430,11 @@ function get_panel($panel_id, int $user_id = 0): array {
 		$definition['alarm']	    = 'grey';
 		$definition['height']	   = 'normal';
 	}
+
+	// Prefix the title with its source ("Core -" / "Plugin -") so every place
+	// that renders the definition name (dashboard cards, detail dialog) shows
+	// where the panel came from.
+	$definition['name'] = intropage_prefix_panel_name((string) $panel_id, (string) $definition['name']);
 
 	if (is_array($panel) && cacti_sizeof($panel)) {
 		$last_update      = $panel['ts'];
@@ -1725,6 +1746,13 @@ function initialize_panel_library(): array {
 
 	static $panel_library = [];
 
+	// A registration mutation in this request raises this flag to discard the
+	// cached library so the next build reflects the change.
+	if (!empty($GLOBALS['intropage_panel_library_stale'])) {
+		$panel_library = [];
+		$GLOBALS['intropage_panel_library_stale'] = false;
+	}
+
 	if (!sizeof($panel_library)) {
 		$panels    = [];
 		$uninstall = [];
@@ -1744,6 +1772,10 @@ function initialize_panel_library(): array {
 
 					// Check to see if the panel should be activated
 					foreach ($base_panels as $panel_id => $p) {
+						// Tag built-in panels with the reserved 'intropage'
+						// owner so their titles are prefixed "Core -".
+						$base_panels[$panel_id]['plugin'] = 'intropage';
+
 						if (isset($p['requires']) && $p['requires'] !== false) {
 							$plugins = explode(',', $p['requires']);
 
@@ -1768,36 +1800,83 @@ function initialize_panel_library(): array {
 			}
 		}
 
-		// Handle unregistered panels
-		if (cacti_sizeof($uninstall) && read_config_option('intropage_unregister') == 'on') {
-			foreach ($uninstall as $panel_id) {
-				$id = db_fetch_cell_prepared('SELECT id
-					FROM plugin_intropage_panel_data
-					WHERE panel_id = ?',
-					[$panel_id]);
+		// Handle panels whose required plugin is no longer installed.
+		intropage_unregister_missing_panels($uninstall);
 
-				if ($id > 0) {
-					db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
-						WHERE panel_id = ?',
-						[$id]);
+		// Merge in panels published by third-party plugins via the
+		// registration API. These are kept in a separate table and
+		// contributed last so they can extend, but never silently clobber,
+		// the built-in panellib panels.
+		$panel_library = intropage_merge_registered_panels($panels);
 
-					db_execute_prepared('DELETE FROM plugin_intropage_panel_data
-						WHERE id = ?',
-						[$id]);
-
-					db_execute_prepared('DELETE FROM plugin_intropage_definition
-						WHERE panel_id = ?',
-						[$panel_id]);
-				}
-			}
+		// Drop panels an administrator has disabled on the Panel Library
+		// management page (core or third-party), so they are hidden from
+		// dashboards, the panel picker and the poller without deleting data.
+		foreach (intropage_disabled_panel_ids() as $disabled_id) {
+			unset($panel_library[$disabled_id]);
 		}
-
-		$panel_library = $panels;
 
 		$_SESSION['intropage_panel_library'] = $panel_library;
 	}
 
 	return $panel_library;
+}
+
+/**
+ * Removes the stored footprint (dashboard placements, data and definition
+ * rows) of panels whose required plugin is no longer installed, when the
+ * administrator has enabled automatic unregistering. Factored out of
+ * initialize_panel_library() so the cleanup is unit-testable in isolation.
+ *
+ * @param array $uninstall Panel ids whose required plugin is missing.
+ *
+ * @return void
+ */
+function intropage_unregister_missing_panels(array $uninstall): void {
+	if (!cacti_sizeof($uninstall) || read_config_option('intropage_unregister') != 'on') {
+		return;
+	}
+
+	foreach ($uninstall as $panel_id) {
+		$id = db_fetch_cell_prepared('SELECT id
+			FROM plugin_intropage_panel_data
+			WHERE panel_id = ?',
+			[$panel_id]);
+
+		if ($id > 0) {
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_dashboard
+				WHERE panel_id = ?',
+				[$id]);
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_data
+				WHERE id = ?',
+				[$id]);
+
+			db_execute_prepared('DELETE FROM plugin_intropage_panel_definition
+				WHERE panel_id = ?',
+				[$panel_id]);
+		}
+	}
+}
+
+/**
+ * Merges the panels published by third-party plugins through the registration
+ * API into a built-in panel library array. Registered panels are contributed
+ * last so they can extend, but never silently clobber, the built-in panellib
+ * panels. Factored out of initialize_panel_library() for unit-testability.
+ *
+ * @param array $library The built-in panel library, keyed by panel id.
+ *
+ * @return array The library with enabled registrations merged in.
+ */
+function intropage_merge_registered_panels(array $library): array {
+	$registered = intropage_load_registered_panels();
+
+	if (cacti_sizeof($registered)) {
+		$library += $registered;
+	}
+
+	return $library;
 }
 
 /**
