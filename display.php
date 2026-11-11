@@ -538,7 +538,15 @@ function display_information(): bool {
 	}
 	// end of admin panel
 
+	$disabled_panels = intropage_disabled_panel_ids();
+
 	foreach ($panels as $xkey => $xvalue) {
+		// Skip panels an administrator has disabled on the Panel Library
+		// management page; their data is retained but they are not rendered.
+		if (in_array($xvalue['panel_id'], $disabled_panels, true)) {
+			continue;
+		}
+
 		intropage_create_panel($xvalue['id'], $dashboard_id);
 	}
 

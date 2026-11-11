@@ -76,6 +76,15 @@ function intropage_reg_router(string $kind, string $sql, array $params) {
 	if ($has('plugin_intropage_user_auth') && $has('permissions')) {
 		return $r['perm_rows_user'];
 	}
+	if ($has('SELECT panel_id, plugin')) {
+		return $r['source_rows'];
+	}
+	if ($has('WHERE enabled = 0')) {
+		return $r['disabled_rows'];
+	}
+	if ($has("plugin = 'intropage'") && $has('include_file = ?')) {
+		return $r['core_file_rows'];
+	}
 	if ($has('WHERE plugin')) {
 		return $r['rows_by_plugin'];
 	}
@@ -138,7 +147,7 @@ beforeEach(function () {
 	$_REQUEST                   = array();
 	$GLOBALS['__test_request']  = array();
 	$GLOBALS['registry']        = array();
-	unset($GLOBALS['intropage_panel_library_stale']);
+	unset($GLOBALS['intropage_panel_library_stale'], $GLOBALS['intropage_panel_sources'], $GLOBALS['intropage_disabled_panels']);
 
 	$GLOBALS['__reg'] = array(
 		'plugin_present'  => true,
@@ -157,6 +166,9 @@ beforeEach(function () {
 		'perm_rows_user'  => array(),
 		'perm_rows_group' => array(),
 		'fallback_uid'    => '0',
+		'source_rows'     => array(),
+		'disabled_rows'   => array(),
+		'core_file_rows'  => array(),
 	);
 });
 
@@ -698,4 +710,147 @@ it('leaves the library unchanged when there are no registrations', function () {
 	$merged = intropage_merge_registered_panels(array('builtin' => array('name' => 'Built-in')));
 
 	expect($merged)->toBe(array('builtin' => array('name' => 'Built-in')));
+});
+
+/* ---- source prefixing (Core - / Plugin -) ---- */
+
+it('builds a source prefix for core and third-party plugins', function () {
+	expect(intropage_source_prefix(''))->toBe('');
+	expect(intropage_source_prefix('intropage'))->toBe('Core - ');
+	expect(intropage_source_prefix('my_plugin'))->toBe('My Plugin - ');
+});
+
+it('prefixes panel names by their recorded source', function () {
+	$GLOBALS['__reg']['source_rows'] = array(
+		array('panel_id' => 'poller_info', 'plugin' => 'intropage'),
+		array('panel_id' => 'ext_panel', 'plugin' => 'my_plugin'),
+	);
+
+	expect(intropage_prefix_panel_name('poller_info', 'Poller Information'))->toBe('Core - Poller Information');
+	expect(intropage_prefix_panel_name('ext_panel', 'Ext'))->toBe('My Plugin - Ext');
+
+	// Unknown panel, empty name and an already-prefixed name are left as-is.
+	expect(intropage_prefix_panel_name('unknown', 'X'))->toBe('X');
+	expect(intropage_prefix_panel_name('poller_info', ''))->toBe('');
+	expect(intropage_prefix_panel_name('poller_info', 'Core - Poller Information'))->toBe('Core - Poller Information');
+});
+
+it('returns no sources or prefix when the registration table is absent', function () {
+	$GLOBALS['__test_tables'] = array();
+
+	expect(intropage_panel_sources())->toBe(array());
+	expect(intropage_prefix_panel_name('poller_info', 'Name'))->toBe('Name');
+});
+
+/* ---- disabled panels ---- */
+
+it('lists disabled panel ids from the registration table', function () {
+	$GLOBALS['__reg']['disabled_rows'] = array(array('panel_id' => 'a'), array('panel_id' => 'b'));
+
+	expect(intropage_disabled_panel_ids())->toBe(array('a', 'b'));
+});
+
+it('returns no disabled ids when the registration table is absent', function () {
+	$GLOBALS['__test_tables'] = array();
+
+	expect(intropage_disabled_panel_ids())->toBe(array());
+});
+
+it('toggles a panel enabled flag', function () {
+	$GLOBALS['__reg']['exists'] = true;
+
+	expect(intropage_set_panel_enabled('demo_panel', false))->toBeTrue();
+
+	$updates = intropage_reg_writes('UPDATE plugin_intropage_panel_registration');
+
+	expect($updates)->toHaveCount(1);
+	expect($updates[0]['sql'])->toContain('SET enabled = ?');
+	expect($updates[0]['params'][0])->toBe(0);
+
+	$GLOBALS['__reg']['exists'] = false;
+	expect(intropage_set_panel_enabled('nope', true))->toBeFalse();
+});
+
+it('excludes disabled panels from the panel library', function () {
+	$GLOBALS['__reg']['disabled_rows'] = array(array('panel_id' => 'poller_info'));
+	$GLOBALS['intropage_panel_library_stale'] = true;
+
+	$library = initialize_panel_library();
+
+	expect($library)->not->toHaveKey('poller_info');
+	expect($library)->toHaveKey('poller_stat');
+});
+
+it('lets Intropage adopt a built-in id that a foreign plugin may not', function () {
+	$GLOBALS['__reg']['owner']   = '';
+	$GLOBALS['__reg']['builtin'] = '1';
+
+	expect(intropage_registration_conflict('poller_info', 'intropage'))->toBe('');
+	expect(intropage_registration_conflict('poller_info', 'other'))->toContain('built-in');
+});
+
+/* ---- panellib -> registration-table sync ---- */
+
+it('does not sync when the registration table is absent', function () {
+	$GLOBALS['__test_tables'] = array();
+
+	expect(intropage_sync_core_registrations())->toBe(0);
+});
+
+it('skips the sync when no panellib file changed', function () {
+	$dir     = $GLOBALS['config']['base_path'] . '/plugins/intropage/panellib';
+	$current = array();
+
+	foreach (glob($dir . '/*.php') as $file) {
+		if (basename($file) === 'index.php') {
+			continue;
+		}
+
+		$current[basename($file)] = filemtime($file);
+	}
+
+	$GLOBALS['__test_config']['intropage_panellib_mtimes'] = json_encode($current);
+
+	expect(intropage_sync_core_registrations(false))->toBe(0);
+});
+
+it('re-registers the built-in panels as core when forced', function () {
+	$n = intropage_sync_core_registrations(true);
+
+	expect($n)->toBeGreaterThanOrEqual(1);
+
+	$inserts = array_filter($GLOBALS['__test_db_calls'], static fn ($c) => strpos($c['sql'], 'INSERT INTO plugin_intropage_panel_registration') !== false);
+
+	expect(count($inserts))->toBeGreaterThanOrEqual(1);
+
+	// Core panels are stored under the reserved 'intropage' owner.
+	$first = array_values($inserts)[0];
+	expect($first['params'][1])->toBe('intropage');
+});
+
+it('withdraws core panels sourced from a deleted panellib file', function () {
+	$dir     = $GLOBALS['config']['base_path'] . '/plugins/intropage/panellib';
+	$current = array();
+
+	foreach (glob($dir . '/*.php') as $file) {
+		if (basename($file) === 'index.php') {
+			continue;
+		}
+
+		$current[basename($file)] = filemtime($file);
+	}
+
+	// Pretend a file that no longer exists was present at the last sync.
+	$stored              = $current;
+	$stored['ghost.php'] = 1;
+
+	$GLOBALS['__test_config']['intropage_panellib_mtimes'] = json_encode($stored);
+
+	$GLOBALS['__reg']['exists']         = true;
+	$GLOBALS['__reg']['core_file_rows'] = array(array('panel_id' => 'ghost_panel'));
+
+	$removed = intropage_sync_core_registrations(false);
+
+	expect($removed)->toBeGreaterThanOrEqual(1);
+	expect(intropage_reg_writes('DELETE FROM plugin_intropage_panel_registration'))->toHaveCount(1);
 });

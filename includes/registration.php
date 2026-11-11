@@ -316,8 +316,10 @@ function intropage_panel_registration_exists(string $panel_id): bool {
 /**
  * Detects an ownership or built-in collision for a panel id before a
  * registration is written. A panel id may only be (re-)registered by the
- * plugin that already owns its registration, and may never shadow a built-in
- * panellib panel (a panel_definition row with no registration behind it).
+ * plugin that already owns its registration. Intropage's own built-in panels
+ * are owned by the reserved `intropage` plugin name, so a foreign plugin may
+ * never shadow a built-in panellib panel, while Intropage itself is allowed to
+ * (re-)register its built-ins through the core sync.
  *
  * @param string $panel_id The panel id being registered.
  * @param string $plugin   The plugin claiming ownership.
@@ -334,7 +336,12 @@ function intropage_registration_conflict(string $panel_id, string $plugin): stri
 		return ($owner === $plugin) ? '' : "Panel id '$panel_id' is already registered by plugin '$owner'.";
 	}
 
-	// No registration owns the id yet: reject it if a built-in panel does.
+	// Intropage owns its built-ins; only a foreign plugin is blocked from
+	// shadowing a built-in panellib panel that has no registration row yet.
+	if ($plugin === 'intropage') {
+		return '';
+	}
+
 	$builtin = db_fetch_cell_prepared('SELECT COUNT(*)
 		FROM plugin_intropage_panel_definition
 		WHERE panel_id = ?',
@@ -740,6 +747,7 @@ function intropage_registration_to_definition(array $row): array {
 		'name'         => $row['name'],
 		'description'  => $row['description'],
 		'class'        => $row['class'] !== '' ? $row['class'] : $row['plugin'],
+		'plugin'       => $row['plugin'],
 		'level'        => (int) $row['level'],
 		'priority'     => (int) $row['priority'],
 		'alarm'        => $row['alarm'],
@@ -1012,7 +1020,333 @@ function intropage_registration_remove_permissions(string $panel_id): void {
 function intropage_registration_reset_cache(): void {
 	$GLOBALS['intropage_panel_library_stale'] = true;
 
+	unset($GLOBALS['intropage_panel_sources'], $GLOBALS['intropage_disabled_panels']);
+
 	if (isset($_SESSION['intropage_panel_library'])) {
 		unset($_SESSION['intropage_panel_library']);
 	}
+}
+
+/**
+ * Returns the display prefix for a panel's source plugin: "Core - " for
+ * Intropage's own built-in panels (the reserved `intropage` plugin name), and
+ * the title-cased plugin name followed by " - " for panels registered by any
+ * other plugin.
+ *
+ * @param string $plugin The owning plugin directory name.
+ *
+ * @return string The display prefix (including the trailing " - "), or '' when
+ *                no plugin is known.
+ */
+function intropage_source_prefix(string $plugin): string {
+	if ($plugin === '') {
+		return '';
+	}
+
+	if ($plugin === 'intropage') {
+		return __('Core', 'intropage') . ' - ';
+	}
+
+	return ucwords(str_replace(['_', '-'], ' ', $plugin)) . ' - ';
+}
+
+/**
+ * Builds (and request-caches) a map of panel id to owning plugin from the
+ * registration table, used to prefix panel titles by their source.
+ *
+ * @return array Map of panel_id => plugin directory name.
+ */
+function intropage_panel_sources(): array {
+	if (!isset($GLOBALS['intropage_panel_sources'])) {
+		$map = [];
+
+		if (db_table_exists('plugin_intropage_panel_registration')) {
+			foreach (db_fetch_assoc('SELECT panel_id, plugin FROM plugin_intropage_panel_registration') as $row) {
+				$map[$row['panel_id']] = $row['plugin'];
+			}
+		}
+
+		$GLOBALS['intropage_panel_sources'] = $map;
+	}
+
+	return $GLOBALS['intropage_panel_sources'];
+}
+
+/**
+ * Prefixes a panel's title with its source ("Core - " / "Plugin - ") based on
+ * the owning plugin recorded in the registration table. Panels without a
+ * registration row (e.g. the favourite-graph pseudo-panel) and empty names are
+ * returned unchanged, and an already-prefixed name is not prefixed twice.
+ *
+ * @param string $panel_id The panel id whose source to resolve.
+ * @param string $name     The panel's base title.
+ *
+ * @return string The prefixed title.
+ */
+function intropage_prefix_panel_name(string $panel_id, string $name): string {
+	if ($name === '') {
+		return $name;
+	}
+
+	$sources = intropage_panel_sources();
+
+	if (!isset($sources[$panel_id])) {
+		return $name;
+	}
+
+	$prefix = intropage_source_prefix($sources[$panel_id]);
+
+	if ($prefix !== '' && strpos($name, $prefix) === 0) {
+		return $name;
+	}
+
+	return $prefix . $name;
+}
+
+/**
+ * Returns (and request-caches) the set of panel ids an administrator has
+ * disabled in the registration table. Disabled panels are excluded from the
+ * live panel library and from dashboards without deleting their stored data.
+ *
+ * @return array A list of disabled panel ids.
+ */
+function intropage_disabled_panel_ids(): array {
+	if (!isset($GLOBALS['intropage_disabled_panels'])) {
+		$ids = [];
+
+		if (db_table_exists('plugin_intropage_panel_registration')) {
+			$ids = array_column(db_fetch_assoc('SELECT panel_id
+				FROM plugin_intropage_panel_registration
+				WHERE enabled = 0'), 'panel_id');
+		}
+
+		$GLOBALS['intropage_disabled_panels'] = $ids;
+	}
+
+	return $GLOBALS['intropage_disabled_panels'];
+}
+
+/**
+ * Enables or disables a panel registration (core or third-party) by setting
+ * its `enabled` flag, and invalidates the panel-library caches. Disabling is
+ * non-destructive: the panel is hidden from dashboards and skipped by the
+ * poller, but its stored data and dashboard placements are retained so it
+ * reappears unchanged when re-enabled. Called from the Panel Library
+ * management page's bulk Enable/Disable actions.
+ *
+ * @param string $panel_id The registered panel id to toggle.
+ * @param bool   $enabled  True to enable, false to disable.
+ *
+ * @return bool True when a registration row was updated.
+ */
+function intropage_set_panel_enabled(string $panel_id, bool $enabled): bool {
+	if (!intropage_panel_registration_exists($panel_id)) {
+		return false;
+	}
+
+	db_execute_prepared('UPDATE plugin_intropage_panel_registration
+		SET enabled = ?, last_updated = NOW()
+		WHERE panel_id = ?',
+		[$enabled ? 1 : 0, $panel_id]);
+
+	intropage_registration_reset_cache();
+
+	return true;
+}
+
+/**
+ * Synchronizes the built-in panellib panels into the registration table so the
+ * table is the single catalog of every panel (core and third-party). It stats
+ * each panellib/*.php file and, when any file's mtime has changed since the
+ * last sync (or when forced), re-runs that file's register_<basename>()
+ * function and upserts its panels as Intropage-owned ("intropage") core
+ * registrations; panels removed from a file, and panels from deleted files,
+ * are withdrawn. The per-file mtimes are stored in the
+ * `intropage_panellib_mtimes` setting. Intended to be called from the poller
+ * (every cycle, cheap when nothing changed) and at install/upgrade time.
+ *
+ * @param bool $force When true, re-register every file regardless of mtime.
+ *
+ * @return int The number of panellib files (re-)synchronized.
+ *
+ * @global array $config   Cacti global configuration array; used to locate the
+ *                         panellib directory.
+ * @global array $registry Populated by each panellib file's register function.
+ */
+function intropage_sync_core_registrations(bool $force = false): int {
+	global $config, $registry;
+
+	if (!db_table_exists('plugin_intropage_panel_registration')) {
+		return 0;
+	}
+
+	$dir   = $config['base_path'] . '/plugins/intropage/panellib';
+	$files = glob($dir . '/*.php') ?: [];
+
+	$current = [];
+
+	foreach ($files as $file) {
+		if (basename($file) === 'index.php') {
+			continue;
+		}
+
+		$mtime = @filemtime($file);
+
+		if ($mtime !== false) {
+			$current[basename($file)] = $mtime;
+		}
+	}
+
+	$stored = json_decode((string) read_config_option('intropage_panellib_mtimes'), true);
+
+	if (!is_array($stored)) {
+		$stored = [];
+	}
+
+	if (!$force && $current == $stored) {
+		return 0;
+	}
+
+	$synced = 0;
+
+	// Re-register every file whose mtime changed or that is new.
+	foreach ($current as $basename => $mtime) {
+		if (!$force && isset($stored[$basename]) && $stored[$basename] == $mtime) {
+			continue;
+		}
+
+		intropage_sync_core_file($dir . '/' . $basename);
+		$synced++;
+	}
+
+	// Withdraw core panels that came from files which no longer exist.
+	foreach ($stored as $basename => $mtime) {
+		if (!isset($current[$basename])) {
+			$relative = 'plugins/intropage/panellib/' . $basename;
+
+			foreach (db_fetch_assoc_prepared("SELECT panel_id
+				FROM plugin_intropage_panel_registration
+				WHERE plugin = 'intropage' AND include_file = ?",
+				[$relative]) as $row) {
+				intropage_unregister_panel($row['panel_id']);
+			}
+
+			$synced++;
+		}
+	}
+
+	set_config_option('intropage_panellib_mtimes', json_encode($current));
+
+	intropage_registration_reset_cache();
+
+	return $synced;
+}
+
+/**
+ * Re-registers every panel a single panellib file declares as Intropage-owned
+ * core registrations, and withdraws any core panel previously sourced from the
+ * same file that the file no longer declares. Helper for
+ * intropage_sync_core_registrations().
+ *
+ * @param string $file Absolute path of the panellib file to synchronize.
+ *
+ * @return void
+ *
+ * @global array $registry Populated by the file's register function.
+ */
+function intropage_sync_core_file(string $file): void {
+	global $registry;
+
+	$basename = str_replace('.php', '', basename($file));
+	$relative = 'plugins/intropage/panellib/' . basename($file);
+
+	include_once($file);
+
+	$function = 'register_' . $basename;
+
+	if (!function_exists($function)) {
+		return;
+	}
+
+	$panels  = call_user_func($function);
+	$defined = [];
+
+	if (is_array($panels)) {
+		foreach ($panels as $panel_id => $def) {
+			$defined[] = $panel_id;
+			intropage_upsert_core_panel((string) $panel_id, $def, $relative);
+		}
+	}
+
+	// Withdraw core panels this file used to declare but no longer does.
+	$existing = db_fetch_assoc_prepared("SELECT panel_id
+		FROM plugin_intropage_panel_registration
+		WHERE plugin = 'intropage' AND include_file = ?",
+		[$relative]);
+
+	foreach ($existing as $row) {
+		if (!in_array($row['panel_id'], $defined, true)) {
+			intropage_unregister_panel($row['panel_id']);
+		}
+	}
+}
+
+/**
+ * Upserts a single built-in panellib panel into the registration table as an
+ * Intropage-owned ("intropage") core registration. The panel's `enabled` flag
+ * is preserved across syncs (only defaulted to enabled on first insert), so an
+ * administrator's Disable survives a panellib file change. Helper for
+ * intropage_sync_core_file().
+ *
+ * @param string $panel_id The built-in panel id.
+ * @param array  $def      The panel definition returned by the file's
+ *                        register_<basename>() function.
+ * @param string $file     The panellib file path (relative to the Cacti base),
+ *                        recorded as the registration's include_file.
+ *
+ * @return void
+ */
+function intropage_upsert_core_panel(string $panel_id, array $def, string $file): void {
+	$level = $def['level'] ?? (defined('PANEL_USER') ? PANEL_USER : 1);
+
+	$requires = $def['requires'] ?? false;
+	$requires = ($requires === false || $requires === null) ? '' : (string) $requires;
+
+	$values = [
+		$panel_id,
+		'intropage',
+		(string) ($def['name'] ?? $panel_id),
+		(string) ($def['description'] ?? ''),
+		(string) ($def['class'] ?? ''),
+		(int) $level,
+		(int) ($def['priority'] ?? 50),
+		(string) ($def['alarm'] ?? 'grey'),
+		(string) ($def['width'] ?? 'quarter-panel'),
+		(string) ($def['height'] ?? 'normal'),
+		!empty($def['height_fixed']) ? 1 : 0,
+		!empty($def['force']) ? 1 : 0,
+		$requires,
+		$file,
+		(string) ($def['update_func'] ?? ''),
+		!empty($def['details_func']) ? (string) $def['details_func'] : '',
+		!empty($def['trends_func']) ? (string) $def['trends_func'] : '',
+		(int) ($def['refresh'] ?? 3600),
+		(int) ($def['trefresh'] ?? 3600),
+		json_encode([]),
+	];
+
+	db_execute_prepared('INSERT INTO plugin_intropage_panel_registration
+		(panel_id, plugin, name, description, class, level, priority, alarm, width, height,
+		height_fixed, `force`, requires, include_file, update_func, details_func, trends_func,
+		refresh, trefresh, request_vars, enabled, registered, last_updated)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW())
+		ON DUPLICATE KEY UPDATE
+			plugin=VALUES(plugin), name=VALUES(name), description=VALUES(description),
+			class=VALUES(class), level=VALUES(level), priority=VALUES(priority),
+			alarm=VALUES(alarm), width=VALUES(width), height=VALUES(height),
+			height_fixed=VALUES(height_fixed), `force`=VALUES(`force`), requires=VALUES(requires),
+			include_file=VALUES(include_file), update_func=VALUES(update_func),
+			details_func=VALUES(details_func), trends_func=VALUES(trends_func),
+			refresh=VALUES(refresh), trefresh=VALUES(trefresh), last_updated=NOW()',
+		$values);
 }

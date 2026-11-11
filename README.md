@@ -537,6 +537,39 @@ all dashboards, data, definitions and permissions. A plugin that is merely
 *disabled* (still installed) keeps its registration; its panels simply stop
 rendering until the plugin — listed in `requires` — is enabled again.
 
+### The registration table is the single panel catalog
+
+The `plugin_intropage_panel_registration` table holds **every** panel — the
+built-in `panellib/` panels as well as third-party ones. Built-in panels are
+owned by the reserved `intropage` plugin name and are kept in sync
+automatically: on each poller cycle `intropage_sync_core_registrations()`
+compares every `panellib/*.php` file's modification time against the last sync
+and, when a file has changed (or is new or removed), re-runs that file's
+`register_<basename>()` function and upserts its panels into the table. This
+means the panel catalog is read from the table instead of being rebuilt from
+disk on every web request; editing a panellib file is picked up on the next
+poller run without any manual "Reload Panel Definitions".
+
+### Panel source prefixes
+
+Panel titles are prefixed by their source wherever they are shown (dashboard
+cards and the detail dialog): Intropage's own panels are prefixed `Core - `,
+and panels registered by another plugin are prefixed with the plugin's name in
+title case, e.g. `Mactrack - `. The prefix is derived from the owning plugin
+recorded in the registration table.
+
+### Panel Library management page
+
+**Console > Intropage > Panel Library** (`intropage_panels.php`, guarded by the
+*Intropage Panel Library* realm) lists every registered panel in a filterable,
+sortable table with a free-text search, a **Source** dropdown (filter by the
+providing plugin, with Intropage shown as *Core*) and **Enable**/**Disable**
+bulk actions. Disabling a panel is non-destructive: it is hidden from
+dashboards and skipped by the poller, but its stored data and dashboard
+placements are retained, so re-enabling restores it unchanged. The columns are
+Panel Name, Source, Category, Level (System/User), Requires, Refresh, Update
+Function and Status.
+
 ### Example
 
 A file `plugins/myplugin/intropage_panels.php` shipped by a plugin named

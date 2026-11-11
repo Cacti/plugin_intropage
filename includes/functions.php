@@ -1431,6 +1431,11 @@ function get_panel($panel_id, int $user_id = 0): array {
 		$definition['height']	   = 'normal';
 	}
 
+	// Prefix the title with its source ("Core -" / "Plugin -") so every place
+	// that renders the definition name (dashboard cards, detail dialog) shows
+	// where the panel came from.
+	$definition['name'] = intropage_prefix_panel_name((string) $panel_id, (string) $definition['name']);
+
 	if (is_array($panel) && cacti_sizeof($panel)) {
 		$last_update      = $panel['ts'];
 		$refresh_interval = $panel['refresh_interval'];
@@ -1767,6 +1772,10 @@ function initialize_panel_library(): array {
 
 					// Check to see if the panel should be activated
 					foreach ($base_panels as $panel_id => $p) {
+						// Tag built-in panels with the reserved 'intropage'
+						// owner so their titles are prefixed "Core -".
+						$base_panels[$panel_id]['plugin'] = 'intropage';
+
 						if (isset($p['requires']) && $p['requires'] !== false) {
 							$plugins = explode(',', $p['requires']);
 
@@ -1799,6 +1808,13 @@ function initialize_panel_library(): array {
 		// contributed last so they can extend, but never silently clobber,
 		// the built-in panellib panels.
 		$panel_library = intropage_merge_registered_panels($panels);
+
+		// Drop panels an administrator has disabled on the Panel Library
+		// management page (core or third-party), so they are hidden from
+		// dashboards, the panel picker and the poller without deleting data.
+		foreach (intropage_disabled_panel_ids() as $disabled_id) {
+			unset($panel_library[$disabled_id]);
+		}
 
 		$_SESSION['intropage_panel_library'] = $panel_library;
 	}

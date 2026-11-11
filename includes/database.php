@@ -234,6 +234,11 @@ function intropage_initialize_database(): void {
 	db_execute('ALTER TABLE plugin_intropage_dashboard ADD PRIMARY KEY (user_id, dashboard_id)');
 
 	intropage_create_panel_registration_table();
+
+	// Seed the registration catalog with the built-in panellib panels so the
+	// Panel Library management page and source prefixes work before the first
+	// poller cycle runs.
+	intropage_sync_core_registrations(true);
 }
 
 /**
@@ -425,6 +430,14 @@ function intropage_upgrade_database(): void {
 			if (!db_table_exists('plugin_intropage_panel_registration')) {
 				intropage_create_panel_registration_table();
 			}
+
+			// Populate the catalog with the built-in panellib panels on upgrade.
+			intropage_sync_core_registrations(true);
+
+			// Register the new Panel Library management page's realm and its
+			// navigation hook on existing installs.
+			api_plugin_register_realm('intropage', 'intropage_panels.php', 'Intropage Panel Library', 1);
+			api_plugin_register_hook('intropage', 'draw_navigation_text', 'intropage_draw_navigation_text', 'setup.php', true);
 		}
 
 		// Remove files/directories a previous version left behind (per manifest.json).
