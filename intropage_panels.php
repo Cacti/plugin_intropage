@@ -249,56 +249,30 @@ function intropage_panels(): void {
 
 	html_start_box('', '100%', '', '3', 'center', '');
 
-	$display_text = [
-		'name' => [
-			'display' => __('Panel Name', 'intropage'),
-			'align'   => 'left',
-			'sort'    => 'ASC',
-			'tip'     => __('The display name of this panel.', 'intropage'),
-		],
-		'plugin' => [
-			'display' => __('Source', 'intropage'),
-			'align'   => 'left',
-			'sort'    => 'ASC',
-			'tip'     => __('The plugin that provides this panel. Intropage\'s own panels show as Core.', 'intropage'),
-		],
-		'class' => [
-			'display' => __('Category', 'intropage'),
-			'align'   => 'left',
-			'sort'    => 'ASC',
-			'tip'     => __('The panel category.', 'intropage'),
-		],
-		'level' => [
-			'display' => __('Level', 'intropage'),
-			'align'   => 'left',
-			'sort'    => 'ASC',
-			'tip'     => __('System panels are shared by all users; User panels are per-user.', 'intropage'),
-		],
-		'requires' => [
-			'display' => __('Requires', 'intropage'),
-			'align'   => 'left',
-			'sort'    => 'ASC',
-			'tip'     => __('Plugins that must be enabled for this panel to render.', 'intropage'),
-		],
-		'refresh' => [
-			'display' => __('Refresh', 'intropage'),
-			'align'   => 'right',
-			'sort'    => 'ASC',
-			'tip'     => __('The panel data collection interval.', 'intropage'),
-		],
-		'update_func' => [
-			'display' => __('Update Function', 'intropage'),
-			'align'   => 'left',
-			'sort'    => 'ASC',
-			'tip'     => __('The function the poller calls to collect this panel\'s data.', 'intropage'),
-		],
-		'enabled' => [
-			'display' => __('Status', 'intropage'),
-			'align'   => 'right',
-			'sort'    => 'DESC',
-			'tip'     => __('Whether the panel is enabled.', 'intropage'),
-		],
+	// Column definitions in display order. Each entry is [display, tip] and
+	// defaults to a left-aligned ascending sort; a column that differs
+	// overrides the alignment (3rd element) and sort direction (4th).
+	$columns = [
+		'name'        => [__('Panel Name', 'intropage'), __('The display name of this panel.', 'intropage')],
+		'plugin'      => [__('Source', 'intropage'), __('The plugin that provides this panel. Intropage\'s own panels show as Core.', 'intropage')],
+		'enabled'     => [__('Status', 'intropage'), __('Whether the panel is enabled.', 'intropage'), 'center', 'DESC'],
+		'class'       => [__('Category', 'intropage'), __('The panel category.', 'intropage')],
+		'level'       => [__('Level', 'intropage'), __('System panels are shared by all users; User panels are per-user.', 'intropage')],
+		'requires'    => [__('Requires', 'intropage'), __('Plugins that must be enabled for this panel to render.', 'intropage')],
+		'update_func' => [__('Update Function', 'intropage'), __('The function the poller calls to collect this panel\'s data.', 'intropage')],
+		'refresh'     => [__('Refresh', 'intropage'), __('The panel data collection interval.', 'intropage'), 'right'],
 	];
+
+	$display_text = [];
+
+	foreach ($columns as $field => $column) {
+		$display_text[$field] = [
+			'display' => $column[0],
+			'align'   => $column[2] ?? 'left',
+			'sort'    => $column[3] ?? 'ASC',
+			'tip'     => $column[1],
+		];
+	}
 
 	html_header_sort_checkbox($display_text, get_request_var('sort_column'), get_request_var('sort_direction'), false);
 
@@ -306,18 +280,20 @@ function intropage_panels(): void {
 		foreach ($panel_list as $panel) {
 			$source = ($panel['plugin'] === 'intropage') ? __('Core', 'intropage') : ucwords(str_replace(['_', '-'], ' ', $panel['plugin']));
 			$level  = ((int) $panel['level'] === 0) ? __('System', 'intropage') : __('User', 'intropage');
-			$status = ((int) $panel['enabled'] === 1) ? __('Enabled', 'intropage') : __('Disabled', 'intropage');
+			$enabled = ((int) $panel['enabled'] === 1);
+			$status = $enabled ? __('Enabled', 'intropage') : __('Disabled', 'intropage');
+			$status_pill = '<span class="intropage_status_pill ' . ($enabled ? 'enabled' : 'disabled') . '">' . html_escape($status) . '</span>';
 
 			form_alternate_row('line' . $panel['panel_id'], true, ((int) $panel['enabled'] !== 1));
 
 			form_selectable_cell(filter_value(intropage_prefix_panel_name($panel['panel_id'], $panel['name']), get_request_var('filter')), $panel['panel_id']);
 			form_selectable_cell(html_escape($source), $panel['panel_id']);
+			form_selectable_cell($status_pill, $panel['panel_id'], '', 'center');
 			form_selectable_cell(html_escape($panel['class']), $panel['panel_id']);
 			form_selectable_cell($level, $panel['panel_id']);
 			form_selectable_cell(html_escape($panel['requires'] != '' ? $panel['requires'] : __('None', 'intropage')), $panel['panel_id']);
-			form_selectable_cell(intropage_readable_interval((float) $panel['refresh'], 0, false), $panel['panel_id'], '', 'right');
 			form_selectable_cell(html_escape($panel['update_func']), $panel['panel_id']);
-			form_selectable_cell($status, $panel['panel_id'], '', 'right');
+			form_selectable_cell(intropage_readable_interval((float) $panel['refresh'], 0, false), $panel['panel_id'], '', 'right');
 			form_checkbox_cell($panel['name'], $panel['panel_id']);
 
 			form_end_row();

@@ -129,7 +129,7 @@ for (const { theme, palette } of themes) {
 				`<div class="cactiTableTitleRow"><div class="cactiTableTitle">Panel Details</div>` +
 				`<div class="cactiTableButton"><i id="bubble-${color}" class="color_${color}_bubble">●</i></div></div>` +
 				`<div${palette ? ' class="grid_item"' : theme === 'paper-plane' ? ' class="panel_data"' : ''}><table class="cactiTable"><tr class="${row}"><td><span id="square-${color}" class="inpa_sq color_${color}"></span>Device status</td></tr></table></div>`
-			).join('') + '</div>');
+			).join('') + `<span id="pill-enabled" class="intropage_status_pill enabled">Enabled</span><span id="pill-disabled" class="intropage_status_pill disabled">Disabled</span>` + '</div>');
 			await preparePalette(page, palette);
 			for (const file of [resolve(core, `include/themes/${theme}/main.css`), resolve(root, 'css/common.css'), resolve(root, `css/${theme}.css`)]) {
 				await installCss(page, file);
@@ -141,6 +141,12 @@ for (const { theme, palette } of themes) {
 			expect(indicators).toHaveLength(8);
 			if (palette) expect(new Set(indicators.filter(item => item.id.startsWith('bubble-')).map(item => item.foreground)).size, 'distinct severity colors').toBe(4);
 			for (const indicator of indicators) expect(indicator.ratio, indicator.id).toBeGreaterThanOrEqual(3);
+			// The Enabled/Disabled status pills carry their own opaque colour, so
+			// their label must stay legible against it on every theme.
+			for (const pill of await page.locator('.intropage_status_pill').all()) {
+				const contrast = await pill.evaluate(elementContrast);
+				expect(contrast.ratio, contrast.id).toBeGreaterThanOrEqual(4.5);
+			}
 		});
 	}
 }

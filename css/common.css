@@ -214,6 +214,28 @@
 	color: black !important;
 }
 
+/* Enabled/Disabled status pills on the Panel Library page */
+.intropage_status_pill {
+	display: inline-block;
+	min-width: 72px;
+	padding: 2px 10px;
+	border-radius: 10px;
+	font-size: 0.85em;
+	font-weight: bold;
+	line-height: 1.5;
+	text-align: center;
+}
+
+.intropage_status_pill.enabled {
+	background: rgba(148,179,107,1);
+	color: #000;
+}
+
+.intropage_status_pill.disabled {
+	background: #cc0000;
+	color: #fff;
+}
+
 #intropage_main .fa,
 #overlay .fa {
 	padding-right: 3px;
