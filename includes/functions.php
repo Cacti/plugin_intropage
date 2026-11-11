@@ -2503,9 +2503,25 @@ function intropage_addpanel_select(int $dashboard_id): void {
 			ON pda.id = pd.panel_id
 			WHERE pd.user_id IN (0, ?)
 			AND pd.dashboard_id = ?
-		)
-		ORDER BY pd.name',
+		)',
 		[$_SESSION['sess_user_id'], $dashboard_id]);
+
+	// Prefix each option label with the panel's source ("Core - " /
+	// "<Plugin> - "), matching the Panel Library list, and HTML-escape it once
+	// here so every option below (including the "(no permission)" entries)
+	// renders the plugin-derived name safely without re-escaping per branch.
+	// Then order by the prefixed label, rather than with ORDER BY pd.name, so
+	// the menu stays grouped by source and reads as sorted even though the
+	// displayed label no longer matches the unprefixed database name.
+	foreach ($add_panels as &$panel) {
+		$panel['name'] = html_escape(intropage_prefix_panel_name($panel['panel_id'], (string) $panel['name']));
+	}
+
+	unset($panel);
+
+	usort($add_panels, function ($a, $b) {
+		return strnatcasecmp($a['name'], $b['name']);
+	});
 
 	// display always, even if it is empty
 	print "<select id='intropage_addpanel'>";
@@ -2528,7 +2544,7 @@ function intropage_addpanel_select(int $dashboard_id): void {
 				if ($uniqid > 0) {
 					if ($allowed) {
 						if ($enabled) {
-							print "<option value='" . $uniqid . "'>" . html_escape($panel['name']) . '</option>';
+							print "<option value='" . $uniqid . "'>" . $panel['name'] . '</option>';
 						}
 					} else {
 						print "<option value='addpanel_" . $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
@@ -2536,7 +2552,7 @@ function intropage_addpanel_select(int $dashboard_id): void {
 				} else {
 					if ($allowed) {
 						if ($enabled) {
-							print "<option value='" . $panel['panel_id'] . "'>" . html_escape($panel['name']) . '</option>';
+							print "<option value='" . $panel['panel_id'] . "'>" . $panel['name'] . '</option>';
 						}
 					} else {
 						print "<option value='addpanel_" . $uniqid . "' disabled='disabled'>" . __('%s (no permission)', $panel['name'], 'intropage') . '</option>';
