@@ -64,7 +64,7 @@ for (const { theme, palette } of themes) {
 		await page.setContent(readFileSync(resolve(root, 'tests/fixtures/Ui/cacti-theme.html'), 'utf8').replaceAll('Cacti theme', `${theme[0].toUpperCase() + theme.slice(1)} theme`));
 		await preparePalette(page, palette);
 		if (['sunrise', 'paper-plane'].includes(theme)) await page.locator('h1').evaluate(element => element.style.color = 'lightgrey');
-		for (const file of [resolve(core, `include/themes/${theme}/jquery-ui.css`), resolve(core, `include/themes/${theme}/main.css`), resolve(core, 'include/fa/css/all.css'), resolve(root, 'includes/cards/cards.css'), resolve(root, 'css/common.css'), resolve(root, `css/${theme}.css`)]) {
+		for (const file of [resolve(core, `include/themes/${theme}/jquery-ui.css`), resolve(core, `include/themes/${theme}/main.css`), resolve(core, 'include/fa/css/all.css'), resolve(root, 'css/cards.css'), resolve(root, 'css/common.css'), resolve(root, `css/${theme}.css`)]) {
 			await installCss(page, file);
 		}
 		if (palette) await expect(page.locator('body')).toHaveCSS('opacity', '1');

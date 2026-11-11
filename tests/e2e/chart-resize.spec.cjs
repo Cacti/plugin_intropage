@@ -7,10 +7,10 @@ const { readFileSync } = require('node:fs');
 const root = resolve(__dirname, '../..');
 const core = process.env.CACTI_ROOT || resolve(root, '../..');
 
-/* Load the real resize helpers from includes/intropage.js without running its
+/* Load the real resize helpers from js/intropage.js without running its
  * jQuery ready block (the only top-level statement in the file), which would
  * call initPage() and the rest of the dashboard bootstrap. */
-const intropageSource = readFileSync(resolve(root, 'includes/intropage.js'), 'utf8')
+const intropageSource = readFileSync(resolve(root, 'js/intropage.js'), 'utf8')
 	.replace(/\$\(function\(\) \{[\s\S]*?\n\}\);/, '/* ready block removed for the isolated helper test */');
 
 test('a chart that renders after reload_panel still gets resized to its container', async ({ page }) => {
