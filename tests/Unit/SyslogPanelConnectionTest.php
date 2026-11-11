@@ -131,3 +131,35 @@ it('tolerates a false levels query without warnings or corrupting the priority-0
 	expect($errors)->toBeEmpty()
 		->and($GLOBALS['__test_cacti_log'])->toBeEmpty();
 });
+
+it('skips plugin_syslog_trend collection when the database is unavailable', function () {
+	$GLOBALS['__test_syslog_connect_ok'] = false;
+
+	plugin_syslog_trend();
+
+	expect(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('could not open the Syslog database connection');
+});
+
+it('shows a waiting message in the devices panel when the database is unavailable', function () {
+	$GLOBALS['__test_syslog_connect_ok'] = false;
+	$GLOBALS['__test_db_calls']          = array();
+
+	$panel = array('id' => 1, 'height' => 'normal', 'refresh' => 300);
+	plugin_syslog_devices($panel, 1, 60);
+
+	expect(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('could not open the Syslog database connection');
+
+	$updates = array_values(array_filter($GLOBALS['__test_db_calls'], static fn ($c) => strpos($c['sql'], 'UPDATE plugin_intropage_panel_data') !== false));
+	expect($updates)->not->toBeEmpty()
+		->and($updates[0]['params'][0])->toContain('Waiting for data');
+});
+
+it('returns an empty devices detail when the database is unavailable', function () {
+	$GLOBALS['__test_syslog_connect_ok'] = false;
+
+	$detail = plugin_syslog_devices_detail();
+
+	expect($detail)->toBeArray()
+		->and($detail['detail'])->toBe('')
+		->and(implode("\n", $GLOBALS['__test_cacti_log']))->toContain('could not open the Syslog database connection');
+});

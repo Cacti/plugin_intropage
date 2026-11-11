@@ -124,6 +124,10 @@ function register_syslog(): array {
 function intropage_syslog_connect(): bool {
 	global $config, $syslog_cnn;
 
+	// The Syslog library is already loaded in the unit harness (its functions
+	// are declared up front), so these one-time include guards for a real poller
+	// context cannot be exercised there; PHP cannot un-declare a function.
+	// @codeCoverageIgnoreStart
 	if (!function_exists('syslog_connect')) {
 		$setup = $config['base_path'] . '/plugins/syslog/setup.php';
 
@@ -141,6 +145,7 @@ function intropage_syslog_connect(): bool {
 			}
 		}
 	}
+	// @codeCoverageIgnoreEnd
 
 	$connected = false;
 
