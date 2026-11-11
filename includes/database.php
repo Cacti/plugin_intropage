@@ -392,7 +392,9 @@ function intropage_upgrade_database(): void {
 			db_execute("UPDATE plugin_intropage_panel_definition SET panel_id='ntp_dns', name='NTP/DNS check' WHERE panel_id='ntp'");
 			db_execute("UPDATE plugin_intropage_panel_data SET panel_id='ntp_dns' WHERE panel_id='ntp'");
 			db_execute("UPDATE plugin_intropage_user_auth set permissions=REPLACE(permissions,'ntp','ntp_dns')");
-			db_execute('ALTER TABLE plugin_intropage_dashboard ADD COLUMN shared INT(1) NOT NULL default "0"');
+			if (!db_column_exists('plugin_intropage_dashboard', 'shared')) {
+				db_execute('ALTER TABLE plugin_intropage_dashboard ADD COLUMN shared INT(1) NOT NULL default "0"');
+			}
 			db_execute('DELETE FROM plugin_hooks WHERE FUNCTION = "intropage_config_form" AND name="intropage"');
 		}
 
@@ -420,10 +422,15 @@ function intropage_upgrade_database(): void {
 		}
 
 		if (cacti_version_compare($oldv, '4.0.5', '<=')) {
-			db_execute('ALTER TABLE plugin_intropage_panel_definition
-				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
-			db_execute('ALTER TABLE plugin_intropage_panel_data
-				ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
+			if (!db_column_exists('plugin_intropage_panel_definition', 'height')) {
+				db_execute('ALTER TABLE plugin_intropage_panel_definition
+					ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
+			}
+
+			if (!db_column_exists('plugin_intropage_panel_data', 'height')) {
+				db_execute('ALTER TABLE plugin_intropage_panel_data
+					ADD COLUMN `height` enum("normal","double","triple") NOT NULL DEFAULT "normal"');
+			}
 		}
 
 		if (cacti_version_compare($oldv, '4.1.0', '<')) {
