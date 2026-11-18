@@ -156,7 +156,7 @@ that is no longer installed are removed.
 - Check the file permissions (Linux/unix - readable for the web server)
 
 - Install and enable the plugin (Console > Configuration > Plugins). Installing
-  creates the tables, the two realms and the hooks; the plugin is not active
+  creates the tables, the three realms and the hooks; the plugin is not active
   until it is enabled.
 
   The same from the command line, in the Cacti directory:
@@ -172,7 +172,7 @@ that is no longer installed are removed.
 
 Who has what after the installation:
 
-- Only the Cacti admin user (user 1) gets the two realms listed below. Give the
+- Only the Cacti admin user (user 1) gets the three realms listed below. Give the
   other users the "Intropage Viewer" realm under Plugin Permissions on the
   Permissions tab of the user or of a group (Console > Configuration > Users or
   User Groups).
@@ -182,10 +182,12 @@ Who has what after the installation:
   Graphs". The system level panels have to be granted one by one.
 - Users that exist already see an empty dashboard until they are given panels.
 
-The plugin adds two realms. "Intropage Viewer" opens the dashboard and is part
+The plugin adds three realms. "Intropage Viewer" opens the dashboard and is part
 of the Normal User role. "Intropage Administration" is part of the System
 Administration role; it allows "Reload Panel Definitions" and changing the
-update frequencies of the system panels.
+update frequencies of the system panels. "Intropage Panel Library" guards the
+Panel Library page (`intropage_panels.php`); it is not added to any role, so
+grant it under Plugin Permissions where it is needed.
 
 More information about installation and upgrade of plugins:
 https://docs.cacti.net/Plugins.md
