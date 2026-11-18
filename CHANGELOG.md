@@ -1,5 +1,8 @@
 # Changelog
 
+Documentation update (unreleased): Refresh README release/source compatibility,
+installation guidance and source-checked behavior.
+
 --- develop ---
 
 * bug: Open the Syslog plugin's own database connection before the Syslog panels query it, so a Syslog database that is separate from Cacti's no longer fails with "Table 'cacti.syslog' doesn't exist"; the panels now skip cleanly when that connection cannot be opened

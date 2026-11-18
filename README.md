@@ -1,13 +1,29 @@
 # plugin_intropage
 
-## Intropage/Dashboard plugin for Cacti
-
 Intropage adds dashboards made of panels to Cacti. A panel shows one piece of
 information, for example the state of the devices, the poller statistics, an
 analysis of the Cacti log, the worst ping times or the last threshold events,
 or a graph that a user has added. The dashboards are shown on the console page
 or on a separate tab. A script that the Cacti poller starts after every
 polling cycle collects the data the panels show.
+
+## Versions and compatibility
+
+This README describes the `develop` source branch.
+
+| Code | Plugin version | Minimum Cacti declared in `INFO` |
+| --- | --- | --- |
+| [Source branch](INFO) | 4.1.0 | 1.2.29 |
+| [Published v4.0.4](https://github.com/Cacti/plugin_intropage/releases/tag/v4.0.4) | 4.0.4 | 1.2.17 |
+
+Use the published release’s assets and tagged documentation when installing that
+package. Branch code can include later changes, even when its version number
+matches the release. Cacti’s own PHP and database requirements also apply.
+
+Install this plugin in **`<cacti-root>/plugins/intropage`**, using the directory
+name `intropage` rather than `plugin_intropage`.
+
+See [CHANGELOG.md](CHANGELOG.md) for the version history.
 
 ## Original Author
 
