@@ -13,7 +13,7 @@ This README describes the `develop` source branch.
 
 | Code | Plugin version | Minimum Cacti declared in `INFO` |
 | --- | --- | --- |
-| [Source branch](INFO) | 4.1.0 | 1.2.29 |
+| [Source branch](https://github.com/Cacti/plugin_intropage/blob/develop/INFO) | 4.1.0 | 1.2.29 |
 | [Published v4.0.4](https://github.com/Cacti/plugin_intropage/releases/tag/v4.0.4) | 4.0.4 | 1.2.17 |
 
 Use the published release’s assets and tagged documentation when installing that
@@ -23,7 +23,7 @@ matches the release. Cacti’s own PHP and database requirements also apply.
 Install this plugin in **`<cacti-root>/plugins/intropage`**, using the directory
 name `intropage` rather than `plugin_intropage`.
 
-See [CHANGELOG.md](CHANGELOG.md) for the version history.
+See [CHANGELOG.md](https://github.com/Cacti/plugin_intropage/blob/develop/CHANGELOG.md) for the version history.
 
 ## Original Author
 
