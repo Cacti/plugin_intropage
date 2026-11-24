@@ -8,29 +8,30 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2024-04-20 14:11-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: es_ES\n"
+"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Spanish <https://translate.cacti.net/projects/cacti/intropage/"
+"es/>\n"
+"Language: es-ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: display.php:40
-#, fuzzy
 msgid "Intropage - Permission Denied"
-msgstr "Intropage - permiso denegado"
+msgstr "Intropage - Permiso denegado"
 
 #: display.php:123
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
 msgstr "Se han eliminado uno o varios paneles debido a permisos insuficientes. Póngase en contacto con el administrador."
 
 #: display.php:179
-#, fuzzy
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
-msgstr "Puedes deshabilitar las filas de arriba en <b>Settings -&gt; General -&gt; Hide Cacti Dashboard </b>y usar toda la página para Intropage<br/><br/>"
+msgstr ""
+"Puede deshabilitar las filas anteriores en <b>Configuración > Ajustes > "
+"General > Ocultar panel de Cacti</b> y usar toda la página para Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -42,60 +43,50 @@ msgid "Hide red/yellow/green square notifications"
 msgstr "Ocultar notificaciones de cuadrados rojos/amarillos/verdes"
 
 #: display.php:245
-#, fuzzy
 msgid "Disable panel move/enable copy text from panel"
-msgstr "Desactivar panel mover/activar texto de copia desde el panel"
+msgstr "Desactivar mover panel/activar copiar texto del panel"
 
 #: display.php:254
-#, fuzzy
 msgid "Actions ..."
-msgstr "(acciones)"
+msgstr "Acciones..."
 
 #: display.php:257
-#, fuzzy
 msgid "Add New Dashboard"
-msgstr "Agregar al tablero de instrumentos"
+msgstr "Añadir nuevo panel"
 
 #: display.php:261
-#, fuzzy
 msgid "Remove current dashboard"
-msgstr "Quitar del tablero de instrumentos"
+msgstr "Eliminar panel actual"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
-#, fuzzy, php-format
+#, php-format
 msgid "Number of lines - %d"
-msgstr "Número de cheques:"
+msgstr "Número de líneas - %d"
 
 #: display.php:286
-#, fuzzy
 msgid "Refresh Now"
-msgstr "Actualizar ahora"
+msgstr "Refrescar"
 
 #: display.php:289 display.php:291
-#, fuzzy
 msgid "Refresh Disabled"
-msgstr "Autorefresh Desactivado"
+msgstr "Actualización desactivada"
 
 #: display.php:295 display.php:297
-#, fuzzy
 msgid "Refresh by Poller"
-msgstr "Autorefresh Desactivado"
+msgstr "Actualizar por sondeador"
 
 #: display.php:301 display.php:303
-#, fuzzy
 msgid "Refresh Every 1 Minute"
-msgstr "Actualización automática 1 minuto"
+msgstr "Actualizar cada 1 minuto"
 
 #: display.php:307 display.php:309
-#, fuzzy
 msgid "Refresh Every 5 Minutes"
-msgstr "Actualización automática 5 minutos"
+msgstr "Actualizar cada 5 minutos"
 
 #: display.php:313 display.php:315
-#, fuzzy
 msgid "Refresh Every Hour"
-msgstr "Cada hora"
+msgstr "Actualizar cada hora"
 
 #: display.php:321 display.php:323
 msgid "Important period - disabled"
@@ -118,85 +109,72 @@ msgid "Important period - 1 day"
 msgstr "Período importante - 1 día"
 
 #: display.php:363 display.php:366
-#, fuzzy
 msgid "Sort by Severity"
-msgstr "Ordenar por prioridad de panel"
+msgstr "Ordenar por gravedad"
 
 #: display.php:364 display.php:367
-#, fuzzy
 msgid "Sort by User Preference"
 msgstr "Ordenar por preferencia del usuario"
 
 #: display.php:373
-#, fuzzy
 msgid "Reload Panel Definitions"
-msgstr "Recargar el panel"
+msgstr "Recargar definiciones del panel"
 
 #: display.php:379
-#, fuzzy
 msgid "Set Intropage as Default Login Page"
-msgstr "Establecer la página de introducción como página por defecto"
+msgstr "Establecer Intropage como página de inicio de sesión predeterminada"
 
 #: display.php:381
-#, fuzzy
 msgid "Set graph as Default Login Page"
-msgstr "Establecer gráfico como página por defecto"
+msgstr "Establecer gráfico como página de inicio de sesión predeterminada"
 
 #: display.php:387
-#, fuzzy
 msgid "Display Intropage in Console"
-msgstr "Establecer la página de introducción como página por defecto"
+msgstr "Mostrar Intropage en la consola"
 
 #: display.php:389
-#, fuzzy
 msgid "Display Intropage in Tab as Default Page"
-msgstr "Establecer la página de introducción como página por defecto"
+msgstr "Mostrar Intropage en pestaña como página predeterminada"
 
 #: display.php:396 display.php:399
 msgid "Less panels on a line"
 msgstr "Menos paneles en una línea"
 
 #: display.php:397 display.php:400
-#, fuzzy
 msgid "More panels on a line"
-msgstr "Permitir panel Superior 5 Ping"
+msgstr "Más paneles por línea"
 
 #: display.php:413
 msgid "Cancel sharing"
 msgstr "Cancelar el uso compartido"
 
 #: display.php:416
-#, fuzzy
 msgid "Share this dashboard"
-msgstr "Añadir a Escritorio"
+msgstr "Compartir este panel"
 
 #: display.php:418
 msgid "Share empty dashboard not allowed"
 msgstr "No se permite compartir un panel vacío"
 
 #: display.php:437
-#, fuzzy
 msgid "Use shared dashboard"
-msgstr "Quitar del tablero de instrumentos"
+msgstr "Usar panel compartido"
 
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr "No se puede usar el panel compartido: se ha alcanzado el límite del panel."
 
 #: display.php:443
-#, fuzzy
 msgid "No shared dashboards"
-msgstr "Agregar al tablero de instrumentos"
+msgstr "No hay paneles de control compartidos"
 
 #: display.php:460
-#, fuzzy
 msgid "Welcome to Intropage!"
-msgstr "Paneles interiores"
+msgstr "¡Bienvenido a Intropage!"
 
 #: display.php:464
-#, fuzzy
 msgid "You can Add Dashboard Panels in more ways:"
-msgstr "Puede agregar paneles de tablero de dos maneras:"
+msgstr "Puede añadir paneles al panel de control de varias formas:"
 
 #: display.php:466
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
@@ -204,7 +182,7 @@ msgstr "Seleccione los paneles preparados en el \"Menú Paneles\". El panel pued
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
-msgstr "Agregue cualquier gráfico de cactus, use el icono"
+msgstr "Añadir cualquier gráfico de Cacti, use el icono"
 
 #: display.php:468
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
@@ -227,9 +205,8 @@ msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same 
 msgstr "Use \"Usar panel compartido (nombre de usuario/panel): prepara el mismo panel que el compartido, pero con sus permisos."
 
 #: display.php:487
-#, fuzzy
 msgid "Customization:"
-msgstr "Escrutinio"
+msgstr "Personalización:"
 
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
@@ -244,52 +221,46 @@ msgid "If you want to copy text from panel, you have to disable drag and drop fu
 msgstr "Si desea copiar texto del panel, debe deshabilitar la función de arrastrar y soltar, usar el icono"
 
 #: display.php:585
-#, fuzzy
 msgid "Panel Details"
-msgstr "Mostrar detalles"
+msgstr "Detalles del panel"
 
 #: display.php:586
-#, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "Desactivar mover panel/activar texto de copia desde el panel"
+msgstr "Desactivar mover panel/Activar copiar texto del panel"
 
 #: display.php:587
-#, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr "Habilitar el panel Mover/Deshabilitar texto de copia desde el panel"
+msgstr "Habilitar movimiento del panel/Deshabilitar copia de texto del panel"
 
 #: display.php:589
 msgid "Show red/yellow/green square notifications"
 msgstr "Mostrar notificaciones cuadradas rojas/amarillas/verdes"
 
 #: display.php:591
-#, fuzzy
 msgid "Error reading new data"
-msgstr "Error en la lectura de nuevos datos"
+msgstr "Error al leer los nuevos datos"
 
 #: display.php:592
 msgid "Close"
 msgstr "Cerrar"
 
 #: include/functions.php:242
-#, fuzzy
 msgid "Dashboard has been removed"
 msgstr "Se ha eliminado el panel"
 
 #: include/functions.php:264
-#, fuzzy
 msgid "New Dashboard"
-msgstr "Agregar al tablero de instrumentos"
+msgstr "Nuevo panel de control"
 
 #: include/functions.php:266
-#, fuzzy
 msgid "Dashboard has been added"
-msgstr "Se ha agregado el panel"
+msgstr "Se ha añadido el panel"
 
 #: include/functions.php:298
-#, fuzzy
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
-msgstr "No se puede agregar un gráfico de intervalo de tiempo personalizado o ampliado, cambiando el intervalo de tiempo a Última media hora"
+msgstr ""
+"No se puede añadir un gráfico ampliado o con intervalo de tiempo "
+"personalizado; cambiando el intervalo a Última media hora"
 
 #: include/functions.php:419
 msgid "Intropage Panel Library Refreshed from Panel Library"
@@ -304,31 +275,26 @@ msgid "Error - trying share non-shared dashboard"
 msgstr "Error: al intentar compartir un panel no compartido"
 
 #: include/functions.php:617
-#, fuzzy
 msgid "The Panel includes a render function but it does not exist."
-msgstr "El Panel incluye una función de renderizado pero no existe."
+msgstr "El panel incluye una función de renderizado pero no existe."
 
 #: include/functions.php:620
-#, fuzzy
 msgid "The Panel does not have a render function."
-msgstr "El Panel no tiene una función de renderizado."
+msgstr "El panel no tiene una función de renderizado."
 
 #: include/functions.php:626
 msgid "Not Found"
-msgstr "No se encontraron"
+msgstr "No encontrado"
 
 #: include/functions.php:653
-#, fuzzy
 msgid "Panel not found"
 msgstr "Panel no encontrado"
 
 #: include/functions.php:686
-#, fuzzy
 msgid "Details Function does not exist."
-msgstr "Detalles La función no existe."
+msgstr "La función de detalles no existe."
 
 #: include/functions.php:693
-#, fuzzy
 msgid "Panel Not Found"
 msgstr "Panel no encontrado"
 
@@ -373,24 +339,24 @@ msgid "%s Days"
 msgstr "%s Dias"
 
 #: include/functions.php:883
-#, fuzzy
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
-msgstr "No hay datos presentes. Forzar actualización o esperar al próximo ciclo de sondeo de Cacti."
+msgstr ""
+"No hay datos disponibles. Fuerce la actualización o espere al próximo ciclo "
+"de sondeo de Cacti."
 
 #: include/functions.php:885
-#, fuzzy
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
-msgstr "No hay datos presentes. Este Panel no permite Actualizaciones Forzadas. Tendrás que esperar hasta que el Sondeador de Cacti realice la comprobación."
+msgstr ""
+"No hay datos disponibles. Este panel no permite actualizaciones forzadas. "
+"Tendrá que esperar a que el sondeador de Cacti realice la comprobación."
 
 #: include/functions.php:1363
-#, fuzzy
 msgid "Disable panel"
 msgstr "Desactivar panel"
 
 #: include/functions.php:1366
-#, fuzzy
 msgid "Reload Panel"
-msgstr "Recargar el panel"
+msgstr "Recargar panel"
 
 #: include/functions.php:1369
 msgid "Show Details"
@@ -402,24 +368,23 @@ msgid "Loading data ..."
 msgstr "Cargando datos ..."
 
 #: include/functions.php:1387
-#, fuzzy
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
-msgstr "Datos no encontrados. O espera el próximo cheque,<br/> o use la recarga forzada si está disponible."
+msgstr ""
+"No se encontraron datos. Espere a la próxima comprobación <br/>o utilice la "
+"recarga forzada si está disponible."
 
 #: include/functions.php:1410
-#, fuzzy
 msgid "Panels ..."
 msgstr "Paneles..."
 
 #: include/functions.php:1433 include/functions.php:1441
-#, fuzzy, php-format
+#, php-format
 msgid "%s (no permission)"
-msgstr "No tienes permiso"
+msgstr "%s (sin permiso)"
 
 #: include/functions.php:1495
-#, fuzzy
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr "No se puede agregar al panel. Intervalo de tiempo personalizado."
+msgstr "No se puede añadir al panel. Intervalo de tiempo personalizado."
 
 #: include/functions.php:1505
 msgid "Remove from Dashboard"
@@ -430,33 +395,29 @@ msgid "Add to Dashboard"
 msgstr "Añadir a Escritorio"
 
 #: include/functions.php:1563
-#, fuzzy
 msgid "Dashboard Names"
-msgstr "Nombres de tableros"
+msgstr "Nombres de paneles"
 
 #: include/functions.php:1572
-#, fuzzy, php-format
+#, php-format
 msgid "Dashboard %s"
-msgstr "Agregar al tablero de instrumentos"
+msgstr "Panel %s"
 
 #: include/functions.php:1596
-#, fuzzy
 msgid "User Level Panel Update Frequencies"
-msgstr "Paneles de nivel de usuario"
+msgstr "Frecuencias de actualización de paneles de nivel de usuario"
 
 #: include/functions.php:1645
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr "Frecuencias de actualización del panel del sistema (todos los usuarios autorizados)"
 
 #: include/functions.php:1694
-#, fuzzy
 msgid "Trend Update Frequencies"
-msgstr "Frecuencia de actualización: %s"
+msgstr "Frecuencias de actualización de tendencias"
 
 #: include/settings.php:32 include/settings.php:93
-#, fuzzy
 msgid "Intropage"
-msgstr "Paneles interiores"
+msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
@@ -468,77 +429,73 @@ msgid "[edit: %s]"
 msgstr "[editar: %s]"
 
 #: include/settings.php:155
-#, fuzzy
 msgid "System Level Panels"
-msgstr "Paneles de nivel del sistema"
+msgstr "Paneles a nivel del sistema"
 
 #: include/settings.php:156
-#, fuzzy
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
-msgstr "Paneles que son apropiados para el acceso de usuarios administrativos o avanzados y que normalmente no se aplican a usuarios generales. Los paneles son generalmente sobre la utilización general del sistema."
+msgstr ""
+"Paneles apropiados para el acceso de administradores o usuarios avanzados y "
+"que normalmente no aplican a usuarios generales. Por lo general, tratan "
+"sobre el uso general del sistema."
 
 #: include/settings.php:159
-#, fuzzy
 msgid "User Level Panels"
 msgstr "Paneles de nivel de usuario"
 
 #: include/settings.php:160
-#, fuzzy
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
-msgstr "Paneles que son apropiados para que accedan los usuarios generales. Los permisos están limitados a lo que el usuario actual puede ver."
+msgstr ""
+"Paneles apropiados para el acceso de usuarios generales. Los permisos están "
+"limitados a lo que el usuario actual puede ver."
 
 #: include/settings.php:203
-#, fuzzy
 msgid "You can Allow/Disallow Panels for User"
-msgstr "Puede permitir/no permitir paneles para el usuario"
+msgstr "Puede permitir/denegar paneles para el usuario"
 
 #: include/variables.php:28
-#, fuzzy
 msgid "Red Status"
-msgstr "Estado"
+msgstr "Estado rojo"
 
 #: include/variables.php:29
-#, fuzzy
 msgid "Yellow Status"
-msgstr "alarma amarilla"
+msgstr "Estado amarillo"
 
 #: include/variables.php:30
-#, fuzzy
 msgid "Green Status"
-msgstr "Estado"
+msgstr "Estado verde"
 
 #: include/variables.php:35
 msgid "Display Settings"
-msgstr "Ajustes de visualización"
+msgstr "Configuración de visualización"
 
 #: include/variables.php:39
-#, fuzzy
 msgid "Important things will be at the top"
-msgstr "Las cosas importantes estarán en la cima"
+msgstr "Los elementos importantes aparecerán en la parte superior"
 
 #: include/variables.php:40
-#, fuzzy
 msgid "If checked Intropage displays important (errors, warnings) information first"
-msgstr "Si está marcada, Intropage muestra primero información importante (errores, advertencias)"
+msgstr ""
+"Si se marca, Intropage muestra primero la información importante (errores, "
+"advertencias)"
 
 #: include/variables.php:45
-#, fuzzy
 msgid "Display more panels on a line"
-msgstr "Visualizar errores y advertencias"
+msgstr "Mostrar más paneles en una línea"
 
 #: include/variables.php:46
 msgid "For wide screen"
 msgstr "Para pantalla panorámica"
 
 #: include/variables.php:51
-#, fuzzy
 msgid "Automatically Uninstall Panels"
 msgstr "Desinstalar paneles automáticamente"
 
 #: include/variables.php:52
-#, fuzzy
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
-msgstr "Si se instala un Panel y se elimina el complemento requerido, también desinstale automáticamente el panel"
+msgstr ""
+"Si hay un panel instalado y se elimina el complemento requerido, desinstalar "
+"también automáticamente el panel"
 
 #: include/variables.php:57
 msgid "Automatic Page Refresh"
@@ -549,9 +506,8 @@ msgid "How often"
 msgstr "¿Con qué frecuencia"
 
 #: include/variables.php:61
-#, fuzzy
 msgid "Automatically by poller"
-msgstr "Automáticamente por sondeador"
+msgstr "Automáticamente por el sondeador"
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
@@ -603,9 +559,8 @@ msgid "1 day"
 msgstr "1 día"
 
 #: include/variables.php:83
-#, fuzzy
 msgid "Number of panel lines"
-msgstr "Número de cheques:"
+msgstr "Número de líneas del panel"
 
 #: include/variables.php:84
 msgid "How many lines in panel"
@@ -617,23 +572,22 @@ msgid "%d lines"
 msgstr "%d lineas"
 
 #: include/variables.php:94
-#, fuzzy
 msgid "Trend Timespan"
-msgstr "Tendencias"
+msgstr "Intervalo de tendencia"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
 msgstr "En el caso de los gráficos de tendencias, ¿cuál debería ser el intervalo de tiempo predeterminado para esos gráficos?"
 
 #: include/variables.php:101
-#, fuzzy
 msgid "Poller Timeout"
-msgstr "Información del encuestador"
+msgstr "Tiempo de espera del sondeador"
 
 #: include/variables.php:102
-#, fuzzy
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
-msgstr "La cantidad de tiempo, en minutos, que el sondeador de fondo de Intropage puede ejecutarse antes de que Cacti lo interrumpa y lo elimine."
+msgstr ""
+"La cantidad de tiempo, en minutos, que el sondeador en segundo plano de "
+"Intropage puede ejecutarse antes de que Cacti lo interrumpa y finalice."
 
 #: include/variables.php:106 setup.php:99
 #, php-format
@@ -655,25 +609,25 @@ msgid "%d Hour"
 msgstr "%d hora"
 
 #: include/variables.php:117
-#, fuzzy
 msgid "Analyze Log - number of lines"
-msgstr "Analizar log - número de líneas"
+msgstr "Analizar registro - número de líneas"
 
 #: include/variables.php:118
-#, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
-msgstr "Cuántas líneas de registro se analizarán. Un número grande puede causar una carga lenta de la página"
+msgstr ""
+"Cuántas líneas de registro se analizarán. Líneas = en el panel, 2x líneas = "
+"en detalle. Un número grande puede provocar una carga lenta de la página"
 
 #: include/variables.php:124
-#, fuzzy
 msgid "How often analyze DB"
-msgstr "Con qué frecuencia analizar la base de datos"
+msgstr "Con qué frecuencia analizar la BD"
 
 #: include/variables.php:125 include/variables.php:158
 #: include/variables.php:176
-#, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
-msgstr "Poller lleva a cabo esta tarea. Podría causar una larga campaña de votación."
+msgstr ""
+"El sondeador ejecuta esta tarea. Podría provocar una ejecución prolongada "
+"del sondeador."
 
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
@@ -689,14 +643,18 @@ msgid "Every Month"
 msgstr "Cada mes"
 
 #: include/variables.php:137
-#, fuzzy
 msgid "Analyze DB - Level of db check"
-msgstr "Analyse DB - Nivel de comprobación de db"
+msgstr "Analizar BD - Nivel de comprobación de BD"
 
 #: include/variables.php:138
-#, fuzzy
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
-msgstr "Rápido - No Comprobar filas para enlaces<br/>inforccert Rápido - comprobar sólo las tablas no cerradas correctamente<br/>Cambiado - comprobar tablas cambiadas desde la última comprobación<br/>Medio - con el escaneo<br/>de filas Extendido - filas completas y claves<br/><strong>Medio y extendido puede causar una carga de página lenta!</strong>"
+msgstr ""
+"Rápida (Quick) - No comprueba filas por enlaces incorrectos<br/>Veloz (Fast) "
+"- Comprueba solo las tablas no cerradas correctamente<br/>Cambiadas (Changed)"
+" - Comprueba tablas modificadas desde la última comprobación<br/>Media "
+"(Medium) - Con análisis de filas<br/>Extendida (Extended) - Filas y claves "
+"completas<br/>¡Media y Extendida pueden provocar una carga lenta de la "
+"página!"
 
 #: include/variables.php:141
 msgid "Quick"
@@ -708,7 +666,7 @@ msgstr "Rápido"
 
 #: include/variables.php:143
 msgid "Changed"
-msgstr "Cambiado"
+msgstr "Modificado"
 
 #: include/variables.php:144
 msgid "Medium"
@@ -719,43 +677,40 @@ msgid "Extended"
 msgstr "Extendido"
 
 #: include/variables.php:150
-#, fuzzy
 msgid "NTP Time Check - IP or DNS name of NTP server"
-msgstr "Comprobación de NTP (tiempo) - Nombre IP o DNS del servidor NTP"
+msgstr "Comprobación de hora NTP: IP o nombre DNS del servidor NTP"
 
 #: include/variables.php:151
-#, fuzzy
 msgid "Insert IP or DNS name of NTP server"
-msgstr "Insertar el nombre IP o DNS del servidor NTP"
+msgstr "Introduzca la IP o el nombre DNS del servidor NTP"
 
 #: include/variables.php:157
-#, fuzzy
 msgid "How often check NTP"
-msgstr "Con qué frecuencia verifica el NTP"
+msgstr "Con qué frecuencia comprobar el NTP"
 
 #: include/variables.php:168
 msgid "DNS Check - Any DNS name"
 msgstr "Comprobación de DNS: cualquier nombre DNS"
 
 #: include/variables.php:169
-#, fuzzy
 msgid "Insert DNS name for test"
-msgstr "Insertar el nombre IP o DNS del servidor NTP"
+msgstr "Introduzca el nombre DNS para la prueba"
 
 #: include/variables.php:175
-#, fuzzy
 msgid "How often check DNS"
-msgstr "Con qué frecuencia verifica el NTP"
+msgstr "Con qué frecuencia comprobar el DNS"
 
 #: include/variables.php:186
-#, fuzzy
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "Panel de información de administración sobre tareas de mantenimiento, dispositivos caídos, ."
+msgstr ""
+"Panel de información de administración sobre tareas de mantenimiento, "
+"dispositivos inactivos, ..."
 
 #: include/variables.php:187
-#, fuzzy
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
-msgstr "Si no está vacío, el panel se mostrará en la parte superior. Puede utilizar etiquetas html (b, i, ....)."
+msgstr ""
+"Si no está vacío, el panel se mostrará en la parte superior. Puede usar "
+"etiquetas HTML (b, i, ...)."
 
 #: include/variables.php:195
 msgid "Upcoming Maint Schedule warning days"
@@ -766,24 +721,22 @@ msgid "How many days before a scheduled maintenance schedule should a warning be
 msgstr "¿Cuántos días antes de un programa de mantenimiento programado se debe mostrar una advertencia?"
 
 #: include/variables.php:199
-#, fuzzy
 msgid "Never warn"
-msgstr "No se ejecutó"
+msgstr "No advertir nunca"
 
 #: include/variables.php:200
-#, fuzzy
 msgid "When maintenance starts"
-msgstr "Cuando se inicia el mantenimiento"
+msgstr "Cuándo comienza el mantenimiento"
 
 #: include/variables.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%d Day Before"
-msgstr "Día anterior"
+msgstr "%d día antes"
 
 #: include/variables.php:202 include/variables.php:203
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days Before"
-msgstr "Días Antes"
+msgstr "%d días antes"
 
 #: include/variables.php:208
 msgid "Network stats in"
@@ -806,9 +759,8 @@ msgid "Alarm Settings"
 msgstr "Config Alarma"
 
 #: include/variables.php:222
-#, fuzzy
 msgid "Alarm DB check Aborted Clients"
-msgstr "Clientes abortados de verificación de base de datos de alarma"
+msgstr "Alarma de comprobación de BD: clientes abortados"
 
 #: include/variables.php:223 include/variables.php:230
 #: include/variables.php:237 include/variables.php:244
@@ -821,68 +773,56 @@ msgid "If this event has occurred, trigger the selected Normal, Warning, or Aler
 msgstr "Si se ha producido este evento, active el color de estado Normal, Advertencia o Alerta seleccionado."
 
 #: include/variables.php:229
-#, fuzzy
 msgid "Alarm Host with the same Description"
-msgstr "Dispositivos con la misma descripción: %s"
+msgstr "Alarma de host con la misma descripción"
 
 #: include/variables.php:236
-#, fuzzy
 msgid "Alarm Orphaned Data Source"
-msgstr "Fuentes de datos huérfanas: %s"
+msgstr "Alarma de origen de datos huérfano"
 
 #: include/variables.php:243
-#, fuzzy
 msgid "Alarm non-empty Poller Output"
-msgstr "Salida de sondeo de alarma no vacía"
+msgstr "Alarma de salida no vacía del sondeador"
 
 #: include/variables.php:250
-#, fuzzy
 msgid "Alarm Bad indexes Data Source"
-msgstr "Fuente de datos de índices incorrectos de alarma"
+msgstr "Alarma de índices incorrectos de origen de datos"
 
 #: include/variables.php:257
-#, fuzzy
 msgid "Alarm Threshold logonly action"
-msgstr "Acción de inicio de sesión de umbral de alarma"
+msgstr "Alarma de acción de solo registro de umbral"
 
 #: include/variables.php:264
 msgid "Alarm when device bulk_walk_size is not optimized"
 msgstr "Alarma cuando el bulk_walk_size del dispositivo no está optimizado"
 
 #: include/variables.php:271
-#, fuzzy
 msgid "Alarm Devices with the same IP/port"
-msgstr "Dispositivos con la misma IP y puerto: %s"
+msgstr "Alarma de dispositivos con la misma IP/puerto"
 
 #: include/variables.php:278
-#, fuzzy
 msgid "Alarm Device in more than one Tree"
-msgstr "Dispositivos en más de un árbol: %s"
+msgstr "Alarma de dispositivo en más de un árbol"
 
 #: include/variables.php:285
-#, fuzzy
 msgid "Alarm Device without a Tree"
-msgstr "Dispositivos en más de un árbol: %s"
+msgstr "Alarma de dispositivo sin árbol"
 
 #: include/variables.php:292
-#, fuzzy
 msgid "Alarm Device with Default public/private SNMP Community"
-msgstr "Hosts con comunidad pública/privada por defecto: %s"
+msgstr "Alarma de dispositivo con comunidad SNMP public/private predeterminada"
 
 #: include/variables.php:299
-#, fuzzy
 msgid "Alarm Device without Monitoring"
-msgstr "Dispositivos con la misma IP y puerto: %s"
+msgstr "Alarma de dispositivo sin monitorización"
 
 #: include/variables.php:306
-#, fuzzy
 msgid "Alarm Device without Graph"
-msgstr "Dispositivos con la misma IP y puerto: %s"
+msgstr "Alarma de dispositivo sin gráfico"
 
 #: include/variables.php:313
-#, fuzzy
 msgid "Alarm Red/Yellow Polling Time"
-msgstr "Permitir al panel Top 5 el peor tiempo de sondeo"
+msgstr "Alarma roja/amarilla de tiempo de sondeo"
 
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
@@ -893,28 +833,24 @@ msgid "5s  / 10s Yellow / Red"
 msgstr "5s / 10s Amarillo / Rojo"
 
 #: include/variables.php:319
-#, fuzzy
 msgid "10s / 20s Yellow / Red"
-msgstr "40s/20s rojo/amarillo"
+msgstr "10 s / 20 s Amarillo / Rojo"
 
 #: include/variables.php:320
-#, fuzzy
 msgid "20s / 40s Yellow / Red"
-msgstr "20s/10s rojo/amarillo"
+msgstr "20 s / 40 s Amarillo / Rojo"
 
 #: include/variables.php:324
-#, fuzzy
 msgid "Alarm Red/Yellow Failed/All Ratio"
-msgstr "Alarma roja/amarilla fallida/todas las proporciones"
+msgstr "Alarma roja/amarilla de proporción fallidos/todos"
 
 #: include/variables.php:325
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr "La relación entre las comprobaciones de disponibilidad fallidas y las comprobaciones correctas que se activan como color de estado de advertencia o alerta."
 
 #: include/variables.php:329
-#, fuzzy
 msgid "0.1 / 0.2 Yellow / Red"
-msgstr "0,1/0,2 rojo/amarillo"
+msgstr "0,1 / 0,2 Amarillo / Rojo"
 
 #: include/variables.php:330
 msgid "0.2 / 0.4 Yellow / Red"
@@ -925,9 +861,8 @@ msgid "0.5 / 0.5++ Yellow / Red"
 msgstr "0.5 / 0.5++ Amarillo / Rojo"
 
 #: include/variables.php:335
-#, fuzzy
 msgid "Alarm Red/Yellow Ping"
-msgstr "Alarma ping rojo/amarillo"
+msgstr "Alarma roja/amarilla de ping"
 
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
@@ -942,14 +877,12 @@ msgid "20ms  / 50ms Yellow / Red"
 msgstr "20ms / 50ms Amarillo / Rojo"
 
 #: include/variables.php:342
-#, fuzzy
 msgid "100ms / 200+ms Yellow / Red"
-msgstr "100/200+ms rojo/amarillo"
+msgstr "100 ms / 200+ ms Amarillo / Rojo"
 
 #: include/variables.php:346
-#, fuzzy
 msgid "Alarm Red/Yellow Worst Availability"
-msgstr "Top5 de las peores disponibilidades"
+msgstr "Alarma roja/amarilla de peor disponibilidad"
 
 #: include/variables.php:347
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
@@ -969,9 +902,8 @@ msgid "Panels that provide alerting."
 msgstr "Paneles que proporcionan alertas."
 
 #: panellib/alert.php:37 panellib/alert.php:205
-#, fuzzy
 msgid "Host alerts"
-msgstr "Nombre de equipo"
+msgstr "Alertas de host"
 
 #: panellib/alert.php:38
 msgid "Host alerts (up/down/recovering) in last 30 minutes"
@@ -1004,78 +936,71 @@ msgstr "Más registros, use la ventana de detalles"
 #: panellib/system.php:191 panellib/system.php:592 panellib/thold.php:309
 #: panellib/top5.php:178 panellib/top5.php:258 panellib/top5.php:338
 #: panellib/top5.php:423
-#, fuzzy
 msgid "Waiting for data"
-msgstr "Esperando los datos"
+msgstr "Esperando datos"
 
 #: panellib/alert.php:188 panellib/alert.php:329 panellib/busiest.php:596
 #: panellib/busiest.php:1428 panellib/graphs.php:144 panellib/graphs.php:237
 #: panellib/graphs.php:374 panellib/top5.php:181 panellib/top5.php:261
 #: panellib/top5.php:341 panellib/top5.php:426 panellib/top5.php:508
 #: panellib/top5.php:589 panellib/top5.php:669 panellib/top5.php:755
-#, fuzzy
 msgid "You don't have permissions to any hosts"
-msgstr "No tienes permiso"
+msgstr "No tiene permisos para ningún host"
 
 #: panellib/analyze.php:31
-#, fuzzy
 msgid "Analysis Panels"
-msgstr "Habilitar/deshabilitar paneles"
+msgstr "Paneles de análisis"
 
 #: panellib/analyze.php:32
-#, fuzzy
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
-msgstr "Paneles que analizan el comportamiento actual de Cacti y sus complementos."
+msgstr ""
+"Paneles que analizan el comportamiento actual de Cacti y sus complementos."
 
 #: panellib/analyze.php:37
-#, fuzzy
 msgid "Analyze Logins"
-msgstr "Permitir a Analayse Logins del panel"
+msgstr "Analizar inicios de sesión"
 
 #: panellib/analyze.php:38
-#, fuzzy
 msgid "Analyze the last several Cacti logins for trends and errors."
-msgstr "Analice los últimos inicios de sesión de Cacti en busca de tendencias y errores."
+msgstr ""
+"Analiza los últimos inicios de sesión de Cacti en busca de tendencias y "
+"errores."
 
 #: panellib/analyze.php:53
-#, fuzzy
 msgid "Analyze Logs"
-msgstr "Analizar el registro de cactus"
+msgstr "Analizar registros"
 
 #: panellib/analyze.php:54
-#, fuzzy
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
-msgstr "Busque errores comunes en el archivo de registro de Cacti que deberían ser motivo de preocupación."
+msgstr ""
+"Buscar errores comunes en el archivo de registro de Cacti que deban ser "
+"motivo de preocupación."
 
 #: panellib/analyze.php:69
-#, fuzzy
 msgid "Database Checks"
-msgstr "Verificación de la base de datos"
+msgstr "Comprobaciones de base de datos"
 
 #: panellib/analyze.php:70
-#, fuzzy
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
-msgstr "Analice la base de datos MySQL/MariaDB en busca de errores comunes. Tenga en cuenta que este proceso puede llevar mucho tiempo en sistemas muy grandes."
+msgstr ""
+"Analiza la base de datos MySQL/MariaDB en busca de errores comunes. Tenga en "
+"cuenta que este proceso puede tardar mucho tiempo en sistemas muy grandes."
 
 #: panellib/analyze.php:85
-#, fuzzy
 msgid "Analyze Cacti Objects"
-msgstr "Analizar el registro de cactus"
+msgstr "Analizar objetos de Cacti"
 
 #: panellib/analyze.php:86
-#, fuzzy
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "Analiza árboles, gráficos, hosts, ..."
+msgstr "Analizar árboles, gráficos, hosts, ..."
 
 #: panellib/analyze.php:101
-#, fuzzy
 msgid "Analyze DS stats"
-msgstr "Permitir panel Base de datos Analayse"
+msgstr "Analizar estadísticas de orígenes de datos"
 
 #: panellib/analyze.php:102
-#, fuzzy
 msgid "Analyze data source stats"
-msgstr "Permitir panel Base de datos Analayse"
+msgstr "Analizar estadísticas de orígenes de datos"
 
 #: panellib/analyze.php:155
 msgid "Username"
@@ -1096,86 +1021,75 @@ msgid "Failed"
 msgstr "FALLO"
 
 #: panellib/analyze.php:174 panellib/analyze.php:1287
-#, fuzzy
 msgid "Success - Login"
-msgstr "Éxito - Iniciar sesión"
+msgstr "Éxito - Inicio de sesión"
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
 msgid "Success - Token"
 msgstr "Exito - Token"
 
 #: panellib/analyze.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Total Failed Logins: %s"
-msgstr "Fallos de inicio de sesión"
+msgstr "Total de inicios de sesión fallidos: %s"
 
 #: panellib/analyze.php:224
 msgid "None"
 msgstr "Ninguno"
 
 #: panellib/analyze.php:227
-#, fuzzy
 msgid "Active Users in Last Hour: "
-msgstr "Usuarios activos en la última hora:"
+msgstr "Usuarios activos en la última hora: "
 
 #: panellib/analyze.php:264 panellib/analyze.php:1107
-#, fuzzy
 msgid "Log file not accessible or empty"
-msgstr "Archivo de registro no accesible o vacío"
+msgstr "Archivo de registro inaccesible o vacío"
 
 #: panellib/analyze.php:284
-#, fuzzy, php-format
+#, php-format
 msgid "Analyze last %s log lines:"
-msgstr "Fallos de inicio de sesión"
+msgstr "Analizar las últimas %s líneas del registro:"
 
 #: panellib/analyze.php:286
-#, fuzzy
 msgid "Errors: "
-msgstr "Errores"
+msgstr "Errores: "
 
 #: panellib/analyze.php:291
-#, fuzzy
 msgid "Warnings: "
-msgstr "Advertencias"
+msgstr "Advertencias: "
 
 #: panellib/analyze.php:298
-#, fuzzy
 msgid "Log Size: Larger than 2GB"
-msgstr "el archivo es mayor de 2 GB"
+msgstr "Tamaño del registro: mayor de 2 GB"
 
 #: panellib/analyze.php:302 panellib/analyze.php:1141
-#, fuzzy
 msgid "Log Size: OK"
-msgstr "Tamaño de registro OK"
+msgstr "Tamaño del registro: OK"
 
 #: panellib/analyze.php:306 panellib/analyze.php:1145
-#, fuzzy
 msgid "Log Size: Quite Large"
-msgstr "El tamaño del tronco es bastante grande"
+msgstr "Tamaño del registro: bastante grande"
 
 #: panellib/analyze.php:309
-#, fuzzy
 msgid "Log Size: "
-msgstr "Tamaño máximo de Log"
+msgstr "Tamaño del registro: "
 
 #: panellib/analyze.php:316
-#, fuzzy
 msgid "Last log lines:"
-msgstr "Últimos 10 logins"
+msgstr "Últimas líneas del registro:"
 
 #: panellib/analyze.php:423
 msgid "Skipping DB tables checks. Database too large"
 msgstr "Omitir comprobaciones de tablas de base de datos. Base de datos demasiado grande"
 
 #: panellib/analyze.php:437
-#, fuzzy, php-format
+#, php-format
 msgid "Table %s status %s"
 msgstr "Tabla %s estado %s"
 
 #: panellib/analyze.php:444
-#, fuzzy
 msgid "DB: Problems"
-msgstr "Problema de DB"
+msgstr "BD: Problemas"
 
 #: panellib/analyze.php:453
 msgid "DB: OK"
@@ -1191,26 +1105,28 @@ msgid "You can increase Max connection via command line tools or permanently in 
 msgstr "Puede aumentar la conexión máxima a través de herramientas de línea de comandos o de forma permanente en el archivo de configuración"
 
 #: panellib/analyze.php:499
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
-msgstr "Errores de conexión - intente reiniciar el servicio SQL."
+msgstr ""
+"Errores de conexión: %s - intente reiniciar el servicio SQL, revise el "
+"registro de SQL, ..."
 
 #: panellib/analyze.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "Clientes/conexiones anuladas: %s: compruebe los registros."
+msgstr "Clientes/conexiones abortados: %s"
 
 #: panellib/analyze.php:519
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
 msgstr "Clientes/conexiones abortados: ejecute 'SET GLOBAL log_warnings = 1;' o ' log_error_verbosity = 1;' (depende de su versión de MySQL/MariaDB) desde la CLI de mysql y establezca en server.cnf en silencio."
 
 #: panellib/analyze.php:523
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s"
 msgstr "Errores de conexión: %s"
 
 #: panellib/analyze.php:524
-#, fuzzy, php-format
+#, php-format
 msgid "Damaged tables: %s"
 msgstr "Tablas dañadas: %s"
 
@@ -1219,14 +1135,14 @@ msgid "You should run check and repair table commands"
 msgstr "Debe ejecutar los comandos de comprobación y reparación de la tabla"
 
 #: panellib/analyze.php:531
-#, fuzzy, php-format
+#, php-format
 msgid "Memory tables: %s"
 msgstr "Tablas de memoria: %s"
 
 #: panellib/analyze.php:532
-#, fuzzy, php-format
+#, php-format
 msgid "All tables: %s"
-msgstr "Todos los cuadros: %s"
+msgstr "Todas las tablas: %s"
 
 #: panellib/analyze.php:571 panellib/analyze.php:678 panellib/analyze.php:711
 #: panellib/analyze.php:763 panellib/analyze.php:792 panellib/analyze.php:823
@@ -1239,10 +1155,10 @@ msgstr "Todos los cuadros: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "N/A"
+msgstr "n/d"
 
 #: panellib/analyze.php:584
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port: %s"
 msgstr "Dispositivos con la misma IP y puerto: %s"
 
@@ -1283,59 +1199,58 @@ msgid "%s: not run yet"
 msgstr "%s: aún no se ha ejecutado"
 
 #: panellib/analyze.php:691
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources: %s"
-msgstr "Fuentes de datos huérfanas: %s"
+msgstr "Orígenes de datos huérfanos: %s"
 
 #: panellib/analyze.php:722
-#, fuzzy, php-format
+#, php-format
 msgid "Datasource - bad indexes: %s"
-msgstr "Fuente de datos - índices malos: %s"
+msgstr "Origen de datos - índices incorrectos: %s"
 
 #: panellib/analyze.php:774
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "Alerta/advertencia de solo inicio de sesión: %s"
+msgstr "Alerta/advertencia de solo registro de Thold: %s"
 
 #: panellib/analyze.php:805
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description: %s"
 msgstr "Dispositivos con la misma descripción: %s"
 
 #: panellib/analyze.php:834
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree: %s"
 msgstr "Dispositivos en más de un árbol: %s"
 
 #: panellib/analyze.php:864
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without graphs: %s"
-msgstr "Hosts sin gráficos: %s"
+msgstr "Dispositivos sin gráficos: %s"
 
 #: panellib/analyze.php:893
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree: %s"
-msgstr "Huéspedes sin árbol: %s"
+msgstr "Dispositivos sin árbol: %s"
 
 #: panellib/analyze.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community: %s"
-msgstr "Hosts con comunidad pública/privada por defecto: %s"
+msgstr "Dispositivos con comunidad pública/privada predeterminada: %s"
 
 #: panellib/analyze.php:947
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "Plugin Monitor - Host no monitorizado: %s"
+msgstr "Complemento Monitor - Hosts no monitorizados: %s"
 
 #: panellib/analyze.php:955 panellib/analyze.php:1862
-#, fuzzy, php-format
+#, php-format
 msgid "Found %s problems"
-msgstr "Problemas de %s encontrados"
+msgstr "Se encontraron %s problemas"
 
 #: panellib/analyze.php:961 panellib/analyze.php:1864
-#, fuzzy
 msgid "Everything OK"
-msgstr "Todo está bien"
+msgstr "Todo correcto"
 
 #: panellib/analyze.php:977
 msgid "DS stats: "
@@ -1358,9 +1273,8 @@ msgid "DS null records "
 msgstr "Registros nulos de DS "
 
 #: panellib/analyze.php:1090
-#, fuzzy
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
-msgstr "Analizar detalles del registro de cactus [Advertencias/Errores]"
+msgstr "Analizar detalles del registro de Cacti [ Advertencias/Errores ]"
 
 #: panellib/analyze.php:1127
 msgid "Errors"
@@ -1371,19 +1285,16 @@ msgid "Warnings"
 msgstr "Advertencias"
 
 #: panellib/analyze.php:1137
-#, fuzzy
 msgid "WARNING: File is Larger than 2GB"
-msgstr "el archivo es mayor de 2 GB"
+msgstr "ADVERTENCIA: El archivo es mayor de 2 GB"
 
 #: panellib/analyze.php:1148
-#, fuzzy
 msgid "Log Size"
-msgstr "Tamaño del tronco"
+msgstr "Tamaño del registro"
 
 #: panellib/analyze.php:1254
-#, fuzzy
 msgid "Analyze Logins Detail"
-msgstr "Analizar log - número de líneas"
+msgstr "Detalle de análisis de inicios de sesión"
 
 #: panellib/analyze.php:1272
 msgid "User"
@@ -1395,29 +1306,25 @@ msgid "Result"
 msgstr "Resultado"
 
 #: panellib/analyze.php:1314
-#, fuzzy
 msgid "Active Users in Last 2 Hours:"
 msgstr "Usuarios activos en las últimas 2 horas:"
 
 #: panellib/analyze.php:1325
-#, fuzzy
 msgid "No Active Users"
-msgstr "Usuarios activos"
+msgstr "No hay usuarios activos"
 
 #: panellib/analyze.php:1331
-#, fuzzy
 msgid "View Full User Log"
-msgstr "Ver registro de usuario completo"
+msgstr "Ver registro completo de usuario"
 
 #: panellib/analyze.php:1363
-#, fuzzy
 msgid "Analyze Tree, Graphs, Hosts"
-msgstr "Analizar árbol/host/gráfico"
+msgstr "Analizar árbol, gráficos y hosts"
 
 #: panellib/analyze.php:1386
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port - %s"
-msgstr "Dispositivos con la misma IP y puerto %s"
+msgstr "Dispositivos con la misma IP y puerto - %s"
 
 #: panellib/analyze.php:1428
 #, php-format
@@ -1425,54 +1332,53 @@ msgid "Not optimized Bulk Walk Size devices - %s"
 msgstr "Dispositivos de tamaño de paseo masivo no optimizados - %s"
 
 #: panellib/analyze.php:1484
-#, fuzzy
 msgid "Data maintenance"
-msgstr "Cuando se inicia el mantenimiento"
+msgstr "Mantenimiento de datos"
 
 #: panellib/analyze.php:1519
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources - %s"
-msgstr "Fuentes de datos huérfanas %s"
+msgstr "Orígenes de datos huérfanos - %s"
 
 #: panellib/analyze.php:1559
-#, fuzzy, php-format
+#, php-format
 msgid "Datasources with bad indexes - %s"
-msgstr "Fuente de datos - índices malos %s:"
+msgstr "Orígenes de datos con índices incorrectos - %s"
 
 #: panellib/analyze.php:1612
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s"
-msgstr "Alerta/advertencia de solo inicio de sesión - %s:"
+msgstr "Alerta/advertencia de solo registro de Thold - %s"
 
 #: panellib/analyze.php:1649
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description - %s"
-msgstr "Dispositivos con la misma descripción %s"
+msgstr "Dispositivos con la misma descripción - %s"
 
 #: panellib/analyze.php:1692
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree - %s"
-msgstr "Dispositivos en más de un árbol %s"
+msgstr "Dispositivos en más de un árbol - %s"
 
 #: panellib/analyze.php:1748
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without Graphs - %s"
-msgstr "Hosts sin gráficos %s"
+msgstr "Dispositivos sin gráficos - %s"
 
 #: panellib/analyze.php:1781
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree - %s"
-msgstr "Huéspedes sin árbol %s"
+msgstr "Dispositivos sin árbol - %s"
 
 #: panellib/analyze.php:1813
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community - %s"
-msgstr "Hosts con comunidad pública/privada predeterminada %s"
+msgstr "Dispositivos con comunidad pública/privada predeterminada - %s"
 
 #: panellib/analyze.php:1845
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts - %s"
-msgstr "Monitor de plugins - hosts no monitorizados %s"
+msgstr "Complemento Monitor - Hosts no monitorizados - %s"
 
 #: panellib/busiest.php:31
 msgid "The busiest"
@@ -1487,18 +1393,16 @@ msgid "Busiest CPU"
 msgstr "CPU más ocupada"
 
 #: panellib/busiest.php:38
-#, fuzzy
 msgid "Devices with the busiest CPU (Host MIB)"
-msgstr "Dispositivos con la misma IP y puerto: %s"
+msgstr "Dispositivos con la CPU más ocupada (Host MIB)"
 
 #: panellib/busiest.php:53
 msgid "Busiest ucd/net - Load"
 msgstr "ucd/net más ocupado - Carga"
 
 #: panellib/busiest.php:54
-#, fuzzy
 msgid "Devices with the highest Load (ucd/net)"
-msgstr "Dispositivos con la misma descripción: %s"
+msgstr "Dispositivos con la carga más alta (ucd/net)"
 
 #: panellib/busiest.php:69
 msgid "Busiest Hard Drive Space"
@@ -1513,18 +1417,16 @@ msgid "Busiest uptime"
 msgstr "Tiempo de actividad más ocupado"
 
 #: panellib/busiest.php:86
-#, fuzzy
 msgid "Devices with the highest uptime"
-msgstr "Top5 peor tiempo de votación"
+msgstr "Dispositivos con mayor tiempo de actividad"
 
 #: panellib/busiest.php:101
 msgid "Busiest Interface in/out traffic"
 msgstr "Tráfico de entrada/salida de la interfaz más concurrida"
 
 #: panellib/busiest.php:102
-#, fuzzy
 msgid "Devices with the highest in/out traffic (Interface)"
-msgstr "Top5 peor tiempo de votación"
+msgstr "Dispositivos con mayor tráfico de entrada/salida (Interfaz)"
 
 #: panellib/busiest.php:117
 msgid "Busiest Interface error"
@@ -1593,12 +1495,11 @@ msgstr "Esperando datos o no tiene permiso para ningún dispositivo con esta pla
 #: panellib/busiest.php:1097 panellib/busiest.php:1213
 #: panellib/busiest.php:1354 panellib/busiest.php:1570
 #: panellib/busiest.php:1692 panellib/busiest.php:1820
-#, fuzzy
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
-msgstr "No tienes permiso"
+msgstr ""
+"No tiene permisos para ningún host o no hay ningún host con esta plantilla"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
-#, fuzzy
 msgid "Uptime"
 msgstr "Tiempo arriba"
 
@@ -1607,9 +1508,8 @@ msgid "Average of all allowed hosts"
 msgstr "Promedio de todos los hosts permitidos"
 
 #: panellib/busiest.php:592 panellib/busiest.php:1424
-#, fuzzy
 msgid "Waiting for data or you don't have permission for any device"
-msgstr "No tienes permiso"
+msgstr "Esperando datos o no tiene permiso para ningún dispositivo"
 
 #: panellib/busiest.php:933 panellib/busiest.php:1773
 msgid "Direction"
@@ -1645,57 +1545,50 @@ msgid "Busiest interface utilization"
 msgstr "Utilización de la interfaz más ocupada"
 
 #: panellib/graphs.php:31
-#, fuzzy
 msgid "Graphical Panels"
-msgstr "Paneles interiores"
+msgstr "Paneles gráficos"
 
 #: panellib/graphs.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
-msgstr "Paneles que brindan información sobre Cacti y sus complementos de forma gráfica."
+msgstr ""
+"Paneles que proporcionan información sobre Cacti y sus complementos de forma "
+"gráfica."
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
 msgstr "Fuentes de datos"
 
 #: panellib/graphs.php:38
-#, fuzzy
 msgid "Graph of Data Sources"
-msgstr "Permitir al panel Graph Data Dource"
+msgstr "Gráfico de orígenes de datos"
 
 #: panellib/graphs.php:53 panellib/graphs.php:603
 msgid "Device Templates"
 msgstr "Plantilla de dispositivos"
 
 #: panellib/graphs.php:54
-#, fuzzy
 msgid "Graph of Device Templates"
-msgstr "Plantilla de dispositivos"
+msgstr "Gráfico de plantillas de dispositivos"
 
 #: panellib/graphs.php:69
-#, fuzzy
 msgid "Devices by Status"
-msgstr "Plantilla de dispositivos"
+msgstr "Dispositivos por estado"
 
 #: panellib/graphs.php:70
-#, fuzzy
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr "Gráfica de Dispositivos por Estado (arriba,abajo,...)"
+msgstr "Gráfico de dispositivos por estado (activo,inactivo,...)"
 
 #: panellib/graphs.php:106
-#, fuzzy
 msgid "Datasources: "
-msgstr "Fuentes de datos"
+msgstr "Orígenes de datos: "
 
 #: panellib/graphs.php:180 panellib/graphs.php:207
-#, fuzzy
 msgid "Device Templates: "
-msgstr "Plantilla de dispositivos"
+msgstr "Plantillas de dispositivo: "
 
 #: panellib/graphs.php:262
-#, fuzzy
 msgid "Devices: "
-msgstr "Dispositivos"
+msgstr "Dispositivos: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
@@ -1716,18 +1609,16 @@ msgid "Total"
 msgstr "Total"
 
 #: panellib/graphs.php:445
-#, fuzzy
 msgid "No untemplated datasources found"
-msgstr "No se han encontrado fuentes de datos no planificadas"
+msgstr "No se encontraron orígenes de datos sin plantilla"
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
 msgstr "Dispositivos"
 
 #: panellib/graphs.php:503
-#, fuzzy
 msgid "Device Count"
-msgstr "Max Dispositivo Inactivo"
+msgstr "Recuento de dispositivos"
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
@@ -1746,59 +1637,53 @@ msgid "Total Devices"
 msgstr "Total de dispositivos"
 
 #: panellib/graphs.php:656
-#, fuzzy
 msgid "No device templates found"
-msgstr "No se encontraron Plantillas de dispositivos"
+msgstr "No se encontraron plantillas de dispositivos"
 
 #: panellib/mactrack.php:31
-#, fuzzy
 msgid "MacTrack Panels"
-msgstr "Sitios Mactrack"
+msgstr "Paneles de MacTrack"
 
 #: panellib/mactrack.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's MacTrack plugins."
-msgstr "Paneles que brindan información sobre los complementos MacTrack de Cacti."
+msgstr ""
+"Paneles que proporcionan información sobre los complementos MacTrack de "
+"Cacti."
 
 #: panellib/mactrack.php:37
-#, fuzzy
 msgid "MacTrack Plugin"
-msgstr "Permitir panel MacTrack Plugin"
+msgstr "Plugin MacTrack"
 
 #: panellib/mactrack.php:38
-#, fuzzy
 msgid "Various MacTrack collection and site statistics."
-msgstr "Varias colecciones de MacTrack y estadísticas del sitio."
+msgstr "Varias estadísticas de recopilación y sitios de MacTrack."
 
 #: panellib/mactrack.php:53 panellib/mactrack.php:184
-#, fuzzy
 msgid "MacTrack Sites"
-msgstr "Sitios Mactrack"
+msgstr "Sitios de MacTrack"
 
 #: panellib/mactrack.php:54
-#, fuzzy
 msgid "Various MacTrack Site statistics."
-msgstr "Varias estadísticas del sitio MacTrack."
+msgstr "Varias estadísticas de sitios de MacTrack."
 
 #: panellib/mactrack.php:81 panellib/mactrack.php:134
-#, fuzzy
 msgid "MacTrack Plugin not Installed/Running"
-msgstr "El plugin de Mactrack no está instalado/no funciona"
+msgstr "El plugin MacTrack no está instalado o no se está ejecutando"
 
 #: panellib/mactrack.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "All: %s"
 msgstr "Todos: %s"
 
 #: panellib/mactrack.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "Up: %s"
-msgstr "Arriba: %s"
+msgstr "Activo: %s"
 
 #: panellib/mactrack.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Down: %s"
-msgstr "Abajo: %s"
+msgstr "Inactivo: %s"
 
 #: panellib/mactrack.php:100
 #, php-format
@@ -1806,14 +1691,14 @@ msgid "Error: %s"
 msgstr "Error: %s"
 
 #: panellib/mactrack.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown: %s"
 msgstr "Desconocido: %s"
 
 #: panellib/mactrack.php:102
-#, fuzzy, php-format
+#, php-format
 msgid "Disabled: %s"
-msgstr "Discapacitados: %s"
+msgstr "Desactivado: %s"
 
 #: panellib/mactrack.php:105
 msgid "MacTrack"
@@ -1828,9 +1713,8 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: panellib/mactrack.php:118 panellib/mactrack.php:173 panellib/thold.php:312
-#, fuzzy
 msgid "You don't have plugin permission"
-msgstr "No tienes permiso"
+msgstr "No tiene permiso para el complemento"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
@@ -1845,123 +1729,107 @@ msgid "Ports"
 msgstr "Puertos"
 
 #: panellib/mactrack.php:142 panellib/mactrack.php:195
-#, fuzzy
 msgid "Ports up"
-msgstr "Puertos de usuario arriba"
+msgstr "Puertos activos"
 
 #: panellib/mactrack.php:143 panellib/mactrack.php:196
-#, fuzzy
 msgid "MACs"
-msgstr "Vista de Fabricantes MACs de MacTrack"
+msgstr "Direcciones MAC"
 
 #: panellib/mactrack.php:144 panellib/mactrack.php:197
 msgid "Device Errors"
 msgstr "Errores del dispositivo"
 
 #: panellib/mactrack.php:170 panellib/mactrack.php:225
-#, fuzzy
 msgid "No mactrack sites found"
-msgstr "No se han encontrado sitios Mactrack"
+msgstr "No se encontraron sitios de MacTrack"
 
 #: panellib/misc.php:31
-#, fuzzy
 msgid "Miscellaneous Panels"
 msgstr "Paneles varios"
 
 #: panellib/misc.php:32
-#, fuzzy
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr "Paneles que generalizan datos no categorizados sobre Cacti's."
+msgstr "Paneles que muestran datos generales sin categorizar sobre Cacti."
 
 #: panellib/misc.php:37
-#, fuzzy
 msgid "NTP/DNS Status"
-msgstr "Estado NTP"
+msgstr "Estado de NTP/DNS"
 
 #: panellib/misc.php:38
-#, fuzzy
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
-msgstr "Comprobación del reloj de su sistema Cacti para ver si se desvía de una línea de base conocida."
+msgstr ""
+"Comprobación de la desviación del reloj del sistema Cacti respecto a una "
+"referencia conocida y comprobación de resolución DNS"
 
 #: panellib/misc.php:53
-#, fuzzy
 msgid "Maint Plugin Details"
-msgstr "Mostrar detalles"
+msgstr "Detalles del plugin Maint"
 
 #: panellib/misc.php:54
-#, fuzzy
 msgid "Maint Plugin details on upcoming schedules"
-msgstr "Detalles del complemento de mantenimiento en los próximos horarios"
+msgstr "Detalles del plugin Maint sobre las próximas programaciones"
 
 #: panellib/misc.php:69
-#, fuzzy
 msgid "Webseer Details"
-msgstr "Mostrar detalles"
+msgstr "Detalles de WebSeer"
 
 #: panellib/misc.php:70
-#, fuzzy
 msgid "Plugin webseer URL Service Check Details"
-msgstr "Complemento Webseer Servicio de URL Comprobar detalles"
+msgstr "Detalles de comprobación de servicio URL del complemento WebSeer"
 
 #: panellib/misc.php:85
-#, fuzzy
 msgid "Servcheck plugin Details"
-msgstr "Complemento Webseer - Detalles"
+msgstr "Detalles del complemento ServCheck"
 
 #: panellib/misc.php:86
-#, fuzzy
 msgid "Plugin ServCheck Details"
-msgstr "Complemento Webseer Servicio de URL Comprobar detalles"
+msgstr "Detalles del complemento ServCheck"
 
 #: panellib/misc.php:117
-#, fuzzy
 msgid "No NTP server configured"
-msgstr "Ningún servidor NTP configurado"
+msgstr "No hay ningún servidor NTP configurado"
 
 #: panellib/misc.php:120
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
-msgstr "Ningún servidor NTP configurado"
+msgstr "Servidor NTP configurado incorrecto - %s<br/>Corríjalo en los ajustes"
 
 #: panellib/misc.php:136
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to get NTP time from %s"
-msgstr "No se pudo obtener tiempo NTP DESDE $ntp_servidor"
+msgstr "No se pudo obtener la hora NTP de %s"
 
 #: panellib/misc.php:144
-#, fuzzy
 msgid "Please check time as it is off by more"
-msgstr "Por favor verifique el tiempo ya que está apagado por más"
+msgstr "Compruebe la hora, ya que tiene una desviación superior"
 
 #: panellib/misc.php:145
-#, fuzzy, php-format
+#, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr "de %s segundos desde el servidor NTP %s."
+msgstr "de %s segundos respecto al servidor NTP %s."
 
 #: panellib/misc.php:147
-#, fuzzy
 msgid "Localtime is equal to NTP server"
-msgstr "La hora local es igual al servidor NTP"
+msgstr "La hora local es igual a la del servidor NTP"
 
 #: panellib/misc.php:151
-#, fuzzy
 msgid "Unable to contact the NTP server indicated."
-msgstr "No se puede contactar con el servidor NTP indicado.<br/>Por favor, compruebe su configuración<br/>"
+msgstr "No se puede contactar con el servidor NTP indicado."
 
 #: panellib/misc.php:153 panellib/misc.php:178
-#, fuzzy
 msgid "Please check your configuration."
 msgstr "Por favor, compruebe su configuración."
 
 #: panellib/misc.php:161
-#, fuzzy
 msgid "No DNS hostname configured"
-msgstr "Ningún servidor NTP configurado"
+msgstr "No hay ningún nombre de host DNS configurado"
 
 #: panellib/misc.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
-msgstr "Ningún servidor NTP configurado"
+msgstr ""
+"Nombre de host DNS configurado incorrecto - %s<br/>Corríjalo en los ajustes"
 
 #: panellib/misc.php:173
 #, php-format
@@ -1979,28 +1847,24 @@ msgid "DNS hostname (%s) resolving failed."
 msgstr "Error en la resolución del nombre de host DNS (%s)."
 
 #: panellib/misc.php:287
-#, fuzzy
 msgid "Maint plugin is not installed/enabled"
-msgstr "El plugin de Mactrack no está instalado/no funciona"
+msgstr "El plugin Maint no está instalado o habilitado"
 
 #: panellib/misc.php:307
-#, fuzzy
 msgid "Plugin Webseer isn't installed or started"
-msgstr "Plugin Thold no está instalado o iniciado"
+msgstr "El complemento WebSeer no está instalado o iniciado"
 
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
 msgstr "El plugin Webseer ya no es compatible, utilice el plugin servcheck en su lugar"
 
 #: panellib/misc.php:320 panellib/misc.php:486
-#, fuzzy
 msgid "Number of checks (all/disabled): "
-msgstr "Número de cheques:"
+msgstr "Número de comprobaciones (todas/deshabilitadas): "
 
 #: panellib/misc.php:321
-#, fuzzy
 msgid "Status (up/down): "
-msgstr "Anfitriones caídos"
+msgstr "Estado (activo/inactivo): "
 
 #: panellib/misc.php:335
 msgid "Last log messages"
@@ -2011,9 +1875,8 @@ msgid "URL"
 msgstr "URL"
 
 #: panellib/misc.php:338 panellib/misc.php:410
-#, fuzzy
 msgid "HTTP code"
-msgstr "código HTTP"
+msgstr "Código HTTP"
 
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
@@ -2021,19 +1884,16 @@ msgid "OK"
 msgstr "OK"
 
 #: panellib/misc.php:390
-#, fuzzy
 msgid "Webseer Plugin - Details"
-msgstr "Complemento Webseer - Detalles"
+msgstr "Complemento WebSeer - Detalles"
 
 #: panellib/misc.php:461
-#, fuzzy
 msgid "Plugin Servcheck isn't installed or started"
-msgstr "Plugin Thold no está instalado o iniciado"
+msgstr "El complemento ServCheck no está instalado o iniciado"
 
 #: panellib/misc.php:487
-#, fuzzy
 msgid "Status (ok/error): "
-msgstr "Anfitriones caídos"
+msgstr "Estado (correcto/error): "
 
 #: panellib/misc.php:498
 msgid "Last log records"
@@ -2048,43 +1908,37 @@ msgid "Type"
 msgstr "Tipo"
 
 #: panellib/misc.php:555
-#, fuzzy
 msgid "Servcheck Plugin - Details"
-msgstr "Complemento Webseer - Detalles"
+msgstr "Complemento ServCheck - Detalles"
 
 #: panellib/poller.php:31
-#, fuzzy
 msgid "Poller Panels"
-msgstr "Permitir al panel Estadísticas del encuestador"
+msgstr "Paneles del sondeador"
 
 #: panellib/poller.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's polling process."
-msgstr "Paneles que brindan información sobre el proceso de votación de Cacti."
+msgstr ""
+"Paneles que proporcionan información sobre el proceso de sondeo de Cacti."
 
 #: panellib/poller.php:37
 msgid "Poller Information"
 msgstr "Información de Sonda"
 
 #: panellib/poller.php:38
-#, fuzzy
 msgid "Various information about your Cacti poller."
-msgstr "Información diversa sobre su sondeador Cacti."
+msgstr "Información diversa sobre su sondeador de Cacti."
 
 #: panellib/poller.php:53
-#, fuzzy
 msgid "Poller Statistics"
-msgstr "Permitir al panel Estadísticas del encuestador"
+msgstr "Estadísticas del sondeador"
 
 #: panellib/poller.php:54 panellib/poller.php:70
-#, fuzzy
 msgid "Various Cacti poller statistics."
-msgstr "Varias estadísticas del encuestador de cactus."
+msgstr "Estadísticas varias del sondeador de Cacti."
 
 #: panellib/poller.php:69
-#, fuzzy
 msgid "Poller Output Items"
-msgstr "Elementos de salida del encuestador: %s"
+msgstr "Elementos de salida del sondeador"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -2111,17 +1965,15 @@ msgid "Idle"
 msgstr "Ocioso"
 
 #: panellib/poller.php:140 panellib/poller.php:346
-#, fuzzy
 msgid "Unkn/down"
-msgstr "Desconocido/desconocido"
+msgstr "Desconocido/inactivo"
 
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
-#, fuzzy, php-format
+#, php-format
 msgid "%s Secs"
-msgstr "%s segundos"
+msgstr "%s seg."
 
 #: panellib/poller.php:171 panellib/poller.php:367
-#, fuzzy
 msgid "(ok)"
 msgstr "(ok)"
 
@@ -2138,9 +1990,8 @@ msgid "Seconds"
 msgstr "Segundos"
 
 #: panellib/poller.php:297
-#, fuzzy
 msgid "Poller Details"
-msgstr "Permitir al panel Estadísticas del encuestador"
+msgstr "Detalles del sondeador"
 
 #: panellib/poller.php:308
 msgid "Average Time"
@@ -2151,31 +2002,28 @@ msgid "Max Time"
 msgstr "Tiempo máximo"
 
 #: panellib/poller.php:446
-#, fuzzy
 msgid "Poller output items "
-msgstr "Artículos de salida del encuestador %s:"
+msgstr "Elementos de salida del sondeador "
 
 #: panellib/poller.php:447
 msgid "Items"
 msgstr "Items"
 
 #: panellib/syslog.php:31
-#, fuzzy
 msgid "Syslog Panels"
-msgstr "Recargar el panel"
+msgstr "Paneles de Syslog"
 
 #: panellib/syslog.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's Syslog message processing."
-msgstr "Paneles que brindan información sobre el procesamiento de mensajes Syslog de Cacti."
+msgstr ""
+"Paneles que proporcionan información sobre el procesamiento de mensajes "
+"Syslog de Cacti."
 
 #: panellib/syslog.php:37
-#, fuzzy
 msgid "Syslog Details"
-msgstr "Mostrar detalles"
+msgstr "Detalles de Syslog"
 
 #: panellib/syslog.php:38
-#, fuzzy
 msgid "Various Syslog Plugin statistics."
 msgstr "Varias estadísticas del complemento Syslog."
 
@@ -2192,75 +2040,66 @@ msgid "Messages"
 msgstr "Mensajes"
 
 #: panellib/syslog.php:197
-#, fuzzy
 msgid "Syslog plugin not installed/running"
-msgstr "El plugin Thold no está instalado/no funciona"
+msgstr "El complemento Syslog no está instalado o en ejecución"
 
 #: panellib/system.php:31
-#, fuzzy
 msgid "System Panels"
-msgstr "Paneles interiores"
+msgstr "Paneles del sistema"
 
 #: panellib/system.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti system performance."
-msgstr "Paneles que brindan información sobre el rendimiento del sistema Cacti."
+msgstr ""
+"Paneles que proporcionan información sobre el rendimiento del sistema Cacti."
 
 #: panellib/system.php:37
 msgid "Information"
 msgstr "Información"
 
 #: panellib/system.php:38
-#, fuzzy
 msgid "Various system information about the Cacti system itself."
-msgstr "Diversa información del sistema sobre el propio sistema Cacti."
+msgstr "Información diversa sobre el propio sistema Cacti."
 
 #: panellib/system.php:53
-#, fuzzy
 msgid "Administrative Alerts"
-msgstr "Alertas Administrativas"
+msgstr "Alertas administrativas"
 
 #: panellib/system.php:54
-#, fuzzy
 msgid "Extra admin notify panel for all users"
-msgstr "Panel de notificación de administrador adicional para todos los usuarios"
+msgstr ""
+"Panel adicional de notificación de administración para todos los usuarios"
 
 #: panellib/system.php:69
-#, fuzzy
 msgid "Boost Statistics"
-msgstr "Aumentar las estadísticas"
+msgstr "Estadísticas de Boost"
 
 #: panellib/system.php:70
-#, fuzzy
 msgid "Information about Cacti's performance boost process."
-msgstr "Información sobre el proceso de mejora del rendimiento de Cacti."
+msgstr "Información sobre el proceso de mejora de rendimiento de Cacti."
 
 #: panellib/system.php:85
-#, fuzzy
 msgid "24 Hour Extremes"
-msgstr "Extremo de 24 horas"
+msgstr "Extremos de 24 horas"
 
 #: panellib/system.php:86
-#, fuzzy
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
-msgstr "Tabla con 24 horas de extremos de sondeo (ejecución más larga del sondeador, hosts inactivos)"
+msgstr ""
+"Tabla con 24 horas de extremos de sondeo (ejecución más larga del sondeador, "
+"hosts inactivos)"
 
 #: panellib/system.php:101
-#, fuzzy
 msgid "CPU Utilization"
-msgstr "Escrutinio"
+msgstr "Uso de CPU"
 
 #: panellib/system.php:102
-#, fuzzy
 msgid "CPU utilization Graph (only Linux)."
-msgstr "Utilización de CPU"
+msgstr "Gráfico de uso de CPU (solo Linux)."
 
 #: panellib/system.php:141
 msgid "CPU Load: "
 msgstr "Carga de CPU: "
 
 #: panellib/system.php:165
-#, fuzzy
 msgid "This function is not implemented on Windows platforms"
 msgstr "Esta función no está implementada en plataformas Windows"
 
@@ -2273,38 +2112,32 @@ msgid "Max CPU"
 msgstr "CPU máx."
 
 #: panellib/system.php:208
-#, fuzzy
 msgid "Cacti Version: "
-msgstr "Versión de Cacti"
+msgstr "Versión de Cacti: "
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Poller Type:"
-msgstr "Tipo de Sonda"
+msgstr "Tipo de sondeador:"
 
 #: panellib/system.php:219
 msgid "Spine"
-msgstr "Columna"
+msgstr "Spine"
 
 #: panellib/system.php:221
-#, fuzzy
 msgid "Spine version: "
-msgstr "Versión con columna vertebral"
+msgstr "Versión de Spine: "
 
 #: panellib/system.php:224
-#, fuzzy
 msgid "You are using incorrect spine version!"
-msgstr "Está usando una versión incorrecta de la columna vertebral!"
+msgstr "¡Está utilizando una versión incorrecta de Spine!"
 
 #: panellib/system.php:229
-#, fuzzy
 msgid "Poller Type: "
-msgstr "Tipo de Sonda"
+msgstr "Tipo de sondeador: "
 
 #: panellib/system.php:238
-#, fuzzy
 msgid "Running on: "
-msgstr "Seguir corriendo"
+msgstr "Ejecutándose en: "
 
 #: panellib/system.php:316
 msgid "Overrun Warning"
@@ -2323,9 +2156,9 @@ msgid "Never Run"
 msgstr "No se ejecutó"
 
 #: panellib/system.php:346
-#, fuzzy, php-format
+#, php-format
 msgid "Boost Status is: %s"
-msgstr "Aumentar las estadísticas"
+msgstr "El estado de Boost es: %s"
 
 #: panellib/system.php:350
 #, php-format
@@ -2333,103 +2166,92 @@ msgid "Processes/Frequency: %s / %s"
 msgstr "Procesos/Frecuencia: %s / %s"
 
 #: panellib/system.php:352
-#, fuzzy, php-format
+#, php-format
 msgid "Pending Records Threshold: %s"
-msgstr "Registros de aumento pendientes: %s"
+msgstr "Umbral de registros pendientes: %s"
 
 #: panellib/system.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Approximate Next Start Time: %s"
-msgstr "Hora de inicio siguiente: %s"
+msgstr "Próxima hora de inicio aproximada: %s"
 
 #: panellib/system.php:361
-#, fuzzy, php-format
+#, php-format
 msgid "Pending/Archived Records: %s / %s"
-msgstr "Registros de incremento archivados: %s"
+msgstr "Registros pendientes/archivados: %s / %s"
 
 #: panellib/system.php:377
-#, fuzzy, php-format
+#, php-format
 msgid "Current Boost Table(s) Size: %s"
-msgstr "Tabla(s) de refuerzo actual Tamaño: %s"
+msgstr "Tamaño actual de la(s) tabla(s) de Boost: %s"
 
 #: panellib/system.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr "Promedio de Bytes/Registro: %s"
+msgstr "Media de bytes/registro: %s"
 
 #: panellib/system.php:390
-#, fuzzy, php-format
+#, php-format
 msgid "Last run duration/updates: %s / %s"
-msgstr "Duración de la última ejecución: %s"
+msgstr "Duración/actualizaciones de la última ejecución: %s / %s"
 
 #: panellib/system.php:448
-#, fuzzy
 msgid "Poller Run"
-msgstr "El cache SNMP será vaciado y regenerado si esta opción es seleccionada. Tenga en cuenta que necesita una ejecución de Sonda adicional para restaurar el cache SNMP completamente."
+msgstr "Ejecución del sondeador"
 
 #: panellib/system.php:474
-#, fuzzy
 msgid "Down Hosts"
-msgstr "Equipos SNMP"
+msgstr "Hosts inactivos"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
 msgstr "Activado"
 
 #: panellib/system.php:526
-#, fuzzy
 msgid "Poller out. itms"
-msgstr "Artículos de salida del encuestador %s:"
+msgstr "Elem. sal. sondeador"
 
 #: panellib/system.php:606
-#, fuzzy
 msgid "48 Hour Extreme Polling"
-msgstr "Extremo de 24 horas"
+msgstr "Sondeo extremo de 48 horas"
 
 #: panellib/system.php:629
-#, fuzzy
 msgid "Long Running Poller"
-msgstr "<br/>Elevador de largo alcance"
+msgstr "Sondeador de ejecución prolongada"
 
 #: panellib/system.php:660
-#, fuzzy
 msgid "Max Device Down"
-msgstr "Max Dispositivo Inactivo"
+msgstr "Máx. dispositivos inactivos"
 
 #: panellib/system.php:690
-#, fuzzy
 msgid "Max Thold Triggered"
-msgstr "Toldos desencadenados"
+msgstr "Máx. Thold activados"
 
 #: panellib/system.php:719
-#, fuzzy
 msgid "Poller Output Item"
-msgstr "Elementos de salida del encuestador: %s"
+msgstr "Elemento de salida del sondeador"
 
 #: panellib/system.php:747
-#, fuzzy
 msgid "Failed Polls"
-msgstr "Fallos de inicio de sesión"
+msgstr "Sondeos fallidos"
 
 #: panellib/thold.php:31
-#, fuzzy
 msgid "Threshold Panels"
-msgstr "Umbrales"
+msgstr "Paneles de umbrales"
 
 #: panellib/thold.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti Thresholding Plugin."
-msgstr "Paneles que brindan información sobre el complemento Cacti Thresholding."
+msgstr ""
+"Paneles que proporcionan información sobre el complemento de umbrales de "
+"Cacti."
 
 #: panellib/thold.php:37 panellib/thold.php:434
-#, fuzzy
 msgid "Last Threshold Events"
-msgstr "Umbrales"
+msgstr "Últimos eventos de umbral"
 
 #: panellib/thold.php:38
-#, fuzzy
 msgid "Threshold Plugin Latest Events"
-msgstr "Umbrales"
+msgstr "Últimos eventos del plugin de umbrales"
 
 #: panellib/thold.php:53
 msgid "Threshold"
@@ -2441,24 +2263,20 @@ msgid "Threshold Plugin Graph (all, trigerred, ...)"
 msgstr "Gráfico de complemento de umbral (todos, trigerred, ...)"
 
 #: panellib/thold.php:87 panellib/thold.php:441
-#, fuzzy
 msgid "Plugin Thold isn't installed or started"
-msgstr "Plugin Thold no está instalado o iniciado"
+msgstr "El complemento Thold no está instalado o iniciado"
 
 #: panellib/thold.php:179 panellib/thold.php:506
-#, fuzzy
 msgid "Without events yet"
 msgstr "Sin eventos todavía"
 
 #: panellib/thold.php:196
-#, fuzzy
 msgid "Thresholds: "
-msgstr "Umbrales"
+msgstr "Umbrales: "
 
 #: panellib/thold.php:208 panellib/thold.php:332
-#, fuzzy
 msgid "Thold plugin not installed/running"
-msgstr "El plugin Thold no está instalado/no funciona"
+msgstr "El plugin Thold no está instalado o no se está ejecutando"
 
 #: panellib/thold.php:238
 #, fuzzy
@@ -2470,81 +2288,70 @@ msgid "Breached"
 msgstr "Violada"
 
 #: panellib/thold.php:325
-#, fuzzy
 msgid "Threshold Details"
-msgstr "Umbrales"
+msgstr "Detalles del umbral"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
 msgstr "Umbrales"
 
 #: panellib/thold.php:402
-#, fuzzy
 msgid "Breached: "
-msgstr "Quebrantado"
+msgstr "Superados: "
 
 #: panellib/thold.php:413
-#, fuzzy
 msgid "Triggered: "
-msgstr "Activado"
+msgstr "Disparado: "
 
 #: panellib/thold.php:421
-#, fuzzy
 msgid "You don't have permission to Thresholds"
-msgstr "No tienes permiso"
+msgstr "No tiene permiso para los umbrales"
 
 #: panellib/thold.php:484
 msgid "Description"
 msgstr "Descripción"
 
 #: panellib/top5.php:31
-#, fuzzy
 msgid "Top/Bottom 5 Panels"
-msgstr "Top5 peor tiempo de votación"
+msgstr "Paneles de 5 mejores/peores"
 
 #: panellib/top5.php:32
-#, fuzzy
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr "Paneles que brindan información de tendencias sobre la recopilación de datos de Cacti."
+msgstr ""
+"Paneles que proporcionan información de tendencias sobre la recopilación de "
+"datos de Cacti."
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
 msgstr "Ping inferior"
 
 #: panellib/top5.php:38
-#, fuzzy
 msgid "Devices with the worst ping response"
-msgstr "Dispositivos con la misma descripción: %s"
+msgstr "Dispositivos con la peor respuesta de ping"
 
 #: panellib/top5.php:53
-#, fuzzy
 msgid "Bottom Availability"
-msgstr "Disponibilidad"
+msgstr "Menor disponibilidad"
 
 #: panellib/top5.php:54
-#, fuzzy
 msgid "Devices with the worst availability/reachability"
-msgstr "Top5 de las peores disponibilidades"
+msgstr "Dispositivos con peor disponibilidad/accesibilidad"
 
 #: panellib/top5.php:69
-#, fuzzy
 msgid "Bottom Polling Time"
-msgstr "Tiempo de Sondeo"
+msgstr "Menor tiempo de sondeo"
 
 #: panellib/top5.php:70
-#, fuzzy
 msgid "Devices with the worst polling time"
-msgstr "Top5 peor tiempo de votación"
+msgstr "Dispositivos con peor tiempo de sondeo"
 
 #: panellib/top5.php:85
-#, fuzzy
 msgid "Bottom Polling Ratio"
-msgstr "Top5 peor tiempo de votación"
+msgstr "Menor proporción de sondeo"
 
 #: panellib/top5.php:86
-#, fuzzy
 msgid "Devices with the worst polling ratio"
-msgstr "Dispositivos con la misma IP y puerto: %s"
+msgstr "Dispositivos con la peor tasa de sondeo"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
@@ -2567,52 +2374,45 @@ msgid "Ratio"
 msgstr "Proporción"
 
 #: panellib/top5.php:437
-#, fuzzy
 msgid "Top 20 Hosts with Worst Ping"
-msgstr "Top5 peor tiempo de votación"
+msgstr "20 hosts con peor ping"
 
 #: panellib/top5.php:519
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Availability"
-msgstr "Top5 de las peores disponibilidades"
+msgstr "20 hosts con la peor disponibilidad"
 
 #: panellib/top5.php:557
 msgid "Availability"
 msgstr "Disponibilidad"
 
 #: panellib/top5.php:600
-#, fuzzy
 msgid "Top 20 Hosts Worst Polling Time"
-msgstr "Top5 peor tiempo de votación"
+msgstr "20 hosts con peor tiempo de sondeo"
 
 #: panellib/top5.php:680
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Polling Ratio"
-msgstr "Top5 peor tiempo de votación"
+msgstr "20 hosts con la peor tasa de sondeo"
 
 #: setup.php:61
-#, fuzzy
 msgid "Intropage Viewer"
-msgstr "Paneles interiores"
+msgstr "Visor de Intropage"
 
 #: setup.php:62
-#, fuzzy
 msgid "Intropage Administration"
-msgstr "Opciones de la página de introducción"
+msgstr "Administración de Intropage"
 
 #: setup.php:80
 msgid "System Administration"
 msgstr "Administración del sistema"
 
 #: setup.php:83
-#, fuzzy
 msgid "Timespan Last 1 Hour"
-msgstr "Usuarios activos en las últimas 2 horas:"
+msgstr "Intervalo: última 1 hora"
 
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "Timespan Last %d Hours"
-msgstr "Usuarios activos en las últimas 2 horas:"
+msgstr "Intervalo de las últimas %d horas"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
