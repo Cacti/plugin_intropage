@@ -8,29 +8,29 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2024-04-20 14:28-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://translate.cacti.net/"
+"projects/cacti/intropage/zh_Hans/>\n"
+"Language: zh-CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: display.php:40
-#, fuzzy
 msgid "Intropage - Permission Denied"
-msgstr "Intropage  - 许可被拒绝"
+msgstr "Intropage - 权限被拒绝"
 
 #: display.php:123
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
 msgstr "由于权限不足，一个或多个面板被移除。请与管理员联系。"
 
 #: display.php:179
-#, fuzzy
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
-msgstr "您可以在<b>设置 - >常规 - >隐藏仙人掌仪表板中</b>禁用上面的行，并使用整个页面进行Intropage <br/><br/>"
+msgstr "您可以在<b>配置 > 设置 > 常规 > 隐藏 Cacti 仪表板</b>中禁用上方行，"
+"并将整个页面用于 Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -42,59 +42,50 @@ msgid "Hide red/yellow/green square notifications"
 msgstr "隐藏红色/黄色/绿色方块通知"
 
 #: display.php:245
-#, fuzzy
 msgid "Disable panel move/enable copy text from panel"
-msgstr "禁用面板从面板移动/启用复制文本"
+msgstr "禁用面板移动/启用从面板复制文本"
 
 #: display.php:254
-#, fuzzy
 msgid "Actions ..."
-msgstr "操作"
+msgstr "操作..."
 
 #: display.php:257
-#, fuzzy
 msgid "Add New Dashboard"
-msgstr "添加到仪表盘"
+msgstr "添加新仪表板"
 
 #: display.php:261
-#, fuzzy
 msgid "Remove current dashboard"
-msgstr "从仪表板中删除"
+msgstr "移除当前仪表板"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
-#, fuzzy, php-format
+#, php-format
 msgid "Number of lines - %d"
-msgstr "检查次数："
+msgstr "行数 - %d"
 
 #: display.php:286
 msgid "Refresh Now"
 msgstr "立即刷新"
 
 #: display.php:289 display.php:291
-#, fuzzy
 msgid "Refresh Disabled"
-msgstr "Autorefresh已禁用"
+msgstr "已禁用刷新"
 
 #: display.php:295 display.php:297
-#, fuzzy
 msgid "Refresh by Poller"
-msgstr "Autorefresh已禁用"
+msgstr "按轮询器刷新"
 
 #: display.php:301 display.php:303
-#, fuzzy
 msgid "Refresh Every 1 Minute"
-msgstr "自动刷新1分钟"
+msgstr "每 1 分钟刷新一次"
 
 #: display.php:307 display.php:309
-#, fuzzy
 msgid "Refresh Every 5 Minutes"
-msgstr "自动清新5分钟"
+msgstr "每 5 分钟刷新一次"
 
 #: display.php:313 display.php:315
-#, fuzzy
 msgid "Refresh Every Hour"
-msgstr "每隔一小时"
+msgstr "每小时刷新一次"
 
 #: display.php:321 display.php:323
 msgid "Important period - disabled"
@@ -117,85 +108,72 @@ msgid "Important period - 1 day"
 msgstr "重要时期 - 1 天"
 
 #: display.php:363 display.php:366
-#, fuzzy
 msgid "Sort by Severity"
-msgstr "按面板优先级排序"
+msgstr "按严重级别排序"
 
 #: display.php:364 display.php:367
-#, fuzzy
 msgid "Sort by User Preference"
 msgstr "按用户偏好排序"
 
 #: display.php:373
-#, fuzzy
 msgid "Reload Panel Definitions"
-msgstr "重新加载面板"
+msgstr "重新加载面板定义"
 
 #: display.php:379
-#, fuzzy
 msgid "Set Intropage as Default Login Page"
-msgstr "将intropage设置为默认页面"
+msgstr "将 Intropage 设为默认登录页"
 
 #: display.php:381
-#, fuzzy
 msgid "Set graph as Default Login Page"
-msgstr "将图形设置为默认页面"
+msgstr "将图形设为默认登录页"
 
 #: display.php:387
-#, fuzzy
 msgid "Display Intropage in Console"
-msgstr "将intropage设置为默认页面"
+msgstr "在控制台中显示 Intropage"
 
 #: display.php:389
-#, fuzzy
 msgid "Display Intropage in Tab as Default Page"
-msgstr "将intropage设置为默认页面"
+msgstr "在选项卡中将 Intropage 显示为默认页面"
 
 #: display.php:396 display.php:399
 msgid "Less panels on a line"
 msgstr "一条生产线上的面板更少"
 
 #: display.php:397 display.php:400
-#, fuzzy
 msgid "More panels on a line"
-msgstr "允许面板前5个Ping"
+msgstr "一行显示更多面板"
 
 #: display.php:413
 msgid "Cancel sharing"
 msgstr "取消共享"
 
 #: display.php:416
-#, fuzzy
 msgid "Share this dashboard"
-msgstr "添加到仪表盘"
+msgstr "共享此仪表盘"
 
 #: display.php:418
 msgid "Share empty dashboard not allowed"
 msgstr "不允许共享空仪表板"
 
 #: display.php:437
-#, fuzzy
 msgid "Use shared dashboard"
-msgstr "从仪表板中删除"
+msgstr "使用共享仪表板"
 
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr "无法使用共享仪表板 - 已达到仪表板限制。"
 
 #: display.php:443
-#, fuzzy
 msgid "No shared dashboards"
-msgstr "新仪表盘"
+msgstr "无共享仪表盘"
 
 #: display.php:460
-#, fuzzy
 msgid "Welcome to Intropage!"
-msgstr "内向板"
+msgstr "欢迎使用 Intropage！"
 
 #: display.php:464
-#, fuzzy
 msgid "You can Add Dashboard Panels in more ways:"
-msgstr "您可以通过两种方式添加仪表板面板："
+msgstr "您可以通过多种方式添加仪表板面板："
 
 #: display.php:466
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
@@ -203,7 +181,7 @@ msgstr "从“面板菜单”中选择准备好的面板。面板可以灰显。
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
-msgstr "添加任何仙人掌图，使用图标"
+msgstr "添加任意 Cacti 图形，使用图标"
 
 #: display.php:468
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
@@ -226,9 +204,8 @@ msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same 
 msgstr "使用“使用共享仪表板（用户/仪表板名称）”- 它准备与共享仪表板相同的仪表板，但具有您的权限。"
 
 #: display.php:487
-#, fuzzy
 msgid "Customization:"
-msgstr "CPU利用率"
+msgstr "自定义："
 
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
@@ -243,26 +220,22 @@ msgid "If you want to copy text from panel, you have to disable drag and drop fu
 msgstr "如果要从面板复制文本，则必须禁用拖放功能，使用图标"
 
 #: display.php:585
-#, fuzzy
 msgid "Panel Details"
-msgstr "显示项目详情"
+msgstr "面板详细信息"
 
 #: display.php:586
-#, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "禁用面板移动/从面板启用复制文本"
+msgstr "禁用面板移动/启用从面板复制文本"
 
 #: display.php:587
-#, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr "启用面板移动/禁用面板中的复制文本"
+msgstr "启用面板移动/禁用从面板复制文本"
 
 #: display.php:589
 msgid "Show red/yellow/green square notifications"
 msgstr "显示红色/黄色/绿色方块通知"
 
 #: display.php:591
-#, fuzzy
 msgid "Error reading new data"
 msgstr "读取新数据时出错"
 
@@ -279,14 +252,12 @@ msgid "New Dashboard"
 msgstr "新仪表盘"
 
 #: include/functions.php:266
-#, fuzzy
 msgid "Dashboard has been added"
 msgstr "仪表板已添加"
 
 #: include/functions.php:298
-#, fuzzy
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
-msgstr "无法添加缩放或自定义时间跨度图，将时间跨度更改为过去半小时"
+msgstr "无法添加缩放或自定义时间跨度的图形，正在将时间跨度更改为过去半小时"
 
 #: include/functions.php:419
 msgid "Intropage Panel Library Refreshed from Panel Library"
@@ -301,31 +272,26 @@ msgid "Error - trying share non-shared dashboard"
 msgstr "错误 - 尝试共享非共享仪表板"
 
 #: include/functions.php:617
-#, fuzzy
 msgid "The Panel includes a render function but it does not exist."
-msgstr "面板包含一个渲染功能，但它不存在。"
+msgstr "该面板包含渲染函数，但该函数不存在。"
 
 #: include/functions.php:620
-#, fuzzy
 msgid "The Panel does not have a render function."
-msgstr "面板没有渲染功能。"
+msgstr "该面板没有渲染函数。"
 
 #: include/functions.php:626
 msgid "Not Found"
 msgstr "未找到"
 
 #: include/functions.php:653
-#, fuzzy
 msgid "Panel not found"
 msgstr "未找到面板"
 
 #: include/functions.php:686
-#, fuzzy
 msgid "Details Function does not exist."
-msgstr "详细信息 函数不存在。"
+msgstr "详细信息函数不存在。"
 
 #: include/functions.php:693
-#, fuzzy
 msgid "Panel Not Found"
 msgstr "未找到面板"
 
@@ -370,22 +336,18 @@ msgid "%s Days"
 msgstr "%s 天"
 
 #: include/functions.php:883
-#, fuzzy
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
-msgstr "没有数据存在。要么强制更新，要么等待下一个 Cacti 轮询周期。"
+msgstr "当前无数据。请执行强制更新，或等待下一个 Cacti 轮询周期。"
 
 #: include/functions.php:885
-#, fuzzy
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
-msgstr "没有数据存在。此面板不允许强制更新。您必须等到 Cacti's Poller 执行检查。"
+msgstr "当前无数据。此面板不允许强制更新。您必须等待 Cacti 轮询器执行检查。"
 
 #: include/functions.php:1363
-#, fuzzy
 msgid "Disable panel"
 msgstr "禁用面板"
 
 #: include/functions.php:1366
-#, fuzzy
 msgid "Reload Panel"
 msgstr "重新加载面板"
 
@@ -399,153 +361,132 @@ msgid "Loading data ..."
 msgstr "加载数据中 ..."
 
 #: include/functions.php:1387
-#, fuzzy
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
-msgstr "没有找到数据。要么等待下一次检查，<br/>或使用强制重新加载（如果可用）。"
+msgstr "未找到数据。请等待下次检查，<br/>或使用“强制重新加载”（如果可用）。"
 
 #: include/functions.php:1410
-#, fuzzy
 msgid "Panels ..."
 msgstr "面板..."
 
 #: include/functions.php:1433 include/functions.php:1441
-#, fuzzy, php-format
+#, php-format
 msgid "%s (no permission)"
-msgstr "您没有权限"
+msgstr "%s（无权限）"
 
 #: include/functions.php:1495
-#, fuzzy
 msgid "Cannot add to Dashboard. Custom timespan."
 msgstr "无法添加到仪表板。自定义时间跨度。"
 
 #: include/functions.php:1505
-#, fuzzy
 msgid "Remove from Dashboard"
-msgstr "从仪表板中删除"
+msgstr "从仪表板中移除"
 
 #: include/functions.php:1507
 msgid "Add to Dashboard"
 msgstr "添加到仪表盘"
 
 #: include/functions.php:1563
-#, fuzzy
 msgid "Dashboard Names"
 msgstr "仪表板名称"
 
 #: include/functions.php:1572
-#, fuzzy, php-format
+#, php-format
 msgid "Dashboard %s"
-msgstr "添加到仪表盘"
+msgstr "仪表盘 %s"
 
 #: include/functions.php:1596
-#, fuzzy
 msgid "User Level Panel Update Frequencies"
-msgstr "用户级面板"
+msgstr "用户级面板更新频率"
 
 #: include/functions.php:1645
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr "系统面板更新频率（所有授权用户）"
 
 #: include/functions.php:1694
-#, fuzzy
 msgid "Trend Update Frequencies"
-msgstr "更新频率：％s"
+msgstr "趋势更新频率"
 
 #: include/settings.php:32 include/settings.php:93
-#, fuzzy
 msgid "Intropage"
-msgstr "内向板"
+msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
 msgstr "普通用户"
 
 #: include/settings.php:146
-#, fuzzy, php-format
+#, php-format
 msgid "[edit: %s]"
-msgstr "[编辑: %s]"
+msgstr "[编辑:%s]"
 
 #: include/settings.php:155
-#, fuzzy
 msgid "System Level Panels"
 msgstr "系统级面板"
 
 #: include/settings.php:156
-#, fuzzy
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
-msgstr "适合管理员或高级用户访问但通常不适用于一般用户的面板。面板通常与整体系统利用率有关。"
+msgstr "适合管理员或高级用户访问、通常不适用于普通用户的面板。这些面板通常涉及系统整"
+"体利用率。"
 
 #: include/settings.php:159
-#, fuzzy
 msgid "User Level Panels"
 msgstr "用户级面板"
 
 #: include/settings.php:160
-#, fuzzy
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
-msgstr "适合一般用户访问的面板。权限仅限于当前用户可以查看的内容。"
+msgstr "适合普通用户访问的面板。权限仅限于当前用户可以查看的内容。"
 
 #: include/settings.php:203
-#, fuzzy
 msgid "You can Allow/Disallow Panels for User"
-msgstr "您可以允许/禁止用户面板"
+msgstr "您可以为用户允许/禁止面板"
 
 #: include/variables.php:28
-#, fuzzy
 msgid "Red Status"
-msgstr "状态"
+msgstr "红色状态"
 
 #: include/variables.php:29
-#, fuzzy
 msgid "Yellow Status"
-msgstr "黄色警报"
+msgstr "黄色状态"
 
 #: include/variables.php:30
-#, fuzzy
 msgid "Green Status"
-msgstr "状态"
+msgstr "绿色状态"
 
 #: include/variables.php:35
 msgid "Display Settings"
 msgstr "显示设置"
 
 #: include/variables.php:39
-#, fuzzy
 msgid "Important things will be at the top"
-msgstr "重要的事情将在顶部"
+msgstr "重要事项将显示在顶部"
 
 #: include/variables.php:40
-#, fuzzy
 msgid "If checked Intropage displays important (errors, warnings) information first"
-msgstr "如果选中Intropage，则首先显示重要（错误，警告）信息"
+msgstr "如果选中，Intropage 将优先显示重要信息（错误、警告）"
 
 #: include/variables.php:45
-#, fuzzy
 msgid "Display more panels on a line"
-msgstr "显示错误和警告"
+msgstr "在一行中显示更多面板"
 
 #: include/variables.php:46
 msgid "For wide screen"
 msgstr "适用于宽屏"
 
 #: include/variables.php:51
-#, fuzzy
 msgid "Automatically Uninstall Panels"
 msgstr "自动卸载面板"
 
 #: include/variables.php:52
-#, fuzzy
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
-msgstr "如果安装了面板并删除了所需的插件，也会自动卸载面板"
+msgstr "如果已安装面板且所需的插件被移除，则也自动卸载该面板"
 
 #: include/variables.php:57
 msgid "Automatic Page Refresh"
 msgstr "自动刷新页面"
 
 #: include/variables.php:58
-#, fuzzy
 msgid "How often"
-msgstr "多久发送一次这个NetFlow报告？"
+msgstr "频率"
 
 #: include/variables.php:61
 msgid "Automatically by poller"
@@ -601,9 +542,8 @@ msgid "1 day"
 msgstr "1天"
 
 #: include/variables.php:83
-#, fuzzy
 msgid "Number of panel lines"
-msgstr "检查次数："
+msgstr "面板行数"
 
 #: include/variables.php:84
 msgid "How many lines in panel"
@@ -615,9 +555,8 @@ msgid "%d lines"
 msgstr "%d 线"
 
 #: include/variables.php:94
-#, fuzzy
 msgid "Trend Timespan"
-msgstr "趋势"
+msgstr "趋势时间跨度"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
@@ -651,25 +590,22 @@ msgid "%d Hour"
 msgstr "%d小时"
 
 #: include/variables.php:117
-#, fuzzy
 msgid "Analyze Log - number of lines"
 msgstr "分析日志 - 行数"
 
 #: include/variables.php:118
-#, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
-msgstr "将分析多少行日志。大数字可能导致页面加载缓慢"
+msgstr "将分析多少行日志。面板中显示指定行数，详情中显示 2 "
+"倍行数。数值过大可能导致页面加载缓慢"
 
 #: include/variables.php:124
-#, fuzzy
 msgid "How often analyze DB"
-msgstr "经常分析DB"
+msgstr "分析数据库的频率"
 
 #: include/variables.php:125 include/variables.php:158
 #: include/variables.php:176
-#, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
-msgstr "Poller执行此任务。它可能导致长轮询运行。"
+msgstr "轮询器会运行此任务，这可能会导致轮询运行时间过长。"
 
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
@@ -685,14 +621,15 @@ msgid "Every Month"
 msgstr "每个月"
 
 #: include/variables.php:137
-#, fuzzy
 msgid "Analyze DB - Level of db check"
-msgstr "分析数据库 - 数据库检查的级别"
+msgstr "分析数据库 - 数据库检查级别"
 
 #: include/variables.php:138
-#, fuzzy
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
-msgstr "快速 - 否检查inforccert链接的行<br/>快速 - 仅检查未正确关闭的表格<br/>已更改 - 检查上次检查后更改的表格<br/>中 - 带行扫描<br/>扩展 - 完整的行和键<br/> <strong>中等和扩展可能导致页面加载缓慢！</strong>"
+msgstr ""
+"Quick - 不检查行中的错误链接<br/>Fast - 仅检查未正常关闭的表<br/>Changed - "
+"检查自上次检查后发生更改的表<br/>Medium - 带行扫描检查<br/>Extended - "
+"完整检查行和索引键<br/>Medium 和 Extended 可能会导致页面加载缓慢！"
 
 #: include/variables.php:141
 msgid "Quick"
@@ -704,7 +641,7 @@ msgstr "快"
 
 #: include/variables.php:143
 msgid "Changed"
-msgstr "已更改"
+msgstr "已变更"
 
 #: include/variables.php:144
 msgid "Medium"
@@ -715,43 +652,36 @@ msgid "Extended"
 msgstr "扩展"
 
 #: include/variables.php:150
-#, fuzzy
 msgid "NTP Time Check - IP or DNS name of NTP server"
-msgstr "NTP（时间）检查 -  NTP服务器的IP或DNS名称"
+msgstr "NTP 时间检查 - NTP 服务器的 IP 或 DNS 名称"
 
 #: include/variables.php:151
-#, fuzzy
 msgid "Insert IP or DNS name of NTP server"
-msgstr "插入NTP服务器的IP或DNS名称"
+msgstr "输入 NTP 服务器的 IP 或 DNS 名称"
 
 #: include/variables.php:157
-#, fuzzy
 msgid "How often check NTP"
-msgstr "经常检查NTP"
+msgstr "检查 NTP 的频率"
 
 #: include/variables.php:168
 msgid "DNS Check - Any DNS name"
 msgstr "DNS 检查 - 任何 DNS 名称"
 
 #: include/variables.php:169
-#, fuzzy
 msgid "Insert DNS name for test"
-msgstr "插入NTP服务器的IP或DNS名称"
+msgstr "输入用于测试的 DNS 名称"
 
 #: include/variables.php:175
-#, fuzzy
 msgid "How often check DNS"
-msgstr "经常检查NTP"
+msgstr "检查 DNS 的频率"
 
 #: include/variables.php:186
-#, fuzzy
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "管理信息面板，关于维护任务，关闭设备，.."
+msgstr "关于维护任务、宕机设备等的管理信息面板"
 
 #: include/variables.php:187
-#, fuzzy
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
-msgstr "如果不为空，则面板将显示在顶部。您可以使用html标签（b，i，...）。"
+msgstr "如果不为空，面板将显示在顶部。您可以使用 HTML 标签（b、i 等）。"
 
 #: include/variables.php:195
 msgid "Upcoming Maint Schedule warning days"
@@ -762,24 +692,22 @@ msgid "How many days before a scheduled maintenance schedule should a warning be
 msgstr "在计划维护计划前多少天应显示警告？"
 
 #: include/variables.php:199
-#, fuzzy
 msgid "Never warn"
-msgstr "从没有运行"
+msgstr "从不警告"
 
 #: include/variables.php:200
-#, fuzzy
 msgid "When maintenance starts"
 msgstr "维护开始时"
 
 #: include/variables.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%d Day Before"
-msgstr "％d前一天"
+msgstr "%d 天前"
 
 #: include/variables.php:202 include/variables.php:203
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days Before"
-msgstr "％d天前"
+msgstr "%d 天前"
 
 #: include/variables.php:208
 msgid "Network stats in"
@@ -802,9 +730,8 @@ msgid "Alarm Settings"
 msgstr "报警设置"
 
 #: include/variables.php:222
-#, fuzzy
 msgid "Alarm DB check Aborted Clients"
-msgstr "警报 DB 检查中止的客户端"
+msgstr "数据库检查中止客户端告警"
 
 #: include/variables.php:223 include/variables.php:230
 #: include/variables.php:237 include/variables.php:244
@@ -817,68 +744,56 @@ msgid "If this event has occurred, trigger the selected Normal, Warning, or Aler
 msgstr "如果发生此事件，请触发选定的“正常”、“警告”或“警报”状态颜色。"
 
 #: include/variables.php:229
-#, fuzzy
 msgid "Alarm Host with the same Description"
-msgstr "具有相同描述的设备：％s"
+msgstr "相同描述主机告警"
 
 #: include/variables.php:236
-#, fuzzy
 msgid "Alarm Orphaned Data Source"
-msgstr "孤立数据源：％s"
+msgstr "孤立数据源告警"
 
 #: include/variables.php:243
-#, fuzzy
 msgid "Alarm non-empty Poller Output"
-msgstr "报警非空轮询器输出"
+msgstr "非空轮询器输出告警"
 
 #: include/variables.php:250
-#, fuzzy
 msgid "Alarm Bad indexes Data Source"
-msgstr "告警坏索引数据源"
+msgstr "错误索引数据源告警"
 
 #: include/variables.php:257
-#, fuzzy
 msgid "Alarm Threshold logonly action"
-msgstr "警报阈值 logonly 操作"
+msgstr "阈值仅记录日志操作告警"
 
 #: include/variables.php:264
 msgid "Alarm when device bulk_walk_size is not optimized"
 msgstr "设备bulk_walk_size未优化时发出警报"
 
 #: include/variables.php:271
-#, fuzzy
 msgid "Alarm Devices with the same IP/port"
-msgstr "具有相同IP和端口的设备：％s"
+msgstr "相同 IP/端口设备告警"
 
 #: include/variables.php:278
-#, fuzzy
 msgid "Alarm Device in more than one Tree"
-msgstr "多个树中的设备：％s"
+msgstr "设备位于多个树中告警"
 
 #: include/variables.php:285
-#, fuzzy
 msgid "Alarm Device without a Tree"
-msgstr "多个树中的设备：％s"
+msgstr "设备未加入树告警"
 
 #: include/variables.php:292
-#, fuzzy
 msgid "Alarm Device with Default public/private SNMP Community"
-msgstr "拥有默认公共/私人社区的主机：％s"
+msgstr "设备使用默认 public/private SNMP 团体名告警"
 
 #: include/variables.php:299
-#, fuzzy
 msgid "Alarm Device without Monitoring"
-msgstr "具有相同IP和端口的设备：％s"
+msgstr "未监控设备告警"
 
 #: include/variables.php:306
-#, fuzzy
 msgid "Alarm Device without Graph"
-msgstr "具有相同IP和端口的设备：％s"
+msgstr "无图形设备告警"
 
 #: include/variables.php:313
-#, fuzzy
 msgid "Alarm Red/Yellow Polling Time"
-msgstr "允许面板排名前五的最差轮询时间"
+msgstr "轮询时间红/黄告警"
 
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
@@ -889,28 +804,24 @@ msgid "5s  / 10s Yellow / Red"
 msgstr "5s / 10s 黄色 / 红色"
 
 #: include/variables.php:319
-#, fuzzy
 msgid "10s / 20s Yellow / Red"
-msgstr "40s/20s 红/黄"
+msgstr "10s / 20s 黄 / 红"
 
 #: include/variables.php:320
-#, fuzzy
 msgid "20s / 40s Yellow / Red"
-msgstr "20s/10s 红/黄"
+msgstr "20 秒 / 40 秒 黄色 / 红色"
 
 #: include/variables.php:324
-#, fuzzy
 msgid "Alarm Red/Yellow Failed/All Ratio"
-msgstr "报警红/黄故障/全比"
+msgstr "失败/总数比例红/黄告警"
 
 #: include/variables.php:325
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr "要触发的可用性检查失败与成功检查的比率，为“警告”或“警报”状态颜色。"
 
 #: include/variables.php:329
-#, fuzzy
 msgid "0.1 / 0.2 Yellow / Red"
-msgstr "0.1/0.2 红/黄"
+msgstr "0.1 / 0.2 黄 / 红"
 
 #: include/variables.php:330
 msgid "0.2 / 0.4 Yellow / Red"
@@ -921,9 +832,8 @@ msgid "0.5 / 0.5++ Yellow / Red"
 msgstr "0.5 / 0.5++ 黄色 / 红色"
 
 #: include/variables.php:335
-#, fuzzy
 msgid "Alarm Red/Yellow Ping"
-msgstr "报警红/黄ping"
+msgstr "Ping 红/黄告警"
 
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
@@ -938,14 +848,12 @@ msgid "20ms  / 50ms Yellow / Red"
 msgstr "20ms / 50ms 黄色 / 红色"
 
 #: include/variables.php:342
-#, fuzzy
 msgid "100ms / 200+ms Yellow / Red"
-msgstr "100/200+ms 红/黄"
+msgstr "100ms / 200+ms 黄 / 红"
 
 #: include/variables.php:346
-#, fuzzy
 msgid "Alarm Red/Yellow Worst Availability"
-msgstr "Top5最差的可用性"
+msgstr "最差可用性红/黄告警"
 
 #: include/variables.php:347
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
@@ -965,9 +873,8 @@ msgid "Panels that provide alerting."
 msgstr "提供警报的面板。"
 
 #: panellib/alert.php:37 panellib/alert.php:205
-#, fuzzy
 msgid "Host alerts"
-msgstr "主机名"
+msgstr "主机警报"
 
 #: panellib/alert.php:38
 msgid "Host alerts (up/down/recovering) in last 30 minutes"
@@ -1000,7 +907,6 @@ msgstr "更多记录，使用详细信息窗口"
 #: panellib/system.php:191 panellib/system.php:592 panellib/thold.php:309
 #: panellib/top5.php:178 panellib/top5.php:258 panellib/top5.php:338
 #: panellib/top5.php:423
-#, fuzzy
 msgid "Waiting for data"
 msgstr "等待数据"
 
@@ -1009,69 +915,57 @@ msgstr "等待数据"
 #: panellib/graphs.php:374 panellib/top5.php:181 panellib/top5.php:261
 #: panellib/top5.php:341 panellib/top5.php:426 panellib/top5.php:508
 #: panellib/top5.php:589 panellib/top5.php:669 panellib/top5.php:755
-#, fuzzy
 msgid "You don't have permissions to any hosts"
-msgstr "您没有权限"
+msgstr "您没有任何主机的权限"
 
 #: panellib/analyze.php:31
-#, fuzzy
 msgid "Analysis Panels"
-msgstr "启用/禁用面板"
+msgstr "分析面板"
 
 #: panellib/analyze.php:32
-#, fuzzy
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
-msgstr "分析 Cacti 及其插件当前行为的面板。"
+msgstr "用于分析 Cacti 及其插件当前行为的面板。"
 
 #: panellib/analyze.php:37
-#, fuzzy
 msgid "Analyze Logins"
-msgstr "允许面板Analayse登录"
+msgstr "分析登录"
 
 #: panellib/analyze.php:38
-#, fuzzy
 msgid "Analyze the last several Cacti logins for trends and errors."
 msgstr "分析最近几次 Cacti 登录的趋势和错误。"
 
 #: panellib/analyze.php:53
-#, fuzzy
 msgid "Analyze Logs"
-msgstr "分析仙人掌日志"
+msgstr "分析日志"
 
 #: panellib/analyze.php:54
-#, fuzzy
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
-msgstr "在 Cacti 的日志文件中查找应该引起关注的常见错误。"
+msgstr "在 Cacti 日志文件中查找需要关注的常见错误。"
 
 #: panellib/analyze.php:69
-#, fuzzy
 msgid "Database Checks"
 msgstr "数据库检查"
 
 #: panellib/analyze.php:70
-#, fuzzy
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
-msgstr "分析 MySQL/MariaDB 数据库的常见错误。请注意，此过程在非常大的系统上可能需要很长时间。"
+msgstr "分析 MySQL/MariaDB "
+"数据库中的常见错误。请注意，在非常大的系统上此过程可能需要很长时间。"
 
 #: panellib/analyze.php:85
-#, fuzzy
 msgid "Analyze Cacti Objects"
-msgstr "分析仙人掌日志"
+msgstr "分析 Cacti 对象"
 
 #: panellib/analyze.php:86
-#, fuzzy
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "分析树、图、主机、..."
+msgstr "分析树、图形、主机等..."
 
 #: panellib/analyze.php:101
-#, fuzzy
 msgid "Analyze DS stats"
-msgstr "允许面板Analayse数据库"
+msgstr "分析数据源统计信息"
 
 #: panellib/analyze.php:102
-#, fuzzy
 msgid "Analyze data source stats"
-msgstr "允许面板Analayse数据库"
+msgstr "分析数据源统计信息"
 
 #: panellib/analyze.php:155
 msgid "Username"
@@ -1092,7 +986,6 @@ msgid "Failed"
 msgstr "失败"
 
 #: panellib/analyze.php:174 panellib/analyze.php:1287
-#, fuzzy
 msgid "Success - Login"
 msgstr "成功 - 登录"
 
@@ -1101,77 +994,67 @@ msgid "Success - Token"
 msgstr "成功 - 令牌"
 
 #: panellib/analyze.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Total Failed Logins: %s"
-msgstr "登录失败"
+msgstr "登录失败总次数：%s"
 
 #: panellib/analyze.php:224
 msgid "None"
 msgstr "无"
 
 #: panellib/analyze.php:227
-#, fuzzy
 msgid "Active Users in Last Hour: "
-msgstr "最后一小时的活跃用户："
+msgstr "最近 1 小时内的活跃用户： "
 
 #: panellib/analyze.php:264 panellib/analyze.php:1107
-#, fuzzy
 msgid "Log file not accessible or empty"
 msgstr "日志文件无法访问或为空"
 
 #: panellib/analyze.php:284
-#, fuzzy, php-format
+#, php-format
 msgid "Analyze last %s log lines:"
-msgstr "登录失败"
+msgstr "分析最后 %s 行日志："
 
 #: panellib/analyze.php:286
-#, fuzzy
 msgid "Errors: "
-msgstr "错误"
+msgstr "错误: "
 
 #: panellib/analyze.php:291
-#, fuzzy
 msgid "Warnings: "
-msgstr "警告"
+msgstr "警告: "
 
 #: panellib/analyze.php:298
-#, fuzzy
 msgid "Log Size: Larger than 2GB"
-msgstr "文件大于2GB"
+msgstr "日志大小：大于 2GB"
 
 #: panellib/analyze.php:302 panellib/analyze.php:1141
-#, fuzzy
 msgid "Log Size: OK"
-msgstr "日志大小好"
+msgstr "日志大小：正常"
 
 #: panellib/analyze.php:306 panellib/analyze.php:1145
-#, fuzzy
 msgid "Log Size: Quite Large"
-msgstr "日志大小非常大"
+msgstr "日志大小：较大"
 
 #: panellib/analyze.php:309
-#, fuzzy
 msgid "Log Size: "
-msgstr "日志大小最大值"
+msgstr "日志大小： "
 
 #: panellib/analyze.php:316
-#, fuzzy
 msgid "Last log lines:"
-msgstr "最后10次登录"
+msgstr "最新日志行："
 
 #: panellib/analyze.php:423
 msgid "Skipping DB tables checks. Database too large"
 msgstr "跳过数据库表检查。数据库太大"
 
 #: panellib/analyze.php:437
-#, fuzzy, php-format
+#, php-format
 msgid "Table %s status %s"
 msgstr "表 %s 状态 %s"
 
 #: panellib/analyze.php:444
-#, fuzzy
 msgid "DB: Problems"
-msgstr "DB问题"
+msgstr "数据库：问题"
 
 #: panellib/analyze.php:453
 msgid "DB: OK"
@@ -1187,42 +1070,42 @@ msgid "You can increase Max connection via command line tools or permanently in 
 msgstr "您可以通过命令行工具或在配置文件中永久增加最大连接数"
 
 #: panellib/analyze.php:499
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
-msgstr "连接错误 - 尝试重新启动SQL服务。"
+msgstr "连接错误：%s - 请尝试重启 SQL 服务、检查 SQL 日志等"
 
 #: panellib/analyze.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "中止的客户端/连接：%s - 检查日志。"
+msgstr "中止的客户端/连接数：%s"
 
 #: panellib/analyze.php:519
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
 msgstr "中止的客户端/连接 - 运行“SET GLOBAL log_warnings = 1;”或“log_error_verbosity = 1;”（取决于您的 MySQL/MariaDB 版本）从 mysql CLI 并在 server.cnf 中设置为静音。"
 
 #: panellib/analyze.php:523
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s"
-msgstr "连接错误：％s"
+msgstr "连接错误：%s"
 
 #: panellib/analyze.php:524
-#, fuzzy, php-format
+#, php-format
 msgid "Damaged tables: %s"
-msgstr "损坏的表：％s"
+msgstr "损坏的表：%s"
 
 #: panellib/analyze.php:527
 msgid "You should run check and repair table commands"
 msgstr "您应该运行 check 和 repair table 命令"
 
 #: panellib/analyze.php:531
-#, fuzzy, php-format
+#, php-format
 msgid "Memory tables: %s"
-msgstr "内存表：％s"
+msgstr "内存表：%s"
 
 #: panellib/analyze.php:532
-#, fuzzy, php-format
+#, php-format
 msgid "All tables: %s"
-msgstr "所有表格：％s"
+msgstr "所有表：%s"
 
 #: panellib/analyze.php:571 panellib/analyze.php:678 panellib/analyze.php:711
 #: panellib/analyze.php:763 panellib/analyze.php:792 panellib/analyze.php:823
@@ -1235,12 +1118,12 @@ msgstr "所有表格：％s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "N/A"
+msgstr "不可用"
 
 #: panellib/analyze.php:584
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port: %s"
-msgstr "具有相同IP和端口的设备：％s"
+msgstr "具有相同 IP 和端口的设备：%s"
 
 #: panellib/analyze.php:613
 #, php-format
@@ -1279,54 +1162,54 @@ msgid "%s: not run yet"
 msgstr "%s：尚未运行"
 
 #: panellib/analyze.php:691
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources: %s"
-msgstr "孤立数据源：％s"
+msgstr "孤立数据源：%s"
 
 #: panellib/analyze.php:722
-#, fuzzy, php-format
+#, php-format
 msgid "Datasource - bad indexes: %s"
-msgstr "数据源 - 坏索引：％s"
+msgstr "数据源 - 错误索引：%s"
 
 #: panellib/analyze.php:774
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "Thold logonly 警报/警告：%s"
+msgstr "Thold 仅日志记录警报/警告：%s"
 
 #: panellib/analyze.php:805
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description: %s"
-msgstr "具有相同描述的设备：％s"
+msgstr "具有相同描述的设备：%s"
 
 #: panellib/analyze.php:834
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree: %s"
-msgstr "多个树中的设备：％s"
+msgstr "位于多个设备树中的设备：%s"
 
 #: panellib/analyze.php:864
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without graphs: %s"
-msgstr "没有图表的主机：％s"
+msgstr "没有图形的设备：%s"
 
 #: panellib/analyze.php:893
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree: %s"
-msgstr "没有树的主机：％s"
+msgstr "未加入设备树的设备：%s"
 
 #: panellib/analyze.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community: %s"
-msgstr "拥有默认公共/私人社区的主机：％s"
+msgstr "使用默认 public/private 团体名的设备：%s"
 
 #: panellib/analyze.php:947
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "插件监视器 - 未监视的主机：％s"
+msgstr "Monitor 插件 - 未监控的主机：%s"
 
 #: panellib/analyze.php:955 panellib/analyze.php:1862
-#, fuzzy, php-format
+#, php-format
 msgid "Found %s problems"
-msgstr "找到了％s的问题"
+msgstr "发现 %s 个问题"
 
 #: panellib/analyze.php:961 panellib/analyze.php:1864
 msgid "Everything OK"
@@ -1334,7 +1217,7 @@ msgstr "一切正常"
 
 #: panellib/analyze.php:977
 msgid "DS stats: "
-msgstr "DS统计数据："
+msgstr "DS统计数据： "
 
 #: panellib/analyze.php:1003 panellib/busiest.php:165 panellib/busiest.php:285
 #: panellib/busiest.php:396 panellib/busiest.php:616 panellib/busiest.php:751
@@ -1346,14 +1229,13 @@ msgstr "面板需要启用 DS 统计信息。"
 
 #: panellib/analyze.php:1015
 msgid "DS all records "
-msgstr "DS 所有记录"
+msgstr "DS 所有记录 "
 
 #: panellib/analyze.php:1031
 msgid "DS null records "
-msgstr "DS 空记录"
+msgstr "DS 空记录 "
 
 #: panellib/analyze.php:1090
-#, fuzzy
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
 msgstr "分析 Cacti 日志详细信息 [警告/错误]"
 
@@ -1366,19 +1248,16 @@ msgid "Warnings"
 msgstr "警告"
 
 #: panellib/analyze.php:1137
-#, fuzzy
 msgid "WARNING: File is Larger than 2GB"
-msgstr "文件大于2GB"
+msgstr "警告：文件大于 2GB"
 
 #: panellib/analyze.php:1148
-#, fuzzy
 msgid "Log Size"
 msgstr "日志大小"
 
 #: panellib/analyze.php:1254
-#, fuzzy
 msgid "Analyze Logins Detail"
-msgstr "分析日志 - 行数"
+msgstr "分析登录详细信息"
 
 #: panellib/analyze.php:1272
 msgid "User"
@@ -1390,29 +1269,25 @@ msgid "Result"
 msgstr "结果"
 
 #: panellib/analyze.php:1314
-#, fuzzy
 msgid "Active Users in Last 2 Hours:"
 msgstr "最近 2 小时内的活跃用户："
 
 #: panellib/analyze.php:1325
-#, fuzzy
 msgid "No Active Users"
-msgstr "活跃用户"
+msgstr "无活跃用户"
 
 #: panellib/analyze.php:1331
-#, fuzzy
 msgid "View Full User Log"
-msgstr "查看完整的用户日志"
+msgstr "查看完整用户日志"
 
 #: panellib/analyze.php:1363
-#, fuzzy
 msgid "Analyze Tree, Graphs, Hosts"
-msgstr "分析树/主机/图"
+msgstr "分析树、图形、主机"
 
 #: panellib/analyze.php:1386
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port - %s"
-msgstr "具有相同IP和端口％s的设备"
+msgstr "具有相同 IP 和端口的设备 - %s"
 
 #: panellib/analyze.php:1428
 #, php-format
@@ -1420,54 +1295,53 @@ msgid "Not optimized Bulk Walk Size devices - %s"
 msgstr "未优化的 Bulk Walk Size 设备 - %s"
 
 #: panellib/analyze.php:1484
-#, fuzzy
 msgid "Data maintenance"
-msgstr "维护开始时"
+msgstr "数据维护"
 
 #: panellib/analyze.php:1519
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources - %s"
-msgstr "孤立数据源％s"
+msgstr "孤立数据源 - %s"
 
 #: panellib/analyze.php:1559
-#, fuzzy, php-format
+#, php-format
 msgid "Datasources with bad indexes - %s"
-msgstr "数据源 - 坏索引％s："
+msgstr "存在错误索引的数据源 - %s"
 
 #: panellib/analyze.php:1612
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s"
-msgstr "Thold logonly 警报/警告 - %s："
+msgstr "Thold 仅日志记录警报/警告 - %s"
 
 #: panellib/analyze.php:1649
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description - %s"
-msgstr "具有相同描述％s的设备"
+msgstr "具有相同描述的设备 - %s"
 
 #: panellib/analyze.php:1692
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree - %s"
-msgstr "多个树中的设备％s"
+msgstr "位于多个设备树中的设备 - %s"
 
 #: panellib/analyze.php:1748
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without Graphs - %s"
-msgstr "主机没有图表％s"
+msgstr "没有图形的设备 - %s"
 
 #: panellib/analyze.php:1781
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree - %s"
-msgstr "没有树％s的主机"
+msgstr "未加入设备树的设备 - %s"
 
 #: panellib/analyze.php:1813
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community - %s"
-msgstr "拥有默认公共/私人社区％s的主机"
+msgstr "使用默认 public/private 团体名的设备 - %s"
 
 #: panellib/analyze.php:1845
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts - %s"
-msgstr "插件监视器 - 未监视的主机％s"
+msgstr "Monitor 插件 - 未监控的主机 - %s"
 
 #: panellib/busiest.php:31
 msgid "The busiest"
@@ -1482,18 +1356,16 @@ msgid "Busiest CPU"
 msgstr "最繁忙的 CPU"
 
 #: panellib/busiest.php:38
-#, fuzzy
 msgid "Devices with the busiest CPU (Host MIB)"
-msgstr "具有相同IP和端口的设备：％s"
+msgstr "CPU 最繁忙的设备 (Host MIB)"
 
 #: panellib/busiest.php:53
 msgid "Busiest ucd/net - Load"
 msgstr "最繁忙的ucd/net - 负载"
 
 #: panellib/busiest.php:54
-#, fuzzy
 msgid "Devices with the highest Load (ucd/net)"
-msgstr "具有相同描述的设备：％s"
+msgstr "负载最高的设备 (ucd/net)"
 
 #: panellib/busiest.php:69
 msgid "Busiest Hard Drive Space"
@@ -1508,18 +1380,16 @@ msgid "Busiest uptime"
 msgstr "最繁忙的正常运行时间"
 
 #: panellib/busiest.php:86
-#, fuzzy
 msgid "Devices with the highest uptime"
-msgstr "Top5最糟糕的投票时间"
+msgstr "运行时间最长的设备"
 
 #: panellib/busiest.php:101
 msgid "Busiest Interface in/out traffic"
 msgstr "最繁忙的接口输入/输出流量"
 
 #: panellib/busiest.php:102
-#, fuzzy
 msgid "Devices with the highest in/out traffic (Interface)"
-msgstr "Top5最糟糕的投票时间"
+msgstr "入/出流量最高的设备 (接口)"
 
 #: panellib/busiest.php:117
 msgid "Busiest Interface error"
@@ -1588,26 +1458,22 @@ msgstr "正在等待数据，或者您没有使用此模板的任何设备的权
 #: panellib/busiest.php:1097 panellib/busiest.php:1213
 #: panellib/busiest.php:1354 panellib/busiest.php:1570
 #: panellib/busiest.php:1692 panellib/busiest.php:1820
-#, fuzzy
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
-msgstr "您没有权限"
+msgstr "您没有任何主机的权限，或没有任何主机使用此模板"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
-#, fuzzy
 msgid "Uptime"
-msgstr "Uptime"
+msgstr "运行时间"
 
 #: panellib/busiest.php:588 panellib/busiest.php:1420
 msgid "Average of all allowed hosts"
 msgstr "所有允许的主机的平均值"
 
 #: panellib/busiest.php:592 panellib/busiest.php:1424
-#, fuzzy
 msgid "Waiting for data or you don't have permission for any device"
-msgstr "您没有权限"
+msgstr "正在等待数据，或者您没有任何设备的权限"
 
 #: panellib/busiest.php:933 panellib/busiest.php:1773
-#, fuzzy
 msgid "Direction"
 msgstr "方向"
 
@@ -1641,57 +1507,48 @@ msgid "Busiest interface utilization"
 msgstr "最繁忙的接口利用率"
 
 #: panellib/graphs.php:31
-#, fuzzy
 msgid "Graphical Panels"
-msgstr "内向板"
+msgstr "图形面板"
 
 #: panellib/graphs.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
-msgstr "以图形方式提供有关 Cacti 及其插件的信息的面板。"
+msgstr "以图形方式提供有关 Cacti 及其插件信息的面板。"
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
 msgstr "数据源"
 
 #: panellib/graphs.php:38
-#, fuzzy
 msgid "Graph of Data Sources"
-msgstr "允许面板图数据源"
+msgstr "数据源图表"
 
 #: panellib/graphs.php:53 panellib/graphs.php:603
 msgid "Device Templates"
 msgstr "设备模板"
 
 #: panellib/graphs.php:54
-#, fuzzy
 msgid "Graph of Device Templates"
-msgstr "设备模板"
+msgstr "设备模板图表"
 
 #: panellib/graphs.php:69
-#, fuzzy
 msgid "Devices by Status"
-msgstr "设备模板"
+msgstr "按状态统计的设备"
 
 #: panellib/graphs.php:70
-#, fuzzy
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr "按状态排列的设备图（向上、向下、...）"
+msgstr "按状态分类的设备图表（正常、宕机...）"
 
 #: panellib/graphs.php:106
-#, fuzzy
 msgid "Datasources: "
-msgstr "数据源："
+msgstr "数据源： "
 
 #: panellib/graphs.php:180 panellib/graphs.php:207
-#, fuzzy
 msgid "Device Templates: "
-msgstr "设备模板"
+msgstr "设备模板： "
 
 #: panellib/graphs.php:262
-#, fuzzy
 msgid "Devices: "
-msgstr "没有设备"
+msgstr "设备： "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
@@ -1712,18 +1569,16 @@ msgid "Total"
 msgstr "一共"
 
 #: panellib/graphs.php:445
-#, fuzzy
 msgid "No untemplated datasources found"
-msgstr "找不到未经模板化的数据源"
+msgstr "未找到未使用模板的数据源"
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
 msgstr "设备"
 
 #: panellib/graphs.php:503
-#, fuzzy
 msgid "Device Count"
-msgstr "最大设备停机"
+msgstr "设备数量"
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
@@ -1731,7 +1586,7 @@ msgstr "所有"
 
 #: panellib/graphs.php:515 panellib/mactrack.php:107
 msgid "Up"
-msgstr "起来"
+msgstr "在线"
 
 #: panellib/graphs.php:635
 msgid "Template Name"
@@ -1742,59 +1597,51 @@ msgid "Total Devices"
 msgstr "设备总数"
 
 #: panellib/graphs.php:656
-#, fuzzy
 msgid "No device templates found"
 msgstr "未找到设备模板"
 
 #: panellib/mactrack.php:31
-#, fuzzy
 msgid "MacTrack Panels"
-msgstr "Mactrack网站"
+msgstr "MacTrack 面板"
 
 #: panellib/mactrack.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's MacTrack plugins."
-msgstr "提供有关 Cacti 的 MacTrack 插件信息的面板。"
+msgstr "提供有关 Cacti MacTrack 插件信息的面板。"
 
 #: panellib/mactrack.php:37
-#, fuzzy
 msgid "MacTrack Plugin"
-msgstr "允许面板MacTrack插件"
+msgstr "MacTrack 插件"
 
 #: panellib/mactrack.php:38
-#, fuzzy
 msgid "Various MacTrack collection and site statistics."
-msgstr "各种 MacTrack 收集和站点统计。"
+msgstr "各类 MacTrack 采集与站点统计信息。"
 
 #: panellib/mactrack.php:53 panellib/mactrack.php:184
-#, fuzzy
 msgid "MacTrack Sites"
-msgstr "Mactrack网站"
+msgstr "MacTrack 站点"
 
 #: panellib/mactrack.php:54
-#, fuzzy
 msgid "Various MacTrack Site statistics."
-msgstr "各种 MacTrack 站点统计数据。"
+msgstr "各类 MacTrack 站点统计信息。"
 
 #: panellib/mactrack.php:81 panellib/mactrack.php:134
-#, fuzzy
 msgid "MacTrack Plugin not Installed/Running"
-msgstr "Mactrack插件未安装/运行"
+msgstr "MacTrack 插件未安装/未运行"
 
 #: panellib/mactrack.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "All: %s"
-msgstr "全部：％s"
+msgstr "全部：%s"
 
 #: panellib/mactrack.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "Up: %s"
-msgstr "UPS"
+msgstr "正常：%s"
 
 #: panellib/mactrack.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Down: %s"
-msgstr "下：％s"
+msgstr "宕机：%s"
 
 #: panellib/mactrack.php:100
 #, php-format
@@ -1802,9 +1649,9 @@ msgid "Error: %s"
 msgstr "错误: %s"
 
 #: panellib/mactrack.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown: %s"
-msgstr "未知 (%s)"
+msgstr "未知：%s"
 
 #: panellib/mactrack.php:102
 #, php-format
@@ -1824,9 +1671,8 @@ msgid "Unknown"
 msgstr "未知"
 
 #: panellib/mactrack.php:118 panellib/mactrack.php:173 panellib/thold.php:312
-#, fuzzy
 msgid "You don't have plugin permission"
-msgstr "您没有权限"
+msgstr "您没有插件权限"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
@@ -1841,9 +1687,8 @@ msgid "Ports"
 msgstr "端口"
 
 #: panellib/mactrack.php:142 panellib/mactrack.php:195
-#, fuzzy
 msgid "Ports up"
-msgstr "用户启动的端口"
+msgstr "在线端口"
 
 #: panellib/mactrack.php:143 panellib/mactrack.php:196
 msgid "MACs"
@@ -1854,108 +1699,92 @@ msgid "Device Errors"
 msgstr "设备错误"
 
 #: panellib/mactrack.php:170 panellib/mactrack.php:225
-#, fuzzy
 msgid "No mactrack sites found"
-msgstr "找不到mactrack网站"
+msgstr "未找到 MacTrack 站点"
 
 #: panellib/misc.php:31
-#, fuzzy
 msgid "Miscellaneous Panels"
 msgstr "杂项面板"
 
 #: panellib/misc.php:32
-#, fuzzy
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr "包含有关 Cacti 的一般非分类数据的面板。"
+msgstr "包含有关 Cacti 的常规未分类数据的面板。"
 
 #: panellib/misc.php:37
-#, fuzzy
 msgid "NTP/DNS Status"
-msgstr "NTP状态"
+msgstr "NTP/DNS 状态"
 
 #: panellib/misc.php:38
-#, fuzzy
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
-msgstr "检查您的 Cacti 系统时钟是否偏离已知基线。"
+msgstr "检查您的 Cacti 系统时钟是否偏离已知基线，以及进行 DNS 解析检查"
 
 #: panellib/misc.php:53
-#, fuzzy
 msgid "Maint Plugin Details"
-msgstr "显示项目详情"
+msgstr "Maint 插件详情"
 
 #: panellib/misc.php:54
-#, fuzzy
 msgid "Maint Plugin details on upcoming schedules"
-msgstr "即将到来的时间表的维护插件详细信息"
+msgstr "Maint 插件关于即将执行计划的详细信息"
 
 #: panellib/misc.php:69
-#, fuzzy
 msgid "Webseer Details"
-msgstr "显示项目详情"
+msgstr "Webseer 详细信息"
 
 #: panellib/misc.php:70
-#, fuzzy
 msgid "Plugin webseer URL Service Check Details"
-msgstr "插件 webseer URL 服务检查详情"
+msgstr "WebSeer 插件 URL 服务检查详情"
 
 #: panellib/misc.php:85
-#, fuzzy
 msgid "Servcheck plugin Details"
-msgstr "Webseer 插件 - 详细信息"
+msgstr "ServCheck 插件详细信息"
 
 #: panellib/misc.php:86
-#, fuzzy
 msgid "Plugin ServCheck Details"
-msgstr "插件 webseer URL 服务检查详情"
+msgstr "ServCheck 插件详情"
 
 #: panellib/misc.php:117
-#, fuzzy
 msgid "No NTP server configured"
-msgstr "没有配置NTP服务器"
+msgstr "未配置 NTP 服务器"
 
 #: panellib/misc.php:120
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
-msgstr "没有配置NTP服务器"
+msgstr "配置的 NTP 服务器错误 - %s<br/>请在设置中修正"
 
 #: panellib/misc.php:136
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to get NTP time from %s"
-msgstr "无法从$ ntp_server获得NTP时间"
+msgstr "无法从 %s 获取 NTP 时间"
 
 #: panellib/misc.php:144
-#, fuzzy
 msgid "Please check time as it is off by more"
-msgstr "请检查时间，因为它是关闭更多"
+msgstr "请检查时间，因为时间偏差过大"
 
 #: panellib/misc.php:145
-#, fuzzy, php-format
+#, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr "从 NTP 服务器 %s 到 %s 秒。"
+msgstr "超过 %s 秒（相对于 NTP 服务器 %s）。"
 
 #: panellib/misc.php:147
-#, fuzzy
 msgid "Localtime is equal to NTP server"
-msgstr "Localtime等于NTP服务器"
+msgstr "本地时间与 NTP 服务器一致"
 
 #: panellib/misc.php:151
-#, fuzzy
 msgid "Unable to contact the NTP server indicated."
-msgstr "无法联系指示的NTP服务器。 <br/>请检查您的配置。 <br/>"
+msgstr "无法连接到指定的 NTP 服务器。"
 
 #: panellib/misc.php:153 panellib/misc.php:178
 msgid "Please check your configuration."
-msgstr "请检查您的配置"
+msgstr "请检查您的配置。"
 
 #: panellib/misc.php:161
-#, fuzzy
 msgid "No DNS hostname configured"
-msgstr "没有配置NTP服务器"
+msgstr "未配置 DNS 主机名"
 
 #: panellib/misc.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
-msgstr "没有配置NTP服务器"
+msgstr "配置的 DNS 主机名错误 - %s<br/>请在设置中修正"
 
 #: panellib/misc.php:173
 #, php-format
@@ -1973,28 +1802,24 @@ msgid "DNS hostname (%s) resolving failed."
 msgstr "DNS 主机名 （%s） 解析失败。"
 
 #: panellib/misc.php:287
-#, fuzzy
 msgid "Maint plugin is not installed/enabled"
-msgstr "Mactrack插件未安装/运行"
+msgstr "Maint 插件未安装/启用"
 
 #: panellib/misc.php:307
-#, fuzzy
 msgid "Plugin Webseer isn't installed or started"
-msgstr "插件Thold未安装或启动"
+msgstr "WebSeer 插件未安装或未启动"
 
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
 msgstr "不再支持 Webseer 插件，请改用插件 servcheck"
 
 #: panellib/misc.php:320 panellib/misc.php:486
-#, fuzzy
 msgid "Number of checks (all/disabled): "
-msgstr "检查次数："
+msgstr "检查数量（全部/已禁用）： "
 
 #: panellib/misc.php:321
-#, fuzzy
 msgid "Status (up/down): "
-msgstr "主持人"
+msgstr "状态（正常/宕机）： "
 
 #: panellib/misc.php:335
 msgid "Last log messages"
@@ -2011,22 +1836,19 @@ msgstr "HTTP代码："
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "确定"
+msgstr "正常"
 
 #: panellib/misc.php:390
-#, fuzzy
 msgid "Webseer Plugin - Details"
 msgstr "Webseer 插件 - 详细信息"
 
 #: panellib/misc.php:461
-#, fuzzy
 msgid "Plugin Servcheck isn't installed or started"
-msgstr "插件Thold未安装或启动"
+msgstr "ServCheck 插件未安装或未启动"
 
 #: panellib/misc.php:487
-#, fuzzy
 msgid "Status (ok/error): "
-msgstr "主持人"
+msgstr "状态（正常/错误）： "
 
 #: panellib/misc.php:498
 msgid "Last log records"
@@ -2037,48 +1859,40 @@ msgid "Test"
 msgstr "测试"
 
 #: panellib/misc.php:501 panellib/misc.php:573
-#, fuzzy
 msgid "Type"
 msgstr "Type"
 
 #: panellib/misc.php:555
-#, fuzzy
 msgid "Servcheck Plugin - Details"
-msgstr "Webseer 插件 - 详细信息"
+msgstr "ServCheck 插件 - 详细信息"
 
 #: panellib/poller.php:31
-#, fuzzy
 msgid "Poller Panels"
-msgstr "允许面板轮询统计"
+msgstr "轮询器面板"
 
 #: panellib/poller.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's polling process."
-msgstr "提供有关 Cacti 投票过程信息的面板。"
+msgstr "提供有关 Cacti 轮询过程信息的面板。"
 
 #: panellib/poller.php:37
 msgid "Poller Information"
 msgstr "poller 信息"
 
 #: panellib/poller.php:38
-#, fuzzy
 msgid "Various information about your Cacti poller."
-msgstr "有关您的 Cacti poller 的各种信息。"
+msgstr "关于 Cacti 轮询器的各类信息。"
 
 #: panellib/poller.php:53
-#, fuzzy
 msgid "Poller Statistics"
-msgstr "允许面板轮询统计"
+msgstr "轮询器统计信息"
 
 #: panellib/poller.php:54 panellib/poller.php:70
-#, fuzzy
 msgid "Various Cacti poller statistics."
-msgstr "各种仙人掌轮询统计。"
+msgstr "各类 Cacti 轮询器统计信息。"
 
 #: panellib/poller.php:69
-#, fuzzy
 msgid "Poller Output Items"
-msgstr "轮询输出项目：％s"
+msgstr "轮询器输出项"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -2105,19 +1919,17 @@ msgid "Idle"
 msgstr "闲"
 
 #: panellib/poller.php:140 panellib/poller.php:346
-#, fuzzy
 msgid "Unkn/down"
-msgstr "UNKN /向下"
+msgstr "未知/宕机"
 
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
-#, fuzzy, php-format
+#, php-format
 msgid "%s Secs"
 msgstr "%s 秒"
 
 #: panellib/poller.php:171 panellib/poller.php:367
-#, fuzzy
 msgid "(ok)"
-msgstr "（好）"
+msgstr "(正常)"
 
 #: panellib/poller.php:172 panellib/poller.php:367
 msgid "(all)"
@@ -2125,16 +1937,15 @@ msgstr "（所有）"
 
 #: panellib/poller.php:274
 msgid "ID: "
-msgstr "ID:"
+msgstr "ID: "
 
 #: panellib/poller.php:275
 msgid "Seconds"
 msgstr "秒"
 
 #: panellib/poller.php:297
-#, fuzzy
 msgid "Poller Details"
-msgstr "允许面板轮询统计"
+msgstr "轮询器详情"
 
 #: panellib/poller.php:308
 msgid "Average Time"
@@ -2145,33 +1956,28 @@ msgid "Max Time"
 msgstr "最长时间"
 
 #: panellib/poller.php:446
-#, fuzzy
 msgid "Poller output items "
-msgstr "轮询输出项％s："
+msgstr "轮询器输出项 "
 
 #: panellib/poller.php:447
 msgid "Items"
 msgstr "项目"
 
 #: panellib/syslog.php:31
-#, fuzzy
 msgid "Syslog Panels"
-msgstr "重新加载面板"
+msgstr "Syslog 面板"
 
 #: panellib/syslog.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's Syslog message processing."
-msgstr "提供有关 Cacti 的 Syslog 消息处理信息的面板。"
+msgstr "提供有关 Cacti Syslog 消息处理信息的面板。"
 
 #: panellib/syslog.php:37
-#, fuzzy
 msgid "Syslog Details"
-msgstr "显示项目详情"
+msgstr "Syslog 详细信息"
 
 #: panellib/syslog.php:38
-#, fuzzy
 msgid "Various Syslog Plugin statistics."
-msgstr "各种 Syslog 插件统计信息。"
+msgstr "各类 Syslog 插件统计信息。"
 
 #: panellib/syslog.php:171
 msgid "Incoming"
@@ -2186,17 +1992,14 @@ msgid "Messages"
 msgstr "消息"
 
 #: panellib/syslog.php:197
-#, fuzzy
 msgid "Syslog plugin not installed/running"
-msgstr "Thold插件未安装/运行"
+msgstr "Syslog 插件未安装/未运行"
 
 #: panellib/system.php:31
-#, fuzzy
 msgid "System Panels"
-msgstr "内向板"
+msgstr "系统面板"
 
 #: panellib/system.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti system performance."
 msgstr "提供有关 Cacti 系统性能信息的面板。"
 
@@ -2205,58 +2008,48 @@ msgid "Information"
 msgstr "信息"
 
 #: panellib/system.php:38
-#, fuzzy
 msgid "Various system information about the Cacti system itself."
-msgstr "有关 Cacti 系统本身的各种系统信息。"
+msgstr "关于 Cacti 系统本身的各类系统信息。"
 
 #: panellib/system.php:53
-#, fuzzy
 msgid "Administrative Alerts"
-msgstr "行政警报"
+msgstr "管理告警"
 
 #: panellib/system.php:54
-#, fuzzy
 msgid "Extra admin notify panel for all users"
-msgstr "所有用户的额外管理员通知面板"
+msgstr "面向所有用户的额外管理员通知面板"
 
 #: panellib/system.php:69
-#, fuzzy
 msgid "Boost Statistics"
-msgstr "提升统计数据"
+msgstr "Boost 统计信息"
 
 #: panellib/system.php:70
-#, fuzzy
 msgid "Information about Cacti's performance boost process."
-msgstr "有关 Cacti 性能提升过程的信息。"
+msgstr "有关 Cacti 性能提升进程的信息。"
 
 #: panellib/system.php:85
-#, fuzzy
 msgid "24 Hour Extremes"
-msgstr "24小时极端"
+msgstr "24 小时极值"
 
 #: panellib/system.php:86
-#, fuzzy
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
-msgstr "具有 24 小时轮询极限的表（最长轮询器运行，主机关闭）"
+msgstr "包含 24 小时轮询极值的表（最长轮询器运行时间、宕机主机）"
 
 #: panellib/system.php:101
 msgid "CPU Utilization"
-msgstr "CPU利用率"
+msgstr "CPU 利用率"
 
 #: panellib/system.php:102
-#, fuzzy
 msgid "CPU utilization Graph (only Linux)."
-msgstr "CPU利用率"
+msgstr "CPU 利用率图形（仅限 Linux）。"
 
 #: panellib/system.php:141
-#, fuzzy
 msgid "CPU Load: "
-msgstr "CPU负载："
+msgstr "CPU 负载: "
 
 #: panellib/system.php:165
-#, fuzzy
 msgid "This function is not implemented on Windows platforms"
-msgstr "Windows平台上未实现此功能"
+msgstr "此功能尚未在 Windows 平台上实现"
 
 #: panellib/system.php:177
 msgid "Avg CPU"
@@ -2267,37 +2060,32 @@ msgid "Max CPU"
 msgstr "最大CPU"
 
 #: panellib/system.php:208
-#, fuzzy
 msgid "Cacti Version: "
-msgstr "Cacti 版本"
+msgstr "Cacti 版本: "
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Poller Type:"
-msgstr "采集类型"
+msgstr "轮询器类型："
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Spine"
 msgstr "Spine 二进制文件位置"
 
 #: panellib/system.php:221
 msgid "Spine version: "
-msgstr "Spine版本："
+msgstr "Spine版本： "
 
 #: panellib/system.php:224
 msgid "You are using incorrect spine version!"
 msgstr "您使用的Spine版本不正确！"
 
 #: panellib/system.php:229
-#, fuzzy
 msgid "Poller Type: "
-msgstr "采集类型"
+msgstr "轮询器类型： "
 
 #: panellib/system.php:238
-#, fuzzy
 msgid "Running on: "
-msgstr "运行："
+msgstr "运行于： "
 
 #: panellib/system.php:316
 msgid "Overrun Warning"
@@ -2316,9 +2104,9 @@ msgid "Never Run"
 msgstr "从没有运行"
 
 #: panellib/system.php:346
-#, fuzzy, php-format
+#, php-format
 msgid "Boost Status is: %s"
-msgstr "提升统计数据"
+msgstr "Boost 状态：%s"
 
 #: panellib/system.php:350
 #, php-format
@@ -2326,103 +2114,90 @@ msgid "Processes/Frequency: %s / %s"
 msgstr "进程/频率：%s / %s"
 
 #: panellib/system.php:352
-#, fuzzy, php-format
+#, php-format
 msgid "Pending Records Threshold: %s"
-msgstr "等待提升记录：％s"
+msgstr "待处理记录阈值：%s"
 
 #: panellib/system.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Approximate Next Start Time: %s"
-msgstr "下一个开始时间：％s"
+msgstr "预计下次开始时间：%s"
 
 #: panellib/system.php:361
-#, fuzzy, php-format
+#, php-format
 msgid "Pending/Archived Records: %s / %s"
-msgstr "存档的提升记录：％s"
+msgstr "待处理/已归档记录：%s / %s"
 
 #: panellib/system.php:377
-#, fuzzy, php-format
+#, php-format
 msgid "Current Boost Table(s) Size: %s"
-msgstr "当前升压表大小：％s"
+msgstr "当前 Boost 表大小：%s"
 
 #: panellib/system.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr "平均字节数/记录：％s"
+msgstr "平均字节数/记录：%s"
 
 #: panellib/system.php:390
-#, fuzzy, php-format
+#, php-format
 msgid "Last run duration/updates: %s / %s"
-msgstr "上次运行时间：％s"
+msgstr "上次运行耗时/更新数：%s / %s"
 
 #: panellib/system.php:448
-#, fuzzy
 msgid "Poller Run"
-msgstr "如果您选择此选项,SNMP 缓存将被清除并重新生成. 请注意,它需要另一个poller 才能完全恢复SNMP 缓存"
+msgstr "轮询器运行"
 
 #: panellib/system.php:474
-#, fuzzy
 msgid "Down Hosts"
-msgstr "主机"
+msgstr "宕机主机"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
 msgstr "触发"
 
 #: panellib/system.php:526
-#, fuzzy
 msgid "Poller out. itms"
-msgstr "轮询输出项％s："
+msgstr "轮询器输出项"
 
 #: panellib/system.php:606
-#, fuzzy
 msgid "48 Hour Extreme Polling"
-msgstr "24小时极端"
+msgstr "48 小时极端轮询"
 
 #: panellib/system.php:629
-#, fuzzy
 msgid "Long Running Poller"
-msgstr "长跑<br/>轮询"
+msgstr "长时间运行的轮询器"
 
 #: panellib/system.php:660
-#, fuzzy
 msgid "Max Device Down"
-msgstr "最大设备停机"
+msgstr "最大设备宕机数"
 
 #: panellib/system.php:690
-#, fuzzy
 msgid "Max Thold Triggered"
-msgstr "Tholds触发了"
+msgstr "最大 Thold 触发数"
 
 #: panellib/system.php:719
-#, fuzzy
 msgid "Poller Output Item"
-msgstr "轮询输出项目：％s"
+msgstr "轮询器输出项"
 
 #: panellib/system.php:747
-#, fuzzy
 msgid "Failed Polls"
-msgstr "登录失败"
+msgstr "失败的轮询"
 
 #: panellib/thold.php:31
-#, fuzzy
 msgid "Threshold Panels"
-msgstr "阈值"
+msgstr "阈值面板"
 
 #: panellib/thold.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti Thresholding Plugin."
-msgstr "提供有关 Cacti Thresholding Plugin 信息的面板。"
+msgstr "提供有关 Cacti 阈值插件信息的面板。"
 
 #: panellib/thold.php:37 panellib/thold.php:434
-#, fuzzy
 msgid "Last Threshold Events"
-msgstr "阈值"
+msgstr "最近阈值事件"
 
 #: panellib/thold.php:38
-#, fuzzy
 msgid "Threshold Plugin Latest Events"
-msgstr "阈值"
+msgstr "阈值插件最新事件"
 
 #: panellib/thold.php:53
 msgid "Threshold"
@@ -2434,24 +2209,20 @@ msgid "Threshold Plugin Graph (all, trigerred, ...)"
 msgstr "Threshold Plugin Graph (all,trigerred, ...)"
 
 #: panellib/thold.php:87 panellib/thold.php:441
-#, fuzzy
 msgid "Plugin Thold isn't installed or started"
-msgstr "插件Thold未安装或启动"
+msgstr "Thold 插件未安装或未启动"
 
 #: panellib/thold.php:179 panellib/thold.php:506
-#, fuzzy
 msgid "Without events yet"
-msgstr "没有事件"
+msgstr "暂无事件"
 
 #: panellib/thold.php:196
-#, fuzzy
 msgid "Thresholds: "
-msgstr "没有阈值"
+msgstr "阈值： "
 
 #: panellib/thold.php:208 panellib/thold.php:332
-#, fuzzy
 msgid "Thold plugin not installed/running"
-msgstr "Thold插件未安装/运行"
+msgstr "Thold 插件未安装/未运行"
 
 #: panellib/thold.php:238
 #, fuzzy
@@ -2463,82 +2234,68 @@ msgid "Breached"
 msgstr "冲破"
 
 #: panellib/thold.php:325
-#, fuzzy
 msgid "Threshold Details"
-msgstr "阈值"
+msgstr "阈值详情"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
 msgstr "阈值"
 
 #: panellib/thold.php:402
-#, fuzzy
 msgid "Breached: "
-msgstr "冲破"
+msgstr "已越限: "
 
 #: panellib/thold.php:413
-#, fuzzy
 msgid "Triggered: "
-msgstr "触发"
+msgstr "已触发: "
 
 #: panellib/thold.php:421
-#, fuzzy
 msgid "You don't have permission to Thresholds"
-msgstr "您没有权限"
+msgstr "您没有访问阈值的权限"
 
 #: panellib/thold.php:484
-#, fuzzy
 msgid "Description"
 msgstr "描述"
 
 #: panellib/top5.php:31
-#, fuzzy
 msgid "Top/Bottom 5 Panels"
-msgstr "Top5最糟糕的投票时间"
+msgstr "最高/最低 5 项面板"
 
 #: panellib/top5.php:32
-#, fuzzy
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr "提供有关 Cacti 数据收集的信息趋势信息的面板。"
+msgstr "提供有关 Cacti 数据收集趋势信息的面板。"
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
 msgstr "底部 Ping"
 
 #: panellib/top5.php:38
-#, fuzzy
 msgid "Devices with the worst ping response"
-msgstr "具有相同描述的设备：％s"
+msgstr "Ping 响应最差的设备"
 
 #: panellib/top5.php:53
-#, fuzzy
 msgid "Bottom Availability"
-msgstr "可用性"
+msgstr "最低可用性"
 
 #: panellib/top5.php:54
-#, fuzzy
 msgid "Devices with the worst availability/reachability"
-msgstr "Top5最差的可用性"
+msgstr "可用性/可达性最差的设备"
 
 #: panellib/top5.php:69
-#, fuzzy
 msgid "Bottom Polling Time"
-msgstr "采集时间"
+msgstr "最差轮询时间"
 
 #: panellib/top5.php:70
-#, fuzzy
 msgid "Devices with the worst polling time"
-msgstr "Top5最糟糕的投票时间"
+msgstr "轮询耗时最长的设备"
 
 #: panellib/top5.php:85
-#, fuzzy
 msgid "Bottom Polling Ratio"
-msgstr "Top5最糟糕的投票时间"
+msgstr "最低轮询比率"
 
 #: panellib/top5.php:86
-#, fuzzy
 msgid "Devices with the worst polling ratio"
-msgstr "具有相同IP和端口的设备：％s"
+msgstr "轮询比率最差的设备"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
@@ -2561,52 +2318,45 @@ msgid "Ratio"
 msgstr "比率"
 
 #: panellib/top5.php:437
-#, fuzzy
 msgid "Top 20 Hosts with Worst Ping"
-msgstr "Top5最糟糕的投票时间"
+msgstr "Ping 最差的前 20 台主机"
 
 #: panellib/top5.php:519
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Availability"
-msgstr "Top5最差的可用性"
+msgstr "可用性最差的前 20 台主机"
 
 #: panellib/top5.php:557
 msgid "Availability"
 msgstr "可用性"
 
 #: panellib/top5.php:600
-#, fuzzy
 msgid "Top 20 Hosts Worst Polling Time"
-msgstr "Top5最糟糕的投票时间"
+msgstr "轮询时间最差的前 20 台主机"
 
 #: panellib/top5.php:680
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Polling Ratio"
-msgstr "Top5最糟糕的投票时间"
+msgstr "轮询比率最差的前 20 台主机"
 
 #: setup.php:61
-#, fuzzy
 msgid "Intropage Viewer"
-msgstr "内向板"
+msgstr "Intropage 查看器"
 
 #: setup.php:62
-#, fuzzy
 msgid "Intropage Administration"
-msgstr "介绍页面选项"
+msgstr "Intropage 管理"
 
 #: setup.php:80
 msgid "System Administration"
 msgstr "系统管理"
 
 #: setup.php:83
-#, fuzzy
 msgid "Timespan Last 1 Hour"
-msgstr "最近 2 小时内的活跃用户："
+msgstr "过去 1 小时时间范围"
 
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "Timespan Last %d Hours"
-msgstr "最近 2 小时内的活跃用户："
+msgstr "时间范围：最近 %d 小时"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
