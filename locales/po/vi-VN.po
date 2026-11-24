@@ -8,29 +8,30 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2024-04-20 14:27-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: vi_VN\n"
+"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Vietnamese <https://translate.cacti.net/projects/cacti/"
+"intropage/vi/>\n"
+"Language: vi-VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: display.php:40
-#, fuzzy
 msgid "Intropage - Permission Denied"
-msgstr "Intropage - sự cho phép bị từ chối"
+msgstr "Intropage - Từ chối quyền truy cập"
 
 #: display.php:123
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
 msgstr "Một hoặc nhiều bảng đã bị xóa do không đủ quyền. Liên hệ với quản trị viên."
 
 #: display.php:179
-#, fuzzy
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
-msgstr "Bạn có thể tắt các hàng ở trên trong <b>Cài đặt -> Chung -> Ẩn Bảng điều khiển Cacti</b> và sử dụng toàn bộ trang cho Intropage <br/><br/>"
+msgstr ""
+"Bạn có thể tắt các hàng ở trên trong <b>Cấu hình > Cài đặt > Chung > Ẩn Bảng "
+"điều khiển Cacti</b> và sử dụng toàn bộ trang cho Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -42,60 +43,50 @@ msgid "Hide red/yellow/green square notifications"
 msgstr "Ẩn thông báo hình vuông màu đỏ / vàng / xanh lá cây"
 
 #: display.php:245
-#, fuzzy
 msgid "Disable panel move/enable copy text from panel"
-msgstr "Vô hiệu hóa di chuyển bảng / cho phép sao chép văn bản từ bảng điều khiển"
+msgstr "Tắt di chuyển bảng/bật sao chép văn bản từ bảng"
 
 #: display.php:254
-#, fuzzy
 msgid "Actions ..."
-msgstr "Hành động"
+msgstr "Thao tác ..."
 
 #: display.php:257
-#, fuzzy
 msgid "Add New Dashboard"
-msgstr "Thêm vào Bảng điều khiển"
+msgstr "Thêm bảng điều khiển mới"
 
 #: display.php:261
-#, fuzzy
 msgid "Remove current dashboard"
-msgstr "Xóa khỏi Bảng điều khiển"
+msgstr "Xóa trang tổng quan hiện tại"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
-#, fuzzy, php-format
+#, php-format
 msgid "Number of lines - %d"
-msgstr "Số lần kiểm tra:"
+msgstr "Số dòng - %d"
 
 #: display.php:286
-#, fuzzy
 msgid "Refresh Now"
-msgstr "Làm mới ngay"
+msgstr "Làm mới"
 
 #: display.php:289 display.php:291
-#, fuzzy
 msgid "Refresh Disabled"
-msgstr "Autorefresh bị vô hiệu hóa"
+msgstr "Đã tắt làm mới"
 
 #: display.php:295 display.php:297
-#, fuzzy
 msgid "Refresh by Poller"
-msgstr "Autorefresh bị vô hiệu hóa"
+msgstr "Làm mới theo Poller"
 
 #: display.php:301 display.php:303
-#, fuzzy
 msgid "Refresh Every 1 Minute"
-msgstr "Autorefresh 1 phút"
+msgstr "Làm mới mỗi 1 phút"
 
 #: display.php:307 display.php:309
-#, fuzzy
 msgid "Refresh Every 5 Minutes"
-msgstr "Autorefresh 5 phút"
+msgstr "Làm mới mỗi 5 phút"
 
 #: display.php:313 display.php:315
-#, fuzzy
 msgid "Refresh Every Hour"
-msgstr "Mỗi tiếng"
+msgstr "Làm mới mỗi giờ"
 
 #: display.php:321 display.php:323
 msgid "Important period - disabled"
@@ -118,85 +109,72 @@ msgid "Important period - 1 day"
 msgstr "Thời gian quan trọng - 1 ngày"
 
 #: display.php:363 display.php:366
-#, fuzzy
 msgid "Sort by Severity"
-msgstr "Sắp xếp theo bảng ưu tiên"
+msgstr "Sắp xếp theo mức độ nghiêm trọng"
 
 #: display.php:364 display.php:367
-#, fuzzy
 msgid "Sort by User Preference"
-msgstr "Sắp xếp theo Sở thích của Người dùng"
+msgstr "Sắp xếp theo tùy chọn người dùng"
 
 #: display.php:373
-#, fuzzy
 msgid "Reload Panel Definitions"
-msgstr "Bảng điều khiển tải lại"
+msgstr "Tải lại định nghĩa bảng"
 
 #: display.php:379
-#, fuzzy
 msgid "Set Intropage as Default Login Page"
-msgstr "Đặt intropage làm trang mặc định"
+msgstr "Đặt Intropage làm trang đăng nhập mặc định"
 
 #: display.php:381
-#, fuzzy
 msgid "Set graph as Default Login Page"
-msgstr "Đặt biểu đồ làm trang mặc định"
+msgstr "Đặt biểu đồ làm trang đăng nhập mặc định"
 
 #: display.php:387
-#, fuzzy
 msgid "Display Intropage in Console"
-msgstr "Đặt intropage làm trang mặc định"
+msgstr "Hiển thị Intropage trong Bảng điều khiển"
 
 #: display.php:389
-#, fuzzy
 msgid "Display Intropage in Tab as Default Page"
-msgstr "Đặt intropage làm trang mặc định"
+msgstr "Hiển thị Intropage trong tab làm trang mặc định"
 
 #: display.php:396 display.php:399
 msgid "Less panels on a line"
 msgstr "Ít bảng hơn trên một dòng"
 
 #: display.php:397 display.php:400
-#, fuzzy
 msgid "More panels on a line"
-msgstr "Cho phép bảng Top 5 Ping"
+msgstr "Nhiều bảng hơn trên một dòng"
 
 #: display.php:413
 msgid "Cancel sharing"
 msgstr "Hủy chia sẻ"
 
 #: display.php:416
-#, fuzzy
 msgid "Share this dashboard"
-msgstr "Thêm vào bảng điều khiển"
+msgstr "Chia sẻ trang tổng quan này"
 
 #: display.php:418
 msgid "Share empty dashboard not allowed"
 msgstr "Chia sẻ bảng điều khiển trống không được phép"
 
 #: display.php:437
-#, fuzzy
 msgid "Use shared dashboard"
-msgstr "Xóa khỏi Bảng điều khiển"
+msgstr "Sử dụng bảng điều khiển dùng chung"
 
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr "Không thể sử dụng bảng thông tin được chia sẻ - đã đạt đến giới hạn bảng thông tin."
 
 #: display.php:443
-#, fuzzy
 msgid "No shared dashboards"
-msgstr "Thêm vào Bảng điều khiển"
+msgstr "Không có bảng điều khiển được chia sẻ nào"
 
 #: display.php:460
-#, fuzzy
 msgid "Welcome to Intropage!"
-msgstr "Tấm intropage"
+msgstr "Chào mừng đến với Intropage!"
 
 #: display.php:464
-#, fuzzy
 msgid "You can Add Dashboard Panels in more ways:"
-msgstr "Bạn có thể Thêm Bảng điều khiển theo hai cách:"
+msgstr "Bạn có thể thêm Panel Bảng tổng quan theo nhiều cách:"
 
 #: display.php:466
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
@@ -204,7 +182,7 @@ msgstr "Chọn các bảng đã chuẩn bị từ \"Menu bảng\". Bảng điề
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
-msgstr "Thêm bất kỳ Biểu đồ xương rồng nào, sử dụng biểu tượng"
+msgstr "Thêm bất kỳ biểu đồ Cacti nào, sử dụng biểu tượng"
 
 #: display.php:468
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
@@ -227,9 +205,8 @@ msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same 
 msgstr "Sử dụng \"Sử dụng bảng thông tin được chia sẻ (tên người dùng / bảng thông tin) - Trang tổng quan này chuẩn bị cùng một bảng điều khiển như được chia sẻ nhưng có quyền của bạn."
 
 #: display.php:487
-#, fuzzy
 msgid "Customization:"
-msgstr "Sử dụng CPU"
+msgstr "Tùy chỉnh:"
 
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
@@ -244,52 +221,46 @@ msgid "If you want to copy text from panel, you have to disable drag and drop fu
 msgstr "Nếu bạn muốn sao chép văn bản từ bảng điều khiển, bạn phải tắt chức năng kéo và thả, sử dụng biểu tượng"
 
 #: display.php:585
-#, fuzzy
 msgid "Panel Details"
-msgstr "Hiển thị chi tiết"
+msgstr "Chi tiết bảng"
 
 #: display.php:586
-#, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "Vô hiệu hóa di chuyển bảng / Bật sao chép văn bản từ bảng điều khiển"
+msgstr "Tắt di chuyển bảng/Bật sao chép văn bản từ bảng"
 
 #: display.php:587
-#, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr "Cho phép di chuyển bảng / Vô hiệu hóa văn bản sao chép từ bảng điều khiển"
+msgstr "Cho phép di chuyển bảng/Tắt sao chép văn bản từ bảng"
 
 #: display.php:589
 msgid "Show red/yellow/green square notifications"
 msgstr "Hiển thị thông báo hình vuông màu đỏ / vàng / xanh lá cây"
 
 #: display.php:591
-#, fuzzy
 msgid "Error reading new data"
-msgstr "Lỗi đọc dữ liệu mới"
+msgstr "Lỗi khi đọc dữ liệu mới"
 
 #: display.php:592
 msgid "Close"
 msgstr "Đóng"
 
 #: include/functions.php:242
-#, fuzzy
 msgid "Dashboard has been removed"
-msgstr "Trang tổng quan đã bị xóa"
+msgstr "Trang tổng quan đã được xóa"
 
 #: include/functions.php:264
-#, fuzzy
 msgid "New Dashboard"
-msgstr "Thêm vào Bảng điều khiển"
+msgstr "Bảng điều khiển mới"
 
 #: include/functions.php:266
-#, fuzzy
 msgid "Dashboard has been added"
-msgstr "Trang tổng quan đã được thêm vào"
+msgstr "Trang tổng quan đã được thêm"
 
 #: include/functions.php:298
-#, fuzzy
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
-msgstr "Không thể thêm biểu đồ được thu phóng hoặc khung thời gian tùy chỉnh, thay đổi khoảng thời gian thành Nửa giờ qua"
+msgstr ""
+"Không thể thêm đồ thị đã thu phóng hoặc có khoảng thời gian tùy chỉnh, đang "
+"đổi khoảng thời gian thành Nửa giờ qua"
 
 #: include/functions.php:419
 msgid "Intropage Panel Library Refreshed from Panel Library"
@@ -304,33 +275,28 @@ msgid "Error - trying share non-shared dashboard"
 msgstr "Lỗi - cố gắng chia sẻ bảng thông tin không được chia sẻ"
 
 #: include/functions.php:617
-#, fuzzy
 msgid "The Panel includes a render function but it does not exist."
-msgstr "Panel bao gồm một chức năng kết xuất nhưng nó không tồn tại."
+msgstr "Bảng thông tin có khai báo hàm kết xuất nhưng hàm này không tồn tại."
 
 #: include/functions.php:620
-#, fuzzy
 msgid "The Panel does not have a render function."
-msgstr "Panel không có chức năng kết xuất."
+msgstr "Bảng thông tin không có hàm kết xuất."
 
 #: include/functions.php:626
 msgid "Not Found"
 msgstr "Không tìm thấy"
 
 #: include/functions.php:653
-#, fuzzy
 msgid "Panel not found"
-msgstr "Không tìm thấy bảng điều khiển"
+msgstr "Không tìm thấy bảng"
 
 #: include/functions.php:686
-#, fuzzy
 msgid "Details Function does not exist."
-msgstr "Chức năng chi tiết không tồn tại."
+msgstr "Hàm chi tiết không tồn tại."
 
 #: include/functions.php:693
-#, fuzzy
 msgid "Panel Not Found"
-msgstr "Không tìm thấy bảng điều khiển"
+msgstr "Không tìm thấy bảng"
 
 #: include/functions.php:774 include/functions.php:794
 #, fuzzy, php-format
@@ -343,7 +309,7 @@ msgid "%s Sec"
 msgstr "%s Giây"
 
 #: include/functions.php:819
-#, fuzzy, php-format
+#, php-format
 msgid "%s Seconds"
 msgstr "%s Giây"
 
@@ -353,12 +319,12 @@ msgid "%s Min"
 msgstr "%s Phút"
 
 #: include/functions.php:826
-#, fuzzy, php-format
+#, php-format
 msgid "%s Minutes"
-msgstr "Mỗi% d Phút"
+msgstr "%s Phút"
 
 #: include/functions.php:833
-#, fuzzy, php-format
+#, php-format
 msgid "%s Hours"
 msgstr "%s giờ"
 
@@ -373,24 +339,23 @@ msgid "%s Days"
 msgstr "%s ngày"
 
 #: include/functions.php:883
-#, fuzzy
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
-msgstr "Không có dữ liệu. Buộc cập nhật hoặc đợi chu kỳ Cacti Polling tiếp theo."
+msgstr ""
+"Không có dữ liệu. Hãy buộc cập nhật hoặc đợi chu kỳ thăm dò Cacti tiếp theo."
 
 #: include/functions.php:885
-#, fuzzy
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
-msgstr "Không có dữ liệu. Bảng điều khiển này không cho phép cập nhật cưỡng bức. Bạn sẽ phải đợi cho đến khi Cacti's Poller thực hiện kiểm tra."
+msgstr ""
+"Không có dữ liệu. Bảng này không cho phép cập nhật cưỡng bức. Bạn sẽ phải "
+"đợi Poller của Cacti thực hiện kiểm tra."
 
 #: include/functions.php:1363
-#, fuzzy
 msgid "Disable panel"
-msgstr "Vô hiệu hóa bảng điều khiển"
+msgstr "Tắt bảng"
 
 #: include/functions.php:1366
-#, fuzzy
 msgid "Reload Panel"
-msgstr "Bảng điều khiển tải lại"
+msgstr "Tải lại bảng"
 
 #: include/functions.php:1369
 msgid "Show Details"
@@ -401,62 +366,56 @@ msgid "Loading data ..."
 msgstr "Lỗi tải dữ liệu"
 
 #: include/functions.php:1387
-#, fuzzy
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
-msgstr "Không tìm thấy dữ liệu nào. Chờ kiểm tra tiếp theo,<br/> hoặc sử dụng Force Tải lại nếu có."
+msgstr ""
+"Không tìm thấy dữ liệu. Hãy đợi lần kiểm tra tiếp theo, <br/>hoặc sử dụng "
+"Tải lại cưỡng bức nếu có."
 
 #: include/functions.php:1410
-#, fuzzy
 msgid "Panels ..."
-msgstr "Bảng điều khiển ..."
+msgstr "Các bảng ..."
 
 #: include/functions.php:1433 include/functions.php:1441
-#, fuzzy, php-format
+#, php-format
 msgid "%s (no permission)"
-msgstr "Bạn không có quyền"
+msgstr "%s (không có quyền)"
 
 #: include/functions.php:1495
-#, fuzzy
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr "Không thể thêm vào Trang tổng quan. Khoảng thời gian tùy chỉnh."
+msgstr "Không thể thêm vào Bảng tổng quan. Khoảng thời gian tùy chỉnh."
 
 #: include/functions.php:1505
-#, fuzzy
 msgid "Remove from Dashboard"
-msgstr "Xóa khỏi Bảng điều khiển"
+msgstr "Xóa khỏi trang tổng quan"
 
 #: include/functions.php:1507
 msgid "Add to Dashboard"
 msgstr "Thêm vào bảng điều khiển"
 
 #: include/functions.php:1563
-#, fuzzy
 msgid "Dashboard Names"
 msgstr "Tên trang tổng quan"
 
 #: include/functions.php:1572
-#, fuzzy, php-format
+#, php-format
 msgid "Dashboard %s"
-msgstr "Thêm vào Bảng điều khiển"
+msgstr "Trang tổng quan %s"
 
 #: include/functions.php:1596
-#, fuzzy
 msgid "User Level Panel Update Frequencies"
-msgstr "Bảng cấp độ người dùng"
+msgstr "Tần suất cập nhật bảng điều khiển cấp người dùng"
 
 #: include/functions.php:1645
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr "Tần suất cập nhật bảng điều khiển hệ thống (Tất cả người dùng được ủy quyền)"
 
 #: include/functions.php:1694
-#, fuzzy
 msgid "Trend Update Frequencies"
-msgstr "Tần suất cập nhật: %s"
+msgstr "Tần suất cập nhật xu hướng"
 
 #: include/settings.php:32 include/settings.php:93
-#, fuzzy
 msgid "Intropage"
-msgstr "Tấm intropage"
+msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
@@ -465,95 +424,88 @@ msgstr "Người dùng bình thường"
 #: include/settings.php:146
 #, php-format
 msgid "[edit: %s]"
-msgstr "[sửa: %s]"
+msgstr "[chỉnh sửa: %s]"
 
 #: include/settings.php:155
-#, fuzzy
 msgid "System Level Panels"
-msgstr "Bảng cấp hệ thống"
+msgstr "Bảng thông tin cấp hệ thống"
 
 #: include/settings.php:156
-#, fuzzy
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
-msgstr "Các bảng điều khiển thích hợp cho người dùng quản trị hoặc cấp quyền truy cập và thường không áp dụng cho người dùng phổ thông. Bảng điều khiển nói chung là về việc sử dụng hệ thống tổng thể."
+msgstr ""
+"Các bảng phù hợp cho quản trị viên hoặc người dùng nâng cao truy cập và "
+"thường không dành cho người dùng phổ thông. Các bảng này thường hiển thị mức "
+"sử dụng tổng thể của hệ thống."
 
 #: include/settings.php:159
-#, fuzzy
 msgid "User Level Panels"
-msgstr "Bảng cấp độ người dùng"
+msgstr "Bảng điều khiển cấp người dùng"
 
 #: include/settings.php:160
-#, fuzzy
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
-msgstr "Các bảng thích hợp cho người dùng phổ thông truy cập. Quyền được giới hạn ở những gì người dùng hiện tại có thể xem."
+msgstr ""
+"Các bảng phù hợp cho người dùng phổ thông truy cập. Quyền truy cập được giới "
+"hạn trong phạm vi những gì người dùng hiện tại có thể xem."
 
 #: include/settings.php:203
-#, fuzzy
 msgid "You can Allow/Disallow Panels for User"
-msgstr "Bạn có thể Cho phép / Không cho phép Bảng cho Người dùng"
+msgstr "Bạn có thể Cho phép/Không cho phép các bảng điều khiển cho người dùng"
 
 #: include/variables.php:28
-#, fuzzy
 msgid "Red Status"
-msgstr "Trạng thái"
+msgstr "Trạng thái đỏ"
 
 #: include/variables.php:29
-#, fuzzy
 msgid "Yellow Status"
-msgstr "Báo động vàng"
+msgstr "Trạng thái màu vàng"
 
 #: include/variables.php:30
-#, fuzzy
 msgid "Green Status"
-msgstr "Trạng thái"
+msgstr "Trạng thái xanh"
 
 #: include/variables.php:35
 msgid "Display Settings"
 msgstr "Cài đặt hiển thị"
 
 #: include/variables.php:39
-#, fuzzy
 msgid "Important things will be at the top"
-msgstr "Những điều quan trọng sẽ ở trên đỉnh"
+msgstr "Các mục quan trọng sẽ hiển thị ở trên cùng"
 
 #: include/variables.php:40
-#, fuzzy
 msgid "If checked Intropage displays important (errors, warnings) information first"
-msgstr "Nếu được chọn Intropage sẽ hiển thị thông tin quan trọng (lỗi, cảnh báo) trước"
+msgstr ""
+"Nếu được chọn, Intropage sẽ hiển thị thông tin quan trọng (lỗi, cảnh báo) "
+"trước tiên"
 
 #: include/variables.php:45
-#, fuzzy
 msgid "Display more panels on a line"
-msgstr "Hiển thị lỗi và cảnh báo"
+msgstr "Hiển thị nhiều bảng hơn trên một dòng"
 
 #: include/variables.php:46
 msgid "For wide screen"
 msgstr "Đối với màn hình rộng"
 
 #: include/variables.php:51
-#, fuzzy
 msgid "Automatically Uninstall Panels"
 msgstr "Tự động gỡ cài đặt bảng điều khiển"
 
 #: include/variables.php:52
-#, fuzzy
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
-msgstr "Nếu một Bảng điều khiển được cài đặt và plugin được yêu cầu bị xóa, hãy tự động gỡ cài đặt bảng điều khiển đó"
+msgstr ""
+"Nếu một bảng đã được cài đặt và plugin bắt buộc bị gỡ bỏ, tự động gỡ cài đặt "
+"bảng đó luôn"
 
 #: include/variables.php:57
-#, fuzzy
 msgid "Automatic Page Refresh"
-msgstr "Trang làm mới tự động"
+msgstr "Làm mới trang tự động"
 
 #: include/variables.php:58
-#, fuzzy
 msgid "How often"
-msgstr "Bao lau"
+msgstr "Tần suất"
 
 #: include/variables.php:61
-#, fuzzy
 msgid "Automatically by poller"
-msgstr "Tự động bằng máy thăm dò ý kiến"
+msgstr "Tự động bởi Poller"
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
@@ -566,11 +518,10 @@ msgstr "Mỗi phút"
 #: include/variables.php:64 include/variables.php:161 include/variables.php:179
 #, php-format
 msgid "Every %d Minutes"
-msgstr "Mỗi% d Phút"
+msgstr "Mỗi %d phút"
 
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
-#, fuzzy
 msgid "Every Hour"
 msgstr "Mỗi tiếng"
 
@@ -587,30 +538,27 @@ msgstr "Từ giờ đến quá khứ. Ảnh hưởng đến màu hàng, các s�
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "Vô hiệu hóa"
+msgstr "đã vô hiệu hóa"
 
 #: include/variables.php:75
-#, fuzzy
 msgid "15 minutes"
-msgstr "Mỗi% d Phút"
+msgstr "15 phút"
 
 #: include/variables.php:76
 msgid "1 hour"
 msgstr "1 giờ"
 
 #: include/variables.php:77
-#, fuzzy
 msgid "4 hours"
-msgstr "4 Giờ"
+msgstr "4 giờ"
 
 #: include/variables.php:78
 msgid "1 day"
 msgstr "1 ngày"
 
 #: include/variables.php:83
-#, fuzzy
 msgid "Number of panel lines"
-msgstr "Số lần kiểm tra:"
+msgstr "Số dòng của bảng"
 
 #: include/variables.php:84
 msgid "How many lines in panel"
@@ -622,23 +570,22 @@ msgid "%d lines"
 msgstr "%d dòng"
 
 #: include/variables.php:94
-#, fuzzy
 msgid "Trend Timespan"
-msgstr "Xu hướng"
+msgstr "Khoảng thời gian xu hướng"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
 msgstr "Đối với biểu đồ Xu hướng, khoảng thời gian mặc định cho các biểu đồ đó phải là bao lâu."
 
 #: include/variables.php:101
-#, fuzzy
 msgid "Poller Timeout"
-msgstr "Thông tin về xe đẩy"
+msgstr "Thời gian chờ Poller"
 
 #: include/variables.php:102
-#, fuzzy
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
-msgstr "Khoảng thời gian, tính bằng phút, máy thăm dò nền Intropage có thể chạy trước khi bị Cacti làm gián đoạn và giết chết."
+msgstr ""
+"Khoảng thời gian (tính bằng phút) mà Trình thăm dò nền Intropage được phép "
+"chạy trước khi bị Cacti ngắt và dừng buộc."
 
 #: include/variables.php:106 setup.php:99
 #, php-format
@@ -655,30 +602,28 @@ msgid "%d Minutes"
 msgstr "%d phút"
 
 #: include/variables.php:113 setup.php:108
-#, fuzzy, php-format
+#, php-format
 msgid "%d Hour"
 msgstr "%d giờ"
 
 #: include/variables.php:117
-#, fuzzy
 msgid "Analyze Log - number of lines"
 msgstr "Phân tích nhật ký - số dòng"
 
 #: include/variables.php:118
-#, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
-msgstr "Có bao nhiêu dòng nhật ký sẽ được phân tích. Số lượng lớn có thể gây ra tải trang chậm"
+msgstr ""
+"Số dòng nhật ký sẽ được phân tích. Số dòng = trong bảng, 2x số dòng = trong "
+"phần chi tiết. Số lượng lớn có thể khiến trang tải chậm"
 
 #: include/variables.php:124
-#, fuzzy
 msgid "How often analyze DB"
-msgstr "Tần suất phân tích DB"
+msgstr "Tần suất phân tích CSDL"
 
 #: include/variables.php:125 include/variables.php:158
 #: include/variables.php:176
-#, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
-msgstr "Poller chạy nhiệm vụ này. Nó có thể gây ra chạy xe đẩy dài."
+msgstr "Poller chạy tác vụ này. Điều này có thể khiến lượt chạy Poller kéo dài."
 
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
@@ -686,24 +631,25 @@ msgid "Every Day"
 msgstr "Hàng Ngày"
 
 #: include/variables.php:131
-#, fuzzy
 msgid "Every Week"
 msgstr "Mỗi tuần"
 
 #: include/variables.php:132
-#, fuzzy
 msgid "Every Month"
-msgstr "Mỗi tháng"
+msgstr "Hằng tháng"
 
 #: include/variables.php:137
-#, fuzzy
 msgid "Analyze DB - Level of db check"
-msgstr "Phân tích DB - Mức kiểm tra db"
+msgstr "Phân tích CSDL - Mức độ kiểm tra CSDL"
 
 #: include/variables.php:138
-#, fuzzy
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
-msgstr "Nhanh chóng - Không Kiểm tra hàng cho các liên kết inforccert <br/> Nhanh - chỉ kiểm tra không đóng bảng đúng cách <br/> Thay đổi - kiểm tra bảng thay đổi từ kiểm tra cuối cùng <br/> Trung bình - với quét hàng <br/> Mở rộng - đầy đủ hàng và khóa <br/> <strong>Trung bình và mở rộng có thể gây ra tải trang chậm!</strong>"
+msgstr ""
+"Nhanh gọn - Không kiểm tra các hàng để tìm liên kết sai<br/>Nhanh - chỉ kiểm "
+"tra các bảng chưa được đóng đúng cách<br/>Đã thay đổi - kiểm tra các bảng đã "
+"thay đổi kể từ lần kiểm tra trước<br/>Trung bình - kèm quét hàng<br/>Mở rộng "
+"- quét đầy đủ hàng và khóa<br/>Mức trung bình và mở rộng có thể làm trang "
+"tải chậm!"
 
 #: include/variables.php:141
 msgid "Quick"
@@ -714,9 +660,8 @@ msgid "Fast"
 msgstr "Nhanh"
 
 #: include/variables.php:143
-#, fuzzy
 msgid "Changed"
-msgstr "Thay đổi"
+msgstr "Đã thay đổi"
 
 #: include/variables.php:144
 msgid "Medium"
@@ -727,17 +672,14 @@ msgid "Extended"
 msgstr "Mở rộng"
 
 #: include/variables.php:150
-#, fuzzy
 msgid "NTP Time Check - IP or DNS name of NTP server"
-msgstr "Kiểm tra NTP (thời gian) - Tên IP hoặc DNS của máy chủ NTP"
+msgstr "Kiểm tra thời gian NTP - IP hoặc tên DNS của máy chủ NTP"
 
 #: include/variables.php:151
-#, fuzzy
 msgid "Insert IP or DNS name of NTP server"
-msgstr "Chèn tên IP hoặc DNS của máy chủ NTP"
+msgstr "Nhập địa chỉ IP hoặc tên DNS của máy chủ NTP"
 
 #: include/variables.php:157
-#, fuzzy
 msgid "How often check NTP"
 msgstr "Tần suất kiểm tra NTP"
 
@@ -746,24 +688,22 @@ msgid "DNS Check - Any DNS name"
 msgstr "Kiểm tra DNS - Bất kỳ tên DNS nào"
 
 #: include/variables.php:169
-#, fuzzy
 msgid "Insert DNS name for test"
-msgstr "Chèn tên IP hoặc DNS của máy chủ NTP"
+msgstr "Nhập tên DNS để kiểm tra"
 
 #: include/variables.php:175
-#, fuzzy
 msgid "How often check DNS"
-msgstr "Tần suất kiểm tra NTP"
+msgstr "Tần suất kiểm tra DNS"
 
 #: include/variables.php:186
-#, fuzzy
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "Bảng thông tin quản trị về các nhiệm vụ bảo trì, thiết bị xuống, .."
+msgstr "Bảng thông tin quản trị về tác vụ bảo trì, thiết bị ngừng hoạt động, .."
 
 #: include/variables.php:187
-#, fuzzy
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
-msgstr "Nếu không trống, bảng sẽ được hiển thị trên cùng. Bạn có thể sử dụng thẻ html (b, i, ...)."
+msgstr ""
+"Nếu không để trống, bảng sẽ được hiển thị ở trên cùng. Bạn có thể sử dụng "
+"các thẻ HTML (b, i, ...)."
 
 #: include/variables.php:195
 msgid "Upcoming Maint Schedule warning days"
@@ -774,24 +714,22 @@ msgid "How many days before a scheduled maintenance schedule should a warning be
 msgstr "Bao nhiêu ngày trước khi lịch trình bảo trì theo lịch trình nên hiển thị cảnh báo?"
 
 #: include/variables.php:199
-#, fuzzy
 msgid "Never warn"
-msgstr "Không bao giờ chạy"
+msgstr "Không bao giờ cảnh báo"
 
 #: include/variables.php:200
-#, fuzzy
 msgid "When maintenance starts"
 msgstr "Khi bảo trì bắt đầu"
 
 #: include/variables.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%d Day Before"
-msgstr "% d Ngày trước"
+msgstr "%d ngày trước"
 
 #: include/variables.php:202 include/variables.php:203
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days Before"
-msgstr "% d Ngày trước"
+msgstr "%d ngày trước"
 
 #: include/variables.php:208
 msgid "Network stats in"
@@ -810,14 +748,12 @@ msgid "Bits"
 msgstr "Bit"
 
 #: include/variables.php:218
-#, fuzzy
 msgid "Alarm Settings"
-msgstr "Cài đặt hiển thị"
+msgstr "Cài đặt cảnh báo"
 
 #: include/variables.php:222
-#, fuzzy
 msgid "Alarm DB check Aborted Clients"
-msgstr "Kiểm tra Alarm DB kiểm tra ứng dụng khách bị hủy bỏ"
+msgstr "Cảnh báo kiểm tra CSDL: Máy khách bị hủy"
 
 #: include/variables.php:223 include/variables.php:230
 #: include/variables.php:237 include/variables.php:244
@@ -830,68 +766,56 @@ msgid "If this event has occurred, trigger the selected Normal, Warning, or Aler
 msgstr "Nếu sự kiện này đã xảy ra, hãy kích hoạt màu trạng thái Bình thường, Cảnh báo hoặc Cảnh báo đã chọn."
 
 #: include/variables.php:229
-#, fuzzy
 msgid "Alarm Host with the same Description"
-msgstr "Các thiết bị có cùng mô tả: %s"
+msgstr "Cảnh báo máy chủ có cùng mô tả"
 
 #: include/variables.php:236
-#, fuzzy
 msgid "Alarm Orphaned Data Source"
-msgstr "Nguồn dữ liệu mồ côi: %s"
+msgstr "Cảnh báo Nguồn dữ liệu mồ côi"
 
 #: include/variables.php:243
-#, fuzzy
 msgid "Alarm non-empty Poller Output"
-msgstr "Báo động đầu ra không trống"
+msgstr "Cảnh báo đầu ra Poller không trống"
 
 #: include/variables.php:250
-#, fuzzy
 msgid "Alarm Bad indexes Data Source"
-msgstr "Alarm Bad lập chỉ mục nguồn dữ liệu"
+msgstr "Cảnh báo Nguồn dữ liệu có chỉ mục lỗi"
 
 #: include/variables.php:257
-#, fuzzy
 msgid "Alarm Threshold logonly action"
-msgstr "Alarm Thershold hành động đăng nhập"
+msgstr "Cảnh báo hành động chỉ ghi nhật ký của Ngưỡng"
 
 #: include/variables.php:264
 msgid "Alarm when device bulk_walk_size is not optimized"
 msgstr "Báo động khi bulk_walk_size thiết bị không được tối ưu hóa"
 
 #: include/variables.php:271
-#, fuzzy
 msgid "Alarm Devices with the same IP/port"
-msgstr "Các thiết bị có cùng IP và cổng: %s"
+msgstr "Cảnh báo các thiết bị có cùng IP/cổng"
 
 #: include/variables.php:278
-#, fuzzy
 msgid "Alarm Device in more than one Tree"
-msgstr "Thiết bị trong nhiều cây: %s"
+msgstr "Cảnh báo thiết bị nằm trong nhiều hơn một cây"
 
 #: include/variables.php:285
-#, fuzzy
 msgid "Alarm Device without a Tree"
-msgstr "Thiết bị trong nhiều cây: %s"
+msgstr "Cảnh báo thiết bị không thuộc cây nào"
 
 #: include/variables.php:292
-#, fuzzy
 msgid "Alarm Device with Default public/private SNMP Community"
-msgstr "Các máy chủ lưu trữ với cộng đồng công cộng / riêng tư mặc định: %s"
+msgstr "Cảnh báo thiết bị dùng SNMP Community mặc định public/private"
 
 #: include/variables.php:299
-#, fuzzy
 msgid "Alarm Device without Monitoring"
-msgstr "Các thiết bị có cùng IP và cổng: %s"
+msgstr "Cảnh báo thiết bị không được giám sát"
 
 #: include/variables.php:306
-#, fuzzy
 msgid "Alarm Device without Graph"
-msgstr "Các thiết bị có cùng IP và cổng: %s"
+msgstr "Cảnh báo thiết bị không có biểu đồ"
 
 #: include/variables.php:313
-#, fuzzy
 msgid "Alarm Red/Yellow Polling Time"
-msgstr "Cho phép bảng 5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Cảnh báo Đỏ/Vàng: Thời gian thăm dò"
 
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
@@ -902,28 +826,24 @@ msgid "5s  / 10s Yellow / Red"
 msgstr "5s / 10s Vàng / Đỏ"
 
 #: include/variables.php:319
-#, fuzzy
 msgid "10s / 20s Yellow / Red"
-msgstr "40 giây / 20 giây đỏ / vàng"
+msgstr "10 giây / 20 giây Vàng / Đỏ"
 
 #: include/variables.php:320
-#, fuzzy
 msgid "20s / 40s Yellow / Red"
-msgstr "20 giây / 10 giây đỏ / vàng"
+msgstr "20 giây / 40 giây Vàng / Đỏ"
 
 #: include/variables.php:324
-#, fuzzy
 msgid "Alarm Red/Yellow Failed/All Ratio"
-msgstr "Báo động màu đỏ / vàng không thành công / tất cả tỷ lệ"
+msgstr "Cảnh báo Đỏ/Vàng: Tỷ lệ Lỗi/Tổng số"
 
 #: include/variables.php:325
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr "Tỷ lệ kiểm tra tình trạng còn hàng không thành công so với kiểm tra thành công để kích hoạt dưới dạng màu trạng thái Cảnh báo hoặc Cảnh báo."
 
 #: include/variables.php:329
-#, fuzzy
 msgid "0.1 / 0.2 Yellow / Red"
-msgstr "0,1 / 0,2 đỏ / vàng"
+msgstr "0.1 / 0.2 Vàng / Đỏ"
 
 #: include/variables.php:330
 msgid "0.2 / 0.4 Yellow / Red"
@@ -934,9 +854,8 @@ msgid "0.5 / 0.5++ Yellow / Red"
 msgstr "0,5 / 0,5++ Vàng / Đỏ"
 
 #: include/variables.php:335
-#, fuzzy
 msgid "Alarm Red/Yellow Ping"
-msgstr "Báo động ping đỏ / vàng"
+msgstr "Cảnh báo Đỏ/Vàng: Ping"
 
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
@@ -951,14 +870,12 @@ msgid "20ms  / 50ms Yellow / Red"
 msgstr "20ms / 50ms Vàng / Đỏ"
 
 #: include/variables.php:342
-#, fuzzy
 msgid "100ms / 200+ms Yellow / Red"
-msgstr "100/200 + ms đỏ / vàng"
+msgstr "100ms / 200+ms Vàng / Đỏ"
 
 #: include/variables.php:346
-#, fuzzy
 msgid "Alarm Red/Yellow Worst Availability"
-msgstr "Top5 tình trạng xấu nhất"
+msgstr "Cảnh báo Đỏ/Vàng: Độ khả dụng thấp nhất"
 
 #: include/variables.php:347
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
@@ -978,9 +895,8 @@ msgid "Panels that provide alerting."
 msgstr "Bảng điều khiển cung cấp cảnh báo."
 
 #: panellib/alert.php:37 panellib/alert.php:205
-#, fuzzy
 msgid "Host alerts"
-msgstr "Tên máy chủ"
+msgstr "Cảnh báo máy chủ"
 
 #: panellib/alert.php:38
 msgid "Host alerts (up/down/recovering) in last 30 minutes"
@@ -1013,78 +929,66 @@ msgstr "Thêm bản ghi, sử dụng cửa sổ chi tiết"
 #: panellib/system.php:191 panellib/system.php:592 panellib/thold.php:309
 #: panellib/top5.php:178 panellib/top5.php:258 panellib/top5.php:338
 #: panellib/top5.php:423
-#, fuzzy
 msgid "Waiting for data"
-msgstr "Chờ dữ liệu"
+msgstr "Đang chờ dữ liệu"
 
 #: panellib/alert.php:188 panellib/alert.php:329 panellib/busiest.php:596
 #: panellib/busiest.php:1428 panellib/graphs.php:144 panellib/graphs.php:237
 #: panellib/graphs.php:374 panellib/top5.php:181 panellib/top5.php:261
 #: panellib/top5.php:341 panellib/top5.php:426 panellib/top5.php:508
 #: panellib/top5.php:589 panellib/top5.php:669 panellib/top5.php:755
-#, fuzzy
 msgid "You don't have permissions to any hosts"
-msgstr "Bạn không có quyền"
+msgstr "Bạn không có quyền đối với bất kỳ máy chủ nào"
 
 #: panellib/analyze.php:31
-#, fuzzy
 msgid "Analysis Panels"
-msgstr "Bật / tắt bảng"
+msgstr "Bảng phân tích"
 
 #: panellib/analyze.php:32
-#, fuzzy
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
-msgstr "Các bảng phân tích hành vi hiện tại của Cacti và các plugin của nó."
+msgstr "Các bảng phân tích hoạt động hiện tại của Cacti và các plugin của nó."
 
 #: panellib/analyze.php:37
-#, fuzzy
 msgid "Analyze Logins"
-msgstr "Cho phép đăng nhập Bảng phân tích"
+msgstr "Phân tích đăng nhập"
 
 #: panellib/analyze.php:38
-#, fuzzy
 msgid "Analyze the last several Cacti logins for trends and errors."
-msgstr "Phân tích một số lần đăng nhập Cacti gần đây nhất để biết các xu hướng và lỗi."
+msgstr "Phân tích các lần đăng nhập Cacti gần đây để tìm xu hướng và lỗi."
 
 #: panellib/analyze.php:53
-#, fuzzy
 msgid "Analyze Logs"
-msgstr "Phân tích nhật ký xương rồng"
+msgstr "Phân tích nhật ký"
 
 #: panellib/analyze.php:54
-#, fuzzy
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
-msgstr "Tìm các lỗi phổ biến trong tệp nhật ký của Cacti mà có thể là nguyên nhân cần quan tâm."
+msgstr "Tìm các lỗi phổ biến trong tệp nhật ký của Cacti đáng lưu tâm."
 
 #: panellib/analyze.php:69
-#, fuzzy
 msgid "Database Checks"
 msgstr "Kiểm tra cơ sở dữ liệu"
 
 #: panellib/analyze.php:70
-#, fuzzy
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
-msgstr "Phân tích cơ sở dữ liệu MySQL / MariaDB để biết các lỗi thường gặp. Lưu ý rằng quá trình này có thể mất nhiều thời gian trên các hệ thống rất lớn."
+msgstr ""
+"Phân tích cơ sở dữ liệu MySQL/MariaDB để tìm các lỗi thường gặp. Lưu ý rằng "
+"quá trình này có thể mất nhiều thời gian trên các hệ thống rất lớn."
 
 #: panellib/analyze.php:85
-#, fuzzy
 msgid "Analyze Cacti Objects"
-msgstr "Phân tích nhật ký xương rồng"
+msgstr "Phân tích đối tượng Cacti"
 
 #: panellib/analyze.php:86
-#, fuzzy
 msgid "Analyze Trees, Graphs, Hosts, ..."
 msgstr "Phân tích Cây, Đồ thị, Máy chủ, ..."
 
 #: panellib/analyze.php:101
-#, fuzzy
 msgid "Analyze DS stats"
-msgstr "Cho phép bảng điều khiển Cơ sở dữ liệu phân tích"
+msgstr "Phân tích thống kê Nguồn dữ liệu"
 
 #: panellib/analyze.php:102
-#, fuzzy
 msgid "Analyze data source stats"
-msgstr "Cho phép bảng điều khiển Cơ sở dữ liệu phân tích"
+msgstr "Phân tích thống kê nguồn dữ liệu"
 
 #: panellib/analyze.php:155
 msgid "Username"
@@ -1105,87 +1009,75 @@ msgid "Failed"
 msgstr "Thất bại"
 
 #: panellib/analyze.php:174 panellib/analyze.php:1287
-#, fuzzy
 msgid "Success - Login"
 msgstr "Thành công - Đăng nhập"
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
-#, fuzzy
 msgid "Success - Token"
 msgstr "Thành công - Mã thông báo"
 
 #: panellib/analyze.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Total Failed Logins: %s"
-msgstr "Đăng nhập thất bại"
+msgstr "Tổng số lần đăng nhập thất bại: %s"
 
 #: panellib/analyze.php:224
 msgid "None"
 msgstr "Không"
 
 #: panellib/analyze.php:227
-#, fuzzy
 msgid "Active Users in Last Hour: "
-msgstr "Người dùng đang hoạt động trong Giờ trước:"
+msgstr "Người dùng hoạt động trong giờ qua: "
 
 #: panellib/analyze.php:264 panellib/analyze.php:1107
-#, fuzzy
 msgid "Log file not accessible or empty"
 msgstr "Tệp nhật ký không thể truy cập hoặc trống"
 
 #: panellib/analyze.php:284
-#, fuzzy, php-format
+#, php-format
 msgid "Analyze last %s log lines:"
-msgstr "Đăng nhập thất bại"
+msgstr "Phân tích %s dòng nhật ký gần nhất:"
 
 #: panellib/analyze.php:286
-#, fuzzy
 msgid "Errors: "
-msgstr "Lỗi"
+msgstr "Lỗi: "
 
 #: panellib/analyze.php:291
-#, fuzzy
 msgid "Warnings: "
-msgstr "Cảnh báo"
+msgstr "Cảnh báo: "
 
 #: panellib/analyze.php:298
-#, fuzzy
 msgid "Log Size: Larger than 2GB"
-msgstr "tệp lớn hơn 2GB"
+msgstr "Kích thước nhật ký: Lớn hơn 2GB"
 
 #: panellib/analyze.php:302 panellib/analyze.php:1141
-#, fuzzy
 msgid "Log Size: OK"
-msgstr "Kích thước nhật ký OK"
+msgstr "Kích thước nhật ký: OK"
 
 #: panellib/analyze.php:306 panellib/analyze.php:1145
-#, fuzzy
 msgid "Log Size: Quite Large"
-msgstr "Kích thước nhật ký khá lớn"
+msgstr "Kích thước nhật ký: Khá lớn"
 
 #: panellib/analyze.php:309
-#, fuzzy
 msgid "Log Size: "
-msgstr "Kích thước nhật ký"
+msgstr "Kích thước nhật ký: "
 
 #: panellib/analyze.php:316
-#, fuzzy
 msgid "Last log lines:"
-msgstr "10 lần đăng nhập gần nhất"
+msgstr "Các dòng nhật ký gần nhất:"
 
 #: panellib/analyze.php:423
 msgid "Skipping DB tables checks. Database too large"
 msgstr "Bỏ qua kiểm tra bảng CSDL. Cơ sở dữ liệu quá lớn"
 
 #: panellib/analyze.php:437
-#, fuzzy, php-format
+#, php-format
 msgid "Table %s status %s"
 msgstr "Bảng %s trạng thái %s"
 
 #: panellib/analyze.php:444
-#, fuzzy
 msgid "DB: Problems"
-msgstr "Vấn đề DB"
+msgstr "CSDL: Sự cố"
 
 #: panellib/analyze.php:453
 msgid "DB: OK"
@@ -1201,40 +1093,42 @@ msgid "You can increase Max connection via command line tools or permanently in 
 msgstr "Bạn có thể tăng kết nối Max thông qua các công cụ dòng lệnh hoặc vĩnh viễn trong tệp cấu hình"
 
 #: panellib/analyze.php:499
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
-msgstr "Lỗi kết nối - thử khởi động lại dịch vụ SQL."
+msgstr ""
+"Lỗi kết nối: %s - hãy thử khởi động lại dịch vụ SQL, kiểm tra nhật ký SQL, "
+"..."
 
 #: panellib/analyze.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "Máy khách / kết nối bị hủy bỏ: %s - kiểm tra nhật ký."
+msgstr "Máy khách/kết nối bị hủy: %s"
 
 #: panellib/analyze.php:519
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
 msgstr "Máy khách/kết nối bị hủy bỏ - Chạy 'SET GLOBAL log_warnings = 1;' hoặc ' log_error_verbosity = 1;' (phụ thuộc vào phiên bản MySQL / MariaDB của bạn) từ mysql CLI và đặt trong server.cnf thành im lặng."
 
 #: panellib/analyze.php:523
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s"
 msgstr "Lỗi kết nối: %s"
 
 #: panellib/analyze.php:524
-#, fuzzy, php-format
+#, php-format
 msgid "Damaged tables: %s"
-msgstr "Bảng bị hư hỏng: %s"
+msgstr "Bảng bị hỏng: %s"
 
 #: panellib/analyze.php:527
 msgid "You should run check and repair table commands"
 msgstr "Bạn nên chạy các lệnh kiểm tra và sửa chữa bảng"
 
 #: panellib/analyze.php:531
-#, fuzzy, php-format
+#, php-format
 msgid "Memory tables: %s"
 msgstr "Bảng bộ nhớ: %s"
 
 #: panellib/analyze.php:532
-#, fuzzy, php-format
+#, php-format
 msgid "All tables: %s"
 msgstr "Tất cả các bảng: %s"
 
@@ -1252,9 +1146,9 @@ msgid "N/A"
 msgstr "N/A"
 
 #: panellib/analyze.php:584
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port: %s"
-msgstr "Các thiết bị có cùng IP và cổng: %s"
+msgstr "Thiết bị có cùng IP và cổng: %s"
 
 #: panellib/analyze.php:613
 #, php-format
@@ -1278,9 +1172,9 @@ msgid "RRD Cleaner last run"
 msgstr "RRD Cleaner lần chạy cuối cùng"
 
 #: panellib/analyze.php:635 panellib/analyze.php:1473
-#, fuzzy, php-format
+#, php-format
 msgid "%s: %s"
-msgstr "%s %s"
+msgstr "%s: %s"
 
 #: panellib/analyze.php:636 panellib/analyze.php:642 panellib/analyze.php:1474
 #: panellib/analyze.php:1480
@@ -1293,59 +1187,58 @@ msgid "%s: not run yet"
 msgstr "%s: chưa chạy"
 
 #: panellib/analyze.php:691
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources: %s"
 msgstr "Nguồn dữ liệu mồ côi: %s"
 
 #: panellib/analyze.php:722
-#, fuzzy, php-format
+#, php-format
 msgid "Datasource - bad indexes: %s"
-msgstr "Nguồn dữ liệu - chỉ mục xấu: %s"
+msgstr "Nguồn dữ liệu - chỉ mục lỗi: %s"
 
 #: panellib/analyze.php:774
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "Cảnh báo / cảnh báo đăng nhập Thold: %s"
+msgstr "Cảnh báo/cảnh báo sớm chỉ ghi nhật ký Thold: %s"
 
 #: panellib/analyze.php:805
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description: %s"
-msgstr "Các thiết bị có cùng mô tả: %s"
+msgstr "Thiết bị có cùng mô tả: %s"
 
 #: panellib/analyze.php:834
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree: %s"
-msgstr "Thiết bị trong nhiều cây: %s"
+msgstr "Thiết bị nằm trên nhiều hơn một cây: %s"
 
 #: panellib/analyze.php:864
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without graphs: %s"
-msgstr "Máy chủ không có đồ thị: %s"
+msgstr "Thiết bị không có đồ thị: %s"
 
 #: panellib/analyze.php:893
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree: %s"
-msgstr "Máy chủ không có cây: %s"
+msgstr "Thiết bị chưa có cây: %s"
 
 #: panellib/analyze.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community: %s"
-msgstr "Các máy chủ lưu trữ với cộng đồng công cộng / riêng tư mặc định: %s"
+msgstr "Thiết bị có chuỗi community public/private mặc định: %s"
 
 #: panellib/analyze.php:947
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "Trình giám sát plugin - Máy chủ không được giám sát: %s"
+msgstr "Plugin Monitor - Máy chủ chưa được giám sát: %s"
 
 #: panellib/analyze.php:955 panellib/analyze.php:1862
-#, fuzzy, php-format
+#, php-format
 msgid "Found %s problems"
 msgstr "Đã tìm thấy %s vấn đề"
 
 #: panellib/analyze.php:961 panellib/analyze.php:1864
-#, fuzzy
 msgid "Everything OK"
-msgstr "Mọi thứ ổn"
+msgstr "Mọi thứ đều ổn"
 
 #: panellib/analyze.php:977
 msgid "DS stats: "
@@ -1368,9 +1261,8 @@ msgid "DS null records "
 msgstr "Bản ghi null DS "
 
 #: panellib/analyze.php:1090
-#, fuzzy
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
-msgstr "Phân tích chi tiết nhật ký xương rồng [Cảnh báo / lỗi]"
+msgstr "Phân tích chi tiết nhật ký Cacti [ Cảnh báo/Lỗi ]"
 
 #: panellib/analyze.php:1127
 msgid "Errors"
@@ -1381,19 +1273,16 @@ msgid "Warnings"
 msgstr "Cảnh báo"
 
 #: panellib/analyze.php:1137
-#, fuzzy
 msgid "WARNING: File is Larger than 2GB"
-msgstr "tệp lớn hơn 2GB"
+msgstr "CẢNH BÁO: Tệp lớn hơn 2GB"
 
 #: panellib/analyze.php:1148
-#, fuzzy
 msgid "Log Size"
 msgstr "Kích thước nhật ký"
 
 #: panellib/analyze.php:1254
-#, fuzzy
 msgid "Analyze Logins Detail"
-msgstr "Phân tích nhật ký - số dòng"
+msgstr "Phân tích chi tiết đăng nhập"
 
 #: panellib/analyze.php:1272
 msgid "User"
@@ -1405,29 +1294,25 @@ msgid "Result"
 msgstr "Kết quả"
 
 #: panellib/analyze.php:1314
-#, fuzzy
 msgid "Active Users in Last 2 Hours:"
-msgstr "Người dùng đang hoạt động trong 2 giờ qua:"
+msgstr "Người dùng hoạt động trong 2 giờ qua:"
 
 #: panellib/analyze.php:1325
-#, fuzzy
 msgid "No Active Users"
-msgstr "Người dùng hoạt động"
+msgstr "Không có người dùng hoạt động"
 
 #: panellib/analyze.php:1331
-#, fuzzy
 msgid "View Full User Log"
 msgstr "Xem toàn bộ nhật ký người dùng"
 
 #: panellib/analyze.php:1363
-#, fuzzy
 msgid "Analyze Tree, Graphs, Hosts"
-msgstr "Phân tích cây / máy chủ / đồ thị"
+msgstr "Phân tích Cây, Đồ thị, Máy chủ"
 
 #: panellib/analyze.php:1386
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port - %s"
-msgstr "Các thiết bị có cùng IP và cổng %s"
+msgstr "Thiết bị có cùng IP và cổng - %s"
 
 #: panellib/analyze.php:1428
 #, php-format
@@ -1435,54 +1320,53 @@ msgid "Not optimized Bulk Walk Size devices - %s"
 msgstr "Thiết bị Kích thước đi bộ hàng loạt không được tối ưu hóa - %s"
 
 #: panellib/analyze.php:1484
-#, fuzzy
 msgid "Data maintenance"
-msgstr "Khi bảo trì bắt đầu"
+msgstr "Bảo trì dữ liệu"
 
 #: panellib/analyze.php:1519
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources - %s"
-msgstr "Nguồn dữ liệu mồ côi %s"
+msgstr "Nguồn dữ liệu mồ côi - %s"
 
 #: panellib/analyze.php:1559
-#, fuzzy, php-format
+#, php-format
 msgid "Datasources with bad indexes - %s"
-msgstr "Nguồn dữ liệu - chỉ mục xấu %s:"
+msgstr "Nguồn dữ liệu có chỉ mục lỗi - %s"
 
 #: panellib/analyze.php:1612
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s"
-msgstr "Cảnh báo / cảnh báo đăng nhập Thold - %s:"
+msgstr "Cảnh báo/cảnh báo sớm chỉ ghi nhật ký Thold - %s"
 
 #: panellib/analyze.php:1649
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description - %s"
-msgstr "Các thiết bị có cùng mô tả %s"
+msgstr "Thiết bị có cùng mô tả - %s"
 
 #: panellib/analyze.php:1692
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree - %s"
-msgstr "Thiết bị trong nhiều hơn một cây %s"
+msgstr "Thiết bị nằm trên nhiều hơn một cây - %s"
 
 #: panellib/analyze.php:1748
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without Graphs - %s"
-msgstr "Máy chủ không có đồ thị %s"
+msgstr "Thiết bị không có đồ thị - %s"
 
 #: panellib/analyze.php:1781
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree - %s"
-msgstr "Máy chủ không có cây %s"
+msgstr "Thiết bị chưa có cây - %s"
 
 #: panellib/analyze.php:1813
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community - %s"
-msgstr "Các máy chủ lưu trữ với cộng đồng công cộng / riêng mặc định %s"
+msgstr "Thiết bị có chuỗi community public/private mặc định - %s"
 
 #: panellib/analyze.php:1845
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts - %s"
-msgstr "Trình giám sát plugin - Máy chủ không được giám sát %s"
+msgstr "Plugin Monitor - Máy chủ chưa được giám sát - %s"
 
 #: panellib/busiest.php:31
 msgid "The busiest"
@@ -1497,18 +1381,16 @@ msgid "Busiest CPU"
 msgstr "CPU bận rộn nhất"
 
 #: panellib/busiest.php:38
-#, fuzzy
 msgid "Devices with the busiest CPU (Host MIB)"
-msgstr "Các thiết bị có cùng IP và cổng: %s"
+msgstr "Các thiết bị có CPU bận nhất (Host MIB)"
 
 #: panellib/busiest.php:53
 msgid "Busiest ucd/net - Load"
 msgstr "Bận rộn nhất ucd / net - Tải"
 
 #: panellib/busiest.php:54
-#, fuzzy
 msgid "Devices with the highest Load (ucd/net)"
-msgstr "Các thiết bị có cùng mô tả: %s"
+msgstr "Các thiết bị có mức tải cao nhất (ucd/net)"
 
 #: panellib/busiest.php:69
 msgid "Busiest Hard Drive Space"
@@ -1523,18 +1405,16 @@ msgid "Busiest uptime"
 msgstr "Thời gian hoạt động bận rộn nhất"
 
 #: panellib/busiest.php:86
-#, fuzzy
 msgid "Devices with the highest uptime"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Thiết bị có thời gian hoạt động cao nhất"
 
 #: panellib/busiest.php:101
 msgid "Busiest Interface in/out traffic"
 msgstr "Giao diện bận rộn nhất trong / ngoài lưu lượng truy cập"
 
 #: panellib/busiest.php:102
-#, fuzzy
 msgid "Devices with the highest in/out traffic (Interface)"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Thiết bị có lưu lượng vào/ra cao nhất (Giao diện)"
 
 #: panellib/busiest.php:117
 msgid "Busiest Interface error"
@@ -1603,9 +1483,10 @@ msgstr "Đang chờ dữ liệu hoặc bạn không có quyền đối với b�
 #: panellib/busiest.php:1097 panellib/busiest.php:1213
 #: panellib/busiest.php:1354 panellib/busiest.php:1570
 #: panellib/busiest.php:1692 panellib/busiest.php:1820
-#, fuzzy
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
-msgstr "Bạn không có quyền"
+msgstr ""
+"Bạn không có quyền đối với bất kỳ máy chủ nào hoặc không có máy chủ nào sử "
+"dụng mẫu này"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
@@ -1616,9 +1497,8 @@ msgid "Average of all allowed hosts"
 msgstr "Trung bình của tất cả các máy chủ được phép"
 
 #: panellib/busiest.php:592 panellib/busiest.php:1424
-#, fuzzy
 msgid "Waiting for data or you don't have permission for any device"
-msgstr "Bạn không có quyền"
+msgstr "Đang chờ dữ liệu hoặc bạn không có quyền đối với bất kỳ thiết bị nào"
 
 #: panellib/busiest.php:933 panellib/busiest.php:1773
 msgid "Direction"
@@ -1654,58 +1534,49 @@ msgid "Busiest interface utilization"
 msgstr "Sử dụng giao diện bận rộn nhất"
 
 #: panellib/graphs.php:31
-#, fuzzy
 msgid "Graphical Panels"
-msgstr "Tấm intropage"
+msgstr "Bảng biểu đồ"
 
 #: panellib/graphs.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
-msgstr "Các bảng cung cấp thông tin về Cacti và các plugin của nó theo cách Đồ họa."
+msgstr ""
+"Các bảng cung cấp thông tin về Cacti và các plugin của nó dưới dạng đồ họa."
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
 msgstr "Nguồn dữ liệu"
 
 #: panellib/graphs.php:38
-#, fuzzy
 msgid "Graph of Data Sources"
-msgstr "Cho phép bảng điều khiển Nguồn dữ liệu đồ thị"
+msgstr "Biểu đồ Nguồn dữ liệu"
 
 #: panellib/graphs.php:53 panellib/graphs.php:603
-#, fuzzy
 msgid "Device Templates"
 msgstr "Mẫu thiết bị"
 
 #: panellib/graphs.php:54
-#, fuzzy
 msgid "Graph of Device Templates"
-msgstr "Mẫu thiết bị"
+msgstr "Biểu đồ Mẫu thiết bị"
 
 #: panellib/graphs.php:69
-#, fuzzy
 msgid "Devices by Status"
-msgstr "Mẫu thiết bị"
+msgstr "Thiết bị theo trạng thái"
 
 #: panellib/graphs.php:70
-#, fuzzy
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr "Biểu đồ thiết bị theo trạng thái (lên, xuống, ...)"
+msgstr "Biểu đồ thiết bị theo trạng thái (hoạt động, ngừng hoạt động,...)"
 
 #: panellib/graphs.php:106
-#, fuzzy
 msgid "Datasources: "
-msgstr "Nguồn dữ liệu:"
+msgstr "Nguồn dữ liệu: "
 
 #: panellib/graphs.php:180 panellib/graphs.php:207
-#, fuzzy
 msgid "Device Templates: "
-msgstr "Mẫu thiết bị"
+msgstr "Mẫu thiết bị: "
 
 #: panellib/graphs.php:262
-#, fuzzy
 msgid "Devices: "
-msgstr "Thiết bị"
+msgstr "Thiết bị: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
@@ -1713,7 +1584,6 @@ msgstr "Xuống"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
-#, fuzzy
 msgid "Recovering"
 msgstr "Phục hồi"
 
@@ -1727,18 +1597,16 @@ msgid "Total"
 msgstr "Tổng"
 
 #: panellib/graphs.php:445
-#, fuzzy
 msgid "No untemplated datasources found"
-msgstr "Không tìm thấy nguồn dữ liệu nào"
+msgstr "Không tìm thấy nguồn dữ liệu chưa gắn mẫu nào"
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
 msgstr "Thiết bị"
 
 #: panellib/graphs.php:503
-#, fuzzy
 msgid "Device Count"
-msgstr "Thiết bị tối đa ngừng hoạt động"
+msgstr "Số lượng thiết bị"
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
@@ -1753,64 +1621,55 @@ msgid "Template Name"
 msgstr "Tên mẫu"
 
 #: panellib/graphs.php:636
-#, fuzzy
 msgid "Total Devices"
-msgstr "Thiết bị"
+msgstr "Tổng số thiết bị"
 
 #: panellib/graphs.php:656
-#, fuzzy
 msgid "No device templates found"
 msgstr "Không tìm thấy mẫu thiết bị nào"
 
 #: panellib/mactrack.php:31
-#, fuzzy
 msgid "MacTrack Panels"
-msgstr "Trang web của Mactrack"
+msgstr "Các bảng MacTrack"
 
 #: panellib/mactrack.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's MacTrack plugins."
-msgstr "Các bảng cung cấp thông tin về các plugin MacTrack của Cacti."
+msgstr "Các bảng cung cấp thông tin về plugin MacTrack của Cacti."
 
 #: panellib/mactrack.php:37
-#, fuzzy
 msgid "MacTrack Plugin"
-msgstr "Cho phép bảng điều khiển MacTrack Plugin"
+msgstr "Plugin MacTrack"
 
 #: panellib/mactrack.php:38
-#, fuzzy
 msgid "Various MacTrack collection and site statistics."
-msgstr "Nhiều bộ sưu tập MacTrack và thống kê trang web."
+msgstr "Các thống kê khác nhau về thu thập và địa điểm MacTrack."
 
 #: panellib/mactrack.php:53 panellib/mactrack.php:184
-#, fuzzy
 msgid "MacTrack Sites"
-msgstr "Trang web của Mactrack"
+msgstr "Địa điểm MacTrack"
 
 #: panellib/mactrack.php:54
-#, fuzzy
 msgid "Various MacTrack Site statistics."
-msgstr "Các số liệu thống kê về trang MacTrack khác nhau."
+msgstr "Các thống kê khác nhau về Địa điểm MacTrack."
 
 #: panellib/mactrack.php:81 panellib/mactrack.php:134
-#, fuzzy
 msgid "MacTrack Plugin not Installed/Running"
-msgstr "Plugin Mactrack chưa được cài đặt / đang chạy"
+msgstr "Plugin MacTrack chưa được cài đặt/đang chạy"
 
 #: panellib/mactrack.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "All: %s"
 msgstr "Tất cả: %s"
 
 #: panellib/mactrack.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "Up: %s"
-msgstr "Lên: %s"
+msgstr "Hoạt động: %s"
 
 #: panellib/mactrack.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Down: %s"
-msgstr "Xuống: %s"
+msgstr "Ngừng hoạt động: %s"
 
 #: panellib/mactrack.php:100
 #, php-format
@@ -1818,19 +1677,18 @@ msgid "Error: %s"
 msgstr "Lỗi: %s"
 
 #: panellib/mactrack.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown: %s"
-msgstr "Không biết"
+msgstr "Không xác định: %s"
 
 #: panellib/mactrack.php:102
-#, fuzzy, php-format
+#, php-format
 msgid "Disabled: %s"
 msgstr "Đã tắt: %s"
 
 #: panellib/mactrack.php:105
-#, fuzzy
 msgid "MacTrack"
-msgstr "Mactrack"
+msgstr "MacTrack"
 
 #: panellib/mactrack.php:109 panellib/misc.php:411 panellib/misc.php:575
 msgid "Error"
@@ -1841,9 +1699,8 @@ msgid "Unknown"
 msgstr "Không xác định"
 
 #: panellib/mactrack.php:118 panellib/mactrack.php:173 panellib/thold.php:312
-#, fuzzy
 msgid "You don't have plugin permission"
-msgstr "Bạn không có quyền"
+msgstr "Bạn không có quyền sử dụng plugin"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
@@ -1858,124 +1715,107 @@ msgid "Ports"
 msgstr "Cổng"
 
 #: panellib/mactrack.php:142 panellib/mactrack.php:195
-#, fuzzy
 msgid "Ports up"
-msgstr "Cổng lên"
+msgstr "Cổng đang hoạt động"
 
 #: panellib/mactrack.php:143 panellib/mactrack.php:196
-#, fuzzy
 msgid "MACs"
-msgstr "MAC"
+msgstr "Địa chỉ MAC"
 
 #: panellib/mactrack.php:144 panellib/mactrack.php:197
-#, fuzzy
 msgid "Device Errors"
 msgstr "Lỗi thiết bị"
 
 #: panellib/mactrack.php:170 panellib/mactrack.php:225
-#, fuzzy
 msgid "No mactrack sites found"
-msgstr "Không tìm thấy trang web mactrack"
+msgstr "Không tìm thấy địa điểm MacTrack nào"
 
 #: panellib/misc.php:31
-#, fuzzy
 msgid "Miscellaneous Panels"
-msgstr "Bảng điều khiển sai"
+msgstr "Các bảng khác"
 
 #: panellib/misc.php:32
-#, fuzzy
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr "Bảng chứa dữ liệu chung không được phân loại về Cacti's."
+msgstr "Các bảng hiển thị dữ liệu chung chưa được phân loại về Cacti."
 
 #: panellib/misc.php:37
-#, fuzzy
 msgid "NTP/DNS Status"
-msgstr "Trạng thái NTP"
+msgstr "Trạng thái NTP/DNS"
 
 #: panellib/misc.php:38
-#, fuzzy
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
-msgstr "Kiểm tra đồng hồ hệ thống Cacti của bạn xem có bị trôi so với đường cơ sở đã biết hay không."
+msgstr ""
+"Kiểm tra độ lệch đồng hồ hệ thống Cacti của bạn so với mốc chuẩn đã biết và "
+"kiểm tra phân giải DNS"
 
 #: panellib/misc.php:53
-#, fuzzy
 msgid "Maint Plugin Details"
-msgstr "Hiển thị chi tiết"
+msgstr "Chi tiết plugin Maint"
 
 #: panellib/misc.php:54
-#, fuzzy
 msgid "Maint Plugin details on upcoming schedules"
-msgstr "Duy trì thông tin chi tiết về Plugin về lịch trình sắp tới"
+msgstr "Chi tiết plugin Maint về các lịch trình sắp tới"
 
 #: panellib/misc.php:69
-#, fuzzy
 msgid "Webseer Details"
-msgstr "Hiển thị chi tiết"
+msgstr "Chi tiết WebSeer"
 
 #: panellib/misc.php:70
-#, fuzzy
 msgid "Plugin webseer URL Service Check Details"
-msgstr "Chi tiết kiểm tra dịch vụ URL của trình duyệt web plugin"
+msgstr "Chi tiết kiểm tra dịch vụ URL của plugin WebSeer"
 
 #: panellib/misc.php:85
-#, fuzzy
 msgid "Servcheck plugin Details"
-msgstr "Plugin Webseer - Chi tiết"
+msgstr "Chi tiết plugin ServCheck"
 
 #: panellib/misc.php:86
-#, fuzzy
 msgid "Plugin ServCheck Details"
-msgstr "Chi tiết kiểm tra dịch vụ URL của trình duyệt web plugin"
+msgstr "Chi tiết plugin ServCheck"
 
 #: panellib/misc.php:117
-#, fuzzy
 msgid "No NTP server configured"
-msgstr "Không có máy chủ NTP nào được cấu hình"
+msgstr "Chưa cấu hình máy chủ NTP nào"
 
 #: panellib/misc.php:120
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
-msgstr "Không có máy chủ NTP nào được cấu hình"
+msgstr "Máy chủ NTP được cấu hình sai - %s<br/>Vui lòng sửa trong phần cài đặt"
 
 #: panellib/misc.php:136
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to get NTP time from %s"
-msgstr "Không thể lấy thời gian NTP TỪ $ ntp_server"
+msgstr "Không thể lấy thời gian NTP từ %s"
 
 #: panellib/misc.php:144
-#, fuzzy
 msgid "Please check time as it is off by more"
-msgstr "Vui lòng kiểm tra thời gian vì nó còn nhiều hơn nữa"
+msgstr "Vui lòng kiểm tra thời gian vì bị lệch quá nhiều"
 
 #: panellib/misc.php:145
-#, fuzzy, php-format
+#, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr "hơn %s giây từ máy chủ NTP %s."
+msgstr "hơn %s giây so với máy chủ NTP %s."
 
 #: panellib/misc.php:147
-#, fuzzy
 msgid "Localtime is equal to NTP server"
-msgstr "Giờ địa phương bằng với máy chủ NTP"
+msgstr "Giờ cục bộ khớp với máy chủ NTP"
 
 #: panellib/misc.php:151
-#, fuzzy
 msgid "Unable to contact the NTP server indicated."
-msgstr "Không thể liên lạc với máy chủ NTP được chỉ định. <br/> Vui lòng kiểm tra cấu hình của bạn. <br/>"
+msgstr "Không thể liên hệ với máy chủ NTP được chỉ định."
 
 #: panellib/misc.php:153 panellib/misc.php:178
-#, fuzzy
 msgid "Please check your configuration."
 msgstr "Vui lòng kiểm tra cấu hình của bạn."
 
 #: panellib/misc.php:161
-#, fuzzy
 msgid "No DNS hostname configured"
-msgstr "Không có máy chủ NTP nào được cấu hình"
+msgstr "Chưa cấu hình tên máy chủ DNS"
 
 #: panellib/misc.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
-msgstr "Không có máy chủ NTP nào được cấu hình"
+msgstr ""
+"Tên máy chủ DNS được cấu hình sai - %s<br/>Vui lòng sửa trong phần cài đặt"
 
 #: panellib/misc.php:173
 #, php-format
@@ -1993,28 +1833,24 @@ msgid "DNS hostname (%s) resolving failed."
 msgstr "Giải quyết tên máy chủ DNS (%s) không thành công."
 
 #: panellib/misc.php:287
-#, fuzzy
 msgid "Maint plugin is not installed/enabled"
-msgstr "Plugin Mactrack chưa được cài đặt / đang chạy"
+msgstr "Plugin Maint chưa được cài đặt/kích hoạt"
 
 #: panellib/misc.php:307
-#, fuzzy
 msgid "Plugin Webseer isn't installed or started"
-msgstr "Plugin Thold chưa được cài đặt hoặc bắt đầu"
+msgstr "Plugin WebSeer chưa được cài đặt hoặc chưa khởi chạy"
 
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
 msgstr "Plugin Webseer không còn được hỗ trợ, hãy sử dụng plugin servcheck thay thế"
 
 #: panellib/misc.php:320 panellib/misc.php:486
-#, fuzzy
 msgid "Number of checks (all/disabled): "
-msgstr "Số lần kiểm tra:"
+msgstr "Số lượng kiểm tra (tất cả/đã tắt): "
 
 #: panellib/misc.php:321
-#, fuzzy
 msgid "Status (up/down): "
-msgstr "Chủ nhà xuống"
+msgstr "Trạng thái (hoạt động/ngừng hoạt động): "
 
 #: panellib/misc.php:335
 msgid "Last log messages"
@@ -2025,7 +1861,6 @@ msgid "URL"
 msgstr "URL"
 
 #: panellib/misc.php:338 panellib/misc.php:410
-#, fuzzy
 msgid "HTTP code"
 msgstr "Mã HTTP"
 
@@ -2035,19 +1870,16 @@ msgid "OK"
 msgstr "OK"
 
 #: panellib/misc.php:390
-#, fuzzy
 msgid "Webseer Plugin - Details"
-msgstr "Plugin Webseer - Chi tiết"
+msgstr "Plugin WebSeer - Chi tiết"
 
 #: panellib/misc.php:461
-#, fuzzy
 msgid "Plugin Servcheck isn't installed or started"
-msgstr "Plugin Thold chưa được cài đặt hoặc bắt đầu"
+msgstr "Plugin ServCheck chưa được cài đặt hoặc chưa khởi chạy"
 
 #: panellib/misc.php:487
-#, fuzzy
 msgid "Status (ok/error): "
-msgstr "Chủ nhà xuống"
+msgstr "Trạng thái (ok/lỗi): "
 
 #: panellib/misc.php:498
 msgid "Last log records"
@@ -2055,51 +1887,43 @@ msgstr "Bản ghi nhật ký cuối cùng"
 
 #: panellib/misc.php:500 panellib/misc.php:572
 msgid "Test"
-msgstr "Kiểm tra "
+msgstr "Kiểm tra"
 
 #: panellib/misc.php:501 panellib/misc.php:573
 msgid "Type"
 msgstr "Loại"
 
 #: panellib/misc.php:555
-#, fuzzy
 msgid "Servcheck Plugin - Details"
-msgstr "Plugin Webseer - Chi tiết"
+msgstr "Plugin ServCheck - Chi tiết"
 
 #: panellib/poller.php:31
-#, fuzzy
 msgid "Poller Panels"
-msgstr "Cho phép bảng thống kê Poller"
+msgstr "Các bảng Poller"
 
 #: panellib/poller.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's polling process."
-msgstr "Các bảng cung cấp thông tin về quy trình bỏ phiếu của Cacti."
+msgstr "Các bảng cung cấp thông tin về quy trình thăm dò (polling) của Cacti."
 
 #: panellib/poller.php:37
-#, fuzzy
 msgid "Poller Information"
-msgstr "Thông tin về xe đẩy"
+msgstr "Thông tin Poller"
 
 #: panellib/poller.php:38
-#, fuzzy
 msgid "Various information about your Cacti poller."
-msgstr "Thông tin khác nhau về người thăm dò Cacti của bạn."
+msgstr "Các thông tin khác nhau về Poller Cacti của bạn."
 
 #: panellib/poller.php:53
-#, fuzzy
 msgid "Poller Statistics"
-msgstr "Cho phép bảng thống kê Poller"
+msgstr "Thống kê Poller"
 
 #: panellib/poller.php:54 panellib/poller.php:70
-#, fuzzy
 msgid "Various Cacti poller statistics."
-msgstr "Nhiều thống kê thăm dò ý kiến của Cacti."
+msgstr "Các thống kê khác nhau về Poller của Cacti."
 
 #: panellib/poller.php:69
-#, fuzzy
 msgid "Poller Output Items"
-msgstr "Các mục đầu ra của Poller: %s"
+msgstr "Các mục đầu ra của Poller"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -2114,7 +1938,6 @@ msgid "Total Time"
 msgstr "Tổng thời gian"
 
 #: panellib/poller.php:134 panellib/poller.php:340
-#, fuzzy
 msgid "New/Idle"
 msgstr "Mới / nhàn rỗi"
 
@@ -2127,24 +1950,21 @@ msgid "Idle"
 msgstr "Rảnh rỗi"
 
 #: panellib/poller.php:140 panellib/poller.php:346
-#, fuzzy
 msgid "Unkn/down"
-msgstr "Không biết / xuống"
+msgstr "Không xác định/ngừng hoạt động"
 
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
-#, fuzzy, php-format
+#, php-format
 msgid "%s Secs"
-msgstr "%s Giây"
+msgstr "%s giây"
 
 #: panellib/poller.php:171 panellib/poller.php:367
-#, fuzzy
 msgid "(ok)"
-msgstr "(được)"
+msgstr "(ok)"
 
 #: panellib/poller.php:172 panellib/poller.php:367
-#, fuzzy
 msgid "(all)"
-msgstr "(tất cả các)"
+msgstr "(tất cả)"
 
 #: panellib/poller.php:274
 msgid "ID: "
@@ -2155,48 +1975,41 @@ msgid "Seconds"
 msgstr "Giây"
 
 #: panellib/poller.php:297
-#, fuzzy
 msgid "Poller Details"
-msgstr "Cho phép bảng thống kê Poller"
+msgstr "Chi tiết Poller"
 
 #: panellib/poller.php:308
-#, fuzzy
 msgid "Average Time"
 msgstr "Thời gian trung bình"
 
 #: panellib/poller.php:309
-#, fuzzy
 msgid "Max Time"
 msgstr "Thời gian tối đa"
 
 #: panellib/poller.php:446
-#, fuzzy
 msgid "Poller output items "
-msgstr "Các mặt hàng đầu ra của xe đẩy %s:"
+msgstr "Các mục đầu ra của Poller "
 
 #: panellib/poller.php:447
 msgid "Items"
 msgstr "Sản phẩm"
 
 #: panellib/syslog.php:31
-#, fuzzy
 msgid "Syslog Panels"
-msgstr "Bảng điều khiển tải lại"
+msgstr "Bảng thông tin Syslog"
 
 #: panellib/syslog.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's Syslog message processing."
-msgstr "Các bảng cung cấp thông tin về xử lý tin nhắn Syslog của Cacti."
+msgstr ""
+"Các bảng cung cấp thông tin về quá trình xử lý thông điệp Syslog của Cacti."
 
 #: panellib/syslog.php:37
-#, fuzzy
 msgid "Syslog Details"
-msgstr "Hiển thị chi tiết"
+msgstr "Chi tiết Syslog"
 
 #: panellib/syslog.php:38
-#, fuzzy
 msgid "Various Syslog Plugin statistics."
-msgstr "Các số liệu thống kê về Plugin Syslog khác nhau."
+msgstr "Các thống kê khác nhau về Plugin Syslog."
 
 #: panellib/syslog.php:171
 msgid "Incoming"
@@ -2211,77 +2024,66 @@ msgid "Messages"
 msgstr "Tin nhắn"
 
 #: panellib/syslog.php:197
-#, fuzzy
 msgid "Syslog plugin not installed/running"
-msgstr "Thold plugin không được cài đặt / đang chạy"
+msgstr "Plugin Syslog chưa được cài đặt hoặc không chạy"
 
 #: panellib/system.php:31
-#, fuzzy
 msgid "System Panels"
-msgstr "Tấm intropage"
+msgstr "Bảng thông tin hệ thống"
 
 #: panellib/system.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti system performance."
-msgstr "Các bảng cung cấp thông tin về hiệu suất của hệ thống Cacti."
+msgstr "Các bảng cung cấp thông tin về hiệu năng hệ thống Cacti."
 
 #: panellib/system.php:37
 msgid "Information"
 msgstr "Thông tin"
 
 #: panellib/system.php:38
-#, fuzzy
 msgid "Various system information about the Cacti system itself."
-msgstr "Thông tin hệ thống khác nhau về chính hệ thống Cacti."
+msgstr "Các thông tin hệ thống khác nhau về chính hệ thống Cacti."
 
 #: panellib/system.php:53
-#, fuzzy
 msgid "Administrative Alerts"
-msgstr "Cảnh báo Quản trị"
+msgstr "Cảnh báo quản trị"
 
 #: panellib/system.php:54
-#, fuzzy
 msgid "Extra admin notify panel for all users"
-msgstr "Bảng thông báo quản trị viên bổ sung cho tất cả người dùng"
+msgstr "Bảng thông báo quản trị bổ sung cho tất cả người dùng"
 
 #: panellib/system.php:69
-#, fuzzy
 msgid "Boost Statistics"
-msgstr "Tăng số liệu thống kê"
+msgstr "Thống kê Boost"
 
 #: panellib/system.php:70
-#, fuzzy
 msgid "Information about Cacti's performance boost process."
-msgstr "Thông tin về quá trình tăng hiệu suất của Cacti."
+msgstr "Thông tin về tiến trình tăng hiệu suất (Boost) của Cacti."
 
 #: panellib/system.php:85
-#, fuzzy
 msgid "24 Hour Extremes"
-msgstr "Cực hạn 24 giờ"
+msgstr "Cực trị 24 giờ"
 
 #: panellib/system.php:86
-#, fuzzy
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
-msgstr "Bảng có 24 giờ về Cực trị thăm dò (thời gian chạy cuộc thăm dò dài nhất, máy chủ không hoạt động)"
+msgstr ""
+"Bảng thống kê 24 giờ các cực trị thăm dò (lần chạy Poller lâu nhất, các máy "
+"chủ ngừng hoạt động)"
 
 #: panellib/system.php:101
-#, fuzzy
 msgid "CPU Utilization"
-msgstr "Sử dụng CPU"
+msgstr "Mức sử dụng CPU"
 
 #: panellib/system.php:102
-#, fuzzy
 msgid "CPU utilization Graph (only Linux)."
-msgstr "Sử dụng CPU"
+msgstr "Đồ thị mức sử dụng CPU (chỉ dành cho Linux)."
 
 #: panellib/system.php:141
 msgid "CPU Load: "
 msgstr "Tải CPU: "
 
 #: panellib/system.php:165
-#, fuzzy
 msgid "This function is not implemented on Windows platforms"
-msgstr "Chức năng này không được triển khai trên nền tảng Windows"
+msgstr "Chức năng này chưa được triển khai trên nền tảng Windows"
 
 #: panellib/system.php:177
 msgid "Avg CPU"
@@ -2292,47 +2094,38 @@ msgid "Max CPU"
 msgstr "CPU tối đa"
 
 #: panellib/system.php:208
-#, fuzzy
 msgid "Cacti Version: "
-msgstr "Phiên bản xương rồng:"
+msgstr "Phiên bản Cacti: "
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Poller Type:"
-msgstr "Loại xe đẩy:"
+msgstr "Loại Poller:"
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Spine"
-msgstr "Xương sống"
+msgstr "Spine"
 
 #: panellib/system.php:221
-#, fuzzy
 msgid "Spine version: "
-msgstr "Phiên bản cột sống:"
+msgstr "Phiên bản Spine: "
 
 #: panellib/system.php:224
-#, fuzzy
 msgid "You are using incorrect spine version!"
-msgstr "Bạn đang sử dụng phiên bản cột sống không chính xác!"
+msgstr "Bạn đang sử dụng phiên bản Spine không đúng!"
 
 #: panellib/system.php:229
-#, fuzzy
 msgid "Poller Type: "
-msgstr "Loại xe đẩy:"
+msgstr "Loại Poller: "
 
 #: panellib/system.php:238
-#, fuzzy
 msgid "Running on: "
-msgstr "Chạy trên:"
+msgstr "Đang chạy trên: "
 
 #: panellib/system.php:316
-#, fuzzy
 msgid "Overrun Warning"
 msgstr "Cảnh báo tràn ngập"
 
 #: panellib/system.php:319
-#, fuzzy
 msgid "Timed Out"
 msgstr "Hết giờ"
 
@@ -2341,14 +2134,13 @@ msgid "Other"
 msgstr "Khác"
 
 #: panellib/system.php:325
-#, fuzzy
 msgid "Never Run"
 msgstr "Không bao giờ chạy"
 
 #: panellib/system.php:346
-#, fuzzy, php-format
+#, php-format
 msgid "Boost Status is: %s"
-msgstr "Tăng số liệu thống kê"
+msgstr "Trạng thái Boost là: %s"
 
 #: panellib/system.php:350
 #, php-format
@@ -2356,104 +2148,90 @@ msgid "Processes/Frequency: %s / %s"
 msgstr "Quy trình / Tần suất: %s / %s"
 
 #: panellib/system.php:352
-#, fuzzy, php-format
+#, php-format
 msgid "Pending Records Threshold: %s"
-msgstr "Bản ghi Boost đang chờ xử lý: %s"
+msgstr "Ngưỡng bản ghi đang chờ xử lý: %s"
 
 #: panellib/system.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Approximate Next Start Time: %s"
-msgstr "Thời gian bắt đầu tiếp theo: %s"
+msgstr "Thời gian bắt đầu tiếp theo ước tính: %s"
 
 #: panellib/system.php:361
-#, fuzzy, php-format
+#, php-format
 msgid "Pending/Archived Records: %s / %s"
-msgstr "Lưu trữ bản ghi Boost: %s"
+msgstr "Bản ghi đang chờ/đã lưu trữ: %s / %s"
 
 #: panellib/system.php:377
-#, fuzzy, php-format
+#, php-format
 msgid "Current Boost Table(s) Size: %s"
-msgstr "Kích thước bảng tăng hiện tại: %s"
+msgstr "Kích thước bảng Boost hiện tại: %s"
 
 #: panellib/system.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr "Byte trung bình / Bản ghi: %s"
+msgstr "Byte trung bình/Bản ghi: %s"
 
 #: panellib/system.php:390
-#, fuzzy, php-format
+#, php-format
 msgid "Last run duration/updates: %s / %s"
-msgstr "Thời lượng chạy lần cuối: %s"
+msgstr "Thời lượng chạy/cập nhật lần cuối: %s / %s"
 
 #: panellib/system.php:448
-#, fuzzy
 msgid "Poller Run"
-msgstr "Thông tin về xe đẩy"
+msgstr "Lượt chạy Poller"
 
 #: panellib/system.php:474
-#, fuzzy
 msgid "Down Hosts"
-msgstr "Hosts"
+msgstr "Máy chủ ngừng hoạt động"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
-#, fuzzy
 msgid "Triggered"
-msgstr "Trigerred"
+msgstr "Đã kích hoạt"
 
 #: panellib/system.php:526
-#, fuzzy
 msgid "Poller out. itms"
-msgstr "Các mặt hàng đầu ra của xe đẩy %s:"
+msgstr "Mục đ.ra Poller"
 
 #: panellib/system.php:606
-#, fuzzy
 msgid "48 Hour Extreme Polling"
-msgstr "Cực hạn 24 giờ"
+msgstr "Thăm dò cực trị 48 giờ"
 
 #: panellib/system.php:629
-#, fuzzy
 msgid "Long Running Poller"
-msgstr "Chạy dài <br/> xe đẩy"
+msgstr "Poller chạy lâu"
 
 #: panellib/system.php:660
-#, fuzzy
 msgid "Max Device Down"
-msgstr "Thiết bị tối đa ngừng hoạt động"
+msgstr "Số thiết bị ngừng hoạt động tối đa"
 
 #: panellib/system.php:690
-#, fuzzy
 msgid "Max Thold Triggered"
-msgstr "Thold kích hoạt"
+msgstr "Số Thold được kích hoạt tối đa"
 
 #: panellib/system.php:719
-#, fuzzy
 msgid "Poller Output Item"
-msgstr "Các mục đầu ra của Poller: %s"
+msgstr "Mục đầu ra của Poller"
 
 #: panellib/system.php:747
-#, fuzzy
 msgid "Failed Polls"
-msgstr "Đăng nhập thất bại"
+msgstr "Lần thăm dò thất bại"
 
 #: panellib/thold.php:31
-#, fuzzy
 msgid "Threshold Panels"
-msgstr "Ngưỡng"
+msgstr "Bảng ngưỡng"
 
 #: panellib/thold.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti Thresholding Plugin."
-msgstr "Bảng cung cấp thông tin về Plugin ngưỡng xương rồng."
+msgstr "Các bảng cung cấp thông tin về Plugin Ngưỡng Cacti."
 
 #: panellib/thold.php:37 panellib/thold.php:434
-#, fuzzy
 msgid "Last Threshold Events"
-msgstr "Ngưỡng"
+msgstr "Sự kiện ngưỡng gần nhất"
 
 #: panellib/thold.php:38
-#, fuzzy
 msgid "Threshold Plugin Latest Events"
-msgstr "Ngưỡng"
+msgstr "Sự kiện mới nhất của plugin Ngưỡng"
 
 #: panellib/thold.php:53
 msgid "Threshold"
@@ -2465,24 +2243,20 @@ msgid "Threshold Plugin Graph (all, trigerred, ...)"
 msgstr "Biểu đồ plugin ngưỡng (tất cả, chia ba lần, ...)"
 
 #: panellib/thold.php:87 panellib/thold.php:441
-#, fuzzy
 msgid "Plugin Thold isn't installed or started"
-msgstr "Plugin Thold chưa được cài đặt hoặc bắt đầu"
+msgstr "Plugin Thold chưa được cài đặt hoặc chưa khởi chạy"
 
 #: panellib/thold.php:179 panellib/thold.php:506
-#, fuzzy
 msgid "Without events yet"
-msgstr "Không có sự kiện nào"
+msgstr "Chưa có sự kiện nào"
 
 #: panellib/thold.php:196
-#, fuzzy
 msgid "Thresholds: "
-msgstr "Ngưỡng"
+msgstr "Ngưỡng: "
 
 #: panellib/thold.php:208 panellib/thold.php:332
-#, fuzzy
 msgid "Thold plugin not installed/running"
-msgstr "Thold plugin không được cài đặt / đang chạy"
+msgstr "Plugin Thold chưa được cài đặt/không chạy"
 
 #: panellib/thold.php:238
 #, fuzzy
@@ -2490,86 +2264,73 @@ msgid "Trigerred"
 msgstr "Trigerred"
 
 #: panellib/thold.php:266 panellib/thold.php:369 panellib/thold.php:385
-#, fuzzy
 msgid "Breached"
-msgstr "Vi phạm"
+msgstr "Vi phạm ngưỡng"
 
 #: panellib/thold.php:325
-#, fuzzy
 msgid "Threshold Details"
-msgstr "Ngưỡng"
+msgstr "Chi tiết ngưỡng"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
-msgstr "Ngưỡng (Thresholds)"
+msgstr "Ngưỡng"
 
 #: panellib/thold.php:402
-#, fuzzy
 msgid "Breached: "
-msgstr "Vi phạm"
+msgstr "Vi phạm ngưỡng: "
 
 #: panellib/thold.php:413
-#, fuzzy
 msgid "Triggered: "
-msgstr "Trigerred"
+msgstr "Đã kích hoạt: "
 
 #: panellib/thold.php:421
-#, fuzzy
 msgid "You don't have permission to Thresholds"
-msgstr "Bạn không có quyền"
+msgstr "Bạn không có quyền truy cập Ngưỡng"
 
 #: panellib/thold.php:484
 msgid "Description"
 msgstr "Mô tả"
 
 #: panellib/top5.php:31
-#, fuzzy
 msgid "Top/Bottom 5 Panels"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Bảng Top/Bottom 5"
 
 #: panellib/top5.php:32
-#, fuzzy
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr "Các bảng cung cấp thông tin về xu hướng thu thập dữ liệu Cacti."
+msgstr ""
+"Các bảng cung cấp thông tin xu hướng về việc thu thập dữ liệu của Cacti."
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
 msgstr "Ping dưới cùng"
 
 #: panellib/top5.php:38
-#, fuzzy
 msgid "Devices with the worst ping response"
-msgstr "Các thiết bị có cùng mô tả: %s"
+msgstr "Các thiết bị có phản hồi ping kém nhất"
 
 #: panellib/top5.php:53
-#, fuzzy
 msgid "Bottom Availability"
-msgstr "Tình trạng"
+msgstr "Độ khả dụng thấp nhất"
 
 #: panellib/top5.php:54
-#, fuzzy
 msgid "Devices with the worst availability/reachability"
-msgstr "Top5 tình trạng xấu nhất"
+msgstr "Thiết bị có độ khả dụng/khả năng kết nối kém nhất"
 
 #: panellib/top5.php:69
-#, fuzzy
 msgid "Bottom Polling Time"
-msgstr "Thông tin về xe đẩy"
+msgstr "Thời gian thăm dò kém nhất"
 
 #: panellib/top5.php:70
-#, fuzzy
 msgid "Devices with the worst polling time"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Thiết bị có thời gian thăm dò kém nhất"
 
 #: panellib/top5.php:85
-#, fuzzy
 msgid "Bottom Polling Ratio"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Tỷ lệ thăm dò thấp nhất"
 
 #: panellib/top5.php:86
-#, fuzzy
 msgid "Devices with the worst polling ratio"
-msgstr "Các thiết bị có cùng IP và cổng: %s"
+msgstr "Các thiết bị có tỷ lệ thăm dò kém nhất"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
@@ -2580,78 +2341,69 @@ msgid "Hostname"
 msgstr "Tên máy chủ"
 
 #: panellib/top5.php:226
-#, fuzzy
 msgid "Availability/Reachability"
-msgstr "Tính khả dụng / Khả năng tiếp cận"
+msgstr "Sẵn có / Khả năng tiếp cận"
 
 #: panellib/top5.php:306 panellib/top5.php:637
-#, fuzzy
 msgid "Polling Time"
-msgstr "Thông tin về xe đẩy"
+msgstr "Thời gian bỏ phiếu"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
 msgstr "Tỉ lệ"
 
 #: panellib/top5.php:437
-#, fuzzy
 msgid "Top 20 Hosts with Worst Ping"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Top 20 máy chủ có Ping tệ nhất"
 
 #: panellib/top5.php:519
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Availability"
-msgstr "Top5 tình trạng xấu nhất"
+msgstr "Top 20 máy chủ có độ khả dụng tệ nhất"
 
 #: panellib/top5.php:557
 msgid "Availability"
 msgstr "Tình trạng"
 
 #: panellib/top5.php:600
-#, fuzzy
 msgid "Top 20 Hosts Worst Polling Time"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Top 20 máy chủ có thời gian thăm dò tệ nhất"
 
 #: panellib/top5.php:680
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Polling Ratio"
-msgstr "Top5 thời gian bỏ phiếu tồi tệ nhất"
+msgstr "Top 20 máy chủ có tỷ lệ thăm dò tệ nhất"
 
 #: setup.php:61
-#, fuzzy
 msgid "Intropage Viewer"
-msgstr "Tấm intropage"
+msgstr "Người xem Intropage"
 
 #: setup.php:62
-#, fuzzy
 msgid "Intropage Administration"
-msgstr "Tùy chọn trang giới thiệu"
+msgstr "Quản trị Intropage"
 
 #: setup.php:80
 msgid "System Administration"
 msgstr "Quản lí hệ thống"
 
 #: setup.php:83
-#, fuzzy
 msgid "Timespan Last 1 Hour"
-msgstr "Người dùng đang hoạt động trong 2 giờ qua:"
+msgstr "Khoảng thời gian 1 giờ qua"
 
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "Timespan Last %d Hours"
-msgstr "Người dùng đang hoạt động trong 2 giờ qua:"
+msgstr "Khoảng thời gian %d giờ qua"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
 msgstr "Khoảng thời gian 1 ngày qua"
 
 #: setup.php:95 setup.php:96 setup.php:97 setup.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "%d Seconds"
-msgstr "%s Giây"
+msgstr "%d Giây"
 
 #: setup.php:109 setup.php:110 setup.php:111 setup.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "%d Hours"
 msgstr "%d giờ"
 
