@@ -8,29 +8,30 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2024-04-20 14:17-0400\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: ko\n"
+"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Korean <https://translate.cacti.net/projects/cacti/intropage/"
+"ko/>\n"
+"Language: ko-KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: display.php:40
-#, fuzzy
 msgid "Intropage - Permission Denied"
-msgstr "인트로 페이지 - 사용 권한이 거부되었습니다."
+msgstr "Intropage - 권한이 거부되었습니다"
 
 #: display.php:123
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
 msgstr "하나 이상의 패널이 권한 부족으로 인해 제거되었습니다. 관리자에게 문의하십시오."
 
 #: display.php:179
-#, fuzzy
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
-msgstr "위의 행을 <b>설정 -> 일반 -> 선인장 대시 보드 숨기기</b> 에서 비활성화하고 전체 페이지를 인트로 페이지에 사용할 수 있습니다. <br/><br/>"
+msgstr ""
+"<b>구성 > 설정 > 일반 > Cacti 대시보드 숨기기</b>에서 위 행을 비활성화하고 "
+"전체 페이지를 Intropage에 사용할 수 있습니다 "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -42,60 +43,50 @@ msgid "Hide red/yellow/green square notifications"
 msgstr "빨간색/노란색/녹색 사각형 알림 숨기기"
 
 #: display.php:245
-#, fuzzy
 msgid "Disable panel move/enable copy text from panel"
-msgstr "패널 이동 비활성화 / 패널에서 텍스트 복사 활성화"
+msgstr "패널 이동 비활성화/패널 텍스트 복사 활성화"
 
 #: display.php:254
-#, fuzzy
 msgid "Actions ..."
-msgstr "작업"
+msgstr "작업 ..."
 
 #: display.php:257
-#, fuzzy
 msgid "Add New Dashboard"
-msgstr "대시 보드에 추가"
+msgstr "새 대시보드 추가"
 
 #: display.php:261
-#, fuzzy
 msgid "Remove current dashboard"
-msgstr "대시 보드에서 제거"
+msgstr "현재 대시보드 제거"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
-#, fuzzy, php-format
+#, php-format
 msgid "Number of lines - %d"
-msgstr "확인 횟수:"
+msgstr "줄 수 - %d"
 
 #: display.php:286
-#, fuzzy
 msgid "Refresh Now"
-msgstr "지금 새로 고침"
+msgstr "새로고침"
 
 #: display.php:289 display.php:291
-#, fuzzy
 msgid "Refresh Disabled"
-msgstr "자동 새로 고침 사용 안 함"
+msgstr "새로 고침 사용 안 함"
 
 #: display.php:295 display.php:297
-#, fuzzy
 msgid "Refresh by Poller"
-msgstr "자동 새로 고침 사용 안 함"
+msgstr "폴러에 따라 새로 고침"
 
 #: display.php:301 display.php:303
-#, fuzzy
 msgid "Refresh Every 1 Minute"
-msgstr "자동 새로 고침 1 분"
+msgstr "1분마다 새로 고침"
 
 #: display.php:307 display.php:309
-#, fuzzy
 msgid "Refresh Every 5 Minutes"
-msgstr "자동 새로 고침 5 분"
+msgstr "5분마다 새로 고침"
 
 #: display.php:313 display.php:315
-#, fuzzy
 msgid "Refresh Every Hour"
-msgstr "매시간"
+msgstr "매시간 새로 고침"
 
 #: display.php:321 display.php:323
 msgid "Important period - disabled"
@@ -118,85 +109,72 @@ msgid "Important period - 1 day"
 msgstr "중요 기간 - 1일"
 
 #: display.php:363 display.php:366
-#, fuzzy
 msgid "Sort by Severity"
-msgstr "패널 우선 순위별로 정렬"
+msgstr "심각도별 정렬"
 
 #: display.php:364 display.php:367
-#, fuzzy
 msgid "Sort by User Preference"
-msgstr "사용자 기본 설정으로 정렬"
+msgstr "사용자 기본 설정별 정렬"
 
 #: display.php:373
-#, fuzzy
 msgid "Reload Panel Definitions"
-msgstr "패널 다시로드"
+msgstr "패널 정의 다시 로드"
 
 #: display.php:379
-#, fuzzy
 msgid "Set Intropage as Default Login Page"
-msgstr "기본 페이지로 소개 페이지 설정"
+msgstr "Intropage를 기본 로그인 페이지로 설정"
 
 #: display.php:381
-#, fuzzy
 msgid "Set graph as Default Login Page"
-msgstr "기본 페이지로 그래프 설정"
+msgstr "그래프를 기본 로그인 페이지로 설정"
 
 #: display.php:387
-#, fuzzy
 msgid "Display Intropage in Console"
-msgstr "기본 페이지로 소개 페이지 설정"
+msgstr "콘솔에 Intropage 표시"
 
 #: display.php:389
-#, fuzzy
 msgid "Display Intropage in Tab as Default Page"
-msgstr "기본 페이지로 소개 페이지 설정"
+msgstr "탭에 Intropage를 기본 페이지로 표시"
 
 #: display.php:396 display.php:399
 msgid "Less panels on a line"
 msgstr "라인의 패널 수 감소"
 
 #: display.php:397 display.php:400
-#, fuzzy
 msgid "More panels on a line"
-msgstr "패널 탑 5 핑 허용"
+msgstr "한 줄에 더 많은 패널 표시"
 
 #: display.php:413
 msgid "Cancel sharing"
 msgstr "공유 취소"
 
 #: display.php:416
-#, fuzzy
 msgid "Share this dashboard"
-msgstr "대시 보드에 추가"
+msgstr "이 대시보드 공유"
 
 #: display.php:418
 msgid "Share empty dashboard not allowed"
 msgstr "빈 대시보드 공유가 허용되지 않음"
 
 #: display.php:437
-#, fuzzy
 msgid "Use shared dashboard"
-msgstr "대시 보드에서 제거"
+msgstr "공유 대시보드 사용"
 
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr "공유 대시보드를 사용할 수 없음 - 대시보드 제한에 도달했습니다."
 
 #: display.php:443
-#, fuzzy
 msgid "No shared dashboards"
-msgstr "대시 보드에 추가"
+msgstr "공유된 대시보드 없음"
 
 #: display.php:460
-#, fuzzy
 msgid "Welcome to Intropage!"
-msgstr "인트로 패널"
+msgstr "Intropage에 오신 것을 환영합니다!"
 
 #: display.php:464
-#, fuzzy
 msgid "You can Add Dashboard Panels in more ways:"
-msgstr "다음 두 가지 방법으로 대시보드 패널을 추가할 수 있습니다."
+msgstr "다음과 같은 방법으로 대시보드 패널을 추가할 수 있습니다:"
 
 #: display.php:466
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
@@ -204,7 +182,7 @@ msgstr "\"패널 메뉴\"에서 준비된 패널을 선택합니다. 패널이 �
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
-msgstr "Cacti 그래프를 추가하고 아이콘을 사용하십시오."
+msgstr "Cacti 그래프를 추가하고 아이콘을 사용하십시오"
 
 #: display.php:468
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
@@ -227,13 +205,13 @@ msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same 
 msgstr "\"공유 대시보드 사용(사용자/대시보드 이름) 사용 - 공유와 동일한 대시보드를 준비하지만 권한이 있습니다."
 
 #: display.php:487
-#, fuzzy
 msgid "Customization:"
-msgstr "CPU 사용률"
+msgstr "사용자 지정:"
 
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
-msgstr "대시보드는 최대 9개까지 만들 수 있습니다. 모든 대시보드의 이름을 지정할 수 있으며 아이콘을 사용할 수 있습니다."
+msgstr "대시보드는 최대 9개까지 만들 수 있습니다. 모든 대시보드의 이름을 지정할 수 "
+"있으며 아이콘을 사용할 수 있습니다"
 
 #: display.php:490
 msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
@@ -241,29 +219,26 @@ msgstr "Intopage는 콘솔 또는 분리된 탭에 표시할 수 있습니다. �
 
 #: display.php:491
 msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
-msgstr "패널에서 텍스트를 복사하려면 드래그 앤 드롭 기능을 비활성화하고 아이콘을 사용해야합니다."
+msgstr "패널에서 텍스트를 복사하려면 드래그 앤 드롭 기능을 비활성화하고 아이콘을 "
+"사용해야합니다"
 
 #: display.php:585
-#, fuzzy
 msgid "Panel Details"
-msgstr "세부 정보 보이기"
+msgstr "패널 세부 정보"
 
 #: display.php:586
-#, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "패널 이동 비활성화 / 패널에서 텍스트 복사 활성화"
+msgstr "패널 이동 비활성화/패널 텍스트 복사 활성화"
 
 #: display.php:587
-#, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr "패널 이동 활성화 / 패널에서 텍스트 복사 비활성화"
+msgstr "패널 이동 활성화/패널 텍스트 복사 비활성화"
 
 #: display.php:589
 msgid "Show red/yellow/green square notifications"
 msgstr "빨간색/노란색/녹색 사각형 알림 표시"
 
 #: display.php:591
-#, fuzzy
 msgid "Error reading new data"
 msgstr "새 데이터 읽기 오류"
 
@@ -272,24 +247,21 @@ msgid "Close"
 msgstr "닫기"
 
 #: include/functions.php:242
-#, fuzzy
 msgid "Dashboard has been removed"
-msgstr "대시보드가 제거되었습니다."
+msgstr "대시보드가 제거되었습니다"
 
 #: include/functions.php:264
-#, fuzzy
 msgid "New Dashboard"
-msgstr "대시 보드에 추가"
+msgstr "새 대시보드"
 
 #: include/functions.php:266
-#, fuzzy
 msgid "Dashboard has been added"
 msgstr "대시보드가 추가되었습니다"
 
 #: include/functions.php:298
-#, fuzzy
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
-msgstr "확대 또는 사용자 지정 기간 그래프를 추가할 수 없습니다. 기간을 지난 30분으로 변경"
+msgstr "확대되었거나 사용자 지정 기간이 적용된 그래프는 추가할 수 없어 기간을 최근 "
+"30분으로 변경합니다"
 
 #: include/functions.php:419
 msgid "Intropage Panel Library Refreshed from Panel Library"
@@ -297,38 +269,34 @@ msgstr "Intropage 패널 라이브러리가 패널 라이브러리에서 새로 
 
 #: include/functions.php:491
 msgid "Dashboard has been added, please wait few poller cycle for data"
-msgstr "대시보드가 추가되었으니 데이터를 위해 폴러 주기가 거의 없을 때까지 기다려 주십시오."
+msgstr "대시보드가 추가되었으니 데이터를 위해 폴러 주기가 거의 없을 때까지 기다려 "
+"주십시오"
 
 #: include/functions.php:502
 msgid "Error - trying share non-shared dashboard"
 msgstr "오류 - 공유되지 않은 대시보드 공유 시도"
 
 #: include/functions.php:617
-#, fuzzy
 msgid "The Panel includes a render function but it does not exist."
-msgstr "패널에 렌더 기능이 포함되어 있지만 존재하지 않습니다."
+msgstr "패널에 렌더링 함수가 포함되어 있으나 해당 함수가 존재하지 않습니다."
 
 #: include/functions.php:620
-#, fuzzy
 msgid "The Panel does not have a render function."
-msgstr "패널에는 렌더링 기능이 없습니다."
+msgstr "패널에 렌더링 함수가 없습니다."
 
 #: include/functions.php:626
 msgid "Not Found"
-msgstr "찾을 수 없습니다"
+msgstr "찾을 수 없음"
 
 #: include/functions.php:653
-#, fuzzy
 msgid "Panel not found"
 msgstr "패널을 찾을 수 없음"
 
 #: include/functions.php:686
-#, fuzzy
 msgid "Details Function does not exist."
-msgstr "세부 정보 기능이 존재하지 않습니다."
+msgstr "세부 정보 함수가 존재하지 않습니다."
 
 #: include/functions.php:693
-#, fuzzy
 msgid "Panel Not Found"
 msgstr "패널을 찾을 수 없음"
 
@@ -338,12 +306,12 @@ msgid " [ Updates in %s ]"
 msgstr " [ %s 업데이트 ]"
 
 #: include/functions.php:819
-#, fuzzy, php-format
+#, php-format
 msgid "%s Sec"
 msgstr "%s초"
 
 #: include/functions.php:819
-#, fuzzy, php-format
+#, php-format
 msgid "%s Seconds"
 msgstr "%s초"
 
@@ -353,14 +321,14 @@ msgid "%s Min"
 msgstr "%s 분"
 
 #: include/functions.php:826
-#, fuzzy, php-format
+#, php-format
 msgid "%s Minutes"
-msgstr "매 %d 분"
+msgstr "%s 분"
 
 #: include/functions.php:833
-#, fuzzy, php-format
+#, php-format
 msgid "%s Hours"
-msgstr "%s시간"
+msgstr "%s 시간"
 
 #: include/functions.php:833
 #, php-format
@@ -368,29 +336,26 @@ msgid "%s Hrs"
 msgstr "%s 시"
 
 #: include/functions.php:837
-#, fuzzy, php-format
+#, php-format
 msgid "%s Days"
 msgstr "%s일"
 
 #: include/functions.php:883
-#, fuzzy
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
-msgstr "데이터가 없습니다. 강제 업데이트하거나 다음 선인장 폴링 주기를 기다리십시오."
+msgstr "데이터가 없습니다. 강제 업데이트하거나 다음 Cacti 폴링 주기를 기다리세요."
 
 #: include/functions.php:885
-#, fuzzy
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
-msgstr "데이터가 없습니다. 이 패널은 강제 업데이트를 허용하지 않습니다. Cacti's Poller가 검사를 수행할 때까지 기다려야 합니다."
+msgstr "데이터가 없습니다. 이 패널에서는 강제 업데이트를 허용하지 않습니다. Cacti "
+"폴러가 확인을 수행할 때까지 기다려야 합니다."
 
 #: include/functions.php:1363
-#, fuzzy
 msgid "Disable panel"
-msgstr "패널 사용 중지"
+msgstr "패널 비활성화"
 
 #: include/functions.php:1366
-#, fuzzy
 msgid "Reload Panel"
-msgstr "패널 다시로드"
+msgstr "패널 다시 로드"
 
 #: include/functions.php:1369
 msgid "Show Details"
@@ -402,161 +367,140 @@ msgid "Loading data ..."
 msgstr "데이터 로드 중..."
 
 #: include/functions.php:1387
-#, fuzzy
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
-msgstr "데이터가 없습니다. 다음 확인을 기다리거나,<br/> 또는 가능한 경우 강제 재장전을 사용하십시오."
+msgstr "데이터를 찾을 수 없습니다. 다음 확인을 기다리거나<br/>가능한 경우 강제 새로 "
+"고침을 사용하세요."
 
 #: include/functions.php:1410
-#, fuzzy
 msgid "Panels ..."
 msgstr "패널 ..."
 
 #: include/functions.php:1433 include/functions.php:1441
-#, fuzzy, php-format
+#, php-format
 msgid "%s (no permission)"
-msgstr "권한이 없습니다."
+msgstr "%s (권한 없음)"
 
 #: include/functions.php:1495
-#, fuzzy
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr "대시보드에 추가할 수 없습니다. 사용자 정의 기간."
+msgstr "대시보드에 추가할 수 없습니다. 사용자 지정 기간입니다."
 
 #: include/functions.php:1505
-#, fuzzy
 msgid "Remove from Dashboard"
-msgstr "대시 보드에서 제거"
+msgstr "대시보드에서 제거"
 
 #: include/functions.php:1507
-#, fuzzy
 msgid "Add to Dashboard"
-msgstr "대시 보드에 추가"
+msgstr "대시보드에 추가"
 
 #: include/functions.php:1563
-#, fuzzy
 msgid "Dashboard Names"
 msgstr "대시보드 이름"
 
 #: include/functions.php:1572
-#, fuzzy, php-format
+#, php-format
 msgid "Dashboard %s"
-msgstr "대시 보드에 추가"
+msgstr "대시보드 %s"
 
 #: include/functions.php:1596
-#, fuzzy
 msgid "User Level Panel Update Frequencies"
-msgstr "사용자 수준 패널"
+msgstr "사용자 수준 패널 업데이트 빈도"
 
 #: include/functions.php:1645
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr "시스템 패널 업데이트 빈도(권한이 있는 모든 사용자)"
 
 #: include/functions.php:1694
-#, fuzzy
 msgid "Trend Update Frequencies"
-msgstr "업데이트 빈도 :  %s"
+msgstr "추세 업데이트 빈도"
 
 #: include/settings.php:32 include/settings.php:93
-#, fuzzy
 msgid "Intropage"
-msgstr "인트로 패널"
+msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
-#, fuzzy
 msgid "Normal User"
 msgstr "일반 사용자"
 
 #: include/settings.php:146
 #, php-format
 msgid "[edit: %s]"
-msgstr "[편집: %s]"
+msgstr "[편집 :  %s]"
 
 #: include/settings.php:155
-#, fuzzy
 msgid "System Level Panels"
-msgstr "시스템 레벨 패널"
+msgstr "시스템 수준 패널"
 
 #: include/settings.php:156
-#, fuzzy
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
-msgstr "관리자 또는 고급 사용자가 액세스하기에 적합하지만 일반적으로 일반 사용자에게는 적용되지 않는 패널입니다. 패널은 일반적으로 전체 시스템 활용도에 관한 것입니다."
+msgstr ""
+"관리자 또는 고급 사용자가 액세스하기에 적합하며 일반적으로 일반 사용자에게는 "
+"적용되지 않는 패널입니다. 패널은 일반적으로 전체 시스템 사용률에 관한 "
+"것입니다."
 
 #: include/settings.php:159
-#, fuzzy
 msgid "User Level Panels"
 msgstr "사용자 수준 패널"
 
 #: include/settings.php:160
-#, fuzzy
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
-msgstr "일반 사용자가 액세스하기에 적합한 패널입니다. 권한은 현재 사용자가 볼 수 있는 것으로 제한됩니다."
+msgstr "일반 사용자가 액세스하기에 적합한 패널입니다. 권한은 현재 사용자가 볼 수 "
+"있는 항목으로 제한됩니다."
 
 #: include/settings.php:203
-#, fuzzy
 msgid "You can Allow/Disallow Panels for User"
-msgstr "사용자에 대한 패널을 허용/비활성화할 수 있습니다."
+msgstr "사용자별로 패널을 허용/비허용할 수 있습니다"
 
 #: include/variables.php:28
-#, fuzzy
 msgid "Red Status"
-msgstr "상태"
+msgstr "빨간색 상태"
 
 #: include/variables.php:29
-#, fuzzy
 msgid "Yellow Status"
-msgstr "노란색 알람"
+msgstr "노란색 상태"
 
 #: include/variables.php:30
-#, fuzzy
 msgid "Green Status"
-msgstr "상태"
+msgstr "녹색 상태"
 
 #: include/variables.php:35
 msgid "Display Settings"
 msgstr "표시 설정"
 
 #: include/variables.php:39
-#, fuzzy
 msgid "Important things will be at the top"
-msgstr "중요한 것들이 맨 위에 있습니다."
+msgstr "중요한 항목이 맨 위에 표시됩니다"
 
 #: include/variables.php:40
-#, fuzzy
 msgid "If checked Intropage displays important (errors, warnings) information first"
-msgstr "이 옵션을 선택하면 중요한 (오류, 경고) 정보가 먼저 표시됩니다"
+msgstr "선택하면 Intropage가 중요한 정보(오류, 경고)를 먼저 표시합니다"
 
 #: include/variables.php:45
-#, fuzzy
 msgid "Display more panels on a line"
-msgstr "오류 및 경고 표시"
+msgstr "한 줄에 더 많은 패널 표시"
 
 #: include/variables.php:46
 msgid "For wide screen"
 msgstr "와이드 스크린용"
 
 #: include/variables.php:51
-#, fuzzy
 msgid "Automatically Uninstall Panels"
-msgstr "자동으로 패널 제거"
+msgstr "패널 자동 제거"
 
 #: include/variables.php:52
-#, fuzzy
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
-msgstr "패널이 설치되고 필요한 플러그인이 제거되면 패널도 자동으로 제거"
+msgstr "패널이 설치되어 있고 필요한 플러그인이 제거되면 패널도 자동으로 제거합니다"
 
 #: include/variables.php:57
-#, fuzzy
 msgid "Automatic Page Refresh"
-msgstr "자동 새로 고침 페이지"
+msgstr "자동 페이지 새로 고침"
 
 #: include/variables.php:58
-#, fuzzy
 msgid "How often"
-msgstr "얼마나 자주"
+msgstr "실행 빈도"
 
 #: include/variables.php:61
-#, fuzzy
 msgid "Automatically by poller"
-msgstr "폴러에 의해 자동으로"
+msgstr "폴러에서 자동으로"
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
@@ -582,14 +526,15 @@ msgstr "중요한 기간"
 
 #: include/variables.php:71
 msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
-msgstr "지금부터 과거까지. 행 색상에 영향을 미치며 이전 이벤트는 강조 표시되지 않고 표시만 됩니다."
+msgstr "지금부터 과거까지. 행 색상에 영향을 미치며 이전 이벤트는 강조 표시되지 않고 "
+"표시만 됩니다"
 
 #: include/variables.php:74 panellib/graphs.php:355 panellib/graphs.php:533
 #: panellib/mactrack.php:111 panellib/poller.php:143 panellib/poller.php:348
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "비활성화"
+msgstr "비활성화됨"
 
 #: include/variables.php:75
 msgid "15 minutes"
@@ -600,18 +545,16 @@ msgid "1 hour"
 msgstr "1시간"
 
 #: include/variables.php:77
-#, fuzzy
 msgid "4 hours"
-msgstr "시간"
+msgstr "4시간"
 
 #: include/variables.php:78
 msgid "1 day"
 msgstr "1일"
 
 #: include/variables.php:83
-#, fuzzy
 msgid "Number of panel lines"
-msgstr "확인 횟수:"
+msgstr "패널 줄 수"
 
 #: include/variables.php:84
 msgid "How many lines in panel"
@@ -620,26 +563,24 @@ msgstr "패널의 줄 수"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d 라인"
+msgstr "%d 개 라인"
 
 #: include/variables.php:94
-#, fuzzy
 msgid "Trend Timespan"
-msgstr "동향 "
+msgstr "추세 기간"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
 msgstr "추세 차트의 경우 해당 차트의 기본 시간 범위는 얼마여야 합니다."
 
 #: include/variables.php:101
-#, fuzzy
 msgid "Poller Timeout"
-msgstr "폴러 정보"
+msgstr "폴러 시간 초과"
 
 #: include/variables.php:102
-#, fuzzy
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
-msgstr "Intropage 백그라운드 폴러가 Cacti에 의해 중단 및 종료되기 전에 실행할 수 있는 시간(분)입니다."
+msgstr "Cacti에 의해 중단 및 종료되기 전에 Intropage 백그라운드 폴러가 실행될 수 "
+"있는 시간(분)입니다."
 
 #: include/variables.php:106 setup.php:99
 #, php-format
@@ -661,25 +602,23 @@ msgid "%d Hour"
 msgstr "%d 시간"
 
 #: include/variables.php:117
-#, fuzzy
 msgid "Analyze Log - number of lines"
-msgstr "분석 로그 - 라인 수"
+msgstr "로그 분석 - 줄 수"
 
 #: include/variables.php:118
-#, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
-msgstr "분석 할 로그의 줄 수. 큰 숫자로 인해 페이지로드가 느려질 수 있습니다."
+msgstr ""
+"분석할 로그 줄 수입니다. 패널에서는 지정한 줄 수, 상세 보기에서는 2배의 줄 "
+"수를 표시합니다. 큰 값을 설정하면 페이지 로딩이 느려질 수 있습니다."
 
 #: include/variables.php:124
-#, fuzzy
 msgid "How often analyze DB"
 msgstr "DB 분석 빈도"
 
 #: include/variables.php:125 include/variables.php:158
 #: include/variables.php:176
-#, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
-msgstr "Poller는이 작업을 실행합니다. 긴 폴러가 발생할 수 있습니다."
+msgstr "폴러가 이 작업을 실행합니다. 폴러 실행 시간이 길어질 수 있습니다."
 
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
@@ -695,14 +634,16 @@ msgid "Every Month"
 msgstr "매월"
 
 #: include/variables.php:137
-#, fuzzy
 msgid "Analyze DB - Level of db check"
-msgstr "DB 분석 - db 체크의 레벨"
+msgstr "DB 분석 - DB 확인 수준"
 
 #: include/variables.php:138
-#, fuzzy
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
-msgstr "Quick - No 인보험 링크 행 확인 <br/> 빠른 닫힘 - 테이블이 제대로 닫히지 않음 <br/> 변경됨 - 마지막 검사에서 변경된 검사 테이블 <br/> 중간 - 행 스캔 있음 <br/> 확장 - 전체 행과 키 <br/> <strong>보통 및 확장으로 인해 페이지로드가 느려질 수 있습니다!</strong>"
+msgstr ""
+"Quick - 잘못된 링크에 대한 행 검사 안 함<br/>Fast - 제대로 닫히지 않은 "
+"테이블만 검사<br/>Changed - 마지막 검사 이후 변경된 테이블 검사<br/>Medium - "
+"행 스캔 포함<br/>Extended - 전체 행 및 키 검사<br/>Medium 및 Extended 옵션은 "
+"페이지 로드를 느리게 할 수 있습니다!"
 
 #: include/variables.php:141
 msgid "Quick"
@@ -714,7 +655,7 @@ msgstr "빠른"
 
 #: include/variables.php:143
 msgid "Changed"
-msgstr "변경 됨"
+msgstr "변경됨"
 
 #: include/variables.php:144
 msgid "Medium"
@@ -725,43 +666,37 @@ msgid "Extended"
 msgstr "확장"
 
 #: include/variables.php:150
-#, fuzzy
 msgid "NTP Time Check - IP or DNS name of NTP server"
-msgstr "NTP (시간) 확인 - NTP 서버의 IP 또는 DNS 이름"
+msgstr "NTP 시간 확인 - NTP 서버의 IP 또는 DNS 이름"
 
 #: include/variables.php:151
-#, fuzzy
 msgid "Insert IP or DNS name of NTP server"
-msgstr "NTP 서버의 IP 또는 DNS 이름 삽입"
+msgstr "NTP 서버의 IP 또는 DNS 이름 입력"
 
 #: include/variables.php:157
-#, fuzzy
 msgid "How often check NTP"
-msgstr "얼마나 자주 NTP 확인"
+msgstr "NTP 확인 빈도"
 
 #: include/variables.php:168
 msgid "DNS Check - Any DNS name"
 msgstr "DNS 확인 - 모든 DNS 이름"
 
 #: include/variables.php:169
-#, fuzzy
 msgid "Insert DNS name for test"
-msgstr "NTP 서버의 IP 또는 DNS 이름 삽입"
+msgstr "테스트할 DNS 이름 입력"
 
 #: include/variables.php:175
-#, fuzzy
 msgid "How often check DNS"
-msgstr "얼마나 자주 NTP 확인"
+msgstr "DNS 확인 빈도"
 
 #: include/variables.php:186
-#, fuzzy
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "유지 보수 작업, 장치 다운, 관리 정보에 관한 관리자 정보 패널"
+msgstr "유지보수 작업, 다운된 장치 등에 대한 관리자 정보 패널"
 
 #: include/variables.php:187
-#, fuzzy
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
-msgstr "비어 있지 않으면 패널이 맨 위에 표시됩니다. html 태그 (b, i, ...)를 사용할 수 있습니다."
+msgstr "비어 있지 않으면 패널이 맨 위에 표시됩니다. HTML 태그(b, i, ...)를 사용할 수 "
+"있습니다."
 
 #: include/variables.php:195
 msgid "Upcoming Maint Schedule warning days"
@@ -772,24 +707,22 @@ msgid "How many days before a scheduled maintenance schedule should a warning be
 msgstr "예약된 유지 관리 일정이 시작되기 며칠 전에 경고를 표시해야 합니까?"
 
 #: include/variables.php:199
-#, fuzzy
 msgid "Never warn"
-msgstr "실행 안 함"
+msgstr "경고 안 함"
 
 #: include/variables.php:200
-#, fuzzy
 msgid "When maintenance starts"
-msgstr "정비가 시작되면"
+msgstr "유지보수 시작 시"
 
 #: include/variables.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%d Day Before"
-msgstr "% d 일 전"
+msgstr "%d일 전"
 
 #: include/variables.php:202 include/variables.php:203
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days Before"
-msgstr "% d 일 전"
+msgstr "%d일 전"
 
 #: include/variables.php:208
 msgid "Network stats in"
@@ -808,14 +741,12 @@ msgid "Bits"
 msgstr "비트"
 
 #: include/variables.php:218
-#, fuzzy
 msgid "Alarm Settings"
-msgstr "화면 설정"
+msgstr "알람 설정"
 
 #: include/variables.php:222
-#, fuzzy
 msgid "Alarm DB check Aborted Clients"
-msgstr "알람 DB 확인 중단된 클라이언트"
+msgstr "DB 확인 중단된 클라이언트 알람"
 
 #: include/variables.php:223 include/variables.php:230
 #: include/variables.php:237 include/variables.php:244
@@ -828,68 +759,56 @@ msgid "If this event has occurred, trigger the selected Normal, Warning, or Aler
 msgstr "이 이벤트가 발생한 경우 선택한 정상, 경고 또는 경고 상태 색상을 트리거합니다."
 
 #: include/variables.php:229
-#, fuzzy
 msgid "Alarm Host with the same Description"
-msgstr "같은 설명이있는 기기 :  %s"
+msgstr "경고: 동일한 설명을 가진 호스트"
 
 #: include/variables.php:236
-#, fuzzy
 msgid "Alarm Orphaned Data Source"
-msgstr "고아 데이터 원본 :  %s"
+msgstr "경고: 고아 데이터 소스"
 
 #: include/variables.php:243
-#, fuzzy
 msgid "Alarm non-empty Poller Output"
 msgstr "비어 있지 않은 폴러 출력 알람"
 
 #: include/variables.php:250
-#, fuzzy
 msgid "Alarm Bad indexes Data Source"
-msgstr "알람 불량 인덱스 데이터 소스"
+msgstr "잘못된 인덱스 데이터 소스 알람"
 
 #: include/variables.php:257
-#, fuzzy
 msgid "Alarm Threshold logonly action"
-msgstr "경보 Theshold logonly 작업"
+msgstr "임계값 logonly 작업 알람"
 
 #: include/variables.php:264
 msgid "Alarm when device bulk_walk_size is not optimized"
 msgstr "장치 bulk_walk_size이 최적화되지 않은 경우 경보"
 
 #: include/variables.php:271
-#, fuzzy
 msgid "Alarm Devices with the same IP/port"
-msgstr "같은 IP 및 포트를 가진 장치 :  %s"
+msgstr "경고: 동일한 IP/포트를 사용하는 장치"
 
 #: include/variables.php:278
-#, fuzzy
 msgid "Alarm Device in more than one Tree"
-msgstr "두 개 이상의 트리에있는 장치 :  %s"
+msgstr "경고: 둘 이상의 트리에 포함된 장치"
 
 #: include/variables.php:285
-#, fuzzy
 msgid "Alarm Device without a Tree"
-msgstr "두 개 이상의 트리에있는 장치 :  %s"
+msgstr "경고: 트리에 속하지 않은 장치"
 
 #: include/variables.php:292
-#, fuzzy
 msgid "Alarm Device with Default public/private SNMP Community"
-msgstr "기본 공개 / 비공개 커뮤니티가있는 호스트 :  %s"
+msgstr "경고: 기본 public/private SNMP 커뮤니티를 사용하는 장치"
 
 #: include/variables.php:299
-#, fuzzy
 msgid "Alarm Device without Monitoring"
-msgstr "같은 IP 및 포트를 가진 장치 :  %s"
+msgstr "경고: 모니터링이 없는 장치"
 
 #: include/variables.php:306
-#, fuzzy
 msgid "Alarm Device without Graph"
-msgstr "같은 IP 및 포트를 가진 장치 :  %s"
+msgstr "경고: 그래프가 없는 장치"
 
 #: include/variables.php:313
-#, fuzzy
 msgid "Alarm Red/Yellow Polling Time"
-msgstr "패널 탑 5 최악의 폴링 시간 허용"
+msgstr "폴링 시간 빨간색/노란색 알람"
 
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
@@ -900,28 +819,24 @@ msgid "5s  / 10s Yellow / Red"
 msgstr "5초 / 10초 옐로우 / 레드"
 
 #: include/variables.php:319
-#, fuzzy
 msgid "10s / 20s Yellow / Red"
-msgstr "40대/20대 레드/옐로우"
+msgstr "10초 / 20초 노랑 / 빨강"
 
 #: include/variables.php:320
-#, fuzzy
 msgid "20s / 40s Yellow / Red"
-msgstr "20s/10s 레드/옐로우"
+msgstr "20초 / 40초 노란색 / 빨간색"
 
 #: include/variables.php:324
-#, fuzzy
 msgid "Alarm Red/Yellow Failed/All Ratio"
-msgstr "경보 빨간색/황색 실패/모든 비율"
+msgstr "실패/전체 비율 빨간색/노란색 알람"
 
 #: include/variables.php:325
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr "실패한 가용성 검사와 성공한 검사의 비율로, 경고 또는 경고 상태 색으로 트리거됩니다."
 
 #: include/variables.php:329
-#, fuzzy
 msgid "0.1 / 0.2 Yellow / Red"
-msgstr "0.1/0.2 빨강/황색"
+msgstr "0.1 / 0.2 노랑 / 빨강"
 
 #: include/variables.php:330
 msgid "0.2 / 0.4 Yellow / Red"
@@ -932,9 +847,8 @@ msgid "0.5 / 0.5++ Yellow / Red"
 msgstr "0.5 / 0.5++ 옐로우 / 레드"
 
 #: include/variables.php:335
-#, fuzzy
 msgid "Alarm Red/Yellow Ping"
-msgstr "알람 빨간색/노란색 핑"
+msgstr "핑 빨간색/노란색 알람"
 
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
@@ -949,14 +863,12 @@ msgid "20ms  / 50ms Yellow / Red"
 msgstr "20ms / 50ms 옐로우 / 레드"
 
 #: include/variables.php:342
-#, fuzzy
 msgid "100ms / 200+ms Yellow / Red"
-msgstr "100/200+ms 빨간색/노란색"
+msgstr "100ms / 200+ms 노랑 / 빨강"
 
 #: include/variables.php:346
-#, fuzzy
 msgid "Alarm Red/Yellow Worst Availability"
-msgstr "Top5 최악의 가용성"
+msgstr "최저 가용성 빨간색/노란색 알람"
 
 #: include/variables.php:347
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
@@ -976,9 +888,8 @@ msgid "Panels that provide alerting."
 msgstr "경고를 제공하는 패널입니다."
 
 #: panellib/alert.php:37 panellib/alert.php:205
-#, fuzzy
 msgid "Host alerts"
-msgstr "호스트명"
+msgstr "호스트 경고"
 
 #: panellib/alert.php:38
 msgid "Host alerts (up/down/recovering) in last 30 minutes"
@@ -1011,7 +922,6 @@ msgstr "더 많은 레코드, 세부 정보 창 사용"
 #: panellib/system.php:191 panellib/system.php:592 panellib/thold.php:309
 #: panellib/top5.php:178 panellib/top5.php:258 panellib/top5.php:338
 #: panellib/top5.php:423
-#, fuzzy
 msgid "Waiting for data"
 msgstr "데이터 대기 중"
 
@@ -1020,69 +930,58 @@ msgstr "데이터 대기 중"
 #: panellib/graphs.php:374 panellib/top5.php:181 panellib/top5.php:261
 #: panellib/top5.php:341 panellib/top5.php:426 panellib/top5.php:508
 #: panellib/top5.php:589 panellib/top5.php:669 panellib/top5.php:755
-#, fuzzy
 msgid "You don't have permissions to any hosts"
-msgstr "권한이 없습니다."
+msgstr "호스트에 대한 권한이 없습니다"
 
 #: panellib/analyze.php:31
-#, fuzzy
 msgid "Analysis Panels"
-msgstr "패널 활성화 / 비활성화"
+msgstr "분석 패널"
 
 #: panellib/analyze.php:32
-#, fuzzy
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
 msgstr "Cacti 및 플러그인의 현재 동작을 분석하는 패널입니다."
 
 #: panellib/analyze.php:37
-#, fuzzy
 msgid "Analyze Logins"
-msgstr "패널 분석 로그인 허용"
+msgstr "로그인 분석"
 
 #: panellib/analyze.php:38
-#, fuzzy
 msgid "Analyze the last several Cacti logins for trends and errors."
-msgstr "추세와 오류에 대해 최근 몇 번의 Cacti 로그인을 분석합니다."
+msgstr "추세 및 오류에 대해 최근 여러 Cacti 로그인을 분석합니다."
 
 #: panellib/analyze.php:53
-#, fuzzy
 msgid "Analyze Logs"
-msgstr "선인장 로그 분석"
+msgstr "로그 분석"
 
 #: panellib/analyze.php:54
-#, fuzzy
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
-msgstr "Cacti의 로그 파일에서 우려할 만한 일반적인 오류를 찾으십시오."
+msgstr "Cacti 로그 파일에서 주의가 필요한 일반적인 오류를 찾습니다."
 
 #: panellib/analyze.php:69
-#, fuzzy
 msgid "Database Checks"
 msgstr "데이터베이스 검사"
 
 #: panellib/analyze.php:70
-#, fuzzy
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
-msgstr "일반적인 오류에 대해 MySQL/MariaDB 데이터베이스를 분석합니다. 이 프로세스는 초대형 시스템에서 오랜 시간이 걸릴 수 있습니다."
+msgstr ""
+"일반적인 오류에 대해 MySQL/MariaDB 데이터베이스를 분석합니다. 매우 큰 "
+"시스템에서는 이 프로세스에 오랜 시간이 걸릴 수 있습니다."
 
 #: panellib/analyze.php:85
-#, fuzzy
 msgid "Analyze Cacti Objects"
-msgstr "선인장 로그 분석"
+msgstr "Cacti 개체 분석"
 
 #: panellib/analyze.php:86
-#, fuzzy
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "트리, 그래프, 호스트 등을 분석합니다."
+msgstr "트리, 그래프, 호스트 등 분석..."
 
 #: panellib/analyze.php:101
-#, fuzzy
 msgid "Analyze DS stats"
-msgstr "패널 분석 데이터베이스 허용"
+msgstr "데이터 소스 통계 분석"
 
 #: panellib/analyze.php:102
-#, fuzzy
 msgid "Analyze data source stats"
-msgstr "패널 분석 데이터베이스 허용"
+msgstr "데이터 소스 통계 분석"
 
 #: panellib/analyze.php:155
 msgid "Username"
@@ -1103,87 +1002,75 @@ msgid "Failed"
 msgstr "실패"
 
 #: panellib/analyze.php:174 panellib/analyze.php:1287
-#, fuzzy
 msgid "Success - Login"
 msgstr "성공 - 로그인"
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
-#, fuzzy
 msgid "Success - Token"
-msgstr "성공 - 토큰"
+msgstr "성공 토큰"
 
 #: panellib/analyze.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Total Failed Logins: %s"
-msgstr "로그인 실패"
+msgstr "총 로그인 실패 횟수: %s"
 
 #: panellib/analyze.php:224
 msgid "None"
 msgstr "없음"
 
 #: panellib/analyze.php:227
-#, fuzzy
 msgid "Active Users in Last Hour: "
-msgstr "지난 1시간 동안의 활성 사용자:"
+msgstr "지난 1시간 동안의 활성 사용자: "
 
 #: panellib/analyze.php:264 panellib/analyze.php:1107
-#, fuzzy
 msgid "Log file not accessible or empty"
-msgstr "로그 파일에 액세스 할 수 없거나 비어 있습니다."
+msgstr "로그 파일에 액세스할 수 없거나 비어 있습니다"
 
 #: panellib/analyze.php:284
-#, fuzzy, php-format
+#, php-format
 msgid "Analyze last %s log lines:"
-msgstr "로그인 실패"
+msgstr "최근 %s개 로그 줄 분석:"
 
 #: panellib/analyze.php:286
-#, fuzzy
 msgid "Errors: "
-msgstr "오류"
+msgstr "오류: "
 
 #: panellib/analyze.php:291
-#, fuzzy
 msgid "Warnings: "
-msgstr "경고"
+msgstr "경고: "
 
 #: panellib/analyze.php:298
-#, fuzzy
 msgid "Log Size: Larger than 2GB"
-msgstr "파일이 2GB보다 큽니다."
+msgstr "로그 크기: 2GB 초과"
 
 #: panellib/analyze.php:302 panellib/analyze.php:1141
-#, fuzzy
 msgid "Log Size: OK"
-msgstr "로그 크기 OK"
+msgstr "로그 크기: 정상"
 
 #: panellib/analyze.php:306 panellib/analyze.php:1145
-#, fuzzy
 msgid "Log Size: Quite Large"
-msgstr "로그 크기가 매우 큽니다."
+msgstr "로그 크기: 매우 큼"
 
 #: panellib/analyze.php:309
-#, fuzzy
 msgid "Log Size: "
-msgstr "로그 크기"
+msgstr "로그 크기: "
 
 #: panellib/analyze.php:316
-#, fuzzy
 msgid "Last log lines:"
-msgstr "최근 10 번의 로그인"
+msgstr "마지막 로그 줄:"
 
 #: panellib/analyze.php:423
 msgid "Skipping DB tables checks. Database too large"
 msgstr "DB 테이블 검사를 건너뜁니다. 데이터베이스가 너무 큼"
 
 #: panellib/analyze.php:437
-#, fuzzy, php-format
+#, php-format
 msgid "Table %s status %s"
 msgstr "테이블 %s 상태 %s"
 
 #: panellib/analyze.php:444
-#, fuzzy
 msgid "DB: Problems"
-msgstr "DB 문제"
+msgstr "DB: 문제"
 
 #: panellib/analyze.php:453
 msgid "DB: OK"
@@ -1196,45 +1083,45 @@ msgstr "최대 연결 도달: %s/%s"
 
 #: panellib/analyze.php:478
 msgid "You can increase Max connection via command line tools or permanently in config file"
-msgstr "명령줄 도구를 통해 또는 구성 파일에서 영구적으로 최대 연결을 늘릴 수 있습니다."
+msgstr "명령줄 도구를 통해 또는 구성 파일에서 영구적으로 최대 연결을 늘릴 수 있습니다"
 
 #: panellib/analyze.php:499
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
-msgstr "연결 오류 - SQL 서비스를 다시 시작하십시오."
+msgstr "연결 오류: %s - SQL 서비스를 다시 시작하고 SQL 로그를 확인하세요..."
 
 #: panellib/analyze.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "중단된 클라이언트/연결: %s - 로그를 확인합니다."
+msgstr "중단된 클라이언트/연결: %s"
 
 #: panellib/analyze.php:519
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
 msgstr "중단된 클라이언트/연결 - 'SET GLOBAL log_warnings = 1;' 또는 ' log_error_verbosity = 1;'을 실행합니다. (MySQL/MariaDB 버전에 따라 다름) mysql CLI에서 server.cnf로 설정하여 silence 합니다."
 
 #: panellib/analyze.php:523
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s"
-msgstr "연결 오류 :  %s"
+msgstr "연결 오류: %s"
 
 #: panellib/analyze.php:524
-#, fuzzy, php-format
+#, php-format
 msgid "Damaged tables: %s"
-msgstr "손상된 테이블 :  %s"
+msgstr "손상된 테이블: %s"
 
 #: panellib/analyze.php:527
 msgid "You should run check and repair table commands"
-msgstr "check 및 repair table 명령을 실행해야 합니다."
+msgstr "check 및 repair table 명령을 실행해야 합니다"
 
 #: panellib/analyze.php:531
-#, fuzzy, php-format
+#, php-format
 msgid "Memory tables: %s"
-msgstr "메모리 테이블 :  %s"
+msgstr "메모리 테이블: %s"
 
 #: panellib/analyze.php:532
-#, fuzzy, php-format
+#, php-format
 msgid "All tables: %s"
-msgstr "모든 테이블 :  %s"
+msgstr "모든 테이블: %s"
 
 #: panellib/analyze.php:571 panellib/analyze.php:678 panellib/analyze.php:711
 #: panellib/analyze.php:763 panellib/analyze.php:792 panellib/analyze.php:823
@@ -1250,9 +1137,9 @@ msgid "N/A"
 msgstr "N/A"
 
 #: panellib/analyze.php:584
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port: %s"
-msgstr "같은 IP 및 포트를 가진 장치 :  %s"
+msgstr "동일한 IP 및 포트를 사용하는 장치: %s"
 
 #: panellib/analyze.php:613
 #, php-format
@@ -1291,59 +1178,58 @@ msgid "%s: not run yet"
 msgstr "%s: 아직 실행되지 않음"
 
 #: panellib/analyze.php:691
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources: %s"
-msgstr "고아 데이터 원본 :  %s"
+msgstr "고아 데이터 소스: %s"
 
 #: panellib/analyze.php:722
-#, fuzzy, php-format
+#, php-format
 msgid "Datasource - bad indexes: %s"
-msgstr "데이터 소스 - 잘못된 색인 :  %s"
+msgstr "데이터 소스 - 잘못된 인덱스: %s"
 
 #: panellib/analyze.php:774
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "보류 로그 전용 경고/경고: %s"
+msgstr "Thold 로그 전용 경보/경고: %s"
 
 #: panellib/analyze.php:805
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description: %s"
-msgstr "같은 설명이있는 기기 :  %s"
+msgstr "동일한 설명이 있는 장치: %s"
 
 #: panellib/analyze.php:834
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree: %s"
-msgstr "두 개 이상의 트리에있는 장치 :  %s"
+msgstr "두 개 이상의 트리에 있는 장치: %s"
 
 #: panellib/analyze.php:864
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without graphs: %s"
-msgstr "그래프가없는 호스트 :  %s"
+msgstr "그래프가 없는 장치: %s"
 
 #: panellib/analyze.php:893
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree: %s"
-msgstr "트리가없는 호스트 :  %s"
+msgstr "트리가 없는 장치: %s"
 
 #: panellib/analyze.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community: %s"
-msgstr "기본 공개 / 비공개 커뮤니티가있는 호스트 :  %s"
+msgstr "기본 public/private 커뮤니티가 설정된 장치: %s"
 
 #: panellib/analyze.php:947
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "플러그인 모니터 - 모니터링되지 않는 호스트 :  %s"
+msgstr "플러그인 Monitor - 모니터링되지 않는 호스트: %s"
 
 #: panellib/analyze.php:955 panellib/analyze.php:1862
-#, fuzzy, php-format
+#, php-format
 msgid "Found %s problems"
-msgstr "%s 문제 발견"
+msgstr "%s개의 문제를 발견했습니다"
 
 #: panellib/analyze.php:961 panellib/analyze.php:1864
-#, fuzzy
 msgid "Everything OK"
-msgstr "전부 괜찮아"
+msgstr "모두 정상"
 
 #: panellib/analyze.php:977
 msgid "DS stats: "
@@ -1366,9 +1252,8 @@ msgid "DS null records "
 msgstr "DS null 레코드 "
 
 #: panellib/analyze.php:1090
-#, fuzzy
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
-msgstr "선인장 로그 세부 정보 분석 [ 경고/오류 ]"
+msgstr "Cacti 로그 세부 정보 분석 [ 경고/오류 ]"
 
 #: panellib/analyze.php:1127
 msgid "Errors"
@@ -1379,19 +1264,16 @@ msgid "Warnings"
 msgstr "경고"
 
 #: panellib/analyze.php:1137
-#, fuzzy
 msgid "WARNING: File is Larger than 2GB"
-msgstr "파일이 2GB보다 큽니다."
+msgstr "경고: 파일이 2GB보다 큽니다"
 
 #: panellib/analyze.php:1148
-#, fuzzy
 msgid "Log Size"
 msgstr "로그 크기"
 
 #: panellib/analyze.php:1254
-#, fuzzy
 msgid "Analyze Logins Detail"
-msgstr "분석 로그 - 라인 수"
+msgstr "로그인 상세 분석"
 
 #: panellib/analyze.php:1272
 msgid "User"
@@ -1403,29 +1285,25 @@ msgid "Result"
 msgstr "결과"
 
 #: panellib/analyze.php:1314
-#, fuzzy
 msgid "Active Users in Last 2 Hours:"
 msgstr "지난 2시간 동안의 활성 사용자:"
 
 #: panellib/analyze.php:1325
-#, fuzzy
 msgid "No Active Users"
-msgstr "온라인 사용자"
+msgstr "활성 사용자 없음"
 
 #: panellib/analyze.php:1331
-#, fuzzy
 msgid "View Full User Log"
 msgstr "전체 사용자 로그 보기"
 
 #: panellib/analyze.php:1363
-#, fuzzy
 msgid "Analyze Tree, Graphs, Hosts"
-msgstr "트리 / 호스트 / 그래프 분석"
+msgstr "트리, 그래프, 호스트 분석"
 
 #: panellib/analyze.php:1386
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port - %s"
-msgstr "같은 IP 및 포트  %s를 사용하는 장치"
+msgstr "동일한 IP 및 포트를 사용하는 장치 - %s"
 
 #: panellib/analyze.php:1428
 #, php-format
@@ -1433,54 +1311,53 @@ msgid "Not optimized Bulk Walk Size devices - %s"
 msgstr "최적화되지 않은 Bulk Walk Size 디바이스 - %s"
 
 #: panellib/analyze.php:1484
-#, fuzzy
 msgid "Data maintenance"
-msgstr "정비가 시작되면"
+msgstr "데이터 유지 관리"
 
 #: panellib/analyze.php:1519
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources - %s"
-msgstr "고아 데이터 원본  %s"
+msgstr "고아 데이터 소스 - %s"
 
 #: panellib/analyze.php:1559
-#, fuzzy, php-format
+#, php-format
 msgid "Datasources with bad indexes - %s"
-msgstr "데이터 소스 - 잘못된 인덱스  %s :"
+msgstr "잘못된 인덱스가 있는 데이터 소스 - %s"
 
 #: panellib/analyze.php:1612
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s"
-msgstr "보류 로그 전용 경고/경고 - %s:"
+msgstr "Thold 로그 전용 경보/경고 - %s"
 
 #: panellib/analyze.php:1649
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description - %s"
-msgstr "동일한 설명이있는 장치  %s"
+msgstr "동일한 설명이 있는 장치 - %s"
 
 #: panellib/analyze.php:1692
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree - %s"
-msgstr "두 개 이상의 트리  %s 장치"
+msgstr "두 개 이상의 트리에 있는 장치 - %s"
 
 #: panellib/analyze.php:1748
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without Graphs - %s"
-msgstr "그래프가없는 호스트  %s"
+msgstr "그래프가 없는 장치 - %s"
 
 #: panellib/analyze.php:1781
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree - %s"
-msgstr "트리가없는 호스트  %s"
+msgstr "트리가 없는 장치 - %s"
 
 #: panellib/analyze.php:1813
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community - %s"
-msgstr "기본 공개 / 비공개 커뮤니티  %s이 (가)있는 호스트"
+msgstr "기본 public/private 커뮤니티가 설정된 장치 - %s"
 
 #: panellib/analyze.php:1845
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts - %s"
-msgstr "플러그인 모니터 - 모니터링되지 않은 호스트  %s"
+msgstr "플러그인 Monitor - 모니터링되지 않는 호스트 - %s"
 
 #: panellib/busiest.php:31
 msgid "The busiest"
@@ -1495,18 +1372,16 @@ msgid "Busiest CPU"
 msgstr "가장 바쁜 CPU"
 
 #: panellib/busiest.php:38
-#, fuzzy
 msgid "Devices with the busiest CPU (Host MIB)"
-msgstr "같은 IP 및 포트를 가진 장치 :  %s"
+msgstr "CPU 사용률이 가장 높은 장치 (Host MIB)"
 
 #: panellib/busiest.php:53
 msgid "Busiest ucd/net - Load"
 msgstr "가장 바쁜 ucd/net - 로드"
 
 #: panellib/busiest.php:54
-#, fuzzy
 msgid "Devices with the highest Load (ucd/net)"
-msgstr "같은 설명이있는 기기 :  %s"
+msgstr "부하가 가장 높은 장치 (ucd/net)"
 
 #: panellib/busiest.php:69
 msgid "Busiest Hard Drive Space"
@@ -1521,18 +1396,16 @@ msgid "Busiest uptime"
 msgstr "가장 바쁜 가동 시간"
 
 #: panellib/busiest.php:86
-#, fuzzy
 msgid "Devices with the highest uptime"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "가동 시간이 가장 긴 장치"
 
 #: panellib/busiest.php:101
 msgid "Busiest Interface in/out traffic"
 msgstr "가장 바쁜 인터페이스 인/아웃 트래픽"
 
 #: panellib/busiest.php:102
-#, fuzzy
 msgid "Devices with the highest in/out traffic (Interface)"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "인/아웃 트래픽이 가장 높은 장치 (인터페이스)"
 
 #: panellib/busiest.php:117
 msgid "Busiest Interface error"
@@ -1556,7 +1429,7 @@ msgstr "인터페이스 사용률이 가장 높은 포트"
 #: panellib/busiest.php:1237 panellib/busiest.php:1451
 #: panellib/busiest.php:1593 panellib/busiest.php:1716
 msgid "Please enable and configure DS stats"
-msgstr "DS 통계를 활성화하고 구성하십시오."
+msgstr "DS 통계를 활성화하고 구성하십시오"
 
 #: panellib/busiest.php:170 panellib/busiest.php:290 panellib/busiest.php:401
 #: panellib/busiest.php:621 panellib/busiest.php:756 panellib/busiest.php:876
@@ -1601,9 +1474,8 @@ msgstr "데이터를 기다리는 중이거나 이 템플릿이 있는 장치에
 #: panellib/busiest.php:1097 panellib/busiest.php:1213
 #: panellib/busiest.php:1354 panellib/busiest.php:1570
 #: panellib/busiest.php:1692 panellib/busiest.php:1820
-#, fuzzy
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
-msgstr "권한이 없습니다."
+msgstr "호스트에 대한 권한이 없거나 이 템플릿을 사용하는 호스트가 없습니다"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
@@ -1614,9 +1486,8 @@ msgid "Average of all allowed hosts"
 msgstr "허용된 모든 호스트의 평균"
 
 #: panellib/busiest.php:592 panellib/busiest.php:1424
-#, fuzzy
 msgid "Waiting for data or you don't have permission for any device"
-msgstr "권한이 없습니다."
+msgstr "데이터를 기다리고 있거나 장치에 대한 권한이 없습니다"
 
 #: panellib/busiest.php:933 panellib/busiest.php:1773
 msgid "Direction"
@@ -1652,58 +1523,48 @@ msgid "Busiest interface utilization"
 msgstr "가장 바쁜 인터페이스 사용률"
 
 #: panellib/graphs.php:31
-#, fuzzy
 msgid "Graphical Panels"
-msgstr "인트로 패널"
+msgstr "그래픽 패널"
 
 #: panellib/graphs.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
-msgstr "선인장과 플러그인에 대한 정보를 그래픽 방식으로 제공하는 패널입니다."
+msgstr "Cacti와 플러그인에 대한 정보를 그래픽 방식으로 제공하는 패널입니다."
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
 msgstr "데이터 원본"
 
 #: panellib/graphs.php:38
-#, fuzzy
 msgid "Graph of Data Sources"
-msgstr "패널 그래프 데이터 소스 허용"
+msgstr "데이터 소스 그래프"
 
 #: panellib/graphs.php:53 panellib/graphs.php:603
-#, fuzzy
 msgid "Device Templates"
 msgstr "장치 템플릿"
 
 #: panellib/graphs.php:54
-#, fuzzy
 msgid "Graph of Device Templates"
-msgstr "장치 템플릿"
+msgstr "장치 템플릿 그래프"
 
 #: panellib/graphs.php:69
-#, fuzzy
 msgid "Devices by Status"
-msgstr "장치 템플릿"
+msgstr "상태별 장치"
 
 #: panellib/graphs.php:70
-#, fuzzy
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr "상태별 장치 그래프(위, 아래,...)"
+msgstr "상태별 장치 그래프 (정상, 다운,...)"
 
 #: panellib/graphs.php:106
-#, fuzzy
 msgid "Datasources: "
-msgstr "데이터 소스:"
+msgstr "데이터 소스: "
 
 #: panellib/graphs.php:180 panellib/graphs.php:207
-#, fuzzy
 msgid "Device Templates: "
-msgstr "장치 템플릿"
+msgstr "장치 템플릿: "
 
 #: panellib/graphs.php:262
-#, fuzzy
 msgid "Devices: "
-msgstr "장치"
+msgstr "장치: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
@@ -1711,7 +1572,6 @@ msgstr "아래로"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
-#, fuzzy
 msgid "Recovering"
 msgstr "복구 중"
 
@@ -1725,18 +1585,16 @@ msgid "Total"
 msgstr "합계"
 
 #: panellib/graphs.php:445
-#, fuzzy
 msgid "No untemplated datasources found"
-msgstr "샘플링되지 않은 데이터 소스가 없습니다."
+msgstr "템플릿이 없는 데이터 소스를 찾을 수 없음"
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
 msgstr "장치"
 
 #: panellib/graphs.php:503
-#, fuzzy
 msgid "Device Count"
-msgstr "최대 장치 다운"
+msgstr "장치 수"
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
@@ -1751,64 +1609,55 @@ msgid "Template Name"
 msgstr "템플릿 이름"
 
 #: panellib/graphs.php:636
-#, fuzzy
 msgid "Total Devices"
-msgstr "장치"
+msgstr "전체 장치"
 
 #: panellib/graphs.php:656
-#, fuzzy
 msgid "No device templates found"
-msgstr "기기 템플릿이 없습니다."
+msgstr "장치 템플릿을 찾을 수 없음"
 
 #: panellib/mactrack.php:31
-#, fuzzy
 msgid "MacTrack Panels"
-msgstr "마이트 락 사이트"
+msgstr "MacTrack 패널"
 
 #: panellib/mactrack.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's MacTrack plugins."
 msgstr "Cacti의 MacTrack 플러그인에 대한 정보를 제공하는 패널입니다."
 
 #: panellib/mactrack.php:37
-#, fuzzy
 msgid "MacTrack Plugin"
-msgstr "패널 MacTrack 플러그인 허용"
+msgstr "MacTrack 플러그인"
 
 #: panellib/mactrack.php:38
-#, fuzzy
 msgid "Various MacTrack collection and site statistics."
-msgstr "다양한 MacTrack 수집 및 사이트 통계."
+msgstr "다양한 MacTrack 수집 및 사이트 통계입니다."
 
 #: panellib/mactrack.php:53 panellib/mactrack.php:184
-#, fuzzy
 msgid "MacTrack Sites"
-msgstr "마이트 락 사이트"
+msgstr "MacTrack 사이트"
 
 #: panellib/mactrack.php:54
-#, fuzzy
 msgid "Various MacTrack Site statistics."
-msgstr "다양한 MacTrack 사이트 통계."
+msgstr "다양한 MacTrack 사이트 통계입니다."
 
 #: panellib/mactrack.php:81 panellib/mactrack.php:134
-#, fuzzy
 msgid "MacTrack Plugin not Installed/Running"
-msgstr "Mactrack 플러그인이 설치되지 않았거나 실행 중입니다."
+msgstr "MacTrack 플러그인이 설치되지 않았거나 실행 중이 아닙니다"
 
 #: panellib/mactrack.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "All: %s"
-msgstr "전체 :  %s"
+msgstr "전체: %s"
 
 #: panellib/mactrack.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "Up: %s"
-msgstr "최대 :  %s"
+msgstr "정상: %s"
 
 #: panellib/mactrack.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Down: %s"
-msgstr "아래로 :  %s"
+msgstr "다운: %s"
 
 #: panellib/mactrack.php:100
 #, php-format
@@ -1816,19 +1665,18 @@ msgid "Error: %s"
 msgstr "오류: %s"
 
 #: panellib/mactrack.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown: %s"
-msgstr "알 수 없음 :  %s"
+msgstr "알 수 없음: %s"
 
 #: panellib/mactrack.php:102
-#, fuzzy, php-format
+#, php-format
 msgid "Disabled: %s"
-msgstr "사용 중지됨 :  %s"
+msgstr "비활성화됨: %s"
 
 #: panellib/mactrack.php:105
-#, fuzzy
 msgid "MacTrack"
-msgstr "막달레락"
+msgstr "MacTrack"
 
 #: panellib/mactrack.php:109 panellib/misc.php:411 panellib/misc.php:575
 msgid "Error"
@@ -1839,9 +1687,8 @@ msgid "Unknown"
 msgstr "알 수 없음"
 
 #: panellib/mactrack.php:118 panellib/mactrack.php:173 panellib/thold.php:312
-#, fuzzy
 msgid "You don't have plugin permission"
-msgstr "권한이 없습니다."
+msgstr "플러그인 권한이 없습니다"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
@@ -1856,124 +1703,104 @@ msgid "Ports"
 msgstr "포트"
 
 #: panellib/mactrack.php:142 panellib/mactrack.php:195
-#, fuzzy
 msgid "Ports up"
-msgstr "포트 업"
+msgstr "활성 포트"
 
 #: panellib/mactrack.php:143 panellib/mactrack.php:196
-#, fuzzy
 msgid "MACs"
-msgstr "맥"
+msgstr "MAC"
 
 #: panellib/mactrack.php:144 panellib/mactrack.php:197
-#, fuzzy
 msgid "Device Errors"
-msgstr "기기 오류"
+msgstr "장치 오류"
 
 #: panellib/mactrack.php:170 panellib/mactrack.php:225
-#, fuzzy
 msgid "No mactrack sites found"
-msgstr "mactrack 사이트가 없습니다."
+msgstr "mactrack 사이트를 찾을 수 없음"
 
 #: panellib/misc.php:31
-#, fuzzy
 msgid "Miscellaneous Panels"
 msgstr "기타 패널"
 
 #: panellib/misc.php:32
-#, fuzzy
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr "Cacti's에 대한 분류되지 않은 데이터를 일반화하는 패널."
+msgstr "Cacti에 대한 분류되지 않은 일반 데이터를 제공하는 패널입니다."
 
 #: panellib/misc.php:37
-#, fuzzy
 msgid "NTP/DNS Status"
-msgstr "NTP 상태"
+msgstr "NTP/DNS 상태"
 
 #: panellib/misc.php:38
-#, fuzzy
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
-msgstr "알려진 기준선에서 드리프트가 있는지 Cacti 시스템 시계를 확인합니다."
+msgstr "알려진 기준 시간 대비 Cacti 시스템 시계 오차 및 DNS 확인 점검"
 
 #: panellib/misc.php:53
-#, fuzzy
 msgid "Maint Plugin Details"
-msgstr "세부 정보 보이기"
+msgstr "Maint 플러그인 세부 정보"
 
 #: panellib/misc.php:54
-#, fuzzy
 msgid "Maint Plugin details on upcoming schedules"
-msgstr "향후 일정에 대한 Maint 플러그인 세부 정보"
+msgstr "예정된 일정에 대한 Maint 플러그인 세부 정보"
 
 #: panellib/misc.php:69
-#, fuzzy
 msgid "Webseer Details"
-msgstr "세부 정보 보이기"
+msgstr "Webseer 세부 정보"
 
 #: panellib/misc.php:70
-#, fuzzy
 msgid "Plugin webseer URL Service Check Details"
-msgstr "플러그인 웹시어 URL 서비스 확인 내용"
+msgstr "플러그인 WebSeer URL 서비스 확인 세부 정보"
 
 #: panellib/misc.php:85
-#, fuzzy
 msgid "Servcheck plugin Details"
-msgstr "Webseer 플러그인 - 세부 정보"
+msgstr "ServCheck 플러그인 세부 정보"
 
 #: panellib/misc.php:86
-#, fuzzy
 msgid "Plugin ServCheck Details"
-msgstr "플러그인 웹시어 URL 서비스 확인 내용"
+msgstr "플러그인 ServCheck 세부 정보"
 
 #: panellib/misc.php:117
-#, fuzzy
 msgid "No NTP server configured"
-msgstr "NTP 서버가 구성되지 않았습니다."
+msgstr "구성된 NTP 서버 없음"
 
 #: panellib/misc.php:120
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
-msgstr "NTP 서버가 구성되지 않았습니다."
+msgstr "잘못된 NTP 서버가 구성되었습니다 - %s<br/>설정에서 수정하세요"
 
 #: panellib/misc.php:136
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to get NTP time from %s"
-msgstr "$ ntp_server에서 NTP 시간을 가져 오는 데 실패했습니다."
+msgstr "%s에서 NTP 시간을 가져오지 못했습니다"
 
 #: panellib/misc.php:144
-#, fuzzy
 msgid "Please check time as it is off by more"
-msgstr "더 많이 떨어져 있으므로 시간을 확인하십시오"
+msgstr "시간 차이가 크므로 시간을 확인하십시오"
 
 #: panellib/misc.php:145
-#, fuzzy, php-format
+#, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr "NTP 서버 %s에서 %s초 이상."
+msgstr "%s초 이상 차이납니다 (NTP 서버 %s)."
 
 #: panellib/misc.php:147
-#, fuzzy
 msgid "Localtime is equal to NTP server"
-msgstr "현지 시간은 NTP 서버와 같습니다."
+msgstr "로컬 시간이 NTP 서버와 일치합니다"
 
 #: panellib/misc.php:151
-#, fuzzy
 msgid "Unable to contact the NTP server indicated."
-msgstr "표시된 NTP 서버에 접속할 수 없습니다. <br/> 구성을 확인하십시오. <br/>"
+msgstr "지정된 NTP 서버에 연결할 수 없습니다."
 
 #: panellib/misc.php:153 panellib/misc.php:178
-#, fuzzy
 msgid "Please check your configuration."
 msgstr "구성을 확인하십시오."
 
 #: panellib/misc.php:161
-#, fuzzy
 msgid "No DNS hostname configured"
-msgstr "NTP 서버가 구성되지 않았습니다."
+msgstr "구성된 DNS 호스트 이름 없음"
 
 #: panellib/misc.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
-msgstr "NTP 서버가 구성되지 않았습니다."
+msgstr "잘못된 DNS 호스트 이름이 구성되었습니다 - %s<br/>설정에서 수정하세요"
 
 #: panellib/misc.php:173
 #, php-format
@@ -1991,28 +1818,25 @@ msgid "DNS hostname (%s) resolving failed."
 msgstr "DNS 호스트 이름(%s)을 확인하지 못했습니다."
 
 #: panellib/misc.php:287
-#, fuzzy
 msgid "Maint plugin is not installed/enabled"
-msgstr "Mactrack 플러그인이 설치되지 않았거나 실행 중입니다."
+msgstr "Maint 플러그인이 설치되지 않았거나 활성화되지 않았습니다"
 
 #: panellib/misc.php:307
-#, fuzzy
 msgid "Plugin Webseer isn't installed or started"
-msgstr "플러그인 Thold가 설치 또는 시작되지 않았습니다."
+msgstr "플러그인 WebSeer가 설치되지 않았거나 시작되지 않았습니다."
 
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
-msgstr "Webseer 플러그인은 더 이상 지원되지 않으며 대신 플러그인 servcheck를 사용하십시오."
+msgstr "Webseer 플러그인은 더 이상 지원되지 않으며 대신 플러그인 servcheck를 "
+"사용하십시오"
 
 #: panellib/misc.php:320 panellib/misc.php:486
-#, fuzzy
 msgid "Number of checks (all/disabled): "
-msgstr "확인 횟수:"
+msgstr "확인 수 (전체/비활성화됨): "
 
 #: panellib/misc.php:321
-#, fuzzy
 msgid "Status (up/down): "
-msgstr "호스트"
+msgstr "상태 (정상/다운): "
 
 #: panellib/misc.php:335
 msgid "Last log messages"
@@ -2023,29 +1847,25 @@ msgid "URL"
 msgstr "URL"
 
 #: panellib/misc.php:338 panellib/misc.php:410
-#, fuzzy
 msgid "HTTP code"
 msgstr "HTTP 코드"
 
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "확인"
+msgstr "정상"
 
 #: panellib/misc.php:390
-#, fuzzy
 msgid "Webseer Plugin - Details"
 msgstr "Webseer 플러그인 - 세부 정보"
 
 #: panellib/misc.php:461
-#, fuzzy
 msgid "Plugin Servcheck isn't installed or started"
-msgstr "플러그인 Thold가 설치 또는 시작되지 않았습니다."
+msgstr "플러그인 ServCheck가 설치되지 않았거나 시작되지 않았습니다."
 
 #: panellib/misc.php:487
-#, fuzzy
 msgid "Status (ok/error): "
-msgstr "호스트"
+msgstr "상태 (정상/오류): "
 
 #: panellib/misc.php:498
 msgid "Last log records"
@@ -2060,44 +1880,36 @@ msgid "Type"
 msgstr "유형"
 
 #: panellib/misc.php:555
-#, fuzzy
 msgid "Servcheck Plugin - Details"
-msgstr "Webseer 플러그인 - 세부 정보"
+msgstr "ServCheck 플러그인 - 세부 정보"
 
 #: panellib/poller.php:31
-#, fuzzy
 msgid "Poller Panels"
-msgstr "패널 폴러 통계 허용"
+msgstr "폴러 패널"
 
 #: panellib/poller.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's polling process."
-msgstr "Cacti의 투표 프로세스에 대한 정보를 제공하는 패널."
+msgstr "Cacti의 폴링 프로세스에 대한 정보를 제공하는 패널입니다."
 
 #: panellib/poller.php:37
-#, fuzzy
 msgid "Poller Information"
 msgstr "폴러 정보"
 
 #: panellib/poller.php:38
-#, fuzzy
 msgid "Various information about your Cacti poller."
-msgstr "선인장 폴러에 대한 다양한 정보."
+msgstr "Cacti 폴러에 대한 다양한 정보입니다."
 
 #: panellib/poller.php:53
-#, fuzzy
 msgid "Poller Statistics"
-msgstr "패널 폴러 통계 허용"
+msgstr "폴러 통계"
 
 #: panellib/poller.php:54 panellib/poller.php:70
-#, fuzzy
 msgid "Various Cacti poller statistics."
-msgstr "다양한 선인장 폴러 통계."
+msgstr "다양한 Cacti 폴러 통계입니다."
 
 #: panellib/poller.php:69
-#, fuzzy
 msgid "Poller Output Items"
-msgstr "폴러 출력 항목 :  %s"
+msgstr "폴러 출력 항목"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -2112,7 +1924,6 @@ msgid "Total Time"
 msgstr "총 시간"
 
 #: panellib/poller.php:134 panellib/poller.php:340
-#, fuzzy
 msgid "New/Idle"
 msgstr "신규 / 유휴"
 
@@ -2125,24 +1936,21 @@ msgid "Idle"
 msgstr "게으른"
 
 #: panellib/poller.php:140 panellib/poller.php:346
-#, fuzzy
 msgid "Unkn/down"
-msgstr "Unkn / down"
+msgstr "알 수 없음/다운"
 
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
-#, fuzzy, php-format
+#, php-format
 msgid "%s Secs"
 msgstr "%s초"
 
 #: panellib/poller.php:171 panellib/poller.php:367
-#, fuzzy
 msgid "(ok)"
-msgstr "확인"
+msgstr "(정상)"
 
 #: panellib/poller.php:172 panellib/poller.php:367
-#, fuzzy
 msgid "(all)"
-msgstr "(모든)"
+msgstr "(전체)"
 
 #: panellib/poller.php:274
 msgid "ID: "
@@ -2153,47 +1961,40 @@ msgid "Seconds"
 msgstr "초"
 
 #: panellib/poller.php:297
-#, fuzzy
 msgid "Poller Details"
-msgstr "패널 폴러 통계 허용"
+msgstr "폴러 세부 정보"
 
 #: panellib/poller.php:308
 msgid "Average Time"
 msgstr "평균 시간"
 
 #: panellib/poller.php:309
-#, fuzzy
 msgid "Max Time"
 msgstr "최대 시간"
 
 #: panellib/poller.php:446
-#, fuzzy
 msgid "Poller output items "
-msgstr "폴러 출력 항목  %s :"
+msgstr "폴러 출력 항목 "
 
 #: panellib/poller.php:447
 msgid "Items"
 msgstr "아이템"
 
 #: panellib/syslog.php:31
-#, fuzzy
 msgid "Syslog Panels"
-msgstr "패널 다시로드"
+msgstr "Syslog 패널"
 
 #: panellib/syslog.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's Syslog message processing."
-msgstr "Cacti의 Syslog 메시지 처리에 대한 정보를 제공하는 패널."
+msgstr "Cacti의 Syslog 메시지 처리에 대한 정보를 제공하는 패널입니다."
 
 #: panellib/syslog.php:37
-#, fuzzy
 msgid "Syslog Details"
-msgstr "세부 정보 보이기"
+msgstr "Syslog 세부 정보"
 
 #: panellib/syslog.php:38
-#, fuzzy
 msgid "Various Syslog Plugin statistics."
-msgstr "다양한 Syslog 플러그인 통계."
+msgstr "다양한 Syslog 플러그인 통계입니다."
 
 #: panellib/syslog.php:171
 msgid "Incoming"
@@ -2208,76 +2009,62 @@ msgid "Messages"
 msgstr "메시지"
 
 #: panellib/syslog.php:197
-#, fuzzy
 msgid "Syslog plugin not installed/running"
-msgstr "Thold 플러그인이 설치되지 않았거나 실행 중이 아닙니다."
+msgstr "Syslog 플러그인이 설치되지 않았거나 실행 중이 아닙니다"
 
 #: panellib/system.php:31
-#, fuzzy
 msgid "System Panels"
-msgstr "인트로 패널"
+msgstr "시스템 패널"
 
 #: panellib/system.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti system performance."
-msgstr "Cacti 시스템 성능에 대한 정보를 제공하는 패널."
+msgstr "Cacti 시스템 성능에 대한 정보를 제공하는 패널입니다."
 
 #: panellib/system.php:37
 msgid "Information"
 msgstr "정보"
 
 #: panellib/system.php:38
-#, fuzzy
 msgid "Various system information about the Cacti system itself."
-msgstr "선인장 시스템 자체에 대한 다양한 시스템 정보."
+msgstr "Cacti 시스템 자체에 대한 다양한 시스템 정보입니다."
 
 #: panellib/system.php:53
-#, fuzzy
 msgid "Administrative Alerts"
-msgstr "관리 경고"
+msgstr "관리자 알림"
 
 #: panellib/system.php:54
-#, fuzzy
 msgid "Extra admin notify panel for all users"
 msgstr "모든 사용자를 위한 추가 관리자 알림 패널"
 
 #: panellib/system.php:69
-#, fuzzy
 msgid "Boost Statistics"
 msgstr "부스트 통계"
 
 #: panellib/system.php:70
-#, fuzzy
 msgid "Information about Cacti's performance boost process."
-msgstr "Cacti의 성능 향상 프로세스에 대한 정보입니다."
+msgstr "Cacti 성능 부스트 프로세스에 대한 정보입니다."
 
 #: panellib/system.php:85
-#, fuzzy
 msgid "24 Hour Extremes"
-msgstr "24 시간 극단적 인"
+msgstr "24시간 극값"
 
 #: panellib/system.php:86
-#, fuzzy
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
-msgstr "24시간 폴링 익스트림 테이블(가장 긴 폴러 실행, 호스트 다운)"
+msgstr "24시간 폴링 극값 테이블 (최장 폴러 실행, 다운된 호스트)"
 
 #: panellib/system.php:101
-#, fuzzy
 msgid "CPU Utilization"
 msgstr "CPU 사용률"
 
 #: panellib/system.php:102
-#, fuzzy
 msgid "CPU utilization Graph (only Linux)."
-msgstr "CPU 사용률"
+msgstr "CPU 사용률 그래프 (Linux 전용)."
 
 #: panellib/system.php:141
-#, fuzzy
 msgid "CPU Load: "
-msgstr "CPU로드 :"
+msgstr "CPU 부하: "
 
 #: panellib/system.php:165
-#, fuzzy
 msgid "This function is not implemented on Windows platforms"
 msgstr "이 기능은 Windows 플랫폼에 구현되어 있지 않습니다."
 
@@ -2290,46 +2077,38 @@ msgid "Max CPU"
 msgstr "최대 CPU"
 
 #: panellib/system.php:208
-#, fuzzy
 msgid "Cacti Version: "
-msgstr "선인장 버전 :"
+msgstr "Cacti 버전: "
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Poller Type:"
-msgstr "폴러 유형 :"
+msgstr "폴러 유형:"
 
 #: panellib/system.php:219
 msgid "Spine"
 msgstr "스파인"
 
 #: panellib/system.php:221
-#, fuzzy
 msgid "Spine version: "
-msgstr "척추 버전 :"
+msgstr "Spine 버전: "
 
 #: panellib/system.php:224
-#, fuzzy
 msgid "You are using incorrect spine version!"
-msgstr "잘못된 척추 버전을 사용 중입니다!"
+msgstr "잘못된 Spine 버전을 사용하고 있습니다!"
 
 #: panellib/system.php:229
-#, fuzzy
 msgid "Poller Type: "
-msgstr "폴러 유형 :"
+msgstr "폴러 유형: "
 
 #: panellib/system.php:238
-#, fuzzy
 msgid "Running on: "
-msgstr "실행 중"
+msgstr "실행 중: "
 
 #: panellib/system.php:316
-#, fuzzy
 msgid "Overrun Warning"
 msgstr "오버런 경고"
 
 #: panellib/system.php:319
-#, fuzzy
 msgid "Timed Out"
 msgstr "시간 초과"
 
@@ -2338,14 +2117,13 @@ msgid "Other"
 msgstr "기타"
 
 #: panellib/system.php:325
-#, fuzzy
 msgid "Never Run"
 msgstr "실행 안 함"
 
 #: panellib/system.php:346
-#, fuzzy, php-format
+#, php-format
 msgid "Boost Status is: %s"
-msgstr "부스트 통계"
+msgstr "Boost 상태: %s"
 
 #: panellib/system.php:350
 #, php-format
@@ -2353,103 +2131,90 @@ msgid "Processes/Frequency: %s / %s"
 msgstr "프로세스/주파수: %s / %s"
 
 #: panellib/system.php:352
-#, fuzzy, php-format
+#, php-format
 msgid "Pending Records Threshold: %s"
-msgstr "보류중인 보완 레코드 :  %s"
+msgstr "보류 중인 레코드 임계값: %s"
 
 #: panellib/system.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Approximate Next Start Time: %s"
-msgstr "다음 시작 시간 :  %s"
+msgstr "예상 다음 시작 시간: %s"
 
 #: panellib/system.php:361
-#, fuzzy, php-format
+#, php-format
 msgid "Pending/Archived Records: %s / %s"
-msgstr "보관 처리 된 부스트 기록 :  %s"
+msgstr "대기 중/보관된 레코드: %s / %s"
 
 #: panellib/system.php:377
-#, fuzzy, php-format
+#, php-format
 msgid "Current Boost Table(s) Size: %s"
-msgstr "현재 부스트 표 크기 :  %s"
+msgstr "현재 Boost 테이블 크기: %s"
 
 #: panellib/system.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr "평균 바이트 / 레코드 :  %s"
+msgstr "평균 바이트/레코드: %s"
 
 #: panellib/system.php:390
-#, fuzzy, php-format
+#, php-format
 msgid "Last run duration/updates: %s / %s"
-msgstr "마지막 실행 시간 :  %s"
+msgstr "마지막 실행 시간/업데이트: %s / %s"
 
 #: panellib/system.php:448
-#, fuzzy
 msgid "Poller Run"
-msgstr "폴러 정보"
+msgstr "폴러 실행"
 
 #: panellib/system.php:474
-#, fuzzy
 msgid "Down Hosts"
-msgstr "호스트"
+msgstr "다운된 호스트"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
 msgstr "발동"
 
 #: panellib/system.php:526
-#, fuzzy
 msgid "Poller out. itms"
-msgstr "폴러 출력 항목  %s :"
+msgstr "폴러 출력 항목"
 
 #: panellib/system.php:606
-#, fuzzy
 msgid "48 Hour Extreme Polling"
-msgstr "24 시간 극단적 인"
+msgstr "48시간 폴링 극값"
 
 #: panellib/system.php:629
-#, fuzzy
 msgid "Long Running Poller"
-msgstr "장기적으로 <br/> 폴러"
+msgstr "장기 실행 폴러"
 
 #: panellib/system.php:660
-#, fuzzy
 msgid "Max Device Down"
 msgstr "최대 장치 다운"
 
 #: panellib/system.php:690
-#, fuzzy
 msgid "Max Thold Triggered"
-msgstr "트리거 된 Tholds"
+msgstr "최대 Thold 트리거"
 
 #: panellib/system.php:719
-#, fuzzy
 msgid "Poller Output Item"
-msgstr "폴러 출력 항목 :  %s"
+msgstr "폴러 출력 항목"
 
 #: panellib/system.php:747
-#, fuzzy
 msgid "Failed Polls"
-msgstr "로그인 실패"
+msgstr "폴링 실패"
 
 #: panellib/thold.php:31
-#, fuzzy
 msgid "Threshold Panels"
-msgstr "임계 값"
+msgstr "임계값 패널"
 
 #: panellib/thold.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti Thresholding Plugin."
 msgstr "Cacti 임계값 플러그인에 대한 정보를 제공하는 패널입니다."
 
 #: panellib/thold.php:37 panellib/thold.php:434
-#, fuzzy
 msgid "Last Threshold Events"
-msgstr "임계 값"
+msgstr "최근 임계값 이벤트"
 
 #: panellib/thold.php:38
-#, fuzzy
 msgid "Threshold Plugin Latest Events"
-msgstr "임계 값"
+msgstr "임계값 플러그인 최신 이벤트"
 
 #: panellib/thold.php:53
 msgid "Threshold"
@@ -2461,24 +2226,20 @@ msgid "Threshold Plugin Graph (all, trigerred, ...)"
 msgstr "임계값 플러그인 그래프(모두, 트리거됨, ...)"
 
 #: panellib/thold.php:87 panellib/thold.php:441
-#, fuzzy
 msgid "Plugin Thold isn't installed or started"
-msgstr "플러그인 Thold가 설치 또는 시작되지 않았습니다."
+msgstr "플러그인 Thold가 설치되지 않았거나 시작되지 않았습니다."
 
 #: panellib/thold.php:179 panellib/thold.php:506
-#, fuzzy
 msgid "Without events yet"
-msgstr "아직 이벤트가없는 경우"
+msgstr "아직 이벤트 없음"
 
 #: panellib/thold.php:196
-#, fuzzy
 msgid "Thresholds: "
-msgstr "임계값"
+msgstr "임계값: "
 
 #: panellib/thold.php:208 panellib/thold.php:332
-#, fuzzy
 msgid "Thold plugin not installed/running"
-msgstr "Thold 플러그인이 설치되지 않았거나 실행 중이 아닙니다."
+msgstr "Thold 플러그인이 설치되지 않았거나 실행 중이 아닙니다"
 
 #: panellib/thold.php:238
 #, fuzzy
@@ -2486,86 +2247,72 @@ msgid "Trigerred"
 msgstr "발동"
 
 #: panellib/thold.php:266 panellib/thold.php:369 panellib/thold.php:385
-#, fuzzy
 msgid "Breached"
-msgstr "위반 한"
+msgstr "초과됨"
 
 #: panellib/thold.php:325
-#, fuzzy
 msgid "Threshold Details"
-msgstr "임계 값"
+msgstr "임계값 세부 정보"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
-msgstr "설정값"
+msgstr "임계값"
 
 #: panellib/thold.php:402
-#, fuzzy
 msgid "Breached: "
-msgstr "위반 한"
+msgstr "초과: "
 
 #: panellib/thold.php:413
-#, fuzzy
 msgid "Triggered: "
-msgstr "발동"
+msgstr "트리거됨: "
 
 #: panellib/thold.php:421
-#, fuzzy
 msgid "You don't have permission to Thresholds"
-msgstr "권한이 없습니다."
+msgstr "임계값에 대한 권한이 없습니다"
 
 #: panellib/thold.php:484
 msgid "Description"
 msgstr "설명"
 
 #: panellib/top5.php:31
-#, fuzzy
 msgid "Top/Bottom 5 Panels"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "상위/하위 5개 패널"
 
 #: panellib/top5.php:32
-#, fuzzy
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr "선인장 데이터 수집에 대한 정보 동향 정보를 제공하는 패널."
+msgstr "Cacti 데이터 수집에 대한 추세 정보를 제공하는 패널입니다."
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
 msgstr "하단 핑"
 
 #: panellib/top5.php:38
-#, fuzzy
 msgid "Devices with the worst ping response"
-msgstr "같은 설명이있는 기기 :  %s"
+msgstr "Ping 응답이 가장 느린 장치"
 
 #: panellib/top5.php:53
-#, fuzzy
 msgid "Bottom Availability"
-msgstr "예약가능 상태설정"
+msgstr "최저 가용성"
 
 #: panellib/top5.php:54
-#, fuzzy
 msgid "Devices with the worst availability/reachability"
-msgstr "Top5 최악의 가용성"
+msgstr "가용성/연결성이 가장 낮은 장치"
 
 #: panellib/top5.php:69
-#, fuzzy
 msgid "Bottom Polling Time"
-msgstr "폴러 정보"
+msgstr "최하위 폴링 시간"
 
 #: panellib/top5.php:70
-#, fuzzy
 msgid "Devices with the worst polling time"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "폴링 시간이 가장 느린 장치"
 
 #: panellib/top5.php:85
-#, fuzzy
 msgid "Bottom Polling Ratio"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "최저 폴링 비율"
 
 #: panellib/top5.php:86
-#, fuzzy
 msgid "Devices with the worst polling ratio"
-msgstr "같은 IP 및 포트를 가진 장치 :  %s"
+msgstr "폴링 비율이 가장 낮은 장치"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
@@ -2576,73 +2323,64 @@ msgid "Hostname"
 msgstr "호스트명"
 
 #: panellib/top5.php:226
-#, fuzzy
 msgid "Availability/Reachability"
-msgstr "가용성/접근성"
+msgstr "가용성 / 도달 가능성"
 
 #: panellib/top5.php:306 panellib/top5.php:637
-#, fuzzy
 msgid "Polling Time"
-msgstr "폴러 정보"
+msgstr "폴링 시간"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
 msgstr "비율"
 
 #: panellib/top5.php:437
-#, fuzzy
 msgid "Top 20 Hosts with Worst Ping"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "Ping이 가장 나쁜 상위 20개 호스트"
 
 #: panellib/top5.php:519
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Availability"
-msgstr "Top5 최악의 가용성"
+msgstr "가용성이 가장 낮은 상위 20개 호스트"
 
 #: panellib/top5.php:557
 msgid "Availability"
 msgstr "예약가능 상태설정"
 
 #: panellib/top5.php:600
-#, fuzzy
 msgid "Top 20 Hosts Worst Polling Time"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "폴링 시간이 가장 나쁜 상위 20개 호스트"
 
 #: panellib/top5.php:680
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Polling Ratio"
-msgstr "최악의 폴링 시간 Top5"
+msgstr "폴링 비율이 가장 나쁜 상위 20개 호스트"
 
 #: setup.php:61
-#, fuzzy
 msgid "Intropage Viewer"
-msgstr "인트로 패널"
+msgstr "Intropage 뷰어"
 
 #: setup.php:62
-#, fuzzy
 msgid "Intropage Administration"
-msgstr "소개 페이지 옵션"
+msgstr "Intropage 관리"
 
 #: setup.php:80
 msgid "System Administration"
 msgstr "시스템 관리"
 
 #: setup.php:83
-#, fuzzy
 msgid "Timespan Last 1 Hour"
-msgstr "지난 2시간 동안의 활성 사용자:"
+msgstr "시간 범위: 최근 1시간"
 
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "Timespan Last %d Hours"
-msgstr "지난 2시간 동안의 활성 사용자:"
+msgstr "기간: 최근 %d시간"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
 msgstr "Timespan 지난 1일"
 
 #: setup.php:95 setup.php:96 setup.php:97 setup.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "%d Seconds"
 msgstr "%d 초"
 
@@ -2652,9 +2390,9 @@ msgid "%d Hours"
 msgstr "%d 시간"
 
 #: setup.php:113
-#, fuzzy, php-format
+#, php-format
 msgid "%d Day"
-msgstr "% d 일 전"
+msgstr "%d일"
 
 #, fuzzy
 #~ msgid "Sort by - red-yellow-green-grey"
