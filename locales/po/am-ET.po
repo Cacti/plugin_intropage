@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Amharic\n"
+"Language: am-ET\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - ፈቃድ ተከልክሏል"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "በቂ ፈቃዶች ባለመኖራቸው አንድ ወይም ከዚያ በላይ ፓነሎች ተወግደዋል። አስተዳዳሪውን ያግኙ።"
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "ከላይ ያሉትን ረድፎች በ<b>አዋቅር > ቅንብሮች > አጠቃላይ > የCacti ዳሽቦርድን ደብቅ</b> ውስጥ ማሰናከል እና ሙሉውን ገጽ ለIntropage መጠቀም ይችላሉ "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "ነባሪ"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "ቀይ/ቢጫ/አረንጓዴ አራት ማዕዘን ማሳወቂያዎችን ደብቅ ወይም አሳይ"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "የፓነል ማንቀሳቀስን አሰናክል/ከፓነል ጽሑፍ መቅዳትን አንቃ"
+
+#: display.php
+msgid "Actions ..."
+msgstr "እርምጃዎች ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "አዲስ ዳሽቦርድ አክል"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "የአሁኑን ዳሽቦርድ አስወግድ"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "የመስመሮች ብዛት - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "አሁን አድስ"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "ማደስ ተሰናክሏል"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "በፖለር አድስ"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "በየ 1 ደቂቃው አድስ"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "በየ5 ደቂቃው አድስ"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "በየሰዓቱ አድስ"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "አስፈላጊ ጊዜ - ተሰናክሏል"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "አስፈላጊ ጊዜ - 15 ደቂቃዎች"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "አስፈላጊ ጊዜ - 1 ሰዓት"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "አስፈላጊ ጊዜ - 4 ሰዓታት"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "አስፈላጊ ጊዜ - 1 ቀን"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "በክብደት ደረጃ ደርድር"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "በተጠቃሚ ምርጫ ደርድር"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "የፓነል ትርጓሜዎችን ዳግም ጫን"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Intropage እንደ ነባሪ የመግቢያ ገጽ አዘጋጅ"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "ግራፍ እንደ ነባሪ የመግቢያ ገጽ አዘጋጅ"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Intropage በኮንሶል ውስጥ አሳይ"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Intropageን በትር ውስጥ እንደ ነባሪ ገጽ አሳይ"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "በአንድ መስመር ላይ ያነሱ ፓነሎች"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "በአንድ መስመር ላይ ተጨማሪ ፓነሎች"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "ማጋራትን አቋርጥ"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "ይህን ዳሽቦርድ አጋራ"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "ባዶ ዳሽቦርድ ማጋራት አይፈቀድም"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "የተጋራ ዳሽቦርድ ይጠቀሙ"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "የተጋራ ዳሽቦርድ መጠቀም አልተቻለም - የዳሽቦርድ ገደብ ላይ ተደርሷል።"
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "ምንም የተጋሩ ዳሽቦርዶች የሉም"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "ወደ Intropage እንኳን በደህና መጡ!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "የዳሽቦርድ ፓነሎችን በተጨማሪ መንገዶች ማከል ይችላሉ፦"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "ከ\"ፓነሎች ምናሌ\" የተዘጋጁ ፓነሎችን ይምረጡ። ፓነል ግራጫ ሆኖ ሊታይ ይችላል። ይህ በፈቃዶች ምክንያት ነው፣ አስተዳዳሪውን ይጠይቁ"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "ማንኛውንም የCacti ግራፍ አክል፣ አዶውን ይጠቀሙ"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "የራስዎን ፓነሎች መፍጠር ይችላሉ። ተጨማሪ መረጃ በ <cacti_install_dir>/plugins/intropage/panellib/README.md ፋይል ውስጥ ይገኛል"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "ዳሽቦርዶችን ለሌሎች ተጠቃሚዎች ማጋራት ይችላሉ፦"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "በድርጊቶች ምናሌ ውስጥ \"ይህን ዳሽቦርድ አጋራ\" የሚለውን አማራጭ ይጠቀሙ - እያንዳንዱ ተጠቃሚ እንደ አብነት ሊጠቀምበት ይችላል።"
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "የተጋራውን ዳሽቦርድ የእርምጃዎች ምናሌን በመጠቀም መጠቀም ይችላሉ፦"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "\"የተጋራ ዳሽቦርድ ተጠቀም (ተጠቃሚ/የዳሽቦርድ ስም) - ልክ እንደተጋራው ተመሳሳይ ዳሽቦርድ ነገር ግን በእርስዎ ፈቃዶች ያዘጋጃል\" ይጠቀሙ።"
+
+#: display.php
+msgid "Customization:"
+msgstr "ማበጀት፦"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "እስከ 9 ዳሽቦርዶች መፍጠር ይችላሉ። እያንዳንዱ ዳሽቦርድ ሊሰየም፣ አዶ ሊጠቀም ይችላል"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Intopage በኮንሶል ውስጥ ወይም በተለየ ትር ውስጥ ሊታይ ይችላል። በድርጊት ምናሌ ውስጥ መቀየር ይችላሉ"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "ከፓነሉ ላይ ጽሑፍ መቅዳት ከፈለጉ፣ የመጎተት እና የመጣል ተግባሩን ማሰናከል አለብዎት፣ አዶውን ይጠቀሙ"
+
+#: display.php
+msgid "Panel Details"
+msgstr "የፓነል ዝርዝሮች"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "የፓነል ማንቀሳቀስን አሰናክል/ከፓነል ጽሑፍ መቅዳትን አንቃ"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "የፓነል እንቅስቃሴን አንቃ/ከፓነል ጽሑፍ መቅዳትን አሰናክል"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "ቀይ/ቢጫ/አረንጓዴ አራት ማዕዘን ማሳወቂያዎችን ደብቅ"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "ቀይ/ቢጫ/አረንጓዴ ካሬ ማሳወቂያዎችን አሳይ"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "አዲስ ውሂብ በማንበብ ላይ ስህተት ተከስቷል"
+
+#: display.php
+msgid "Close"
+msgstr "ዝጋ"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "ዳሽቦርድ ተወግዷል"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "አዲስ ዳሽቦርድ"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "ዳሽቦርድ ታክሏል"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "የጎላ ወይም ብጁ የጊዜ ክልል ያለው ግራፍ ማከል አልተቻለም፣ የጊዜ ክልሉን ወደ ያለፈው ግማሽ ሰዓት በመቀየር ላይ"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "የIntropage ፓነል ቤተ-መጽሐፍት ከፓነል ቤተ-መጽሐፍት ታድሷል"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "ዳሽቦርድ ታክሏል፣ እባክዎ ለውሂብ ጥቂት የፖለር ዑደቶችን ይጠብቁ"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "ስህተት - ያልተጋራ ዳሽቦርድ ለማጋራት መሞከር"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "ፓነሉን ዳግም ጫን"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "ቅደም ተከተል ለመቀየር ይጎትቱ"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "ፓነልን እንደገና ደርድር"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "ያነሱ ረድፎች"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "ተጨማሪ ረድፎች"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "ዝርዝሮችን አሳይ"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "ፓነልን አሰናክል"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "ፓነል አልተገኘም"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "ይህ ፓነል የሚፈልገው ተሰኪ ስለተሰናከለ አይገኝም።"
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "ፓነሉ የማሳያ (render) ተግባርን ያካትታል ነገር ግን አይገኝም።"
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "ፓነሉ የማሳያ (render) ተግባር የለውም።"
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "አልተገኘም"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "ምንም ውሂብ አልተገኘም። የሚቀጥለውን ፍተሻ ይጠብቁ፣ <br/>ወይም ካለ በግድ ዳግም ጫን የሚለውን ይጠቀሙ።"
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "ፓነል አልተገኘም"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "የዝርዝሮች ተግባር የለም።"
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [ዝመና በ %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "%s ሰከንድ"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s ሰከንዶች"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "%s ደቂቃ"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "%s ደቂቃዎች"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "%s ሰዓታት"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "%s ሰዓታት"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "%s ቀናት"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "ምንም ውሂብ የለም። በግድ ያዘምኑ፣ ወይም የሚቀጥለውን የCacti ፖሊንግ ዑደት ይጠብቁ።"
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "ምንም ውሂብ የለም። ይህ ፓነል በግድ ማዘመንን አይፈቅድም። የCacti ፖለር ፍተሻውን እስኪያከናውን ድረስ መጠበቅ ይኖርብዎታል።"
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "ፓነሎች ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (ፈቃድ የለም)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "ወደ ዳሽቦርድ ማከል አልተቻለም። ብጁ የጊዜ ክልል።"
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "ከዳሽቦርድ አስወግድ"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "ወደ ዳሽቦርድ አክል"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "የዳሽቦርድ ስሞች"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "ዳሽቦርድ %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "የተጠቃሚ ደረጃ ፓነል የዝማኔ ድግግሞሾች"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "የስርዓት ፓነል ማዘመኛ ድግግሞሾች (ሁሉም የተፈቀደላቸው ተጠቃሚዎች)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "የአዝማሚያ ማዘመኛ ድግግሞሾች"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "ዋና"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "መደበኛ ተጠቃሚ"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[አርትዕ: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "የስርዓት ደረጃ ፓነሎች"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "ለአስተዳዳሪዎች ወይም ለላቁ ተጠቃሚዎች ተደራሽ ለመሆን ተስማሚ የሆኑ እና በተለምዶ ለአጠቃላይ ተጠቃሚዎች የማይውሉ ፓነሎች። ፓነሎቹ በአጠቃላይ ስለ አጠቃላይ የስርዓት አጠቃቀም ናቸው።"
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "የተጠቃሚ ደረጃ ፓነሎች"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "ለአጠቃላይ ተጠቃሚዎች ተደራሽ ለመሆን ተስማሚ የሆኑ ፓነሎች። ፈቃዶች የአሁኑ ተጠቃሚ ማየት በሚችለው ላይ የተገደቡ ናቸው።"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "ለተጠቃሚ ፓነሎችን መፍቀድ/መከልከል ይችላሉ"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "ለቡድን ፓነሎችን መፍቀድ/መከልከል ይችላሉ"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "ቀይ ሁኔታ"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "ቢጫ ሁኔታ"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "አረንጓዴ ሁኔታ"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "የማሳያ ቅንብሮች"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "አስፈላጊ ነገሮች ከላይ ይሆናሉ"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "ምልክት ከተደረገበት፣ Intropage አስፈላጊ መረጃዎችን (ስህተቶችን፣ ማስጠንቀቂያዎችን) መጀመሪያ ያሳያል"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "በአንድ መስመር ላይ ተጨማሪ ፓነሎችን አሳይ"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "ለሰፊ ማያ ገጽ"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "ፓነሎችን በራስ-ሰር አራግፍ"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "አንድ ፓነል ከተጫነ እና አስፈላጊው ተሰኪ ከተወገደ፣ ፓነሉንም በራስ-ሰር አራግፍ"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "ራስ-ሰር የገጽ እድሳት"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "በየስንት ጊዜው"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "በፖለር በራስ-ሰር"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "ፈጽሞ"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "በየደቂቃው"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "በየ %d ደቂቃዎች"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "በየሰዓቱ"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "አስፈላጊ ጊዜ"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "ከአሁን ወደ ያለፈው ጊዜ። የረድፍ ቀለም አሰጣጥ ላይ ተጽዕኖ ያሳድራል፤ የቆዩ ክስተቶች አይደምቁም፣ ብቻ ይታያሉ"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "ተሰናክሏል"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "15 ደቂቃዎች"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "1 ሰዓት"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "4 ሰዓታት"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "1 ቀን"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "የፓነል መስመሮች ብዛት"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "በፓነሉ ውስጥ ስንት መስመሮች"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "%d መስመሮች"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "የአዝማሚያ ጊዜ ክፍተት"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "ለአዝማሚያ ቻርቶች፣ የእነዚያ ቻርቶች ነባሪ የጊዜ ገደብ ምን መሆን አለበት።"
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "የፖለር ጊዜ ማለፊያ"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "የIntropage የጀርባ ፖለር በCacti ከመቋረጡ እና ከመዘጋቱ በፊት መስራት የሚችለው የጊዜ መጠን በደቂቃ።"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d ደቂቃ"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d ደቂቃዎች"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "%d ሰዓት"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "ምዝግብ ማስታወሻ ተንትን - የመስመሮች ብዛት"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "ስንት የምዝግብ ማስታወሻ መስመሮች እንደሚተነተኑ። መስመሮች = በፓነል ውስጥ፣ 2x መስመሮች = በዝርዝር ውስጥ። ትልቅ ቁጥር ገጹ ዘግይቶ እንዲጫን ሊያደርግ ይችላል"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "DB በየስንት ጊዜው ይተንተን"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "ፖለር ይህን ተግባር ያስኬዳል። ይህ ረጅም የፖለር አፈጻጸም ሊያስከትል ይችላል።"
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "በየቀኑ"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "በየሳምንቱ"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "በየወሩ"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "DB ተንትን - የDB ፍተሻ ደረጃ"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "ቀልጣፋ - ትክክል ያልሆኑ አገናኞችን ለመፈተሽ ረድፎችን አትመርምር<br/>ፈጣን - በትክክል ያልተዘጉ ሰንጠረዦችን ብቻ ፈትሽ<br/>የተለወጡ - ከመጨረሻው ፍተሻ ወዲህ የተለወጡ ሰንጠረዦችን ፈትሽ<br/>መካከለኛ - ከረድፎች ቅኝት ጋር<br/>የተራዘመ - ሙሉ ረድፎች እና ቁልፎች<br/>መካከለኛ እና የተራዘመ የገጽ መጫንን ሊያዘገዩ ይችላሉ!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "ፈጣን"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "ፈጣን"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "ተቀይሯል"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "መካከለኛ"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "የተራዘመ"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "የNTP ሰዓት ፍተሻ - የNTP አገልጋይ IP ወይም DNS ስም"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "የNTP አገልጋይ IP ወይም የDNS ስም ያስገቡ"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "NTP በየስንት ጊዜው ይፈተሽ"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "የDNS ፍተሻ - ማንኛውም የDNS ስም"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "ለሙከራ የDNS ስም ያስገቡ"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "DNS በየስንት ጊዜው ይፈተሽ"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "ስለ ጥገና ተግባራት፣ ስለወረዱ መሳሪያዎች እና ስለሌሎችም የአስተዳዳሪ መረጃ ፓነል"
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "ባዶ ካልሆነ፣ ፓነል ከላይ ይታያል። HTML መለያዎችን (b, i, ...) መጠቀም ይችላሉ።"
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "መጪ የጥገና መርሐግብር ማስጠንቀቂያ ቀናት"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "ከታቀደው የጥገና መርሃ ግብር ስንት ቀናት በፊት ማስጠንቀቂያ መታየት አለበት?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "በጭራሽ አታስጠንቅቅ"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "ጥገና የሚጀምርበት ጊዜ"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "ከ%d ቀን በፊት"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "ከ%d ቀናት በፊት"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "የአውታረ መረብ ስታቲስቲክስ በ"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "ባይቶች ወይም ቢቶች"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "ባይቶች"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "ቢቶች"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "የማንቂያ ቅንብሮች"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "የDB ፍተሻ የተቋረጡ ደንበኞች ማንቂያ"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "ይህ ክስተት ከተከሰተ፣ የተመረጠውን መደበኛ፣ ማስጠንቀቂያ፣ ወይም የማንቂያ ሁኔታ ቀለም አስነሳ።"
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "ተመሳሳይ መግለጫ ያለው አስተናጋጅ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "ያለቤት የቀረ የውሂብ ምንጭ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "ባዶ ያልሆነ የፖለር ውጤት ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "የተበላሹ ኢንዴክሶች የውሂብ ምንጭ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "የገደብ logonly እርምጃ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "የመሣሪያ bulk_walk_size በተመቻቸ ሁኔታ ሳይሆን ሲቀር ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "ተመሳሳይ IP/ወደብ ያላቸው መሳሪያዎች ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "ከአንድ በላይ ዛፍ ውስጥ ያለ መሣሪያ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "ዛፍ የሌለው መሣሪያ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "ነባሪ public/private SNMP ማህበረሰብ ያለው መሣሪያ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "ክትትል የሌለው መሣሪያ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "ግራፍ የሌለው መሣሪያ ማንቂያ"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "ቀይ/ቢጫ የፖሊንግ ጊዜ ማንቂያ"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "ከነዚህ ገደቦች በላይ የሆኑ የፖሊንግ ጊዜያት የማስጠንቀቂያ ወይም የማንቂያ ሁኔታ ቀለም ያስነሳሉ።"
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "ቀይ/ቢጫ ያልተሳኩ/ሁሉም ጥምርታ ማንቂያ"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "እንደ ማስጠንቀቂያ ወይም ማንቂያ ሁኔታ ቀለም ለማስነሳት ያልተሳኩ የተገኝነት ፍተሻዎች ከተሳኩ ፍተሻዎች ጋር ያላቸው ጥምርታ።"
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "ቀይ/ቢጫ Ping ማንቂያ"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "ከእነዚህ ደረጃዎች በላይ ያለ የPing መዘግየት የማስጠንቀቂያ ወይም የማንቂያ ሁኔታ ቀለም ያስነሳል።"
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms ቢጫ / ቀይ"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "ቀይ/ቢጫ ዝቅተኛ ተደራሽነት ማንቂያ"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "ከነዚህ ደረጃዎች በታች ያለ ተገኝነት ቢጫ ወይም ቀይ የሁኔታ ቀለም ያስነሳል።"
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "ቢጫ / ቀይ"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "አንቃ"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "አሰናክል"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "ፓነሎች"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "የሚከተለውን ፓነል ለማንቃት 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+msgstr[1] "የሚከተሉትን ፓነሎች ለማንቃት 'ቀጥል' የሚለውን ጠቅ ያድርጉ።"
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "ፓነልን አንቃ"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "የሚከተለውን ፓነል ለማሰናከል 'ቀጥል' የሚለውን ጠቅ ያድርጉ። የተሰናከሉ ፓነሎች ከዳሽቦርዶች ይደበቃሉ እንዲሁም በፖለሩ ይዘለላሉ፣ ነገር ግን ውሂባቸው ይቀመጣል።"
+msgstr[1] "የሚከተሉትን ፓነሎች ለማሰናከል 'ቀጥል' የሚለውን ጠቅ ያድርጉ። የተሰናከሉ ፓነሎች ከዳሽቦርዶች ይደበቃሉ እንዲሁም በፖለሩ ይዘለላሉ፣ ነገር ግን ውሂባቸው ይቀመጣል።"
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "ፓነልን አሰናክል"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "ይቅር"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "ቀጥል"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "የፓነል ስም"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "የዚህ ፓነል መታያ ስም።"
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "ምንጭ"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "ይህን ፓነል የሚያቀርበው ተሰኪ (plugin)። የIntropage የራሱ ፓነሎች እንደ Core ሆነው ይታያሉ።"
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "ምድብ"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "የፓነል ምድብ።"
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "ደረጃ"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "የስርዓት ፓነሎች በሁሉም ተጠቃሚዎች ይጋራሉ፤ የተጠቃሚ ፓነሎች በየተጠቃሚው ናቸው።"
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "ያስፈልገዋል"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "ይህ ፓነል እንዲታይ መንቃት ያለባቸው ተሰኪዎች።"
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "አድስ"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "የፓነል ውሂብ መሰብሰቢያ ክፍተት።"
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "የማዘመኛ ተግባር"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "የዚህን ፓነል ውሂብ ለመሰብሰብ ፖለሩ የሚጠራው ተግባር።"
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "ሁኔታ"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "ፓነሉ የነቃ መሆን አለመሆኑ።"
+
+#: intropage_panels.php
+msgid "System"
+msgstr "ሥርዓት"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "ተጠቃሚ"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "ነቅቷል"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "ምንም"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "ምንም ፓነሎች አልተገኙም"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "የIntropage ፓነል ቤተ-መጽሐፍት"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "ፈልግ"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "ማንኛውም"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "ሂድ"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "ማጣሪያዎችን አዘጋጅ/አድስ"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "አጽዳ"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "ማጣሪያዎችን አጽዳ"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "ማንቂያዎች"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "ማንቂያ የሚሰጡ ፓነሎች።"
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "የአስተናጋጅ ማንቂያዎች"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "የቅርብ ጊዜ የአስተናጋጅ ማንቂያዎች (እየሰራ/የወረደ/በማገገም ላይ)"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "ቀን"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "አስተናጋጅ"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "ግዛት"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "ተጨማሪ መዝገቦች አሉ፣ የዝርዝር መስኮት ይጠቀሙ"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "ውሂብ በመጠበቅ ላይ"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "ለማንኛውም አስተናጋጆች ፈቃድ የለዎትም"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "የትንተና ፓነሎች"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "የCacti እና የተሰኪዎቹን የአሁኑን ባህሪ የሚተነትኑ ፓነሎች።"
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "መግቢያዎችን ተንትን"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "ለአዝማሚያዎች እና ለስህተቶች የመጨረሻዎቹን በርካታ የCacti መግቢያዎች ይተንትኑ።"
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "ምዝግብ ማስታወሻዎችን ተንትን"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "አሳሳቢ ሊሆኑ የሚችሉ የተለመዱ ስህተቶችን በCacti የምዝግብ ማስታወሻ ፋይል ውስጥ ይፈልጉ።"
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "የውሂብ ጎታ ፍተሻዎች"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "ለተለመዱ ስህተቶች የMySQL/MariaDB የውሂብ ጎታን ይተንትኑ።  ይህ ሂደት በጣም ትልቅ በሆኑ ስርዓቶች ላይ ረጅም ጊዜ ሊወስድ እንደሚችል ልብ ይበሉ።"
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "የCacti ነገሮችን ተንትን"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "ዛፎችን፣ ግራፎችን፣ አስተናጋጆችን፣ ... ተንትን"
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "የDS ስታቲስቲክስን ተንትን"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "የውሂብ ምንጭ ስታቲስቲክስን ተንትን"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "የተጠቃሚ ስም"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "የIP አድራሻ"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "አልተሳካም"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "ተሳክቷል - መግባት"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "ስኬት - ቶከን"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "ጠቅላላ ያልተሳኩ መግቢያዎች: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "ባለፈው ሰዓት ውስጥ ንቁ ተጠቃሚዎች፦ "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "የምዝግብ ማስታወሻ ፋይሉ ተደራሽ አይደለም ወይም ባዶ ነው"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "የመጨረሻዎቹን %s የምዝግብ ማስታወሻ መስመሮች ተንትን፦"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "ስህተቶች፦ "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "ማስጠንቀቂያዎች፦ "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "የምዝግብ ማስታወሻ መጠን፡ ከ2GB በላይ"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "የምዝግብ ማስታወሻ መጠን፡ እሺ"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "የምዝግብ ማስታወሻ መጠን፡ በጣም ትልቅ"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "የምዝግብ መጠን: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "የመጨረሻ የምዝግብ መስመሮች:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "የውሂብ ጎታ (DB) ሠንጠረዦች ፍተሻ እየተዘለለ ነው። የውሂብ ጎታው በጣም ትልቅ ነው"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "የሠንጠረዥ %s ሁኔታ %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: ችግሮች"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: እሺ"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "ከፍተኛው የግንኙነት ገደብ ላይ ተደርሷል: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "ከፍተኛ ግንኙነትን (Max connection) በትዕዛዝ መስመር መሣሪያዎች ወይም በቋሚነት በውቅር ፋይል ውስጥ መጨመር ይችላሉ"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "የግንኙነት ስህተቶች: %s - የSQL አገልግሎትን እንደገና ለማስጀመር ይሞክሩ፣ የSQL ምዝግብ ማስታወሻን ይመልከቱ፣ ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "የተቋረጡ ደንበኞች/ግንኙነቶች፦ %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "የተቋረጡ ደንበኞች/ግንኙነቶች - ድምጽ ለማጥፋት ከmysql CLI 'SET GLOBAL log_warnings = 1;' ወይም ' log_error_verbosity = 1;' (እንደ MySQL/MariaDB ስሪትዎ ይወሰናል) ያሂዱ እና በserver.cnf ውስጥ ያቀናብሩ።"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "የግንኙነት ስህተቶች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "የተበላሹ ሰንጠረዦች፦ %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "የሰንጠረዥ ማረጋገጫ እና መጠገኛ ትዕዛዞችን ማስኬድ አለብዎት"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "የማህደረ ትውስታ ሰንጠረዦች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "ሁሉም ሠንጠረዦች፦ %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "አይመለከትም"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "ተመሳሳይ IP እና ወደብ ያላቸው መሳሪያዎች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "ያልተመቻቸ Bulk Walk Size ያላቸው መሳሪያዎች: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "እባክዎ የመሣሪያውን መለኪያ \"Bulk Walk Maximum Repetitions\" ይመልከቱ። የፖለር አፈጻጸምዎን ማሻሻል ይችላሉ"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "የመጨረሻው ዳግም መረጃ ጠቋሚ ማስኬጃ"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "የRRD Checker የመጨረሻ አሂድ"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "የRRD Cleaner የመጨረሻ አሂድ"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s፦ %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "ይህን መሣሪያ ቢያንስ አልፎ አልፎ ማስኬድ ይመከራል"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s፦ ገና አልተካሄደም"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "የተተዉ የውሂብ ምንጮች፦ %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "የውሂብ ምንጭ - የተበላሹ ኢንዴክሶች፦ %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "የThold ምዝግብ ብቻ ማንቂያ/ማስጠንቀቂያ፦ %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "ተመሳሳይ መግለጫ ያላቸው መሳሪያዎች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "ከአንድ በላይ ዛፍ ውስጥ ያሉ መሳሪያዎች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "ግራፎች የሌላቸው መሳሪያዎች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "ዛፍ የሌላቸው መሳሪያዎች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "ነባሪ public/private community ያላቸው መሳሪያዎች: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "የግራፍ ንጥሎች/የአብነት ንጥሎች ችግር፦ %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "የMonitor ተሰኪ - ክትትል የማይደረግባቸው አስተናጋጆች፦ %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "እሺ"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "የአገልጋይ CPU (ኮሮች / ሂደቶች / ክሮች): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "አስተዳዳሪን ማሳወቅ ተሰናክሏል እና የአስተዳዳሪ ኢሜይል አልተዘጋጀም"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "%s ችግሮች ተገኝተዋል"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "ሁሉም ነገር ደህና ነው"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "የDS ስታቲስቲክስ፦ "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "ፓነሉ የDS ስታቲስቲክስ እንዲነቃ ይፈልጋል።"
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "የDS ሁሉም መዝገቦች "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "የDS ባዶ መዝገቦች "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "የCacti ምዝግብ ማስታወሻ ዝርዝሮችን ተንትን [ ማስጠንቀቂያዎች/ስህተቶች ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "ስህተቶች"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "ማስጠንቀቂያዎች"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "ማስጠንቀቂያ፦ ፋይሉ ከ2GB ይበልጣል"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "የምዝግብ መጠን"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "የመግቢያዎች ዝርዝርን ተንትን"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "ውጤት"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "ባለፉት 2 ሰዓታት ውስጥ ንቁ ተጠቃሚዎች፦"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "ምንም ንቁ ተጠቃሚዎች የሉም"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "ሙሉ የተጠቃሚ መዝገብ ተመልከት"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "ዛፍ፣ ግራፎች፣ አስተናጋጆችን ተንትን"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "ተመሳሳይ IP እና ወደብ ያላቸው መሳሪያዎች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "ያልተመቻቸ Bulk Walk Size ያላቸው መሳሪያዎች - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "የውሂብ ጥገና"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "የተተዉ የውሂብ ምንጮች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "የተበላሹ ኢንዴክሶች ያሏቸው የውሂብ ምንጮች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "የThold ምዝግብ ብቻ ማንቂያ/ማስጠንቀቂያ - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "ተመሳሳይ መግለጫ ያላቸው መሳሪያዎች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "ከአንድ በላይ ዛፍ ውስጥ ያሉ መሳሪያዎች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "ግራፎች የሌላቸው መሳሪያዎች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "ዛፍ የሌላቸው መሳሪያዎች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "ነባሪ public/private community ያላቸው መሳሪያዎች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "የግራፍ ንጥሎች/የአብነት ንጥሎች ችግር - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "የግራፍ አብነት"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "ግራፎች"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "የግራፍ ንጥሎች"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "የአብነት ንጥሎች"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "የMonitor ተሰኪ - ክትትል የማይደረግባቸው አስተናጋጆች - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "የአገልጋይ CPU ኮሮች / ሂደቶች / ክሮች: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "አስተዳዳሪን ማሳወቅ ተሰናክሏል ወይም የአስተዳዳሪ ኢሜይል አልተዘጋጀም"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "በጣም ስራ የበዛበት"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "በጣም ስራ የበዛባቸውን አስተናጋጆች የሚያገኙ ፓነሎች።"
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "በጣም ስራ የበዛበት CPU"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "በጣም ስራ የበዛበት CPU ያላቸው መሳሪያዎች (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "በጣም ስራ የበዛበት ucd/net - ጭነት"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "ከፍተኛ ጭነት ያላቸው መሳሪያዎች (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "በጣም ስራ የበዛበት የሃርድ ድራይቭ ቦታ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "ከፍተኛ የሃርድ ድራይቭ ቦታ የተጠቀሙ መሳሪያዎች (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "በጣም ስራ የበዛበት የስራ ጊዜ (uptime)"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "ረጅም የስራ ጊዜ ያላቸው መሳሪያዎች"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "በጣም ስራ የበዛበት የበይነገጽ የገቢ/ወጪ ትራፊክ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "ከፍተኛ የገቢ/ወጪ ትራፊክ ያላቸው መሳሪያዎች (በይነገጽ)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "በጣም ስራ የበዛበት የበይነገጽ ስህተት"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "ከፍተኛ ስህተቶች/የተጣሉ ፓኬቶች ያላቸው መሳሪያዎች (በይነገጽ)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "በጣም ስራ የበዛበት የበይነገጽ አጠቃቀም"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "ከፍተኛ የበይነገጽ አጠቃቀም ያላቸው ወደቦች"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "እባክዎ የDS ስታቲስቲክስን ያንቁ እና ያዋቅሩ"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "የDS ስታቲስቲክስን እንዲያነቃ አስተዳዳሪውን ይጠይቁ"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "አማካይ"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "ከፍተኛ"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "የሁሉም የተፈቀዱ DS አማካይ"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "ውሂብ በመጠበቅ ላይ ወይም ይህ አብነት ላለው ለማንኛውም መሣሪያ ፈቃድ የለዎትም።"
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "ለማንኛውም አስተናጋጆች ፈቃድ የለዎትም ወይም ከዚህ አብነት ጋር ምንም አስተናጋጅ የለም"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "የስራ ጊዜ"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "የሁሉም የተፈቀዱ አስተናጋጆች አማካይ"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "ውሂብ በመጠበቅ ላይ ወይም ለማንኛውም መሣሪያ ፈቃድ የለዎትም"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "አቅጣጫ"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "የመጨረሻዎቹ 5 ደቂቃዎች የጊዜ ክፍተት"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "በጣም ስራ የበዛባቸው 30 የአስተናጋጅ MIB CPU አጠቃቀም (ያለፈው ሰዓት)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "ለተጨማሪ የDS ስታቲስቲክስ የTopX ተሰኪን ይጫኑ"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "በጣም ስራ የበዛባቸው 30 ucd/net ጭነት (ያለፈው ሰዓት)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "በጣም ስራ የበዛባቸው 30 የአስተናጋጅ MIB የሃርድ ድራይቭ ቦታ (ያለፈው ሰዓት)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "በጣም ስራ የበዛበት ትራፊክ (ገቢ+ወጪ)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "በጣም ስራ የበዛበት የበይነገጽ አጠቃቀም"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "ግራፊክ ፓነሎች"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "ስለ Cacti እና ተሰኪዎቹ መረጃ በግራፍ መልክ የሚሰጡ ፓነሎች።"
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "የውሂብ ምንጮች"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "የውሂብ ምንጮች ግራፍ"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "የመሣሪያ አብነቶች"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "የመሣሪያ አብነቶች ግራፍ"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "መሳሪያዎች በሁኔታ"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "የመሳሪያዎች ግራፍ በሁኔታ (ላይ፣ ታች፣ ...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "የውሂብ ምንጮች፦ "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "የመሣሪያ አብነቶች: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "መሳሪያዎች: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "የወረደ"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "በማገገም ላይ"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "የውሂብ ዓይነት"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "ጠቅላላ"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "ምንም አብነት የሌላቸው የውሂብ ምንጮች አልተገኙም"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "መሳሪያዎች"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "የመሣሪያ ብዛት"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "ሁሉም"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "በመስመር ላይ"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "የአብነት ስም"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "ጠቅላላ መሳሪያዎች"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "ምንም የመሣሪያ አብነቶች አልተገኙም"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "የMacTrack ፓነሎች"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "ስለ Cacti MacTrack ተሰኪዎች መረጃ የሚሰጡ ፓነሎች።"
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "የMacTrack ተሰኪ"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "የተለያዩ የMacTrack ስብስብ እና ጣቢያ ስታቲስቲክስ።"
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "የMacTrack ጣቢያዎች"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "የተለያዩ የMacTrack ጣቢያ ስታቲስቲክስ።"
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "የMacTrack ተሰኪ አልተጫነም/እየሰራ አይደለም"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "ሁሉም፦ %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "ንቁ፡ %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "ወርዷል፦ %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "ስህተት፦ %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "ያልታወቀ: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "ተሰናክሏል: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "ስህተት"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "ያልታወቀ"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "የተሰኪ ፈቃድ የለዎትም"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "ጣቢያ"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "IPዎች"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "ወደቦች"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "ንቁ ወደቦች"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "MACዎች"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "የመሣሪያ ስህተቶች"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "ምንም የmactrack ጣቢያዎች አልተገኙም"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "ልዩ ልዩ ፓነሎች"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "ስለ Cacti አጠቃላይ ያልተመደበ ውሂብ የሚያሳዩ ፓነሎች።"
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "የNTP/DNS ሁኔታ"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "የCacti ስርዓት ሰዓትዎን ከሚታወቅ መነሻ ጋር ያለውን መዛባት እና የDNS መፍቻ ፍተሻን በማረጋገጥ ላይ"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "የMaint ተሰኪ ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "መጪ መርሐግብሮችን በተመለከተ የMaint ተሰኪ ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "የWebseer ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "የwebseer ተሰኪ URL የአገልግሎት ፍተሻ ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "የServcheck ፕለጊን ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "የServCheck ተሰኪ ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "ምንም የNTP አገልጋይ አልተዋቀረም"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "የተሳሳተ የNTP አገልጋይ ተዋቅሯል - %s<br/>እባክዎ በቅንብሮች ውስጥ ያስተካክሉት"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "የNTP ጊዜ ከ%s ማግኘት አልተሳካም"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "ሰዓቱ ከሚገባው በላይ ስለተዛባ እባክዎ ያረጋግጡ"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "ከ%s ሰከንዶች በላይ ከNTP አገልጋይ %s።"
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "አካባቢያዊ ሰዓት ከNTP አገልጋይ ጋር እኩል ነው"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "የተጠቀሰውን የNTP አገልጋይ ማግኘት አልተቻለም።"
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "እባክዎ ውቅርዎን ያረጋግጡ።"
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "ምንም የDNS አስተናጋጅ ስም አልተዋቀረም"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "የተሳሳተ የDNS አስተናጋጅ ስም ተዋቅሯል - %s<br/>እባክዎ በቅንብሮች ውስጥ ያስተካክሉት"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "የDNS አስተናጋጅ ስም (%s) መፍታት ተሳክቷል።"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "የDNS መፍቻ ጊዜ፦ %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "የDNS አስተናጋጅ ስም (%s) መፍታት አልተሳካም።"
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "የMaint ተሰኪ አልተጫነም/አልነቃም"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "የWebseer ተሰኪ አልተጫነም ወይም አልተጀመረም"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "የWebseer ተሰኪ ከእንግዲህ አይደገፍም፤ በምትኩ የservcheck ተሰኪን ይጠቀሙ"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "የፍተሻዎች ብዛት (ሁሉም/ተሰናክሏል): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "ሁኔታ (ንቁ/የወደቀ): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "የመጨረሻ የምዝግብ መልዕክቶች"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "የHTTP ኮድ"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "የWebseer ተሰኪ - ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "የServcheck ተሰኪ አልተጫነም ወይም አልተጀመረም"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "ሁኔታ (እሺ/ስህተት): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "የመጨረሻ የምዝግብ መዝገቦች"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "ሙከራ"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "ዓይነት"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "የServcheck ፕለጊን - ዝርዝሮች"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "የፍለጋ ውጤት"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "የፖለር ፓነሎች"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "ስለ Cacti የፖሊንግ ሂደት መረጃ የሚሰጡ ፓነሎች።"
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "የፖለር መረጃ"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "ስለ Cacti ፖለርዎ የተለያዩ መረጃዎች።"
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "የፖለር ስታቲስቲክስ"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "የተለያዩ የCacti ፖለር ስታቲስቲክስ።"
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "የፖለር ውጤት ንጥሎች"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "መለያ"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "ስም"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "ጠቅላላ ጊዜ"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "አዲስ/እንቅስቃሴ-አልባ"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "በመካሄድ ላይ"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "ስራ ፈት"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "ያልታወቀ/የወደቀ"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "%s ሰከንዶች"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(እሺ)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(ሁሉም)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "መታወቂያ: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "ሰከንዶች"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "የ24 ሰዓት አማካይ መታወቂያ፦ "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "የፖለር ዝርዝሮች"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "አማካይ ጊዜ"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "ከፍተኛ ጊዜ"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "የፖለር ውጤት ንጥሎች "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "ንጥሎች"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "የSyslog ፓነሎች"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "ስለ Cacti Syslog የመልዕክት ሂደት መረጃ የሚሰጡ ፓነሎች።"
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "የSyslog ዝርዝሮች"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "የተለያዩ የSyslog ተሰኪ ስታቲስቲክስ።"
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "የSyslog ከፍተኛ መሳሪያዎች"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "በጣም ብዙ መልዕክቶች ያላቸው መሳሪያዎች"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "የSyslog መልዕክት ደረጃዎች"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "መልዕክቶች በደረጃ።"
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "ገቢ"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "ተከማችቷል"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "መልዕክቶች"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "የSyslog ተሰኪው አልተጫነም/አይሰራም"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "መሣሪያ"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "የSyslog ተሰኪው አልነቃም"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "ብዙ መልዕክቶች ያሏቸው ከፍተኛ 20 አስተናጋጆች"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "ምንም መልዕክቶች የሉም"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "የስርዓት ፓነሎች"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "ስለ Cacti የስርዓት አፈጻጸም መረጃ የሚሰጡ ፓነሎች።"
+
+#: panellib/system.php
+msgid "Information"
+msgstr "መረጃ"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "ስለራሱ ስለ Cacti ሥርዓት የተለያዩ የሥርዓት መረጃዎች።"
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "አስተዳደራዊ ማንቂያዎች"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "ለሁሉም ተጠቃሚዎች ተጨማሪ የአስተዳዳሪ ማሳወቂያ ፓነል"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "የBoost ስታቲስቲክስ"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "ስለ Cacti የአፈጻጸም ማበልጸጊያ ሂደት መረጃ።"
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "የBoost ታሪክ"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "ስለ ማበልጸጊያ ሂደት ታሪክ መረጃ።"
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "የ24 ሰዓት ጽንፎች"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "የ24 ሰዓት የፖሊንግ ጽንፎችን የያዘ ሠንጠረዥ (ረጅሙ የፖለር አሂድ፣ የወረዱ አስተናጋጆች)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "የ CPU አጠቃቀም"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "የ CPU አጠቃቀም ግራፍ (Linux ብቻ)።"
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "የ CPU ጭነት: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "ይህ ተግባር በWindows መድረኮች ላይ አልተተገበረም"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "አማካይ CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "ከፍተኛ CPU"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "የ24 ሰዓት አማካይ"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "የ Cacti ስሪት: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "የፖለር አይነት፦"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "የSpine ስሪት: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "የተሳሳተ የspine ስሪት እየተጠቀሙ ነው!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "የፖለር አይነት፦ "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "የሚሄደው በ: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "የBoost ታሪክ: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "ማህደረ ትውስታ "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "በመጠባበቅ ላይ ያሉ መዝገቦች "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "የጊዜ ማለፍ ማስጠንቀቂያ"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "ጊዜው አልፏል"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "ሌላ"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "በጭራሽ አልተካሄደም"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "የBoost ሁኔታ: %s ነው"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "ሂደቶች/ድግግሞሽ: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "በመጠባበቅ ላይ ያሉ መዝገቦች ገደብ: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "ግምታዊ ቀጣይ የመጀመሪያ ጊዜ፦ %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "በመጠባበቅ ላይ ያሉ/በማህደር የተቀመጡ መዝገቦች: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "የአሁን Boost ሠንጠረዥ(ዎች) መጠን፦ %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "አማካይ ባይቶች/መዝገብ: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "የመጨረሻ ማስኬድ ቆይታ/ዝማኔዎች: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "የፖለር አፈጻጸም"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "የወረዱ አስተናጋጆች"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "ተቀስቅሷል"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "የፖለር ውጤት ንጥሎች"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "የአስተናጋጅ ስህተቶች"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "የ48 ሰዓት ጽንፍ ፖሊንግ"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "ለረጅም ጊዜ የሚሰራ ፖለር"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "ከፍተኛ የወረደ መሣሪያ"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "ከፍተኛ የተቀሰቀሰ ገደብ"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "የፖለር ውጤት ንጥል"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "ያልተሳኩ ፖሎች"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "የገደብ ፓነሎች"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "ስለ Cacti የገደብ ተሰኪ መረጃ የሚሰጡ ፓነሎች።"
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "የመጨረሻ የገደብ ክስተቶች"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "የገደብ ተሰኪ የቅርብ ጊዜ ክስተቶች"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "ገደብ"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "የገደብ ተሰኪ ግራፍ (ሁሉም፣ የተቀሰቀሱ፣ ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "የThold ተሰኪ አልተጫነም ወይም አልተጀመረም"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "ገና ክስተቶች የሉም"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "ገደቦች: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "የThold ተሰኪ አልተጫነም/እየሰራ አይደለም"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "የተጣሰ"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "የገደብ ዝርዝሮች"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "ገደቦች"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "የተጣሰ: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "ተቀስቅሷል: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "ለገደቦች ፈቃድ የለዎትም"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "መግለጫ"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "ከፍተኛ/ዝቅተኛ 5 ፓነሎች"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "ስለ Cacti የውሂብ አሰባሰብ የአዝማሚያ መረጃ የሚሰጡ ፓነሎች።"
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "ዝቅተኛ Ping"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "ደካማው የping ምላሽ ያላቸው መሳሪያዎች"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "ዝቅተኛ ተገኝነት"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "ዝቅተኛው ተገኝነት/ተደራሽነት ያላቸው መሳሪያዎች"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "ዝቅተኛ የፖሊንግ ጊዜ"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "በጣም የዘገየ የፖሊንግ ጊዜ ያላቸው መሳሪያዎች"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "ዝቅተኛ የፖሊንግ ጥምርታ"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "ደካማው የፖሊንግ ምጣኔ ያላቸው መሳሪያዎች"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "የአሁኑ"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "የአስተናጋጅ ስም"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "ተገኝነት/ተደራሽነት"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "የጥያቄ ጊዜ"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "ጥምርታ"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "በጣም መጥፎ Ping ያላቸው ከፍተኛ 20 አስተናጋጆች"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "በጣም ዝቅተኛ ተገኝነት ያላቸው ከፍተኛ 20 አስተናጋጆች"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "ተገኝነት"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "በጣም መጥፎ የፖሊንግ ጊዜ ያላቸው ከፍተኛ 20 አስተናጋጆች"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "በጣም መጥፎ የፖሊንግ ጥምርታ ያላቸው ከፍተኛ 20 አስተናጋጆች"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "የIntropage ተመልካች"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "የIntropage አስተዳደር"
+
+#: setup.php
+msgid "Management"
+msgstr "አስተዳደር"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "የፓነል ቤተ-መጽሐፍት"
+
+#: setup.php
+msgid "System Administration"
+msgstr "የስርዓት አስተዳደር"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "የጊዜ ርዝመት ያለፈው 1 ሰዓት"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "የጊዜ ርዝመት የመጨረሻዎቹ %d ሰዓታት"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "የጊዜ ርዝመት ያለፈው 1 ቀን"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "የጊዜ ርዝመት ያለፉት 2 ቀናት"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d ሰከንዶች"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ሰዓታት"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d ቀን"
+
+#: setup.php
+msgid "Actions"
+msgstr "ድርጊቶች"
+

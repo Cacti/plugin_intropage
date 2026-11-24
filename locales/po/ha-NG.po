@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Hausa\n"
+"Language: ha-NG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - An Hana Izini"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "An cire faifai ɗaya ko fiye saboda ƙarancin izini. Tuntuɓi mai gudanarwa."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Za ka iya kashe layukan da ke sama a cikin <b>Saita > Saituna > Gabaɗaya > Ɓoye Allon Bayanai na Cacti</b> kuma ka yi amfani da dukan shafin don Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Na Asali"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Ɓoye ko nuna sanarwar murabba'i ja/rawaya/kore"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Kashe motsa fanel/kunna kwafin rubutu daga fanel"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Matakai ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Ƙara Sabon Allon Kulawa"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Cire allon bayanai na yanzu"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Adadin layuka - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Sabunta Yanzu"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "An kashe sabuntawa"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Sabunta ta Mai Tattara Bayanai"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Sabunta kowane minti 1"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Sabunta Kowane Minti 5"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Sabunta Kowane Sa'a"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Muhimmin lokaci - an kashe"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Muhimmin lokaci - mintuna 15"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Muhimmin lokaci - sa'a 1"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Muhimmin lokaci - sa'o'i 4"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Muhimmin lokaci - kwana 1"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Jera bisa Tsananin Matsala"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Jera bisa Zaɓin Mai Amfani"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Sake Loda Ma'anonin Rukunin Allo"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Sanya Intropage a matsayin Shafin Shiga na Asali"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Sanya jadawali a matsayin Shafin Shiga na Asali"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Nuna Intropage a cikin Console"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Nuna Intropage a Shafi a matsayin Shafin Asali"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Ƙarancin faneloli a layi ɗaya"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Ƙarin fanaloli a kan layi"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Soke rabawa"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Raba wannan dashboard"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Ba a yarda da raba dashboard mara komai ba"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Yi amfani da allon kulawa na haɗin gwiwa"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Ba za a iya amfani da allon kulawa da aka raba ba - an kai iyakar allon kulawa."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Babu allunan bayanai da aka raba"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Barka da zuwa Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Za ka iya Ƙara Allunan Dashboard ta hanyoyi da yawa:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Zaɓi shiryaɗɗun fanel daga \"Menu na Fanel\". Fanel na iya yin launin toka. Saboda izini ne, tambayi mai gudanarwa"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Ƙara kowane Jadawalin Cacti, yi amfani da alama"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Za ka iya ƙirƙirar naka faneloli. Ƙarin bayani yana cikin fayil ɗin <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Za ka iya raba allunan bayanai ga sauran masu amfani:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "yi amfani da zaɓin \"Raba wannan allon bayani\" a cikin menu na Ayyuka - Kowane mai amfani zai iya amfani da shi a matsayin samfuri."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Za ka iya amfani da allon bayanai da aka raba ta menu na Ayyuka:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Yi amfani da \"Yi amfani da allon kulawa na haɗin gwiwa (sunan mai amfani/allon kulawa) - Yana shirya irin allon kulawar da aka raba amma da izininka."
+
+#: display.php
+msgid "Customization:"
+msgstr "Keɓancewa:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Za ka iya ƙirƙirar allunan bayanai har guda 9. Za a iya sanya wa kowane allon bayanai suna, da amfani da alama"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Ana iya nuna Intopage a cikin na'urar sarrafawa ko a cikin shafi daban. Za ka iya canza shi a cikin menu na Aiki"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Idan kana son kwafin rubutu daga fanel, dole ne ka kashe aikin ja da saki (drag and drop), yi amfani da alama (icon)"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Cikakkun Bayanan Allo"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Kashe motsa fanel/Kunna kwafin rubutu daga fanel"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Kunna motsa fanel/Kashe kwafin rubutu daga fanel"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Ɓoye sanarwar murabba'i ja/rawaya/kore"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Nuna sanarwar murabba'i ja/rawaya/kore"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Kuskure wajen karanta sabbin bayanai"
+
+#: display.php
+msgid "Close"
+msgstr "Rufe"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "An cire Allon Kulawa"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Sabon Allon Kulawa"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "An ƙara Allon Kulawa"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Ba za a iya ƙara jadawali da aka faɗaɗa ko na lokaci na musamman ba, ana canza lokacin zuwa Rabin sa'ar da ta gabata"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "An Sabunta Rumbun Allunan Intropage daga Rumbun Alluna"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "An ƙara Allon Kulawa, da fatan za a jira 'yan zagayen Mai Tattara Bayanai don samun bayanai"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Kuskure - ana ƙoƙarin raba allon kulawa da ba a raba shi ba"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Sake Loda Rukunin Allo"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Ja don sake tsara jerin"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Sake tsara rukunin allo"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Ƙarancin layuka"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Ƙarin layuka"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Nuna Cikakkun Bayanai"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Kashe fanel"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Ba a sami allo ba"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Wannan fanel ba ya samuwa saboda an kashe ƙarin manhajar da yake buƙata."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Fanel ɗin yana ƙunshe da aikin render amma ba ya wanzu."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Fanel ɗin ba shi da aikin render."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Ba a Samu Ba"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Ba a Samu Bayanai ba. Ko dai a jira bincike na gaba, <br/>ko a yi amfani da Sake Lodawa da Ƙarfi idan akwai."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Ba a Sami Allo Ba"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Aikin Cikakken Bayani ba ya nan."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Sab. cikin %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "Daƙiƙa %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "Daƙiƙa %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "Minti %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "Mintuna %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "Sa'o'i %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "Sa'o'i %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "Kwanaki %s"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Babu Bayanai a Yanzu. Ko dai a Tilasta Sabuntawa, ko a jira zagayen Tattara Bayanai na Cacti na gaba."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Babu Bayanai a Yanzu. Wannan Fanel ba ya ba da damar Tilasta Sabuntawa. Za ku jira har sai Mai Tattara Bayanai na Cacti ya gudanar da binciken."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Alluna ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (babu izini)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Ba za a iya ƙarawa zuwa Allon Kulawa ba. Lokaci na musamman."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Cire daga Allon Bayanai"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Ƙara zuwa Allon Kulawa"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Sunayen Allon Kulawa"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Allon Kulawa %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Yawan Sabuntawar Fanel na Matakin Mai Amfani"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Yawan Sabunta Fanalin Tsari (Duk Masu Amfani da Aka Ba da Izini)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Yawan Sabunta Yanayi"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Tushe"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Mai Amfani na Yau da Kullum"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[gyara: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Fanalolin Matakin Tsari"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Alluna da suka dace masu gudanarwa ko ƙwararrun masu amfani su shiga kuma ba a saba amfani da su ga masu amfani na gama-gari ba. Allunan galibi suna game da amfani da tsarin gaba ɗaya ne."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Fanel na Matakin Mai Amfani"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Alluna da suka dace masu amfani na gama-gari su shiga. An iyakance izini ga abin da mai amfani na yanzu zai iya gani."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Za ka iya Bada izini/Hana Alluna ga Mai amfani"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Za ka iya Bada izini/Hana Alluna ga Rukuni"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Matsayi Ja"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Matsayin Rawaya"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Matsayin Kore"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Saitunan Nuni"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Abubuwa masu muhimmanci za su kasance a sama"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Idan an zaɓa, Intropage yana nuna muhimman bayanai (kurakurai, gargaɗi) da farko"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Nuna ƙarin fanel a kan layi ɗaya"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Don faɗin allo"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Cire Fanal Ta Atomatik"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Idan an girka Bangon (Panel) kuma an cire ƙarin da ake buƙata, a cire bangon ma kai tsaye"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Sabunta Shafi ta Atomatik"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Sau nawa"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Ta atomatik daga Mai Tattara Bayanai"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Ba a Taɓa Ba"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Kowane Minti"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Kowane Minti %d"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Kowace Awa"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Muhimmin lokaci"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Daga yanzu zuwa baya. Yana shafar launin layi, ba za a haskaka tsofaffin abubuwan da suka faru ba, za a nuna su ne kawai"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "An kashe"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "Minti 15"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "Sa'a 1"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "Sa'o'i 4"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "Kwana 1"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Adadin layukan fanel"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Layuka nawa a cikin allo"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "layuka %d"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Tsawon Lokacin Yanayi"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Don taswirorin Yanayi (Trend), menene yakamata ya zama tsohon tsawon lokaci ga waɗannan taswirorin."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Lokacin Karewa na Mai Tattara Bayanai"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Adadin lokaci, a cikin mintuna, da mai tattara bayanai na baya na Intropage zai iya gudana kafin Cacti ya katse shi ya kashe shi."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Minti %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Mintuna %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "Sa'a %d"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Yi Nazarin Rajista - adadin layuka"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Layukan rajista nawa za a bincika. Layuka = a cikin allo, ninki 2 na layuka = a cikakken bayani. Babbar lamba na iya jinkirta buɗe shafi"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Sau nawa ake nazarin DB"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Mai Tattara Bayanai ne ke gudanar da wannan aikin. Yana iya jawo tsawon lokacin gudun Mai Tattara Bayanai."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Kowace Rana"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Kowane Mako"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Kowane Wata"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Yi Nazarin DB - Matakin duba db"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Gaggawa - Kada a duba layuka don hanyoyin haɗi marasa daidai<br/>Mai sauri - duba tebura kawai da ba a rufe daidai ba<br/>Waɗanda suka canza - duba teburan da suka canza tun bincike na ƙarshe<br/>Matsakaici - tare da duba layuka<br/>Faɗaɗaɗɗe - cikakkun layuka da maɓallai<br/>Matsakaici da faɗaɗaɗɗe na iya haifar da jinkirin buɗe shafi!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Mai Sauri"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Sauri"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "An sauya"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Matsakaici"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "An faɗaɗa"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Binciken Lokacin NTP - Adireshin IP ko sunan DNS na uwar garken NTP"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Shigar da IP ko sunan DNS na sabar NTP"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Sau nawa ake duba NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Duba DNS - Kowane sunan DNS"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Shigar da sunan DNS don gwaji"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Sau nawa ake duba DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Fanel na Bayanan Mai Gudanarwa game da Ayyukan Gyara, Na'urori da suka Kashe, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Idan ba fanko ba ne, za a nuna Fanel a saman. Za ka iya amfani da alamomin HTML (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Kwanakin gargaɗi na Tsarin Kulawa mai zuwa"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Kwanaki nawa kafin lokacin gyaran da aka tsara ya kamata a nuna gargaɗi?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Kada a taɓa yin gargaɗi"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Lokacin da gyara zai fara"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "%d Rana Kafin"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "%d Kwanaki Kafin"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Ƙididdigar hanyar sadarwa a cikin"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "bytes ko bits"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Baitoci"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Bitoci"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Saitunan Ƙararrawa"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Ƙararrawar Binciken DB na Masu Haɗin da aka Katse"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Idan wannan lamarin ya faru, kunna launin matsayi na Al'ada, Gargaɗi, ko Faɗakarwa da aka zaɓa."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Ƙararrawar Mai Masauki mai Bayani iri ɗaya"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Ƙararrawar Tushen Bayanai Marar Mai Shi"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Ƙararrawar Sakamakon Mai Tattara Bayanai da ba fanko ba"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Ƙararrawar Tushen Bayanai Mai Munanan Fihirisa"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Matakin logonly na Iyakar Ƙararrawa"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Ƙararrawa idan ba a inganta bulk_walk_size na na'ura ba"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Ƙararrawar Na'urori masu IP/tasha iri ɗaya"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Ƙararrawar Na'ura a cikin Bishiya fiye da ɗaya"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Ƙararrawar Na'ura mara Bishiya"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Ƙararrawar Na'ura mai SNMP Community na asali public/private"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Ƙararrawar Na'ura mara Sa Ido"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Ƙararrawar Na'ura mara Jadawali"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Ƙararrawar Ja/Rawaya na Lokacin Tattara Bayanai"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Lokutan tattara bayanai da suka wuce waɗannan iyakoki za su kunna launin matsayin Gargaɗi ko Faɗakarwa."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Rawaya / Ja"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Rawaya / Ja"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Rawaya / Ja"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Ƙararrawar Ja/Rawaya na Rabon Waɗanda Suka Kasa/Duka"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Rabo na binciken samuwa da suka gaza zuwa binciken da suka yi nasara don kunna launin Matsayin Gargaɗi ko Faɗakarwa."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Rawaya / Ja"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Rawaya / Ja"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Rawaya / Ja"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Ƙararrawar Ja/Rawaya na Ping"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Jinkirin Ping sama da waɗannan matakan zai kunna launi na matsayin Gargaɗi ko Faɗakarwa."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Rawaya / Ja"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Rawaya / Ja"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Rawaya / Ja"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Ƙararrawar Ja/Rawaya na Mafi Munin Samuwar Aiki"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Samuwa ƙasa da waɗannan matakai za ta kunna launin matsayi na Rawaya ko Ja."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Rawaya / Ja"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Kunna"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Kashe"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Alluna"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Danna 'Ci gaba' don Kunna Fanel mai zuwa."
+msgstr[1] "Danna 'Ci gaba' don Kunna Faneloli masu zuwa."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Kunna Fanel"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Danna 'Ci gaba' don Kashe Fanel mai zuwa. Ana ɓoye fanelolin da aka kashe daga allunan bayanai kuma Mai Tattara Bayanai yana tsallake su, amma ana adana bayanansu."
+msgstr[1] "Danna 'Ci gaba' don Kashe Faneloli masu zuwa. Ana ɓoye fanelolin da aka kashe daga allunan bayanai kuma Mai Tattara Bayanai yana tsallake su, amma ana adana bayanansu."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Kashe Fanel"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Soke"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Ci gaba"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Sunan Allo"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Sunan nuni na wannan fanel."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Tushe"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Ƙarin manhajar da ke samar da wannan fanel ɗin. Fanelolin Intropage da kansu suna nunawa a matsayin Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Rukuni"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Rukunin fanel."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Mataki"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Duk masu amfani suna raba fanalolin tsari; Fanalolin mai amfani na kowane mai amfani ne."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Yana Buƙatar"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Manhajojin ƙari da dole ne a kunna su don wannan rukunin ya fito."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Sabunta"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Tazarar tattara bayanai ta fanel."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Sabunta Aiki"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Aikin da Mai Tattara Bayanai ke kira don tattara bayanan wannan rukunin allo."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Matsayi"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Ko an kunna allon."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Tsarin Na'ura"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Mai Amfani"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "An kunna"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Babu"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Ba a Samu Faneloli ba"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Rumbun Allunan Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Bincika"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Kowane"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Tafi"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Saita/Sabunta Matatu"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Share"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Share Matatu"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Faɗakarwowi"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Alluna da ke ba da faɗakarwa."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Faɗakarwar Mai Masauki"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Faɗakarwar Mai Masauki (a kunne/a kashe/yana farfaɗowa) kwanan nan"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Kwanan Wata"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Mai Masauki"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Jiha"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Akwai ƙarin bayanai, yi amfani da tagar cikakken bayani"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Ana jiran bayanai"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Ba ka da izini ga kowane Mai Masauki"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Fuskokin Nazari"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Alluna da ke nazarin halin yanzu na Cacti da ƙarin kayan aikinsa."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Yi Nazarin Shiga"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Yi nazarin shigowar Cacti na ƙarshe da dama don gano al'amura da kurakurai."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Yi Nazarin Rajistoci"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Nemo kurakurai da aka saba samu a cikin fayil ɗin rajistar Cacti waɗanda ya kamata su zama abin damuwa."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Binciken Rumbun Bayanai"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Yi nazarin rumbun adana bayanai na MySQL/MariaDB don gano kurakuran da aka saba samu. Lura cewa wannan tsarin na iya ɗaukar dogon lokaci a kan manyan tsare-tsare sosai."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Yi Nazarin Abubuwan Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Yi Nazarin Bishiyoyi, Jadawalai, Masu Masauki, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Yi Nazarin ƙididdigar DS"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Yi nazarin ƙididdigar tushen bayanai"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Sunan mai amfani"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "Adireshin IP"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Ya Gagara"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Nasara - Shiga"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Nasara - Token"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Jimillar Shiga da Suka Kasa: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Masu Amfani Masu Aiki a cikin Awa ta Ƙarshe: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Ba a iya samun fayil ɗin rajista ba ko yana da fanko"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Yi nazarin layukan rajista %s na ƙarshe:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Kurakurai: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Gargaɗi: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Girman Rajista: Ya fi 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Girman Rajista: Yana da kyau"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Girman Rajista: Yana da girma sosai"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Girman Rajista: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Layukan rajista na ƙarshe:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Ana tsallake binciken teburan DB. Rumbun bayanai ya yi girma da yawa"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Tebur %s matsayi %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Matsaloli"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: Lafiya"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "An kai iyakar haɗin gwiwa: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Za ka iya ƙara mafi yawan haɗi ta kayan aikin layin umarni ko na dindindin a cikin fayil ɗin saiti"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Kuskuren haɗi: %s - gwada sake kunna sabis ɗin SQL, duba rajistar SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Abokan ciniki/haɗin da aka soke: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Abokan ciniki/haɗin da aka soke - Gudanar da 'SET GLOBAL log_warnings = 1;' ko ' log_error_verbosity = 1;' (ya danganta da sigar MySQL/MariaDB ɗinku) daga mysql CLI kuma a saita a cikin server.cnf don yin shiru."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Kuskuren haɗi: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Teburan da suka lalace: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Ya kamata ka gudanar da umarnin bincika da gyara tebur"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Teburan ƙwaƙwalwa: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Duk tebura: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Babu"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Na'urori masu IP da tasha (port) iri ɗaya: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Na'urorin da ba a inganta Bulk Walk Size nasu ba: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Da fatan za a duba ma'aunin na'ura \"Bulk Walk Maximum Repetitions\". Za ka iya inganta aikin Mai Tattara Bayanai naka"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Gudanarwar ƙarshe ta sake yin fihirisa"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Gudun Mai Duba RRD na ƙarshe"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Gudun Mai Tsabtace RRD na ƙarshe"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Ana ba da shawarar gudanar da wannan kayan aikin aƙalla lokaci zuwa lokaci"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: ba a gudanar ba tukuna"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Tusoshin Bayanai Marasa Maƙala: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Tushen Bayanai - munanan fihirisa: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Faɗakarwa/gargaɗi na rajista kaɗai na Thold: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Na'urori masu bayani iri ɗaya: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Na'urori a cikin bishiya fiye da ɗaya: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Na'urori marasa jadawalai: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Na'urori marasa bishiya: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Na'urori masu tsohon community na public/private: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Matsalar abubuwan jadawali/abubuwan samfuri: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Manhajar ƙari ta Monitor - Masu masauki da ba a sa ido ba: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "To"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "CPU na Saba (cibiyoyi / ayyuka / zaren aiki): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "An kashe sanar da mai gudanarwa kuma ba a saita imel ɗin mai gudanarwa ba"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "An samo matsaloli %s"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Komai Lafiya"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Ƙididdigar DS: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Allo yana buƙatar a kunna ƙididdigar DS."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Duk rikodin DS "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Rikodin DS marasa komai "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Yi Nazarin Cikakkun Bayanan Rajistar Cacti [ Gargaɗi/Kurakurai ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Kurakurai"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Gargaɗi"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "GARGAƊI: Fayil ya fi girman 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Girman Rajista"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Yi Nazarin Cikakken Bayanin Shiga"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Sakamako"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Masu Amfani Masu Aiki a cikin Awanni 2 da suka Wuce:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Babu Masu Amfani Masu Aiki"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Duba Cikakkiyar Rijistar Mai Amfani"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Yi Nazarin Bishiya, Jadawalai, Masu Masauki"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Na'urori masu IP da tasha (port) iri ɗaya - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Na'urorin da ba a inganta Bulk Walk Size nasu ba - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Kula da bayanai"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Tusoshin Bayanai Marasa Maƙala - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Tusoshin Bayanai masu munanan fihirisa - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Faɗakarwa/gargaɗi na rajista kaɗai na Thold - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Na'urori masu bayani iri ɗaya - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Na'urori a cikin bishiya fiye da ɗaya - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Na'urori marasa Jadawalai - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Na'urori marasa bishiya - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Na'urori masu tsohon community na public/private - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Matsalar abubuwan jadawali/abubuwan samfuri - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Samfurin jadawali"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Jadawalai"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Abubuwan jadawali"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Abubuwan samfuri"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Manhajar ƙari ta Monitor - Masu masauki da ba a sa ido ba - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "Cibiyoyi / ayyuka / zaren aiki na CPU na Saba: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "An kashe sanar da mai gudanarwa ko ba a saita imel ɗin mai gudanarwa ba"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Mafi yawan aiki"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Alluna da ke gano masu masauki mafi yawan aiki."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "CPU mafi cunkoso"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Na'urori masu CPU mafi yawan aiki (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "ucd/net Mafi Cunkoso - Nauyi"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Na'urori masu mafi girman nauyin aiki (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Sararin Hard Drive Mafi Cunkoso"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Na'urori masu mafi yawan sararin rumbun ajiya da aka yi amfani da shi (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Lokacin aiki mafi cunkoso"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Na'urori masu mafi tsawon lokacin aiki"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Zirga-zirgar shiga/fita ta mahaɗi mafi cunkoso"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Na'urori masu mafi yawan zirga-zirgar shiga/fita (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Kuskuren mahaɗi mafi cunkoso"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Na'urori masu mafi yawan kurakurai/watsi (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Amfanin Mahaɗi Mafi Cunkoso"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Tashoshin haɗi masu mafi yawan amfani da mahaɗa"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Da fatan za a kunna kuma a saita ƙididdigar DS"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Nemi mai gudanarwa ya kunna ƙididdigar DS"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Matsakaici"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Ƙololuwa"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Matsakaicin duk DS da aka amince da su"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Ana jiran bayanai ko ba ka da izinin kowace na'ura mai wannan samfuri."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Ba ka da izini ga kowane Mai Masauki ko kuma babu wani Mai Masauki mai wannan Samfurin"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Lokacin Aiki"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Matsakaicin duk masu masauki da aka amince da su"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Ana jiran bayanai ko ba ka da izinin kowace na'ura"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Alkibla"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Tazarar lokacin mintuna 5 na ƙarshe"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Amfanin CPU na Host MIB guda 30 mafi cunkoso (awa ta ƙarshe)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Sanya fulogin ɗin TopX don ƙarin ƙididdigar DS"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Nauyin ucd/net guda 30 mafi cunkoso (awa ta ƙarshe)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Sararin Hard Drive na Host MIB guda 30 mafi cunkoso (awa ta ƙarshe)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Zirga-zirga mafi cunkoso (shiga+fita)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Amfanin mahaɗi mafi cunkoso"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Allon Jadawalai"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Alluna da ke ba da bayanai game da Cacti da ƙarin kayan aikinsa ta hanyar Jadawali."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Tusoshin Bayanai"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Jadawalin Tusoshin Bayanai"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Samfuran Na'ura"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Jadawalin Samfuran Na'ura"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Na'urori bisa Matsayi"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Jadawalin Na'urori ta Matsayi (sama,ƙasa,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Tusoshin Bayanai: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Samfuran Na'ura: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Na'urori: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Ba Ya Aiki"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Yana Farfaɗowa"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Nau'in Bayanai"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Jimla"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Ba a sami tusoshin bayanai marasa samfuri ba"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Na'urori"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Adadin Na'urori"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Duka"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Yana Aiki"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Sunan Samfuri"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Jimillar Na'urori"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Ba a sami samfuran na'ura ba"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Rukunin MacTrack"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Alluna da ke ba da bayanai game da ƙarin kayan aikin MacTrack na Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Ƙarin Manhajar MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Ƙididdiga daban-daban na tattarawa da Wuri na MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Wurare na MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Ƙididdiga daban-daban na Wuri na MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Ba a Shigar da Ƙarin Manhajar MacTrack ba ko Ba ya Aiki"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Duka: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "A kunne: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Ya Daina Aiki: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Kuskure: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Ba a sani ba: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "An kashe: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Kuskure"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Ba a sani ba"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Ba ka da izinin ƙarin manhaja"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Wuri"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "Adiresoshin IP"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Tashoshin haɗi"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Tashoshin haɗi da ke aiki"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "MACs"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Kurakuran Na'ura"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Ba a sami wuraren mactrack ba"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Sauran Fanaloli"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Alluna da ke ba da bayanan da ba a rarraba su ba game da Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Matsayin NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Ana duba agogon tsarin Cacti naka don karkacewa daga sanannen ma'auni da kuma duba warwarewar DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Cikakkun Bayanan Kari na Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Cikakkun bayanan kari na Maint game da jadawalan da ke tafe"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Bayanai na Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Bayanin Duba Sabis na URL na Manhajar ƙari ta webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Cikakkun Bayanan ƙarin Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Bayanin Manhajar ƙari ta ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Ba a saita sabar NTP ba"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "An saita uwar garken NTP ba daidai ba - %s<br/>Da fatan za a gyara shi a saituna"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "An kasa samun lokacin NTP daga %s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Da fatan za a duba lokaci domin ya karkace da fiye da haka"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "fiye da daƙiƙa %s daga uwar garken NTP %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Lokacin gida daidai yake da na uwar garken NTP"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "An kasa tuntuɓar uwar garken NTP da aka nuna."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Da fatan za a duba saitin ku."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Ba a saita sunan mai masauki na DNS ba"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "An saita sunan mai masauki na DNS ba daidai ba - %s<br/>Da fatan za a gyara shi a saituna"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Fassarar sunan mai masauki na DNS (%s) ta yi nasara."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Lokacin warware DNS: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Fassarar sunan mai masauki na DNS (%s) ta gaza."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Ba a girka/kunna karin Maint ba"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Ba a shigar da manhajar ƙari ta Webseer ba ko ba a kunna ta ba"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Ba a ƙara goyon bayan ƙarin manhajar Webseer ba, yi amfani da ƙarin manhajar servcheck a maimakonsa"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Adadin dubawa (duka/an kashe): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Matsayi (sama/ƙasa): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Saƙonnin rajista na ƙarshe"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "Lambar HTTP"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Ƙarin Manhajar Webseer - Cikakkun Bayanai"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Ba a shigar da manhajar ƙari ta Servcheck ba ko ba a kunna ta ba"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Matsayi (lafiya/kuskure): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Bayanai na rajista na ƙarshe"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Gwaji"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Nau'i"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Ƙarin Servcheck - Cikakkun Bayanai"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Sakamakon bincike"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Rukunonin Mai Tattara Bayanai"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Alluna da ke ba da bayanai game da tsarin tattara bayanai na Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Bayanin Poller"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Bayanai daban-daban game da Mai Tattara Bayanai na Cacti naka."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Ƙididdigar Mai Tattara Bayanai"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Ƙididdiga daban-daban na Mai Tattara Bayanai na Cacti."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Abubuwan Fitarwa na Mai Tattara Bayanai"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "Lambar ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Suna"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Jimillar Lokaci"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Sabo/Mara Aiki"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Ana Gudanarwa"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Ba ya Aiki"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Ba a sani ba/a kashe"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "Daƙiƙa %s"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(daidai)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(duka)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "Lambar ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Daƙiƙoƙi"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "ID na matsakaicin 24h: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Bayanin Mai Tattara Bayanai"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Matsakaicin Lokaci"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Mafi Tsawon Lokaci"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Abubuwan fitarwa na Mai Tattara Bayanai "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Abubuwa"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Fanalolin Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Alluna da ke ba da bayanai game da sarrafa saƙonnin Syslog na Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Cikakken Bayanin Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Ƙididdiga daban-daban na ƙarin manhajar Syslog."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Manyan Na'urorin Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Na'urori masu mafi yawan saƙonni"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Matakan Saƙon Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Saƙonni bisa mataki."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Mai shigowa"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "An ajiye"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Saƙonni"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Ba a shigar ko kunna ƙarin Syslog ba"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Na'ura"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Ba a kunna ƙarin Syslog ba"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Masu Masauki 20 masu mafi yawan saƙonni"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Babu saƙonni"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Fanalolin Tsari"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Alluna da ke ba da bayanai game da ingancin aikin tsarin Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Bayani"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Bayanai daban-daban na tsari game da tsarin Cacti da kansa."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Faɗakarwar Gudanarwa"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Ƙarin sashin sanarwa na mai gudanarwa ga duk masu amfani"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Ƙididdigar Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Bayani game da tsarin ƙara saurin aiki na Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Tarihin Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Bayani game da tarihin tsarin ƙara sauri."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Mafi Girma da Ƙaranci na Sa'o'i 24"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Tebur mai ɗauke da mafi tsananin lokutan Tattara Bayanai na sa'o'i 24 (mafi tsawo aikin Mai Tattara Bayanai, Masu Masauki da suka faɗi)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Amfanin CPU"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Jadawalin amfanin CPU (Linux kaɗai)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Nauyin CPU: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Ba a aiwatar da wannan aikin akan tsarin Windows ba"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Matsakaicin CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "Mafi Girman CPU"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Matsakaicin 24h"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Sigar Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Nau'in Mai Tattara Bayanai:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Sigar Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Kana amfani da sigar spine wadda ba daidai ba ce!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Nau'in Mai Tattara Bayanai: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Yana gudana akan: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Tarihin Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Ƙwaƙwalwa "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Bayanai masu jira "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Gargaɗin Wuce Iyakar Lokaci"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Lokaci Ya Ƙure"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Sauran"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Ba a Taɓa Gudanarwa Ba"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Matsayin Boost shi ne: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Tsare-tsare/Yawan lokaci: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Iyakar Bayanai Masu Jira: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Kimanin Lokacin Farawa na Gaba: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Bayanai Masu Jira/Da aka Ajiye: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Girman Teburin Boost na Yanzu: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Matsakaicin Bytes/Rikodi: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Tsawon gudanarwa/sabuntawa na ƙarshe: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Gudun Mai Tattara Bayanai"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Masu Masauki da Suka Daina Aiki"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "An tada"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Abub. fit. na Mai Tattara Bayanai"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Kurakuran Mai Masauki"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Tattara Bayanai na Mafi Girma da Ƙaranci na Sa'o'i 48"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Mai Tattara Bayanai Mai Daɗewa Yana Aiki"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Mafi Yawan Na'ura da Ta Sauka"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Mafi Yawan Iyaka da Aka Tada"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Abun Fitarwa na Mai Tattara Bayanai"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Tattara Bayanai da Suka Kasa"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Fanelolin Iyaka"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Alluna da ke ba da bayanai game da ƙarin kayan aikin Iyaka na Cacti."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Abubuwan Iyaka Na Ƙarshe"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Sabbin Abubuwan da Suka Faru na Ƙarin Manhajar Iyaka"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Iyaka"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Jadawalin Ƙarin Manhajar Iyaka (duka, waɗanda suka tashi, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Ba a shigar da manhajar ƙari ta Thold ba ko ba a kunna ta ba"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Babu al'amura tukuna"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Iyakoki: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Ba a girka/kunna ƙarin manhajar Thold ba"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "An Keta Iyaka"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Cikakkun Bayanan Iyaka"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Iyakoki"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "An Keta: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "An tada: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Ba ka da izinin shiga Iyakoki"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Bayani"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Faneloli 5 na Sama/Ƙasa"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Alluna da ke ba da bayanai game da yanayin ci gaban tattara bayanan Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Mafi Ƙarancin Ping"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Na'urori masu mafi munin amsawar ping"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Mafi Ƙarancin Samuwa"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Na'urori masu mafi ƙarancin samuwa/isa"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Mafi Ƙarancin Lokacin Tattara Bayanai"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Na'urori masu mafi munin lokacin tattara bayanai"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Mafi Ƙarancin Rabon Tattara Bayanai"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Na'urori masu mafi munin rabon tattara bayanai"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Na Yanzu"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Sunan Mai Masauki"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Samuwa/Isa"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Lokacin Ɗaukar Bayanai"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Rabo"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Masu Masauki 20 Masu Mafi Munin Ping"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Masu Masauki 20 Masu Mafi Munin Samuwar Aiki"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Samuwa"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Masu Masauki 20 Mafi Muni a Lokacin Tattara Bayanai"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Masu Masauki 20 Masu Mafi Munin Rabon Tattara Bayanai"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Mai Kallon Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Gudanar da Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Gudanarwa"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Rumbun Alluna"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Gudanar da Tsari"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Tsawon Lokaci Sa'a 1 ta Ƙarshe"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Tsawon Lokaci Sa'o'i %d na Ƙarshe"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Tsawon Lokaci Rana 1 ta Ƙarshe"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Tsawon Lokaci Kwanaki 2 na Ƙarshe"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Daƙiƙa %d"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "Sa'o'i %d"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "Kwana %d"
+
+#: setup.php
+msgid "Actions"
+msgstr "Ayyuka"
+

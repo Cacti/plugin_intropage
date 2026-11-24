@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Kinyarwanda\n"
+"Language: rw-RW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - Uburenganzira bwanzwe"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "Imbonerahamwe imwe cyangwa nyinshi zakuweho kubera uburenganzira budahagije. Vugana n'umuyobozi wa sisitemu."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Ushobora guhagarika imirongo yo hejuru muri <b>Gena imiterere > Amagenamiterere > Rusange > Hisha Imbonerahamwe ya Cacti</b> maze ugakoresha urupapuro rwose kuri Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Mburabuzi"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Hisha cyangwa garagaza ubutumwa bumenyesha bw'ikare itukura/y'umuhondo/y'icyatsi"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Hagarika kwimura agace/fungura gukoporora inyandiko mu gace"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Ibikorwa ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Ongeraho Imbonerahamwe Nshya"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Kuraho ikibaho kiriho"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Umubare w'imirongo - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Vugurura Ubu"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Kuvugurura byahagaritswe"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Vugurura hakurikijwe Ikusanyamakuru"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Vugurura buri munota 1"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Vugurura Buri Minota 5"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Vugurura Buri Saha"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Igihe cy'ingenzi - byahagaritswe"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Igihe cy'ingenzi - iminota 15"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Igihe cy'ingenzi - isaha 1"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Igihe cy'ingenzi - amasaha 4"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Igihe cy'ingenzi - umunsi 1"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Tondeka ukurikije uburemere"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Tondeka ukurikije ibyo ukoresha yahisemo"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Ongera upakire Ibisobanuro by'Uduce"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Shyiraho Intropage nk'ipaji isanzwe yo kwinjira"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Shyiraho Igishushanyo nk'ipaji isanzwe yo kwinjira"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Erekana Intropage muri Console"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Erekana Intropage mu cyiciro nk'urupapuro fatizo"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Ibice bike ku murongo umwe"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Ibibaho byinshi ku murongo"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Hagarika gusangira"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Sangiza iki kibaho"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Ntibyemewe gusangiza ikibaho kirimo ubusa"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Koresha imbonerahamwe isangiwe"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Ntibishoboka gukoresha ikibaho cy'igenzura gisangiwe - umubare ntarengwa w'ibibaho wagezweho."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Nta mbonerahamwe zisangiwe"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Ikaze kuri Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Ushobora Kongeraho ibice by'ikibaho cy'igenzura mu buryo bwinshi:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Hitamo ibice byateguwe muri \"Panels menu\". Igice gishobora kuba gifite ibara ry'ikijuju. Biterwa n'uburenganzira, baza umuyobozi"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Ongeraho Igishushanyo icyo ari cyo cyose cya Cacti, koresha agashusho"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Ushobora gukora amapaneli yawe bwite. Andi makuru ari muri dosiye <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Ushobora gusangiza imbonerahamwe abandi bakoresha:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "koresha amahitamo ya \"Sangiza iki kibaho\" muri menyu y'Ibikorwa - Buri mukoresha ashobora kugikoresha nk'inyandikorugero."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Ushobora gukoresha imbonerahamwe yasangijwe ukoresheje ibikubiye mu Bikorwa:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Koresha \"Koresha imbonerahamwe isangiwe (izina ry'ukoresha/imbonerahamwe) -  Itunganya imbonerahamwe imwe nk'iyasangiwe ariko ikoresheje uburenganzira bwawe."
+
+#: display.php
+msgid "Customization:"
+msgstr "Ihindura ryihariye:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Ushobora gukora imbonerahamwe zigera kuri 9. Buri mbonerahamwe ishobora guhabwa izina, igakoresha agashushondanga"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Intopage ishobora kwerekanwa muri konsore cyangwa mu gice gitandukanye. Ushobora kubihindura muri menu y'Ibikorwa"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Niba ushaka gukoporora inyandiko uvanye ku kibaho, ugomba guhagarika igikorwa cyo gukurura no kurekura, koresha agashusho"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Ibisobanuro by'igisate"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Hagarika kwimura agace/Fungura gukoporora inyandiko mu gace"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Fungura kwimura akadirishya/Hagarika gukoporora inyandiko muri ako kadirishya"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Hisha ubutumwa bumenyesha bw'ikare itukura/y'umuhondo/y'icyatsi"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Erekana imenyesha ry'utuzu tw'umutuku/umuhondo/icyatsi"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Ikosa mu gusoma amakuru mashya"
+
+#: display.php
+msgid "Close"
+msgstr "Funga"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Ikibaho cy'ibikorwa cyasibwe"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Imbonerahamwe Nshya"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Ikibaho cy'ibikorwa cyongeweho"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Ntibishoboka kongeraho igishushanyo cyagutse cyangwa gifite igihe cyihariye, ihindura igihe kuri Igice cy'isaha gishize"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Isomero ry'ibice bya Intropage ryavuguruwe rikuwe mu Isomero ry'ibice"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Ikibaho cy'ibikorwa cyongeweho, nyamuneka tegereza inshuro nke z'ikusanyamakuru kugira ngo amakuru aboneke"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Ikosa - kugerageza gusangiza imbonerahamwe ngenzuzi idasangizwa"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Ongera upakire Agace"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Kurura kugira ngo uhindure urutonde"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Hindura itonde ry'agace"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Imirongo mike"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Imirongo myinshi"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Erekana ibisobanuro birambuye"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Hagarika agace"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Igisate nticyabonetse"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Iki gice ntikiboneka kuko umugereka wacyo ukenewe wahagaritswe."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Panel irimo umumaro wa render ariko ntubaho."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Panel ntigira umumaro wa render."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Ntibyabonetse"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Nta makuru yabonetse.  Tegereza igenzura rikurikira, <br/>cyangwa ukoreshe Kongera gupakira ku ngufu niba bihari."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Igisate Ntikibonetse"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Umukoro w'ibisobanuro birambuye ntubaho."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Ivugurura muri %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "Isegonda %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "Amasegonda %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "Iminota %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "Iminota %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "Amasaha %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "Amasaha %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "Iminsi %s"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Nta makuru ahari.  Koresha Kuvugurura ku ngufu, cyangwa utegereze icyiciro gikurikira cy'ikusanyamakuru rya Cacti."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Nta makuru ahari.  Iyi mbonerahamwe ntiyemera Kuvugurura ku ngufu.  Ugomba gutegereza ko Ikusanyamakuru rya Cacti rikora igenzura."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Ibisate ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (nta burenganzira)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Ntibishoboka kongerwa ku kibaho cy'igenzura. Igihe cyagenwe n'ukoresha."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Kura ku Kibaho"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Ongeraho ku Mbonerahamwe"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Amazina y'ibibaho by'ibikorwa"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Ikibaho cy'ibikorwa %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Inshuro zo kuvugurura utubaho tw'urwego rw'ukoresha"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Inshuro zo kuvugurura paneli ya sisitemu (Abakoresha bose bemerewe)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Inshuro zo Kuvugurura Icyerekezo"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Igice cy'ibanze"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Ukoresha Usanzwe"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[hindura: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Paneli zo ku rwego rwa sisitemu"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Ibisate bikwiriye abayobozi cyangwa abakoresha bafite ububasha bwisumbuye kandi ubusanzwe bitareba abakoresha bose.  Ibisate akenshi bivuga ku mikoreshereze rusange ya sisitemu."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Utubaho tw'urwego rw'ukoresha"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Ibisate bikwiriye ko abakoresha rusange babigeraho.  Uburenganzira bugarukira ku byo ukoresha uriho ashobora kureba."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Ushobora Kwemerera/Kwima ibice ku Ukoresha"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Ushobora Kwemerera/Kwima ibice ku Itsinda"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Imiterere itukura"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Imiterere y'umuhondo"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Imiterere y'icyatsi"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Amagenamiterere y'igaragara"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Ibintu by'ingenzi bizajya hejuru"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Niba bihiswemo, Intropage yerekana mbere amakuru y'ingenzi (amakosa, amaburira)"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Erekana ibice byinshi ku murongo umwe"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Kuri mugaragaza ngari"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Gukuraho Amapaneli mu buryo bwikora"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Niba Umwanya (Panel) washyizwemo kandi umugereka ukenewe ukavanwamo, vanamo nawo mu buryo bwikora"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Kuvugurura Urupapuro ku buryo bwikora"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Inshuro zingahe"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Mu buryo bwikora bikozwe n'ikusanyamakuru"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Nta na rimwe"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Buri munota"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Buri minota %d"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Buri saha"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Igihe cy'ingenzi"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Kuva ubu gusubira inyuma. Bigira ingaruka ku ibara ry'imirongo, ibikorwa bya kera ntibizashimangirwa, bizerekanwa gusa"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Byahagaritswe"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "Iminota 15"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "Isaha 1"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "Amasaha 4"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "Umunsi 1"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Umubare w'imirongo y'ikibaho"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Umubare w'imirongo mu kibaho"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "imirongo %d"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Igihe cy'Icyerekezo"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Ku bishushanyo by'icyerekezo, ni ikihe gihe fatizo cyagombye kuba icy'ibyo bishushanyo."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Igihe ntarengwa cy'Ikusanyamakuru"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Igihe, mu minota, Ikusanyamakuru ryo mu mutima rya Intropage rishobora kumara rikora mbere yo guhagarikwa no kwicwa na Cacti."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Umunota %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Iminota %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "Isaha %d"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Sesengura Inyandiko - umubare w'imirongo"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Umubare w'imirongo y'inyandiko z'ibikorwa izasesengurwa. Imirongo = mu kibaho, imirongo 2x = mu makuru arambuye. Umubare munini ushobora gutera ipaji gutinda gufunguka"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Inshuro zo gusesengura DB"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Ikusanyamakuru rikora uyu murimo. Bishobora gutera ikora rirerire ry'ikusanyamakuru."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Buri munsi"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Buri cyumweru"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Buri kwezi"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Sesengura DB - Urwego rw'igenzura rya db"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Byihuse cyane - Nta suzuma ry'imirongo ku mahuza atari yo<br/>Byihuse - suzuma gusa imbonerahamwe zitafunzwe neza<br/>Byahindutse - suzuma imbonerahamwe zahindutse kuva ku isuzuma riheruka<br/>Byo hagati - hamwe n'isuzuma ry'imirongo<br/>Byagutse - imirongo yose n'imfunguzo<br/>Byo hagati na byagutse bishobora gutuma ipaji itinda gufunguka!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Byihuse"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Byihuse"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Byahinduwe"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Biringaniye"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Byongerewe"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Igenzura ry'Igihe rya NTP - Aderesi ya IP cyangwa izina rya DNS rya seriveri ya NTP"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Shyiramo IP cyangwa izina rya DNS rya seriveri ya NTP"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Inshuro zo kugenzura NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Isuzuma rya DNS - Izina iryo ari ryo ryose rya DNS"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Shyiramo izina rya DNS ryo kugerageza"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Inshuro zo kugenzura DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Ikibaho cy'Amakuru y'Umuyobozi ku Mirimo y'Isana, Ibikoresho Byahagaze, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Niba hatarimo ubusa, Ikibaho kizagaragara hejuru. Ushobora gukoresha utumenyetso twa HTML (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Iminsi y'iburira ku ngengabihe y'isanasana igiye kuza"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Ni iminsi ingahe mbere ya gahunda y'isanwa yateganyijwe iburira rigomba kwerekanwa?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Ntuzigere uburira"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Igihe ubugenzuzi n'isana bitangirira"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "Umunsi %d mbere"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "Iminsi %d mbere"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Imibare y'umuyoboro mu"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "bayiti cyangwa biti"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Bayiti"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Amabiti"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Amagenamiterere y'Impuruza"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Impuruza y'igenzura rya DB ku bakiriya bahagaritswe"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Niba iki gikorwa cyabaye, koresha ibara ry'Imiterere ryahiswemo rya Bisanzwe, Iburira, cyangwa Impuruza."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Impuruza ya Mwakirizi ufite ibisobanuro bimwe"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Impuruza y'Inkomoko y'Amakuru itagira nyirayo"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Impuruza y'Ibisohoka by'Ikusanyamakuru bitarimo ubusa"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Impuruza y'imibare ndangamwanya mibi y'Inkomoko y'Amakuru"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Igikorwa cyo kubika mu nyandiko gusa kw'Impuruza y'Urwego ntarengwa"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Impuruza igihe bulk_walk_size y'igikoresho itanonosowe"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Impuruza y'Ibikoresho bifite IP/port imwe"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Impuruza y'Igikoresho kiri mu Giti kirenze kimwe"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Impuruza y'Igikoresho kitagira Igiti"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Impuruza y'Igikoresho gifite umuryango wa SNMP usanzwe wa public/private"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Impuruza y'Igikoresho kitari mu igenzura"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Impuruza y'Igikoresho kitagira Igishushanyo"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Impuruza y'Umutuku/Umuhondo y'Igihe cyo gukusanya amakuru"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Ibihe byo gukusanya amakuru birenze izi nzego ntarengwa bizabyutsa ibara ry'imiterere y'Iburira cyangwa Impuruza."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Impuruza y'Umutuku/Umuhondo ku kigereranyo cy'ibyananiwe/byose"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Ikigereranyo cy'isuzuma ry'ububoneke ryatsinzwe ugereranyije n'iryagenze neza kugira ngo hatangwe ibara ry'imiterere y'Iburira cyangwa Impuruza."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Impuruza y'Umutuku/Umuhondo ya Ping"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Ubukererwe bwa Ping burenze izi nzego buzazamura ibara ry'Imiterere y'Iburira cyangwa Integuza."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Umuhondo / Umutuku"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Impuruza y'Umutuku/Umuhondo y'Ukuboneka gukeya cyane"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Kuboneka kuri munsi y'ibi bipimo bizatuma imiterere igira ibara ry'Umuhondo cyangwa Iritukura."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Umuhondo / Umutuku"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Koresha"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Hagarika"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Utubaho"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Kanda 'Komeza' kugira ngo ufungure Igice gikurikira."
+msgstr[1] "Kanda 'Komeza' kugira ngo ufungure Ibice bikurikira."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Fungura Akadirishya"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Kanda 'Komeza' kugira ngo uhagarike Igice gikurikira. Ibice byahagaritswe bihishwa ku mbonerahamwe kandi bisimbukwa n'ikusanyamakuru, ariko amakuru yabyo arabikwa."
+msgstr[1] "Kanda 'Komeza' kugira ngo uhagarike Ibice bikurikira. Ibice byahagaritswe bihishwa ku mbonerahamwe kandi bisimbukwa n'ikusanyamakuru, ariko amakuru yabyo arabikwa."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Hagarika Agace"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Hagarika"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Komeza"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Izina ry'igisate"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Izina ryerekana ry'iyi panel."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Inkomoko"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Umugereka utanga iki kibaho. Ibibaho bya Intropage ubwayo bigaragara nka Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Icyiciro"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Icyiciro cy'ikibaho."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Urwego"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Paneli za sisitemu zisangirwa n'abakoresha bose; Paneli z'umukoresha ziba ari iz'umukoresha umwe umwe."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Bisaba"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Imigereka igomba kuba yafunguwe kugira ngo aka gace kagaragare."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Vugurura"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Intera y'igihe cyo gukusanya amakuru y'ikibaho."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Umumaro wo kuvugurura"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Umumaro ikusanyamakuru rihamagara kugira ngo rikusanirize hamwe amakuru y'iki gice."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Imiterere"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Niba urubaho rufunguwe."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Sisitemu"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Umukoresha"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Byafunguwe"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Nta na kimwe"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Nta mbonerahamwe zabonetse"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Isomero ry'ibice bya Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Shakisha"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Icyo ari cyo cyose"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Komeza"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Gushyiraho/Kuvugurura muyunguruzi"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Siba"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Gusiba muyunguruzi"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Integuza"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Ibisate bitanga amaburira."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Impuruza za Mwakirizi"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Impuruza za Mwakirizi (iri gukora/yahagaze/iri gukira) vuba aha"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Itariki"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Mwakirizi"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Intara cyangwa Leta"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Inyandiko nyinshi, koresha idirishya ry'ibisobanuro"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Bitegereje amakuru"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Ntabwo ufite uburenganzira kuri ba Mwakirizi abo ari bo bose"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Imbonerahamwe z'Isesengura"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Ibisate bisesengura imikorere y'ako kanya ya Cacti n'inyongera zayo."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Sesengura Iyinjira"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Sesengura iyinjira rya Cacti ry'ubu kugira ngo umenye imigendekere n'amakosa."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Sesengura Inyandiko"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Shakisha amakosa asanzwe mu idosiye y'ibikorwa ya Cacti ashobora gutera impungenge."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Isuzuma ry'ububiko bw'amakuru"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Sesengura ububiko bwa MySQL/MariaDB ushakisha amakosa asanzwe.  Menya ko iki gikorwa gishobora gufata igihe kirekire kuri sisitemu nini cyane."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Sesengura Ibikubiye muri Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Sesengura Ibiti, Ibishushanyo, Ba Mwakirizi, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Sesengura imibare ya DS"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Sesengura imibare y'inkomoko y'amakuru"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Izina ry'ukoresha"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "Aderesi ya IP"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Byanze"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Byagenze neza - Kwinjira"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Byakunze - Token"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Kwinjira Kunaniranye Kose: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Abakoresha bakora mu isaha ishize: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Idosiye y'ibikorwa ntibashije gufungurwa cyangwa irimo ubusa"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Sesengura imirongo %s ya nyuma y'inyandiko:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Amakosa: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Amaburira: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Ingano y'ikayi y'ibikorwa: Irenze 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Ingano y'ikayi y'ibikorwa: Ni nziza"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Ingano y'ikayi y'ibikorwa: Ni nini cyane"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Ingano y'inyandiko y'ibikorwa: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Imirongo ya nyuma y'inyandiko z'ibikorwa:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Gusimbuka isuzuma ry'imbonerahamwe za DB. Ububiko bw'amakuru ni bunini cyane"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Imbonerahamwe %s imiterere %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Ibibazo"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: Bimeze neza"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Ihuza ntarengwa ryagezweho: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Ushobora kongera umubare ntarengwa w'ubushobozi bwo kwihuza ukoresheje ibikoresho by'umurongo w'amabwiriza cyangwa burundu muri dosiye y'igenamiterere"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Amakosa yo guhuza: %s - gerageza gutangiza bundi bushya serivisi ya SQL, genzura inyandiko ya SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Abakiriya/kwihuza byahagaritswe: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Abakiriya/kwihuza byahagaritswe - Koresha 'SET GLOBAL log_warnings = 1;' cyangwa ' log_error_verbosity = 1;' (biterwa na verisiyo yawe ya MySQL/MariaDB) uvuye muri mysql CLI kandi ubyemeze muri server.cnf kugira ngo ucecekeshe ubu butumwa."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Amakosa yo guhuza: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Imbonerahamwe zangiritse: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Ugomba gukoresha amabwiriza yo kugenzura no gusana imbonerahamwe"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Imbonerahamwe zo mu bubiko: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Imbonerahamwe zose: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Ntibihari"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Ibikoresho bifite IP na port bimwe: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Ibikoresho bitarimo Bulk Walk Size itunganyije: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Nyamuneka reba ikipimo cy'igikoresho \"Bulk Walk Maximum Repetitions\". Ushobora kunoza imikorere y'Ikusanyamakuru ryawe"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Ikorwa rya nyuma ryo kongera gutondeka"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Ikora riheruka rya RRD Checker"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Ikora riheruka rya RRD Cleaner"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Birasabwa gukoresha iki gikoresho nibura rimwe na rimwe"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: ntibirakoreshwa"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Inkomoko z'Amakuru zidafite nyirazo: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Inkomoko y'Amakuru - ibimenyetso bibi: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Imenyesha/iburira ry'inyandiko gusa rya Thold: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Ibikoresho bifite ibisobanuro bimwe: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Ibikoresho biri mu biti birenze kimwe: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Ibikoresho bitagira ibishushanyo: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Ibikoresho bitagira igiti: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Ibikoresho bifite itsinda mbanziriza rya public/private: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Ikibazo ku bigize igishushanyo/ibigize inyandikorugero: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Umugereka wa Monitor - Ba Mwakirizi badakurikiranwa: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "Emeza"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "CPU ya Seriveri (imitima / ibikorwa / udushami): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Kumenyesha umuyobozi byahagaritswe kandi imeyili y'umuyobozi ntiyashyizweho"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Habonetse ibibazo %s"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Byose bimeze neza"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Imibare ya DS: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Igisate gisaba ko imibare ya DS iba yafunguwe."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Inyandiko zose za DS "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Inyandiko zirimo ubusa za DS "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Sesengura Ibisobanuro by'Inyandiko ya Cacti [ Amaburira/Amakosa ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Amakosa"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Imiburo"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "IBURIRA: Dosiye irarengeje 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Ingano y'inyandiko y'ibikorwa"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Sesengura Ibisobanuro by'Iyinjira"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Ibyavuyemo"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Abakoresha bakora mu masaha 2 ashize:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Nta Bakoresha Bakora Bariho"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Reba inyandiko yuzuye y'ukoresha"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Sesengura Igiti, Ibishushanyo, Ba Mwakirizi"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Ibikoresho bifite IP na port bimwe - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Ibikoresho bitarimo Bulk Walk Size itunganyije - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Kubungabunga amakuru"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Inkomoko z'Amakuru zidafite nyirazo - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Inkomoko z'Amakuru zifite ibimenyetso bibi - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Imenyesha/iburira ry'inyandiko gusa rya Thold - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Ibikoresho bifite ibisobanuro bimwe - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Ibikoresho biri mu biti birenze kimwe - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Ibikoresho bitagira Ibishushanyo - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Ibikoresho bitagira igiti - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Ibikoresho bifite itsinda mbanziriza rya public/private - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Ikibazo ku bigize igishushanyo/ibigize inyandikorugero - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Inyandikorugero y'igishushanyo"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Ibishushanyo"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Ibigize igishushanyo"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Ibigize inyandikorugero"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Umugereka wa Monitor - Ba Mwakirizi badakurikiranwa - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "Imitima / ibikorwa / udushami bya CPU ya Seriveri: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Kumenyesha umuyobozi byahagaritswe cyangwa imeyili y'umuyobozi ntiyashyizweho"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Ikoreshwa cyane kurusha izindi"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Ibisate bishakisha ba mwakirizi bakora cyane kurusha abandi."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "CPU ifite akazi kenshi kurusha izindi"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Ibikoresho bifite CPU ikora cyane kurusha ibindi (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "ucd/net ifite akazi kenshi - Umutwaro"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Ibikoresho bifite umutwaro munini kurusha ibindi (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Umwanya wa Disiki ukoreshwa cyane kurusha uwundi"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Ibikoresho bikoresha umwanya munini wa disiki ikomeye kurusha ibindi (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Igihe cyo gukora kinini kurusha ibindi"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Ibikoresho bimaze igihe kinini bikora kurusha ibindi"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Urujya n'uruza rwinjira/rusohoka ku muyoboro ukoreshwa cyane"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Ibikoresho bifite urujya n'uruza rw'amakuru rwinshi kurusha ibindi (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Ikosa ry'umuyoboro rikomeye kurusha ayandi"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Ibikoresho bifite amakosa/ibyaterewe byinshi kurusha ibindi (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Ikoreshwa ry'umuyoboro ukoreshwa cyane"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Poruti zikoreshwa cyane kurusha izindi"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Nyamuneka fungura kandi ugenamiterere imibare ya DS"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Saba umuyobozi gufungura imibare ya DS"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Impuzandengo"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Agasongero"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Impuzandengo y'Inkomoko z'Amakuru zose zemewe"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Bitegereje amakuru cyangwa nta burenganzira ufite ku gikoresho na kimwe gifite iyi nyandikorugero."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Ntabwo ufite uburenganzira kuri ba Mwakirizi abo ari bo bose cyangwa nta Mwakirizi ufite iyi nyandikorugero"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Igihe kimaze gikora"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Impuzandengo ya ba Mwakirizi bose bemewe"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Bitegereje amakuru cyangwa nta burenganzira ufite ku gikoresho na kimwe"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Icyerekezo"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Intera y'igihe mu minota 5 ishize"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Ikoreshwa rya CPU rya Host MIB 30 zifite akazi kenshi kurusha izindi (isaha ishize)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Shyiramo umugereka wa TopX kugira ngo ubone imibare yisumbuyeho ya DS"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Umutwaro wa ucd/net 30 zifite akazi kenshi kurusha izindi (isaha ishize)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Umwanya wa Disiki ya Host MIB 30 zifite akazi kenshi kurusha izindi (isaha ishize)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Urujya n'uruza rwinshi (rwinjira+rusohoka)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Ikoreshwa ry'umuyoboro ukoreshwa cyane"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Ibice by'ibishushanyo"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Ibisate bitanga amakuru kuri Cacti n'inyongera zayo mu buryo bw'ibishushanyo."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Inkomoko z'Amakuru"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Igishushanyo cy'Inkomoko z'Amakuru"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Inyandikorugero z'ibikoresho"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Igishushanyo cy'Inyandikorugero z'Ibikoresho"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Ibikoresho hashingiwe ku Miterere"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Igishushanyo cy'Ibikoresho ukurikije Imiterere (bikora, byahagaze,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Inkomoko z'Amakuru: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Inyandikorugero z'Igikoresho: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Ibikoresho: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Ntigikora"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Kirimo gusubira mu buryo"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Ubwoko bw'amakuru"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Igiteranyo"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Nta nkomoko z'amakuru zitagira inyandikorugero zabonetse"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Ibikoresho"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Umubare w'Ibikoresho"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Byose"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Kirakora"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Izina ry'inyandikorugero"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Ibikoresho byose"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Nta nyandikorugero z'ibikoresho zabonetse"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Ibibaho bya MacTrack"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Ibisate bitanga amakuru ku nyongera za MacTrack za Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Umugereka wa MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Imibare itandukanye y'ikusanya n'Ahantu ya MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Ahantu ha MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Imibare itandukanye y'Ahantu ya MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Umugereka wa MacTrack ntiwashyizwemo/ntukora"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Byose: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Bikora: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Byahagaze: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Ikosa: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Bitazwi: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Byahagaritswe: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Ikosa"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Ntibizwi"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Ntabwo ufite uburenganzira ku mugereka"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Ahantu"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "Za IP"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Poruti"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Poruti zikora"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "Aderesi za MAC"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Amakosa y'Ibikoresho"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Nta hantu ha mactrack habonetse"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Ibibaho bitandukanye"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Ibisate bitanga amakuru rusange adashyizwe mu byiciro yerekeye Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Imiterere ya NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Kugenzura isaha ya sisitemu yawe ya Cacti ngo urebe niba itandukira ku gipimo cy'ifatizo kizwi hamwe n'isuzuma ryo gusobanura DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Ibisobanuro by'Umugereka wa Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Ibisobanuro by'Umugereka wa Maint ku ngengabihe ziri imbere"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Ibisobanuro birambuye bya Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Amakuru arambuye y'Igenzura rya Serivisi ya URL y'umugereka wa webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Ibisobanuro birambuye by'umugereka wa Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Amakuru arambuye y'Umugereka wa ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Nta seriveri ya NTP yashyizweho"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Seriveri ya NTP yagenwe nabi - %s<br/>Nyamuneka yikosore mu magenamiterere"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Kubona igihe cya NTP bivuye kuri %s byanze"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Nyamuneka genzura isaha kuko itandukanye cyane"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "kurusha amasegonda %s uhereye kuri seriveri ya NTP %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Isaha y'aho uherereye ingana n'iya seriveri ya NTP"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Ntibishoboka kuvugana na seriveri ya NTP yagaragajwe."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Nyamuneka genzura igenamiterere ryawe."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Nta zina rya mwakirizi rya DNS ryashyizweho"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Izina rya Mwakirizi rya DNS ryagenwe nabi - %s<br/>Nyamuneka rikosore mu magenamiterere"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Gushakisha izina rya mwakirizi rya DNS (%s) byagenze neza."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Igihe cyo gukemura DNS: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Gushakisha izina rya mwakirizi rya DNS (%s) byananiranye."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Umugereka wa Maint ntiwashyizwemo/ntiwafunguwe"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Umugereka wa Webseer ntabwo washyizwemo cyangwa ngo utangizwe"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Umugereka wa Webseer ntabwo ukishyigikiwe, koresha umugereka wa servcheck mu mwanya wawo"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Umubare w'isuzuma (byose/byahagaritswe): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Imiterere (birakora/byahagaze): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Ubutumwa bwa nyuma bw'inyandiko z'ibikorwa"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "Kode ya HTTP"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Umugereka wa Webseer - Ibisobanuro birambuye"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Umugereka wa Servcheck ntabwo washyizwemo cyangwa ngo utangizwe"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Imiterere (byiza/ikosa): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Ibyabitswe bya nyuma by'inyandiko z'ibikorwa"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Gerageza"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Ubwoko"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Umugereka wa Servcheck - Ibisobanuro birambuye"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Igisubizo cy'ishakisha"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Utubaho tw'Ikusanyamakuru"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Ibisate bitanga amakuru ku gikorwa cy'ikusanyamakuru rya Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Amakuru y'igikusanyamakuru"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Amakuru atandukanye ku ikusanyamakuru ryawe rya Cacti."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Imibare y'Ikusanyamakuru"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Imibare itandukanye y'ikusanyamakuru rya Cacti."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Ibintu bisohorwa n'Ikusanyamakuru"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Izina"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Igihe cyose"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Gishya/Kitari gukora"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Biri gukora"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Ntibiri gukora"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Bitazwi/byahagaze"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "Amaseg. %s"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(nibyo)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(byose)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Amasegonda"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "ID y'impuzandengo y'amasaha 24: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Amakuru arambuye y'Ikusanyamakuru"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Igihe cy'impuzandengo"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Igihe ntarengwa"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Ibintu bisohorwa n'ikusanyamakuru "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Ibintu"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Paneli za Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Ibisate bitanga amakuru ku itunganywa ry'ubutumwa bwa Syslog bwa Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Ibisobanuro birambuye bya Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Imibare itandukanye y'umugereka wa Syslog."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Ibikoresho bya mbere bya Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Ibikoresho bifite ubutumwa bwinshi kurusha ibindi"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Inzego z'ubutumwa bwa Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Ubutumwa ukurikije urwego."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Byinjira"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Byabitswe"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Ubutumwa"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Umugereka wa Syslog ntiwashyizwemo/ntukora"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Igikoresho"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Umugereka wa Syslog ntiwafunguwe"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Abakirizi 20 bafite ubutumwa bwinshi cyane"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Nta butumwa"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Paneli za sisitemu"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Ibisate bitanga amakuru ku mikorere ya sisitemu ya Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Amakuru"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Amakuru atandukanye ya sisitemu kuri sisitemu ya Cacti ubwayo."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Imenyesha ry'Ubuyobozi"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Agasanduku k'inyongera ko kumenyesha abayobozi ku bakoresha bose"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Imibare ya Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Amakuru ku gikorwa cyo kongera imikorere cya Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Amateka ya Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Amakuru ku mateka y'igikorwa cyo kongera imikorere."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Ibipimo ntarengwa by'amasaha 24"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Imbonerahamwe y'amasaha 24 y'ibihe bikabije by'ikusanyamakuru (ikusanyamakuru ryamaze igihe kirekire kurusha ayandi, ba Mwakirizi bahagaze)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Ikoreshwa rya CPU"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Igishushanyo cy'ikoreshwa rya CPU (kuri Linux gusa)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Umutwaro wa CPU: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Ubu bushobozi ntibushyirwa mu bikorwa ku mashini za Windows"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Impuzandengo ya CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "CPU ntarengwa"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Impuzandengo y'amasaha 24"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Verisiyo ya Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Ubwoko bw'Ikusanyamakuru:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Verisiyo ya Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Urakoresha verisiyo ya spine itari yo!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Ubwoko bw'Ikusanyamakuru: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Bikora kuri: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Amateka ya Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Ububiko "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Inyandiko zitegereje "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Iburira ryo kurenza igihe"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Igihe cyararenze"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Ibindi"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Ntirigeze ikora"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Imiterere ya Boost ni: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Ibikorwa/Inshuro: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Urwego ntarengwa rw'inyandiko zitegereje: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Igihe gikurikira cyo gutangira kigereranywa: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Inyandiko zitegereje/zabitswe: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Ingano y'imbonerahamwe z'ubu za Boost: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Impuzandengo y'Amabayite/Inyandiko: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Igihe ikora rya nyuma ryamaze/ivugurura: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Ikora ry'Ikusanyamakuru"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Ba Mwakirizi bahagaze"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Byatewe imbarutso"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Ibisoh. by'Ikusany."
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Amakosa ya Mwakirizi"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Ikusanyamakuru ry'ibipimo ntarengwa ry'amasaha 48"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Ikusanyamakuru rimara igihe kirekire"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Umubare ntarengwa w'Ibikoresho bitari gukora"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Umubare ntarengwa w'Urwego ntarengwa rwabaye"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Ikintu gisohorwa n'Ikusanyamakuru"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Ikusanyamakuru ryanze"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Ibice by'Urwego ntarengwa"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Ibisate bitanga amakuru ku nyongera ya Cacti y'urwego ntarengwa."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Ibikorwa bya nyuma by'urwego ntarengwa"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Ibyabaye Biheruka mu Mugereka w'Urwego ntarengwa"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Urwego ntarengwa"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Igishushanyo cy'Umugereka w'Urwego ntarengwa (byose, ibyatewe, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Umugereka wa Thold ntabwo washyizwemo cyangwa ngo utangizwe"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Nta bikorwa birabaho"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Inzego ntarengwa: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Umugereka wa Thold ntiwashyizweho/ntukora"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Byarenze"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Amakuru arambuye y'Urwego ntarengwa"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Inzego ntarengwa"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Byarenze: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Byatewe imbarutso: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Ntabwo ufite uburenganzira ku Nzego ntarengwa"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Ibisobanuro"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Ibice 5 byo Hejuru/Hasi"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Ibisate bitanga amakuru y'icyerekezo ku ikusanyamakuru rya Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Ping yo hasi"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Ibikoresho bisubiza ping nabi kurusha ibindi"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Kuboneka ko hasi"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Ibikoresho biboneka/bigerwaho nabi kurusha ibindi"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Igihe cyo gukusanya amakuru cyo hasi"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Ibikoresho bifite igihe cy'ikusanyamakuru kibi kurusha ibindi"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Igipimo cyo gukusanya amakuru cyo hasi"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Ibikoresho bifite igipimo cy'ikusanyamakuru kibi kurusha ibindi"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Ibiriho ubu"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Izina ku muyoboro"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Kuboneka/Kugerwaho"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Igihe cyo kubaza amakuru"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Ikigereranyo"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Abakirizi 20 bafite Ping Mbi Cyane"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Abakirizi 20 bafite Kuboneka Kubi Cyane"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Kuboneka"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Abakirizi 20 bafite Igihe Kibi Cyane cy'Ikusanyamakuru"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Abakirizi 20 bafite Igipimo Kibi Cyane cy'Ikusanyamakuru"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Uburyo bwo kureba Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Ubuyobozi bwa Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Imicungire"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Ububiko bw'ibisate"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Ubuyobozi bwa Sisitemu"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Igihe Cy'Isaha 1 Ishize"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Igihe Cy'Amasaha %d Ashize"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Igihe Cy'Umunsi 1 Ushize"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Igihe Cy'Iminsi 2 Ishize"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Amasegonda %d"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "Amasaha %d"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "Umunsi %d"
+
+#: setup.php
+msgid "Actions"
+msgstr "Ibikorwa"
+
