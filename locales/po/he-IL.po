@@ -19,18 +19,16 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: display.php:40
-#, fuzzy
 msgid "Intropage - Permission Denied"
-msgstr "Intropage - רשות נדחתה"
+msgstr "Intropage - ההרשאה נדחתה"
 
 #: display.php:123
 msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
 msgstr "חלונית אחת או יותר הוסרה עקב הרשאות לא מספיקות. פנה למנהל המערכת."
 
 #: display.php:179
-#, fuzzy
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
-msgstr "ניתן להשבית שורות למעלה <b>ב'הגדרות '-> כללי -> הסתר את מרכז השליטה של Cacti</b> והשתמש בדף שלם עבור Intropage <br/><br/>"
+msgstr "ניתן להשבית את השורות שלמעלה תחת <b>הגדרה > הגדרות > כללי > הסתר לוח בקרה של Cacti</b> ולהשתמש בכל הדף עבור Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -42,60 +40,50 @@ msgid "Hide red/yellow/green square notifications"
 msgstr "הסתרת התראות ריבוע אדום/צהוב/ירוק"
 
 #: display.php:245
-#, fuzzy
 msgid "Disable panel move/enable copy text from panel"
-msgstr "השבת את החלונית / אפשר להעתיק טקסט מהחלונית"
+msgstr "השבת הזזת חלונית/אפשר העתקת טקסט מחלונית"
 
 #: display.php:254
-#, fuzzy
 msgid "Actions ..."
-msgstr "פעולות"
+msgstr "פעולות ..."
 
 #: display.php:257
-#, fuzzy
 msgid "Add New Dashboard"
-msgstr "הוסף למרכז השליטה"
+msgstr "הוסף לוח בקרה חדש"
 
 #: display.php:261
-#, fuzzy
 msgid "Remove current dashboard"
-msgstr "הסר ממרכז השליטה"
+msgstr "הסר את לוח המחוונים הנוכחי"
 
 #: display.php:267 display.php:269 display.php:273 display.php:275
 #: display.php:279 display.php:281
-#, fuzzy, php-format
+#, php-format
 msgid "Number of lines - %d"
-msgstr "מספר המחאות:"
+msgstr "מספר שורות - %d"
 
 #: display.php:286
-#, fuzzy
 msgid "Refresh Now"
-msgstr "רענן עכשיו"
+msgstr "רענן"
 
 #: display.php:289 display.php:291
-#, fuzzy
 msgid "Refresh Disabled"
-msgstr "ביטול נעילה אוטומטית"
+msgstr "רענון מושבת"
 
 #: display.php:295 display.php:297
-#, fuzzy
 msgid "Refresh by Poller"
-msgstr "ביטול נעילה אוטומטית"
+msgstr "רענן לפי Poller"
 
 #: display.php:301 display.php:303
-#, fuzzy
 msgid "Refresh Every 1 Minute"
-msgstr "תיקון אוטומטי של דקה אחת"
+msgstr "רענן כל דקה אחת"
 
 #: display.php:307 display.php:309
-#, fuzzy
 msgid "Refresh Every 5 Minutes"
-msgstr "5 דקות"
+msgstr "רענן כל 5 דקות"
 
 #: display.php:313 display.php:315
-#, fuzzy
 msgid "Refresh Every Hour"
-msgstr "כל שעה"
+msgstr "רענן כל שעה"
 
 #: display.php:321 display.php:323
 msgid "Important period - disabled"
@@ -118,85 +106,72 @@ msgid "Important period - 1 day"
 msgstr "תקופה חשובה - יום אחד"
 
 #: display.php:363 display.php:366
-#, fuzzy
 msgid "Sort by Severity"
-msgstr "מיין לפי עדיפות פאנל"
+msgstr "מיין לפי חומרה"
 
 #: display.php:364 display.php:367
-#, fuzzy
 msgid "Sort by User Preference"
 msgstr "מיין לפי העדפת משתמש"
 
 #: display.php:373
-#, fuzzy
 msgid "Reload Panel Definitions"
-msgstr "רענן לוח"
+msgstr "טען מחדש הגדרות לוח"
 
 #: display.php:379
-#, fuzzy
 msgid "Set Intropage as Default Login Page"
-msgstr "הגדרת intropage כדף ברירת המחדל"
+msgstr "הגדר את Intropage כדף ההתחברות המוגדר כברירת מחדל"
 
 #: display.php:381
-#, fuzzy
 msgid "Set graph as Default Login Page"
-msgstr "הגדר תרשים כברירת מחדל"
+msgstr "הגדר גרף כדף ההתחברות המוגדר כברירת מחדל"
 
 #: display.php:387
-#, fuzzy
 msgid "Display Intropage in Console"
-msgstr "הגדרת intropage כדף ברירת המחדל"
+msgstr "הצג את Intropage במסוף"
 
 #: display.php:389
-#, fuzzy
 msgid "Display Intropage in Tab as Default Page"
-msgstr "הגדרת intropage כדף ברירת המחדל"
+msgstr "הצג את Intropage בלשונית כדף ברירת המחדל"
 
 #: display.php:396 display.php:399
 msgid "Less panels on a line"
 msgstr "פחות חלוניות בקו"
 
 #: display.php:397 display.php:400
-#, fuzzy
 msgid "More panels on a line"
-msgstr "אפשר פאנל למעלה 5 פינג"
+msgstr "יותר פאנלים בשורה"
 
 #: display.php:413
 msgid "Cancel sharing"
 msgstr "ביטול שיתוף"
 
 #: display.php:416
-#, fuzzy
 msgid "Share this dashboard"
-msgstr "הוסף למרכז השליטה"
+msgstr "שתף לוח מחוונים זה"
 
 #: display.php:418
 msgid "Share empty dashboard not allowed"
 msgstr "שיתוף לוח מחוונים ריק אינו מותר"
 
 #: display.php:437
-#, fuzzy
 msgid "Use shared dashboard"
-msgstr "הסר ממרכז השליטה"
+msgstr "השתמש בלוח בקרה משותף"
 
 #: display.php:439
 msgid "Cannot use shared dashboard - dashboard limit reached."
 msgstr "לא ניתן להשתמש בלוח מחוונים משותף - מגבלת לוח המחוונים הגיעה."
 
 #: display.php:443
-#, fuzzy
 msgid "No shared dashboards"
-msgstr "הוסף למרכז השליטה"
+msgstr "אין לוחות מחוונים משותפים"
 
 #: display.php:460
-#, fuzzy
 msgid "Welcome to Intropage!"
-msgstr "לוחות אינטרופ"
+msgstr "ברוכים הבאים ל-Intropage!"
 
 #: display.php:464
-#, fuzzy
 msgid "You can Add Dashboard Panels in more ways:"
-msgstr "אתה יכול להוסיף לוחות לוח מחוונים בשתי דרכים:"
+msgstr "ניתן להוסיף לוחות ללוח המחוונים במספר דרכים:"
 
 #: display.php:466
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
@@ -204,7 +179,7 @@ msgstr "בחר חלוניות מוכנות מתפריט \"חלוניות\". לו
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
-msgstr "הוסף גרף קקטוסים, השתמש בסמל"
+msgstr "הוסף כל גרף Cacti, השתמש בסמל"
 
 #: display.php:468
 msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
@@ -227,9 +202,8 @@ msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same 
 msgstr "השתמש באפשרות \"השתמש בלוח מחוונים משותף (שם משתמש/לוח מחוונים) - הוא מכין את אותו לוח מחוונים כמו משותף, אך עם ההרשאות שלך."
 
 #: display.php:487
-#, fuzzy
 msgid "Customization:"
-msgstr "ניצול CPU"
+msgstr "התאמה אישית:"
 
 #: display.php:489
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
@@ -244,26 +218,22 @@ msgid "If you want to copy text from panel, you have to disable drag and drop fu
 msgstr "אם ברצונך להעתיק טקסט מהחלונית, עליך להשבית את פונקציית הגרירה והשחרור, השתמש בסמל"
 
 #: display.php:585
-#, fuzzy
 msgid "Panel Details"
-msgstr "הצג פרטים"
+msgstr "פרטי פאנל"
 
 #: display.php:586
-#, fuzzy
 msgid "Disable panel move/Enable copy text from panel"
-msgstr "השבת את העברת החלונית / אפשר טקסט להעתיק מהחלונית"
+msgstr "השבת הזזת חלונית/אפשר העתקת טקסט מחלונית"
 
 #: display.php:587
-#, fuzzy
 msgid "Enable panel move/Disable copy text from panel"
-msgstr "הפעל לוח / בטל טקסט להעתיק מהחלונית"
+msgstr "אפשר הזזת חלוניות/השבת העתקת טקסט מחלונית"
 
 #: display.php:589
 msgid "Show red/yellow/green square notifications"
 msgstr "הצגת הודעות ריבוע אדום/צהוב/ירוק"
 
 #: display.php:591
-#, fuzzy
 msgid "Error reading new data"
 msgstr "שגיאה בקריאת נתונים חדשים"
 
@@ -272,24 +242,20 @@ msgid "Close"
 msgstr "סגור"
 
 #: include/functions.php:242
-#, fuzzy
 msgid "Dashboard has been removed"
 msgstr "לוח המחוונים הוסר"
 
 #: include/functions.php:264
-#, fuzzy
 msgid "New Dashboard"
-msgstr "הוסף למרכז השליטה"
+msgstr "לוח בקרה חדש"
 
 #: include/functions.php:266
-#, fuzzy
 msgid "Dashboard has been added"
 msgstr "לוח המחוונים נוסף"
 
 #: include/functions.php:298
-#, fuzzy
 msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
-msgstr "לא ניתן להוסיף גרף מוגדל או מותאם אישית בטווח זמן, שינוי טווח הזמן לחצי שעה אחרונה"
+msgstr "לא ניתן להוסיף גרף מוגדל או בעל טווח זמן מותאם אישית; טווח הזמן משתנה לחצי השעה האחרונה"
 
 #: include/functions.php:419
 msgid "Intropage Panel Library Refreshed from Panel Library"
@@ -304,33 +270,28 @@ msgid "Error - trying share non-shared dashboard"
 msgstr "שגיאה - ניסיון לשתף לוח מחוונים שאינו משותף"
 
 #: include/functions.php:617
-#, fuzzy
 msgid "The Panel includes a render function but it does not exist."
-msgstr "הלוח כולל פונקציית render אך היא לא קיימת."
+msgstr "הלוח כולל פונקציית רינדור (render) אך היא אינה קיימת."
 
 #: include/functions.php:620
-#, fuzzy
 msgid "The Panel does not have a render function."
-msgstr "לפאנל אין פונקציית רינדור."
+msgstr "ללוח אין פונקציית רינדור (render)."
 
 #: include/functions.php:626
 msgid "Not Found"
 msgstr "לא נמצא"
 
 #: include/functions.php:653
-#, fuzzy
 msgid "Panel not found"
-msgstr "לוח לא נמצא"
+msgstr "הפאנל לא נמצא"
 
 #: include/functions.php:686
-#, fuzzy
 msgid "Details Function does not exist."
-msgstr "פרטים הפונקציה לא קיימת."
+msgstr "פונקציית הפרטים אינה קיימת."
 
 #: include/functions.php:693
-#, fuzzy
 msgid "Panel Not Found"
-msgstr "פאנל לא נמצא"
+msgstr "הפאנל לא נמצא"
 
 #: include/functions.php:774 include/functions.php:794
 #, fuzzy, php-format
@@ -338,24 +299,24 @@ msgid " [ Updates in %s ]"
 msgstr " [ עדכונים ב-%s ]"
 
 #: include/functions.php:819
-#, fuzzy, php-format
+#, php-format
 msgid "%s Sec"
-msgstr "%s ס\"ק"
+msgstr "%s שנייה"
 
 #: include/functions.php:819
-#, fuzzy, php-format
+#, php-format
 msgid "%s Seconds"
 msgstr "%s שניות"
 
 #: include/functions.php:826
-#, fuzzy, php-format
+#, php-format
 msgid "%s Min"
-msgstr "כל% d דקות"
+msgstr "%s דק'"
 
 #: include/functions.php:826
-#, fuzzy, php-format
+#, php-format
 msgid "%s Minutes"
-msgstr "כל% d דקות"
+msgstr "%s דקות"
 
 #: include/functions.php:833
 #, php-format
@@ -363,34 +324,30 @@ msgid "%s Hours"
 msgstr "%s שעות"
 
 #: include/functions.php:833
-#, fuzzy, php-format
+#, php-format
 msgid "%s Hrs"
 msgstr "%s שעות"
 
 #: include/functions.php:837
 #, php-format
 msgid "%s Days"
-msgstr "עמוד %s"
+msgstr "%s ימים"
 
 #: include/functions.php:883
-#, fuzzy
 msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
-msgstr "אין נתונים קיימים. או כפה עדכון, או המתן למחזור סקר הקקטוסים הבא."
+msgstr "אין נתונים זמינים. יש לאלץ עדכון, או להמתין למחזור הדגימה הבא של Cacti."
 
 #: include/functions.php:885
-#, fuzzy
 msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
-msgstr "אין נתונים קיימים. פאנל זה אינו מאפשר עדכונים מאולצים. תצטרך לחכות עד לפולר הקקטוסים כדי לבצע את הבדיקה."
+msgstr "אין נתונים זמינים. חלונית זו אינה מאפשרת עדכונים מאולצים. יש להמתין עד שה-Poller של Cacti יבצע את הבדיקה."
 
 #: include/functions.php:1363
-#, fuzzy
 msgid "Disable panel"
-msgstr "השבת את החלונית"
+msgstr "השבת חלונית"
 
 #: include/functions.php:1366
-#, fuzzy
 msgid "Reload Panel"
-msgstr "רענן לוח"
+msgstr "טען מחדש לוח"
 
 #: include/functions.php:1369
 msgid "Show Details"
@@ -402,66 +359,56 @@ msgid "Loading data ..."
 msgstr "טוען נתונים..."
 
 #: include/functions.php:1387
-#, fuzzy
 msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
-msgstr "לא נמצאו נתונים. או שתחכה לבדיקה הבאה,<br/> או השתמש ב- Force Reload אם זמין."
+msgstr "לא נמצאו נתונים. המתן לבדיקה הבאה, <br/>או השתמש ב-Force Reload אם זמין."
 
 #: include/functions.php:1410
-#, fuzzy
 msgid "Panels ..."
-msgstr "פנלים..."
+msgstr "פאנלים..."
 
 #: include/functions.php:1433 include/functions.php:1441
-#, fuzzy, php-format
+#, php-format
 msgid "%s (no permission)"
-msgstr "אין לך הרשאה"
+msgstr "%s (אין הרשאה)"
 
 #: include/functions.php:1495
-#, fuzzy
 msgid "Cannot add to Dashboard. Custom timespan."
-msgstr "לא ניתן להוסיף למרכז השליטה. טווח זמן מותאם אישית."
+msgstr "לא ניתן להוסיף ללוח המחוונים. טווח זמן מותאם אישית."
 
 #: include/functions.php:1505
-#, fuzzy
 msgid "Remove from Dashboard"
-msgstr "הסר ממרכז השליטה"
+msgstr "הסר מלוח המחוונים"
 
 #: include/functions.php:1507
-#, fuzzy
 msgid "Add to Dashboard"
-msgstr "הוסף למרכז השליטה"
+msgstr "הוסף ללוח הבקרה"
 
 #: include/functions.php:1563
-#, fuzzy
 msgid "Dashboard Names"
-msgstr "שמות לוח המחוונים"
+msgstr "שמות לוחות מחוונים"
 
 #: include/functions.php:1572
-#, fuzzy, php-format
+#, php-format
 msgid "Dashboard %s"
-msgstr "הוסף למרכז השליטה"
+msgstr "לוח בקרה %s"
 
 #: include/functions.php:1596
-#, fuzzy
 msgid "User Level Panel Update Frequencies"
-msgstr "לוחות ברמת משתמש"
+msgstr "תדירויות עדכון של לוחות ברמת משתמש"
 
 #: include/functions.php:1645
 msgid "System Panel Update Frequencies (All Authorized Users)"
 msgstr "תדרי עדכון לוח המערכת (כל המשתמשים המורשים)"
 
 #: include/functions.php:1694
-#, fuzzy
 msgid "Trend Update Frequencies"
-msgstr "עדכן תדירות: %s"
+msgstr "תדירויות עדכון מגמה"
 
 #: include/settings.php:32 include/settings.php:93
-#, fuzzy
 msgid "Intropage"
-msgstr "לוחות אינטרופ"
+msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
-#, fuzzy
 msgid "Normal User"
 msgstr "משתמש רגיל"
 
@@ -471,92 +418,76 @@ msgid "[edit: %s]"
 msgstr "[עריכה: %s]"
 
 #: include/settings.php:155
-#, fuzzy
 msgid "System Level Panels"
 msgstr "לוחות ברמת המערכת"
 
 #: include/settings.php:156
-#, fuzzy
 msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
-msgstr "פאנלים המתאימים לגישה למשתמשים מנהליים או מתקדמים ואינם מתאימים בדרך כלל למשתמשים כלליים. פאנלים עוסקים בדרך כלל בניצול כללי של המערכת."
+msgstr "פאנלים המתאימים לגישה של מנהלי מערכת או משתמשים מתקדמים ובדרך כלל אינם מיועדים למשתמשים רגילים. פאנלים אלה עוסקים לרוב בניצולת המערכת הכללית."
 
 #: include/settings.php:159
-#, fuzzy
 msgid "User Level Panels"
 msgstr "לוחות ברמת משתמש"
 
 #: include/settings.php:160
-#, fuzzy
 msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
-msgstr "לוחות שמתאימים לגישה של משתמשים כלליים. ההרשאות מוגבלות למה שהמשתמש הנוכחי יכול לראות."
+msgstr "פאנלים המתאימים לגישה של משתמשים רגילים. ההרשאות מוגבלות למה שהמשתמש הנוכחי רשאי להציג."
 
 #: include/settings.php:203
-#, fuzzy
 msgid "You can Allow/Disallow Panels for User"
-msgstr "אתה יכול לאפשר/לא לאפשר פאנלים למשתמש"
+msgstr "ניתן לאפשר/לאסור לוחות עבור משתמש"
 
 #: include/variables.php:28
-#, fuzzy
 msgid "Red Status"
-msgstr "סטטוס"
+msgstr "סטטוס אדום"
 
 #: include/variables.php:29
-#, fuzzy
 msgid "Yellow Status"
-msgstr "אזעקה צהובה"
+msgstr "מצב צהוב"
 
 #: include/variables.php:30
-#, fuzzy
 msgid "Green Status"
-msgstr "סטטוס"
+msgstr "מצב ירוק"
 
 #: include/variables.php:35
 msgid "Display Settings"
 msgstr "הגדרות תצוגה"
 
 #: include/variables.php:39
-#, fuzzy
 msgid "Important things will be at the top"
-msgstr "דברים חשובים יהיה בראש"
+msgstr "פריטים חשובים יוצגו בראש"
 
 #: include/variables.php:40
-#, fuzzy
 msgid "If checked Intropage displays important (errors, warnings) information first"
-msgstr "אם מסומן Intropage מציג מידע חשוב (שגיאות, אזהרות) הראשון"
+msgstr "אם מסומן, Intropage מציג מידע חשוב (שגיאות, אזהרות) תחילה"
 
 #: include/variables.php:45
-#, fuzzy
 msgid "Display more panels on a line"
-msgstr "הצגת שגיאות ואזהרות"
+msgstr "הצג יותר חלוניות בשורה"
 
 #: include/variables.php:46
 msgid "For wide screen"
 msgstr "עבור מסך רחב"
 
 #: include/variables.php:51
-#, fuzzy
 msgid "Automatically Uninstall Panels"
-msgstr "הסרה אוטומטית של פאנלים"
+msgstr "הסר חלוניות אוטומטית"
 
 #: include/variables.php:52
-#, fuzzy
 msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
-msgstr "אם מותקן פאנל והתוסף הנדרש הוסר, הסר גם את הפאנל באופן אוטומטי"
+msgstr "אם מותקן לוח והתוסף הנדרש מוסר, הסר גם את הלוח באופן אוטומטי"
 
 #: include/variables.php:57
-#, fuzzy
 msgid "Automatic Page Refresh"
-msgstr "דף רענון אוטומטי"
+msgstr "רענון אוטומטי של דף"
 
 #: include/variables.php:58
-#, fuzzy
 msgid "How often"
 msgstr "באיזו תדירות"
 
 #: include/variables.php:61
-#, fuzzy
 msgid "Automatically by poller"
-msgstr "אוטומטית על ידי משאל"
+msgstr "אוטומטית על ידי ה-Poller"
 
 #: include/variables.php:62 include/variables.php:128
 msgid "Never"
@@ -573,7 +504,6 @@ msgstr "כל %d דקות"
 
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
-#, fuzzy
 msgid "Every Hour"
 msgstr "כל שעה"
 
@@ -601,7 +531,6 @@ msgid "1 hour"
 msgstr "שעה"
 
 #: include/variables.php:77
-#, fuzzy
 msgid "4 hours"
 msgstr "4 שעות"
 
@@ -610,9 +539,8 @@ msgid "1 day"
 msgstr "יום אחד"
 
 #: include/variables.php:83
-#, fuzzy
 msgid "Number of panel lines"
-msgstr "מספר המחאות:"
+msgstr "מספר שורות בפאנל"
 
 #: include/variables.php:84
 msgid "How many lines in panel"
@@ -624,23 +552,20 @@ msgid "%d lines"
 msgstr "קווי %d"
 
 #: include/variables.php:94
-#, fuzzy
 msgid "Trend Timespan"
-msgstr "מגמות"
+msgstr "טווח זמן למגמה"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
 msgstr "עבור תרשימי מגמה, מה אמור להיות טווח הזמן המוגדר כברירת מחדל עבור תרשימים אלה."
 
 #: include/variables.php:101
-#, fuzzy
 msgid "Poller Timeout"
-msgstr "פרטי סוקר"
+msgstr "פסק זמן של Poller"
 
 #: include/variables.php:102
-#, fuzzy
 msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
-msgstr "משך הזמן, בדקות, שמסקר הרקע של Intropage יכול לפעול לפני שהוא מופרע ומומת על ידי קקטוסים."
+msgstr "משך הזמן, בדקות, שבו דוגם הרקע של Intropage יכול לרוץ לפני שיופסק ויחוסל על ידי Cacti."
 
 #: include/variables.php:106 setup.php:99
 #, php-format
@@ -652,7 +577,7 @@ msgstr "‫%d דקה"
 #: include/variables.php:111 include/variables.php:112 setup.php:100
 #: setup.php:101 setup.php:102 setup.php:103 setup.php:104 setup.php:105
 #: setup.php:106 setup.php:107
-#, fuzzy, php-format
+#, php-format
 msgid "%d Minutes"
 msgstr "דקות %d"
 
@@ -662,25 +587,21 @@ msgid "%d Hour"
 msgstr "‫%d שעה"
 
 #: include/variables.php:117
-#, fuzzy
 msgid "Analyze Log - number of lines"
-msgstr "ניתוח יומן - מספר השורות"
+msgstr "ניתוח יומן - מספר שורות"
 
 #: include/variables.php:118
-#, fuzzy
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
-msgstr "כמה שורות של יומן ינותחו. מספר גדול עלול לגרום לעומס דפים איטי"
+msgstr "כמה שורות יומן ינותחו. שורות = בלוח, פי 2 שורות = בפירוט. מספר גדול עלול לגרום לטעינת דף איטית"
 
 #: include/variables.php:124
-#, fuzzy
 msgid "How often analyze DB"
-msgstr "כמה פעמים לנתח DB"
+msgstr "באיזו תדירות לנתח את מסד הנתונים"
 
 #: include/variables.php:125 include/variables.php:158
 #: include/variables.php:176
-#, fuzzy
 msgid "Poller runs this task. It could cause long poller run."
-msgstr "פולר מנהל את המשימה הזאת. זה יכול לגרום להמשך זמן רב."
+msgstr "ה-Poller מריץ משימה זו. הדבר עלול לגרום לריצת Poller ממושכת."
 
 #: include/variables.php:130 include/variables.php:163
 #: include/variables.php:181
@@ -696,14 +617,12 @@ msgid "Every Month"
 msgstr "כל חודש"
 
 #: include/variables.php:137
-#, fuzzy
 msgid "Analyze DB - Level of db check"
-msgstr "ניתוח DB - רמת בדיקת db"
+msgstr "ניתוח DB - רמת בדיקת מסד הנתונים"
 
 #: include/variables.php:138
-#, fuzzy
 msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
-msgstr "מהיר - לא בדוק שורות עבור קישורים inforccert <br/> מהר - לבדוק רק לא סגור שולחנות כראוי <br/> שולחנות בדיקה שהשתנו השתנו מהבדיקה האחרונה <br/> בינוני - עם שורות סריקה <br/> מורחבת - שורות ומפתחות מלאים <br/> <strong>בינונית ומורחבת עלולה לגרום לעומס דף איטי!</strong>"
+msgstr "מהיר (Quick) - ללא בדיקת שורות לקישורים שגויים<br/>מהיר מאוד (Fast) - בדיקת טבלאות שלא נסגרו כראוי בלבד<br/>שינויים (Changed) - בדיקת טבלאות שהשתנו מהבדיקה האחרונה<br/>בינוני (Medium) - עם סריקת שורות<br/>מורחב (Extended) - שורות ומפתחות מלאים<br/>מצב בינוני ומורחב עלולים לגרום לטעינת דף איטית!"
 
 #: include/variables.php:141
 msgid "Quick"
@@ -726,43 +645,36 @@ msgid "Extended"
 msgstr "מורחב"
 
 #: include/variables.php:150
-#, fuzzy
 msgid "NTP Time Check - IP or DNS name of NTP server"
-msgstr "NTP (זמן) לבדוק - IP או DNS שם שרת NTP"
+msgstr "בדיקת זמן NTP - כתובת IP או שם DNS של שרת ה-NTP"
 
 #: include/variables.php:151
-#, fuzzy
 msgid "Insert IP or DNS name of NTP server"
-msgstr "הכנס IP או DNS שם שרת NTP"
+msgstr "הזן כתובת IP או שם DNS של שרת NTP"
 
 #: include/variables.php:157
-#, fuzzy
 msgid "How often check NTP"
-msgstr "כמה פעמים לבדוק NTP"
+msgstr "באיזו תדירות לבדוק NTP"
 
 #: include/variables.php:168
 msgid "DNS Check - Any DNS name"
 msgstr "בדיקת DNS - כל שם DNS"
 
 #: include/variables.php:169
-#, fuzzy
 msgid "Insert DNS name for test"
-msgstr "הכנס IP או DNS שם שרת NTP"
+msgstr "הזן שם DNS לבדיקה"
 
 #: include/variables.php:175
-#, fuzzy
 msgid "How often check DNS"
-msgstr "כמה פעמים לבדוק NTP"
+msgstr "באיזו תדירות לבדוק DNS"
 
 #: include/variables.php:186
-#, fuzzy
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "לוח מידע של מנהל מערכת על משימות תחזוקה, התקנים למטה, .."
+msgstr "לוח מידע למנהל המערכת על משימות תחזוקה, התקנים לא פעילים, .."
 
 #: include/variables.php:187
-#, fuzzy
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
-msgstr "אם הוא לא ריק, לוח יוצג בחלק העליון. ניתן להשתמש בתגי HTML (b, i, ...)."
+msgstr "אם אינו ריק, הלוח יוצג בחלק העליון. ניתן להשתמש בתגיות HTML (b, i, ...)."
 
 #: include/variables.php:195
 msgid "Upcoming Maint Schedule warning days"
@@ -773,24 +685,22 @@ msgid "How many days before a scheduled maintenance schedule should a warning be
 msgstr "כמה ימים לפני לוח זמנים מתוזמן לתחזוקה יש להציג אזהרה?"
 
 #: include/variables.php:199
-#, fuzzy
 msgid "Never warn"
-msgstr "לעולם לא לרוץ"
+msgstr "אל תזהיר לעולם"
 
 #: include/variables.php:200
-#, fuzzy
 msgid "When maintenance starts"
 msgstr "כאשר התחזוקה מתחילה"
 
 #: include/variables.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%d Day Before"
-msgstr "% d יום לפני"
+msgstr "לפני יום %d"
 
 #: include/variables.php:202 include/variables.php:203
-#, fuzzy, php-format
+#, php-format
 msgid "%d Days Before"
-msgstr "% d ימים לפני"
+msgstr "לפני %d ימים"
 
 #: include/variables.php:208
 msgid "Network stats in"
@@ -809,14 +719,12 @@ msgid "Bits"
 msgstr "סיביות"
 
 #: include/variables.php:218
-#, fuzzy
 msgid "Alarm Settings"
-msgstr "הגדרות תצוגה"
+msgstr "הגדרות אזעקה"
 
 #: include/variables.php:222
-#, fuzzy
 msgid "Alarm DB check Aborted Clients"
-msgstr "Alarm DB בדיקת לקוחות שהופסקו"
+msgstr "אזעקת בדיקת מסד נתונים: לקוחות שהופסקו"
 
 #: include/variables.php:223 include/variables.php:230
 #: include/variables.php:237 include/variables.php:244
@@ -829,68 +737,56 @@ msgid "If this event has occurred, trigger the selected Normal, Warning, or Aler
 msgstr "אם אירוע זה התרחש, הפעל את צבע המצב רגיל, אזהרה או התראה שנבחר."
 
 #: include/variables.php:229
-#, fuzzy
 msgid "Alarm Host with the same Description"
-msgstr "התקנים עם אותו תיאור: %s"
+msgstr "התראה: מארח עם אותו תיאור"
 
 #: include/variables.php:236
-#, fuzzy
 msgid "Alarm Orphaned Data Source"
-msgstr "מקורות נתונים יתומים: %s"
+msgstr "התראה: מקור נתונים יתום"
 
 #: include/variables.php:243
-#, fuzzy
 msgid "Alarm non-empty Poller Output"
-msgstr "פלט מסקר לא ריק אזעקה"
+msgstr "אזעקת פלט Poller לא ריק"
 
 #: include/variables.php:250
-#, fuzzy
 msgid "Alarm Bad indexes Data Source"
-msgstr "אזעקה שגויה מצרפת את מקור הנתונים"
+msgstr "אזעקת אינדקסים שגויים של מקור נתונים"
 
 #: include/variables.php:257
-#, fuzzy
 msgid "Alarm Threshold logonly action"
-msgstr "פעולת התחברות של Alarm Thershold"
+msgstr "אזעקת סף עם פעולת יומן בלבד"
 
 #: include/variables.php:264
 msgid "Alarm when device bulk_walk_size is not optimized"
 msgstr "התראה כאשר bulk_walk_size המכשיר אינו ממוטב"
 
 #: include/variables.php:271
-#, fuzzy
 msgid "Alarm Devices with the same IP/port"
-msgstr "התקנים עם כתובת IP ויציאה: %s"
+msgstr "התראה: התקנים עם אותה כתובת IP/יציאה"
 
 #: include/variables.php:278
-#, fuzzy
 msgid "Alarm Device in more than one Tree"
-msgstr "התקנים ביותר מעץ אחד: %s"
+msgstr "התראה: התקן ביותר מעץ אחד"
 
 #: include/variables.php:285
-#, fuzzy
 msgid "Alarm Device without a Tree"
-msgstr "התקנים ביותר מעץ אחד: %s"
+msgstr "התראה: התקן ללא עץ"
 
 #: include/variables.php:292
-#, fuzzy
 msgid "Alarm Device with Default public/private SNMP Community"
-msgstr "מארחים עם הקהילה הציבורית / פרטית המוגדרת כברירת מחדל: %s"
+msgstr "התראה: התקן עם קהילת SNMP ברירת מחדל (public/private)"
 
 #: include/variables.php:299
-#, fuzzy
 msgid "Alarm Device without Monitoring"
-msgstr "התקנים עם כתובת IP ויציאה: %s"
+msgstr "התראה: התקן ללא ניטור"
 
 #: include/variables.php:306
-#, fuzzy
 msgid "Alarm Device without Graph"
-msgstr "התקנים עם כתובת IP ויציאה: %s"
+msgstr "התראה: התקן ללא גרף"
 
 #: include/variables.php:313
-#, fuzzy
 msgid "Alarm Red/Yellow Polling Time"
-msgstr "אפשר פאנל Top 5 הגרוע ביותר זמן הסקרים"
+msgstr "אזעקת אדום/צהוב: זמן דגימה"
 
 #: include/variables.php:314
 msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
@@ -901,28 +797,24 @@ msgid "5s  / 10s Yellow / Red"
 msgstr "5s / 10s צהוב / אדום"
 
 #: include/variables.php:319
-#, fuzzy
 msgid "10s / 20s Yellow / Red"
-msgstr "שנות ה-40/20 אדום/צהוב"
+msgstr "10s / 20s צהוב / אדום"
 
 #: include/variables.php:320
-#, fuzzy
 msgid "20s / 40s Yellow / Red"
-msgstr "20/10 אדום/צהוב"
+msgstr "20s / 40s צהוב / אדום"
 
 #: include/variables.php:324
-#, fuzzy
 msgid "Alarm Red/Yellow Failed/All Ratio"
-msgstr "יחס אזעקה אדום/צהוב נכשל/כל"
+msgstr "אזעקת אדום/צהוב: יחס נכשלים/הכל"
 
 #: include/variables.php:325
 msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
 msgstr "היחס בין בדיקות זמינות שנכשלו לבדיקות מוצלחות שיופעלו כצבע מצב אזהרה או התראה."
 
 #: include/variables.php:329
-#, fuzzy
 msgid "0.1 / 0.2 Yellow / Red"
-msgstr "0.1/0.2 אדום/צהוב"
+msgstr "0.1 / 0.2 צהוב / אדום"
 
 #: include/variables.php:330
 msgid "0.2 / 0.4 Yellow / Red"
@@ -933,9 +825,8 @@ msgid "0.5 / 0.5++ Yellow / Red"
 msgstr "0.5 / 0.5++ צהוב / אדום"
 
 #: include/variables.php:335
-#, fuzzy
 msgid "Alarm Red/Yellow Ping"
-msgstr "אזעקה פינג אדום/צהוב"
+msgstr "אזעקת אדום/צהוב: Ping"
 
 #: include/variables.php:336
 msgid "Ping latency above these levels will trigger a Warning or Alert status color."
@@ -950,14 +841,12 @@ msgid "20ms  / 50ms Yellow / Red"
 msgstr "20ms / 50ms צהוב / אדום"
 
 #: include/variables.php:342
-#, fuzzy
 msgid "100ms / 200+ms Yellow / Red"
-msgstr "100/200+ms אדום/צהוב"
+msgstr "100ms / 200+ms צהוב / אדום"
 
 #: include/variables.php:346
-#, fuzzy
 msgid "Alarm Red/Yellow Worst Availability"
-msgstr "Top5 זמינות הגרוע ביותר"
+msgstr "אזעקת אדום/צהוב: זמינות גרועה ביותר"
 
 #: include/variables.php:347
 msgid "Availability below these levels will trigger either a Yellow or a Red status color."
@@ -977,9 +866,8 @@ msgid "Panels that provide alerting."
 msgstr "לוחות המספקים התראה."
 
 #: panellib/alert.php:37 panellib/alert.php:205
-#, fuzzy
 msgid "Host alerts"
-msgstr "Hostname"
+msgstr "התראות מארח"
 
 #: panellib/alert.php:38
 msgid "Host alerts (up/down/recovering) in last 30 minutes"
@@ -1012,7 +900,6 @@ msgstr "רשומות נוספות, השתמש בחלון פרטים"
 #: panellib/system.php:191 panellib/system.php:592 panellib/thold.php:309
 #: panellib/top5.php:178 panellib/top5.php:258 panellib/top5.php:338
 #: panellib/top5.php:423
-#, fuzzy
 msgid "Waiting for data"
 msgstr "ממתין לנתונים"
 
@@ -1021,69 +908,56 @@ msgstr "ממתין לנתונים"
 #: panellib/graphs.php:374 panellib/top5.php:181 panellib/top5.php:261
 #: panellib/top5.php:341 panellib/top5.php:426 panellib/top5.php:508
 #: panellib/top5.php:589 panellib/top5.php:669 panellib/top5.php:755
-#, fuzzy
 msgid "You don't have permissions to any hosts"
-msgstr "אין לך הרשאה"
+msgstr "אין לך הרשאות לאף מארח"
 
 #: panellib/analyze.php:31
-#, fuzzy
 msgid "Analysis Panels"
-msgstr "הפעל / השבת את החלוניות"
+msgstr "חלוניות ניתוח"
 
 #: panellib/analyze.php:32
-#, fuzzy
 msgid "Panels that analyze the current behavior of Cacti and it's plugins."
-msgstr "פאנלים שמנתחים את ההתנהגות הנוכחית של קקטוסים והתוספים שלהם."
+msgstr "חלוניות המנתחות את ההתנהגות הנוכחית של Cacti והתוספים שלו."
 
 #: panellib/analyze.php:37
-#, fuzzy
 msgid "Analyze Logins"
-msgstr "אפשר לוח אנאלייז"
+msgstr "ניתוח התחברויות"
 
 #: panellib/analyze.php:38
-#, fuzzy
 msgid "Analyze the last several Cacti logins for trends and errors."
-msgstr "נתח את מספר ההתחברות האחרונות של קקטוסים לאיתור מגמות ושגיאות."
+msgstr "נתח את הכניסות האחרונות ל-Cacti לזיהוי מגמות ושגיאות."
 
 #: panellib/analyze.php:53
-#, fuzzy
 msgid "Analyze Logs"
-msgstr "ניתוח יומן קקטוסים"
+msgstr "ניתוח יומנים"
 
 #: panellib/analyze.php:54
-#, fuzzy
 msgid "Look for common errors in Cacti's log file that should be a cause for concern."
-msgstr "חפש שגיאות נפוצות בקובץ היומן של Cacti שאמורות להוות סיבה לדאגה."
+msgstr "חפש שגיאות נפוצות בקובץ היומן של Cacti שצריכות לעורר דאגה."
 
 #: panellib/analyze.php:69
-#, fuzzy
 msgid "Database Checks"
-msgstr "בדיקת מסד נתונים"
+msgstr "בדיקות מסד נתונים"
 
 #: panellib/analyze.php:70
-#, fuzzy
 msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
-msgstr "נתח את מסד הנתונים של MySQL/MariaDB עבור שגיאות נפוצות. שימו לב שתהליך זה עשוי להימשך זמן רב במערכות גדולות מאוד."
+msgstr "נתח את מסד הנתונים של MySQL/MariaDB לאיתור שגיאות נפוצות. שימו לב שתהליך זה עשוי להימשך זמן רב במערכות גדולות מאוד."
 
 #: panellib/analyze.php:85
-#, fuzzy
 msgid "Analyze Cacti Objects"
-msgstr "ניתוח יומן קקטוסים"
+msgstr "נתח אובייקטי Cacti"
 
 #: panellib/analyze.php:86
-#, fuzzy
 msgid "Analyze Trees, Graphs, Hosts, ..."
 msgstr "ניתוח עצים, גרפים, מארחים, ..."
 
 #: panellib/analyze.php:101
-#, fuzzy
 msgid "Analyze DS stats"
-msgstr "אפשר פאנל אנאליזה"
+msgstr "ניתוח סטטיסטיקות מקורות נתונים"
 
 #: panellib/analyze.php:102
-#, fuzzy
 msgid "Analyze data source stats"
-msgstr "אפשר פאנל אנאליזה"
+msgstr "נתח סטטיסטיקות של מקורות נתונים"
 
 #: panellib/analyze.php:155
 msgid "Username"
@@ -1104,87 +978,75 @@ msgid "Failed"
 msgstr "נכשל"
 
 #: panellib/analyze.php:174 panellib/analyze.php:1287
-#, fuzzy
 msgid "Success - Login"
-msgstr "הצלחה - כניסה"
+msgstr "הצלחה - התחברות"
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
-#, fuzzy
 msgid "Success - Token"
 msgstr "הצלחה - אסימון"
 
 #: panellib/analyze.php:215
-#, fuzzy, php-format
+#, php-format
 msgid "Total Failed Logins: %s"
-msgstr "כניסות נכשלו"
+msgstr "סך כל ניסיונות הכניסה שנכשלו: %s"
 
 #: panellib/analyze.php:224
 msgid "None"
 msgstr "ללא"
 
 #: panellib/analyze.php:227
-#, fuzzy
 msgid "Active Users in Last Hour: "
-msgstr "משתמשים פעילים בשעה האחרונה:"
+msgstr "משתמשים פעילים בשעה האחרונה: "
 
 #: panellib/analyze.php:264 panellib/analyze.php:1107
-#, fuzzy
 msgid "Log file not accessible or empty"
 msgstr "קובץ היומן אינו נגיש או ריק"
 
 #: panellib/analyze.php:284
-#, fuzzy, php-format
+#, php-format
 msgid "Analyze last %s log lines:"
-msgstr "כניסות נכשלו"
+msgstr "נתח את %s שורות היומן האחרונות:"
 
 #: panellib/analyze.php:286
-#, fuzzy
 msgid "Errors: "
-msgstr "שגיאות"
+msgstr "שגיאות: "
 
 #: panellib/analyze.php:291
-#, fuzzy
 msgid "Warnings: "
-msgstr "אזהרות"
+msgstr "אזהרות: "
 
 #: panellib/analyze.php:298
-#, fuzzy
 msgid "Log Size: Larger than 2GB"
-msgstr "הקובץ גדול מ 2GB"
+msgstr "גודל יומן: גדול מ-2GB"
 
 #: panellib/analyze.php:302 panellib/analyze.php:1141
-#, fuzzy
 msgid "Log Size: OK"
-msgstr "גודל יומן אישור"
+msgstr "גודל יומן: תקין"
 
 #: panellib/analyze.php:306 panellib/analyze.php:1145
-#, fuzzy
 msgid "Log Size: Quite Large"
-msgstr "גודל יומן גדול למדי"
+msgstr "גודל יומן: גדול למדי"
 
 #: panellib/analyze.php:309
-#, fuzzy
 msgid "Log Size: "
-msgstr "גודל יומן"
+msgstr "גודל יומן: "
 
 #: panellib/analyze.php:316
-#, fuzzy
 msgid "Last log lines:"
-msgstr "10 כניסות אחרונות"
+msgstr "שורות יומן אחרונות:"
 
 #: panellib/analyze.php:423
 msgid "Skipping DB tables checks. Database too large"
 msgstr "דילוג על בדיקות טבלאות DB. מסד נתונים גדול מדי"
 
 #: panellib/analyze.php:437
-#, fuzzy, php-format
+#, php-format
 msgid "Table %s status %s"
-msgstr "סטטוס טבלה %s %s"
+msgstr "טבלה %s במצב %s"
 
 #: panellib/analyze.php:444
-#, fuzzy
 msgid "DB: Problems"
-msgstr "בעיית DB"
+msgstr "DB: בעיות"
 
 #: panellib/analyze.php:453
 msgid "DB: OK"
@@ -1200,26 +1062,26 @@ msgid "You can increase Max connection via command line tools or permanently in 
 msgstr "ניתן להגדיל את החיבור המרבי באמצעות כלי שורת הפקודה או לצמיתות בקובץ config"
 
 #: panellib/analyze.php:499
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
-msgstr "שגיאות חיבור - נסה להפעיל מחדש את שירות SQL."
+msgstr "שגיאות חיבור: %s - נסה להפעיל מחדש את שירות ה-SQL, בדוק את יומן ה-SQL, ..."
 
 #: panellib/analyze.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "Aborted clients/connects: %s"
-msgstr "לקוחות/חיבורים שהבוטלו: %s - בדוק יומנים."
+msgstr "לקוחות/חיבורים שבוטלו: %s"
 
 #: panellib/analyze.php:519
 msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
 msgstr "לקוחות/חיבורים שבוטלו - הפעל את 'SET GLOBAL log_warnings = 1;' או ' log_error_verbosity = 1;' (תלוי בגרסת MySQL/MariaDB שלך) מה- mysql CLI ומוגדר ב- server.cnf להשתקה."
 
 #: panellib/analyze.php:523
-#, fuzzy, php-format
+#, php-format
 msgid "Connection errors: %s"
-msgstr "שגיאות התחברות: %s"
+msgstr "שגיאות חיבור: %s"
 
 #: panellib/analyze.php:524
-#, fuzzy, php-format
+#, php-format
 msgid "Damaged tables: %s"
 msgstr "טבלאות פגומות: %s"
 
@@ -1228,12 +1090,12 @@ msgid "You should run check and repair table commands"
 msgstr "עליך להפעיל פקודות טבלת בדיקה ותיקון"
 
 #: panellib/analyze.php:531
-#, fuzzy, php-format
+#, php-format
 msgid "Memory tables: %s"
 msgstr "טבלאות זיכרון: %s"
 
 #: panellib/analyze.php:532
-#, fuzzy, php-format
+#, php-format
 msgid "All tables: %s"
 msgstr "כל הטבלאות: %s"
 
@@ -1251,9 +1113,9 @@ msgid "N/A"
 msgstr "לא זמין"
 
 #: panellib/analyze.php:584
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port: %s"
-msgstr "התקנים עם כתובת IP ויציאה: %s"
+msgstr "התקנים עם כתובת IP ויציאה זהות: %s"
 
 #: panellib/analyze.php:613
 #, php-format
@@ -1292,59 +1154,58 @@ msgid "%s: not run yet"
 msgstr "%s: עדיין לא רץ"
 
 #: panellib/analyze.php:691
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources: %s"
 msgstr "מקורות נתונים יתומים: %s"
 
 #: panellib/analyze.php:722
-#, fuzzy, php-format
+#, php-format
 msgid "Datasource - bad indexes: %s"
-msgstr "מסדי נתונים - מדדים גרועים: %s"
+msgstr "מקור נתונים - אינדקסים שגויים: %s"
 
 #: panellib/analyze.php:774
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning: %s"
-msgstr "התראה/אזהרה של Thold לכניסה: %s"
+msgstr "התראה/אזהרה של Thold ליומן בלבד: %s"
 
 #: panellib/analyze.php:805
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description: %s"
 msgstr "התקנים עם אותו תיאור: %s"
 
 #: panellib/analyze.php:834
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree: %s"
 msgstr "התקנים ביותר מעץ אחד: %s"
 
 #: panellib/analyze.php:864
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without graphs: %s"
-msgstr "מארחים ללא גרפים: %s"
+msgstr "התקנים ללא גרפים: %s"
 
 #: panellib/analyze.php:893
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree: %s"
-msgstr "מארחים ללא עץ: %s"
+msgstr "התקנים ללא עץ: %s"
 
 #: panellib/analyze.php:921
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community: %s"
-msgstr "מארחים עם הקהילה הציבורית / פרטית המוגדרת כברירת מחדל: %s"
+msgstr "התקנים עם קהילת public/private ברירת מחדל: %s"
 
 #: panellib/analyze.php:947
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts: %s"
-msgstr "לפקח מארח - לא מארחים: %s"
+msgstr "תוסף Monitor - מארחים שאינם מנוטרים: %s"
 
 #: panellib/analyze.php:955 panellib/analyze.php:1862
-#, fuzzy, php-format
+#, php-format
 msgid "Found %s problems"
 msgstr "נמצאו %s בעיות"
 
 #: panellib/analyze.php:961 panellib/analyze.php:1864
-#, fuzzy
 msgid "Everything OK"
-msgstr "הכל בסדר"
+msgstr "הכול תקין"
 
 #: panellib/analyze.php:977
 msgid "DS stats: "
@@ -1367,33 +1228,28 @@ msgid "DS null records "
 msgstr "רשומות DS null "
 
 #: panellib/analyze.php:1090
-#, fuzzy
 msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
-msgstr "נתח את פרטי יומן הקקטוסים [אזהרות/שגיאות]"
+msgstr "נתח פרטי יומן Cacti [אזהרות/שגיאות]"
 
 #: panellib/analyze.php:1127
 msgid "Errors"
 msgstr "שגיאות"
 
 #: panellib/analyze.php:1132
-#, fuzzy
 msgid "Warnings"
 msgstr "אזהרות"
 
 #: panellib/analyze.php:1137
-#, fuzzy
 msgid "WARNING: File is Larger than 2GB"
-msgstr "הקובץ גדול מ 2GB"
+msgstr "אזהרה: הקובץ גדול מ-2GB"
 
 #: panellib/analyze.php:1148
-#, fuzzy
 msgid "Log Size"
 msgstr "גודל יומן"
 
 #: panellib/analyze.php:1254
-#, fuzzy
 msgid "Analyze Logins Detail"
-msgstr "ניתוח יומן - מספר השורות"
+msgstr "פירוט ניתוח התחברויות"
 
 #: panellib/analyze.php:1272
 msgid "User"
@@ -1405,29 +1261,25 @@ msgid "Result"
 msgstr "תוצאה"
 
 #: panellib/analyze.php:1314
-#, fuzzy
 msgid "Active Users in Last 2 Hours:"
 msgstr "משתמשים פעילים ב-2 השעות האחרונות:"
 
 #: panellib/analyze.php:1325
-#, fuzzy
 msgid "No Active Users"
 msgstr "אין משתמשים פעילים"
 
 #: panellib/analyze.php:1331
-#, fuzzy
 msgid "View Full User Log"
-msgstr "צפה ביומן המשתמש המלא"
+msgstr "הצג יומן משתמש מלא"
 
 #: panellib/analyze.php:1363
-#, fuzzy
 msgid "Analyze Tree, Graphs, Hosts"
-msgstr "ניתוח עץ / מארח / גרף"
+msgstr "ניתוח עץ, גרפים, מארחים"
 
 #: panellib/analyze.php:1386
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same IP and port - %s"
-msgstr "התקנים עם כתובת IP זהה ויציאה %s"
+msgstr "התקנים עם כתובת IP ויציאה זהות - %s"
 
 #: panellib/analyze.php:1428
 #, php-format
@@ -1435,54 +1287,53 @@ msgid "Not optimized Bulk Walk Size devices - %s"
 msgstr "מכשירים לא ממוטבים בגודל הליכה בתפזורת - %s"
 
 #: panellib/analyze.php:1484
-#, fuzzy
 msgid "Data maintenance"
-msgstr "כאשר התחזוקה מתחילה"
+msgstr "תחזוקת נתונים"
 
 #: panellib/analyze.php:1519
-#, fuzzy, php-format
+#, php-format
 msgid "Orphaned Data Sources - %s"
-msgstr "מקורות נתונים יתומים %s"
+msgstr "מקורות נתונים יתומים - %s"
 
 #: panellib/analyze.php:1559
-#, fuzzy, php-format
+#, php-format
 msgid "Datasources with bad indexes - %s"
-msgstr "Datasource - אינדקסים רעים %s:"
+msgstr "מקורות נתונים עם אינדקסים שגויים - %s"
 
 #: panellib/analyze.php:1612
-#, fuzzy, php-format
+#, php-format
 msgid "Thold logonly alert/warning - %s"
-msgstr "התראה/אזהרה של Thold לכניסה - %s:"
+msgstr "התראה/אזהרה של Thold ליומן בלבד - %s"
 
 #: panellib/analyze.php:1649
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with the same description - %s"
-msgstr "התקנים עם אותו %s תיאור"
+msgstr "התקנים עם אותו תיאור - %s"
 
 #: panellib/analyze.php:1692
-#, fuzzy, php-format
+#, php-format
 msgid "Devices in more than one tree - %s"
-msgstr "התקנים ביותר מעץ אחד %s"
+msgstr "התקנים ביותר מעץ אחד - %s"
 
 #: panellib/analyze.php:1748
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without Graphs - %s"
-msgstr "מארחים ללא גרפים %s"
+msgstr "התקנים ללא גרפים - %s"
 
 #: panellib/analyze.php:1781
-#, fuzzy, php-format
+#, php-format
 msgid "Devices without tree - %s"
-msgstr "מארחים ללא עץ %s"
+msgstr "התקנים ללא עץ - %s"
 
 #: panellib/analyze.php:1813
-#, fuzzy, php-format
+#, php-format
 msgid "Devices with default public/private community - %s"
-msgstr "מארחים עם ברירת מחדל של קהילה ציבורית / פרטית %s"
+msgstr "התקנים עם קהילת public/private ברירת מחדל - %s"
 
 #: panellib/analyze.php:1845
-#, fuzzy, php-format
+#, php-format
 msgid "Plugin Monitor - Unmonitored hosts - %s"
-msgstr "לפקח מארח - ununitored המארחים %s"
+msgstr "תוסף Monitor - מארחים שאינם מנוטרים - %s"
 
 #: panellib/busiest.php:31
 msgid "The busiest"
@@ -1497,18 +1348,16 @@ msgid "Busiest CPU"
 msgstr "המעבד העמוס ביותר"
 
 #: panellib/busiest.php:38
-#, fuzzy
 msgid "Devices with the busiest CPU (Host MIB)"
-msgstr "התקנים עם כתובת IP ויציאה: %s"
+msgstr "התקנים עם המעבד העמוס ביותר (Host MIB)"
 
 #: panellib/busiest.php:53
 msgid "Busiest ucd/net - Load"
 msgstr "UCD/נטו העמוסים ביותר - עומס"
 
 #: panellib/busiest.php:54
-#, fuzzy
 msgid "Devices with the highest Load (ucd/net)"
-msgstr "התקנים עם אותו תיאור: %s"
+msgstr "התקנים עם העומס הגבוה ביותר (ucd/net)"
 
 #: panellib/busiest.php:69
 msgid "Busiest Hard Drive Space"
@@ -1523,18 +1372,16 @@ msgid "Busiest uptime"
 msgstr "זמן הפעולה התקינה העמוס ביותר"
 
 #: panellib/busiest.php:86
-#, fuzzy
 msgid "Devices with the highest uptime"
-msgstr "זמן הגרוע ביותר"
+msgstr "התקנים עם זמן הפעולה הרציפה הגבוה ביותר"
 
 #: panellib/busiest.php:101
 msgid "Busiest Interface in/out traffic"
 msgstr "הממשק העמוס ביותר תעבורת כניסה/יציאה"
 
 #: panellib/busiest.php:102
-#, fuzzy
 msgid "Devices with the highest in/out traffic (Interface)"
-msgstr "זמן הגרוע ביותר"
+msgstr "התקנים עם תעבורת הכניסה/יציאה הגבוהה ביותר (ממשק)"
 
 #: panellib/busiest.php:117
 msgid "Busiest Interface error"
@@ -1603,9 +1450,8 @@ msgstr "ממתין לנתונים או שאין לך הרשאה לאף מכשי�
 #: panellib/busiest.php:1097 panellib/busiest.php:1213
 #: panellib/busiest.php:1354 panellib/busiest.php:1570
 #: panellib/busiest.php:1692 panellib/busiest.php:1820
-#, fuzzy
 msgid "You don't have permissions to any hosts or there isn't any host with this template"
-msgstr "אין לך הרשאה"
+msgstr "אין לך הרשאות למארחים כלשהם או שאין מארח עם תבנית זו"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
@@ -1616,9 +1462,8 @@ msgid "Average of all allowed hosts"
 msgstr "ממוצע של כל המארחים המותרים"
 
 #: panellib/busiest.php:592 panellib/busiest.php:1424
-#, fuzzy
 msgid "Waiting for data or you don't have permission for any device"
-msgstr "אין לך הרשאה"
+msgstr "ממתין לנתונים או שאין לך הרשאה לאף התקן"
 
 #: panellib/busiest.php:933 panellib/busiest.php:1773
 msgid "Direction"
@@ -1654,59 +1499,48 @@ msgid "Busiest interface utilization"
 msgstr "ניצול הממשק העמוס ביותר"
 
 #: panellib/graphs.php:31
-#, fuzzy
 msgid "Graphical Panels"
-msgstr "לוחות אינטרופ"
+msgstr "לוחות גרפיים"
 
 #: panellib/graphs.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
-msgstr "פאנלים המספקים מידע על קקטוסים והתוספים שלהם בצורה גרפית."
+msgstr "חלוניות המספקות מידע על Cacti והתוספים שלו באופן גרפי."
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
-#, fuzzy
 msgid "Data Sources"
-msgstr "מקורות מידע:"
+msgstr "מקורות מידע"
 
 #: panellib/graphs.php:38
-#, fuzzy
 msgid "Graph of Data Sources"
-msgstr "התר לוח נתונים של נתוני גרף"
+msgstr "גרף מקורות נתונים"
 
 #: panellib/graphs.php:53 panellib/graphs.php:603
-#, fuzzy
 msgid "Device Templates"
 msgstr "תבניות מכשיר"
 
 #: panellib/graphs.php:54
-#, fuzzy
 msgid "Graph of Device Templates"
-msgstr "תבניות מכשיר"
+msgstr "גרף תבניות התקנים"
 
 #: panellib/graphs.php:69
-#, fuzzy
 msgid "Devices by Status"
-msgstr "תבניות מכשיר"
+msgstr "התקנים לפי מצב"
 
 #: panellib/graphs.php:70
-#, fuzzy
 msgid "Graph of Devices by Status (up,down,...)"
-msgstr "גרף של התקנים לפי סטטוס (למעלה, למטה,...)"
+msgstr "גרף התקנים לפי מצב (פעיל, לא פעיל,...)"
 
 #: panellib/graphs.php:106
-#, fuzzy
 msgid "Datasources: "
-msgstr "מקורות מידע:"
+msgstr "מקורות נתונים: "
 
 #: panellib/graphs.php:180 panellib/graphs.php:207
-#, fuzzy
 msgid "Device Templates: "
-msgstr "תבניות מכשיר"
+msgstr "תבניות התקן: "
 
 #: panellib/graphs.php:262
-#, fuzzy
 msgid "Devices: "
-msgstr "ניתן להתנתק מכל ההתקנים האחרים, כגון טלפון נייד או מחשב ציבורי, על ידי לחיצה על כפתור התנתקות מכל ההתקנים האחרים."
+msgstr "התקנים: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
@@ -1714,7 +1548,6 @@ msgstr "למטה"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
-#, fuzzy
 msgid "Recovering"
 msgstr "שחזור"
 
@@ -1728,18 +1561,16 @@ msgid "Total"
 msgstr "סה\"כ"
 
 #: panellib/graphs.php:445
-#, fuzzy
 msgid "No untemplated datasources found"
-msgstr "לא נמצאו datasources untemplated"
+msgstr "לא נמצאו מקורות נתונים ללא תבנית"
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
-msgstr "ניתן להתנתק מכל ההתקנים האחרים, כגון טלפון נייד או מחשב ציבורי, על ידי לחיצה על כפתור התנתקות מכל ההתקנים האחרים."
+msgstr "התקנים"
 
 #: panellib/graphs.php:503
-#, fuzzy
 msgid "Device Count"
-msgstr "מקסימום מכשיר מושבת"
+msgstr "מספר התקנים"
 
 #: panellib/graphs.php:509 panellib/thold.php:365 panellib/thold.php:381
 msgid "All"
@@ -1754,64 +1585,55 @@ msgid "Template Name"
 msgstr "שם התבנית"
 
 #: panellib/graphs.php:636
-#, fuzzy
 msgid "Total Devices"
-msgstr "ניתן להתנתק מכל ההתקנים האחרים, כגון טלפון נייד או מחשב ציבורי, על ידי לחיצה על כפתור התנתקות מכל ההתקנים האחרים."
+msgstr "סה\"כ התקנים"
 
 #: panellib/graphs.php:656
-#, fuzzy
 msgid "No device templates found"
-msgstr "לא נמצאו תבניות מכשיר"
+msgstr "לא נמצאו תבניות התקן"
 
 #: panellib/mactrack.php:31
-#, fuzzy
 msgid "MacTrack Panels"
-msgstr "אתרי Mactrack"
+msgstr "פאנלים של MacTrack"
 
 #: panellib/mactrack.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's MacTrack plugins."
-msgstr "לוחות המספקים מידע על התוספים של MacTrack של Cacti."
+msgstr "פאנלים המספקים מידע על תוספי MacTrack של Cacti."
 
 #: panellib/mactrack.php:37
-#, fuzzy
 msgid "MacTrack Plugin"
-msgstr "אפשר תוסף MacTrack של החלונית"
+msgstr "תוסף MacTrack"
 
 #: panellib/mactrack.php:38
-#, fuzzy
 msgid "Various MacTrack collection and site statistics."
-msgstr "מגוון אוסף MacTrack וסטטיסטיקות אתרים."
+msgstr "סטטיסטיקות שונות של איסוף ואתרים ב-MacTrack."
 
 #: panellib/mactrack.php:53 panellib/mactrack.php:184
-#, fuzzy
 msgid "MacTrack Sites"
-msgstr "אתרי Mactrack"
+msgstr "אתרי MacTrack"
 
 #: panellib/mactrack.php:54
-#, fuzzy
 msgid "Various MacTrack Site statistics."
-msgstr "סטטיסטיקות שונות באתר MacTrack."
+msgstr "סטטיסטיקות שונות של אתרי MacTrack."
 
 #: panellib/mactrack.php:81 panellib/mactrack.php:134
-#, fuzzy
 msgid "MacTrack Plugin not Installed/Running"
-msgstr "לא מותקן / פועל"
+msgstr "תוסף MacTrack אינו מותקן/פועל"
 
 #: panellib/mactrack.php:97
-#, fuzzy, php-format
+#, php-format
 msgid "All: %s"
 msgstr "הכל: %s"
 
 #: panellib/mactrack.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "Up: %s"
-msgstr "יו פי אס"
+msgstr "פעיל: %s"
 
 #: panellib/mactrack.php:99
-#, fuzzy, php-format
+#, php-format
 msgid "Down: %s"
-msgstr "למטה: %s"
+msgstr "לא פעיל: %s"
 
 #: panellib/mactrack.php:100
 #, php-format
@@ -1819,19 +1641,18 @@ msgid "Error: %s"
 msgstr "שגיאה %s"
 
 #: panellib/mactrack.php:101
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown: %s"
 msgstr "לא ידוע: %s"
 
 #: panellib/mactrack.php:102
-#, fuzzy, php-format
+#, php-format
 msgid "Disabled: %s"
 msgstr "מושבת: %s"
 
 #: panellib/mactrack.php:105
-#, fuzzy
 msgid "MacTrack"
-msgstr "Mactrack"
+msgstr "MacTrack"
 
 #: panellib/mactrack.php:109 panellib/misc.php:411 panellib/misc.php:575
 msgid "Error"
@@ -1842,9 +1663,8 @@ msgid "Unknown"
 msgstr "לא ידוע"
 
 #: panellib/mactrack.php:118 panellib/mactrack.php:173 panellib/thold.php:312
-#, fuzzy
 msgid "You don't have plugin permission"
-msgstr "אין לך הרשאה"
+msgstr "אין לך הרשאה לתוסף"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
@@ -1855,129 +1675,108 @@ msgid "IPs"
 msgstr "כתובות IP"
 
 #: panellib/mactrack.php:141 panellib/mactrack.php:194
-#, fuzzy
 msgid "Ports"
-msgstr "נמלים"
+msgstr "יציאות"
 
 #: panellib/mactrack.php:142 panellib/mactrack.php:195
-#, fuzzy
 msgid "Ports up"
-msgstr "יציאות למעלה"
+msgstr "יציאות פעילות"
 
 #: panellib/mactrack.php:143 panellib/mactrack.php:196
-#, fuzzy
 msgid "MACs"
-msgstr "MACs"
+msgstr "כתובות MAC"
 
 #: panellib/mactrack.php:144 panellib/mactrack.php:197
-#, fuzzy
 msgid "Device Errors"
-msgstr "שגיאות בהתקן"
+msgstr "שגיאות התקן"
 
 #: panellib/mactrack.php:170 panellib/mactrack.php:225
-#, fuzzy
 msgid "No mactrack sites found"
-msgstr "לא נמצאו אתרים mactrack"
+msgstr "לא נמצאו אתרי MacTrack"
 
 #: panellib/misc.php:31
-#, fuzzy
 msgid "Miscellaneous Panels"
 msgstr "פאנלים שונים"
 
 #: panellib/misc.php:32
-#, fuzzy
 msgid "Panels that general non-categorized data about Cacti's."
-msgstr "פאנלים הכוללים נתונים לא מסווגים על קקטוסים."
+msgstr "חלוניות המספקות נתונים כלליים שאינם מסווגים על Cacti."
 
 #: panellib/misc.php:37
-#, fuzzy
 msgid "NTP/DNS Status"
-msgstr "מצב NTP"
+msgstr "מצב NTP/DNS"
 
 #: panellib/misc.php:38
-#, fuzzy
 msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
-msgstr "בדיקת שעון מערכת הקקטוסים שלך לאיתור סחף מקו בסיס ידוע."
+msgstr "בדיקת שעון מערכת ה-Cacti שלך לאיתור סחיפה מקו בסיס ידוע ובדיקת פענוח DNS"
 
 #: panellib/misc.php:53
-#, fuzzy
 msgid "Maint Plugin Details"
-msgstr "הצג פרטים"
+msgstr "פרטי תוסף Maint"
 
 #: panellib/misc.php:54
-#, fuzzy
 msgid "Maint Plugin details on upcoming schedules"
-msgstr "שמור את פרטי הפלאגין על לוחות הזמנים הקרובים"
+msgstr "פרטי תוסף Maint על לוחות הזמנים הקרובים"
 
 #: panellib/misc.php:69
-#, fuzzy
 msgid "Webseer Details"
-msgstr "הצג פרטים"
+msgstr "פרטי WebSeer"
 
 #: panellib/misc.php:70
-#, fuzzy
 msgid "Plugin webseer URL Service Check Details"
-msgstr "פרטי בדיקת שירות URL של plugin webseer"
+msgstr "פרטי בדיקת שירות URL של תוסף webseer"
 
 #: panellib/misc.php:85
-#, fuzzy
 msgid "Servcheck plugin Details"
-msgstr "תוסף Webseer - פרטים"
+msgstr "פרטי תוסף ServCheck"
 
 #: panellib/misc.php:86
-#, fuzzy
 msgid "Plugin ServCheck Details"
-msgstr "פרטי בדיקת שירות URL של plugin webseer"
+msgstr "פרטי תוסף ServCheck"
 
 #: panellib/misc.php:117
-#, fuzzy
 msgid "No NTP server configured"
 msgstr "לא הוגדר שרת NTP"
 
 #: panellib/misc.php:120
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
-msgstr "לא הוגדר שרת NTP"
+msgstr "הוגדר שרת NTP שגוי - %s<br/>אנא תקן זאת בהגדרות"
 
 #: panellib/misc.php:136
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to get NTP time from %s"
-msgstr "נכשל כדי לקבל זמן NTP מ- ntp_server $"
+msgstr "נכשל בקבלת זמן NTP מ-%s"
 
 #: panellib/misc.php:144
-#, fuzzy
 msgid "Please check time as it is off by more"
-msgstr "אנא בדוק את השעה מכיוון שהוא כבוי בעוד יותר"
+msgstr "אנא בדוק את השעה מכיוון שהיא סוטה יותר מדי"
 
 #: panellib/misc.php:145
-#, fuzzy, php-format
+#, php-format
 msgid "than %s seconds from NTP server %s."
-msgstr "יותר מ-%s שניות משרת NTP %s."
+msgstr "מ-%s שניות משרת NTP %s."
 
 #: panellib/misc.php:147
-#, fuzzy
 msgid "Localtime is equal to NTP server"
-msgstr "Localtime שווה לשרת NTP"
+msgstr "הזמן המקומי תואם לשרת NTP"
 
 #: panellib/misc.php:151
-#, fuzzy
 msgid "Unable to contact the NTP server indicated."
-msgstr "לא ניתן ליצור קשר עם שרת NTP. <br/> בדוק את התצורה שלך. <br/>"
+msgstr "לא ניתן ליצור קשר עם שרת ה-NTP שצוין."
 
 #: panellib/misc.php:153 panellib/misc.php:178
-#, fuzzy
 msgid "Please check your configuration."
 msgstr "אנא בדוק את התצורה שלך."
 
 #: panellib/misc.php:161
-#, fuzzy
 msgid "No DNS hostname configured"
-msgstr "לא הוגדר שרת NTP"
+msgstr "לא הוגדר שם מארח DNS"
 
 #: panellib/misc.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
-msgstr "לא הוגדר שרת NTP"
+msgstr "הוגדר שם מארח DNS שגוי - %s<br/>אנא תקן זאת בהגדרות"
 
 #: panellib/misc.php:173
 #, php-format
@@ -1995,28 +1794,24 @@ msgid "DNS hostname (%s) resolving failed."
 msgstr "פתרון שם מארח DNS (%s) נכשל."
 
 #: panellib/misc.php:287
-#, fuzzy
 msgid "Maint plugin is not installed/enabled"
-msgstr "לא מותקן / פועל"
+msgstr "תוסף Maint אינו מותקן או אינו מופעל"
 
 #: panellib/misc.php:307
-#, fuzzy
 msgid "Plugin Webseer isn't installed or started"
-msgstr "תוסף Thold אינו מותקן או מופעל"
+msgstr "תוסף Webseer אינו מותקן או אינו מופעל"
 
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
 msgstr "תוסף Webseer אינו נתמך עוד, השתמש בתוסף servcheck במקום זאת"
 
 #: panellib/misc.php:320 panellib/misc.php:486
-#, fuzzy
 msgid "Number of checks (all/disabled): "
-msgstr "מספר המחאות:"
+msgstr "מספר בדיקות (הכל/מושבתות): "
 
 #: panellib/misc.php:321
-#, fuzzy
 msgid "Status (up/down): "
-msgstr "מארחים למטה"
+msgstr "מצב (פעיל/לא פעיל): "
 
 #: panellib/misc.php:335
 msgid "Last log messages"
@@ -2027,7 +1822,6 @@ msgid "URL"
 msgstr "URL"
 
 #: panellib/misc.php:338 panellib/misc.php:410
-#, fuzzy
 msgid "HTTP code"
 msgstr "קוד HTTP"
 
@@ -2037,19 +1831,16 @@ msgid "OK"
 msgstr "אישור"
 
 #: panellib/misc.php:390
-#, fuzzy
 msgid "Webseer Plugin - Details"
-msgstr "תוסף Webseer - פרטים"
+msgstr "תוסף WebSeer - פרטים"
 
 #: panellib/misc.php:461
-#, fuzzy
 msgid "Plugin Servcheck isn't installed or started"
-msgstr "תוסף Thold אינו מותקן או מופעל"
+msgstr "תוסף Servcheck אינו מותקן או אינו מופעל"
 
 #: panellib/misc.php:487
-#, fuzzy
 msgid "Status (ok/error): "
-msgstr "מארחים למטה"
+msgstr "מצב (תקין/שגיאה): "
 
 #: panellib/misc.php:498
 msgid "Last log records"
@@ -2064,44 +1855,36 @@ msgid "Type"
 msgstr "סוג"
 
 #: panellib/misc.php:555
-#, fuzzy
 msgid "Servcheck Plugin - Details"
-msgstr "תוסף Webseer - פרטים"
+msgstr "תוסף ServCheck - פרטים"
 
 #: panellib/poller.php:31
-#, fuzzy
 msgid "Poller Panels"
-msgstr "אפשר פאנל סטטיסטיקת פולר"
+msgstr "לוחות Poller"
 
 #: panellib/poller.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's polling process."
-msgstr "פאנלים המספקים מידע על תהליך הסקרים של קקטוסים."
+msgstr "חלוניות המספקות מידע על תהליך הדגימה של Cacti."
 
 #: panellib/poller.php:37
-#, fuzzy
 msgid "Poller Information"
-msgstr "פרטי סוקר"
+msgstr "מידע על פולרים"
 
 #: panellib/poller.php:38
-#, fuzzy
 msgid "Various information about your Cacti poller."
-msgstr "מידע מגוון על פולר הקקטוסים שלך."
+msgstr "מידע שונה על ה-Poller של Cacti שלך."
 
 #: panellib/poller.php:53
-#, fuzzy
 msgid "Poller Statistics"
-msgstr "אפשר פאנל סטטיסטיקת פולר"
+msgstr "סטטיסטיקת Poller"
 
 #: panellib/poller.php:54 panellib/poller.php:70
-#, fuzzy
 msgid "Various Cacti poller statistics."
-msgstr "סטטיסטיקות שונות של פולר קקטוסים."
+msgstr "סטטיסטיקות שונות של ה-Poller של Cacti."
 
 #: panellib/poller.php:69
-#, fuzzy
 msgid "Poller Output Items"
-msgstr "פריטי פלט של פולרים: %s"
+msgstr "פריטי פלט של Poller"
 
 #: panellib/poller.php:119 panellib/poller.php:304
 msgid "ID"
@@ -2116,7 +1899,6 @@ msgid "Total Time"
 msgstr "סך הכול זמן"
 
 #: panellib/poller.php:134 panellib/poller.php:340
-#, fuzzy
 msgid "New/Idle"
 msgstr "חדש / לא פעיל"
 
@@ -2129,24 +1911,21 @@ msgid "Idle"
 msgstr "ממתין"
 
 #: panellib/poller.php:140 panellib/poller.php:346
-#, fuzzy
 msgid "Unkn/down"
-msgstr "Unkn / מטה"
+msgstr "לא ידוע/לא פעיל"
 
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
-#, fuzzy, php-format
+#, php-format
 msgid "%s Secs"
 msgstr "%s שניות"
 
 #: panellib/poller.php:171 panellib/poller.php:367
-#, fuzzy
 msgid "(ok)"
-msgstr "אישור"
+msgstr "(תקין)"
 
 #: panellib/poller.php:172 panellib/poller.php:367
-#, fuzzy
 msgid "(all)"
-msgstr "(את כל)"
+msgstr "(הכל)"
 
 #: panellib/poller.php:274
 msgid "ID: "
@@ -2157,46 +1936,38 @@ msgid "Seconds"
 msgstr "שניות"
 
 #: panellib/poller.php:297
-#, fuzzy
 msgid "Poller Details"
-msgstr "אפשר פאנל סטטיסטיקת פולר"
+msgstr "פרטי Poller"
 
 #: panellib/poller.php:308
-#, fuzzy
 msgid "Average Time"
 msgstr "זמן ממוצע"
 
 #: panellib/poller.php:309
-#, fuzzy
 msgid "Max Time"
-msgstr "מקסימום זמן"
+msgstr "זמן מרבי"
 
 #: panellib/poller.php:446
-#, fuzzy
 msgid "Poller output items "
-msgstr "פריטי פלט לפולרים %s:"
+msgstr "פריטי פלט של Poller "
 
 #: panellib/poller.php:447
 msgid "Items"
 msgstr "פריטים"
 
 #: panellib/syslog.php:31
-#, fuzzy
 msgid "Syslog Panels"
-msgstr "רענן לוח"
+msgstr "לוחות Syslog"
 
 #: panellib/syslog.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti's Syslog message processing."
 msgstr "פאנלים המספקים מידע על עיבוד הודעות Syslog של Cacti."
 
 #: panellib/syslog.php:37
-#, fuzzy
 msgid "Syslog Details"
-msgstr "הצג פרטים"
+msgstr "פרטי Syslog"
 
 #: panellib/syslog.php:38
-#, fuzzy
 msgid "Various Syslog Plugin statistics."
 msgstr "סטטיסטיקות שונות של תוסף Syslog."
 
@@ -2213,78 +1984,64 @@ msgid "Messages"
 msgstr "הודעות"
 
 #: panellib/syslog.php:197
-#, fuzzy
 msgid "Syslog plugin not installed/running"
-msgstr "תוסף זה לא מותקן / פועל"
+msgstr "תוסף Syslog אינו מותקן/אינו פועל"
 
 #: panellib/system.php:31
-#, fuzzy
 msgid "System Panels"
-msgstr "לוחות אינטרופ"
+msgstr "לוחות מערכת"
 
 #: panellib/system.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti system performance."
-msgstr "לוחות המספקים מידע על ביצועי מערכת Cacti."
+msgstr "פאנלים המספקים מידע על ביצועי מערכת Cacti."
 
 #: panellib/system.php:37
 msgid "Information"
 msgstr "מידע"
 
 #: panellib/system.php:38
-#, fuzzy
 msgid "Various system information about the Cacti system itself."
-msgstr "מידע מערכתי מגוון על מערכת הקקטוסים עצמה."
+msgstr "מידע מערכתי שונה על מערכת Cacti עצמה."
 
 #: panellib/system.php:53
-#, fuzzy
 msgid "Administrative Alerts"
 msgstr "התראות מנהליות"
 
 #: panellib/system.php:54
-#, fuzzy
 msgid "Extra admin notify panel for all users"
-msgstr "פאנל הודעות מנהל נוסף עבור כל המשתמשים"
+msgstr "חלונית התראות מנהל נוספת לכל המשתמשים"
 
 #: panellib/system.php:69
-#, fuzzy
 msgid "Boost Statistics"
-msgstr "שפר נתונים סטטיסטיים"
+msgstr "סטטיסטיקות Boost"
 
 #: panellib/system.php:70
-#, fuzzy
 msgid "Information about Cacti's performance boost process."
 msgstr "מידע על תהליך שיפור הביצועים של Cacti."
 
 #: panellib/system.php:85
-#, fuzzy
 msgid "24 Hour Extremes"
-msgstr "24 שעות קיצוניות"
+msgstr "ערכי קיצון של 24 שעות"
 
 #: panellib/system.php:86
-#, fuzzy
 msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
-msgstr "טבלה עם 24 שעות של אקסטרים בסקר (הרצת הסקרים הארוכה ביותר, מארחים יורדים)"
+msgstr "טבלה עם ערכי קיצון של דגימה ב-24 השעות האחרונות (ריצת Poller הארוכה ביותר, מארחים לא פעילים)"
 
 #: panellib/system.php:101
-#, fuzzy
 msgid "CPU Utilization"
-msgstr "ניצול CPU"
+msgstr "ניצולת מעבד"
 
 #: panellib/system.php:102
-#, fuzzy
 msgid "CPU utilization Graph (only Linux)."
-msgstr "ניצול CPU"
+msgstr "גרף ניצול CPU (Linux בלבד)."
 
 #: panellib/system.php:141
-#, fuzzy
 msgid "CPU Load: "
-msgstr "עומס CPU:"
+msgstr "עומס CPU: "
 
 #: panellib/system.php:165
-#, fuzzy
 msgid "This function is not implemented on Windows platforms"
-msgstr "פונקציה זו אינה מיושמת בפלטפורמות של Windows"
+msgstr "פונקציה זו אינה ממומשת בפלטפורמות Windows"
 
 #: panellib/system.php:177
 msgid "Avg CPU"
@@ -2295,46 +2052,38 @@ msgid "Max CPU"
 msgstr "מעבד מקסימלי"
 
 #: panellib/system.php:208
-#, fuzzy
 msgid "Cacti Version: "
-msgstr "גרסת Cacti:"
+msgstr "גרסת Cacti: "
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Poller Type:"
-msgstr "סוג הסולם:"
+msgstr "סוג Poller:"
 
 #: panellib/system.php:219
-#, fuzzy
 msgid "Spine"
 msgstr "עַמוּד הַשִׁדרָה"
 
 #: panellib/system.php:221
-#, fuzzy
 msgid "Spine version: "
-msgstr "גרסת השדרה:"
+msgstr "גרסת Spine: "
 
 #: panellib/system.php:224
-#, fuzzy
 msgid "You are using incorrect spine version!"
-msgstr "אתה משתמש בגרסה שגויה של עמוד השדרה!"
+msgstr "אתה משתמש בגרסת Spine שגויה!"
 
 #: panellib/system.php:229
-#, fuzzy
 msgid "Poller Type: "
-msgstr "סוג הסולם:"
+msgstr "סוג Poller: "
 
 #: panellib/system.php:238
 msgid "Running on: "
 msgstr "רץ על:"
 
 #: panellib/system.php:316
-#, fuzzy
 msgid "Overrun Warning"
 msgstr "אזהרה על הצפת"
 
 #: panellib/system.php:319
-#, fuzzy
 msgid "Timed Out"
 msgstr "נגמר הזמן"
 
@@ -2343,14 +2092,13 @@ msgid "Other"
 msgstr "אחר"
 
 #: panellib/system.php:325
-#, fuzzy
 msgid "Never Run"
 msgstr "לעולם לא לרוץ"
 
 #: panellib/system.php:346
-#, fuzzy, php-format
+#, php-format
 msgid "Boost Status is: %s"
-msgstr "שפר נתונים סטטיסטיים"
+msgstr "סטטוס Boost הוא: %s"
 
 #: panellib/system.php:350
 #, php-format
@@ -2358,104 +2106,90 @@ msgid "Processes/Frequency: %s / %s"
 msgstr "תהליכים/תדירות: %s / %s"
 
 #: panellib/system.php:352
-#, fuzzy, php-format
+#, php-format
 msgid "Pending Records Threshold: %s"
-msgstr "רשומות Boost בהמתנה: %s"
+msgstr "סף רשומות ממתינות: %s"
 
 #: panellib/system.php:358
-#, fuzzy, php-format
+#, php-format
 msgid "Approximate Next Start Time: %s"
-msgstr "שעת התחלה: %s"
+msgstr "זמן ההתחלה הבא המשוער: %s"
 
 #: panellib/system.php:361
-#, fuzzy, php-format
+#, php-format
 msgid "Pending/Archived Records: %s / %s"
-msgstr "רשומות ארכיון שהועברו לארכיון: %s"
+msgstr "רשומות בהמתנה / בארכיון: %s / %s"
 
 #: panellib/system.php:377
-#, fuzzy, php-format
+#, php-format
 msgid "Current Boost Table(s) Size: %s"
-msgstr "טבלאות Boost נוכחי גודל: %s"
+msgstr "גודל טבלאות Boost נוכחי: %s"
 
 #: panellib/system.php:380
-#, fuzzy, php-format
+#, php-format
 msgid "Avg Bytes/Record: %s"
-msgstr "בתים ביתיים / הקלטה: %s"
+msgstr "ממוצע בתים/רשומה: %s"
 
 #: panellib/system.php:390
-#, fuzzy, php-format
+#, php-format
 msgid "Last run duration/updates: %s / %s"
-msgstr "משך הפעלה אחרון: %s"
+msgstr "משך ריצה אחרונה / עדכונים: %s / %s"
 
 #: panellib/system.php:448
-#, fuzzy
 msgid "Poller Run"
-msgstr "פרטי סוקר"
+msgstr "ריצת Poller"
 
 #: panellib/system.php:474
-#, fuzzy
 msgid "Down Hosts"
-msgstr "מארחים"
+msgstr "מארחים לא פעילים"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
-#, fuzzy
 msgid "Triggered"
-msgstr "טריגרד"
+msgstr "הופעל"
 
 #: panellib/system.php:526
-#, fuzzy
 msgid "Poller out. itms"
-msgstr "פריטי פלט לפולרים %s:"
+msgstr "פריטי פלט Poller"
 
 #: panellib/system.php:606
-#, fuzzy
 msgid "48 Hour Extreme Polling"
-msgstr "24 שעות קיצוניות"
+msgstr "ערכי קיצון לדגימה ב-48 שעות"
 
 #: panellib/system.php:629
-#, fuzzy
 msgid "Long Running Poller"
-msgstr "טווח ארוך <br/> פוסטר"
+msgstr "Poller הפועל זמן רב"
 
 #: panellib/system.php:660
-#, fuzzy
 msgid "Max Device Down"
-msgstr "מקסימום מכשיר מושבת"
+msgstr "מקסימום התקנים לא פעילים"
 
 #: panellib/system.php:690
-#, fuzzy
 msgid "Max Thold Triggered"
-msgstr "Tholds מופעלות"
+msgstr "מקסימום התראות Thold שהופעלו"
 
 #: panellib/system.php:719
-#, fuzzy
 msgid "Poller Output Item"
-msgstr "פריטי פלט של פולרים: %s"
+msgstr "פריט פלט של Poller"
 
 #: panellib/system.php:747
-#, fuzzy
 msgid "Failed Polls"
-msgstr "כניסות נכשלו"
+msgstr "דגימות שנכשלו"
 
 #: panellib/thold.php:31
-#, fuzzy
 msgid "Threshold Panels"
-msgstr "סף"
+msgstr "לוחות סף"
 
 #: panellib/thold.php:32
-#, fuzzy
 msgid "Panels that provide information about Cacti Thresholding Plugin."
-msgstr "לוחות המספקים מידע על תוסף Cacti Thresholding."
+msgstr "פאנלים המספקים מידע על תוסף Cacti Thresholding."
 
 #: panellib/thold.php:37 panellib/thold.php:434
-#, fuzzy
 msgid "Last Threshold Events"
-msgstr "סף"
+msgstr "אירועי סף אחרונים"
 
 #: panellib/thold.php:38
-#, fuzzy
 msgid "Threshold Plugin Latest Events"
-msgstr "סף"
+msgstr "האירועים האחרונים של תוסף הסף"
 
 #: panellib/thold.php:53
 msgid "Threshold"
@@ -2467,24 +2201,20 @@ msgid "Threshold Plugin Graph (all, trigerred, ...)"
 msgstr "גרף תוסף סף (הכל, מופעל, ...)"
 
 #: panellib/thold.php:87 panellib/thold.php:441
-#, fuzzy
 msgid "Plugin Thold isn't installed or started"
-msgstr "תוסף Thold אינו מותקן או מופעל"
+msgstr "תוסף Thold אינו מותקן או אינו מופעל"
 
 #: panellib/thold.php:179 panellib/thold.php:506
-#, fuzzy
 msgid "Without events yet"
-msgstr "ללא אירועים"
+msgstr "ללא אירועים עדיין"
 
 #: panellib/thold.php:196
-#, fuzzy
 msgid "Thresholds: "
-msgstr "ערכי סף"
+msgstr "ערכי סף: "
 
 #: panellib/thold.php:208 panellib/thold.php:332
-#, fuzzy
 msgid "Thold plugin not installed/running"
-msgstr "תוסף זה לא מותקן / פועל"
+msgstr "תוסף Thold אינו מותקן/פועל"
 
 #: panellib/thold.php:238
 #, fuzzy
@@ -2492,86 +2222,72 @@ msgid "Trigerred"
 msgstr "טריגרד"
 
 #: panellib/thold.php:266 panellib/thold.php:369 panellib/thold.php:385
-#, fuzzy
 msgid "Breached"
-msgstr "הפרוצה"
+msgstr "חריגה מסף"
 
 #: panellib/thold.php:325
-#, fuzzy
 msgid "Threshold Details"
-msgstr "סף"
+msgstr "פרטי סף"
 
 #: panellib/thold.php:357
 msgid "Thresholds"
 msgstr "ערכי סף"
 
 #: panellib/thold.php:402
-#, fuzzy
 msgid "Breached: "
-msgstr "הפרוצה"
+msgstr "חריגות: "
 
 #: panellib/thold.php:413
-#, fuzzy
 msgid "Triggered: "
-msgstr "טריגרד"
+msgstr "הופעל: "
 
 #: panellib/thold.php:421
-#, fuzzy
 msgid "You don't have permission to Thresholds"
-msgstr "אין לך הרשאה"
+msgstr "אין לך הרשאה לספים"
 
 #: panellib/thold.php:484
 msgid "Description"
 msgstr "תיאור"
 
 #: panellib/top5.php:31
-#, fuzzy
 msgid "Top/Bottom 5 Panels"
-msgstr "זמן הגרוע ביותר"
+msgstr "לוחות 5 המובילים/החלשים ביותר"
 
 #: panellib/top5.php:32
-#, fuzzy
 msgid "Panels that provide information trending information about Cacti data collection."
-msgstr "פאנלים המספקים מידע מגמתי על איסוף נתוני קקטוסים."
+msgstr "חלוניות המספקות מידע על מגמות באיסוף הנתונים של Cacti."
 
 #: panellib/top5.php:37
 msgid "Bottom Ping"
 msgstr "פינג תחתון"
 
 #: panellib/top5.php:38
-#, fuzzy
 msgid "Devices with the worst ping response"
-msgstr "התקנים עם אותו תיאור: %s"
+msgstr "התקנים עם זמן התגובה הגרוע ביותר ב-ping"
 
 #: panellib/top5.php:53
-#, fuzzy
 msgid "Bottom Availability"
-msgstr "זמינות"
+msgstr "זמינות נמוכה ביותר"
 
 #: panellib/top5.php:54
-#, fuzzy
 msgid "Devices with the worst availability/reachability"
-msgstr "Top5 זמינות הגרוע ביותר"
+msgstr "התקנים עם הזמינות/נגישות הגרועה ביותר"
 
 #: panellib/top5.php:69
-#, fuzzy
 msgid "Bottom Polling Time"
-msgstr "פרטי סוקר"
+msgstr "זמן דגימה נמוך ביותר"
 
 #: panellib/top5.php:70
-#, fuzzy
 msgid "Devices with the worst polling time"
-msgstr "זמן הגרוע ביותר"
+msgstr "התקנים עם זמן הדגימה הגרוע ביותר"
 
 #: panellib/top5.php:85
-#, fuzzy
 msgid "Bottom Polling Ratio"
-msgstr "זמן הגרוע ביותר"
+msgstr "יחס דגימה נמוך ביותר"
 
 #: panellib/top5.php:86
-#, fuzzy
 msgid "Devices with the worst polling ratio"
-msgstr "התקנים עם כתובת IP ויציאה: %s"
+msgstr "התקנים עם יחס הדגימה הגרוע ביותר"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
@@ -2582,86 +2298,393 @@ msgid "Hostname"
 msgstr "Hostname"
 
 #: panellib/top5.php:226
-#, fuzzy
 msgid "Availability/Reachability"
-msgstr "זמינות/נגישות"
+msgstr "זמינות / יכולת חזרה"
 
 #: panellib/top5.php:306 panellib/top5.php:637
-#, fuzzy
 msgid "Polling Time"
-msgstr "פרטי סוקר"
+msgstr "זמן הסקרים"
 
 #: panellib/top5.php:389 panellib/top5.php:721
-#, fuzzy
 msgid "Ratio"
-msgstr "יַחַס"
+msgstr "יחס"
 
 #: panellib/top5.php:437
-#, fuzzy
 msgid "Top 20 Hosts with Worst Ping"
-msgstr "זמן הגרוע ביותר"
+msgstr "20 המארחים בעלי זמן ה-Ping הגרוע ביותר"
 
 #: panellib/top5.php:519
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Availability"
-msgstr "Top5 זמינות הגרוע ביותר"
+msgstr "20 המארחים בעלי הזמינות הגרועה ביותר"
 
 #: panellib/top5.php:557
 msgid "Availability"
 msgstr "זמינות"
 
 #: panellib/top5.php:600
-#, fuzzy
 msgid "Top 20 Hosts Worst Polling Time"
-msgstr "זמן הגרוע ביותר"
+msgstr "20 המארחים בעלי זמן הדגימה הגרוע ביותר"
 
 #: panellib/top5.php:680
-#, fuzzy
 msgid "Top 20 Hosts with the Worst Polling Ratio"
-msgstr "זמן הגרוע ביותר"
+msgstr "20 המארחים בעלי יחס הדגימה הגרוע ביותר"
 
 #: setup.php:61
-#, fuzzy
 msgid "Intropage Viewer"
-msgstr "לוחות אינטרופ"
+msgstr "מציג Intropage"
 
 #: setup.php:62
-#, fuzzy
 msgid "Intropage Administration"
-msgstr "אפשרויות דף מבוא"
+msgstr "ניהול Intropage"
 
 #: setup.php:80
 msgid "System Administration"
 msgstr "ניהול המערכת"
 
 #: setup.php:83
-#, fuzzy
 msgid "Timespan Last 1 Hour"
-msgstr "משתמשים פעילים ב-2 השעות האחרונות:"
+msgstr "טווח זמן: השעה האחרונה"
 
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "Timespan Last %d Hours"
-msgstr "משתמשים פעילים ב-2 השעות האחרונות:"
+msgstr "טווח זמן: %d שעות אחרונות"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
 msgstr "טיימספאן אחרון יום אחד"
 
 #: setup.php:95 setup.php:96 setup.php:97 setup.php:98
-#, fuzzy, php-format
+#, php-format
 msgid "%d Seconds"
 msgstr "%d שניות"
 
 #: setup.php:109 setup.php:110 setup.php:111 setup.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "%d Hours"
-msgstr "%d לפני מספר ימים"
+msgstr "%d שעות"
 
 #: setup.php:113
-#, fuzzy, php-format
+#, php-format
 msgid "%d Day"
-msgstr "% d יום לפני"
+msgstr "%d יום"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "הסתר או הצג התראות ריבועים אדום/צהוב/ירוק"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "גרור לשינוי סדר"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "סדר מחדש חלונית"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "פחות שורות"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "שורות נוספות"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "חלונית זו אינה זמינה מכיוון שהתוסף הנדרש לה מושבת."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [עדכון בעוד %s/%s]"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "ליבה"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "באפשרותך לאפשר/לאסור חלוניות עבור קבוצה"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "אפשר"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "כיבוי"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "לוחות"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "לחץ על 'המשך' כדי להפעיל את הפאנל הבא."
+msgstr[1] "לחץ על 'המשך' כדי להפעיל את הפאנלים הבאים."
+msgstr[2] "לחץ על 'המשך' כדי להפעיל את הפאנלים הבאים."
+msgstr[3] "לחץ על 'המשך' כדי להפעיל את הפאנלים הבאים."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "הפעל פאנל"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "לחץ על 'המשך' כדי להשבית את הפאנל הבא. פאנלים מושבתים מוסתרים מלוחות הבקרה ומדולגים על ידי הדוגם, אך הנתונים שלהם נשמרים."
+msgstr[1] "לחץ על 'המשך' כדי להשבית את הפאנלים הבאים. פאנלים מושבתים מוסתרים מלוחות הבקרה ומדולגים על ידי הדוגם, אך הנתונים שלהם נשמרים."
+msgstr[2] "לחץ על 'המשך' כדי להשבית את הפאנלים הבאים. פאנלים מושבתים מוסתרים מלוחות הבקרה ומדולגים על ידי הדוגם, אך הנתונים שלהם נשמרים."
+msgstr[3] "לחץ על 'המשך' כדי להשבית את הפאנלים הבאים. פאנלים מושבתים מוסתרים מלוחות הבקרה ומדולגים על ידי הדוגם, אך הנתונים שלהם נשמרים."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "השבת פאנל"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "ביטול"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "המשך"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "שם לוח"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "שם התצוגה של חלונית זו."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "מקור"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "התוסף המספק חלונית זו. החלוניות של Intropage עצמה מוצגות כ-Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "קטגוריה"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "קטגוריית החלונית."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "רמה"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "לוחות מערכת משותפים לכל המשתמשים; לוחות משתמש הם אישיים לכל משתמש."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "נדרש ציון"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "תוספים שחייבים להיות מופעלים כדי שלוח זה יוצג."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "רענן"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "מרווח איסוף הנתונים של החלונית."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "פונקציית עדכון"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "הפונקציה שאליה הדוגם (Poller) קורא כדי לאסוף את נתוני חלונית זו."
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "האם החלונית מופעלת."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "מערכת"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "מאופשר"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "לא נמצאו פאנלים"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "ספריית לוחות Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "חיפוש"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "הכל"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "עבור"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "הגדר / רענן מסננים"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "נקה"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "מחיקת מסננים"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "התראות מארח (פעיל/לא פעיל/מתאושש) לאחרונה"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "בעיה בפריטי גרף/פריטי תבנית: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "מעבד השרת (ליבות / תהליכים / תהליכונים): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "התראה למנהל מושבתת וכתובת הדוא\"ל של המנהל לא הוגדרה"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "בעיה בפריטי גרף/פריטי תבנית - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "תבנית גרף"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "גרפים"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "פריטי גרף"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "פריטי תבנית"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "ליבות / תהליכים / תהליכונים של מעבד השרת: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "התראה למנהל מושבתת או שכתובת הדוא\"ל של המנהל לא הוגדרה"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "תוצאת חיפוש"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "מזהה ממוצע 24 שעות: "
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "התקנים מובילים ב-Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "התקנים עם המספר הרב ביותר של הודעות"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "רמות הודעות Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "הודעות לפי רמה."
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "התקן"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "תוסף Syslog אינו מופעל"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "20 המארחים המובילים עם מרבית ההודעות"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "אין הודעות"
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "היסטוריית Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "מידע על היסטוריית תהליך ה-Boost."
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "ממוצע 24 שעות"
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "היסטוריית Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "זיכרון "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "רשומות ממתינות "
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "שגיאות מארח"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "גרף תוסף ספים (הכל, מופעלים, ...)"
+
+#: setup.php
+msgid "Management"
+msgstr "ניהול"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "ספריית לוחות"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "טווח זמן יומיים אחרונים"
+
+#: setup.php
+msgid "Actions"
+msgstr "פעולות"
 
 #, fuzzy
 #~ msgid "Sort by - red-yellow-green-grey"
@@ -2674,9 +2697,6 @@ msgstr "% d יום לפני"
 #, fuzzy
 #~ msgid "Reset All to Default"
 #~ msgstr "אפס הכל אל ברירת המחדל"
-
-#~ msgid "Go"
-#~ msgstr "עבור"
 
 #~ msgid "Last check"
 #~ msgstr "בדיקה אחרונה"

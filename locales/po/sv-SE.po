@@ -2458,6 +2458,319 @@ msgstr "%d timmar"
 msgid "%d Day"
 msgstr "%d dag"
 
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Dölj eller visa röda/gula/gröna kvadratiska aviseringar"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Dra för att ändra ordning"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Ändra ordning på panel"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Färre rader"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Fler rader"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Denna panel är otillgänglig eftersom tillägget som krävs är inaktiverat."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Uppd. om %s/%s]"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Kärna"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Du kan tillåta/neka paneler för grupp"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Aktivera"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Inaktivera"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Rutor"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Klicka på 'Fortsätt' för att aktivera följande panel."
+msgstr[1] "Klicka på 'Fortsätt' för att aktivera följande paneler."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Aktivera panel"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Klicka på 'Fortsätt' för att inaktivera följande panel. Inaktiverade paneler döljs från instrumentpaneler och hoppas över av pollern, men deras data behålls."
+msgstr[1] "Klicka på 'Fortsätt' för att inaktivera följande paneler. Inaktiverade paneler döljs från instrumentpaneler och hoppas över av pollern, men deras data behålls."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Inaktivera panel"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Panelnamn"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Visningsnamnet för denna panel."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Källa"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Tillägget som tillhandahåller denna panel. Intropage-tilläggets egna paneler visas som Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Kategori"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Panelkategorin."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Nivå"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Systempaneler delas av alla användare; användarpaneler är per användare."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Kräver"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Insticksmoduler som måste vara aktiverade för att denna panel ska visas."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Uppdatera"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Panelens intervall för datainsamling."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Uppdateringsfunktion"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Funktionen som Pollern anropar för att samla in data för denna panel."
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Om panelen är aktiverad."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "System"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Aktiverad"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Inga paneler hittades"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Panelbibliotek för Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Sök"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Valfri"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Gå"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Ange/uppdatera filter"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Rensa"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Rensa filter"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Värdvarningar (uppe/nere/återhämtar) nyligen"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Problem med grafobjekt/mallobjekt: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "Serverns CPU (kärnor / processer / trådar): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Avisera administratör är inaktiverat och administratörens e-postadress är inte inställd"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Problem med grafobjekt/mallobjekt - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Grafmall"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Grafer"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Grafobjekt"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Mallobjekt"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "Serverns CPU kärnor / processer / trådar: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Avisera administratör är inaktiverat eller administratörens e-postadress är inte inställd"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Sökresultat"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "24h medel-ID: "
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Syslog – främsta enheter"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Enheter med flest meddelanden"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Syslog-meddelandenivåer"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Meddelanden per nivå."
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Enhet"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Syslog-tillägget är inte aktiverat"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Topp 20 värdar med flest meddelanden"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Inga meddelanden"
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Boost-historik"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Information om historik för boost-processen."
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "24h medel"
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Boost-historik: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Minne "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Väntande poster "
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Värdfel"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Graf för tröskelvärdestillägget (alla, utlösta, ...)"
+
+#: setup.php
+msgid "Management"
+msgstr "Hantering"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Panelbibliotek"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Tidsperiod senaste 2 dagarna"
+
+#: setup.php
+msgid "Actions"
+msgstr "Åtgärder"
+
 #, fuzzy
 #~ msgid "Sort by - red-yellow-green-grey"
 #~ msgstr "Sortera efter - Röd-Gul-Grön-Grå"
@@ -2469,9 +2782,6 @@ msgstr "%d dag"
 #, fuzzy
 #~ msgid "Reset All to Default"
 #~ msgstr "Återställ allt till standard"
-
-#~ msgid "Go"
-#~ msgstr "Utför"
 
 #, fuzzy
 #~ msgid "Last check"

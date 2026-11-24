@@ -1,0 +1,2587 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 23:00+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk-UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage — доступ заборонено"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "Одну або кілька панелей було вилучено через недостатні права доступу. Зверніться до адміністратора."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Ви можете вимкнути рядки вище в меню <b>Налаштування > Параметри > Загальні > Приховати інформаційну панель Cacti</b> і використовувати всю сторінку для Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "За замовчуванням"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Приховати або показувати червоні/жовті/зелені квадратні сповіщення"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Вимкнути переміщення панелі/увімкнути копіювання тексту з панелі"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Дії ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Додати новий дашборд"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Видалити поточний дашборд"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Кількість рядків - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Оновити зараз"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Оновлення вимкнено"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Оновлення за опитувачем"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Оновлювати кожну 1 хвилину"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Оновлювати кожні 5 хвилин"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Оновлювати щогодини"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Важливий період — вимкнено"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Важливий період — 15 хвилин"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Важливий період — 1 година"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Важливий період — 4 години"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Важливий період — 1 день"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Сортувати за важливістю"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Сортувати за налаштуваннями користувача"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Перезавантажити визначення панелей"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Установити Intropage як типову сторінку входу"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Установити графік як типову сторінку входу"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Відображати Intropage у консолі"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Відображати Intropage на вкладці як типову сторінку"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Менше панелей у рядку"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Більше панелей в одному рядку"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Скасувати спільний доступ"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Поділитися цією панеллю інструментів"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Надання спільного доступу до порожньої панелі інструментів заборонено"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Використовувати спільну панель"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Неможливо використати спільну інформаційну панель — досягнуто ліміту панелей."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Немає спільних інформаційних панелей"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Ласкаво просимо до Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Ви можете додавати панелі інформаційної панелі кількома способами:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Виберіть підготовлені панелі в «Меню панелей». Панель може бути неактивною (сірою) через права доступу — зверніться до адміністратора"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Додати будь-який графік Cacti, використовуйте значок"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Ви можете створювати власні панелі. Докладніше у файлі <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Ви можете ділитися інформаційними панелями з іншими користувачами:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "скористайтеся параметром «Поділитися цією панеллю» в меню «Дії» — кожен користувач зможе використовувати її як шаблон."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Ви можете скористатися спільною інформаційною панеллю через меню «Дії»:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Використайте «Використовувати спільну панель (користувач/назва панелі)» — створює таку саму панель, як спільна, але з вашими правами доступу."
+
+#: display.php
+msgid "Customization:"
+msgstr "Налаштування:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Ви можете створити до 9 інформаційних панелей. Кожній панелі можна задати назву та використовувати значок"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Intropage може відображатися в консолі або в окремій вкладці. Це можна змінити в меню «Дія»"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Щоб скопіювати текст із панелі, необхідно вимкнути функцію перетягування за допомогою піктограми"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Відомості про панель"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Вимкнути переміщення панелі/Увімкнути копіювання тексту з панелі"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Увімкнути переміщення панелей / Вимкнути копіювання тексту з панелі"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Приховати червоні/жовті/зелені квадратні сповіщення"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Показувати червоні/жовті/зелені квадратні сповіщення"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Помилка читання нових даних"
+
+#: display.php
+msgid "Close"
+msgstr "Закрити"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Інформаційну панель видалено"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Нова інформаційна панель"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Інформаційну панель додано"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Неможливо додати масштабований графік або графік із власним інтервалом; інтервал змінено на «Останні пів години»"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Бібліотеку панелей Intropage оновлено з бібліотеки панелей"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Інформаційну панель додано, зачекайте кілька циклів опитувача для отримання даних"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Помилка — спроба поділитися неспільним дашбордом"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Перезавантажити панель"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Перетягніть для зміни порядку"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Змінити порядок панелі"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Менше рядків"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Більше рядків"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Показати деталі"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Вимкнути панель"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Панель не знайдено"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Ця панель недоступна, оскільки необхідний для неї плагін вимкнено."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Панель містить посилання на функцію відображення (render), але вона не існує."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Панель не має функції відображення (render)."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Не знайдено"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Дані не знайдено. Зачекайте на наступну перевірку <br/>або скористайтеся примусовим перезавантаженням, якщо воно доступне."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Панель не знайдено"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Функція деталізації не існує."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Оновл. через %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "%s с"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s секунд"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "%s хв"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "%s хвилин"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "%s годин"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "%s год"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "%s днів"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Дані відсутні. Виконайте примусове оновлення або зачекайте на наступний цикл опитування Cacti."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Дані відсутні. Ця панель не підтримує примусове оновлення. Доведеться зачекати, доки опитувач Cacti виконає перевірку."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Панелі ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (немає дозволу)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Неможливо додати на інформаційну панель. Власний часовий інтервал."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Видалити з дашборда"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Додати на дашборд"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Назви інформаційних панелей"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Інформаційна панель %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Частота оновлення панелей рівня користувача"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Частота оновлення системних панелей (усі авторизовані користувачі)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Частота оновлення трендів"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Ядро"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Звичайний користувач"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[редагувати: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Панелі системного рівня"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Панелі, призначені для адміністраторів або досвідчених користувачів і зазвичай недоцільні для звичайних користувачів. Загалом ці панелі відображають загальне завантаження системи."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Панелі рівня користувача"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Панелі, доступні для звичайних користувачів. Права доступу обмежено тим, що дозволено переглядати поточному користувачу."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Ви можете дозволити/заборонити панелі для користувача"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Ви можете дозволити/заборонити панелі для групи"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Червоний статус"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Жовтий статус"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Зелений статус"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Налаштування відображення"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Важливі елементи будуть угорі"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Якщо позначено, Intropage відображає спочатку важливу інформацію (помилки, попередження)"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Відображати більше панелей в одному рядку"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Для широкого екрана"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Автоматично видаляти панелі"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Якщо панель встановлено, а потрібний плагін видалено, автоматично видаляти також і панель"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Автоматичне оновлення сторінки"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Як часто"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Автоматично опитувачем"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Ніколи"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Кожну хвилину"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Кожні %d хвилин"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Кожну годину"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Важливий період"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Від теперішнього часу в минуле. Впливає на підсвічування рядків: старіші події не підсвічуватимуться, а лише відображатимуться"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Вимкнен"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "15 хвилин"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "1 година"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "4 години"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "1 день"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Кількість рядків панелі"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Скільки рядків на панелі"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "%d рядків"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Період тренду"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Який часовий інтервал за замовчуванням використовувати для діаграм трендів."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Тайм-аут опитувача"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Час у хвилинах, протягом якого фоновий опитувач Intropage може працювати перед тим, як Cacti примусово завершить його роботу."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d Хвилина"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d хвилин"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "%d година"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Аналіз журналу — кількість рядків"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Скільки рядків журналу буде проаналізовано. Рядки = на панелі, 2x рядків = у деталях. Велика кількість може спричинити повільне завантаження сторінки"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Як часто аналізувати БД"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Опитувач виконує це завдання. Це може призвести до тривалої роботи опитувача."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Кожен день"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Кожний тиждень"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Щомісяця"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Аналіз БД — рівень перевірки бази даних"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Quick — без перевірки рядків на некоректні посилання<br/>Fast — перевіряти лише некоректно закриті таблиці<br/>Changed — перевіряти таблиці, змінені з моменту останньої перевірки<br/>Medium — зі скануванням рядків<br/>Extended — повна перевірка рядків і ключів<br/>Режими Medium та Extended можуть сповільнити завантаження сторінки!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Швидко"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Швидко"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Змінено"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Середній"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Розширений"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Перевірка часу NTP - IP або DNS-ім'я NTP-сервера"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Введіть IP-адресу або DNS-ім'я NTP-сервера"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Як часто перевіряти NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Перевірка DNS — будь-яке DNS-ім'я"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Введіть DNS-ім'я для перевірки"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Як часто перевіряти DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Інформаційна панель адміністратора про завдання обслуговування, недоступні пристрої, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Якщо не порожнє, панель відображатиметься вгорі. Можна використовувати HTML-теги (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Кількість днів попередження про майбутній графік обслуговування"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "За скільки днів до запланованого технічного обслуговування слід відображати попередження?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Ніколи не попереджати"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Коли починається технічне обслуговування"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "%d день тому"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "%d днів тому"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Мережева статистика (вхід)"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "байти або біти"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Байти"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Біти"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Налаштування тривог"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Тривога: перевірка БД — перервані клієнти"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Якщо ця подія сталася, встановити вибраний колір стану: Звичайний, Попередження або Тривога."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Тривога: вузол з однаковим описом"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Тривога: ізольоване джерело даних"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Тривога: непорожній вивід опитувача"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Тривога: некоректні індекси джерела даних"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Тривога: дія logonly для порогу"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Тривога, коли значення bulk_walk_size пристрою не оптимізовано"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Тривога: пристрої з однаковим IP/портом"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Тривога: пристрій більш ніж в одному дереві"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Тривога: пристрій без дерева"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Тривога: пристрій зі стандартною SNMP-спільнотою public/private"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Тривога: пристрій без моніторингу"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Тривога: пристрій без графіка"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Тривога (червоний/жовтий): час опитування"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Час опитування вище цих порогів призведе до відображення кольору стану «Попередження» або «Тривога»."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5 с / 10 с Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10 с / 20 с Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20 с / 40 с Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Тривога (червоний/жовтий): співвідношення невдалих до всіх"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Співвідношення невдалих перевірок доступності до успішних для спрацювання кольору стану «Попередження» або «Тривога»."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Тривога (червоний/жовтий): Ping"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Затримка Ping вище цих рівнів призведе до відображення кольору стану «Попередження» або «Тривога»."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10 мс / 20 мс Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20 мс / 50 мс Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100 мс / 200+ мс Жовтий / Червоний"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Тривога (червоний/жовтий): найгірша доступність"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Доступність нижче цих рівнів активує жовтий або червоний колір стану."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Жовтий / Червоний"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Увімкнути"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Вимкнути"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Панелі"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Натисніть 'Продовжити', щоб увімкнути наступну панель."
+msgstr[1] "Натисніть 'Продовжити', щоб увімкнути наступні панелі."
+msgstr[2] "Натисніть 'Продовжити', щоб увімкнути наступні панелі."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Увімкнути панель"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Натисніть 'Продовжити', щоб вимкнути наступну панель. Вимкнені панелі приховано з інформаційних панелей, і опитувач їх пропускає, але їхні дані зберігаються."
+msgstr[1] "Натисніть 'Продовжити', щоб вимкнути наступні панелі. Вимкнені панелі приховано з інформаційних панелей, і опитувач їх пропускає, але їхні дані зберігаються."
+msgstr[2] "Натисніть 'Продовжити', щоб вимкнути наступні панелі. Вимкнені панелі приховано з інформаційних панелей, і опитувач їх пропускає, але їхні дані зберігаються."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Вимкнути панель"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Продовжити"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Назва панелі"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Відображувана назва цієї панелі."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Джерело"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Плагін, що надає цю панель. Власні панелі Intropage позначаються як Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Категорія"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Категорія панелі."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Рівень"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Системні панелі є спільними для всіх користувачів; панелі користувача — індивідуальні для кожного користувача."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Вимагає"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Плагіни, які мають бути увімкнені для відображення цієї панелі."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Оновити"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Інтервал збирання даних панелі."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Функція оновлення"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Функція, яку викликає опитувач для збирання даних цієї панелі."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Статус"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Чи увімкнено панель."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Система"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Користувач"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Увімкнено"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Немає"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Панелей не знайдено"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Бібліотека панелей Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Пошук"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Будь-який"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Перейти"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Встановити/оновити фільтри"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Очистити"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Очистити фільтри"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Сповіщення"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Панелі, що забезпечують сповіщення."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Сповіщення про хости"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Нещодавні сповіщення про хости (доступний/недоступний/відновлення)"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Дата"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Хост"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Область"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Більше записів, скористайтеся вікном деталей"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Очікування даних"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "У вас немає прав доступу до жодного вузла"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Панелі аналізу"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Панелі, що аналізують поточну поведінку Cacti та його плагінів."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Аналіз входів у систему"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Аналізувати кілька останніх входів у Cacti для виявлення тенденцій та помилок."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Аналіз журналів"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Пошук типових помилок у файлі журналу Cacti, на які варто звернути увагу."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Перевірки бази даних"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Аналізувати базу даних MySQL/MariaDB на наявність типових помилок.  Зауважте, що на дуже великих системах цей процес може тривати довго."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Аналіз об'єктів Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Аналіз дерев, графіків, вузлів, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Аналіз статистики джерел даних"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Аналізувати статистику джерел даних"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "IP адреса"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Невдало"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Успіх — Вхід"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Успіх - жетон"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Усього невдалих входів: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Активні користувачі за останню годину: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Файл журналу недоступний або порожній"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Аналізувати останні %s рядків журналу:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Помилки: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Попередження: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Розмір журналу: понад 2 ГБ"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Розмір журналу: ОК"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Розмір журналу: досить великий"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Розмір журналу: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Останні рядки журналу:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Перевірку таблиць БД пропущено. База даних занадто велика"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Таблиця %s, стан %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "БД: Проблеми"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "БД: OK"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Досягнуто макс. кількості підключень: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Ви можете збільшити значення Max connection за допомогою інструментів командного рядка або постійно у файлі конфігурації"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Помилки підключення: %s - спробуйте перезапустити службу SQL, перевірте журнал SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Перервані клієнти/з'єднання: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Перервані клієнти/з'єднання — виконайте 'SET GLOBAL log_warnings = 1;' або ' log_error_verbosity = 1;' (залежно від версії MySQL/MariaDB) у CLI mysql і задайте у server.cnf, щоб вимкнути попередження."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Помилки підключення: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Пошкоджені таблиці: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Слід виконати команди перевірки та відновлення таблиць"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Таблиці в пам'яті: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Усі таблиці: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "(відсутній)"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Пристрої з однаковими IP та портом: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Пристрої з неоптимізованим розміром Bulk Walk: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Зверніть увагу на параметр пристрою «Bulk Walk Maximum Repetitions». Ви можете покращити продуктивність опитувача"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Останній запуск переіндексації"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Останній запуск RRD Checker"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Останній запуск RRD Cleaner"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Рекомендується запускати цей інструмент хоча б час від часу"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: ще не виконувалося"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Осиротілі джерела даних: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Джерело даних — некоректні індекси: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Тривога/попередження Thold лише для журналу: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Пристрої з однаковим описом: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Пристрої у кількох деревах: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Пристрої без графіків: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Пристрої без дерева: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Пристрої зі стандартним community public/private: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Проблема з елементами графіка/шаблону: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Плагін Monitor - Хости без моніторингу: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "OK"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "ЦП сервера (ядра / процеси / потоки): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Сповіщення адміністратора вимкнено, а електронну адресу адміністратора не задано"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Знайдено проблем: %s"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Усе гаразд"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Статистика джерел даних: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Панель потребує ввімкненої статистики DS."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Усі записи джерел даних "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Порожні записи джерел даних "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Аналіз деталей журналу Cacti [ Попередження/Помилки ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Помилки"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Попередження"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "ПОПЕРЕДЖЕННЯ: Розмір файлу перевищує 2 ГБ"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Розмір журналу"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Деталі аналізу входів у систему"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Результат"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Активні користувачі за останні 2 години:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Немає активних користувачів"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Переглянути повний журнал користувача"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Аналіз дерева, графіків, вузлів"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Пристрої з однаковими IP та портом — %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Пристрої з неоптимізованим розміром Bulk Walk — %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Обслуговування даних"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Осиротілі джерела даних - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Джерела даних з некоректними індексами — %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Тривога/попередження Thold лише для журналу - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Пристрої з однаковим описом — %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Пристрої у кількох деревах — %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Пристрої без графіків — %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Пристрої без дерева — %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Пристрої зі стандартним community public/private — %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Проблема з елементами графіка/шаблону — %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Шаблон графіка"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Графіки"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Елементи графіка"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Елементи шаблону"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Плагін Monitor - Хости без моніторингу - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "ЦП сервера: ядра / процеси / потоки: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Сповіщення адміністратора вимкнено або електронну адресу адміністратора не задано"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Найбільш завантажені"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Панелі, що визначають найбільш завантажені вузли."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "Найбільш завантажені CPU"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Пристрої з найбільшим навантаженням CPU (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "Найбільше навантаження ucd/net"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Пристрої з найвищим навантаженням (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Найбільш заповнені жорсткі диски"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Пристрої з найбільшим використанням дискового простору (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Найбільший час безперервної роботи"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Пристрої з найбільшим часом безперервної роботи"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Найбільш завантажені інтерфейси (вхід./вихід. трафік)"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Пристрої з найбільшим вхідним/вихідним трафіком (інтерфейс)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Інтерфейси з найбільшою кількістю помилок"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Пристрої з найбільшою кількістю помилок/відкидань (інтерфейс)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Найбільш завантажені інтерфейси"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Порти з найбільшим завантаженням інтерфейсу"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Будь ласка, увімкніть і налаштуйте DS stats"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Попросіть адміністратора увімкнути статистику DS (DS stats)"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Середній"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Пік"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Середнє всіх дозволених джерел даних"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Очікування даних або у вас немає дозволу для жодного пристрою з цим шаблоном."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "У вас немає прав доступу до жодного вузла або немає жодного вузла з цим шаблоном"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Час роботи"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Середнє всіх дозволених вузлів"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Очікування даних або у вас немає дозволу для жодного пристрою"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Напрямок"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Інтервал часу: останні 5 хвилин"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Топ-30 завантаження CPU Host MIB (за останню годину)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Установіть плагін TopX для отримання детальнішої статистики джерел даних (DS)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Топ-30 навантаження ucd/net (за останню годину)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Топ-30 заповнення жорстких дисків Host MIB (за останню годину)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Найбільший трафік (вхід+вихід)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Найбільш завантажені інтерфейси"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Графічні панелі"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Панелі, що надають інформацію про Cacti та його плагіни в графічному вигляді."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Джерела даних"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Графік джерел даних"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Шаблони пристроїв"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Графік шаблонів пристроїв"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Пристрої за станом"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Графік пристроїв за станом (доступний, недоступний,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Джерела даних: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Шаблони пристроїв: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Пристрої: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Оффлайн"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Відновлення"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Тип даних"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Всього"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Джерел даних без шаблону не знайдено"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Пристрої"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Кількість пристроїв"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Всі"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Онлайн"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Ім'я шаблону"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Усього пристроїв"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Шаблонів пристроїв не знайдено"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Панелі MacTrack"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Панелі, що надають інформацію про плагін MacTrack у Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Плагін MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Різна статистика збору даних і майданчиків MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Майданчики MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Різна статистика майданчиків MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Плагін MacTrack не встановлено або не запущено"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Усього: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Доступний: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Недоступний: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Помилка: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Невідомо: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Вимкнено: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Помилка"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "У вас немає прав доступу до плагіна"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Вузол"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "IP-адреси"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Порти"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Активні порти"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "MAC-адреси"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Помилки пристроїв"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Сайтів MacTrack не знайдено"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Різні панелі"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Панелі, що надають загальні некатегоризовані дані про Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Стан NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Перевірка системного годинника Cacti на розбіжність із відомим еталоном і перевірка розв'язання DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Відомості плагіна Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Відомості плагіна Maint щодо запланованих розкладів"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Деталі WebSeer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Деталі перевірки URL-сервісів плагіна WebSeer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Деталі плагіна Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Деталі плагіна ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Сервер NTP не налаштовано"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Налаштовано неправильний сервер NTP — %s<br/>Будь ласка, виправте це в налаштуваннях"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Не вдалося отримати час NTP від %s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Будь ласка, перевірте час, оскільки розбіжність перевищує"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "ніж на %s секунд від NTP-сервера %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Локальний час збігається з NTP-сервером"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Не вдалося зв'язатися із вказаним NTP-сервером."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Будь ласка, перевірте свою конфігурацію."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Ім'я хоста DNS не налаштовано"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Налаштовано неправильне ім'я хоста DNS — %s<br/>Будь ласка, виправте це в налаштуваннях"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "DNS-ім'я вузла (%s) розв'язано успішно."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Час розв'язання DNS: %s мс"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Не вдалося розв'язати DNS-ім'я вузла (%s)."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Плагін Maint не встановлено або не ввімкнено"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Плагін WebSeer не встановлено або не запущено"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Плагін WebSeer більше не підтримується, натомість використовуйте плагін ServCheck"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Кількість перевірок (усі/вимкнені): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Статус (доступний/недоступний): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Останні повідомлення журналу"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "HTTP-код"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Плагін WebSeer — Деталі"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Плагін ServCheck не встановлено або не запущено"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Статус (OK/помилка): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Останні записи журналу"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Тест"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Тип"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Плагін Servcheck — деталі"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Результат пошуку"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Панелі опитувача"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Панелі, що надають інформацію про процес опитування в Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Інформація про опитувальника"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Різна інформація про ваш опитувач Cacti."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Статистика опитувача"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Різна статистика опитувача Cacti."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Елементи виводу опитувача"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Ім'я"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Загальний час"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Новий/неактивний"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Працює"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Простій"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Невідомо/Недоступний"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "%s сек"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(ок)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(усі)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Секунди"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "Середнє за 24 год ID: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Деталі опитувача"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Середній час"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Макс. час"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Елементи виводу опитувача "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Елементи"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Панелі Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Панелі, що надають інформацію про обробку повідомлень Syslog у Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Деталі Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Різна статистика плагіна Syslog."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Топ пристроїв Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Пристрої з найбільшою кількістю повідомлень"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Рівні повідомлень Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Повідомлення за рівнем."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Вхідний"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Збережено"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Повідомлення"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Плагін Syslog не встановлено або не запущено"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Пристрій"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Плагін Syslog не ввімкнено"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Топ-20 вузлів з найбільшою кількістю повідомлень"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Немає повідомлень"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Системні панелі"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Панелі, що надають інформацію про системну продуктивність Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Інформація"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Різна системна інформація про саму систему Cacti."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Адміністративні сповіщення"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Додаткова панель сповіщень адміністратора для всіх користувачів"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Статистика Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Інформація про процес підвищення продуктивності (boost) Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Історія Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Інформація про історію процесу boost."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Екстремуми за 24 години"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Таблиця екстремальних значень опитування за 24 години (найдовший запуск опитувача, недоступні вузли)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Використання ЦП"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Графік використання ЦП (лише для Linux)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Навантаження ЦП: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Ця функція не реалізована на платформах Windows"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Сер. CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "Макс. CPU"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Середнє за 24 год"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Версія Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Тип опитувача:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Версія Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Ви використовуєте неправильну версію Spine!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Тип опитувача: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Працює на: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Історія Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Пам'ять "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Записи в очікуванні "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Попередження про перевищення"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Час вийшов"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Інше"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Ніколи"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Стан Boost: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Процеси/Частота: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Поріг записів в очікуванні: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Орієнтовний час наступного запуску: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Записи в очікуванні / архівовані: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Поточний розмір таблиць Boost: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Сер. байт/запис: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Тривалість/оновлення останнього запуску: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Запуск опитувача"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Недоступні вузли"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Спрацювало"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Елем. виводу опитувача"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Помилки хостів"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Екстремуми опитування за 48 годин"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Тривала робота опитувача"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Макс. недоступних пристроїв"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Макс. спрацювань Thold"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Елемент виводу опитувача"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Невдалі опитування"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Панелі порогів"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Панелі, що надають інформацію про плагін порогових значень Cacti."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Останні події порогів"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Останні події плагіна порогів"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Граничне значення"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Графік плагіна порогів (усі, спрацьовані, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Плагін Thold не встановлено або не запущено"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Подій ще немає"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Пороги: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Плагін Thold не встановлено або не запущено"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Порушено"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Відомості про поріг"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Пороги"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Порушено: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Спрацювало: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "У вас немає прав доступу до Порогів"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Опис"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Панелі 5 найкращих/найгірших"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Панелі, що надають інформацію про тренди збору даних у Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Найгірший Ping"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Пристрої з найгіршим часом відгуку ping"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Найнижча доступність"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Пристрої з найгіршою доступністю"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Найгірший час опитування"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Пристрої з найгіршим часом опитування"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Найнижчий коефіцієнт опитування"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Пристрої з найгіршим коефіцієнтом опитування"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Поточний"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Ім'я хоста"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Наявність/доступність"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Час голосування"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Співвідношення"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Топ-20 вузлів з найгіршим Ping"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Топ-20 вузлів з найгіршою доступністю"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Доступність"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Топ-20 вузлів з найгіршим часом опитування"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Топ-20 вузлів з найгіршим коефіцієнтом опитування"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Переглядач Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Адміністрування Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Управління"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Бібліотека панелей"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Системне адміністрування"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Часовий проміжок: остання 1 година"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Часовий проміжок: останні %d год."
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Часовий проміжок: останній 1 день"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Часовий проміжок: останні 2 дні"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d секунд"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d Годин"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d день"
+
+#: setup.php
+msgid "Actions"
+msgstr "Дії"
+
