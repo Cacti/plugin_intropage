@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Vietnamese <https://translate.cacti.net/projects/cacti/"
 "intropage/vi/>\n"
@@ -538,7 +538,7 @@ msgstr "Từ giờ đến quá khứ. Ảnh hưởng đến màu hàng, các s�
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "đã vô hiệu hóa"
+msgstr "Vô hiệu hóa"
 
 #: include/variables.php:75
 msgid "15 minutes"
@@ -1867,7 +1867,7 @@ msgstr "Mã HTTP"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "OK"
+msgstr "Đồng ý"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1907,7 +1907,7 @@ msgstr "Các bảng cung cấp thông tin về quy trình thăm dò (polling) c�
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "Thông tin Poller"
+msgstr "Thông tin trình thu thập (Poller)"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
@@ -2346,7 +2346,7 @@ msgstr "Sẵn có / Khả năng tiếp cận"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
-msgstr "Thời gian bỏ phiếu"
+msgstr "Thời gian thu thập"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
