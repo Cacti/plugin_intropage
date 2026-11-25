@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/"
 "cacti/intropage/ar_SA/>\n"
@@ -322,7 +322,7 @@ msgstr "%s دقيقة"
 #: include/functions.php:826
 #, php-format
 msgid "%s Minutes"
-msgstr "%s دقيقة"
+msgstr "%s دقائق"
 
 #: include/functions.php:833
 #, php-format
@@ -426,7 +426,7 @@ msgstr "المستخدم العادي"
 #: include/settings.php:146
 #, php-format
 msgid "[edit: %s]"
-msgstr "[عدل: %s]"
+msgstr "[تعديل: %s]"
 
 #: include/settings.php:155
 msgid "System Level Panels"
@@ -546,7 +546,7 @@ msgstr "15 دقيقة"
 
 #: include/variables.php:76
 msgid "1 hour"
-msgstr "ساعة"
+msgstr "ساعة واحدة"
 
 #: include/variables.php:77
 msgid "4 hours"
@@ -554,7 +554,7 @@ msgstr "4 ساعات"
 
 #: include/variables.php:78
 msgid "1 day"
-msgstr "يوم 1"
+msgstr "يوم واحد"
 
 #: include/variables.php:83
 msgid "Number of panel lines"
@@ -567,7 +567,7 @@ msgstr "كم عدد الأسطر في اللوحة"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "خطوط %d"
+msgstr "%d أسطر"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -590,7 +590,7 @@ msgstr ""
 #: include/variables.php:106 setup.php:99
 #, php-format
 msgid "%d Minute"
-msgstr "دقيقة %d"
+msgstr "%d دقيقة"
 
 #: include/variables.php:107 include/variables.php:108
 #: include/variables.php:109 include/variables.php:110
@@ -1863,7 +1863,7 @@ msgstr "رمز HTTP"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "موافق"
+msgstr "أوك"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1903,7 +1903,7 @@ msgstr "لوحات توفّر معلومات حول عملية الاستطلا�
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "معلومات المستطلع (Poller)"
+msgstr "معلومات Poller"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
@@ -2404,7 +2404,7 @@ msgstr "%d د ساعات"
 #: setup.php:113
 #, php-format
 msgid "%d Day"
-msgstr "يوم %d"
+msgstr "%d يوم"
 
 #, fuzzy
 #~ msgid "Sort by - red-yellow-green-grey"
