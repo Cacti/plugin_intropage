@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: French <https://translate.cacti.net/projects/cacti/intropage/"
 "fr/>\n"
@@ -627,7 +627,7 @@ msgstr "Analyser le journal - nombre de lignes"
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr ""
 "Nombre de lignes de journal analysées. Lignes = dans le panneau, 2x lignes = "
-"en détail. Un nombre élevé peut ralentir le chargement de la page."
+"en détail. Un nombre élevé peut ralentir le chargement de la page"
 
 #: include/variables.php:124
 msgid "How often analyze DB"
@@ -2120,11 +2120,11 @@ msgstr "Cette fonction n'est pas implémentée sur les plateformes Windows"
 
 #: panellib/system.php:177
 msgid "Avg CPU"
-msgstr "Processeur moyen"
+msgstr "Moyenne CPU"
 
 #: panellib/system.php:178
 msgid "Max CPU"
-msgstr "Processeur max."
+msgstr "Processeur maximal"
 
 #: panellib/system.php:208
 msgid "Cacti Version: "
@@ -2224,7 +2224,7 @@ msgstr "Déclenché"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
-msgstr "Élém. sortie coll."
+msgstr "Éléments de sortie du collecteur"
 
 #: panellib/system.php:606
 msgid "48 Hour Extreme Polling"
