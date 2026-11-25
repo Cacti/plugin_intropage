@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Polish <https://translate.cacti.net/projects/cacti/intropage/"
 "pl/>\n"
@@ -307,7 +307,7 @@ msgstr " [ Aktualizacje w %s ]"
 #: include/functions.php:819
 #, php-format
 msgid "%s Sec"
-msgstr "%s sek."
+msgstr "%s s"
 
 #: include/functions.php:819
 #, php-format
@@ -332,7 +332,7 @@ msgstr "%s godziny"
 #: include/functions.php:833
 #, php-format
 msgid "%s Hrs"
-msgstr "%s godz."
+msgstr "%s godzin"
 
 #: include/functions.php:837
 #, php-format
@@ -603,12 +603,12 @@ msgstr "%d minuta"
 #: setup.php:106 setup.php:107
 #, php-format
 msgid "%d Minutes"
-msgstr "%d Minuty"
+msgstr "%d minut"
 
 #: include/variables.php:113 setup.php:108
 #, php-format
 msgid "%d Hour"
-msgstr "%d godz"
+msgstr "%d godzina"
 
 #: include/variables.php:117
 msgid "Analyze Log - number of lines"
@@ -894,7 +894,7 @@ msgstr "Żółty / Czerwony"
 
 #: panellib/alert.php:31 panellib/syslog.php:172
 msgid "Alerts"
-msgstr "Powiadomienia"
+msgstr "Alerty"
 
 #: panellib/alert.php:32
 msgid "Panels that provide alerting."
@@ -1711,7 +1711,7 @@ msgstr "Nie masz uprawnień do wtyczki"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
-msgstr "Lokalizacja"
+msgstr "Obiekt"
 
 #: panellib/mactrack.php:140 panellib/mactrack.php:193
 msgid "IPs"
@@ -1963,7 +1963,7 @@ msgstr "Nieznany/Nieaktywny"
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
 msgid "%s Secs"
-msgstr "%s sek."
+msgstr "%s sekund"
 
 #: panellib/poller.php:171 panellib/poller.php:367
 msgid "(ok)"
@@ -2094,7 +2094,7 @@ msgstr "Ta funkcja nie jest zaimplementowana na platformach Windows"
 
 #: panellib/system.php:177
 msgid "Avg CPU"
-msgstr "Średnia wartość procesora"
+msgstr "Średnia CPU"
 
 #: panellib/system.php:178
 msgid "Max CPU"
@@ -2194,7 +2194,7 @@ msgstr "Nieaktywne hosty"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "Wyzwolony"
+msgstr "Wyzwolone"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
@@ -2398,7 +2398,7 @@ msgstr "Przedział czasu: ostatnia 1 godzina"
 #: setup.php:84 setup.php:85 setup.php:86 setup.php:87 setup.php:88
 #, php-format
 msgid "Timespan Last %d Hours"
-msgstr "Przedział czasu: ostatnie %d godz."
+msgstr "Przedział czasu: ostatnie %d godzin"
 
 #: setup.php:89
 msgid "Timespan Last 1 Day"
@@ -2407,7 +2407,7 @@ msgstr "Przedział czasowy Ostatni 1 dzień"
 #: setup.php:95 setup.php:96 setup.php:97 setup.php:98
 #, php-format
 msgid "%d Seconds"
-msgstr "%d Sekund"
+msgstr "%d sek"
 
 #: setup.php:109 setup.php:110 setup.php:111 setup.php:112
 #, php-format
