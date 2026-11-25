@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Japanese <https://translate.cacti.net/projects/cacti/"
 "intropage/ja/>\n"
@@ -333,7 +333,7 @@ msgstr "%s 時"
 #: include/functions.php:833
 #, php-format
 msgid "%s Hrs"
-msgstr "%s Hrs"
+msgstr "%s 時間"
 
 #: include/functions.php:837
 #, php-format
@@ -538,19 +538,19 @@ msgstr "無効"
 
 #: include/variables.php:75
 msgid "15 minutes"
-msgstr "15分"
+msgstr "15 分"
 
 #: include/variables.php:76
 msgid "1 hour"
-msgstr "1時間"
+msgstr "1 時間"
 
 #: include/variables.php:77
 msgid "4 hours"
-msgstr "4時間"
+msgstr "4 時間"
 
 #: include/variables.php:78
 msgid "1 day"
-msgstr "1日"
+msgstr "1 日"
 
 #: include/variables.php:83
 msgid "Number of panel lines"
@@ -563,7 +563,7 @@ msgstr "パネル内の行数"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%dライン"
+msgstr "%d 行"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -693,7 +693,7 @@ msgstr "DNS のチェック頻度"
 
 #: include/variables.php:186
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "メンテナンスタスクや停止中デバイスなどに関する管理者情報パネル"
+msgstr "メンテナンスタスクや停止中デバイスなどに関する管理者情報パネル。"
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
@@ -975,7 +975,7 @@ msgstr "Cacti オブジェクトを分析"
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "ツリー、グラフ、ホストなどを分析"
+msgstr "ツリー、グラフ、ホストなどを分析します。"
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
@@ -1571,7 +1571,7 @@ msgstr "デバイス: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
-msgstr "下"
+msgstr "ダウン"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
@@ -1856,7 +1856,7 @@ msgstr "HTTP コード"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "正常"
+msgstr "OK"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -2173,7 +2173,7 @@ msgstr "ダウンホスト"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "トリガーされた"
+msgstr "トリガー済み"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
