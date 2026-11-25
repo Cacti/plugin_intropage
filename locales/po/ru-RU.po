@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Russian <https://translate.cacti.net/projects/cacti/intropage/"
 "ru/>\n"
@@ -542,7 +542,7 @@ msgstr "От настоящего момента к прошлому. Влияе
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "отключено"
+msgstr "Выключен"
 
 #: include/variables.php:75
 msgid "15 minutes"
@@ -926,7 +926,7 @@ msgstr "Хост"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "Область"
+msgstr "Состояние"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -1879,7 +1879,7 @@ msgstr "Код HTTP"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "OK"
+msgstr "Ок"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1968,7 +1968,7 @@ msgstr "Неизв./недоступен"
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
 msgid "%s Secs"
-msgstr "%s сек."
+msgstr "%s секунд"
 
 #: panellib/poller.php:171 panellib/poller.php:367
 msgid "(ok)"
@@ -2416,7 +2416,7 @@ msgstr "%d секунд"
 #: setup.php:109 setup.php:110 setup.php:111 setup.php:112
 #, php-format
 msgid "%d Hours"
-msgstr "%d Часа(ов)"
+msgstr "%d Часов"
 
 #: setup.php:113
 #, php-format
