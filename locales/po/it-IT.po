@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Italian <https://translate.cacti.net/projects/cacti/intropage/"
 "it/>\n"
@@ -571,7 +571,7 @@ msgstr "Quante righe nel pannello"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d linee"
+msgstr "%d righe"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -1961,7 +1961,7 @@ msgstr "Corsa"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
-msgstr "Idle"
+msgstr "Inattivo"
 
 #: panellib/poller.php:140 panellib/poller.php:346
 msgid "Unkn/down"
@@ -2119,7 +2119,7 @@ msgstr "Tipo di Poller:"
 
 #: panellib/system.php:219
 msgid "Spine"
-msgstr "Spina"
+msgstr "Spine"
 
 #: panellib/system.php:221
 msgid "Spine version: "
@@ -2203,7 +2203,7 @@ msgstr "Host inattivi"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "innescato"
+msgstr "Attivato"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
