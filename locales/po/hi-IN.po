@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Hindi <https://translate.cacti.net/projects/cacti/intropage/"
 "hi/>\n"
@@ -567,7 +567,7 @@ msgstr "पैनल में कितनी लाइनें हैं"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d लाइन्स"
+msgstr "%d पंक्तियाँ"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -633,7 +633,7 @@ msgstr "हर रोज"
 
 #: include/variables.php:131
 msgid "Every Week"
-msgstr "प्रति सप्ताह"
+msgstr "प्रत्येक सप्ताह"
 
 #: include/variables.php:132
 msgid "Every Month"
@@ -981,7 +981,7 @@ msgstr "Cacti ऑब्जेक्ट का विश्लेषण करे
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "ट्री, ग्राफ़, होस्ट, ... का विश्लेषण करें"
+msgstr "ट्री, ग्राफ़, होस्ट, ... का विश्लेषण करें।"
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
@@ -1867,7 +1867,7 @@ msgstr "HTTP कोड"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "ठीक है"
+msgstr "ठीक"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -2159,7 +2159,7 @@ msgstr "अनुमानित अगला प्रारंभ समय: %
 #: panellib/system.php:361
 #, php-format
 msgid "Pending/Archived Records: %s / %s"
-msgstr "लंबित/संग्रहीत रिकॉर्ड: %1$s / %2$s"
+msgstr "लंबित/संग्रहीत रिकॉर्ड: %s / %s"
 
 #: panellib/system.php:377
 #, php-format
@@ -2174,7 +2174,7 @@ msgstr "औसत बाइट्स/रिकॉर्ड: %s"
 #: panellib/system.php:390
 #, php-format
 msgid "Last run duration/updates: %s / %s"
-msgstr "अंतिम रन अवधि/अपडेट: %1$s / %2$s"
+msgstr "अंतिम रन अवधि/अपडेट: %s / %s"
 
 #: panellib/system.php:448
 msgid "Poller Run"
@@ -2186,7 +2186,7 @@ msgstr "डाउन होस्ट"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "ट्रिगर हुआ"
+msgstr "ट्रिगर किया गया"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
