@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Bulgarian <https://translate.cacti.net/projects/cacti/"
 "intropage/bg/>\n"
@@ -313,7 +313,7 @@ msgstr " [ Актуализации в %s ]"
 #: include/functions.php:819
 #, php-format
 msgid "%s Sec"
-msgstr "%s сек."
+msgstr "%s секунда"
 
 #: include/functions.php:819
 #, php-format
@@ -338,7 +338,7 @@ msgstr "%s часа"
 #: include/functions.php:833
 #, php-format
 msgid "%s Hrs"
-msgstr "%s ч."
+msgstr "%s часа"
 
 #: include/functions.php:837
 #, php-format
@@ -547,7 +547,7 @@ msgstr "От сега в миналото. Засяга оцветяването
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "деактивиран"
+msgstr "Изключен"
 
 #: include/variables.php:75
 msgid "15 minutes"
@@ -576,7 +576,7 @@ msgstr "Колко линии в панела"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d линии"
+msgstr "%d реда"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -1159,7 +1159,7 @@ msgstr "Всички таблици: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "Няма"
+msgstr "Неприложимо"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1600,7 +1600,7 @@ msgstr "Надолу"
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
 msgid "Recovering"
-msgstr "Възстановяване"
+msgstr "Възстановява се"
 
 #: panellib/graphs.php:423
 msgid "Data Type"
@@ -1884,7 +1884,7 @@ msgstr "HTTP код"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "ОК"
+msgstr "Добре"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1958,7 +1958,7 @@ msgstr "Общо време"
 
 #: panellib/poller.php:134 panellib/poller.php:340
 msgid "New/Idle"
-msgstr "New / Idle"
+msgstr "Нов/Неактивен"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
@@ -1975,7 +1975,7 @@ msgstr "Неизв./неактивен"
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
 msgid "%s Secs"
-msgstr "%s сек."
+msgstr "%s секунди"
 
 #: panellib/poller.php:171 panellib/poller.php:367
 msgid "(ok)"
@@ -2109,7 +2109,7 @@ msgstr "Тази функция не е внедрена за платформи
 
 #: panellib/system.php:177
 msgid "Avg CPU"
-msgstr "Среден процесор"
+msgstr "Ср. CPU"
 
 #: panellib/system.php:178
 msgid "Max CPU"
