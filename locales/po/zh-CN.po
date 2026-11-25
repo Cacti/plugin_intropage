@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://translate.cacti.net/"
 "projects/cacti/intropage/zh_Hans/>\n"
@@ -523,15 +523,15 @@ msgstr "从现在到过去。影响行着色，较旧的事件不会突出显示
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "已禁用"
+msgstr "禁用"
 
 #: include/variables.php:75
 msgid "15 minutes"
-msgstr "15分钟"
+msgstr "15 分钟"
 
 #: include/variables.php:76
 msgid "1 hour"
-msgstr "1小时"
+msgstr "1 小时"
 
 #: include/variables.php:77
 msgid "4 hours"
@@ -539,7 +539,7 @@ msgstr "4 小时"
 
 #: include/variables.php:78
 msgid "1 day"
-msgstr "1天"
+msgstr "1 天"
 
 #: include/variables.php:83
 msgid "Number of panel lines"
@@ -552,7 +552,7 @@ msgstr "面板中有多少行"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d 线"
+msgstr "%d 行"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -582,12 +582,12 @@ msgstr "%d 分钟"
 #: setup.php:106 setup.php:107
 #, php-format
 msgid "%d Minutes"
-msgstr "%d 分"
+msgstr "%d分钟"
 
 #: include/variables.php:113 setup.php:108
 #, php-format
 msgid "%d Hour"
-msgstr "%d小时"
+msgstr "%d 小时"
 
 #: include/variables.php:117
 msgid "Analyze Log - number of lines"
@@ -677,7 +677,7 @@ msgstr "检查 DNS 的频率"
 
 #: include/variables.php:186
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "关于维护任务、宕机设备等的管理信息面板"
+msgstr "关于维护任务、宕机设备等的管理信息面板。"
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
@@ -1072,7 +1072,7 @@ msgstr "您可以通过命令行工具或在配置文件中永久增加最大连
 #: panellib/analyze.php:499
 #, php-format
 msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
-msgstr "连接错误：%s - 请尝试重启 SQL 服务、检查 SQL 日志等"
+msgstr "连接错误：%s - 请尝试重启 SQL 服务、检查 SQL 日志等。"
 
 #: panellib/analyze.php:518
 #, php-format
@@ -1836,7 +1836,7 @@ msgstr "HTTP代码："
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "正常"
+msgstr "确定"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -2069,7 +2069,7 @@ msgstr "轮询器类型："
 
 #: panellib/system.php:219
 msgid "Spine"
-msgstr "Spine 二进制文件位置"
+msgstr "Spine"
 
 #: panellib/system.php:221
 msgid "Spine version: "
@@ -2153,7 +2153,7 @@ msgstr "宕机主机"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "触发"
+msgstr "已触发"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
@@ -2365,7 +2365,7 @@ msgstr "时间跨度：过去 1 天"
 #: setup.php:95 setup.php:96 setup.php:97 setup.php:98
 #, php-format
 msgid "%d Seconds"
-msgstr "%d 秒"
+msgstr "%d秒"
 
 #: setup.php:109 setup.php:110 setup.php:111 setup.php:112
 #, php-format
