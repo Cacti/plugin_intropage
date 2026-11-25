@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.cacti.net/"
 "projects/cacti/intropage/zh_Hant/>\n"
@@ -66,7 +66,7 @@ msgstr "行數 - %d"
 
 #: display.php:286
 msgid "Refresh Now"
-msgstr "立即重新整理"
+msgstr "重新整理"
 
 #: display.php:289 display.php:291
 msgid "Refresh Disabled"
@@ -282,7 +282,7 @@ msgstr "此面板沒有轉譯函式。"
 
 #: include/functions.php:626
 msgid "Not Found"
-msgstr "找不到"
+msgstr "未找到"
 
 #: include/functions.php:653
 msgid "Panel not found"
@@ -319,12 +319,12 @@ msgstr "%s 分"
 #: include/functions.php:826
 #, php-format
 msgid "%s Minutes"
-msgstr "%s 分鐘"
+msgstr "%s Minutes"
 
 #: include/functions.php:833
 #, php-format
 msgid "%s Hours"
-msgstr "%s 小時"
+msgstr "%s小時"
 
 #: include/functions.php:833
 #, php-format
@@ -413,7 +413,7 @@ msgstr "Intropage"
 
 #: include/settings.php:37 setup.php:79
 msgid "Normal User"
-msgstr "一般使用者"
+msgstr "普通用戶"
 
 #: include/settings.php:146
 #, php-format
@@ -483,7 +483,7 @@ msgstr "如果已安裝面板且所需的外掛程式已被移除，也自動解
 
 #: include/variables.php:57
 msgid "Automatic Page Refresh"
-msgstr "自動重新整理頁面"
+msgstr "自動頁面刷新"
 
 #: include/variables.php:58
 msgid "How often"
@@ -509,7 +509,7 @@ msgstr "每 %d 分鐘"
 #: include/variables.php:65 include/variables.php:129 include/variables.php:162
 #: include/variables.php:180
 msgid "Every Hour"
-msgstr "每小時"
+msgstr "每隔一小時"
 
 #: include/variables.php:70
 msgid "Important period"
@@ -524,23 +524,23 @@ msgstr "從現在到過去。影響行著色，較舊的事件不會突出顯示
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "已停用"
+msgstr "停用"
 
 #: include/variables.php:75
 msgid "15 minutes"
-msgstr "15分鐘"
+msgstr "15 分鐘"
 
 #: include/variables.php:76
 msgid "1 hour"
-msgstr "1 小時"
+msgstr "1小時"
 
 #: include/variables.php:77
 msgid "4 hours"
-msgstr "4 小時"
+msgstr "4個小時"
 
 #: include/variables.php:78
 msgid "1 day"
-msgstr "1 天"
+msgstr "1天"
 
 #: include/variables.php:83
 msgid "Number of panel lines"
@@ -553,7 +553,7 @@ msgstr "面板中有多少行"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d 行"
+msgstr "%d行"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -634,7 +634,7 @@ msgstr ""
 
 #: include/variables.php:141
 msgid "Quick"
-msgstr "快速"
+msgstr "快"
 
 #: include/variables.php:142
 msgid "Fast"
@@ -678,7 +678,7 @@ msgstr "檢查 DNS 的頻率"
 
 #: include/variables.php:186
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "關於維護工作、離線裝置等的管理員資訊面板"
+msgstr "關於維護工作、離線裝置等的管理員資訊面板。"
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
@@ -897,7 +897,7 @@ msgstr "主機"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "狀態"
+msgstr "州"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -970,7 +970,7 @@ msgstr "分析資料來源統計資訊"
 
 #: panellib/analyze.php:155
 msgid "Username"
-msgstr "使用者名稱"
+msgstr "用戶名"
 
 #: panellib/analyze.php:156 panellib/analyze.php:1271
 msgid "IP Address"
@@ -992,7 +992,7 @@ msgstr "成功 - 登入"
 
 #: panellib/analyze.php:181 panellib/analyze.php:1294
 msgid "Success - Token"
-msgstr "成功 - 權杖"
+msgstr "成功 - 令牌"
 
 #: panellib/analyze.php:215
 #, php-format
@@ -1433,7 +1433,7 @@ msgstr "要求管理員啟用 DS 統計資訊"
 #: panellib/busiest.php:1523 panellib/busiest.php:1649 panellib/top5.php:144
 #: panellib/top5.php:474
 msgid "Average"
-msgstr "平均值"
+msgstr "平均"
 
 #: panellib/busiest.php:219 panellib/busiest.php:339 panellib/busiest.php:474
 #: panellib/busiest.php:690 panellib/busiest.php:812 panellib/busiest.php:1054
@@ -1467,7 +1467,7 @@ msgstr "您沒有任何主機的權限，或沒有使用此範本的主機"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
-msgstr "運作時間"
+msgstr "運行時間"
 
 #: panellib/busiest.php:588 panellib/busiest.php:1420
 msgid "Average of all allowed hosts"
@@ -1520,7 +1520,7 @@ msgstr "以圖形方式提供 Cacti 及其外掛程式相關資訊的面板。"
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
-msgstr "資料來源"
+msgstr "數據源"
 
 #: panellib/graphs.php:38
 msgid "Graph of Data Sources"
@@ -1528,7 +1528,7 @@ msgstr "資料來源圖表"
 
 #: panellib/graphs.php:53 panellib/graphs.php:603
 msgid "Device Templates"
-msgstr "裝置範本"
+msgstr "設備模板"
 
 #: panellib/graphs.php:54
 msgid "Graph of Device Templates"
@@ -1556,7 +1556,7 @@ msgstr "裝置: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
-msgstr "離線"
+msgstr "向下"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
@@ -1578,7 +1578,7 @@ msgstr "找不到未使用範本的資料來源"
 
 #: panellib/graphs.php:456 panellib/mactrack.php:139 panellib/mactrack.php:192
 msgid "Devices"
-msgstr "裝置"
+msgstr "設備"
 
 #: panellib/graphs.php:503
 msgid "Device Count"
@@ -1590,11 +1590,11 @@ msgstr "全部"
 
 #: panellib/graphs.php:515 panellib/mactrack.php:107
 msgid "Up"
-msgstr "運作中"
+msgstr "向上"
 
 #: panellib/graphs.php:635
 msgid "Template Name"
-msgstr "範本名稱"
+msgstr "模板名稱"
 
 #: panellib/graphs.php:636
 msgid "Total Devices"
@@ -1602,7 +1602,7 @@ msgstr "設備總數"
 
 #: panellib/graphs.php:656
 msgid "No device templates found"
-msgstr "找不到裝置範本"
+msgstr "找不到設備模板"
 
 #: panellib/mactrack.php:31
 msgid "MacTrack Panels"
@@ -1680,7 +1680,7 @@ msgstr "您沒有外掛程式權限"
 
 #: panellib/mactrack.php:138 panellib/mactrack.php:191
 msgid "Site"
-msgstr "站台"
+msgstr "網站"
 
 #: panellib/mactrack.php:140 panellib/mactrack.php:193
 msgid "IPs"
@@ -1840,7 +1840,7 @@ msgstr "HTTP 狀態碼"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "正常"
+msgstr "確定"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1880,7 +1880,7 @@ msgstr "提供 Cacti 輪詢程序相關資訊的面板。"
 
 #: panellib/poller.php:37
 msgid "Poller Information"
-msgstr "輪詢器資訊"
+msgstr "輪詢信息"
 
 #: panellib/poller.php:38
 msgid "Various information about your Cacti poller."
@@ -1912,11 +1912,11 @@ msgstr "總計時間"
 
 #: panellib/poller.php:134 panellib/poller.php:340
 msgid "New/Idle"
-msgstr "新增/閒置"
+msgstr "新/空閒"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
-msgstr "執行中"
+msgstr "運行"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
@@ -2097,7 +2097,7 @@ msgstr "超限警告"
 
 #: panellib/system.php:319
 msgid "Timed Out"
-msgstr "已逾時"
+msgstr "逾時"
 
 #: panellib/system.php:322
 msgid "Other"
@@ -2105,7 +2105,7 @@ msgstr "其他"
 
 #: panellib/system.php:325
 msgid "Never Run"
-msgstr "從未執行"
+msgstr "從不運行"
 
 #: panellib/system.php:346
 #, php-format
@@ -2303,7 +2303,7 @@ msgstr "輪詢比例最差的裝置"
 
 #: panellib/top5.php:145 panellib/top5.php:475
 msgid "Current"
-msgstr "目前"
+msgstr "當前"
 
 #: panellib/top5.php:225
 msgid "Hostname"
@@ -2311,7 +2311,7 @@ msgstr "主機名稱"
 
 #: panellib/top5.php:226
 msgid "Availability/Reachability"
-msgstr "可用性／可連線性"
+msgstr "可用性/可達性"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
