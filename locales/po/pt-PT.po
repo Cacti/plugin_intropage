@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Portuguese (Portugal) <https://translate.cacti.net/projects/"
 "cacti/intropage/pt_PT/>\n"
@@ -621,7 +621,7 @@ msgstr "%d minutos"
 #: include/variables.php:113 setup.php:108
 #, php-format
 msgid "%d Hour"
-msgstr "hora %d"
+msgstr "%d hora"
 
 #: include/variables.php:117
 msgid "Analyze Log - number of lines"
@@ -1611,7 +1611,7 @@ msgstr "Dispositivos: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
-msgstr "Inativo"
+msgstr "Em baixo"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
@@ -1973,7 +1973,7 @@ msgstr "Tempo Total"
 
 #: panellib/poller.php:134 panellib/poller.php:340
 msgid "New/Idle"
-msgstr "Novo/Informação"
+msgstr "Novo/Inativo"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
@@ -2222,7 +2222,7 @@ msgstr "Anfitriões inativos"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "Provocado"
+msgstr "Acionado"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
@@ -2378,11 +2378,11 @@ msgstr "Hostname"
 
 #: panellib/top5.php:226
 msgid "Availability/Reachability"
-msgstr "Disponibilidade/Integração"
+msgstr "Disponibilidade/Acessibilidade"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
-msgstr "Tempo de votação"
+msgstr "Tempo de sondagem"
 
 #: panellib/top5.php:389 panellib/top5.php:721
 msgid "Ratio"
@@ -2441,7 +2441,7 @@ msgstr "%d Segundos"
 #: setup.php:109 setup.php:110 setup.php:111 setup.php:112
 #, php-format
 msgid "%d Hours"
-msgstr "horas %d"
+msgstr "%d horas"
 
 #: setup.php:113
 #, php-format
