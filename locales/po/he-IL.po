@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Hebrew (Israel) <https://translate.cacti.net/projects/cacti/"
 "intropage/he_IL/>\n"
@@ -541,7 +541,7 @@ msgstr "15 דקות"
 
 #: include/variables.php:76
 msgid "1 hour"
-msgstr "שעה"
+msgstr "שעה אחת"
 
 #: include/variables.php:77
 msgid "4 hours"
@@ -1135,7 +1135,7 @@ msgstr "כל הטבלאות: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "לא זמין"
+msgstr "לא רלוונטי"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1509,7 +1509,7 @@ msgstr "התקן תוסף TopX לסטטיסטיקות DS נוספות"
 
 #: panellib/busiest.php:1109
 msgid "Busiest 30 ucd/net Load (last hour)"
-msgstr "עומס עומס של 30 UCD/נטו העמוס ביותר (שעה אחרונה)"
+msgstr "30 עומסי ucd/net העמוסים ביותר (שעה אחרונה)"
 
 #: panellib/busiest.php:1226
 msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
@@ -1569,7 +1569,7 @@ msgstr "התקנים: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
-msgstr "למטה"
+msgstr "מושבת"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
@@ -1854,7 +1854,7 @@ msgstr "קוד HTTP"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "תקין"
+msgstr "OK"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -2089,7 +2089,7 @@ msgstr "סוג Poller:"
 
 #: panellib/system.php:219
 msgid "Spine"
-msgstr "עַמוּד הַשִׁדרָה"
+msgstr "Spine"
 
 #: panellib/system.php:221
 msgid "Spine version: "
