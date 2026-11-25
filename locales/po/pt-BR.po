@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.cacti.net/projects/"
 "cacti/intropage/pt_BR/>\n"
@@ -331,7 +331,7 @@ msgstr "%s Horas"
 #: include/functions.php:833
 #, php-format
 msgid "%s Hrs"
-msgstr "%s Hrs"
+msgstr "%s horas"
 
 #: include/functions.php:837
 #, php-format
@@ -2045,7 +2045,7 @@ msgstr "Painéis que fornecem informações sobre o desempenho do sistema Cacti.
 
 #: panellib/system.php:37
 msgid "Information"
-msgstr "Informação"
+msgstr "Informações"
 
 #: panellib/system.php:38
 msgid "Various system information about the Cacti system itself."
@@ -2195,7 +2195,7 @@ msgstr "Hosts inativos"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "Provocado"
+msgstr "Acionado"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
@@ -2243,7 +2243,7 @@ msgstr "Últimos eventos do plugin Threshold"
 
 #: panellib/thold.php:53
 msgid "Threshold"
-msgstr "Threshold"
+msgstr "Limiar"
 
 #: panellib/thold.php:54
 #, fuzzy
@@ -2351,7 +2351,7 @@ msgstr "Hostname"
 
 #: panellib/top5.php:226
 msgid "Availability/Reachability"
-msgstr "Disponibilidade/Integração"
+msgstr "Disponibilidade/Acessibilidade"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
