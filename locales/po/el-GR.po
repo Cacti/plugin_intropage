@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Greek <https://translate.cacti.net/projects/cacti/intropage/"
 "el/>\n"
@@ -314,7 +314,7 @@ msgstr " [ Ενημερώσεις σε %s ]"
 #: include/functions.php:819
 #, php-format
 msgid "%s Sec"
-msgstr "%s Δευτ."
+msgstr "%s δευτερόλεπτα"
 
 #: include/functions.php:819
 #, php-format
@@ -324,7 +324,7 @@ msgstr "%s δευτερόλεπτα"
 #: include/functions.php:826
 #, php-format
 msgid "%s Min"
-msgstr "%s λεπ."
+msgstr "%s λεπτά"
 
 #: include/functions.php:826
 #, php-format
@@ -1165,7 +1165,7 @@ msgstr "Όλοι οι πίνακες: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "Μη Διαθέσιμο"
+msgstr "Μη Εφαρμόσιμο"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1567,7 +1567,7 @@ msgstr ""
 
 #: panellib/graphs.php:37 panellib/graphs.php:386 panellib/graphs.php:424
 msgid "Data Sources"
-msgstr "Data Sources"
+msgstr "Πηγές δεδομένων"
 
 #: panellib/graphs.php:38
 msgid "Graph of Data Sources"
@@ -1896,7 +1896,7 @@ msgstr "Κωδικός HTTP"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "OK"
+msgstr "Εντάξει"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1977,7 +1977,7 @@ msgstr "Τρέχουσες"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
-msgstr "Σε αδράνεια"
+msgstr "Αδρανής"
 
 #: panellib/poller.php:140 panellib/poller.php:346
 msgid "Unkn/down"
@@ -1986,7 +1986,7 @@ msgstr "Άγνωστο/ανενεργό"
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
 msgid "%s Secs"
-msgstr "%s Δευτ."
+msgstr "%s δευτερόλεπτα"
 
 #: panellib/poller.php:171 panellib/poller.php:367
 msgid "(ok)"
@@ -2219,7 +2219,7 @@ msgstr "Ανενεργοί κεντρικοί υπολογιστές"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "Ενεργοποιημένο"
+msgstr "Πυροδοτήθηκε"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
