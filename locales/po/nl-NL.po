@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Dutch <https://translate.cacti.net/projects/cacti/intropage/"
 "nl/>\n"
@@ -553,7 +553,7 @@ msgstr "1 uur"
 
 #: include/variables.php:77
 msgid "4 hours"
-msgstr "4 uren"
+msgstr "4 uur"
 
 #: include/variables.php:78
 msgid "1 day"
@@ -989,7 +989,7 @@ msgstr "Cacti-objecten analyseren"
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "Bomen, grafieken, hosts, ... analyseren"
+msgstr "Analyseer bomen, grafieken, hosts, ..."
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
@@ -1497,7 +1497,7 @@ msgstr "U heeft geen rechten voor hosts of er is geen host met dit sjabloon"
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
-msgstr "Uptime"
+msgstr "Bedrijfstijd"
 
 #: panellib/busiest.php:588 panellib/busiest.php:1420
 msgid "Average of all allowed hosts"
@@ -1953,7 +1953,7 @@ msgstr "Nieuw/Inactief"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
-msgstr "Actief"
+msgstr "Wordt uitgevoerd"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
@@ -2352,7 +2352,7 @@ msgstr "Hostname"
 
 #: panellib/top5.php:226
 msgid "Availability/Reachability"
-msgstr "Beschikbaarheid/Reachability"
+msgstr "Beschikbaarheid/bereikbaarheid"
 
 #: panellib/top5.php:306 panellib/top5.php:637
 msgid "Polling Time"
