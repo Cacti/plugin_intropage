@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Korean <https://translate.cacti.net/projects/cacti/intropage/"
 "ko/>\n"
@@ -424,7 +424,7 @@ msgstr "일반 사용자"
 #: include/settings.php:146
 #, php-format
 msgid "[edit: %s]"
-msgstr "[편집 :  %s]"
+msgstr "[편집: %s]"
 
 #: include/settings.php:155
 msgid "System Level Panels"
@@ -534,11 +534,11 @@ msgstr "지금부터 과거까지. 행 색상에 영향을 미치며 이전 이�
 #: panellib/system.php:346 panellib/thold.php:293 panellib/thold.php:377
 #: panellib/thold.php:393
 msgid "Disabled"
-msgstr "비활성화됨"
+msgstr "비활성화"
 
 #: include/variables.php:75
 msgid "15 minutes"
-msgstr "15 분"
+msgstr "15분"
 
 #: include/variables.php:76
 msgid "1 hour"
@@ -563,7 +563,7 @@ msgstr "패널의 줄 수"
 #: include/variables.php:87 include/variables.php:88 include/variables.php:89
 #, php-format
 msgid "%d lines"
-msgstr "%d 개 라인"
+msgstr "%d줄"
 
 #: include/variables.php:94
 msgid "Trend Timespan"
@@ -609,7 +609,7 @@ msgstr "로그 분석 - 줄 수"
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr ""
 "분석할 로그 줄 수입니다. 패널에서는 지정한 줄 수, 상세 보기에서는 2배의 줄 "
-"수를 표시합니다. 큰 값을 설정하면 페이지 로딩이 느려질 수 있습니다."
+"수를 표시합니다. 큰 값을 설정하면 페이지 로딩이 느려질 수 있습니다"
 
 #: include/variables.php:124
 msgid "How often analyze DB"
@@ -691,7 +691,7 @@ msgstr "DNS 확인 빈도"
 
 #: include/variables.php:186
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "유지보수 작업, 다운된 장치 등에 대한 관리자 정보 패널"
+msgstr "유지보수 작업, 다운된 장치 등에 대한 관리자 정보 패널."
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
@@ -1568,7 +1568,7 @@ msgstr "장치: "
 
 #: panellib/graphs.php:299 panellib/graphs.php:521 panellib/mactrack.php:108
 msgid "Down"
-msgstr "아래로"
+msgstr "다운"
 
 #: panellib/graphs.php:328 panellib/graphs.php:527 panellib/poller.php:145
 #: panellib/poller.php:350
@@ -1823,7 +1823,7 @@ msgstr "Maint 플러그인이 설치되지 않았거나 활성화되지 않았�
 
 #: panellib/misc.php:307
 msgid "Plugin Webseer isn't installed or started"
-msgstr "플러그인 WebSeer가 설치되지 않았거나 시작되지 않았습니다."
+msgstr "플러그인 WebSeer가 설치되지 않았거나 시작되지 않았습니다"
 
 #: panellib/misc.php:319
 msgid "Webseer plugin no longer supported, use plugin servcheck instead"
@@ -1853,7 +1853,7 @@ msgstr "HTTP 코드"
 #: panellib/misc.php:348 panellib/misc.php:425 panellib/misc.php:512
 #: panellib/misc.php:591
 msgid "OK"
-msgstr "정상"
+msgstr "확인"
 
 #: panellib/misc.php:390
 msgid "Webseer Plugin - Details"
@@ -1861,7 +1861,7 @@ msgstr "Webseer 플러그인 - 세부 정보"
 
 #: panellib/misc.php:461
 msgid "Plugin Servcheck isn't installed or started"
-msgstr "플러그인 ServCheck가 설치되지 않았거나 시작되지 않았습니다."
+msgstr "플러그인 ServCheck가 설치되지 않았거나 시작되지 않았습니다"
 
 #: panellib/misc.php:487
 msgid "Status (ok/error): "
@@ -2066,7 +2066,7 @@ msgstr "CPU 부하: "
 
 #: panellib/system.php:165
 msgid "This function is not implemented on Windows platforms"
-msgstr "이 기능은 Windows 플랫폼에 구현되어 있지 않습니다."
+msgstr "이 기능은 Windows 플랫폼에 구현되어 있지 않습니다"
 
 #: panellib/system.php:177
 msgid "Avg CPU"
@@ -2170,7 +2170,7 @@ msgstr "다운된 호스트"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "발동"
+msgstr "트리거됨"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
@@ -2227,7 +2227,7 @@ msgstr "임계값 플러그인 그래프(모두, 트리거됨, ...)"
 
 #: panellib/thold.php:87 panellib/thold.php:441
 msgid "Plugin Thold isn't installed or started"
-msgstr "플러그인 Thold가 설치되지 않았거나 시작되지 않았습니다."
+msgstr "플러그인 Thold가 설치되지 않았거나 시작되지 않았습니다"
 
 #: panellib/thold.php:179 panellib/thold.php:506
 msgid "Without events yet"
