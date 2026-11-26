@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: German <https://translate.cacti.net/projects/cacti/intropage/"
 "de/>\n"
@@ -581,7 +581,7 @@ msgstr "Trend-Zeitraum"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
-msgstr "Was sollte für Trenddiagramme die Standardzeitspanne für diese Diagramme sein?"
+msgstr "Standardzeitspanne für Trenddiagramme."
 
 #: include/variables.php:101
 msgid "Poller Timeout"
@@ -928,7 +928,7 @@ msgstr "Zielsystem"
 #: panellib/alert.php:121 panellib/alert.php:266 panellib/poller.php:121
 #: panellib/poller.php:306
 msgid "State"
-msgstr "Bundesland"
+msgstr "Zustand"
 
 #: panellib/alert.php:178 panellib/alert.php:319
 msgid "More records, use detail window"
@@ -993,7 +993,7 @@ msgstr "Cacti-Objekte analysieren"
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "Bäume, Diagramme, Hosts, ... analysieren"
+msgstr "Bäume, Diagramme, Hosts usw. analysieren."
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
@@ -1156,7 +1156,7 @@ msgstr "Alle Tabellen: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "Nicht verfügbar"
+msgstr "Nicht zutreffend"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1503,7 +1503,7 @@ msgstr ""
 
 #: panellib/busiest.php:570 panellib/busiest.php:1403
 msgid "Uptime"
-msgstr "Laufzeit"
+msgstr "Betriebszeit"
 
 #: panellib/busiest.php:588 panellib/busiest.php:1420
 msgid "Average of all allowed hosts"
@@ -1974,7 +1974,7 @@ msgstr "Unbekannt/Inaktiv"
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
 msgid "%s Secs"
-msgstr "%s Sek."
+msgstr "%s Sekunden"
 
 #: panellib/poller.php:171 panellib/poller.php:367
 msgid "(ok)"
@@ -2207,11 +2207,11 @@ msgstr "Nicht erreichbare Hosts"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "Getriggert"
+msgstr "Ausgelöst"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
-msgstr "Poller-Ausg.-Elem."
+msgstr "Poller-Ausgabeelemente"
 
 #: panellib/system.php:606
 msgid "48 Hour Extreme Polling"
