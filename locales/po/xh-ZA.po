@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Xhosa\n"
+"Language: xh-ZA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - Imvume ikhanyelwe"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "Iphaneli enye okanye ezininzi zisusiwe ngenxa yeemvume ezinganelanga. Qhagamshelana nomlawuli."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Ungayicima imiqolo engasentla apha ku-<b>Qwalasela > Iisetingi > Jikelele > Fihla iDeshibhodi ye-Cacti</b> kwaye usebenzise iphepha lonke kwi-Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Okungagqibekanga"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Fihla okanye ubonise izaziso zesikwere ezibomvu/ezityheli/eziluhlaza"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Cima ukushukumisa iphaneli/vula ukukopa umbhalo kwiphaneli"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Iizenzo ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Yongeza iDashboard eNtsha"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Susa ideshibhodi yangoku"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Inani leemigca - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Hlaziya Ngoku"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Uhlaziyo luCinyiwe"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Hlaziya nge-Poller"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Hlaziya Qho ngoMzuzu o-1"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Hlaziya Rhoqo ngeMizuzu emi-5"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Hlaziya Rhoqo ngeYure"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Ixesha elibalulekileyo - licinyiwe"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Ixesha elibalulekileyo - imizuzu eli-15"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Ixesha elibalulekileyo - iyure e-1"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Ixesha elibalulekileyo - iiyure ezi-4"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Ixesha elibalulekileyo - usuku olu-1"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Hlela ngobunzima"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Hlela ngokukhetha komsebenzisi"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Layisha kwakhona iiNkcazelo zePhaneli"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Seta i-Intropage njengePhepha lokuNgena elisiSekelo"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Seta igrafu njengePhepha lokuNgena elisiSekelo"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Bonisa i-Intropage kwiKhonsoli"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Bonisa i-Intropage kwiThebhu njengePhepha Elisisiseko"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Iipaneli ezimbalwa emgceni"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Iipaneli ezingakumbi kumgca omnye"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Rhoxisa ukwabelana"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Yabelana ngale deshibhodi"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Ukwabelana ngedeshibhodi engenanto akuvumelekanga"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Sebenzisa ideshibhodi ekwabelwana ngayo"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Ayikwazi ukusebenzisa i-dashboard ekwabelwana ngayo - umda we-dashboard ufikelelwe."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Akukho zideshibhodi ekwabelwana ngazo"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Wamkelekile kwi-Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Unokwengeza iiPhaneli zeDashibhodi ngeendlela ezininzi:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Khetha iiphaneli ezilungisiweyo kwi-\"Panels menu\". Iphaneli inokuba ngwevu. Oko kubangelwa ziimvume, buza umlawuli"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Yongeza nayiphi na iGrafu ye-Cacti, sebenzisa i-ayikhoni"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Ungazenzela awakho amaphaneli. Ulwazi oluthe vetshe lukwifayile ethi <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Ungabelana ngeedeshibhodi nabanye abasebenzisi:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "sebenzisa ukhetho oluthi \"Yabelana ngale bhodi yolawulo\" kwimenyu yeZenzo - Wonke umsebenzisi unokuyisebenzisa njenge-itempleyiti."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Ungasebenzisa ideshibhodi ekwabelwana ngayo ngokusebenzisa imenyu yeZenzo:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Sebenzisa i-\"Sebenzisa ideshibhodi ekwabelwana ngayo (igama lomsebenzisi/ledeshibhodi) - Ilungiselela ideshibhodi efanayo njengaleyo kwabelwana ngayo kodwa ngeemvume zakho."
+
+#: display.php
+msgid "Customization:"
+msgstr "Ukulungiselela:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Ungadala ukuya kutsho kwiideshibhodi ezi-9. Ideshibhodi nganye inokunikwa igama, isebenzise i-ayikhoni"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "I-Intopage ingaboniswa kwikhonsoli okanye kwithebhu eyahlukileyo. Ungayitshintsha kwimenyu yeNtshukumo"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Ukuba ufuna ukukopa umbhalo kwiphaneli, kufuneka ucime umsebenzi wokutsala nokulahla, sebenzisa i-ayikhoni"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Iinkcukacha zePhaneli"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Cima ukushukumisa iphaneli/Vula ukukopa umbhalo kwiphaneli"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Vula ukuhambisa iphaneli/Cima ukukopa umbhalo kwiphaneli"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Fihla izaziso zesikwere ezibomvu/ezityheli/eziluhlaza"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Bonisa izaziso zesikwere esibomvu/esityheli/esiluhlaza"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Imposiso ekufundeni idatha entsha"
+
+#: display.php
+msgid "Close"
+msgstr "Vala"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Ideshibhodi isusiwe"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Ideshibhodi eNtsha"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Ideshibhodi yongeziwe"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Ayikwazi ukongeza igrafu eyandisiweyo okanye enethuba lexesha elilungiselelweyo, itshintshela ixesha kwisiqingatha seyure esidlulileyo"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Ithala leepaneli ze-Intropage lihlaziywe ukusuka kwithala leepaneli"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Ideshibhodi yongeziwe, nceda ulinde imijikelo embalwa ye-Poller ukuze kufumaneke idatha"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Impazamo - kuzanywa ukwabelana ngebhodi yolawulo engabelwananga"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Layisha kwakhona iPhaneli"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Tsala ukuze ulungelelanise kwakhona"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Lungisa kwakhona ulandelelwano lwephaneli"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Imiqolo embalwa"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Imiqolo engakumbi"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Bonisa iinkcukacha"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Cima iphaneli"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Iphaneli ayifumanekanga"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Le phaneli ayifumaneki kuba i-plugin yayo efunekayo icinyiwe."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Iphaneli ibandakanya ifankshini ye-render kodwa ayikho."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Iphaneli ayinayo ifankshini ye-render."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Ayifunyenwanga"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Akukho Datha Ifunyenweyo.  Linda uhlolo olulandelayo, <br/>okanye sebenzisa ukuLayisha Kwakhona Ngenkani ukuba kuyafumaneka."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Iphaneli ayifumanekanga"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Umsebenzi weeNkcukacha awukho."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Ihlaz. nge-%s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "%s Isek."
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s Imizuzwana"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "%s Imiz."
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "Imizuzu eyi-%s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "Iiyure eziyi-%s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "%s Iiyure"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "%s Iintsuku"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Akukho Datha Ikhoyo.  Hlaziya Ngenkani, okanye linda umjikelo olandelayo we-Cacti Polling."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Akukho Datha Ikhoyo.  Le Phaneli ayivumeli uHlaziyo lweNkani.  Kuya kufuneka ulinde de I-Poller ye-Cacti yenze uhlolo."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Iiphaneli ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (akukho mvume)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Ayikwazi ukongezwa kwi-Dashboard. Ithuba lexesha elilungiselelweyo."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Susa kwiDeshibhodi"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Yongeza kwiDashboard"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Amagama eeDeshibhodi"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Ideshibhodi %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Amaxesha oHlaziya lwePhaneli yeNqanaba loMsebenzisi"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Ukuphindaphindeka koHlaziya iPhaneli yeNkqubo (Bonke abaSebenzisi abaGunyazisiweyo)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Ukuphindaphindeka koHlazo loTyekelo"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Umbindi"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "UMsebenzisi oQhelekileyo"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[hlela: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Iipaneli zeNqanaba leNkqubo"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Iiphaneli ezifanele ukusetyenziswa ngabalawuli okanye abasebenzisi abanamagunya aphezulu kwaye azidla ngokusetyenziswa ngabasebenzisi jikelele.  Iiphaneli ngokubanzi zimalunga nokusetyenziswa kwesixokelelwano sonke."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Iiphaneli zeNqanaba loMsebenzisi"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Iiphaneli ezifanele ukusetyenziswa ngabasebenzisi jikelele.  Iimvume zilinganiselwe koko umsebenzisi wangoku anakho ukukujonga."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Unokuvumela/Ungavumeli iiPhaneli zoMsebenzisi"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Unokuvumela/Ungavumeli iiPhaneli zeQela"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Ubume obubomvu"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Ubume obuTyheli"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Ubume obuLuhlaza"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Iisetingi zokuBonisa"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Izinto ezibalulekileyo ziya kuba phezulu"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Ukuba ikhethiwe, i-Intropage ibonisa ulwazi olubalulekileyo (iimpazamo, izilumkiso) kuqala"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Bonisa iipaneli ezongezelelweyo kumgca omnye"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Kwiskrini esibanzi"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Khupha iiPhaneli ngokuzenzekelayo"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Ukuba iPhaneli ifakiwe kwaye iplagin efunekayo isusiwe, yikhuphe ngokuzenzekelayo iphaneli nayo"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Uhlaziyo lwePhepha oluZenzekelayo"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Kangaphi"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Ngokuzenzekelayo nge-Poller"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Nakanye"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Umzuzu ngamnye"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Rhoqo emva kwemizuzu eyi-%d"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Iyure nganye"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Ixesha elibalulekileyo"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Ukusukela ngoku ukuya kwixesha elidlulileyo. Kuchaphazela umbala wemiqolo, iziganeko ezidala aziyi kugqanyiswa, ziya kuboniswa kuphela"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Icinyiwe"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "Imizuzu eli-15"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "Iyure e-1"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "Iiyure ezi-4"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "Usuku olu-1"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Inani leemigca yepaneli"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Mingaphi imigca kwiphaneli"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "%d imigca"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Ixesha loTyekelo"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Kwiitshati ze-Trend, kufanele ibe yintoni isithuba sexesha esisisiseko sezo tshati."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Ixesha lokuPhelelwa kwe-Poller"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Ixesha, ngemizuzu, apho i-Poller yangasemva ye-Intropage inokusebenza phambi kokuba iphazanyiswe kwaye icinywe yi-Cacti."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d Umzuzu"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d Imizuzu"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "%d Iyure"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Hlalutya iLogi - inani lemigca"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Mingaphi imigca yelogi eya kuhlalutywa. Imigca = kwiphaneli, 2x imigca = ngokweenkcukacha. Inani elikhulu linokubangela ukulayisha kancinci kwephepha"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Kufuneka ihlalutywe kangaphi i-DB"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "I-Poller iqhuba lo msebenzi. Ingabangela ukusebenza okude kwe-Poller."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Yonke iMihla"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Rhoqo ngeVeki"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Rhoqo ngeNyanga"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Hlalutya i-DB - Inqanaba lokujonga i-db"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Quick - Musa ukukhangela imiqolo kumakhonkco angachanekanga<br/>Fast - khangela kuphela iitafile ezingavalwanga kakuhle<br/>Changed - khangela iitafile ezitshintshileyo ukusuka kukhangelo lokugqibela<br/>Medium - kunye nokuskena imiqolo<br/>Extended - imiqolo epheleleyo nezitshixo<br/>Medium kunye ne-Extended zinokubangela ukulayisha kwephepha okucothayo!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Okukhawulezayo"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Ngokukhawuleza"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Itshintshiwe"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Phakathi"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Yandisiwe"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Uhlolo lweXesha le-NTP - idilesi ye-IP okanye igama le-DNS leseva ye-NTP"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Faka i-IP okanye igama le-DNS leseva ye-NTP"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Kufuneka ihlolwe kangaphi i-NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Uhlolo lwe-DNS - Naliphi na igama le-DNS"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Faka igama le-DNS lovavanyo"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Kufuneka ihlolwe kangaphi i-DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "IPhaneli yoLwazi loMlawuli malunga neMisebenzi yoLondolozo, iZixhobo eziCimileyo, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Ukuba ayikho ze, iPhaneli iya kuboniswa phezulu. Unokusebenzisa iithegi ze-html (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Iintsuku zesilumkiso zeShedyuli yoLondolozo ezayo"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Zingaphi iintsuku phambi kweshedyuli yolondolozo ecwangcisiweyo ekufuneka kuboniswe isilumkiso?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Ungaze ulumkise"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Xa ulondolozo luqala"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "Usuku olu-%d Ngaphambili"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "Iintsuku ezi-%d Ngaphambili"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Amanani enethiwekhi nge-"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "ii-byte okanye ii-bit"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Iibhayithi"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Iibhithi"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Iisetingi ze-Alamu"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "I-Alamu yokuhlola i-DB yaBaxhasi abaRhoxisiweyo"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Ukuba esi siganeko senzekile, qalisa umbala wobume okhethiweyo oQhelekileyo, weSilumkiso, okanye we-Alert."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "I-Alamu yeHosti eneNkcazelo efanayo"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "I-Alamu yoMthombo weDatha oyiNkedama"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "I-Alamu yeMveliso ye-Poller engeyoze"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "I-Alamu yee-indeksi ezingalunganga zoMthombo weDatha"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "I-Alamu yentshukumo ye-logonly yoMda"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "I-Alamu xa i-bulk_walk_size yesixhobo ingalungiselelwe kakuhle"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "I-Alamu yeZixhobo ezine-IP/port efanayo"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "I-Alamu yeSixhobo kwiMithi engaphezu komnye"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "I-Alamu yeSixhobo esingenamThi"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "I-Alamu yeSixhobo esine-SNMP Community esisiseko se-public/private"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "I-Alamu yeSixhobo esingabekwa esweni"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "I-Alamu yeSixhobo esingenayo iGrafu"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "I-Alamu yeXesha lokuPolisha eBomvu/eMthubi"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Amaxesha okuhlola nge-Poller angaphezu kwale mida aya kuvusa umbala wobume beSilumkiso okanye beSaziso."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "I-Alamu yoMlinganiselo oBomvu/oMthubi weZingaphumelelanga/Zonke"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Umlinganiselo wokuhlolwa kokufumaneka okungaphumelelanga kokuqhathaniswa nokuhlolwa okuphumeleleyo ukuze kuvuselelwe umbala wobume beSilumkiso okanye be-Alert."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Mthubi / Bomvu"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "I-Alamu ye-Ping eBomvu/eMthubi"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Ukulibaziseka kwe-Ping okungaphezu kwala manqanaba kuya kuvusa umbala wobume beSilumkiso okanye beSivuso."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Lubhelu / Bomvu"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "I-Alamu yoKufumaneka okuKubi kakhulu okuBomvu/okuMthubi"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Ukufumaneka okungaphantsi kwala manqanaba kuya kubangela umbala wobume oMthubi okanye oBomvu."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Tyheli / Bomvu"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Yenza isebenze"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Khubaza"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Iiphaneli"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Cofa 'Qhubeka' ukuze uvule le Phaneli ilandelayo."
+msgstr[1] "Cofa 'Qhubeka' ukuze uvule ezi Phaneli zilandelayo."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Vula iPhaneli"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Cofa 'Qhubeka' ukuze ukhubaze le Phaneli ilandelayo. Iiphaneli ezicinyiweyo zifihlwa kwiideshibhodi kwaye zitsitywe yi-Poller, kodwa idatha yazo iyagcinwa."
+msgstr[1] "Cofa 'Qhubeka' ukuze ukhubaze ezi Phaneli zilandelayo. Iiphaneli ezicinyiweyo zifihlwa kwiideshibhodi kwaye zitsitywe yi-Poller, kodwa idatha yazo iyagcinwa."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Cima Iphaneli"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Rhoxisa"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Qhubeka"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Igama lePhaneli"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Igama lokubonisa lale phaneli."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Umthombo"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Iplagini ebonelela ngale paneli. Iipaneli ze-Intropage ziboniswa njenge-Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Udidi"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Udidi lwepaneli."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Inqanaba"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Iipaneli zenkqubo zabelwana ngabo bonke abasebenzisi; iipaneli zomsebenzisi zezomsebenzisi ngamnye."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Ifuna"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Iiplagini ekufuneka zivuliwe ukuze eli phaneli liboniswe."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Hlaziya"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Ixesha lokuqokelela idatha kwepaneli."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Umsebenzi wokuHlaziya"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Umsebenzi obizwa yi-Poller ukuze uqokelele idatha yale phaneli."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Ubume"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Nokuba iphaneli ivuliwe na."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "ISixokelelwano"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Umsebenzisi"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Ivuliwe"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Akukho"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Akukho Ziphaneli Zifunyenweyo"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Ithala leepaneli ze-Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Khangela"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Nayiphi na"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Hamba"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Seta/Hlaziya Izihluzo"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Sula"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Sula Izihluzo"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Izaziso"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Iiphaneli ezibonelela ngezilumkiso."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Izilumkiso zehosti"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Izilumkiso zehosti (phezulu/phantsi/iyachacha) kutshanje"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Umhla"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Ihosti"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Iphondo"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Iirekhodi ezingakumbi, sebenzisa ifestile yeenkcukacha"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Ilindele idatha"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Awunazo iimvume kuzo naziphi na iihosti"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Iipaneli zoHlalutyo"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Iiphaneli ezihlalutya indlela esebenza ngayo ngoku i-Cacti kunye neeplagi zayo."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Hlalutya ukuNgena"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Hlalutya ukungena kwe-Cacti okumbalwa kokugqibela ukujonga iindlela neempazamo."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Hlalutya Iilogi"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Jonga iimpazamo eziqhelekileyo kwifayile yelogi yeCacti ezinokuba ngunobangela wenkxalabo."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Uvavanyo lweDathabheyisi"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Hlalutya isiseko sedatha se-MySQL/MariaDB ukujonga iimpazamo eziqhelekileyo. Qaphela ukuba le nkqubo inokuthatha ixesha elide kwiinkqubo ezinkulu kakhulu."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Hlalutya Izinto ze-Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Hlalutya Imithi, Iigrafu, Iihosti, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Hlalutya iinkcukacha-manani ze-DS"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Hlalutya iinkcukacha-manani zomthombo wedatha"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Igama lomsebenzisi"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "Idilesi ye-IP"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Ayiphumelelanga"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Impumelelo - Ukungena"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Impumelelo - Ithokheni"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "UkuNgena okuSileleyo kuKonke: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Abasebenzisi abaSebenzayo kwiYure eDlulileyo: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Ifayile yelogi ayifikeleleki okanye ayinanto"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Hlalutya imigca yelog yokugqibela eyi-%s:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Iimpazamo: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Izilumkiso: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Ubungakanani beLogi: Bukhulu kuno-2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Ubungakanani beLogi: Kulungile"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Ubungakanani beLogi: Bukhulu Kakhulu"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Ubungakanani beLogu: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Imigca yokugqibela yelogu:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Kutsitywa ukuhlolwa kweetheyibhile ze-DB. Isiseko sedatha sikhulu kakhulu"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Itheyibhile %s ubume %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Iingxaki"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: KULUNGILE"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Ubuninzi boqhagamshelwano bufikelelwe: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Ungandisa uqhagamshelo oluphezulu ngeentlobo zezixhobo zomgca womyalelo okanye ngokusisigxina kwifayile yoqwalaselo"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Iimpazamo zoqhagamshelwano: %s - zama ukuqalisa kwakhona inkonzo ye-SQL, khangela ilogi ye-SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Abaxhasi/uqhagamshelwano oluyekisiweyo: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Abaxhasi/uqhagamshelwano oluyekisiweyo - Sebenzisa i-'SET GLOBAL log_warnings = 1;' okanye i-' log_error_verbosity = 1;' (kuxhomekeke kuhlobo lwakho lwe-MySQL/MariaDB) ukusuka kwi-CLI ye-mysql kwaye usete kwi-server.cnf ukuyithulisa."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Iimpazamo zoqhagamshelwano: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Iitheyibhile ezonakeleyo: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Kufuneka uqhube imiyalelo yokukhangela nokulungisa itheyibhile"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Iitheyibhile zememori: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Zonke iitheyibhile: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Akusebenzi"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Izixhobo ezine-IP kunye ne-port efanayo: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Izixhobo ezingalungiselelwe Ubungakanani be-Bulk Walk: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Nceda jonga ipharamitha yesixhobo ethi \"Bulk Walk Maximum Repetitions\". Ungaphucula ukusebenza kwe-Poller yakho"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Ukuphinda ukwenza isalathisi okugqibeleleyo"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Ukusebenza kokugqibela kwe-RRD Checker"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Ukusebenza kokugqibela kwe-RRD Cleaner"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Kucetyiswa ukuba uqhube esi sixhobo nokuba kukanye ngamaxesha athile"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: ayikaqhutywa okwangoku"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Imithombo yeDatha Engenabani: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Umthombo weDatha - izalathisi ezingalunganga: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Isaziso/isilumkiso se-Thold sokuloga kuphela: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Izixhobo ezinenkcazelo efanayo: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Izixhobo ezikumthi ongaphezu komnye: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Izixhobo ezingenazo iigrafu: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Izixhobo ezingenamthi: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Izixhobo ezinekhomiyunithi emiselweyo engu-public/private: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Ingxaki yezinto zegrafu/izinto zetempleyiti: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Iplagini ye-Monitor - Iihosti ezingabekwanga esweni: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "Kulungile"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "I-CPU yeseva (ii-cores / iinkqubo / imisonto): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Ukwazisa umlawuli kucinyiwe kwaye i-imeyile yomlawuli ayicwangciswanga"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Kufunyenwe iingxaki ezi-%s"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Yonke into ilungile"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Amanani e-DS: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Iphaneli ifuna ukuba iinkcukacha-manani ze-DS zibe zivuliwe."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Zonke iirekhodi ze-DS "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Iirekhodi ze-DS ezingenanto "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Hlalutya Iinkcukacha zeLogi ye-Cacti [ Izilumkiso/Iimpazamo ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Iimpazamo"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Izilumkiso"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "ISILUMKISO: Ifayile inkulu kune-2GB"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Ubungakanani beLogu"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Hlalutya Iinkcukacha zokuNgena"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Isiphumo"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Abasebenzisi abaSebenzayo kwiiYure ezi-2 eziDlulileyo:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Akukho basebenzisi basebenzayo"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Jonga iLogi ePheleleyo yoMsebenzisi"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Hlalutya uMthi, Iigrafu, Iihosti"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Izixhobo ezine-IP kunye ne-port efanayo - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Izixhobo ezingalungiselelwe Ubungakanani be-Bulk Walk - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Ulondolozo lwedatha"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Imithombo yeDatha Engenabani - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Imithombo yeDatha enezalathisi ezingalunganga - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Isaziso/isilumkiso se-Thold sokuloga kuphela - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Izixhobo ezinenkcazelo efanayo - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Izixhobo ezikumthi ongaphezu komnye - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Izixhobo ezingenazo Iigrafu - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Izixhobo ezingenaMthi - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Izixhobo ezinekhomiyunithi emiselweyo engu-public/private - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Ingxaki yezinto zegrafu/izinto zetempleyiti - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Itempleyiti yegrafu"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Iigrafu"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Izinto zegrafu"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Izinto zetempleyiti"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Iplagini ye-Monitor - Iihosti ezingabekwanga esweni - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "I-CPU yeseva ii-cores / iinkqubo / imisonto: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Ukwazisa umlawuli kucinyiwe okanye i-imeyile yomlawuli ayicwangciswanga"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Eyona ixakekileyo"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Iiphaneli ezifumana iihosti ezixakeke kakhulu."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "I-CPU Exakeke Kakhulu"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Izixhobo ezine-CPU exakeke kakhulu (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "I-ucd/net exakeke kakhulu - Umthwalo"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Izixhobo ezinomthwalo ophezulu kakhulu (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Isithuba se-Hard Drive Esixakeke Kakhulu"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Izixhobo ezinendawo ye-Hard Drive esetyenziswe kakhulu (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Ixesha lokusebenza elixakeke kakhulu"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Izixhobo ezinexesha lokusebenza eliphezulu kakhulu"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Itrafikhi yokungena/yokuphuma ye-Interface exakeke kakhulu"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Izixhobo ezinothutho lwangaphakathi/lwangaphandle oluphezulu kakhulu (Ujongano)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Impazamo ye-Interface exakeke kakhulu"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Izixhobo ezineempazamo/ezilahliweyo eziphezulu kakhulu (Ujongano)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Ukusetyenziswa kwe-Interface okuxakeke kakhulu"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Amazibuko anokusetyenziswa kwendawo yojongano okuphezulu kakhulu"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Nceda vula kwaye uqwalasele iinkcukacha-manani ze-DS"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Cela umlawuli ukuba avule iinkcukacha-manani ze-DS"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Umndilili"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Incopho"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Umndilili wazo zonke ii-DS ezivumelekileyo"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Ilindele idatha okanye awunayo imvume kuso nasiphi na isixhobo esinale templeyiti."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Awunazo iimvume kuzo naziphi na iihosti okanye akukho nayiphi na ihosti enale itempleyiti"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Ixesha Lokusebenza"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Umndilili wazo zonke iihosti ezivumelekileyo"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Ilindele idatha okanye awunayo imvume kuso nasiphi na isixhobo"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Ulwalathiso"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Isithuba sexesha imizuzu emi-5 edlulileyo"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Ukusetyenziswa kwe-CPU ye-Host MIB okuxakeke kakhulu okungama-30 (iyure yokugqibela)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Fakela iplagin ye-TopX ukufumana amanani amaninzi e-DS"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Umthwalo we-ucd/net oxakeke kakhulu ongama-30 (iyure yokugqibela)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Isithuba se-Hard Drive ye-Host MIB esixakeke kakhulu esingama-30 (iyure yokugqibela)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Itrafikhi exakeke kakhulu (ngena+phuma)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Ukusetyenziswa kwe-interface okuxakeke kakhulu"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Iipaneli zeegrafu"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Iiphaneli ezibonelela ngolwazi malunga ne-Cacti kunye neeplagi zayo ngendlela yeGrafu."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Imithombo yeDatha"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Igrafu yeMithombo yeDatha"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Iithempleyithi zeSixhobo"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Igrafu yeeTempleyiti zeSixhobo"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Izixhobo ngoBume"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Igrafu yeZixhobo ngokoBume (iphezulu,iphantsi,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Imithombo yeDatha: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Iitempleyiti zeSixhobo: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Izixhobo: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Phantsi"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Siyachacha"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Uhlobo lweDatha"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Iyonke"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Akukho mithombo yedatha engenatempleyiti ifunyenweyo"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Izixhobo"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Inani leZixhobo"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Konke"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Phezulu"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Igama leTempleyithi"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Izixhobo ziZonke"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Akukho zitempleyiti zesixhobo zifunyenweyo"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Iiphaneli ze-MacTrack"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Iiphaneli ezibonelela ngolwazi malunga neeplagi ze-MacTrack ze-Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Iplagini ye-MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Iinkcukacha-manani ezahlukeneyo zokuqokelela nezesiza ze-MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Iziza ze-MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Iinkcukacha-manani ezahlukeneyo zeSiza se-MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Iplagini ye-MacTrack ayiFakwanga/ayiSebenzi"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Konke: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Iyasebenza: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Iphantsi: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Imposiso: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Ayaziwa: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Icinyiwe: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Imposiso"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Akwaziwa"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Awunayo imvume yeplagin"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Isiza"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "Ii-IP"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Amazibuko"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Amazibuko asebenzayo"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "Ii-MAC"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Iimpazamo zeSixhobo"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Akukho ziza ze-mactrack zifunyenweyo"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Iipaneli eziZahlukeneyo"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Iiphaneli ezinika idatha jikelele engahlelwanga ngokweendidi malunga ne-Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Ubume be-NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Ukujonga iwotshi yenkqubo yakho ye-Cacti ngokutenxa kwisiseko esaziwayo kunye nokuhlolwa kokusombulula kwe-DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Iinkcukacha zePlagin ye-Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Iinkcukacha zePlagin ye-Maint kwiishedyuli ezizayo"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Iinkcukacha ze-Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Iinkcukacha zoHlolo lweNkonzo ye-URL yeplagini ye-webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Iinkcukacha zeplagini ye-Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Iinkcukacha zePlagini ye-ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Akukho seva ye-NTP eqwalaselweyo"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Iseva ye-NTP engalunganga eqwalaselweyo - %s<br/>Nceda uyilungise kwiisetingi"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Kusilele ukufumana ixesha le-NTP kwi-%s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Nceda jonga ixesha njengoko liphume ngaphezulu"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "kunemizuzwana eyi-%s ukusuka kwiserver ye-NTP engu-%s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Ixesha lendawo lilingana neseva ye-NTP"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Ayikwazi ukunxibelelana neseva ye-NTP ebonisiweyo."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Nceda jonga uqwalaselo lwakho."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Akukho gama lehosti le-DNS liqwalaselweyo"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Igama lehosti ye-DNS engalunganga eliqwalaselweyo - %s<br/>Nceda ulilungise kwiisetingi"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Ukusombulula igama lehosti ye-DNS (%s) kulungile."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Ixesha lokusonjululwa kwe-DNS: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Ukusombulula igama lehosti ye-DNS (%s) akuphumelelanga."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Iplagin ye-Maint ayifakwanga/ayivulwanga"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Iplagini ye-Webseer ayifakwanga okanye ayiqaliswanga"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "I-plugin ye-Webseer ayisaxhaswa, sebenzisa i-plugin ye-servcheck endaweni yayo"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Inani lokujonga (zonke/ezicinyiwe): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Ubume (phezulu/phantsi): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Imiyalezo yokugqibela yelogu"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "Ikhowudi ye-HTTP"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "I-Plugin ye-Webseer - Iinkcukacha"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Iplagini ye-Servcheck ayifakwanga okanye ayiqaliswanga"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Ubume (kulungile/impazamo): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Iirekhodi zokugqibela zelogu"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Vavanya"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Uhlobo"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Iplagini ye-Servcheck - Iinkcukacha"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Isiphumo sophando"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Amaphaneli e-Poller"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Iiphaneli ezibonelela ngolwazi malunga nenkqubo ye-Poller ye-Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Ulwazi loMhloli"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Ulwazi olwahlukeneyo malunga ne-Poller yakho ye-Cacti."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Iinkcukacha-manani ze-Poller"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Iinkcukacha-manani ezahlukeneyo ze-Poller ye-Cacti."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Izinto zeSiphumo se-Poller"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Igama"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Ixesha liLonke"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Entsha/Engasebenziyo"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Iyasebenza"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Iphumle"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Ayaziwa/iphantsi"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "%s Iisekh."
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(kulungile)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(zonke)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "I-ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Imizuzwana"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "I-ID yomyinge we-24h: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Iinkcukacha ze-Poller"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Ixesha eliPhakathi"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Elona Xesha liPhezulu"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Izinto zesiphumo se-Poller "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Izinto"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Iipaneli ze-Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Iiphaneli ezibonelela ngolwazi malunga nokusetyenzwa kwemiyalezo ye-Syslog ye-Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Iinkcukacha ze-Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Iinkcukacha-manani ezahlukeneyo zeplagini ye-Syslog."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Izixhobo eziPhezulu ze-Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Izixhobo ezinemiyalezo emininzi kakhulu"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Amanqanaba oMyalezo we-Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Imiyalezo ngokwenqanaba."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Okungenayo"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Igciniwe"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Imiyalezo"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "I-plugin ye-Syslog ayifakwanga/ayisebenzi"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Isixhobo"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "I-plugin ye-Syslog ayivulwanga"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Iihosti ezingama-20 eziPhezulu ezinemiyalezo emininzi kakhulu"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Akukho miyalezo"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Iipaneli zeNkqubo"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Iiphaneli ezibonelela ngolwazi malunga nokusebenza kwesixokelelwano se-Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Ulwazi"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Ulwazi olwahlukeneyo lwesixokelelwano malunga nesixokelelwano se-Cacti ngokwaso."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Izilumkiso zoLawulo"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Iphaneli eyongezelelweyo yesaziso somlawuli kubo bonke abasebenzisi"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Amanani e-Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Ulwazi malunga nenkqubo yokunyusa ukusebenza kwe-Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Imbali ye-Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Ulwazi malunga nembali yenkqubo yokunyusa ukusebenza."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Iimeko ezigqithisileyo zeeyure ezingama-24"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Itheyibhile enee-awara ezingama-24 zeZiphumo eziGqithisileyo zoVavanyo (eyona ntsebenzo ye-Poller inde, iihosti eziphantsi)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Ukusetyenziswa kwe-CPU"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Igrafu yokusetyenziswa kwe-CPU (kwi-Linux kuphela)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Umthwalo we-CPU: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Lo msebenzi awuphunyezwanga kumaqonga e-Windows"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Umndilili we-CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "Ubuninzi be-CPU"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Umyinge we-24h"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Uguqulelo lwe-Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Uhlobo lwe-Poller:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Uguqulelo lwe-Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Usebenzisa inguqulelo engachanekanga ye-spine!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Uhlobo lwe-Poller: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Iqhubeka kwi: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Imbali ye-Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Imem "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Iirekhodi ezisalindileyo "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Isilumkiso sokuGqithisa iXesha"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Iphelelwe liXesha"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Ezinye"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Ayizange isebenze"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Ubume be-Boost ngu: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Iinkqubo/Isantya sokuphindaphinda: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Umda WeeRekhodi Ezisalindileyo: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Ixesha eliqikelelweyo loKuqalisa okuLandelayo: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Iirekhodi Ezisalindileyo/Ezigciniweyo: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Ubungakanani beTheyibhile(iiTheyibhile) ze-Boost zaNgoku: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Umndilili weeBayithi/Ingxelo: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Ubude bexesha loqhutywo lokugqibela/uhlaziyo: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Ukusebenza kwe-Poller"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Iihosti Eziphantsi"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Ivuselelwe"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Iznt. zesiph. ze-Poller"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Iimpazamo zehosti"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Uhlolo olugqithisileyo lweeyure ezingama-48"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "I-Poller esebenza ixesha elide"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Ubuninzi beSixhobo esiPhantsi"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Ubuninzi be-Thold eQalisiweyo"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Into yeSiphumo se-Poller"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Ii-Poll ezisileleyo"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Iiphaneli zeMida"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Iiphaneli ezibonelela ngolwazi malunga nePlagi yoMda ye-Cacti."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Iziganeko zeMida zokugqibela"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Iziganeko zaMva nje ze-Plugin yoMda"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Umda"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Igrafu ye-Plugin yoMda (zonke, ezivusiweyo, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Iplagini ye-Thold ayifakwanga okanye ayiqaliswanga"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Akukho ziganeko okwangoku"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Imida: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "I-plugin ye-Thold ayifakwanga/ayisebenzi"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Yaphuliwe"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Iinkcukacha zoMda"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Imida"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Yaphuliwe: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Ivuselelwe: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Awunayo imvume kwiMida"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Inkcazo"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Iiphaneli ezi-5 eziPhezulu/eziZantsi"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Iiphaneli ezibonelela ngolwazi lweentsingiselo malunga nokuqokelelwa kwedatha ye-Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "I-Ping ePhantsi"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Izixhobo ezinempendulo ye-ping embi kakhulu"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Ukufumaneka okuPhantsi"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Izixhobo ezinenkqubo yokufumaneka/yokufikeleleka embi kakhulu"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Ixesha eliPhantsi lokuVota"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Izixhobo ezinexesha le-polling elibi kakhulu"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Umlinganiselo oPhantsi wokuVota"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Izixhobo ezinomlinganiselo we-polling ombi kakhulu"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Eyangoku"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Igama Lomamkeli"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Ukufumaneka/Ukufikeleleka"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "IXesha loHlolo"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Umlinganiselo"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Iihosti ezingama-20 eziPhezulu ezinePing eBi kakhulu"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Iihosti ezingama-20 eziPhezulu ezinokuFumaneka okuBi kakhulu"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Ukufumaneka"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Iihosti ezingama-20 eziPhezulu ezineXesha lokuPola eliBi kakhulu"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Iihosti ezingama-20 eziPhezulu ezinomLinganiselo wokuPola oBi kakhulu"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Umbonisi we-Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Ulawulo lwe-Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Ulawulo"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Ithala leePhaneli"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Ulawulo lweSixokelelwano"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Isithuba seXesha kwiYure e-1 edlulileyo"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Isithuba seXesha kwiiyure ezi-%d ezidlulileyo"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Isithuba seXesha kuSuku olu-1 oludlulileyo"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Isithuba seXesha kwiiNtsuku ezi-2 ezidlulileyo"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Imizuzwana eyi-%d"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d Iiyure"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "Usuku olu-%d"
+
+#: setup.php
+msgid "Actions"
+msgstr "Izenzo"
+

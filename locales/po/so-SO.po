@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Somali\n"
+"Language: so-SO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - Ogolaanshaha Waa La Diiday"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "Hal ama in ka badan oo ka mid ah guddiyada ayaa laga saaray oggolaansho aan ku filnayn awgeed. La xiriir maamulaha."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Waxaad joojin kartaa safafka kore gudaha <b>Habee > Dejinta > Guud > Qari Sabuuradda Cacti</b> waxaadna bogga oo dhan u adeegsan kartaa Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Asal ah"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Qari ama muuji ogeysiisyada labajibaarane ee cas/jaalle/cagaar"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Jooji dhaqaajinta gudiga/hawlgeli nuqul-ka-samaynta qoraalka gudiga"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Tallaabooyin ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Ku dar Looxa Xogta Cusub"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Ka saar sabuuradda hadda jirta"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Tirada sadarrada - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Cusboonaysii Hadda"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Dib-u-cusboonaysiinta Waa La Joojiyay"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Cusbooneysii iyadoo la raacayo Xog-uruuriye"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Dib u cusboonaysii 1 Daqiiqo Kasta"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Cusbooneysii 5 Daqiiqo Kasta"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Cusbooneysii Saacad Kasta"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Muddada muhiimka ah - la joojiyay"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Muddada muhiimka ah - 15 daqiiqo"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Muddada muhiimka ah - 1 saac"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Muddada muhiimka ah - 4 saacadood"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Muddada muhiimka ah - 1 maalin"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "U kala sooc Darnaanta"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "U kala sooc Dookha Isticmaalaha"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Dib u soo rar Qeexitaannada Guddiga"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "U deji Intropage sidii Bogga Gelitaanka ee Caadiga ah"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "U deji Garaafka sidii Bogga Gelitaanka ee Caadiga ah"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Muuji Intropage gudaha Koonsoolka"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Muuji Intropage gudaha Tab-ka iyadoo ah Bogga Caadiga ah"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Guddiyo yar oo hal xariiq ah"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Guddiyo badan oo hal sadar ku jira"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Jooji wadaagista"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "La wadaag dashboard-kan"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Lama ogola in la wadaago dashboard madhan"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Isticmaal guddi-hawleed la wadaago"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Lama isticmaali karo guddi-hawleedka la wadaago - xadka guddi-hawleedka waa la gaaray."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Ma jiraan sabuurado xogeed oo la wadaago"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Ku soo dhawoow Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Waxaad ku dari kartaa Guddiyada Dashboard siyaabo badan:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Ka dooro qaybaha diyaarsan \"Liiska Qaybaha\". Qaybta waxay noqon kartaa mid cawl ah. Taasi waxay sabab u tahay oggolaanshaha, weydii maamulaha"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Ku dar Garaafka Cacti kasta, isticmaal astaanta"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Waxaad samayn kartaa baanallo kuu gaar ah. Macluumaad dheeraad ah waxaa laga helayaa faylka <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Waxaad la wadaagi kartaa sabuuradaha isticmaalayaasha kale:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "isticmaal doorashada \"La wadaag sabuuraddan\" ee liiska Ficilada - Isticmaale kasta wuxuu u isticmaali karaa qaab-dhismeed ahaan."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Waxaad adeegsan kartaa sabuuradda la wadaago adiga oo adeegsanaya liiska Falalka:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Isticmaal \"Isticmaal guddi-hawleed wadaag ah (magaca isticmaalaha/guddi-hawleedka) - Waxay diyaarisaa isla guddi-hawleedka la wadaago balse leh oggolaanshahaaga."
+
+#: display.php
+msgid "Customization:"
+msgstr "Habaynta gaarka ah:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Waxaad samayn kartaa ilaa 9 sabuuradood. Sabuurad kasta waa la magacaabi karaa, waxayna adeegsan kartaa astaan"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Intopage waxaa lagu soo bandhigi karaa konsoolka ama tab gaar ah. Waxaad ka beddeli kartaa liiska Ficilka"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Haddii aad rabto inaad ka koobiyayso qoraal guddiga, waa inaad joojisaa shaqada jiidista iyo dhigista, isticmaal astaanta"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Faahfaahinta Guddiga"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Jooji dhaqaajinta gudiga/Hawlgeli nuqul-ka-samaynta qoraalka gudiga"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Hawlgeli dhaqaajinta guddiga/Jooji koobiyeynta qoraalka guddiga"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Qari ogeysiisyada labajibaarane ee cas/jaalle/cagaar"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Muuji ogeysiisyada afar-geeska cas/jaalle/cagaar"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Khalad baa ka dhacay akhrinta xogta cusub"
+
+#: display.php
+msgid "Close"
+msgstr "Xir"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Guddiga Xogta waa laga saaray"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Sabuurad Cusub"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Guddiga Xogta waa lagu daray"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Laguma dari karo Garaafka la soo dhoweeyay ama leh muddo-waqti gaar ah, waxaa muddo-waqtiga loo beddelayaa Nuskii saac ee u dambeeyay"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Maktabadda Guddiyada Intropage Waa La Cusboonaysiiyay iyadoo laga soo qaatay Maktabadda Guddiyada"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Guddiga Xogta waa lagu daray, fadlan sug dhowr wareeg oo xog-uruuriye ah si xogta loo helo"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Khalad - isku dayaya in la wadaago guddi xog oo aan la wadaagin"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Dib u soo rar Guddiga"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Jiid si aad u habayso"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Dib u habee guddiga"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Safaf yar"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Safaf dheeraad ah"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Muuji Faahfaahinta"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Jooji gudiga"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Guddiga lama helin"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Guddiigan lama heli karo sababtoo ah plugin-ka uu u baahan yahay waa la joojiyay."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Guddigu wuxuu ku jiraa hawl soo-bandhigid (render function) laakiin ma jiro."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Guddigu ma laha hawl soo-bandhigid (render function)."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Lama Helin"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Xog Lama Helin. Sug hubinta xigta, <br/>ama isticmaal Dib-u-raridda Qasabka ah haddii ay diyaar tahay."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Guddiga Lama Helin"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Shaqada Faahfaahintu ma jirto."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Cusub. %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "%s Ilb"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s Ilbiriqsi"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "%s Daq"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "%s Daqiiqo"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "%s Saacadood"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "%s Saac"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "%s Maalmood"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Xog Ma Taallo. Samee Cusbooneysiin Qasab ah, ama sug wareegga Xog-uruurinta Cacti ee xiga."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Xog Ma Taallo. Guddigan ma oggola Cusbooneysiinta Qasabka ah. Waa inaad sugtaa ilaa Xog-uruuriyaha Cacti uu sameeyo hubinta."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Guddiyada ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (oggolaansho la'aan)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Laguma dari karo Guddi-hawleedka. Muddo-waqti gaar ah."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Ka saar Sabuuradda"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Ku dar Looxa Xogta"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Magacyada Guddiyada Xogta"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Guddiga Xogta %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Inta Jeer ee Cusbooneysiinta Guddiyada Heerka Isticmaalaha"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Joogteynta Cusboonaysiinta Guddiga Nidaamka (Dhammaan Isticmaalayaasha La Oggol Yahay)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Inta Jeer ee Cusboonaysiinta Isbeddelka"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Xudunta"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Isticmaale Caadi ah"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[wax ka beddel: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Guddiyada Heerka Nidaamka"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Guddiyada ku habboon inay galaan maamulayaasha ama isticmaalayaasha awoodda leh oo aan caadiyan khuseyn isticmaalayaasha guud. Guddiyadu guud ahaan waxay ku saabsan yihiin isticmaalka guud ee nidaamka."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Guddiyada Heerka Isticmaalaha"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Guddiyada ku habboon inay galaan isticmaalayaasha guud. Ogolaanshaha waxaa lagu xaddiday waxa uu isticmaalaha hadda jira arki karo."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Waxaad u Oggolaan/Diidi kartaa Guddiyada Isticmaalaha"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Waxaad u Oggolaan/Diidi kartaa Guddiyada Kooxda"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Xaaladda Cas"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Xaaladda Jaalle"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Xaaladda Cagaaran"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Dejinta Muuqaalka"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Waxyaabaha muhiimka ah waxay ahaan doonaan xagga sare"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Haddii la calaamadeeyo Intropage wuxuu marka hore soo bandhigaa xogta muhiimka ah (khaladaadka, digniinaha)"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Muuji qaybo badan hal sadar gudaheed"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Shaashadda ballaaran"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Si toos ah uga saar Qaybaha"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Haddii Guddi (Panel) la rakibay oo plugin-ka loo baahan yahay meesha laga saaro, si toos ah u tirtir guddiga sidoo kale"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Cusboonaysiinta Tooska ah ee Bogga"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Inta jeer"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Si toos ah uu u sameeyo xog-uruuriyaha"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Marna"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Daqiiqad Kasta"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "%d Daqiiqo Kasta"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Saacad Kasta"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Muddada muhiimka ah"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Laga bilaabo hadda ilaa waqtigii hore. Waxay saamaysaa midabeynta safka, dhacdooyinka hore lama iftiimin doono, kaliya waa la soo bandhigi doonaa"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "La joojiyay"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "15 daqiiqo"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "1 saac"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "4 saacadood"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "1 maalin"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Tirada sadarrada baalka"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Immisa xariiq oo ku jira guddiga"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "%d sadarro"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Muddada Isbeddelka"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Jaantusyada Isbeddelka, muxuu noqonayaa muddada waqtiga caadiga ah ee jaantusyadaas."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Waqtiga dhammaadka Xog-uruuriyaha"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Muddada, daqiiqado ahaan, ee xog-uruuriyaha gadaal ee Intropage uu shaqeyn karo ka hor inta uusan Cacti joojin oo uusan dilin."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d Daqiiqo"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d Daqiiqo"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "%d Saac"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Falanqee Diiwaanka - tirada sadarada"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Immisa xariiq oo diiwaan ah ayaa la falanqayn doonaa. Xariiqyada = guddiga dhexdiisa, 2x xariiqyada = faahfaahinta dhexdeeda. Tiro weyn waxay keeni kartaa in boggu tartiib u furmo"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Inta jeer ee la falanqeeyo DB"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Xog-uruuriyaha ayaa qabta hawshan. Waxay sababi kartaa shaqo xog-uruuriye oo dheer."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Maalin Kasta"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Toddobaad Kasta"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Bil kasta"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Falanqee DB - Heerka hubinta db"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Degdeg ah - Ha hubin safafka xiriiriyeyaasha khaldan<br/>Dhakhso ah - hubi kaliya miisaska aan si sax ah loo xirin<br/>La beddelay - hubi miisaska isbeddelay tan iyo hubintii u dambeysay<br/>Dhexdhexaad - oo leh baaritaanka safafka<br/>Ballaaran - safaf iyo furayaal buuxa<br/>Dhexdhexaad iyo ballaaran waxay sababi karaan in boggu si gaabis ah u soo furmo!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Degdeg ah"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Dhakhso"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "La beddelay"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Dhexdhexaad"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "La kordhiyay"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Hubinta Waqtiga NTP - IP-ga ama magaca DNS ee adeegaha NTP"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Geli ciwaanka IP ama magaca DNS ee adeegaha NTP"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Inta jeer ee la hubiyo NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Hubinta DNS - Magac kasta oo DNS ah"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Geli magaca DNS ee tijaabada"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Inta jeer ee la hubiyo DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Guddiga Macluumaadka Maamulaha ee ku saabsan Hawlaha Dayactirka, Aaladaha Dhaadhacay, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Haddii uusan madhnayn, Guddigu wuxuu ka muuqan doonaa xagga sare. Waxaad isticmaali kartaa summadaha HTML (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Maalmaha digniinta ee Jadwalka Dayactirka soo socda"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Immisa maalmood ka hor jadwalka dayactirka ee qorshaysan ayay tahay in digniin la soo bandhigo?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Weligaa ha digin"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Marka dayactirku bilaabmo"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "%d Maalin Ka Hor"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "%d Maalmood Ka Hor"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Tirakoobka shabakadda gudaha"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "baytyo ama bityo"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Baytyada"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Bit-yada"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Dejinta Qaylo-dhaanta"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Qaylo-dhaanta Hubinta DB ee Macaamiisha la Joojiyay"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Haddii dhacdadani dhacdo, kici midabka Xaaladda la doortay ee Caadi ah, Digniin, ama Qaylo-dhaan."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Qaylo-dhaanta Martigeliye leh isku Sharaxaad"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Qaylo-dhaanta Isha Xogta ee Go'doonsan"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Qaylo-dhaanta Wax-soo-saarka Xog-uruuriye ee aan madhnayn"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Qaylo-dhaanta Tusmooyinka Xun ee Isha Xogta"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Tallaabada diiwaangelinta oo keliya ee Xadka Qaylo-dhaanta"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Qaylo-dhaan marka bulk_walk_size ee qalabka aan la hagaajin"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Qaylo-dhaanta Aaladaha leh isku IP/port"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Qaylo-dhaanta Qalab ku jira wax ka badan hal Geed"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Qaylo-dhaanta Qalab aan Geed lahayn"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Qaylo-dhaanta Qalab leh Bulshada SNMP ee caadiga ah (public/private)"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Qaylo-dhaanta Qalab aan la socod lahayn"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Qaylo-dhaanta Qalab aan lahayn Garaafka"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Qaylo-dhaanta Casaanka/Jaallaha Waqtiga Xog-uruurinta"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Waqtiyada xog-uruurinta ee ka sarreeya xadkan waxay kicin doonaan midabka xaaladda Digniin ama Ogeysiis."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Jaalle / Cas"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Jaalle / Cas"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Jaalle / Cas"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Qaylo-dhaanta Casaanka/Jaallaha Saamiga Fashilmay/Dhammaan"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Saamiga hubinta helitaanka ee fashilantay marka loo eego hubinta guulaysatay si uu u kiciyo midabka xaaladda Digniin ama Ogeysiis Sare."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Jaalle / Cas"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Jaalle / Cas"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Jaalle / Cas"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Qaylo-dhaanta Casaanka/Jaallaha Ping"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Daahitaanka Ping ee ka sarreeya heerarkan wuxuu kicin doonaa midabka Xaaladda Digniin ama Qaylo-dhaan."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Jaalle / Cas"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Jaalle / Cas"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Jaalle / Cas"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Qaylo-dhaanta Casaanka/Jaallaha Helitaanka Ugu Xun"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Helitaanka ka hooseeya heerarkan wuxuu kicin doonaa midabka xaaladda ee Jaalle ama Casaan."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Jaalle / Cas"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Hawl-geli"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Hawl-jooji"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Guddiyada"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Guji 'Sii wad' si aad u Hawlgeliso Looxa soo socda."
+msgstr[1] "Guji 'Sii wad' si aad u Hawlgeliso Looxyada soo socda."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Hawlgeli Gudiga"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Guji 'Sii wad' si aad u Joojiso Looxa soo socda. Looxyada la joojiyay waxaa laga qariyaa sabuuradaha xogta waxaana ka booda xog-uruuriyuhu, laakiin xogtooda waa la hayaa."
+msgstr[1] "Guji 'Sii wad' si aad u Joojiso Looxyada soo socda. Looxyada la joojiyay waxaa laga qariyaa sabuuradaha xogta waxaana ka booda xog-uruuriyuhu, laakiin xogtooda waa la hayaa."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Jooji Gudiga"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Jooji"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Sii wad"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Magaca Guddiga"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Magaca soo-bandhigidda ee guddigan."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Isha"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Ku-xiraha bixiya guddigan. Guddiyada u gaarka ah Intropage waxay u muuqdaan Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Qaybta"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Qaybta guddiga."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Heerka"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Guddiyada nidaamka waxaa wadaaga dhammaan isticmaalayaasha; Guddiyada isticmaaluhu waa mid isticmaale kasta u gaar ah."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Waxay u Baahan Tahay"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Kordhinnada ay tahay in la hawlgeliyo si looxani u soo baxo."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Cusboonaysii"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Mudada u dhaxaysa ururinta xogta guddiga."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Shaqada Cusbooneysiinta"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Shaqada uu Xog-uruuriyuhu waco si uu u ururiyo xogta guddigan."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Xaaladda"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Haddii guddiga la hawlgeliyay."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Nidaamka"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Isticmaale"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "La hawlgeliyay"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Midna"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Guddiyo Lama Helin"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Maktabadda Guddiyada Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Raadi"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Mid kasta"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Soco"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Deji/Cusboonaysii Shaandheeyayaasha"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Nadiifi"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Nadiifi Shaandheeyayaasha"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Feejignaannada"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Guddiyada bixiya digniinaha."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Digniinaha martigeliyaha"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Digniinaha martigeliyaha (kacsan/hoos u dhacay/soo kabanaya) ee dhowaan"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Taariikhda"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Martigeliye"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Gobolka"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Diiwaanno dheeraad ah, isticmaal daaqadda faahfaahinta"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Waxaa la sugayaa xog"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Ma lihid ogolaansho aad ku gasho wax Martigeliyeyaal ah"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Guddiyada Falanqaynta"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Guddiyada falanqeeya hab-dhaqanka hadda jira ee Cacti iyo kordhinnadiisa."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Falanqee Gelitaannada"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Falanqee gelitaannadii u dambeeyay ee Cacti si loo eego isbeddellada iyo khaladaadka."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Falanqee Diiwaannada"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Ka raadi faylka diiwaanka Cacti khaladaadka caanka ah ee walaaca keeni kara."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Hubinta Kaydka Xogta"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Falanqee xogta kaydka MySQL/MariaDB si loo helo khaladaadka caadiga ah.  Ogow in habkani qaadan karo waqti dheer nidaamyada aadka u waaweyn."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Falanqee Walxaha Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Falanqee Geedaha, Jaantusyada, Martigeliyeyaasha, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Falanqee tirakoobyada DS"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Falanqee tirakoobyada isha xogta"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Magaca isticmaalaha"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "Ciwaanka IP"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Fashilmay"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Guul - Galitaan"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Guul - Token"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Wadarta Gelitaannada Fashilmay: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Isticmaalayaasha Firfircoon Saacaddii Ugu Dambeysay: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Faylka diiwaanka lama geli karo ama wuu madhan yahay"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Falanqee %s sadarada diiwaanka ee u dambeeyay:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Khaladaadka: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Digniino: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Cabbirka Diiwaanka: Ka weyn 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Cabbirka Diiwaanka: Waa caadi"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Cabbirka Diiwaanka: Aad u weyn"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Cabbirka Diiwaanka: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Xariiqyadii diiwaanka ee u dambeeyay:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Waa laga boodayaa hubinta miisaska DB. Kaydka xogtu aad buu u weyn yahay"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Jadwalka %s xaaladda %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Dhibaatooyin"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: Waa hagaag"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Xiriirka ugu badan waa la gaaray: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Waxaad kordhin kartaa xiriirka ugu badan adiga oo adeegsanaya qalabka khadka taliska ama si joogto ah faylka qaabeynta"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Khaladaadka xidhiidhka: %s - isku day inaad dib u bilowdo adeegga SQL, hubi diiwaanka SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Macaamiisha/isku-xirnaanta la joojiyay: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Macaamiisha/isku-xirnaanta la joojiyay - Ka socodsii 'SET GLOBAL log_warnings = 1;' ama ' log_error_verbosity = 1;' (waxay ku xiran tahay noocaaga MySQL/MariaDB) mysql CLI-ga oo ku deji server.cnf si aad u aamusiiso."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Khaladaadka xidhiidhka: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Shaxaha waxyeelloobay: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Waa inaad fulisaa amarada hubinta iyo hagaajinta shaxda"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Shaxda xusuusta: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Dhammaan jadwalada: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Ma khuseyso"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Aaladaha leh isku IP iyo deked: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Aaladaha aan la hagaajin cabbirka Bulk Walk: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Fadlan eeg cabbirka Qalabka \"Bulk Walk Maximum Repetitions\". Waxaad wanaajin kartaa waxqabadka Xog-uruuriyahaaga"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Dib-u-tusmayntii ugu dambeysay ee la socodsiiyay"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Orodka ugu dambeeyay ee Hubiyaha RRD"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Orodka ugu dambeeyay ee Nadiifiyaha RRD"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Waxaa lagugula talinayaa inaad qalabkan socodsiiso ugu yaraan mar mar"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: weli lama socodsiin"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Ilaha Xogta ee Go'doonsan: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Isha xogta - tusmooyin xun: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Qaylo-dhaan/digniin diiwaan-keliya ah ee Thold: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Aaladaha leh isku sharaxaad: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Aaladaha ku jira in ka badan hal geed: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Aaladaha aan lahayn jaantusyada: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Aaladaha aan lahayn geed: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Aaladaha leh bulshada caadiga ah ee public/private: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Dhibaatada walxaha garaafka/walxaha qaab-dhismeedka: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Kordhinta Kormeerka - Martigeliyayaasha aan la kormeerin: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "Hagaag"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "CPU-ga Adeegaha (xudunta / hababka / dunta): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Ogeysiinta maamulaha waa la joojiyay iimaylka maamulahana lama dejin"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Waxaa la helay %s dhibaatooyin"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Wax walba waa caadi"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Tirakoobka DS: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Guddigu wuxuu u baahan yahay in tirakoobka DS la hawlgeliyo."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "DS dhammaan diiwaannada "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "DS diiwaannada eberka ah "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Falanqee Faahfaahinta Diiwaanka Cacti [ Digniino/Khaladaad ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Khaladaadka"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Digniinaha"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "DIGNIIN: Faylku wuu ka weyn yahay 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Cabbirka Diiwaanka"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Falanqee Faahfaahinta Gelitaannada"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Natiijada"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Isticmaalayaasha Firfircoon 2-dii Saac ee Ugu Dambeysay:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Ma Jiraan Isticmaalayaal Firfircoon"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Eeg Diiwaanka Buuxa ee Isticmaalaha"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Falanqee Geedka, Jaantusyada, Martigeliyeyaasha"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Aaladaha leh isku IP iyo deked - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Aaladaha aan la hagaajin cabbirka Bulk Walk - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Dayactirka xogta"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Ilaha Xogta ee Go'doonsan - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Ilaha xogta ee leh tusmooyin xun - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Qaylo-dhaan/digniin diiwaan-keliya ah ee Thold - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Aaladaha leh isku sharaxaad - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Aaladaha ku jira in ka badan hal geed - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Aaladaha aan lahayn Jaantusyada - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Aaladaha aan lahayn geed - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Aaladaha leh bulshada caadiga ah ee public/private - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Dhibaatada walxaha garaafka/walxaha qaab-dhismeedka - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Qaab-dhismeedka garaafka"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Jaantusyada"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Walxaha garaafka"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Walxaha qaab-dhismeedka"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Kordhinta Kormeerka - Martigeliyayaasha aan la kormeerin - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "Xudunta / hababka / dunta CPU-ga Adeegaha: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Ogeysiinta maamulaha waa la joojiyay ama iimaylka maamulaha lama dejin"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Ugu mashquulka badan"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Guddiyada hela martigeliyayaasha ugu mashquulka badan."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "CPU-ga ugu mashquulka badan"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Aaladaha leh CPU-ga ugu mashquulka badan (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "ucd/net ugu mashquulka badan - Culayska"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Aaladaha leh culayska ugu sarreeya (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Booska Hard Drive-ka ugu mashquulka badan"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Aaladaha leh booska Hard Drive-ka ugu badan ee la isticmaalay (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Waqtiga shaqada (uptime) ee ugu mashquulka badan"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Aaladaha leh waqtiga shaqada ugu dheer"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Taraafikada soo galaysa/baxaysa ee Interface-ka ugu mashquulka badan"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Aaladaha leh taraafikada soo gasha/baxda ugu badan (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Khaladka Interface-ka ugu mashquulka badan"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Aaladaha leh khaladaadka/tuurista ugu badan (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Isticmaalka Interface-ka ugu mashquulka badan"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Dekedaha leh isticmaalka isku-xirka ugu sarreeya"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Fadlan hawlgeli oo habeey tirakoobka DS"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Waydiiso maamulaha inuu hawlgeliyo tirakoobyada DS"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Celcelis"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Ugu Sarreeya"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Celceliska dhammaan DS-yada la oggol yahay"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Waxaa la sugayaa xog ama uma lihid oggolaansho wax qalab ah oo leh qaab-dhismeedkan."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Ma lihid ogolaansho aad ku gasho wax Martigeliyeyaal ah ama ma jiro wax Martigeliye ah oo leh Qaab-dhismeedkan"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Waqtiga Shaqeynta"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Celceliska dhammaan martigeliyayaasha la oggol yahay"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Waxaa la sugayaa xog ama uma lihid oggolaansho wax qalab ah"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Jihada"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Muddada waqtiga 5-tii daqiiqo ee u dambeysay"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "30-ka Martigeliye ee MIB CPU isticmaalka ugu mashquulka badan (saacaddii u dambeysay)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Ku rakib qalabka dheeriga ah ee TopX si aad u hesho tirokoobyo DS oo dheeraad ah"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "30-ka ucd/net ee culayska ugu mashquulka badan (saacaddii u dambeysay)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "30-ka Martigeliye ee MIB booska Hard Drive-ka ugu mashquulka badan (saacaddii u dambeysay)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Taraafikada ugu mashquulka badan (soo gelid+bixid)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Isticmaalka interface-ka ugu mashquulka badan"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Guddiyada Garaafyada"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Guddiyada bixiya macluumaadka ku saabsan Cacti iyo kordhinnadiisa si muuqaal jaantus ah."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Ilaha Xogta"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Garaafka Ilaha Xogta"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Qaababka Aaladaha"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Garaafka Qaab-dhismeedyada Qalabka"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Aaladaha Xaaladda ku saleysan"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Garaafka Aaladaha ku salaysan Xaaladda (up,down,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Ilaha xogta: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Qaab-dhismeedyada Qalabka: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Aaladaha: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Ma shaqeynayo"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Soo Kabanaysa"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Nooca Xogta"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Wadarta"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Ma jiraan ilaha xogta aan lahayn qaab-dhismeed oo la helay"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Aaladaha"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Tirada Qalabka"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Dhammaan"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Shaqeynaya"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Magaca Shaxanka"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Wadarta Aaladaha"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Wax qaab-dhismeedyada qalabka ah lama helin"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Guddiyada MacTrack"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Guddiyada bixiya macluumaadka ku saabsan kordhinnada MacTrack ee Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Ku-xiraha MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Tirokoobyada kala duwan ee ururinta iyo goobta MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Goobaha MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Tirokoobyada kala duwan ee Goobta MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Ku-xiraha MacTrack Lama Rakibin/Ma Shaqeynayo"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Dhammaan: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Shaqeynaya: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Maqan: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Khalad: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Aan la aqoon: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "La joojiyay: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Cilad"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Aan la aqoon"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Ma lihid ogolaanshaha ku-xiraha"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Goob"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "IP-yada"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Dekedaha"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Dekedaha shaqaynaya"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "MAC-yada"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Khaladaadka Qalabka"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Wax goobo mactrack ah lama helin"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Guddiyo Kala Duwan"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Guddiyada xogta guud ee aan la kala saarin ee ku saabsan Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Xaaladda NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Hubinta saacadda nidaamka Cacti ee leexashada ka timid aasaas la yaqaan iyo hubinta xallinta DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Faahfaahinta Plugin-ka Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Faahfaahinta Plugin-ka Maint ee jadwallada soo socda"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Faahfaahinta Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Faahfaahinta Hubinta Adeegga URL ee Kordhinta webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Faahfaahinta kordhinta Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Faahfaahinta Kordhinta ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Ma jiro server NTP oo la habeeyay"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Adeegaha NTP oo khaldan ayaa la habeeyay - %s<br/>Fadlan ku hagaaji dejinta"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Waa lagu guuldareystay in waqtiga NTP laga helo %s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Fadlan hubi waqtiga maadaama uu ka fog yahay in ka badan"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "ka badan %s ilbiriqsi server-ka NTP %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Waqtiga maxalliga ah wuxuu la mid yahay adeegaha NTP"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Lama la xiriiri karo adeegaha NTP ee la tilmaamay."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Fadlan hubi qaabeyntaada."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Ma jiro magaca martigeliyaha DNS oo la habeeyay"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Magac martigeliye DNS oo khaldan ayaa la habeeyay - %s<br/>Fadlan ku hagaaji dejinta"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Xallinta magaca martigeliyaha DNS (%s) way guulaysatay."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Waqtiga xallinta DNS: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Xallinta magaca martigeliyaha DNS (%s) way fashilantay."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Plugin-ka Maint lama rakibin/lama hawlgelin"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Kordhinta Webseer lama rakibin ama lama bilaabin"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Kordhinta Webseer hadda lama taageero, beddelkeeda isticmaal kordhinta servcheck"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Tirada hubinta (dhammaan/la joojiyay): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Xaaladda (kacsan/hoos u dhacsan): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Fariimihii diiwaanka ee u dambeeyay"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "Koodhka HTTP"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Kordhinta Webseer - Faahfaahinta"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Kordhinta Servcheck lama rakibin ama lama bilaabin"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Xaaladda (ok/khalad): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Diiwaannadii u dambeeyay"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Tijaabi"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Nooca"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Kordhinta Servcheck - Faahfaahin"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Natiijada raadinta"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Looxyada Xog-uruuriyaha"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Guddiyada bixiya macluumaadka ku saabsan habka xog-uruurinta ee Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Macluumaadka Xog-ururiyaha"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Macluumaadyo kala duwan oo ku saabsan Xog-uruuriyahaaga Cacti."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Tirakoobka Xog-uruuriyaha"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Tirokoobyada kala duwan ee Xog-uruuriyaha Cacti."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Shayyada Soo-saarka Xog-uruuriyaha"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "Aqoonsiga"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Magac"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Wadarta Waqtiga"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Cusub/Aan shaqaynayn"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Socda"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Heegan"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Aan la aqoon/hoos"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "%s Ilb"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(waa yahay)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(dhammaan)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "Aqoonsiga: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Ilbiriqsiyo"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "Aqoonsiga celceliska 24s: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Faahfaahinta Xog-uruuriyaha"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Celceliska Waqtiga"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Waqtiga Ugu Badan"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Shayyada soo-saarka Xog-uruuriyaha "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Walxaha"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Guddiyada Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Guddiyada bixiya macluumaadka ku saabsan habaynta fariimaha Syslog ee Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Faahfaahinta Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Tirokoobyada kala duwan ee Ku-xidhka Syslog."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Aaladaha Ugu Sarreeya Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Aaladaha leh farriimaha ugu badan"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Heerarka Farriimaha Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Farriimaha sida heerarka."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Soo galaya"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "La kaydiyay"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Farriimaha"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Kordhinta Syslog lama rakibin/ma shaqaynayso"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Qalab"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Kordhinta Syslog lama hawlgelin"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "20-ka Martigeliye ee leh fariimaha ugu badan"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Wax farriimo ah ma jiraan"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Guddiyada Nidaamka"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Guddiyada bixiya macluumaadka ku saabsan waxqabadka nidaamka Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Macluumaad"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Macluumaadyo kala duwan oo nidaamka ah oo ku saabsan nidaamka Cacti laftiisa."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Ogeysiisyada Maamulka"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Guddi ogeysiis maamul oo dheeraad ah dhammaan isticmaalayaasha"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Tirakoobka Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Macluumaad ku saabsan habka kor-u-qaadista waxqabadka ee Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Taariikhda Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Macluumaad ku saabsan taariikhda habka kor-u-qaadista."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Heerarka Ugu Darnaa ee 24 Saac"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Jadwal leh 24 saacadood oo Xad-dhaafka Xog-ururinta ah (orodka xog-ururiyaha ugu dheer, martigeliyeyaasha dansan)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Isticmaalka CPU"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Garaafka isticmaalka CPU (Linux oo keliya)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Culayska CPU: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Shaqadan laguma hirgelin nidaamyada Windows"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Celceliska CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "CPU-ga Ugu Badan"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Celceliska 24s"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Nooca Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Nooca Xog-uruuriyaha:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Nooca Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Waxaad isticmaalaysaa nooc khaldan oo spine ah!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Nooca Xog-uruuriyaha: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Wuxuu ku shaqaynayaa: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Taariikhda Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Xusuus "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Diiwaannada sugaya "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Digniinta Xad-dhaafka"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Waqtigii Waa Ka Dhammaaday"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Kale"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Weligii Ma Shaqayn"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Xaaladda Boost waa: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Hababka/Joogtaynta: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Xadka Diiwaannada Sugaya: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Waqtiga Bilowga Xiga ee Qiyaasta ah: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Diiwaannada Sugaya/Kaydsan: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Cabbirka Miiska/Miisaska Boost ee Hadda: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Celceliska Bayt/Diiwaan: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Muddada socodkii u dambeeyay/cusboonaysiinta: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Shaqada Xog-uruuriyaha"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Martigeliyayaasha Maqan"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "La kiciyay"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Shay. soo-saarka Xog-uruuriyaha"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Khaladaadka martigeliyaha"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Xog-uruurinta Heerarka Ugu Darnaa ee 48 Saac"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Xog-uruuriye Muddo Dheer Shaqeynaya"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Qalabka Ugu Badan ee Dansan"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Xadka Ugu Badan ee Kicay"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Shayga Soo-saarka Xog-uruuriyaha"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Xog-uruurinta Fashilantay"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Guddiyada Xadka"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Guddiyada bixiya macluumaadka ku saabsan Kordhinta Xadka ee Cacti."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Dhacdooyinkii Xadka ee Ugu Dambeeyay"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Dhacdooyinkii Ugu Dambeeyay ee Plugin-ka Xadka"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Xadka"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Garaafka Plugin-ka Xadka (dhammaan, kiciyay, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Kordhinta Thold lama rakibin ama lama bilaabin"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Aan lahayn dhacdooyin weli"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Xadadka: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Plugin-ka Thold lama rakibin/ma shaqeynayo"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "La jebiyay"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Faahfaahinta Xadka"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Xadadka"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "La jebiyay: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "La kiciyay: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Ma lihid ogolaansho ku aaddan Xadadka"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Sharaxaadda"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "5-ta Guddi ee Sare/Hoose"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Guddiyada bixiya macluumaadka isbeddelka ee ku saabsan ururinta xogta Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Ping-ga Ugu Hooseeya"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Aaladaha leh jawaabta ping-ka ugu liidata"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Helitaanka Ugu Hooseeya"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Aaladaha leh helitaanka/gaadhista ugu liidata"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Waqtiga Xog-uruurinta Ugu Hooseeya"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Aaladaha leh waqtiga xog-uruurinta ugu liita"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Saamiga Xog-uruurinta Ugu Hooseeya"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Aaladaha leh saamiga xog-uruurinta ugu liita"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Hadda"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Magaca Martigeliyaha"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Helitaanka/Gaaritaanka"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Waqtiga Xog-baarista"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Saamiga"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "20-ka Martigeliye ee Leh Ping-ga Ugu Xun"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "20-ka Martigeliye ee Leh Helitaanka Ugu Xun"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Helitaanka"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "20-ka Martigeliye ee Ugu Xun Waqtiga Xog-uruurinta"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "20-ka Martigeliye ee Leh Saamiga Xog-uruurinta Ugu Xun"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Daawadaha Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Maamulka Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Maamul"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Maktabadda Guddiga"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Maamulka Nidaamka"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Muddada 1 Saac ee U Dambeysay"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Muddada %d Saacadood ee U Dambeysay"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Muddada 1 Maalin ee U Dambeysay"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Muddada 2 Maalmood ee U Dambeysay"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d Ilbiriqsi"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d Saacadood"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d Maalin"
+
+#: setup.php
+msgid "Actions"
+msgstr "Ficillada"
+

@@ -1,0 +1,2583 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Igbo\n"
+"Language: ig-NG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - A jụrụ Ikike"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "E wepụrụ otu ma ọ bụ karịa ogwe n'ihi ikike ezughị oke. Kpọtụrụ onye nchịkwa."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Ị nwere ike gbanyụọ ahịrị ndị dị n'elu na <b>Hazie > Ntọala > Izugbe > Zoo Dashboard Cacti</b> ma jiri ibe ahụ niile maka Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Nke Ndabere"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Zoo ma ọ bụ gosipụta ọkwa akụkụ anọ uhie/edo-edo/akwụkwọ ndụ"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Gbanyụọ mmegharị ogwe/gbanye ndepụta ederede site na ogwe"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Omume ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Tinye Dashboard Ọhụrụ"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Wepụ dashboard dị ugbu a"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Ọnụọgụ ahịrị - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Megharịa Ugbu a"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Gbanyụrụ Mmeghari"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Mee Ka Ọ Dị Ọhụrụ site na Poller"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Megharia Nkeji 1 Ọ Bụla"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Mee Ka Ọ Dị Ọhụrụ Kwa Nkeji 5"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Mee Ka Ọ Dị Ọhụrụ Kwa Elekere"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Oge dị mkpa - gbanyụrụ"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Oge dị mkpa - nkeji 15"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Oge dị mkpa - 1 elekere"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Oge dị mkpa - elekere 4"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Oge dị mkpa - 1 ụbọchị"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Hazie dịka Ịdị njọ siri dị"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Hazie dịka Mmasị Onye ọrụ siri dị"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Bugharịa Nkọwa Ogwe Ọzọ"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Tọọ Intropage ka ọ bụrụ Ibe Nbanye Ndabere"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Tọọ eserese ka ọ bụrụ Ibe Nbanye Ndabere"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Gosi Intropage na Console"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Gosi Intropage na Taabụ dị ka Peeji Ndabere"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Ogwe dị nta n'otu ahịrị"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Ogwe ndị ọzọ n'otu ahịrị"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Kagbuo nkesa"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Kekọrịta dashboard a"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Anaghị ekwe ka ekekọrịta dashboard tọgbọrọ chakoo"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Jiri dashboard ekerịta"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Enweghị ike iji dashboard ekesara - oke dashboard eruola."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Enweghị dashboard ekekọrịtara"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Nnọọ na Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Ị nwere ike Tinye Ogwe Dashboard n'ọtụtụ ụzọ:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Họrọ panel a kwadebere site na \"Nchịkọta Panel\". Panel nwere ike ịdị ntụ ntụ. Ọ bụ n'ihi ikike, jụọ onye nchịkwa"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Tinye Eserese Cacti ọ bụla, jiri akara ngosi"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Ị nwere ike imepụta ogwe nke gị. Ozi ndị ọzọ dị na faịlụ <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Ị nwere ike ịkekọrịta dashboard na ndị ọrụ ndị ọzọ:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "jiri nhọrọ \"Kekọrịta dashboard a\" dị na ndepụta Omume - Onye ọrụ ọ bụla nwere ike iji ya dị ka nlereanya."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Ị nwere ike iji dashboard ekekọrịtara site na menu Omume:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Jiri \"Jiri dashboard ekerịta (aha onye ọrụ/dashboard) -  Ọ na-akwadebe otu dashboard dị ka nke ekerịta mana jiri ikike gị."
+
+#: display.php
+msgid "Customization:"
+msgstr "Nhazi pụrụ iche:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Ị nwere ike imepụta dashboard ruru 9. Enwere ike ịkpọ dashboard ọ bụla aha, jiri akara ngosi"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Enwere ike igosi Intopage na njikwa ma ọ bụ na taabụ dị iche. Ị nwere ike ịgbanwe ya na menu Omume"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Ọ bụrụ na ịchọrọ idetuo ederede site na ogwe, ị ga-agbanyụrịrị ọrụ dọrọ ma dobe, jiri akara ngosi"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Nkọwa Ogwe"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Gbanyụọ mmegharị ogwe/Gbanye ndepụta ederede site na ogwe"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Gbanye mbugharị ogwe/Gbanyụọ iṅomi ederede site na ogwe"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Zoo ọkwa akụkụ anọ uhie/edo-edo/akwụkwọ ndụ"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Gosi ọkwa akụkụ anọ uhie/edo edo/akwụkwọ ndụ akwụkwọ ndụ"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Njehie n'ịgụ data ọhụrụ"
+
+#: display.php
+msgid "Close"
+msgstr "Mechie"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Ewepụla Bọọdụ njikwa"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Bọọdụ Njikwa Ọhụrụ"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Etinyela Bọọdụ njikwa"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Enweghị ike itinye eserese ebugharịrị ma ọ bụ nke nwere oge ahaziri, na-agbanwe oge gaa na Ọkara elekere ikpeazụ"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Emegharịrị Ọba Akwụkwọ Ogwe Intropage site na Ọba Akwụkwọ Ogwe"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Etinyela Bọọdụ njikwa, biko chere okirikiri poller ole na ole maka data"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Mperi - na-anwa ịkesa dashboard nke a na-ekesaghị"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Bugharịa Ogwe Ọzọ"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Dọrọ ka ị hazigharịa"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Hazigharịa usoro ogwe"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Ahịrị ole na ole"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Ahịrị ndị ọzọ"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Gosi Nkọwa"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Gbanyụọ ogwe"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Ahụghị ogwe"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Ogwe a adịghị n'ihi na ngwa mgbakwunye ya dị mkpa gbanyụrụ."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Panel nwere ọrụ ngosi mana ọ dịghị."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Panel enweghị ọrụ ngosi."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Ahụghị Ya"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Ahụghị Data Ọ bụla.  Chere nlele na-esote, <br/>ma ọ bụ jiri Manye Nbugharị ọ bụrụ na ọ dị."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Ahụghị Ogwe"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Ọrụ Nkọwa adịghị."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Mmel. n'ime %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "Sekọnd %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "Sekọnd %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "Nkeji %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "Nkeji %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "Awa %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "Awa %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "Ụbọchị %s"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Enweghị Data Dị Ugbu a.  Manye Mmelite, ma ọ bụ chere okirikiri Polling Cacti na-esote."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Enweghị Data Dị Ugbu a.  Ogwe a anaghị ekwe ka e Manye Mmelite.  Ị ga-echere ruo mgbe Poller nke Cacti ga-eme nlele ahụ."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Ogwe gasị ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (enweghị ikike)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Enweghị ike itinye na Dashboard. Oge ahaziri."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Wepụ na Dashboard"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Tinye na Dashboard"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Aha Bọọdụ njikwa Gasị"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Bọọdụ njikwa %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Ugboro Mmelite Panel Ọkwa Onye Ọrụ"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Ogologo Oge Mmelite Ogwe Sistemụ (Ndị Ọrụ Niile E Nyere Ikike)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Ugboro Mmelite Usoro"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Isi"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Onye Ọrụ Nkịtị"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[dezie: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Ogwe Ọkwa Sistemụ"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Ogwe gasị kwesịrị ekwesị maka ndị nchịkwa ma ọ bụ ndị ọrụ dị elu ịnweta ma adịghị adaba maka ndị ọrụ nkịtị.  Ogwe gasị na-abụkarị maka ojiji sistemụ niile."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Panel Ọkwa Onye Ọrụ"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Ogwe gasị kwesịrị ekwesị maka ndị ọrụ nkịtị ịnweta.  Ikike dị naanị n'ihe onye ọrụ ugbu a nwere ike ile."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Ị nwere ike Kwe/Ekweghị Ogwe maka Onye Ọrụ"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Ị nwere ike Kwe/Ekweghị Ogwe maka Otu"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Ọnọdụ Uhie"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Ọnọdụ Odo"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Ọnọdụ Akwụkwọ Ndụ Akwụkwọ Ndụ"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Ntọala Ngosi"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Ihe ndị dị mkpa ga-adị n'elu"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Ọ bụrụ na akaa ya Intropage na-egosipụta ozi dị mkpa (mperi, ịdọ aka ná ntị) na mbụ"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Gosi ọtụtụ panel n'otu ahịrị"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Maka ihuenyo obosara"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Wepụ Ogwe na-akpaghị aka"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Ọ bụrụ na etinyere Ogwe (Panel) ma wepụ ngwa mgbakwunye achọrọ, wepụkwa ogwe ahụ na-akpaghị aka"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Mmelite Peeji N'akpaghị Aka"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Ugboro ole"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Na-akpaghị aka site na poller"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Ọ dịtụbeghị"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Nkeji Ọ bụla"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Nkeji %d Ọ bụla"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Elekere Ọ bụla"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Oge dị mkpa"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Site ugbu a gaa n'oge gara aga. Na-emetụta agba ahịrị, agaghị egosipụta ihe omume ochie n'ụdị pụrụ iche, naanị igosipụta ha"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Gbanyụrụ"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "Nkeji 15"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "Awa 1"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "Awa 4"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "Ụbọchị 1"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Ọnụọgụ ahịrị panel"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Ahịrị ole dị na ogwe"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "ahịrị %d"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Ogologo Oge Usoro"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Maka chaatị Ụkpụrụ Omume, gịnị kwesịrị ịbụ oge ndabara maka chaatị ndị ahụ."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Oge Njedebe Poller"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Oge, na nkeji, nke Poller ndabere Intropage nwere ike ịgba ọsọ tupu Cacti akwụsị ma gbuo ya."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Nkeji %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Nkeji %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "Elekere %d"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Nyochaa Ndekọ - ọnụọgụ ahịrị"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Ahịrị ndekọ ole ka a ga-enyocha. Ahịrị = na ogwe, 2x ahịrị = na nkọwa. Nnukwu ọnụ ọgụgụ nwere ike ime ka ibe dị nwayọọ ibu"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Ugboro ole a ga-enyocha DB"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Poller na-arụ ọrụ a. O nwere ike ime ka ọrụ poller gaa ogologo oge."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Kwa Ụbọchị"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Kwa Izu"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Ọnwa Ọ Bụla"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Nyochaa DB - Ọkwa nlele db"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Ngwa ngwa - Enweghị nlele ahịrị maka njikọ na-ezighi ezi<br/>Ọsọ ọsọ - lelee naanị tebụl ndị emechighị nke ọma<br/>Gbanwere - lelee tebụl ndị gbanwere kemgbe nlele ikpeazụ<br/>Ọkara - yana nyocha ahịrị<br/>Mgbatị - ahịrị na igodo niile<br/>Ọkara na Mgbatị nwere ike ime ka nbudata peeji dị nwayọọ!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Ngwa ngwa"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Ọsọ ọsọ"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Agbanweela"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Ọkara"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Agbasara"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Nlele Oge NTP - IP ma ọ bụ aha DNS nke sava NTP"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Tinye IP ma ọ bụ aha DNS nke sava NTP"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Ugboro ole a ga-elele NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Nyocha DNS - Aha DNS ọ bụla"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Tinye aha DNS maka nnwale"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Ugboro ole a ga-elele DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Ogwe Ozi Onye Nchịkwa gbasara Ọrụ Mmezi, Ngwaọrụ Adịghị Arụ Ọrụ, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Ọ bụrụ na ọ bụghị ihe efu, a ga-egosi Ogwe ahụ n'elu. Ị nwere ike iji mkpado html (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Ụbọchị ịdọ aka ná ntị nke Nhazi Ndozi Na-abịa"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Ụbọchị ole tupu oge mmezi a haziri ahazi ka a ga-egosi ịdọ aka ná ntị?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Adọla aka ná ntị ma olị"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Mgbe ndozi na-amalite"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "Ụbọchị %d Tupu"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "Ụbọchị %d Tupu"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Ndekọ netwọk na"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "bytes ma ọ bụ bits"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Biti"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Ntọala Oti"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Oti Nlele DB Ndị Ahịa Kwụsịrị"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Ọ bụrụ na ihe omume a emeela, kpalite agba ọnọdụ Nkịtị, Ịdọ aka ná ntị, ma ọ bụ Mkpu ahọpụtara."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Oti Onye nnabata nwere otu Nkọwa"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Oti Isi Iyi Data Na-enweghị Njikọ"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Oti Mmepụta Poller na-abụghị ihe efu"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Oti Ndepụta Ọjọọ Isi Iyi Data"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Oti Omume logonly nke Ọnụ ụzọ"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Oti mgbe ahazighị bulk_walk_size nke ngwaọrụ nke ọma"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Oti Ngwaọrụ nwere otu IP/port"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Oti Ngwaọrụ nọ n'ihe karịrị otu Osisi"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Oti Ngwaọrụ na-enweghị Osisi"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Oti Ngwaọrụ nwere Obodo SNMP Ndabara public/private"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Oti Ngwaọrụ na-enweghị Nlekọta"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Oti Ngwaọrụ na-enweghị Eserese"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Oti Uhie/Odo Oge Polling"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Oge nnyocha karịrị ọnụ ụzọ ndị a ga-akpalite agba ọnọdụ Ịdọ aka ná ntị ma ọ bụ Mkpu."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Odo / Uhie"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Odo / Uhie"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Odo / Uhie"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Oti Uhie/Odo Oke Ọdịda/Niile"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Oke nyocha ịdị adị dara ada tụnyere nyocha gara nke ọma iji kpalite dịka agba ọnọdụ Ịdọ aka ná ntị maọbụ Mkpu."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Odo / Uhie"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Odo / Uhie"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Odo / Uhie"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Oti Uhie/Odo Ping"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Nkwụsị ping karịrị ọkwa ndị a ga-akpalite agba ọnọdụ Ịdọ aka ná ntị ma ọ bụ Mkpu."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Odo / Uhie"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Odo / Uhie"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Odo / Uhie"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Oti Uhie/Odo Nnweta Kachasị Njọ"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Nnọdị dị n'okpuru ọkwa ndị a ga-akpalite agba ọnọdụ Odo ma ọ bụ Uhie."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Odo / Uhie"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Gbanye"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Gbanyụọ"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Ogwe"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Pịa 'Gaa n'ihu' iji Gbanye Ogwe ndị na-esonụ."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Gbanye Ogwe"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Pịa 'Gaa n'ihu' iji Gbanyụọ Ogwe ndị na-esonụ. A na-ezo ogwe ndị gbanyụrụ na dashbọọdụ ma poller na-awụfe ha, mana a na-edobe data ha."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Gbanyụọ Ogwe"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Kagbuo"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Gaa n'ihu"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Aha Ogwe"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Aha ngosi nke panel a."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Isi Iyi"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Plugin na-enye ogwe a. Ogwe nke Intropage n'onwe ya na-egosi dịka Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Ngalaba"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Ụdị ogwe ahụ."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Ọkwa"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Ndị ọrụ niile na-ekerịta ogwe sistemụ; ogwe onye ọrụ bụ maka onye ọrụ nke ọ bụla."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Chọrọ"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Nkwụnye ndị ga-abụrịrị ndị gbanyere ka ogwe a wee gosipụta."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Megharịa"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Oge nchịkọta data nke ogwe ahụ."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Ọrụ Mmelite"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Ọrụ Poller na-akpọ iji chịkọta data nke panel a."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Ọnọdụ"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Ma a gbanyere ogwe ahụ."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Sistemụ"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Onye ọrụ"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Gbanyere"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Ọ Dịghị Nke Ọ Bụla"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Ahụghị Ogwe Ọ bụla"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Ọba Akwụkwọ Ogwe Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Chọọ"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Ọ Bụla"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Gaa"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Tọọ/Megharịa Ihe nzacha"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Kpochapụ"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Kpochapụ Ihe nzacha"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Ịma ọkwa Gasị"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Ogwe gasị na-enye ọkwa ịdọ aka ná ntị."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Ọkwa mgbaama Onye nnabata"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Ọkwa mgbaama Onye nnabata (dị elu/dara/na-agbake) n'oge na-adịbeghị anya"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Ụbọchị"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Onye nnabata"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Steeti"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Ndekọ ndị ọzọ, jiri windo nkọwa"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Na-eche data"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Ị nweghị ikike maka ndị nnabata ọ bụla"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Ogwe Nyocha"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Ogwe gasị na-enyocha omume Cacti na ngwa mgbakwunye ya ugbu a."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Nyochaa Nbanye Gasị"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Nyochaa nbanye Cacti ole na ole ikpeazụ maka usoro na mperi."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Nyochaa Ndekọ Gasị"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Chọọ mmejọ ndị a na-ahụkarị na faịlụ ndekọ Cacti nke kwesịrị ịkpata nchegbu."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Nlele Nchekwa Data"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Nyochaa nchekwa data MySQL/MariaDB maka mperi ndị na-emekarị.  Rịba ama na usoro a nwere ike iwe ogologo oge na sistemụ buru ibu nke ukwuu."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Nyochaa Ihe Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Nyochaa Osisi Gasị, Eserese Gasị, Ndị nnabata, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Nyochaa ọnụọgụgụ DS"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Nyochaa ọnụọgụgụ isi iyi data"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Aha njirimara"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "Adreesị IP"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Dara"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Ịga nke ọma - Nbanye"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Ọ gara nke ọma - Token"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Mkpokọta Nbanye dara ada: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Ndị Ọrụ Na-arụ Ọrụ n'Awa Gara Aga: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Faịlụ ndekọ enweghị ike ịbanye ma ọ bụ tọgbọ chakoo"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Nyochaa ahịrị ndekọ %s ikpeazụ:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Njehie: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Ịdọ aka ná ntị: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Ogo Ndekọ: Karịrị 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Ogo Ndekọ: Dị mma"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Ogo Ndekọ: Buru ibu nke ukwuu"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Ogo Ndekọ: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Ahịrị ndekọ ikpeazụ:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Na-awụfe nlele tebụl DB. Nchekwa data buru ibu karịa"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Tebụl %s ọnọdụ %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Nsogbu Gasị"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: Ọ Dị Mma"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Njikọ kacha elu eruola: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Ị nwere ike ịbawanye njikọ kacha elu site na ngwa ahịrị iwu ma ọ bụ ruo mgbe ebighi ebi na faịlụ nhazi"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Njehie njikọ: %s - nwaa ịmaliteghachi ọrụ SQL, lelee ndekọ SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Ndị ahịa/njikọ akwụsịrị: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Ndị ahịa/njikọ akwụsịrị - Gbaa 'SET GLOBAL log_warnings = 1;' ma ọ bụ ' log_error_verbosity = 1;' (dabere na ụdị MySQL/MariaDB gị) site na mysql CLI ma debe ya na server.cnf iji mechie ya."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Njehie njikọ: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Tebụl mebiri emebi: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Ị kwesịrị ịgba iwu nlele na nrụzi tebụl"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Tebụl nchekwa: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Tebụl nile: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Ọ dịghị"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Ngwaọrụ nwere otu IP na port: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Ngwaọrụ Bulk Walk Size na-adịghị mma: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Biko lelee oke ngwaọrụ \"Nkwughachi Kachasị nke Bulk Walk\". Ị nwere ike imeziwanye arụmọrụ poller gị"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Ndepụtagharị emere ikpeazụ"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Ọrụ ikpeazụ nke Nyocha RRD"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Ọrụ ikpeazụ nke Nhicha RRD"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "A na-atụ aro ka ị rụọ ngwa a opekata mpe mgbe ụfọdụ"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: agbabeghị"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Isi Iyi Data Gasị Enweghị Nne na Nna: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Isi Iyi Data - ndeksi ọjọọ: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Ọkwa/ịdọ aka ná ntị ndekọ naanị Thold: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Ngwaọrụ nwere otu nkọwa: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Ngwaọrụ nọ n'ihe karịrị otu osisi: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Ngwaọrụ na-enweghị eserese gasị: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Ngwaọrụ na-enweghị osisi: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Ngwaọrụ nwere community public/private nke ndabara: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Nsogbu ihe eserese/ihe nlereanya: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Nkwụnye Monitor - Ndị nnabata a na-eleghị anya: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "Ọ dị mma"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "CPU Sava (cores / usoro / eriri): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Agbanyụrụ ịgwa onye nchịkwa na edobeghị ozi-e onye nchịkwa"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Achọtara nsogbu %s"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Ihe niile dị mma"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Ọnụọgụgụ DS: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Ogwe chọrọ ka a gbanye DS stats."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Ndekọ DS niile "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Ndekọ DS efu "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Nyochaa Nkọwa Ndekọ Cacti [ Ịdọ aka ná ntị/Mperi ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Mmejọ"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Ịdọ Aka na Ntị"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "ỊDỌ AKA NÁ NTỊ: Faịlụ Karịrị 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Ogo Ndekọ"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Nyochaa Nkọwa Nbanye Gasị"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Nsonaazụ"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Ndị Ọrụ Na-arụ Ọrụ n'Awa 2 Gara Aga:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Enweghị Ndị Ọrụ Na-arụ Ọrụ"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Lee Ndekọ Onye Ọrụ Zuru Ezu"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Nyochaa Osisi, Eserese Gasị, Ndị nnabata"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Ngwaọrụ nwere otu IP na port - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Ngwaọrụ Bulk Walk Size na-adịghị mma - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Nlekọta data"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Isi Iyi Data Gasị Enweghị Nne na Nna - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Isi Iyi Data Gasị nwere ndeksi ọjọọ - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Ọkwa/ịdọ aka ná ntị ndekọ naanị Thold - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Ngwaọrụ nwere otu nkọwa - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Ngwaọrụ nọ n'ihe karịrị otu osisi - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Ngwaọrụ na-enweghị Eserese Gasị - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Ngwaọrụ na-enweghị osisi - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Ngwaọrụ nwere community public/private nke ndabara - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Nsogbu ihe eserese/ihe nlereanya - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Nlereanya eserese"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Eserese Gasị"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Ihe eserese"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Ihe nlereanya"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Nkwụnye Monitor - Ndị nnabata a na-eleghị anya - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "CPU Sava cores / usoro / eriri: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Agbanyụrụ ịgwa onye nchịkwa ma ọ bụ edobeghị ozi-e onye nchịkwa"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Nke kacha arụ ọrụ"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Ogwe gasị na-achọta ndị nnabata kacha arụ ọrụ."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "CPU Kacha Arụ Ọrụ"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Ngwaọrụ nwere CPU kacha arụsi ọrụ ike (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "ucd/net kacha arụ ọrụ - Ibu"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Ngwaọrụ nwere Ibu ọrụ kacha elu (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Ohere Hard Drive Kacha Arụ Ọrụ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Ngwaọrụ nwere Ohere Hard Drive kacha ejiri rụọ ọrụ (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Oge ọrụ kacha elu"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Ngwaọrụ nwere oge ịrụ ọrụ kacha ogologo"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Okporo ụzọ mbata/ọpụpụ Njikọ kacha arụ ọrụ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Ngwaọrụ nwere okporo data mbata/mpụta kacha elu (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Njehie Njikọ kacha arụ ọrụ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Ngwaọrụ nwere njehie/ntụfu kacha elu (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Ojiji Njikọ kacha arụ ọrụ"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Port ndị nwere ojiji interface kachasị elu"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Biko gbanye ma hazie ọnụọgụ DS"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Rịọ onye nchịkwa ka ọ gbanye ọnụọgụgụ DS"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Nkezi"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Kacha Elu"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Nkezi nke DS niile ekwere"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Na-eche data ma ọ bụ na ị nweghị ikike maka ngwaọrụ ọ bụla nwere nlereanya a."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Ị nweghị ikike maka ndị nnabata ọ bụla ma ọ bụ enweghị onye nnabata ọ bụla nwere nlereanya a"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Oge Ọrụ"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Nkezi nke ndị nnabata niile ekwere"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Na-eche data ma ọ bụ na ị nweghị ikike maka ngwaọrụ ọ bụla"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Ntụziaka"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Oge nkeji ise gara aga"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Ojiji CPU MIB Onye nnabata 30 kacha arụ ọrụ (elekere gara aga)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Wụnye ngwa mgbakwunye TopX maka ọtụtụ ọnụọgụgụ DS"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Ibu ucd/net 30 kacha arụ ọrụ (elekere gara aga)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Ohere Hard Drive MIB Onye nnabata 30 kacha arụ ọrụ (elekere gara aga)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Okporo ụzọ kacha arụ ọrụ (mbata+ọpụpụ)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Ojiji njikọ kacha arụ ọrụ"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Ogwe Eserese Gasị"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Ogwe gasị na-enye ozi gbasara Cacti na ngwa mgbakwunye ya n'ụzọ Eserese."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Isi Iyi Data Gasị"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Eserese nke Isi Iyi Data Gasị"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Ndebiri Ngwaọrụ"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Eserese nke Nlereanya Gasị Ngwaọrụ"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Ngwaọrụ dị ka Ọnọdụ si dị"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Eserese nke Ngwaọrụ site n'Ọnọdụ (elu, ala,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Isi Iyi Data Gasị: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Nlereanya Gasị Ngwaọrụ: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Ngwaọrụ: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Dara ada"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Na-agbake"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Ụdị Data"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Ngụkọta"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Achọtaghị isi iyi data gasị na-enweghị nlereanya"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Ngwaọrụ"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Ọnụọgụ Ngwaọrụ"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Niile"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Na-arụ ọrụ"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Aha Templeeti"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Mkpokọta Ngwaọrụ"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Achọtaghị nlereanya gasị ngwaọrụ ọ bụla"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Ogwe MacTrack Gasị"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Ogwe gasị na-enye ozi gbasara ngwa mgbakwunye MacTrack nke Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Ngwa Mgbakwunye MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Ndekọ ọnụọgụ nchịkọta na saịtị MacTrack dị iche iche."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Saịtị MacTrack Gasị"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Ndekọ ọnụọgụ Saịtị MacTrack dị iche iche."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Etinyebeghị/Anaghị agba Ngwa Mgbakwunye MacTrack"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Nile: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Elu: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Adịghị arụ ọrụ: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Njehie: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Amaghị: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Gbanyụrụ: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Njehie"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Amaghị"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Ị nweghị ikike ngwa mgbakwunye"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Saịtị"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "IP gasị"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Port Gasị"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Port ndị na-arụ ọrụ"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "MAC gasị"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Njehie Ngwaọrụ Gasị"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Achọtaghị saịtị mactrack ọ bụla"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Ogwe Ndị Ọzọ"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Ogwe gasị nwere data izugbe na-enweghị nkewa gbasara Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Ọnọdụ NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Na-elele elekere sistemụ Cacti gị maka mgbanwe site na ntọala amaara na nlele idozi DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Nkọwa Plugin Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Nkọwa Plugin Maint maka nhazi oge na-abịa"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Nkọwa Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Nkọwa Nlele Ọrụ URL nke Nkwụnye webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Nkọwa ngwa mgbakwunye Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Nkọwa Nkwụnye ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Enweghị sava NTP ahaziri"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Ahaziri sava NTP na-ezighị ezi - %s<br/>Biko dozie ya na ntọala"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Emezighị inweta oge NTP site na %s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Biko lelee oge n'ihi na ọ dị iche nke ukwuu"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "karịa sekọnd %s site na sava NTP %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Oge mpaghara hà nhata na sava NTP"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Enweghị ike iru sava NTP ahụ e gosipụtara."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Biko lelee nhazi gị."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Ahazighị aha onye nnabata DNS ọ bụla"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Ahaziri aha onye nnabata DNS na-ezighị ezi - %s<br/>Biko dozie ya na ntọala"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Nkọwa aha onye nnabata DNS (%s) gara nke ọma."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Oge mkpebi DNS: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Nkọwa aha onye nnabata DNS (%s) dara."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Etinyeghị/agbanyeghị plugin Maint"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Ewụnyebeghị ma ọ bụ amalitebeghị Nkwụnye Webseer"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "A kwadoghịzi ngwa mgbakwunye Webseer, jiri ngwa mgbakwunye servcheck kama"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Ọnụọgụ nyocha (niile/gbanyụrụ): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Ọnọdụ (n'elu/ala): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Ozi ndekọ ikpeazụ"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "Koodu HTTP"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Ngwa Mgbakwunye Webseer - Nkọwa"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Ewụnyebeghị ma ọ bụ amalitebeghị Nkwụnye Servcheck"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Ọnọdụ (ọ dị mma/njehie): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Ihe ndekọ ikpeazụ"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Nnwale"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Ụdị"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Ngwa mgbakwunye Servcheck - Nkọwa"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Nsonaazụ ọchụchọ"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Ogwe Poller"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Ogwe gasị na-enye ozi gbasara usoro polling nke Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Ozi Poller"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Ozi dị iche iche gbasara Cacti Poller gị."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Ndekọ Ọnụọgụgụ Poller"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Ndekọ ọnụọgụ dị iche iche nke Cacti Poller."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Ihe Nsonaazụ Poller Gasị"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "Njirimara"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Aha"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Mkpokọta Oge"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Ọhụrụ/Na-adịghị arụ ọrụ"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Na-agba"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Na-ezu ike"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Amaghị/dara"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "Sekọnd %s"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(ọ dị mma)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(niile)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Sekọnd"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "ID nkezi awa 24: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Nkọwa Poller"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Nkezi Oge"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Oge Kacha Elu"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Ihe nsonaazụ Poller "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Ihe Gasị"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Ogwe Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Ogwe gasị na-enye ozi gbasara nhazi ozi Syslog nke Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Nkọwa Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Ndekọ ọnụọgụ Ngwa mgbakwunye Syslog dị iche iche."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Ngwaọrụ Kacha Elu nke Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Ngwaọrụ nwere ozi kacha ọtụtụ"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Ọkwa Ozi Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Ozi site n'ọkwa."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Na-abata"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Echekwara"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Ozi Gasị"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Etinyeghị mgbakwunye Syslog ma ọ bụ ọ naghị arụ ọrụ"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Ngwaọrụ"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "E gbanyeghị mgbakwunye Syslog"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Ndị nnabata 20 nwere ọtụtụ ozi kacha"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Enweghị ozi"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Ogwe Sistemụ"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Ogwe gasị na-enye ozi gbasara arụmọrụ sistemụ Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Ozi"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Ozi sistemụ dị iche iche gbasara sistemụ Cacti n'onwe ya."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Mkpọsa Nchịkwa"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Ogwe ọkwa nchịkwa mgbakwunye maka ndị ọrụ niile"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Ndekọ ọgụgụ Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Ozi gbasara usoro nkwalite arụmọrụ nke Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Akụkọ ihe mere eme Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Ozi gbasara akụkọ ihe mere eme nke usoro nkwalite."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Ọnụọgụ Oke nke Awa 24"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Tebụl nwere awa 24 nke Oke Mgba Poller (ọsọ poller kacha ogologo, ndị nnabata dara ada)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Ojiji CPU"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Eserese ojiji CPU (naanị Linux)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Ibu CPU: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Emeghị ka ọrụ a rụọ ọrụ na ikpo okwu Windows"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Nkezi CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "CPU Kacha Elu"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Nkezi Awa 24"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Ụdị Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Ụdị Poller:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Ụdị Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Ị na-eji ụdị spine na-ezighị ezi!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Ụdị Poller: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Na-agba na: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Akụkọ ihe mere eme Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Nchekwa "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Ndekọ na-eche "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Ịdọ Aka Ná Ntị Mgbafega"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Oge Agwụla"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Ndị Ọzọ"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Ọ Dịbeghị Mgbe Ọ Gbara"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Ọnọdụ Boost bụ: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Usoro ọrụ/Ugboro ugboro: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Ọnụ ụzọ Ndekọ Na-eche: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Oge Mmalite Na-abịa (Nke Nkenke): %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Ndekọ Na-eche/Echekwara: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Ogo Tebụl Boost Ugbu a: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Nkezi Baiti/Ndekọ: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Oge ọrụ ikpeazụ/mmelite: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Ọrụ Poller"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Ndị Nnabata Adịghị Arụ Ọrụ"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Akpaliri"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Ihe nsn. Poller"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Njehie Onye nnabata"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Polling Oke nke Awa 48"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Poller Na-agba Ogologo Oge"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Ngwaọrụ Dara Kacha Elu"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Thold Kpalitere Kacha Elu"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Ihe Nsonaazụ Poller"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Nnyocha Poller Dara"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Ogwe Ọnụ ụzọ"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Ogwe gasị na-enye ozi gbasara Ngwa mgbakwunye Ọnụ ụzọ Cacti."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Ihe Omume Ọnụ ụzọ Ikpeazụ"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Ihe Omume Kacha Ọhụrụ nke Ngwa Mgbakwunye Ọnụ ụzọ"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Ọnụ ụzọ"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Eserese Ngwa Mgbakwunye Ọnụ ụzọ (niile, kpalitere, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Ewụnyebeghị ma ọ bụ amalitebeghị Nkwụnye Thold"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Enwebeghị mmemme"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Ọnụ ụzọ Gasị: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Ngwa mgbakwunye Thold etinyebeghị/anaghị arụ ọrụ"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Emebiri"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Nkọwa Ọnụ ụzọ"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Ọnụ ụzọ Gasị"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Emebiri: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Akpaliri: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Ị nweghị ikike maka Ọnụ ụzọ"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Nkọwa"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Ogwe 5 kacha elu/ala"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Ogwe gasị na-enye ozi gbasara usoro mgbanwe nchịkọta data Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Ping Kacha Ala"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Ngwaọrụ nwere nzaghachi ping kacha njọ"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Nnọdị Kacha Ala"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Ngwaọrụ nwere nnweta/iru nso kacha njọ"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Oge Nnyocha Kacha Ala"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Ngwaọrụ nwere oge polling kacha njọ"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Oke Nnyocha Kacha Ala"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Ngwaọrụ nwere oke polling kacha njọ"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Ugbu a"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Aha Host"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Ịdị Njikere/Ịdị Iru"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Oge Nyocha"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Oke nha"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Ndị nnabata 20 nwere Ping kacha njọ"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Ndị nnabata 20 nwere Nnweta kacha njọ"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Nnweta"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Ndị nnabata 20 nwere Oge Polling kacha njọ"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Ndị nnabata 20 nwere Oke Polling kacha njọ"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Onye Nleba Anya Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Nlekọta Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Njikwa"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Ọbá Ogwe"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Nchịkwa Sistemụ"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Oge Otu Awa Gara Aga"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Oge Awa %d Gara Aga"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Oge Otu Ụbọchị Gara Aga"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Oge Ụbọchị Abụọ Gara Aga"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Sekọnd %d"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "Elekere %d"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "Ụbọchị %d"
+
+#: setup.php
+msgid "Actions"
+msgstr "Omume"
+

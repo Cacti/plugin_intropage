@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Malagasy\n"
+"Language: mg-MG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - Nolavina ny alalana"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "Nesorina ny tontonana iray na maromaro noho ny tsy fahampian'ny alalana. Mifandraisa amin'ny mpitantana."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Azonao atao tsy mavitrika ireo andalana etsy ambony ao amin'ny <b>Fikirakirana > Fandrindrana > Ankapobeny > Afeno ny Tabilao Cacti</b> ary ampiasao ho an'ny Intropage ny pejy manontolo "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Voafaritra mialoha"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Afeno na asehoy ny fampandrenesana efamira mena/mavo/maitso"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Ataovy tsy mavitrika ny famindrana tontonana/ataovy mavitrika ny fandikana lahatsoratra avy amin'ny tontonana"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Hetsika ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Manampy tabilao vaovao"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Esory ny takelaka fanaraha-maso ankehitriny"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Isan'ny andalana - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Havaozy izao"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Tsy mavitrika ny fanavaozana"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Havaozy araka ny Poller"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Havaozy isaky ny 1 minitra"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Havaozy isaky ny 5 minitra"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Havaozy isan'ora"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Vanimpotoana manan-danja - tsy mavitrika"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Vanimpotoana manan-danja - 15 minitra"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Vanimpotoana manan-danja - 1 ora"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Vanimpotoana manan-danja - 4 ora"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Vanimpotoana manan-danja - 1 andro"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Alaharo araka ny hamafiny"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Alaharo araka ny safidin'ny mpampiasa"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Avereno alefa ny famaritana ny takelaka"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Ataovy ho pejy fidirana lasitra ny Intropage"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Ataovy ho pejy fidirana lasitra ny kisary"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Asehoy ao amin'ny Konsoly ny Intropage"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Asehoy ho pejy fototra ao amin'ny vakizoro ny Intropage"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Takelaka vitsy kokoa amin'ny andalana iray"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Takelaka maro kokoa amin'ny andalana iray"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Foano ny fizarana"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Zarao ity tabilao ity"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Tsy azo zaraina ny tabilao foana"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Ampiasao ny tabilao nozaraina"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Tsy afaka mampiasa tabilao fanaraha-maso nozaraina - tratra ny fetran'ny tabilao fanaraha-maso."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Tsy misy tabilao famintinana iombonana"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Tongasoa eto amin'ny Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Azonao atao ny Manampy Takelaka Tabilao amin'ny fomba maro kokoa:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Misafidiana tontonana efa voaomana avy amin'ny \"Sakafo Tontonana\". Mety ho volondavenona ny tontonana iray. Noho ny alalana izany, anontanio ny mpitantana"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Manampy Kisary Cacti na inona na inona, ampiasao ny kisary famantarana"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Afaka mamorona tontonana manokana ianao. Fampahalalana fanampiny ao amin'ny rakitra <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Azonao zaraina amin'ny mpampiasa hafa ny tabilao fanaraha-maso:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "ampiasao ny safidy \"Zarao ity takelaka fanaraha-maso ity\" ao amin'ny menio Hetsika - Afaka mampiasa azy ho modely ny mpampiasa tsirairay."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Azonao ampiasaina ny tabilao fanaraha-maso nozaraina amin'ny alalan'ny safidy Hetsika:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Ampiasao ny \"Ampiasao ny tabilao nozaraina (anaran'ny mpampiasa/anaran'ny tabilao) - Manomana tabilao mitovy amin'ny nozaraina izany saingy miaraka amin'ny fahazoan-dalanao."
+
+#: display.php
+msgid "Customization:"
+msgstr "Fanamboarana manokana:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Afaka mamorona tabilao fanaraha-maso hatramin'ny 9 ianao. Ny tabilao fanaraha-maso tsirairay dia azo omena anarana sy sary famantarana"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Ny Intopage dia azo aseho ao amin'ny konsole na amin'ny vakizoro mitokana. Azonao ovaina ao amin'ny sakafo Hetsika izany"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Raha te handika lahatsoratra avy amin'ny tontonana ianao, dia tsy maintsy atsahatrao ny fiasan'ny fisintonana sy fametrahana, ampiasao ny sary famantarana"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Antsipirian'ny takelaka"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Ataovy tsy mavitrika ny famindrana tontonana/Ataovy mavitrika ny fandikana lahatsoratra avy amin'ny tontonana"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Ataovy mavitrika ny famindrana takelaka/Ajanony ny fandikana lahatsoratra avy amin'ny takelaka"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Afeno ny fampandrenesana efamira mena/mavo/maitso"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Asehoy ny fampandrenesana efamira mena/mavo/maitso"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Hadisoana teo am-pamakiana angona vaovao"
+
+#: display.php
+msgid "Close"
+msgstr "Akatony"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Voafafa ny takelaka fanaraha-maso"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Tabilao fanaraha-maso vaovao"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Nampiana ny takelaka fanaraha-maso"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Tsy afaka manampy kisary nohalehibiazina na manana fe-potoana manokana, ovaina ho Adiny sasany farany teo ny fe-potoana"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Nohavaozina avy amin'ny Tranombokin'ny tontonana ny Tranombokin'ny tontonana Intropage"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Nampiana ny takelaka fanaraha-maso, miandrasa tsingerin'ny Poller vitsivitsy ahazoana angona"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Hadisoana - manandrana mizara tabilao fanaraha-maso tsy nozaraina"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Avereno alefa ny takelaka"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Tariho hanovana ny filaharany"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Alamino indray ny takelaka"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Andalana vitsy kokoa"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Andalana maro kokoa"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Asehoy ny antsipiriany"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Ataovy tsy mavitrika ny tontonana"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Tsy hita ny takelaka"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Tsy azo ampiasaina ity tontonana ity satria tsy mavitrika ny plugin ilainy."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Ahitana fiasa fanehoana (render) ny tontonana saingy tsy misy izany."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Tsy manana fiasa fanehoana (render) ny tontonana."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Tsy hita"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Tsy misy angona hita. Andraso ny fanamarinana manaraka, <br/>na ampiasao ny Fanavaozana an-terisetra raha misy."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Tsy hita ny takelaka"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Tsy misy ny asa Antsipiriany."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Fanav. ao amin'ny %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "%s Seg"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s Segondra"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "%s Min"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "%s Minitra"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "%s Ora"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "%s Ora"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "%s Andro"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Tsy misy angona. Manaova Fanavaozana an-terisetra, na andraso ny tsingerin'ny Poller Cacti manaraka."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Tsy misy angona. Tsy mamela ny Fanavaozana an-terisetra ity Tontonana ity. Mila miandry ny Poller-n'ny Cacti hanao ny fanamarinana ianao."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Takelaka ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (tsy misy alalana)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Tsy afaka manampy amin'ny Tabilao fanaraha-maso. Fe-potoana manokana."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Esory ao amin'ny takelaka fanaraha-maso"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Manampy ao amin'ny tabilao"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Anaran'ireo takelaka fanaraha-maso"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Takelaka fanaraha-maso %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Matetika fanavaozana ny tontonana ambaratongan'ny mpampiasa"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Matetika fanavaozana ny takelaky ny rafitra (Mpampiasa nahazo alalana rehetra)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Fahatetehan'ny fanavaozana ny fironana"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Fototra"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Mpampiasa tsotra"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[fanovana: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Takelaka amin'ny ambaratongan'ny rafitra"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Takelaka sahaza idiran'ny mpitantana na mpampiasa matihanina ary matetika tsy natao ho an'ny mpampiasa tsotra.  Mikasika ny fampiasana ny rafitra amin'ny ankapobeny ireo takelaka ireo."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Tontonana ambaratongan'ny mpampiasa"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Takelaka sahaza idiran'ny mpampiasa tsotra.  Voafetra amin'izay azon'ny mpampiasa ankehitriny jerena ny alalana."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Azonao atao ny Mamela/Mandrara Takelaka ho an'ny Mpampiasa"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Azonao atao ny Mamela/Mandrara Takelaka ho an'ny Vondrona"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Sata Mena"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Sata Mavo"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Sata maitso"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Fandrindrana ny fisehoana"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Ho eo ambony ny zavatra manan-danja"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Raha voamarika dia mampiseho ny vaovao manan-danja (hadisoana, fampitandremana) aloha ny Intropage"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Manehoa takelaka maro kokoa amin'ny andalana iray"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Ho an'ny efijery malalaka"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Manala tontonana ho azy"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Raha misy Tontonana napetraka ary nesorina ny plugin ilaina, dia esorina ho azy ihany koa ny tontonana"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Famelombelomana pejy ho azy"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Impiry"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Ho azy avy amin'ny poller"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Tsy mihitsy"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Isan-minitra"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Isaky ny %d minitra"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Isan'ora"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Vanimpotoana manan-danja"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Manomboka izao mankany amin'ny lasa. Misy fiantraikany amin'ny lokon'ny andalana, tsy hasongadina ny hetsika tranainy kokoa fa aseho fotsiny"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Tsy mavitrika"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "15 minitra"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "1 ora"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "4 ora"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "1 andro"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Isan'ny andalan'ny takelaka"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Firy ny andalana ao amin'ny tontonana"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "%d andalana"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Fe-potoan'ny fironana"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Ho an'ny kisary Fironana, inona no tokony ho fe-potoana mahazatra ho an'ireo kisary ireo."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Fe-potoana lany an'ny Poller"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Ny faharetan'ny fotoana, amin'ny minitra, ahafahan'ny Poller ao ambadika an'ny Intropage mandeha alohan'ny hanapahana sy hamonoan'i Cacti azy."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minitra"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minitra"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "%d ora"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Famakafakana ny tantara - isan'ny andalana"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Firy ny andalana rakitra (log) hohadihadiana. Andalana = ao amin'ny tontonana, andalana 2x = amin'ny antsipiriany. Ny isa lehibe dia mety hampiadana ny fisokafan'ny pejy"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Impiry no mandinika ny DB"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Ny Poller no manatanteraka ity asa ity. Mety hampaharitra ela ny fandehan'ny Poller izany."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Isan'andro"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Isan-kerinandro"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Isam-bolana"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Famakafakana DB - Ambaratongan'ny fanamarinana db"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Haingana be - Tsy manamarina andalana ho an'ny rohy diso<br/>Haingana - manamarina ny tabilao tsy nikatona tsara ihany<br/>Niova - manamarina ny tabilao niova hatramin'ny fanamarinana farany<br/>Antonony - miaraka amin'ny fitiliana andalana<br/>Feno - andalana sy fanalahidy feno<br/>Ny antonony sy ny feno dia mety hampiadana ny fampidirana ny pejy!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Haingana"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Haingana"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Novaina"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Antonony"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Nitarina"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Fanamarinana ora NTP - Adiresy IP na anarana DNS an'ny mpizara NTP"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Ampidiro ny IP na ny anarana DNS an'ny mpizara NTP"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Impiry no manamarina ny NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Fanamarinana DNS - Izay anarana DNS rehetra"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Ampidiro ny anarana DNS hanaovana fitsapana"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Impiry no manamarina ny DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Tontonana fampahafantarana ho an'ny mpitantana momba ny asa fikojakojana, Fitaovana maty, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Raha tsy foana, dia haseho eo ambony ny Tontonana. Azonao ampiasaina ny marika html (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Andro fampitandremana mialoha ny fandaharam-potoana fikojakojana ho avy"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Firy andro mialoha ny fandaharam-potoana fikojakojana voalahatra no tokony hampisehoana fampitandremana?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Aza mampitandrina mihitsy"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Rahoviana no hanomboka ny fikojakojana"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "%d Andro taloha"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "%d Andro taloha"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Statistikan'ny tambajotra ao"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "oktety na bit"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Bytes"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Bita"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Fandrindrana ny fanairana"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Fanairana fanamarinana DB Mpanjifa najanona"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Raha nitranga ity hetsika ity, dia asehoy ny lokon'ny sata Ara-dalàna, Fampitandremana, na Fanairana voafidy."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Fanairana Mpampiantrano mitovy fanoritsoritana"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Fanairana Loharanon'angona tsy misy mpifandray"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Fanairana vokatry ny Poller tsy foana"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Fanairana Loharanon'angona misy fanondro diso"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Fanairana hetsika logonly amin'ny Fetra"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Fanairana rehefa tsy voarindra tsara ny bulk_walk_size an'ny Fitaovana"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Fanairana Fitaovana mitovy IP/port"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Fanairana Fitaovana ao anaty Hazo mihoatra ny iray"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Fanairana Fitaovana tsy ao anaty Hazo"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Fanairana Fitaovana misy SNMP Community mahazatra public/private"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Fanairana Fitaovana tsy misy fanaraha-maso"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Fanairana Fitaovana tsy misy Kisary"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Fanairana Mena/Mavo fotoana fanaovana polling"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Ny fotoana fanaovana Poller mihoatra ireo fetra ireo dia hampiseho loko Sata Fampitandremana na Fanairana."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Mavo / Mena"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Mavo / Mena"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Mavo / Mena"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Fanairana Mena/Mavo tahan'ny tsy fahombiazana/rehetra"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Ny tahan'ny fanamarinana fahafahana mampiasa tsy nahomby raha oharina amin'ny nahomby mba hampisehoana loko Sata Fampitandremana na Fanairana."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Mavo / Mena"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Mavo / Mena"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Mavo / Mena"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Fanairana Mena/Mavo Ping"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Ny fahatarana Ping mihoatra ireo ambaratonga ireo dia hiteraka lokon'ny Sata Fampitandremana na fampandrenesana."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Mavo / Mena"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Mavo / Mena"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Mavo / Mena"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Fanairana Mena/Mavo fahafahana miasa ratsy indrindra"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Ny fahafahana miasa ambanin'ireo haavo ireo dia hitarika loko sata Mavo na Mena."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Mavo / Mena"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Alefa"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Ajanony"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Takelaka"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Tsindrio ny 'Tohizo' mba hanao ho mavitrika ity tontonana manaraka ity."
+msgstr[1] "Tsindrio ny 'Tohizo' mba hanao ho mavitrika ireto tontonana manaraka ireto."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Alefaso ny tontonana"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Tsindrio ny 'Tohizo' mba hanao ho tsy mavitrika ity tontonana manaraka ity. Afenina tsy ho hita ao amin'ny solaitra fanaraha-maso ireo tontonana tsy mavitrika ary dinganin'ny poller, saingy voatahiry ihany ny angon-drakitra ao aminy."
+msgstr[1] "Tsindrio ny 'Tohizo' mba hanao ho tsy mavitrika ireto tontonana manaraka ireto. Afenina tsy ho hita ao amin'ny solaitra fanaraha-maso ireo tontonana tsy mavitrika ary dinganin'ny poller, saingy voatahiry ihany ny angon-drakitra ao aminy."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Ataovy tsy mavitrika ny tontonana"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Foano"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Tohizo"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Anaran'ny takelaka"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Ny anarana aseho amin'ity tontonana ity."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Loharano"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Ny plugin izay manome ity tontonana ity. Ny tontonan'ny Intropage manokana dia miseho ho Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Sokajy"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Ny sokajin'ny tontonana."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Ambaratonga"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Iombonan'ny mpampiasa rehetra ny takelaky ny rafitra; ny takelaky ny mpampiasa kosa dia isaky ny mpampiasa."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Mitaky"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Ireo plugin tsy maintsy atao mavitrika mba hisehoan'ity takelaka ity."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Havaozy"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Ny elanelam-potoana fanangonana angon-drakitry ny tontonana."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Asa fanavaozana"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Ny fiasa antsoin'ny poller mba hanangonana ny angon'ity takelaka ity."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Sata"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Na mavitrika ny takelaka na tsia."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Rafitra"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Mpampiasa"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Mavitrika"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Tsy misy"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Tsy misy Tontonana hita"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Tranombokin'ny tontonana Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Fikarohana"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Na inona na inona"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Alefa"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Hametraka/Hanavao sivana"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Fafao"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Esory ny sivana"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Fampandrenesana"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Takelaka manome fanairana."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Fanairana Mpampiantrano"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Fanairana Mpampiantrano (mandeha/maty/miverina) vao haingana"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Daty"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Mpampiantrano"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Faritany"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Misy rakitra maro kokoa, ampiasao ny varavarankelin'ny antsipiriany"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Miandry angona"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Tsy manana alalana amin'ny mpampiantrano na iray aza ianao"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Takelaka famakafakana"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Takelaka manadihady ny fihetsik'i Cacti sy ireo tovanany ankehitriny."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Famakafakana ny fidirana"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Makafaka ny fidirana Cacti maromaro farany hahitana fironana sy hadisoana."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Famakafakana ny tantara"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Mitadiava hadisoana mahazatra ao amin'ny rakitra firaketan'i Cacti izay tokony hampanahy."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Fanamarinana angon-drakitra"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Makafaka ny tahiry angona MySQL/MariaDB hahitana hadisoana mahazatra. Mariho fa mety haharitra ela ity dingana ity amin'ny rafitra tena lehibe."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Famakafakana ny zavatra ao amin'ny Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Famakafakana ny Hazo, Kisary, Mpampiantrano, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Famakafakana ny antontan'isan'ny DS"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Makafaka ny antontan'isan'ny loharanon'angona"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Anaran'ny mpampiasa"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "Adiresy IP"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Tsy nahomby"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Fahombiazana - Fidirana"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Fahombiazana - Token"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Fitambaran'ny fidirana tsy nahomby: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Mpampiasa mavitrika tao anatin'ny ora farany: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Tsy azo idirana na foana ny rakitra firaketana"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Makafaka ny andalana tantara %s farany:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Hadisoana: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Fampitandremana: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Haben'ny firaketana: Lehibe noho ny 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Haben'ny firaketana: OK"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Haben'ny firaketana: Somary lehibe"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Haben'ny firaketana: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Andalana firaketana farany:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Mandalo ny fanamarinana ny tabilao DB. Lehibe loatra ny angon-drakitra"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Tabilao %s sata %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Misy olana"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: Mety"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Tratrarina ny fetran'ny fifandraisana farany ambony: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Azonao ampitomboina ny fifandraisana ambony indrindra amin'ny alalan'ny fitaovana baiko an-tsoratra na maharitra ao amin'ny rakitra fandrindrana"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Hadisoana tamin'ny fifandraisana: %s - andramo averina alefa ny serivisy SQL, jereo ny diarin'ny SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Mpanjifa/fifandraisana tapaka: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Mpanjifa/fifandraisana tapaka - Alefaso ny 'SET GLOBAL log_warnings = 1;' na ' log_error_verbosity = 1;' (miankina amin'ny dikan-tenin'ny MySQL/MariaDB anao) avy amin'ny mysql CLI ary ampidiro ao amin'ny server.cnf mba hampanginana azy."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Hadisoana tamin'ny fifandraisana: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Latabatra simba: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Tokony hanatanteraka ny baiko fanamarinana sy fanamboarana tabilao ianao"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Tabilao fitadidiana: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Tabilao rehetra: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Tsy misy"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Fitaovana mitovy IP sy seranana: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Fitaovana tsy voatsara ny Bulk Walk Size: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Jereo azafady ny mason-tsivana Fitaovana \"Bulk Walk Maximum Repetitions\". Azonao atao ny manatsara ny fahombiazan'ny Poller-nao"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Fanavaozana ny fanondroana farany"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Fandehanana farany an'ny RRD Checker"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Fandehanana farany an'ny RRD Cleaner"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Amporisihina ny fampiasana ity fitaovana ity indraindray farafaharatsiny"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: mbola tsy nandeha"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Loharanon'angona kamboty: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Loharanon'angona - tondro diso: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Fampandrenesana/fampitandremana rakitra ihany Thold: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Fitaovana mitovy famaritana: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Fitaovana ao amin'ny hazo mihoatra ny iray: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Fitaovana tsy misy kisary: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Fitaovana tsy misy hazo: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Fitaovana mampiasa community public/private mahazatra: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Olana amin'ny singan'ny Kisary/singan'ny Modely: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Plugin Monitor - Mpampiantrano tsy arahi-maso: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "Eny"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "CPU-n'ny Mpizara (foibe / fizotra / kofehy): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Tsy mavitrika ny fampandrenesana mpitantana ary tsy voafaritra ny mailaky ny mpitantana"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Nahitana olana %s"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Milamina ny zava-drehetra"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Statistika DS: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Mila mavitrika ny antontan'isan'ny DS ho an'ny takelaka."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Firaketana DS rehetra "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Firaketana DS foana "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Famakafakana ny antsipirian'ny tantaran'ny Cacti [ Fampitandremana/Hadisoana ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Hadisoana"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Fampitandremana"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "FAMPITANDREMANA: Mihoatra ny 2GB ny haben'ny rakitra"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Haben'ny firaketana"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Famakafakana ny antsipirian'ny fidirana"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Vokatra"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Mpampiasa mavitrika tao anatin'ny 2 ora farany:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Tsy misy mpampiasa mavitrika"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Jereo ny diarin'ny mpampiasa feno"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Famakafakana ny Hazo, Kisary, Mpampiantrano"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Fitaovana mitovy IP sy seranana - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Fitaovana tsy voatsara ny Bulk Walk Size - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Fikojakojana angona"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Loharanon'angona kamboty - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Loharanon'angona misy tondro diso - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Fampandrenesana/fampitandremana rakitra ihany Thold - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Fitaovana mitovy famaritana - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Fitaovana ao amin'ny hazo mihoatra ny iray - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Fitaovana tsy misy Kisary - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Fitaovana tsy misy hazo - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Fitaovana mampiasa community public/private mahazatra - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Olana amin'ny singan'ny Kisary/singan'ny Modely - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Modelin'ny Kisary"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Kisary"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Singan'ny Kisary"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Singan'ny Modely"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Plugin Monitor - Mpampiantrano tsy arahi-maso - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "CPU-n'ny Mpizara foibe / fizotra / kofehy: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Tsy mavitrika ny fampandrenesana mpitantana na tsy voafaritra ny mailaky ny mpitantana"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Ny be atao indrindra"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Takelaka mitady ireo mpampiantrano be asa indrindra."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "CPU be atao indrindra"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Fitaovana manana CPU be asa indrindra (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "ucd/net be atao indrindra - Enta-mavesatra"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Fitaovana manana enta-mavesatra ambony indrindra (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Habaka Kapila Mafy be atao indrindra"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Fitaovana mampiasa habaka kapila mafy be indrindra (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Fotoana fiasana be atao indrindra"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Fitaovana manana fotoana fandehanana lava indrindra"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Fifamoivoizana miditra/mivoaka interface be atao indrindra"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Fitaovana manana fifamoivoizana miditra/mivoaka be indrindra (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Hadisoan'ny interface be atao indrindra"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Fitaovana manana hadisoana/fanariana be indrindra (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Fampiasana interface be atao indrindra"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Seranana be fampiasana indrindra"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Ataovy mavitrika sy rindrao ny antontan'isa DS azafady"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Mangataha amin'ny mpitantana mba hampavitrika ny antontan'isan'ny DS"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Salan'isa"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Tampony"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Salanisan'ny DS rehetra avela"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Miandry angona na tsy manana alalana amin'ny fitaovana misy ity modely ity ianao."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Tsy manana alalana amin'ny mpampiantrano na iray aza ianao na tsy misy mpampiantrano mampiasa ity modely ity"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Fotoana niasana"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Salanisan'ny mpampiantrano rehetra avela"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Miandry angona na tsy manana alalana amin'ny fitaovana na iray aza ianao"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Lalana"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Elanelam-potoana 5 minitra farany"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Fampiasana CPU Host MIB be atao indrindra 30 (ora farany)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Apetraho ny plugin TopX raha mila antontan'isa DS bebe kokoa"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Enta-mavesatra ucd/net be atao indrindra 30 (ora farany)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Habaka Kapila Mafy Host MIB be atao indrindra 30 (ora farany)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Fifamoivoizana be atao indrindra (miditra+mivoaka)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Fampiasana interface be atao indrindra"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Takelaka misy kisary"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Takelaka manome fampahalalana momba an'i Cacti sy ireo tovanany amin'ny endrika kisary."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Loharanon'angona"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Kisarin'ny Loharanon'angona"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Modely fitaovana"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Kisarin'ny Modelin'ny Fitaovana"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Fitaovana araka ny sata"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Kisarin'ny Fitaovana araka ny Sata (mandeha, maty,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Loharanon'angona: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Modelin'ny fitaovana: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Fitaovana: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Tsy mandeha"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Miverina amin'ny laoniny"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Karazan'angona"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Fitambarany"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Tsy nisy loharanon'angona tsy manana modely hita"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Fitaovana"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Isan'ny fitaovana"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Rehetra"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Mandeha"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Anaran'ny lasitra"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Fitambaran'ny Fitaovana"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Tsy nisy modely fitaovana hita"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Takelaka MacTrack"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Takelaka manome fampahalalana momba ireo tovana MacTrack an'i Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Tovana MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Antontan'isa isan-karazany momba ny fanangonana sy ny Toerana MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Toerana MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Antontan'isa isan-karazany momba ny Toerana MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Tsy voapetraka/tsy mandeha ny tovana MacTrack"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Rehetra: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Mandeha: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Maty: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Hadisoana: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Tsy fantatra: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Tsy mavitrika: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Hadisoana"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Tsy fantatra"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Tsy manana alalana amin'ny plugin ianao"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Toerana"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "Ireo IP"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Seranana"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Seranana mandeha"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "Ireo MAC"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Hadisoan'ny fitaovana"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Tsy nisy toerana mactrack hita"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Takelaka samihafa"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Takelaka mirakitra angona ankapobeny tsy voasokajy momba ny Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Sata NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Fanamarinana ny famantaranandron'ny rafitra Cacti-nao raha misy fiviliana amin'ny fototra fantatra sy fanamarinana ny famahana DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Antsipirian'ny plugin Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Antsipirian'ny plugin Maint momba ny fandaharam-potoana ho avy"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Antsipirian'ny Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Antsipirian'ny fanamarinana serivisy URL an'ny Plugin webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Antsipirian'ny fanampiny Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Antsipirian'ny Plugin ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Tsy misy lohamilina NTP namboarina"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Diso ny lohamilina NTP voarindra - %s<br/>Azafady amboary ao amin'ny Fandrindrana"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Tsy nahomby ny fakana ny ora NTP avy amin'ny %s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Hamarino ny ora azafady satria diso mihoatra ny"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "noho ny %s segondra avy amin'ny mpizara NTP %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Mitovy amin'ny lohamilina NTP ny ora an-toerana"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Tsy afaka nifandray tamin'ny mpizara NTP voalaza."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Hamarino ny fandrindranao azafady."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Tsy misy anaran'ny mpampiantrano DNS voarindra"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Diso ny anaran'ny mpampiantrano DNS voarindra - %s<br/>Azafady amboary ao amin'ny Fandrindrana"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Nahomby ny famahana ny anaran'ny Mpampiantrano DNS (%s)."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Fotoana famahana DNS: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Tsy nahomby ny famahana ny anaran'ny Mpampiantrano DNS (%s)."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Tsy voapetraka na tsy mavitrika ny plugin Maint"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Tsy voapetraka na tsy mandeha ny Plugin Webseer"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Tsy tohanana intsony ny plugin Webseer, ampiasao ny plugin servcheck fa tsy izy"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Isan'ny fanamarinana (rehetra/tsy mavitrika): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Sata (mandeha/maty): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Hafatra firaketana farany"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "Kaody HTTP"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Plugin Webseer - Antsipiriany"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Tsy voapetraka na tsy mandeha ny Plugin Servcheck"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Sata (tsara/hadisoana): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Firaketana farany"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Andrana"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Karazana"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Fanampiny Servcheck - Antsipiriany"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Valin'ny fikarohana"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Takelaka Poller"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Takelaka manome fampahalalana momba ny fizotry ny poller an'i Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Fampahalalana momba ny mpanadihady"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Fampahalalana isan-karazany momba ny Poller Cacti-nao."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Antontan'isan'ny Poller"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Antontan'isa isan-karazany momba ny Poller Cacti."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Ireo singa vokatra Poller"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Anarana"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Fotoana manontolo"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Vaovao/Tsy miasa"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Mandeha"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Tsy miasa"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Tsy fantatra/maty"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "%s Seg"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(mety)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(rehetra)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Segondra"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "ID salan'isa 24h: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Antsipirian'ny Poller"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Fotoana antonony"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Fotoana farany ambony"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Ireo singa vokatra Poller "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Singa"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Takelaka Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Takelaka manome fampahalalana momba ny fanodinana hafatra Syslog an'i Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Antsipirian'ny Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Antontan'isa isan-karazany momba ny plugin Syslog."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Fitaovana Syslog ambony indrindra"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Fitaovana manana hafatra be indrindra"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Ambaratongan'ny hafatra Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Hafatra araka ny ambaratonga."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Miditra"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Voatahiry"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Hafatra"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Tsy napetraka na tsy mandeha ny plugin Syslog"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Fitaovana"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Tsy mavitrika ny plugin Syslog"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Mpampiantrano 20 manana hafatra betsaka indrindra"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Tsy misy hafatra"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Takelaky ny rafitra"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Takelaka manome fampahalalana momba ny fahombiazan'ny rafitra Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Fampahalalana"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Fampahalalana isan-karazany momba ny rafitra Cacti tenany."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Fanairana ara-pitantanana"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Tabilao fampandrenesan'ny mpitantana fanampiny ho an'ny mpampiasa rehetra"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Antontan'isan'ny Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Fampahalalana momba ny fizotry ny fanatsarana fahombiazana (boost) an'ny Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Tantaran'ny Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Fampahalalana momba ny tantaran'ny fizotry ny fanatsarana (boost)."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Fara tampony 24 Ora"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Tabilao misy ireo fara-tampony tamin'ny Poller nandritra ny 24 ora (fandehanan'ny poller lava indrindra, mpampiantrano tsy mandeha)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Fampiasana CPU"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Kisary fampiasana CPU (Linux ihany)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Enta-mavesatra CPU: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Tsy tafapetraka amin'ny sehatra Windows ity fiasa ity"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Salanisa CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "CPU farany ambony"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Salan'isa 24h"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Kinova Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Karazana Poller:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Dikan-teny Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Mampiasa kinova spine diso ianao!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Karazana Poller: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Mandeha amin'ny: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Tantaran'ny Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Fitadidiana "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Firaketana miandry "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Fampitandremana fihoaram-potoana"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Lany ny fotoana"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Hafa"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Tsy mbola nampandehanina mihitsy"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Ny Satan'ny Boost dia: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Dingana/Fatra: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Fetra ho an'ny firaketana miandry: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Fotoana fanombohana manaraka eo ho eo: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Firaketana miandry/voatahiry: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Haben'ny tabilao Boost ankehitriny: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Salanisa Bytes/Firaketana: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Faharetana/fanavaozana tamin'ny fampandehanana farany: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Fandehan'ny Poller"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Mpampiantrano maty"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Voahetsika"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Sing. vok. Poller"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Hadisoana Mpampiantrano"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Polling Fara Tampony 48 Ora"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Poller mandeha maharitra"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Fitaovana maty farany ambony"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Fetra voahetsika farany ambony"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Singa vokatra Poller"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Fanangonana tsy nahomby"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Tontonana Fetra"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Takelaka manome fampahalalana momba ny tovana fametrahana fetra (Thresholding Plugin) an'i Cacti."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Hetsika Fetra farany"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Zava-mitranga Farany amin'ny Plugin Fetra"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Fetra"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Kisary Plugin Fetra (rehetra, nihetsika, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Tsy voapetraka na tsy mandeha ny Plugin Thold"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Tsy mbola misy hetsika"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Fetra: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Tsy tafapetraka/tsy mandeha ny plugin Thold"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Nihoatra"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Antsipirian'ny Fetra"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Fetra"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Nihoatra: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Voahetsika: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Tsy manana alalana amin'ny Fetra ianao"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Famaritana"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Takelaka 5 ambony/ambany indrindra"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Takelaka manome fampahalalana momba ny fironan'ny fanangonana angona ao amin'i Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Ping ambany indrindra"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Fitaovana manana valinteny ping ratsy indrindra"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Fahafahana miasa ambany indrindra"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Fitaovana manana fahafahana mifandray ratsy indrindra"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Fotoana polling ambany indrindra"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Fitaovana manana fotoana polling ratsy indrindra"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Tahan'ny polling ambany indrindra"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Fitaovana manana tahan'ny polling ratsy indrindra"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Ankehitriny"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Anaran'ny mpampiantrano"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Fahazoana/Fahatratrarana"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Fotoana fakana angona"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Taha"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Mpampiantrano 20 manana Ping ratsy indrindra"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Mpampiantrano 20 manana fahafahana miasa ratsy indrindra"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Fahafahana mifandray"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Mpampiantrano 20 manana fotoam-panontaniana ratsy indrindra"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Mpampiantrano 20 manana taham-panontaniana ratsy indrindra"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Mpijery Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Fitantanana Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Fitantanana"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Tranombokin'ny takelaka"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Fitantanana ny rafitra"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Elanelam-potoana 1 Ora farany"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Elanelam-potoana %d Ora farany"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Elanelam-potoana 1 Andro farany"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Elanelam-potoana 2 Andro farany"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d Segondra"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ora"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d Andro"
+
+#: setup.php
+msgid "Actions"
+msgstr "Hetsika"
+

@@ -1,0 +1,2583 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Yoruba\n"
+"Language: yo-NG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - A Kọ̀ Ìyọ̀ǹda"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "A ti yọ pánẹ́lì kan tàbí jù bẹ́ẹ̀ lọ kúrò nítorí àìtó àṣẹ. Kàn sí olùṣàkóso."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "O lè pa àwọn ìlà òkè wọ̀nyí ní <b>Ṣètò > Àwọn Ètò > Gbogbogbòò > Fi Pátákó Ìṣàkóso Cacti Pamọ́</b> kí o sì lo gbogbo ojú-ewé náà fún Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Àìyípadà"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Fi pamọ́ tàbí fi àwọn ìfitónilétí onígun mẹ́rin pupa/òfeefee/alàwọ̀ ewé hàn"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Ṣe àìṣiṣẹ́ gbígbé pánẹ́lì/ṣiṣẹ́ dída ọ̀rọ̀ kọ láti pánẹ́lì"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Àwọn Ìgbésẹ̀ ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Fi Pátákó Ìṣàkóso Tuntun Kún un"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Yọ pátákó ìṣàkóso lọ́wọ́lọ́wọ́ kúrò"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Iye àwọn ìlà - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Sọdọ̀tun Nísinsìnyí"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Àtúnṣe-ojú Àìṣiṣẹ́"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Sọ Di Ọ̀tun nípa Olùṣàyẹ̀wò"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Tún Ojú Ṣe Ní Ìṣẹ́jú 1 Kọ̀ọ̀kan"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Sọ Di Ọ̀tun ní Gbogbo Ìṣẹ́jú 5"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Sọ Di Ọ̀tun ní Gbogbo Wákàtí"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Àkókò pàtàkì - àìṣiṣẹ́"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Àkókò pàtàkì - ìṣẹ́jú 15"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Àkókò pàtàkì - wákàtí 1"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Àkókò pàtàkì - wákàtí 4"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Àkókò pàtàkì - ọjọ́ 1"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Tò nípa Ìwọ̀n líle"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Tò nípa Ìfẹ́ Olùlò"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Tún Àwọn Ìtumọ̀ Pánẹ́lì Gbé Wọlé"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Ṣètò Intropage gẹ́gẹ́ bí Ojú-ìwé Ìwọlé Àìyípadà"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Ṣètò Gíráfù gẹ́gẹ́ bí Ojú-ìwé Ìwọlé Àìyípadà"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Ṣàfihàn Intropage nínú Kọ́ńsólù"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Ṣàfihàn Intropage nínú Táàbù gẹ́gẹ́ bí Ojú-ìwé Àkọ́bẹ̀rẹ̀"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Àwọn pánẹ́ẹ̀lì díẹ̀ sí i lórí ìlà kan"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Àwọn pánẹ́lì púpọ̀ sí i lórí ìlà kan"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Fagilé pínpín"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Pín pátákó ìṣàkóso yìí"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "A kò gba pípín pátákó ìṣàkóso òfo láàyè"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Lo pátákó àpínlò"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Kò lè lo dáṣíbọ́ọ̀dù tí a pín - ààlà dáṣíbọ́ọ̀dù ti pé."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Kò sí àwọn pátákó ìṣàkóso tí a pín"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Ẹ káàbọ̀ sí Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "O lè Fi Àwọn Pánẹ́lì Pátákó Ìṣàkóso kún un ní ọ̀pọ̀ ọ̀nà:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Yan àwọn pánẹ́lì tí a ti múra sílẹ̀ láti inú \"Àtòjọ Pánẹ́lì\". Pánẹ́lì lè rí ní àwọ̀ eérú. Èyí jẹ́ nítorí àwọn àṣẹ, béèrè lọ́wọ́ alákòóso"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Fi èyíkéyìí Gíráfù Cacti kún un, lo àmì"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "O lè ṣẹ̀dá àwọn pánẹ́lì tirẹ. Àlàyé síwájú sí i wà nínú fáìlì <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "O lè pín àwọn pátákó ìṣàkóso pẹ̀lú àwọn olùlò mìíràn:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "lo àṣàyàn \"Pín dasibọ́ọ̀dù yìí\" nínú àtòjọ Àwọn Ìṣe - Olùlò kọ̀ọ̀kan lè lò ó gẹ́gẹ́ bí àdàkọ."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "O lè lo pátákó ìṣàkóso tí a pín nípa lílo àtòjọ Àwọn Ìṣe:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Lo \"Lo pátákó àpínlò (orúkọ olùlò/pátákó) -  Ó ń pèsè pátákó kan náà bíi ti àpínlò ṣùgbọ́n pẹ̀lú àwọn àṣẹ rẹ."
+
+#: display.php
+msgid "Customization:"
+msgstr "Ìṣàdáni:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "O lè ṣẹ̀dá tó àwọn pátákó ìṣàkóso 9. Gbogbo pátákó ìṣàkóso ni a lè fún ní orúkọ, kí a sì lo àmì"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "A lè ṣàfihàn Intopage nínú kọ́ńsólù tàbí nínú táàbù ọ̀tọ̀. O lè yí i padà nínú àtòjọ Ìṣe"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Tí o bá fẹ́ da ọ̀rọ̀ kọ láti inú pánẹ́lì, o gbọ́dọ̀ sọ iṣẹ́ fífà àti gbígbé sílẹ̀ di Àìṣiṣẹ́, lo àmì-ìdámọ̀ (icon)"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Àlàyé Pánẹ́lì"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Ṣe àìṣiṣẹ́ gbígbé pánẹ́lì/Ṣiṣẹ́ dída ọ̀rọ̀ kọ láti pánẹ́lì"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Mú gbígbé pánẹ́lì ṣiṣẹ́/Mú dídàkọ ọ̀rọ̀ láti inú pánẹ́lì dúró"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Fi àwọn ìfitónilétí onígun mẹ́rin pupa/òfeefee/alàwọ̀ ewé pamọ́"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Ṣàfihàn àwọn ìfitónilétí onígun mẹ́rin pupa/òfeefee/alàwọ̀ ewé"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Àṣìṣe ní kíkà dátà tuntun"
+
+#: display.php
+msgid "Close"
+msgstr "Padé"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "A ti yọ Pátákó Àkóso kúrò"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Pátákó Iṣẹ́ Tuntun"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "A ti fi Pátákó Àkóso kún un"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Kò ṣeé fi Gíráfù tí a sún mọ́ tàbí tí ó ní àkókò àdáni kún un, ó ń yí àkókò padà sí Ìdajì wákàtí tó kọjá"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "A Ti Sọ Ilé-ìkówèé Pánẹ́lì Intropage Dọ̀tun Láti Ilé-ìkówèé Pánẹ́lì"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "A ti fi Pátákó Àkóso kún un, jọ̀wọ́ dúró fún ìyípo olùṣàyẹ̀wò díẹ̀ fún dátà"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Àṣìṣe - ń gbìyànjú láti pín pátákó ìṣàkóso tí kò ṣe é pín"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Tún Pánẹ́lì Gbé Wọlé"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Fà á láti tún tò"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Tún pánẹ́lì tò"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Àwọn ìlà díẹ̀ sí i"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Àwọn ìlà púpọ̀ sí i"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Ṣàfihàn Àwọn Àlàyé"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Ṣe àìṣiṣẹ́ pánẹ́lì"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "A kò rí pánẹ́lì"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Pánẹ́lì yìí kò sí nítorí pé àfikún rẹ̀ tí a nílò wà ní Àìṣiṣẹ́."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Pánẹ́lì náà ní iṣẹ́ ìṣàfihàn ṣùgbọ́n kò sí."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Pánẹ́lì náà kò ní iṣẹ́ ìṣàfihàn kankan."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "A Kò Rí I"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Kò sí Dátà kankan tí a rí.  Yálà dúró de àyẹ̀wò tó kàn, <br/>tàbí kí o lo Fífipá Tún Gbé Jáde tí ó bá wà."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "A Kò Rí Pánẹ́lì"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Iṣẹ́ Àwọn Àlàyé kò sí."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Ìmúdójúìwọ̀n ní %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "Ìṣẹ́jú-àáyá %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "Ìṣẹ́jú-àáyá %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "Ìṣẹ́jú %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "Ìṣẹ́jú %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "Wákàtí %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "Wákàtí %s"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "Ọjọ́ %s"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Kò sí Dátà kankan níbí.  Yálà lo Fífipá Múdójúìwọ̀n, tàbí dúró de ìyípo Ìṣàyẹ̀wò Cacti tó kàn."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Kò sí Dátà kankan níbí.  Pánẹ́lì yìí kò fàyè gba Àwọn Ìmúdójúìwọ̀n Àgídí.  O ó ní láti dúró títí Olùṣàyẹ̀wò Cacti yóò fi ṣe àyẹ̀wò náà."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Àwọn Pánẹ́lì ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (kò sí ìyọ̀ǹda)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Kò ṣeé fi kún Dáṣíbọ́ọ̀dù. Àkókò àdáni."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Yọ kúrò láti Pátákó Ìṣàkóso"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Fi kún Pátákó Ìṣàkóso"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Àwọn Orúkọ Pátákó Àkóso"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Pátákó Àkóso %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Ìgbà Ìmúdójúìwọ̀n Pánẹ́lì Ìpele Olùlò"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Ìgbà Ìmúdójúìwọ̀n Pánẹ́ẹ̀lì Ètò (Gbogbo Àwọn Olùlò Tí A Fàṣẹ Fún)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Àwọn Ìgbà Ìmúdójúìwọ̀n Ìtẹ̀sí"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Kókó"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Olùlò Déédéé"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[àtúnṣe: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Àwọn Pánẹ́ẹ̀lì Ìpele Ètò"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Àwọn pánẹ́lì tí ó yẹ fún àwọn olùṣàkóso tàbí àwọn olùlò àkànṣe láti wọlé sí, tí kò sì sábà wúlò fún gbogbo àwọn olùlò.  Àwọn pánẹ́lì máa ń dá lórí ìlò gbogbo ètò ní gbogbogbòò."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Àwọn Pánẹ́lì Ìpele Olùlò"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Àwọn pánẹ́lì tí ó yẹ fún gbogbo àwọn olùlò láti wọlé sí.  Àwọn àṣẹ wà ní ìwọ̀n ohun tí olùlò lọ́wọ́lọ́wọ́ lè wò nìkan."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "O lè Gba/Dí Àwọn Pánẹ́lì Lọ́wọ́ fún Olùlò"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "O lè Gba/Dí Àwọn Pánẹ́lì Lọ́wọ́ fún Ẹgbẹ́"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Ipò Pupa"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Ipò Òféfèé"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Ipò Aláwọ̀ Ewé"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Àwọn Ètò Ìfihàn"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Àwọn ohun pàtàkì yóò wà ní òkè"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Bí a bá fọwọ́ sí i, Intropage yóò fi ìfitónilétí pàtàkì (àwọn àṣìṣe, àwọn ìkìlọ̀) hàn ní àkọ́kọ́"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Ṣàfihàn pánẹ́lì púpọ̀ sí i lórí ìlà kan"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Fún ojú-ìwòran gbòòrò"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Yọ Àwọn Pánẹ́lì Kúrò Lọ́nà Àdáṣe"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Bí a bá fi Pánẹ́lì kan sí i tí a sì yọ àfikún tí a nílò kúrò, yọ pánẹ́lì náà kúrò fúnra rẹ̀ pẹ̀lú"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Ìsọdọ̀tun Ojú-ewé Aládàáṣe"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Ìgbàgbà"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Lọ́nà àdáṣe láti ọwọ́ olùṣàyẹ̀wò"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Kò ṣẹlẹ̀ rí"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Ní Gbogbo Ìṣẹ́jú"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Ní Gbogbo Ìṣẹ́jú %d"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Ní Gbogbo Wákàtí"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Àkókò pàtàkì"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Láti ìsinsìnyí sí àtẹ̀yìnwá. Ó ní ipa lórí àwọ̀ ìlà, àwọn ìṣẹ̀lẹ̀ àtijọ́ kò ní ní àfihàn pàtàkì, wọ́n á kàn hàn lásán"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Àìṣiṣẹ́"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "Ìṣẹ́jú 15"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "Wákàtí 1"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "Wákàtí 4"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "Ọjọ́ 1"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Iye àwọn ìlà páànẹ́lì"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Ìlà mélòó nínú pánẹ́lì"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "àwọn ìlà %d"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Àkókò Ìtẹ̀sí"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Fún àwọn àtẹ Ìtẹ̀síwájú, kí ni ó yẹ kó jẹ́ àkókò àìyípadà fún àwọn àtẹ wọ̀nyẹn."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Àkókò Ìparí Olùṣàyẹ̀wò"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Iye àkókò, ní ìṣẹ́jú, tí olùṣàyẹ̀wò ẹ̀yìn Intropage lè ṣiṣẹ́ kí Cacti tó dá a dúró tí ó sì pa á."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "Ìṣẹ́jú %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "Ìṣẹ́jú %d"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "Wákàtí %d"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Túpalẹ̀ Àkọsílẹ̀ - iye àwọn ìlà"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Ìlà àkọsílẹ̀ mélòó ni a ó ṣàyẹ̀wò. Àwọn ìlà = nínú pánẹ́lì, ìlà 2x = nínú àlàyé kíkún. Nọ́ńbà ńlá lè fa kí ojú-ewé lọ́ra láti ṣí"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Ìgbàgbà láti ṣàyẹ̀wò DB"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Olùṣàyẹ̀wò ló ń ṣe iṣẹ́ yìí. Ó lè fa kí ìṣiṣẹ́ olùṣàyẹ̀wò pẹ́."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Lójoojúmọ́"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Lọ́sọ̀ọ̀sẹ̀"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Gbogbo Oṣù"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Túpalẹ̀ DB - Ìpele àyẹ̀wò db"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Kíákíá - Kò sí àyẹ̀wò àwọn ìlà fún àwọn ìjápọ̀ tí kò tọ́<br/>Yára - ṣàyẹ̀wò kìkì àwọn tábìlì tí a kò tì dáadáa<br/>Yípadà - ṣàyẹ̀wò àwọn tábìlì tí ó yípadà láti àyẹ̀wò tí ó kọjá<br/>Àárín - pẹ̀lú àyẹ̀wò àwọn ìlà<br/>Gbòòrò - gbogbo àwọn ìlà àti àwọn kọ́kọ́rọ́<br/>Àárín àti gbòòrò lè fa kí ojú-ewé lọ́ra láti ṣí!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Kíákíá"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Kíákíá"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Ti yí padà"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Agbedeméjì"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Tí a fà gùn"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Àyẹ̀wò Àkókò NTP - IP tàbí orúkọ DNS ti olùpèsè NTP"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Tẹ IP tàbí orúkọ DNS ti olùpèsè NTP sí i"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Ìgbàgbà láti ṣàyẹ̀wò NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "Àyẹ̀wò DNS - Orúkọ DNS èyíkéyìí"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Tẹ orúkọ DNS sí i fún àyẹ̀wò"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Ìgbàgbà láti ṣàyẹ̀wò DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Pánẹ́lì Ìfitónilétí Olùṣàkóso nípa Àwọn Iṣẹ́ Àtúnṣe, Àwọn Ẹ̀rọ Tí Ó Wálẹ̀, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Tí kò bá ṣófo, a óò ṣàfihàn Pánẹ́lì ní òkè. O lè lo àwọn àmì HTML (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Àwọn ọjọ́ ìkìlọ̀ Ìṣètò Ìtọ́jú tó ń bọ̀"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Ọjọ́ mélòó ṣáájú ètò ìtọ́jú tí a ṣètò ni a yẹ kí a fi ìkìlọ̀ hàn?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Má ṣe kìlọ̀ láé"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Ìgbà tí ìtọ́jú yóò bẹ̀rẹ̀"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "Ọjọ́ %d Ṣáájú"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "Ọjọ́ %d Ṣáájú"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Àwọn ìṣirò nẹ́tíwọ́ọ̀kì nínú"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "bytes tàbí bits"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Àwọn Báìtì"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Àwọn Bíìtì"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Àwọn Ètò Ìtanijì"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Ìtanijì Àyẹ̀wò DB Àwọn Oníbàárà Tí A Dá Dúró"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Tí ìṣẹ̀lẹ̀ yìí bá ti ṣẹlẹ̀, mú àwọ̀ Ipò Déédéé, Ìkìlọ̀, tàbí Ìtanijí tí a yàn ṣiṣẹ́."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Ìtanijì Olùgbàlejò tí ó ní Àpèjúwe kan náà"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Ìtanijì Orísun Dátà Tí A Kọ̀ Sílẹ̀"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Ìtanijì Àbájáde Olùṣàyẹ̀wò tí kò ṣófo"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Ìtanijì Orísun Dátà Àwọn Àtọ́ka Tí Kò Dára"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Ìṣe ìkọsílẹ̀-nìkan fún Àlà Ìtanijì"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Ìtanijì nígbà tí a kò bá mú bulk_walk_size ẹ̀rọ dára jùlọ"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Ìtanijì Àwọn Ẹ̀rọ tí wọ́n ní IP/èbúté kan náà"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Ìtanijì Ẹ̀rọ tó wà nínú Igi tó ju ẹyọ kan lọ"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Ìtanijì Ẹ̀rọ tí kò ní Igi"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Ìtanijì Ẹ̀rọ pẹ̀lú Àwùjọ SNMP public/private àìyípadà"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Ìtanijì Ẹ̀rọ tí kò sí lábẹ́ Àbójútó"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Ìtanijì Ẹ̀rọ tí kò ní Gíráfù"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Ìtanijì Àkókò Ìṣàyẹ̀wò Pupa/Òfééfèé"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Àwọn àkókò ìṣàyẹ̀wò tó bá ju àwọn àlà wọ̀nyí lọ yóò fa àwọ̀ ipò Ìkìlọ̀ tàbí Ìtanijí."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Ìtanijì Ìpín Àkùnà/Gbogbo Pupa/Òfééfèé"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Ìpíndọ́gba àwọn àyẹ̀wò ìwàlárọ̀wọ́tó tí ó kùnà sí àwọn àyẹ̀wò tí ó yọrí sí rere láti mú àwọ̀ Ipò Ìkìlọ̀ tàbí Ìtanijí ṣiṣẹ́."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Yẹ́lò / Pupa"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Ìtanijì Ping Pupa/Òfééfèé"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Ìdádúró Ping tó kọjá àwọn ìpele wọ̀nyí yóò mú àwọ̀ Ipò Ìkìlọ̀ tàbí Ìtanijí jáde."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Òféfèé / Pupa"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Ìtanijì Wíwàníhìn-ín Tó Burú Jùlọ Pupa/Òfééfèé"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Wíwànílẹ̀ ní ìsàlẹ̀ àwọn ìpele wọ̀nyí yóò fa àwọ̀ ipò Yẹ́lò tàbí Pupa."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Òféfèé / Pupa"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Mú Ṣiṣẹ́"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Dá Dúró"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Àwọn Pánẹ́lì"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Tẹ 'Tẹ̀síwájú' láti Mú àwọn Pánẹ́ẹ̀lì wọ̀nyí ṣiṣẹ́."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Mú Pánẹ́lì ṣiṣẹ́"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Tẹ 'Tẹ̀síwájú' láti Sọ àwọn Pánẹ́ẹ̀lì wọ̀nyí di àìṣiṣẹ́. A máa ń fi àwọn pánẹ́ẹ̀lì àìṣiṣẹ́ pamọ́ kúrò lórí àwọn pátákó ìṣàkóso, Olùṣàyẹ̀wò a sì máa fò wọ́n dá, ṣùgbọ́n a máa ń pa dátà wọn mọ́."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Ṣe àìṣiṣẹ́ Pánẹ́lì"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Fagilé"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Tẹ̀síwájú"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Orúkọ Pánẹ́lì"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Orúkọ ìfihàn ti pánẹ́lì yìí."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Orísun"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Afikún tí ó pèsè pánẹ́lì yìí. Àwọn pánẹ́lì ti Intropage fúnra rẹ̀ máa ń hàn gẹ́gẹ́ bí Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Ẹ̀ka"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Ìsọ̀rí pánẹ́lì."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Ìpele"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Gbogbo àwọn olùlò ló ń pín àwọn pánẹ́ẹ̀lì ètò; àwọn pánẹ́ẹ̀lì olùlò jẹ́ fún olùlò kọ̀ọ̀kan."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Nílò"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Àwọn àfikún tí ó gbọ́dọ̀ ṣiṣẹ́ kí pánẹ́lì yìí tó lè hàn."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Sọdọ̀tun"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Àlàfo àkókò ìkójọpọ̀ dátà pánẹ́lì."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Iṣẹ́ Ìmúdójúìwọ̀n"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Iṣẹ́ tí olùṣàyẹ̀wò ń pè láti kó dátà pánẹ́lì yìí jọ."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Ipò"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Bóyá pánẹ́lì náà wà ní ṣiṣẹ́."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Ètò"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Olùlò"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Ṣiṣẹ́"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Kò Sí"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Kò sí Àwọn Pánẹ́lì kankan tí a rí"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Ilé-ìkówèé Pánẹ́lì Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Ṣàwárí"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Èyíkéyìí"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Lọ"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Ṣètò/Sọ Àwọn Àlẹ̀mọ́ Dọ̀tun"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Nu Kúrò"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Pa Àwọn Àlẹ̀mọ́ Rẹ́"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Àwọn Ìfiyèsí"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè ìkìlọ̀ ìtànijí."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Àwọn ìkìlọ̀ olùgbàlejò"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Àwọn ìkìlọ̀ olùgbàlejò (òkè/ìsàlẹ̀/ìmúbọ̀sípò) lẹ́nu àìpẹ́"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Ọjọ́"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Olùgbàlejò"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Ìpínlẹ̀"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Àwọn àkọsílẹ̀ púpọ̀ sí i, lo fèrèsé ẹ̀kúnrẹ́rẹ́"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Ń dúró de dátà"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "O kò ní àṣẹ sí àwọn olùgbàlejò kankan"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Àwọn Pánẹ́ẹ̀lì Ìtúpalẹ̀"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Àwọn pánẹ́lì tí ó ń ṣàyẹ̀wò ìhùwàsí lọ́wọ́lọ́wọ́ ti Cacti àti àwọn àfikún rẹ̀."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Túpalẹ̀ Àwọn Ìwọlé"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Túpalẹ̀ àwọn ìwọlé Cacti mélòó kan tó kẹ́yìn fún àwọn ìtẹ̀síwájú àti àwọn àṣìṣe."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Túpalẹ̀ Àwọn Àkọsílẹ̀"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Wá àwọn àṣìṣe tó wọ́pọ̀ nínú fáìlì àkọọ́lẹ̀ Cacti tó yẹ kí ó jẹ́ ohun àníyàn."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Àwọn Àyẹ̀wò Dátàbẹ́ẹ̀sì"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Túpalẹ̀ ibi ìpamọ́ dátà MySQL/MariaDB fún àwọn àṣìṣe tó wọ́pọ̀.  Ṣàkíyèsí pé ìlànà yìí lè gba àkókò púpọ̀ lórí àwọn ètò tó tóbi gan-an."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Túpalẹ̀ Àwọn Ohun Cacti"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Túpalẹ̀ Àwọn Igi, Àwọn Gíráàfù, Àwọn Olùgbàlejò, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Túpalẹ̀ àwọn ìṣirò DS"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Túpalẹ̀ àwọn ìṣirò orísun dátà"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Orúkọ Olùlò"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "Àdírẹ́ẹ̀sì IP"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Kùnà"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Àṣeyọrí - Ìwọlé"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Àṣeyọrí - Àmì-ìdánimọ̀"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Àpapọ̀ Ìwọlé Tó Kùnà: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Àwọn Olùlò Tí Ó Ń Ṣiṣẹ́ Ní Wákàtí Kan Sẹ́yìn: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Fáìlì àkọọ́lẹ̀ kò ṣeé wọlé tàbí ó ṣófo"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Túpalẹ̀ %s àwọn ìlà àkọsílẹ̀ tó kẹ́yìn:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Àwọn Àṣìṣe: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Àwọn Ìkìlọ̀: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Ìwọ̀n Àkọọ́lẹ̀: Tóbi ju 2GB lọ"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Ìwọ̀n Àkọọ́lẹ̀: Ó dára"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Ìwọ̀n Àkọọ́lẹ̀: Tóbi púpọ̀"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Ìwọ̀n Àkọsílẹ̀: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Àwọn ìlà àkọsílẹ̀ tó kẹ́yìn:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Ń fò àyẹ̀wò àwọn tábìlì DB. Ibùdó dátà tóbi jù"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Tábìlì %s ipò %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Àwọn Ìṣòro"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: Ó DÁA"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Ààlà ìsopọ̀ tó pọ̀ jù lọ ti dé: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "O lè mú ìsopọ̀ tó pọ̀ jù lọ (Max connection) pọ̀ sí i nípasẹ̀ àwọn irinṣẹ́ ìlà àṣẹ tàbí títí láé nínú fáìlì ìṣètò"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Àwọn àṣìṣe ìsopọ̀: %s - gbìyànjú láti tún iṣẹ́ SQL bẹ̀rẹ̀, ṣàyẹ̀wò àkọsílẹ̀ SQL, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Àwọn oníbàárà/ìsopọ̀ tó jáwọ́: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Àwọn oníbàárà/ìsopọ̀ tó jáwọ́ - Ṣe 'SET GLOBAL log_warnings = 1;' tàbí ' log_error_verbosity = 1;' (ó sinmi lórí ẹ̀yà MySQL/MariaDB rẹ) láti inú mysql CLI kí o sì ṣètò rẹ̀ nínú server.cnf láti pa á lẹ́nu mọ́."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Àwọn àṣìṣe ìsopọ̀: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Àwọn tábìlì tí ó bàjẹ́: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "O yẹ kí o ṣiṣẹ́ àwọn àṣẹ àyẹ̀wò àti àtúnṣe tábìlì"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Àwọn tábìlì ìrántí: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Gbogbo àwọn tábìlì: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Kò Sí"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Àwọn ẹ̀rọ tí ó ní IP àti ibùdó-ìsopọ̀ kan náà: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Àwọn Ẹ̀rọ tí ìwọ̀n Bulk Walk wọn kò tíì dára jù lọ: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Jọ̀wọ́ wo ààlà Ẹ̀rọ \"Bulk Walk Maximum Repetitions\". O lè mú iṣẹ́ Olùṣàyẹ̀wò rẹ sunwọ̀n síi"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Ìṣàtúnṣe àtọ́ka tó ṣẹ̀ṣẹ̀ parí"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Ìṣiṣẹ́ Olùṣàyẹ̀wò RRD tó kẹ́yìn"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Ìṣiṣẹ́ Olùfọ̀mọ́ RRD tó kẹ́yìn"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "A gbani nímọ̀ràn láti máa ṣiṣẹ́ irinṣẹ́ yìí ní ìgbà kọ̀ọ̀kan ó kéré tán"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: kò tíì ṣiṣẹ́ síbẹ̀"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Àwọn Orísun Dátà Aláìní-olùtọ́jú: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Orísun Dátà - àwọn àtọ́ka búburú: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Ìtànijí/ìkìlọ̀ àkọọ́lẹ̀-nìkan Thold: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Àwọn ẹ̀rọ tí ó ní àpèjúwe kan náà: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Àwọn ẹ̀rọ tí ó wà nínú ju igi kan lọ: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Àwọn ẹ̀rọ láìsí àwọn gíráàfù: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Àwọn ẹ̀rọ láìsí igi: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Àwọn ẹ̀rọ tí ó ní àwùjọ public/private àìyípadà: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Ìṣòro àwọn ohun Gíráfù/ohun àdàkọ: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Àbójútó Àfikún - Àwọn olùgbàlejò tí a kò ṣàbójútó: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "Ó dára"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "CPU Sáfà (àwọn kọ́ọ̀ / àwọn ìlànà / àwọn okùn): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Ìfitọ́nilétí alábòójútó wà ní àìṣiṣẹ́, a kò sì tíì ṣètò ímeèlì alábòójútó"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Rí àwọn ìṣòro %s"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Gbogbo Nǹkan Dára"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "Àwọn ìṣirò DS: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Pánẹ́lì nílò kí ìṣirò DS wà ní ṣiṣẹ́."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Gbogbo àwọn àkọsílẹ̀ DS "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Àwọn àkọsílẹ̀ DS òfo "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Túpalẹ̀ Àlàyé Àkọsílẹ̀ Cacti [ Àwọn Ìkìlọ̀/Àṣìṣe ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Àwọn Àṣìṣe"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Àwọn Ìkìlọ̀"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "ÌKÌLỌ̀: Fáìlì Tóbi Ju 2GB Lọ"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Ìwọ̀n Àkọsílẹ̀"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Túpalẹ̀ Àlàyé Àwọn Ìwọlé"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Èsì"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Àwọn Olùlò Tí Ó Ń Ṣiṣẹ́ Ní Wákàtí 2 Sẹ́yìn:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Kò Sí Àwọn Olùlò Tí Wọ́n Ń Ṣiṣẹ́"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Wo Gbogbo Àkọsílẹ̀ Olùlò"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Túpalẹ̀ Igi, Àwọn Gíráàfù, Àwọn Olùgbàlejò"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Àwọn ẹ̀rọ tí ó ní IP àti ibùdó-ìsopọ̀ kan náà - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Àwọn Ẹ̀rọ tí ìwọ̀n Bulk Walk wọn kò tíì dára jù lọ - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Ìtọ́jú dátà"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Àwọn Orísun Dátà Aláìní-olùtọ́jú - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Àwọn Orísun Dátà tí ó ní àwọn àtọ́ka búburú - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Ìtànijí/ìkìlọ̀ àkọọ́lẹ̀-nìkan Thold - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Àwọn ẹ̀rọ tí ó ní àpèjúwe kan náà - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Àwọn ẹ̀rọ tí ó wà nínú ju igi kan lọ - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Àwọn Ẹ̀rọ láìsí Àwọn Gíráàfù - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Àwọn ẹ̀rọ láìsí igi - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Àwọn ẹ̀rọ tí ó ní àwùjọ public/private àìyípadà - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Ìṣòro àwọn ohun Gíráfù/ohun àdàkọ - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Àdàkọ Gíráfù"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Àwọn Gíráàfù"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Àwọn ohun Gíráfù"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Àwọn ohun èlò Àdàkọ"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Àbójútó Àfikún - Àwọn olùgbàlejò tí a kò ṣàbójútó - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "Àwọn kọ́ọ̀ / àwọn ìlànà / àwọn okùn CPU Sáfà: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Ìfitọ́nilétí alábòójútó wà ní àìṣiṣẹ́ tàbí a kò tíì ṣètò ímeèlì alábòójútó"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Èyí tó kún fún iṣẹ́ jùlọ"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Àwọn pánẹ́lì tí ó ń wá àwọn olùgbàlejò tí ó ní iṣẹ́ jùlọ."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "CPU Tí Ó Ṣiṣẹ́ Jùlọ"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Àwọn ẹ̀rọ tí CPU wọn ní iṣẹ́ jùlọ (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "ucd/net Tí Ó Ṣiṣẹ́ Jùlọ - Ìrù"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Àwọn ẹ̀rọ tí ó ní Ẹrù-iṣẹ́ gíga jùlọ (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Ààyè Hard Drive Tí Ó Ṣiṣẹ́ Jùlọ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Àwọn ẹ̀rọ tí ó lo ààyè Hard Drive jùlọ (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Àkókò ìṣiṣẹ́ tí ó pọ̀ jùlọ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Àwọn ẹ̀rọ tí ó ní àkókò ìṣiṣẹ́ pípẹ́ jùlọ"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Ìṣàn-dátà wọlé/jáde Íńtáféèsì tí ó ṣiṣẹ́ jùlọ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Àwọn ẹ̀rọ tí ó ní ìrìn-àjò dátà wíwọlé/jíjáde gíga jùlọ (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Àṣìṣe Íńtáféèsì tí ó ṣiṣẹ́ jùlọ"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Àwọn ẹ̀rọ tí ó ní àṣìṣe/ìdànù gíga jùlọ (Interface)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Ìlò Íńtáféèsì tí ó ṣiṣẹ́ jùlọ"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Àwọn pọ́ọ̀tì tó ní ìlò ìbánisọ̀rọ̀ tó ga jù lọ"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Jọ̀wọ́ mú DS stats ṣiṣẹ́ kí o sì ṣètò rẹ̀"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Beere lọ́wọ́ olùdarí láti mú àwọn ìṣirò DS ṣiṣẹ́"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Ìpíndọ́gba"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Òkè Jùlọ"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Ìpíndọ́gba gbogbo DS tí a gbà láàyè"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Ń dúró de dátà tàbí o kò ní àṣẹ fún ẹ̀rọ kankan pẹ̀lú àdàkọ yìí."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "O kò ní àṣẹ sí àwọn olùgbàlejò kankan tàbí kò sí olùgbàlejò kankan pẹ̀lú àdàkọ yìí"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Àkókò Ìṣiṣẹ́"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Ìpíndọ́gba gbogbo àwọn olùgbàlejò tí a gbà láàyè"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Ń dúró de dátà tàbí o kò ní àṣẹ fún ẹ̀rọ kankan"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Ìtọ́sọ́nà"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Ààrin àkókò ìṣẹ́jú 5 tó kọjá"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Ìlò CPU MIB Olùgbàlejò 30 tí ó ṣiṣẹ́ jùlọ (wákàtí tí ó kọjá)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Fi afikún TopX sórí ẹ̀rọ fún ìṣirò DS púpọ̀ sí i"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Ìrù ucd/net 30 tí ó ṣiṣẹ́ jùlọ (wákàtí tí ó kọjá)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Ààyè Hard Drive MIB Olùgbàlejò 30 tí ó ṣiṣẹ́ jùlọ (wákàtí tí ó kọjá)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Ìṣàn-dátà tí ó ṣiṣẹ́ jùlọ (wọlé+jáde)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Ìlò íńtáféèsì tí ó ṣiṣẹ́ jùlọ"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Àwọn Pánẹ́lì Gíráfìkì"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè àlàyé nípa Cacti àti àwọn àfikún rẹ̀ lọ́nà Gíráfù."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Àwọn Orísun Dátà"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Gíráfù Àwọn Orísun Dátà"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Àwọn Àdàkọ Ẹ̀rọ"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Gíráfù Àwọn Àdàkọ Ẹ̀rọ"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Àwọn Ẹ̀rọ nípa Ipò"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Gíráfù Àwọn Ẹ̀rọ nípa Ipò (ókè, ìsàlẹ̀,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Àwọn Orísun Dátà: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Àwọn Àdàkọ Ẹ̀rọ: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Àwọn Ẹ̀rọ: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Kò Ṣiṣẹ́"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Ń Bọ̀ sípò"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Irú Dátà"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Àpapọ̀"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Kò sí àwọn orísun dátà tí kò ní àdàkọ kankan tí a rí"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Àwọn Ẹ̀rọ"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Iye Ẹ̀rọ"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Gbogbo"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Ń Ṣiṣẹ́"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Orúkọ Àdàkọ"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Àpapọ̀ Àwọn Ẹ̀rọ"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Kò sí àwọn àdàkọ ẹ̀rọ kankan tí a rí"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "Àwọn Pánẹ́lì MacTrack"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè àlàyé nípa àwọn àfikún MacTrack ti Cacti."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "Àfikún MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Oríṣiríṣi ìṣirò àkójọ àti Ibùdó MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "Àwọn Ibùdó MacTrack"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Oríṣiríṣi ìṣirò Ibùdó MacTrack."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "Àfikún MacTrack Kò Tíì Fi Sí i/Kò Ṣiṣẹ́"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Gbogbo: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Ń ṣiṣẹ́: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Kò ṣiṣẹ́: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Àṣìṣe: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Àìmọ̀: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Àìṣiṣẹ́: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Àṣìṣe"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Àìmọ̀"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "O kò ní àṣẹ àfikún (plugin)"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Ibùdó"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "Àwọn IP"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Àwọn Pọ́ọ̀tì"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Àwọn pọ́ọ̀tì tó ń ṣiṣẹ́"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "Àwọn MAC"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Àwọn Àṣìṣe Ẹ̀rọ"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Kò sí àwọn ibùdó mactrack kankan tí a rí"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Àwọn Pánẹ́lì Oríṣiríṣi"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè dátà gbogbogbòò tí kò sí lábẹ́ ìpín nípa Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "Ipò NTP/DNS"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Ṣíṣàyẹ̀wò aago ètò Cacti rẹ fún ìyàtọ̀ láti ìpìlẹ̀ tí a mọ̀ àti àyẹ̀wò ìtúmọ̀ DNS"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Àwọn Àlàyé Àfikún Maint"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Àwọn àlàyé Àfikún Maint lórí àwọn ìṣètò tí ó ń bọ̀"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Àwọn Àlàyé Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Àlàyé Kíkún ti Àyẹ̀wò Iṣẹ́ URL Àfikún webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Àwọn Àlàyé àfikún Servcheck"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Àlàyé Kíkún ti Àfikún ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Kò sí olùpèsè NTP tí a ṣètò"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Olùpèsè NTP tí kò tọ́ ni a ṣètò - %s<br/>Jọ̀wọ́ ṣàtúnṣe rẹ̀ nínú àwọn ètò"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Kíkùnà láti gba àkókò NTP láti %s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Jọ̀wọ́ ṣàyẹ̀wò àkókò nítorí pé ó ti yàtọ̀ jù"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "ju ìṣẹ́jú-àáyá %s lọ láti olùpèsè NTP %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Àkókò abẹ́lé dọ́gba pẹ̀lú olùpèsè NTP"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Kò le bá olùpèsè NTP tí a tọ́ka sí sọ̀rọ̀."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Jọ̀wọ́ ṣàyẹ̀wò ìṣètò rẹ."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Kò sí orúkọ olùgbàlejò DNS tí a ṣètò"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Orúkọ olùgbàlejò DNS tí kò tọ́ ni a ṣètò - %s<br/>Jọ̀wọ́ ṣàtúnṣe rẹ̀ nínú àwọn ètò"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Ìtúmọ̀ orúkọ olùgbàlejò DNS (%s) yọrí sí rere."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Àkókò ìtúmọ̀ DNS: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Ìtúmọ̀ orúkọ olùgbàlejò DNS (%s) kùnà."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Àfikún Maint kò tíì di fífisílẹ̀/ṣiṣẹ́"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "A kò tíì fi Àfikún Webseer sori ẹ̀rọ tàbí a kò tíì bẹ̀rẹ̀ rẹ̀"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Àfikún Webseer kò ní àtìlẹ́yìn mọ́, lo àfikún servcheck dípò rẹ̀"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Iye àwọn àyẹ̀wò (gbogbo rẹ̀/àìṣiṣẹ́): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Ipò (ń ṣiṣẹ́/kò ṣiṣẹ́): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Àwọn ìránṣẹ́ àkọsílẹ̀ tó kẹ́yìn"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "Kóòdù HTTP"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Àfikún Webseer - Àwọn Àlàyé"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "A kò tíì fi Àfikún Servcheck sori ẹ̀rọ tàbí a kò tíì bẹ̀rẹ̀ rẹ̀"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Ipò (dára/àṣìṣe): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Àwọn àkọọ́lẹ̀ àkọsílẹ̀ tó kẹ́yìn"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Dánwò"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Irú"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Àfikún Servcheck - Àwọn Àlàyé"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Èsì ìwádìí"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Àwọn Pánẹ́lì Olùṣàyẹ̀wò"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè àlàyé nípa ìlànà ìṣàyẹ̀wò ti Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Àlàyé Olùwádìí"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Oríṣiríṣi àlàyé nípa Olùṣàyẹ̀wò Cacti rẹ."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Àwọn Àkọsílẹ̀ Ìṣirò Olùṣàyẹ̀wò"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Oríṣiríṣi ìṣirò Olùṣàyẹ̀wò Cacti."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Àwọn Ohun Àbájáde Olùṣàyẹ̀wò"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Orúkọ"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Àpapọ̀ Àkókò"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Tuntun/Àìṣiṣẹ́"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Ń ṣiṣẹ́"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Ní ìsinmi"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Àìmọ̀/wálẹ̀"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "Àwọn Ìṣẹ́jú-àáyá %s"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(ó dára)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(gbogbo rẹ̀)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Àwọn Ìṣẹ́jú-àáyá"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "ID ìpíndọ́gba 24h: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Àlàyé Kíkún ti Olùṣàyẹ̀wò"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Ìpíndọ́gba Àkókò"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Àkókò Tó Pọ̀ Jù Lọ"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Àwọn ohun àbájáde Olùṣàyẹ̀wò "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Àwọn Ohun"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Àwọn Pánẹ́ẹ̀lì Syslog"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè àlàyé nípa ìṣàkóso ìfiranṣẹ́ Syslog ti Cacti."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Àwọn Àlàyé Kíkún Syslog"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Oríṣiríṣi ìṣirò Àfikún Syslog."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Àwọn Ẹ̀rọ Tó Ga Jù lọ Syslog"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Àwọn ẹ̀rọ tí ó ní ìfiránsẹ́ púpọ̀ jùlọ"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Àwọn ìpele Ìránṣẹ́ Syslog"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Àwọn ìránṣẹ́ nípa ìpele."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Tí ń wọlé"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Ti Fipamọ́"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Àwọn Ìfiranṣẹ́"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Àfikún Syslog kò sí lórí ètò/kò ń ṣiṣẹ́"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Ẹ̀rọ"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Àfikún Syslog kò sí ní ipò ṣiṣẹ́"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Àwọn Olùgbàlejò 20 tó ní àwọn ìránṣẹ́ tó pọ̀ jùlọ"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Kò sí àwọn ìránṣẹ́"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Àwọn Pánẹ́ẹ̀lì Ètò"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè àlàyé nípa iṣẹ́ ètò Cacti."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Ìfitónilétí"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Oríṣiríṣi àlàyé ètò nípa ètò Cacti fúnra rẹ̀."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Àwọn Ìtànijí Ìṣàkóso"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Pánẹ́lì ìfitónilétí alákòóso àfikún fún gbogbo àwọn olùlò"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Ìṣirò Boost"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Ìfitónilétí nípa ìlànà ìgbéga iṣẹ́ Cacti."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Ìtàn Boost"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Ìfitónilétí nípa ìtàn ìlànà ìgbéga."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Àwọn Ìpẹ̀kun Wákàtí 24"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Tábìlì pẹ̀lú wákàtí 24 ti Àwọn Àṣeyọrí Ìṣàyẹ̀wò Gíga Jùlọ (ìṣiṣẹ́ olùṣàyẹ̀wò tó pẹ́ jùlọ, àwọn olùgbàlejò tó dúró)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Ìlò CPU"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Gíráfù ìlò CPU (Linux nìkan)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "Ìrù CPU: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "A kò ṣe ìgbékalẹ̀ iṣẹ́ yìí lórí àwọn pẹpẹ Windows"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Ìpíndọ́gba CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "CPU Tó Pọ̀ Jù Lọ"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "Ìpíndọ́gba 24h"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Ẹ̀dà Cacti: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Irú Olùṣàyẹ̀wò:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Ẹ̀yà Spine: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "O ń lo ẹ̀yà spine tí kò tọ́!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Irú Olùṣàyẹ̀wò: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Ń ṣiṣẹ́ lórí: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Ìtàn Boost: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Ìrántí "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Àwọn àkọsílẹ̀ tó ń dúró "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Ìkìlọ̀ Àṣejù Àkókò"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Àkókò Ti Kọjá"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Òmíràn"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Kò Tíì Ṣiṣẹ́ Rí"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Ipò Boost ni: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Àwọn Ìṣiṣẹ́/Ìgbàgbọ̀n: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Àlà Àwọn Àkọsílẹ̀ Tó Ń Dúró: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Àkókò Ìbẹ̀rẹ̀ Tókàn Tó Súnmọ́: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Àwọn Àkọsílẹ̀ Tó Ń Dúró/Tí A Fi Pamọ́: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Ìwọ̀n Tábìlì Boost Lọ́wọ́lọ́wọ́: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Ìpíndọ́gba Báìtì/Àkọsílẹ̀: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Àkókò/ìmúdójúìwọ̀n ìṣiṣẹ́ tó kẹ́yìn: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Ìṣiṣẹ́ Olùṣàyẹ̀wò"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Àwọn Olùgbàlejò Tí Kò Ṣiṣẹ́"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Ti Ṣokùnfà"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Àwọn ohn. àbáj. Olùṣàyẹ̀wò"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Àwọn àṣìṣe olùgbàlejò"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Ìṣàyẹ̀wò Ìpẹ̀kun Wákàtí 48"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Olùṣàyẹ̀wò Tó Ń Ṣiṣẹ́ Pẹ́"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Ẹ̀rọ Tó Dáwọ́ Dúró Tó Pọ̀ Jù Lọ"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Àlà Tó Fà Sókè Tó Pọ̀ Jù Lọ"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Ohun Àbájáde Olùṣàyẹ̀wò"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Àwọn Àyẹ̀wò Tí Ó Kùnà"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Àwọn Pánẹ́lì Àlà"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè àlàyé nípa Àfikún Àlà Cacti."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Àwọn Ìṣẹ̀lẹ̀ Àlà Tó Kẹ́yìn"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Àwọn Ìṣẹ̀lẹ̀ Tuntun Jùlọ ti Àfikún Àlà"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Àlà"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Gíráfù Àfikún Àlà (gbogbo, tí ó ṣẹlẹ̀, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "A kò tíì fi Àfikún Thold sori ẹ̀rọ tàbí a kò tíì bẹ̀rẹ̀ rẹ̀"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Láìsí àwọn ìṣẹ̀lẹ̀ síbẹ̀"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Àwọn Àlà: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Àfikún Thold kò sí ní ìfisílẹ̀/kò ṣiṣẹ́"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Ti rékọjá"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Àwọn Àlàyé Àlà"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Àwọn Àlà"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Ti rékọjá: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Ti Ṣokùnfà: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "O kò ní àṣẹ sí Àwọn Àlà"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Àpèjúwe"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Àwọn Pánẹ́lì 5 Òkè/Ìsàlẹ̀"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Àwọn pánẹ́lì tí ó ń pèsè àlàyé ìtẹ̀sí nípa ìkójọ dátà Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Ping Ìsàlẹ̀"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Àwọn ẹ̀rọ tí ìdáhùn ping wọn burú jùlọ"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Wíwànílẹ̀ Ìsàlẹ̀"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Àwọn ẹ̀rọ tí wíwà-lárọ̀ọ́wọ́tó/ìbádé wọn burú jùlọ"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Àkókò Ìṣàyẹ̀wò Ìsàlẹ̀"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Àwọn ẹ̀rọ tí àkókò ìṣàyẹ̀wò wọn burú jùlọ"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Ìpín Ìṣàyẹ̀wò Ìsàlẹ̀"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Àwọn ẹ̀rọ tí ìpíndọ́gba ìṣàyẹ̀wò wọn burú jùlọ"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Lọ́wọ́lọ́wọ́"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Orúkọ Olùgbàlejò"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Wíwànísílẹ̀/Ìṣeédeébá"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Àkókò Ìṣàyẹ̀wò"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Ìpíndọ́gba"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Àwọn Olùgbàlejò 20 Tó Ní Ping Tó Burú Jùlọ"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Àwọn Olùgbàlejò 20 Tó Ní Ìwàlárọ̀wọ́tó Tó Burú Jùlọ"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Wíwà-lárọ̀ọ́wọ́tó"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Àwọn Olùgbàlejò 20 Tó Ní Àkókò Ìṣàyẹ̀wò Tó Burú Jùlọ"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Àwọn Olùgbàlejò 20 Tó Ní Ìpíndọ́gba Ìṣàyẹ̀wò Tó Burú Jùlọ"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Olùwo Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Ìṣàkóso Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Ìṣàkóso"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Àkójọpọ̀ Pánẹ́lì"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Ìṣàkóso Ètò"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Ààlà Àkókò Wákàtí 1 Tó Kọjá"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Ààlà Àkókò Wákàtí %d Tó Kọjá"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Ààlà Àkókò Ọjọ́ 1 Tó Kọjá"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Ààlà Àkókò Ọjọ́ 2 Tó Kọjá"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "Ìṣẹ́jú-àáyá %d"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "Wákàtí %d"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "Ọjọ́ %d"
+
+#: setup.php
+msgid "Actions"
+msgstr "Àwọn Ìgbésẹ̀"
+

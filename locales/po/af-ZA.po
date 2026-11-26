@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-24 19:00+0000\n"
+"Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
+"Language-Team: Afrikaans\n"
+"Language: af-ZA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - Toestemming geweier"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "Een of meer panele is verwyder weens onvoldoende toestemmings. Kontak die administrateur."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Jy kan rye hierbo deaktiveer in <b>Konfigureer > Instellings > Algemeen > Versteek Cacti-kontroleskerm</b> en die hele bladsy vir Intropage gebruik "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Verstek"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Versteek of vertoon rooi/geel/groen vierkant-kennisgewings"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Deaktiveer paneelverskuiwing/aktiveer kopieer teks vanaf paneel"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Aksies ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Voeg nuwe paneelbord by"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Verwyder huidige paneelbord"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Aantal reëls - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Verfris nou"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Verfrissing gedeaktiveer"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Verfris volgens Poller"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Verfris elke 1 minuut"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Verfris elke 5 minute"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Verfris elke uur"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Belangrike tydperk - gedeaktiveer"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Belangrike tydperk - 15 minute"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Belangrike tydperk - 1 uur"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Belangrike tydperk - 4 ure"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Belangrike tydperk - 1 dag"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Sorteer volgens erns"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Sorteer volgens gebruikersvoorkeur"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Herlaai paneeldefinisies"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Stel Intropage as verstek-aanmeldbladsy"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Stel grafiek as verstek-aanmeldbladsy"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Vertoon Intropage in konsole"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Vertoon Intropage in oortjie as verstekbladsy"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Minder panele op 'n ry"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Meer panele op 'n lyn"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Kanselleer deling"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Deel hierdie paneelbord"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Deel van leë paneelbord word nie toegelaat nie"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Gebruik gedeelde kontroleskerm"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Kan nie gedeelde paneelbord gebruik nie - paneelbordlimiet bereik."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Geen gedeelde paneelborde"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Welkom by Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Jy kan Paneelbordpanele op meer maniere byvoeg:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Kies voorbereide panele uit die \"Panele-kieslys\". 'n Paneel kan grys vertoon word. Dit is as gevolg van toestemmings, vra die administrateur"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Voeg enige Cacti-grafiek by, gebruik ikoon"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Jy kan jou eie panele skep. Meer inligting in die lêer <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Jy kan kontroleskerms met ander gebruikers deel:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "gebruik die \"Deel hierdie paneelbord\"-opsie in die Aksies-kieslys - Elke gebruiker kan dit as sjabloon gebruik."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Jy kan 'n gedeelde kontroleskerm gebruik deur die Aksies-kieslys te gebruik:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Gebruik \"Gebruik gedeelde kontroleskerm (gebruiker/kontroleskermnaam) - Dit berei dieselfde kontroleskerm as die gedeelde een voor, maar met jou toestemmings."
+
+#: display.php
+msgid "Customization:"
+msgstr "Aanpassing:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Jy kan tot 9 kontroleskerms skep. Elke kontroleskerm kan benoem word en 'n ikoon gebruik"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Intopage kan in die konsole of in 'n aparte oortjie vertoon word. Jy kan dit in die Aksie-kieslys verander"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Indien u teks vanaf die paneel wil kopieer, moet u die sleep-en-los-funksie deaktiveer; gebruik ikoon"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Paneelbesonderhede"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Deaktiveer paneelverskuiwing/Aktiveer kopieer teks vanaf paneel"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Aktiveer paneelverskuiwing/Deaktiveer die kopiëring van teks vanaf paneel"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Versteek rooi/geel/groen vierkant-kennisgewings"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Wys rooi/geel/groen vierkantige kennisgewings"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Fout met die lees van nuwe data"
+
+#: display.php
+msgid "Close"
+msgstr "Sluit"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Kontroleskerm is verwyder"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Nuwe paneelbord"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Kontroleskerm is bygevoeg"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Kan nie 'n ingezoomde grafiek of 'n grafiek met 'n pasgemaakte tydperk byvoeg nie; tydperk word verander na Laaste halfuur"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Intropage-paneelbiblioteek verfris vanaf paneelbiblioteek"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Kontroleskerm is bygevoeg, wag asseblief 'n paar poller-siklusse vir data"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Fout - probeer om 'n nie-gedeelde kontroleskerm te deel"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Herlaai paneel"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Sleep om te herrangskik"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Herrangskik paneel"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Minder rye"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Meer rye"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Wys besonderhede"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Deaktiveer paneel"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Paneel nie gevind nie"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Hierdie paneel is onbeskikbaar omdat die vereiste inprop gedeaktiveer is."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Die paneel sluit 'n renderingsfunksie in, maar dit bestaan nie."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Die paneel het nie 'n renderingsfunksie nie."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Nie gevind nie"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Geen data gevind nie.  Wag vir die volgende kontrole, <br/>of gebruik Dwing herlaai indien beskikbaar."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Paneel nie gevind nie"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Besonderhede-funksie bestaan nie."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Opd. oor %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "%s Sek"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s Sekondes"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "%s Min"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "%s Minute"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "%s Ure"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "%s Ure"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "%s Dae"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Geen data beskikbaar nie.  Gebruik Dwing opdatering, of wag vir die volgende Cacti-pollersiklus."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Geen data beskikbaar nie.  Hierdie paneel laat nie gedwonge opdaterings toe nie.  Jy sal moet wag totdat Cacti se Poller die kontrole uitvoer."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Panele ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (geen toestemming)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Kan nie by Paneelbord voeg nie. Pasgemaakte tydperk."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Verwyder vanaf paneelbord"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Voeg by paneelbord"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Kontroleskermname"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Kontroleskerm %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Opdateringsfrekwensies vir gebruikersvlakpanele"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Stelselpaneel-opdateringsfrekwensies (Alle gemagtigde gebruikers)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Tendens-bywerkingsfrekwensies"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Kern"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Gewone gebruiker"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[wysig: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Stelselvlakpanele"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Panele wat geskik is vir toegang deur administratiewe of gevorderde gebruikers en tipies nie vir algemene gebruikers van toepassing is nie. Panele gaan gewoonlik oor algehele stelselbenutting."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Gebruikersvlakpanele"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Panele wat geskik is vir algemene gebruikers om toegang tot te verkry. Toestemmings is beperk tot wat die huidige gebruiker kan bekyk."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Jy kan Panele vir 'n gebruiker toelaat/verbied"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Jy kan Panele vir 'n groep toelaat/verbied"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Rooi status"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Geel status"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Groen Status"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Vertooninstellings"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Belangrike dinge sal boaan wees"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Indien gemerk, vertoon Intropage belangrike inligting (foute, waarskuwings) eerste"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Vertoon meer panele op 'n reël"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "Vir wye skerm"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Deïnstalleer panele outomaties"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "As 'n paneel geïnstalleer is en die vereiste inprop verwyder word, deïnstalleer die paneel ook outomaties"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Outomatiese Bladsyverfrissing"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Hoe gereeld"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Outomaties deur poller"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Nooit"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Elke minuut"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Elke %d minute"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Elke uur"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Belangrike tydperk"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Vanaf nou tot die verlede. Beïnvloed ry-kleuring; ouer gebeurtenisse sal nie uitgelig word nie, slegs vertoon word"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Gedeaktiveer"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "15 minute"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "1 uur"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "4 uur"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "1 dag"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Aantal paneelreëls"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Hoeveel reëls in paneel"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "%d reëls"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Tendenstydspan"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "Vir Tendensgrafieke, wat moet die verstek tydspan vir daardie grafieke wees."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Poller-tydverstryking"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Die tyd, in minute, wat die Intropage-agtergrond-Poller kan loop voordat dit deur Cacti onderbreek en beëindig word."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d minuut"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d minute"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "%d uur"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Ontleed logboek - aantal reëls"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Hoeveel logboekreëls ontleed sal word. Reëls = in paneel, 2x reëls = in detail. 'n Groot getal kan stadige bladsylaai veroorsaak"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Hoe gereeld om DB te ontleed"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Die poller voer hierdie taak uit. Dit kan 'n lang poller-lopie veroorsaak."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Elke dag"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Elke week"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Elke maand"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Ontleed DB - Vlak van DB-kontrolering"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Snel - Kontroleer nie rye vir verkeerde skakels nie<br/>Vinnig - kontroleer slegs tabelle wat nie behoorlik gesluit is nie<br/>Gewysig - kontroleer tabelle wat sedert die laaste kontrole gewysig is<br/>Medium - met ryskandering<br/>Uitgebrei - volledige rye en sleutels<br/>Medium en uitgebrei kan stadige bladsylaai veroorsaak!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Vinnig"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Vinnig"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Verander"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Medium"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Uitgebrei"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "NTP-tydtoets - IP- of DNS-naam van NTP-bediener"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Voeg IP- of DNS-naam van NTP-bediener in"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Hoe gereeld om NTP na te gaan"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "DNS-kontrole - Enige DNS-naam"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Voeg DNS-naam vir toets in"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Hoe gereeld om DNS na te gaan"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Admin-inligtingspaneel oor instandhoudingstake, af-toestelle, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Indien dit nie leeg is nie, sal die paneel bo-aan vertoon word. U kan HTML-merkers (b, i, ...) gebruik."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Waarskuwingsdae vir komende instandhoudingskedule"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Hoeveel dae voor 'n geskeduleerde instandhoudingskedule moet 'n waarskuwing vertoon word?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Waarsku nooit"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Wanneer onderhoud begin"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "%d dag vooraf"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "%d dae vooraf"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Netwerkstatistieke in"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "grepe of bisse"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Grepe"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Bisse"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Alarminstellings"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Alarm DB-kontrole gestaakte kliënte"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Indien hierdie gebeurtenis plaasgevind het, aktiveer die gekose Normaal-, Waarskuwing- of Alarm-statuskleur."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Alarm gasheer met dieselfde beskrywing"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Alarm ouerlose databron"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Alarm nie-leë Poller-afvoer"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Alarm databron met slegte indekse"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Alarm Drempel logonly-aksie"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Alarm wanneer toestel se bulk_walk_size nie geoptimeer is nie"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Alarm toestelle met dieselfde IP/poort"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Alarm toestel in meer as een boom"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Alarm toestel sonder 'n boom"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Alarm toestel met verstek public/private SNMP-gemeenskap"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Alarm toestel sonder monitering"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Alarm toestel sonder grafiek"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Alarm Rooi/Geel Poller-tyd"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Polling-tye bo hierdie drempels sal 'n Waarskuwing- of Alarm-statuskleur aktiveer."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s Geel / Rooi"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s Geel / Rooi"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s Geel / Rooi"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Alarm Rooi/Geel Misluk/Alle-verhouding"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Die verhouding van mislukte beskikbaarheidskontroles tot suksesvolle kontroles om as Waarskuwing- of Alarm-statuskleur te aktiveer."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 Geel / Rooi"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 Geel / Rooi"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ Geel / Rooi"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Alarm Rooi/Geel Ping"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Ping-latensie bo hierdie vlakke sal 'n Waarskuwing- of Alarm-statuskleur aktiveer."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms Geel / Rooi"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms Geel / Rooi"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms Geel / Rooi"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Alarm Rooi/Geel slegste beskikbaarheid"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Beskikbaarheid onder hierdie vlakke sal óf 'n geel óf 'n rooi statuskleur aktiveer."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Geel / Rooi"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Aktiveer"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Deaktiveer"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Panele"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Klik 'Gaan voort' om die volgende paneel te aktiveer."
+msgstr[1] "Klik 'Gaan voort' om die volgende panele te aktiveer."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Aktiveer paneel"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Klik 'Gaan voort' om die volgende paneel te deaktiveer. Gedeaktiveerde panele word op kontroleskerms versteek en deur die poller oorgeslaan, maar hul data word behou."
+msgstr[1] "Klik 'Gaan voort' om die volgende panele te deaktiveer. Gedeaktiveerde panele word op kontroleskerms versteek en deur die poller oorgeslaan, maar hul data word behou."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Deaktiveer paneel"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Kanselleer"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Gaan voort"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Paneelnaam"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Die vertoonnaam van hierdie paneel."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Bron"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Die inprop wat hierdie paneel verskaf. Intropage se eie panele word as Core gewys."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Kategorie"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Die paneelkategorie."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Vlak"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Stelselpanele word deur alle gebruikers gedeel; Gebruikerspanele is per gebruiker."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Vereis"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Inproppe wat geaktiveer moet wees sodat hierdie paneel kan vertoon."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Verfris"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Die paneel se data-insamelingsinterval."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Opdateringsfunksie"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Die funksie wat die poller roep om hierdie paneel se data in te samel."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Status"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Of die paneel geaktiveer is."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Stelsel"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Gebruiker"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Geaktiveer"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Geen"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Geen panele gevind nie"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Intropage-paneelbiblioteek"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Soek"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Enige"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Gaan"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Stel/verfris filters"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Maak skoon"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Maak filters skoon"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Alarms"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Panele wat waarskuwings verskaf."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Gasheerwaarskuwings"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Gasheerwaarskuwings (op/af/herstellend) onlangs"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Datum"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Gasheer"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Staat"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Meer rekords, gebruik detailvenster"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Wag vir data"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Jy het nie toestemming tot enige gashere nie"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Ontledingspanele"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Panele wat die huidige gedrag van Cacti en sy inproppe ontleed."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Ontleed aanmeldings"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Ontleed die laaste paar Cacti-aanmeldings vir tendense en foute."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Ontleed logboeke"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Soek na algemene foute in Cacti se loglêer wat rede tot kommer behoort te wees."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Databasiskontroles"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Ontleed MySQL/MariaDB-databasis vir algemene foute.  Let wel dat hierdie proses lank kan neem op baie groot stelsels."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Ontleed Cacti-objekte"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Ontleed Bome, Grafieke, Gashere, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Ontleed DS-statistieke"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Ontleed databronstatistieke"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "IP-adres"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Misluk"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Sukses - Aanmelding"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Sukses - Teken"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Totale mislukte aanmeldings: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Aktiewe gebruikers in laaste uur: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Loglêer nie toeganklik nie of leeg"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Ontleed laaste %s logboekreëls:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Foute: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Waarskuwings: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Loggrootte: Groter as 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Loggrootte: OK"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Loggrootte: Taamlik groot"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Loggrootte: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Laaste logreëls:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Slaan DB-tabelkontroles oor. Databasis te groot"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Tabel %s status %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "DB: Probleme"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "DB: OK"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Maksimum verbindings bereik: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Jy kan maksimum verbindings verhoog via opdraglyn-nutsgoed of permanent in die konfigurasielêer"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Verbindingsfoute: %s - probeer om die SQL-diens te herbegin, gaan die SQL-logboek na, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Gestaakte kliënte/verbindings: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Gestaakte kliënte/verbindings - Voer 'SET GLOBAL log_warnings = 1;' of ' log_error_verbosity = 1;' (hang af van jou MySQL/MariaDB-weergawe) vanaf die mysql-CLI uit en stel in server.cnf om dit stil te maak."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Verbindingsfoute: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Beskadigde tabelle: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Jy behoort tabelkontrole- en tabelherstelopdragte uit te voer"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Geheuetabelle: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Alle tabelle: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "N.v.t"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Toestelle met dieselfde IP en poort: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Nie-geoptimaliseerde Bulk Walk-grootte-toestelle: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Kyk asseblief na die toestelparameter \"Bulk Walk Maximum Repetitions\". U kan u poller-werkverrigting verbeter"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Herindeksering laas uitgevoer"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "RRD-kontroleerder se laaste lopie"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "RRD-skoonmaker se laaste lopie"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Dit word aanbeveel om hierdie hulpmiddel ten minste af en toe uit te voer"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: nog nie uitgevoer nie"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Wees-databronne: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Databron - slegte indekse: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Thold-slegs-log-alarm/waarskuwing: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Toestelle met dieselfde beskrywing: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Toestelle in meer as een boom: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Toestelle sonder grafieke: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Toestelle sonder boom: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Toestelle met verstek public/private-gemeenskap: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Grafiekitems-/sjabloonitemsprobleem: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Inprop Monitor - Ongemonitorde gashere: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "OK"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "Bediener-CPU (kerns / prosesse / drade): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Stel administrateur in kennis is gedeaktiveer en administrateur-e-pos is nie gestel nie"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "%s probleme gevind"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Alles in orde"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "DS-statistiek: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Paneel vereis dat DS-statistieke geaktiveer is."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "DS alle rekords "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "DS nulrekords "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Ontleed Cacti-logboekbesonderhede [ Waarskuwings/Foute ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Foute"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Waarskuwings"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "WAARSKUWING: Lêer is groter as 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Loggrootte"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Ontleed aanmeldingsbesonderhede"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Resultaat"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Aktiewe gebruikers in laaste 2 uur:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Geen aktiewe gebruikers nie"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Bekyk volledige gebruikerslogboek"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Ontleed Boom, Grafieke, Gashere"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Toestelle met dieselfde IP en poort - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Nie-geoptimaliseerde Bulk Walk-grootte-toestelle - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Data-instandhouding"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Wees-databronne - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Databronne met slegte indekse - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Thold-slegs-log-alarm/waarskuwing - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Toestelle met dieselfde beskrywing - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Toestelle in meer as een boom - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Toestelle sonder Grafieke - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Toestelle sonder boom - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Toestelle met verstek public/private-gemeenskap - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Grafiekitems-/sjabloonitemsprobleem - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Grafieksjabloon"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Grafieke"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Grafiekitems"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Sjabloonitems"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Inprop Monitor - Ongemonitorde gashere - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "Bediener-CPU-kerns / prosesse / drade: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Stel administrateur in kennis is gedeaktiveer of administrateur-e-pos is nie gestel nie"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Die besigste"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Panele wat die besigste gashere vind."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "Besigste SVE"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Toestelle met die besigste SVE (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "Besigste ucd/net - Las"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Toestelle met die hoogste las (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Besigste hardeskyfspasie"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Toestelle met die meeste hardeskyfspasie gebruik (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Besigste bedryfstyd"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Toestelle met die hoogste bedryfstyd"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Besigste koppelvlak in-/uitverkeer"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Toestelle met die hoogste in-/uitgaande verkeer (Koppelvlak)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Besigste koppelvlakfout"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Toestelle met die meeste foute/weggegooide pakkies (Koppelvlak)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Besigste koppelvlakbenutting"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Poorte met die hoogste koppelvlakbenutting"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Aktiveer en konfigureer asseblief DS-statistieke"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Vra administrateur om DS-statistieke te aktiveer"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Gemiddelde"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Piek"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Gemiddelde van alle toegelate DS"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Wag vir data of jy het nie toestemming vir enige toestel met hierdie sjabloon nie."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Jy het nie toestemming tot enige gashere nie of daar is geen gasheer met hierdie sjabloon nie"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Looptyd"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Gemiddelde van alle toegelate gashere"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Wag vir data of jy het nie toestemming vir enige toestel nie"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Rigting"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Tydinterval laaste 5 minute"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Besigste 30 Gasheer-MIB SVE-benutting (afgelope uur)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Installeer die TopX-inprop vir meer DS-statistieke"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "Besigste 30 ucd/net-las (afgelope uur)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "Besigste 30 Gasheer-MIB hardeskyfspasie (afgelope uur)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Besigste verkeer (in+uit)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Besigste koppelvlakbenutting"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Grafiese Panele"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Panele wat inligting oor Cacti en sy inproppe op 'n grafiese wyse verskaf."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Databronne"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Grafiek van Databronne"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Toestelsjablone"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Grafiek van Toestelsjablone"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Toestelle volgens status"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Grafiek van Toestelle volgens Status (op,af,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Databronne: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Toestelsjablone: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Toestelle: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Af"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Herstel tans"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Datatipe"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Totaal"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Geen databronne sonder sjablone gevind nie"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Toestelle"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Toesteltelling"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Almal"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Op"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Sjabloonnaam"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Totale toestelle"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Geen toestelsjablone gevind nie"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "MacTrack-panele"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Panele wat inligting oor Cacti se MacTrack-inproppe verskaf."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "MacTrack-inprop"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Verskeie MacTrack-versameling- en terreinstatistieke."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "MacTrack-terreine"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Verskeie MacTrack-terreinstatistieke."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "MacTrack-inprop nie geïnstalleer/aan die gang nie"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Alles: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Op: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Af: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Fout: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Onbekend: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Gedeaktiveer: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Fout"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Jy het nie inprop-toestemming nie"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Terrein"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "IP's"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Poorte"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Poorte op"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "MAC's"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Toestelfoute"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Geen mactrack-terreine gevind nie"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Allerlei panele"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Panele wat algemene nie-gekategoriseerde data oor Cacti verskaf."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "NTP/DNS-status"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Kontroleer jou Cacti-stelselklok vir tydafwyking vanaf 'n bekende basislyn en DNS-oplossingskontrole"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Maint-inpropbesonderhede"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Maint-inpropbesonderhede oor komende skedules"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Webseer-besonderhede"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Inprop webseer URL-dienskontrole-besonderhede"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Servcheck-inprop Besonderhede"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Inprop ServCheck-besonderhede"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Geen NTP-bediener gekonfigureer nie"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Verkeerde NTP-bediener gekonfigureer - %s<br/>Maak dit asseblief in instellings reg"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Kon nie NTP-tyd vanaf %s kry nie"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Gaan asseblief die tyd na aangesien dit met meer verskil"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "as %s sekondes vanaf NTP-bediener %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Plaaslike tyd is gelyk aan NTP-bediener"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Kan nie die aangeduide NTP-bediener kontak nie."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Gaan asseblief u konfigurasie na."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Geen DNS-gasheernaam gekonfigureer nie"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Verkeerde DNS-gasheernaam gekonfigureer - %s<br/>Maak dit asseblief in instellings reg"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "DNS-gasheernaam (%s) se resolusie het geslaag."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "DNS-oplossingstyd: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "DNS-gasheernaam (%s) se resolusie het misluk."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Maint-inprop is nie geïnstalleer/geaktiveer nie"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Inprop Webseer is nie geïnstalleer of begin nie"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Die Webseer-inprop word nie meer ondersteun nie; gebruik eerder die servcheck-inprop"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Aantal kontroles (alles/gedeaktiveer): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Status (op/af): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Laaste logboodskappe"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "HTTP-kode"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Webseer-inprop - Besonderhede"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Inprop Servcheck is nie geïnstalleer of begin nie"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Status (ok/fout): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Laaste logrekords"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Toets"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Tipe"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Servcheck-inprop - Besonderhede"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Soekresultaat"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Poller-panele"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Panele wat inligting oor Cacti se poller-proses verskaf."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Peiler-inligting"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Verskeie inligting oor jou Cacti-poller."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Poller-statistieke"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Verskeie Cacti-pollerstatistieke."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Poller-uitvoeritems"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Naam"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Totale tyd"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Nuut/Onaktief"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "Loop"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "Ledig"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Onbek/af"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "%s Sek"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(ok)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(alles)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Sekondes"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "24u gem. ID: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Poller-besonderhede"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Gemiddelde tyd"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Maks. tyd"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Poller-uitvoeritems "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Items"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Syslog-panele"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Panele wat inligting oor Cacti se Syslog-boodskapverwerking verskaf."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Syslog-besonderhede"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Verskeie Syslog-inpropstatistieke."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Syslog-toptoestelle"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Toestelle met die meeste boodskappe"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Syslog-boodskapvlakke"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Boodskappe volgens vlak."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Inkomend"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Gestoor"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Boodskappe"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Syslog-inprop nie geïnstalleer/aan die gang nie"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Toestel"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Syslog-inprop is nie geaktiveer nie"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Top 20 Gashere met die meeste boodskappe"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Geen boodskappe"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Stelselpanele"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Panele wat inligting oor Cacti-stelselwerkverrigting verskaf."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Inligting"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Verskeie stelselinligting oor die Cacti-stelsel self."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Administratiewe alarms"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Ekstra admin-kennisgewingpaneel vir alle gebruikers"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Boost-statistieke"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Inligting oor Cacti se werkverrigting-hupstootproses."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Boost-geskiedenis"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Inligting oor hupstootprosesgeskiedenis."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "24-uur Uiterstes"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Tabel met 24 uur se Poller-uiterstes (langste Poller-lopie, gashere wat af is)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "SVE-benutting"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "SVE-benuttingsgrafiek (slegs Linux)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "SVE-las: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Hierdie funksie is nie op Windows-platforms geïmplementeer nie"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Gem. CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "Maks. SVE"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "24u GEM"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Cacti-weergawe: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Poller-tipe:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Spine-weergawe: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Jy gebruik 'n verkeerde spine-weergawe!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Poller-tipe: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Loop op: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Boost-geskiedenis: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Geheue "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Hangende rekords "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Oorskrydingswaarskuwing"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Tyd verstryk"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Ander"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Nooit uitgevoer nie"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Boost-status is: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Prosesse/Frekwensie: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Drempel vir hangende rekords: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Geskatte volgende begintyd: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Hangende/geargiveerde rekords: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Huidige grootte van Boost-tabel(le): %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Gem. grepe/rekord: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Laaste lopieduur/bywerkings: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Poller-lopie"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Gashere af"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Uitgelok"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Poller-uitv. items"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Gasheerfoute"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "48-uur Uiterste Polling"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Langlopende Poller"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Maks. toestel af"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Maks. drempel geaktiveer"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Poller-uitvoeritem"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Mislukte peilings"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Drempelpanele"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Panele wat inligting oor die Cacti-drempelinprop verskaf."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Laaste drempelgebeurtenisse"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Drempel-inprop nuutste gebeurtenisse"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Drempel"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Drempel-inpropgrafiek (almal, geaktiveer, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Inprop Thold is nie geïnstalleer of begin nie"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Nog sonder gebeurtenisse"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Drempels: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Thold-inprop nie geïnstalleer nie / loop nie"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Oorskry"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Drempelbesonderhede"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Drempels"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Oorskry: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Uitgelok: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Jy het nie toestemming tot Drempels nie"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Beskrywing"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Hoogste/Laagste 5 panele"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Panele wat tendensinligting oor Cacti-datainsameling verskaf."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Onderste ping"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Toestelle met die swakste ping-reaksie"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Onderste beskikbaarheid"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Toestelle met die swakste beskikbaarheid/bereikbaarheid"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Onderste pollertyd"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Toestelle met die swakste peiltyd"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Onderste pollerverhouding"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Toestelle met die swakste peilverhouding"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Huidige"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Gasheernaam"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Beskikbaarheid/Bereikbaarheid"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Peiltyd"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Verhouding"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Top 20 Gashere met swakste ping"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Top 20 Gashere met die swakste beskikbaarheid"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Beskikbaarheid"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Top 20 Gashere met swakste peiltyd"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Top 20 Gashere met die swakste peilverhouding"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Intropage-kyker"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Intropage-administrasie"
+
+#: setup.php
+msgid "Management"
+msgstr "Bestuur"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Paneelbiblioteek"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Stelseladministrasie"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Tydspan laaste 1 uur"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Tydspan laaste %d uur"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Tydspan laaste 1 dag"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Tydspan laaste 2 dae"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d Sekondes"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d ure"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d dag"
+
+#: setup.php
+msgid "Actions"
+msgstr "Aksies"
+
