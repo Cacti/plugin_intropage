@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-26 01:18+0000\n"
+"PO-Revision-Date: 2026-11-26 05:54+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Arabic (Saudi Arabia) <https://translate.cacti.net/projects/"
 "cacti/intropage/ar_SA/>\n"
@@ -1939,7 +1939,7 @@ msgstr "جديد / الخمول"
 
 #: panellib/poller.php:136 panellib/poller.php:342 panellib/system.php:314
 msgid "Running"
-msgstr "مفتوح"
+msgstr "قيد التشغيل"
 
 #: panellib/poller.php:138 panellib/poller.php:344 panellib/system.php:312
 msgid "Idle"
