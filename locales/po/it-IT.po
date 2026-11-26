@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-26 01:18+0000\n"
+"PO-Revision-Date: 2026-11-26 23:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Italian <https://translate.cacti.net/projects/cacti/intropage/"
 "it/>\n"
@@ -307,7 +307,7 @@ msgstr " [ Aggiornamenti in %s ]"
 #: include/functions.php:819
 #, php-format
 msgid "%s Sec"
-msgstr "%s sec"
+msgstr "%s s"
 
 #: include/functions.php:819
 #, php-format
@@ -659,7 +659,7 @@ msgstr ""
 
 #: include/variables.php:141
 msgid "Quick"
-msgstr "Quick"
+msgstr "Rapido"
 
 #: include/variables.php:142
 msgid "Fast"
