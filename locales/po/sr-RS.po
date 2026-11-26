@@ -1,0 +1,2585 @@
+# Serbian translation for Cacti.
+# Copyright (C) 2004-2026 The Cacti Group
+# This file is distributed under the same license as the Cacti package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cacti\n"
+"Report-Msgid-Bugs-To: developers@cacti.net\n"
+"POT-Creation-Date: 2026-11-11 14:16-0500\n"
+"PO-Revision-Date: 2026-11-26 18:57+0000\n"
+"Last-Translator: Thomas Vincent <thomasvincent@gmail.com>\n"
+"Language-Team: Serbian <developers@cacti.net>\n"
+"Language: sr-RS\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+#: display.php intropage_panels.php
+msgid "Intropage - Permission Denied"
+msgstr "Intropage - Дозвола одбијена"
+
+#: display.php
+msgid "One or more panels was removed due to insufficient permissions. Contact administrator."
+msgstr "Један или више панела је уклоњено због недовољних дозвола. Обратите се администратору."
+
+#: display.php
+msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
+msgstr "Редове изнад можете онемогућити у <b>Конфигурација > Подешавања > Опште > Сакриј Cacti контролну таблу</b> и користити целу страницу за Intropage "
+
+#: display.php includes/functions.php intropage_panels.php
+msgid "Default"
+msgstr "Подразумевано"
+
+#: display.php
+msgid "Hide or display red/yellow/green square notifications"
+msgstr "Сакриј или прикажи црвена/жута/зелена квадратна обавештења"
+
+#: display.php
+msgid "Disable panel move/enable copy text from panel"
+msgstr "Онемогући померање панела/омогући копирање текста са панела"
+
+#: display.php
+msgid "Actions ..."
+msgstr "Радње ..."
+
+#: display.php
+msgid "Add New Dashboard"
+msgstr "Додај нову контролну таблу"
+
+#: display.php
+msgid "Remove current dashboard"
+msgstr "Уклони тренутну контролну таблу"
+
+#: display.php
+#, php-format
+msgid "Number of lines - %d"
+msgstr "Број редова - %d"
+
+#: display.php
+msgid "Refresh Now"
+msgstr "Освежи одмах"
+
+#: display.php
+msgid "Refresh Disabled"
+msgstr "Освежавање онемогућено"
+
+#: display.php
+msgid "Refresh by Poller"
+msgstr "Освежавање према анкетеру"
+
+#: display.php
+msgid "Refresh Every 1 Minute"
+msgstr "Освежавај сваки 1 минут"
+
+#: display.php
+msgid "Refresh Every 5 Minutes"
+msgstr "Освежавај сваких 5 минута"
+
+#: display.php
+msgid "Refresh Every Hour"
+msgstr "Освежавај сваки сат"
+
+#: display.php
+msgid "Important period - disabled"
+msgstr "Важан период - онемогућено"
+
+#: display.php
+msgid "Important period - 15 minutes"
+msgstr "Важан период - 15 минута"
+
+#: display.php
+msgid "Important period - 1 hour"
+msgstr "Важан период - 1 сат"
+
+#: display.php
+msgid "Important period - 4 hours"
+msgstr "Важан период - 4 сата"
+
+#: display.php
+msgid "Important period - 1 day"
+msgstr "Важан период - 1 дан"
+
+#: display.php
+msgid "Sort by Severity"
+msgstr "Сортирај по озбиљности"
+
+#: display.php
+msgid "Sort by User Preference"
+msgstr "Сортирај по избору корисника"
+
+#: display.php
+msgid "Reload Panel Definitions"
+msgstr "Поново учитај дефиниције панела"
+
+#: display.php
+msgid "Set Intropage as Default Login Page"
+msgstr "Постави Intropage као подразумевану страницу за пријаву"
+
+#: display.php
+msgid "Set graph as Default Login Page"
+msgstr "Постави графикон као подразумевану страницу за пријаву"
+
+#: display.php
+msgid "Display Intropage in Console"
+msgstr "Прикажи Intropage у конзоли"
+
+#: display.php
+msgid "Display Intropage in Tab as Default Page"
+msgstr "Прикажи Intropage на картици као подразумевану страницу"
+
+#: display.php
+msgid "Less panels on a line"
+msgstr "Мање панела у реду"
+
+#: display.php
+msgid "More panels on a line"
+msgstr "Више панела у реду"
+
+#: display.php
+msgid "Cancel sharing"
+msgstr "Откажи дељење"
+
+#: display.php
+msgid "Share this dashboard"
+msgstr "Дели ову контролну таблу"
+
+#: display.php
+msgid "Share empty dashboard not allowed"
+msgstr "Дељење празне контролне табле није дозвољено"
+
+#: display.php
+msgid "Use shared dashboard"
+msgstr "Користи дељену контролну таблу"
+
+#: display.php
+msgid "Cannot use shared dashboard - dashboard limit reached."
+msgstr "Није могуће користити дељену контролну таблу - достигнуто је ограничење броја контролних табли."
+
+#: display.php
+msgid "No shared dashboards"
+msgstr "Нема дељених контролних табли"
+
+#: display.php
+msgid "Welcome to Intropage!"
+msgstr "Добродошли у Intropage!"
+
+#: display.php
+msgid "You can Add Dashboard Panels in more ways:"
+msgstr "Панеле на контролну таблу можете додати на више начина:"
+
+#: display.php
+msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
+msgstr "Изаберите припремљене панеле из менија \"Панели\". Панел може бити засивљен. То је због дозвола, обратите се администратору"
+
+#: display.php
+msgid "Add any Cacti Graph, use icon"
+msgstr "Додајте било који Cacti графикон, користите иконицу"
+
+#: display.php
+msgid "You can create own panels. More info in file <cacti_install_dir>/plugins/intropage/panellib/README.md"
+msgstr "Можете креирати сопствене панеле. Више информација у датотеци <cacti_install_dir>/plugins/intropage/panellib/README.md"
+
+#: display.php
+msgid "You can share dashboards to other users:"
+msgstr "Можете делити контролне табле са другим корисницима:"
+
+#: display.php
+msgid "use \"Share this dashboard\" option in Actions menu - Every user can use it as template."
+msgstr "користите опцију \"Дели ову контролну таблу\" у менију Радње - Сваки корисник може да је користи као шаблон."
+
+#: display.php
+msgid "You can use shared dashboard using the Actions menu:"
+msgstr "Дељену контролну таблу можете користити преко менија Радње:"
+
+#: display.php
+msgid "Use \"Use shared dashboard (user/dashboard name) -  It prepares the same dashboard like shared but with your permissions."
+msgstr "Користите \"Користи дељену контролну таблу (корисник/назив контролне табле)\" - Припрема исту контролну таблу као дељену, али са вашим дозволама."
+
+#: display.php
+msgid "Customization:"
+msgstr "Прилагођавање:"
+
+#: display.php
+msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
+msgstr "Можете креирати до 9 контролних табли. Свака контролна табла може имати назив, користите иконицу"
+
+#: display.php
+msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
+msgstr "Intropage може бити приказан у конзоли или у засебној картици. То можете променити у менију Радње"
+
+#: display.php
+msgid "If you want to copy text from panel, you have to disable drag and drop function, use icon"
+msgstr "Ако желите да копирате текст са панела, морате онемогућити функцију превлачења и отпуштања, користите иконицу"
+
+#: display.php
+msgid "Panel Details"
+msgstr "Детаљи панела"
+
+#: display.php
+msgid "Disable panel move/Enable copy text from panel"
+msgstr "Онемогући премештање панела/Омогући копирање текста са панела"
+
+#: display.php
+msgid "Enable panel move/Disable copy text from panel"
+msgstr "Омогући премештање панела/Онемогући копирање текста са панела"
+
+#: display.php
+msgid "Hide red/yellow/green square notifications"
+msgstr "Сакриј црвена/жута/зелена квадратна обавештења"
+
+#: display.php
+msgid "Show red/yellow/green square notifications"
+msgstr "Прикажи црвена/жута/зелена квадратна обавештења"
+
+#: display.php
+msgid "Error reading new data"
+msgstr "Грешка при читању нових података"
+
+#: display.php
+msgid "Close"
+msgstr "Затвори"
+
+#: includes/functions.php
+msgid "Dashboard has been removed"
+msgstr "Контролна табла је уклоњена"
+
+#: includes/functions.php
+msgid "New Dashboard"
+msgstr "Нова контролна табла"
+
+#: includes/functions.php
+msgid "Dashboard has been added"
+msgstr "Контролна табла је додата"
+
+#: includes/functions.php
+msgid "Cannot add zoomed or custom timespaned graph, changing timespan to Last half hour"
+msgstr "Није могуће додати увећани графикон или графикон са прилагођеним временским распоном, мењање временског распона на Последњих пола сата"
+
+#: includes/functions.php
+msgid "Intropage Panel Library Refreshed from Panel Library"
+msgstr "Intropage библиотека панела освежена из библиотеке панела"
+
+#: includes/functions.php
+msgid "Dashboard has been added, please wait few poller cycle for data"
+msgstr "Контролна табла је додата, сачекајте неколико циклуса прикупљача за податке"
+
+#: includes/functions.php
+msgid "Error - trying share non-shared dashboard"
+msgstr "Грешка - покушај дељења недељене контролне табле"
+
+#: includes/functions.php
+msgid "Reload Panel"
+msgstr "Поново учитај панел"
+
+#: includes/functions.php
+msgid "Drag to reorder"
+msgstr "Превуците за промену редоследа"
+
+#: includes/functions.php
+msgid "Reorder panel"
+msgstr "Промени редослед панела"
+
+#: includes/functions.php
+msgid "Fewer rows"
+msgstr "Мање редова"
+
+#: includes/functions.php
+msgid "More rows"
+msgstr "Више редова"
+
+#: includes/functions.php
+msgid "Show Details"
+msgstr "Прикажи детаље"
+
+#: includes/functions.php
+msgid "Disable panel"
+msgstr "Онемогући панел"
+
+#: includes/functions.php
+msgid "Panel not found"
+msgstr "Панел није пронађен"
+
+#: includes/functions.php
+msgid "This panel is unavailable because its required plugin is disabled."
+msgstr "Овај панел није доступан јер је потребан додатак онемогућен."
+
+#: includes/functions.php
+msgid "The Panel includes a render function but it does not exist."
+msgstr "Панел укључује функцију за исцртавање, али она не постоји."
+
+#: includes/functions.php
+msgid "The Panel does not have a render function."
+msgstr "Панел нема функцију за исцртавање."
+
+#: includes/functions.php
+msgid "Not Found"
+msgstr "Није пронађено"
+
+#: includes/functions.php
+msgid "No Data Found.  Either wait for next check, <br/>or use the Force Reload if available."
+msgstr "Подаци нису пронађени. Сачекајте следећу проверу <br/>или користите Принудно учитавање ако је доступно."
+
+#: includes/functions.php
+msgid "Panel Not Found"
+msgstr "Панел није пронађен"
+
+#: includes/functions.php
+msgid "Details Function does not exist."
+msgstr "Функција детаља не постоји."
+
+#: includes/functions.php
+#, php-format
+msgid " [Upd. in %s/%s]"
+msgstr " [Ажур. за %s/%s]"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Sec"
+msgstr "%s сек"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Seconds"
+msgstr "%s секунди"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Min"
+msgstr "%s мин"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Minutes"
+msgstr "%s минута"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hours"
+msgstr "%s сати"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Hrs"
+msgstr "%s сати"
+
+#: includes/functions.php
+#, php-format
+msgid "%s Days"
+msgstr "%s дана"
+
+#: includes/functions.php
+msgid "No Data Present.  Either Force Update, or wait for next Cacti Polling cycle."
+msgstr "Нема података. Покрените принудно ажурирање или сачекајте следећи Cacti циклус прикупљања."
+
+#: includes/functions.php
+msgid "No Data Present.  This Panel does not allow for Forced Updates.  You will have to wait until the Cacti's Poller to perform the check."
+msgstr "Нема података. Овај панел не дозвољава принудна ажурирања. Мораћете да сачекате да Cacti прикупљач изврши проверу."
+
+#: includes/functions.php
+msgid "Panels ..."
+msgstr "Панели ..."
+
+#: includes/functions.php
+#, php-format
+msgid "%s (no permission)"
+msgstr "%s (нема дозволе)"
+
+#: includes/functions.php
+msgid "Cannot add to Dashboard. Custom timespan."
+msgstr "Није могуће додати на контролну таблу. Прилагођени временски распон."
+
+#: includes/functions.php
+msgid "Remove from Dashboard"
+msgstr "Уклони са контролне табле"
+
+#: includes/functions.php
+msgid "Add to Dashboard"
+msgstr "Додај на контролну таблу"
+
+#: includes/functions.php
+msgid "Dashboard Names"
+msgstr "Називи контролних табли"
+
+#: includes/functions.php
+#, php-format
+msgid "Dashboard %s"
+msgstr "Контролна табла %s"
+
+#: includes/functions.php
+msgid "User Level Panel Update Frequencies"
+msgstr "Учесталости ажурирања панела на нивоу корисника"
+
+#: includes/functions.php
+msgid "System Panel Update Frequencies (All Authorized Users)"
+msgstr "Учесталости ажурирања системских панела (сви овлашћени корисници)"
+
+#: includes/functions.php
+msgid "Trend Update Frequencies"
+msgstr "Учесталости ажурирања трендова"
+
+#: includes/registration.php intropage_panels.php
+msgid "Core"
+msgstr "Језгро"
+
+#: includes/settings.php setup.php
+msgid "Intropage"
+msgstr "Intropage"
+
+#: includes/settings.php setup.php
+msgid "Normal User"
+msgstr "Обичан корисник"
+
+#: includes/settings.php
+#, php-format
+msgid "[edit: %s]"
+msgstr "[измени: %s]"
+
+#: includes/settings.php
+msgid "System Level Panels"
+msgstr "Панели на нивоу система"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for administrative or power users to access and not typically applicable for general users.  Panels are generally about overall system utilization."
+msgstr "Панели који су намењени администраторима или напредним корисницима и обично нису применљиви за опште кориснике. Панели се углавном односе на укупну искоришћеност система."
+
+#: includes/settings.php
+msgid "User Level Panels"
+msgstr "Панели на нивоу корисника"
+
+#: includes/settings.php
+msgid "Panels that are appropriate for general users to access.  Permissions are limited to what the current user can view."
+msgstr "Панели који су прилагођени општим корисницима. Дозволе су ограничене на оно што тренутни корисник може да види."
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for User"
+msgstr "Можете дозволити/забранити панеле за корисника"
+
+#: includes/settings.php
+msgid "You can Allow/Disallow Panels for Group"
+msgstr "Можете дозволити/забранити панеле за групу"
+
+#: includes/variables.php
+msgid "Red Status"
+msgstr "Црвени статус"
+
+#: includes/variables.php
+msgid "Yellow Status"
+msgstr "Жути статус"
+
+#: includes/variables.php
+msgid "Green Status"
+msgstr "Зелени статус"
+
+#: includes/variables.php
+msgid "Display Settings"
+msgstr "Подешавања приказа"
+
+#: includes/variables.php
+msgid "Important things will be at the top"
+msgstr "Важне ствари ће бити на врху"
+
+#: includes/variables.php
+msgid "If checked Intropage displays important (errors, warnings) information first"
+msgstr "Ако је означено, Intropage прво приказује важне информације (грешке, упозорења)"
+
+#: includes/variables.php
+msgid "Display more panels on a line"
+msgstr "Прикажи више панела у реду"
+
+#: includes/variables.php
+msgid "For wide screen"
+msgstr "За широк екран"
+
+#: includes/variables.php
+msgid "Automatically Uninstall Panels"
+msgstr "Аутоматски деинсталирај панеле"
+
+#: includes/variables.php
+msgid "If a Panel is installed and required plugin is removed, automatically uninstall the panel too"
+msgstr "Ако је панел инсталиран, а потребан додатак уклоњен, аутоматски деинсталирај и панел"
+
+#: includes/variables.php
+msgid "Automatic Page Refresh"
+msgstr "Аутоматско освежавање странице"
+
+#: includes/variables.php
+msgid "How often"
+msgstr "Колико често"
+
+#: includes/variables.php
+msgid "Automatically by poller"
+msgstr "Аутоматски помоћу полера"
+
+#: includes/variables.php
+msgid "Never"
+msgstr "Никада"
+
+#: includes/variables.php
+msgid "Every Minute"
+msgstr "Сваког минута"
+
+#: includes/variables.php
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Сваких %d минута"
+
+#: includes/variables.php
+msgid "Every Hour"
+msgstr "Сваког сата"
+
+#: includes/variables.php
+msgid "Important period"
+msgstr "Важан период"
+
+#: includes/variables.php
+msgid "From now to past. Affects row coloring, older events will not be highlighted, only displayed"
+msgstr "Од сада у прошлост. Утиче на бојење редова, старији догађаји неће бити истакнути, већ само приказани"
+
+#: includes/variables.php intropage_panels.php panellib/graphs.php
+#: panellib/mactrack.php panellib/poller.php panellib/system.php
+#: panellib/thold.php
+msgid "Disabled"
+msgstr "Онемогућено"
+
+#: includes/variables.php
+msgid "15 minutes"
+msgstr "15 минута"
+
+#: includes/variables.php
+msgid "1 hour"
+msgstr "1 сат"
+
+#: includes/variables.php
+msgid "4 hours"
+msgstr "4 сата"
+
+#: includes/variables.php
+msgid "1 day"
+msgstr "1 дан"
+
+#: includes/variables.php
+msgid "Number of panel lines"
+msgstr "Број редова панела"
+
+#: includes/variables.php
+msgid "How many lines in panel"
+msgstr "Колико редова у панелу"
+
+#: includes/variables.php
+#, php-format
+msgid "%d lines"
+msgstr "%d редова"
+
+#: includes/variables.php
+msgid "Trend Timespan"
+msgstr "Временски опсег тренда"
+
+#: includes/variables.php
+msgid "For Trend charts, what should be the default timespan for those charts."
+msgstr "За графиконе тренда, који треба да буде подразумевани временски опсег за те графиконе."
+
+#: includes/variables.php
+msgid "Poller Timeout"
+msgstr "Истек времена полера"
+
+#: includes/variables.php
+msgid "The amount of time, in minutes, that the Intropage background poller can run before being interrupted and killed by Cacti."
+msgstr "Количина времена, у минутима, колико позадински полер за Intropage може да ради пре него што га Cacti прекине и обустави."
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minute"
+msgstr "%d минут"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Minutes"
+msgstr "%d минута"
+
+#: includes/variables.php setup.php
+#, php-format
+msgid "%d Hour"
+msgstr "%d сат"
+
+#: includes/variables.php
+msgid "Analyze Log - number of lines"
+msgstr "Анализа дневника - број редова"
+
+#: includes/variables.php
+msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
+msgstr "Колико редова дневника ће бити анализирано. Редови = у панелу, 2x редова = у детаљима. Велики број може изазвати споро учитавање странице"
+
+#: includes/variables.php
+msgid "How often analyze DB"
+msgstr "Колико често анализирати базу података"
+
+#: includes/variables.php
+msgid "Poller runs this task. It could cause long poller run."
+msgstr "Полер покреће овај задатак. То може изазвати дуго извршавање полера."
+
+#: includes/variables.php
+msgid "Every Day"
+msgstr "Сваки дан"
+
+#: includes/variables.php
+msgid "Every Week"
+msgstr "Сваке недеље"
+
+#: includes/variables.php
+msgid "Every Month"
+msgstr "Сваког месеца"
+
+#: includes/variables.php
+msgid "Analyze DB - Level of db check"
+msgstr "Анализа базе података - ниво провере базе података"
+
+#: includes/variables.php
+msgid "Quick - No Check rows for incorrect links<br/>Fast - check only not properly closed tables<br/>Changed - check tables changed from last check<br/>Medium - with rows scan<br/>Extended - full rows and keys<br/>Medium and extended may cause a slow page load!"
+msgstr "Кратко - без провере редова за неисправне везе<br/>Брзо - проверава само неправилно затворене табеле<br/>Измењено - проверава табеле измењене од последње провере<br/>Средње - са скенирањем редова<br/>Проширено - пуни редови и кључеви<br/>Средње и проширено могу изазвати споро учитавање странице!"
+
+#: includes/variables.php
+msgid "Quick"
+msgstr "Брзи"
+
+#: includes/variables.php
+msgid "Fast"
+msgstr "Брзо"
+
+#: includes/variables.php
+msgid "Changed"
+msgstr "Измењено"
+
+#: includes/variables.php
+msgid "Medium"
+msgstr "Средње"
+
+#: includes/variables.php
+msgid "Extended"
+msgstr "Проширено"
+
+#: includes/variables.php
+msgid "NTP Time Check - IP or DNS name of NTP server"
+msgstr "Провера NTP времена - IP или DNS назив NTP сервера"
+
+#: includes/variables.php
+msgid "Insert IP or DNS name of NTP server"
+msgstr "Унесите IP или DNS назив NTP сервера"
+
+#: includes/variables.php
+msgid "How often check NTP"
+msgstr "Колико често проверавати NTP"
+
+#: includes/variables.php
+msgid "DNS Check - Any DNS name"
+msgstr "DNS провера - било који DNS назив"
+
+#: includes/variables.php
+msgid "Insert DNS name for test"
+msgstr "Унесите DNS назив за тест"
+
+#: includes/variables.php
+msgid "How often check DNS"
+msgstr "Колико често проверавати DNS"
+
+#: includes/variables.php
+msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
+msgstr "Администраторски информациони панел о задацима одржавања, недоступним уређајима, .."
+
+#: includes/variables.php
+msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
+msgstr "Ако није празно, панел ће бити приказан на врху. Можете користити HTML ознаке (b, i, ...)."
+
+#: includes/variables.php
+msgid "Upcoming Maint Schedule warning days"
+msgstr "Дани упозорења за предстојећи распоред одржавања"
+
+#: includes/variables.php
+msgid "How many days before a scheduled maintenance schedule should a warning be displayed?"
+msgstr "Колико дана пре заказаног распореда одржавања треба приказати упозорење?"
+
+#: includes/variables.php
+msgid "Never warn"
+msgstr "Никад не упозоравај"
+
+#: includes/variables.php
+msgid "When maintenance starts"
+msgstr "Када одржавање почне"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Day Before"
+msgstr "%d дан раније"
+
+#: includes/variables.php
+#, php-format
+msgid "%d Days Before"
+msgstr "%d дана раније"
+
+#: includes/variables.php
+msgid "Network stats in"
+msgstr "Мрежна статистика у"
+
+#: includes/variables.php
+msgid "bytes or bits"
+msgstr "бајтовима или битовима"
+
+#: includes/variables.php
+msgid "Bytes"
+msgstr "Бајтови"
+
+#: includes/variables.php
+msgid "Bits"
+msgstr "Битови"
+
+#: includes/variables.php
+msgid "Alarm Settings"
+msgstr "Подешавања аларма"
+
+#: includes/variables.php
+msgid "Alarm DB check Aborted Clients"
+msgstr "Аларм провере базе података за прекинуте клијенте"
+
+#: includes/variables.php
+msgid "If this event has occurred, trigger the selected Normal, Warning, or Alert status color."
+msgstr "Ако се овај догађај десио, активирај изабрану боју статуса Нормално, Упозорење или Узбуна."
+
+#: includes/variables.php
+msgid "Alarm Host with the same Description"
+msgstr "Аларм за хост са истим описом"
+
+#: includes/variables.php
+msgid "Alarm Orphaned Data Source"
+msgstr "Аларм за неповезани извор података"
+
+#: includes/variables.php
+msgid "Alarm non-empty Poller Output"
+msgstr "Аларм за непразан излаз полера"
+
+#: includes/variables.php
+msgid "Alarm Bad indexes Data Source"
+msgstr "Аларм за извор података са лошим индексима"
+
+#: includes/variables.php
+msgid "Alarm Threshold logonly action"
+msgstr "Аларм за радњу прага само за дневник"
+
+#: includes/variables.php
+msgid "Alarm when device bulk_walk_size is not optimized"
+msgstr "Аларм када bulk_walk_size уређаја није оптимизован"
+
+#: includes/variables.php
+msgid "Alarm Devices with the same IP/port"
+msgstr "Аларм за уређаје са истим IP/портом"
+
+#: includes/variables.php
+msgid "Alarm Device in more than one Tree"
+msgstr "Аларм за уређај у више од једног стабла"
+
+#: includes/variables.php
+msgid "Alarm Device without a Tree"
+msgstr "Аларм за уређај без стабла"
+
+#: includes/variables.php
+msgid "Alarm Device with Default public/private SNMP Community"
+msgstr "Аларм за уређај са подразумеваном public/private SNMP заједницом"
+
+#: includes/variables.php
+msgid "Alarm Device without Monitoring"
+msgstr "Аларм за уређај без надзора"
+
+#: includes/variables.php
+msgid "Alarm Device without Graph"
+msgstr "Аларм за уређај без графикона"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Polling Time"
+msgstr "Аларм црвено/жуто за време очитавања"
+
+#: includes/variables.php
+msgid "Polling times above these thresholds will trigger a Warning or Alert status color."
+msgstr "Времена очитавања изнад ових прагова активираће боју статуса Упозорење или Узбуна."
+
+#: includes/variables.php
+msgid "5s  / 10s Yellow / Red"
+msgstr "5s  / 10s жуто / црвено"
+
+#: includes/variables.php
+msgid "10s / 20s Yellow / Red"
+msgstr "10s / 20s жуто / црвено"
+
+#: includes/variables.php
+msgid "20s / 40s Yellow / Red"
+msgstr "20s / 40s жуто / црвено"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Failed/All Ratio"
+msgstr "Аларм црвено/жуто за однос неуспелих/свих"
+
+#: includes/variables.php
+msgid "The ratio of failed availability checks to successful checks to trigger as Warning or Alert status color."
+msgstr "Однос неуспелих провера доступности према успешним проверама за активирање боје статуса Упозорење или Узбуна."
+
+#: includes/variables.php
+msgid "0.1 / 0.2 Yellow / Red"
+msgstr "0.1 / 0.2 жуто / црвено"
+
+#: includes/variables.php
+msgid "0.2 / 0.4 Yellow / Red"
+msgstr "0.2 / 0.4 жуто / црвено"
+
+#: includes/variables.php
+msgid "0.5 / 0.5++ Yellow / Red"
+msgstr "0.5 / 0.5++ жуто / црвено"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Ping"
+msgstr "Аларм црвено/жуто за пинг"
+
+#: includes/variables.php
+msgid "Ping latency above these levels will trigger a Warning or Alert status color."
+msgstr "Кашњење пинга изнад ових нивоа активираће боју статуса Упозорење или Узбуна."
+
+#: includes/variables.php
+msgid "10ms  / 20ms Yellow / Red"
+msgstr "10ms  / 20ms жуто / црвено"
+
+#: includes/variables.php
+msgid "20ms  / 50ms Yellow / Red"
+msgstr "20ms  / 50ms жуто / црвено"
+
+#: includes/variables.php
+msgid "100ms / 200+ms Yellow / Red"
+msgstr "100ms / 200+ms жуто / црвено"
+
+#: includes/variables.php
+msgid "Alarm Red/Yellow Worst Availability"
+msgstr "Црвени/жути аларм најгоре доступности"
+
+#: includes/variables.php
+msgid "Availability below these levels will trigger either a Yellow or a Red status color."
+msgstr "Доступност испод ових нивоа покренуће жуту или црвену боју статуса."
+
+#: includes/variables.php
+msgid "Yellow / Red"
+msgstr "Жута / црвена"
+
+#: intropage_panels.php
+msgid "Enable"
+msgstr "Омогући"
+
+#: intropage_panels.php
+msgid "Disable"
+msgstr "Онемогући"
+
+#: intropage_panels.php
+msgid "Panels"
+msgstr "Панели"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Enable the following Panel."
+msgid_plural "Click 'Continue' to Enable the following Panels."
+msgstr[0] "Кликните на 'Настави' да бисте омогућили следећи панел."
+msgstr[1] "Кликните на 'Настави' да бисте омогућили следеће панеле."
+msgstr[2] "Кликните на 'Настави' да бисте омогућили следеће панеле."
+
+#: intropage_panels.php
+msgid "Enable Panel"
+msgstr "Омогући панел"
+
+#: intropage_panels.php
+msgid "Click 'Continue' to Disable the following Panel. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgid_plural "Click 'Continue' to Disable the following Panels. Disabled panels are hidden from dashboards and skipped by the poller, but their data is retained."
+msgstr[0] "Кликните на 'Настави' да бисте онемогућили следећи панел. Онемогућени панели су сакривени са контролних табли и полер их прескаче, али се њихови подаци задржавају."
+msgstr[1] "Кликните на 'Настави' да бисте онемогућили следеће панеле. Онемогућени панели су сакривени са контролних табли и полер их прескаче, али се њихови подаци задржавају."
+msgstr[2] "Кликните на 'Настави' да бисте онемогућили следеће панеле. Онемогућени панели су сакривени са контролних табли и полер их прескаче, али се њихови подаци задржавају."
+
+#: intropage_panels.php
+msgid "Disable Panel"
+msgstr "Онемогући панел"
+
+#: intropage_panels.php
+msgid "Cancel"
+msgstr "Откажи"
+
+#: intropage_panels.php
+msgid "Continue"
+msgstr "Настави"
+
+#: intropage_panels.php
+msgid "Panel Name"
+msgstr "Назив панела"
+
+#: intropage_panels.php
+msgid "The display name of this panel."
+msgstr "Приказни назив овог панела."
+
+#: intropage_panels.php
+msgid "Source"
+msgstr "Извор"
+
+#: intropage_panels.php
+msgid "The plugin that provides this panel. Intropage's own panels show as Core."
+msgstr "Додатак који обезбеђује овај панел. Сопствени панели додатка Intropage приказују се као Core."
+
+#: intropage_panels.php
+msgid "Category"
+msgstr "Категорија"
+
+#: intropage_panels.php
+msgid "The panel category."
+msgstr "Категорија панела."
+
+#: intropage_panels.php
+msgid "Level"
+msgstr "Ниво"
+
+#: intropage_panels.php
+msgid "System panels are shared by all users; User panels are per-user."
+msgstr "Системски панели се деле између свих корисника; кориснички панели су по кориснику."
+
+#: intropage_panels.php
+msgid "Requires"
+msgstr "Захтева"
+
+#: intropage_panels.php
+msgid "Plugins that must be enabled for this panel to render."
+msgstr "Додаци који морају бити омогућени да би се овај панел приказао."
+
+#: intropage_panels.php
+msgid "Refresh"
+msgstr "Освежи"
+
+#: intropage_panels.php
+msgid "The panel data collection interval."
+msgstr "Интервал прикупљања података за панел."
+
+#: intropage_panels.php
+msgid "Update Function"
+msgstr "Функција ажурирања"
+
+#: intropage_panels.php
+msgid "The function the poller calls to collect this panel's data."
+msgstr "Функција коју прикупљач позива за прикупљање података овог панела."
+
+#: intropage_panels.php panellib/analyze.php panellib/graphs.php
+#: panellib/thold.php
+msgid "Status"
+msgstr "Статус"
+
+#: intropage_panels.php
+msgid "Whether the panel is enabled."
+msgstr "Да ли је панел омогућен."
+
+#: intropage_panels.php
+msgid "System"
+msgstr "Систем"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "User"
+msgstr "Корисник"
+
+#: intropage_panels.php
+msgid "Enabled"
+msgstr "Омогућено"
+
+#: intropage_panels.php panellib/analyze.php
+msgid "None"
+msgstr "Ниједан"
+
+#: intropage_panels.php
+msgid "No Panels Found"
+msgstr "Није пронађен ниједан панел"
+
+#: intropage_panels.php setup.php
+msgid "Intropage Panel Library"
+msgstr "Библиотека панела Intropage"
+
+#: intropage_panels.php
+msgid "Search"
+msgstr "Претражи"
+
+#: intropage_panels.php
+msgid "Any"
+msgstr "Било који"
+
+#: intropage_panels.php
+msgid "Go"
+msgstr "Иди"
+
+#: intropage_panels.php
+msgid "Set/Refresh Filters"
+msgstr "Постави/освежи филтере"
+
+#: intropage_panels.php
+msgid "Clear"
+msgstr "Очисти"
+
+#: intropage_panels.php
+msgid "Clear Filters"
+msgstr "Очисти филтере"
+
+#: panellib/alert.php panellib/syslog.php
+msgid "Alerts"
+msgstr "Аларми"
+
+#: panellib/alert.php
+msgid "Panels that provide alerting."
+msgstr "Панели који обезбеђују алармирање."
+
+#: panellib/alert.php
+msgid "Host alerts"
+msgstr "Аларми хоста"
+
+#: panellib/alert.php
+msgid "Host alerts (up/down/recovering) recently"
+msgstr "Недавни аларми хоста (доступан/недоступан/опоравак)"
+
+#: panellib/alert.php panellib/analyze.php panellib/misc.php panellib/thold.php
+msgid "Date"
+msgstr "Датум"
+
+#: panellib/alert.php panellib/busiest.php panellib/top5.php
+msgid "Host"
+msgstr "Домаћин"
+
+#: panellib/alert.php panellib/poller.php
+msgid "State"
+msgstr "Савезна држава"
+
+#: panellib/alert.php
+msgid "More records, use detail window"
+msgstr "Има још записа, користите прозор са детаљима"
+
+#: panellib/alert.php panellib/analyze.php panellib/graphs.php
+#: panellib/poller.php panellib/syslog.php panellib/system.php
+#: panellib/thold.php panellib/top5.php
+msgid "Waiting for data"
+msgstr "Чекање на податке"
+
+#: panellib/alert.php panellib/busiest.php panellib/graphs.php
+#: panellib/top5.php
+msgid "You don't have permissions to any hosts"
+msgstr "Немате дозволе ни за један хост"
+
+#: panellib/analyze.php
+msgid "Analysis Panels"
+msgstr "Панели за анализу"
+
+#: panellib/analyze.php
+msgid "Panels that analyze the current behavior of Cacti and it's plugins."
+msgstr "Панели који анализирају тренутно понашање система Cacti и његових додатака."
+
+#: panellib/analyze.php
+msgid "Analyze Logins"
+msgstr "Анализа пријава"
+
+#: panellib/analyze.php
+msgid "Analyze the last several Cacti logins for trends and errors."
+msgstr "Анализирајте последњих неколико пријава у Cacti ради уочавања трендова и грешака."
+
+#: panellib/analyze.php
+msgid "Analyze Logs"
+msgstr "Анализа дневника"
+
+#: panellib/analyze.php
+msgid "Look for common errors in Cacti's log file that should be a cause for concern."
+msgstr "Потражите уобичајене грешке у датотеци дневника система Cacti које би требало да буду разлог за забринутост."
+
+#: panellib/analyze.php
+msgid "Database Checks"
+msgstr "Провере базе података"
+
+#: panellib/analyze.php
+msgid "Analyze MySQL/MariaDB database for common errors.  Note that this process may take a long time on very large systems."
+msgstr "Анализирајте MySQL/MariaDB базу података ради откривања уобичајених грешака. Имајте у виду да овај процес може дуго трајати на веома великим системима."
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Objects"
+msgstr "Анализа Cacti објеката"
+
+#: panellib/analyze.php
+msgid "Analyze Trees, Graphs, Hosts, ..."
+msgstr "Анализа стабала, графикона, хостова, ..."
+
+#: panellib/analyze.php
+msgid "Analyze DS stats"
+msgstr "Анализа DS статистике"
+
+#: panellib/analyze.php
+msgid "Analyze data source stats"
+msgstr "Анализа статистике извора података"
+
+#: panellib/analyze.php
+msgid "Username"
+msgstr "Корисничко име"
+
+#: panellib/analyze.php
+msgid "IP Address"
+msgstr "IP адреса"
+
+#: panellib/analyze.php panellib/misc.php panellib/system.php panellib/top5.php
+msgid "Failed"
+msgstr "Неуспешно"
+
+#: panellib/analyze.php
+msgid "Success - Login"
+msgstr "Успешно - Пријава"
+
+#: panellib/analyze.php
+msgid "Success - Token"
+msgstr "Успешно - Токен"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Total Failed Logins: %s"
+msgstr "Укупно неуспелих пријава: %s"
+
+#: panellib/analyze.php
+msgid "Active Users in Last Hour: "
+msgstr "Активни корисници у последњем сату: "
+
+#: panellib/analyze.php
+msgid "Log file not accessible or empty"
+msgstr "Датотека дневника није доступна или је празна"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Analyze last %s log lines:"
+msgstr "Анализа последњих %s редова дневника:"
+
+#: panellib/analyze.php
+msgid "Errors: "
+msgstr "Грешке: "
+
+#: panellib/analyze.php
+msgid "Warnings: "
+msgstr "Упозорења: "
+
+#: panellib/analyze.php
+msgid "Log Size: Larger than 2GB"
+msgstr "Величина дневника: већа од 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size: OK"
+msgstr "Величина дневника: у реду"
+
+#: panellib/analyze.php
+msgid "Log Size: Quite Large"
+msgstr "Величина дневника: прилично велика"
+
+#: panellib/analyze.php
+msgid "Log Size: "
+msgstr "Величина дневника: "
+
+#: panellib/analyze.php
+msgid "Last log lines:"
+msgstr "Последњи редови дневника:"
+
+#: panellib/analyze.php
+msgid "Skipping DB tables checks. Database too large"
+msgstr "Прескакање провере табела базе података. База података је превелика"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Table %s status %s"
+msgstr "Табела %s статус %s"
+
+#: panellib/analyze.php
+msgid "DB: Problems"
+msgstr "База података: проблеми"
+
+#: panellib/analyze.php
+msgid "DB: OK"
+msgstr "База података: у реду"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Max connection reached: %s / %s"
+msgstr "Достигнут максималан број веза: %s / %s"
+
+#: panellib/analyze.php
+msgid "You can increase Max connection via command line tools or permanently in config file"
+msgstr "Можете повећати максималан број веза путем алата командне линије или трајно у конфигурационој датотеци"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s - try to restart SQL service, check SQL log, ..."
+msgstr "Грешке везе: %s - покушајте да поново покренете SQL сервис, проверите SQL дневник, ..."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Aborted clients/connects: %s"
+msgstr "Прекинути клијенти/везе: %s"
+
+#: panellib/analyze.php
+msgid "Aborted clients/connects - Run 'SET GLOBAL log_warnings = 1;' or ' log_error_verbosity = 1;' (depends on your MySQL/MariaDB version) from the mysql CLI and set in server.cnf to silence."
+msgstr "Прекинути клијенти/везе - Покрените 'SET GLOBAL log_warnings = 1;' или ' log_error_verbosity = 1;' (зависи од ваше верзије система MySQL/MariaDB) из mysql CLI интерфејса и подесите у server.cnf да бисте утишали обавештења."
+
+#: panellib/analyze.php
+#, php-format
+msgid "Connection errors: %s"
+msgstr "Грешке везе: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Damaged tables: %s"
+msgstr "Оштећене табеле: %s"
+
+#: panellib/analyze.php
+msgid "You should run check and repair table commands"
+msgstr "Требало би да покренете команде за проверу и поправку табела"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Memory tables: %s"
+msgstr "Меморијске табеле: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "All tables: %s"
+msgstr "Све табеле: %s"
+
+#: panellib/analyze.php panellib/poller.php panellib/system.php
+msgid "N/A"
+msgstr "Н/Д"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port: %s"
+msgstr "Уређаји са истом IP адресом и портом: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices: %s"
+msgstr "Уређаји са неоптимизованом величином Bulk Walk: %s"
+
+#: panellib/analyze.php
+msgid "Please have a look to device parameter \"Bulk Walk Maximum Repetitions\". You can improve your poller performance"
+msgstr "Погледајте параметар уређаја \"Bulk Walk Maximum Repetitions\". Можете побољшати перформансе прикупљача"
+
+#: panellib/analyze.php
+msgid "Reindex last run"
+msgstr "Последње покретање поновног индексирања"
+
+#: panellib/analyze.php
+msgid "RRD Checker last run"
+msgstr "Последње покретање алата RRD Checker"
+
+#: panellib/analyze.php
+msgid "RRD Cleaner last run"
+msgstr "Последње покретање алата RRD Cleaner"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: %s"
+msgstr "%s: %s"
+
+#: panellib/analyze.php
+msgid "It is recommended to run this tool at least occasionally"
+msgstr "Препоручује се да овај алат покренете барем повремено"
+
+#: panellib/analyze.php
+#, php-format
+msgid "%s: not run yet"
+msgstr "%s: још није покренуто"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources: %s"
+msgstr "Напуштени извори података: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasource - bad indexes: %s"
+msgstr "Извор података - лоши индекси: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning: %s"
+msgstr "Thold узбуна/упозорење само за дневник: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description: %s"
+msgstr "Уређаји са истим описом: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree: %s"
+msgstr "Уређаји у више од једног стабла: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without graphs: %s"
+msgstr "Уређаји без графикона: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree: %s"
+msgstr "Уређаји без стабла: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community: %s"
+msgstr "Уређаји са подразумеваном public/private заједницом: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue: %s"
+msgstr "Проблем са ставкама графикона/шаблона: %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts: %s"
+msgstr "Додатак Monitor - ненадзирани хостови: %s"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "OK"
+msgstr "У реду"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU (cores / processes / threads): %s / %s / %s"
+msgstr "CPU сервера (језгра / процеси / нити): %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled and admin email is not set"
+msgstr "Обавештавање администратора је онемогућено и имејл администратора није подешен"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Found %s problems"
+msgstr "Пронађено %s проблема"
+
+#: panellib/analyze.php
+msgid "Everything OK"
+msgstr "Све је у реду"
+
+#: panellib/analyze.php
+msgid "DS stats: "
+msgstr "DS статистика: "
+
+#: panellib/analyze.php panellib/busiest.php
+msgid "Panel needs DS stats enabled."
+msgstr "Панел захтева омогућену DS статистику."
+
+#: panellib/analyze.php
+msgid "DS all records "
+msgstr "Сви DS записи "
+
+#: panellib/analyze.php
+msgid "DS null records "
+msgstr "Празни DS записи "
+
+#: panellib/analyze.php
+msgid "Analyze Cacti Log Details [ Warnings/Errors ]"
+msgstr "Анализа детаља Cacti дневника [ Упозорења/Грешке ]"
+
+#: panellib/analyze.php
+msgid "Errors"
+msgstr "Грешке"
+
+#: panellib/analyze.php
+msgid "Warnings"
+msgstr "Упозорења"
+
+#: panellib/analyze.php
+msgid "WARNING: File is Larger than 2GB"
+msgstr "УПОЗОРЕЊЕ: Датотека је већа од 2GB"
+
+#: panellib/analyze.php
+msgid "Log Size"
+msgstr "Величина дневника"
+
+#: panellib/analyze.php
+msgid "Analyze Logins Detail"
+msgstr "Анализа детаља пријава"
+
+#: panellib/analyze.php panellib/misc.php
+msgid "Result"
+msgstr "Резултат"
+
+#: panellib/analyze.php
+msgid "Active Users in Last 2 Hours:"
+msgstr "Активни корисници у последња 2 сата:"
+
+#: panellib/analyze.php
+msgid "No Active Users"
+msgstr "Нема активних корисника"
+
+#: panellib/analyze.php
+msgid "View Full User Log"
+msgstr "Прикажи цео кориснички дневник"
+
+#: panellib/analyze.php
+msgid "Analyze Tree, Graphs, Hosts"
+msgstr "Анализа стабла, графикона, хостова"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same IP and port - %s"
+msgstr "Уређаји са истом IP адресом и портом - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Not optimized Bulk Walk Size devices - %s"
+msgstr "Уређаји са неоптимизованом Bulk Walk Size вредношћу - %s"
+
+#: panellib/analyze.php
+msgid "Data maintenance"
+msgstr "Одржавање података"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Orphaned Data Sources - %s"
+msgstr "Неповезани извори података - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Datasources with bad indexes - %s"
+msgstr "Извори података са неисправним индексима - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Thold logonly alert/warning - %s"
+msgstr "Thold узбуна/упозорење само за дневник - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with the same description - %s"
+msgstr "Уређаји са истим описом - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices in more than one tree - %s"
+msgstr "Уређаји у више од једног стабла - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without Graphs - %s"
+msgstr "Уређаји без графикона - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices without tree - %s"
+msgstr "Уређаји без стабла - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Devices with default public/private community - %s"
+msgstr "Уређаји са подразумеваном public/private заједницом - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Graph items/template items issue - %s"
+msgstr "Проблем са ставкама графикона/шаблона - %s"
+
+#: panellib/analyze.php
+msgid "Graph template"
+msgstr "Шаблон графикона"
+
+#: panellib/analyze.php
+msgid "Graphs"
+msgstr "Графикони"
+
+#: panellib/analyze.php
+msgid "Graph items"
+msgstr "Ставке графикона"
+
+#: panellib/analyze.php
+msgid "Template items"
+msgstr "Ставке шаблона"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Plugin Monitor - Unmonitored hosts - %s"
+msgstr "Додатак Monitor - ненадзирани хостови - %s"
+
+#: panellib/analyze.php
+#, php-format
+msgid "Server CPU cores / processes / threads: %s / %s / %s"
+msgstr "CPU сервера језгра / процеси / нити: %s / %s / %s"
+
+#: panellib/analyze.php
+msgid "Notify admin is disabled or admin email is not set"
+msgstr "Обавештавање администратора је онемогућено или имејл администратора није подешен"
+
+#: panellib/busiest.php
+msgid "The busiest"
+msgstr "Најоптерећенији"
+
+#: panellib/busiest.php
+msgid "Panels that finds the busiest hosts."
+msgstr "Панели који проналазе најоптерећеније хостове."
+
+#: panellib/busiest.php
+msgid "Busiest CPU"
+msgstr "Најоптерећенији CPU"
+
+#: panellib/busiest.php
+msgid "Devices with the busiest CPU (Host MIB)"
+msgstr "Уређаји са најоптерећенијим CPU (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest ucd/net - Load"
+msgstr "Најоптерећенији ucd/net - оптерећење"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Load (ucd/net)"
+msgstr "Уређаји са највећим оптерећењем (ucd/net)"
+
+#: panellib/busiest.php
+msgid "Busiest Hard Drive Space"
+msgstr "Најзаузетији простор на чврстом диску"
+
+#: panellib/busiest.php
+msgid "Devices with the highest Hard Drive Space used (Host MIB)"
+msgstr "Уређаји са највећим заузећем простора на чврстом диску (Host MIB)"
+
+#: panellib/busiest.php
+msgid "Busiest uptime"
+msgstr "Најдуже време непрекидног рада"
+
+#: panellib/busiest.php
+msgid "Devices with the highest uptime"
+msgstr "Уређаји са најдужим временом непрекидног рада"
+
+#: panellib/busiest.php
+msgid "Busiest Interface in/out traffic"
+msgstr "Најоптерећенији улазни/излазни саобраћај интерфејса"
+
+#: panellib/busiest.php
+msgid "Devices with the highest in/out traffic (Interface)"
+msgstr "Уређаји са највећим улазним/излазним саобраћајем (интерфејс)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface error"
+msgstr "Највише грешака интерфејса"
+
+#: panellib/busiest.php
+msgid "Devices with the highest errors/discards (Interface)"
+msgstr "Уређаји са највише грешака/одбацивања (интерфејс)"
+
+#: panellib/busiest.php
+msgid "Busiest Interface utilization"
+msgstr "Највећа искоришћеност интерфејса"
+
+#: panellib/busiest.php
+msgid "Ports with the highest interface utilization"
+msgstr "Портови са највећом искоришћеношћу интерфејса"
+
+#: panellib/busiest.php
+msgid "Please enable and configure DS stats"
+msgstr "Омогућите и подесите DS статистику"
+
+#: panellib/busiest.php
+msgid "Ask admin to enable DS stats"
+msgstr "Затражите од администратора да омогући DS статистику"
+
+#: panellib/busiest.php panellib/top5.php
+msgid "Average"
+msgstr "Просек"
+
+#: panellib/busiest.php
+msgid "Peak"
+msgstr "Вршна вредност"
+
+#: panellib/busiest.php
+msgid "Average of all allowed DS"
+msgstr "Просек свих дозвољених DS"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device with this template."
+msgstr "Чекају се подаци или немате дозволу ни за један уређај са овим шаблоном."
+
+#: panellib/busiest.php
+msgid "You don't have permissions to any hosts or there isn't any host with this template"
+msgstr "Немате дозволе ни за један хост или не постоји ниједан хост са овим шаблоном"
+
+#: panellib/busiest.php
+msgid "Uptime"
+msgstr "Време непрекидног рада"
+
+#: panellib/busiest.php
+msgid "Average of all allowed hosts"
+msgstr "Просек свих дозвољених хостова"
+
+#: panellib/busiest.php
+msgid "Waiting for data or you don't have permission for any device"
+msgstr "Чекају се подаци или немате дозволу ни за један уређај"
+
+#: panellib/busiest.php
+msgid "Direction"
+msgstr "Смер"
+
+#: panellib/busiest.php
+msgid "Time interval last 5 minutes"
+msgstr "Временски интервал последњих 5 минута"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB CPU utilization (last hour)"
+msgstr "Највећих 30 искоришћења Host MIB CPU (последњи сат)"
+
+#: panellib/busiest.php
+msgid "Install TopX plugin for more DS statistics"
+msgstr "Инсталирајте додатак TopX за више DS статистике"
+
+#: panellib/busiest.php
+msgid "Busiest 30 ucd/net Load (last hour)"
+msgstr "30 највећих ucd/net оптерећења (последњи сат)"
+
+#: panellib/busiest.php
+msgid "Busiest 30 Host MIB Hard Drive space (last hour)"
+msgstr "30 најзаузетијих простора на чврстом диску Host MIB (последњи сат)"
+
+#: panellib/busiest.php
+msgid "Busiest traffic (in+out)"
+msgstr "Највећи саобраћај (улаз+излаз)"
+
+#: panellib/busiest.php
+msgid "Busiest interface utilization"
+msgstr "Највећа искоришћеност интерфејса"
+
+#: panellib/graphs.php
+msgid "Graphical Panels"
+msgstr "Графички панели"
+
+#: panellib/graphs.php
+msgid "Panels that provide information about Cacti and it's plugins in a Graphical way."
+msgstr "Панели који пружају информације о систему Cacti и његовим прикључцима на графички начин."
+
+#: panellib/graphs.php
+msgid "Data Sources"
+msgstr "Извори података"
+
+#: panellib/graphs.php
+msgid "Graph of Data Sources"
+msgstr "Графикон извора података"
+
+#: panellib/graphs.php
+msgid "Device Templates"
+msgstr "Шаблони уређаја"
+
+#: panellib/graphs.php
+msgid "Graph of Device Templates"
+msgstr "Графикон шаблона уређаја"
+
+#: panellib/graphs.php
+msgid "Devices by Status"
+msgstr "Уређаји по статусу"
+
+#: panellib/graphs.php
+msgid "Graph of Devices by Status (up,down,...)"
+msgstr "Графикон уређаја по статусу (доступан,недоступан,...)"
+
+#: panellib/graphs.php
+msgid "Datasources: "
+msgstr "Извори података: "
+
+#: panellib/graphs.php
+msgid "Device Templates: "
+msgstr "Шаблони уређаја: "
+
+#: panellib/graphs.php
+msgid "Devices: "
+msgstr "Уређаји: "
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Down"
+msgstr "Недоступан"
+
+#: panellib/graphs.php panellib/poller.php
+msgid "Recovering"
+msgstr "Опоравак"
+
+#: panellib/graphs.php
+msgid "Data Type"
+msgstr "Тип података"
+
+#: panellib/graphs.php panellib/top5.php
+msgid "Total"
+msgstr "Укупно"
+
+#: panellib/graphs.php
+msgid "No untemplated datasources found"
+msgstr "Није пронађен ниједан извор података без шаблона"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Devices"
+msgstr "Уређаји"
+
+#: panellib/graphs.php
+msgid "Device Count"
+msgstr "Број уређаја"
+
+#: panellib/graphs.php panellib/thold.php
+msgid "All"
+msgstr "Све"
+
+#: panellib/graphs.php panellib/mactrack.php
+msgid "Up"
+msgstr "Доступан"
+
+#: panellib/graphs.php
+msgid "Template Name"
+msgstr "Назив шаблона"
+
+#: panellib/graphs.php
+msgid "Total Devices"
+msgstr "Укупно уређаја"
+
+#: panellib/graphs.php
+msgid "No device templates found"
+msgstr "Није пронађен ниједан шаблон уређаја"
+
+#: panellib/mactrack.php
+msgid "MacTrack Panels"
+msgstr "MacTrack панели"
+
+#: panellib/mactrack.php
+msgid "Panels that provide information about Cacti's MacTrack plugins."
+msgstr "Панели који пружају информације о Cacti MacTrack прикључцима."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin"
+msgstr "MacTrack прикључак"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack collection and site statistics."
+msgstr "Разне MacTrack статистике прикупљања и локација."
+
+#: panellib/mactrack.php
+msgid "MacTrack Sites"
+msgstr "MacTrack локације"
+
+#: panellib/mactrack.php
+msgid "Various MacTrack Site statistics."
+msgstr "Разне статистике MacTrack локација."
+
+#: panellib/mactrack.php
+msgid "MacTrack Plugin not Installed/Running"
+msgstr "MacTrack прикључак није инсталиран/покренут"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "All: %s"
+msgstr "Сви: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Up: %s"
+msgstr "Доступни: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Down: %s"
+msgstr "Недоступни: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Error: %s"
+msgstr "Грешка: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Unknown: %s"
+msgstr "Непознато: %s"
+
+#: panellib/mactrack.php
+#, php-format
+msgid "Disabled: %s"
+msgstr "Онемогућени: %s"
+
+#: panellib/mactrack.php
+msgid "MacTrack"
+msgstr "MacTrack"
+
+#: panellib/mactrack.php panellib/misc.php
+msgid "Error"
+msgstr "Грешка"
+
+#: panellib/mactrack.php
+msgid "Unknown"
+msgstr "Непознато"
+
+#: panellib/mactrack.php panellib/thold.php
+msgid "You don't have plugin permission"
+msgstr "Немате дозволу за прикључак"
+
+#: panellib/mactrack.php
+msgid "Site"
+msgstr "Локација"
+
+#: panellib/mactrack.php
+msgid "IPs"
+msgstr "IP адресе"
+
+#: panellib/mactrack.php
+msgid "Ports"
+msgstr "Портови"
+
+#: panellib/mactrack.php
+msgid "Ports up"
+msgstr "Активни портови"
+
+#: panellib/mactrack.php
+msgid "MACs"
+msgstr "MAC адресе"
+
+#: panellib/mactrack.php
+msgid "Device Errors"
+msgstr "Грешке уређаја"
+
+#: panellib/mactrack.php
+msgid "No mactrack sites found"
+msgstr "Није пронађена ниједна MacTrack локација"
+
+#: panellib/misc.php
+msgid "Miscellaneous Panels"
+msgstr "Разни панели"
+
+#: panellib/misc.php
+msgid "Panels that general non-categorized data about Cacti's."
+msgstr "Панели са општим некатегоризованим подацима о систему Cacti."
+
+#: panellib/misc.php
+msgid "NTP/DNS Status"
+msgstr "NTP/DNS статус"
+
+#: panellib/misc.php
+msgid "Checking your Cacti system clock for drift from a known baseline and DNS resolving check"
+msgstr "Провера одступања системског сата вашег система Cacti од познате референтне вредности и провера DNS разрешавања"
+
+#: panellib/misc.php
+msgid "Maint Plugin Details"
+msgstr "Детаљи Maint прикључка"
+
+#: panellib/misc.php
+msgid "Maint Plugin details on upcoming schedules"
+msgstr "Детаљи Maint прикључка о предстојећим распоредима"
+
+#: panellib/misc.php
+msgid "Webseer Details"
+msgstr "Детаљи за Webseer"
+
+#: panellib/misc.php
+msgid "Plugin webseer URL Service Check Details"
+msgstr "Детаљи провере URL сервиса прикључка webseer"
+
+#: panellib/misc.php
+msgid "Servcheck plugin Details"
+msgstr "Детаљи Servcheck прикључка"
+
+#: panellib/misc.php
+msgid "Plugin ServCheck Details"
+msgstr "Детаљи прикључка ServCheck"
+
+#: panellib/misc.php
+msgid "No NTP server configured"
+msgstr "Није подешен NTP сервер"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong NTP server configured - %s<br/>Please fix it in settings"
+msgstr "Подешен је погрешан NTP сервер - %s<br/>Исправите то у подешавањима"
+
+#: panellib/misc.php
+#, php-format
+msgid "Failed to get NTP time from %s"
+msgstr "Није успело преузимање NTP времена са %s"
+
+#: panellib/misc.php
+msgid "Please check time as it is off by more"
+msgstr "Проверите време јер одступа за више"
+
+#: panellib/misc.php
+#, php-format
+msgid "than %s seconds from NTP server %s."
+msgstr "од %s секунди у односу на NTP сервер %s."
+
+#: panellib/misc.php
+msgid "Localtime is equal to NTP server"
+msgstr "Локално време је једнако времену на NTP серверу"
+
+#: panellib/misc.php
+msgid "Unable to contact the NTP server indicated."
+msgstr "Није могуће успоставити везу са наведеним NTP сервером."
+
+#: panellib/misc.php
+msgid "Please check your configuration."
+msgstr "Проверите вашу конфигурацију."
+
+#: panellib/misc.php
+msgid "No DNS hostname configured"
+msgstr "Није подешен DNS назив хоста"
+
+#: panellib/misc.php
+#, php-format
+msgid "Wrong DNS hostname configured - %s<br/>Please fix it in settings"
+msgstr "Подешен је погрешан DNS назив хоста - %s<br/>Исправите то у подешавањима"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving ok."
+msgstr "Разрешавање DNS назива хоста (%s) је у реду."
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS resolv time: %s ms"
+msgstr "Време DNS разрешавања: %s ms"
+
+#: panellib/misc.php
+#, php-format
+msgid "DNS hostname (%s) resolving failed."
+msgstr "Разрешавање DNS назива хоста (%s) није успело."
+
+#: panellib/misc.php
+msgid "Maint plugin is not installed/enabled"
+msgstr "Maint прикључак није инсталиран/омогућен"
+
+#: panellib/misc.php
+msgid "Plugin Webseer isn't installed or started"
+msgstr "Прикључак Webseer није инсталиран или покренут"
+
+#: panellib/misc.php
+msgid "Webseer plugin no longer supported, use plugin servcheck instead"
+msgstr "Прикључак Webseer више није подржан, користите прикључак servcheck уместо њега"
+
+#: panellib/misc.php
+msgid "Number of checks (all/disabled): "
+msgstr "Број провера (све/онемогућене): "
+
+#: panellib/misc.php
+msgid "Status (up/down): "
+msgstr "Статус (доступан/недоступан): "
+
+#: panellib/misc.php
+msgid "Last log messages"
+msgstr "Последње поруке дневника"
+
+#: panellib/misc.php
+msgid "URL"
+msgstr "URL"
+
+#: panellib/misc.php
+msgid "HTTP code"
+msgstr "HTTP код"
+
+#: panellib/misc.php
+msgid "Webseer Plugin - Details"
+msgstr "Webseer прикључак - детаљи"
+
+#: panellib/misc.php
+msgid "Plugin Servcheck isn't installed or started"
+msgstr "Прикључак Servcheck није инсталиран или покренут"
+
+#: panellib/misc.php
+msgid "Status (ok/error): "
+msgstr "Статус (у реду/грешка): "
+
+#: panellib/misc.php
+msgid "Last log records"
+msgstr "Последњи записи дневника"
+
+#: panellib/misc.php
+msgid "Test"
+msgstr "Тест"
+
+#: panellib/misc.php
+msgid "Type"
+msgstr "Тип"
+
+#: panellib/misc.php
+msgid "Servcheck Plugin - Details"
+msgstr "Servcheck прикључак - детаљи"
+
+#: panellib/misc.php
+msgid "Search result"
+msgstr "Резултат претраге"
+
+#: panellib/poller.php
+msgid "Poller Panels"
+msgstr "Полер панели"
+
+#: panellib/poller.php
+msgid "Panels that provide information about Cacti's polling process."
+msgstr "Панели који пружају информације о процесу прикупљања у систему Cacti."
+
+#: panellib/poller.php
+msgid "Poller Information"
+msgstr "Информације о прикупљачу"
+
+#: panellib/poller.php
+msgid "Various information about your Cacti poller."
+msgstr "Разне информације о вашем Cacti полеру."
+
+#: panellib/poller.php
+msgid "Poller Statistics"
+msgstr "Статистика полера"
+
+#: panellib/poller.php
+msgid "Various Cacti poller statistics."
+msgstr "Разне статистике Cacti прикупљача."
+
+#: panellib/poller.php
+msgid "Poller Output Items"
+msgstr "Излазне ставке прикупљача"
+
+#: panellib/poller.php
+msgid "ID"
+msgstr "ID"
+
+#: panellib/poller.php
+msgid "Name"
+msgstr "Назив"
+
+#: panellib/poller.php
+msgid "Total Time"
+msgstr "Укупно време"
+
+#: panellib/poller.php
+msgid "New/Idle"
+msgstr "Ново/неактивно"
+
+#: panellib/poller.php panellib/system.php
+msgid "Running"
+msgstr "У току"
+
+#: panellib/poller.php panellib/system.php
+msgid "Idle"
+msgstr "У мировању"
+
+#: panellib/poller.php
+msgid "Unkn/down"
+msgstr "Непозн/недост"
+
+#: panellib/poller.php panellib/top5.php
+#, php-format
+msgid "%s Secs"
+msgstr "%s сек"
+
+#: panellib/poller.php
+msgid "(ok)"
+msgstr "(у реду)"
+
+#: panellib/poller.php
+msgid "(all)"
+msgstr "(све)"
+
+#: panellib/poller.php
+msgid "ID: "
+msgstr "ID: "
+
+#: panellib/poller.php
+msgid "Seconds"
+msgstr "Секунде"
+
+#: panellib/poller.php
+msgid "24h avg ID: "
+msgstr "24ч просек ID: "
+
+#: panellib/poller.php
+msgid "Poller Details"
+msgstr "Детаљи прикупљача"
+
+#: panellib/poller.php
+msgid "Average Time"
+msgstr "Просечно време"
+
+#: panellib/poller.php
+msgid "Max Time"
+msgstr "Макс. време"
+
+#: panellib/poller.php
+msgid "Poller output items "
+msgstr "Излазне ставке прикупљача "
+
+#: panellib/poller.php
+msgid "Items"
+msgstr "Ставке"
+
+#: panellib/syslog.php
+msgid "Syslog Panels"
+msgstr "Syslog панели"
+
+#: panellib/syslog.php
+msgid "Panels that provide information about Cacti's Syslog message processing."
+msgstr "Панели који пружају информације о Cacti обради Syslog порука."
+
+#: panellib/syslog.php
+msgid "Syslog Details"
+msgstr "Syslog детаљи"
+
+#: panellib/syslog.php
+msgid "Various Syslog Plugin statistics."
+msgstr "Разне статистике Syslog додатка."
+
+#: panellib/syslog.php
+msgid "Syslog Top Devices"
+msgstr "Најактивнији Syslog уређаји"
+
+#: panellib/syslog.php
+msgid "Devices with the most messages"
+msgstr "Уређаји са највише порука"
+
+#: panellib/syslog.php
+msgid "Syslog Message levels"
+msgstr "Нивои Syslog порука"
+
+#: panellib/syslog.php
+msgid "Messages by level."
+msgstr "Поруке по нивоу."
+
+#: panellib/syslog.php
+msgid "Incoming"
+msgstr "Долазне"
+
+#: panellib/syslog.php
+msgid "Stored"
+msgstr "Сачуване"
+
+#: panellib/syslog.php
+msgid "Messages"
+msgstr "Поруке"
+
+#: panellib/syslog.php
+msgid "Syslog plugin not installed/running"
+msgstr "Syslog додатак није инсталиран/покренут"
+
+#: panellib/syslog.php
+msgid "Device"
+msgstr "Уређај"
+
+#: panellib/syslog.php
+msgid "Syslog plugin is not enabled"
+msgstr "Syslog додатак није омогућен"
+
+#: panellib/syslog.php
+msgid "Top 20 Hosts with the most messages"
+msgstr "Првих 20 хостова са највише порука"
+
+#: panellib/syslog.php
+msgid "No messages"
+msgstr "Нема порука"
+
+#: panellib/system.php
+msgid "System Panels"
+msgstr "Системски панели"
+
+#: panellib/system.php
+msgid "Panels that provide information about Cacti system performance."
+msgstr "Панели који пружају информације о перформансама Cacti система."
+
+#: panellib/system.php
+msgid "Information"
+msgstr "Информације"
+
+#: panellib/system.php
+msgid "Various system information about the Cacti system itself."
+msgstr "Разне системске информације о самом Cacti систему."
+
+#: panellib/system.php
+msgid "Administrative Alerts"
+msgstr "Административна упозорења"
+
+#: panellib/system.php
+msgid "Extra admin notify panel for all users"
+msgstr "Додатни панел за обавештења администратора за све кориснике"
+
+#: panellib/system.php
+msgid "Boost Statistics"
+msgstr "Boost статистике"
+
+#: panellib/system.php
+msgid "Information about Cacti's performance boost process."
+msgstr "Информације о Cacti процесу убрзања перформанси."
+
+#: panellib/system.php
+msgid "Boost History"
+msgstr "Boost историја"
+
+#: panellib/system.php
+msgid "Information about boost process history."
+msgstr "Информације о историји процеса убрзања."
+
+#: panellib/system.php
+msgid "24 Hour Extremes"
+msgstr "Екстреми за 24 сата"
+
+#: panellib/system.php
+msgid "Table with 24 hours of Polling Extremes (longest poller run, down hosts)"
+msgstr "Табела са екстремима прикупљања за 24 сата (најдуже извршавање прикупљача, недоступни хостови)"
+
+#: panellib/system.php
+msgid "CPU Utilization"
+msgstr "Искоришћеност CPU-а"
+
+#: panellib/system.php
+msgid "CPU utilization Graph (only Linux)."
+msgstr "Графикон искоришћености CPU (само Linux)."
+
+#: panellib/system.php
+msgid "CPU Load: "
+msgstr "CPU оптерећење: "
+
+#: panellib/system.php
+msgid "This function is not implemented on Windows platforms"
+msgstr "Ова функција није имплементирана на Windows платформама"
+
+#: panellib/system.php
+msgid "Avg CPU"
+msgstr "Прос. CPU"
+
+#: panellib/system.php
+msgid "Max CPU"
+msgstr "Макс. CPU"
+
+#: panellib/system.php
+msgid "24h AVG"
+msgstr "24ч просек"
+
+#: panellib/system.php
+msgid "Cacti Version: "
+msgstr "Cacti верзија: "
+
+#: panellib/system.php
+msgid "Poller Type:"
+msgstr "Тип прикупљача:"
+
+#: panellib/system.php
+msgid "Spine"
+msgstr "Spine"
+
+#: panellib/system.php
+msgid "Spine version: "
+msgstr "Spine верзија: "
+
+#: panellib/system.php
+msgid "You are using incorrect spine version!"
+msgstr "Користите неисправну Spine верзију!"
+
+#: panellib/system.php
+msgid "Poller Type: "
+msgstr "Тип прикупљача: "
+
+#: panellib/system.php
+msgid "Running on: "
+msgstr "Покренуто на: "
+
+#: panellib/system.php
+msgid "Boost history: "
+msgstr "Boost историја: "
+
+#: panellib/system.php
+msgid "Mem "
+msgstr "Мем "
+
+#: panellib/system.php
+msgid "Pending records "
+msgstr "Записи на чекању "
+
+#: panellib/system.php
+msgid "Overrun Warning"
+msgstr "Упозорење о прекорачењу"
+
+#: panellib/system.php
+msgid "Timed Out"
+msgstr "Време је истекло"
+
+#: panellib/system.php
+msgid "Other"
+msgstr "Остало"
+
+#: panellib/system.php
+msgid "Never Run"
+msgstr "Никада није покренуто"
+
+#: panellib/system.php
+#, php-format
+msgid "Boost Status is: %s"
+msgstr "Boost статус је: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Processes/Frequency: %s / %s"
+msgstr "Процеси/Учесталост: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending Records Threshold: %s"
+msgstr "Праг записа на чекању: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Approximate Next Start Time: %s"
+msgstr "Приближно време следећег покретања: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Pending/Archived Records: %s / %s"
+msgstr "Записи на чекању/архивирани: %s / %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Current Boost Table(s) Size: %s"
+msgstr "Тренутна величина Boost табеле(а): %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Avg Bytes/Record: %s"
+msgstr "Просек бајтова/запису: %s"
+
+#: panellib/system.php
+#, php-format
+msgid "Last run duration/updates: %s / %s"
+msgstr "Трајање/ажурирања последњег извршавања: %s / %s"
+
+#: panellib/system.php
+msgid "Poller Run"
+msgstr "Извршавање прикупљача"
+
+#: panellib/system.php
+msgid "Down Hosts"
+msgstr "Недоступни хостови"
+
+#: panellib/system.php panellib/thold.php
+msgid "Triggered"
+msgstr "Активирано"
+
+#: panellib/system.php
+msgid "Poller out. itms"
+msgstr "Изл. ст. прикупљача"
+
+#: panellib/system.php
+msgid "Host errors"
+msgstr "Грешке хостова"
+
+#: panellib/system.php
+msgid "48 Hour Extreme Polling"
+msgstr "Екстремна прикупљања за 48 сати"
+
+#: panellib/system.php
+msgid "Long Running Poller"
+msgstr "Дуготрајно извршавање прикупљача"
+
+#: panellib/system.php
+msgid "Max Device Down"
+msgstr "Макс. недоступних уређаја"
+
+#: panellib/system.php
+msgid "Max Thold Triggered"
+msgstr "Макс. активираних Thold"
+
+#: panellib/system.php
+msgid "Poller Output Item"
+msgstr "Излазна ставка прикупљача"
+
+#: panellib/system.php
+msgid "Failed Polls"
+msgstr "Неуспела прикупљања"
+
+#: panellib/thold.php
+msgid "Threshold Panels"
+msgstr "Панели прагова"
+
+#: panellib/thold.php
+msgid "Panels that provide information about Cacti Thresholding Plugin."
+msgstr "Панели који пружају информације о Cacti додатку за прагове."
+
+#: panellib/thold.php
+msgid "Last Threshold Events"
+msgstr "Последњи догађаји прагова"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Latest Events"
+msgstr "Најновији догађаји додатка за прагове"
+
+#: panellib/thold.php
+msgid "Threshold"
+msgstr "Праг"
+
+#: panellib/thold.php
+msgid "Threshold Plugin Graph (all, triggered, ...)"
+msgstr "Графикон додатка за прагове (сви, активирани, ...)"
+
+#: panellib/thold.php
+msgid "Plugin Thold isn't installed or started"
+msgstr "Додатак Thold није инсталиран или покренут"
+
+#: panellib/thold.php
+msgid "Without events yet"
+msgstr "Још увек нема догађаја"
+
+#: panellib/thold.php
+msgid "Thresholds: "
+msgstr "Прагови: "
+
+#: panellib/thold.php
+msgid "Thold plugin not installed/running"
+msgstr "Додатак Thold није инсталиран/покренут"
+
+#: panellib/thold.php
+msgid "Breached"
+msgstr "Прекорачено"
+
+#: panellib/thold.php
+msgid "Threshold Details"
+msgstr "Детаљи прага"
+
+#: panellib/thold.php
+msgid "Thresholds"
+msgstr "Прагови"
+
+#: panellib/thold.php
+msgid "Breached: "
+msgstr "Прекорачено: "
+
+#: panellib/thold.php
+msgid "Triggered: "
+msgstr "Активирано: "
+
+#: panellib/thold.php
+msgid "You don't have permission to Thresholds"
+msgstr "Немате дозволу за приступ праговима"
+
+#: panellib/thold.php
+msgid "Description"
+msgstr "Опис"
+
+#: panellib/top5.php
+msgid "Top/Bottom 5 Panels"
+msgstr "Најбољих/најгорих 5 панела"
+
+#: panellib/top5.php
+msgid "Panels that provide information trending information about Cacti data collection."
+msgstr "Панели који пружају информације о трендовима прикупљања података у систему Cacti."
+
+#: panellib/top5.php
+msgid "Bottom Ping"
+msgstr "Најгори пинг"
+
+#: panellib/top5.php
+msgid "Devices with the worst ping response"
+msgstr "Уређаји са најгорим одзивом на пинг"
+
+#: panellib/top5.php
+msgid "Bottom Availability"
+msgstr "Најгора доступност"
+
+#: panellib/top5.php
+msgid "Devices with the worst availability/reachability"
+msgstr "Уређаји са најгором доступношћу/достижношћу"
+
+#: panellib/top5.php
+msgid "Bottom Polling Time"
+msgstr "Најгоре време прозивања"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling time"
+msgstr "Уређаји са најгорим временом прозивања"
+
+#: panellib/top5.php
+msgid "Bottom Polling Ratio"
+msgstr "Најгори однос прозивања"
+
+#: panellib/top5.php
+msgid "Devices with the worst polling ratio"
+msgstr "Уређаји са најгорим односом прозивања"
+
+#: panellib/top5.php
+msgid "Current"
+msgstr "Тренутно"
+
+#: panellib/top5.php
+msgid "Hostname"
+msgstr "Име домаћина"
+
+#: panellib/top5.php
+msgid "Availability/Reachability"
+msgstr "Доступност/Достижност"
+
+#: panellib/top5.php
+msgid "Polling Time"
+msgstr "Време анкетирања"
+
+#: panellib/top5.php
+msgid "Ratio"
+msgstr "Однос"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with Worst Ping"
+msgstr "Првих 20 домаћина са најгорим пингом"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Availability"
+msgstr "Првих 20 домаћина са најгором доступношћу"
+
+#: panellib/top5.php
+msgid "Availability"
+msgstr "Доступност"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts Worst Polling Time"
+msgstr "Првих 20 домаћина са најгорим временом прозивања"
+
+#: panellib/top5.php
+msgid "Top 20 Hosts with the Worst Polling Ratio"
+msgstr "Првих 20 домаћина са најгорим односом прозивања"
+
+#: setup.php
+msgid "Intropage Viewer"
+msgstr "Прегледач за Intropage"
+
+#: setup.php
+msgid "Intropage Administration"
+msgstr "Администрација за Intropage"
+
+#: setup.php
+msgid "Management"
+msgstr "Управљање"
+
+#: setup.php
+msgid "Panel Library"
+msgstr "Библиотека панела"
+
+#: setup.php
+msgid "System Administration"
+msgstr "Системска администрација"
+
+#: setup.php
+msgid "Timespan Last 1 Hour"
+msgstr "Временски опсег: последњи 1 сат"
+
+#: setup.php
+#, php-format
+msgid "Timespan Last %d Hours"
+msgstr "Временски опсег: последњих %d сати"
+
+#: setup.php
+msgid "Timespan Last 1 Day"
+msgstr "Временски опсег: последњи 1 дан"
+
+#: setup.php
+msgid "Timespan Last 2 Days"
+msgstr "Временски опсег: последња 2 дана"
+
+#: setup.php
+#, php-format
+msgid "%d Seconds"
+msgstr "%d секунди"
+
+#: setup.php
+#, php-format
+msgid "%d Hours"
+msgstr "%d сати"
+
+#: setup.php
+#, php-format
+msgid "%d Day"
+msgstr "%d дан"
+
+#: setup.php
+msgid "Actions"
+msgstr "Радње"
