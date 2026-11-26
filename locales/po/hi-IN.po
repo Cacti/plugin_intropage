@@ -980,7 +980,7 @@ msgstr "Cacti ऑब्जेक्ट का विश्लेषण करे
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "ट्री, ग्राफ़, होस्ट, ... का विश्लेषण करें।"
+msgstr "विश्लेषण करें: ट्री, ग्राफ़, होस्ट, ..."
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
