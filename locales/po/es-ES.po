@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Spanish <https://translate.cacti.net/projects/cacti/intropage/"
 "es/>\n"
@@ -577,7 +577,7 @@ msgstr "Intervalo de tendencia"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
-msgstr "En el caso de los gráficos de tendencias, ¿cuál debería ser el intervalo de tiempo predeterminado para esos gráficos?"
+msgstr "Intervalo de tiempo predeterminado para los gráficos de tendencias."
 
 #: include/variables.php:101
 msgid "Poller Timeout"
@@ -1971,7 +1971,7 @@ msgstr "Desconocido/inactivo"
 #: panellib/poller.php:164 panellib/top5.php:329 panellib/top5.php:660
 #, php-format
 msgid "%s Secs"
-msgstr "%s seg."
+msgstr "%s segundos"
 
 #: panellib/poller.php:171 panellib/poller.php:367
 msgid "(ok)"
@@ -2109,7 +2109,7 @@ msgstr "Promedio de CPU"
 
 #: panellib/system.php:178
 msgid "Max CPU"
-msgstr "CPU máx."
+msgstr "CPU máxima"
 
 #: panellib/system.php:208
 msgid "Cacti Version: "
@@ -2205,7 +2205,7 @@ msgstr "Hosts inactivos"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "Activado"
+msgstr "Disparado"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
