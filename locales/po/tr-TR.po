@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: developers@cacti.net\n"
 "POT-Creation-Date: 2024-04-20 13:36-0400\n"
-"PO-Revision-Date: 2026-11-25 00:18+0000\n"
+"PO-Revision-Date: 2026-11-26 01:18+0000\n"
 "Last-Translator: Thomas Vincent <balder.infuser.6n@icloud.com>\n"
 "Language-Team: Turkish <https://translate.cacti.net/projects/cacti/intropage/"
 "tr/>\n"
@@ -579,7 +579,7 @@ msgstr "Trend Zaman Aralığı"
 
 #: include/variables.php:95
 msgid "For Trend charts, what should be the default timespan for those charts."
-msgstr "Eğilim grafikleri için, bu grafikler için varsayılan zaman aralığı ne olmalıdır?"
+msgstr "Eğilim grafikleri için varsayılan zaman aralığını belirler."
 
 #: include/variables.php:101
 msgid "Poller Timeout"
@@ -703,7 +703,7 @@ msgstr "DNS ne sıklıkla kontrol edilsin"
 
 #: include/variables.php:186
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
-msgstr "Bakım Görevleri, Pasif Cihazlar vb. hakkında Yönetici Bilgi Paneli"
+msgstr "Bakım Görevleri, Pasif Cihazlar vb. hakkında Yönetici Bilgi Paneli."
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
@@ -1150,7 +1150,7 @@ msgstr "Tüm tablolar: %s"
 #: panellib/analyze.php:1841 panellib/poller.php:112 panellib/poller.php:321
 #: panellib/system.php:350 panellib/system.php:385 panellib/system.php:766
 msgid "N/A"
-msgstr "Yok"
+msgstr "Geçerli Değil"
 
 #: panellib/analyze.php:584
 #, php-format
@@ -1632,7 +1632,7 @@ msgstr "Toplam Cihaz"
 
 #: panellib/graphs.php:656
 msgid "No device templates found"
-msgstr "Cihaz şablonu bulunamadı"
+msgstr "Aygıt Şablonu Bulunamadı"
 
 #: panellib/mactrack.php:31
 msgid "MacTrack Panels"
@@ -2193,11 +2193,11 @@ msgstr "Pasif Ana Bilgisayarlar"
 
 #: panellib/system.php:500 panellib/thold.php:373 panellib/thold.php:389
 msgid "Triggered"
-msgstr "Tetikleyici"
+msgstr "Tetiklendi"
 
 #: panellib/system.php:526
 msgid "Poller out. itms"
-msgstr "Poller çıkt. öğl."
+msgstr "Poller çıktısı öğeleri"
 
 #: panellib/system.php:606
 msgid "48 Hour Extreme Polling"
