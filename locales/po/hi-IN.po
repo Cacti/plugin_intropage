@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.11.4\n"
 
 #: display.php:40
@@ -48,7 +48,7 @@ msgstr "पैनल मूव अक्षम करें/पैनल से 
 
 #: display.php:254
 msgid "Actions ..."
-msgstr "कार्रवाइयाँ ..।"
+msgstr "कार्रवाइयाँ ..."
 
 #: display.php:257
 msgid "Add New Dashboard"
@@ -299,7 +299,7 @@ msgid "Panel Not Found"
 msgstr "पैनल नहीं मिला"
 
 #: include/functions.php:774 include/functions.php:794
-#, fuzzy, php-format
+#, php-format
 msgid " [ Updates in %s ]"
 msgstr " [ में अपडेट %s ]"
 
@@ -362,7 +362,6 @@ msgid "Show Details"
 msgstr "विवरण देखें"
 
 #: include/functions.php:1376
-#, fuzzy
 msgid "Loading data ..."
 msgstr "डेटा लोड हो रहा है ..."
 
@@ -374,7 +373,7 @@ msgstr ""
 
 #: include/functions.php:1410
 msgid "Panels ..."
-msgstr "पैनल ..।"
+msgstr "पैनल ..."
 
 #: include/functions.php:1433 include/functions.php:1441
 #, php-format
@@ -981,7 +980,7 @@ msgstr "Cacti ऑब्जेक्ट का विश्लेषण करे
 
 #: panellib/analyze.php:86
 msgid "Analyze Trees, Graphs, Hosts, ..."
-msgstr "ट्री, ग्राफ़, होस्ट, ... का विश्लेषण करें।"
+msgstr "विश्लेषण करें: ट्री, ग्राफ़, होस्ट, ..."
 
 #: panellib/analyze.php:101
 msgid "Analyze DS stats"
@@ -2237,7 +2236,6 @@ msgid "Threshold"
 msgstr "थ्रेशोल्ड"
 
 #: panellib/thold.php:54
-#, fuzzy
 msgid "Threshold Plugin Graph (all, trigerred, ...)"
 msgstr "दहलीज प्लगइन ग्राफ (सभी, ट्रिगर, ...)"
 

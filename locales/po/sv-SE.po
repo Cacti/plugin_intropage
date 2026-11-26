@@ -30,8 +30,8 @@ msgstr "En eller flera paneler togs bort på grund av otillräcklig behörighet.
 #: display.php:179
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
-"Du kan inaktivera raderna ovan i <b>Konfigurera &gt; Inställningar &gt; "
-"Allmänt &gt; Dölj Cacti Dashboard</b> och använda hela sidan för Intropage "
+"Du kan inaktivera raderna ovan i <b>Konfigurera > Inställningar > "
+"Allmänt > Dölj Cacti Dashboard</b> och använda hela sidan för Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
@@ -183,7 +183,7 @@ msgstr "Du kan lägga till paneler på instrumentpanelen på flera sätt:"
 msgid "Select prepared panels from the \"Panels menu\". Panel can be grayed out. It is due to permissions, ask administrator"
 msgstr ""
 "Välj förberedda paneler från menyn ”Paneler”. Om en panel är nedtonad beror "
-"det på behörigheterna. Kontakta administratören."
+"det på behörigheterna. Kontakta administratören"
 
 #: display.php:467
 msgid "Add any Cacti Graph, use icon"
@@ -221,7 +221,7 @@ msgstr "Anpassning:"
 msgid "You can create up to 9 dashboards. Every dashboard can be named, use icon"
 msgstr ""
 "Du kan skapa upp till nio instrumentpaneler. Använd ikonen för att ge varje "
-"instrumentpanel ett namn."
+"instrumentpanel ett namn"
 
 #: display.php:490
 msgid "Intopage can be displayed in console or in separated tab. You can change it in Action menu"
@@ -634,7 +634,7 @@ msgstr "Analysera logg – antal rader"
 msgid "How many lines of log will be analysed. Lines = in panel, 2x lines = in detail. Big number may causes slow page load"
 msgstr ""
 "Antal loggrader som ska analyseras. Antalet rader gäller panelen, dubbla "
-"antalet gäller detaljvyn. Ett stort antal kan göra sidan långsam att läsa in."
+"antalet gäller detaljvyn. Ett stort antal kan göra sidan långsam att läsa in"
 
 #: include/variables.php:124
 msgid "How often analyze DB"
@@ -721,7 +721,7 @@ msgstr "Hur ofta DNS ska kontrolleras"
 msgid "Admin Information Panel about Maintenance Tasks, Down Devices, .."
 msgstr ""
 "Informationspanel för administratörer om underhåll, enheter som är nere med "
-"mera"
+"mera .."
 
 #: include/variables.php:187
 msgid "If isn't empty, Panel will be displayed on the top. You can use html tags (b, i, ...)."
