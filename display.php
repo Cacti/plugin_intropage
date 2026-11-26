@@ -566,14 +566,14 @@ function display_information(): bool {
 	var redirectPage = '';
 	var fullPage = <?php print $display_important_first == 'on' ? 'true' : 'false'; ?>;
 	var dashboard_id = <?php print $dashboard_id; ?>;
-	var intropage_text_panel_details = '<?php print __('Panel Details', 'intropage'); ?>';
+	var intropage_text_panel_details = <?php print json_encode(__('Panel Details', 'intropage')); ?>;
 	var intropage_text_panel_disable = '<?php print __esc('Disable panel move/Enable copy text from panel', 'intropage'); ?>';
 	var intropage_text_panel_enable = '<?php print __esc('Enable panel move/Disable copy text from panel', 'intropage'); ?>';
 	var intropage_text_square_disable = '<?php print __esc('Hide red/yellow/green square notifications', 'intropage'); ?>';
 	var intropage_text_square_enable = '<?php print __esc('Show red/yellow/green square notifications', 'intropage'); ?>';
 
-	var intropage_text_data_error = '<?php print __('Error reading new data', 'intropage'); ?>';
-	var intropage_text_close = '<?php print __('Close', 'intropage'); ?>';
+	var intropage_text_data_error = <?php print json_encode(__('Error reading new data', 'intropage')); ?>;
+	var intropage_text_close = <?php print json_encode(__('Close', 'intropage')); ?>;
 
 	var panels = {};
 

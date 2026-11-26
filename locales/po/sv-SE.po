@@ -30,8 +30,8 @@ msgstr "En eller flera paneler togs bort på grund av otillräcklig behörighet.
 #: display.php:179
 msgid "You can disable rows above in <b>Configure > Settings > General > Hide Cacti Dashboard</b> and use the whole page for Intropage "
 msgstr ""
-"Du kan inaktivera raderna ovan i <b>Konfigurera &gt; Inställningar &gt; "
-"Allmänt &gt; Dölj Cacti Dashboard</b> och använda hela sidan för Intropage "
+"Du kan inaktivera raderna ovan i <b>Konfigurera > Inställningar > "
+"Allmänt > Dölj Cacti Dashboard</b> och använda hela sidan för Intropage "
 
 #: display.php:194 include/functions.php:1622 include/functions.php:1671
 #: include/functions.php:1715
